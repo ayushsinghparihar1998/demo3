@@ -2,7 +2,8 @@ import ELPViewApiService from '../../services/apiService';
 import {
   LOGIN, PROFESSIONAL_LOGIN, LISTNER_SIGNUP, PROFESSIONAL_SIGNUP,
   LOGOUT, LOGIN_SUCCESS, GET_QUESTION, USER_LOGIN, USER_SIGNUP, GET_RECENT_JOIN,
-  GET_LISTNER_DASHBOARD, GET_PROFILE, GET_USER_DASHBOARD, GET_PROFESIONAL_DASHBOARD
+  GET_LISTNER_DASHBOARD, GET_PROFILE, GET_USER_DASHBOARD, GET_PROFESIONAL_DASHBOARD,
+  GET_PROFILE_LISTING
 } from '../types';
 
 export const actionLogin = data => async dispatch => {
@@ -88,5 +89,11 @@ export const actionGetUserDashBoard = () => async dispatch => {
 export const actionGetProfesionalDashBoard = () => async dispatch => {
   const request = ELPViewApiService('getProfesionalDashBoard');
   dispatch({ type: GET_PROFESIONAL_DASHBOARD, payload: request.data });
+  return request;
+};
+
+export const actionGetProfileListing = (data) => async dispatch => {
+  const request = ELPViewApiService('getProfileListing', data);
+  dispatch({ type: GET_PROFILE_LISTING, payload: request.data });
   return request;
 };

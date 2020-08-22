@@ -140,4 +140,14 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+  getProfileListing: {
+    url: 'elp/superadmin_getlistenerlist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
 };
