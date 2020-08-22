@@ -9,7 +9,7 @@ class Abouteat extends Component {
             <Container> 
                 <Row>
                     <Col md={7}>   
-                        <div className="fs50 col14 fw700 w-100">About Eat Luv n Pray</div>
+                        <div className="fs44 col14 fw700 w-100">About Eat Luv n Pray</div>
                         <div className="col14 fs16 fw300 w-100 pt-3">
                         <div className="pb-4">We live in a world where you can be surrounded by people, but still feel lonely, with nobody to turn to when things get rough.</div>
 

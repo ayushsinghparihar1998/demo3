@@ -16,8 +16,6 @@ class ProfessionalSignup extends Component {
             email: "",
             password: "",
             errors: {},
-            username: "",
-            category: "",
             organisationName: "",
             showLoader: false,
             fristSignUp: true,
@@ -62,8 +60,8 @@ class ProfessionalSignup extends Component {
             let year = this.state.year !== '' ? this.state.year : '';
             let dob = '';
             if (day && month && year) {
-                dob = day + '/' + month + '/' + year;
-                // dob = moment(dob).valueOf();
+                dob = month + '-' + day + '-' + year;
+                dob = moment(dob).valueOf();
             }
             let data = {
                 email: this.state.email ? this.state.email.toLowerCase().trim() : "",
@@ -149,7 +147,6 @@ class ProfessionalSignup extends Component {
             pathname: 'login',
             state: { roleType: this.state.roleType }
         });
-        this.props.handleSet()
     }
     render() {
         const { errors } = this.state;
@@ -157,6 +154,7 @@ class ProfessionalSignup extends Component {
             <div>
                 <div className="layout_box mt-3 mb-4">
                     <div className="col10 fs30 fw600 mb-4">Create Your Account</div>
+
                     <Row>
                         <Col md={6}>
                             <Form.Group>
@@ -209,7 +207,7 @@ class ProfessionalSignup extends Component {
                                             defaultValue="Day"
                                             id="day"
                                             name="day"
-                                            classes="form-control"
+                                            classes="form-control selectTyp1"
                                             year={this.state.year}
                                             month={this.state.month}
                                             minDate={moment().startOf('year')}
@@ -228,7 +226,7 @@ class ProfessionalSignup extends Component {
                                         <MonthPicker
                                             id="month"
                                             name="month"
-                                            classes="form-control"
+                                            classes="form-control selectTyp1"
                                             defaultValue={'Month'}
                                             short
                                             endYearGiven
@@ -246,7 +244,7 @@ class ProfessionalSignup extends Component {
                                         <YearPicker
                                             id="year"
                                             name="year"
-                                            classes="form-control"
+                                            classes="form-control selectTyp1"
                                             defaultValue="Year"
                                             end={moment().year()}
 
@@ -264,7 +262,7 @@ class ProfessionalSignup extends Component {
 
                         <Col md={6}>
                             <Form.Group>
-                                <Form.Label className="fs20 fw600 col14">
+                                <Form.Label className="fs20 fw600 col14 mt-2">
                                     Password </Form.Label>
                                 <Form.Control
                                     type="password"
@@ -281,7 +279,7 @@ class ProfessionalSignup extends Component {
                                     }}
                                 />
                                 <div className="error alignLeft">{errors.password}</div>
-                            </Form.Group>
+                            </Form.Group> 
                         </Col>
 
                         <Col md={6}>
@@ -295,9 +293,9 @@ class ProfessionalSignup extends Component {
                                     value={this.state.u_school_code ? true : false
                                     }
                                     onChange={this.handleChange}
-                                    className="fw300 fs18 col14 mt-3 checkboxTyp1"
+                                    className="fw300 fs15 col14 mt-3 checkboxTyp1"
                                     label="I have a School/Organization code." />
-                            </Form.Group>
+                            </Form.Group> 
                         </Col>
 
                         <Col md={12}>
@@ -308,7 +306,7 @@ class ProfessionalSignup extends Component {
 
                         <Col md={6}>
                             <Button onClick={this.handleSubmit} className="btnTyp5 mt-3">continue</Button>
-                        </Col>
+                        </Col> 
                     </Row>
 
                     <div className="fs18 fw300 pt-5 col14">
@@ -316,7 +314,7 @@ class ProfessionalSignup extends Component {
                                     <span className="fw500 pointer pl-1"
                             onClick={this.goToLoginPage}>Login here</span>
                     </div>
-                </div> </div>
+                </div> </div> 
         )
 
     }

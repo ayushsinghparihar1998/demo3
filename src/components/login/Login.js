@@ -207,7 +207,7 @@ class Login extends Component {
 
             <div className="fs18 fw300 pb-5 col14">
               Interested in becoming a Listener?
-              <span className="fw500 pointer pl-1">Reset it Here</span>
+              <span className="fw600 pointer pl-1">Learn More / Signup</span>  
             </div>
           </Container>
         </div>

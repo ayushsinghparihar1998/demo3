@@ -110,9 +110,9 @@ class NavBar extends Component {
                                     </NavLink>,
                                     <Nav.Link onClick={this.handleModal}>Volunteer as a Listener</Nav.Link>,
                                     <NavDropdown title="CSR" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="#">Action</NavDropdown.Item>,
-                                        <NavDropdown.Item href="#">Another</NavDropdown.Item>,
-                                        <NavDropdown.Item href="#">Something</NavDropdown.Item>,
+                                        <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                                        <NavDropdown.Item href="#">Another</NavDropdown.Item>
+                                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
                                     </NavDropdown>,
                                     <NavDropdown title="Communities" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
@@ -125,7 +125,7 @@ class NavBar extends Component {
                             {getLocalStorage("userInfo") || getLocalStorage("userInfoProff")
                                 || getLocalStorage("customerInfo") ?
                                 (<Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>) :
-                                <NavDropdown title="Login" id="login-nav-dropdown">
+                                <NavDropdown title="Login" id="login-nav-dropdown" className="btnTypeone"> 
                                     <NavDropdown.Item onClick={e => { this.handleLogin(1) }}>Listener Login</NavDropdown.Item>
                                     <NavDropdown.Item onClick={e => { this.handleLogin(2) }}>Professional Login</NavDropdown.Item>
                                     <NavDropdown.Item onClick={e => { this.handleLogin(3) }}>User Login</NavDropdown.Item>

@@ -77,7 +77,7 @@ class Listenersignup extends Component {
                 device_type: '',
                 device_token: '',
                 uc_cat_name: this.state.listOfCategory,
-                screen_name: this.state.screen_name,
+                screen_name: this.state.screenName,
                 // question: this.state.question,
             };
 
@@ -235,7 +235,7 @@ class Listenersignup extends Component {
                                                 value={this.state.password}
                                                 onChange={this.handleChange}
                                                 inputProps={{
-                                                    maxLength: 30,
+                                                    maxLength: 30, 
                                                 }}
                                             />
                                             <div className="error alignLeft">{errors.password}</div>
@@ -250,7 +250,7 @@ class Listenersignup extends Component {
                                             <Form.Label className="fs20 fw600 col14">Add Category</Form.Label>
                                             <Form.Control
                                                 type="category"
-                                                placeholder="category" className="inputTyp2"
+                                                placeholder="Category" className="inputTyp2"
                                                 error={errors.category ? true : false}
                                                 id="outlined-pwd"
                                                 label="category"

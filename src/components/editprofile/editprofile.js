@@ -37,87 +37,66 @@ class Editprofile extends Component {
                                         <Image src={Camera} alt="" className="camera" />
                                     </div>
                                 </div>
-                                <div className="text-center mt-4 mb-4 pb-2">
-                                    <div className="fs18 fw600 col1 pb-1">Melisa R. Wright</div>
-                                    <div className="col23 fs16 fw500 pb-1">
-                                        Listener - Novice
-                                        <Image src={warningS} alt="" className="ml-2" />
-                                    </div>
-                                    <div className="col27 fw400 fs14">Finding myself....</div>
-                                    <div className="border_bottoms mt-3"></div>
-                                </div>
+                                <div className="mt-4 mb-4 pb-2"></div>
                                 <div className="text-center user_tab">
                                     <Tabs defaultActiveKey="home">
                                         <Tab eventKey="home" title="profile info">
-                                            <div className="mx-wcustom m-auto">
+                                            <Col md={8} className="m-auto">
                                                 <Form className="text-left mt-5">
+                                                    <Form.Group>
+                                                        <Form.Label className="fs20 fw600 col14">User Name:</Form.Label>
+                                                        <Form.Control type="text" value="Melisa R. Wright" className="inputTyp2" />
+                                                    </Form.Group>
+
+                                                    <Form.Group>
+                                                        <Form.Label className="fs20 fw600 col14">Email:</Form.Label>
+                                                        <Form.Control type="email" value="melisa_rw@ gmail.com" className="inputTyp2" />
+                                                    </Form.Group>
+                                                    <Form.Group>
+                                                        <Form.Label className="fs20 fw600 col14 mt-2">Password:</Form.Label>
+                                                        <div className="d-flex">
+                                                            <Form.Control type="password" value="passsword" className="inputTyp2" />
+                                                            <Button className="btnTyp11 ml-3">reset</Button>
+                                                        </div>
+                                                    </Form.Group>
+
+                                                    <Form.Label className="fs20 fw600 col14 mt-2">Date of Birth:</Form.Label>
                                                     <Row>
-                                                        <Col md={12}>
+                                                        <Col md={3}>
                                                             <Form.Group>
-                                                                <Form.Label className="fs20 fw600 col14">User name:</Form.Label>
-                                                                <Form.Control type="text" value="Melisa R. Wright" className="inputTyp2" />
-                                                            </Form.Group>
-                                                        </Col>
-                                                        <Col md={12}>
-                                                            <Form.Group>
-                                                                <Form.Label className="fs20 fw600 col14">Email:</Form.Label>
-                                                                <Form.Control type="email" value="melisa_rw@ gmail.com" className="inputTyp2" />
-                                                            </Form.Group>
-                                                        </Col>
-
-                                                        <Col md={12}>
-                                                            <Form.Group>
-                                                                <Form.Label className="fs20 fw600 col14 mt-2">Password:</Form.Label>
-                                                                <div className="d-flex">
-                                                                    <Form.Control type="password" value="passsword" className="inputTyp2" />
-                                                                    <Button className="btnTyp11 ml-3">reset</Button>
-                                                                </div>
+                                                                <Form.Control as="select" className="selectTyp1">
+                                                                    <option>Date</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </Form.Control>
                                                             </Form.Group>
                                                         </Col>
 
-                                                        <Col md={6}>
-                                                            <Form.Label className="fs20 fw600 col14 mt-2">Date of birth:</Form.Label>
-                                                            <Row>
-                                                                <Col md={6}>
-                                                                    <Form.Group>
-                                                                        <Form.Control as="select" className="selectTyp1">
-                                                                            <option>17 Feb</option>
-                                                                            <option>2</option>
-                                                                            <option>3</option>
-                                                                            <option>4</option>
-                                                                            <option>5</option>
-                                                                        </Form.Control>
-                                                                    </Form.Group>
-                                                                </Col>
-
-                                                                <Col md={6}>
-                                                                    <Form.Group>
-                                                                        <Form.Control as="select" className="selectTyp1">
-                                                                            <option>1981</option>
-                                                                            <option>Jan</option>
-                                                                            <option>Feb</option>
-                                                                            <option>March</option>
-                                                                            <option>April</option>
-                                                                        </Form.Control>
-                                                                    </Form.Group>
-                                                                </Col>
-                                                            </Row>
-                                                        </Col>
-
-                                                        <Col md={12}>
-                                                            <Button className="btnTyp5 mt-5 mr-3">save</Button>
-                                                            <Button className="btnTyp10 mt-5">cancel</Button>
+                                                        <Col md={3}>
+                                                            <Form.Group>
+                                                                <Form.Control as="select" className="selectTyp1">
+                                                                    <option>Year</option>
+                                                                    <option>1990</option>
+                                                                    <option>1991</option>
+                                                                    <option>1992</option>
+                                                                    <option>1993</option>
+                                                                </Form.Control>
+                                                            </Form.Group>
                                                         </Col>
                                                     </Row>
+                                                    <Button className="btnTyp5 mt-5 mr-3">save</Button>
+                                                    <Button className="btnTyp10 mt-5">cancel</Button>
                                                 </Form>
-                                            </div>
+                                            </Col>
                                         </Tab>
                                         <Tab eventKey="videos" title="videos">
                                             <div className="mx-wcustomtwo m-auto">
                                                 <Row>
                                                     <Col md={6}>
                                                         <div className="profile_infos d-flex mb-4 pb-2">
-                                                            <div className="mr-3">
+                                                            <div className="mr-1">
                                                                 <Form.Group controlId="profileinfos" className="mt-5 pt-3">
                                                                     <Form.Check type="checkbox" className="checkboxTyp1" label="" checked />
                                                                 </Form.Group>
@@ -128,33 +107,22 @@ class Editprofile extends Component {
                                                                     <li>Delete Video</li>
                                                                     <li>Publish video to public</li>
                                                                     <li>
-                                                                        <Form>
-                                                                            <Form.Check
-                                                                                type="switch"
-                                                                                id="custom-switch"
-                                                                                label=""
-                                                                                checked
-                                                                            />
-                                                                        </Form>
+                                                                        <Form.Check type="switch" id="custom-switch" label="" checked />
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="profile-video">
                                                                 <Image src={Profileimgnew} alt="" className="" />
                                                                 <Image src={Videoicon} alt="" className="video_icon" />
-                                                                <div className="col29 fs18 fw500 mt-3 mb-3">
-                                                                    Lorem Ipsum is simply
-                                                                </div>
-                                                                <div className="fs16 col28 fw500 mb-2">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                                </div>
+                                                                <div className="col29 fs18 fw500 mt-3 mb-3">Lorem Ipsum is simply</div>
+                                                                <div className="fs16 col28 fw500 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
                                                                 <div className="fs16 col23">23 Jan 2020</div>
                                                             </div>
                                                         </div>
                                                     </Col>
                                                     <Col md={6}>
                                                         <div className="profile_infos d-flex mb-4 pb-2">
-                                                            <div className="mr-3">
+                                                            <div className="mr-1">
                                                                 <Form.Group controlId="profileinfotwo" className="mt-5 pt-3">
                                                                     <Form.Check type="checkbox" className="checkboxTyp1" label="" />
                                                                 </Form.Group>
@@ -166,12 +134,7 @@ class Editprofile extends Component {
                                                                     <li>Publish video to public</li>
                                                                     <li>
                                                                         <Form>
-                                                                            <Form.Check
-                                                                                type="switch"
-                                                                                id="custom-switch"
-                                                                                label=""
-                                                                                checked
-                                                                            />
+                                                                            <Form.Check type="switch" id="custom-switch" label="" checked />
                                                                         </Form>
                                                                     </li>
                                                                 </ul>
@@ -179,12 +142,8 @@ class Editprofile extends Component {
                                                             <div className="profile-video">
                                                                 <Image src={Profileimgnew} alt="" className="" />
                                                                 <Image src={Videoicon} alt="" className="video_icon" />
-                                                                <div className="col29 fs18 fw500 mt-3 mb-3">
-                                                                    Lorem Ipsum is simply
-                                                                </div>
-                                                                <div className="fs16 col28 fw500 mb-2">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                                </div>
+                                                                <div className="col29 fs18 fw500 mt-3 mb-3">Lorem Ipsum is simply</div>
+                                                                <div className="fs16 col28 fw500 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
                                                                 <div className="fs16 col23">23 Jan 2020</div>
                                                             </div>
                                                         </div>
@@ -192,7 +151,7 @@ class Editprofile extends Component {
 
                                                     <Col md={6}>
                                                         <div className="profile_infos d-flex mb-4 pb-2">
-                                                            <div className="mr-3">
+                                                            <div className="mr-1">
                                                                 <Form.Group controlId="profileinfothree" className="mt-5 pt-3">
                                                                     <Form.Check type="checkbox" className="checkboxTyp1" label="" />
                                                                 </Form.Group>
@@ -204,12 +163,7 @@ class Editprofile extends Component {
                                                                     <li>Publish video to public</li>
                                                                     <li>
                                                                         <Form>
-                                                                            <Form.Check
-                                                                                type="switch"
-                                                                                id="custom-switch"
-                                                                                label=""
-                                                                                checked
-                                                                            />
+                                                                            <Form.Check type="switch" id="custom-switch" label="" checked />
                                                                         </Form>
                                                                     </li>
                                                                 </ul>
@@ -217,12 +171,8 @@ class Editprofile extends Component {
                                                             <div className="profile-video">
                                                                 <Image src={Profileimgnew} alt="" className="" />
                                                                 <Image src={Videoicon} alt="" className="video_icon" />
-                                                                <div className="col29 fs18 fw500 mt-3 mb-3">
-                                                                    Lorem Ipsum is simply
-                                                                </div>
-                                                                <div className="fs16 col28 fw500 mb-2">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                                </div>
+                                                                <div className="col29 fs18 fw500 mt-3 mb-3">Lorem Ipsum is simply</div>
+                                                                <div className="fs16 col28 fw500 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
                                                                 <div className="fs16 col23">23 Jan 2020</div>
                                                             </div>
                                                         </div>
@@ -230,7 +180,7 @@ class Editprofile extends Component {
 
                                                     <Col md={6}>
                                                         <div className="profile_infos d-flex mb-4 pb-2">
-                                                            <div className="mr-3">
+                                                            <div className="mr-1">
                                                                 <Form.Group controlId="profileinfofour" className="mt-5 pt-3">
                                                                     <Form.Check type="checkbox" className="checkboxTyp1" label="" />
                                                                 </Form.Group>
@@ -242,12 +192,7 @@ class Editprofile extends Component {
                                                                     <li>Publish video to public</li>
                                                                     <li>
                                                                         <Form>
-                                                                            <Form.Check
-                                                                                type="switch"
-                                                                                id="custom-switch"
-                                                                                label=""
-                                                                                checked
-                                                                            />
+                                                                            <Form.Check type="switch" id="custom-switch" label="Check this switch" checked />
                                                                         </Form>
                                                                     </li>
                                                                 </ul>
@@ -255,29 +200,24 @@ class Editprofile extends Component {
                                                             <div className="profile-video">
                                                                 <Image src={Profileimgnew} alt="" className="" />
                                                                 <Image src={Videoicon} alt="" className="video_icon" />
-                                                                <div className="col29 fs18 fw500 mt-3 mb-3">
-                                                                    Lorem Ipsum is simply
-                                                                </div>
-                                                                <div className="fs16 col28 fw500 mb-2">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                                </div>
+                                                                <div className="col29 fs18 fw500 mt-3 mb-3">Lorem Ipsum is simply</div>
+                                                                <div className="fs16 col28 fw500 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
                                                                 <div className="fs16 col23">23 Jan 2020</div>
                                                             </div>
                                                         </div>
                                                     </Col>
 
-                                                    <Col md={12} className="pl-4">
+                                                    <Col md={12} className="pl-4 text-left">
                                                         <Button className="btnTyp5 ml-5 mt-4 mr-3">save</Button>
                                                         <Button className="btnTyp10 mt-4">cancel</Button>
                                                     </Col>
-
                                                 </Row>
                                             </div>
                                         </Tab>
                                         <Tab eventKey="badgesawards" title="Badges & Awards">
-                                            <div className="budge_layout text-left mt-5">
+                                            <Col md={6} className="m-auto text-left pt-5">
                                                 <div className="mw-40 m-auto d-flex">
-                                                    <div className="w-50">
+                                                    <div className="w-50 pl-5">
                                                         <div className="mb-4">
                                                             <Image src={Checkediconfour} alt="" />
                                                             <span className="pl-3">Newbie</span>
@@ -313,47 +253,41 @@ class Editprofile extends Component {
                                                             <span className="pl-3">Open Door</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div> 
+                                            </Col>
                                         </Tab>
                                         <Tab eventKey="Categories" title="Categories">
-                                            <div className="mx-wcustom m-auto">
+                                            <Col md={8} className="m-auto">
                                                 <Form className="text-left mt-5">
-                                                    <Row>
+                                                    <Form.Group>
+                                                        <div className="d-flex">
+                                                            <Form.Control type="text" value="Categories |" className="inputTyp2 col23" />
+                                                            <Button className="btnTyp11 ml-3">Add</Button>
+                                                        </div>
+                                                        <div className="d-flex mw-customtree">
+                                                            <span className="multiple_d">
+                                                                Work Stress
+                                                                <Image src={Crossblue} alt="" />
+                                                            </span>
+                                                            <span className="multiple_d">
+                                                                Eating Disorders
+                                                                <Image src={Crossblue} alt="" />
+                                                            </span>
+                                                            <span className="multiple_d">
+                                                                Work Stress
+                                                                <Image src={Crossblue} alt="" />
+                                                            </span>
+                                                            <span className="multiple_d">
+                                                                Eating Disorders
+                                                                <Image src={Crossblue} alt="" />
+                                                            </span>
+                                                        </div>
+                                                    </Form.Group>
 
-
-                                                        <Col md={12}>
-                                                            <Form.Group>
-                                                                <div className="d-flex">
-                                                                    <Form.Control type="text" value="Categories |" className="inputTyp2 col23" />
-                                                                    <Button className="btnTyp11 ml-3">Add</Button>
-                                                                </div>
-                                                                <div className="d-flex mw-customtree">
-                                                                    <span className="multiple_d">Work Stress
-                                                                        <Image src={Crossblue} alt="" />
-                                                                    </span>
-                                                                    <span className="multiple_d">Eating Disorders
-                                                                        <Image src={Crossblue} alt="" />
-                                                                    </span>
-                                                                    <span className="multiple_d">Work Stress
-                                                                        <Image src={Crossblue} alt="" />
-                                                                    </span>
-                                                                    <span className="multiple_d">Eating Disorders
-                                                                        <Image src={Crossblue} alt="" />
-                                                                    </span>
-                                                                </div>
-
-                                                            </Form.Group>
-                                                        </Col>
-
-                                                        <Col md={12}>
-                                                            <Button className="btnTyp5 mt-5 mr-3">save</Button>
-                                                            <Button className="btnTyp10 mt-5">cancel</Button>
-                                                        </Col>
-
-                                                    </Row>
+                                                    <Button className="btnTyp5 mt-5 mr-3">save</Button>
+                                                    <Button className="btnTyp10 mt-5">cancel</Button>
                                                 </Form>
-                                            </div>
+                                            </Col>
                                         </Tab>
                                     </Tabs>
                                 </div>

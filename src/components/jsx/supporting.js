@@ -22,7 +22,7 @@ class Supporting extends Component {
     return (   
         <div className="Supporting">       
             <Container> 
-                    <div className="fw700 fs50 col10 col1 w-100">Supporting Organizations</div>
+                    <div className="fw700 fs44 col10 col1 w-100">Supporting Organizations</div>
                     <div className="col14 fs20 fw500 w-100 pt-3 mb-5 pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
 
                   <Slider {...settings}> 

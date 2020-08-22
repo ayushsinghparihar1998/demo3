@@ -25,7 +25,7 @@ class Becomelistener extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="becomeListener">
+        <div className="becomeListener">  
           <Container>
             <div className="listener_layout mt-4 mb-4">
               <Row>
@@ -42,15 +42,18 @@ class Becomelistener extends Component {
                   as often as you like.
                             </div>
                   <div className="fw500 fs20 col29 pt-3 mb-2">Here is the two-step registration process:</div>
-                  <div className="fw300 fs15 col28"><span className="col29 fw500">1.</span> Complete the active listening course</div>
-                  <div className="fw300 fs15 col28"><span className="col29 fw500">2.</span> Create your listener profile</div>
+                  
+				  <ol className="pl-3"> 
+                     <li><div className="fw300 fs15 col28"> Complete the active listening course</div></li>
+                     <li><div className="fw300 fs15 col28"> Create your listener profile</div></li> 
+                  </ol>
 
                   <NavLink to="/listenersignup" className="btnTyp4 mb-4 mt-5 d-inline-block">
                     Become a Listener
                             </NavLink>
 
                   <div className="col28 fw500 fs20 pt-4">Already have an account?
-                            <span className="col12 pointer" onClick={this.goToLoginPage}>Login here</span></div>
+                            <span className="col12 pointer pl-1" onClick={this.goToLoginPage}>Login here</span></div>
                 </Col>
                 <Col md={4}>
                   <Image src={WomenListener} alt="" className="w-100" />

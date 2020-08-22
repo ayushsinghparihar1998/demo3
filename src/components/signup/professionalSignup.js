@@ -74,10 +74,10 @@ class ProfessionalSignup extends Component {
                 device_type: '',
                 device_token: '',
                 uc_cat_name: this.state.listOfCategory,
-                screen_name: this.state.screen_name,
+                screen_name: this.state.screenName,
                 // question: this.state.question,
             };
-
+            console.log("rwerwerwe", data)
             this.props.actionProfessionalSignup(data).then((result) => {
                 console.log(result && result.data && result.data.status,
                     "result321321312", result)
@@ -299,7 +299,7 @@ class ProfessionalSignup extends Component {
                                     <Form.Label className="fs20 fw600 col14">Add Category</Form.Label>
                                     <Form.Control
                                         type="category"
-                                        placeholder="category" className="inputTyp2"
+                                        placeholder="Category" className="inputTyp2"
                                         error={errors.category ? true : false}
                                         id="outlined-pwd"
                                         label="category"

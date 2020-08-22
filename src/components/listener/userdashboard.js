@@ -275,7 +275,7 @@ class Userdashboard extends Component {
                         })}
                     </div>
 
-                    <div className="inner_side">
+                    {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                         <span>Currently Active Listeners</span>
                       </div>
@@ -339,6 +339,7 @@ class Userdashboard extends Component {
                         </div>
                       )}
                     </div>
+                */}
                   </div>
 
                   <div className="inner_side">

@@ -13,21 +13,17 @@ axios.defaults.baseURL = 'http://103.76.253.131:81';
 //axios.defaults.baseURL = 'http://103.21.53.11:3004';
 
 axios.interceptors.request.use(
-  function (config) {
-    let access_token = '';
-    let userInfo = getLocalStorage('userInfo');
-    let customerInfo = getLocalStorage('customerInfo');
-    let userInfoProff = getLocalStorage('userInfoProff');
 
-    if (userInfo || customerInfo || userInfoProff) {
+  function (config) {
+    console.log("getLocalStorage", getLocalStorage)
+    let access_token = '';
+    let userInfo = getLocalStorage('userInfo') || getLocalStorage('customerInfo') || getLocalStorage('userInfoProff');
+
+
+
+    if (userInfo) {
       if (userInfo.u_accesstoken) {
         access_token = userInfo.u_accesstoken;
-        config.headers.accesstoken = `${access_token}`;
-      } else if (customerInfo.u_accesstoken) {
-        access_token = customerInfo.u_accesstoken;
-        config.headers.accesstoken = `${access_token}`;
-      } else if (userInfoProff.u_accesstoken) {
-        access_token = userInfoProff.u_accesstoken;
         config.headers.accesstoken = `${access_token}`;
       }
     }

@@ -60,7 +60,7 @@
 
         .invertedtwo {
             position: absolute;
-            right: 21%; 
+            right: 8%; 
             top: 85px; 
         }
     }
@@ -203,12 +203,12 @@
             height: auto; 
         }   
         .Loginlayout {
-            height: calc(100vh - 146px); 
+            min-height: calc(100vh - 146px);
         }
     }
 
     .main_baner {
-        height: 100vh; 
+        // min-height: 100vh; 
     }
 
     .happyPatient {

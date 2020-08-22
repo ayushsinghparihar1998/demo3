@@ -9,7 +9,7 @@ class Happypatient extends Component {
     return (
         <div className="happyPatient">    
             <Container>
-                    <div className="fs50 col10 fw700 w-100">Happy Patient</div>
+                    <div className="fs44 col10 fw700 w-100">Happy Patient</div>
                     <div className="col14 fs20 fw500 w-100 pt-3 mb-4">What people say about us. Here are comments from individuals who have visited Counselor.</div>
                     <Carousel>
                         <Carousel.Item>   
