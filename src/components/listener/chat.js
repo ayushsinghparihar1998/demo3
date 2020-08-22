@@ -59,7 +59,7 @@ class Chat extends Component {
       ans31: false,
       ans32: false,
       ans33: false,
-      typing: "",
+      typing: ""
     };
   }
   componentDidMount() {
@@ -72,6 +72,7 @@ class Chat extends Component {
     socket.on("connect", function () {
       console.log("connected");
     });
+
     socket.emit(
       "chat-login",
       JSON.stringify({
@@ -85,13 +86,10 @@ class Chat extends Component {
     socket.emit(
       "onScreen",
       JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
-        user_type: getLocalStorage("userInfo").u_role_id,
+        from_user_id: getLocalStorage("userInfo").u_id,
+        to_user_id: this.props.match.params.id,
         status: 1,
-      }),
-      function (d) {
-        console.log("onScreen", d);
-      }
+      }), data => this.setState({ userMeta: data.userDetail })
     );
     socket.on("startTyping", (data) => {
       this.setState({ response: data });
@@ -198,7 +196,6 @@ class Chat extends Component {
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
       user_type: 3,
     };
-    console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
       console.log("sendMessage", data);
       this.updateChat(object);
@@ -234,6 +231,12 @@ class Chat extends Component {
   changepath = (path) => {
     this.props.history.push(path);
   };
+  changeChatpath = (id) => {
+    this.props.history.replace(`/reload`);
+    setTimeout(() => {
+      this.props.history.replace("/chat/" + id);
+    });
+  };
 
   handleClose2 = () => {
     this.setState({
@@ -241,6 +244,7 @@ class Chat extends Component {
     });
   };
   render() {
+    const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -259,7 +263,7 @@ class Chat extends Component {
                       {this.state.recentChatUsers &&
                         this.state.recentChatUsers.map((item) => {
                           return (
-                            <div className="d-flex m-3 border-bottom">
+                            <div className="d-flex m-3 border-bottom pointer" onClick={() => this.changeChatpath(item.id)}>
                               <div className="position-relative">
                                 <Image
                                   src={
@@ -273,7 +277,7 @@ class Chat extends Component {
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
                                   {item.from_user_id ==
-                                  getLocalStorage("userInfo").u_id
+                                    getLocalStorage("userInfo").u_id
                                     ? item.to_user_name
                                     : item.from_user_name}
                                 </div>
@@ -304,7 +308,11 @@ class Chat extends Component {
                           {this.state.activeChatUsers &&
                             this.state.activeChatUsers.map((item, ind) => {
                               return ind < this.state.showVal ? (
-                                <div className="d-flex m-3 border-bottom">
+                                <div className="d-flex m-3 border-bottom pointer"
+                                  onClick={() =>
+                                    this.changeChatpath(item.id)
+                                  }
+                                >
                                   <div className="position-relative">
                                     <Image
                                       src={
@@ -317,23 +325,20 @@ class Chat extends Component {
                                   <div className="position-relative pl-3 mt-auto mb-auto">
                                     <div
                                       className="fs14 col14 fw500"
-                                      onClick={() =>
-                                        this.changepath("/chat/" + item.id)
-                                      }
+
                                     >
                                       {item.u_name}
                                     </div>
                                   </div>
                                 </div>
                               ) : (
-                                ""
-                              );
+                                  ""
+                                );
                             })}
                         </Tab>
                       </Tabs>
                       {this.state.showVal == 4 ? (
-                        <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
+                        <div className="fs15 fw600 col23 p-3 pointer show-more"
                           onClick={() => {
                             this.setState({
                               showVal: this.state.activeChatUsers.length,
@@ -343,17 +348,17 @@ class Chat extends Component {
                           Show More
                         </div>
                       ) : (
-                        <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: 4,
-                            });
-                          }}
-                        >
-                          Show Less
-                        </div>
-                      )}
+                          <div
+                            className="fs15 fw600 col23 p-3 pointer show-more"
+                            onClick={() => {
+                              this.setState({
+                                showVal: 4,
+                              });
+                            }}
+                          >
+                            Show Less
+                          </div>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -365,12 +370,13 @@ class Chat extends Component {
                     <Row>
                       <Col xs={3}>
                         <div className="mt-auto mb-auto">
+                          {console.log("userMeta", userMeta)}
                           <Image
-                            src={UserChat3}
-                            alt=""
+                            src={userMeta.u_image || UserChat3}
+                            alt={userMeta.u_username}
                             className="r50 pointer"
                           />
-                          <span className="fs17 fw600 col18 pl-3">Melisa</span>
+                          <span className="fs17 fw600 col18 pl-3">{userMeta.u_username}</span>
                         </div>
                       </Col>
                       <Col xs={9}>
@@ -449,42 +455,42 @@ class Chat extends Component {
                         {this.state.allMessages.map((msg, index) => {
                           return msg.from_user_id ==
                             getLocalStorage("userInfo").u_id ? (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="text-right">
-                                <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
-                                  {msg.message}
-                                </div>
-                                <div className="fs10 fw300 col47">
-                                  {moment(msg.date_time).format("hh:mm a")}
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="d-flex">
-                                <div className="mt-auto mb-auto">
-                                  <Image
-                                    src={UserChat4}
-                                    alt=""
-                                    className="r50 mr-3"
-                                  />
-                                </div>
-                                <div className="mt-auto mb-auto">
-                                  <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="text-right">
+                                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
                                     {msg.message}
                                   </div>
                                   <div className="fs10 fw300 col47">
-                                    {moment(msg.date_time).format("hh:mm")}
+                                    {moment(msg.date_time).format("hh:mm a")}
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
+                            ) : (
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="d-flex">
+                                  <div className="mt-auto mb-auto">
+                                    <Image
+                                      src={UserChat4}
+                                      alt=""
+                                      className="r50 mr-3"
+                                    />
+                                  </div>
+                                  <div className="mt-auto mb-auto">
+                                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                                      {msg.message}
+                                    </div>
+                                    <div className="fs10 fw300 col47">
+                                      {moment(msg.date_time).format("hh:mm")}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
                         })}
                       </div>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                     {/* <div className="pl-3 pr-3 pb-3">
                       <div className="d-flex">
                         <div className="mt-auto mb-auto">

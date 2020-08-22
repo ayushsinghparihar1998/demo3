@@ -243,7 +243,9 @@ class Userdashboard extends Component {
                       {this.state.recentChatUsers &&
                         this.state.recentChatUsers.map((item) => {
                           return (
-                            <div className="d-flex m-3 border-bottom">
+                            <div className="d-flex m-3 border-bottom" onClick={() => {
+                              this.changepath("/chat/" + item.id)
+                            }}>
                               <div className="position-relative">
                                 <Image
                                   src={
@@ -257,7 +259,7 @@ class Userdashboard extends Component {
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
                                   {item.from_user_id ==
-                                  getLocalStorage("userInfo").u_id
+                                    getLocalStorage("userInfo").u_id
                                     ? item.to_user_name
                                     : item.from_user_name}
                                 </div>
@@ -352,7 +354,10 @@ class Userdashboard extends Component {
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom"
+                              onClick={() =>
+                                this.changepath("/chat/" + item.id)
+                              }>
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -363,9 +368,7 @@ class Userdashboard extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-                                    onClick={() =>
-                                      this.changepath("/chat/" + item.id)
-                                    }
+                                    
                                   >
                                     {item.u_name}
                                   </div>

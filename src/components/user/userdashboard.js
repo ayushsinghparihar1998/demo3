@@ -186,6 +186,7 @@ class Userdashboard extends Component {
   changepath = (path) => {
     this.props.history.push(path);
   };
+
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -206,7 +207,9 @@ class Userdashboard extends Component {
                     {this.state.recentChatUsers &&
                       this.state.recentChatUsers.map((item) => {
                         return (
-                          <div className="d-flex m-3 border-bottom">
+                          <div className="d-flex m-3 border-bottom" onClick={() => {
+                            this.changepath("/chatuser/" + item.id)
+                          }}>
                             <div className="position-relative">
                               <Image
                                 src={item.from_image ? item.from_image : UserChat}
@@ -246,7 +249,11 @@ class Userdashboard extends Component {
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom"
+                                onClick={() =>
+                                  this.changepath("/chatuser/" + item.id)
+                                }
+                              >
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -257,9 +264,7 @@ class Userdashboard extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-                                    onClick={() =>
-                                      this.changepath("/chatuser/" + item.id)
-                                    }
+
                                   >
                                     {item.u_name}
                                   </div>
