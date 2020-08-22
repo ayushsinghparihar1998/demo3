@@ -97,8 +97,7 @@ class NavBar extends Component {
                     <Navbar.Collapse id="basic-navbar-nav">
 
                         <Nav className="ml-auto">
-                            {getLocalStorage("userInfo") || getLocalStorage("userInfoProff")
-                                || getLocalStorage("customerInfo") ?
+                            {getLocalStorage("loggedIn") ?
                                 [<NavLink to="/myprofile" className="nav-link">
                                     My Profile
                             </NavLink>,
@@ -122,10 +121,9 @@ class NavBar extends Component {
                                     </NavDropdown>,
                                     <Nav.Link onClick={this.handleModal3}>Professionals</Nav.Link>,
                                     <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>]}
-                            {getLocalStorage("userInfo") || getLocalStorage("userInfoProff")
-                                || getLocalStorage("customerInfo") ?
+                            {getLocalStorage("loggedIn") ?
                                 (<Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>) :
-                                <NavDropdown title="Login" id="login-nav-dropdown" className="btnTypeone"> 
+                                <NavDropdown title="Login" id="login-nav-dropdown" className="btnTypeone">
                                     <NavDropdown.Item onClick={e => { this.handleLogin(1) }}>Listener Login</NavDropdown.Item>
                                     <NavDropdown.Item onClick={e => { this.handleLogin(2) }}>Professional Login</NavDropdown.Item>
                                     <NavDropdown.Item onClick={e => { this.handleLogin(3) }}>User Login</NavDropdown.Item>
@@ -133,8 +131,7 @@ class NavBar extends Component {
 
                             <Form inline>
                                 <span className="d-none">
-                                    {getLocalStorage("userInfo") || getLocalStorage("userInfoProff")
-                                        || getLocalStorage("customerInfo") ?
+                                    {getLocalStorage("loggedIn") ?
                                         <div onClick={this.handleLogout} className="btnType1">
                                             Logout
                                     </div>

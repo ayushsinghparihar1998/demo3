@@ -140,4 +140,14 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+  adminLogin: {
+    url: 'elp/superadmin_login',
+    method: 'POST',
+    data: {
+      email: '',
+      password: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
 };
