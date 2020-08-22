@@ -1,0 +1,56 @@
+@import 'fonts.scss';
+@import 'color.scss';
+
+.mj_nav { 
+    .navbar-light {
+        .navbar-brand {
+            font-size: $fs23;
+            font-weight: 600;
+            color: $col8; 
+        }
+        .navbar-nav {
+            a.nav-link {
+                padding-right: $fs16;
+                color: $col3;
+                font-weight: 500; 
+
+                &:hover {
+                    color: $col1; 
+                }
+            }
+
+            .form-inline {
+                span {
+                    padding-right: 20px;   
+                    img {
+                        max-width: 25px; 
+                    }
+                }
+            }
+            
+            .dropdown-menu { 
+                padding: 0 15px;
+                border-radius: 10px;
+                background-color: $col18;
+                box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+                border-color: $col18;         
+                a {
+                    color: $col1; 
+                    font-size: 15px;
+                    font-weight: 400; 
+                    border-bottom: 0.7px solid $col15;
+                    padding: 10px 20px;
+                    background-color: transparent;
+                    transition: 0.3s; 
+
+                    &:last-child {
+                        border-bottom: none; 
+                    }
+                    &:hover {
+                        background-color: $col15;
+                    } 
+                }
+            }
+        }
+    }
+}

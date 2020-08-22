@@ -1,0 +1,71 @@
+.userdashboards {
+    .left_sidebar { 
+        .num-bg {
+            background: $col36;
+            padding: 0.3rem 0.9rem;  
+            font-size: 13px; 
+        }        
+        .nav-tabs  {
+            display: flex;
+            justify-content: space-between;
+            border: none; 
+            .nav-link { 
+                font-size: $fs14 !important;
+                color: $col34;  
+                font-weight: 500; 
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                &.active { 
+                    background-color: $col18; 
+                    border-color: transparent;
+                    color: $col40; 
+                } 
+                &:hover {
+                    border: solid 1px $col18;
+                }
+            }
+        }
+    }
+}
+
+.chat_dashboard {
+    position: relative; 
+    background: $col18;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+
+    .chat_top {
+        height: 4.5rem;
+        line-height: 4.5rem;
+        background: $col40;  
+        padding: 0 15px; 
+    }
+    .chat_middle {  
+        min-height: 380px;
+        display: grid;
+        .bg_blue {  
+            background: $col44; 
+            padding: 10px;
+            border-radius: 5px; 
+            margin-bottom: 10px !important;
+        }
+        .bg_gray {  
+            background: $col42;
+            padding: 10px;
+            border-radius: 5px; 
+            margin-bottom: 10px !important;  
+            span.cirles {
+                width: 22px; 
+                min-width: 22px;
+                height: 22px;
+                line-height: 22px; 
+                display: inline-block;
+                background: $col43;
+                text-align: center;
+                border-radius: 50%; 
+            }
+        }
+    }
+    .chat_bottom {
+        
+    }
+}
