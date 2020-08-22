@@ -370,7 +370,6 @@ class Chat extends Component {
                     <Row>
                       <Col xs={3}>
                         <div className="mt-auto mb-auto">
-                          {console.log("userMeta", userMeta)}
                           <Image
                             src={userMeta.u_image || UserChat3}
                             alt={userMeta.u_username}
