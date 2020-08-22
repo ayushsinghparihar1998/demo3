@@ -98,7 +98,15 @@ class NavBar extends Component {
 
                         <Nav className="ml-auto">
                             {getLocalStorage("loggedIn") ?
-                                [<NavLink to="/myprofile" className="nav-link">
+                                [
+                                    <NavLink to={getLocalStorage('userInfo') ? 'userDashboard' :
+                                        getLocalStorage('userInfoProff') ? 'userDashboardproff' :
+                                            getLocalStorage('userInfo') ? 'userDashboardcust' :
+                                                getLocalStorage('userInfoAdmin') ? 'adminlistener'
+                                                    : ''} className="nav-link">
+                                        Dashboard
+                            </NavLink>,
+                                <NavLink to="/myprofile" className="nav-link">
                                     My Profile
                             </NavLink>,
                                 <NavLink to="/editprofile" className="nav-link">
