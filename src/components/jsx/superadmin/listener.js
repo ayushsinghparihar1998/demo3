@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-    actionGetProfileListing,
+    actionGetListnerListing,
+    actionGetUserListing,
+    actionGetProfessionalListing
 } from "../../../common/redux/actions";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import NavBar from "../../core/nav";
@@ -25,16 +27,33 @@ class Adminlistener extends Component {
         this.getProfileListing('', "listner");
     }
 
-    getProfileListing = (e, activaClass) => {
+    getListnerListing = (e, activaClass) => {
         let data = { "count": 10, "offset": 1 }
-        this.props.actionGetProfileListing(data).then((result) => {
-            console.log("11111", result);
+        this.props.actionGetListnerListing(data).then((result) => {
             if (result && result.status === 200) {
                 let profileListing = result && result.data && result.data.data ? result.data.data : [];
                 this.setState({ profileListing: profileListing, activeProfile: activaClass });
             }
         });
     }
+    // getProfessionalListing = (e, activaClass) => {
+    //     let data = { "count": 10, "offset": 1 }
+    //     this.props.actionGetProfessionalListing(data).then((result) => {            
+    //         if (result && result.status === 200) {
+    //             let profileListing = result && result.data && result.data.data ? result.data.data : [];
+    //             this.setState({ profileListing: profileListing, activeProfile: activaClass });
+    //         }
+    //     });
+    // }
+    // getCustomerListing = (e, activaClass) => {
+    //     let data = { "count": 10, "offset": 1 }
+    //     this.props.actionGetUserListing(data).then((result) => {            
+    //         if (result && result.status === 200) {
+    //             let profileListing = result && result.data && result.data.data ? result.data.data : [];
+    //             this.setState({ profileListing: profileListing, activeProfile: activaClass });
+    //         }
+    //     });
+    // }
     render() {
         let userActveClass = this.state.activeProfile == 'user' ? "position-relative active" : "position-relative";
         let professnalActveClass = this.state.activeProfile == 'professional' ? "position-relative active" : "position-relative";
@@ -53,17 +72,17 @@ class Adminlistener extends Component {
                                     <div className="inner_area">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
-                                            <div className={userActveClass} onClick={(e) => { this.getProfileListing(e, "user") }}>
+                                            <div className={userActveClass} onClick={(e) => { this.getCustomerListing(e, "user") }}>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> USER LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom" onCl>
-                                            <div className={professnalActveClass} onClick={(e) => { this.getProfileListing(e, "professional") }}>
+                                            <div className={professnalActveClass} onClick={(e) => { this.getProfessionalListing(e, "professional") }}>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> PROFESSIONAL LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
-                                            <div className={listnerActveClass} onClick={(e) => { this.getProfileListing(e, "listner") }}>
+                                            <div className={listnerActveClass} onClick={(e) => { this.getListnerListing(e, "listner") }}>
                                                 <div className="fs14 col23 fw500"><Image src={Menuiconblue} alt="" className="mr-1" /> LISTENER LISTING</div>
                                             </div>
                                         </div>
@@ -127,5 +146,7 @@ class Adminlistener extends Component {
 }
 
 export default connect(null, {
-    actionGetProfileListing
+    actionGetListnerListing,
+    actionGetUserListing,
+    actionGetProfessionalListing
 })(Adminlistener);

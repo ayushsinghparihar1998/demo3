@@ -3,7 +3,7 @@ import {
   LOGIN, PROFESSIONAL_LOGIN, LISTNER_SIGNUP, PROFESSIONAL_SIGNUP, ADMIN_LOGIN,
   LOGOUT, LOGIN_SUCCESS, GET_QUESTION, USER_LOGIN, USER_SIGNUP, GET_RECENT_JOIN,
   GET_LISTNER_DASHBOARD, GET_PROFILE, GET_USER_DASHBOARD, GET_PROFESIONAL_DASHBOARD,
-  GET_PROFILE_LISTING
+  GET_LISTNER_LISTING, GET_PROFESSIONAL_LISTING, GET_USER_LISTING
 } from '../types';
 
 export const actionLogin = data => async dispatch => {
@@ -92,9 +92,9 @@ export const actionGetProfesionalDashBoard = () => async dispatch => {
   return request;
 };
 
-export const actionGetProfileListing = (data) => async dispatch => {
-  const request = ELPViewApiService('getProfileListing', data);
-  dispatch({ type: GET_PROFILE_LISTING, payload: request.data });
+export const actionGetListnerListing = (data) => async dispatch => {
+  const request = ELPViewApiService('getListnerListing', data);
+  dispatch({ type: GET_LISTNER_LISTING, payload: request.data });
   return request;
 }
 export const actionAdminLogin = data => async dispatch => {
@@ -102,3 +102,13 @@ export const actionAdminLogin = data => async dispatch => {
   dispatch({ type: ADMIN_LOGIN, payload: request });
   return request;
 };
+export const actionGetUserListing = (data) => async dispatch => {
+  const request = ELPViewApiService('getUserListing', data);
+  dispatch({ type: GET_USER_LISTING, payload: request.data });
+  return request;
+}
+export const actionGetProfessionalListing = (data) => async dispatch => {
+  const request = ELPViewApiService('getProfessionalListing', data);
+  dispatch({ type: GET_PROFESSIONAL_LISTING, payload: request.data });
+  return request;
+}
