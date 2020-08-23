@@ -1,5 +1,6 @@
 .profile_layout {
     background-color: $col22; 
+    min-height: calc(100vh - 146px); 
 
     .myprofile {
         background: $col18;
@@ -93,7 +94,13 @@
                 top: 77px;
                 right: 20px; 
             }
+
+            &.melisa {
+                margin-top: 105px; 
+            }
         }
+
+       
         .user_tab {
             padding-bottom: 3rem; 
             

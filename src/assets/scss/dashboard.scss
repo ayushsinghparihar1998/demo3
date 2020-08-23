@@ -311,7 +311,16 @@
         max-width: 67px; 
     }
 
-    .custom-switch .custom-control-label::before {
+    .d-flex.justify-content-between { 
+        & div {
+            & > div {
+                word-break: break-all; 
+                padding-right: 15px; 
+            }
+        }
+    }
+
+    .custom-switch .custom-control-label::before { 
         width: 34px;
         height: 14px;
         background: $col55;

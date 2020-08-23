@@ -67,6 +67,7 @@ class Login extends Component {
       [event.target.name]: event.target.value,
     });
   };
+
   isValid() {
     const { errors, isValid } = validateInput(this.state);
     if (!isValid) {
@@ -74,6 +75,7 @@ class Login extends Component {
     }
     return isValid;
   }
+
   handleSubmitListener = () => {
     if (this.isValid()) {
       let data = {
@@ -174,6 +176,11 @@ class Login extends Component {
       QAndA: true,
     });
   };
+
+  changepath = (path) => {
+    this.props.history.push(path);
+  };
+
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
@@ -266,13 +273,24 @@ class Login extends Component {
               )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
-                <span className="fw500 pointer pl-1">Reset it Here</span>
+                <span
+                  className="fw500 pointer pl-1"
+                  onClick={() => this.changepath('/forgotpassword')}
+                >
+                  Reset it Here
+                </span>
               </div>
             </div>
+
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="fs18 fw300 pb-5 col14">
                 Interested in becoming a Listener?
-                <span className="fw600 pointer pl-1">Learn More / Signup</span>
+                <span
+                  className="fw600 pointer pl-1"
+                  onClick={() => this.changepath('/listenersignup')}
+                >
+                  Learn More / Signup
+                </span>
               </div>
             ) : (
               ''

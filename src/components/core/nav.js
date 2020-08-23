@@ -14,6 +14,7 @@ import Signup from '../jsx/listenersignup/signup';
 import ProfessionalSignup from '../signup/professionalSignup';
 import UserSignup from '../signup/userSignup';
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
+import CONSTANTS from "../../common/helpers/Constants";
 class NavBar extends Component {
     constructor() {
         super();
@@ -46,11 +47,23 @@ class NavBar extends Component {
     };
 
     handleLogout = () => {
+
+        let roleType = getLocalStorage("customerInfo") ? 3 : 
+                getLocalStorage("userInfo") ? 1 : 
+                getLocalStorage("userInfoProff") ? 2 :
+                 CONSTANTS.ROLES.LISTNER ; 
+
         let data = {}
         this.props
             .actionLogout(data)
-            .then((result) => {
-                this.props.history.push({ pathname: "/login" });
+            .then((result) => {               
+
+               console.log('rnv roleType',roleType);  
+                this.props.history.push({
+                    pathname: 'login',
+                    state: { roleType: roleType }
+                });
+                
                 localStorage.clear();
             })
             .catch((error) => {
@@ -112,10 +125,10 @@ class NavBar extends Component {
                                 <NavLink to="/editprofile" className="nav-link">
                                     Edit Profile
                     </NavLink>] : [
+                                    <Nav.Link onClick={this.handleModal}>Connect Now</Nav.Link>,
                                     <NavLink to="/becomeListener" className="nav-link">
-                                        Connect Now
-                                    </NavLink>,
-                                    <Nav.Link onClick={this.handleModal}>Volunteer as a Listener</Nav.Link>,
+                                        Volunteer as a Listener
+                                    </NavLink>,                                    
                                     <NavDropdown title="CSR" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="#">Action</NavDropdown.Item>
                                         <NavDropdown.Item href="#">Another</NavDropdown.Item>
