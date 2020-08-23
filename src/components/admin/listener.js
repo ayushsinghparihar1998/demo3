@@ -122,6 +122,14 @@ class Adminlistener extends Component {
         });
     }
 
+    userProfile = (e, uid) => {
+        this.props.history.push({
+            pathname: '/myprofile',
+            state: { userId: uid }
+        });
+    }
+
+
     adminUserDeleteConfirm = (e, uid) => {
         this.setState({
             deleteConformationModal: true,
@@ -135,6 +143,7 @@ class Adminlistener extends Component {
             profileId: '',
         })
     }
+
 
     render() {
         let totalRecord = this.state.totalRecord;
@@ -190,7 +199,9 @@ class Adminlistener extends Component {
                                                     <div className="pl-2 w-100">
                                                         <div className="d-flex justify-content-between">
                                                             <div>
-                                                                <div className="col1 fw500 fs18 pb-1">{item.u_name ? item.u_name : ''}</div>
+                                                                <div
+                                                                    onClick={(e) => { this.userProfile(e, item.id) }}
+                                                                    className="col1 fw500 fs18 pb-1">{item.u_name ? item.u_name : ''}</div>
                                                                 <div className="col40 fs15 fw400 pb-1">
                                                                     Category:  {item.uc_cat_name && item.uc_cat_name.map((cat, idx) => {
                                                                     return (
