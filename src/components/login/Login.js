@@ -128,6 +128,8 @@ class Login extends Component {
             setLocalStorage("loggedIn", true);
             this.props.history.push({ pathname: '/userDashboardcust' });
 
+            
+
           }
         })
         .catch(error => {
@@ -135,11 +137,17 @@ class Login extends Component {
         });
     }
   };
+
   handleClose = () => {
     this.setState({
       QAndA: true,
     })
-  }
+  };
+
+  changepath = (path) => {
+    this.props.history.push(path);
+  };  
+
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
@@ -207,7 +215,14 @@ class Login extends Component {
 
             <div className="fs18 fw300 pb-5 col14">
               Interested in becoming a Listener?
-              <span className="fw600 pointer pl-1">Learn More / Signup</span>  
+              <span 
+              className="fw600 pointer pl-1"
+              onClick={() =>
+                this.changepath("/listenersignup")
+              }
+              >              
+                Learn More / Signup
+                </span>  
             </div>
           </Container>
         </div>

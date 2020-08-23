@@ -181,7 +181,7 @@ class ProfessionalSignup extends Component {
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14">User name:</Form.Label>
                                 <Form.Control type="text"
-                                    placeholder="Enter screen name"
+                                    placeholder="Enter User name"
                                     className="inputTyp2"
                                     error={errors.username ? true : false}
                                     id="outlined-email"
