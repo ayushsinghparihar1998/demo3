@@ -36,8 +36,6 @@ class Adminlistener extends Component {
 
     handlePageChange = (newPageNumber) => {
         let chkUserProfile = this.state.activeProfile;
-        alert(chkUserProfile)
-        alert(newPageNumber)
         this.setState({ pageNumber: newPageNumber }, () => {
             if (chkUserProfile === 'user') {
                 this.getCustomerListing('', 'user');
