@@ -17,10 +17,13 @@
                 max-width: 35%; 
             }
             .w60 {
-                width: 60%;
+                width: 50%;
+                word-break: break-all;
             }
             .w40 {
-                width: 40%; 
+                width: 50%;
+                word-break: break-all; 
+
             }
             &:last-child {
                 .border2 {
