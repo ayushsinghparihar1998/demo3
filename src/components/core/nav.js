@@ -67,14 +67,6 @@ class NavBar extends Component {
       ? 2
       : CONSTANTS.ROLES.LISTNER;
 
-    let roleType = getLocalStorage('customerInfo')
-      ? 3
-      : getLocalStorage('userInfo')
-      ? 1
-      : getLocalStorage('userInfoProff')
-      ? 2
-      : CONSTANTS.ROLES.LISTNER;
-
     let data = {};
     this.props
       .actionLogout(data)

@@ -22,7 +22,8 @@ import {
   RESET_PASSWORD,
   ADMIN_CHANGE_USER_STATUS,
   ADMIN_USER_DELETE,
-  GET_PROFILE_BY_ID
+  GET_PROFILE_BY_ID,
+  UPDATE_USER_DETAILS,
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -151,10 +152,23 @@ export const actionResetPassword = (data) => async (dispatch) => {
   const request = ELPViewApiService('resetpassword', data);
   dispatch({ type: RESET_PASSWORD, payload: request.data });
   return request;
-}
+};
 
-export const actionGetProfileById = (data) => async dispatch => {
+export const actionGetProfileById = (data) => async (dispatch) => {
   const request = ELPViewApiService('getProfileById', data);
   dispatch({ type: GET_PROFILE_BY_ID, payload: request.data });
   return request;
 };
+export const actionUpdateUserDetails = (data) => async (dispatch) => {
+  console.log('request', data);
+  const request = ELPViewApiService('editUserDetails', data);
+  console.log('request', request);
+  dispatch({ type: UPDATE_USER_DETAILS, payload: data });
+  return request;
+};
+
+// export const actionResetPassword = (data) => async (dispatch) => {
+//   const request = ELPViewApiService('resetpassword', data);
+//   dispatch({ type: RESET_PASSWORD, payload: data });
+//   return request;
+// };

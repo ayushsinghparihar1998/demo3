@@ -11,6 +11,16 @@ import {
   Tabs,
   Tab,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {
+  actionGetProfile,
+  actionUpdateUserDetails,
+  actionResetPassword,
+} from '../../common/redux/actions';
+import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
+import moment from 'moment';
+
+import CONSTANTS from '../../common/helpers/Constants';
 import NavBar from '../core/nav';
 import Footer from '../core/footer';
 import Profileban from '../../assets/images/profile_ban.svg';
@@ -24,7 +34,120 @@ import Videoicon from '../../assets/images/video_icon.svg';
 import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
 
+import { setLocalStorage } from '../../common/helpers/Utils';
+
 class Editprofile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: {},
+      userName: '',
+      userEmail: '',
+      userPassword: '',
+      day: '',
+      month: '',
+      year: '',
+    };
+  }
+
+  componentDidMount() {
+    this.getProfile();
+    console.log('this.props', this.props);
+  }
+
+  getProfile = () => {
+    this.props.actionGetProfile({}).then((result) => {
+      if (result && result.status === 200) {
+        let res =
+          result.data.data.profile_list && result.data.data.profile_list[0]
+            ? result.data.data.profile_list[0]
+            : {};
+        console.log('qweqweqweqwe 11', res);
+        let dob = res.u_birthdate.split('/');
+
+        let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
+
+        this.setState({
+          userData: res,
+          userName: res.u_name,
+          userEmail: res.email,
+
+          day: dob[0],
+          //  month: getMonth[0].id,
+          month: '',
+          year: dob[2],
+          userId: res.id,
+        });
+      }
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleSubmit = () => {
+    let day = this.state.day !== '' ? this.state.day : '';
+    let month = this.state.month !== '' ? Number(this.state.month) + 1 : '';
+    let year = this.state.year !== '' ? this.state.year : '';
+    let dob = '';
+
+    console.log('date', day, month, year);
+    if (day && month && year) {
+      dob = month + '/' + day + '/' + year;
+
+      console.log('date', dob);
+      dob = moment(dob).valueOf();
+      console.log('date', dob);
+    }
+
+    let data;
+    if (this.state.userPassword !== '') {
+      data = {
+        email: this.state.userEmail,
+        password: this.state.userPassword,
+        u_birthdate: dob,
+        u_name: this.state.userName,
+        u_gender: '',
+        u_image: '',
+      };
+    } else {
+      data = {
+        email: this.state.userEmail,
+        //  password: this.state.userPassword,
+        u_birthdate: dob,
+        u_name: this.state.userName,
+        u_gender: '',
+        u_image: '',
+      };
+    }
+
+    console.log('data', data);
+    this.props.actionUpdateUserDetails(data).then((result) => {
+      console.log('result321321312', result.data.data);
+      if (result && result.status === 200) {
+        //setLocalStorage('result', result.data.data);
+      }
+    });
+  };
+
+  handleResetPassword = () => {
+    let data = {
+      email: this.state.userEmail,
+      password: this.state.userPassword,
+      userid: this.state.userId,
+    };
+    console.log('data', data);
+    this.props.actionResetPassword(data).then((result) => {
+      console.log('result321321312', result.data.data);
+      if (result && result.status === 200) {
+        setLocalStorage('result', result.data.data);
+      }
+    });
+  };
+
   render() {
     return (
       <div className="page__wrapper innerpage">
@@ -64,7 +187,9 @@ class Editprofile extends Component {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              value="Melisa R. Wright"
+                              name="userName"
+                              onChange={this.handleChange}
+                              value={this.state.userName}
                               className="inputTyp2"
                             />
                           </Form.Group>
@@ -75,8 +200,10 @@ class Editprofile extends Component {
                             </Form.Label>
                             <Form.Control
                               type="email"
-                              value="melisa_rw@ gmail.com"
+                              name="userEmail"
+                              value={this.state.userEmail}
                               className="inputTyp2"
+                              readOnly
                             />
                           </Form.Group>
                           <Form.Group>
@@ -86,15 +213,22 @@ class Editprofile extends Component {
                             <div className="d-flex">
                               <Form.Control
                                 type="password"
-                                value="passsword"
+                                name="userPassword"
+                                onChange={this.handleChange}
+                                value={this.state.userPassword}
                                 className="inputTyp2"
                               />
-                              <Button className="btnTyp11 ml-3">reset</Button>
+                              <Button
+                                className="btnTyp11 ml-3"
+                                onClick={this.handleResetPassword}
+                              >
+                                reset
+                              </Button>
                             </div>
                           </Form.Group>
 
-                          <Form.Label className="fs20 fw600 col14 mt-2">
-                            Date of Birth
+                          {/* <Form.Label className="fs20 fw600 col14 mt-2">
+                            Date of Birth:
                           </Form.Label>
                           <Row>
                             <Col md={3}>
@@ -103,7 +237,7 @@ class Editprofile extends Component {
                                   as="select"
                                   className="selectTyp1"
                                 >
-                                  <option>Day</option>
+                                  <option>Date</option>
                                   <option>2</option>
                                   <option>3</option>
                                   <option>4</option>
@@ -112,20 +246,6 @@ class Editprofile extends Component {
                               </Form.Group>
                             </Col>
 
-                            <Col md={3}>
-                              <Form.Group>
-                                <Form.Control
-                                  as="select"
-                                  className="selectTyp1"
-                                >
-                                  <option>Month</option>
-                                  <option>1990</option>
-                                  <option>1991</option>
-                                  <option>1992</option>
-                                  <option>1993</option>
-                                </Form.Control>
-                              </Form.Group>
-                            </Col>
                             <Col md={3}>
                               <Form.Group>
                                 <Form.Control
@@ -141,7 +261,74 @@ class Editprofile extends Component {
                               </Form.Group>
                             </Col>
                           </Row>
-                          <Button className="btnTyp5 mt-5 mr-3">save</Button>
+                           */}
+
+                          <Form.Label className="fs20 fw600 col14 mt-2">
+                            Date of birth:
+                          </Form.Label>
+                          <Row>
+                            <Col md={4}>
+                              <Form.Group controlId="exampleForm.ControlSelect1">
+                                <DayPicker
+                                  defaultValue="Day"
+                                  id="day"
+                                  name="day"
+                                  classes="form-control selectTyp1"
+                                  year={this.state.year}
+                                  month={this.state.month}
+                                  minDate={moment().startOf('year')}
+                                  endYearGiven
+                                  value={this.state.day}
+                                  onChange={(day) => {
+                                    this.setState({ day });
+                                    console.log(day, typeof day);
+                                  }}
+                                />
+                              </Form.Group>
+                            </Col>
+
+                            <Col md={4}>
+                              <Form.Group controlId="exampleForm.ControlSelect1">
+                                <MonthPicker
+                                  id="month"
+                                  name="month"
+                                  classes="form-control selectTyp1"
+                                  defaultValue={'Months'}
+                                  short
+                                  endYearGiven
+                                  year={this.state.year}
+                                  value={this.state.month}
+                                  onChange={(month) => {
+                                    this.setState({ month });
+                                  }}
+                                />
+                              </Form.Group>
+                            </Col>
+                            <Col md={4}>
+                              <Form.Group controlId="exampleForm.ControlSelect1">
+                                <YearPicker
+                                  id="year"
+                                  name="year"
+                                  classes="form-control selectTyp1"
+                                  defaultValue="Year"
+                                  end={moment().year()}
+                                  reverse
+                                  value={this.state.year}
+                                  onChange={(year) => {
+                                    this.setState({ year });
+                                    console.log(year);
+                                  }}
+                                />
+                              </Form.Group>
+                            </Col>
+                          </Row>
+
+                          <Button
+                            className="btnTyp5 mt-5 mr-3"
+                            onClick={this.handleSubmit}
+                          >
+                            save
+                          </Button>
                           <Button className="btnTyp10 mt-5">cancel</Button>
                         </Form>
                       </Col>
@@ -462,4 +649,9 @@ class Editprofile extends Component {
     );
   }
 }
-export default Editprofile;
+
+export default connect(null, {
+  actionGetProfile,
+  actionUpdateUserDetails,
+  actionResetPassword,
+})(Editprofile);
