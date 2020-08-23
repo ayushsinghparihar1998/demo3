@@ -67,6 +67,14 @@ class NavBar extends Component {
       ? 2
       : CONSTANTS.ROLES.LISTNER;
 
+    let roleType = getLocalStorage('customerInfo')
+      ? 3
+      : getLocalStorage('userInfo')
+      ? 1
+      : getLocalStorage('userInfoProff')
+      ? 2
+      : CONSTANTS.ROLES.LISTNER;
+
     let data = {};
     this.props
       .actionLogout(data)
@@ -83,6 +91,21 @@ class NavBar extends Component {
         console.log(error);
       });
   };
+
+  goToLoginPage = () => {
+    this.props.history.push({
+      pathname: 'login',
+      state: { roleType: this.state.roleType },
+    });
+    //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
+  };
+  handleLogin(roleType) {
+    console.log('roleTyperoleType', roleType);
+    this.props.history.push({
+      pathname: 'login',
+      state: { roleType: roleType },
+    });
+  }
   goToLoginPage = () => {
     this.props.history.push({
       pathname: 'login',
