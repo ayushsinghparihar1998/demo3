@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SimpleReactValidator from "simple-react-validator/dist/simple-react-validator";
-import { actionLogin, actionProfessionalLogin, actionUserLogin } from "../../common/redux/actions";
+import { actionLogin, actionProfessionalLogin, actionUserLogin, actionAdminLogin } from "../../common/redux/actions";
 import {
   encrypt,
   decrypt,
@@ -30,8 +30,8 @@ class Login extends Component {
       email: "",
       errors: {},
       password: "",
-      roleType: this.props.location.state && this.props.location.state.roleType ?
-        this.props.location.state.roleType : CONSTANTS.ROLES.LISTNER,
+      roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
+        this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
@@ -40,12 +40,14 @@ class Login extends Component {
         email: "Enter a valid email",
       },
     });
+    console.log("this.props.roleType", this.props.roleType)
+
   }
 
   componentWillReceiveProps(next) {
     this.setState({
       roleType: next.location && next.location.state && next.location.state.roleType ?
-        next.location.state.roleType : CONSTANTS.ROLES.LISTNER,
+        next.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
     })
   }
 
@@ -136,6 +138,29 @@ class Login extends Component {
         });
     }
   };
+
+  handleSubmitAdmin = () => {
+    if (this.isValid()) {
+      let data = {
+        email: this.state.email.toLowerCase().trim(),
+        password: this.state.password.trim()
+      };
+      this.props
+        .actionAdminLogin(data)
+        .then(result => {
+          if (result && result.data && result.data.status === "success") {
+            setLocalStorage('userInfoAdmin', result.data.data);
+            setLocalStorage("loggedIn", true);
+            this.props.history.push({ pathname: '/adminlistener' });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  };
+
+
   handleClose = () => {
     this.setState({
       QAndA: true,
@@ -155,10 +180,15 @@ class Login extends Component {
 
 
             <div className="col10 fs40 fw600 pt-4 mb-2">
-              {this.state.roleType === 1 ? ('Listener Login') : this.state.roleType === 2 ? 'Professional Login' :
-                this.state.roleType === 3 ? 'User Login' : ''}
+              {this.state.roleType === CONSTANTS.ROLES.LISTNER ? ('Listener Login') :
+                this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL ? 'Professional Login' :
+                  this.state.roleType === CONSTANTS.ROLES.USER ? 'User Login' :
+                    this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? 'Admin Login' : ''}
             </div>
-            <div className="col14 fs25 fw300 mb-4 pb-2">Don’t have an account? <strong className="fw500">Become a Member</strong></div>
+            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ?
+              <div className="col14 fs25 fw300 mb-4 pb-2">Don’t have an account?
+             <strong className="fw500">Become a Member</strong></div>
+              : ''}
 
             <div className="layout_box mb-4">
               <Form.Group className="mb-4 pb-2">
@@ -188,28 +218,34 @@ class Login extends Component {
                 <div className="error alignLeft">{errors.password}</div>
               </Form.Group>
 
-              {this.state.roleType === 1 ? (
+              {this.state.roleType === CONSTANTS.ROLES.LISTNER ? (
                 <Button className="btnTyp4 mb-4" onClick={this.handleSubmitListener}>
                   LOGIN
                 </Button>
-              ) : this.state.roleType === 2 ? (
+              ) : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL ? (
                 <Button className="btnTyp4 mb-4" onClick={this.handleSubmitProfessional}>
                   LOGIN
-                </Button>) : this.state.roleType === 3 ? (
+                </Button>) : this.state.roleType === CONSTANTS.ROLES.USER ? (
                   <Button className="btnTyp4 mb-4" onClick={this.handleSubmitUser}>
                     LOGIN
-                  </Button>) : ''}
+                  </Button>) :
+                    this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
+                      <Button className="btnTyp4 mb-4" onClick={this.handleSubmitAdmin}>
+                        LOGIN
+                      </Button>) :
+                      ''}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
                   <span className="fw500 pointer pl-1">Reset it Here</span>
               </div>
 
             </div>
+            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ?
+              <div className="fs18 fw300 pb-5 col14">
+                Interested in becoming a Listener?
+              <span className="fw600 pointer pl-1">Learn More / Signup</span>
+              </div> : ''}
 
-            <div className="fs18 fw300 pb-5 col14">
-              Interested in becoming a Listener?
-              <span className="fw600 pointer pl-1">Learn More / Signup</span>  
-            </div>
           </Container>
         </div>
         <Modal
@@ -235,4 +271,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { actionLogin, actionProfessionalLogin, actionUserLogin })(Login);
+export default connect(null, { actionLogin, actionProfessionalLogin, actionUserLogin, actionAdminLogin })(Login);

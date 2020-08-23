@@ -18,6 +18,7 @@ const CONSTANTS = {
     LISTNER: 1,
     PROFESSIONAL: 2,
     USER: 3,
+    SUPER_ADMIN: 4,
   }
 };
 

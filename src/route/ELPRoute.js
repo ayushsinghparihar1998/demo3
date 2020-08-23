@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch } from "react-router-dom";
 import Landing from "../components/core/landing";
-import Login from "../components/login/Login";
+import Login from "../components/login/login";
 import ProfessionalLogin from "../components/login/professionalLogin";
 import Becomelistener from "../components/signup/becomeListener";
 import Listenersignup from "../components/signup/listenerSignup";
@@ -18,32 +18,33 @@ import UserdashboardCust from "../components/user/userdashboard";
 import PrivateRouteUser from "./PrivateRouteUser"; 
 import PrivateRoutes from "./PrivateRoutes";
 import MyProfile from "../components/editprofile/myprofile";
-import EditProfile from "../components/editprofile/editprofile";
+import EditProfile from "../components/editprofile/editprofile"; 
 import ChatUser from "../components/user/chatUser";
-import Resetpassword from "../components/login/resetpassword";  
-import Forgotpassword from "../components/login/forgotpassword"; 
+import Resetpassword from "../components/login/resetpassword";
+import Forgotpassword from "../components/login/forgotpassword";
 import Userotp from "../components/login/userotp";
-import Adminlogin from "../components/jsx/superadmin/adminlogin";
-import Adminlistener from "../components/jsx/superadmin/listener";
 import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";  
 
-class ELPRoute extends Component {   
+import AdminLogin from "../components/admin/adminlogin";
+import Adminlistener from "../components/admin/listener";
+
+class ELPRoute extends Component { 
   render() {
+
     return (
       <Switch>
         <PublicRoute exact path="/" component={Landing} />
         <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/adminLogin" component={AdminLogin} />
         <PublicRoute path="/becomeListener" component={Becomelistener} />
         <PublicRoute path="/listenersignup" component={Listenersignup} />
-
         <PublicRoute path="/professionalLogin" component={ProfessionalLogin} />
         <PublicRoute path="/logout" component={Chat} />
-
-        <PublicRoute path="/resetpassword" component={Resetpassword} />   
-        <PublicRoute path="/forgotpassword" component={Forgotpassword} />          
+        <PublicRoute path="/resetpassword" component={Resetpassword} />
+        <PublicRoute path="/forgotpassword" component={Forgotpassword} />
         <PublicRoute path="/userotp" component={Userotp} />
-        <PublicRoute path="/adminlogin" component={Adminlogin} /> 
-        <PublicRoute path="/adminlistener" component={Adminlistener} /> 
+        {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
+        {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
         <PublicRoute path="/adminlistener" component={Adminlistener} /> 
 
         <PublicRoute path="/userprofiledetail" component={Userprofiledetail} />
@@ -53,23 +54,25 @@ class ELPRoute extends Component {
         <PrivateRouteList path="/chat/:id" component={Chat} />
 
         {/* Proff */} 
+        <PublicRoute path="/adminlistener" component={Adminlistener} />
+        <PublicRoute path="/usersignup" component={Usersignup} />
+        {/* LIst */}
+        <PrivateRouteList path="/userDashboard" component={Userdashboard} />
+        <PrivateRouteList path="/chat/:id" component={Chat} />
+        {/* Proff */}
         <PrivateRouteProff
           path="/userDashboardproff"
           component={UserdashboardProff}
-        />  
+        />
         {/*User*/}
         <PrivateRouteUser
           path="/userDashboardcust"
           component={UserdashboardCust}
         />
         <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
-
         <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
-
         <PrivateRoutes path="/myprofile" component={MyProfile} />
         <PrivateRoutes path="/editprofile" component={EditProfile} />
-
-
       </Switch>
     );
   }

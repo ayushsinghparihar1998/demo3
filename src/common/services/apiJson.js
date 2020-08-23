@@ -140,4 +140,46 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+
+  getListnerListing: {
+    url: 'elp/superadmin_getlistenerlist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+
+  adminLogin: {
+    url: 'elp/superadmin_login',
+    method: 'POST',
+    data: {
+      email: '',
+      password: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getProfessionalListing: {
+    url: 'elp/superadmin_getprofessionalist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getUserListing: {
+    url: 'elp/superadmin_getUserlist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
 };
