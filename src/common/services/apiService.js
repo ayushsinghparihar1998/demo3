@@ -17,7 +17,8 @@ axios.interceptors.request.use(
   function (config) {
     console.log("getLocalStorage", getLocalStorage)
     let access_token = '';
-    let userInfo = getLocalStorage('userInfo') || getLocalStorage('customerInfo') || getLocalStorage('userInfoProff');
+    let userInfo = getLocalStorage('userInfo') || getLocalStorage('customerInfo') || getLocalStorage('userInfoProff')
+      || getLocalStorage('userInfoAdmin');
 
 
 
