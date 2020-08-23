@@ -60,8 +60,9 @@ class ProfessionalSignup extends Component {
             let year = this.state.year !== '' ? this.state.year : '';
             let dob = '';
             if (day && month && year) {
-                dob = month + '-' + day + '-' + year;
-                dob = moment(dob).valueOf();
+                //dob = month + '-' + day + '-' + year;
+                dob = day + '/' + month + '/' + year;
+               // dob = moment(dob).valueOf();
             }
             let data = {
                 email: this.state.email ? this.state.email.toLowerCase().trim() : "",
@@ -181,7 +182,7 @@ class ProfessionalSignup extends Component {
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14">User name:</Form.Label>
                                 <Form.Control type="text"
-                                    placeholder="Enter screen name"
+                                    placeholder="Enter User name"
                                     className="inputTyp2"
                                     error={errors.username ? true : false}
                                     id="outlined-email"
