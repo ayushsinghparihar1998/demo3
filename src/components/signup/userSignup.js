@@ -60,8 +60,9 @@ class ProfessionalSignup extends Component {
             let year = this.state.year !== '' ? this.state.year : '';
             let dob = '';
             if (day && month && year) {
-                dob = month + '-' + day + '-' + year;
-                dob = moment(dob).valueOf();
+                //dob = month + '-' + day + '-' + year;
+                dob = day + '/' + month + '/' + year;
+               // dob = moment(dob).valueOf();
             }
             let data = {
                 email: this.state.email ? this.state.email.toLowerCase().trim() : "",

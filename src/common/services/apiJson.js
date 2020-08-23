@@ -19,6 +19,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+
   userLogin: {
     url: 'elp/customer_login',
     method: 'POST',
@@ -29,6 +30,29 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+
+  forgotpassword: {
+    url: 'elp/forgotpassword',
+    method: 'POST',
+    data: {
+      email: '',      
+    },
+    showResultMessage: true,
+    showErrorMessage: true
+  },
+
+  resetpassword: {
+    url: 'elp/resetpassword',
+    method: 'POST',
+    data: {      
+      userid:'',
+      email: '',
+      password:'',
+    },
+    showResultMessage: true,
+    showErrorMessage: true
+  },  
+  
   listnerSignup: {
     url: '/elp/listner_register',
     method: 'POST',
@@ -137,6 +161,48 @@ export default {
     url: 'elp/getprofile',
     method: 'GET',
     data: {},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+
+  getListnerListing: {
+    url: 'elp/superadmin_getlistenerlist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+
+  adminLogin: {
+    url: 'elp/superadmin_login',
+    method: 'POST',
+    data: {
+      email: '',
+      password: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getProfessionalListing: {
+    url: 'elp/superadmin_getprofessionalist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getUserListing: {
+    url: 'elp/superadmin_getUserlist',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: ''
+    },
     showResultMessage: false,
     showErrorMessage: true
   },
