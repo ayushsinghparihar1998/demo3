@@ -22,7 +22,8 @@ import {
   RESET_PASSWORD,
   ADMIN_CHANGE_USER_STATUS,
   ADMIN_USER_DELETE,
-  GET_PROFILE_BY_ID
+  GET_PROFILE_BY_ID,
+  SUBSCRIBE
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -158,3 +159,10 @@ export const actionGetProfileById = (data) => async dispatch => {
   dispatch({ type: GET_PROFILE_BY_ID, payload: request.data });
   return request;
 };
+
+export const actionSubscribe = (data) => async dispatch => {
+  const request = ELPViewApiService('subscribe', data);
+  dispatch({ type: SUBSCRIBE, payload: request.data });
+  return request;
+};
+

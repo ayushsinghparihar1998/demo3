@@ -228,4 +228,14 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+
+  subscribe: {
+    url: 'elp/usersubscriber',
+    method: 'POST',
+    data: { email: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+
+
 };
