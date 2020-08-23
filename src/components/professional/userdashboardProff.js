@@ -295,7 +295,7 @@ class ProfessionalDashboard extends Component {
                                       this.changepath("/chatproff/" + item.id)
                                     }
                                   >
-                                    {item.u_username}
+                                    {item.u_name}
                                   </div>
                                 </div>
                               </div>

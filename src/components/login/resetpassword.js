@@ -85,6 +85,11 @@ class Resetpassword extends Component {
         .then(result => {
           if (result && result.data && result.data.status === "success") {            
               console.log('rnv actionResetPassword check');
+              let roleType = "1"
+              this.props.history.push({
+                pathname: 'login',
+                state: { roleType: roleType }
+            });
           }
         })
         .catch(error => {

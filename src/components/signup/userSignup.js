@@ -15,6 +15,7 @@ class ProfessionalSignup extends Component {
             roleType: CONSTANTS.ROLES.USER,
             email: "",
             password: "",
+            username:"",
             errors: {},
             organisationName: "",
             showLoader: false,
@@ -170,6 +171,7 @@ class ProfessionalSignup extends Component {
                                     value={this.state.email}
                                     onChange={this.handleChange}
                                     autoComplete="off"
+                                    maxLength="50" 
                                     inputProps={{
                                         maxLength: 50,
                                     }}
@@ -191,6 +193,7 @@ class ProfessionalSignup extends Component {
                                     value={this.state.username}
                                     onChange={this.handleChange}
                                     autoComplete="off"
+                                    maxLength="50" 
                                     inputProps={{
                                         maxLength: 50,
                                     }}
@@ -275,8 +278,10 @@ class ProfessionalSignup extends Component {
                                     name="password"
                                     value={this.state.password}
                                     onChange={this.handleChange}
+                                    minLength="8"    
+                                    maxLength="15"                                
                                     inputProps={{
-                                        maxLength: 30,
+                                        maxLength: 15,
                                     }}
                                 />
                                 <div className="error alignLeft">{errors.password}</div>

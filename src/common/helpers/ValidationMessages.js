@@ -3,6 +3,9 @@ export default {
     required: 'Please enter your email address.',
     invalid: 'Please enter a valid email address.'
   },
+  username: {
+    required: 'Please enter your user name.',    
+  },   
   password: {
     required: 'Please enter your password.',
     newPassword: 'Please enter new password.',

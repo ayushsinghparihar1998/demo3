@@ -17,6 +17,10 @@ function validateInput(data) {
     errors.password = ValidationMessages.password.required;
   }
 
+  if (Validator.isEmpty(data.username)) {
+    errors.username = ValidationMessages.username.required;
+  }
+
   // if (Validator.isEmpty(data.screenName)) {
   //   errors.screenName = ValidationMessages.screenName.required;
   // }
