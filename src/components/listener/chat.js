@@ -96,11 +96,11 @@ class Chat extends Component {
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
       'page': 1,
-      'pagination': 10
+      'pagination': 20
     }),
       (data) => {
-        if (data.data) {
-          this.setState({ allMessages: data.data })
+        if (data.data && data.data.length > 0) {
+          this.setState({ allMessages: data.data.reverse() })
         }
       }
     );

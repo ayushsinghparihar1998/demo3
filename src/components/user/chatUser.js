@@ -91,11 +91,11 @@ class ChatUser extends Component {
       from_user_id: getLocalStorage("customerInfo").u_id,
       to_user_id: this.props.match.params.id,
       'page': 1,
-      'pagination': 10
+      'pagination': 20
     }),
-      function (data) {
-        if (data.data) {
-          self.setState({ allMessages: data.data })
+      (data) => {
+        if (data.data && data.data.length > 0) {
+          this.setState({ allMessages: data.data.reverse() })
         }
       }
     );
