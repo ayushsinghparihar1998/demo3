@@ -13,19 +13,22 @@ import PrivateRouteProff from "./PrivateRouteProff";
 import PublicRoute from "./PublicRoute";
 import UserdashboardProff from "../components/professional/userdashboardProff";
 import ChatProff from "../components/professional/chatproff";
-import UserdashboardCust from "../components/user/userdashboard";
-import PrivateRouteUser from "./PrivateRouteUser";
+import UserdashboardCust from "../components/user/userdashboard";  
+
+import PrivateRouteUser from "./PrivateRouteUser"; 
 import PrivateRoutes from "./PrivateRoutes";
 import MyProfile from "../components/editprofile/myprofile";
-import EditProfile from "../components/editprofile/editprofile";
+import EditProfile from "../components/editprofile/editprofile"; 
 import ChatUser from "../components/user/chatUser";
 import Resetpassword from "../components/login/resetpassword";
 import Forgotpassword from "../components/login/forgotpassword";
 import Userotp from "../components/login/userotp";
+import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";  
+
 import AdminLogin from "../components/admin/adminlogin";
 import Adminlistener from "../components/admin/listener";
 
-class ELPRoute extends Component {
+class ELPRoute extends Component { 
   render() {
 
     return (
@@ -37,9 +40,23 @@ class ELPRoute extends Component {
         <PublicRoute path="/listenersignup" component={Listenersignup} />
         <PublicRoute path="/professionalLogin" component={ProfessionalLogin} />
         <PublicRoute path="/logout" component={Chat} />
-        <PublicRoute path="/resetpassword" component={Resetpassword} />
+
+        <PublicRoute path="/reset" component={Resetpassword} />
+        
+
         <PublicRoute path="/forgotpassword" component={Forgotpassword} />
         <PublicRoute path="/userotp" component={Userotp} />
+        {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
+        {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
+        <PublicRoute path="/adminlistener" component={Adminlistener} /> 
+
+        <PublicRoute path="/userprofiledetail" component={Userprofiledetail} />
+
+        {/* LIst */}
+        <PrivateRouteList path="/userDashboard" component={Userdashboard} />
+        <PrivateRouteList path="/chat/:id" component={Chat} />
+
+        {/* Proff */} 
         <PublicRoute path="/adminlistener" component={Adminlistener} />
         <PublicRoute path="/usersignup" component={Usersignup} />
         {/* LIst */}

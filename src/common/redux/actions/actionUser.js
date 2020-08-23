@@ -3,8 +3,8 @@ import {
   LOGIN, PROFESSIONAL_LOGIN, LISTNER_SIGNUP, PROFESSIONAL_SIGNUP, ADMIN_LOGIN,
   LOGOUT, LOGIN_SUCCESS, GET_QUESTION, USER_LOGIN, USER_SIGNUP, GET_RECENT_JOIN,
   GET_LISTNER_DASHBOARD, GET_PROFILE, GET_USER_DASHBOARD, GET_PROFESIONAL_DASHBOARD,
-  GET_LISTNER_LISTING, GET_PROFESSIONAL_LISTING, GET_USER_LISTING,
-  ADMIN_CHANGE_USER_STATUS, ADMIN_USER_DELETE
+  GET_LISTNER_LISTING, GET_PROFESSIONAL_LISTING, GET_USER_LISTING, FORGOT_PASSWORD,
+  RESET_PASSWORD, ADMIN_CHANGE_USER_STATUS, ADMIN_USER_DELETE
 } from '../types';
 
 export const actionLogin = data => async dispatch => {
@@ -108,6 +108,7 @@ export const actionGetCustomerListing = (data) => async dispatch => {
   dispatch({ type: GET_USER_LISTING, payload: request.data });
   return request;
 }
+
 export const actionGetProfessionalListing = (data) => async dispatch => {
   const request = ELPViewApiService('getProfessionalListing', data);
   dispatch({ type: GET_PROFESSIONAL_LISTING, payload: request.data });
@@ -121,5 +122,16 @@ export const actionAdminChangeUserStatus = (data) => async dispatch => {
 export const actionadminUserDelete = (data) => async dispatch => {
   const request = ELPViewApiService('adminUserDelete', data);
   dispatch({ type: ADMIN_USER_DELETE, payload: request.data });
+  return request;
+}
+export const actionForGotPassword = (data) => async dispatch => {
+  const request = ELPViewApiService('forgotpassword', data);
+  dispatch({ type: FORGOT_PASSWORD, payload: request.data });
+  return request;
+}
+
+export const actionResetPassword = (data) => async dispatch => {
+  const request = ELPViewApiService('resetpassword', data);
+  dispatch({ type: RESET_PASSWORD, payload: request.data });
   return request;
 }
