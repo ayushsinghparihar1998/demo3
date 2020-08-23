@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import {
     actionGetListnerListing, actionGetCustomerListing,
     actionGetProfessionalListing, actionadminUserDelete, actionAdminChangeUserStatus,
 } from "../../common/redux/actions";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
+import Pagination from "react-js-pagination";
+import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
@@ -22,22 +25,40 @@ class Adminlistener extends Component {
             activeProfile: 'listner',
             profileListing: [],
             deleteConformationModal: false,
-            profileId: ''
+            profileId: '',
+            pageNumber: customPagination.paginationPageNumber,
+            totalRecord: 0
         };
     }
     componentDidMount() {
         this.getListnerListing('', "listner");
     }
 
+    handlePageChange = (newPageNumber) => {
+        let chkUserProfile = this.state.activeProfile;
+        alert(chkUserProfile)
+        alert(newPageNumber)
+        this.setState({ pageNumber: newPageNumber }, () => {
+            if (chkUserProfile === 'user') {
+                this.getCustomerListing('', 'user');
+            } else if (chkUserProfile === 'professional') {
+                this.getProfessionalListing('', 'professional');
+            } else if (chkUserProfile === 'listner') {
+                this.getListnerListing('', 'listner');
+            }
+        });
+    }
+
     getListnerListing = (e, activaClass) => {
         let chkUserProfile = this.state.activeProfile;
         this.setState({ activeProfile: activaClass });
         let profileListing = [];
-        let data = { "count": 10, "offset": 1 }
+        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
         this.props.actionGetListnerListing(data).then((result) => {
             if (result && result.status === 200) {
-                profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing });
+                profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
+                let totalRecord = result && result.data && result.data.data ? result.data.data.totalRecordCount : 0;
+                this.setState({ profileListing: profileListing, totalRecord: totalRecord });
             }
         });
     }
@@ -45,22 +66,24 @@ class Adminlistener extends Component {
         let chkUserProfile = this.state.activeProfile;
         this.setState({ activeProfile: activaClass });
         let profileListing = [];
-        let data = { "count": 10, "offset": 1 }
+        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
         this.props.actionGetProfessionalListing(data).then((result) => {
             if (result && result.status === 200) {
-                profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing });
+                profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
+                let totalRecord = result && result.data && result.data.data ? result.data.data.totalRecordCount : 0;
+                this.setState({ profileListing: profileListing, totalRecord: totalRecord });
             }
         });
     }
-    getCustomerListing = (e, activaClass) => {
+    getCustomerListing = (activaClass) => {
         this.setState({ activeProfile: activaClass });
         let profileListing = [];
-        let data = { "count": 10, "offset": 1 }
+        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
         this.props.actionGetCustomerListing(data).then((result) => {
             if (result && result.status === 200) {
-                profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing });
+                profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
+                let totalRecord = result && result.data && result.data.data ? result.data.data.totalRecordCount : 0;
+                this.setState({ profileListing: profileListing, totalRecord: totalRecord });
             }
         });
     }
@@ -114,6 +137,7 @@ class Adminlistener extends Component {
     }
 
     render() {
+        let totalRecord = this.state.totalRecord;
         let userActveClass = this.state.activeProfile == 'user' ? "position-relative active" : "position-relative";
         let professnalActveClass = this.state.activeProfile == 'professional' ? "position-relative active" : "position-relative";
         let listnerActveClass = this.state.activeProfile == 'listner' ? "position-relative active" : "position-relative";
@@ -230,6 +254,22 @@ class Adminlistener extends Component {
                             </div>
                         </Modal.Body>
                     </Modal>
+                    {totalRecord && totalRecord > customPagination.paginationPageSize ?
+                        <div className="paginationWrapper">
+                            <Pagination
+                                activePage={this.state.pageNumber}
+                                itemsCountPerPage={customPagination.itemsCountPerPage}
+                                totalItemsCount={totalRecord}
+                                pageRangeDisplayed={customPagination.pageRangeDisplayed}
+                                onChange={this.handlePageChange.bind(this)}
+                                firstPageText={"<<"}
+                                lastPageText={">>"}
+                                prevPageText={"<"}
+                                nextPageText={">"}
+                            />
+                        </div>
+                        : ''}
+
                 </div>
                 <Footer />
             </div>
