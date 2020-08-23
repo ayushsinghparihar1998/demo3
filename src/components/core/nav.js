@@ -106,6 +106,13 @@ class NavBar extends Component {
       state: { roleType: roleType },
     });
   }
+  handleGet = () => {
+    this.setState({
+      show: false,
+      show3: false,
+    });
+  };
+
   goToLoginPage = () => {
     this.props.history.push({
       pathname: 'login',
