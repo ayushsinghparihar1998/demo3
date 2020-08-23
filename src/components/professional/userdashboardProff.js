@@ -37,7 +37,6 @@ import SocketIOClient from "socket.io-client";
 import { getLocalStorage } from "../../common/helpers/Utils";
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
 
 class ProfessionalDashboard extends Component {
   constructor(props) {
@@ -47,12 +46,22 @@ class ProfessionalDashboard extends Component {
       activeChatUsers: [],
       showVal: 4,
       recentJoin: [], dashboardData: [],
+      user_id: getLocalStorage("userInfoProff").u_id
     };
   }
-
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
+    socket.connect();
+    window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
-
     this.getProfesionalDashBoard();
     let result = getLocalStorage("result");
     console.log("getLocalStorage", getLocalStorage("result"));
@@ -71,26 +80,36 @@ class ProfessionalDashboard extends Component {
     }
 
     socket.on("connect", function () {
-      console.log("connected");
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("userInfoProff").u_id,
+          user_type: getLocalStorage("userInfoProff").u_role_id,
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfoProff").u_id,
-        user_type: getLocalStorage("userInfoProff").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
       }
-    );
+    });
 
     socket.emit(
       "getRecentsChatedUsers",
       JSON.stringify({
         user_id: getLocalStorage("userInfoProff").u_id,
       }),
-      function (d) {
+      (d) => {
         console.log("getRecentsChatedUsers", d);
+        this.setState(
+          {
+            recentChatUsers: d.data,
+          });
       }
     );
 
@@ -159,7 +178,12 @@ class ProfessionalDashboard extends Component {
     document.execCommand("copy");
     // alert("Copied the text: " + copyText.value);
   }
-
+  // "/chatproff/" + item.id
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.props.history.push('/chatproff/' + id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -177,7 +201,41 @@ class ProfessionalDashboard extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
                     </div>
-                    <div className="d-flex m-3 border-bottom">
+
+                    {this.state.recentChatUsers &&
+                      this.state.recentChatUsers.map((item) => {
+                        return (
+                          <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
+                            <div className="position-relative">
+                              <Image
+                                src={
+                                  item.from_image ? item.from_image : UserChat
+                                }
+                                alt=""
+                                className="r50 pt-1"
+                              />
+                              <span className="online"></span>
+                            </div>
+                            <div className="position-relative pl-3">
+                              <div className="fs15 col23 fw500 pr-2">
+                                {item.from_user_id ==
+                                  getLocalStorage("userInfoProff").u_id
+                                  ? item.to_user_name
+                                  : item.from_user_name}
+                              </div>
+                              <div className="col27 fs13 fw500">
+                                {item.message}
+                              </div>
+                              <Image
+                                src={ChatCross}
+                                alt=""
+                                className="pointer cross_btn"
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    {/* <div className="d-flex m-3 border-bottom">
                       <div className="position-relative">
                         <Image src={UserChat} alt="" className="r50 pt-1" />
                         <span className="online"></span>
@@ -266,21 +324,25 @@ class ProfessionalDashboard extends Component {
                         />
                       </div>
                     </div>
+                   */}
                   </div>
 
                   <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      <span onClick={() => this.call()}>
+                      <span
+                      // onClick={() => this.call()}
+                      >
                         Currently Active Listeners
                       </span>
                     </div>
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
                         <div className="chat-border"></div>
+                        {console.log("activeChatUsers", this.state.activeChatUsers)}
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom pointer">
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -295,7 +357,7 @@ class ProfessionalDashboard extends Component {
                                       this.changepath("/chatproff/" + item.id)
                                     }
                                   >
-                                    {item.u_username}
+                                    {item.u_name}
                                   </div>
                                 </div>
                               </div>

@@ -47,29 +47,47 @@ class ChatProff extends Component {
       allMessages: [],
       showChat: false,
       response: {},
+      user_id: getLocalStorage("userInfoProff").u_id
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    // this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
-    console.log(this.props.match.params.id);
+    window.addEventListener("beforeunload", this.unmount)
     this.setState({
       from_user_id: getLocalStorage("userInfoProff").u_id,
     });
     socket.on("connect", function () {
-      console.log("connected");
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("userInfoProff").u_id,
+          user_type: getLocalStorage("userInfoProff").u_role_id,
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfoProff").u_id,
-        user_type: getLocalStorage("userInfoProff").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
+    socket.emit("chatHistory", JSON.stringify({
+      from_user_id: getLocalStorage("userInfoProff").u_id,
+      to_user_id: this.props.match.params.id,
+      'page': 1,
+      'pagination': 10
+    }),
+      (data) => {
+        if (data.data) {
+          this.setState({ allMessages: data.data })
+        }
       }
     );
-    // socket.on(PATIENT_PHARMA_JOIN_REQUEST, (data) => {
-    //   console.log("PATIENT_PHARMA_JOIN_REQUEST", data);
-    // });
     socket.on("startTyping", (data) => this.setState({ response: data }));
     socket.on("stopTyping", (data) =>
       this.setState({ response: { message: "" } })
@@ -80,6 +98,60 @@ class ChatProff extends Component {
       // data.type = "on";
       this.updateChat(data);
     });
+
+    socket.emit(
+      "onScreen",
+      JSON.stringify({
+        from_user_id: getLocalStorage("userInfoProff").u_id,
+        to_user_id: this.props.match.params.id,
+        status: 1,
+      }),
+      data => this.setState({ userMeta: data.userDetail })
+    );
+    socket.emit(
+      "getRecentsChatedUsers",
+      JSON.stringify({
+        user_id: getLocalStorage("userInfoProff").u_id,
+      }),
+      function (d) {
+        console.log("getRecentsChatedUsers", d);
+        this.setState(
+          {
+            recentChatUsers: d.data,
+          },
+          () => {
+            console.log(this.state.recentChatUsers);
+          }
+        );
+      }.bind(this)
+    );
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
+    });
+    socket.emit(
+      "getActiveListnersOrCustomers",
+      JSON.stringify({
+        user_type: getLocalStorage("userInfoProff").u_role_id,
+        user_id: getLocalStorage("userInfoProff").u_id,
+        pagination: "30",
+        page: "1",
+      }),
+      function (d) {
+        console.log("getActiveListnersOrCustomers", d);
+        this.setState(
+          {
+            activeChatUsers: d.data,
+          },
+          () => {
+            console.log(this.state.activeChatUsers);
+          }
+        );
+      }.bind(this)
+    );
   }
 
   addMessage = (e) => {
@@ -121,7 +193,7 @@ class ChatProff extends Component {
       from_user_id: getLocalStorage("userInfoProff").u_id,
       to_user_id: this.props.match.params.id,
       message_type: 1,
-      date_time : moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
+      date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
     };
     console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
@@ -153,11 +225,26 @@ class ChatProff extends Component {
       (data) => this.setState({ response: data })
     );
   }
+  changepath = (path) => {
+    this.props.history.push(path);
+  };
+  changeChatpath = (id) => {
+    this.props.history.replace(`/reload`);
+    setTimeout(() => {
+      this.props.history.push("/chatproff/" + id);
+    });
+  };
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.changeChatpath(id);
+  }
   render() {
+    const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar />
+          <NavBar {...this.props} />
         </div>
         <div className="userdashboards pt-4 pb-5">
           <Container>
@@ -168,95 +255,40 @@ class ChatProff extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
                     </div>
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="pointer cross_btn"
-                        />
-                      </div>
-                    </div>
 
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat2} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">John</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat3} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat4} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Stiv</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat5} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Jinny</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
+                    {this.state.recentChatUsers &&
+                      this.state.recentChatUsers.map((item) => {
+                        return (
+                          <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
+                            <div className="position-relative">
+                              <Image
+                                src={
+                                  item.from_image ? item.from_image : UserChat
+                                }
+                                alt=""
+                                className="r50 pt-1"
+                              />
+                              <span className="online"></span>
+                            </div>
+                            <div className="position-relative pl-3">
+                              <div className="fs15 col23 fw500 pr-2">
+                                {item.from_user_id ==
+                                  getLocalStorage("userInfoProff").u_id
+                                  ? item.to_user_name
+                                  : item.from_user_name}
+                              </div>
+                              <div className="col27 fs13 fw500">
+                                {item.message}
+                              </div>
+                              <Image
+                                src={ChatCross}
+                                alt=""
+                                className="pointer cross_btn"
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
                   </div>
 
                   <div className="inner_side">
@@ -271,7 +303,10 @@ class ChatProff extends Component {
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom pointer"
+                                onClick={() =>
+                                  this.changeChatpath(item.id)
+                                }>
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -282,17 +317,15 @@ class ChatProff extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-                                    onClick={() =>
-                                      this.changepath("/chatproff")
-                                    }
+
                                   >
                                     {item.u_name}
                                   </div>
                                 </div>
                               </div>
                             ) : (
-                              ""
-                            );
+                                ""
+                              );
                           })}
                       </Tab>
                     </Tabs>
@@ -308,17 +341,17 @@ class ChatProff extends Component {
                         Show More
                       </div>
                     ) : (
-                      <div
-                        className="fs15 fw600 col23 p-3 pointer show-more"
-                        onClick={() => {
-                          this.setState({
-                            showVal: 4,
-                          });
-                        }}
-                      >
-                        Show Less
-                      </div>
-                    )}
+                        <div
+                          className="fs15 fw600 col23 p-3 pointer show-more"
+                          onClick={() => {
+                            this.setState({
+                              showVal: 4,
+                            });
+                          }}
+                        >
+                          Show Less
+                        </div>
+                      )}
                   </div>
                 </div>
               </Col>
@@ -330,11 +363,11 @@ class ChatProff extends Component {
                       <Col xs={3}>
                         <div className="mt-auto mb-auto">
                           <Image
-                            src={UserChat3}
-                            alt=""
+                            src={userMeta.u_image || UserChat3}
+                            alt={userMeta.u_username}
                             className="r50 pointer"
                           />
-                          <span className="fs17 fw600 col18 pl-3">Melisa</span>
+                          <span className="fs17 fw600 col18 pl-3">{userMeta.u_username}</span>
                         </div>
                       </Col>
                       <Col xs={9}>
@@ -411,28 +444,9 @@ class ChatProff extends Component {
                         {this.state.allMessages.map((msg, index) => {
                           return msg.from_user_id ==
                             getLocalStorage("userInfoProff").u_id ? (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="text-right">
-                                <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
-                                  {msg.message}
-                                </div>
-                                <div className="fs10 fw300 col47">
-                                {moment(msg.date_time).format('hh:mm a')}
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="d-flex">
-                                <div className="mt-auto mb-auto">
-                                  <Image
-                                    src={UserChat4}
-                                    alt=""
-                                    className="r50 mr-3"
-                                  />
-                                </div>
-                                <div className="mt-auto mb-auto">
-                                  <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="text-right">
+                                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
                                     {msg.message}
                                   </div>
                                   <div className="fs10 fw300 col47">
@@ -440,13 +454,32 @@ class ChatProff extends Component {
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
+                            ) : (
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="d-flex">
+                                  <div className="mt-auto mb-auto">
+                                    <Image
+                                      src={UserChat4}
+                                      alt=""
+                                      className="r50 mr-3"
+                                    />
+                                  </div>
+                                  <div className="mt-auto mb-auto">
+                                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                                      {msg.message}
+                                    </div>
+                                    <div className="fs10 fw300 col47">
+                                      {moment(msg.date_time).format('hh:mm a')}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
                         })}
                       </div>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                   </div>
                   <div className="chat_bottom">
                     <Form>

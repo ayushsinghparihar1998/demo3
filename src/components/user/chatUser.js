@@ -48,26 +48,55 @@ class ChatUser extends Component {
       allMessages: [],
       showChat: false,
       response: {},
+      user_id: getLocalStorage("customerInfo").u_id
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    // this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
-    console.log(this.props);
+    window.addEventListener("beforeunload", this.unmount)
+    const self = this;
     this.setState({
       from_user_id: getLocalStorage("customerInfo").u_id,
     });
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
 
     socket.on("connect", function () {
-      console.log("connected");
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("customerInfo").u_id,
+          user_type: getLocalStorage("customerInfo").u_role_id,
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("customerInfo").u_id,
-        user_type: getLocalStorage("customerInfo").u_role_id,
-      }),
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
+    });
+    socket.emit("chatHistory", JSON.stringify({
+      from_user_id: getLocalStorage("customerInfo").u_id,
+      to_user_id: this.props.match.params.id,
+      'page': 1,
+      'pagination': 10
+    }),
       function (data) {
-        console.log(data, "authenticateSocket");
+        if (data.data) {
+          self.setState({ allMessages: data.data })
+        }
       }
     );
 
@@ -214,13 +243,17 @@ class ChatUser extends Component {
       this.props.history.push("/chatuser/" + id);
     });
   };
-
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.changeChatpath(id);
+  }
   render() {
     const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar />
+          <NavBar {...this.props} />
         </div>
         <div className="userdashboards pt-4 pb-5">
           <Container>
@@ -235,7 +268,7 @@ class ChatUser extends Component {
                       {this.state.recentChatUsers &&
                         this.state.recentChatUsers.map((item) => {
                           return (
-                            <div className="d-flex m-3 border-bottom pointer" onClick={() => this.changeChatpath(item.id)}>
+                            <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
                               <div className="position-relative">
                                 <Image
                                   src={
@@ -336,7 +369,6 @@ class ChatUser extends Component {
                   </div>
                 </div>
               </Col>
-
               <Col md={9}>
                 <div className="chat_dashboard">
                   <div className="chat_top">

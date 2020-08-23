@@ -3,7 +3,6 @@ const CONSTANTS = {
   ENCRYPTION_KEY: 'sd5b75nb7577#^%$%*&G#CGF*&%@#%*&',
   CRYPTER_KEY:
     '0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xfffffff8',
-
   azureStorageAccount: 'spikeviewmediastorage',
   azureContainer: 'spikeview-media-production',
   azureBlobURI: 'https://spikeviewmediastorage.blob.core.windows.net',

@@ -49,10 +49,21 @@ class Userdashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recentJoin: [], dashboardData: [],
+      recentJoin: [], dashboardData: [],activeChatUsers:[], user_id: getLocalStorage("u_id")
     };
   }
+  componentWillUnmount(){
+    window.removeEventListener("beforeunload", this.unmount);
+    this.unmount();
+  }
+  unmount = () => {
+    if(socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
+    socket.connect();
+    window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
     this.actionGetListnerDashBoard();
     let result = getLocalStorage("result")
@@ -72,28 +83,72 @@ class Userdashboard extends Component {
     }
 
     socket.on("connect", function () {
-      console.log("connected");
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("u_id"),
+          user_type: getLocalStorage("u_role_id"),
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
+    
+
+    
+
     socket.emit(
-      "chat-login",
+      "getActiveListnersOrCustomers",
       JSON.stringify({
         user_id: getLocalStorage("u_id"),
         user_type: getLocalStorage("u_role_id"),
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
-      }
-    );
-
-    socket.emit(
-      "getRecentsChatedUsers",
-      JSON.stringify({
-        user_id: getLocalStorage("u_id"),
+        pagination: "10",
+        page: "1",
       }),
       function (d) {
-        console.log("getRecentsChatedUsers", d);
-      }
+        console.log("getActiveListnersOrCustomers", d);
+        this.setState(
+          {
+            activeChatUsers: d.data,
+          },
+          () => {
+            console.log(this.state.activeChatUsers);
+          }
+        );
+      }.bind(this)
     );
+
+    if (getLocalStorage("signup")) {
+      if (getLocalStorage("result") >= 60) {
+        this.setState({
+          sucess: true,
+          result: true,
+          message: "your score is " + result,
+        });
+      } else {
+        this.setState({
+          sucess: true,
+          result: false,
+          message: "your score is" + result,
+        });
+      }
+    }
+
+    if (getLocalStorage("onScreenIdList")) {
+      socket.emit(
+        "onScreen",
+        JSON.stringify({
+          user_id: getLocalStorage("u_id"),
+          user_type: getLocalStorage("u_role_id"),
+          status: 0,
+        }),
+        function (d) {
+          console.log("onScreen", d);
+          removeLocalStorage("onScreenIdList");
+        }
+      );
+    }
   }
   call() {
     console.log('call');
