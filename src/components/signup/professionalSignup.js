@@ -5,7 +5,7 @@ import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import moment from 'moment';
 import { actionProfessionalSignup } from '../../common/redux/actions';
 import CONSTANTS from "../../common/helpers/Constants";
-import validateInput from "../../common/validations/validationSignup";
+import validateInput from "../../common/validations/validationProfessionalSignup";
 import { setLocalStorage } from "../../common/helpers/Utils";
 import { Link } from 'react-router-dom';
 import Crossblue from "../../assets/images/cross_blue.svg";
@@ -182,6 +182,7 @@ class ProfessionalSignup extends Component {
                                         value={this.state.screenName}
                                         onChange={this.handleChange}
                                         autoComplete="off"
+                                        maxLength = "50"
                                         inputProps={{
                                             maxLength: 50,
                                         }}
@@ -202,6 +203,7 @@ class ProfessionalSignup extends Component {
                                         value={this.state.email}
                                         onChange={this.handleChange}
                                         autoComplete="off"
+                                        maxLength = "50"
                                         inputProps={{
                                             maxLength: 50,
                                         }}
@@ -224,6 +226,8 @@ class ProfessionalSignup extends Component {
                                         name="password"
                                         value={this.state.password}
                                         onChange={this.handleChange}
+                                        minLength = "8"
+                                        maxLength = "15"
                                         inputProps={{
                                             maxLength: 30,
                                         }}
@@ -307,6 +311,7 @@ class ProfessionalSignup extends Component {
                                         name="category"
                                         value={this.state.category}
                                         onChange={this.handleChange}
+                                        maxLength = "30"
                                         inputProps={{
                                             maxLength: 30,
                                         }}
@@ -316,7 +321,9 @@ class ProfessionalSignup extends Component {
                                     <div className="error alignLeft">{errors.category}</div>
 
 
-                                    <div className="fs13 fw300 col27 pb-2">Password must contain at least 8 characters.</div>
+                                    {/* <div className="fs13 fw300 col27 pb-2">
+                                        Password must contain at least 8 characters.
+                                        </div> */}
 
                                 </Form.Group>
 

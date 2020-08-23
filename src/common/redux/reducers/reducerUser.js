@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGOUT, GET_QUESTION } from '../types';
+import { LOGIN, ADMIN_LOGIN, LOGOUT, GET_QUESTION } from '../types';
 import {
   setLocalStorage,
   getLocalStorage,
@@ -19,17 +19,15 @@ export default (state = INITIAL_STATE, action) => {
         setLocalStorage('userInfo', action.data.data);
         state.userData = userInfo;
       }
-      console.log("reduxState111", state)
       return { ...state };
 
-    // case LOGIN_SUCCESS:
-    //   if (action && action.data && action.data.data) {
-    //     const userInfo = action.data.data;
-    //     setLocalStorage('userInfo', action.data.data);
-    //     state.userData = userInfo;
-    //   }
-    //   console.log("reduxState", state)
-    //   return { ...state };
+    case ADMIN_LOGIN:
+      if (action && action.data && action.data.data) {
+        const userInfo = action.data.data;
+        setLocalStorage('userInfoAdmin', action.data.data);
+        state.userData = userInfo;
+      }
+      return { ...state };
 
     case LOGOUT:
       state.userData = {};

@@ -8,7 +8,8 @@ const PrivateRoutes = ({ component: Component, ...rest }) => (
     render={props =>
       getLocalStorage('userInfo') ||
         getLocalStorage('userInfoProff') ||
-        getLocalStorage('customerInfo') ? (
+        getLocalStorage('customerInfo') ||
+        getLocalStorage('userInfoAdmin') ? (
           <Component {...props} />
         ) : (
           <Redirect

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Button,
   NavDropdown,
@@ -12,47 +12,47 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";
-import NavBar from "../core/nav";
-import Footer from "../core/footer";
-import moment from "moment";
+} from 'react-bootstrap';
+import NavBar from '../core/nav';
+import Footer from '../core/footer';
+import moment from 'moment';
 import {
   actionGetRecentJoin,
   actionGetListnerDashBoard,
-} from "../../common/redux/actions";
-import CONSTANTS from "../../common/helpers/Constants";
-import validateInput from "../../common/validations/validationSignup";
+} from '../../common/redux/actions';
+import CONSTANTS from '../../common/helpers/Constants';
+import validateInput from '../../common/validations/validationSignup';
 
-import Educations from "../../assets/images/educations.svg";
-import Educationmarks from "../../assets/images/education_marks.svg";
-import Educationtwo from "../../assets/images/ice_fail.svg";
-import Educationmarktwo from "../../assets/images/education_mark2.svg";
-import Crossbluetwo from "../../assets/images/blue_cross.svg";
+import Educations from '../../assets/images/educations.svg';
+import Educationmarks from '../../assets/images/education_marks.svg';
+import Educationtwo from '../../assets/images/ice_fail.svg';
+import Educationmarktwo from '../../assets/images/education_mark2.svg';
+import Crossbluetwo from '../../assets/images/blue_cross.svg';
 
-import UserChat from "../../assets/images/user_chat.svg";
-import UserChat2 from "../../assets/images/user_chat2.svg";
-import UserChat3 from "../../assets/images/user_chat3.svg";
-import UserChat4 from "../../assets/images/user_chat4.svg";
-import UserChat5 from "../../assets/images/user_chat5.svg";
-import ChatCross from "../../assets/images/chat_cross.svg";
-import Heartfive from "../../assets/images/heart5.svg";
-import Skill from "../../assets/images/skills.svg";
-import Skill2 from "../../assets/images/skills2.svg";
-import Skill3 from "../../assets/images/skills3.svg";
-import Copys from "../../assets/images/copy_icon.svg";
-import Warningtwo from "../../assets/images/w_signal.svg";
-import Progresss from "../../assets/images/progress_bar.svg";
-import Stars from "../../assets/images/stars.svg";
-import Hearttwo from "../../assets/images/heart2.svg";
-import Medals from "../../assets/images/medals.svg";
-import Rflag from "../../assets/images/r_flag.svg";
-import SocketIOClient from "socket.io-client";
+import UserChat from '../../assets/images/user_chat.svg';
+import UserChat2 from '../../assets/images/user_chat2.svg';
+import UserChat3 from '../../assets/images/user_chat3.svg';
+import UserChat4 from '../../assets/images/user_chat4.svg';
+import UserChat5 from '../../assets/images/user_chat5.svg';
+import ChatCross from '../../assets/images/chat_cross.svg';
+import Heartfive from '../../assets/images/heart5.svg';
+import Skill from '../../assets/images/skills.svg';
+import Skill2 from '../../assets/images/skills2.svg';
+import Skill3 from '../../assets/images/skills3.svg';
+import Copys from '../../assets/images/copy_icon.svg';
+import Warningtwo from '../../assets/images/w_signal.svg';
+import Progresss from '../../assets/images/progress_bar.svg';
+import Stars from '../../assets/images/stars.svg';
+import Hearttwo from '../../assets/images/heart2.svg';
+import Medals from '../../assets/images/medals.svg';
+import Rflag from '../../assets/images/r_flag.svg';
+import SocketIOClient from 'socket.io-client';
 import {
   getLocalStorage,
   setLocalStorage,
   removeLocalStorage,
-} from "../../common/helpers/Utils";
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
+} from '../../common/helpers/Utils';
+const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 const socket = SocketIOClient(SOCKET_IO_URL);
 
 class Userdashboard extends Component {
@@ -80,7 +80,7 @@ class Userdashboard extends Component {
     window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
     this.getListnerDashBoard();
-    let result = getLocalStorage("result");
+    let result = getLocalStorage('result');
 
     // if (getLocalStorage("result") >= 60) {
     //   this.setState({
@@ -118,12 +118,12 @@ class Userdashboard extends Component {
 
 
     socket.emit(
-      "getRecentsChatedUsers",
+      'getRecentsChatedUsers',
       JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
+        user_id: getLocalStorage('userInfo').u_id,
       }),
       function (d) {
-        console.log("getRecentsChatedUsers", d);
+        console.log('getRecentsChatedUsers', d);
         this.setState(
           {
             recentChatUsers: d.data,
@@ -136,15 +136,15 @@ class Userdashboard extends Component {
     );
 
     socket.emit(
-      "getActiveListnersOrCustomers",
+      'getActiveListnersOrCustomers',
       JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
-        user_type: getLocalStorage("userInfo").u_role_id,
-        pagination: "10",
-        page: "1",
+        user_id: getLocalStorage('userInfo').u_id,
+        user_type: getLocalStorage('userInfo').u_role_id,
+        pagination: '10',
+        page: '1',
       }),
       function (d) {
-        console.log("getActiveListnersOrCustomers", d);
+        console.log('getActiveListnersOrCustomers', d);
         this.setState(
           {
             activeChatUsers: d.data,
@@ -156,33 +156,33 @@ class Userdashboard extends Component {
       }.bind(this)
     );
 
-    if (getLocalStorage("signup")) {
-      if (getLocalStorage("result") >= 60) {
+    if (getLocalStorage('signup')) {
+      if (getLocalStorage('result') >= 60) {
         this.setState({
           sucess: true,
           result: true,
-          message: "your score is " + result,
+          message: 'your score is ' + result + '%',
         });
       } else {
         this.setState({
           sucess: true,
           result: false,
-          message: "your score is" + result,
+          message: 'your score is' + result + '%',
         });
       }
     }
 
-    if (getLocalStorage("onScreenIdList")) {
+    if (getLocalStorage('onScreenIdList')) {
       socket.emit(
-        "onScreen",
+        'onScreen',
         JSON.stringify({
-          user_id: getLocalStorage("userInfo").u_id,
-          user_type: getLocalStorage("userInfo").u_role_id,
+          user_id: getLocalStorage('userInfo').u_id,
+          user_type: getLocalStorage('userInfo').u_role_id,
           status: 0,
         }),
         function (d) {
-          console.log("onScreen", d);
-          removeLocalStorage("onScreenIdList");
+          console.log('onScreen', d);
+          removeLocalStorage('onScreenIdList');
         }
       );
     }
@@ -207,7 +207,7 @@ class Userdashboard extends Component {
   };
 
   getRecentJoinUsers() {
-    let userInfo = getLocalStorage("userInfo");
+    let userInfo = getLocalStorage('userInfo');
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.u_mem_list;
@@ -225,16 +225,16 @@ class Userdashboard extends Component {
     });
   }
   copyReferUrl = () => {
-    var copyText = document.getElementById("referURL");
+    var copyText = document.getElementById('referURL');
     copyText.select();
     copyText.setSelectionRange(0, 99999);
-    document.execCommand("copy");
+    document.execCommand('copy');
     // alert("Copied the text: " + copyText.value);
   };
 
   handleCancel = (e) => {
     console.log(e);
-    setLocalStorage("signup", false);
+    setLocalStorage('signup', false);
     this.setState({
       sucess: false,
     });
@@ -255,7 +255,7 @@ class Userdashboard extends Component {
         <div className="userdashboards pt-4 pb-5">
           <Container>
             <Row>
-              {" "}
+              {' '}
               <Col md={3}>
                 <div className="left_sidebar">
                   <div className="left_sidebar">
@@ -389,15 +389,14 @@ class Userdashboard extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-
                                   >
                                     {item.u_name}
                                   </div>
                                 </div>
                               </div>
                             ) : (
-                                ""
-                              );
+                              ''
+                            );
                           })}
                       </Tab>
                     </Tabs>
@@ -413,17 +412,17 @@ class Userdashboard extends Component {
                         Show More
                       </div>
                     ) : (
-                        <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: 4,
-                            });
-                          }}
-                        >
-                          Show Less
-                        </div>
-                      )}
+                      <div
+                        className="fs15 fw600 col23 p-3 pointer show-more"
+                        onClick={() => {
+                          this.setState({
+                            showVal: 4,
+                          });
+                        }}
+                      >
+                        Show Less
+                      </div>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -531,7 +530,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_cheers
                               ? dashboardData.u_cheers
-                              : "0"}{" "}
+                              : '0'}{' '}
                           </strong>
                           Cheers
                         </span>
@@ -544,7 +543,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_compassion_count
                               ? dashboardData.u_compassion_count
-                              : "0"}{" "}
+                              : '0'}{' '}
                           </strong>
                           Compassion Hearts
                         </span>
@@ -557,7 +556,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_badge_count
                               ? dashboardData.u_badge_count
-                              : "0"}{" "}
+                              : '0'}{' '}
                           </strong>
                           Badges Earned
                         </span>
@@ -591,7 +590,7 @@ class Userdashboard extends Component {
                           value={
                             dashboardData.refer_url
                               ? dashboardData.refer_url
-                              : ""
+                              : ''
                           }
                         />
                         <Button className="btnTyp8" onClick={this.copyReferUrl}>
@@ -611,17 +610,17 @@ class Userdashboard extends Component {
                           <div className="d-flex m-3 border-bottom">
                             <div className="position-relative">
                               <Image
-                                src={data.u_image ? data.u_image : ""}
+                                src={data.u_image ? data.u_image : ''}
                                 alt=""
                                 className="r50 pt-1"
                               />
                             </div>
                             <div className="mt-auto mb-auto pl-3">
                               <div className="fs15 col14 fw500">
-                                {data.u_username ? data.u_username : ""}
+                                {data.u_username ? data.u_username : ''}
                               </div>
                               <div className="col27 fs13 fw500">
-                                {data.u_role_txt ? data.u_role_txt : ""}
+                                {data.u_role_txt ? data.u_role_txt : ''}
                               </div>
                             </div>
                           </div>
@@ -665,7 +664,7 @@ class Userdashboard extends Component {
           <Modal.Body>
             <p className="text-center fs24">{this.state.message}</p>
             <Container>
-              {getLocalStorage("result") >= 60 ? (
+              {getLocalStorage('result') >= 60 ? (
                 <div className="layout_box text-center mt-3 mb-4 p-4">
                   <Image src={Educations} alt="" className="mb-4" />
                   <div className="col9 fs44 fw600 mb-2">Congratulation</div>
@@ -682,32 +681,32 @@ class Userdashboard extends Component {
                       <span class="progress-bar"></span>
                     </span>
                     <div class="progress-value">
-                      {getLocalStorage("result")}%
+                      {getLocalStorage('result')}%
                     </div>
                   </div>
                 </div>
               ) : (
-                  <div className="layout_box text-center mt-3 mb-4 p-4">
-                    <Image src={Educationtwo} alt="" className="mb-4" />
-                    <div className="col9 fs44 fw600 mb-2">Sorry</div>
-                    <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
-                      please take the survey again or contact Admin
+                <div className="layout_box text-center mt-3 mb-4 p-4">
+                  <Image src={Educationtwo} alt="" className="mb-4" />
+                  <div className="col9 fs44 fw600 mb-2">Sorry</div>
+                  <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
+                    please take the survey again or contact Admin
                   </div>
-                    {/* <Image src={Educationmarktwo} alt="" />    */}
-                    <div class="progress yellow">
-                      <span className="progress-full"></span>
-                      <span class="progress-left">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <span class="progress-right">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <div class="progress-value">
-                        {getLocalStorage("result")}%
-                    </div>
+                  {/* <Image src={Educationmarktwo} alt="" />    */}
+                  <div class="progress yellow">
+                    <span className="progress-full"></span>
+                    <span class="progress-left">
+                      <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                      <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">
+                      {getLocalStorage('result')}%
                     </div>
                   </div>
-                )}
+                </div>
+              )}
             </Container>
           </Modal.Body>
         </Modal>

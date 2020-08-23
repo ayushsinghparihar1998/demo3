@@ -4,7 +4,7 @@ import ApiJson from './apiJson';
 import {
   showErrorToast,
   showSuccessToast,
-  getLocalStorage
+  getLocalStorage,
 } from '../helpers/Utils';
 
 let apiFailCounter = 0;
@@ -13,13 +13,14 @@ axios.defaults.baseURL = 'http://103.76.253.131:81';
 //axios.defaults.baseURL = 'http://103.21.53.11:3004';
 
 axios.interceptors.request.use(
-
   function (config) {
-    console.log("getLocalStorage", getLocalStorage)
+    console.log('getLocalStorage', getLocalStorage);
     let access_token = '';
-    let userInfo = getLocalStorage('userInfo') || getLocalStorage('customerInfo') || getLocalStorage('userInfoProff');
-
-
+    let userInfo =
+      getLocalStorage('userInfo') ||
+      getLocalStorage('customerInfo') ||
+      getLocalStorage('userInfoProff') ||
+      getLocalStorage('userInfoAdmin');
 
     if (userInfo) {
       if (userInfo.u_accesstoken) {
@@ -53,8 +54,8 @@ const injectParamsToUrl = (_url_, paramObj) => {
   return url;
 };
 
-const handleErrorByStatus = error => {
-  if (error && error.status === "error") {
+const handleErrorByStatus = (error) => {
+  if (error && error.status === 'error') {
     const message = error.message;
     showErrorToast(message);
   }
@@ -78,7 +79,11 @@ const spikeViewApiService = (apiKeyName, data) => {
   return axios(requestObject)
     .then(function (result) {
       apiFailCounter = 0;
-      if (result.data && result.data.data && result.data.data.status === 'Success') {
+      if (
+        result.data &&
+        result.data.data &&
+        result.data.data.status === 'Success'
+      ) {
         if (result.data.message) {
           const message = result.data.data.message;
           if (requestObject.showResultMessage === true)
