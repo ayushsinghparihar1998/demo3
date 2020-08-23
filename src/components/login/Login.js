@@ -65,7 +65,7 @@ class Login extends Component {
     }
     return isValid;
   }
-  
+
   handleSubmitListener = () => {
     if (this.isValid()) {
       let data = {
@@ -134,7 +134,7 @@ class Login extends Component {
             setLocalStorage("loggedIn", true);
             this.props.history.push({ pathname: '/userDashboardcust' });
 
-            
+
 
           }
         })
@@ -156,6 +156,7 @@ class Login extends Component {
           if (result && result.data && result.data.status === "success") {
             setLocalStorage('userInfoAdmin', result.data.data);
             setLocalStorage("loggedIn", true);
+            setLocalStorage("isAdmin", true);
             this.props.history.push({ pathname: '/adminlistener' });
           }
         })
@@ -174,7 +175,7 @@ class Login extends Component {
 
   changepath = (path) => {
     this.props.history.push(path);
-  };  
+  };
 
   render() {
     const { email, password } = this.state;
@@ -246,13 +247,13 @@ class Login extends Component {
                       ''}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
-                  <span 
+                  <span
                   className="fw500 pointer pl-1"
                   onClick={() =>
                     this.changepath("/forgotpassword")
                   }
-                  >
-                    Reset it Here
+                >
+                  Reset it Here
                     </span>
               </div>
 
@@ -261,15 +262,15 @@ class Login extends Component {
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ?
               <div className="fs18 fw300 pb-5 col14">
                 Interested in becoming a Listener?
-              <span 
-              className="fw600 pointer pl-1"
-              onClick={() =>
-                this.changepath("/listenersignup")
-              }
-              >
-                Learn More / Signup
+              <span
+                  className="fw600 pointer pl-1"
+                  onClick={() =>
+                    this.changepath("/listenersignup")
+                  }
+                >
+                  Learn More / Signup
                 </span>
-              </div> : ''}            
+              </div> : ''}
 
           </Container>
         </div>

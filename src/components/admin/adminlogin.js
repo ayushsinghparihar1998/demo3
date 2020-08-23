@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import Login from "../login/login";
+import Login from "../login/Login";
 import CONSTANTS from "../../common/helpers/Constants";
 class Adminlogin extends Component {
   render() {

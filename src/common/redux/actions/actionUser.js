@@ -4,7 +4,7 @@ import {
   LOGOUT, LOGIN_SUCCESS, GET_QUESTION, USER_LOGIN, USER_SIGNUP, GET_RECENT_JOIN,
   GET_LISTNER_DASHBOARD, GET_PROFILE, GET_USER_DASHBOARD, GET_PROFESIONAL_DASHBOARD,
   GET_LISTNER_LISTING, GET_PROFESSIONAL_LISTING, GET_USER_LISTING, FORGOT_PASSWORD,
-  RESET_PASSWORD, ADMIN_CHANGE_USER_STATUS, ADMIN_USER_DELETE
+  RESET_PASSWORD, ADMIN_CHANGE_USER_STATUS, ADMIN_USER_DELETE, GET_PROFILE_BY_ID
 } from '../types';
 
 export const actionLogin = data => async dispatch => {
@@ -133,5 +133,11 @@ export const actionForGotPassword = (data) => async dispatch => {
 export const actionResetPassword = (data) => async dispatch => {
   const request = ELPViewApiService('resetpassword', data);
   dispatch({ type: RESET_PASSWORD, payload: request.data });
+  return request;
+}
+
+export const actionGetProfileById = (data) => async dispatch => {
+  const request = ELPViewApiService('getProfileById', data);
+  dispatch({ type: GET_PROFILE_BY_ID, payload: request.data });
   return request;
 }

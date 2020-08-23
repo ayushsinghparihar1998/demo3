@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch } from "react-router-dom";
 import Landing from "../components/core/landing";
-import Login from "../components/login/login";
+import Login from "../components/login/Login";
 import ProfessionalLogin from "../components/login/professionalLogin";
 import Becomelistener from "../components/signup/becomeListener";
 import Listenersignup from "../components/signup/listenerSignup";
@@ -13,22 +13,20 @@ import PrivateRouteProff from "./PrivateRouteProff";
 import PublicRoute from "./PublicRoute";
 import UserdashboardProff from "../components/professional/userdashboardProff";
 import ChatProff from "../components/professional/chatproff";
-import UserdashboardCust from "../components/user/userdashboard";  
-
-import PrivateRouteUser from "./PrivateRouteUser"; 
+import UserdashboardCust from "../components/user/userdashboard";
+import PrivateRouteUser from "./PrivateRouteUser";
 import PrivateRoutes from "./PrivateRoutes";
 import MyProfile from "../components/editprofile/myprofile";
-import EditProfile from "../components/editprofile/editprofile"; 
+import EditProfile from "../components/editprofile/editprofile";
 import ChatUser from "../components/user/chatUser";
 import Resetpassword from "../components/login/resetpassword";
 import Forgotpassword from "../components/login/forgotpassword";
 import Userotp from "../components/login/userotp";
-import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";  
-
+import Userprofiledetail from "../components/editprofile/userprofiledetail";
 import AdminLogin from "../components/admin/adminlogin";
 import Adminlistener from "../components/admin/listener";
 
-class ELPRoute extends Component { 
+class ELPRoute extends Component {
   render() {
 
     return (
@@ -42,21 +40,21 @@ class ELPRoute extends Component {
         <PublicRoute path="/logout" component={Chat} />
 
         <PublicRoute path="/reset" component={Resetpassword} />
-        
+
 
         <PublicRoute path="/forgotpassword" component={Forgotpassword} />
         <PublicRoute path="/userotp" component={Userotp} />
         {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
         {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
-        <PublicRoute path="/adminlistener" component={Adminlistener} /> 
+        <PublicRoute path="/adminlistener" component={Adminlistener} />
 
-        <PublicRoute path="/userprofiledetail" component={Userprofiledetail} />
+        <PrivateRoutes path="/userprofile" component={Userprofiledetail} />
 
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
         <PrivateRouteList path="/chat/:id" component={Chat} />
 
-        {/* Proff */} 
+        {/* Proff */}
         <PublicRoute path="/adminlistener" component={Adminlistener} />
         <PublicRoute path="/usersignup" component={Usersignup} />
         {/* LIst */}
