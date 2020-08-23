@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import Landing from '../components/core/landing';
 import Login from '../components/login/Login'; 
+// import Login from '../components/login/Login';
 import ProfessionalLogin from '../components/login/professionalLogin';
 import Becomelistener from '../components/signup/becomeListener';
 import Listenersignup from '../components/signup/listenerSignup';
@@ -39,16 +40,14 @@ class ELPRoute extends Component {
         <PublicRoute path="/listenersignup" component={Listenersignup} />
         <PublicRoute path="/professionalLogin" component={ProfessionalLogin} />
         <PublicRoute path="/logout" component={Chat} />
-
         <PublicRoute path="/reset" component={Resetpassword} />
-
         <PublicRoute path="/forgotpassword" component={Forgotpassword} />
         <PublicRoute path="/userotp" component={Userotp} />
         {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
         {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
         <PublicRoute path="/adminlistener" component={Adminlistener} />
 
-        <PublicRoute path="/userprofiledetail" component={Userprofiledetail} />
+        <PrivateRoutes path="/userprofile" component={Userprofiledetail} />
 
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
