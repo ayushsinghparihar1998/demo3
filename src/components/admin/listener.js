@@ -4,7 +4,7 @@ import {
     actionGetListnerListing, actionGetCustomerListing,
     actionGetProfessionalListing, actionadminUserDelete, actionAdminChangeUserStatus,
 } from "../../common/redux/actions";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
+import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
@@ -13,6 +13,7 @@ import Requestuserthree from "../../assets/images/pro_img3.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
+import { stubFalse } from "lodash";
 
 class Adminlistener extends Component {
     constructor(props) {
@@ -20,6 +21,8 @@ class Adminlistener extends Component {
         this.state = {
             activeProfile: 'listner',
             profileListing: [],
+            deleteConformationModal: false,
+            profileId: ''
         };
     }
     componentDidMount() {
@@ -27,48 +30,87 @@ class Adminlistener extends Component {
     }
 
     getListnerListing = (e, activaClass) => {
+        let chkUserProfile = this.state.activeProfile;
+        this.setState({ activeProfile: activaClass });
+        let profileListing = [];
         let data = { "count": 10, "offset": 1 }
         this.props.actionGetListnerListing(data).then((result) => {
             if (result && result.status === 200) {
-                let profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing, activeProfile: activaClass });
+                profileListing = result && result.data && result.data.data ? result.data.data : [];
+                this.setState({ profileListing: profileListing });
             }
         });
     }
     getProfessionalListing = (e, activaClass) => {
+        let chkUserProfile = this.state.activeProfile;
+        this.setState({ activeProfile: activaClass });
+        let profileListing = [];
         let data = { "count": 10, "offset": 1 }
         this.props.actionGetProfessionalListing(data).then((result) => {
             if (result && result.status === 200) {
-                let profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing, activeProfile: activaClass });
+                profileListing = result && result.data && result.data.data ? result.data.data : [];
+                this.setState({ profileListing: profileListing });
             }
         });
     }
     getCustomerListing = (e, activaClass) => {
+        this.setState({ activeProfile: activaClass });
+        let profileListing = [];
         let data = { "count": 10, "offset": 1 }
         this.props.actionGetCustomerListing(data).then((result) => {
             if (result && result.status === 200) {
-                let profileListing = result && result.data && result.data.data ? result.data.data : [];
-                this.setState({ profileListing: profileListing, activeProfile: activaClass });
+                profileListing = result && result.data && result.data.data ? result.data.data : [];
+                this.setState({ profileListing: profileListing });
             }
         });
     }
-    adminChangeUserStatus() {
-        let data = { "userid": 1, "u_status": 1 }
+
+    adminChangeUserStatus = (e, uid, status) => {
+        let userStatus = status ? 0 : 1;
+        let chkUserProfile = this.state.activeProfile;
+        let data = { "userid": uid, "u_status": userStatus }
         this.props.actionAdminChangeUserStatus(data).then((result) => {
-            console.log("mmmmmm", result);
             if (result && result.status === 200) {
-                console.log("hh");
+                if (chkUserProfile === 'user') {
+                    this.getCustomerListing(e, 'user');
+                } else if (chkUserProfile === 'professional') {
+                    this.getProfessionalListing(e, 'professional');
+                } else if (chkUserProfile === 'listner') {
+                    this.getListnerListing(e, 'listner');
+                }
             }
         });
     }
+
     adminUserDelete = (e, uid, status) => {
+        let chkUserProfile = this.state.activeProfile;
         let data = { "userid": uid, "u_status": status }
         this.props.actionadminUserDelete(data).then((result) => {
+            this.setState({ deleteConformationModal: false })
             if (result && result.status === 200) {
-                console.log("gg");
+                if (chkUserProfile === 'user') {
+                    this.getCustomerListing(e, 'user');
+                } else if (chkUserProfile === 'professional') {
+                    this.getProfessionalListing(e, 'professional');
+                } else if (chkUserProfile === 'listner') {
+                    this.getListnerListing(e, 'listner');
+                }
             }
         });
+    }
+
+    adminUserDeleteConfirm = (e, uid) => {
+        this.setState({
+            deleteConformationModal: true,
+            profileId: uid,
+        })
+    }
+
+    handleCloseConformation = () => {
+        this.setState({
+            deleteConformationModal: false,
+            profileId: '',
+        })
     }
 
     render() {
@@ -139,13 +181,14 @@ class Adminlistener extends Component {
                                                                 <span className="pr-3 disabled">
                                                                     <Form.Check
                                                                         type="switch"
-                                                                        id="custom-switch5"
+                                                                        id={"custom-switch" + index}
+                                                                        name={"status" + index}
                                                                         label=""
-                                                                        onClick={(e) => { this.adminChangeUserStatus(e, item.id, 1) }}
+                                                                        onClick={(e) => { this.adminChangeUserStatus(e, item.id, item.u_status) }}
                                                                         checked={item.u_status ? true : false}
                                                                     />
                                                                 </span>
-                                                                <span onClick={(e) => { this.adminUserDelete(e, item.id, 2) }}><Image src={Deleteicon} alt="" /></span>
+                                                                <span onClick={(e) => { this.adminUserDeleteConfirm(e, item.id) }}><Image src={Deleteicon} alt="" /></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -156,6 +199,37 @@ class Adminlistener extends Component {
                             </Col>
                         </Row>
                     </Container>
+
+                    <Modal
+                        show={this.state.deleteConformationModal}
+                        onHide={this.handleCloseConformation}
+                        className="custom-popUp confirmation-box"
+                        bsSize="small"
+                    >
+                        <Modal.Body>
+                            <div className="">
+                                <h5 className="text-center">
+                                    Are you sure you want to delete this?
+                    </h5>
+                                <div className="text-center">
+                                    <button
+                                        className="btn btn-default text-uppercase sm-btn"
+                                        onClick={event =>
+                                            this.adminUserDelete(event, this.state.profileId, 2)
+                                        }
+                                    >
+                                        OK
+                        </button>
+                                    <button
+                                        className="btn btn-success text-uppercase"
+                                        onClick={this.handleCloseConformation}
+                                    >
+                                        Cancel
+                        </button>
+                                </div>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
                 </div>
                 <Footer />
             </div>
