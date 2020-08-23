@@ -87,6 +87,9 @@ class Login extends Component {
         .actionLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            this.setState({
+              errors: {},
+            });
             let u_que_ans_per = result.data.data.u_que_ans_per;
             if (u_que_ans_per >= 60) {
               setLocalStorage('userInfo', result.data.data);
@@ -96,6 +99,10 @@ class Login extends Component {
               setLocalStorage('result', u_que_ans_per);
               setLocalStorage('loggedIn', false);
             }
+          } else {
+            this.setState({
+              errors: {},
+            });
           }
         })
         .catch((error) => {
