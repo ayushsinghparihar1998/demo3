@@ -36,7 +36,6 @@ import moment from "moment";
 
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
 class ChatProff extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +46,8 @@ class ChatProff extends Component {
       allMessages: [],
       showChat: false,
       response: {},
-      user_id: getLocalStorage("userInfoProff").u_id
+      user_id: getLocalStorage("userInfoProff").u_id,
+      userMeta: {}
     };
   }
   componentWillUnmount() {
@@ -57,14 +57,17 @@ class ChatProff extends Component {
   unmount = () => {
     if (socket) {
       socket.disconnect();
+      console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
+    socket.connect();
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
       from_user_id: getLocalStorage("userInfoProff").u_id,
     });
     socket.on("connect", function () {
+      console.log("COnnected ================================================")
       socket.emit(
         "chat-login",
         JSON.stringify({
@@ -162,7 +165,7 @@ class ChatProff extends Component {
       });
     }
   };
-  handleSendMessage = () => {
+  handleSendMessage = (e) => {
     let message = this.state.message ? this.state.message.trim() : "";
     this.sendMessage(message);
     this.setState({ message: "" });
@@ -193,7 +196,8 @@ class ChatProff extends Component {
       from_user_id: getLocalStorage("userInfoProff").u_id,
       to_user_id: this.props.match.params.id,
       message_type: 1,
-      date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
+      date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+      user_type: this.state.userMeta.user_type
     };
     console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
@@ -209,6 +213,7 @@ class ChatProff extends Component {
         to_user_id: this.props.match.params.id,
         user_type: getLocalStorage("userInfoProff").u_role_id,
         from_user_id: getLocalStorage("userInfoProff").u_id,
+        user_type: this.state.userMeta.user_type
       }),
       (data) => this.setState({ response: data })
     );
@@ -482,7 +487,7 @@ class ChatProff extends Component {
                       )}
                   </div>
                   <div className="chat_bottom">
-                    <Form>
+                    <div>
                       <Form.Group>
                         <div className="d-flex">
                           <Form.Control
@@ -498,13 +503,13 @@ class ChatProff extends Component {
                           <Button
                             className="btnTyp7"
                             // disabled={this.state.allMessages.length == 0}
-                            onClick={() => this.handleSendMessage()}
+                            onClick={this.handleSendMessage}
                           >
                             Send
                           </Button>
                         </div>
                       </Form.Group>
-                    </Form>
+                    </div>
                   </div>
                 </div>
               </Col>

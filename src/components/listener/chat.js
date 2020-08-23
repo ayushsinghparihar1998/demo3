@@ -37,7 +37,7 @@ import moment from "moment";
 
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
+// socket.connect();
 
 class Chat extends Component {
   constructor(props) {
@@ -60,7 +60,8 @@ class Chat extends Component {
       ans32: false,
       ans33: false,
       typing: "",
-      user_id: getLocalStorage("userInfo").u_id
+      user_id: getLocalStorage("userInfo").u_id,
+      userMeta: {}
     };
   }
   componentWillUnmount() {
@@ -70,9 +71,11 @@ class Chat extends Component {
   unmount = () => {
     if (socket) {
       socket.disconnect();
+      console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
+    socket.connect();
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
       from_user_id: getLocalStorage("userInfo").u_id,
@@ -80,6 +83,7 @@ class Chat extends Component {
     setLocalStorage("onScreenIdList", this.props.match.params.id);
 
     socket.on("connect", function () {
+      console.log("COnnected ================================================")
       socket.emit(
         "chat-login",
         JSON.stringify({
@@ -221,7 +225,7 @@ class Chat extends Component {
       to_user_id: this.props.match.params.id,
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
-      user_type: 3,
+      user_type: this.state.userMeta.user_type,
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
       console.log("sendMessage", data);
@@ -234,7 +238,7 @@ class Chat extends Component {
       "startTyping",
       JSON.stringify({
         to_user_id: this.props.match.params.id,
-        user_type: 3,
+        user_type: this.state.userMeta.user_type,
         from_user_id: getLocalStorage("userInfo").u_id,
       }),
       (data) => {
