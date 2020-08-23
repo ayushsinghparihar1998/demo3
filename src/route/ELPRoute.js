@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import Landing from '../components/core/landing';
-import Login from '../components/login/Login'; 
+import Login from '../components/login/Login';
 // import Login from '../components/login/Login';
 import ProfessionalLogin from '../components/login/professionalLogin';
 import Becomelistener from '../components/signup/becomeListener';
