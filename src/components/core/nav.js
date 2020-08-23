@@ -48,22 +48,22 @@ class NavBar extends Component {
 
     handleLogout = () => {
 
-        let roleType = getLocalStorage("customerInfo") ? 3 : 
-                getLocalStorage("userInfo") ? 1 : 
+        let roleType = getLocalStorage("customerInfo") ? 3 :
+            getLocalStorage("userInfo") ? 1 :
                 getLocalStorage("userInfoProff") ? 2 :
-                 CONSTANTS.ROLES.LISTNER ; 
+                    CONSTANTS.ROLES.LISTNER;
 
         let data = {}
         this.props
             .actionLogout(data)
-            .then((result) => {               
+            .then((result) => {
 
-               console.log('rnv roleType',roleType);  
+                console.log('rnv roleType', roleType);
                 this.props.history.push({
                     pathname: 'login',
                     state: { roleType: roleType }
                 });
-                
+
                 localStorage.clear();
             })
             .catch((error) => {
@@ -119,16 +119,16 @@ class NavBar extends Component {
                                                     : ''} className="nav-link">
                                         Dashboard
                             </NavLink>,
-                                <NavLink to="/myprofile" className="nav-link">
-                                    My Profile
+                                    <NavLink to="/myprofile" className="nav-link">
+                                        My Profile
                             </NavLink>,
-                                <NavLink to="/editprofile" className="nav-link">
-                                    Edit Profile
+                                    getLocalStorage('userInfoAdmin') ? '' : <NavLink to="/editprofile" className="nav-link">
+                                        Edit Profile
                     </NavLink>] : [
                                     <Nav.Link onClick={this.handleModal}>Connect Now</Nav.Link>,
                                     <NavLink to="/becomeListener" className="nav-link">
                                         Volunteer as a Listener
-                                    </NavLink>,                                    
+                                    </NavLink>,
                                     <NavDropdown title="CSR" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="#">Action</NavDropdown.Item>
                                         <NavDropdown.Item href="#">Another</NavDropdown.Item>

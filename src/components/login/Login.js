@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import SimpleReactValidator from "simple-react-validator/dist/simple-react-validator";
-import { actionLogin, actionProfessionalLogin, actionUserLogin, actionAdminLogin } from "../../common/redux/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import SimpleReactValidator from 'simple-react-validator/dist/simple-react-validator';
 import {
-  encrypt,
-  decrypt,
-  setLocalStorage,
-} from "../../common/helpers/Utils";
+  actionLogin,
+  actionProfessionalLogin,
+  actionUserLogin,
+  actionAdminLogin,
+} from '../../common/redux/actions';
+import { encrypt, decrypt, setLocalStorage } from '../../common/helpers/Utils';
 
 import {
   Button,
@@ -27,11 +28,10 @@ import validateInput from "../../common/validations/validationLogin";
 import ProfessionalSignup from '../signup/professionalSignup';
 
 class Login extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: '',
       errors: {},
       password: "",
       show3:false,
@@ -40,20 +40,23 @@ class Login extends Component {
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
-      className: "msgcolor",
+      className: 'msgcolor',
       messages: {
-        email: "Enter a valid email",
+        email: 'Enter a valid email',
       },
     });
-    console.log("this.props.roleType", this.props.roleType)
-
+    console.log('this.props.roleType', this.props.roleType);
   }
 
   componentWillReceiveProps(next) {
     this.setState({
-      roleType: next.location && next.location.state && next.location.state.roleType ?
-        next.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
-    })
+      roleType:
+        next.location && next.location.state && next.location.state.roleType
+          ? next.location.state.roleType
+          : this.props.roleType
+          ? this.props.roleType
+          : CONSTANTS.ROLES.LISTNER,
+    });
   }
 
   handleChange = (event) => {
@@ -69,7 +72,7 @@ class Login extends Component {
     }
     return isValid;
   }
-  
+
   handleSubmitListener = () => {
     if (this.isValid()) {
       let data = {
@@ -80,15 +83,15 @@ class Login extends Component {
       this.props
         .actionLogin(data)
         .then((result) => {
-          if (result && result.data && result.data.status === "success") {
+          if (result && result.data && result.data.status === 'success') {
             let u_que_ans_per = result.data.data.u_que_ans_per;
             if (u_que_ans_per >= 60) {
-              setLocalStorage("userInfo", result.data.data);
-              setLocalStorage("loggedIn", true);
-              this.props.history.push({ pathname: "/userdashboard" });
+              setLocalStorage('userInfo', result.data.data);
+              setLocalStorage('loggedIn', true);
+              this.props.history.push({ pathname: '/userdashboard' });
             } else {
-              setLocalStorage("result", u_que_ans_per);
-              setLocalStorage("loggedIn", false);
+              setLocalStorage('result', u_que_ans_per);
+              setLocalStorage('loggedIn', false);
             }
           }
         })
@@ -102,21 +105,20 @@ class Login extends Component {
     if (this.isValid()) {
       let data = {
         email: this.state.email.toLowerCase().trim(),
-        password: this.state.password.trim()
+        password: this.state.password.trim(),
         // password: encrypt(this.state.password.trim())
       };
 
       this.props
         .actionProfessionalLogin(data)
-        .then(result => {
-          if (result && result.data && result.data.status === "success") {
+        .then((result) => {
+          if (result && result.data && result.data.status === 'success') {
             setLocalStorage('userInfoProff', result.data.data);
-            setLocalStorage("loggedIn", true);
+            setLocalStorage('loggedIn', true);
             this.props.history.push({ pathname: '/userDashboardproff' });
-
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -126,23 +128,20 @@ class Login extends Component {
     if (this.isValid()) {
       let data = {
         email: this.state.email.toLowerCase().trim(),
-        password: this.state.password.trim()
+        password: this.state.password.trim(),
         // password: encrypt(this.state.password.trim())
       };
 
       this.props
         .actionUserLogin(data)
-        .then(result => {
-          if (result && result.data && result.data.status === "success") {
+        .then((result) => {
+          if (result && result.data && result.data.status === 'success') {
             setLocalStorage('customerInfo', result.data.data);
-            setLocalStorage("loggedIn", true);
+            setLocalStorage('loggedIn', true);
             this.props.history.push({ pathname: '/userDashboardcust' });
-
-            
-
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -152,28 +151,29 @@ class Login extends Component {
     if (this.isValid()) {
       let data = {
         email: this.state.email.toLowerCase().trim(),
-        password: this.state.password.trim()
+        password: this.state.password.trim(),
       };
       this.props
         .actionAdminLogin(data)
-        .then(result => {
-          if (result && result.data && result.data.status === "success") {
+        .then((result) => {
+          if (result && result.data && result.data.status === 'success') {
             setLocalStorage('userInfoAdmin', result.data.data);
             setLocalStorage("loggedIn", true);
+            setLocalStorage("isAdmin", true);
+
             this.props.history.push({ pathname: '/adminlistener' });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
   };
 
-
   handleClose = () => {
     this.setState({
       QAndA: true,
-    })
+    });
   };
 
   changepath = (path) => {
@@ -205,7 +205,7 @@ handleGet = () => {
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
-    console.log("errors", errors)
+    console.log('errors', errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -213,18 +213,25 @@ handleGet = () => {
         </div>
         <div className="Loginlayout">
           <Container>
-
-
             <div className="col10 fs40 fw600 pt-4 mb-2">
-              {this.state.roleType === CONSTANTS.ROLES.LISTNER ? ('Listener Login') :
-                this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL ? 'Professional Login' :
-                  this.state.roleType === CONSTANTS.ROLES.USER ? 'User Login' :
-                    this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? 'Admin Login' : ''}
+              {this.state.roleType === CONSTANTS.ROLES.LISTNER
+                ? 'Listener Login'
+                : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
+                ? 'Professional Login'
+                : this.state.roleType === CONSTANTS.ROLES.USER
+                ? 'User Login'
+                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                ? 'Admin Login'
+                : ''}
             </div>
-            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ?
-              <div className="col14 fs25 fw300 mb-4 pb-2">Don’t have an account?
-             <strong className="fw500">Become a Member</strong></div>
-              : ''}
+            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
+              <div className="col14 fs25 fw300 mb-4 pb-2">
+                Don’t have an account?
+                <strong className="fw500">Become a Member</strong>
+              </div>
+            ) : (
+              ''
+            )}
 
             <div className="layout_box mb-4">
               <Form.Group className="mb-4 pb-2">
@@ -264,24 +271,40 @@ handleGet = () => {
               </Form.Group>
 
               {this.state.roleType === CONSTANTS.ROLES.LISTNER ? (
-                <Button className="btnTyp4 mb-4" onClick={this.handleSubmitListener}>
+                <Button
+                  className="btnTyp4 mb-4"
+                  onClick={this.handleSubmitListener}
+                >
                   LOGIN
                 </Button>
               ) : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL ? (
-                <Button className="btnTyp4 mb-4" onClick={this.handleSubmitProfessional}>
+                <Button
+                  className="btnTyp4 mb-4"
+                  onClick={this.handleSubmitProfessional}
+                >
                   LOGIN
-                </Button>) : this.state.roleType === CONSTANTS.ROLES.USER ? (
-                  <Button className="btnTyp4 mb-4" onClick={this.handleSubmitUser}>
-                    LOGIN
-                  </Button>) :
-                    this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
-                      <Button className="btnTyp4 mb-4" onClick={this.handleSubmitAdmin}>
-                        LOGIN
-                      </Button>) :
-                      ''}
+                </Button>
+              ) : this.state.roleType === CONSTANTS.ROLES.USER ? (
+                <Button
+                  className="btnTyp4 mb-4"
+                  onClick={this.handleSubmitUser}
+                >
+                  LOGIN
+                </Button>
+              ) : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
+                <Button
+                  className="btnTyp4 mb-4"
+                  onClick={this.handleSubmitAdmin}
+                >
+                  LOGIN
+                </Button>
+              ) : (
+                ''
+              )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
-                  <span 
+
+                  <span
                   className="fw500 pointer pl-1"
                   onClick={() =>                    
                     this.props.history.push({
@@ -293,21 +316,25 @@ handleGet = () => {
                     Reset it Here
                     </span>
               </div>
-
             </div>
 
-            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ?
+            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="fs18 fw300 pb-5 col14">
                 Interested in becoming a Listener?
-              <span 
-              className="fw600 pointer pl-1"
-              onClick={() =>
-                this.changepath("/listenersignup")
-              }
-              >
-                Learn More / Signup
+  <span
+                  className="fw600 pointer pl-1"
+                  onClick={() =>
+                    this.changepath("/listenersignup")
+                  }
+                >
+                  Learn More / Signup
                 </span>
-              </div> : ''}            
+              </div>
+
+                
+            ) : (
+              ''
+            )}
 
           </Container>
         </div>
@@ -321,11 +348,13 @@ handleGet = () => {
             <Container>
               <div className="layout_box mt-3 mb-4">
                 <div className="col10 fs30 fw600 mb-2">Create Your Account</div>
-                <div className="fs300 fs20 col14 mb-4 pb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                <div className="fs300 fs20 col14 mb-4 pb-2">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </div>
                 {/* <QuestionAndAnswer {...this.props} /> */}
               </div>
             </Container>
-
           </Modal.Body>
         </Modal>
         <Modal show={this.state.show3} className="CreateAccount">
@@ -350,4 +379,9 @@ handleGet = () => {
   }
 }
 
-export default connect(null, { actionLogin, actionProfessionalLogin, actionUserLogin, actionAdminLogin })(Login);
+export default connect(null, {
+  actionLogin,
+  actionProfessionalLogin,
+  actionUserLogin,
+  actionAdminLogin,
+})(Login);

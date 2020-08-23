@@ -35,7 +35,7 @@ export default {
     url: 'elp/forgotpassword',
     method: 'POST',
     data: {
-      email: '',      
+      email: '',
     },
     showResultMessage: true,
     showErrorMessage: true
@@ -44,15 +44,15 @@ export default {
   resetpassword: {
     url: 'elp/resetpassword',
     method: 'POST',
-    data: {      
-      userid:'',
+    data: {
+      userid: '',
       email: '',
-      password:'',
+      password: '',
     },
     showResultMessage: true,
     showErrorMessage: true
-  },  
-  
+  },
+
   listnerSignup: {
     url: '/elp/listner_register',
     method: 'POST',
@@ -196,13 +196,35 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  getUserListing: {
-    url: 'elp/superadmin_getUserlist',
+  getCustomerListing: {
+    url: 'elp/superadmin_getcustomerlist',
     method: 'POST',
     data: {
       count: '',
       offset: ''
     },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  adminChangeUserStatus: {
+    url: 'elp/superadmin_changeuserstatus?userid=:userid&u_status=:u_status',
+    method: 'POST',
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  adminUserDelete: {
+    url: 'elp/superadmin_deleteuser?userid=:userid&u_status=:u_status',
+    method: 'POST',
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+
+  getProfileById: {
+    url: 'elp/superadmin_userdetail?userid=:userid',
+    method: 'POST',
+    data: {},
     showResultMessage: false,
     showErrorMessage: true
   },
