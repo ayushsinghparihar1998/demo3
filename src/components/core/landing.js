@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import NavBar from '../core/nav';
-import Banner from '../jsx/banner';
-import Conversations from '../jsx/conversation';
-import Happypatient from '../jsx/happyPatient';
-import Abouteat from '../jsx/aboutEat';
-import Supporting from '../jsx/supporting';
-import Discussanything from '../jsx/discussAnything';
-import Footer from '../core/footer'; 
-class Home extends Component {     
+import Banner from '../landing/banner';
+import Conversations from '../landing/conversation';
+import Happypatient from '../landing/happyPatient';
+import Abouteat from '../landing/aboutEat';
+import Supporting from '../landing/supporting';
+import Discussanything from '../landing/discussAnything';
+import Footer from '../core/footer';
+class Home extends Component {
   render() {
     return (
       <div className="page__wrapper">
@@ -17,7 +17,7 @@ class Home extends Component {
         </div>
         <Conversations />
         <Happypatient />
-        <Abouteat />
+        <Abouteat {...this.props} />
         <Supporting />
         <Discussanything />
         <Footer />

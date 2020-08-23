@@ -24,6 +24,7 @@ import {
   ADMIN_USER_DELETE,
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
+  SUBSCRIBE
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -172,3 +173,10 @@ export const actionUpdateUserDetails = (data) => async (dispatch) => {
 //   dispatch({ type: RESET_PASSWORD, payload: data });
 //   return request;
 // };
+
+export const actionSubscribe = (data) => async dispatch => {
+  const request = ELPViewApiService('subscribe', data);
+  dispatch({ type: SUBSCRIBE, payload: request.data });
+  return request;
+};
+
