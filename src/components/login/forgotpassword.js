@@ -50,6 +50,10 @@ class Forgotpassword extends Component {
         .then(result => {
           if (result && result.data && result.data.status === "success") {            
               console.log('rnv forgot password check');
+              this.props.history.push({
+                pathname: 'login',
+                state: { roleType: this.state.roleType }
+            });
           }
         })
         .catch(error => {

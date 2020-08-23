@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -12,30 +12,33 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";
-import { actionGetRecentJoin, actionGetProfesionalDashBoard } from '../../common/redux/actions';
-import NavBar from "../core/nav";
-import Footer from "../core/footer";
-import UserChat from "../../assets/images/user_chat.svg";
-import UserChat2 from "../../assets/images/user_chat2.svg";
-import UserChat3 from "../../assets/images/user_chat3.svg";
-import UserChat4 from "../../assets/images/user_chat4.svg";
-import UserChat5 from "../../assets/images/user_chat5.svg";
-import ChatCross from "../../assets/images/chat_cross.svg";
-import Heartfive from "../../assets/images/heart5.svg";
-import Skill from "../../assets/images/skills.svg";
-import Skill2 from "../../assets/images/skills2.svg";
-import Skill3 from "../../assets/images/skills3.svg";
-import Copys from "../../assets/images/copy_icon.svg";
-import Warningtwo from "../../assets/images/w_signal.svg";
-import Progresss from "../../assets/images/progress_bar.svg";
-import Stars from "../../assets/images/stars.svg";
-import Hearttwo from "../../assets/images/heart2.svg";
-import Medals from "../../assets/images/medals.svg";
-import Rflag from "../../assets/images/r_flag.svg";
-import SocketIOClient from "socket.io-client";
-import { getLocalStorage } from "../../common/helpers/Utils";
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
+} from 'react-bootstrap';
+import {
+  actionGetRecentJoin,
+  actionGetProfesionalDashBoard,
+} from '../../common/redux/actions';
+import NavBar from '../core/nav';
+import Footer from '../core/footer';
+import UserChat from '../../assets/images/user_chat.svg';
+import UserChat2 from '../../assets/images/user_chat2.svg';
+import UserChat3 from '../../assets/images/user_chat3.svg';
+import UserChat4 from '../../assets/images/user_chat4.svg';
+import UserChat5 from '../../assets/images/user_chat5.svg';
+import ChatCross from '../../assets/images/chat_cross.svg';
+import Heartfive from '../../assets/images/heart5.svg';
+import Skill from '../../assets/images/skills.svg';
+import Skill2 from '../../assets/images/skills2.svg';
+import Skill3 from '../../assets/images/skills3.svg';
+import Copys from '../../assets/images/copy_icon.svg';
+import Warningtwo from '../../assets/images/w_signal.svg';
+import Progresss from '../../assets/images/progress_bar.svg';
+import Stars from '../../assets/images/stars.svg';
+import Hearttwo from '../../assets/images/heart2.svg';
+import Medals from '../../assets/images/medals.svg';
+import Rflag from '../../assets/images/r_flag.svg';
+import SocketIOClient from 'socket.io-client';
+import { getLocalStorage } from '../../common/helpers/Utils';
+const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 const socket = SocketIOClient(SOCKET_IO_URL);
 socket.connect();
 
@@ -46,7 +49,8 @@ class ProfessionalDashboard extends Component {
       activeListners: [],
       activeChatUsers: [],
       showVal: 4,
-      recentJoin: [], dashboardData: [],
+      recentJoin: [],
+      dashboardData: [],
     };
   }
 
@@ -54,56 +58,56 @@ class ProfessionalDashboard extends Component {
     this.getRecentJoinUsers();
 
     this.getProfesionalDashBoard();
-    let result = getLocalStorage("result");
-    console.log("getLocalStorage", getLocalStorage("result"));
-    if (getLocalStorage("result") >= 60) {
+    let result = getLocalStorage('result');
+    console.log('getLocalStorage', getLocalStorage('result'));
+    if (getLocalStorage('result') >= 60) {
       this.setState({
         sucess: true,
         result: true,
-        message: "your score is " + result,
+        message: 'your score is ' + result + '%',
       });
     } else {
       this.setState({
         sucess: true,
         result: false,
-        message: "your score is" + result,
+        message: 'your score is ' + result + '%',
       });
     }
 
-    socket.on("connect", function () {
-      console.log("connected");
+    socket.on('connect', function () {
+      console.log('connected');
     });
     socket.emit(
-      "chat-login",
+      'chat-login',
       JSON.stringify({
-        user_id: getLocalStorage("userInfoProff").u_id,
-        user_type: getLocalStorage("userInfoProff").u_role_id,
+        user_id: getLocalStorage('userInfoProff').u_id,
+        user_type: getLocalStorage('userInfoProff').u_role_id,
       }),
       function (data) {
-        console.log(data, "authenticateSocket");
+        console.log(data, 'authenticateSocket');
       }
     );
 
     socket.emit(
-      "getRecentsChatedUsers",
+      'getRecentsChatedUsers',
       JSON.stringify({
-        user_id: getLocalStorage("userInfoProff").u_id,
+        user_id: getLocalStorage('userInfoProff').u_id,
       }),
       function (d) {
-        console.log("getRecentsChatedUsers", d);
+        console.log('getRecentsChatedUsers', d);
       }
     );
 
     socket.emit(
-      "getActiveListnersOrCustomers",
+      'getActiveListnersOrCustomers',
       JSON.stringify({
-        user_type: getLocalStorage("u_role_id"),
-        user_id: getLocalStorage("u_id"),
-        pagination: "10",
-        page: "1",
+        user_type: getLocalStorage('u_role_id'),
+        user_id: getLocalStorage('u_id'),
+        pagination: '10',
+        page: '1',
       }),
       function (d) {
-        console.log("getActiveListnersOrCustomers", d);
+        console.log('getActiveListnersOrCustomers', d);
         this.setState(
           {
             activeChatUsers: d.data,
@@ -136,29 +140,29 @@ class ProfessionalDashboard extends Component {
   getRecentJoinUsers() {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetRecentJoin({}).then((result) => {
-      console.log("vvvvvv", result);
+      console.log('vvvvvv', result);
       if (result && result.status === 200) {
         // let res = result.data.data.u_mem_list;
         //this.setState({ recentJoin: res })
       }
-    })
+    });
   }
   getProfesionalDashBoard() {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetProfesionalDashBoard({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.dashboard_list;
-        this.setState({ dashboardData: res })
+        this.setState({ dashboardData: res });
       }
-    })
+    });
   }
   copyReferUrl = () => {
-    var copyText = document.getElementById("referURL");
+    var copyText = document.getElementById('referURL');
     copyText.select();
-    copyText.setSelectionRange(0, 99999)
-    document.execCommand("copy");
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand('copy');
     // alert("Copied the text: " + copyText.value);
-  }
+  };
 
   render() {
     let recentJoin = this.state.recentJoin;
@@ -292,16 +296,16 @@ class ProfessionalDashboard extends Component {
                                   <div
                                     className="fs14 col14 fw500"
                                     onClick={() =>
-                                      this.changepath("/chatproff/" + item.id)
+                                      this.changepath('/chatproff/' + item.id)
                                     }
                                   >
-                                    {item.u_username}
+                                    {item.u_name}
                                   </div>
                                 </div>
                               </div>
                             ) : (
-                                ""
-                              );
+                              ''
+                            );
                           })}
                       </Tab>
                     </Tabs>
@@ -317,17 +321,17 @@ class ProfessionalDashboard extends Component {
                         Show More
                       </div>
                     ) : (
-                        <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: 4,
-                            });
-                          }}
-                        >
-                          Show Less
-                        </div>
-                      )}
+                      <div
+                        className="fs15 fw600 col23 p-3 pointer show-more"
+                        onClick={() => {
+                          this.setState({
+                            showVal: 4,
+                          });
+                        }}
+                      >
+                        Show Less
+                      </div>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -341,7 +345,6 @@ class ProfessionalDashboard extends Component {
                           What's your goal?
                         </label>
                         <Form.Control
-
                           type="text"
                           className="inputTyp5 fs16 col27 fw400"
                           placeholder="take a general request"
@@ -431,7 +434,11 @@ class ProfessionalDashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Stars} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_cheers
+                              ? dashboardData.u_cheers
+                              : '0'}{' '}
+                          </strong>
                           Cheers
                         </span>
                       </div>
@@ -440,7 +447,11 @@ class ProfessionalDashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Hearttwo} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_compassion_count ? dashboardData.u_compassion_count : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_compassion_count
+                              ? dashboardData.u_compassion_count
+                              : '0'}{' '}
+                          </strong>
                           Compassion Hearts
                         </span>
                       </div>
@@ -449,7 +460,11 @@ class ProfessionalDashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Medals} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_badge_count ? dashboardData.u_badge_count : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_badge_count
+                              ? dashboardData.u_badge_count
+                              : '0'}{' '}
+                          </strong>
                           Badges Earned
                         </span>
                       </div>
@@ -479,7 +494,11 @@ class ProfessionalDashboard extends Component {
                           type="text"
                           readOnly
                           className="inputTyp4"
-                          value={dashboardData.refer_url ? dashboardData.refer_url : ''}
+                          value={
+                            dashboardData.refer_url
+                              ? dashboardData.refer_url
+                              : ''
+                          }
                         />
                         <Button className="btnTyp8" onClick={this.copyReferUrl}>
                           <Image src={Copys} alt="" className="" />
@@ -493,21 +512,27 @@ class ProfessionalDashboard extends Component {
                     </div>
 
                     {recentJoin &&
-                      recentJoin.map(
-                        (data, index) => {
-                          return (
-                            <div className="d-flex m-3 border-bottom">
-                              <div className="position-relative">
-                                <Image src={data.u_image ? data.u_image : ''} alt="" className="r50 pt-1" />
+                      recentJoin.map((data, index) => {
+                        return (
+                          <div className="d-flex m-3 border-bottom">
+                            <div className="position-relative">
+                              <Image
+                                src={data.u_image ? data.u_image : ''}
+                                alt=""
+                                className="r50 pt-1"
+                              />
+                            </div>
+                            <div className="mt-auto mb-auto pl-3">
+                              <div className="fs15 col14 fw500">
+                                {data.u_username ? data.u_username : ''}
                               </div>
-                              <div className="mt-auto mb-auto pl-3">
-                                <div className="fs15 col14 fw500">{data.u_username ? data.u_username : ''}</div>
-                                <div className="col27 fs13 fw500">{data.u_role_txt ? data.u_role_txt : ''}</div>
+                              <div className="col27 fs13 fw500">
+                                {data.u_role_txt ? data.u_role_txt : ''}
                               </div>
                             </div>
-                          )
-                        })
-                    }
+                          </div>
+                        );
+                      })}
 
                     {/* <div className="d-flex m-3 border-bottom">
                       <div className="position-relative">
@@ -518,7 +543,6 @@ class ProfessionalDashboard extends Component {
                         <div className="col27 fs13 fw500">Listeners</div>
                       </div>
                     </div> */}
-
                   </div>
                 </div>
               </Col>
@@ -531,7 +555,7 @@ class ProfessionalDashboard extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { actionGetRecentJoin, actionGetProfesionalDashBoard }
-)(ProfessionalDashboard);
+export default connect(null, {
+  actionGetRecentJoin,
+  actionGetProfesionalDashBoard,
+})(ProfessionalDashboard);

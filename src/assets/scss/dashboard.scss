@@ -566,10 +566,10 @@
                 margin-bottom: 30px;
             }
 
-            button.sm-btn {
+            button.btn.sm-btn {  
                 margin-right: 15px;
-                border-color: $col1 !important;
-                background-color: $col1 !important; 
+                border-color: $col23 !important;
+                background-color: $col23 !important; 
             }
 
             button.btn {
@@ -581,8 +581,42 @@
                 color: $col18 !important; 
                 box-shadow: none !important; 
                 height: 2.8rem; 
-                padding: 0 2rem; 
+                padding: 0 0; 
+                width: 100px; 
                 font-size: $fs15; 
+            }
+        }
+    }
+}
+
+.container {
+    
+    & + .paginationWrapper {
+        max-width: 1140px;
+        margin: auto;
+        ul.pagination {
+            justify-content: flex-end;
+            margin-top: 10px; 
+            margin-right: 15px;
+            li {
+                border: solid 1px $col57; 
+                padding: 10px;
+                width: 45px;
+                text-align: center;
+                margin-right: -1px;  
+
+                & > a {
+                    color: $col28; 
+                }
+
+                &.active {
+                    background: $col23;
+                    border: solid 1px $col23; 
+
+                    & > a {
+                        color: $col18;  
+                    }
+                }
             }
         }
     }

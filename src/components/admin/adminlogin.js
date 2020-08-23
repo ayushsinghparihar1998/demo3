@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import Login from '../login/Login';
-import CONSTANTS from '../../common/helpers/Constants';
+
+import React, { Component } from "react";
+import Login from "../login/Login";
+import CONSTANTS from "../../common/helpers/Constants";
 class Adminlogin extends Component {
   render() {
     console.log('this.propsthis.props', this.props);
@@ -12,4 +13,4 @@ class Adminlogin extends Component {
   }
 }
 
-export default Adminlogin;
+export default Adminlogin; 

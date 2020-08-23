@@ -17,29 +17,26 @@ import {
   Row,
   Col,
   Image,
-  Form,
-  Modal,
-} from 'react-bootstrap';
-import NavBar from '../core/nav';
-import Footer from '../core/footer';
+  Form, Modal
+} from "react-bootstrap";
+import Crossbtn from "../../assets/images/blue_cross.svg";
+import NavBar from "../core/nav";
+import Footer from "../core/footer";
 import QuestionAndAnswer from '../signup/questionAndAnswer';
-import CONSTANTS from '../../common/helpers/Constants';
-import validateInput from '../../common/validations/validationLogin';
+import CONSTANTS from "../../common/helpers/Constants";
+import validateInput from "../../common/validations/validationLogin";
+import ProfessionalSignup from '../signup/professionalSignup';
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       errors: {},
-      password: '',
-      roleType:
-        this.props.location &&
-        this.props.location.state &&
-        this.props.location.state.roleType
-          ? this.props.location.state.roleType
-          : this.props.roleType
-          ? this.props.roleType
-          : CONSTANTS.ROLES.LISTNER,
+      password: "",
+      show3:false,
+      roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
+        this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
@@ -87,6 +84,9 @@ class Login extends Component {
         .actionLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            this.setState({
+              errors: {},
+            });
             let u_que_ans_per = result.data.data.u_que_ans_per;
             if (u_que_ans_per >= 60) {
               setLocalStorage('userInfo', result.data.data);
@@ -96,6 +96,10 @@ class Login extends Component {
               setLocalStorage('result', u_que_ans_per);
               setLocalStorage('loggedIn', false);
             }
+          } else {
+            this.setState({
+              errors: {},
+            });
           }
         })
         .catch((error) => {
@@ -180,8 +184,30 @@ class Login extends Component {
   };
 
   changepath = (path) => {
-    this.props.history.push(path);
-  };
+    let roleType =  this.state.roleType;
+    if(roleType == 2)
+    {
+      this.handleModal3();
+    }else
+    {
+      this.props.history.push(path);
+    }    
+  };  
+
+handleModal3 = () => {
+    this.setState({ show3: true });
+};
+
+handleClose3 = () => {
+  this.setState({ show3: false });
+};
+
+handleGet = () => {
+  this.setState({
+      show: false,
+      show3: false
+  })
+}
 
   render() {
     const { email, password } = this.state;
@@ -225,6 +251,10 @@ class Login extends Component {
                   value={email}
                   placeholder="Email"
                   onChange={this.handleChange}
+                  maxLength="50"                                
+                  inputProps={{
+                      maxLength: 50,
+                  }}                  
                 />
                 <div className="error alignLeft">{errors.email}</div>
               </Form.Group>
@@ -238,6 +268,11 @@ class Login extends Component {
                   error={errors.password ? true : false}
                   placeholder="Password"
                   className="inputTyp2"
+                  minLength="8"    
+                  maxLength="15"                                
+                  inputProps={{
+                      maxLength: 15,
+                  }}
                 />
                 <div className="error alignLeft">{errors.password}</div>
               </Form.Group>
@@ -278,11 +313,14 @@ class Login extends Component {
 
                   <span
                   className="fw500 pointer pl-1"
-                  onClick={() =>
-                    this.changepath("/forgotpassword")
-                  }
-                >
-                  Reset it Here
+                  onClick={() =>                    
+                    this.props.history.push({
+                      pathname: 'forgotpassword',
+                      state: { roleType: this.state.roleType }
+                    })
+                  }                  
+                  >
+                    Reset it Here
                     </span>
               </div>
             </div>
@@ -326,6 +364,22 @@ class Login extends Component {
             </Container>
           </Modal.Body>
         </Modal>
+        <Modal show={this.state.show3} className="CreateAccount">
+                    <Modal.Header>
+                        <Button onClick={this.handleClose3}>
+                            <Image src={Crossbtn} alt="" />
+                        </Button>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Container>
+                            <div className="layout_box mt-3 mb-4">
+                                <ProfessionalSignup
+                                    handleSet={this.handleGet}
+                                    {...this.props} />
+                            </div>
+                        </Container>
+                    </Modal.Body>
+                </Modal>
         <Footer />
       </div>
     );
