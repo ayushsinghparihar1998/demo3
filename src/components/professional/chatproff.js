@@ -97,9 +97,10 @@ class ChatProff extends Component {
     );
     socket.on("sendMessage", (data) => {
       console.log("SEND_MESSAGE On", data);
-      data.date_time = new Date();
-      // data.type = "on";
-      this.updateChat(data);
+      if(data.from_user_id == this.props.match.params.id){
+        data.date_time = new Date();
+        this.updateChat(data);
+      }
     });
 
     socket.emit(
