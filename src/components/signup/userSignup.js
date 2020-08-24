@@ -85,22 +85,14 @@ class ProfessionalSignup extends Component {
       this.props
         .actionUserSignup(data)
         .then((result) => {
-          console.log(
-            result && result.data && result.data.status,
-            'result321321312',
-            result
-          );
+          
           if (result && result.data && result.data.status === 'success') {
-            //setLocalStorage("userInfoProff", result.data.data);
+            this.props.handleSet()
             this.props.history.push({
               pathname: '/login',
               state: { roleType: this.state.roleType },
             });
-            console.log(
-              result && result.data && result.data.status,
-              'result321321312',
-              result
-            );
+            
           } else {
             this.setState({
               showLoader: false,
