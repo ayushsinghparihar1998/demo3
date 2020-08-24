@@ -23,8 +23,11 @@ class Abouteat extends Component {
             let data = {
                 email: this.state.email.toLowerCase().trim(),
             };
-            this.props.actionSubscribe(data).then((result) => {
-
+                this.props.actionSubscribe(data).then((result) => {
+                this.setState({
+                    errors: {},
+                    email: ''
+                });
             })
         }
     }
