@@ -36,7 +36,7 @@ import moment from "moment";
 
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
+
 
 class ChatUser extends Component {
   constructor(props) {
@@ -48,7 +48,8 @@ class ChatUser extends Component {
       allMessages: [],
       showChat: false,
       response: {},
-      user_id: getLocalStorage("customerInfo").u_id
+      user_id: getLocalStorage("customerInfo").u_id,
+      userMeta: {}
     };
   }
   componentWillUnmount() {
@@ -58,9 +59,11 @@ class ChatUser extends Component {
   unmount = () => {
     if (socket) {
       socket.disconnect();
+      console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
+    socket.connect();
     window.addEventListener("beforeunload", this.unmount)
     const self = this;
     this.setState({
@@ -69,6 +72,8 @@ class ChatUser extends Component {
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
 
     socket.on("connect", function () {
+      console.log("COnnected ================================================")
+
       socket.emit(
         "chat-login",
         JSON.stringify({
@@ -107,8 +112,10 @@ class ChatUser extends Component {
 
     socket.on("sendMessage", (data) => {
       console.log("SEND_MESSAGE On", data);
-      data.date_time = new Date();
-      this.updateChat(data);
+      if(data.from_user_id == this.props.match.params.id){
+        data.date_time = new Date();
+        this.updateChat(data);
+      }
     });
 
     socket.emit(
@@ -199,7 +206,7 @@ class ChatUser extends Component {
       to_user_id: this.props.match.params.id,
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
-      user_type: 1,
+      user_type: this.state.userMeta.user_type,
     };
     console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
@@ -213,7 +220,7 @@ class ChatUser extends Component {
       "startTyping",
       JSON.stringify({
         to_user_id: this.props.match.params.id,
-        user_type: 1,
+        user_type: this.state.userMeta.user_type,
         from_user_id: getLocalStorage("customerInfo").u_id,
       }),
       (data) => {
