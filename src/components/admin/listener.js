@@ -31,29 +31,28 @@ class Adminlistener extends Component {
         };
     }
     componentDidMount() {
-        this.getListnerListing('', "listner");
+        this.getListnerListing('', "listner", 1);
     }
 
     handlePageChange = (newPageNumber) => {
         let chkUserProfile = this.state.activeProfile;
-        alert(chkUserProfile)
-        alert(newPageNumber)
         this.setState({ pageNumber: newPageNumber }, () => {
             if (chkUserProfile === 'user') {
-                this.getCustomerListing('', 'user');
+                this.getCustomerListing('', 'user', newPageNumber);
             } else if (chkUserProfile === 'professional') {
-                this.getProfessionalListing('', 'professional');
+                this.getProfessionalListing('', 'professional', newPageNumber);
             } else if (chkUserProfile === 'listner') {
-                this.getListnerListing('', 'listner');
+                this.getListnerListing('', 'listner', newPageNumber);
             }
         });
     }
 
-    getListnerListing = (e, activaClass) => {
+    /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
+    getListnerListing = (e, activaClass, pageNumber) => {
         let chkUserProfile = this.state.activeProfile;
-        this.setState({ activeProfile: activaClass });
+        this.setState({ activeProfile: activaClass, pageNumber: pageNumber });
         let profileListing = [];
-        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
+        let data = { "count": customPagination.paginationPageSize, "offset": pageNumber }
         this.props.actionGetListnerListing(data).then((result) => {
             if (result && result.status === 200) {
                 profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
@@ -62,11 +61,11 @@ class Adminlistener extends Component {
             }
         });
     }
-    getProfessionalListing = (e, activaClass) => {
+    getProfessionalListing = (e, activaClass, pageNumber) => {
         let chkUserProfile = this.state.activeProfile;
-        this.setState({ activeProfile: activaClass });
+        this.setState({ activeProfile: activaClass, pageNumber: pageNumber });
         let profileListing = [];
-        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
+        let data = { "count": customPagination.paginationPageSize, "offset": pageNumber }
         this.props.actionGetProfessionalListing(data).then((result) => {
             if (result && result.status === 200) {
                 profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
@@ -75,10 +74,10 @@ class Adminlistener extends Component {
             }
         });
     }
-    getCustomerListing = (activaClass) => {
-        this.setState({ activeProfile: activaClass });
+    getCustomerListing = (e, activaClass, pageNumber) => {
+        this.setState({ activeProfile: activaClass, pageNumber: pageNumber });
         let profileListing = [];
-        let data = { "count": customPagination.paginationPageSize, "offset": this.state.pageNumber }
+        let data = { "count": customPagination.paginationPageSize, "offset": pageNumber }
         this.props.actionGetCustomerListing(data).then((result) => {
             if (result && result.status === 200) {
                 profileListing = result && result.data && result.data.data ? result.data.data.listing : [];
@@ -89,34 +88,36 @@ class Adminlistener extends Component {
     }
 
     adminChangeUserStatus = (e, uid, status) => {
+        let pageNumber = this.state.pageNumber;
         let userStatus = status ? 0 : 1;
         let chkUserProfile = this.state.activeProfile;
         let data = { "userid": uid, "u_status": userStatus }
         this.props.actionAdminChangeUserStatus(data).then((result) => {
             if (result && result.status === 200) {
                 if (chkUserProfile === 'user') {
-                    this.getCustomerListing(e, 'user');
+                    this.getCustomerListing(e, 'user', pageNumber);
                 } else if (chkUserProfile === 'professional') {
-                    this.getProfessionalListing(e, 'professional');
+                    this.getProfessionalListing(e, 'professional', pageNumber);
                 } else if (chkUserProfile === 'listner') {
-                    this.getListnerListing(e, 'listner');
+                    this.getListnerListing(e, 'listner', pageNumber);
                 }
             }
         });
     }
 
     adminUserDelete = (e, uid, status) => {
+        let pageNumber = this.state.pageNumber;
         let chkUserProfile = this.state.activeProfile;
         let data = { "userid": uid, "u_status": status }
         this.props.actionadminUserDelete(data).then((result) => {
             this.setState({ deleteConformationModal: false })
             if (result && result.status === 200) {
                 if (chkUserProfile === 'user') {
-                    this.getCustomerListing(e, 'user');
+                    this.getCustomerListing(e, 'user', pageNumber);
                 } else if (chkUserProfile === 'professional') {
-                    this.getProfessionalListing(e, 'professional');
+                    this.getProfessionalListing(e, 'professional', pageNumber);
                 } else if (chkUserProfile === 'listner') {
-                    this.getListnerListing(e, 'listner');
+                    this.getListnerListing(e, 'listner', pageNumber);
                 }
             }
         });
@@ -164,17 +165,17 @@ class Adminlistener extends Component {
                                     <div className="inner_area">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
-                                            <div className={userActveClass} onClick={(e) => { this.getCustomerListing(e, "user") }}>
+                                            <div className={userActveClass} onClick={(e) => { this.getCustomerListing(e, "user", 1) }}>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> USER LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom" onCl>
-                                            <div className={professnalActveClass} onClick={(e) => { this.getProfessionalListing(e, "professional") }}>
+                                            <div className={professnalActveClass} onClick={(e) => { this.getProfessionalListing(e, "professional", 1) }}>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> PROFESSIONAL LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
-                                            <div className={listnerActveClass} onClick={(e) => { this.getListnerListing(e, "listner") }}>
+                                            <div className={listnerActveClass} onClick={(e) => { this.getListnerListing(e, "listner", 1) }}>
                                                 <div className="fs14 col23 fw500"><Image src={Menuiconblue} alt="" className="mr-1" /> LISTENER LISTING</div>
                                             </div>
                                         </div>
