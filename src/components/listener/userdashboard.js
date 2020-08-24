@@ -210,7 +210,7 @@ class Userdashboard extends Component {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.u_mem_list;
+        let res = result.data.data && result.data.data.u_mem_list?result.data.data.u_mem_list:[];
         this.setState({ recentJoin: res });
       }
     });

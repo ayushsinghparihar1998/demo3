@@ -163,7 +163,8 @@ class NavBar extends Component {
                             :
                             (
             <Nav className="ml-auto">
-              {getLocalStorage('loggedIn')
+              {getLocalStorage('userInfo') || getLocalStorage('userInfoProff') 
+              || getLocalStorage('userInfo')
                 ? [
                     <NavLink to={getLocalStorage('userInfo') ? 'userDashboard' :
                                         getLocalStorage('userInfoProff') ? 'userDashboardproff' :
@@ -199,7 +200,8 @@ class NavBar extends Component {
                     </Nav.Link>,
                     <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
                   ]}
-              {getLocalStorage('loggedIn') ? (
+              {getLocalStorage('userInfo') || getLocalStorage('userInfoProff') 
+              || getLocalStorage('userInfo') ? (
                 <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
               ) : (
                 <NavDropdown
