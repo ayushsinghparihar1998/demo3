@@ -58,9 +58,6 @@ const handleErrorByStatus = (error) => {
   if (error && error.status === 'error') {
     const message = error.message;
     showErrorToast(message);
-  }else if (error && error.status === 'success') {
-    const message = error.message;
-    showSuccessToast(message);
   }
 };
 

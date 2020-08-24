@@ -210,14 +210,14 @@ export default {
     url: 'elp/superadmin_changeuserstatus?userid=:userid&u_status=:u_status',
     method: 'POST',
     data: {},
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true
   },
   adminUserDelete: {
     url: 'elp/superadmin_deleteuser?userid=:userid&u_status=:u_status',
     method: 'POST',
     data: {},
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true
   },
 
