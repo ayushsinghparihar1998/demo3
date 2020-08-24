@@ -36,7 +36,7 @@ import moment from "moment";
 
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
+
 
 class ChatUser extends Component {
   constructor(props) {
@@ -48,26 +48,60 @@ class ChatUser extends Component {
       allMessages: [],
       showChat: false,
       response: {},
+      user_id: getLocalStorage("customerInfo").u_id,
+      userMeta: {}
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    // this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+      console.log("DISCOnnected ================================================")
+    }
+  }
   componentDidMount() {
-    console.log(this.props);
+    socket.connect();
+    window.addEventListener("beforeunload", this.unmount)
+    const self = this;
     this.setState({
       from_user_id: getLocalStorage("customerInfo").u_id,
     });
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
 
     socket.on("connect", function () {
-      console.log("connected");
+      console.log("COnnected ================================================")
+
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("customerInfo").u_id,
+          user_type: getLocalStorage("customerInfo").u_role_id,
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("customerInfo").u_id,
-        user_type: getLocalStorage("customerInfo").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
+    });
+    socket.emit("chatHistory", JSON.stringify({
+      from_user_id: getLocalStorage("customerInfo").u_id,
+      to_user_id: this.props.match.params.id,
+      'page': 1,
+      'pagination': 20
+    }),
+      (data) => {
+        if (data.data && data.data.length > 0) {
+          this.setState({ allMessages: data.data.reverse() })
+        }
       }
     );
 
@@ -78,20 +112,20 @@ class ChatUser extends Component {
 
     socket.on("sendMessage", (data) => {
       console.log("SEND_MESSAGE On", data);
-      data.date_time = new Date();
-      this.updateChat(data);
+      if(data.from_user_id == this.props.match.params.id){
+        data.date_time = new Date();
+        this.updateChat(data);
+      }
     });
 
     socket.emit(
       "onScreen",
       JSON.stringify({
-        user_id: getLocalStorage("customerInfo").u_id,
-        user_type: getLocalStorage("customerInfo").u_role_id,
+        from_user_id: getLocalStorage("customerInfo").u_id,
+        to_user_id: this.props.match.params.id,
         status: 1,
       }),
-      function (d) {
-        console.log("onScreen", d);
-      }
+      data => this.setState({ userMeta: data.userDetail })
     );
     socket.emit(
       "getRecentsChatedUsers",
@@ -172,7 +206,7 @@ class ChatUser extends Component {
       to_user_id: this.props.match.params.id,
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
-      user_type: 1,
+      user_type: this.state.userMeta.user_type,
     };
     console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
@@ -186,7 +220,7 @@ class ChatUser extends Component {
       "startTyping",
       JSON.stringify({
         to_user_id: this.props.match.params.id,
-        user_type: 1,
+        user_type: this.state.userMeta.user_type,
         from_user_id: getLocalStorage("customerInfo").u_id,
       }),
       (data) => {
@@ -210,12 +244,23 @@ class ChatUser extends Component {
   changepath = (path) => {
     this.props.history.push(path);
   };
-
+  changeChatpath = (id) => {
+    this.props.history.replace(`/reload`);
+    setTimeout(() => {
+      this.props.history.push("/chatuser/" + id);
+    });
+  };
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.changeChatpath(id);
+  }
   render() {
+    const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar />
+          <NavBar {...this.props} />
         </div>
         <div className="userdashboards pt-4 pb-5">
           <Container>
@@ -230,7 +275,7 @@ class ChatUser extends Component {
                       {this.state.recentChatUsers &&
                         this.state.recentChatUsers.map((item) => {
                           return (
-                            <div className="d-flex m-3 border-bottom">
+                            <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
                               <div className="position-relative">
                                 <Image
                                   src={
@@ -244,7 +289,7 @@ class ChatUser extends Component {
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
                                   {item.from_user_id ==
-                                  getLocalStorage("customerInfo").u_id
+                                    getLocalStorage("customerInfo").u_id
                                     ? item.to_user_name
                                     : item.from_user_name}
                                 </div>
@@ -275,7 +320,11 @@ class ChatUser extends Component {
                           {this.state.activeChatUsers &&
                             this.state.activeChatUsers.map((item, ind) => {
                               return ind < this.state.showVal ? (
-                                <div className="d-flex m-3 border-bottom">
+                                <div className="d-flex m-3 border-bottom pointer"
+                                  onClick={() =>
+                                    this.changeChatpath(item.id)
+                                  }
+                                >
                                   <div className="position-relative">
                                     <Image
                                       src={
@@ -288,23 +337,21 @@ class ChatUser extends Component {
                                   <div className="position-relative pl-3 mt-auto mb-auto">
                                     <div
                                       className="fs14 col14 fw500"
-                                      onClick={() =>
-                                        this.changepath("/chat/" + item.id)
-                                      }
+
                                     >
                                       {item.u_name}
                                     </div>
                                   </div>
                                 </div>
                               ) : (
-                                ""
-                              );
+                                  ""
+                                );
                             })}
                         </Tab>
                       </Tabs>
                       {this.state.showVal == 4 ? (
                         <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
+                          className="fs15 fw600 col23 p-3 show-more"
                           onClick={() => {
                             this.setState({
                               showVal: this.state.activeChatUsers.length,
@@ -314,22 +361,21 @@ class ChatUser extends Component {
                           Show More
                         </div>
                       ) : (
-                        <div
-                          className="fs15 fw600 col23 p-3 pointer show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: 4,
-                            });
-                          }}
-                        >
-                          Show Less
-                        </div>
-                      )}
+                          <div
+                            className="fs15 fw600 col23 p-3 pointer show-more"
+                            onClick={() => {
+                              this.setState({
+                                showVal: 4,
+                              });
+                            }}
+                          >
+                            Show Less
+                          </div>
+                        )}
                     </div>
                   </div>
                 </div>
               </Col>
-
               <Col md={9}>
                 <div className="chat_dashboard">
                   <div className="chat_top">
@@ -337,11 +383,11 @@ class ChatUser extends Component {
                       <Col xs={3}>
                         <div className="mt-auto mb-auto">
                           <Image
-                            src={UserChat3}
-                            alt=""
+                            src={userMeta.u_image || UserChat3}
+                            alt={userMeta.u_username}
                             className="r50 pointer"
                           />
-                          <span className="fs17 fw600 col18 pl-3">Melisa</span>
+                          <span className="fs17 fw600 col18 pl-3">{userMeta.u_username}</span>
                         </div>
                       </Col>
                       <Col xs={9}>
@@ -418,42 +464,42 @@ class ChatUser extends Component {
                         {this.state.allMessages.map((msg, index) => {
                           return msg.from_user_id ==
                             getLocalStorage("customerInfo").u_id ? (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="text-right">
-                                <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
-                                  {msg.message}
-                                </div>
-                                <div className="fs10 fw300 col47">
-                                  {moment(msg.date_time).format("hh:mm")}
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="pl-3 pr-3 pb-3">
-                              <div className="d-flex">
-                                <div className="mt-auto mb-auto">
-                                  <Image
-                                    src={UserChat4}
-                                    alt=""
-                                    className="r50 mr-3"
-                                  />
-                                </div>
-                                <div className="mt-auto mb-auto">
-                                  <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="text-right">
+                                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
                                     {msg.message}
                                   </div>
                                   <div className="fs10 fw300 col47">
-                                    {moment(msg.date_time).format("hh:mm a")}
+                                    {moment(msg.date_time).format("hh:mm")}
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
+                            ) : (
+                              <div className="pl-3 pr-3 pb-3">
+                                <div className="d-flex">
+                                  <div className="mt-auto mb-auto">
+                                    <Image
+                                      src={UserChat4}
+                                      alt=""
+                                      className="r50 mr-3"
+                                    />
+                                  </div>
+                                  <div className="mt-auto mb-auto">
+                                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                                      {msg.message}
+                                    </div>
+                                    <div className="fs10 fw300 col47">
+                                      {moment(msg.date_time).format("hh:mm a")}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
                         })}
                       </div>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                   </div>
                   <div className="chat_bottom">
                     {/* <Form> */}

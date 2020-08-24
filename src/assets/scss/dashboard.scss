@@ -331,7 +331,8 @@
         & div {
             & > div {
                 word-break: break-all; 
-                padding-right: 15px; 
+                padding-right: 15px;
+                cursor: pointer;
             }
         }
         
@@ -343,7 +344,11 @@
         }
     }
 
-    .custom-switch .custom-control-label::before {  
+    .custom-switch .custom-control-label {
+        cursor: pointer; 
+    }
+
+    .custom-switch .custom-control-label::before {   
         width: 34px;
         height: 14px;
         background: $col55;
@@ -540,8 +545,6 @@
                     }
                 }
             }
-            
-            
             
         
             @media only screen and (max-width: 990px) {

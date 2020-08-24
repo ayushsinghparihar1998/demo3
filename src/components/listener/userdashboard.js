@@ -54,7 +54,6 @@ import {
 } from '../../common/helpers/Utils';
 const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
 
 class Userdashboard extends Component {
   constructor(props) {
@@ -63,9 +62,22 @@ class Userdashboard extends Component {
       recentJoin: [],
       dashboardData: [],
       showVal: 4,
+      activeChatUsers: [],
+      user_id: getLocalStorage("userInfo").u_id
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
+    socket.connect();
+    window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
     this.getListnerDashBoard();
     let result = getLocalStorage('result');
@@ -84,19 +96,26 @@ class Userdashboard extends Component {
     //   });
     // }
 
-    socket.on('connect', function () {
-      console.log('connected');
+    socket.on("connect", function () {
+      socket.emit(
+        "chat-login",
+        JSON.stringify({
+          user_id: getLocalStorage("userInfo").u_id,
+          user_type: getLocalStorage("userInfo").u_role_id,
+        }),
+        function (data) {
+          console.log(data, "authenticateSocket");
+        }
+      );
     });
-    socket.emit(
-      'chat-login',
-      JSON.stringify({
-        user_id: getLocalStorage('userInfo').u_id,
-        user_type: getLocalStorage('userInfo').u_role_id,
-      }),
-      function (data) {
-        console.log(data, 'authenticateSocket');
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
       }
-    );
+    });
+
 
     socket.emit(
       'getRecentsChatedUsers',
@@ -220,7 +239,11 @@ class Userdashboard extends Component {
       sucess: false,
     });
   };
-
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.props.history.push('/chat/' + id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -237,13 +260,13 @@ class Userdashboard extends Component {
                 <div className="left_sidebar">
                   <div className="left_sidebar">
                     <div className="inner_side">
-                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                      <div className="chat-bg fs600 fs17 col18 pl-3 ">
                         Chat
                       </div>
                       {this.state.recentChatUsers &&
                         this.state.recentChatUsers.map((item) => {
                           return (
-                            <div className="d-flex m-3 border-bottom">
+                            <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
                               <div className="position-relative">
                                 <Image
                                   src={
@@ -257,7 +280,7 @@ class Userdashboard extends Component {
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
                                   {item.from_user_id ==
-                                  getLocalStorage('userInfo').u_id
+                                    getLocalStorage("userInfo").u_id
                                     ? item.to_user_name
                                     : item.from_user_name}
                                 </div>
@@ -352,7 +375,10 @@ class Userdashboard extends Component {
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom pointer"
+                                onClick={() =>
+                                  this.changepath("/chat/" + item.id)
+                                }>
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -363,9 +389,6 @@ class Userdashboard extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-                                    onClick={() =>
-                                      this.changepath('/chat/' + item.id)
-                                    }
                                   >
                                     {item.u_name}
                                   </div>
