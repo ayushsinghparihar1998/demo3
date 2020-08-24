@@ -14,7 +14,6 @@ axios.defaults.baseURL = 'http://103.76.253.131:81';
 
 axios.interceptors.request.use(
   function (config) {
-    console.log('getLocalStorage', getLocalStorage);
     let access_token = '';
     let userInfo =
       getLocalStorage('userInfo') ||
@@ -64,9 +63,6 @@ const handleErrorByStatus = (error) => {
 const spikeViewApiService = (apiKeyName, data) => {
   let apiDetails = ApiJson[apiKeyName];
   if (!apiDetails) {
-    console.log(
-      'Api configuration do not found in api-json, please check api-json.js'
-    );
     throw new Error(
       'Api configuration do not found in api-json, please check api-json.js'
     );
@@ -81,11 +77,11 @@ const spikeViewApiService = (apiKeyName, data) => {
       apiFailCounter = 0;
       if (
         result.data &&
-        result.data.data &&
-        result.data.data.status === 'Success'
-      ) {
+        result.data &&
+        result.data.status === 'success'
+      ) {  
         if (result.data.message) {
-          const message = result.data.data.message;
+          const message = result.data.message;
           if (requestObject.showResultMessage === true)
             showSuccessToast(message);
         }
@@ -95,7 +91,6 @@ const spikeViewApiService = (apiKeyName, data) => {
       return result;
     })
     .catch(function (error) {
-      console.log('error', error);
       if (error && error.response) {
         if (requestObject.showErrorMessage === true)
           handleErrorByStatus(error.response);

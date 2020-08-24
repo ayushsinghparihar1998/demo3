@@ -83,22 +83,22 @@ class Userprofiledetail extends Component {
                                     <div className="text-center user_tab">
                                         <div className="">
                                             <div className="layout mt-5">
-                                                <div className="d-flex m-auto w35 border2">
+                                                <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Name:</div>
                                                     <div className="fs16 col14 fw400 text-left w40">{userData.u_name}</div>
                                                 </div>
                                             </div>
                                             <div className="layout">
-                                                <div className="d-flex m-auto w35 border2">
+                                                <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Email:</div>
                                                     <div className="fs16 col14 fw400 text-left w40">{userData.email}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="layout">
-                                                <div className="d-flex m-auto w35 border2">
+                                                <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                                                    <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('d MMM yyyy') : ''}</div>
+                                                    <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('D MMM yyyy') : ''}</div>
                                                 </div>
                                             </div>
 

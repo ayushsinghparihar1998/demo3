@@ -58,6 +58,25 @@ class NavBar extends Component {
     this.setState({ show3: false });
   };
 
+handleLogoutAdmin = () => {  
+
+    let data = {};
+    this.props
+      .actionLogout(data)
+      .then((result) => {
+        this.props.history.push({
+          pathname: 'adminlogin',
+          state: { roleType: 4 },
+        });
+
+        localStorage.clear();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   handleLogout = () => {
 
     // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1 
@@ -100,7 +119,6 @@ class NavBar extends Component {
     //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
   };
   handleLogin(roleType) {
-    console.log('roleTyperoleType', roleType);
     this.props.history.push({
       pathname: 'login',
       state: { roleType: roleType },
@@ -121,7 +139,6 @@ class NavBar extends Component {
     //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
   };
   handleLogin(roleType) {
-    console.log('roleTyperoleType', roleType);
     this.props.history.push({
       pathname: 'login',
       state: { roleType: roleType },
@@ -155,7 +172,7 @@ class NavBar extends Component {
                             <Nav className="ml-auto">
                                 <Form inline>
                                     <span >
-                                        <div onClick={this.handleLogout} className="btnType1">
+                                        <div onClick={this.handleLogoutAdmin} className="btnType1">
                                             Logout
                                         </div>
                                     </span>
