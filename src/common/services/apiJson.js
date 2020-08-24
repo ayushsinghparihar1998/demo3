@@ -233,7 +233,7 @@ export default {
     url: 'elp/usersubscriber',
     method: 'POST',
     data: { email: '' },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true
   },
 
