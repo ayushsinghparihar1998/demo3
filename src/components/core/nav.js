@@ -227,11 +227,11 @@ class NavBar extends Component {
                     }}
                   >
                     User Login
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> 
                 </NavDropdown>
               )}
 
-              <Form inline>
+              <Form inline> 
                 <span className="d-none">
                   {getLocalStorage('loggedIn') ? (
                     <div onClick={this.handleLogout} className="btnType1">
@@ -255,7 +255,11 @@ class NavBar extends Component {
                 <span>
                   <Image src={linkedin} alt="" className="pointer" />
                 </span>
+
               </Form>
+              {/* <span>
+                    <Nav.Link><Image src={linkedin} alt="" className="pointer" /></Nav.Link>
+              </span>   */}
             </Nav>)}
           </Navbar.Collapse>
         </Navbar>
