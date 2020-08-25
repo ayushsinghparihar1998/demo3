@@ -299,6 +299,15 @@
         min-height: 100vh;
 
         .border-bottom {
+
+            .position-relative {
+                
+                & > div {
+                    & > img {
+                        display: none;
+                    }
+                }
+            }
  
             & > div {
                 cursor: pointer;
@@ -558,7 +567,7 @@
 
 .custom-popUp.confirmation-box.modal {
     .modal-content {
-        max-width: 450px;
+        // max-width: 450px;
         margin: auto;
 
         .modal-body {
