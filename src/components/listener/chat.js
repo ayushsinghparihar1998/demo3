@@ -75,7 +75,9 @@ class Chat extends Component {
     }
   }
   componentDidMount() {
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
+    }
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
       from_user_id: getLocalStorage("userInfo").u_id,
@@ -84,18 +86,17 @@ class Chat extends Component {
 
     socket.on("connect", function () {
       console.log("COnnected ================================================")
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("userInfo").u_id,
-          user_type: getLocalStorage("userInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
-
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("userInfo").u_id,
+        user_type: getLocalStorage("userInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.emit("chatHistory", JSON.stringify({
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
@@ -127,7 +128,7 @@ class Chat extends Component {
 
     socket.on("sendMessage", (data) => {
       console.log("SEND_MESSAGE On", data);
-      if(data.from_user_id == this.props.match.params.id){
+      if (data.from_user_id == this.props.match.params.id) {
         data.date_time = new Date();
         this.updateChat(data);
       }
@@ -198,6 +199,7 @@ class Chat extends Component {
     }
   };
   handleSendMessage = () => {
+    if (!this.state.message) return false;
     let message = this.state.message ? this.state.message.trim() : "";
     this.sendMessage(message);
     this.setState({ message: "" });
@@ -310,7 +312,11 @@ class Chat extends Component {
                                   alt=""
                                   className="r50 pt-1"
                                 />
-                                <span className="online"></span>
+
+                                <span className={(item.from_user_id ==
+                                  getLocalStorage("userInfo").u_id
+                                  ? item.to_user_online
+                                  : item.from_user_online) == "1" ? 'online' : ''}></span>
                               </div>
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
@@ -553,7 +559,7 @@ class Chat extends Component {
                         <Button
                           className="btnTyp7"
                           type="button"
-                          // disabled={this.state.allMessages.length == 0}
+                          disabled={!this.state.message}
                           onClick={() => this.handleSendMessage()}
                         >
                           Send

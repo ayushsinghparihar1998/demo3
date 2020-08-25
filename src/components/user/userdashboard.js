@@ -66,7 +66,9 @@ class Userdashboard extends Component {
     }
   }
   componentDidMount() {
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
+    }
     window.addEventListener("beforeunload", this.unmount)
     this.getRecentJoinUsers();
     this.getUserDashBoard();
@@ -103,23 +105,23 @@ class Userdashboard extends Component {
     }
 
     socket.on("connect", function () {
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("customerInfo").u_id,
-          user_type: getLocalStorage("customerInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("customerInfo").u_id,
+        user_type: getLocalStorage("customerInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.on("newUserForActivityList", (data) => {
-        if(this.state.activeChatUsers.findIndex(u=> u.id === data.id) === -1){
-          this.setState(prev => ({
-            activeChatUsers: [...prev.activeChatUsers, data]
-          }))
-        }
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
     });
 
     socket.emit(
@@ -206,9 +208,9 @@ class Userdashboard extends Component {
     this.props.history.push(path);
   };
   handleRedirectRecentChat = (data) => () => {
-    const {user_id} = this.state;
+    const { user_id } = this.state;
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
-    this.props.history.push('/chatuser/'+id);
+    this.props.history.push('/chatuser/' + id);
   }
   render() {
     let recentJoin = this.state.recentJoin;
@@ -237,7 +239,10 @@ class Userdashboard extends Component {
                                 alt=""
                                 className="r50 pt-1"
                               />
-                              <span className="online"></span>
+                              <span className={(item.from_user_id ==
+                                getLocalStorage("customerInfo").u_id
+                                ? item.to_user_online
+                                : item.from_user_online) == "1" ? 'online' : ''}></span>
                             </div>
                             <div className="position-relative pl-3">
                               <div className="fs15 col23 fw500 pr-2">

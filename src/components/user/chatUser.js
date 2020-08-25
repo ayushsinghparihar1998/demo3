@@ -63,28 +63,28 @@ class ChatUser extends Component {
     }
   }
   componentDidMount() {
-    socket.connect();
+    if(!socket.connected){
+      socket.connect();
+    }
     window.addEventListener("beforeunload", this.unmount)
     const self = this;
     this.setState({
       from_user_id: getLocalStorage("customerInfo").u_id,
     });
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
-
     socket.on("connect", function () {
       console.log("COnnected ================================================")
-
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("customerInfo").u_id,
-          user_type: getLocalStorage("customerInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("customerInfo").u_id,
+        user_type: getLocalStorage("customerInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
         this.setState(prev => ({
@@ -100,6 +100,7 @@ class ChatUser extends Component {
     }),
       (data) => {
         if (data.data && data.data.length > 0) {
+          console.log("message debugg history", data.data)
           this.setState({ allMessages: data.data.reverse() })
         }
       }
@@ -175,13 +176,13 @@ class ChatUser extends Component {
     }
   };
   handleSendMessage = () => {
+    if(!this.state.message) return false;
     let message = this.state.message ? this.state.message.trim() : "";
     this.sendMessage(message);
     this.setState({ message: "" });
   };
   updateChat(data) {
-    console.log("data", data);
-
+    console.log("message debugg", data);
     this.setState({ allMessages: [...this.state.allMessages, data] });
     console.log("AllMessages", this.state.allMessages);
   }
@@ -208,7 +209,6 @@ class ChatUser extends Component {
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
       user_type: this.state.userMeta.user_type,
     };
-    console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
       console.log("sendMessage", data);
       this.updateChat(object);
@@ -257,6 +257,7 @@ class ChatUser extends Component {
   }
   render() {
     const { userMeta = {} } = this.state;
+    console.log("this.state.activeChatUsers", this.state.activeChatUsers)
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -284,7 +285,10 @@ class ChatUser extends Component {
                                   alt=""
                                   className="r50 pt-1"
                                 />
-                                <span className="online"></span>
+                                <span className={(item.from_user_id ==
+                                    getLocalStorage("customerInfo").u_id
+                                    ? item.to_user_online
+                                    : item.from_user_online) == "1" ? 'online' : ''}></span>
                               </div>
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
@@ -470,7 +474,7 @@ class ChatUser extends Component {
                                     {msg.message}
                                   </div>
                                   <div className="fs10 fw300 col47">
-                                    {moment(msg.date_time).format("hh:mm")}
+                                    {moment(msg.date_time).format("hh:mm a")}
                                   </div>
                                 </div>
                               </div>
@@ -518,7 +522,7 @@ class ChatUser extends Component {
                         <Button
                           className="btnTyp7"
                           type="button"
-                          // disabled={this.state.allMessages.length == 0}
+                          disabled={!this.state.message}
                           onClick={() => this.handleSendMessage()}
                         >
                           Send
