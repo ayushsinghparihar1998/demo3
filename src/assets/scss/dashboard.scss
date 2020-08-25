@@ -579,9 +579,9 @@
     }
 }
 
-.custom-popUp.confirmation-box.modal {
+.custom-popUp.confirmation-box.modal.delete_modal { 
     .modal-content {
-        // max-width: 450px;
+        max-width: 450px;
         margin: auto;
 
         .modal-body {
