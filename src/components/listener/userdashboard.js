@@ -76,7 +76,9 @@ class Userdashboard extends Component {
     }
   }
   componentDidMount() {
-    socket.connect();
+    if(!socket.connected){
+      socket.connect();
+    }
     window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
     this.getListnerDashBoard();
@@ -275,7 +277,10 @@ class Userdashboard extends Component {
                                   alt=""
                                   className="r50 pt-1"
                                 />
-                                <span className="online"></span>
+                                <span className={(item.from_user_id ==
+                                getLocalStorage("userInfo").u_id
+                                ? item.to_user_online
+                                : item.from_user_online) == "1" ? 'online' : ''}></span>
                               </div>
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">

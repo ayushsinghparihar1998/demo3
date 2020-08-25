@@ -75,7 +75,9 @@ class Chat extends Component {
     }
   }
   componentDidMount() {
-    socket.connect();
+    if(!socket.connected){
+      socket.connect();
+    }
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
       from_user_id: getLocalStorage("userInfo").u_id,
@@ -198,6 +200,7 @@ class Chat extends Component {
     }
   };
   handleSendMessage = () => {
+    if(!this.state.message) return false;
     let message = this.state.message ? this.state.message.trim() : "";
     this.sendMessage(message);
     this.setState({ message: "" });
@@ -310,7 +313,11 @@ class Chat extends Component {
                                   alt=""
                                   className="r50 pt-1"
                                 />
-                                <span className="online"></span>
+                                
+                                <span className={(item.from_user_id ==
+                                    getLocalStorage("userInfo").u_id
+                                    ? item.to_user_online
+                                    : item.from_user_online) == "1" ? 'online' : ''}></span>
                               </div>
                               <div className="position-relative pl-3">
                                 <div className="fs15 col23 fw500 pr-2">
@@ -553,7 +560,7 @@ class Chat extends Component {
                         <Button
                           className="btnTyp7"
                           type="button"
-                          // disabled={this.state.allMessages.length == 0}
+                          disabled={!this.state.message}
                           onClick={() => this.handleSendMessage()}
                         >
                           Send
