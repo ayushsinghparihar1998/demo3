@@ -238,7 +238,7 @@ class Adminlistener extends Component {
                     <Modal
                         show={this.state.deleteConformationModal}
                         onHide={this.handleCloseConformation}
-                        className="custom-popUp confirmation-box"
+                        className="custom-popUp confirmation-box delete_modal"
                         bsSize="small"
                     >
                         <Modal.Body>

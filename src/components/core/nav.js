@@ -22,6 +22,8 @@ import fb from '../../assets/images/fb.svg';
 import twit from '../../assets/images/twit.svg';
 import linkedin from '../../assets/images/linkedin.svg';
 import Crossbtn from '../../assets/images/blue_cross.svg';
+import Mailicon from '../../assets/images/mail_icon.svg';
+import Bellicon from '../../assets/images/bell_icons.svg'; 
 import Signup from '../jsx/listenersignup/signup';
 import ProfessionalSignup from '../signup/professionalSignup';
 import UserSignup from '../signup/userSignup';
@@ -276,9 +278,14 @@ handleLogoutAdmin = () => {
                 </span>
 
               </Form>
-              {/* <span>
-                    <Nav.Link><Image src={linkedin} alt="" className="pointer" /></Nav.Link>
-              </span>   */}
+              <span className="userprofiles d-flex">  
+                  <Nav.Link><Image src={Mailicon} alt="" className="pointer" /></Nav.Link>  
+                  <Nav.Link><Image src={Bellicon} alt="" className="pointer" /></Nav.Link>  
+                  <NavDropdown title="Profile" id="basic-nav-dropdown">         
+                      <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                  </NavDropdown>
+              </span>  
+              
             </Nav>)}
           </Navbar.Collapse>
         </Navbar>
