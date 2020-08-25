@@ -99,17 +99,18 @@ class Userdashboard extends Component {
     // }
 
     socket.on("connect", function () {
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("userInfo").u_id,
-          user_type: getLocalStorage("userInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
+      
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("userInfo").u_id,
+        user_type: getLocalStorage("userInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
         this.setState(prev => ({

@@ -70,17 +70,17 @@ class ChatProff extends Component {
     });
     socket.on("connect", function () {
       console.log("COnnected ================================================")
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("userInfoProff").u_id,
-          user_type: getLocalStorage("userInfoProff").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("userInfoProff").u_id,
+        user_type: getLocalStorage("userInfoProff").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.emit("chatHistory", JSON.stringify({
       from_user_id: getLocalStorage("userInfoProff").u_id,
       to_user_id: this.props.match.params.id,

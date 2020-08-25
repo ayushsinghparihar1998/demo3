@@ -54,7 +54,7 @@ class ChatUser extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
-    this.unmount();
+    // this.unmount();
   }
   unmount = () => {
     if (socket) {
@@ -72,25 +72,21 @@ class ChatUser extends Component {
       from_user_id: getLocalStorage("customerInfo").u_id,
     });
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
-
     socket.on("connect", function () {
       console.log("COnnected ================================================")
-
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("customerInfo").u_id,
-          user_type: getLocalStorage("customerInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("customerInfo").u_id,
+        user_type: getLocalStorage("customerInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.on("newUserForActivityList", (data) => {
-      debugger;
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
-        debugger;
         this.setState(prev => ({
           activeChatUsers: [...prev.activeChatUsers, data]
         }))

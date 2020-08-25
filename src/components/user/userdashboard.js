@@ -66,7 +66,7 @@ class Userdashboard extends Component {
     }
   }
   componentDidMount() {
-    if(!socket.connected){
+    if (!socket.connected) {
       socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount)
@@ -105,23 +105,23 @@ class Userdashboard extends Component {
     }
 
     socket.on("connect", function () {
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("customerInfo").u_id,
-          user_type: getLocalStorage("customerInfo").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
     });
+    socket.emit(
+      "chat-login",
+      JSON.stringify({
+        user_id: getLocalStorage("customerInfo").u_id,
+        user_type: getLocalStorage("customerInfo").u_role_id,
+      }),
+      function (data) {
+        console.log(data, "authenticateSocket");
+      }
+    );
     socket.on("newUserForActivityList", (data) => {
-        if(this.state.activeChatUsers.findIndex(u=> u.id === data.id) === -1){
-          this.setState(prev => ({
-            activeChatUsers: [...prev.activeChatUsers, data]
-          }))
-        }
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
     });
 
     socket.emit(
@@ -208,9 +208,9 @@ class Userdashboard extends Component {
     this.props.history.push(path);
   };
   handleRedirectRecentChat = (data) => () => {
-    const {user_id} = this.state;
+    const { user_id } = this.state;
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
-    this.props.history.push('/chatuser/'+id);
+    this.props.history.push('/chatuser/' + id);
   }
   render() {
     let recentJoin = this.state.recentJoin;
