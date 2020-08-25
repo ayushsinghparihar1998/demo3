@@ -93,11 +93,7 @@ console.log("dob",dob)
 
     console.log('date', day, month, year);
     if (day && month && year) {
-      dob = month + '/' + day + '/' + year;
-
-      console.log('date', dob);
-      dob = moment(dob).valueOf();
-      console.log('date', dob);
+      dob = day + '/' + month + '/' + year;
     }
 
     let data;
@@ -123,10 +119,8 @@ console.log("dob",dob)
 
     console.log('data', data);
     this.props.actionUpdateUserDetails(data).then((result) => {
-      console.log('result321321312', result.data.data);
-      if (result && result.status === 200) {
-        //setLocalStorage('result', result.data.data);
-      }
+      console.log('result321321312', result.data);
+      
     });
   };
 

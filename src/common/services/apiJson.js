@@ -247,7 +247,7 @@ export default {
       // u_gender: '',
       // u_image: '',
     },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
 };
