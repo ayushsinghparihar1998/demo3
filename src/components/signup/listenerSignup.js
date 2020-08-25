@@ -160,6 +160,8 @@ class Listenersignup extends Component {
     if (event.key === 'Enter') {
       event.preventDefault();
       this.addCategory();
+    }else{
+        this.addCategory();
     }
   };
   handleRemoveCategory = (e, idx) => {
@@ -293,9 +295,9 @@ class Listenersignup extends Component {
                         inputProps={{
                           maxLength: 30,
                         }}
-                        onKeyPress={this.handleEnter}
+                        //onKeyPress={this.handleEnter}
                       />
-
+                      <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 ml-3">Add</Button>
                       <div className="error alignLeft">{errors.category}</div>
                     </Form.Group>
 

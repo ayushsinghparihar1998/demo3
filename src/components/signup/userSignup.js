@@ -210,24 +210,26 @@ class ProfessionalSignup extends Component {
 
                         <Col md={6}>
                             <Form.Group>
-                                <Form.Label className="fs20 fw600 col14">User name:</Form.Label>
-                                <Form.Control type="text"
-                                    placeholder="Enter User name"
-                                    className="inputTyp2"
-                                    error={errors.username ? true : false}
-                                    id="outlined-email"
+                                <Form.Label className="fs20 fw600 col14 mt-2">
+                                    Password </Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Password" className="inputTyp2"
+                                    error={errors.password ? true : false}
+                                    id="outlined-pwd"
+                                    label="Password"
                                     variant="outlined"
-                                    name="username"
-                                    value={this.state.username}
+                                    name="password"
+                                    value={this.state.password}
                                     onChange={this.handleChange}
-                                    autoComplete="off"
-                                    maxLength="50" 
+                                    minLength="8"    
+                                    maxLength="15"                                
                                     inputProps={{
-                                        maxLength: 50,
+                                        maxLength: 15,
                                     }}
                                 />
-                                <div className="error alignLeft">{errors.username}</div>
-                            </Form.Group>
+                                <div className="error alignLeft">{errors.password}</div>
+                            </Form.Group> 
                         </Col>
 
             <Col md={6}>
@@ -318,7 +320,7 @@ class ProfessionalSignup extends Component {
               </Row>
             </Col>
 
-                        <Col md={6}>
+{/*                        <Col md={6}>
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14 mt-2">
                                     Password </Form.Label>
@@ -340,7 +342,7 @@ class ProfessionalSignup extends Component {
                                 />
                                 <div className="error alignLeft">{errors.password}</div>
                             </Form.Group> 
-                        </Col>
+                        </Col>*/}
 
             <Col md={6}>
               <div className="fs13 fw300 mt-2 col27">

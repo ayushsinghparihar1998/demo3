@@ -236,6 +236,18 @@ export default {
     showResultMessage: true,
     showErrorMessage: true
   },
-
-
+  editUserDetails: {
+    url: 'elp/editprofile',
+    method: 'POST',
+    data: {
+      email: '',
+      // password: '',
+      u_birthdate: '',
+      u_name: '',
+      // u_gender: '',
+      // u_image: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };

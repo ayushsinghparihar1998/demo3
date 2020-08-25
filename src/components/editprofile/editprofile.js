@@ -62,19 +62,16 @@ class Editprofile extends Component {
           result.data.data.profile_list && result.data.data.profile_list[0]
             ? result.data.data.profile_list[0]
             : {};
-        console.log('qweqweqweqwe 11', res);
-        let dob = res.u_birthdate.split('/');
-
-        let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
-
+        let dob = res.u_birthdate?res.u_birthdate.split('/'):['','',''];
+console.log("dob",dob)
+      //  let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
         this.setState({
           userData: res,
           userName: res.u_name,
           userEmail: res.email,
 
           day: dob[0],
-          //  month: getMonth[0].id,
-          month: '',
+          month: dob[1],
           year: dob[2],
           userId: res.id,
         });
