@@ -139,12 +139,14 @@ class ProfessionalSignup extends Component {
             secondSignUp: true,
         })
     }
-    handleEnter = (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            this.addCategory();
-        }
-    };
+     handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addCategory();
+    }else{
+        this.addCategory();
+    }
+  };
     goToLoginPage = () => {
         this.props.history.push({
             pathname: 'login',
@@ -315,8 +317,9 @@ class ProfessionalSignup extends Component {
                                         inputProps={{
                                             maxLength: 30,
                                         }}
-                                        onKeyPress={this.handleEnter}
+                                        //onKeyPress={this.handleEnter}
                                     />
+                      <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 ml-3">Add</Button>
 
                                     <div className="error alignLeft">{errors.category}</div>
 
