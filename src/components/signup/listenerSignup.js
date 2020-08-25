@@ -278,26 +278,32 @@ class Listenersignup extends Component {
                   </Col>
                   <Col md={12}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Add Category
-                      </Form.Label>
-                      <Form.Control
-                        type="category"
-                        placeholder="Category"
-                        className="inputTyp2"
-                        error={errors.category ? true : false}
-                        id="outlined-pwd"
-                        label="category"
-                        variant="outlined"
-                        name="category"
-                        value={this.state.category}
-                        onChange={this.handleChange}
-                        inputProps={{
-                          maxLength: 30,
-                        }}
-                        //onKeyPress={this.handleEnter}
-                      />
-                      <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 ml-3">Add</Button>
+                      <div className="d-flex"> 
+                          <div className="w-100"> 
+                          <Form.Label className="fs20 fw600 col14">
+                            Add Category
+                          </Form.Label>
+                          <Form.Control
+                            type="category"
+                            placeholder="Category"
+                            className="inputTyp2"
+                            error={errors.category ? true : false}
+                            id="outlined-pwd"
+                            label="category"
+                            variant="outlined"
+                            name="category"
+                            value={this.state.category}
+                            onChange={this.handleChange}
+                            inputProps={{
+                              maxLength: 30,
+                            }}
+                            //onKeyPress={this.handleEnter}
+                          />
+                          </div>
+                          <div className="mt-4 pt-2">
+                          <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3 pointer">Add</Button>
+                          </div>
+                      </div>
                       <div className="error alignLeft">{errors.category}</div>
                     </Form.Group>
 

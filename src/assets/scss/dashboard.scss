@@ -308,6 +308,20 @@
                     }
                 }
             }
+
+            div {
+                
+                & > div {
+                    & > img {
+                        display: none;
+                    }
+
+                    & > a {
+                        color: $col23;
+                        text-decoration: none; 
+                    }
+                }
+            }
  
             & > div {
                 cursor: pointer;
@@ -618,6 +632,7 @@
 
                 & > a {
                     color: $col28; 
+                    text-decoration: none;
                 }
 
                 &.active {

@@ -73,22 +73,22 @@ class Adminlistener extends Component {
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div className={userActveClass} onClick={(e) => { this.getCustomerListing(e, "user") }}>
-                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> USER LISTING</div>
+                                                <div className="fs14 col28 fw500"> USER LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom" onCl>
                                             <div className={professnalActveClass} onClick={(e) => { this.getProfessionalListing(e, "professional") }}>
-                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> PROFESSIONAL LISTING</div>
+                                                <div className="fs14 col28 fw500"> PROFESSIONAL LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div className={listnerActveClass} onClick={(e) => { this.getListnerListing(e, "listner") }}>
-                                                <div className="fs14 col23 fw500"><Image src={Menuiconblue} alt="" className="mr-1" /> LISTENER LISTING</div>
+                                                <div className="fs14 col23 fw500"> LISTENER LISTING</div>
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div className="position-relative">
-                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> LISTENER Q&A</div>
+                                                <div className="fs14 col28 fw500"> LISTENER Q&A</div>
                                             </div>
                                         </div>
                                     </div>

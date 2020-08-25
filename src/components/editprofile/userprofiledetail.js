@@ -16,7 +16,7 @@ class Userprofiledetail extends Component {
                 this.props.location.state.userId : '',
         };
     }
-    componentDidMount() {
+    componentDidMount() { 
         this.getProfile();
     }
     componentWillReceiveProps = (nextProps) => {
@@ -63,7 +63,7 @@ class Userprofiledetail extends Component {
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" />
                                                     <Link to={`/adminlistener`}> USER LISTING</Link>
 
-                                                </div>
+                                                </div> 
                                             </div>
                                         </div>
 
@@ -71,7 +71,7 @@ class Userprofiledetail extends Component {
                                 </div>
                             </Col>
                             <Col md={9} className="pl-1">
-                                <div className="myprofile mt-3 w-100">
+                                <div className="myprofile w-100">
                                     <div className="text-center profile_top melisa">
                                         <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />
                                         <Image src={Usaflag} alt="" className="r50 flags" />
@@ -85,20 +85,20 @@ class Userprofiledetail extends Component {
                                             <div className="layout mt-5">
                                                 <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Name:</div>
-                                                    <div className="fs16 col14 fw400 text-left w40">{userData.u_name}</div>
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.u_name}</div>
                                                 </div>
                                             </div>
                                             <div className="layout">
                                                 <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Email:</div>
-                                                    <div className="fs16 col14 fw400 text-left w40">{userData.email}
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.email}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="layout">
                                                 <div className="d-flex m-auto w40 border2">
                                                     <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                                                    <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('D MMM yyyy') : ''}</div>
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('D MMM yyyy') : ''}</div>
                                                 </div>
                                             </div>
 

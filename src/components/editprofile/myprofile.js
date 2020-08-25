@@ -42,7 +42,7 @@ class Myprofile extends Component {
                     <div className="profile_layout pt-4 pb-5">
                         <Container>
                             <Row>
-                                <div className="myprofile">
+                                <div className="myprofile">    
                                     <Image src={Profileban} alt="" className="w-100" />
                                     <div className="text-center profile_top">
                                         <Image src={Profileimg} alt="" className="r50 border_profile" />

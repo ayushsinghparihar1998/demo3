@@ -284,6 +284,15 @@
     color           : $col18 !important; 
     box-shadow      : none !important; 
   }
+
+  .btnTyp11 {
+    &.bttyp2 {
+       border-radius: 0px; 
+       height: 3.5rem;
+       margin-top: 2px;
+       cursor: pointer; 
+    }
+  }
   
   .btn-outline-primary {  
     color       : $col10 !important;
