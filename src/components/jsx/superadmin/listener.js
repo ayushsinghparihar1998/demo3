@@ -93,7 +93,7 @@ class Adminlistener extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </Col>
+                            </Col> 
                             <Col md={9} className="pl-1"> 
                                 {profileListing && profileListing.length > 0 &&
                                     profileListing.map((item, index) => {

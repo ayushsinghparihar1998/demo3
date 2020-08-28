@@ -210,7 +210,7 @@ class ProfessionalSignup extends Component {
 
                         <Col md={6}>
                             <Form.Group>
-                                <Form.Label className="fs20 fw600 col14 mt-2">
+                                <Form.Label className="fs20 fw600 col14">
                                     Password </Form.Label>
                                 <Form.Control
                                     type="password"
@@ -255,7 +255,7 @@ class ProfessionalSignup extends Component {
             </Col>
 
             <Col md={6}>
-              <Form.Label className="fs20 fw600 col14 mt-2">
+              <Form.Label className="fs20 fw600 col14">
                 Date of birth*
               </Form.Label>
               <Row>
