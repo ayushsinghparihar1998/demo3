@@ -29,7 +29,7 @@ import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
 
-class ELPRoute extends Component {
+class ELPRoute extends Component { 
   render() {
     return (
       <Switch>
