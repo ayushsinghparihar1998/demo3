@@ -16,8 +16,8 @@ import UserdashboardProff from '../components/professional/userdashboardProff';
 import ChatProff from '../components/professional/chatproff';
 import UserdashboardCust from '../components/user/userdashboard';
 
-import PrivateRouteUser from './PrivateRouteUser';
-import PrivateRoutes from './PrivateRoutes';
+import PrivateRouteUser from './PrivateRouteUser';  
+import PrivateRoutes from './PrivateRoutes'; 
 import MyProfile from '../components/editprofile/myprofile';
 import EditProfile from '../components/editprofile/editprofile';
 import ChatUser from '../components/user/chatUser';
@@ -28,8 +28,11 @@ import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
 
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
+import Chatsearch from '../components/chat/chatsearch';
+import Videocall from '../components/videoaudio/videocall'; 
+import Audiocall from '../components/videoaudio/audiocall'; 
 
-class ELPRoute extends Component { 
+class ELPRoute extends Component {  
   render() {
     return (
       <Switch>
@@ -56,11 +59,15 @@ class ELPRoute extends Component {
         {/* Proff */}
         <PublicRoute path="/adminlistener" component={Adminlistener} />
         <PublicRoute path="/usersignup" component={Usersignup} />
+        <PublicRoute path="/chatsearch" component={Chatsearch} /> 
+        <PublicRoute path="/videocall" component={Videocall} /> 
+        <PublicRoute path="/audiocall" component={Audiocall} />  
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
         <PrivateRouteList path="/chat/:id" component={Chat} />
+        
         {/* Proff */}
-        <PrivateRouteProff
+        <PrivateRouteProff 
           path="/userDashboardproff"
           component={UserdashboardProff}
         />

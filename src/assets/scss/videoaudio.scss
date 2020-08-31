@@ -1,0 +1,72 @@
+.videochat {
+    position: relative; 
+    background-image: url(../images/womanvideo.jpg);
+    min-height: 89vh;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    .container {
+        position: relative; 
+    }
+    
+    .chat_dashboard {
+        max-width: 500px;
+        position: absolute;
+        bottom: 0;
+        left: 2px;
+        right: 0; 
+    }
+
+    .videocontrol {
+        position: absolute;
+        left: 0;
+        top: 200%;  
+        bottom: 0;
+
+        .mw-250 { 
+            max-width: 250px;
+            margin-right: 7%; 
+        }
+    }
+    
+    .userdetail {
+        span {
+            margin-right: 15px;     
+            img {
+                max-width: 70px;
+            }
+        }
+    }
+}
+
+.audiochat { 
+    background: $col40;    
+    min-height: 89vh; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+
+    .audiocontrol {
+        text-align: center; 
+        .mw-150 { 
+            max-width: 150px; 
+            border-radius: 50%;
+            border: solid 5px $col18; 
+        }
+    }
+
+    .audiocontrolicon {
+        position: relative;
+        top: 110px; 
+    }
+}
+
+@media (max-width: 1400px) {
+
+    .videochat {
+        .videocontrol {
+            top: 170%; 
+        }
+    }
+
+}
