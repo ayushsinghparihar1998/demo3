@@ -60,8 +60,6 @@ class ELPRoute extends Component {
         <PublicRoute path="/adminlistener" component={Adminlistener} />
         <PublicRoute path="/usersignup" component={Usersignup} />
         <PublicRoute path="/chatsearch" component={Chatsearch} /> 
-        <PublicRoute path="/videocall" component={Videocall} /> 
-        <PublicRoute path="/audiocall" component={Audiocall} />  
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
         <PrivateRouteList path="/chat/:id" component={Chat} />
@@ -80,6 +78,9 @@ class ELPRoute extends Component {
         <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
         <PrivateRoutes path="/myprofile" component={MyProfile} />
         <PrivateRoutes path="/editprofile" component={EditProfile} />
+        <PrivateRoutes path="/videocall" component={Videocall} /> 
+        <PrivateRoutes path="/audiocall" component={Audiocall} />  
+
       </Switch>
     );
   }
