@@ -23,7 +23,10 @@ class Videocall extends Component {
                     <Container>
                         <div className="userdetail pt-5">      
                             <span><Image src={Backicon} alt="" className="pointer" /></span>    
-                            <span><Image src={Videouser} alt="" className="r50" /></span>
+                            <span><Image src={Videouser} alt="" className="r50 uone" />
+                                <span className="online"></span> 
+                            </span>
+                            
                             <span className="fs20 fw600 col60">William Smith</span>
                         </div> 
                         <div className="w-100 videocontrol">     
@@ -44,7 +47,7 @@ class Videocall extends Component {
                     <div className="chat_dashboard">
                                     <div className="chat_top">
                                         <Row>
-                                            <Col xs={6}>
+                                            <Col xs={6}> 
                                                 <div className="mt-auto mb-auto">
                                                     <span className="fs17 fw600 col18">William Smith</span> 
                                                 </div>

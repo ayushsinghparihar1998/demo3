@@ -15,7 +15,6 @@ import PublicRoute from './PublicRoute';
 import UserdashboardProff from '../components/professional/userdashboardProff';
 import ChatProff from '../components/professional/chatproff';
 import UserdashboardCust from '../components/user/userdashboard';
-
 import PrivateRouteUser from './PrivateRouteUser';  
 import PrivateRoutes from './PrivateRoutes'; 
 import MyProfile from '../components/editprofile/myprofile';
@@ -25,12 +24,13 @@ import Resetpassword from '../components/login/resetpassword';
 import Forgotpassword from '../components/login/forgotpassword';
 import Userotp from '../components/login/userotp';
 import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
+import Videocall from '../components/videoaudio/videocall'; 
+import Audiocall from '../components/videoaudio/audiocall';  
+import Professionalchatsearch from '../components/chat/professinalchatsearch';
 
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
 import Chatsearch from '../components/chat/chatsearch';
-import Videocall from '../components/videoaudio/videocall'; 
-import Audiocall from '../components/videoaudio/audiocall'; 
 
 class ELPRoute extends Component {  
   render() {
@@ -62,6 +62,7 @@ class ELPRoute extends Component {
         <PublicRoute path="/chatsearch" component={Chatsearch} /> 
         <PublicRoute path="/videocall" component={Videocall} /> 
         <PublicRoute path="/audiocall" component={Audiocall} />  
+        <PublicRoute path="/professionalchatsearch" component={Professionalchatsearch} />  
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
         <PrivateRouteList path="/chat/:id" component={Chat} />

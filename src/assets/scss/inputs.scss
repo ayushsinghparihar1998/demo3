@@ -59,18 +59,30 @@ a:hover {
     color: $col1;
 }
 
-.inputTyp1:focus::placeholder {
+.inputTyp1:focus::placeholder { 
     opacity: 0.4; 
 }
 
-.inputTyp2.form-control {  
+.inputTyp2.form-control {   
   color       : $col25 !important; 
   background  : $col22 !important;
   border: solid 0.5px $col23 !important;
   box-shadow  : none;
   height: 3.5rem; 
   border-radius: 0px; 
-  font-size: $fs18 !important;
+  font-size: $fs18 !important;  
+}
+
+.inputTyp2.input3 { 
+  height: 2.5rem;
+  background: $col18 !important; 
+  color: $col14 !important;
+  font-size: $fs16 !important;
+  font-weight: 300 !important;
+}
+
+.inputTyp2.input3::placeholder { 
+  color: $col10 !important; 
 }
 
 .inputTyp3 {
@@ -147,6 +159,16 @@ a:hover {
   height                    : 3.5rem !important;
   font-size                 : $fs18 !important;
   padding                   : 0 3rem 0 2rem !important; 
+}
+
+.selectTyp1.select3 {    
+  height: 2.5rem !important; 
+  background-color: #ffffff !important;
+  color: $col10 !important;
+  font-size: $fs16 !important;
+  font-weight: 300 !important;
+  padding-left: 15px !important;
+  box-shadow: none;  
 }
 
 .form-group {

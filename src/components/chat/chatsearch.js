@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Profileban from "../../assets/images/profile_ban.svg";
-import Profileimg from "../../assets/images/profile_img.svg";
-import Usaflag from "../../assets/images/usa_flag.svg";
-import warningS from "../../assets/images/w_signal.svg";
-import Camera from "../../assets/images/camera.svg";
-import Cameratwo from "../../assets/images/camera-white.svg";
 import Requestuser from "../../assets/images/pro_img.svg"; 
 import Requestusertwo from "../../assets/images/pro_img2.svg"; 
 import Requestuserthree from "../../assets/images/pro_img3.svg"; 
 import Aflag from "../../assets/images/australia_flag.svg";
 import Iflag from "../../assets/images/india_flag.svg";  
+import Messagefour from "../../assets/images/msg4.svg"; 
+import Melida from "../../assets/images/melida.svg";
+import Searches from "../../assets/images/searches.svg"; 
+import Starblank from "../../assets/images/starempty.svg";
+import Starfill from "../../assets/images/starfill.svg";
+import Subscribes from "../../assets/images/subscribes.svg";  
 
-class Chatsearch extends Component {  
+class Chatsearch extends Component {         
     render() {
         return (
             <div className="page__wrapper innerpage">
@@ -23,123 +23,236 @@ class Chatsearch extends Component {
                 </div>
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
-                        <Row>
-                            <div className="myprofile"> 
-                                <Image src={Profileban} alt="" className="w-100" /> 
-                                <div className="text-center profile_top">
-                                    <Image src={Profileimg} alt="" className="r50 border_profile" />
-                                </div>
-                                <div className="text-center mt-4 mb-4 pb-2">
-                                    <div className="fs18 fw600 col1 pb-1">Melisa R. Wright</div>
-                                    <div className="col23 fs16 fw500 pb-1">
-                                        Listener - Novice 
-                                        <Image src={warningS} alt="" className="ml-2" />
-                                    </div>
-                                    <div className="col27 fw400 fs14">Finding myself....</div>
-                                    <div className="border_bottoms mt-3"></div>
-                                </div>
-                                <div className="text-center user_tab">  
-                                    <Tabs defaultActiveKey="request">
-                                        <Tab eventKey="request" title="Requested">
-                                            <div className="p-5">
-                                                <div className="d-flex pt-5 pb-5 text-left border-grays">    
-                                                    <div className="mr-4">
-                                                        <Image src={Requestuser} alt="" className="r50" /> 
+                            <div className="chatsearch w-100">
+                                 <div className="search-box">       
+                                 <Row>
+                                     <Col md={3}> 
+                                         <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
+                                     </Col>
+                                     <Col md={3}>
+                                        <Form.Group>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Find Keywords" 
+                                                className="inputTyp2 input3"
+                                                id="outlined-email"
+                                                variant="outlined"
+                                                name="screenName"
+                                            />
+                                        </Form.Group> 
+                                     </Col>
+                                     <Col md={3}>
+                                          <Form.Group controlId="exampleForm.ControlSelect1">
+                                            <Form.Control as="select"
+                                                className="selectTyp1 select3"
+                                                name="date"> 
+                                                <option>Sort By</option>
+                                                
+                                            </Form.Control> 
+                                        </Form.Group>
+                                     </Col>
+                                     <Col md={3}>
+                                     <Button onClick={this.handleSubmit} className="btnTyp5 bTyp5">
+                                        Search
+                                    </Button>
+                                         <Image src={Searches} alt="" className="ml-3 pointer" />  
+                                     </Col>  
+                                 </Row>
+                                 </div>
+
+                                 <div className="search-listing"> 
+                                     <Row>
+                                         <Col md={4}>     
+                                              <div className="subscribes active"> 
+                                                   <div className="subleft">
+                                                        <Image src={Subscribes} alt="" />    
+                                                        <span>Subscribe</span>   
+                                                  </div>  
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
                                                     </div>
-                                                    <div className="pl-2">         
-                                                        <div className="d-flex justify-content-between">      
-                                                            <div>
-                                                                <div className="col1 fw500 fs18 pb-1">Veronica Wade-Hampton</div> 
-                                                                <div className="col40 fs15 fw400 pb-1">Category: Depression, Work Stress,  Bullying
-                                                                </div>
-                                                                <div className="fs14 fw400 col54 pb-1">Licensed Professional Counselor, LPC</div>
-                                                            </div>
-                                                            <div className="">  
-                                                                <span className="col28 fs14 fs400 pr-3"> 
-                                                                    Victoria
-                                                                </span>
-                                                                <Image src={Aflag} alt="" />  
-                                                                <div className="col40 fs14 fs400 pt-1">901-647-8522</div> 
-                                                            </div>  
-                                                        </div>
-
-                                                        <div className="col28 fs15 fw400 pt-1">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life.  <span className="col40 fw500">Read more...</span>
-                                                        </div>    
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestuser} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
                                                     </div>
-                                                </div> 
-
-                                                <div className="d-flex pt-5 pb-5 text-left border-grays">    
-                                                    <div className="mr-4"> 
-                                                        <Image src={Requestusertwo} alt="" className="r50" /> 
+                                                    <div className="col1 fs18 fw600 mt-4">Melisa R. Wright</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
                                                     </div>
-                                                    <div className="pl-2">        
-                                                        <div className="d-flex justify-content-between">      
-                                                            <div>
-                                                                <div className="col1 fw500 fs18 pb-1">Hope Hadding
-                                                                </div> 
-                                                                <div className="col40 fs15 fw400 pb-1">Category: Alcohol/Drug Use, Family Stress, Financial Stress
-                                                                </div>
-                                                                <div className="fs14 fw400 col54 pb-1">Licensed Professional Counselor, LPC</div>
-                                                            </div>
-                                                            <div className="">  
-                                                                <span className="col28 fs14 fs400 pr-3"> 
-                                                                    Mumbai
-                                                                </span>
-                                                                <Image src={Iflag} alt="" />  
-                                                                <div className="col40 fs14 fs400 pt-1">91 9826098260
-                                                                </div>  
-                                                            </div>  
-                                                        </div>
-
-                                                        <div className="col28 fs15 fw400 pt-1">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life.  <span className="col40 fw500">Read more...</span>
-                                                        </div>    
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                                                     </div>
-                                                </div> 
-
-                                                <div className="d-flex pt-5 pb-5 text-left">      
-                                                    <div className="mr-4">
-                                                        <Image src={Requestuserthree} alt="" className="r50" /> 
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col> 
+                                         <Col md={4}> 
+                                         <div className="subscribes">  
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
                                                     </div>
-                                                    <div className="pl-2">        
-                                                        <div className="d-flex justify-content-between">      
-                                                            <div>
-                                                                <div className="col1 fw500 fs18 pb-1">Evelyn Coker
-                                                                </div> 
-                                                                <div className="col40 fs15 fw400 pb-1">Category: Alcohol/Drug Use, Family Stress, Financial Stress
-                                                                </div>
-                                                                <div className="fs14 fw400 col54 pb-1">Licensed Professional Counselor, LPC</div>
-                                                            </div>
-                                                            <div className="">  
-                                                                <span className="col28 fs14 fs400 pr-3"> 
-                                                                    Mumbai  
-                                                                </span>
-                                                                <Image src={Iflag} alt="" />  
-                                                                <div className="col40 fs14 fs400 pt-1">91 9826098260</div> 
-                                                            </div>  
-                                                        </div>
-
-                                                        <div className="col28 fs15 fw400 pt-1">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life.  <span className="col40 fw500">Read more...</span>
-                                                        </div>    
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestusertwo} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
                                                     </div>
-                                                </div> 
-                                        </div> 
-                                        
-                                        </Tab>
-                                        <Tab eventKey="ongoing" title="Ongoing">
-                                            
-                                        </Tab>
-                                        <Tab eventKey="completed" title="Completed">           
-
-                                        </Tab> 
-
-                                    </Tabs>
-                                </div>
-                            </div>
-                        </Row>
+                                                    <div className="col1 fs18 fw600 mt-4">HopePeaceHappiness</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
+                                                    </div>
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    </div>
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col>
+                                         <Col md={4}> 
+                                         <div className="subscribes"> 
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
+                                                    </div>
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestuserthree} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
+                                                    </div>
+                                                    <div className="col1 fs18 fw600 mt-4">Aurelia T. Poe</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
+                                                    </div>
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    </div>
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col>
+                                         <Col md={4}> 
+                                         <div className="subscribes"> 
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
+                                                    </div>
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestusertwo} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
+                                                    </div>
+                                                    <div className="col1 fs18 fw600 mt-4">Cathy R. Kern</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
+                                                    </div>
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    </div>
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col>
+                                         <Col md={4}> 
+                                         <div className="subscribes"> 
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
+                                                    </div>
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestusertwo} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
+                                                    </div>
+                                                    <div className="col1 fs18 fw600 mt-4">BalletMomm</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
+                                                    </div>
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    </div>
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col>
+                                         <Col md={4}> 
+                                         <div className="subscribes active"> 
+                                                  <div className="subleft">
+                                                        <Image src={Subscribes} alt="" />    
+                                                        <span>Subscribe</span>   
+                                                  </div>  
+                                                   <div className="text-right mt-4 mr-3">
+                                                        <Image src={Messagefour} alt="" />
+                                                        <span className="fs13 col14 fw400 ml-1">340</span> 
+                                                    </div>
+                                                    <div className="text-center position-relative"> 
+                                                        <Image src={Requestusertwo} className="r50" />  
+                                                        <Image src={Aflag} alt="" className="flagset" />
+                                                    </div>
+                                                    <div className="col1 fs18 fw600 mt-4">Rose G. Smith</div>
+                                                    <div className="fs14 col14 fw400">Master 10</div>
+                                                    <div className="fs14 col14 fw400">Listens to Over 18 in last week
+                                                    </div>  
+                                                    <div className="starrating">
+                                                        <Image src={Starfill} alt="" /> 
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starfill} alt="" />
+                                                        <Image src={Starblank} alt="" />
+                                                    </div>
+                                                    <hr className="shr" /> 
+                                                    <div className="fs14 col29 fw300">  
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    </div>
+                                                    <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div> 
+                                              </div>
+                                         </Col>
+                                         <div className="text-center w-100">  
+                                             <Button
+                                               className="btnTyp12" 
+                                               onClick={this.handleSubmit}
+                                             >
+                                               show more
+                                             </Button> 
+                                         </div>
+                                     </Row>
+                                 </div>
+                            </div> 
                     </Container>
                 </div>
-                <Footer />
-            </div>
+                <Footer /> 
+            </div> 
         );
     }
 }

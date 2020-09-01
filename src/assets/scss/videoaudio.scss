@@ -30,11 +30,23 @@
     
     .userdetail {
         span {
+            position: relative;
             margin-right: 15px;     
-            img {
+            img.uone {
                 max-width: 70px;
+                border: solid 1px #ccc;
+            }
+            .online {
+                background: $col32;
+                width: 14px;
+                height: 14px;
+                display: inline-block;
+                border-radius: 50%;
+                position: absolute;
+                right: -10px;
             }
         }
+
     }
 }
 

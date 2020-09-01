@@ -136,6 +136,13 @@
     font-size: $fs20; 
     text-transform: uppercase;   
   }
+
+  .btnTyp5.bTyp5 {
+    height: 2.5rem;
+    padding: 0 2rem;
+    font-size: $fs16; 
+    
+  }
   
   .btnTyp5:hover,
   .btnTyp5:focus,
@@ -279,6 +286,29 @@
   .btnTyp11:hover,
   .btnTyp11:focus,
   .btnTyp11:active:focus { 
+    border-color    : $col1 !important;
+    background-color: $col1 !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important; 
+  }
+
+  .btnTyp12 {
+    background-color: $col18 !important;
+    box-shadow      : none !important;
+    border: 1px solid $col1;
+    box-sizing: border-box;
+    border-radius: 40px; 
+    height: 2.5rem; 
+    color: $col1; 
+    font-size: $fs15;
+    font-weight: 500; 
+    padding: 0 2rem;
+    text-transform: uppercase; 
+  }
+  
+  .btnTyp12:hover,
+  .btnTyp12:focus,
+  .btnTyp12:active:focus {  
     border-color    : $col1 !important;
     background-color: $col1 !important;
     color           : $col18 !important; 
