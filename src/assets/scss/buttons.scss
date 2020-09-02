@@ -314,7 +314,15 @@
     color           : $col18 !important; 
     box-shadow      : none !important; 
   }
-
+  .btnTyp12.btnT12 {
+    border-color    : $col26 !important;
+    background-color: $col26 !important;
+    color: $col18 !important; 
+  }
+  .btnTyp12.btnT12:hover, .btnTyp12.btnT12:focus {
+    background-color: $col1 !important;
+    border-color: $col1 !important; 
+  }
   .btnTyp11 {
     &.bttyp2 {
        border-radius: 0px; 
