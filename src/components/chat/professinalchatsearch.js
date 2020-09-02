@@ -69,7 +69,7 @@ class Professionalchatsearch extends Component {
                                             </Form.Group>  
                                             <hr className="hrx" />  
                                             <div className="col1 fs16 fw500 mb-2">Options</div>
-                                            <Form.Group controlId="formBasicCheckboxfour"> 
+                                            <Form.Group controlId="formBasicCheckboxfive">  
                                                 <Form.Check type="checkbox" label="Provides Online Therapy" className="fw300 fs14 col3 mt-1 checkboxTyp1 check2" /> 
                                             </Form.Group> 
                                             <Button
