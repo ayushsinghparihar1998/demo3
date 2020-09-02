@@ -38,9 +38,10 @@ import Medals from '../../assets/images/medals.svg';
 import Rflag from '../../assets/images/r_flag.svg';
 import SocketIOClient from 'socket.io-client';
 import { getLocalStorage } from '../../common/helpers/Utils';
-const SOCKET_IO_URL = 'http://103.76.253.131:8282';
-const socket = SocketIOClient(SOCKET_IO_URL);
-
+import socketClass from '../../common/utility/socketClass';
+// const SOCKET_IO_URL = 'http://103.76.253.131:8282';
+// const socket = SocketIOClient(SOCKET_IO_URL);
+const socket = socketClass.getSocket();
 class ProfessionalDashboard extends Component {
   constructor(props) {
     super(props);
@@ -58,12 +59,12 @@ class ProfessionalDashboard extends Component {
   }
   unmount = () => {
     if (socket) {
-      socket.disconnect();
+      // socket.disconnect();
     }
   }
   componentDidMount() {
     if(!socket.connected){
-      socket.connect();
+      // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
@@ -85,16 +86,16 @@ class ProfessionalDashboard extends Component {
     }
 
     socket.on("connect", function () {
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("userInfoProff").u_id,
-          user_type: getLocalStorage("userInfoProff").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
+      // socket.emit(
+      //   "chat-login",
+      //   JSON.stringify({
+      //     user_id: getLocalStorage("userInfoProff").u_id,
+      //     user_type: getLocalStorage("userInfoProff").u_role_id,
+      //   }),
+      //   function (data) {
+      //     console.log(data, "authenticateSocket");
+      //   }
+      // );
     });
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {

@@ -33,9 +33,12 @@ import Chatplus from "../../assets/images/user_plus.svg";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import SocketIOClient from "socket.io-client";
 import moment from "moment";
+import socketClass from "../../common/utility/socketClass";
+import getUserProfile from "../../common/utility/getUserProfile";
 
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
-const socket = SocketIOClient(SOCKET_IO_URL);
+// const SOCKET_IO_URL = "http://103.76.253.131:8282";
+// const socket = SocketIOClient(SOCKET_IO_URL);
+const socket = socketClass.getSocket();
 class ChatProff extends Component {
   constructor(props) {
     super(props);
@@ -56,13 +59,13 @@ class ChatProff extends Component {
   }
   unmount = () => {
     if (socket) {
-      socket.disconnect();
-      console.log("DISCOnnected ================================================")
+      // socket.disconnect();
+      // console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
     if(!socket.connected){
-      socket.connect();
+      // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
@@ -71,16 +74,16 @@ class ChatProff extends Component {
     socket.on("connect", function () {
       console.log("COnnected ================================================")
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfoProff").u_id,
-        user_type: getLocalStorage("userInfoProff").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
-      }
-    );
+    // socket.emit(
+    //   "chat-login",
+    //   JSON.stringify({
+    //     user_id: getLocalStorage("userInfoProff").u_id,
+    //     user_type: getLocalStorage("userInfoProff").u_role_id,
+    //   }),
+    //   function (data) {
+    //     console.log(data, "authenticateSocket");
+    //   }
+    // );
     socket.emit("chatHistory", JSON.stringify({
       from_user_id: getLocalStorage("userInfoProff").u_id,
       to_user_id: this.props.match.params.id,
@@ -248,6 +251,23 @@ class ChatProff extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.changeChatpath(id);
   }
+  initCall = () => {
+    const { userMeta } = this.state;
+    const { u_email, u_id, u_role_id } = getUserProfile;
+    // console.log("user");
+    // debugger;
+    const payload = {
+      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+      "date": moment().format("YYYY-MM-DD"),
+      "time": moment().format("HH:mm:ss"),
+      "sender": {
+        u_email, u_id, u_role_id
+      }, type: "video"
+    }
+    socket.emit("makeVideoCall", payload, (data) => {
+      console.log("makeVideoCall", data)
+    })
+  }
   render() {
     const { userMeta = {} } = this.state;
     return (
@@ -410,7 +430,7 @@ class ChatProff extends Component {
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image src={Calls} alt="" className="pointer mr-2" />
+                          <Image src={Calls} alt="" onClick={this.initCall} className="pointer mr-2" />
                           <Image src={Videos} alt="" className="pointer mr-2" />
                           <Button className="btnTyp6 text-uppercase">
                             end chat

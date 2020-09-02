@@ -1,6 +1,12 @@
 import React, { Component, useState, useEffect, useRef } from "react";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video';
+import {
+  useParams,
+  useHistory
+} from "react-router-dom";
+
+
 import NavBar from "../core/nav";
 import Backicon from "../../assets/images/backicon.svg";
 import Videouser from "../../assets/images/pro_img2.svg";
@@ -14,6 +20,7 @@ import UserChat4 from "../../assets/images/user_chat4.svg";
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
+import generateRoomId from "../../common/utility/generateRoomId";
 const Videocall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
@@ -27,14 +34,18 @@ const Videocall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
+  const { caller, id:paramsid } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     //get the token
     (async () => {
-      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile.u_id, room_id: roomid, type: 'video' });
+      const room = generateRoomId(getUserProfile.u_id, paramsid);
+      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile.u_id, room_id: room, type: 'video' });
       const token = await Axios.get(`http://103.76.253.131:8282/getToken?${params}`).then(res => res.data.token);
+      setRoomId(room);
       setToken(token);
-      connectTwillio(token);
+      connectTwillio(token, room);
     })()
     return () => {
       if (roomRef.current != null) {
@@ -59,14 +70,18 @@ const Videocall = (props) => {
       //   debugger;
       //   track.track.stop()
       // });
+      history.push('/')
     }
   }
-  const connectTwillio = (token) => {
+  const connectTwillio = (token, room) => {
+    console.log("roomroomroomroomroomroom", room)
+    console.log(caller)
+    // debugger;
     connect(token, {
       audio: true,
-      name: roomid,
-      video: false
-      // video: { width: 640 }
+      name: room,
+      // video: false
+      video: { width: 640 }
     }).then(roomjoined);
   }
   const roomjoined = (room) => {

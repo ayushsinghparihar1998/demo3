@@ -25,7 +25,8 @@ class App extends React.Component {
     }
   }
 
-  render() {  
+  render() {
+    console.log("this.state.access_token", this.state.access_token)
     return (
       <React.Fragment>
         <div className="pageWrapper">

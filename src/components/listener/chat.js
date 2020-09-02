@@ -34,10 +34,12 @@ import Chatplus from "../../assets/images/user_plus.svg";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import SocketIOClient from "socket.io-client";
 import moment from "moment";
+import socketClass from "../../common/utility/socketClass";
 
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
-const socket = SocketIOClient(SOCKET_IO_URL);
+// const SOCKET_IO_URL = "http://103.76.253.131:8282";
+// const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
+const socket = socketClass.getSocket();
 
 class Chat extends Component {
   constructor(props) {
@@ -70,13 +72,13 @@ class Chat extends Component {
   }
   unmount = () => {
     if (socket) {
-      socket.disconnect();
-      console.log("DISCOnnected ================================================")
+    //   socket.disconnect();
+    //   console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
     if (!socket.connected) {
-      socket.connect();
+      // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
@@ -87,16 +89,16 @@ class Chat extends Component {
     socket.on("connect", function () {
       console.log("COnnected ================================================")
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
-        user_type: getLocalStorage("userInfo").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
-      }
-    );
+    // socket.emit(
+    //   "chat-login",
+    //   JSON.stringify({
+    //     user_id: getLocalStorage("userInfo").u_id,
+    //     user_type: getLocalStorage("userInfo").u_role_id,
+    //   }),
+    //   function (data) {
+    //     console.log(data, "authenticateSocket");
+    //   }
+    // );
     socket.emit("chatHistory", JSON.stringify({
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
@@ -127,7 +129,7 @@ class Chat extends Component {
     );
 
     socket.on("sendMessage", (data) => {
-      console.log("SEND_MESSAGE On", data);
+      console.log("getRecentsChatedUsers SEND_MESSAGE On", data);
       if (data.from_user_id == this.props.match.params.id) {
         data.date_time = new Date();
         this.updateChat(data);
@@ -282,6 +284,23 @@ class Chat extends Component {
     const { user_id } = this.state;
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.changeChatpath(id);
+  }
+  initCall = () => {
+    const { userMeta } = this.state;
+    const { u_email, u_id, u_role_id } = getLocalStorage("userInfo");
+    // console.log("user");
+    // debugger;
+    const payload = {
+      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+      "date": moment().format("YYYY-MM-DD"),
+      "time": moment().format("HH:mm:ss"),
+      "sender": {
+        u_email, u_id, u_role_id
+      }, type: "video"
+    }
+    socket.emit("makeVideoCall", payload, (data) => {
+      console.log("makeVideoCall", data)
+    })
   }
   render() {
     const { userMeta = {} } = this.state;
@@ -450,7 +469,7 @@ class Chat extends Component {
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image src={Calls} alt="" className="pointer mr-2" />
+                          <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall} />
                           <Image src={Videos} alt="" className="pointer mr-2" />
                           <Button
                             className="btnTyp6 text-uppercase"
