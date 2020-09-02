@@ -16,6 +16,8 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 const Videocall = (props) => {
   const [showChat, setShowChat] = useState(false);
+  const [muteVideo, setMuteVideo] = useState(false);
+  const [muteAudio, setMuteAudio] = useState(false);
   const [token, setToken] = useState();
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
@@ -34,7 +36,6 @@ const Videocall = (props) => {
       setToken(token);
       connectTwillio(token);
     })()
-
     return () => {
       if (roomRef.current != null) {
         setToken(null)
@@ -64,7 +65,8 @@ const Videocall = (props) => {
     connect(token, {
       audio: true,
       name: roomid,
-      video: { width: 640 }
+      video: false
+      // video: { width: 640 }
     }).then(roomjoined);
   }
   const roomjoined = (room) => {
@@ -156,7 +158,35 @@ const Videocall = (props) => {
     });
   }
   // console.log(props, getUserProfile, token)
-  console.log("streamTracks", streamTracks)
+  const editTrack = (type1, type2, todo) => {
+    if (type1 == 'local') {
+      streamTracks.local.forEach((track) => {
+        if (track.kind == type2) {
+          switch (todo) {
+            case 'enable':
+              track.enable();
+              setMuteAudio(false)
+              break;
+            case 'disable':
+              track.disable();
+              setMuteAudio(true)
+              break;
+            case 'enablev':
+              track.enable();
+              setMuteVideo(false)
+              break;
+            case 'disablev':
+              track.disable();
+              setMuteVideo(true)
+              break;
+            default:
+              break;
+          }
+        }
+      })
+    }
+  }
+
   return (
     <div className="page__wrapper innerpage">
       <div className="main_baner">
@@ -176,9 +206,19 @@ const Videocall = (props) => {
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
             <div className="videocontrolicon text-center">
-              <Image src={Soundstwo} className="mr-3 pointer" />
-              <Image src={Videomute} className="mr-3 pointer" />
-              <Image src={Videothree} className="mr-3 pointer" />
+              {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
+              {
+                (muteAudio == false) ?
+                  <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">mute</button> :
+                  <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">unmute</button>
+              }
+              {
+                (muteVideo == false) ?
+                  <button onClick={() => editTrack('local', 'video', 'disablev')} className="btn btn-primary">show video</button> :
+                  <button onClick={() => editTrack('local', 'video', 'enablev')} className="btn btn-primary">hide video</button>
+              }
+              {/* <Image src={Videomute} className="mr-3 pointer" />
+              <Image src={Videothree} className="mr-3 pointer" /> */}
               <Image src={Videochat} className="mr-3 pointer" onClick={toggleChat} />
               <Image src={Videodisconnect} className="pointer" onClick={disconnect} />
             </div>
