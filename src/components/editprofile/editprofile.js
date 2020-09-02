@@ -73,8 +73,8 @@ class Editprofile extends Component {
           userEmail: res.email,
 
           day: dob[0],
-          //  month: getMonth[0].id,
-          month: '',
+          month: getMonth[0].value,
+          // month: '',
           year: dob[2],
           userId: res.id,
         });
