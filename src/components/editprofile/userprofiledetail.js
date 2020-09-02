@@ -3,8 +3,10 @@ import { Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import Profileimg from "../../assets/images/profile_img.svg";
 import Usaflag from "../../assets/images/usa_flag.svg";
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { actionGetProfile, actionGetProfileById } from '../../common/redux/actions';
 import * as moment from 'moment';
+import Menuicon from "../../assets/images/menu_icon.svg";
 class Userprofiledetail extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ class Userprofiledetail extends Component {
                 this.props.location.state.userId : '',
         };
     }
-    componentDidMount() {
+    componentDidMount() { 
         this.getProfile();
     }
     componentWillReceiveProps = (nextProps) => {
@@ -51,42 +53,60 @@ class Userprofiledetail extends Component {
             <div >
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
-                        <Row>{console.log("userData234234", userData)}
-                            <div className="myprofile mt-3 w-100">
-                                <div className="text-center profile_top melisa">
-                                    <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />
-                                    <Image src={Usaflag} alt="" className="r50 flags" />
-                                </div>
-                                <div className="text-center mt-4 mb-4 pb-2">
-                                    <div className="col1 fs18 fw600 pb-1">{userData.u_name}
-                                    </div>
-                                </div>
-                                <div className="text-center user_tab">
-                                    <div className="">
-                                        <div className="layout mt-5">
-                                            <div className="d-flex m-auto w35 border2">
-                                                <div className="fs16 col23 fw400 text-left w60">Name:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_name}</div>
+                        <Row>
+                            <Col md={3} className="pr-1">
+                                <div className="adminsidebar">
+                                    <div className="inner_area">
+                                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
+                                        <div className="d-flex m-3 pb-3 border-bottom">
+                                            <div>
+                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" />
+                                                    <Link to={`/adminlistener`}> USER LISTING</Link>
+
+                                                </div> 
                                             </div>
                                         </div>
-                                        <div className="layout">
-                                            <div className="d-flex m-auto w35 border2">
-                                                <div className="fs16 col23 fw400 text-left w60">Email:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.email}
+
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col md={9} className="pl-1">
+                                <div className="myprofile w-100">
+                                    <div className="text-center profile_top melisa">
+                                        <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />
+                                        <Image src={Usaflag} alt="" className="r50 flags" />
+                                    </div>
+                                    <div className="text-center mt-4 mb-4 pb-2">
+                                        <div className="col1 fs18 fw600 pb-1">{userData.u_name}
+                                        </div>
+                                    </div>
+                                    <div className="text-center user_tab">
+                                        <div className="">
+                                            <div className="layout mt-5">
+                                                <div className="d-flex m-auto w40 border2">
+                                                    <div className="fs16 col23 fw400 text-left w60">Name:</div>
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.u_name}</div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="layout">
-                                            <div className="d-flex m-auto w35 border2">
-                                                <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('d MMM yyyy') : ''}</div>
+                                            <div className="layout">
+                                                <div className="d-flex m-auto w40 border2">
+                                                    <div className="fs16 col23 fw400 text-left w60">Email:</div>
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.email}
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div className="layout">
+                                                <div className="d-flex m-auto w40 border2">
+                                                    <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
+                                                    <div className="fs15 col14 fw400 text-left w40">{userData.u_birthdate ? moment(userData.u_birthdate, 'DD/MM/YYYY').format('D MMM yyyy') : ''}</div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
-                            </div>
+                            </Col>
                         </Row>
                     </Container>
                 </div>

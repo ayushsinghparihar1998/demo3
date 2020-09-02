@@ -9,18 +9,21 @@
         position: relative; 
         .layout {
             .border2 {
-                border-bottom: solid 1px #D3F5FF;
+                border-bottom: solid 1px $col51; 
                 padding-bottom: 20px;
-                margin-bottom: 20px !important;
+                margin-bottom: 20px !important;        
             }  
             .w35 {
                 max-width: 35%; 
             }
             .w60 {
-                width: 60%;
+                width: 45%;
+                word-break: break-all;
             }
             .w40 {
-                width: 40%; 
+                width: 55%;
+                word-break: break-all; 
+
             }
             &:last-child {
                 .border2 {

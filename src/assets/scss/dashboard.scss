@@ -10,10 +10,16 @@
 
             .border-bottom {
 
+                & > div.position-relative {
+                    & > img {
+                        max-width: 45px; 
+                    }
+                }
+
                 & > div {
                     
                     & + div {
-                        width: 100%;
+                        width: 100%; 
                     }
                 }
             }
@@ -245,7 +251,7 @@
         }
     }
 
-    .right_sidebar {
+    .right_sidebar { 
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);  
         .chat-bg {
             background-color: $col23; 
@@ -261,12 +267,21 @@
             background: $col18; 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
+            .p-3 {
+                div.d-flex.mt-4.form-group {
+                    & > input.inputTyp4 {
+                        max-width: 200px; 
+                    }
+                }
+            }
             .bg-grays {
-                border-bottom: solid 1px $col31;
+                border-bottom: solid 1px $col31; 
                 overflow: hidden;
             }
 
             .border-bottom { 
+
+                
                 border-bottom: solid 1px $col31; 
                 padding-bottom: 10px !important;    
                 img {
@@ -299,6 +314,29 @@
         min-height: 100vh;
 
         .border-bottom {
+
+            .position-relative {
+                
+                & > div {
+                    & > img {
+                        display: none;
+                    }
+                }
+            }
+
+            div {
+                
+                & > div {
+                    & > img {
+                        display: none;
+                    }
+
+                    & > a {
+                        color: $col23;
+                        text-decoration: none; 
+                    }
+                }
+            }
  
             & > div {
                 cursor: pointer;
@@ -331,19 +369,23 @@
         & div {
             & > div {
                 word-break: break-all; 
-                padding-right: 15px; 
+                padding-right: 15px;
+                cursor: pointer;
             }
         }
         
         .mb-auto.d-flex {
-
             & > span {
                 cursor: pointer; 
             }
         }
+    } 
+
+    .custom-switch .custom-control-label {
+        cursor: pointer; 
     }
 
-    .custom-switch .custom-control-label::before {  
+    .custom-switch .custom-control-label::before {   
         width: 34px;
         height: 14px;
         background: $col55;
@@ -541,8 +583,6 @@
                 }
             }
             
-            
-            
         
             @media only screen and (max-width: 990px) {
                 .progress {
@@ -554,7 +594,7 @@
     }
 }
 
-.custom-popUp.confirmation-box.modal {
+.custom-popUp.confirmation-box.modal.delete_modal {    
     .modal-content {
         max-width: 450px;
         margin: auto;
@@ -607,6 +647,7 @@
 
                 & > a {
                     color: $col28; 
+                    text-decoration: none;
                 }
 
                 &.active {

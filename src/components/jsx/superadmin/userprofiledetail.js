@@ -14,10 +14,10 @@ class Userprofiledetail extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} /> 
                 </div>
-                <div className="profile_layout pt-4 pb-5">
-                    <Container>
+                <div className="profile_layout pt-4 pb-5"> 
+                    <Container> 
                         <Row> 
-                            <div className="myprofile mt-3 w-100">    
+                            <div className="myprofile userprofileone w-100">      
                                 <div className="text-center profile_top melisa">
                                     <Image src={Profileimg} alt="" className="r50 border_profile" />
                                     <Image src={Usaflag} alt="" className="r50 flags" />

@@ -29,7 +29,7 @@ import Usaflag from '../../assets/images/usa_flag.svg';
 import warningS from '../../assets/images/w_signal.svg';
 import Camera from '../../assets/images/camera.svg';
 import Cameratwo from '../../assets/images/camera-white.svg';
-import Profileimgnew from '../../assets/images/profileinner_img.svg';
+import Profileimgnew from '../../assets/images/profileinner_img.svg'; 
 import Videoicon from '../../assets/images/video_icon.svg';
 import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
@@ -62,19 +62,16 @@ class Editprofile extends Component {
           result.data.data.profile_list && result.data.data.profile_list[0]
             ? result.data.data.profile_list[0]
             : {};
-        console.log('qweqweqweqwe 11', res);
-        let dob = res.u_birthdate.split('/');
-
-        let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
-
+        let dob = res.u_birthdate?res.u_birthdate.split('/'):['','',''];
+console.log("dob",dob)
+      //  let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
         this.setState({
           userData: res,
           userName: res.u_name,
           userEmail: res.email,
 
           day: dob[0],
-          month: getMonth[0].value,
-          // month: '',
+          month: dob[1],
           year: dob[2],
           userId: res.id,
         });
@@ -96,11 +93,7 @@ class Editprofile extends Component {
 
     console.log('date', day, month, year);
     if (day && month && year) {
-      dob = month + '/' + day + '/' + year;
-
-      console.log('date', dob);
-      dob = moment(dob).valueOf();
-      console.log('date', dob);
+      dob = day + '/' + month + '/' + year;
     }
 
     let data;
@@ -126,10 +119,8 @@ class Editprofile extends Component {
 
     console.log('data', data);
     this.props.actionUpdateUserDetails(data).then((result) => {
-      console.log('result321321312', result.data.data);
-      if (result && result.status === 200) {
-        //setLocalStorage('result', result.data.data);
-      }
+      console.log('result321321312', result.data);
+      
     });
   };
 
@@ -157,7 +148,7 @@ class Editprofile extends Component {
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
-              <div className="myprofile">
+              <div className="myprofile"> 
                 <Image src={Profileban} alt="" className="w-100" />
                 <div className="upload_bg">
                   <Form.File id="custom-filetwo" />
@@ -323,7 +314,7 @@ class Editprofile extends Component {
                             </Col>
                           </Row>
 
-                          <Button
+                          <Button 
                             className="btnTyp5 mt-5 mr-3"
                             onClick={this.handleSubmit}
                           >

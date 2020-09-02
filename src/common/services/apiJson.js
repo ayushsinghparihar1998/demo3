@@ -209,15 +209,15 @@ export default {
     url: 'elp/superadmin_changeuserstatus?userid=:userid&u_status=:u_status',
     method: 'POST',
     data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
+    showResultMessage: true,
+    showErrorMessage: true
   },
   adminUserDelete: {
     url: 'elp/superadmin_deleteuser?userid=:userid&u_status=:u_status',
     method: 'POST',
     data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
+    showResultMessage: true,
+    showErrorMessage: true
   },
 
   getProfileById: {
@@ -232,10 +232,9 @@ export default {
     url: 'elp/usersubscriber',
     method: 'POST',
     data: { email: '' },
-    showResultMessage: false,
-    showErrorMessage: true,
+    showResultMessage: true,
+    showErrorMessage: true
   },
-
   editUserDetails: {
     url: 'elp/editprofile',
     method: 'POST',
@@ -247,7 +246,7 @@ export default {
       // u_gender: '',
       // u_image: '',
     },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
 };

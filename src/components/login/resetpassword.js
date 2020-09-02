@@ -48,9 +48,6 @@ class Resetpassword extends Component {
     let email = parsed.email.replace(/\s/g, '+');
     let userid = parseInt(parsed.userid);
     
-
-    console.log('rnv email',email);
-    console.log('rnv userid',userid);
     this.setState({
       email,
       userid,      
@@ -83,13 +80,16 @@ class Resetpassword extends Component {
       this.props
         .actionResetPassword(data)
         .then(result => {
-          if (result && result.data && result.data.status === "success") {            
-              console.log('rnv actionResetPassword check');
-              let roleType = "1"
+          if (result && result.data && result.data.status === "success") {  
+          let roleType = "1"          
+               setTimeout(() => {
               this.props.history.push({
                 pathname: 'login',
                 state: { roleType: roleType }
             });
+          }, 2000);
+              
+              
           }
         })
         .catch(error => {

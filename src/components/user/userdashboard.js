@@ -44,7 +44,7 @@ import {
 } from "../../common/redux/actions";
 const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
+// socket.connect();
 
 class Userdashboard extends Component {
   constructor(props) {
@@ -52,9 +52,24 @@ class Userdashboard extends Component {
     this.state = {
       dashboardData: [],
       showVal: 4,
+      activeChatUsers: [],
+      user_id: getLocalStorage("customerInfo").u_id
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    this.unmount();
+  }
+  unmount = () => {
+    if (socket) {
+      socket.disconnect();
+    }
+  }
   componentDidMount() {
+    if (!socket.connected) {
+      socket.connect();
+    }
+    window.addEventListener("beforeunload", this.unmount)
     this.getRecentJoinUsers();
     this.getUserDashBoard();
     // abhi start
@@ -90,7 +105,6 @@ class Userdashboard extends Component {
     }
 
     socket.on("connect", function () {
-      console.log("connected");
     });
     socket.emit(
       "chat-login",
@@ -102,6 +116,13 @@ class Userdashboard extends Component {
         console.log(data, "authenticateSocket");
       }
     );
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
+      }
+    });
 
     socket.emit(
       "getRecentsChatedUsers",
@@ -186,6 +207,11 @@ class Userdashboard extends Component {
   changepath = (path) => {
     this.props.history.push(path);
   };
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    this.props.history.push('/chatuser/' + id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -206,14 +232,17 @@ class Userdashboard extends Component {
                     {this.state.recentChatUsers &&
                       this.state.recentChatUsers.map((item) => {
                         return (
-                          <div className="d-flex m-3 border-bottom">
+                          <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
                             <div className="position-relative">
                               <Image
                                 src={item.from_image ? item.from_image : UserChat}
                                 alt=""
                                 className="r50 pt-1"
                               />
-                              <span className="online"></span>
+                              <span className={(item.from_user_id ==
+                                getLocalStorage("customerInfo").u_id
+                                ? item.to_user_online
+                                : item.from_user_online) == "1" ? 'online' : ''}></span>
                             </div>
                             <div className="position-relative pl-3">
                               <div className="fs15 col23 fw500 pr-2">
@@ -246,7 +275,11 @@ class Userdashboard extends Component {
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
-                              <div className="d-flex m-3 border-bottom">
+                              <div className="d-flex m-3 border-bottom pointer"
+                                onClick={() =>
+                                  this.changepath("/chatuser/" + item.id)
+                                }
+                              >
                                 <div className="position-relative">
                                   <Image
                                     src={item.u_image ? item.u_image : UserChat}
@@ -257,9 +290,7 @@ class Userdashboard extends Component {
                                 <div className="position-relative pl-3 mt-auto mb-auto">
                                   <div
                                     className="fs14 col14 fw500"
-                                    onClick={() =>
-                                      this.changepath("/chatuser/" + item.id)
-                                    }
+
                                   >
                                     {item.u_name}
                                   </div>

@@ -139,12 +139,14 @@ class ProfessionalSignup extends Component {
             secondSignUp: true,
         })
     }
-    handleEnter = (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            this.addCategory();
-        }
-    };
+     handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addCategory();
+    }else{
+        this.addCategory();
+    }
+  };
     goToLoginPage = () => {
         this.props.history.push({
             pathname: 'login',
@@ -300,6 +302,8 @@ class ProfessionalSignup extends Component {
 
                             <Col md={12}>
                                 <Form.Group>
+                                <div className="d-flex"> 
+                                    <div className="w-100"> 
                                     <Form.Label className="fs20 fw600 col14">Add Category</Form.Label>
                                     <Form.Control
                                         type="category"
@@ -315,8 +319,14 @@ class ProfessionalSignup extends Component {
                                         inputProps={{
                                             maxLength: 30,
                                         }}
-                                        onKeyPress={this.handleEnter}
+                                        //onKeyPress={this.handleEnter}
                                     />
+                                       
+                                    </div>
+                                        <div className="mt-4 pt-2">
+                                        <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3">Add</Button> 
+                                        </div> 
+                                </div>
 
                                     <div className="error alignLeft">{errors.category}</div>
 

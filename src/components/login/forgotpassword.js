@@ -10,7 +10,6 @@ import {
   Image,
   Form, Modal
 } from "react-bootstrap";
-
 import { connect } from "react-redux";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -48,12 +47,14 @@ class Forgotpassword extends Component {
       this.props
         .actionForGotPassword(data)
         .then(result => {
-          if (result && result.data && result.data.status === "success") {            
-              console.log('rnv forgot password check');
-              this.props.history.push({
-                pathname: 'login',
-                state: { roleType: this.state.roleType }
-            });
+          if (result && result.data && result.data.status === "success") {  
+          setTimeout(() => {
+          this.props.history.push({
+          pathname: 'login',
+          state: { roleType: this.state.roleType }
+          });
+          }, 3000);
+
           }
         })
         .catch(error => {

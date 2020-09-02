@@ -21,6 +21,7 @@ import {
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import NavBar from "../core/nav";
+import NavBarAdmin from "../core/navAdmin";
 import Footer from "../core/footer";
 import QuestionAndAnswer from '../signup/questionAndAnswer';
 import CONSTANTS from "../../common/helpers/Constants";
@@ -216,7 +217,11 @@ handleGet = () => {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
+        {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN?
+           <NavBarAdmin {...this.props} />
+          :
           <NavBar {...this.props} />
+        }
         </div>
         <div className="Loginlayout">
           <Container>
