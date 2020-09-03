@@ -17,7 +17,7 @@ import Subscribes from "../../assets/images/subscribes.svg";
 class Chatsearch extends Component {         
     render() {
         return (
-            <div className="page__wrapper innerpage">
+            <div className="page__wrapper innerpage"> 
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
@@ -60,7 +60,7 @@ class Chatsearch extends Component {
                                  </Row>
                                  </div>
 
-                                 <div className="search-listing"> 
+                                 <div className="search-listing">   
                                      <Row>
                                          <Col md={4}>     
                                               <div className="subscribes active"> 

@@ -48,6 +48,7 @@ a:hover {
   font-weight: 300 !important;
 }
 
+
 .inputTyp1.form-control:focus { 
   color       : $col1;
   background  : $col18;
@@ -103,6 +104,27 @@ a:hover {
 }
 
 .inputTyp3::placeholder {
+    color: $col46; 
+}
+
+.textTypes1 { 
+  border          : 1px solid $col45 !important; 
+  border-radius: $col44;
+  background      : $col44;
+  color           : $col1 !important; 
+  text-align      : left !important;
+  font-size       : $fs16 !important;  
+  padding-left: 20px;
+  border-radius: 0px !important; 
+  height: 120px !important;
+}
+
+.textTypes1:focus,
+.textTypes1:active {
+    box-shadow: none !important;
+}
+
+.textTypes1::placeholder { 
     color: $col46; 
 }
 
@@ -218,7 +240,7 @@ a:hover {
   }
 }  
 
-.checkboxTyp1.check2 label:after {           
+.checkboxTyp1.check2 label:after {             
   content: "";
   height: 1.5rem;
   width: 1.5rem;
