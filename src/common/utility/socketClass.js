@@ -9,6 +9,7 @@ class socketClass {
   }
   connect(user) {
     this.socket.connect();
+    // console.log('chat-login = connected to socket')
     this.chatlogin(user);
   }
   disconnect() {
@@ -19,6 +20,7 @@ class socketClass {
   }
 
   chatlogin(user) {
+    console.log('chat-login', user)
     this.socket.emit(
       "chat-login",
       JSON.stringify({
@@ -26,7 +28,7 @@ class socketClass {
         user_type: user.u_role_id,
       }),
       function (data) {
-        console.log("socket=== authenticateSocket", data);
+        console.log("chat-login socket=== authenticateSocket", data);
       }
     );
   }

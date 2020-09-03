@@ -30,11 +30,12 @@ import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
 import Chatsearch from '../components/chat/chatsearch';
 import Videocall from '../components/videoaudio/videocall';
-import Audiocall from '../components/videoaudio/audiocall';
+import Audiocall from '../components/videoaudio/AudioCall';
 import getUserProfile from '../common/utility/getUserProfile';
 import { getLocalStorage } from '../common/helpers/Utils';
 import socketClass from '../common/utility/socketClass';
 import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCalling';
+import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
 const user = getLocalStorage('userInfo') ||
   getLocalStorage('userInfoProff') ||
   getLocalStorage('customerInfo') ||
@@ -43,9 +44,9 @@ class ELPRoute extends Component {
   state = {}
   componentDidMount() {
     window.addEventListener("beforeunload", socketClass.disconnect)
-    if (getUserProfile) {
+    if (getUserProfile()) {
       // console.log("socketClass", socketClass.connect);
-      socketClass.connect(getUserProfile);
+      socketClass.connect(getUserProfile());
     }
     this.setState({ socket: socketClass.getSocket() })
     // console.log("socket===", socket)
@@ -54,7 +55,7 @@ class ELPRoute extends Component {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
   render() {
-    console.log("getUserProfile", getUserProfile, user)
+    // console.log("getUserProfile", getUserProfile, user)
     return (
       <>
         {this.state.socket && <VideoCalling />}
@@ -100,7 +101,8 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/myprofile" component={MyProfile} />
           <PrivateRoutes path="/editprofile" component={EditProfile} />
           <PrivateRoutes path="/videocall/:id" component={Videocall} />
-          <PrivateRoutes path="/audiocall" component={Audiocall} />
+          <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
+          <PrivateRoutes path="/calling" component={CallingTo} />
 
         </Switch>
       </>

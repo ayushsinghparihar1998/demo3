@@ -27,6 +27,7 @@ import QuestionAndAnswer from '../signup/questionAndAnswer';
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationLogin";
 import ProfessionalSignup from '../signup/professionalSignup';
+import socketClass from '../../common/utility/socketClass';
 
 class Login extends Component {
   constructor(props) {
@@ -85,6 +86,7 @@ class Login extends Component {
         .actionLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            socketClass.connect(result.data.data);
             this.setState({
               errors: {},
             });
@@ -121,6 +123,7 @@ class Login extends Component {
         .actionProfessionalLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            socketClass.connect(result.data.data);
             setLocalStorage('userInfoProff', result.data.data);
             setLocalStorage('loggedIn', true);
             this.props.history.push({ pathname: '/userDashboardproff' });
@@ -144,6 +147,7 @@ class Login extends Component {
         .actionUserLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            socketClass.connect(result.data.data);
             setLocalStorage('customerInfo', result.data.data);
             setLocalStorage('loggedIn', true);
             this.props.history.push({ pathname: '/userDashboardcust' });
@@ -165,6 +169,7 @@ class Login extends Component {
         .actionAdminLogin(data)
         .then((result) => {
           if (result && result.data && result.data.status === 'success') {
+            socketClass.connect(result.data.data);
             setLocalStorage('userInfoAdmin', result.data.data);
             setLocalStorage("loggedIn", true);
             setLocalStorage("isAdmin", true);

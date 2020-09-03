@@ -21,10 +21,15 @@ import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
+import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
+import socketClass from "../../common/utility/socketClass";
+import { showErrorMessage } from "../../common/helpers/Utils";
+const socket = socketClass.getSocket();
 const Videocall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
   const [muteAudio, setMuteAudio] = useState(false);
+  const [userDetails, setUserDetails] = useState(null);
   const [token, setToken] = useState();
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
@@ -34,19 +39,28 @@ const Videocall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
-  const { caller, id:paramsid } = useParams();
+  const { caller, id: paramsid } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     //get the token
     (async () => {
-      const room = generateRoomId(getUserProfile.u_id, paramsid);
-      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile.u_id, room_id: room, type: 'video' });
+      const room = generateRoomId(getUserProfile().u_id, paramsid);
+      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
       const token = await Axios.get(`http://103.76.253.131:8282/getToken?${params}`).then(res => res.data.token);
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
-    })()
+      getUserDetails(paramsid);
+
+    })();
+   socket.on('endVideoCall', data => {
+      console.log("call ended");
+      showErrorMessage("Call has been ended.")
+      setTimeout(() => {
+        history.push('/')
+      }, 2000);
+    })
     return () => {
       if (roomRef.current != null) {
         setToken(null)
@@ -60,6 +74,16 @@ const Videocall = (props) => {
       }
     }
   }, [])
+  const getUserDetails = (id) => {
+    socket.emit('userDetail', { "user_id": id }, data => {
+      // console.log("userDetail data", data);
+      if (data.success === 1) {
+        setUserDetails(data.userDetail);
+      } else {
+        // handle odd scenario
+      }
+    })
+  }
   const disconnect = () => {
     if (roomRef.current != null) {
       setToken(null)
@@ -70,6 +94,16 @@ const Videocall = (props) => {
       //   debugger;
       //   track.track.stop()
       // });
+      const payload = {
+        reciver_id: paramsid,
+        reciver_type: userDetails?.u_role_id,
+        // "sender": {},
+        type: "video",
+        sender_id: getUserProfile().u_id
+      }
+      socket.emit('endVideoCall', payload, data => {
+        console.log(data)
+      });
       history.push('/')
     }
   }
@@ -212,7 +246,7 @@ const Videocall = (props) => {
           <div className="userdetail pt-5">
             <span><Image src={Backicon} alt="" className="pointer" /></span>
             <span><Image src={Videouser} alt="" className="r50" /></span>
-            <span className="fs20 fw600 col60">William Smith</span>
+            <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
           </div>
           <div ref={remoteVideoRef} className="remoteMedia"></div>
           <div className="w-100 videocontrol">
@@ -238,57 +272,10 @@ const Videocall = (props) => {
               <Image src={Videodisconnect} className="pointer" onClick={disconnect} />
             </div>
           </div>
-
         </Container>
-
-        {showChat && <div className="chat_dashboard">
-          <div className="chat_top">
-            <Row>
-              <Col xs={6}>
-                <div className="mt-auto mb-auto">
-                  <span className="fs17 fw600 col18">William Smith</span>
-                </div>
-              </Col>
-              <Col xs={6}>
-                <div className="mt-auto mb-auto text-right">
-                  <Image src={ChatCross} alt="" className="pointer cross_btn" onClick={toggleChat} />
-                </div>
-              </Col>
-            </Row>
-            <div></div>
-          </div>
-          <div className="chat_middle">
-            <div className="mt-auto">
-              <div className="pl-3 pr-3 pb-3">
-                <div className="d-flex">
-                  <div className="mt-auto mb-auto">
-                    <Image src={UserChat4} alt="" className="r50 mr-3" />
-                  </div>
-                  <div className="mt-auto mb-auto">
-                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">Hi</div>
-                    <div className="fs10 fw300 col47">Thu Apr 30, 2020 1.12 pm</div>
-                  </div>
-                </div>
-              </div>
-              <div className="pl-3 pr-3 pb-3">
-                <div className="text-right">
-                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">Hi, how are you?</div>
-                  <div className="fs10 fw300 col47">Thu Apr 30, 2020 1.12 pm</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="chat_bottom">
-            <Form>
-              <Form.Group className="mb-0">
-                <div className="d-flex">
-                  <Form.Control type="text" placeholder="Type your message here..." className="inputTyp3" />
-                  <Button className="btnTyp7">Send</Button>
-                </div>
-              </Form.Group>
-            </Form>
-          </div>
-        </div>}
+        {userDetails &&
+          <ChatInCall show={showChat} toggle={toggleChat} user={userDetails} />}
+          }
       </div>
     </div>
   );

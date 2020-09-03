@@ -1,6 +1,8 @@
 import { getLocalStorage } from "../helpers/Utils";
 
-export default getLocalStorage('userInfo') ||
+const getUserProfile = () => getLocalStorage('userInfo') ||
   getLocalStorage('userInfoProff') ||
   getLocalStorage('customerInfo') ||
   getLocalStorage('userInfoAdmin');
+
+export default getUserProfile;

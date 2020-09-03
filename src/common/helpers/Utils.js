@@ -44,7 +44,15 @@ export const showErrorToast = (errorMessage, event) => {
     });
   }
 };
-
+// Tostr without condition
+export const showErrorMessage = (errorMessage, event) => {
+  toast.error(errorMessage, {
+    position: toast.POSITION.TOP_RIGHT,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true
+  });
+};
 // toastr messages for success
 export const showSuccessToast = message => {
   if (!toast.isActive(toastId)) {
@@ -114,7 +122,7 @@ export const isURL = str => {
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
     '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
+    '(\\#[-a-z\\d_]*)?$',
     'i'
   ); // fragment locator
   return pattern.test(str);

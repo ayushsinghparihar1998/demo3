@@ -30,10 +30,11 @@ import Videos from "../../assets/images/videos.svg";
 import Errors from "../../assets/images/errors.svg";
 import Chatcross2 from "../../assets/images/chat_cross2.svg";
 import Chatplus from "../../assets/images/user_plus.svg";
-import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
 import SocketIOClient from "socket.io-client";
 import moment from "moment";
 import socketClass from "../../common/utility/socketClass";
+import getUserProfile from "../../common/utility/getUserProfile";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -257,6 +258,26 @@ class ChatUser extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.changeChatpath(id);
   }
+  initCall = (type) => () => {
+    const { userMeta } = this.state;
+    const { u_email, u_id, u_role_id } = getUserProfile();
+    const payload = {
+      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+      "date": moment().format("YYYY-MM-DD"),
+      "time": moment().format("HH:mm:ss"),
+      "sender_id": u_id,
+      "sender": {
+        u_email, u_id, u_role_id
+      }, type: type
+    }
+    socket.emit("makeVideoCall", payload, (data) => {
+      if (data.success === 1) {
+        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type })
+      } else {
+        showErrorMessage(data.msg)
+      }
+    })
+  }
   render() {
     const { userMeta = {} } = this.state;
     console.log("this.state.activeChatUsers", this.state.activeChatUsers)
@@ -424,8 +445,8 @@ class ChatUser extends Component {
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image src={Calls} alt="" className="pointer mr-2" />
-                          <Image src={Videos} alt="" className="pointer mr-2" />
+                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
+                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           <Button className="btnTyp6 text-uppercase">
                             end chat
                           </Button>
