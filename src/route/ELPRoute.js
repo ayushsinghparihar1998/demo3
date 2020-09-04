@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
-import Landing from '../components/core/landing';
-import Login from '../components/login/Login';
+import React, { Component } from "react";
+import { Switch } from "react-router-dom";
+import Landing from "../components/core/landing";
+import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
 import ProfessionalLogin from '../components/login/professionalLogin';
 import Becomelistener from '../components/signup/becomeListener';
@@ -37,6 +37,7 @@ import socketClass from '../common/utility/socketClass';
 import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCalling';
 import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
 import Admincategory from '../components/jsx/superadmin/category'; 
+import CalendarDemo from "../components/professional/calendar";
 
 
 
@@ -102,6 +103,8 @@ class ELPRoute extends Component {
           />
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
+          <PrivateRouteProff path="/calendar" component={CalendarDemo} />
+
           <PrivateRoutes path="/myprofile" component={MyProfile} />
           <PrivateRoutes path="/editprofile" component={EditProfile} />
           <PrivateRoutes path="/videocall/:id" component={Videocall} />
