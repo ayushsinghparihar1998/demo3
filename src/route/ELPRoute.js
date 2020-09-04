@@ -1,39 +1,40 @@
-import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
-import Landing from '../components/core/landing';
-import Login from '../components/login/Login';
+import React, { Component } from "react";
+import { Switch } from "react-router-dom";
+import Landing from "../components/core/landing";
+import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
-import ProfessionalLogin from '../components/login/professionalLogin';
-import Becomelistener from '../components/signup/becomeListener';
-import Listenersignup from '../components/signup/listenerSignup';
-import Usersignup from '../components/signup/userSignup';
-import Userdashboard from '../components/listener/userdashboard'; 
-import Chat from '../components/listener/chat';
-import PrivateRouteList from './PrivateRouteList';
-import PrivateRouteProff from './PrivateRouteProff';
-import PublicRoute from './PublicRoute';
-import UserdashboardProff from '../components/professional/userdashboardProff';
-import ChatProff from '../components/professional/chatproff';
-import UserdashboardCust from '../components/user/userdashboard';
-import PrivateRouteUser from './PrivateRouteUser';  
-import PrivateRoutes from './PrivateRoutes'; 
-import MyProfile from '../components/editprofile/myprofile';
-import EditProfile from '../components/editprofile/editprofile';
-import ChatUser from '../components/user/chatUser';
-import Resetpassword from '../components/login/resetpassword';
-import Forgotpassword from '../components/login/forgotpassword';
-import Userotp from '../components/login/userotp';
-import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
-import Videocall from '../components/videoaudio/videocall'; 
-import Audiocall from '../components/videoaudio/audiocall';  
-import Professionalchatsearch from '../components/chat/professinalchatsearch';
+import ProfessionalLogin from "../components/login/professionalLogin";
+import Becomelistener from "../components/signup/becomeListener";
+import Listenersignup from "../components/signup/listenerSignup";
+import Usersignup from "../components/signup/userSignup";
+import Userdashboard from "../components/listener/userdashboard";
+import Chat from "../components/listener/chat";
+import PrivateRouteList from "./PrivateRouteList";
+import PrivateRouteProff from "./PrivateRouteProff";
+import PublicRoute from "./PublicRoute";
+import UserdashboardProff from "../components/professional/userdashboardProff";
+import ChatProff from "../components/professional/chatproff";
+import UserdashboardCust from "../components/user/userdashboard";
+import PrivateRouteUser from "./PrivateRouteUser";
+import PrivateRoutes from "./PrivateRoutes";
+import MyProfile from "../components/editprofile/myprofile";
+import EditProfile from "../components/editprofile/editprofile";
+import ChatUser from "../components/user/chatUser";
+import Resetpassword from "../components/login/resetpassword";
+import Forgotpassword from "../components/login/forgotpassword";
+import Userotp from "../components/login/userotp";
+import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";
+import Videocall from "../components/videoaudio/videocall";
+import Audiocall from "../components/videoaudio/audiocall";
+import Professionalchatsearch from "../components/chat/professinalchatsearch";
 
-import AdminLogin from '../components/admin/adminlogin';
-import Adminlistener from '../components/admin/listener';
-import Chatsearch from '../components/chat/chatsearch';
-import Admincategory from '../components/jsx/superadmin/category'; 
+import AdminLogin from "../components/admin/adminlogin";
+import Adminlistener from "../components/admin/listener";
+import Chatsearch from "../components/chat/chatsearch";
+import Admincategory from "../components/jsx/superadmin/category";
+import CalendarDemo from "../components/professional/calendar";
 
-class ELPRoute extends Component {  
+class ELPRoute extends Component {
   render() {
     return (
       <Switch>
@@ -60,17 +61,20 @@ class ELPRoute extends Component {
         {/* Proff */}
         <PublicRoute path="/adminlistener" component={Adminlistener} />
         <PublicRoute path="/usersignup" component={Usersignup} />
-        <PublicRoute path="/chatsearch" component={Chatsearch} /> 
-        <PublicRoute path="/videocall" component={Videocall} /> 
-        <PublicRoute path="/audiocall" component={Audiocall} />  
+        <PublicRoute path="/chatsearch" component={Chatsearch} />
+        <PublicRoute path="/videocall" component={Videocall} />
+        <PublicRoute path="/audiocall" component={Audiocall} />
         <PublicRoute path="/admincategory" component={Admincategory} />
-        <PublicRoute path="/professionalchatsearch" component={Professionalchatsearch} />  
+        <PublicRoute
+          path="/professionalchatsearch"
+          component={Professionalchatsearch}
+        />
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
         <PrivateRouteList path="/chat/:id" component={Chat} />
-        
+        <PrivateRouteProff path="/calendar" component={CalendarDemo} />
         {/* Proff */}
-        <PrivateRouteProff 
+        <PrivateRouteProff
           path="/userDashboardproff"
           component={UserdashboardProff}
         />
@@ -87,5 +91,4 @@ class ELPRoute extends Component {
     );
   }
 }
-export default ELPRoute; 
-
+export default ELPRoute;

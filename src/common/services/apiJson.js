@@ -271,4 +271,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+  getCalendarEvents: {
+    url: 'elp/get_event',
+    method: 'GET',
+    data: {
+     
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };
