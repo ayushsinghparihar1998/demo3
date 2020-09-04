@@ -287,4 +287,27 @@ export default {
     showResultMessage: true,
     showErrorMessage: true
   },
+  adminGetCategory: {
+    url: 'elp/superadmin_getcategory',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  searchProfessionals: {
+    url: '/elp/searchprofessionals',
+    method: 'POST',
+    data: {
+      category: '',
+      name: '',
+      country: '',
+      state: '',
+      city: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };
