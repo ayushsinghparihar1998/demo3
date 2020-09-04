@@ -250,21 +250,21 @@ export default {
     showErrorMessage: true,
   },
 
-    getCountry: {
+  getCountry: {
     url: 'elp/getcountry',
     method: 'GET',
     data: { email: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getState: {
+  getState: {
     url: 'elp/getstate',
     method: 'POST',
     data: { country_id: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getCity: {
+  getCity: {
     url: 'elp/getcity',
     method: 'POST',
     data: { state_id: '' },
@@ -275,9 +275,16 @@ export default {
     url: 'elp/get_event',
     method: 'GET',
     data: {
-     
+
     },
     showResultMessage: false,
     showErrorMessage: true,
+  },
+  adminUserDeleteReason: {
+    url: 'elp//superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment',
+    method: 'POST',
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true
   },
 };

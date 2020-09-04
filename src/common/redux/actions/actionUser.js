@@ -24,7 +24,8 @@ import {
   ADMIN_USER_DELETE,
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
-  SUBSCRIBE,GET_COUNTRY,GET_STATE,GET_CITY
+  SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
+  ADMIN_USER_DELETE_REASON,
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -197,4 +198,9 @@ export const actionGetCity = (data) => async dispatch => {
   dispatch({ type: GET_CITY, payload: request.data });
   return request;
 };
-    
+
+export const actionAdminUserDeleteReason = (data) => async (dispatch) => {
+  const request = ELPViewApiService('adminUserDeleteReason', data);
+  dispatch({ type: ADMIN_USER_DELETE_REASON, payload: request.data });
+  return request;
+};

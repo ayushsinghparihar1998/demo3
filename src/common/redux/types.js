@@ -26,6 +26,7 @@ export const SUBSCRIBE = 'SUBSCRIBE';
 export const GET_COUNTRY = 'GET_COUNTRY';
 export const GET_STATE = 'GET_STATE';
 export const GET_CITY = 'GET_CITY';
+export const ADMIN_USER_DELETE_REASON = 'ADMIN_USER_DELETE_REASON';
 
 
 
