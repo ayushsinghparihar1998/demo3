@@ -42,8 +42,13 @@ import {
   actionGetRecentJoin,
   actionGetUserDashBoard,
 } from "../../common/redux/actions";
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
-const socket = SocketIOClient(SOCKET_IO_URL);
+import socketClass from "../../common/utility/socketClass";
+import RecentChat from "../ChatShared/RecentChat/RecentChat";
+import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
+// const SOCKET_IO_URL = "http://103.76.253.131:8282";
+const socket = socketClass.getSocket();
+// SocketIOClient(SOCKET_IO_URL);
+
 // socket.connect();
 
 class Userdashboard extends Component {
@@ -61,14 +66,14 @@ class Userdashboard extends Component {
     this.unmount();
   }
   unmount = () => {
-    if (socket) {
-      socket.disconnect();
-    }
+    // if (socket) {
+    //   socket.disconnect();
+    // }
   }
   componentDidMount() {
-    if (!socket.connected) {
-      socket.connect();
-    }
+    // if (!socket.connected) {
+    //   socket.connect();
+    // }
     window.addEventListener("beforeunload", this.unmount)
     this.getRecentJoinUsers();
     this.getUserDashBoard();
@@ -106,16 +111,16 @@ class Userdashboard extends Component {
 
     socket.on("connect", function () {
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("customerInfo").u_id,
-        user_type: getLocalStorage("customerInfo").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
-      }
-    );
+    // socket.emit(
+    //   "chat-login",
+    //   JSON.stringify({
+    //     user_id: getLocalStorage("customerInfo").u_id,
+    //     user_type: getLocalStorage("customerInfo").u_role_id,
+    //   }),
+    //   function (data) {
+    //     console.log(data, "authenticateSocket");
+    //   }
+    // );
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
         this.setState(prev => ({
@@ -212,6 +217,9 @@ class Userdashboard extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.props.history.push('/chatuser/' + id);
   }
+  handleRedirectActiveUsers = (data) => () => {
+    this.props.history.push('/chatuser/' + data.id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -225,7 +233,9 @@ class Userdashboard extends Component {
             <Row>
               <Col md={3}>
                 <div className="left_sidebar">
-                  <div className="inner_side">
+                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
                     </div>
@@ -263,11 +273,11 @@ class Userdashboard extends Component {
                           </div>
                         );
                       })}
-                  </div>
+                  </div> */}
 
-                  <div className="inner_side">
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      <span>Currently Active Listeners</span>
+                      <span>Currently Active Listeners </span>
                     </div>
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
@@ -325,7 +335,7 @@ class Userdashboard extends Component {
                           Show Less
                         </div>
                       )}
-                  </div>
+                  </div> */}
                 </div>
               </Col>
 

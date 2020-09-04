@@ -31,13 +31,18 @@ import Videos from "../../assets/images/videos.svg";
 import Errors from "../../assets/images/errors.svg";
 import Chatcross2 from "../../assets/images/chat_cross2.svg";
 import Chatplus from "../../assets/images/user_plus.svg";
-import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
 import SocketIOClient from "socket.io-client";
 import moment from "moment";
+import socketClass from "../../common/utility/socketClass";
+import getUserProfile from "../../common/utility/getUserProfile";
+import RecentChat from "../ChatShared/RecentChat/RecentChat";
+import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
-const socket = SocketIOClient(SOCKET_IO_URL);
+// const SOCKET_IO_URL = "http://103.76.253.131:8282";
+// const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
+const socket = socketClass.getSocket();
 
 class Chat extends Component {
   constructor(props) {
@@ -70,13 +75,13 @@ class Chat extends Component {
   }
   unmount = () => {
     if (socket) {
-      socket.disconnect();
-      console.log("DISCOnnected ================================================")
+      //   socket.disconnect();
+      //   console.log("DISCOnnected ================================================")
     }
   }
   componentDidMount() {
     if (!socket.connected) {
-      socket.connect();
+      // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount)
     this.setState({
@@ -87,16 +92,16 @@ class Chat extends Component {
     socket.on("connect", function () {
       console.log("COnnected ================================================")
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
-        user_type: getLocalStorage("userInfo").u_role_id,
-      }),
-      function (data) {
-        console.log(data, "authenticateSocket");
-      }
-    );
+    // socket.emit(
+    //   "chat-login",
+    //   JSON.stringify({
+    //     user_id: getLocalStorage("userInfo").u_id,
+    //     user_type: getLocalStorage("userInfo").u_role_id,
+    //   }),
+    //   function (data) {
+    //     console.log(data, "authenticateSocket");
+    //   }
+    // );
     socket.emit("chatHistory", JSON.stringify({
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
@@ -127,9 +132,9 @@ class Chat extends Component {
     );
 
     socket.on("sendMessage", (data) => {
-      console.log("SEND_MESSAGE On", data);
+      console.log("getRecentsChatedUsers SEND_MESSAGE On", data);
       if (data.from_user_id == this.props.match.params.id) {
-        data.date_time = new Date();
+        // data.date_time = new Date();
         this.updateChat(data);
       }
     });
@@ -164,7 +169,7 @@ class Chat extends Component {
         user_type: getLocalStorage("userInfo").u_role_id,
         user_id: getLocalStorage("userInfo").u_id,
         pagination: "30",
-        page: "1",
+        page: "1"
       }),
       function (d) {
         console.log("getActiveListnersOrCustomers", d);
@@ -228,11 +233,12 @@ class Chat extends Component {
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
       message_type: 1,
-      date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+      date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type,
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      console.log("sendMessage", data);
       this.updateChat(object);
     });
   }
@@ -283,6 +289,29 @@ class Chat extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.changeChatpath(id);
   }
+  handleRedirectActiveUsers = (data) => () => {
+    this.changeChatpath(data.id);
+  }
+  initCall = (type) => () => {
+    const { userMeta } = this.state;
+    const { u_email, u_id, u_role_id } = getUserProfile();
+    const payload = {
+      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+      "date": moment().format("YYYY-MM-DD"),
+      "time": moment().format("HH:mm:ss"),
+      "sender_id": u_id,
+      "sender": {
+        u_email, u_id, u_role_id
+      }, type: type
+    }
+    socket.emit("makeVideoCall", payload, (data) => {
+      if (data.success === 1) {
+        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type })
+      } else {
+        showErrorMessage(data.msg);
+      }
+    })
+  }
   render() {
     const { userMeta = {} } = this.state;
     return (
@@ -296,7 +325,9 @@ class Chat extends Component {
               <Col md={3}>
                 <div className="left_sidebar">
                   <div className="left_sidebar">
-                    <div className="inner_side">
+                    <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                    <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                    {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                         Chat
                       </div>
@@ -337,9 +368,9 @@ class Chat extends Component {
                             </div>
                           );
                         })}
-                    </div>
+                    </div> */}
 
-                    <div className="inner_side">
+                    {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                         <span>Currently Active Listeners</span>
                       </div>
@@ -403,7 +434,8 @@ class Chat extends Component {
                             Show Less
                           </div>
                         )}
-                    </div>
+                    </div> */}
+                  
                   </div>
                 </div>
               </Col>
@@ -450,8 +482,8 @@ class Chat extends Component {
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image src={Calls} alt="" className="pointer mr-2" />
-                          <Image src={Videos} alt="" className="pointer mr-2" />
+                          <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
+                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           <Button
                             className="btnTyp6 text-uppercase"
                             onClick={() => this.handleClose2()}
@@ -523,7 +555,7 @@ class Chat extends Component {
                                       {msg.message}
                                     </div>
                                     <div className="fs10 fw300 col47">
-                                      {moment(msg.date_time).format("hh:mm")}
+                                      {moment(msg.date_time).format("hh:mm a")}
                                     </div>
                                   </div>
                                 </div>
