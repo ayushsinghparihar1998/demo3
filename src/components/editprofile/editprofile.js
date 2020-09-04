@@ -32,7 +32,7 @@ import Usaflag from '../../assets/images/usa_flag.svg';
 import warningS from '../../assets/images/w_signal.svg';
 import Camera from '../../assets/images/camera.svg';
 import Cameratwo from '../../assets/images/camera-white.svg';
-import Profileimgnew from '../../assets/images/profileinner_img.svg';
+import Profileimgnew from '../../assets/images/profileinner_img.svg'; 
 import Videoicon from '../../assets/images/video_icon.svg';
 import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
@@ -237,7 +237,7 @@ console.log("dob",dob)
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
-              <div className="myprofile">
+              <div className="myprofile"> 
                 <Image src={Profileban} alt="" className="w-100" />
                 <div className="upload_bg">
                   <Form.File id="custom-filetwo" />
@@ -457,7 +457,7 @@ console.log("dob",dob)
                             </Col>
                           </Row>
 
-                          <Button
+                          <Button 
                             className="btnTyp5 mt-5 mr-3"
                             onClick={this.handleSubmit}
                           >

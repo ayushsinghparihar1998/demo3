@@ -11,11 +11,11 @@ import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
+import Deleteusers from "../../assets/images/delete_users.svg"; 
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
+import Blueicons from "../../assets/images/blue_cross.svg"; 
 import { stubFalse } from "lodash";
 
 class Adminlistener extends Component {
@@ -241,27 +241,41 @@ class Adminlistener extends Component {
                         className="custom-popUp confirmation-box delete_modal"
                         bsSize="small"
                     >
-                        <Modal.Body>
-                            <div className="">
-                                <h5 className="text-center">
-                                    Are you sure you want to delete this?
-                    </h5>
-                                <div className="text-center">
+                        <Modal.Body> 
+                            <div className="delete_user mt-4">   
+                                <Image src={Deleteusers} alt="" />
+                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handleCloseConformation} />
+                                <div className="text-center fs24 mt-4 col64 mb-4">    
+                                Are you sure want to delete <br /> Veronica Wade? </div> 
+                                
+                                <div className="text-center mb-5">    
                                     <button
-                                        className="btn btn-default text-uppercase sm-btn"
+                                        className="btn btn-success text-uppercase"
                                         onClick={event =>
                                             this.adminUserDelete(event, this.state.profileId, 2)
                                         }
                                     >
-                                        OK
+                                        Yes
                         </button>
                                     <button
-                                        className="btn btn-success text-uppercase"
+                                        className="btn btn-default text-uppercase sm-btn"
                                         onClick={this.handleCloseConformation}
                                     >
-                                        Cancel
+                                        No 
                         </button>
                                 </div>
+                                <div className="fs18 fw500 col10 pointer write_txt mb-4">write a reason</div> 
+
+                                 <Form.Group controlId="exampleForm.ControlTextarea1" className="mb-4">  
+                                    <Form.Control as="textarea" className="textTypes1" />
+                                </Form.Group> 
+                                 
+                                <button
+                                        className="btn btn-success bt-submit text-uppercase" 
+                                        onClick={this.handleCloseConformation}
+                                    >
+                                        SUBMIT & DELETE  
+                                 </button> 
                             </div>
                         </Modal.Body>
                     </Modal>

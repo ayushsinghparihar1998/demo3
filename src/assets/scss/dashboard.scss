@@ -594,25 +594,40 @@
     }
 }
 
-.custom-popUp.confirmation-box.modal.delete_modal {    
+.custom-popUp.confirmation-box.modal.delete_modal {     
     .modal-content {
-        max-width: 450px;
+        max-width: 600px; 
         margin: auto;
+        border-radius: 0;
+        border-top: solid 10px $col23; 
 
         .modal-body {
             padding: 40px; 
+            text-align: center;
 
-            h5.text-center {
-                margin-bottom: 30px;
-            }
+           .delete_user {
+               
+              img.close  {
+                position: absolute;
+                right: 15px;
+                top: 12px;
+              }
+
+              .write_txt {
+                text-transform: uppercase;
+                text-decoration: underline;
+                text-underline-position: under;
+              }
+           }
 
             button.btn.sm-btn {  
                 margin-right: 15px;
-                border-color: $col23 !important;
-                background-color: $col23 !important; 
+                border-color: $col54 !important;
+                background-color: $col54 !important;  
+                height: 3rem; 
             }
 
-            button.btn {
+            button.btn { 
                 font-weight: 600;
                 font-size: 0.9375rem;
                 border-radius: 40px;
@@ -620,10 +635,26 @@
                 background-color: $col26 !important;  
                 color: $col18 !important; 
                 box-shadow: none !important; 
-                height: 2.8rem; 
-                padding: 0 0; 
-                width: 100px; 
+                font-size: $fs18 !important; 
+                height: 3rem; 
+                padding: 0 2rem; 
+                width: 100px;   
                 font-size: $fs15; 
+
+                &:hover { 
+                    background-color: $col1 !important; 
+                    border-color: $col1 !important; 
+                }
+                &:first-child {
+                    margin-right: 15px; 
+                }
+                
+                &.bt-submit { 
+                    width: auto;
+                    padding: 0 1.5rem;   
+                    margin-bottom: 10px; 
+                    margin-right: 0px;
+                }
             }
         }
     }

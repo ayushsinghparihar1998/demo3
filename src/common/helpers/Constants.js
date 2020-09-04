@@ -11,7 +11,7 @@ const CONSTANTS = {
     CREATEFEED: 'CreateFeed',
     LIKEFEED: 'LikeFeed',
     SHAREFEED: 'ShareFeed',
-    COMMENTONFEED: 'CommentOnFeed'
+    COMMENTONFEED: 'CommentOnFeed',
   },
   ROLES: {
     LISTNER: 1,

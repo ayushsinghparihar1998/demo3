@@ -48,6 +48,7 @@ a:hover {
   font-weight: 300 !important;
 }
 
+
 .inputTyp1.form-control:focus { 
   color       : $col1;
   background  : $col18;
@@ -59,18 +60,30 @@ a:hover {
     color: $col1;
 }
 
-.inputTyp1:focus::placeholder {
+.inputTyp1:focus::placeholder { 
     opacity: 0.4; 
 }
 
-.inputTyp2.form-control {  
+.inputTyp2.form-control {   
   color       : $col25 !important; 
   background  : $col22 !important;
   border: solid 0.5px $col23 !important;
   box-shadow  : none;
   height: 3.5rem; 
   border-radius: 0px; 
-  font-size: $fs18 !important;
+  font-size: $fs18 !important;  
+}
+
+.inputTyp2.input3 { 
+  height: 2.5rem;
+  background: $col18 !important; 
+  color: $col14 !important;
+  font-size: $fs16 !important;
+  font-weight: 300 !important;
+}
+
+.inputTyp2.input3::placeholder { 
+  color: $col10 !important; 
 }
 
 .inputTyp3 {
@@ -91,6 +104,27 @@ a:hover {
 }
 
 .inputTyp3::placeholder {
+    color: $col46; 
+}
+
+.textTypes1 { 
+  border          : 1px solid $col45 !important; 
+  border-radius: $col44;
+  background      : $col44;
+  color           : $col1 !important; 
+  text-align      : left !important;
+  font-size       : $fs16 !important;  
+  padding-left: 20px;
+  border-radius: 0px !important; 
+  height: 120px !important;
+}
+
+.textTypes1:focus,
+.textTypes1:active {
+    box-shadow: none !important;
+}
+
+.textTypes1::placeholder { 
     color: $col46; 
 }
 
@@ -149,6 +183,16 @@ a:hover {
   padding                   : 0 3rem 0 2rem !important; 
 }
 
+.selectTyp1.select3 {    
+  height: 2.5rem !important; 
+  background-color: #ffffff !important;
+  color: $col10 !important;
+  font-size: $fs16 !important;
+  font-weight: 300 !important;
+  padding-left: 15px !important;
+  box-shadow: none;  
+}
+
 .form-group {
   label {
       text-transform: capitalize; 
@@ -195,6 +239,23 @@ a:hover {
     content: url('../images/checked.svg'); 
   }
 }  
+
+.checkboxTyp1.check2 label:after {             
+  content: "";
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0;
+  top: 4px;
+}
+
+.checkboxTyp1.check2 [type='checkbox']:checked + label:before{
+  top: 1px;
+  left: 3px;
+}
+
+.checkboxTyp1.check2 label {  
+  padding-left: 2.5rem;
+}
 
 
 /* media query */

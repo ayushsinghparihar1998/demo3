@@ -29,7 +29,7 @@ class Chat extends Component {
                 </div>
                 <div className="userdashboards pt-4 pb-5">
                     <Container>
-                        <Row>
+                        <Row> 
                             <Col md={3}>
                                 <div className="left_sidebar">
                                     <div className="inner_side">
