@@ -10,7 +10,7 @@ import {
   Form,
   Tabs,
   Tab,
-} from 'react-bootstrap';
+} from 'react-bootstrap'; 
 import { connect } from 'react-redux';
 import {
     actionGetProfile,
