@@ -15,7 +15,7 @@ import Menuicon from "../../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../../assets/images/delete_icon.svg";
 
-class Adminlistener extends Component {
+class Adminlistener extends Component { 
     constructor(props) {
         super(props);
         this.state = {
@@ -29,11 +29,11 @@ class Adminlistener extends Component {
 
     getListnerListing = (e, activaClass) => {
         let data = { "count": 10, "offset": 1 }
-        this.props.actionGetListnerListing(data).then((result) => {
+        this.props.actionGetListnerListing(data).then((result) => { 
             if (result && result.status === 200) {
                 let profileListing = result && result.data && result.data.data ? result.data.data : [];
                 this.setState({ profileListing: profileListing, activeProfile: activaClass });
-            }
+            } 
         });
     }
     // getProfessionalListing = (e, activaClass) => {
@@ -60,7 +60,7 @@ class Adminlistener extends Component {
         let listnerActveClass = this.state.activeProfile == 'listner' ? "position-relative active" : "position-relative";
         let profileListing = this.state.profileListing;
         return (
-            <div className="page__wrapper innerpage">
+            <div className="page__wrapper innerpage"> 
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
@@ -90,6 +90,11 @@ class Adminlistener extends Component {
                                             <div className="position-relative">
                                                 <div className="fs14 col28 fw500"> LISTENER Q&A</div>
                                             </div>
+                                        </div> 
+                                        <div className="d-flex m-3 pb-3 border-bottom"> 
+                                            <div className="position-relative">
+                                                <div className="fs14 col28 fw500"> CATEGORY</div> 
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>

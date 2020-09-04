@@ -415,6 +415,39 @@
 
 }
 
+.categorys {
+    position: relative;
+
+    .category_listing {  
+        width: 100%;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: space-between; 
+            list-style: none;
+            border-bottom: solid 0.7px $col51;
+            padding: 15px 0; 
+            
+            & .c_img {
+
+                img {
+                    
+                    &:first-child {
+                    
+                    }
+                }
+                
+            }
+
+            &:last-child {
+                border-bottom: none; 
+            }
+        }
+    }
+}
+
 .confirmation-box { 
     .modal-dialog { 
         max-width: 1140px;  

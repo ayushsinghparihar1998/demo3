@@ -330,6 +330,16 @@
        margin-top: 2px;
        cursor: pointer; 
     }
+
+    &.cbttyp2 {
+       height: 2.9rem; 
+       background-color: $col18 !important; 
+       border-radius: solid 1px $col10 !important; 
+       color: $col10 !important; 
+       font-size: $fs15 !important;
+       font-weight: 500;
+       border-radius: 25px !important;
+    }
   }
   
   .btn-outline-primary {  

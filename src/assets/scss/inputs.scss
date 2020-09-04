@@ -25,10 +25,10 @@ a:hover {
       content: "";
       height: 2.0rem;
       width: 2.0rem;
-      border: 0.5px solid #8AD1E7 !important;
+      border: 0.5px solid $col23 !important; 
       display: inline-block;
       vertical-align: middle;
-      position: absolute;
+      position: absolute; 
       left: 0;
       border-radius: 50%;
     }
@@ -72,6 +72,10 @@ a:hover {
   height: 3.5rem; 
   border-radius: 0px; 
   font-size: $fs18 !important;  
+}
+
+.inputTyp2.categoryInput {        
+  height: 2.9rem;
 }
 
 .inputTyp2.input3 { 

@@ -31,6 +31,7 @@ import Professionalchatsearch from '../components/chat/professinalchatsearch';
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
 import Chatsearch from '../components/chat/chatsearch';
+import Admincategory from '../components/jsx/superadmin/category'; 
 
 class ELPRoute extends Component {  
   render() {
@@ -62,6 +63,7 @@ class ELPRoute extends Component {
         <PublicRoute path="/chatsearch" component={Chatsearch} /> 
         <PublicRoute path="/videocall" component={Videocall} /> 
         <PublicRoute path="/audiocall" component={Audiocall} />  
+        <PublicRoute path="/admincategory" component={Admincategory} />
         <PublicRoute path="/professionalchatsearch" component={Professionalchatsearch} />  
         {/* LIst */}
         <PrivateRouteList path="/userDashboard" component={Userdashboard} />
