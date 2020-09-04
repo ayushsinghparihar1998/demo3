@@ -53,6 +53,8 @@ import {
   removeLocalStorage,
 } from '../../common/helpers/Utils';
 import socketClass from '../../common/utility/socketClass';
+import RecentChat from '../ChatShared/RecentChat/RecentChat';
+import ActiveUsers from '../ChatShared/ActiveUsers/ActiveUsers';
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
@@ -77,7 +79,7 @@ class Userdashboard extends Component {
     // }
   }
   componentDidMount() {
-    if(!socket.connected){
+    if (!socket.connected) {
       // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount);
@@ -100,7 +102,7 @@ class Userdashboard extends Component {
     // }
 
     socket.on("connect", function () {
-      
+
     });
     // socket.emit(
     //   "chat-login",
@@ -214,7 +216,7 @@ class Userdashboard extends Component {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data && result.data.data.u_mem_list?result.data.data.u_mem_list:[];
+        let res = result.data.data && result.data.data.u_mem_list ? result.data.data.u_mem_list : [];
         this.setState({ recentJoin: res });
       }
     });
@@ -248,6 +250,9 @@ class Userdashboard extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.props.history.push('/chat/' + id);
   }
+  handleRedirectActiveUsers = (data) => () => {
+    this.props.history.push('/chat/' + data.id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -263,7 +268,8 @@ class Userdashboard extends Component {
               <Col md={3}>
                 <div className="left_sidebar">
                   <div className="left_sidebar">
-                    <div className="inner_side">
+                    <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                    {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 ">
                         Chat
                       </div>
@@ -303,7 +309,7 @@ class Userdashboard extends Component {
                             </div>
                           );
                         })}
-                    </div>
+                    </div> */}
 
                     {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -371,10 +377,10 @@ class Userdashboard extends Component {
                     </div>
                 */}
                   </div>
-
-                  <div className="inner_side">
+                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      <span>Currently Active Listeners</span>
+                      <span>Currently Active Listeners asdf </span>
                     </div>
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
@@ -431,6 +437,7 @@ class Userdashboard extends Component {
                       </div>
                     )}
                   </div>
+                 */}
                 </div>
               </Col>
               <Col md={6}>
@@ -610,7 +617,6 @@ class Userdashboard extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Recent join
                     </div>
-
                     {recentJoin &&
                       recentJoin.map((data, index) => {
                         return (
@@ -633,16 +639,6 @@ class Userdashboard extends Component {
                           </div>
                         );
                       })}
-
-                    {/* <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat2} alt="" className="r50 pt-1" />
-                      </div>
-                      <div className="mt-auto mb-auto pl-3">
-                        <div className="fs15 col14 fw500">Scott Smith</div>
-                        <div className="col27 fs13 fw500">Listeners</div>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </Col>
@@ -693,27 +689,27 @@ class Userdashboard extends Component {
                   </div>
                 </div>
               ) : (
-                <div className="layout_box text-center mt-3 mb-4 p-4">
-                  <Image src={Educationtwo} alt="" className="mb-4" />
-                  <div className="col9 fs44 fw600 mb-2">Sorry</div>
-                  <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
-                    please take the survey again or contact Admin
+                  <div className="layout_box text-center mt-3 mb-4 p-4">
+                    <Image src={Educationtwo} alt="" className="mb-4" />
+                    <div className="col9 fs44 fw600 mb-2">Sorry</div>
+                    <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
+                      please take the survey again or contact Admin
                   </div>
-                  {/* <Image src={Educationmarktwo} alt="" />    */}
-                  <div class="progress yellow">
-                    <span className="progress-full"></span>
-                    <span class="progress-left">
-                      <span class="progress-bar"></span>
-                    </span>
-                    <span class="progress-right">
-                      <span class="progress-bar"></span>
-                    </span>
-                    <div class="progress-value">
-                      {getLocalStorage('result')}%
+                    {/* <Image src={Educationmarktwo} alt="" />    */}
+                    <div class="progress yellow">
+                      <span className="progress-full"></span>
+                      <span class="progress-left">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <div class="progress-value">
+                        {getLocalStorage('result')}%
+                    </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
             </Container>
           </Modal.Body>
         </Modal>

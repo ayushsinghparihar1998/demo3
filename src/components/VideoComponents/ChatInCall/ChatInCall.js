@@ -28,7 +28,6 @@ function ChatInCall({ show, toggle, user }) {
     socket.on("sendMessage", (data) => {
       // console.log("SEND_MESSAGE On", data);
       if (data.from_user_id == user.id) {
-        data.date_time = new Date();
         setAllMsg(prev => [...prev, data]);
       }
     });
@@ -49,11 +48,11 @@ function ChatInCall({ show, toggle, user }) {
       to_user_id: user.id,
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
-      user_type: user.u_role_id
+      user_type: user.u_role_id,
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm:ss")
     };
-    console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      console.log("sendMessage", data);
       setAllMsg(prev => [...prev, object]);
     });
     setMsgInput("")

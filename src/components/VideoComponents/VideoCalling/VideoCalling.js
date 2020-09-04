@@ -24,7 +24,6 @@ function VideoCalling() {
       }
       console.log(history)
     })
-
     socket.on("cancelCall", data => {
       console.log("Call Cancelled", data)
       showErrorMessage("Call has been cancelled.")

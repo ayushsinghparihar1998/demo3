@@ -29,6 +29,7 @@ import ProfessionalSignup from '../signup/professionalSignup';
 import UserSignup from '../signup/userSignup';
 import { getLocalStorage, setLocalStorage } from '../../common/helpers/Utils';
 import CONSTANTS from '../../common/helpers/Constants';
+import socketClass from '../../common/utility/socketClass';
 class NavBar extends Component {
   constructor() {
     super();
@@ -100,6 +101,7 @@ handleLogoutAdmin = () => {
     this.props
       .actionLogout(data)
       .then((result) => {
+        socketClass.disconnect();
         console.log('rnv roleType', roleType);
         this.props.history.push({
           pathname: 'login',
