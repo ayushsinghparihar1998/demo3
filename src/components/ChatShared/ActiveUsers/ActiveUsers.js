@@ -29,10 +29,15 @@ function ActiveUsers({ onRedirect }) {
         page: '1',
       }),
       data => {
-        if (data.success)
-          setActiveUsers(data.data)
-        else
+        if (data.success) {
+          if (data.data && data.data.length > 0) {
+            const activeUsers = data.data.filter(item => item.show_record)
+            setActiveUsers(activeUsers)
+          }
+        }
+        else {
           console.warn("Error, getActiveListnersOrCustomers", data)
+        }
       }
     );
     // socket.emit('getRecentsChatedUsers', JSON.stringify({ user_id: user.u_id }), data => {
