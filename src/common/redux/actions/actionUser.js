@@ -24,7 +24,7 @@ import {
   ADMIN_USER_DELETE,
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
-  SUBSCRIBE
+  SUBSCRIBE,GET_COUNTRY,GET_STATE,GET_CITY
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -180,3 +180,21 @@ export const actionSubscribe = (data) => async dispatch => {
   return request;
 };
 
+export const actionGetCountry = (data) => async dispatch => {
+  const request = ELPViewApiService('getCountry', data);
+  dispatch({ type: GET_COUNTRY, payload: request.data });
+  return request;
+};
+
+export const actionGetState = (data) => async dispatch => {
+  const request = ELPViewApiService('getState', data);
+  dispatch({ type: GET_STATE, payload: request.data });
+  return request;
+};
+
+export const actionGetCity = (data) => async dispatch => {
+  const request = ELPViewApiService('getCity', data);
+  dispatch({ type: GET_CITY, payload: request.data });
+  return request;
+};
+    

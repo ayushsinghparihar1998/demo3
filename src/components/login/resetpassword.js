@@ -150,7 +150,7 @@ class Resetpassword extends Component {
               </Form.Group> 
 
               <Button onClick={this.handleSubmitUser} className="btnTyp4 text-uppercase">
-                Save
+                Submit
               </Button>   
 
             </div>

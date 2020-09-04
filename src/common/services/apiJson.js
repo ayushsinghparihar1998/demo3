@@ -249,4 +249,26 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+
+    getCountry: {
+    url: 'elp/getcountry',
+    method: 'GET',
+    data: { email: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+    getState: {
+    url: 'elp/getstate',
+    method: 'POST',
+    data: { country_id: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+    getCity: {
+    url: 'elp/getcity',
+    method: 'POST',
+    data: { state_id: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
 };

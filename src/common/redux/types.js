@@ -23,6 +23,9 @@ export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const GET_PROFILE_BY_ID = 'GET_PROFILE_BY_ID';
 export const UPDATE_USER_DETAILS = 'UPDATE_USER_DETAILS';
 export const SUBSCRIBE = 'SUBSCRIBE';
+export const GET_COUNTRY = 'GET_COUNTRY';
+export const GET_STATE = 'GET_STATE';
+export const GET_CITY = 'GET_CITY';
 
 
 

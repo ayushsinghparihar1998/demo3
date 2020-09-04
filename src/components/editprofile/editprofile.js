@@ -13,9 +13,12 @@ import {
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
-  actionGetProfile,
-  actionUpdateUserDetails,
-  actionResetPassword,
+    actionGetProfile,
+    actionUpdateUserDetails,
+    actionResetPassword,
+    actionGetCountry,
+    actionGetState,
+    actionGetCity,
 } from '../../common/redux/actions';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import moment from 'moment';
@@ -33,9 +36,11 @@ import Profileimgnew from '../../assets/images/profileinner_img.svg';
 import Videoicon from '../../assets/images/video_icon.svg';
 import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
-
-import { setLocalStorage } from '../../common/helpers/Utils';
-
+import 'antd/dist/antd.css';
+import { Select } from 'antd';
+import { setLocalStorage,capitalizeFirstLetter } from '../../common/helpers/Utils';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 class Editprofile extends Component {
   constructor(props) {
     super(props);
@@ -47,12 +52,13 @@ class Editprofile extends Component {
       day: '',
       month: '',
       year: '',
+      countryList:[]
     };
   }
 
   componentDidMount() {
     this.getProfile();
-    console.log('this.props', this.props);
+    this.getCountry();
   }
 
   getProfile = () => {
@@ -78,7 +84,48 @@ console.log("dob",dob)
       }
     });
   };
-
+  getCountry = () => {
+    this.props.actionGetCountry({}).then((result) => {
+      console.log("resqweqweqweult",result)
+      if (result && result.status === 200) {
+        let countryList =
+          result.data.data && result.data.data
+            ? result.data.data
+            : [];
+        this.setState({
+          countryList:countryList
+        });
+      }
+    });
+  };
+  getState = () => {
+    this.props.actionGetState({country_id:this.state.countryId}).then((result) => {
+      console.log("resqweqweqweult",result)
+      if (result && result.status === 200) {
+        let stateList =
+          result.data.data && result.data.data
+            ? result.data.data
+            : [];
+        this.setState({
+          stateList:stateList
+        });
+      }
+    });
+  };
+  getCity = () => {
+    this.props.actionGetCity({state_id:this.state.stateId}).then((result) => {
+      console.log("resqweqweqweult",result)
+      if (result && result.status === 200) {
+        let cityList =
+          result.data.data && result.data.data
+            ? result.data.data
+            : [];
+        this.setState({
+          cityList:cityList
+        });
+      }
+    });
+  };
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -103,17 +150,26 @@ console.log("dob",dob)
         password: this.state.userPassword,
         u_birthdate: dob,
         u_name: this.state.userName,
-        u_gender: '',
-        u_image: '',
+        u_gender: this.state.gender,
+        u_image: this.state.image,
+        u_country:this.state.countryId,
+        u_state:this.state.stateId,
+        u_city:this.state.cityId,
+        u_bio:this.state.discription,
+        u_mobile:this.state.mobileNumber
       };
     } else {
       data = {
         email: this.state.userEmail,
-        //  password: this.state.userPassword,
         u_birthdate: dob,
         u_name: this.state.userName,
-        u_gender: '',
-        u_image: '',
+        u_gender: this.state.gender,
+        u_image: this.state.image,
+        u_country:this.state.countryId,
+        u_state:this.state.stateId,
+        u_city:this.state.cityId,
+        u_bio:this.state.discription,
+        u_mobile:this.state.mobileNumber
       };
     }
 
@@ -139,6 +195,39 @@ console.log("dob",dob)
     });
   };
 
+ onChangeSelection(value) {
+  console.log("valuevaluevalue",value)
+    this.setState({
+      countryId: value,
+      stateId: '',
+      cityId: '',
+      },()=>{
+          this.getState()
+    });
+
+  }
+   onChangeSelectionState(value) {
+  console.log("valuevaluevalue",value)
+    this.setState({
+      stateId: value,
+      cityId: '',
+      },()=>{
+          this.getCity()
+    });
+
+  }
+   onChangeSelectionCity(value) {
+  console.log("valuevaluevalue",value)
+    this.setState({
+      cityId: value,
+    });
+
+  }
+  handleMobileChange=(value)=>{
+ this.setState({
+      mobileNumber: value,
+    });
+  }
   render() {
     return (
       <div className="page__wrapper innerpage">
@@ -211,49 +300,103 @@ console.log("dob",dob)
                               />
                               <Button
                                 className="btnTyp11 ml-3"
-                                onClick={this.handleResetPassword}
-                              >
+                                onClick={this.handleResetPassword}>
                                 reset
                               </Button>
                             </div>
                           </Form.Group>
-
-                          {/* <Form.Label className="fs20 fw600 col14 mt-2">
-                            Date of Birth:
+                          
+                          <Form.Group>
+                            <Form.Label className="fs20 fw600 col14">
+                              Mobile Number:
+                            </Form.Label>
+                            <PhoneInput
+                            placeholder="Enter phone number"
+                            value={this.state.mobileNumber}
+                            onChange={this.handleMobileChange}/>
+                          </Form.Group>
+                          <Form.Group>
+                            <Form.Label className="fs20 fw600 col14">
+                              Description:
+                            </Form.Label>
+                            <Form.Control
+                              type="textarea"
+                              name="discription"
+                              onChange={this.handleChange}
+                              value={this.state.discription}
+                              className="inputTyp2"
+                            />
+                          </Form.Group>
+                          <Form.Label className="fs20 fw600 col14 mt-2">
+                            Country:
                           </Form.Label>
                           <Row>
                             <Col md={3}>
-                              <Form.Group>
-                                <Form.Control
-                                  as="select"
-                                  className="selectTyp1"
-                                >
-                                  <option>Date</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </Form.Control>
-                              </Form.Group>
+                              <Select
+                                classes="form-control selectTyp1"
+                                showSearch
+                                style={{ width: 200 }}
+                                placeholder="Select a Country"
+                                optionFilterProp="children"
+                                onChange={event => this.onChangeSelection(event)}
+                                value={this.state.countryId}
+                              >
+                                <option value="">Select a Country</option>
+                                {this.state.countryList && this.state.countryList.map(
+                                  (item, index) => {
+                                    return (
+                                      <option value={item.country_id}>
+                                          {capitalizeFirstLetter(item.country_name)}
+                                        </option>
+                                    );
+                                  }
+                                )}
+                              </Select>
                             </Col>
-
                             <Col md={3}>
-                              <Form.Group>
-                                <Form.Control
-                                  as="select"
-                                  className="selectTyp1"
-                                >
-                                  <option>Year</option>
-                                  <option>1990</option>
-                                  <option>1991</option>
-                                  <option>1992</option>
-                                  <option>1993</option>
-                                </Form.Control>
-                              </Form.Group>
+                              <Select
+                                classes="form-control selectTyp1"
+                                showSearch
+                                style={{ width: 200 }}
+                                placeholder="Select a State"
+                                optionFilterProp="children"
+                                onChange={event => this.onChangeSelectionState(event)}
+                                value={this.state.stateId}
+                              >
+                                <option value="">Select a State</option>
+                                {this.state.stateList && this.state.stateList.map(
+                                  (item, index) => {
+                                    return (
+                                      <option value={item.state_id}>
+                                          {capitalizeFirstLetter(item.state_name)}
+                                        </option>
+                                    );
+                                  }
+                                )}
+                              </Select>
+                            </Col>
+                            <Col md={3}>
+                              <Select
+                                classes="form-control selectTyp1"
+                                showSearch
+                                style={{ width: 200 }}
+                                placeholder="Select a City"
+                                optionFilterProp="children"
+                                onChange={event => this.onChangeSelectionCity(event)}
+                                value={this.state.cityId}>
+                                <option value="">Select a City</option>
+                                {this.state.cityList && this.state.cityList.map(
+                                  (item, index) => {
+                                    return (
+                                      <option value={item.ct_id}>
+                                          {capitalizeFirstLetter(item.city)}
+                                        </option>
+                                    );
+                                  }
+                                )}
+                              </Select>
                             </Col>
                           </Row>
-                           */}
-
                           <Form.Label className="fs20 fw600 col14 mt-2">
                             Date of birth:
                           </Form.Label>
@@ -645,4 +788,7 @@ export default connect(null, {
   actionGetProfile,
   actionUpdateUserDetails,
   actionResetPassword,
+  actionGetCountry,
+  actionGetState,
+  actionGetCity,
 })(Editprofile);
