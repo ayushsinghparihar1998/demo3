@@ -38,9 +38,12 @@ import Medals from '../../assets/images/medals.svg';
 import Rflag from '../../assets/images/r_flag.svg';
 import SocketIOClient from 'socket.io-client';
 import { getLocalStorage } from '../../common/helpers/Utils';
-const SOCKET_IO_URL = 'http://103.76.253.131:8282';
-const socket = SocketIOClient(SOCKET_IO_URL);
-
+import socketClass from '../../common/utility/socketClass';
+import RecentChat from '../ChatShared/RecentChat/RecentChat';
+import ActiveUsers from '../ChatShared/ActiveUsers/ActiveUsers';
+// const SOCKET_IO_URL = 'http://103.76.253.131:8282';
+// const socket = SocketIOClient(SOCKET_IO_URL);
+const socket = socketClass.getSocket();
 class ProfessionalDashboard extends Component {
   constructor(props) {
     super(props);
@@ -58,12 +61,12 @@ class ProfessionalDashboard extends Component {
   }
   unmount = () => {
     if (socket) {
-      socket.disconnect();
+      // socket.disconnect();
     }
   }
   componentDidMount() {
-    if(!socket.connected){
-      socket.connect();
+    if (!socket.connected) {
+      // socket.connect();
     }
     window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
@@ -85,16 +88,16 @@ class ProfessionalDashboard extends Component {
     }
 
     socket.on("connect", function () {
-      socket.emit(
-        "chat-login",
-        JSON.stringify({
-          user_id: getLocalStorage("userInfoProff").u_id,
-          user_type: getLocalStorage("userInfoProff").u_role_id,
-        }),
-        function (data) {
-          console.log(data, "authenticateSocket");
-        }
-      );
+      // socket.emit(
+      //   "chat-login",
+      //   JSON.stringify({
+      //     user_id: getLocalStorage("userInfoProff").u_id,
+      //     user_type: getLocalStorage("userInfoProff").u_role_id,
+      //   }),
+      //   function (data) {
+      //     console.log(data, "authenticateSocket");
+      //   }
+      // );
     });
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
@@ -189,6 +192,9 @@ class ProfessionalDashboard extends Component {
     const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.props.history.push('/chatproff/' + id);
   }
+  handleRedirectActiveUsers = (data) => () => {
+    this.props.history.push('/chatproff/' + data.id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -202,7 +208,8 @@ class ProfessionalDashboard extends Component {
             <Row>
               <Col md={3}>
                 <div className="left_sidebar">
-                  <div className="inner_side">
+                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
                     </div>
@@ -243,102 +250,11 @@ class ProfessionalDashboard extends Component {
                           </div>
                         );
                       })}
-                    {/* <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="pointer cross_btn"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat2} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">John</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat3} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat4} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Stiv</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat5} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Jinny</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-                   */}
-                  </div>
-
-                  <div className="inner_side">
+                  </div> */}
+                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       <span
-                      // onClick={() => this.call()}
                       >
                         Currently Active Listeners
                       </span>
@@ -346,7 +262,6 @@ class ProfessionalDashboard extends Component {
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
                         <div className="chat-border"></div>
-                        {console.log("activeChatUsers", this.state.activeChatUsers)}
                         {this.state.activeChatUsers &&
                           this.state.activeChatUsers.map((item, ind) => {
                             return ind < this.state.showVal ? (
@@ -370,8 +285,8 @@ class ProfessionalDashboard extends Component {
                                 </div>
                               </div>
                             ) : (
-                              ''
-                            );
+                                ''
+                              );
                           })}
                       </Tab>
                     </Tabs>
@@ -387,18 +302,18 @@ class ProfessionalDashboard extends Component {
                         Show More
                       </div>
                     ) : (
-                      <div
-                        className="fs15 fw600 col23 p-3 pointer show-more"
-                        onClick={() => {
-                          this.setState({
-                            showVal: 4,
-                          });
-                        }}
-                      >
-                        Show Less
-                      </div>
-                    )}
-                  </div>
+                        <div
+                          className="fs15 fw600 col23 p-3 pointer show-more"
+                          onClick={() => {
+                            this.setState({
+                              showVal: 4,
+                            });
+                          }}
+                        >
+                          Show Less
+                        </div>
+                      )}
+                  </div> */}
                 </div>
               </Col>
 
