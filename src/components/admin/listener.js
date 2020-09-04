@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
     actionGetListnerListing, actionGetCustomerListing,
     actionGetProfessionalListing, actionadminUserDelete, actionAdminChangeUserStatus,
+    actionAdminUserDeleteReason
 } from "../../common/redux/actions";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
 import Pagination from "react-js-pagination";
@@ -11,11 +12,11 @@ import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
-import Deleteusers from "../../assets/images/delete_users.svg"; 
+import Deleteusers from "../../assets/images/delete_users.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
-import Blueicons from "../../assets/images/blue_cross.svg"; 
+import Blueicons from "../../assets/images/blue_cross.svg";
 import { stubFalse } from "lodash";
 
 class Adminlistener extends Component {
@@ -27,7 +28,9 @@ class Adminlistener extends Component {
             deleteConformationModal: false,
             profileId: '',
             pageNumber: customPagination.paginationPageNumber,
-            totalRecord: 0
+            totalRecord: 0,
+            userProfileName: '',
+            reasonForDelete: '',
         };
     }
     componentDidMount() {
@@ -131,10 +134,11 @@ class Adminlistener extends Component {
     }
 
 
-    adminUserDeleteConfirm = (e, uid) => {
+    adminUserDeleteConfirm = (e, uid, name) => {
         this.setState({
             deleteConformationModal: true,
             profileId: uid,
+            userProfileName: name,
         })
     }
 
@@ -145,6 +149,33 @@ class Adminlistener extends Component {
         })
     }
 
+    handleChange(e) {
+        const name = e.target.name;
+        let value = e.target.value;
+
+        this.setState({
+            reasonForDelete: value
+        });
+    }
+
+    adminUserDeleteReason = (e, uid, status) => {
+        let pageNumber = this.state.pageNumber;
+        let reason = this.state.reasonForDelete;
+        let chkUserProfile = this.state.activeProfile;
+        let data = { "userid": uid, "ui_status": status, "ui_comment": reason }
+        this.props.actionAdminUserDeleteReason(data).then((result) => {
+            this.setState({ deleteConformationModal: false })
+            if (result && result.status === 200) {
+                if (chkUserProfile === 'user') {
+                    this.getCustomerListing(e, 'user', pageNumber);
+                } else if (chkUserProfile === 'professional') {
+                    this.getProfessionalListing(e, 'professional', pageNumber);
+                } else if (chkUserProfile === 'listner') {
+                    this.getListnerListing(e, 'listner', pageNumber);
+                }
+            }
+        });
+    }
 
     render() {
         let totalRecord = this.state.totalRecord;
@@ -152,6 +183,7 @@ class Adminlistener extends Component {
         let professnalActveClass = this.state.activeProfile == 'professional' ? "position-relative active" : "position-relative";
         let listnerActveClass = this.state.activeProfile == 'listner' ? "position-relative active" : "position-relative";
         let profileListing = this.state.profileListing;
+        let profileName = this.state.userProfileName;
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -200,7 +232,7 @@ class Adminlistener extends Component {
                                                     <div className="pl-2 w-100">
                                                         <div className="d-flex justify-content-between">
                                                             <div onClick={(e) => { this.userProfile(e, item.id) }}>
-                                                                <div                                                                   
+                                                                <div
                                                                     className="col1 fw500 fs18 pb-1">{item.u_name ? item.u_name : ''}</div>
                                                                 <div className="col40 fs15 fw400 pb-1">
                                                                     Category:  {item.uc_cat_name && item.uc_cat_name.map((cat, idx) => {
@@ -223,7 +255,7 @@ class Adminlistener extends Component {
                                                                         checked={item.u_status ? true : false}
                                                                     />
                                                                 </span>
-                                                                <span onClick={(e) => { this.adminUserDeleteConfirm(e, item.id) }}><Image src={Deleteicon} alt="" /></span>
+                                                                <span onClick={(e) => { this.adminUserDeleteConfirm(e, item.id, item.u_name) }}><Image src={Deleteicon} alt="" /></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -236,19 +268,19 @@ class Adminlistener extends Component {
                     </Container>
 
                     <Modal
-                        show={this.state.deleteConformationModal}  
+                        show={this.state.deleteConformationModal}
                         onHide={this.handleCloseConformation}
                         className="custom-popUp confirmation-box delete_modal"
                         bsSize="small"
                     >
-                        <Modal.Body> 
-                            <div className="delete_user mt-4">   
+                        <Modal.Body>
+                            <div className="delete_user mt-4">
                                 <Image src={Deleteusers} alt="" />
                                 <Image src={Blueicons} alt="" className="close pointer" onClick={this.handleCloseConformation} />
-                                <div className="text-center fs24 mt-4 col64 mb-4">    
-                                Are you sure want to delete <br /> Veronica Wade? </div> 
-                                
-                                <div className="text-center mb-5">    
+                                <div className="text-center fs24 mt-4 col64 mb-4">
+                                    Are you sure want to delete <br /> {profileName}? </div>
+
+                                <div className="text-center mb-5">
                                     <button
                                         className="btn btn-success text-uppercase"
                                         onClick={event =>
@@ -261,21 +293,28 @@ class Adminlistener extends Component {
                                         className="btn btn-default text-uppercase sm-btn"
                                         onClick={this.handleCloseConformation}
                                     >
-                                        No 
+                                        No
                         </button>
                                 </div>
-                                <div className="fs18 fw500 col10 pointer write_txt mb-4">write a reason</div> 
+                                <div className="fs18 fw500 col10 pointer write_txt mb-4">WRITE A REASON
+                                </div>
 
-                                 <Form.Group controlId="exampleForm.ControlTextarea1" className="mb-4">  
-                                    <Form.Control as="textarea" className="textTypes1" />
-                                </Form.Group> 
-                                 
+                                <Form.Group controlId="exampleForm.ControlTextarea1" className="mb-4">
+                                    <Form.Control as="textarea" className="textTypes1"
+                                        name="reason"
+                                        onChange={event => {
+                                            this.handleChange(event);
+                                        }} />
+                                </Form.Group>
+
                                 <button
-                                        className="btn btn-success bt-submit text-uppercase" 
-                                        onClick={this.handleCloseConformation}
-                                    >
-                                        SUBMIT & DELETE  
-                                 </button> 
+                                    className="btn btn-success bt-submit text-uppercase"
+                                    onClick={event =>
+                                        this.adminUserDeleteReason(event, this.state.profileId, 2)
+                                    }
+                                >
+                                    SUBMIT & DELETE
+                                 </button>
                             </div>
                         </Modal.Body>
                     </Modal>
@@ -305,4 +344,5 @@ class Adminlistener extends Component {
 export default connect(null, {
     actionGetListnerListing, actionGetCustomerListing,
     actionGetProfessionalListing, actionadminUserDelete, actionAdminChangeUserStatus,
+    actionAdminUserDeleteReason
 })(Adminlistener);

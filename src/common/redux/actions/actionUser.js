@@ -26,6 +26,7 @@ import {
   UPDATE_USER_DETAILS,
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
   SEARCH_LISTNER
+  ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -199,8 +200,25 @@ export const actionGetCity = (data) => async dispatch => {
   return request;
 };
 
+
 export const actionSearchListner = (data) => async dispatch => {
   const request = ELPViewApiService('searchlistener', data);
   dispatch({ type: SEARCH_LISTNER, payload: request.data });
+
+export const actionAdminUserDeleteReason = (data) => async (dispatch) => {
+  const request = ELPViewApiService('adminUserDeleteReason', data);
+  dispatch({ type: ADMIN_USER_DELETE_REASON, payload: request.data });
+  return request;
+};
+
+export const actionAdminGetCategory = (data) => async (dispatch) => {
+  const request = ELPViewApiService('adminGetCategory', data);
+  dispatch({ type: GET_ADMIN_CATEGORY, payload: request.data });
+  return request;
+};
+
+export const actionSearchProfessionals = (data) => async (dispatch) => {
+  const request = ELPViewApiService('searchProfessionals', data);
+  dispatch({ type: SEARCH_PROFESSIONAL, payload: request.data });
   return request;
 };

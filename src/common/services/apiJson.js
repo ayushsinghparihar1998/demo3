@@ -280,7 +280,36 @@ export default {
     url: 'elp/get_event',
     method: 'GET',
     data: {
-
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  adminUserDeleteReason: {
+    url: 'elp//superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment',
+    method: 'POST',
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true
+  },
+  adminGetCategory: {
+    url: 'elp/superadmin_getcategory',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  searchProfessionals: {
+    url: '/elp/searchprofessionals',
+    method: 'POST',
+    data: {
+      category: '',
+      name: '',
+      country: '',
+      state: '',
+      city: '',
     },
     showResultMessage: false,
     showErrorMessage: true,
