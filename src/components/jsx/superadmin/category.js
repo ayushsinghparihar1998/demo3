@@ -107,7 +107,7 @@ class Admincategory extends Component {
                                                      <Image src={Deleteicon} alt="" />         
                                                   </div> 
                                              </li>
-                                             <li>
+                                             <li> 
                                                   <div className="col23 fs16 fw400">Weight Management</div>
                                                   <div className="c_img">
                                                      <Image src={Requestdetails} alt="" className="mr-2" />   
