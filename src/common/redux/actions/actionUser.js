@@ -24,7 +24,8 @@ import {
   ADMIN_USER_DELETE,
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
-  SUBSCRIBE,GET_COUNTRY,GET_STATE,GET_CITY
+  SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
+  SEARCH_LISTNER
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -197,4 +198,9 @@ export const actionGetCity = (data) => async dispatch => {
   dispatch({ type: GET_CITY, payload: request.data });
   return request;
 };
-    
+
+export const actionSearchListner = (data) => async dispatch => {
+  const request = ELPViewApiService('searchlistener', data);
+  dispatch({ type: SEARCH_LISTNER, payload: request.data });
+  return request;
+};

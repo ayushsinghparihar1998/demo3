@@ -243,28 +243,33 @@ export default {
       // password: '',
       u_birthdate: '',
       u_name: '',
-      // u_gender: '',
-      // u_image: '',
+      u_gender: '',
+      id: '',
+      u_bio: '',
+      u_city: '',
+      u_country: '',
+      u_mobile: '',
+      u_state: '',
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
 
-    getCountry: {
+  getCountry: {
     url: 'elp/getcountry',
     method: 'GET',
     data: { email: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getState: {
+  getState: {
     url: 'elp/getstate',
     method: 'POST',
     data: { country_id: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getCity: {
+  getCity: {
     url: 'elp/getcity',
     method: 'POST',
     data: { state_id: '' },
@@ -275,9 +280,19 @@ export default {
     url: 'elp/get_event',
     method: 'GET',
     data: {
-     
+
     },
     showResultMessage: false,
     showErrorMessage: true,
   },
+  searchlistener: {
+    url: 'elp/searchlistener',
+    method: 'GET',
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
 };
