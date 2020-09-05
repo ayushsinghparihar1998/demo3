@@ -454,6 +454,92 @@
     }
 }
 
+.main_calender { 
+    background-color: $col22; 
+    min-height: calc(100vh - 146px); 
+    .calenderset { 
+        
+    }
+    .bg-white { 
+        border-top: solid 10px $col23; 
+        background-color: $col18;
+        padding: 15px 30px !important;
+    }
+    .light-shadow { 
+        .fc-btn-group {
+            button.btn-cal {
+                background-color: $col1;
+                color: $col18;
+
+                &:first-child {
+                    margin-right: 10px;  
+                }
+            }
+        }
+
+        .fc-theme-standard {
+            table.fc-col-header th { 
+                background: $col10;  
+                padding: 20px 0;
+                    & a { 
+                        color: $col18; 
+                        font-weight: 500;  
+                    }
+            }
+
+            tbody {
+                tr {
+                    & > td {
+                        &:first-child {
+                            // background: $col10;
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        .demo-app-calendar {
+            .fc-header-toolbar.fc-toolbar { 
+                display: flex;
+                
+                .fc-toolbar-chunk {
+                    position: relative;
+
+                    .fc-button-group {
+
+                        button.fc-button.fc-button-primary {
+                            background: $col18 !important;
+                            border-color: $col18 !important; 
+                            outline: 0; 
+                            box-shadow: none;
+                            border: none;
+
+                            span {
+                                font-size: 30px; 
+                                color: #333;
+                            }
+                        }
+                    }
+
+                    &:nth-child(1) {
+                        order: 3;
+                        h2.fc-toolbar-title { 
+                            font-size: 20px; 
+                        }
+                    }
+                    &:nth-child(2) {
+                        order: 2; 
+                    }
+                    &:nth-child(3) {
+                        order: 1; 
+                    }
+                }
+            }
+        }
+    }
+}
+
 /*****calender modal start*****/
 
 .calender_model { 
@@ -467,6 +553,17 @@
 
         .modal-body {
             padding: 20px 25px;
+
+            .form-group {
+                
+                .react-datepicker-wrapper {
+                    width: 100%;
+                }
+
+                .selectTyp1.p3.selectWidth {
+                    max-width: 180px; 
+                }
+            }
         }
     }
   }

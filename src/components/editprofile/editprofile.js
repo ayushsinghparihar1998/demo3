@@ -53,7 +53,21 @@ class Editprofile extends Component {
       day: '',
       month: '',
       year: '',
-      countryList: []
+      countryList: [],
+      userId: '',
+      chats: '',
+      lastactive: '',
+      listento: '',
+      listnersince: '',
+      bio: '',
+      cityId: '',
+      countryId: '',
+      flag: '',
+      gender: '',
+      lang: '',
+      rating: '',
+      stateId: '',
+      mobileNumber:'',
     };
   }
 
@@ -65,14 +79,12 @@ class Editprofile extends Component {
   getProfile = () => {
     this.props.actionGetProfile({}).then((result) => {
       if (result && result.status === 200) {
-        console.log("actionGetProfile423423", result)
+        console.log(result.data.data.profile_list,"actionGetProfile423423", result)
         let profile =
-          result.data.data.profile_list && result.data.data.profile_list[0]
-            ? result.data.data.profile_list[0]
+          result.data.data.profile_list && result.data.data.profile_list
+            ? result.data.data.profile_list
             : {};
         let dob = profile.u_birthdate ? profile.u_birthdate.split('/') : ['', '', ''];
-        console.log("dob", dob)
-        //  let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
         this.setState({
           userData: profile,
           userName: profile.u_name,
@@ -248,7 +260,7 @@ class Editprofile extends Component {
   }
   render() { 
     const { errors } = this.state;
-    console.log('errors', errors);
+    console.log(this.state,'errors', errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
