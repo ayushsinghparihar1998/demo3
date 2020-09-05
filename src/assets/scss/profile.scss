@@ -7,6 +7,39 @@
         border-top: solid 10px $col23;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
         position: relative; 
+
+        .ant-select {
+            min-width: 100%;
+            .ant-select-selector { 
+                color: #9F9F9F !important;
+                background: #f3fdff !important;
+                border: solid 0.5px #8AD1E7 !important;
+                box-shadow: none;
+                height: 3.5rem !important;
+
+                & .ant-select-selection-search {
+                    height: 3.5rem;
+
+                    & input {
+                        height: 3.5rem;
+                        font-size: 1rem;
+                    }
+                    
+                }
+
+                & .ant-select-selection-placeholder { 
+                    line-height: 3.5rem;
+                    font-size: 1rem;
+                }
+            }    
+        }      
+
+        .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+            line-height: 3.5rem; 
+            font-size: 1rem;          
+            color: $col25 !important;
+        }
+
         .layout {
             .border2 {
                 border-bottom: solid 1px $col51; 
@@ -103,6 +136,20 @@
             }
         }
 
+        .genders {
+            position: relative;
+            span {
+                margin-left: 15px;
+
+                input {
+                    width: 20px;
+                    height: 20px;
+                    position: relative;
+                    top: 4px;
+                    margin-right: 4px;
+                }
+            }
+        }
        
         .user_tab {
             padding-bottom: 3rem; 
@@ -139,6 +186,10 @@
             .mx-wcustomtwo { 
                 max-width: 900px;  
                 margin-top: 3rem !important; 
+
+                .edit_dropdown {
+                    display: none; 
+                }
             }
         }
 

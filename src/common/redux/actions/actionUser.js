@@ -25,6 +25,7 @@ import {
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
+  SEARCH_LISTNER,
   ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL
 } from '../types';
 
@@ -196,6 +197,13 @@ export const actionGetState = (data) => async dispatch => {
 export const actionGetCity = (data) => async dispatch => {
   const request = ELPViewApiService('getCity', data);
   dispatch({ type: GET_CITY, payload: request.data });
+  return request;
+};
+
+
+export const actionSearchListner = (data) => async dispatch => {
+  const request = ELPViewApiService('searchlistener', data);
+  dispatch({ type: SEARCH_LISTNER, payload: request.data });
   return request;
 };
 

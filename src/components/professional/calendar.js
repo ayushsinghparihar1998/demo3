@@ -4,6 +4,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Button,
   NavDropdown,
@@ -30,26 +32,20 @@ export default class CalendarDemo extends Component {
     this.calendarComponentRef = React.createRef();
     this.state = {
       show5: false,
-
+      end_at: "",
+      duration: "1 hour",
+      recurring: "daily",
+      repeat: "",
+      sl_desc: "",
       init: false,
       calendarWeekends: true,
       listOfCalendarEventResponse: [],
       // listOfCalendarEventResponse: this.props.location.state
       //   .listOfCalendarEventResponse,
-      calendarEvents: [
-        {
-          //   // this object will be "parsed" into an Event Object
-          //   title: "The Titleeeee", // a property!
-          //   start: "2020-09-08 10:30:00", // a property!
-          //   end: "2020-09-09 10:30:00", // a property! ** see important note below about 'end' **
-          // },
-          // {
-          //   // this object will be "parsed" into an Event Object
-          //   title: "The Title2", // a property!
-          //   start: "2020-09-18 02:30:00", // a property!
-          //   end: "2020-09-19 11:30:00", // a property! ** see important note below about 'end' **
-        },
-      ],
+      calendarEvents: [{}],
+      date: new Date(new Date().setHours(0, 0)),
+      starting_at: new Date(new Date().setHours(0, 0)),
+
       calendarView: {},
       type: "dayGridMonth",
     };
@@ -63,6 +59,26 @@ export default class CalendarDemo extends Component {
     console.log("calendarApi", calendarApi);
     console.log(calendarApi.view);
   }
+
+  setStartDate(date, type) {
+    console.log(new Date());
+    console.log(new Date(this.state.date));
+    console.log(new Date(new Date(this.state.date)));
+    console.log("date", date);
+
+    this.setState({
+      [type]: date,
+    });
+    // let d = Moment.utc(date).format("HH:mm");
+  }
+  handleDate = (date) => {
+    console.log("date", date);
+    this.setState({
+      date,
+    });
+
+    console.log(this.state.date);
+  };
 
   getAllevents = (start, end, x) => {
     ELPRxApiService("getCalendarEvents").then((response) => {
@@ -197,6 +213,13 @@ export default class CalendarDemo extends Component {
   handleClose5 = () => {
     this.setState({ show5: false });
   };
+  handleChange = (event, type) => {
+    this.setState({
+      [type]: event.target.value,
+    });
+
+    console.log(event.target.value);
+  };
   render() {
     const { listOfCalendarEventResponse } = this.state;
     return (
@@ -204,16 +227,19 @@ export default class CalendarDemo extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="flex-1 mr-4">
+        
+        <div className="main_calender pt-5">  
+        <Container>
+        <div className="calenderset">    
           <div className="bg-white light-shadow p-3">
             <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
               <div>
-                <button className="btn " onClick={this.handleModal5}>
+                <button className="btn b btnTyp9 btnCalender" onClick={this.handleModal5}>
                   Create Schedule
                   <span className="icon-arrow"></span>
                 </button>
               </div>
-              <div>
+              <div> 
                 <button
                   className="btn btn-prev"
                   onClick={this.handleCalendarPrev}
@@ -267,6 +293,9 @@ export default class CalendarDemo extends Component {
                       eventLimit: 4,
                     },
                   }}
+                  expandRows={true}
+                  height={1050}
+                  handleWindowResize={true}
                   allDaySlot={false}
                   viewRender={function (view, elm) {
                     console.log(view, elm);
@@ -281,6 +310,8 @@ export default class CalendarDemo extends Component {
               </div>
             </div>
           </div>
+        </div>
+        </Container>
         </div>
         {/* calender modal start */}
 
@@ -301,8 +332,21 @@ export default class CalendarDemo extends Component {
                   Add Scheduled Listening Shift
                 </div>
                 <Form.Group>
-                  <Form.Label className="fs20 fw600 col14">Date:</Form.Label>
+                  <Form.Label className="fs20 fw600 col14">Title:</Form.Label>
                   <Form.Control
+                    type="text"
+                    placeholder="Title"
+                    className="inputTyp2"
+                    variant="outlined"
+                    name="Title"
+                    autoComplete="off"
+                    value={this.state.sl_desc}
+                    onChange={(e) => this.handleChange(e, "sl_desc")}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="fs20 fw600 col14">Date:</Form.Label>
+                  {/* <Form.Control
                     type="text"
                     placeholder="Friday 5/8/2020"
                     className="inputTyp2"
@@ -310,29 +354,49 @@ export default class CalendarDemo extends Component {
                     variant="outlined"
                     name="screenName"
                     autoComplete="off"
+                  /> */}
+
+                  <DatePicker
+                    placeholderText="Click to select a date"
+                    selected={this.state.date}
+                    value={this.state.date}
+                    onChange={(event) => this.handleDate(event)}
+                    minDate={new Date()}
                   />
                 </Form.Group>
 
-                <Form.Group>
+                <Form.Group> 
                   <Form.Label className="fs20 fw600 col14">
                     Starting at:
                   </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="5:00 am"
-                    className="inputTyp2"
-                    id="datetwo"
-                    variant="outlined"
-                    name="screenName"
-                    autoComplete="off"
+                  <DatePicker
+                    selected={this.state.starting_at}
+                    onChange={(date) => this.setStartDate(date, "starting_at")}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    // minTime={new Date(this.state.date)}
+                    // maxTime = {new Date().setHours(23 , 59)}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
                   />
                 </Form.Group>
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label className="fs20 fw600 col14">Lasting:</Form.Label>
                   <Form.Control as="select" className="selectTyp1 p3">
-                    <option>5:00 am</option>
-                    <option>2:00 am</option>
+                    <option>1 hour</option>
+                    <option>2 hours</option>
+                    <option>3 hours</option>
+                    <option>4 hours</option>
+                    <option>5 hours</option>
+                    <option>6 hours</option>
+                    <option>7 hours</option>
+                    <option>8 hours</option>
+                    <option>9 hours</option>
+                    <option>10 hours</option>
+                    <option>11 hours</option>
+                    <option>12 hours</option>
                   </Form.Control>
                 </Form.Group>
 
@@ -340,7 +404,13 @@ export default class CalendarDemo extends Component {
                   <Form.Label className="fs20 fw600 col14">
                     Recurring:
                   </Form.Label>
-                  <Form.Control as="select" className="selectTyp1 p3">
+                  <Form.Control
+                    as="select"
+                    className="selectTyp1 p3"
+                    value={this.state.recurring}
+                    onChange={(e) => this.handleChange(e, "recurring")}
+                  >
+                    <option>Daily</option>
                     <option>Weekly</option>
                     <option>Friday</option>
                     <option>Saturday</option>
@@ -353,14 +423,17 @@ export default class CalendarDemo extends Component {
                     Repeat for
                   </Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder=""
-                    className="inputTyp2 w-25"
-                    id="date"
-                    variant="outlined"
-                    name="screenName"
-                    autoComplete="off"
-                  />
+                    as="select"
+                    className="selectTyp1 p3"
+                    value={this.state.duration}
+                    onChange={(e) => this.handleChange(e, "duration")}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Form.Control>
                   <div className="fs18 fw300 col14 ml-3">Additional Weeks</div>
                 </Form.Group>
 

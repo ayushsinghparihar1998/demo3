@@ -10,15 +10,15 @@ import {
   Form,
   Tabs,
   Tab,
-} from 'react-bootstrap'; 
+} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
-    actionGetProfile,
-    actionUpdateUserDetails,
-    actionResetPassword,
-    actionGetCountry,
-    actionGetState,
-    actionGetCity,
+  actionGetProfile,
+  actionUpdateUserDetails,
+  actionResetPassword,
+  actionGetCountry,
+  actionGetState,
+  actionGetCity,
 } from '../../common/redux/actions';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import moment from 'moment';
@@ -32,13 +32,13 @@ import Usaflag from '../../assets/images/usa_flag.svg';
 import warningS from '../../assets/images/w_signal.svg';
 import Camera from '../../assets/images/camera.svg';
 import Cameratwo from '../../assets/images/camera-white.svg';
-import Profileimgnew from '../../assets/images/profileinner_img.svg'; 
+import Profileimgnew from '../../assets/images/profileinner_img.svg';
 import Videoicon from '../../assets/images/video_icon.svg';
 import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
-import { setLocalStorage,capitalizeFirstLetter } from '../../common/helpers/Utils';
+import { setLocalStorage, capitalizeFirstLetter } from '../../common/helpers/Utils';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 class Editprofile extends Component {
@@ -46,13 +46,14 @@ class Editprofile extends Component {
     super(props);
     this.state = {
       userData: {},
+      errors: {},
       userName: '',
       userEmail: '',
       userPassword: '',
       day: '',
       month: '',
       year: '',
-      countryList:[]
+      countryList: []
     };
   }
 
@@ -64,67 +65,84 @@ class Editprofile extends Component {
   getProfile = () => {
     this.props.actionGetProfile({}).then((result) => {
       if (result && result.status === 200) {
-        let res =
+        console.log("actionGetProfile423423", result)
+        let profile =
           result.data.data.profile_list && result.data.data.profile_list[0]
             ? result.data.data.profile_list[0]
             : {};
-        let dob = res.u_birthdate?res.u_birthdate.split('/'):['','',''];
-console.log("dob",dob)
-      //  let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
+        let dob = profile.u_birthdate ? profile.u_birthdate.split('/') : ['', '', ''];
+        console.log("dob", dob)
+        //  let getMonth = CONSTANTS.MONTHS.filter((data) => data.id == dob[1]);
         this.setState({
-          userData: res,
-          userName: res.u_name,
-          userEmail: res.email,
-
+          userData: profile,
+          userName: profile.u_name,
+          userEmail: profile.email,
           day: dob[0],
           month: dob[1],
           year: dob[2],
-          userId: res.id,
+          userId: profile.id,
+          chats: profile.chats,
+          lastactive: profile.lastactive,
+          listento: profile.listento,
+          listnersince: profile.listnersince,
+          bio: profile.u_bio,
+          cityId: profile.u_city,
+          countryId: profile.u_country,
+          flag: profile.u_flag,
+          gender: profile.u_gender,
+          lang: profile.u_lang,
+          rating: profile.u_rating,
+          stateId: profile.u_state,
+          mobileNumber: profile.u_mobile,
+        }, () => {
+          this.getState();
+          this.getCity();
         });
       }
     });
   };
   getCountry = () => {
     this.props.actionGetCountry({}).then((result) => {
-      console.log("resqweqweqweult",result)
       if (result && result.status === 200) {
         let countryList =
           result.data.data && result.data.data
             ? result.data.data
             : [];
         this.setState({
-          countryList:countryList
+          countryList: countryList
         });
       }
     });
   };
   getState = () => {
-    this.props.actionGetState({country_id:this.state.countryId}).then((result) => {
-      console.log("resqweqweqweult",result)
-      if (result && result.status === 200) {
-        let stateList =
-          result.data.data && result.data.data
-            ? result.data.data
-            : [];
-        this.setState({
-          stateList:stateList
-        });
-      }
-    });
+    if (this.state.countryId) {
+      this.props.actionGetState({ country_id: this.state.countryId }).then((result) => {
+        if (result && result.status === 200) {
+          let stateList =
+            result.data.data && result.data.data
+              ? result.data.data
+              : [];
+          this.setState({
+            stateList: stateList
+          });
+        }
+      });
+    }
   };
   getCity = () => {
-    this.props.actionGetCity({state_id:this.state.stateId}).then((result) => {
-      console.log("resqweqweqweult",result)
-      if (result && result.status === 200) {
-        let cityList =
-          result.data.data && result.data.data
-            ? result.data.data
-            : [];
-        this.setState({
-          cityList:cityList
-        });
-      }
-    });
+    if (this.state.stateId) {
+      this.props.actionGetCity({ state_id: this.state.stateId }).then((result) => {
+        if (result && result.status === 200) {
+          let cityList =
+            result.data.data && result.data.data
+              ? result.data.data
+              : [];
+          this.setState({
+            cityList: cityList
+          });
+        }
+      });
+    }
   };
   handleChange = (event) => {
     this.setState({
@@ -152,11 +170,11 @@ console.log("dob",dob)
         u_name: this.state.userName,
         u_gender: this.state.gender,
         u_image: this.state.image,
-        u_country:this.state.countryId,
-        u_state:this.state.stateId,
-        u_city:this.state.cityId,
-        u_bio:this.state.discription,
-        u_mobile:this.state.mobileNumber
+        u_country: this.state.countryId,
+        u_state: this.state.stateId,
+        u_city: this.state.cityId,
+        u_bio: this.state.bio,
+        u_mobile: this.state.mobileNumber
       };
     } else {
       data = {
@@ -165,18 +183,18 @@ console.log("dob",dob)
         u_name: this.state.userName,
         u_gender: this.state.gender,
         u_image: this.state.image,
-        u_country:this.state.countryId,
-        u_state:this.state.stateId,
-        u_city:this.state.cityId,
-        u_bio:this.state.discription,
-        u_mobile:this.state.mobileNumber
+        u_country: this.state.countryId,
+        u_state: this.state.stateId,
+        u_city: this.state.cityId,
+        u_bio: this.state.bio,
+        u_mobile: this.state.mobileNumber
       };
     }
 
     console.log('data', data);
     this.props.actionUpdateUserDetails(data).then((result) => {
       console.log('result321321312', result.data);
-      
+
     });
   };
 
@@ -195,40 +213,42 @@ console.log("dob",dob)
     });
   };
 
- onChangeSelection(value) {
-  console.log("valuevaluevalue",value)
+  onChangeSelection(value) {
+    console.log("valuevaluevalue", value)
     this.setState({
       countryId: value,
       stateId: '',
       cityId: '',
-      },()=>{
-          this.getState()
+    }, () => {
+      this.getState()
     });
 
   }
-   onChangeSelectionState(value) {
-  console.log("valuevaluevalue",value)
+  onChangeSelectionState(value) {
+    console.log("valuevaluevalue", value)
     this.setState({
       stateId: value,
       cityId: '',
-      },()=>{
-          this.getCity()
+    }, () => {
+      this.getCity()
     });
 
   }
-   onChangeSelectionCity(value) {
-  console.log("valuevaluevalue",value)
+  onChangeSelectionCity(value) {
+    console.log("valuevaluevalue", value)
     this.setState({
       cityId: value,
     });
 
   }
-  handleMobileChange=(value)=>{
- this.setState({
+  handleMobileChange = (value) => {
+    this.setState({
       mobileNumber: value,
     });
   }
-  render() {
+  render() { 
+    const { errors } = this.state;
+    console.log('errors', errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -237,7 +257,7 @@ console.log("dob",dob)
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
-              <div className="myprofile"> 
+              <div className="myprofile">
                 <Image src={Profileban} alt="" className="w-100" />
                 <div className="upload_bg">
                   <Form.File id="custom-filetwo" />
@@ -249,13 +269,13 @@ console.log("dob",dob)
                     alt=""
                     className="r50 border_profile"
                   />
-                  <Image src={Usaflag} alt="" className="r50 flags" />
+                  <Image src={this.state.flag ? this.state.flag : Usaflag} alt="" width='50px' className="r50 flags" />
                   <div className="upload_pic">
                     <Form.File id="custom-fileone" />
                     <Image src={Camera} alt="" className="camera" />
                   </div>
                 </div>
-                <div className="mt-4 mb-4 pb-2"></div>
+                <div className="mt-4 mb-4 pb-2"></div> 
                 <div className="text-center user_tab">
                   <Tabs defaultActiveKey="home">
                     <Tab eventKey="home" title="profile info">
@@ -264,7 +284,7 @@ console.log("dob",dob)
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
                               User Name:
-                            </Form.Label>
+                            </Form.Label> 
                             <Form.Control
                               type="text"
                               name="userName"
@@ -305,15 +325,26 @@ console.log("dob",dob)
                               </Button>
                             </div>
                           </Form.Group>
-                          
+
                           <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
+                            <Form.Label className="fs20 fw600 mt-2 col14">
                               Mobile Number:
                             </Form.Label>
                             <PhoneInput
-                            placeholder="Enter phone number"
-                            value={this.state.mobileNumber}
-                            onChange={this.handleMobileChange}/>
+                              className="inputTyp2"
+                              placeholder="Enter phone number"
+                              value={this.state.mobileNumber}
+                              onChange={this.handleMobileChange} />
+                          </Form.Group>
+
+                          <Form.Group className="genders">
+                            <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
+                              Gender:
+                            </Form.Label>
+                            
+                            <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
+                            <span>
+                            <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
                           </Form.Group>
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
@@ -321,9 +352,9 @@ console.log("dob",dob)
                             </Form.Label>
                             <Form.Control
                               type="textarea"
-                              name="discription"
+                              name="bio"
                               onChange={this.handleChange}
-                              value={this.state.discription}
+                              value={this.state.bio}
                               className="inputTyp2"
                             />
                           </Form.Group>
@@ -331,7 +362,7 @@ console.log("dob",dob)
                             Country:
                           </Form.Label>
                           <Row>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -346,14 +377,14 @@ console.log("dob",dob)
                                   (item, index) => {
                                     return (
                                       <option value={item.country_id}>
-                                          {capitalizeFirstLetter(item.country_name)}
-                                        </option>
+                                        {capitalizeFirstLetter(item.country_name)}
+                                      </option>
                                     );
                                   }
                                 )}
                               </Select>
                             </Col>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -368,14 +399,14 @@ console.log("dob",dob)
                                   (item, index) => {
                                     return (
                                       <option value={item.state_id}>
-                                          {capitalizeFirstLetter(item.state_name)}
-                                        </option>
+                                        {capitalizeFirstLetter(item.state_name)}
+                                      </option>
                                     );
                                   }
                                 )}
                               </Select>
                             </Col>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -389,15 +420,15 @@ console.log("dob",dob)
                                   (item, index) => {
                                     return (
                                       <option value={item.ct_id}>
-                                          {capitalizeFirstLetter(item.city)}
-                                        </option>
+                                        {capitalizeFirstLetter(item.city)}
+                                      </option>
                                     );
                                   }
                                 )}
                               </Select>
                             </Col>
                           </Row>
-                          <Form.Label className="fs20 fw600 col14 mt-2">
+                          <Form.Label className="fs20 fw600 col14 mt-4">
                             Date of birth:
                           </Form.Label>
                           <Row>
@@ -457,7 +488,7 @@ console.log("dob",dob)
                             </Col>
                           </Row>
 
-                          <Button 
+                          <Button
                             className="btnTyp5 mt-5 mr-3"
                             onClick={this.handleSubmit}
                           >

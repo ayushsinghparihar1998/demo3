@@ -243,8 +243,13 @@ export default {
       // password: '',
       u_birthdate: '',
       u_name: '',
-      // u_gender: '',
-      // u_image: '',
+      u_gender: '',
+      id: '',
+      u_bio: '',
+      u_city: '',
+      u_country: '',
+      u_mobile: '',
+      u_state: '',
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -275,7 +280,6 @@ export default {
     url: 'elp/get_event',
     method: 'GET',
     data: {
-
     },
     showResultMessage: false,
     showErrorMessage: true,
@@ -310,4 +314,14 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  searchlistener: {
+    url: 'elp/searchlistener',
+    method: 'GET',
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
 };
