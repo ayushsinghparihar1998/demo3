@@ -22,7 +22,8 @@ class Chatsearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listnerList: []
+            listnerList: [],
+            search:''
         };
     }
     componentDidMount() {
@@ -30,7 +31,14 @@ class Chatsearch extends Component {
     }
 
     getListner = () => {
-        this.props.actionSearchListner({}).then((result) => {
+        let data = {};
+        if(this.state.screenName){
+            data = {
+                order_by:this.state.order_by?this.state.order_by:'',
+                search_keyword: this.state.screenName
+            }
+        }
+        this.props.actionSearchListner(data).then((result) => {
             if (result && result.status === 200) {
                 let profile = result.data.data ? result.data.data
                     : [];
@@ -43,6 +51,11 @@ class Chatsearch extends Component {
     ratingChanged = (newRating) => {
         console.log(newRating);
     };
+      handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
     render() {
         let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
         console.log("this.state.listOfSearchLisner", this.state.listOfSearchLisner)
@@ -68,10 +81,12 @@ class Chatsearch extends Component {
                                                 id="outlined-email"
                                                 variant="outlined"
                                                 name="screenName"
+                                                value={this.state.screenName}
+                                                onChange={this.handleChange}
                                             />
                                         </Form.Group>
                                     </Col>
-                                    <Col md={3}>
+                                    {/*<Col md={3}>
                                         <Form.Group controlId="exampleForm.ControlSelect1">
                                             <Form.Control as="select"
                                                 className="selectTyp1 select3"
@@ -80,12 +95,12 @@ class Chatsearch extends Component {
 
                                             </Form.Control>
                                         </Form.Group>
-                                    </Col>
+                                    </Col>*/}
                                     <Col md={3}>
-                                        <Button onClick={this.handleSubmit} className="btnTyp5 bTyp5">
+                                        <Button onClick={this.getListner} className="btnTyp5 bTyp5">
                                             Search
                                     </Button>
-                                        <Image src={Searches} alt="" className="ml-3 pointer" />
+                                        {/*<Image src={Searches} alt="" className="ml-3 pointer" />*/}
                                     </Col>
                                 </Row>
                             </div>
@@ -114,213 +129,42 @@ class Chatsearch extends Component {
                                                             </div>
                                                             <div className="col1 fs18 fw600 mt-4">{item.u_name ? item.u_name : ''}</div>
                                                             <div className="fs14 col14 fw400">Master 10</div>
-                                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
+                                                            <div className="fs14 col14 fw400">Listens to Over {item.u_listen_to ? item.u_listen_to : 0} in last week
+                                                        </div>
                                                             <div className="starrating">
                                                                 <ReactStars
                                                                     count={5}
-                                                                    value={item.u_rating ? item.u_rating : 0}
+                                                                    value={item.u_rating ? item.u_rating :0}
                                                                     onChange={this.ratingChanged}
                                                                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                                                                     size={24}
-                                                                    color="#FABE2C" 
-                                                                    activeColor="#FABE2C"
+                                                                  //  color="#FABE2C" 
+                                                                   activeColor="#FABE2C"
                                                                 />
-                                                                <Image src={Starfill} alt="" />
-                                                                <Image src={Starfill} alt="" />
-                                                                <Image src={Starfill} alt="" />
-                                                                <Image src={Starfill} alt="" />
-                                                                <Image src={Starblank} alt="" />
                                                             </div>
+                                                            {item.u_bio ? 
+                                                            <div>
+                                                                <hr className="shr" />
+                                                                <div className="fs14 col29 fw300">
+                                                                    {item.u_bio ? item.u_bio : ''}
+                                                                </div>
+                                                                {item.u_bio.length>100?
+                                                                <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
+                                                           :''}
+                                                            </div> :
+                                                            <div>  
                                                             <hr className="shr" />
                                                             <div className="fs14 col29 fw300">
-                                                                {item.u_bio ? item.u_bio : ''}
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                                        </div>
+                                                                    {item.u_bio ? item.u_bio : ''}
+                                                                </div></div>}
+                                                            </div>
                                                     </Col>
 
                                                 )
                                             })}
-
-                                    <Col md={4}>
-                                        <div className="subscribes active">
-                                            <div className="subleft">
-                                                <Image src={Subscribes} alt="" />
-                                                <span>Subscribe</span>
-                                            </div>
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestuser} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">Melisa R. Wright</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className="subscribes">
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestusertwo} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">HopePeaceHappiness</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className="subscribes">
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestuserthree} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">Aurelia T. Poe</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className="subscribes">
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestusertwo} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">Cathy R. Kern</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className="subscribes">
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestusertwo} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">BalletMomm</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className="subscribes active">
-                                            <div className="subleft">
-                                                <Image src={Subscribes} alt="" />
-                                                <span>Subscribe</span>
-                                            </div>
-                                            <div className="text-right mt-4 mr-3">
-                                                <Image src={Messagefour} alt="" />
-                                                <span className="fs13 col14 fw400 ml-1">340</span>
-                                            </div>
-                                            <div className="text-center position-relative">
-                                                <Image src={Requestusertwo} className="r50" />
-                                                <Image src={Aflag} alt="" className="flagset" />
-                                            </div>
-                                            <div className="col1 fs18 fw600 mt-4">Rose G. Smith</div>
-                                            <div className="fs14 col14 fw400">Master 10</div>
-                                            <div className="fs14 col14 fw400">Listens to Over 18 in last week
-                                                    </div>
-                                            <div className="starrating">
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starfill} alt="" />
-                                                <Image src={Starblank} alt="" />
-                                            </div>
-                                            <hr className="shr" />
-                                            <div className="fs14 col29 fw300">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    </div>
-                                            <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
-                                        </div>
-                                    </Col>
-                                    <div className="text-center w-100">
+                                   {listOfSearchLisner &&
+                                        listOfSearchLisner.length > 10 ?
+                                   <div className="text-center w-100">
                                         <Button
                                             className="btnTyp12"
                                             onClick={this.handleSubmit}
@@ -328,6 +172,7 @@ class Chatsearch extends Component {
                                             show more
                                              </Button>
                                     </div>
+                                    :''}
                                 </Row>
                             </div>
                         </div>

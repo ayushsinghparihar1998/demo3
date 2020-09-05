@@ -330,9 +330,12 @@ export default {
     showErrorMessage: true,
   },
   searchlistener: {
-    url: "elp/searchlistener",
-    method: "GET",
-    data: {},
+    url: 'elp/searchlistener',
+    method: 'POST',
+    data: {
+     search_keyword:'',
+     order_by:''
+    },
     showResultMessage: false,
     showErrorMessage: true,
   },
