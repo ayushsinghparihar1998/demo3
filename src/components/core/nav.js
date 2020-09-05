@@ -23,7 +23,7 @@ import twit from '../../assets/images/twit.svg';
 import linkedin from '../../assets/images/linkedin.svg';
 import Crossbtn from '../../assets/images/blue_cross.svg';
 import Mailicon from '../../assets/images/mail_icon.svg';
-import Bellicon from '../../assets/images/bell_icons.svg'; 
+import Bellicon from '../../assets/images/bell_icons.svg';
 import Signup from '../jsx/listenersignup/signup';
 import ProfessionalSignup from '../signup/professionalSignup';
 import UserSignup from '../signup/userSignup';
@@ -61,7 +61,7 @@ class NavBar extends Component {
     this.setState({ show3: false });
   };
 
-handleLogoutAdmin = () => {  
+  handleLogoutAdmin = () => {
 
     let data = {};
     this.props
@@ -85,17 +85,14 @@ handleLogoutAdmin = () => {
     // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1 
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
-    let roleType = '';    
-    if(getLocalStorage('customerInfo'))
-    {
+    let roleType = '';
+    if (getLocalStorage('customerInfo')) {
       roleType = 3;
-    }else if(getLocalStorage('userInfo'))
-    {
+    } else if (getLocalStorage('userInfo')) {
       roleType = 1;
-    }else if(getLocalStorage('userInfoProff'))
-    {
+    } else if (getLocalStorage('userInfoProff')) {
       roleType = 2;
-    }   
+    }
 
     let data = {};
     this.props
@@ -133,7 +130,7 @@ handleLogoutAdmin = () => {
       show: false,
       show3: false,
     });
-  }; 
+  };
 
   goToLoginPage = () => {
     this.props.history.push({
@@ -172,123 +169,126 @@ handleLogoutAdmin = () => {
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-          {getLocalStorage('userInfoAdmin') ?
-                            <Nav className="ml-auto">
-                                <Form inline>
-                                    <span >
-                                        <div onClick={this.handleLogoutAdmin} className="btnType1">
-                                            Logout
-                                        </div>
-                                    </span>
-                                </Form></Nav>
-                            :
-                            (
-            <Nav className="ml-auto">
-              {getLocalStorage('userInfo') || getLocalStorage('userInfoProff') 
-              || getLocalStorage('customerInfo')
-                ? [
-                    <NavLink to={getLocalStorage('userInfo') ? 'userDashboard' :
-                                        getLocalStorage('userInfoProff') ? 'userDashboardproff' :
-                                            getLocalStorage('customerInfo') ? 'userDashboardcust'
-                                                : ''} className="nav-link">
-                                        Dashboard
-                            </NavLink>,
-                    <NavLink to="/myprofile" className="nav-link">
-                      My Profile
-                    </NavLink>,
-                    <NavLink to="/editprofile" className="nav-link">
-                      Edit Profile
-                    </NavLink>,
-                  ]
-                : [
-                    <Nav.Link onClick={this.handleModal}>Connect Now</Nav.Link>,
-                    <NavLink to="/becomeListener" className="nav-link">
-                      Volunteer as a Listener
-                    </NavLink>,
-                    <NavDropdown title="CSR" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#">Action</NavDropdown.Item>
-                      <NavDropdown.Item href="#">Another</NavDropdown.Item>
-                      <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                    </NavDropdown>,
-                    <NavDropdown title="Communities" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
-                      <NavDropdown.Item href="#">Women Rights</NavDropdown.Item>
-                      <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
-                      <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
-                    </NavDropdown>,
-                    <Nav.Link onClick={this.handleModal3}>
-                      Professionals
-                    </Nav.Link>,
-                    <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
-                  ]}
-              {getLocalStorage('userInfo') || getLocalStorage('userInfoProff') 
-              || getLocalStorage('customerInfo') ? (
-                <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-              ) : (
-                <NavDropdown
-                  title="Login"
-                  id="login-nav-dropdown"
-                  className="btnTypeone"
-                >
-                  <NavDropdown.Item
-                    onClick={(e) => {
-                      this.handleLogin(1);
-                    }}
-                  >
-                    Listener Login
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    onClick={(e) => {
-                      this.handleLogin(2);
-                    }}
-                  >
-                    Professional Login
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    onClick={(e) => {
-                      this.handleLogin(3);
-                    }}
-                  >
-                    User Login
-                  </NavDropdown.Item> 
-                </NavDropdown>
-              )}
-
-              <Form inline> 
-                <span className="d-none">
-                  {getLocalStorage('loggedIn') ? (
-                    <div onClick={this.handleLogout} className="btnType1">
+            {getLocalStorage('userInfoAdmin') ?
+              <Nav className="ml-auto">
+                <Form inline>
+                  <span >
+                    <div onClick={this.handleLogoutAdmin} className="btnType1">
                       Logout
-                    </div>
-                  ) : (
-                    <NavLink to="/login" className="btnType1">
-                      Login
-                    </NavLink>
-                  )}
-                </span>
-                <span>
-                  <Image src={insta} alt="" className="pointer" />
-                </span>
-                <span>
-                  <Image src={fb} alt="" className="pointer" />
-                </span>
-                <span>
-                  <Image src={twit} alt="" className="pointer" />
-                </span>
-                <span>
-                  <Image src={linkedin} alt="" className="pointer" />
-                </span>
+                                        </div>
+                  </span>
+                </Form></Nav>
+              :
+              (
+                <Nav className="ml-auto">
+                  {getLocalStorage('userInfo') || getLocalStorage('userInfoProff')
+                    || getLocalStorage('customerInfo')
+                    ? [
+                      <NavLink to="/professinalchatsearch" className="nav-link">
+                        Professional Search
+                    </NavLink>,
+                      <NavLink to={getLocalStorage('userInfo') ? 'userDashboard' :
+                        getLocalStorage('userInfoProff') ? 'userDashboardproff' :
+                          getLocalStorage('customerInfo') ? 'userDashboardcust'
+                            : ''} className="nav-link">
+                        Dashboard
+                            </NavLink>,
+                      <NavLink to="/myprofile" className="nav-link">
+                        My Profile
+                    </NavLink>,
+                      <NavLink to="/editprofile" className="nav-link">
+                        Edit Profile
+                    </NavLink>,
+                    ]
+                    : [
+                      <Nav.Link onClick={this.handleModal}>Connect Now</Nav.Link>,
+                      <NavLink to="/becomeListener" className="nav-link">
+                        Volunteer as a Listener
+                    </NavLink>,
+                      <NavDropdown title="CSR" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Another</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
+                      </NavDropdown>,
+                      <NavDropdown title="Communities" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Women Rights</NavDropdown.Item>
+                        <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
+                      </NavDropdown>,
+                      <Nav.Link onClick={this.handleModal3}>
+                        Professionals
+                    </Nav.Link>,
+                      <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
+                    ]}
+                  {getLocalStorage('userInfo') || getLocalStorage('userInfoProff')
+                    || getLocalStorage('customerInfo') ? (
+                      <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                    ) : (
+                      <NavDropdown
+                        title="Login"
+                        id="login-nav-dropdown"
+                        className="btnTypeone"
+                      >
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(1);
+                          }}
+                        >
+                          Listener Login
+                  </NavDropdown.Item>
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(2);
+                          }}
+                        >
+                          Professional Login
+                  </NavDropdown.Item>
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(3);
+                          }}
+                        >
+                          User Login
+                  </NavDropdown.Item>
+                      </NavDropdown>
+                    )}
 
-              </Form>
-              <span className="userprofiles d-flex">  
-                  <Nav.Link><Image src={Mailicon} alt="" className="pointer" /></Nav.Link>  
-                  <Nav.Link><Image src={Bellicon} alt="" className="pointer" /></Nav.Link>  
-                  <NavDropdown title="Profile" id="basic-nav-dropdown">         
+                  <Form inline>
+                    <span className="d-none">
+                      {getLocalStorage('loggedIn') ? (
+                        <div onClick={this.handleLogout} className="btnType1">
+                          Logout
+                        </div>
+                      ) : (
+                          <NavLink to="/login" className="btnType1">
+                            Login
+                          </NavLink>
+                        )}
+                    </span>
+                    <span>
+                      <Image src={insta} alt="" className="pointer" />
+                    </span>
+                    <span>
+                      <Image src={fb} alt="" className="pointer" />
+                    </span>
+                    <span>
+                      <Image src={twit} alt="" className="pointer" />
+                    </span>
+                    <span>
+                      <Image src={linkedin} alt="" className="pointer" />
+                    </span>
+
+                  </Form>
+                  <span className="userprofiles d-flex">
+                    <Nav.Link><Image src={Mailicon} alt="" className="pointer" /></Nav.Link>
+                    <Nav.Link><Image src={Bellicon} alt="" className="pointer" /></Nav.Link>
+                    <NavDropdown title="Profile" id="basic-nav-dropdown">
                       <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  </NavDropdown>
-              </span>  
-              
-            </Nav>)}
+                    </NavDropdown>
+                  </span>
+
+                </Nav>)}
           </Navbar.Collapse>
         </Navbar>
 

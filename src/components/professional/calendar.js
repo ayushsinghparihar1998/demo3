@@ -34,11 +34,15 @@ export default class CalendarDemo extends Component {
     this.calendarComponentRef = React.createRef();
     this.state = {
       show5: false,
+
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
       repeat: "0",
       sl_desc: "",
+      date: new Date(new Date().setHours(0, 0)),
+      starting_at: new Date(new Date().setHours(0, 0)),
+
       init: false,
       calendarWeekends: true,
       errorTitle: "",
@@ -46,8 +50,6 @@ export default class CalendarDemo extends Component {
       // listOfCalendarEventResponse: this.props.location.state
       //   .listOfCalendarEventResponse,
       calendarEvents: [{}],
-      date: new Date(new Date().setHours(0, 0)),
-      starting_at: new Date(new Date().setHours(0, 0)),
 
       calendarView: {},
       type: "dayGridMonth",
@@ -117,11 +119,16 @@ export default class CalendarDemo extends Component {
           const calendarEvents = response.data.data.event_list.map(function (
             row
           ) {
+            let ar = row.sl_created_at.split(" ");
+            let ar2 = row.sl_end_date.split(" ");
+            ar[1] = row.sl_start_at;
+            ar2[1] = row.sl_end_at;
+            console.log(ar.join(" "));
             return {
               title: row.sl_desc,
-              start: row.sl_created_at,
+              start: ar.join(" "),
               // start: "2020-09-18 02:30:00", // a property!
-              end: row.sl_end_date,
+              end: ar2.join(" "),
               // ? new Date(row.sl_created_at)
               // : new Date(row.slotStartTimestamp),
             };
@@ -214,7 +221,16 @@ export default class CalendarDemo extends Component {
   };
 
   handleClose5 = () => {
-    this.setState({ show5: false });
+    this.setState({
+      show5: false,
+      end_at: "",
+      duration: "1 hour",
+      recurring: "daily",
+      repeat: "0",
+      sl_desc: "",
+      date: new Date(new Date().setHours(0, 0)),
+      starting_at: new Date(new Date().setHours(0, 0)),
+    });
   };
   handleChange = (event, type) => {
     this.setState({
@@ -244,18 +260,19 @@ export default class CalendarDemo extends Component {
       let data = {
         date: moment(this.state.date).format("YYYY-MM-DD"),
         starting_at: moment(this.state.starting_at).format("HH:mm"),
-        end_at: ('0' + endHour).slice(-2) + ':00',
+        end_at: ("0" + endHour).slice(-2) + ":00",
         duration: this.state.duration,
         recurring: this.state.recurring,
-        repeat: this.state.repeat,
+        repeat: +this.state.repeat,
         sl_desc: this.state.sl_desc,
       };
       console.log("data", data);
-      //   ELPRxApiService("postCalendarEvents", data).then((response) => {
-      //     console.log("response", response);
-      //     this.state.handleClose5();
-      //     this.getAllevents();
-      //   });
+      ELPRxApiService("postCalendarEvents", data).then((response) => {
+        console.log("response", response);
+
+        this.handleClose5();
+        this.getAllevents();
+      });
     }
   };
   render() {
@@ -272,7 +289,10 @@ export default class CalendarDemo extends Component {
               <div className="bg-white light-shadow p-3">
                 <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
                   <div>
-                    <button className="btn " onClick={this.handleModal5}>
+                    <button
+                      className="btn b btnTyp9 btnCalender"
+                      onClick={this.handleModal5}
+                    >
                       Create Schedule
                       <span className="icon-arrow"></span>
                     </button>
@@ -390,34 +410,55 @@ export default class CalendarDemo extends Component {
                     {this.state.errorTitle}
                   </div>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label className="fs20 fw600 col14">Date:</Form.Label>
+                <Row>
+                  <Col md={6}>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14 d-block">
+                        Date:
+                      </Form.Label>
+                      {/* <Form.Control
+                              type="text"
+                              placeholder="Friday 5/8/2020"
+                              className="inputTyp2"
+                              id="date"
+                              variant="outlined"
+                              name="screenName"
+                              autoComplete="off"
+                            /> */}
 
-                  <DatePicker
-                    placeholderText="Click to select a date"
-                    selected={this.state.date}
-                    value={this.state.date}
-                    onChange={(event) => this.handleDate(event)}
-                    minDate={new Date()}
-                  />
-                </Form.Group>
+                      <DatePicker
+                        placeholderText="Click to select a date"
+                        selected={this.state.date}
+                        value={this.state.date}
+                        onChange={(event) => this.handleDate(event)}
+                        minDate={new Date()}
+                        className="form-control inputTyp2"
+                      />
+                    </Form.Group>
+                  </Col>
 
-                <Form.Group>
-                  <Form.Label className="fs20 fw600 col14">
-                    Starting at:
-                  </Form.Label>
-                  <DatePicker
-                    selected={this.state.starting_at}
-                    onChange={(date) => this.setStartDate(date, "starting_at")}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    // minTime={new Date(this.state.date)}
-                    // maxTime = {new Date().setHours(23 , 59)}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                  />
-                </Form.Group>
+                  <Col md={6}>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14 d-block">
+                        Starting at:
+                      </Form.Label>
+                      <DatePicker
+                        selected={this.state.starting_at}
+                        onChange={(date) =>
+                          this.setStartDate(date, "starting_at")
+                        }
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={60}
+                        // minTime={new Date(this.state.date)}
+                        // maxTime = {new Date().setHours(23 , 59)}
+                        timeCaption="Time"
+                        dateFormat="h:mm aa"
+                        className="form-control inputTyp2"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label className="fs20 fw600 col14">Lasting:</Form.Label>
@@ -452,11 +493,9 @@ export default class CalendarDemo extends Component {
                     value={this.state.recurring}
                     onChange={(e) => this.handleChange(e, "recurring")}
                   >
-                    <option>Daily</option>
-                    <option>Weekly</option>
-                    <option>Friday</option>
-                    <option>Saturday</option>
-                    <option>Sunday</option>
+                    <option>daily</option>
+                    <option>weekly</option>
+                    
                   </Form.Control>
                 </Form.Group>
 
@@ -466,7 +505,7 @@ export default class CalendarDemo extends Component {
                   </Form.Label>
                   <Form.Control
                     as="select"
-                    className="selectTyp1 p3"
+                    className="selectTyp1 p3 selectWidth"
                     value={this.state.repeat}
                     onChange={(e) => this.handleChange(e, "repeat")}
                   >
