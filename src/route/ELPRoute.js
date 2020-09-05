@@ -38,7 +38,7 @@ import { getLocalStorage } from '../common/helpers/Utils';
 import socketClass from '../common/utility/socketClass';
 import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCalling';
 import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
-import Admincategory from '../components/jsx/superadmin/category'; 
+import Admincategory from '../components/jsx/superadmin/category';
 import CalendarDemo from "../components/professional/calendar";
 
 
@@ -58,7 +58,7 @@ class ELPRoute extends Component {
     this.setState({ socket: socketClass.getSocket() })
     // console.log("socket===", socket)
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
   render() {
@@ -88,7 +88,7 @@ class ELPRoute extends Component {
           {/* Proff */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/usersignup" component={Usersignup} />
-          <PublicRoute path="/chatsearch" component={Chatsearch} />
+          <PrivateRouteUser path="/chatsearch" component={Chatsearch} />
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />

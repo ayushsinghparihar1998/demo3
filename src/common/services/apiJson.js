@@ -243,28 +243,33 @@ export default {
       // password: '',
       u_birthdate: '',
       u_name: '',
-      // u_gender: '',
-      // u_image: '',
+      u_gender: '',
+      id: '',
+      u_bio: '',
+      u_city: '',
+      u_country: '',
+      u_mobile: '',
+      u_state: '',
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
 
-    getCountry: {
+  getCountry: {
     url: 'elp/getcountry',
     method: 'GET',
     data: { email: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getState: {
+  getState: {
     url: 'elp/getstate',
     method: 'POST',
     data: { country_id: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-    getCity: {
+  getCity: {
     url: 'elp/getcity',
     method: 'POST',
     data: { state_id: '' },
@@ -275,9 +280,48 @@ export default {
     url: 'elp/get_event',
     method: 'GET',
     data: {
-     
     },
     showResultMessage: false,
     showErrorMessage: true,
   },
+  adminUserDeleteReason: {
+    url: 'elp//superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment',
+    method: 'POST',
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true
+  },
+  adminGetCategory: {
+    url: 'elp/superadmin_getcategory',
+    method: 'POST',
+    data: {
+      count: '',
+      offset: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  searchProfessionals: {
+    url: '/elp/searchprofessionals',
+    method: 'POST',
+    data: {
+      category: '',
+      name: '',
+      country: '',
+      state: '',
+      city: '',
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  searchlistener: {
+    url: 'elp/searchlistener',
+    method: 'GET',
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
 };
