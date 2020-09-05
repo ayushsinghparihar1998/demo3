@@ -15,6 +15,7 @@ import PublicRoute from './PublicRoute';
 import UserdashboardProff from '../components/professional/userdashboardProff';
 import ChatProff from '../components/professional/chatproff';
 import UserdashboardCust from '../components/user/userdashboard';
+import Professionalchatsearch from '../components/chat/professinalchatsearch';
 
 import PrivateRouteUser from './PrivateRouteUser';
 import PrivateRoutes from './PrivateRoutes';
@@ -31,6 +32,7 @@ import Adminlistener from '../components/admin/listener';
 import Chatsearch from '../components/chat/chatsearch';
 import Videocall from '../components/videoaudio/videocall';
 import Audiocall from '../components/videoaudio/audiocall';
+
 import getUserProfile from '../common/utility/getUserProfile';
 import { getLocalStorage } from '../common/helpers/Utils';
 import socketClass from '../common/utility/socketClass';
@@ -111,6 +113,8 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
+          <PublicRoute path="/professionalchatsearch" component={Professionalchatsearch} />
+          
 
         </Switch>
       </>
