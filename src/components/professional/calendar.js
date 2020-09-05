@@ -204,7 +204,10 @@ export default class CalendarDemo extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="flex-1 mr-4">
+        
+        <div className="main_calender pt-5">  
+        <Container>
+        <div className="calenderset">    
           <div className="bg-white light-shadow p-3">
             <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
               <div>
@@ -282,6 +285,8 @@ export default class CalendarDemo extends Component {
             </div>
           </div>
         </div>
+        </Container>
+        </div>
         {/* calender modal start */}
 
         <Modal
@@ -313,7 +318,7 @@ export default class CalendarDemo extends Component {
                   />
                 </Form.Group>
 
-                <Form.Group>
+                <Form.Group> 
                   <Form.Label className="fs20 fw600 col14">
                     Starting at:
                   </Form.Label>

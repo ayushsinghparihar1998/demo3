@@ -246,7 +246,7 @@ class Editprofile extends Component {
       mobileNumber: value,
     });
   }
-  render() {
+  render() { 
     const { errors } = this.state;
     console.log('errors', errors);
     return (
@@ -275,7 +275,7 @@ class Editprofile extends Component {
                     <Image src={Camera} alt="" className="camera" />
                   </div>
                 </div>
-                <div className="mt-4 mb-4 pb-2"></div>
+                <div className="mt-4 mb-4 pb-2"></div> 
                 <div className="text-center user_tab">
                   <Tabs defaultActiveKey="home">
                     <Tab eventKey="home" title="profile info">
@@ -284,7 +284,7 @@ class Editprofile extends Component {
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
                               User Name:
-                            </Form.Label>
+                            </Form.Label> 
                             <Form.Control
                               type="text"
                               name="userName"
@@ -327,21 +327,24 @@ class Editprofile extends Component {
                           </Form.Group>
 
                           <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
+                            <Form.Label className="fs20 fw600 mt-2 col14">
                               Mobile Number:
                             </Form.Label>
                             <PhoneInput
+                              className="inputTyp2"
                               placeholder="Enter phone number"
                               value={this.state.mobileNumber}
                               onChange={this.handleMobileChange} />
                           </Form.Group>
 
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
+                          <Form.Group className="genders">
+                            <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
                               Gender:
                             </Form.Label>
-                            <input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male
-                            <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female
+                            
+                            <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
+                            <span>
+                            <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
                           </Form.Group>
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
@@ -359,7 +362,7 @@ class Editprofile extends Component {
                             Country:
                           </Form.Label>
                           <Row>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -381,7 +384,7 @@ class Editprofile extends Component {
                                 )}
                               </Select>
                             </Col>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -403,7 +406,7 @@ class Editprofile extends Component {
                                 )}
                               </Select>
                             </Col>
-                            <Col md={3}>
+                            <Col md={4}>
                               <Select
                                 classes="form-control selectTyp1"
                                 showSearch
@@ -425,7 +428,7 @@ class Editprofile extends Component {
                               </Select>
                             </Col>
                           </Row>
-                          <Form.Label className="fs20 fw600 col14 mt-2">
+                          <Form.Label className="fs20 fw600 col14 mt-4">
                             Date of birth:
                           </Form.Label>
                           <Row>
