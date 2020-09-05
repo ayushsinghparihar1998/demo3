@@ -15,6 +15,7 @@ import Starfill from "../../assets/images/starfill.svg";
 import Subscribes from "../../assets/images/subscribes.svg";
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
+import { Popover } from 'antd';
 import {
     actionSearchListner
 } from '../../common/redux/actions';
@@ -67,9 +68,19 @@ class Chatsearch extends Component {
         });
     }
   }
+
+
+  content = (dropdown) => (
+    <div>
+      <div className="popup-drp m-b-30">
+       <div className="fs14 col29 fw300 content_set">
+            {dropdown}
+            </div> 
+      </div>
+    </div>
+  );
     render() {
         let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
-        console.log("this.state.listOfSearchLisner", this.state.listOfSearchLisner)
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -149,7 +160,9 @@ class Chatsearch extends Component {
                                                                     {item.u_bio ? item.u_bio : ''}
                                                                 </div>
                                                                 {item.u_bio.length>100?
-                                                                <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
+                                                                    <Popover content={this.content(item.u_bio)} title="Title" trigger="click">
+                                                                        <div className="mt-3 mb-3 col10 fs14 fw600 pointer">Read More</div>
+                                                                    </Popover>
                                                            :''}
                                                             </div> :
                                                             <div>  
