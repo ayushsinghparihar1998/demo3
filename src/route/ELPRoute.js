@@ -40,6 +40,7 @@ import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCallin
 import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
 import Admincategory from '../components/jsx/superadmin/category';
 import CalendarDemo from "../components/professional/calendar";
+import ProfessinalcChatSearch from '../components/chat/professinalchatsearch';
 
 
 
@@ -113,8 +114,7 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
-          <PublicRoute path="/professionalchatsearch" component={Professionalchatsearch} />
-          
+          <PrivateRoutes path="/professinalchatsearch" component={ProfessinalcChatSearch} />
 
         </Switch>
       </>

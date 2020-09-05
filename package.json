@@ -15,7 +15,7 @@
     "cryptlib": "^1.0.3",
     "cryptr": "^4.0.2",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.27.0",
     "node-sass": "^4.12.0",
     "query-string": "^5.1.1",
     "react": "^16.9.0",
