@@ -29,7 +29,7 @@ import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
 
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
-import Chatsearch from '../components/chat/chatsearch';
+import ListenerSearch from '../components/chat/listenerSearch';  Listener
 import Videocall from '../components/videoaudio/videocall';
 import Audiocall from '../components/videoaudio/audiocall';
 
@@ -89,7 +89,7 @@ class ELPRoute extends Component {
           {/* Proff */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/usersignup" component={Usersignup} />
-          <PrivateRouteUser path="/chatsearch" component={Chatsearch} />
+          <PrivateRouteUser path="/listenerSearch" component={ListenerSearch} />
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
