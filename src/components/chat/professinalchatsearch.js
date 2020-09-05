@@ -59,12 +59,27 @@ class Professionalchatsearch extends Component {
 
     searchProfessionalList1 = () => {
         let profileName = this.state.profileName;
+        let categoryArray = this.state.categoryArray;
+        let catData= ''
+        let countryIndex = ''; let stateIndex = ''; let cityIndex = '';
+        if(categoryArray && categoryArray.length>0 ){
+                //catData = categoryArray.join();
+                catData = "'" + categoryArray.join("','") + "'";
+            }
+       if(this.state.countryId)
+        countryIndex = this.state.countryList.findIndex(x => x.country_id ===this.state.countryId);
+    if(this.state.stateId)
+        stateIndex = this.state.stateList.findIndex(x => x.state_id ===this.state.stateId);
+    if(this.state.cityId)
+        cityIndex = this.state.cityList.findIndex(x => x.ct_id ===this.state.cityId);
+
+console.log(this.state.countryList,"indexindex",countryIndex,stateIndex,cityIndex)
         let data = {
-            "category": "'Category 1','Category 2'",
+            "category": catData,
             "name": profileName,
-            "country": this.state.countryId,
-            "state": this.state.stateId,
-            "city": this.state.cityId
+            "country": countryIndex?this.state.countryList[countryIndex].country_name:'',
+            "state": stateIndex?this.state.stateList[stateIndex].state_name:'',
+            "city": cityIndex?this.state.cityList[cityIndex].city:'',
         }
         this.props.actionSearchProfessionals(data).then((result) => {
             if (result && result.status === 200) {
@@ -79,24 +94,23 @@ class Professionalchatsearch extends Component {
         const name = e.target.name;
         let value = e.target.value;
         let categoryArray = this.state.categoryArray;
-        console.log("eventsss", e);
-        this.setState({ categoryChk: true });
         if (name == 'profileName') {
             this.setState({
                 profileName: value,
             });
-        } else if (name == 'categoryName') {
-            categoryArray.push(catName);
-            if (e.target.check) {
+        } else if (name === 'categoryName') {
+            if (e.target.checked) {
                 categoryArray.push(catName);
-            } else {
-                categoryArray.pop(catName);
+            } else if(categoryArray && categoryArray.length>0){
+                var index = categoryArray.indexOf(catName);
+                if (index >= 0) {
+                  categoryArray.splice( index, 1 );
+                }
             }
-            console.log("zzzzz", categoryArray);
+            
             this.setState({
                 category: categoryArray,
             });
-
         }
     }
 
@@ -192,6 +206,7 @@ class Professionalchatsearch extends Component {
         let countryId = this.state.countryId;
         let stateId = this.state.stateId;
         let cityId = this.state.cityId;
+        console.log("categoryArray53453",this.state.categoryArray)
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -311,12 +326,13 @@ class Professionalchatsearch extends Component {
                                             <div className="cat-sethight">
                                                 {categoryList && categoryList.map((cat, idx) => {
                                                     return (
+                                                        <div>
                                                         <Form.Group
                                                             controlId={"formBasicCheckbox4" + idx}
                                                             className="d-flex"
                                                         >
                                                             <Form.Check
-                                                                name={'categoryName' + idx}
+                                                                name={'categoryName'}
                                                                 onChange={(e) => {
                                                                     this.handleChange(
                                                                         e, cat.uc_cat_name
@@ -330,16 +346,8 @@ class Professionalchatsearch extends Component {
                                                                 label={cat.uc_cat_name ? cat.uc_cat_name : ''}
                                                             />
                                                         </Form.Group>
-                                                        // <Form.Group controlId={"formBasicCheckbox" + idx}>                                                           
-                                                        //     <Form.Check
-                                                        //         type="checkbox"
-                                                        //         label={cat.uc_cat_name ? cat.uc_cat_name : ''}
-                                                        //         name="categoryName"
-                                                        //         // value={this.state.u_school_code ? true : false}
-                                                        //         onChange={(e) => { this.handleChange(e, cat.uc_cat_name) }}
-                                                        //         className="fw300 fs14 col3 mt-1 checkboxTyp1 check2"
-                                                        //     />
-                                                        // </Form.Group>
+                                                       
+                                                        </div>
                                                     )
                                                 })}
                                                 {/* <Form.Group controlId="formBasicCheckbox">

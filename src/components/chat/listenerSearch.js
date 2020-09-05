@@ -100,7 +100,8 @@ class Chatsearch extends Component {
                                         <Button onClick={this.getListner} className="btnTyp5 bTyp5">
                                             Search
                                     </Button>
-                                        {/*<Image src={Searches} alt="" className="ml-3 pointer" />*/}
+                                    {/*<i class="glyphicon glyphicon-sort"></i>
+                                    <Image src={Searches} alt="" className="ml-3 pointer" />*/}
                                     </Col>
                                 </Row>
                             </div>
