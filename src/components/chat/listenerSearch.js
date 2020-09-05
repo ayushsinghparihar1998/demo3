@@ -100,7 +100,7 @@ class Chatsearch extends Component {
                                     <Col md={3}>
                                         <Button onClick={this.getListner} className="btnTyp5 bTyp5">
                                             Search
-                                    </Button>}
+                                    </Button>
                                     </Col>
                                 </Row>
                             </div>
