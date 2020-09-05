@@ -211,12 +211,12 @@ export default class CalendarDemo extends Component {
           <div className="bg-white light-shadow p-3">
             <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
               <div>
-                <button className="btn " onClick={this.handleModal5}>
+                <button className="btn b btnTyp9 btnCalender" onClick={this.handleModal5}>
                   Create Schedule
                   <span className="icon-arrow"></span>
                 </button>
               </div>
-              <div>
+              <div> 
                 <button
                   className="btn btn-prev"
                   onClick={this.handleCalendarPrev}
