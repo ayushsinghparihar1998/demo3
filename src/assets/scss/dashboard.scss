@@ -22,6 +22,12 @@
                         width: 100%; 
                     }
                 }
+
+                .position-relative {
+                    & > div {
+                        word-break: break-all; 
+                    }
+                }
             }
         }
         .chat-bg {
@@ -433,11 +439,11 @@
             & .c_img {
 
                 img {
-                    
+                    cursor: pointer; 
                     &:first-child {
                     
                     }
-                }
+                } 
                 
             }
 
@@ -447,6 +453,26 @@
         }
     }
 }
+
+/*****calender modal start*****/
+
+.calender_model { 
+    position: relative;
+
+  .modal-dialog {
+    .modal-content {
+        border-radius: 0px;
+        max-width: 700px;
+        margin: auto;
+
+        .modal-body {
+            padding: 20px 25px;
+        }
+    }
+  }
+}
+
+/*****calender modal end*****/ 
 
 .confirmation-box { 
     .modal-dialog { 

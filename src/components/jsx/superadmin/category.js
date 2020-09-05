@@ -5,11 +5,13 @@ import {
     actionGetUserListing,
     actionGetProfessionalListing
 } from "../../../common/redux/actions";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
-import NavBar from "../../core/nav";
+import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
+
+import NavBar from "../../core/nav"; 
 import Footer from "../../core/footer";
 import Requestdetails from "../../../assets/images/register2.svg";
 import Deleteicon from "../../../assets/images/delete_icon.svg";
+import Crossbtn from '../../../assets/images/blue_cross.svg';
 
 class Admincategory extends Component {
     render() {
@@ -54,7 +56,7 @@ class Admincategory extends Component {
                                 </div>
                             </Col>
                             <Col md={9} className="pl-1">
-                                <div className="adminlistener categorys p-3 mb-3">   
+                                <div className="adminlistener categorys p-3 mb-3">
                                     <Col md={12}>
                                         <Form.Group>
                                             <div className="d-flex">
@@ -66,103 +68,103 @@ class Admincategory extends Component {
                                                         type="category"
                                                         placeholder=""
                                                         className="inputTyp2 categoryInput"
-                                                        id="outlined-pwd" 
+                                                        id="outlined-pwd"
                                                         label="category"
                                                         variant="outlined"
                                                         name="category"
                                                     />
                                                 </div>
-                                                <div className="mt-4 pt-2"> 
+                                                <div className="mt-4 pt-2">
                                                     <Button className="btnTyp11 cbttyp2 ml-3 pointer">Add</Button>
                                                 </div>
                                             </div>
                                         </Form.Group>
 
-                                        <ul className="category_listing">   
-                                             <li> 
-                                                 <div className="col23 fs16 fw400">Breakups</div>
-                                                 <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                 </div>
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Family Stress</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Financial Stress</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li> 
-                                                  <div className="col23 fs16 fw400">Weight Management</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
-                                             <li>
-                                                  <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
-                                                  <div className="c_img">
-                                                     <Image src={Requestdetails} alt="" className="mr-2" />   
-                                                     <Image src={Deleteicon} alt="" />         
-                                                  </div> 
-                                             </li>
+                                        <ul className="category_listing">
+                                            <li>
+                                                <div className="col23 fs16 fw400">Breakups</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Family Stress</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Financial Stress</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Weight Management</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="col23 fs16 fw400">Alcohol/Drug Use</div>
+                                                <div className="c_img">
+                                                    <Image src={Requestdetails} alt="" className="mr-2" />
+                                                    <Image src={Deleteicon} alt="" />
+                                                </div>
+                                            </li>
                                         </ul>
 
                                     </Col>
@@ -171,8 +173,12 @@ class Admincategory extends Component {
                             </Col>
                         </Row>
                     </Container>
+
+
                 </div>
                 <Footer />
+
+
             </div>
         );
     }

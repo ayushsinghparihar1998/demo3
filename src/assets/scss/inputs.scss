@@ -90,6 +90,24 @@ a:hover {
   color: $col10 !important; 
 }
 
+.PhoneInputInput {   
+  color       : $col25 !important; 
+  background  : $col22 !important;
+  border: solid 0.5px $col23 !important;
+  box-shadow  : none;
+  height: 3.5rem; 
+  border-radius: 0px; 
+  font-size: $fs18 !important;  
+  padding-left: 15px;
+  outline: 0;
+}
+
+.PhoneInputInput:focus { 
+  color       : $col25 !important; 
+  background  : $col22 !important;
+  border: solid 0.5px $col23 !important;
+}
+
 .inputTyp3 {
   border          : 1px solid $col45 !important; 
   border-radius: $col44;
@@ -189,12 +207,16 @@ a:hover {
 
 .selectTyp1.select3 {    
   height: 2.5rem !important; 
-  background-color: #ffffff !important;
+  background-color: #ffffff !important; 
   color: $col10 !important;
   font-size: $fs16 !important;
   font-weight: 300 !important;
   padding-left: 15px !important;
   box-shadow: none;  
+}
+
+.selectTyp1.p3 { 
+   padding-left: 1rem !important;
 }
 
 .form-group {
