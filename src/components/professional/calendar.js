@@ -6,6 +6,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+
 import {
   Button,
   NavDropdown,
@@ -35,10 +37,11 @@ export default class CalendarDemo extends Component {
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
-      repeat: "",
+      repeat: "0",
       sl_desc: "",
       init: false,
       calendarWeekends: true,
+      errorTitle: "",
       listOfCalendarEventResponse: [],
       // listOfCalendarEventResponse: this.props.location.state
       //   .listOfCalendarEventResponse,
@@ -69,7 +72,7 @@ export default class CalendarDemo extends Component {
     this.setState({
       [type]: date,
     });
-    // let d = Moment.utc(date).format("HH:mm");
+    // let d = t.utc(date).format("HH:mm");
   }
   handleDate = (date) => {
     console.log("date", date);
@@ -220,6 +223,41 @@ export default class CalendarDemo extends Component {
 
     console.log(event.target.value);
   };
+
+  handleSubmit = () => {
+    if (this.state.sl_desc == "") {
+      this.setState({
+        errorTitle: "Please enter a valid title.",
+      });
+    } else {
+      this.setState({
+        errorTitle: "",
+      });
+      let hour = this.state.starting_at.getHours();
+      console.log(hour);
+      let endHour = hour + +this.state.duration.replace(/\D/g, "");
+      if (endHour > 23) {
+        endHour = endHour - 24;
+      }
+      console.log(endHour);
+
+      let data = {
+        date: moment(this.state.date).format("YYYY-MM-DD"),
+        starting_at: moment(this.state.starting_at).format("HH:mm"),
+        end_at: ('0' + endHour).slice(-2) + ':00',
+        duration: this.state.duration,
+        recurring: this.state.recurring,
+        repeat: this.state.repeat,
+        sl_desc: this.state.sl_desc,
+      };
+      console.log("data", data);
+      //   ELPRxApiService("postCalendarEvents", data).then((response) => {
+      //     console.log("response", response);
+      //     this.state.handleClose5();
+      //     this.getAllevents();
+      //   });
+    }
+  };
   render() {
     const { listOfCalendarEventResponse } = this.state;
     return (
@@ -227,91 +265,95 @@ export default class CalendarDemo extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        
-        <div className="main_calender pt-5">  
-        <Container>
-        <div className="calenderset">    
-          <div className="bg-white light-shadow p-3">
-            <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
-              <div>
-                <button className="btn " onClick={this.handleModal5}>
-                  Create Schedule
-                  <span className="icon-arrow"></span>
-                </button>
-              </div>
-              <div>
-                <button
-                  className="btn btn-prev"
-                  onClick={this.handleCalendarPrev}
-                >
-                  {" "}
-                  <span className="icon-arrow"></span>
-                </button>
-                <button
-                  className="btn btn-next"
-                  onClick={this.handleCalendarNext}
-                >
-                  {" "}
-                  <span className="icon-arrow"></span>
-                </button>
-              </div>
-              <h6 className="mb-0">
-                {this.state.calendarView && this.state.calendarView.title}
-              </h6>
-              <div className="fc-btn-group">
-                <button
-                  className="btn btn-cal"
-                  onClick={() => this.handleCalendarGrid("dayGridMonth")}
-                >
-                  Month
-                </button>
-                <button
-                  className="btn btn-cal"
-                  onClick={() => this.handleCalendarGrid("timeGridWeek")}
-                >
-                  Week
-                </button>
+
+        <div className="main_calender pt-5">
+          <Container>
+            <div className="calenderset">
+              <div className="bg-white light-shadow p-3">
+                <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
+                  <div>
+                    <button className="btn " onClick={this.handleModal5}>
+                      Create Schedule
+                      <span className="icon-arrow"></span>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className="btn btn-prev"
+                      onClick={this.handleCalendarPrev}
+                    >
+                      {" "}
+                      <span className="icon-arrow"></span>
+                    </button>
+                    <button
+                      className="btn btn-next"
+                      onClick={this.handleCalendarNext}
+                    >
+                      {" "}
+                      <span className="icon-arrow"></span>
+                    </button>
+                  </div>
+                  <h6 className="mb-0">
+                    {this.state.calendarView && this.state.calendarView.title}
+                  </h6>
+                  <div className="fc-btn-group">
+                    <button
+                      className="btn btn-cal"
+                      onClick={() => this.handleCalendarGrid("dayGridMonth")}
+                    >
+                      Month
+                    </button>
+                    <button
+                      className="btn btn-cal"
+                      onClick={() => this.handleCalendarGrid("timeGridWeek")}
+                    >
+                      Week
+                    </button>
+                  </div>
+                </div>
+                <div className="demo-app">
+                  <div className="demo-app-top"></div>
+                  <div className="demo-app-calendar">
+                    <FullCalendar
+                      defaultView="dayGridMonth"
+                      header={false}
+                      plugins={[
+                        timeGridPlugin,
+                        dayGridPlugin,
+                        interactionPlugin,
+                      ]}
+                      ref={this.calendarComponentRef}
+                      weekends={this.state.calendarWeekends}
+                      events={this.state.calendarEvents}
+                      eventBorderColor={""}
+                      eventLimit={true}
+                      views={{
+                        timeGrid: {
+                          eventLimit: 3, // adjust to 3 only for timeGridWeek/timeGridDay
+                        },
+                        dayGrid: {
+                          eventLimit: 4,
+                        },
+                      }}
+                      expandRows={true}
+                      height={1050}
+                      handleWindowResize={true}
+                      allDaySlot={false}
+                      viewRender={function (view, elm) {
+                        console.log(view, elm);
+                      }}
+                      select={function (start, end) {
+                        console.log(start, end);
+                      }}
+                      slotDuration={"01:00:00"}
+                      slotLabelInterval={"00:05:00"}
+                      dateClick={this.handleDateClick}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="demo-app">
-              <div className="demo-app-top"></div>
-              <div className="demo-app-calendar">
-                <FullCalendar
-                  defaultView="dayGridMonth"
-                  header={false}
-                  plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
-                  ref={this.calendarComponentRef}
-                  weekends={this.state.calendarWeekends}
-                  events={this.state.calendarEvents}
-                  eventBorderColor={""}
-                  eventLimit={true}
-                  views={{
-                    timeGrid: {
-                      eventLimit: 3, // adjust to 3 only for timeGridWeek/timeGridDay
-                    },
-                    dayGrid: {
-                      eventLimit: 4,
-                    },
-                  }}
-                  expandRows={true}
-                  height={1050}
-                  handleWindowResize={true}
-                  allDaySlot={false}
-                  viewRender={function (view, elm) {
-                    console.log(view, elm);
-                  }}
-                  select={function (start, end) {
-                    console.log(start, end);
-                  }}
-                  slotDuration={"01:00:00"}
-                  slotLabelInterval={"00:05:00"}
-                  dateClick={this.handleDateClick}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        </Container>
+          </Container>
         </div>
         {/* calender modal start */}
 
@@ -343,18 +385,13 @@ export default class CalendarDemo extends Component {
                     value={this.state.sl_desc}
                     onChange={(e) => this.handleChange(e, "sl_desc")}
                   />
+                  <div className="error alignLeft">
+                    {" "}
+                    {this.state.errorTitle}
+                  </div>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label className="fs20 fw600 col14">Date:</Form.Label>
-                  {/* <Form.Control
-                    type="text"
-                    placeholder="Friday 5/8/2020"
-                    className="inputTyp2"
-                    id="date"
-                    variant="outlined"
-                    name="screenName"
-                    autoComplete="off"
-                  /> */}
 
                   <DatePicker
                     placeholderText="Click to select a date"
@@ -365,7 +402,7 @@ export default class CalendarDemo extends Component {
                   />
                 </Form.Group>
 
-                <Form.Group> 
+                <Form.Group>
                   <Form.Label className="fs20 fw600 col14">
                     Starting at:
                   </Form.Label>
@@ -384,7 +421,12 @@ export default class CalendarDemo extends Component {
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label className="fs20 fw600 col14">Lasting:</Form.Label>
-                  <Form.Control as="select" className="selectTyp1 p3">
+                  <Form.Control
+                    as="select"
+                    className="selectTyp1 p3"
+                    value={this.state.duration}
+                    onChange={(e) => this.handleChange(e, "duration")}
+                  >
                     <option>1 hour</option>
                     <option>2 hours</option>
                     <option>3 hours</option>
@@ -425,9 +467,10 @@ export default class CalendarDemo extends Component {
                   <Form.Control
                     as="select"
                     className="selectTyp1 p3"
-                    value={this.state.duration}
-                    onChange={(e) => this.handleChange(e, "duration")}
+                    value={this.state.repeat}
+                    onChange={(e) => this.handleChange(e, "repeat")}
                   >
+                    <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -437,7 +480,13 @@ export default class CalendarDemo extends Component {
                   <div className="fs18 fw300 col14 ml-3">Additional Weeks</div>
                 </Form.Group>
 
-                <Button className="btnTyp5 mt-5">Save Shift</Button>
+                <Button
+                  className="btnTyp5 mt-5"
+                  type="button"
+                  onClick={() => this.handleSubmit()}
+                >
+                  Save Shift
+                </Button>
               </div>
             </Container>
           </Modal.Body>
