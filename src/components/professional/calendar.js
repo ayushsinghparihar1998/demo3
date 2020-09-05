@@ -227,91 +227,91 @@ export default class CalendarDemo extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        
-        <div className="main_calender pt-5">  
-        <Container>
-        <div className="calenderset">    
-          <div className="bg-white light-shadow p-3">
-            <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
-              <div>
-                <button className="btn b btnTyp9 btnCalender" onClick={this.handleModal5}>
-                  Create Schedule
-                  <span className="icon-arrow"></span>
+
+        <div className="main_calender pt-5">
+          <Container>
+            <div className="calenderset">
+              <div className="bg-white light-shadow p-3">
+                <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
+                  <div>
+                    <button className="btn b btnTyp9 btnCalender" onClick={this.handleModal5}>
+                      Create Schedule
+                  <span className="icon-arrow"></span> 
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className="btn btn-prev"
+                      onClick={this.handleCalendarPrev}
+                    >
+                      {" "}
+                      <span className="icon-arrow"></span>
+                    </button>
+                    <button
+                      className="btn btn-next"
+                      onClick={this.handleCalendarNext}
+                    >
+                      {" "}
+                      <span className="icon-arrow"></span>
+                    </button>
+                  </div>
+                  <h6 className="mb-0">
+                    {this.state.calendarView && this.state.calendarView.title}
+                  </h6>
+                  <div className="fc-btn-group">
+                    <button
+                      className="btn btn-cal"
+                      onClick={() => this.handleCalendarGrid("dayGridMonth")}
+                    >
+                      Month
                 </button>
-              </div>
-              <div> 
-                <button
-                  className="btn btn-prev"
-                  onClick={this.handleCalendarPrev}
-                >
-                  {" "}
-                  <span className="icon-arrow"></span>
+                    <button
+                      className="btn btn-cal"
+                      onClick={() => this.handleCalendarGrid("timeGridWeek")}
+                    >
+                      Week
                 </button>
-                <button
-                  className="btn btn-next"
-                  onClick={this.handleCalendarNext}
-                >
-                  {" "}
-                  <span className="icon-arrow"></span>
-                </button>
-              </div>
-              <h6 className="mb-0">
-                {this.state.calendarView && this.state.calendarView.title}
-              </h6>
-              <div className="fc-btn-group">
-                <button
-                  className="btn btn-cal"
-                  onClick={() => this.handleCalendarGrid("dayGridMonth")}
-                >
-                  Month
-                </button>
-                <button
-                  className="btn btn-cal"
-                  onClick={() => this.handleCalendarGrid("timeGridWeek")}
-                >
-                  Week
-                </button>
+                  </div>
+                </div>
+                <div className="demo-app">
+                  <div className="demo-app-top"></div>
+                  <div className="demo-app-calendar">
+                    <FullCalendar
+                      defaultView="dayGridMonth"
+                      header={false}
+                      plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
+                      ref={this.calendarComponentRef}
+                      weekends={this.state.calendarWeekends}
+                      events={this.state.calendarEvents}
+                      eventBorderColor={""}
+                      eventLimit={true}
+                      views={{
+                        timeGrid: {
+                          eventLimit: 3, // adjust to 3 only for timeGridWeek/timeGridDay
+                        },
+                        dayGrid: {
+                          eventLimit: 4,
+                        },
+                      }}
+                      expandRows={true}
+                      height={1050}
+                      handleWindowResize={true}
+                      allDaySlot={false}
+                      viewRender={function (view, elm) {
+                        console.log(view, elm);
+                      }}
+                      select={function (start, end) {
+                        console.log(start, end);
+                      }}
+                      slotDuration={"01:00:00"}
+                      slotLabelInterval={"00:05:00"}
+                      dateClick={this.handleDateClick}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="demo-app">
-              <div className="demo-app-top"></div>
-              <div className="demo-app-calendar">
-                <FullCalendar
-                  defaultView="dayGridMonth"
-                  header={false}
-                  plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
-                  ref={this.calendarComponentRef}
-                  weekends={this.state.calendarWeekends}
-                  events={this.state.calendarEvents}
-                  eventBorderColor={""}
-                  eventLimit={true}
-                  views={{
-                    timeGrid: {
-                      eventLimit: 3, // adjust to 3 only for timeGridWeek/timeGridDay
-                    },
-                    dayGrid: {
-                      eventLimit: 4,
-                    },
-                  }}
-                  expandRows={true}
-                  height={1050}
-                  handleWindowResize={true}
-                  allDaySlot={false}
-                  viewRender={function (view, elm) {
-                    console.log(view, elm);
-                  }}
-                  select={function (start, end) {
-                    console.log(start, end);
-                  }}
-                  slotDuration={"01:00:00"}
-                  slotLabelInterval={"00:05:00"}
-                  dateClick={this.handleDateClick}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        </Container>
+          </Container>
         </div>
         {/* calender modal start */}
 
@@ -344,43 +344,53 @@ export default class CalendarDemo extends Component {
                     onChange={(e) => this.handleChange(e, "sl_desc")}
                   />
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label className="fs20 fw600 col14">Date:</Form.Label>
-                  {/* <Form.Control
-                    type="text"
-                    placeholder="Friday 5/8/2020"
-                    className="inputTyp2"
-                    id="date"
-                    variant="outlined"
-                    name="screenName"
-                    autoComplete="off"
-                  /> */}
+                <Row>
+                    <Col md={6}> 
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14 d-block">Date:</Form.Label>
+                        {/* <Form.Control
+                              type="text"
+                              placeholder="Friday 5/8/2020"
+                              className="inputTyp2"
+                              id="date"
+                              variant="outlined"
+                              name="screenName"
+                              autoComplete="off"
+                            /> */}
 
-                  <DatePicker
-                    placeholderText="Click to select a date"
-                    selected={this.state.date}
-                    value={this.state.date}
-                    onChange={(event) => this.handleDate(event)}
-                    minDate={new Date()}
-                  />
-                </Form.Group>
+                        <DatePicker
+                          placeholderText="Click to select a date"
+                          selected={this.state.date}
+                          value={this.state.date}
+                          onChange={(event) => this.handleDate(event)}
+                          minDate={new Date()}
+                          className="form-control inputTyp2"
+                        />
 
-                <Form.Group> 
-                  <Form.Label className="fs20 fw600 col14">
-                    Starting at:
-                  </Form.Label>
-                  <DatePicker
-                    selected={this.state.starting_at}
-                    onChange={(date) => this.setStartDate(date, "starting_at")}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    // minTime={new Date(this.state.date)}
-                    // maxTime = {new Date().setHours(23 , 59)}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                  />
-                </Form.Group>
+                      </Form.Group>
+                    </Col>
+
+                    <Col md={6}> 
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14 d-block">
+                            Starting at:
+                          </Form.Label>
+                          <DatePicker
+                            selected={this.state.starting_at}
+                            onChange={(date) => this.setStartDate(date, "starting_at")}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            // minTime={new Date(this.state.date)}
+                            // maxTime = {new Date().setHours(23 , 59)}
+                            timeCaption="Time"
+                            dateFormat="h:mm aa"
+                            className="form-control inputTyp2"
+                          />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label className="fs20 fw600 col14">Lasting:</Form.Label>
@@ -424,7 +434,7 @@ export default class CalendarDemo extends Component {
                   </Form.Label>
                   <Form.Control
                     as="select"
-                    className="selectTyp1 p3"
+                    className="selectTyp1 p3 selectWidth"
                     value={this.state.duration}
                     onChange={(e) => this.handleChange(e, "duration")}
                   >
