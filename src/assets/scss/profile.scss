@@ -2,6 +2,12 @@
     background-color: $col22; 
     min-height: calc(100vh - 146px); 
 
+    .d-flex.text-left.border-grays {
+        div.mr-4 > img {
+            max-width: 70px;
+        }
+    }
+
     .myprofile {
         background: $col18;
         border-top: solid 10px $col23;
@@ -11,11 +17,11 @@
         .ant-select {
             min-width: 100%;
             .ant-select-selector { 
-                color: #9F9F9F !important;
-                background: #f3fdff !important;
-                border: solid 0.5px #8AD1E7 !important;
+                color: $col25 !important; 
+                background: $col22 !important;
+                border: solid 0.5px $col23 !important;  
                 box-shadow: none;
-                height: 3.5rem !important;
+                height: 3.5rem !important; 
 
                 & .ant-select-selection-search {
                     height: 3.5rem;
@@ -206,4 +212,39 @@
         }
         
     }
+}
+
+.location { 
+    .ant-select {
+        min-width: 100%;
+        margin-bottom: 15px; 
+        .ant-select-selector { 
+            color: $col25 !important; 
+            background: $col22 !important;
+            border: solid 0.5px $col23 !important;  
+            box-shadow: none;
+            height: 2.5rem !important;
+
+            & .ant-select-selection-search {
+                height: 2.5rem;
+
+                & input {
+                    height: 2.5rem;
+                    font-size: 1rem;
+                }
+                
+            }
+
+            & .ant-select-selection-placeholder { 
+                line-height: 2.5rem;
+                font-size: 1rem;
+            }
+        }    
+    }      
+
+    .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+        line-height: 2.5rem;  
+        font-size: 1rem;         
+        color: $col25 !important; 
+    } 
 }
