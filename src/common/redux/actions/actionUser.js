@@ -204,6 +204,8 @@ export const actionGetCity = (data) => async dispatch => {
 export const actionSearchListner = (data) => async dispatch => {
   const request = ELPViewApiService('searchlistener', data);
   dispatch({ type: SEARCH_LISTNER, payload: request.data });
+  return request;
+};
 
 export const actionAdminUserDeleteReason = (data) => async (dispatch) => {
   const request = ELPViewApiService('adminUserDeleteReason', data);

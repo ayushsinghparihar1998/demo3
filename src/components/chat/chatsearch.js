@@ -121,8 +121,10 @@ class Chatsearch extends Component {
                                                                     count={5}
                                                                     value={item.u_rating ? item.u_rating : 0}
                                                                     onChange={this.ratingChanged}
+                                                                    halfIcon={<i className="fa fa-star-half-alt"></i>}
                                                                     size={24}
-                                                                    activeColor="#ffd700"
+                                                                    color="#FABE2C" 
+                                                                    activeColor="#FABE2C"
                                                                 />
                                                                 <Image src={Starfill} alt="" />
                                                                 <Image src={Starfill} alt="" />

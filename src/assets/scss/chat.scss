@@ -111,7 +111,19 @@
                 right: 45%;
             }
             .starrating {
-                margin-top: 10px; 
+                margin-top: 10px;
+
+                & > div {
+                    justify-content: center; 
+
+                    & > div {
+                        outline: 0; 
+                    }
+                }
+
+                img {
+                    display: none;
+                }
             }
             .shr {
                 margin-left: 20px;
@@ -126,7 +138,12 @@
 .chatsearches {
     .left_sidebar {  
         .location { 
-            padding: 15px; 
+            padding: 15px;
+
+            .cat-sethight {
+                max-height: 245px; 
+                overflow: auto;
+            }
         }
     }
 }
