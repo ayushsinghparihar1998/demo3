@@ -72,7 +72,7 @@ class Chatsearch extends Component {
                                     <Col md={3}>
                                         <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
                                     </Col>
-                                    <Col md={3}>
+                                    <Col md={3}> 
                                         <Form.Group>
                                             <Form.Control
                                                 type="text"
@@ -106,7 +106,7 @@ class Chatsearch extends Component {
                                 </Row>
                             </div>
 
-                            <div className="search-listing">
+                            <div className="search-listing"> 
                                 <Row>
                                     {listOfSearchLisner &&
                                         listOfSearchLisner.length > 0 &&
@@ -146,7 +146,7 @@ class Chatsearch extends Component {
                                                             {item.u_bio ? 
                                                             <div>
                                                                 <hr className="shr" />
-                                                                <div className="fs14 col29 fw300">
+                                                                <div className="fs14 col29 fw300 content_set">
                                                                     {item.u_bio ? item.u_bio : ''}
                                                                 </div>
                                                                 {item.u_bio.length>100?
