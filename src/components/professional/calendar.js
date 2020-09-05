@@ -91,9 +91,9 @@ export default class CalendarDemo extends Component {
       if (response && response.data && response.data.data) {
         console.log("response", response.data.data.event_list);
 
-        // sl_created_at: "2020-09-03 14:51:38"
+        // sl_end_date: "2020-09-03 14:51:38"
         // sl_created_by: "85"
-        // sl_date: "2020-09-03 00:00:00"
+        // sl_end_date: "2020-09-03 00:00:00"
         // sl_desc: "hello i am creating this event"
         // sl_duration: "2 hours"
         // sl_end_at: "18:00:00"
@@ -111,7 +111,7 @@ export default class CalendarDemo extends Component {
               return {
                 id: row.sl_id,
                 title: row.sl_desc,
-                startDateTime: row.sl_created_at,
+                startDateTime: row.sl_end_date,
                 endDateTime: row.sl_end_date,
               };
             }
@@ -119,7 +119,7 @@ export default class CalendarDemo extends Component {
           const calendarEvents = response.data.data.event_list.map(function (
             row
           ) {
-            let ar = row.sl_created_at.split(" ");
+            let ar = row.sl_end_date.split(" ");
             let ar2 = row.sl_end_date.split(" ");
             ar[1] = row.sl_start_at;
             ar2[1] = row.sl_end_at;
@@ -129,7 +129,7 @@ export default class CalendarDemo extends Component {
               start: ar.join(" "),
               // start: "2020-09-18 02:30:00", // a property!
               end: ar2.join(" "),
-              // ? new Date(row.sl_created_at)
+              // ? new Date(row.sl_end_date)
               // : new Date(row.slotStartTimestamp),
             };
           });
@@ -313,9 +313,7 @@ export default class CalendarDemo extends Component {
                       <span className="icon-arrow"></span>
                     </button>
                   </div>
-                  <h6 className="mb-0">
-                    {this.state.calendarView && this.state.calendarView.title}
-                  </h6>
+                  
                   <div className="fc-btn-group">
                     <button
                       className="btn btn-cal"
