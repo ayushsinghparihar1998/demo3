@@ -23,7 +23,8 @@ class Chatsearch extends Component {
         super(props);
         this.state = {
             listnerList: [],
-            search:''
+            search:'',
+            recordCount:9
         };
     }
     componentDidMount() {
@@ -56,6 +57,16 @@ class Chatsearch extends Component {
       [event.target.name]: event.target.value
     });
   };
+  handlePagination =() => {
+    let listOfSearchLisner = this.state.listOfSearchLisner;
+    let recordCount = this.state.recordCount 
+    if(listOfSearchLisner &&  listOfSearchLisner.length >0){
+        recordCount = recordCount + 9
+        this.setState({
+            recordCount: recordCount
+        });
+    }
+  }
     render() {
         let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
         console.log("this.state.listOfSearchLisner", this.state.listOfSearchLisner)
@@ -86,22 +97,10 @@ class Chatsearch extends Component {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    {/*<Col md={3}>
-                                        <Form.Group controlId="exampleForm.ControlSelect1">
-                                            <Form.Control as="select"
-                                                className="selectTyp1 select3"
-                                                name="date">
-                                                <option>Sort By</option>
-
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Col>*/}
                                     <Col md={3}>
                                         <Button onClick={this.getListner} className="btnTyp5 bTyp5">
                                             Search
-                                    </Button>
-                                    {/*<i class="glyphicon glyphicon-sort"></i>
-                                    <Image src={Searches} alt="" className="ml-3 pointer" />*/}
+                                    </Button>}
                                     </Col>
                                 </Row>
                             </div>
@@ -110,7 +109,7 @@ class Chatsearch extends Component {
                                 <Row>
                                     {listOfSearchLisner &&
                                         listOfSearchLisner.length > 0 &&
-                                        listOfSearchLisner.map(
+                                        listOfSearchLisner.slice(0, this.state.recordCount).map(
                                             (item, index) => {
                                                 return (
                                                     <Col md={4}>
@@ -168,7 +167,8 @@ class Chatsearch extends Component {
                                    <div className="text-center w-100">
                                         <Button
                                             className="btnTyp12"
-                                            onClick={this.handleSubmit}
+                                            disabled={listOfSearchLisner.length < this.state.recordCount?true:false}
+                                            onClick={this.handlePagination}
                                         >
                                             show more
                                              </Button>

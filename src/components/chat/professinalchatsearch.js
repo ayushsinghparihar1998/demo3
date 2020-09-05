@@ -73,7 +73,6 @@ class Professionalchatsearch extends Component {
     if(this.state.cityId)
         cityIndex = this.state.cityList.findIndex(x => x.ct_id ===this.state.cityId);
 
-console.log(this.state.countryList,"indexindex",countryIndex,stateIndex,cityIndex)
         let data = {
             "category": catData,
             "name": profileName,
