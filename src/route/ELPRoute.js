@@ -36,8 +36,9 @@ import { getLocalStorage } from '../common/helpers/Utils';
 import socketClass from '../common/utility/socketClass';
 import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCalling';
 import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
-import Admincategory from '../components/jsx/superadmin/category'; 
+import Admincategory from '../components/jsx/superadmin/category';
 import CalendarDemo from "../components/professional/calendar";
+import ProfessinalcChatSearch from '../components/chat/professinalchatsearch';
 
 
 
@@ -56,7 +57,7 @@ class ELPRoute extends Component {
     this.setState({ socket: socketClass.getSocket() })
     // console.log("socket===", socket)
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
   render() {
@@ -87,6 +88,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/usersignup" component={Usersignup} />
           <PublicRoute path="/chatsearch" component={Chatsearch} />
+
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
@@ -111,6 +113,7 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
+          <PrivateRoutes path="/professinalchatsearch" component={ProfessinalcChatSearch} />
 
         </Switch>
       </>
