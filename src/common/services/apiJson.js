@@ -284,7 +284,7 @@ export default {
     showErrorMessage: true,
   },
   postCalendarEvents: {
-    url: "elp/get_event",
+    url: "elp/add_event",
     method: "POST",
     data: {
       date: "",
