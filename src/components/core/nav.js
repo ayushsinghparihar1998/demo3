@@ -184,13 +184,13 @@ class NavBar extends Component {
                   {getLocalStorage('userInfo') || getLocalStorage('userInfoProff')
                     || getLocalStorage('customerInfo')
                     ? [
-                    getLocalStorage('customerInfo')?[
-                      <NavLink to="/professinalchatsearch" className="nav-link">
-                        Professional Search
+                      getLocalStorage('customerInfo') ? [
+                        <NavLink to="/professionalSearch" className="nav-link">
+                          Professional Search
                     </NavLink>,
-                    <NavLink to="/listenerSearch" className="nav-link">
-                        Listener Search
-                    </NavLink>]:'',
+                        <NavLink to="/listenerSearch" className="nav-link">
+                          Listener Search
+                    </NavLink>] : '',
                       <NavLink to={getLocalStorage('userInfo') ? 'userDashboard' :
                         getLocalStorage('userInfoProff') ? 'userDashboardproff' :
                           getLocalStorage('customerInfo') ? 'userDashboardcust'
