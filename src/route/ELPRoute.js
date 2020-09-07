@@ -15,7 +15,6 @@ import PublicRoute from './PublicRoute';
 import UserdashboardProff from '../components/professional/userdashboardProff';
 import ChatProff from '../components/professional/chatproff';
 import UserdashboardCust from '../components/user/userdashboard';
-import Professionalchatsearch from '../components/chat/professinalchatsearch';
 
 import PrivateRouteUser from './PrivateRouteUser';
 import PrivateRoutes from './PrivateRoutes';
@@ -29,7 +28,7 @@ import Userprofiledetail from '../components/jsx/superadmin/userprofiledetail';
 
 import AdminLogin from '../components/admin/adminlogin';
 import Adminlistener from '../components/admin/listener';
-import ListenerSearch from '../components/chat/listenerSearch'; 
+import ListenerSearch from '../components/chat/listenerSearch';
 import Videocall from '../components/videoaudio/videocall';
 import Audiocall from '../components/videoaudio/audiocall';
 
@@ -40,7 +39,7 @@ import VideoCalling from '../components/VideoComponents/VideoCalling/VideoCallin
 import CallingTo from '../components/videoaudio/CallingTo/CallingTo';
 import Admincategory from '../components/jsx/superadmin/category';
 import CalendarDemo from "../components/professional/calendar";
-import ProfessinalcChatSearch from '../components/chat/professinalchatsearch';
+import ProfessionalChatSearch from '../components/chat/professionalSearch';
 
 
 
@@ -114,7 +113,7 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
-          <PrivateRoutes path="/professinalchatsearch" component={ProfessinalcChatSearch} />
+          <PrivateRoutes path="/professionalSearch" component={ProfessionalChatSearch} />
 
         </Switch>
       </>
