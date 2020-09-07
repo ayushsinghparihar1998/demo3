@@ -92,6 +92,7 @@ class ELPRoute extends Component {
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
+          <PrivateRouteList path="/calendar" component={CalendarDemo} />
 
           {/* Proff */}
           <PrivateRouteProff
