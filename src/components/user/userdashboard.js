@@ -187,7 +187,7 @@ class Userdashboard extends Component {
   getRecentJoinUsers = () => {
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.u_mem_list;
+        let res = result.data.data && result.data.data.u_mem_list?result.data.data.u_mem_list:[];
         this.setState({ recentJoin: res })
       }
     })
@@ -195,7 +195,7 @@ class Userdashboard extends Component {
   getUserDashBoard = () => {
     this.props.actionGetUserDashBoard({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.dashboard_list;
+        let res = result.data.data && result.data.data.dashboard_list?result.data.data.dashboard_list:[];
         this.setState({ dashboardData: res })
       }
     })
