@@ -182,6 +182,12 @@
 }
 
 .chatsearches { 
+
+    .col-md-8 {
+        & > .col1.fw500.fs18.pb-1 { 
+            word-break: break-all;      
+        }
+    }
     .left_sidebar {  
         .location { 
             padding: 15px;
