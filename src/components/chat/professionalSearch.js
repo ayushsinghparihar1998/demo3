@@ -394,9 +394,9 @@ class Professionalchatsearch extends Component {
                                                     <div className="mr-4">
                                                         <Image src={searchItem.u_image ? searchItem.u_image : Requestuser} alt="" className="r50" />
                                                     </div>
-                                                    <div className="pl-2">
-                                                        <div className="d-flex justify-content-between">
-                                                            <div>
+                                                    <div className="pl-2 w-100">
+                                                        <div className="d-flex justify-content-between w-100"> 
+                                                            <div className="col-md-8">
                                                                 <div className="col1 fw500 fs18 pb-1">{searchItem.u_name ? searchItem.u_name : ''}</div>
                                                                 <div className="col40 fs15 fw400 pb-1">
                                                                     Category:  {searchItem.uc_cat_name && searchItem.uc_cat_name.map((cat, cidx) => {
@@ -407,16 +407,18 @@ class Professionalchatsearch extends Component {
                                                                 </div>
                                                                 {/* <div className="fs14 fw400 col54 pb-1">Licensed Professional Counselor, LPC</div> */}
                                                             </div>
-                                                            <div className="">
+                                                            <div className="col-md-4"> 
+                                                                <div className="ml-auto text-right">  
                                                                 <span className="col28 fs14 fs400 pr-3">
                                                                     {searchItem.u_city ? searchItem.u_city : ''}
                                                                 </span>
-                                                                <Image src={searchItem.u_flag ? searchItem.u_flag : ''} alt="" width={100} />
-                                                                <div className="col40 fs14 fs400 pt-1">{searchItem.u_mobile ? searchItem.u_mobile : ''}</div>
+                                                                <Image src={searchItem.u_flag ? searchItem.u_flag : ''} alt="" width={100} className="mx50" />
+                                                                <div className="col40 fs14 fs400 pt-1 text-center">{searchItem.u_mobile ? searchItem.u_mobile : ''}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <div className="col28 fs15 fw400 pt-1">{searchItem.u_bio ? searchItem.u_bio : ''}
+                                                        <div className="col28 fs15 fw400 pt-2">{searchItem.u_bio ? searchItem.u_bio : ''} 
                                                             {/* <span className="col40 fw500">Read more...</span> */}
                                                         </div>
                                                     </div>
