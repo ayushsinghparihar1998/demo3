@@ -4,7 +4,7 @@ import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video'
 import {
   useParams,
   useHistory
-} from "react-router-dom";
+} from "react-router-dom"; 
 import NavBar from "../core/nav";
 import Backicon from "../../assets/images/backicon.svg";
 import Videouser from "../../assets/images/pro_img2.svg";
@@ -12,6 +12,7 @@ import Videousertwo from "../../assets/images/videousers.svg";
 import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
 import Videothree from "../../assets/images/video.svg";
+import Videomuteov from "../../assets/images/mute_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
 import UserChat4 from "../../assets/images/user_chat4.svg";
@@ -214,8 +215,12 @@ const AudioCall = (props) => {
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
                 (muteAudio == false) ?
-                  <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">mute</button> :
-                  <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">unmute</button>
+                  <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
+                    <Image src={Videomute} alt="" />
+                  </button> :
+                  <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">
+                     <Image src={Videomuteov} alt="" />
+                  </button>
               }
 
               {/* <Image src={Videomute} className="mr-3 pointer" />

@@ -212,6 +212,14 @@
         }
         
     }
+
+    .ant-popover.ant-popover-placement-top {
+
+        .ant-popover-inner {
+            max-width: 325px; 
+        }
+    }
+
 }
 
 .location { 
