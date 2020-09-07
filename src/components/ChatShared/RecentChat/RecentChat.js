@@ -6,7 +6,6 @@ import socketClass from '../../../common/utility/socketClass'
 import ChatCross from '../../../assets/images/chat_cross.svg';
 const socket = socketClass.getSocket();
 function RecentChat({ onRedirect }) {
-  console.log("getUserProfile()", getUserProfile())
   const user = getUserProfile();
   const [recentChats, setRecentChats] = useState([]);
   useEffect(() => {

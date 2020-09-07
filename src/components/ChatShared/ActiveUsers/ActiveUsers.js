@@ -5,7 +5,6 @@ import getUserProfile from '../../../common/utility/getUserProfile'
 import socketClass from '../../../common/utility/socketClass'
 const socket = socketClass.getSocket();
 function ActiveUsers({ onRedirect }) {
-  console.log("getUserProfile()", getUserProfile())
   const user = getUserProfile();
   const [activeUsers, setActiveUsers] = useState([]);
   const [showVal, setShowVal] = useState(4);

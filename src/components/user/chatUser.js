@@ -216,7 +216,11 @@ class ChatUser extends Component {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      this.updateChat(object);
+      if (data.success === 1) {
+        this.updateChat(object);
+      } else {
+        showErrorMessage(data.msg);
+      }
     });
   }
 
