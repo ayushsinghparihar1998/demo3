@@ -34,12 +34,13 @@
     .videocontrol {
         position: absolute; 
         left: 0;
-        top: 150%;   
+        top: 200%; 
         bottom: 0;
 
         .localMedia {
+            padding-right: 10%;
             video {
-                max-width: 400px;  
+                max-width: 300px;  
             }
         }
 
@@ -71,8 +72,18 @@
     }
     
     .userdetail { 
-        // z-index: 999;
+        z-index: 999;
         position: relative;
+        .online_user {
+            width: 14px; 
+            height: 14px;
+            background: #79EE1D;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+            top: 36%;
+            left: 11%;
+        }
         span {
             position: relative;
             margin-right: 15px;     
@@ -111,7 +122,8 @@
         position: fixed;
         left: 0;
         right: 0;
-        bottom: 0;   
+        bottom: 0;  
+        top: 86px;  
         
         video {  
             display: block;
@@ -187,7 +199,7 @@
 
     .videochat {   
         .videocontrol {
-            top: 110%; 
+            top: 170%;   
         }
     }
 

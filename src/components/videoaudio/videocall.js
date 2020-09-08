@@ -246,15 +246,16 @@ const Videocall = (props) => {
   }
 
   return (
-    <div className="page__wrapper innerpage">
-      <div className="main_baner"> 
+    <div className="page__wrapper innerpage">  
+      <div className="main_baner header-fixed">   
         <NavBar {...props} />
       </div>
-      <div className="videochat">
+      <div className="videochat">     
         <Container>
           <div className="userdetail pt-5">
             <span><Image src={Backicon} alt="" className="pointer" /></span>
             <span><Image src={Videouser} alt="" className="r50" /></span>
+            <span className="online_user"></span>
             <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
           </div>
           <div ref={remoteVideoRef} className="remoteMedia"></div>

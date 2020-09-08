@@ -15,6 +15,7 @@ import Videothree from "../../assets/images/video.svg";
 import Videomuteov from "../../assets/images/mute_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
+import Audioreceivecall from "../../assets/images/receive_call.svg";
 import UserChat4 from "../../assets/images/user_chat4.svg";
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
@@ -211,15 +212,15 @@ const AudioCall = (props) => {
               </div>
             }
 
-            <div className="audiocontrolicon text-center">
+            <div className="audiocontrolicon text-center"> 
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
                 (muteAudio == false) ?
                   <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
-                    <Image src={Videomute} alt="" />
+                    <Image src={Audioreceivecall} alt="" /> 
                   </button> :
                   <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">
-                     <Image src={Videomuteov} alt="" />
+                     <Image src={Audioreceivecall} alt="" /> 
                   </button>
               }
 
