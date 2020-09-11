@@ -209,7 +209,15 @@ class NavBar extends Component {
                       >
                         Dashboard
                       </NavLink>,
-                      <NavLink to="/calendar" className="nav-link">
+                      <NavLink
+                        to={
+                          getLocalStorage("userInfoProff") ||
+                          getLocalStorage("userInfo")
+                            ? "calendar"
+                            : ""
+                        }
+                        className="nav-link"
+                      >
                         My Schedule
                       </NavLink>,
                       <NavLink to="/myprofile" className="nav-link">
