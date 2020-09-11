@@ -5,6 +5,7 @@ import Videousertwo from "../../../assets/images/videousers.svg";
 
 import Videothree from "../../../assets/images/video.svg";
 import Videodisconnect from "../../../assets/images/dissconect.svg";
+import Audioreceivecall from "../../../assets/images/receive_call.svg"; 
 import { useHistory } from 'react-router-dom'
 import { useEffect } from "react";
 import socketClass from "../../../common/utility/socketClass";
@@ -48,7 +49,7 @@ const Calling = (props) => {
       <div className="audiochat">
         <Container>
           {!!userDetails ?
-            <div className="w-100 audiocontrol">
+            <div className="w-100 audiocontrol"> 
               <div className="mb-5">
                 <Image src={Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name} </div>
@@ -61,8 +62,8 @@ const Calling = (props) => {
                       <Image src={Videothree} className="mr-3 pointer" onClick={() => props.handleAction('accept')} />
                     }
                     {type === "audio" &&
-                      <Image src={Videothree} className="mr-3 pointer"
-                        onClick={() => props.handleAction('accept')} />
+                      <Image src={Audioreceivecall} className="mr-3 pointer"
+                        onClick={() => props.handleAction('accept')} /> 
                     }
                   </> : null
                 }

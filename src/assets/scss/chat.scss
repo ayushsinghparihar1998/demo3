@@ -38,10 +38,36 @@
         line-height: 4.5rem;
         background: $col40;  
         padding: 0 15px; 
+
+        .mt-auto.mb-auto { 
+            & span {
+                font-size: 14px !important; 
+            }
+        }
     }
-    .chat_middle {  
+
+    &::-webkit-scrollbar {
+        width: 0.2em;
+    }
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    
+    &::-webkit-scrollbar-thumb {  
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
+    
+    .chat_middle {   
         min-height: 380px;
         display: grid;
+        & > .mt-auto {
+            max-height: 300px; 
+            overflow: auto; 
+        }              
+
+        
         .bg_blue {  
             background: $col44; 
             padding: 10px;
@@ -147,11 +173,21 @@
                 }
             }   
         }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #333; 
+        }
     }
     
 }
 
 .chatsearches { 
+
+    .col-md-8 {
+        & > .col1.fw500.fs18.pb-1 { 
+            word-break: break-all;      
+        }
+    }
     .left_sidebar {  
         .location { 
             padding: 15px;

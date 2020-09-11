@@ -207,11 +207,15 @@ class ChatProff extends Component {
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type
     };
-    console.log("object", object);
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      console.log("sendMessage", data);
-      this.updateChat(object);
+      if (data.success === 1) {
+        this.updateChat(object);
+      } else {
+        showErrorMessage(data.msg);
+      }
     });
+
+    
   }
 
   startTyping() {

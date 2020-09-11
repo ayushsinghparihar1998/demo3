@@ -212,6 +212,7 @@
         }
         
     }
+
 }
 
 .location { 
@@ -247,4 +248,10 @@
         font-size: 1rem;         
         color: $col25 !important; 
     } 
+}
+
+.ant-popover.ant-popover-placement-top {
+    .ant-popover-inner {
+        max-width: 325px; 
+    }
 }

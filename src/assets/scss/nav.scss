@@ -72,6 +72,11 @@
     }
 }
 
+.header-fixed {
+    z-index: 9999;
+    position: relative; 
+}
+
 @media (max-width: 1250px) {  
 .mj_nav {
     .navbar-light {

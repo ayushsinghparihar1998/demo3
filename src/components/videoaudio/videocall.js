@@ -4,7 +4,7 @@ import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video'
 import {
   useParams,
   useHistory
-} from "react-router-dom";
+} from "react-router-dom"; 
 
 
 import NavBar from "../core/nav";
@@ -14,11 +14,20 @@ import Videousertwo from "../../assets/images/videousers.svg";
 import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
 import Videothree from "../../assets/images/video.svg";
+import Videoov from "../../assets/images/video_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
 import UserChat4 from "../../assets/images/user_chat4.svg";
+
+import Videomuteov from "../../assets/images/mute_ov.svg";  
+
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
+
+// import Videomute from "../../assets/images/mute.svg"; 
+// import Videomuteov from "../../assets/images/mute_ov.svg";  
+
+
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
@@ -237,15 +246,16 @@ const Videocall = (props) => {
   }
 
   return (
-    <div className="page__wrapper innerpage">
-      <div className="main_baner">
+    <div className="page__wrapper innerpage">  
+      <div className="main_baner header-fixed">   
         <NavBar {...props} />
       </div>
-      <div className="videochat">
+      <div className="videochat">     
         <Container>
           <div className="userdetail pt-5">
             <span><Image src={Backicon} alt="" className="pointer" /></span>
             <span><Image src={Videouser} alt="" className="r50" /></span>
+            <span className="online_user"></span>
             <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
           </div>
           <div ref={remoteVideoRef} className="remoteMedia"></div>
@@ -254,22 +264,29 @@ const Videocall = (props) => {
               <div ref={localVideoRef} className="localMedia"></div>
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
-            <div className="videocontrolicon text-center">
+            <div className="videocontrolicon text-center"> 
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
                 (muteAudio == false) ?
-                  <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">mute</button> :
-                  <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">unmute</button>
+                  <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
+                    <Image src={Videomute} alt="" />
+                  </button> :
+                  <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">
+                    <Image src={Videomuteov} alt="" />
+                  </button>
               }
               {
                 (muteVideo == false) ?
-                  <button onClick={() => editTrack('local', 'video', 'disablev')} className="btn btn-primary">show video</button> :
-                  <button onClick={() => editTrack('local', 'video', 'enablev')} className="btn btn-primary">hide video</button>
+                  <button onClick={() => editTrack('local', 'video', 'disablev')} className="btn btn-primary">
+                    <Image src={Videothree} alt="" /> </button> :
+                  <button onClick={() => editTrack('local', 'video', 'enablev')} className="btn btn-primary">
+                      <Image src={Videoov} alt="" />   
+                  </button>
               }
               {/* <Image src={Videomute} className="mr-3 pointer" />
               <Image src={Videothree} className="mr-3 pointer" /> */}
               <Image src={Videochat} className="mr-3 pointer" onClick={toggleChat} />
-              <Image src={Videodisconnect} className="pointer" onClick={disconnect} />
+              <Image src={Videodisconnect} className="pointer" onClick={disconnect} /> 
             </div>
           </div>
         </Container>
