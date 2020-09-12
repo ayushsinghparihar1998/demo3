@@ -137,6 +137,7 @@ class Chatsearch extends Component {
                                                             <div className="text-center position-relative">
                                                                 <span className="onlines"></span>
                                                                 <span className="offline d-none"></span>
+                                                                <span className="onlineyellow d-none"></span>
                                                                 <Image width={100} src={item.u_image ? item.u_image : Requestuser} className="r50" />
                                                                 <Image src={Aflag} alt="" className="flagset" />
                                                             </div>
