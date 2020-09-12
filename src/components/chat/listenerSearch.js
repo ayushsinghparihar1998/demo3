@@ -87,6 +87,7 @@ class Chatsearch extends Component {
   );
     render() {
         let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
+        console.log("listOfSearchLisner",listOfSearchLisner)
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -128,13 +129,12 @@ class Chatsearch extends Component {
                                         listOfSearchLisner.length > 0 &&
                                         listOfSearchLisner.slice(0, this.state.recordCount).map(
                                             (item, index) => {
-                                                console.log("itemitem",item)
                                                 return (
                                                     <Col md={4}>
                                                         <div className="subscribes active"> 
                                                             {item.u_paid ?
                                                                 <div className="subleft">
-                                                                    <Image src={Subscribes} alt="" />
+                                                                    <Image src={Subscribes} alt=""/>
                                                                     <span>Subscribe</span>
                                                                 </div> : ''}
                                                             <div className="text-right mt-4 mr-3">
@@ -142,7 +142,8 @@ class Chatsearch extends Component {
                                                                 <span className="fs13 col14 fw400 ml-1">340</span>
                                                             </div>
                                                             <div className="text-center position-relative">
-                                                                <span className="onlines"></span>
+                                                                <span className={item.online===1?'onlines':
+                                                                item.online===0?'offline':'onlineyellow'}></span>
                                                                 <span className="offline d-none"></span>
                                                                 <Image width={100} src={item.u_image ? item.u_image : Requestuser} className="r50" />
                                                                 <Image src={Aflag} alt="" className="flagset" />
