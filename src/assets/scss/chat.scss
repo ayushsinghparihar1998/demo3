@@ -125,6 +125,17 @@
                 right: 35%;
                 border: 1px solid $col18;                       
             }
+            span.offline {
+                background-color: $col33;
+                width: 14px;
+                height: 14px;
+                display: inline-block;
+                border-radius: 50%;
+                position: absolute;
+                top: 12%;
+                right: 35%;
+                border: 1px solid $col18;   
+            }
             
             &.active {
                 background: $col62;
