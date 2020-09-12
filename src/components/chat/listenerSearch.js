@@ -122,7 +122,7 @@ class Chatsearch extends Component {
                                 </Row>
                             </div>
 
-                            <div className="search-listing"> 
+                            <div className="search-listing">   
                                 <Row>
                                     {listOfSearchLisner &&
                                         listOfSearchLisner.length > 0 &&
@@ -131,7 +131,7 @@ class Chatsearch extends Component {
                                                 console.log("itemitem",item)
                                                 return (
                                                     <Col md={4}>
-                                                        <div className="subscribes active">
+                                                        <div className="subscribes active"> 
                                                             {item.u_paid ?
                                                                 <div className="subleft">
                                                                     <Image src={Subscribes} alt="" />
@@ -142,6 +142,8 @@ class Chatsearch extends Component {
                                                                 <span className="fs13 col14 fw400 ml-1">340</span>
                                                             </div>
                                                             <div className="text-center position-relative">
+                                                                <span className="onlines"></span>
+                                                                <span className="offline d-none"></span>
                                                                 <Image width={100} src={item.u_image ? item.u_image : Requestuser} className="r50" />
                                                                 <Image src={Aflag} alt="" className="flagset" />
                                                             </div>
