@@ -23,12 +23,19 @@ class Myprofile extends Component {
   }
   getProfile() {
     this.props.actionGetProfile({}).then((result) => {
+      console.log(result.data.data.profile_list,"actionGetProfile", result)
       if (result && result.status === 200) {
-        let res = result.data.data.profile_list &&
-          result.data.data.profile_list[0] ? result.data.data.profile_list[0] : {};
+
+        let res = result.data.data &&
+          result.data.data.profile_list ? result.data.data.profile_list : {};
         this.setState({ userData: res })
       }
     })
+  }
+  handleEdit = ()=>{
+    this.props.history.push({
+      pathname: "editprofile",
+    });
   }
   render() {
     let userData = this.state.userData ? this.state.userData : {};
@@ -46,15 +53,16 @@ class Myprofile extends Component {
                   <Image src={Profileban} alt="" className="w-100" />
                   <div className="text-center profile_top">
                     <Image src={Profileimg} alt="" className="r50 border_profile" />
-                    <Image src={Usaflag} alt="" className="r50 flags" />
-                    <Button className="btnTyp9 fs15 fw500 btn_set">edit profile</Button>
+                    <Image src={userData.flag ? userData.flag : Usaflag} 
+                  alt="" width='50px' className="r50 flags" />
+                    <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button>
                   </div>
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
                     <div className="col23 fs16 fw500 pb-1">Listener - Novice
-                                        <Image src={warningS} alt="" className="ml-2" />
+                         <Image src={warningS} alt="" className="ml-2" />
                     </div>
-                    <div className="col27 fw400 fs14">Finding myself....</div>
+                    <div className="col27 fw400 fs14">{userData.u_bio}</div>
                     <div className="border_bottoms mt-3"></div>
                   </div>
                   <div className="text-center user_tab">
@@ -66,16 +74,46 @@ class Myprofile extends Component {
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_rating}</div>
                           </div>
                         </div>
-                        <div className="layout">
+                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
-                            <div className="fs16 col14 fw400 text-left w40">Over 18</div>
+                            <div className="fs16 col23 fw400 text-left w60">Email:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
                           </div>
                         </div>
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
+                            <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
+                          </div>
+                        </div>
+                        <div className="layout">
+                          <div className="d-flex m-auto w35 border2">
+                            <div className="fs16 col23 fw400 text-left w60">Country:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name }</div>
+                          </div>
+                        </div>
+                        <div className="layout">
+                          <div className="d-flex m-auto w35 border2">
+                            <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
+                          </div>
+                        </div>
+                        <div className="layout">
+                          <div className="d-flex m-auto w35 border2">
+                            <div className="fs16 col23 fw400 text-left w60">BIO:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
+                          </div>
+                        </div>
+                        <div className="layout">
+                          <div className="d-flex m-auto w35 border2">
+                            <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.listento}</div>
+                          </div>
+                        </div>{console.log("userDatauserData",userData)}
+                        <div className="layout">
+                          <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Languages:</div>
-                            <div className="fs16 col14 fw400 text-left w40">English</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.language?userData.language:''}</div>
                           </div>
                         </div>
                         <div className="layout">
@@ -93,7 +131,7 @@ class Myprofile extends Component {
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Gender:</div>
-                            <div className="fs16 col14 fw400 text-left w40">Female</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.gender}</div>
                           </div>
                         </div>
                         <div className="layout">

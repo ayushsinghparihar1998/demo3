@@ -225,7 +225,8 @@ class Userdashboard extends Component {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetListnerDashBoard({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.dashboard_list;
+        let res = result.data.data && result.data.data.dashboard_list ? result.data.data.dashboard_list : [];
+        
         this.setState({ dashboardData: res });
       }
     });

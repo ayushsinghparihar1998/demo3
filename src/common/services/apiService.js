@@ -54,6 +54,7 @@ const injectParamsToUrl = (_url_, paramObj) => {
 };
 
 const handleErrorByStatus = (error) => {
+  console.log("error3424",error)
   if (error && error.status === 'error') {
     const message = error.message;
     showErrorToast(message);
@@ -71,9 +72,9 @@ const spikeViewApiService = (apiKeyName, data) => {
   let requestObject = Object.assign({}, apiDetails);
   requestObject.data = prepareDataObject(requestObject.data, data);
   requestObject.url = injectParamsToUrl(requestObject.url, data);
-
   return axios(requestObject)
     .then(function (result) {
+      console.log("result",result)
       apiFailCounter = 0;
       if (
         result.data &&

@@ -26,7 +26,8 @@ import {
   UPDATE_USER_DETAILS,
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
   SEARCH_LISTNER,
-  ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL
+  ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL,
+  CHANGE_PASSWORD,SET_RATING
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -222,5 +223,17 @@ export const actionAdminGetCategory = (data) => async (dispatch) => {
 export const actionSearchProfessionals = (data) => async (dispatch) => {
   const request = ELPViewApiService('searchProfessionals', data);
   dispatch({ type: SEARCH_PROFESSIONAL, payload: request.data });
+  return request;
+};
+
+export const actionChangePassword = (data) => async (dispatch) => {
+  const request = ELPViewApiService('changepassword', data);
+  dispatch({ type: CHANGE_PASSWORD, payload: request });
+  return request;
+};
+
+export const actionAddrating = (data) => async (dispatch) => {
+  const request = ELPViewApiService('addrating', data);
+  dispatch({ type: CHANGE_PASSWORD, payload: request });
   return request;
 };
