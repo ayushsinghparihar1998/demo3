@@ -17,7 +17,8 @@ import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
 import {
-    actionSearchListner
+    actionSearchListner,
+    actionAddrating
 } from '../../common/redux/actions';
 class Chatsearch extends Component {
     constructor(props) {
@@ -50,8 +51,13 @@ class Chatsearch extends Component {
             }
         });
     };
-    ratingChanged = (newRating) => {
-        console.log(newRating);
+    ratingChanged =  (id) => (newRating) => {
+        console.log("newRating,id",newRating,id);
+           let data = {
+                to_id:id,
+                rating_count: newRating
+            }
+        this.props.actionAddrating(data)
     };
       handleChange = event => {
     this.setState({
@@ -122,6 +128,7 @@ class Chatsearch extends Component {
                                         listOfSearchLisner.length > 0 &&
                                         listOfSearchLisner.slice(0, this.state.recordCount).map(
                                             (item, index) => {
+                                                console.log("itemitem",item)
                                                 return (
                                                     <Col md={4}>
                                                         <div className="subscribes active"> 
@@ -149,7 +156,7 @@ class Chatsearch extends Component {
                                                                 <ReactStars
                                                                     count={5}
                                                                     value={item.u_rating ? item.u_rating :0}
-                                                                    onChange={this.ratingChanged}
+                                                                    onChange={this.ratingChanged(item.id)}
                                                                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                                                                     size={24}
                                                                   //  color="#FABE2C" 
@@ -201,6 +208,7 @@ class Chatsearch extends Component {
     }
 }
 export default connect(null, {
-    actionSearchListner
+    actionSearchListner,
+    actionAddrating
 })(Chatsearch);
 

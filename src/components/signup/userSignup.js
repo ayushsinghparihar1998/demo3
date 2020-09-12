@@ -177,7 +177,13 @@ class ProfessionalSignup extends Component {
             state: { roleType: this.state.roleType }
         });
     }
-
+  handleLogin(roleType) {
+    this.props.handleSet()
+    this.props.history.push({
+      pathname: "login",
+      state: { roleType: roleType },
+    });
+  }
     render() {
         const { errors } = this.state;
         return (
@@ -384,7 +390,9 @@ class ProfessionalSignup extends Component {
           <div className="fs18 fw300 pt-5 col14">
             Already have an account?
             <span className="fw500 pointer pl-1">
-              <Link to={`/login`}>Login here</Link>
+              <button  onClick={(e) => {
+                        this.handleLogin(3);
+                      }}>Login hereter</button>
             </span>
           </div>
         </div>{' '}
