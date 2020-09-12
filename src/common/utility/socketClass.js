@@ -13,7 +13,9 @@ class socketClass {
     this.chatlogin(user);
   }
   disconnect() {
-    this.socket.disconnect();
+    if(this.socket){
+      this.socket.disconnect();
+    }
   }
   getSocket() {
     return this.socket;
