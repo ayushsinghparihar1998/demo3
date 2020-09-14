@@ -195,7 +195,115 @@
     }
 }
 
+/* media screen start */
+@media (min-width: 768px) and (max-width: 991px) { 
+    .main_baner {
+        .container { 
+            & > .pt-120  {  
+                padding-top: 50px;
+                font-size: 36px !important;
 
+                & + div {
+                    font-size: 20px !important;
+                }
+            }
+        }
+        
+        .baner1, .baner2, .baner3 { 
+            
+            div.fs18 {
+                font-size: 13px !important; 
+                padding-top: 0px !important;
+            }
+            div.fs14 {
+                font-size: 11px !important;
+                padding-top: 5px !important;
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            & > img:first-child {
+                max-width: 40px;
+                padding-top: 0px !important;
+                margin-top: -5px; 
+            }
+        }
+        .baner1 {
+            & > img:last-child {
+                padding-top: 0px !important;
+                max-width: 40px;
+            }
+        }
+        .baner2 {
+            & > img:last-child {
+                padding-top: 15px !important;
+                max-width: 40px;
+            }
+        }
+        .baner3 {
+            & > img:last-child {
+                padding-top: 0px !important;
+                max-width: 40px;
+                margin-top: 5px !important;
+            }
+        }
+    }
+
+    .conversations {
+        .col-md-6 {
+            & > img {
+                width: 100%; 
+            }
+
+            div:nth-child(2) { 
+                font-size: 36px !important;
+            }
+            div:nth-child(3) {
+                font-size: 24px !important;
+            }
+            div:nth-child(4) { 
+                font-size: 18px !important;
+            }
+            &:last-child {
+                div:nth-child(2) {
+                    margin-top: 36px !important; 
+                }
+            }
+        }
+    }
+
+    .happyPatient {
+        .container {
+            .italic_style {
+                font-size: 15px !important; 
+
+                .invertedone {
+                    max-width: 50px; 
+                    left: -35px;
+                }
+                .invertedtwo {  
+                    max-width: 50px;
+                    right: -1%;
+                    top: 100px;      
+                }
+            }
+            .fs44 {
+                font-size: 36px !important; 
+            }
+            .fs20 {
+                font-size: 16px !important; 
+            }
+        }
+    }
+
+    .aboutEats {
+        .container {
+            div.fs44  {
+                font-size: 36px !important; 
+            }
+        }
+    }
+
+}
 @media (min-width: 1500px) {
     
     .innerpage {
@@ -220,4 +328,6 @@
         }
     }
 }
+
+/* media screen start */
  
