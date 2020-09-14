@@ -31,7 +31,7 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
-import socketClass from "../../common/utility/socketClass";
+import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
 const socket = socketClass.getSocket();
 const Videocall = (props) => {
@@ -56,7 +56,7 @@ const Videocall = (props) => {
     (async () => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
       const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
-      const token = await Axios.get(`http://103.76.253.131:8282/getToken?${params}`).then(res => res.data.token);
+      const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
