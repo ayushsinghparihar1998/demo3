@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import {
   actionGetProfile,
   actionUpdateUserDetails,
-  actionResetPassword,
+  actionChangePassword,
   actionGetCountry,
   actionGetState,
   actionGetCity,
@@ -38,7 +38,7 @@ import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
-import { setLocalStorage, capitalizeFirstLetter } from '../../common/helpers/Utils';
+import { setLocalStorage, getLocalStorage,capitalizeFirstLetter } from '../../common/helpers/Utils';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 class Editprofile extends Component {
@@ -85,6 +85,9 @@ class Editprofile extends Component {
             ? result.data.data.profile_list
             : {};
         let dob = profile.u_birthdate ? profile.u_birthdate.split('/') : ['', '', ''];
+        if(dob && dob.length>0 && dob[1] !== 0 ){
+         dob[1] = dob[1]-1
+        }
         this.setState({
           userData: profile,
           userName: profile.u_name,
@@ -203,30 +206,21 @@ class Editprofile extends Component {
       };
     }
 
-    console.log('data', data);
-    this.props.actionUpdateUserDetails(data).then((result) => {
-      console.log('result321321312', result.data);
+   this.props.actionUpdateUserDetails(data).then((result) => {
 
     });
   };
 
   handleResetPassword = () => {
     let data = {
-      email: this.state.userEmail,
       password: this.state.userPassword,
-      userid: this.state.userId,
     };
-    console.log('data', data);
-    this.props.actionResetPassword(data).then((result) => {
-      console.log('result321321312', result.data.data);
-      if (result && result.status === 200) {
-        setLocalStorage('result', result.data.data);
-      }
+    this.props.actionChangePassword(data).then((result) => {
+      console.log('actionChangePassword', result);
     });
   };
 
   onChangeSelection(value) {
-    console.log("valuevaluevalue", value)
     this.setState({
       countryId: value,
       stateId: '',
@@ -237,7 +231,6 @@ class Editprofile extends Component {
 
   }
   onChangeSelectionState(value) {
-    console.log("valuevaluevalue", value)
     this.setState({
       stateId: value,
       cityId: '',
@@ -258,9 +251,13 @@ class Editprofile extends Component {
       mobileNumber: value,
     });
   }
+  handleCancel =()=>{
+    this.props.history.push({
+      pathname: "/",
+    });
+  }
   render() { 
     const { errors } = this.state;
-    console.log(this.state,'errors', errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -281,7 +278,8 @@ class Editprofile extends Component {
                     alt=""
                     className="r50 border_profile"
                   />
-                  <Image src={this.state.flag ? this.state.flag : Usaflag} alt="" width='50px' className="r50 flags" />
+                  <Image src={this.state.flag ? this.state.flag : Usaflag} 
+                  alt="" width='50px' className="r50 flags" />
                   <div className="upload_pic">
                     <Form.File id="custom-fileone" />
                     <Image src={Camera} alt="" className="camera" />
@@ -300,9 +298,10 @@ class Editprofile extends Component {
                             <Form.Control
                               type="text"
                               name="userName"
-                              onChange={this.handleChange}
+                              //onChange={this.handleChange}
                               value={this.state.userName}
                               className="inputTyp2"
+                              disabled={true}
                             />
                           </Form.Group>
 
@@ -506,7 +505,7 @@ class Editprofile extends Component {
                           >
                             save
                           </Button>
-                          <Button className="btnTyp10 mt-5">cancel</Button>
+                          <Button  onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
                         </Form>
                       </Col>
                     </Tab>
@@ -830,7 +829,7 @@ class Editprofile extends Component {
 export default connect(null, {
   actionGetProfile,
   actionUpdateUserDetails,
-  actionResetPassword,
+  actionChangePassword,
   actionGetCountry,
   actionGetState,
   actionGetCity,

@@ -48,6 +48,7 @@ export default {
       userid: "",
       email: "",
       password: "",
+      authcode:''
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -347,4 +348,23 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  changepassword: {
+    url: 'elp/changepassword',
+    method: 'POST',
+    data: {
+     password:''
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  addrating: {
+    url: 'elp/addrating',
+    method: 'POST',
+    data: {
+     rating_count:'',
+     to_id:''
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  }
 };

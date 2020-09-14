@@ -17,7 +17,8 @@ import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
 import {
-    actionSearchListner
+    actionSearchListner,
+    actionAddrating
 } from '../../common/redux/actions';
 class Chatsearch extends Component {
     constructor(props) {
@@ -50,8 +51,13 @@ class Chatsearch extends Component {
             }
         });
     };
-    ratingChanged = (newRating) => {
-        console.log(newRating);
+    ratingChanged =  (id) => (newRating) => {
+        console.log("newRating,id",newRating,id);
+           let data = {
+                to_id:id,
+                rating_count: newRating
+            }
+        this.props.actionAddrating(data)
     };
       handleChange = event => {
     this.setState({
@@ -81,6 +87,7 @@ class Chatsearch extends Component {
   );
     render() {
         let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
+        console.log("listOfSearchLisner",listOfSearchLisner)
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -116,7 +123,7 @@ class Chatsearch extends Component {
                                 </Row>
                             </div>
 
-                            <div className="search-listing"> 
+                            <div className="search-listing">   
                                 <Row>
                                     {listOfSearchLisner &&
                                         listOfSearchLisner.length > 0 &&
@@ -124,10 +131,10 @@ class Chatsearch extends Component {
                                             (item, index) => {
                                                 return (
                                                     <Col md={4}>
-                                                        <div className="subscribes active">
+                                                        <div className="subscribes active"> 
                                                             {item.u_paid ?
                                                                 <div className="subleft">
-                                                                    <Image src={Subscribes} alt="" />
+                                                                    <Image src={Subscribes} alt=""/>
                                                                     <span>Subscribe</span>
                                                                 </div> : ''}
                                                             <div className="text-right mt-4 mr-3">
@@ -135,6 +142,10 @@ class Chatsearch extends Component {
                                                                 <span className="fs13 col14 fw400 ml-1">340</span>
                                                             </div>
                                                             <div className="text-center position-relative">
+                                                                <span className={item.online===1?'onlines':
+                                                                item.online===0?'offline':'onlineyellow'}></span>
+                                                                <span className="offline d-none"></span>
+                                                                <span className="onlineyellow d-none"></span>
                                                                 <Image width={100} src={item.u_image ? item.u_image : Requestuser} className="r50" />
                                                                 <Image src={Aflag} alt="" className="flagset" />
                                                             </div>
@@ -146,7 +157,7 @@ class Chatsearch extends Component {
                                                                 <ReactStars
                                                                     count={5}
                                                                     value={item.u_rating ? item.u_rating :0}
-                                                                    onChange={this.ratingChanged}
+                                                                    onChange={this.ratingChanged(item.id)}
                                                                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                                                                     size={24}
                                                                   //  color="#FABE2C" 
@@ -198,6 +209,7 @@ class Chatsearch extends Component {
     }
 }
 export default connect(null, {
-    actionSearchListner
+    actionSearchListner,
+    actionAddrating
 })(Chatsearch);
 
