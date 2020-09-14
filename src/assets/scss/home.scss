@@ -195,9 +195,219 @@
     }
 }
 
-/* media screen start */
+/* media screen start */ 
+@media (max-width: 1200px) {
+    .happyPatient .italic_style .invertedtwo {  
+        right: -8%;
+        max-width: 60px;
+    }
+    .happyPatient .italic_style .invertedone {              
+        left: -60px;
+        max-width: 60px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {  
+    .mj_nav .navbar-light .navbar-nav a.nav-link {
+        font-size: 12px !important;
+        padding: 10px 6px !important;
+    }
+    .mj_nav .navbar-light .navbar-brand {
+        font-size: 18px; 
+    }
+    .main_baner .baner1 > img:first-child, .main_baner .baner2 > img:first-child, .main_baner .baner3 > img:first-child {
+        max-width: 60px;
+    }
+    .main_baner {
+        .baner1, .baner2, .baner3 { 
+            div.fs18 {
+                font-size: 13px !important; 
+                padding-top: 12px !important;
+            }
+            div.fs14 {
+                font-size: 13px !important;
+                padding-top: 10px !important;
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            & > img:first-child {
+                max-width: 70px;
+                padding-top: 0px !important;
+                margin-top: -5px; 
+            }
+        }
+        .baner1 {
+            & > img:last-child {
+                padding-top: 22px !important;
+                max-width: 40px;
+            }
+        }
+        .baner2 {
+            & > img:last-child {
+                padding-top: 20px !important;
+                max-width: 40px;
+            }
+        }
+        .baner3 {
+            & > img:last-child {
+                padding-top: 32px !important;
+                max-width: 40px;
+                margin-top: 5px !important;
+            }
+        }
+    }
+    .conversations {
+        .col-md-6 {
+            & > img {
+                position: relative;
+                width: 100%; 
+            } 
+            &:first-child {
+                & > img {
+                    position: relative;
+                    width: 380px;  
+                } 
+            }
+            div:nth-child(2) { 
+                font-size: 36px !important;
+            }
+            div:nth-child(3) {
+                font-size: 24px !important;
+            }
+            div:nth-child(4) { 
+                font-size: 18px !important;
+            }
+            &:last-child {
+                div:nth-child(2) {
+                    // margin-top: 70px !important;  
+                }
+            }
+        }
+    }
+
+    .Discussanything .container div.fs50 {
+        font-size: 36px !important;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+    .mj_nav .navbar-light .navbar-nav a.nav-link {
+        font-size: 11px !important;
+        padding: 10px 4px !important; 
+    }
+    .mj_nav .navbar-light .navbar-brand {
+        font-size: 18px; 
+    }
+    .main_baner .baner1 > img:first-child, .main_baner .baner2 > img:first-child, .main_baner .baner3 > img:first-child {
+        max-width: 60px;
+    }
+    .main_baner {
+        .baner1, .baner2, .baner3 { 
+            div.fs18 {
+                font-size: 13px !important; 
+                padding-top: 12px !important;
+            }
+            div.fs14 {
+                font-size: 13px !important;
+                padding-top: 10px !important;
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            & > img:first-child {
+                max-width: 70px;
+                padding-top: 0px !important;
+                margin-top: -5px; 
+            }
+        }
+        .baner1 {
+            & > img:last-child {
+                padding-top: 22px !important;
+                max-width: 40px;
+            }
+        }
+        .baner2 {
+            & > img:last-child {
+                padding-top: 20px !important;
+                max-width: 40px;
+            }
+        }
+        .baner3 {
+            & > img:last-child {
+                padding-top: 32px !important;
+                max-width: 40px;
+                margin-top: 5px !important;
+            }
+        }
+    }
+    .conversations {
+        .col-md-6 {
+            & > img {
+                width: 100%; 
+            }
+
+            div:nth-child(2) { 
+                font-size: 36px !important;
+            }
+            div:nth-child(3) {
+                font-size: 24px !important;
+            }
+            div:nth-child(4) { 
+                font-size: 18px !important;
+            }
+            &:last-child {
+                div:nth-child(2) {
+                    margin-top: 36px !important; 
+                }
+            }
+        }
+    }
+
+    .Discussanything .container div.fs50 {
+        font-size: 30px !important;
+    }
+
+}
+
 @media (min-width: 768px) and (max-width: 991px) { 
     .main_baner {
+        .mj_nav {
+            div.navbar-collapse {
+                background: #fff;
+                padding: 15px 0;
+                border-radius: 12px;
+                position: absolute;
+                top: 90%;
+                left: 3%;
+                right: 0;
+                z-index: 99;
+                max-width: 94%;
+                border: solid 1px #ddd;
+
+                .navbar-nav a.nav-link {
+                    margin-bottom: 10px; 
+                }
+                form.form-inline {
+                    margin-top: 12px;
+                    margin-left: 12px;
+                }
+            }
+            button.navbar-toggler, button.navbar-toggler:hover, button.navbar-toggler:focus {
+                // border: none;
+                outline: 0;     
+            }
+            div.btnTypeone.dropdown {
+                max-width: 200px;
+
+                a.dropdown-toggle.nav-link {
+                    margin-bottom: 0px;
+                }
+                div.dropdown-menu {
+                    position: absolute;
+                    border: solid 1px #ddd;
+                }
+            }
+        }
         .container { 
             & > .pt-120  {  
                 padding-top: 50px;
@@ -210,7 +420,6 @@
         }
         
         .baner1, .baner2, .baner3 { 
-            
             div.fs18 {
                 font-size: 13px !important; 
                 padding-top: 0px !important;
@@ -300,10 +509,95 @@
             div.fs44  {
                 font-size: 36px !important; 
             }
+            div.fs16  {
+                font-size: 14px !important;  
+
+                & > div {
+                    padding-bottom: 10px !important; 
+                }
+            }
+            .subscribe_here {
+                div.fs40 {
+                    font-size: 30px !important;
+                }
+                div.fs22 {
+                    font-size: 18px !important; 
+                }
+                button.btnTyp2  {
+                    margin-top: 0px !important;
+                }
+                input.inputTyp1 {
+                    height: 3rem !important;
+                    font-size: 16px !important; 
+                }
+            }
+        }
+    }
+
+    .Supporting {
+        .container {
+            div.fs44  {
+                font-size: 36px !important; 
+            }
+            div.fs20  {
+                font-size: 16px !important; 
+            }
+            .organise_carousel {
+                max-width: 160px;
+                height: 160px; 
+                & > img {
+                    max-width: 130px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .Discussanything {
+        .container {
+            div.fs50  { 
+                font-size: 30px !important; 
+            }
+            div.fs20  {
+                font-size: 16px !important;  
+            } 
+            div {
+                & > img {
+                    width: 100%; 
+                }
+            }
+            div.fs30 {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important; 
+                font-size: 24px !important;
+            }
+            div.fs18 {
+                font-size: 14px !important;
+                padding-top: 0px !important; 
+            }
+            div.fs20 {
+                font-size: 14px !important;
+                padding-top: 10px !important; 
+            }
+        }
+    }
+
+    .footer {
+        .container-fluid {
+            div.fs15 {
+                font-size: 12px !important;
+            }
+            ul.social {
+                li {
+                    font-size: 12px !important; 
+                }
+            }
         }
     }
 
 }
+
+
 @media (min-width: 1500px) {
     
     .innerpage {
