@@ -24,7 +24,7 @@ function VideoCalling() {
       }
     })
     socket.on("cancelCall", data => {
-      showErrorMessage("Call has been cancelled.")
+      showErrorMessage(data.msg);
       setTimeout(() => {
         setCaller(null)
       }, 1000)

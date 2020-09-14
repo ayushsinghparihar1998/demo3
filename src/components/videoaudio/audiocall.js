@@ -26,7 +26,7 @@ import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
 const socket = socketClass.getSocket();
-
+let tmp = 0;
 const AudioCall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
@@ -36,6 +36,7 @@ const AudioCall = (props) => {
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
   const [timerStr, setTimerStr] = useState(null);
+  const [remoteUserStatus, setRemoteUserStatus] = useState({ audio: false, video: false })
   const roomRef = useRef(null)
   const localVideoRef = useRef(null)
   const remoteVideoRef = useRef(null)
@@ -47,6 +48,12 @@ const AudioCall = (props) => {
   const history = useHistory();
 
   useEffect(() => {
+    socket.on('endVideoCall', () => {
+      showErrorMessage("Call has been ended.")
+      setTimeout(() => {
+        history.push('/')
+      }, 1000);
+    });
     //get the token
     (async () => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
@@ -56,12 +63,6 @@ const AudioCall = (props) => {
       setToken(token);
       connectTwillio(token, room);
       getUserDetails(paramsid);
-      socket.on('endVideoCall', () => {
-        showErrorMessage("Call has been ended.")
-        setTimeout(() => {
-          history.push('/')
-        }, 1000);
-      })
     })()
     return () => {
       if (callTimerRef.current) {
@@ -101,9 +102,7 @@ const AudioCall = (props) => {
         sender_id: getUserProfile().u_id
       }
       if (token) {
-        socket.emit('endVideoCall', payload, data => {
-          console.log(data)
-        });
+        socket.emit('endVideoCall', payload);
       }
       history.push('/')
     }
@@ -215,7 +214,7 @@ const AudioCall = (props) => {
               <div className="mb-5">
                 <Image src={Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div>
-                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...' }</div>
+                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
               </div>
             }
 
@@ -224,10 +223,10 @@ const AudioCall = (props) => {
               {
                 (muteAudio == false) ?
                   <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
-                    <Image src={Audioreceivecall} alt="" />
+                    <Image src={Videomute} alt="" />
                   </button> :
                   <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">
-                    <Image src={Audioreceivecall} alt="" />
+                    <Image src={Videomuteov} alt="" />
                   </button>
               }
 

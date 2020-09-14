@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.css';
 import CONSTANTS from './Constants';
-
 const ENCRYPTION_KEY = 'sd5b75nb7577#^%$%*&G#CGF*&%@#%*&';
 var cryptlib = require('cryptlib'),
   iv = 'F@$%^*GD$*(*#!12', //16 bytes = 128 bit
@@ -34,7 +33,7 @@ export const decryptedData = data => {
 };
 
 // toastr messages for error
-export const showErrorToast = (errorMessage, event) => {
+export const showErrorToast = (errorMessage) => {
   if (!toast.isActive(toastId)) {
     toastId = toast.error(errorMessage, {
       position: toast.POSITION.TOP_RIGHT,
@@ -45,14 +44,20 @@ export const showErrorToast = (errorMessage, event) => {
   }
 };
 // Tostr without condition
-export const showErrorMessage = (errorMessage, event) => {
-  toast.error(errorMessage, {
-    position: toast.POSITION.TOP_RIGHT,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true
-  });
+export const showErrorMessage = (errorMessage) => {
+  if (!toast.isActive(toastId)) {
+    toastId = toast.error(errorMessage, {
+      position: toast.POSITION.TOP_RIGHT,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true
+    });
+  } 
+  // setTimeout(() => {
+  //   toastId = ''
+  // }, 3000);
 };
+
 // toastr messages for success
 export const showSuccessToast = message => {
   if (!toast.isActive(toastId)) {

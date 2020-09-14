@@ -20,7 +20,8 @@ const Calling = (props) => {
       const payload = {
         reciver_id: _id,
         reciver_type: _ud?.u_role_id,
-        sender: {}
+        sender: {},
+        type: 'auto'
       }
       setTimeout(() => {
         if (history.location.pathname === "/calling") {
@@ -75,7 +76,7 @@ const Calling = (props) => {
                 {mode === "incoming" && props.handleAction ?
                   <>
                     {type === "video" &&
-                      <Image src={Videothree} className="mr-3 pointer" onClick={() => props.handleAction('accept')} />
+                      <Image src={Audioreceivecall} className="mr-3 pointer" onClick={() => props.handleAction('accept')} />
                     }
                     {type === "audio" &&
                       <Image src={Audioreceivecall} className="mr-3 pointer"

@@ -4,7 +4,7 @@ import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video'
 import {
   useParams,
   useHistory
-} from "react-router-dom"; 
+} from "react-router-dom";
 
 
 import NavBar from "../core/nav";
@@ -19,7 +19,7 @@ import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
 import UserChat4 from "../../assets/images/user_chat4.svg";
 
-import Videomuteov from "../../assets/images/mute_ov.svg";  
+import Videomuteov from "../../assets/images/mute_ov.svg";
 
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
@@ -63,8 +63,7 @@ const Videocall = (props) => {
       getUserDetails(paramsid);
 
     })();
-   socket.on('endVideoCall', data => {
-      console.log("call ended");
+    socket.on('endVideoCall', data => {
       showErrorMessage("Call has been ended.")
       setTimeout(() => {
         history.push('/')
@@ -110,9 +109,12 @@ const Videocall = (props) => {
         type: "video",
         sender_id: getUserProfile().u_id
       }
-      socket.emit('endVideoCall', payload, data => {
-        console.log(data)
-      });
+      if (token) {
+        socket.emit('endVideoCall', payload, data => {
+          console.log(data)
+        });
+      }
+
       history.push('/')
     }
   }
@@ -246,11 +248,11 @@ const Videocall = (props) => {
   }
 
   return (
-    <div className="page__wrapper innerpage">  
-      <div className="main_baner header-fixed">   
+    <div className="page__wrapper innerpage">
+      <div className="main_baner header-fixed">
         <NavBar {...props} />
       </div>
-      <div className="videochat">     
+      <div className="videochat">
         <Container>
           <div className="userdetail pt-5">
             <span><Image src={Backicon} alt="" className="pointer" /></span>
@@ -264,7 +266,7 @@ const Videocall = (props) => {
               <div ref={localVideoRef} className="localMedia"></div>
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
-            <div className="videocontrolicon text-center"> 
+            <div className="videocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
                 (muteAudio == false) ?
@@ -280,13 +282,13 @@ const Videocall = (props) => {
                   <button onClick={() => editTrack('local', 'video', 'disablev')} className="btn btn-primary">
                     <Image src={Videothree} alt="" /> </button> :
                   <button onClick={() => editTrack('local', 'video', 'enablev')} className="btn btn-primary">
-                      <Image src={Videoov} alt="" />   
+                    <Image src={Videoov} alt="" />
                   </button>
               }
               {/* <Image src={Videomute} className="mr-3 pointer" />
               <Image src={Videothree} className="mr-3 pointer" /> */}
               <Image src={Videochat} className="mr-3 pointer" onClick={toggleChat} />
-              <Image src={Videodisconnect} className="pointer" onClick={disconnect} /> 
+              <Image src={Videodisconnect} className="pointer" onClick={disconnect} />
             </div>
           </div>
         </Container>
