@@ -79,6 +79,8 @@ class Userdashboard extends Component {
     // }
   }
   componentDidMount() {
+    console.log(getLocalStorage("userInfo"));
+
     if (!socket.connected) {
       // socket.connect();
     }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Landing from "../components/core/landing";
 import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
@@ -67,7 +67,7 @@ class ELPRoute extends Component {
         {this.state.socket && <VideoCalling />}
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
-          <PublicRoute path="/login" component={Login} />
+          <Route path="/login" component={Login} />
           <PublicRoute path="/adminLogin" component={AdminLogin} />
           <PublicRoute path="/becomeListener" component={Becomelistener} />
           <PublicRoute path="/listenersignup" component={Listenersignup} />

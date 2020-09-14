@@ -53,12 +53,20 @@ export default class CalendarDemo extends Component {
 
       calendarView: {},
       type: "dayGridMonth",
+      email_varified: true,
     };
     this.getAllevents = this.getAllevents.bind(this);
     // this.openEvent = this.openEvent.bind(this);
   }
 
   componentDidMount() {
+    let data = getLocalStorage("userInfo")
+      ? getLocalStorage("userInfo")
+      : getLocalStorage("userInfoProff");
+    this.setState({
+      email_varified: data.u_verified == 1 ? false : true,
+    });
+
     this.getAllevents();
     let calendarApi = this.calendarComponentRef.current.getApi();
     console.log("calendarApi", calendarApi);
@@ -262,7 +270,7 @@ export default class CalendarDemo extends Component {
       let data = {
         date: moment(this.state.date).format("YYYY-MM-DD"),
         starting_at: moment(this.state.starting_at).format("HH:mm"),
-        end_at: ("0" + endHour).slice(-2) + ":" +min,
+        end_at: ("0" + endHour).slice(-2) + ":" + min,
         duration: this.state.duration,
         recurring: this.state.recurring,
         repeat: +this.state.repeat,
@@ -294,6 +302,7 @@ export default class CalendarDemo extends Component {
                     <button
                       className="btn b btnTyp9 btnCalender"
                       onClick={this.handleModal5}
+                      disabled={this.state.email_varified}
                     >
                       Create Schedule
                       <span className="icon-arrow"></span>
