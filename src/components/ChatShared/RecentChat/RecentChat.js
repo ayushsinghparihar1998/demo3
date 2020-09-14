@@ -10,6 +10,7 @@ function RecentChat({ onRedirect }) {
   const [recentChats, setRecentChats] = useState([]);
   useEffect(() => {
     getRecentChats();
+    socket.on("messageReceived", getRecentChats);
     socket.on("sendMessage", getRecentChats);
     socket.on("changeUserOnlineStatus", getRecentChats);
   }, [])
