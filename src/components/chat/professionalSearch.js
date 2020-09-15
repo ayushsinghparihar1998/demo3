@@ -214,7 +214,7 @@ class Professionalchatsearch extends Component {
                 <div className="profile_layout userdashboards chatsearches pt-4 pb-5">
                     <Container>
                         <Row>
-                            <Col md={3}>
+                            <Col lg={3} md={4}> 
                                 <div className="left_sidebar">
                                     <div className="inner_side">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Refine Your Search</div>
@@ -384,7 +384,7 @@ class Professionalchatsearch extends Component {
                                     </div>
                                 </div>
                             </Col>
-                            <Col md={9}>
+                            <Col lg={9} md={8}>
                                 <div className="text-center">
                                     <div className="bg-white pl-4 pr-4">
                                         {searchData && searchData.map((searchItem, idx) => {
@@ -396,7 +396,7 @@ class Professionalchatsearch extends Component {
                                                     </div>
                                                     <div className="pl-2 w-100">
                                                         <div className="d-flex justify-content-between w-100"> 
-                                                            <div className="col-md-8">
+                                                            <Col md={6} lg={8}>
                                                                 <div className="col1 fw500 fs18 pb-1">{searchItem.u_name ? searchItem.u_name : ''}</div>
                                                                 <div className="col40 fs15 fw400 pb-1">
                                                                     Category:  {searchItem.uc_cat_name && searchItem.uc_cat_name.map((cat, cidx) => {
@@ -406,8 +406,8 @@ class Professionalchatsearch extends Component {
                                                                 })}
                                                                 </div>
                                                                 {/* <div className="fs14 fw400 col54 pb-1">Licensed Professional Counselor, LPC</div> */}
-                                                            </div>
-                                                            <div className="col-md-4"> 
+                                                            </Col>
+                                                            <Col md={6} lg={4}> 
                                                                 <div className="ml-auto text-right">  
                                                                 <span className="col28 fs14 fs400 pr-3">
                                                                     {searchItem.u_city ? searchItem.u_city : ''}
@@ -415,7 +415,7 @@ class Professionalchatsearch extends Component {
                                                                 <Image src={searchItem.u_flag ? searchItem.u_flag : ''} alt="" width={100} className="mx50" />
                                                                 <div className="col40 fs14 fs400 pt-1 text-center">{searchItem.u_mobile ? searchItem.u_mobile : ''}</div>
                                                                 </div>
-                                                            </div>
+                                                            </Col>
                                                         </div>
 
                                                         <div className="col28 fs15 fw400 pt-2">{searchItem.u_bio ? searchItem.u_bio : ''} 

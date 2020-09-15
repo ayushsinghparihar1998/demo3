@@ -96,7 +96,7 @@
         .upload_pic { 
             // position: relative; 
 
-            input[type="file"] { 
+            input[type="file"] {  
                 position: absolute;
                 width: 36px;
                 height: 40px;
@@ -114,7 +114,7 @@
             }
         }
         
-        .border_bottoms {
+        .border_bottoms {   
             border-bottom: 0.5px solid $col50; 
             width: 100%;
             max-width: 250px;

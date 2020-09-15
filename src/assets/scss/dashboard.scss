@@ -867,8 +867,46 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px) { 
-    .profile_layout .myprofile .layout .w40 {
+@media (min-width: 768px) and (max-width: 991px) {     
+    .profile_layout .myprofile .layout .w40 {   
         width: 75% !important; 
     }
+
+    .chatsearch  {
+        .search-box {
+            div.fs18  {
+                font-size: 14px !important; 
+            }
+        }
+    }
+
+    .location .ant-select {
+        max-width: 180px;
+    }
+
+    .chatsearches  {
+        div {
+            div.fs18 {
+                font-size: 15px !important;
+            } 
+            div.fs15 {
+                font-size: 13px !important;
+            }   
+            div.ml-auto {
+                div.fs14 {
+                    font-size: 13px !important;
+                    word-break: break-all; 
+                }    
+            }
+        }
+
+        .pt-5 { 
+            padding-top: 1rem!important;   
+        }
+
+        .pb-5 { 
+            padding-bottom: 1rem!important; 
+        }
+    }
+
 }

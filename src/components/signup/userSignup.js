@@ -192,7 +192,7 @@ class ProfessionalSignup extends Component {
                     <div className="col10 fs30 fw600 mb-4">Create Your Account</div>
 
                     <Row>
-                        <Col md={6}>
+                        <Col md={12} lg={6}>
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14">Email address</Form.Label>
                                 <Form.Control type="email"
@@ -214,7 +214,7 @@ class ProfessionalSignup extends Component {
                             </Form.Group>
                         </Col>
 
-                        <Col md={6}>
+                        <Col md={12} lg={6}>
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14">
                                     Password </Form.Label>
@@ -238,7 +238,7 @@ class ProfessionalSignup extends Component {
                             </Form.Group> 
                         </Col>
 
-            <Col md={6}>
+            <Col md={12} lg={6}>
               <Form.Group>
                 <Form.Label className="fs20 fw600 col14">User name*</Form.Label>
                 <Form.Control
@@ -260,7 +260,7 @@ class ProfessionalSignup extends Component {
               </Form.Group>
             </Col>
 
-            <Col md={6}>
+            <Col md={12} lg={6}>
               <Form.Label className="fs20 fw600 col14">
                 Date of birth*
               </Form.Label>
@@ -350,14 +350,14 @@ class ProfessionalSignup extends Component {
                             </Form.Group> 
                         </Col>*/}
 
-            <Col md={6}>
+            <Col md={12} lg={6}>
               <div className="fs13 fw300 mt-2 col27">
                 Please make sure you enter the correct date. You will be unable
                 to change this later.
               </div>
             </Col>
 
-            <Col md={6}>
+            <Col md={12} lg={6}>
               <Form.Group controlId="formBasicCheckbox" className="d-flex">
                 <Form.Check
                   type="checkbox"
@@ -383,7 +383,7 @@ class ProfessionalSignup extends Component {
             <Col md={6}>
               <Button onClick={this.handleSubmit} className="btnTyp5 mt-3">
                 continue
-              </Button>
+              </Button> 
             </Col>
           </Row>
 
@@ -401,4 +401,4 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default connect(null, { actionUserSignup })(ProfessionalSignup);
+export default connect(null, { actionUserSignup })(ProfessionalSignup); 

@@ -98,10 +98,10 @@ class Chatsearch extends Component {
                         <div className="chatsearch w-100">
                             <div className="search-box">
                                 <Row>
-                                    <Col md={3}>
+                                    <Col lg={3} md={4}> 
                                         <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
                                     </Col>
-                                    <Col md={3}> 
+                                    <Col lg={3} md={5}> 
                                         <Form.Group>
                                             <Form.Control
                                                 type="text"
@@ -115,7 +115,7 @@ class Chatsearch extends Component {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    <Col md={3}>
+                                    <Col lg={3} md={3}> 
                                         <Button onClick={this.getListner} className="btnTyp5 bTyp5">
                                             Search
                                     </Button>
@@ -130,7 +130,7 @@ class Chatsearch extends Component {
                                         listOfSearchLisner.slice(0, this.state.recordCount).map(
                                             (item, index) => {
                                                 return (
-                                                    <Col md={4}>
+                                                    <Col lg={4} md={6}> 
                                                         <div className="subscribes active"> 
                                                             {item.u_paid ?
                                                                 <div className="subleft">
