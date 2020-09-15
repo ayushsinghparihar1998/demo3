@@ -1,4 +1,5 @@
 import ELPViewApiService from '../../services/apiService';
+import { post, get } from "axios";
 import {
   LOGIN,
   PROFESSIONAL_LOGIN,
@@ -27,7 +28,7 @@ import {
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
   SEARCH_LISTNER,
   ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL,
-  CHANGE_PASSWORD,SET_RATING
+  CHANGE_PASSWORD,SET_RATING,UPLOAD_PICTURE
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -235,5 +236,18 @@ export const actionChangePassword = (data) => async (dispatch) => {
 export const actionAddrating = (data) => async (dispatch) => {
   const request = ELPViewApiService('addrating', data);
   dispatch({ type: CHANGE_PASSWORD, payload: request });
+  return request;
+};
+
+export const actionUploadImage = data => async (dispatch) => {
+  console.log("datadata",data)
+  const url = "http://103.76.253.131:81/elp/uploadimage";
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    }
+  };
+  const request = post(url, data, config);
+  dispatch({ type: UPLOAD_PICTURE, payload: request });
   return request;
 };

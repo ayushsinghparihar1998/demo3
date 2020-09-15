@@ -23,7 +23,6 @@ class Myprofile extends Component {
   }
   getProfile() {
     this.props.actionGetProfile({}).then((result) => {
-      console.log(result.data.data.profile_list,"actionGetProfile", result)
       if (result && result.status === 200) {
 
         let res = result.data.data &&
@@ -131,7 +130,7 @@ class Myprofile extends Component {
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Gender:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.gender}</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
                           </div>
                         </div>
                         <div className="layout">

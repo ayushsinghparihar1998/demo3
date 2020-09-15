@@ -19,10 +19,12 @@ import {
   actionGetCountry,
   actionGetState,
   actionGetCity,
+  actionUploadImage
 } from '../../common/redux/actions';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import moment from 'moment';
-
+import { ToastContainer, toast } from "react-toastify";
+import 'react-datepicker/dist/react-datepicker.css';
 import CONSTANTS from '../../common/helpers/Constants';
 import NavBar from '../core/nav';
 import Footer from '../core/footer';
@@ -79,8 +81,7 @@ class Editprofile extends Component {
   getProfile = () => {
     this.props.actionGetProfile({}).then((result) => {
       if (result && result.status === 200) {
-        console.log(result.data.data.profile_list,"actionGetProfile423423", result)
-        let profile =
+        let profile = result.data.data &&
           result.data.data.profile_list && result.data.data.profile_list
             ? result.data.data.profile_list
             : {};
@@ -256,6 +257,39 @@ class Editprofile extends Component {
       pathname: "/",
     });
   }
+  handleUploadPicture(event, name) {
+    const fileObject = event.target.files[0];
+    if (fileObject) {
+      let _this = this;
+      let uploadPicturesResponse = {};
+      let reqArray = [];
+      const formData = new FormData();
+      formData.set('u_image', fileObject);
+      formData.append('thumbnailHeight', 100);
+      formData.append('thumbnailWidth', 100);
+      formData.append('isCreateThumbnail', true);
+      formData.append('fileKey', fileObject.name);
+      formData.append('filePath', fileObject.name);
+      console.log("formDataformData",formData)
+
+      this.props.actionUploadImage(formData)
+        .then((result, error) => {
+
+          console.log(name,"resultresultresult",result)
+          let file = result.data.data.filepath;
+          console.log("filefile",file)
+          this.setState({
+            [name]: file
+          });
+        })
+        .catch(e => {
+          
+        });
+    }
+  }
+    actionOnUpload(event) {
+    toast.dismiss();
+  }
   render() { 
     const { errors } = this.state;
     return (
@@ -267,21 +301,42 @@ class Editprofile extends Component {
           <Container>
             <Row>
               <div className="myprofile">
-                <Image src={Profileban} alt="" className="w-100" />
+                <Image src={this.state.backgroud_img ? this.state.backgroud_img : Profileban} 
+                alt="" className="w-100" />
                 <div className="upload_bg">
-                  <Form.File id="custom-filetwo" />
+                  <Form.File
+                      id="custom-filetwo" 
+                      autoComplete="off"
+                      onChange={e =>
+                        this.handleUploadPicture(e,'backgroud_img')
+                      }
+                      onClick={(event) => {
+                        event.target.value = null; this.actionOnUpload(event)
+                      }}
+                     // accept={customConstant.acceptedFormat.imageAcceptFormatType}
+                    />
                   <Image src={Cameratwo} alt="" className="camera2" />
                 </div>
                 <div className="text-center profile_top">
-                  <Image
-                    src={Profileimg}
+                  <Image  
+                    src={this.state.profileImg ? this.state.profileImg : Profileimg} 
                     alt=""
                     className="r50 border_profile"
                   />
                   <Image src={this.state.flag ? this.state.flag : Usaflag} 
                   alt="" width='50px' className="r50 flags" />
                   <div className="upload_pic">
-                    <Form.File id="custom-fileone" />
+                    <Form.File
+                      id="custom-fileone" 
+                      autoComplete="off"
+                      onChange={e =>
+                        this.handleUploadPicture(e,'profileImg')
+                      }
+                      onClick={(event) => {
+                        event.target.value = null; this.actionOnUpload(event)
+                      }}
+                     // accept={customConstant.acceptedFormat.imageAcceptFormatType}
+                    />
                     <Image src={Camera} alt="" className="camera" />
                   </div>
                 </div>
@@ -351,8 +406,7 @@ class Editprofile extends Component {
                           <Form.Group className="genders">
                             <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
                               Gender:
-                            </Form.Label>
-                            
+                            </Form.Label>                            
                             <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
                             <span>
                             <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
@@ -833,4 +887,5 @@ export default connect(null, {
   actionGetCountry,
   actionGetState,
   actionGetCity,
+  actionUploadImage
 })(Editprofile);
