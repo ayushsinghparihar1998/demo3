@@ -343,7 +343,7 @@
     .conversations {
         .col-md-6 {
             & > img {
-                width: 100%; 
+                width: 100%;  
             }
 
             div:nth-child(2) { 
@@ -457,10 +457,14 @@
         }
     }
 
-    .conversations {
+    .conversations {   
         .col-md-6 {
             & > img {
                 width: 100%; 
+            }
+
+            &:first-child {
+                
             }
 
             div:nth-child(2) { 
