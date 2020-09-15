@@ -28,13 +28,13 @@ class Resetpassword extends Component {
     super(props);
     this.state = {
       email: "",
-      userid:'',
+      userid: '',
       errors: {},
-      password:'',
-      confirmPassword:'',      
+      password: '',
+      confirmPassword: '',
       roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
         this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
-    }; 
+    };
   }
 
   componentDidMount() {
@@ -42,16 +42,18 @@ class Resetpassword extends Component {
     const { url } = this.props.match;
     const { location } = this.props;
 
-    if(location)
-    {
-    const parsed = qs.parse(location.search);  
-    let email = parsed.email.replace(/\s/g, '+');
-    let userid = parseInt(parsed.userid);
-    
-    this.setState({
-      email,
-      userid,      
-    });    
+    if (location) {
+      const parsed = qs.parse(location.search);
+
+      let email = parsed.email.replace(/\s/g, '+');
+      let userid = parseInt(parsed.userid);
+      let authcode = parsed.authcode;
+
+      this.setState({
+        email,
+        userid,
+        authcode
+      });
 
     }
 
@@ -73,29 +75,30 @@ class Resetpassword extends Component {
   handleSubmitUser = () => {
     if (this.isValid()) {
       let data = {
-        email: this.state.email.toLowerCase().trim(),    
-        password: this.state.password.trim() ,
-        userid:this.state.userid,  
-      };      
+        email: this.state.email.toLowerCase().trim(),
+        password: this.state.password.trim(),
+        userid: this.state.userid,
+        authcode: this.state.authcode
+      };
       this.props
         .actionResetPassword(data)
         .then(result => {
-          if (result && result.data && result.data.status === "success") {  
-          let roleType = "1"          
-               setTimeout(() => {
+          if (result && result.data && result.data.status === "success") {
+            let roleType = "1"
+            setTimeout(() => {
               this.props.history.push({
                 pathname: 'login',
                 state: { roleType: roleType }
-            });
-          }, 2000);
-              
-              
+              });
+            }, 2000);
+
+
           }
         })
         .catch(error => {
           console.log(error);
         });
-      }
+    }
   };
 
   isValid() {
@@ -115,13 +118,13 @@ class Resetpassword extends Component {
           <NavBar {...this.props} />
         </div>
         <div className="Loginlayout">
-          <Container> 
+          <Container>
             <div className="col10 fs40 fw600 pt-4 mb-2">
-                Reset Password
+              Reset Password
             </div>
             <div className="col14 fs25 fw300 mb-4 pb-2">Want to Reset Your Password?</div>
 
-            <div className="layout_box forgots mb-4">  
+            <div className="layout_box forgots mb-4">
 
               <Form.Group className="mb-4 pb-2">
                 <Form.Control
@@ -134,7 +137,7 @@ class Resetpassword extends Component {
                   className="inputTyp2"
                 />
                 <div className="error alignLeft">{errors.password}</div>
-              </Form.Group>  
+              </Form.Group>
 
               <Form.Group className="mb-4 pb-2">
                 <Form.Control
@@ -147,17 +150,17 @@ class Resetpassword extends Component {
                   className="inputTyp2"
                 />
                 <div className="error alignLeft">{errors.confirmPassword}</div>
-              </Form.Group> 
+              </Form.Group>
 
               <Button onClick={this.handleSubmitUser} className="btnTyp4 text-uppercase">
                 Submit
-              </Button>   
+              </Button>
 
             </div>
 
           </Container>
         </div>
-       
+
         <Footer />
       </div>
     );
