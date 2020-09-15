@@ -80,6 +80,9 @@ class Chat extends Component {
     }
   }
   componentDidMount() {
+    if (this.state.user_id == this.props.match.params.id) {
+      this.props.history.push('/');
+    }
     if (!socket.connected) {
       // socket.connect();
     }

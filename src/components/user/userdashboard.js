@@ -207,8 +207,6 @@ class Userdashboard extends Component {
     document.execCommand("copy");
     // alert("Copied the text: " + copyText.value);
   }
-
-
   changepath = (path) => {
     this.props.history.push(path);
   };

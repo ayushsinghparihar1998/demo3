@@ -61,7 +61,6 @@ class ELPRoute extends Component {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
   render() {
-    console.log("SocketClass", socketClass)
     return (
       <>
         {this.state.socket && <VideoCalling />}
