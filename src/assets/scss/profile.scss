@@ -47,13 +47,14 @@
         }
 
         .layout {
+            padding-left: 10%; 
             .border2 {
                 border-bottom: solid 1px $col51; 
                 padding-bottom: 20px;
                 margin-bottom: 20px !important;        
             }  
-            .w35 {
-                max-width: 35%; 
+            .w35 { 
+                max-width: 45%;   
             }
             .w60 {
                 width: 45%;
@@ -130,6 +131,7 @@
                 position: absolute;
                 top: 85%; 
                 left: 49%;
+                max-width: 31px; 
             }
             .btn_set {
                 position: absolute;
@@ -159,6 +161,9 @@
        
         .user_tab {
             padding-bottom: 3rem; 
+            .tab-content {
+                padding-top: 20px; 
+            }            
             
             .nav-tabs {
                 justify-content: center;

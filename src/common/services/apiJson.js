@@ -331,12 +331,20 @@ export default {
     showErrorMessage: true,
   },
   searchlistener: {
-    url: 'elp/searchlistener',
-    method: 'POST',
+    url: "elp/searchlistener",
+    method: "POST",
     data: {
-     search_keyword:'',
-     order_by:''
+      search_keyword: "",
+      order_by: "",
     },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  emailVerification: {
+    url: "elp/emailverification",
+    method: "POST",
+    data: { email: "", authcode: "" },
     showResultMessage: false,
     showErrorMessage: true,
   },

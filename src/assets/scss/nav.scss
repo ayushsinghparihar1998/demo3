@@ -77,6 +77,33 @@
     position: relative; 
 }
 
+.email_verified {
+    position: relative;
+    text-align: center;
+
+    .verifys {
+        position: absolute;  
+        background-color: $col26; 
+        background-image: url(../images/mask_layer.png); 
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom;
+        max-width: 400px;
+        width: 100%;
+        margin: auto;
+        left: 50%;
+        transform: translate(-50%);
+        display: flex;
+        height: 65px;
+        align-items: center;
+        padding: 12px;
+
+        & > img {
+            max-width: 50px; 
+        }
+    }
+}
+
 @media (max-width: 1250px) {  
 .mj_nav {
     .navbar-light {

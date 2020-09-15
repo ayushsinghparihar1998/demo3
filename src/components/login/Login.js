@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import SimpleReactValidator from 'simple-react-validator/dist/simple-react-validator';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import SimpleReactValidator from "simple-react-validator/dist/simple-react-validator";
 import {
   actionLogin,
   actionProfessionalLogin,
   actionUserLogin,
   actionAdminLogin,
-} from '../../common/redux/actions';
-import { encrypt, decrypt, setLocalStorage } from '../../common/helpers/Utils';
+} from "../../common/redux/actions";
+import {
+  encrypt,
+  decrypt,
+  setLocalStorage,
+  getLocalStorage,
+} from "../../common/helpers/Utils";
+import * as qs from "query-string";
+import ELPRxApiService from "../../common/services/apiService";
 
 import {
   Button,
@@ -17,37 +24,44 @@ import {
   Row,
   Col,
   Image,
-  Form, Modal
+  Form,
+  Modal,
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import NavBar from "../core/nav";
 import NavBarAdmin from "../core/navAdmin";
 import Footer from "../core/footer";
-import QuestionAndAnswer from '../signup/questionAndAnswer';
+import QuestionAndAnswer from "../signup/questionAndAnswer";
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationLogin";
-import ProfessionalSignup from '../signup/professionalSignup';
-import socketClass from '../../common/utility/socketClass';
+import ProfessionalSignup from "../signup/professionalSignup";
+import socketClass from "../../common/utility/socketClass";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: "",
       errors: {},
       password: "",
-      show3:false,
-      roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
-        this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
+      show3: false,
+      roleType:
+        this.props.location &&
+        this.props.location.state &&
+        this.props.location.state.roleType
+          ? this.props.location.state.roleType
+          : this.props.roleType
+          ? this.props.roleType
+          : CONSTANTS.ROLES.LISTNER,
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
-      className: 'msgcolor',
+      className: "msgcolor",
       messages: {
-        email: 'Enter a valid email',
+        email: "Enter a valid email",
       },
     });
-    console.log('this.props.roleType', this.props.roleType);
+    console.log("this.props.roleType", this.props.roleType);
   }
 
   componentWillReceiveProps(next) {
@@ -60,6 +74,92 @@ class Login extends Component {
           : CONSTANTS.ROLES.LISTNER,
     });
   }
+  componentDidMount() {
+    const { location } = this.props;
+    console.log("location", location);
+    if (location.search) {
+      const parsed = qs.parse(location.search);
+      if (parsed.type === "emailverification") {
+        console.log("helloverify");
+
+        let email = parsed.email;
+        let type = parsed.type;
+        let authCode = parsed.authcode;
+        this.verifyEmail(email, type, authCode);
+      }
+    } else {
+      console.log("not varification");
+      if (getLocalStorage("userInfoProff")) {
+        this.props.history.push({ pathname: "/userDashboardproff" });
+      } else if (getLocalStorage("userInfo")) {
+        this.props.history.push({ pathname: "/userDashboard" });
+      } else if (getLocalStorage("customerInfo")) {
+        this.props.history.push({ pathname: "/userDashboardcust" });
+      }
+    }
+  }
+  verifyEmail = (email, type, authcode) => {
+    if (email && type) {
+      let data = {
+        email,
+        // type,
+        authcode,
+      };
+      let _this = this;
+      //  console.log(data);
+      ELPRxApiService("emailVerification", data)
+        .then((response) => {
+          if (response.data.status === "success") {
+            let u_email;
+            if (getLocalStorage("userInfoProff")) {
+              let data = getLocalStorage("userInfoProff");
+              u_email = data.u_email;
+
+              console.log(u_email, email, u_email == email);
+
+              if (u_email == email) {
+                data.u_verified = 1;
+                setLocalStorage("userInfoProff", data);
+
+                _this.props.history.push({ pathname: "/userDashboardproff" });
+              } else {
+                _this.props.history.push("/login");
+              }
+            } else if (getLocalStorage("userInfo")) {
+              let data = getLocalStorage("userInfo");
+              u_email = data.u_email;
+
+              console.log(u_email, email, u_email == email);
+              if (u_email == email) {
+                data.u_verified = 1;
+                setLocalStorage("userInfo", data);
+
+                _this.props.history.push({ pathname: "/userDashboard" });
+              } else {
+                _this.props.history.push("/login");
+              }
+            } else if (getLocalStorage("customerInfo")) {
+              let data = getLocalStorage("customerInfo");
+
+              u_email = data.u_email;
+              console.log(u_email, email, u_email == email);
+              if (u_email == email) {
+                data.u_verified = 1;
+                setLocalStorage("customerInfo", data);
+                _this.props.history.push({ pathname: "/userDashboardcust" });
+              } else {
+                _this.props.history.push("/login");
+              }
+            }
+          } else {
+            _this.props.history.push("/login");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   handleChange = (event) => {
     this.setState({
@@ -85,19 +185,19 @@ class Login extends Component {
       this.props
         .actionLogin(data)
         .then((result) => {
-          if (result && result.data && result.data.status === 'success') {
+          if (result && result.data && result.data.status === "success") {
             socketClass.connect(result.data.data);
             this.setState({
               errors: {},
             });
             let u_que_ans_per = result.data.data.u_que_ans_per;
             if (u_que_ans_per >= 60) {
-              setLocalStorage('userInfo', result.data.data);
-              setLocalStorage('loggedIn', true);
-              this.props.history.push({ pathname: '/userdashboard' });
+              setLocalStorage("userInfo", result.data.data);
+              setLocalStorage("loggedIn", true);
+              this.props.history.push({ pathname: "/userdashboard" });
             } else {
-              setLocalStorage('result', u_que_ans_per);
-              setLocalStorage('loggedIn', false);
+              setLocalStorage("result", u_que_ans_per);
+              setLocalStorage("loggedIn", false);
             }
           } else {
             this.setState({
@@ -122,11 +222,11 @@ class Login extends Component {
       this.props
         .actionProfessionalLogin(data)
         .then((result) => {
-          if (result && result.data && result.data.status === 'success') {
+          if (result && result.data && result.data.status === "success") {
             socketClass.connect(result.data.data);
-            setLocalStorage('userInfoProff', result.data.data);
-            setLocalStorage('loggedIn', true);
-            this.props.history.push({ pathname: '/userDashboardproff' });
+            setLocalStorage("userInfoProff", result.data.data);
+            setLocalStorage("loggedIn", true);
+            this.props.history.push({ pathname: "/userDashboardproff" });
           }
         })
         .catch((error) => {
@@ -146,11 +246,11 @@ class Login extends Component {
       this.props
         .actionUserLogin(data)
         .then((result) => {
-          if (result && result.data && result.data.status === 'success') {
+          if (result && result.data && result.data.status === "success") {
             socketClass.connect(result.data.data);
-            setLocalStorage('customerInfo', result.data.data);
-            setLocalStorage('loggedIn', true);
-            this.props.history.push({ pathname: '/userDashboardcust' });
+            setLocalStorage("customerInfo", result.data.data);
+            setLocalStorage("loggedIn", true);
+            this.props.history.push({ pathname: "/userDashboardcust" });
           }
         })
         .catch((error) => {
@@ -168,13 +268,13 @@ class Login extends Component {
       this.props
         .actionAdminLogin(data)
         .then((result) => {
-          if (result && result.data && result.data.status === 'success') {
+          if (result && result.data && result.data.status === "success") {
             socketClass.connect(result.data.data);
-            setLocalStorage('userInfoAdmin', result.data.data);
+            setLocalStorage("userInfoAdmin", result.data.data);
             setLocalStorage("loggedIn", true);
             setLocalStorage("isAdmin", true);
 
-            this.props.history.push({ pathname: '/adminlistener' });
+            this.props.history.push({ pathname: "/adminlistener" });
           }
         })
         .catch((error) => {
@@ -190,56 +290,54 @@ class Login extends Component {
   };
 
   changepath = (path) => {
-    let roleType =  this.state.roleType;
-    if(roleType == 2)
-    {
+    let roleType = this.state.roleType;
+    if (roleType == 2) {
       this.handleModal3();
-    }else
-    {
+    } else {
       this.props.history.push(path);
-    }    
-  };  
+    }
+  };
 
-handleModal3 = () => {
+  handleModal3 = () => {
     this.setState({ show3: true });
-};
+  };
 
-handleClose3 = () => {
-  this.setState({ show3: false });
-};
+  handleClose3 = () => {
+    this.setState({ show3: false });
+  };
 
-handleGet = () => {
-  this.setState({
+  handleGet = () => {
+    this.setState({
       show: false,
-      show3: false
-  })
-}
+      show3: false,
+    });
+  };
 
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
-    console.log('errors', errors);
+    console.log("errors", errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-        {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN?
-           <NavBarAdmin {...this.props} />
-          :
-          <NavBar {...this.props} />
-        }
+          {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
+            <NavBarAdmin {...this.props} />
+          ) : (
+            <NavBar {...this.props} />
+          )}
         </div>
         <div className="Loginlayout">
           <Container>
             <div className="col10 fs40 fw600 pt-4 mb-2">
               {this.state.roleType === CONSTANTS.ROLES.LISTNER
-                ? 'Listener Login'
+                ? "Listener Login"
                 : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                ? 'Professional Login'
+                ? "Professional Login"
                 : this.state.roleType === CONSTANTS.ROLES.USER
-                ? 'User Login'
+                ? "User Login"
                 : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                ? 'Admin Login'
-                : ''}
+                ? "Admin Login"
+                : ""}
             </div>
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
@@ -247,7 +345,7 @@ handleGet = () => {
                 <strong className="fw500">Become a Member</strong>
               </div>
             ) : (
-              ''
+              ""
             )}
 
             <div className="layout_box mb-4">
@@ -261,10 +359,10 @@ handleGet = () => {
                   value={email}
                   placeholder="Email"
                   onChange={this.handleChange}
-                  maxLength="50"                                
+                  maxLength="50"
                   inputProps={{
-                      maxLength: 50,
-                  }}                  
+                    maxLength: 50,
+                  }}
                 />
                 <div className="error alignLeft">{errors.email}</div>
               </Form.Group>
@@ -278,10 +376,10 @@ handleGet = () => {
                   error={errors.password ? true : false}
                   placeholder="Password"
                   className="inputTyp2"
-                  minLength="8"    
-                  maxLength="15"                                
+                  minLength="8"
+                  maxLength="15"
                   inputProps={{
-                      maxLength: 15,
+                    maxLength: 15,
                   }}
                 />
                 <div className="error alignLeft">{errors.password}</div>
@@ -316,43 +414,37 @@ handleGet = () => {
                   LOGIN
                 </Button>
               ) : (
-                ''
+                ""
               )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
-
-                  <span
+                <span
                   className="fw500 pointer pl-1"
-                  onClick={() =>                    
+                  onClick={() =>
                     this.props.history.push({
-                      pathname: 'forgotpassword',
-                      state: { roleType: this.state.roleType }
+                      pathname: "forgotpassword",
+                      state: { roleType: this.state.roleType },
                     })
-                  }                  
-                  >
-                    Reset it Here
-                    </span>
+                  }
+                >
+                  Reset it Here
+                </span>
               </div>
             </div>
 
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="fs18 fw300 pb-5 col14">
                 Interested in becoming a Listener?
-  <span
+                <span
                   className="fw600 pointer pl-1"
-                  onClick={() =>
-                    this.changepath("/listenersignup")
-                  }
+                  onClick={() => this.changepath("/listenersignup")}
                 >
                   Learn More / Signup
                 </span>
               </div>
-
-                
             ) : (
-              ''
+              ""
             )}
-
           </Container>
         </div>
         <Modal
@@ -375,21 +467,22 @@ handleGet = () => {
           </Modal.Body>
         </Modal>
         <Modal show={this.state.show3} className="CreateAccount">
-                    <Modal.Header>
-                        <Button onClick={this.handleClose3}>
-                            <Image src={Crossbtn} alt="" />
-                        </Button>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Container>
-                            <div className="layout_box mt-3 mb-4">
-                                <ProfessionalSignup
-                                    handleSet={this.handleGet}
-                                    {...this.props} />
-                            </div>
-                        </Container>
-                    </Modal.Body>
-                </Modal>
+          <Modal.Header>
+            <Button onClick={this.handleClose3}>
+              <Image src={Crossbtn} alt="" />
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Container>
+              <div className="layout_box mt-3 mb-4">
+                <ProfessionalSignup
+                  handleSet={this.handleGet}
+                  {...this.props}
+                />
+              </div>
+            </Container>
+          </Modal.Body>
+        </Modal>
         <Footer />
       </div>
     );

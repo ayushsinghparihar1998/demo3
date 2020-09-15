@@ -5,8 +5,8 @@ import Videousertwo from "../../../assets/images/videousers.svg";
 
 import Videothree from "../../../assets/images/video.svg";
 import Videodisconnect from "../../../assets/images/dissconect.svg";
-import Audioreceivecall from "../../../assets/images/receive_call.svg"; 
-import { useHistory } from 'react-router-dom'
+import Audioreceivecall from "../../../assets/images/receive_call.svg";
+import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect } from "react";
 import socketClass from "../../../common/utility/socketClass";
 import { showErrorMessage } from "../../../common/helpers/Utils";
@@ -15,6 +15,22 @@ const Calling = (props) => {
   const { id, mode, type } = props;
   const history = useHistory();
   const [userDetails, setUserDetails] = useState(null);
+  const notAnswered = (_id, _ud) => {
+    if (mode !== "incoming") {
+      const payload = {
+        reciver_id: _id,
+        reciver_type: _ud?.u_role_id,
+        sender: {},
+        type: 'auto'
+      }
+      setTimeout(() => {
+        if (history.location.pathname === "/calling") {
+          socket.emit("cancelCall", payload);
+          history.goBack();
+        }
+      }, 1000 * 30);
+    }
+  }
   // console.log("props", props)
   const cancelCall = () => {
     if (mode === "incoming") {
@@ -36,6 +52,7 @@ const Calling = (props) => {
     socket.emit('userDetail', { "user_id": id }, data => {
       if (data.success === 1) {
         setUserDetails(data.userDetail);
+        notAnswered(id, data.userDetail);
       } else {
         // handle odd scenario
       }
@@ -49,7 +66,7 @@ const Calling = (props) => {
       <div className="audiochat">
         <Container>
           {!!userDetails ?
-            <div className="w-100 audiocontrol"> 
+            <div className="w-100 audiocontrol">
               <div className="mb-5">
                 <Image src={Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name} </div>
@@ -59,11 +76,11 @@ const Calling = (props) => {
                 {mode === "incoming" && props.handleAction ?
                   <>
                     {type === "video" &&
-                      <Image src={Videothree} className="mr-3 pointer" onClick={() => props.handleAction('accept')} />
+                      <Image src={Audioreceivecall} className="mr-3 pointer" onClick={() => props.handleAction('accept')} />
                     }
                     {type === "audio" &&
                       <Image src={Audioreceivecall} className="mr-3 pointer"
-                        onClick={() => props.handleAction('accept')} /> 
+                        onClick={() => props.handleAction('accept')} />
                     }
                   </> : null
                 }

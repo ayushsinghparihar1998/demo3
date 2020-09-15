@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   NavDropdown,
@@ -12,36 +12,36 @@ import {
   Tabs,
   Tab,
   Modal,
-} from 'react-bootstrap';
-import NavBar from '../core/nav';
-import Footer from '../core/footer';
-import moment from 'moment';
+} from "react-bootstrap";
+import NavBar from "../core/nav";
+import Footer from "../core/footer";
+import moment from "moment";
 import {
   actionGetRecentJoin,
   actionGetListnerDashBoard,
-} from '../../common/redux/actions';
-import CONSTANTS from '../../common/helpers/Constants';
-import validateInput from '../../common/validations/validationSignup';
-import UserChat from '../../assets/images/user_chat.svg';
-import UserChat2 from '../../assets/images/user_chat2.svg';
-import UserChat3 from '../../assets/images/user_chat3.svg';
-import UserChat4 from '../../assets/images/user_chat4.svg';
-import UserChat5 from '../../assets/images/user_chat5.svg';
-import ChatCross from '../../assets/images/chat_cross.svg';
-import Heartfive from '../../assets/images/heart5.svg';
-import Skill from '../../assets/images/skills.svg';
-import Skill2 from '../../assets/images/skills2.svg';
-import Skill3 from '../../assets/images/skills3.svg';
-import Copys from '../../assets/images/copy_icon.svg';
-import Warningtwo from '../../assets/images/w_signal.svg';
-import Progresss from '../../assets/images/progress_bar.svg';
-import Stars from '../../assets/images/stars.svg';
-import Hearttwo from '../../assets/images/heart2.svg';
-import Medals from '../../assets/images/medals.svg';
-import Rflag from '../../assets/images/r_flag.svg';
-import SocketIOClient from 'socket.io-client';
-import { getLocalStorage } from '../../common/helpers/Utils';
-const SOCKET_IO_URL = 'http://103.76.253.131:8282';
+} from "../../common/redux/actions";
+import CONSTANTS from "../../common/helpers/Constants";
+import validateInput from "../../common/validations/validationSignup";
+import UserChat from "../../assets/images/user_chat.svg";
+import UserChat2 from "../../assets/images/user_chat2.svg";
+import UserChat3 from "../../assets/images/user_chat3.svg";
+import UserChat4 from "../../assets/images/user_chat4.svg";
+import UserChat5 from "../../assets/images/user_chat5.svg";
+import ChatCross from "../../assets/images/chat_cross.svg";
+import Heartfive from "../../assets/images/heart5.svg";
+import Skill from "../../assets/images/skills.svg";
+import Skill2 from "../../assets/images/skills2.svg";
+import Skill3 from "../../assets/images/skills3.svg";
+import Copys from "../../assets/images/copy_icon.svg";
+import Warningtwo from "../../assets/images/w_signal.svg";
+import Progresss from "../../assets/images/progress_bar.svg";
+import Stars from "../../assets/images/stars.svg";
+import Hearttwo from "../../assets/images/heart2.svg";
+import Medals from "../../assets/images/medals.svg";
+import Rflag from "../../assets/images/r_flag.svg";
+import SocketIOClient from "socket.io-client";
+import { getLocalStorage } from "../../common/helpers/Utils";
+const SOCKET_IO_URL = "http://103.76.253.131:8282";
 const socket = SocketIOClient(SOCKET_IO_URL);
 socket.connect();
 
@@ -54,66 +54,67 @@ class Userdashboard extends Component {
     };
   }
   componentDidMount() {
+    console.log(getLocalStorage("userInfo"));
     this.getRecentJoinUsers();
     this.getListnerDashBoard();
-    let result = getLocalStorage('result');
-    console.log('getLocalStorage', getLocalStorage('result'));
-    if (getLocalStorage('result') >= 60) {
+    let result = getLocalStorage("result");
+    console.log("getLocalStorage", getLocalStorage("result"));
+    if (getLocalStorage("result") >= 60) {
       this.setState({
         sucess: true,
         result: true,
-        message: 'your score is ' + result + '%',
+        message: "your score is " + result + "%",
       });
     } else {
       this.setState({
         sucess: true,
         result: false,
-        message: 'your score is ' + result + '%',
+        message: "your score is " + result + "%",
       });
     }
 
-    socket.on('connect', function () {
-      console.log('connected');
+    socket.on("connect", function () {
+      console.log("connected");
     });
     socket.emit(
-      'chat-login',
+      "chat-login",
       JSON.stringify({
-        user_id: getLocalStorage('u_id'),
-        user_type: getLocalStorage('u_role_id'),
+        user_id: getLocalStorage("u_id"),
+        user_type: getLocalStorage("u_role_id"),
       }),
       function (data) {
-        console.log(data, 'authenticateSocket');
+        console.log(data, "authenticateSocket");
       }
     );
 
     socket.emit(
-      'getRecentsChatedUsers',
+      "getRecentsChatedUsers",
       JSON.stringify({
-        user_id: getLocalStorage('u_id'),
+        user_id: getLocalStorage("u_id"),
       }),
       function (d) {
-        console.log('getRecentsChatedUsers', d);
+        console.log("getRecentsChatedUsers", d);
       }
     );
   }
   call() {
-    console.log('call');
-    console.log('obj', {
-      user_type: getLocalStorage('u_role_id'),
-      user_id: getLocalStorage('u_id'),
-      pagination: '10',
-      page: '1',
+    console.log("call");
+    console.log("obj", {
+      user_type: getLocalStorage("u_role_id"),
+      user_id: getLocalStorage("u_id"),
+      pagination: "10",
+      page: "1",
     });
     socket.emit(
-      'getActiveListnersOrCustomers',
+      "getActiveListnersOrCustomers",
       JSON.stringify({
-        user_type: getLocalStorage('u_role_id'),
-        user_id: getLocalStorage('u_id'),
-        pagination: '10',
-        page: '1',
+        user_type: getLocalStorage("u_role_id"),
+        user_id: getLocalStorage("u_id"),
+        pagination: "10",
+        page: "1",
       }),
       function (d) {
-        console.log('getActiveListnersOrCustomers', d);
+        console.log("getActiveListnersOrCustomers", d);
       }
     );
   }
@@ -134,7 +135,7 @@ class Userdashboard extends Component {
   };
 
   getRecentJoinUsers() {
-    let userInfo = getLocalStorage('userInfo');
+    let userInfo = getLocalStorage("userInfo");
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.u_mem_list;
@@ -143,7 +144,7 @@ class Userdashboard extends Component {
     });
   }
   getListnerDashBoard() {
-    let userInfo = getLocalStorage('userInfo');
+    let userInfo = getLocalStorage("userInfo");
     this.props.actionGetListnerDashBoard({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.dashboard_list;
@@ -152,10 +153,10 @@ class Userdashboard extends Component {
     });
   }
   copyReferUrl = () => {
-    var copyText = document.getElementById('referURL');
+    var copyText = document.getElementById("referURL");
     copyText.select();
     copyText.setSelectionRange(0, 99999);
-    document.execCommand('copy');
+    document.execCommand("copy");
     // alert("Copied the text: " + copyText.value);
   };
 
@@ -520,7 +521,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_cheers
                               ? dashboardData.u_cheers
-                              : '0'}{' '}
+                              : "0"}{" "}
                           </strong>
                           Cheers
                         </span>
@@ -533,7 +534,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_compassion_count
                               ? dashboardData.u_compassion_count
-                              : '0'}{' '}
+                              : "0"}{" "}
                           </strong>
                           Compassion Hearts
                         </span>
@@ -546,7 +547,7 @@ class Userdashboard extends Component {
                           <strong className="fs18">
                             {dashboardData.u_badge_count
                               ? dashboardData.u_badge_count
-                              : '0'}{' '}
+                              : "0"}{" "}
                           </strong>
                           Badges Earned
                         </span>
@@ -580,7 +581,7 @@ class Userdashboard extends Component {
                           value={
                             dashboardData.refer_url
                               ? dashboardData.refer_url
-                              : ''
+                              : ""
                           }
                         />
                         <Button className="btnTyp8" onClick={this.copyReferUrl}>
@@ -600,17 +601,17 @@ class Userdashboard extends Component {
                           <div className="d-flex m-3 border-bottom">
                             <div className="position-relative">
                               <Image
-                                src={data.u_image ? data.u_image : ''}
+                                src={data.u_image ? data.u_image : ""}
                                 alt=""
                                 className="r50 pt-1"
                               />
                             </div>
                             <div className="mt-auto mb-auto pl-3">
                               <div className="fs15 col14 fw500">
-                                {data.u_username ? data.u_username : ''}
+                                {data.u_username ? data.u_username : ""}
                               </div>
                               <div className="col27 fs13 fw500">
-                                {data.u_role_txt ? data.u_role_txt : ''}
+                                {data.u_role_txt ? data.u_role_txt : ""}
                               </div>
                             </div>
                           </div>

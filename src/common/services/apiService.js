@@ -6,12 +6,10 @@ import {
   showSuccessToast,
   getLocalStorage,
 } from '../helpers/Utils';
-
 let apiFailCounter = 0;
-axios.defaults.baseURL = 'http://103.76.253.131:81';
-
+// axios.defaults.baseURL = 'http://103.76.253.131:81';
+axios.defaults.baseURL = 'http://eatluvnpray.org/';
 //axios.defaults.baseURL = 'http://103.21.53.11:3004';
-
 axios.interceptors.request.use(
   function (config) {
     let access_token = '';

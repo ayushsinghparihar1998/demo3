@@ -80,6 +80,9 @@ class Chat extends Component {
     }
   }
   componentDidMount() {
+    if (this.state.user_id == this.props.match.params.id) {
+      this.props.history.push('/');
+    }
     if (!socket.connected) {
       // socket.connect();
     }
@@ -145,44 +148,6 @@ class Chat extends Component {
         }))
       }
     });
-
-    socket.emit(
-      "getRecentsChatedUsers",
-      JSON.stringify({
-        user_id: getLocalStorage("userInfo").u_id,
-      }),
-      function (d) {
-        console.log("getRecentsChatedUsers", d);
-        this.setState(
-          {
-            recentChatUsers: d.data,
-          },
-          () => {
-            console.log(this.state.recentChatUsers);
-          }
-        );
-      }.bind(this)
-    );
-    socket.emit(
-      "getActiveListnersOrCustomers",
-      JSON.stringify({
-        user_type: getLocalStorage("userInfo").u_role_id,
-        user_id: getLocalStorage("userInfo").u_id,
-        pagination: "30",
-        page: "1"
-      }),
-      function (d) {
-        console.log("getActiveListnersOrCustomers", d);
-        this.setState(
-          {
-            activeChatUsers: d.data,
-          },
-          () => {
-            console.log(this.state.activeChatUsers);
-          }
-        );
-      }.bind(this)
-    );
   }
   handleQue1(e, a1, a2) {
     let name = e.target.name;
@@ -239,6 +204,7 @@ class Chat extends Component {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
+      console.log(data);
       if (data.success === 1) {
         this.updateChat(object);
       } else {
@@ -290,7 +256,7 @@ class Chat extends Component {
   };
   handleRedirectRecentChat = (data) => () => {
     const { user_id } = this.state;
-    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+    const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
     this.changeChatpath(id);
   }
   handleRedirectActiveUsers = (data) => () => {

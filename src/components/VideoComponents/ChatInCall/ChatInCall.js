@@ -47,7 +47,7 @@ function ChatInCall({ show, toggle, user }) {
       from_user_id: getUserProfile().u_id,
       to_user_id: user.id,
       message_type: 1,
-      date_time: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+      date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: user.u_role_id,
       date: moment().format("YYYY-MM-DD"),
       time: moment().format("HH:mm:ss")

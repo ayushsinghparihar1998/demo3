@@ -4,7 +4,8 @@ import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video'
 import {
   useParams,
   useHistory
-} from "react-router-dom"; 
+} from "react-router-dom";
+import moment from 'moment';
 import NavBar from "../core/nav";
 import Backicon from "../../assets/images/backicon.svg";
 import Videouser from "../../assets/images/pro_img2.svg";
@@ -22,10 +23,10 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
-import socketClass from "../../common/utility/socketClass";
+import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
 const socket = socketClass.getSocket();
-
+let tmp = 0;
 const AudioCall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
@@ -34,9 +35,12 @@ const AudioCall = (props) => {
   const [token, setToken] = useState();
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
+  const [timerStr, setTimerStr] = useState(null);
+  const [remoteUserStatus, setRemoteUserStatus] = useState({ audio: false, video: false })
   const roomRef = useRef(null)
   const localVideoRef = useRef(null)
   const remoteVideoRef = useRef(null)
+  const callTimerRef = useRef(null);
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
@@ -44,28 +48,37 @@ const AudioCall = (props) => {
   const history = useHistory();
 
   useEffect(() => {
+    socket.on('endVideoCall', () => {
+      showErrorMessage("Call has been ended.")
+      setTimeout(() => {
+        history.push('/')
+      }, 1000);
+    });
     //get the token
     (async () => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
       const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
-      const token = await Axios.get(`http://103.76.253.131:8282/getToken?${params}`).then(res => res.data.token);
+      const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
       getUserDetails(paramsid);
-
-
-      socket.on('endVideoCall', () => {
-        showErrorMessage("Call has been ended.")
-        setTimeout(() => {
-          history.push('/')
-        }, 1000);
-      })
     })()
     return () => {
-      disconnect()
+      if (callTimerRef.current) {
+        clearInterval(callTimerRef.current);
+      }
+      disconnect();
     }
   }, [])
+  const runTimer = () => {
+    const curr = new Date().getTime();
+    callTimerRef.current = setInterval(() => {
+      const diff = Date.now() - curr;
+      const time = moment.duration(diff);
+      setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`)
+    }, 1000)
+  }
   const getUserDetails = (id) => {
     socket.emit('userDetail', { "user_id": id }, data => {
       // console.log("userDetail data", data);
@@ -81,12 +94,6 @@ const AudioCall = (props) => {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
-      // debugger;
-      // roomRef.current.localParticipant.tracks.forEach(track => {
-      //   debugger;
-      //   track.track.stop()
-      // });
-      // endVideoCall
       const payload = {
         reciver_id: paramsid,
         reciver_type: userDetails?.u_role_id,
@@ -95,9 +102,7 @@ const AudioCall = (props) => {
         sender_id: getUserProfile().u_id
       }
       if (token) {
-        socket.emit('endVideoCall', payload, data => {
-          console.log(data)
-        });
+        socket.emit('endVideoCall', payload);
       }
       history.push('/')
     }
@@ -113,6 +118,7 @@ const AudioCall = (props) => {
     }).then(roomjoined);
   }
   const roomjoined = (room) => {
+    runTimer();
     roomRef.current = room;
     if (room.localParticipant) {
       attachParticipantTracks(room.localParticipant, localVideoRef.current, 'local');
@@ -208,19 +214,19 @@ const AudioCall = (props) => {
               <div className="mb-5">
                 <Image src={Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div>
-                <div className="fs16 col18 fw300">Call started</div>
+                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
               </div>
             }
 
-            <div className="audiocontrolicon text-center"> 
+            <div className="audiocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
                 (muteAudio == false) ?
                   <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
-                    <Image src={Audioreceivecall} alt="" /> 
+                    <Image src={Videomute} alt="" />
                   </button> :
                   <button onClick={() => editTrack('local', 'audio', 'enable')} className="btn btn-primary">
-                     <Image src={Audioreceivecall} alt="" /> 
+                    <Image src={Videomuteov} alt="" />
                   </button>
               }
 

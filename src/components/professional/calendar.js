@@ -39,7 +39,7 @@ export default class CalendarDemo extends Component {
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
-      repeat: "0",
+      repeat: "1",
       sl_desc: "",
       date: new Date(new Date().setHours(0, 0)),
       starting_at: new Date(new Date().setHours(0, 0)),
@@ -54,12 +54,20 @@ export default class CalendarDemo extends Component {
 
       calendarView: {},
       type: "dayGridMonth",
+      email_varified: true,
     };
     this.getAllevents = this.getAllevents.bind(this);
     // this.openEvent = this.openEvent.bind(this);
   }
 
   componentDidMount() {
+    let data = getLocalStorage("userInfo")
+      ? getLocalStorage("userInfo")
+      : getLocalStorage("userInfoProff");
+    this.setState({
+      email_varified: data.u_verified == 1 ? false : true,
+    });
+
     this.getAllevents();
     let calendarApi = this.calendarComponentRef.current.getApi();
     console.log("calendarApi", calendarApi);
@@ -227,7 +235,7 @@ export default class CalendarDemo extends Component {
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
-      repeat: "0",
+      repeat: "1",
       sl_desc: "",
       date: new Date(new Date().setHours(0, 0)),
       starting_at: new Date(new Date().setHours(0, 0)),
@@ -251,6 +259,8 @@ export default class CalendarDemo extends Component {
         errorTitle: "",
       });
       let hour = this.state.starting_at.getHours();
+      let min = this.state.starting_at.getMinutes();
+      console.log(min);
       console.log(hour);
       let endHour = hour + +this.state.duration.replace(/\D/g, "");
       if (endHour > 23) {
@@ -261,7 +271,7 @@ export default class CalendarDemo extends Component {
       let data = {
         date: moment(this.state.date).format("YYYY-MM-DD"),
         starting_at: moment(this.state.starting_at).format("HH:mm"),
-        end_at: ("0" + endHour).slice(-2) + ":00",
+        end_at: ("0" + endHour).slice(-2) + ":" + min,
         duration: this.state.duration,
         recurring: this.state.recurring,
         repeat: +this.state.repeat,
@@ -293,6 +303,7 @@ export default class CalendarDemo extends Component {
                     <button
                       className="btn b btnTyp9 btnCalender"
                       onClick={this.handleModal5}
+                      disabled={this.state.email_varified}
                     >
                       Create Schedule
                       <span className="icon-arrow"></span>
@@ -314,19 +325,19 @@ export default class CalendarDemo extends Component {
                       <span className="icon-arrow"></span>
                     </button>
                   </div>
-                  
+
                   <div className="fc-btn-group">
                     <button
                       className="btn btn-cal"
                       onClick={() => this.handleCalendarGrid("dayGridMonth")}
                     >
-                      Month
+                      month
                     </button>
                     <button
                       className="btn btn-cal"
                       onClick={() => this.handleCalendarGrid("timeGridWeek")}
                     >
-                      Week
+                      week
                     </button>
                   </div>
                 </div>
@@ -494,7 +505,6 @@ export default class CalendarDemo extends Component {
                   >
                     <option>daily</option>
                     <option>weekly</option>
-                    
                   </Form.Control>
                 </Form.Group>
 
@@ -508,7 +518,6 @@ export default class CalendarDemo extends Component {
                     value={this.state.repeat}
                     onChange={(e) => this.handleChange(e, "repeat")}
                   >
-                    <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>

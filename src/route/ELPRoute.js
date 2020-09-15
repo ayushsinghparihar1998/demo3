@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Landing from "../components/core/landing";
 import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
@@ -33,7 +33,7 @@ import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
 
 import getUserProfile from "../common/utility/getUserProfile";
-import { getLocalStorage } from "../common/helpers/Utils";
+import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
 import socketClass from "../common/utility/socketClass";
 import VideoCalling from "../components/VideoComponents/VideoCalling/VideoCalling";
 import CallingTo from "../components/videoaudio/CallingTo/CallingTo";
@@ -61,13 +61,12 @@ class ELPRoute extends Component {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
   render() {
-    // console.log("getUserProfile", getUserProfile, user)
     return (
       <>
         {this.state.socket && <VideoCalling />}
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
-          <PublicRoute path="/login" component={Login} />
+          <Route path="/login" component={Login} />
           <PublicRoute path="/adminLogin" component={AdminLogin} />
           <PublicRoute path="/becomeListener" component={Becomelistener} />
           <PublicRoute path="/listenersignup" component={Listenersignup} />
