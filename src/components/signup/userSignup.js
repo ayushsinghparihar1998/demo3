@@ -390,9 +390,10 @@ class ProfessionalSignup extends Component {
           <div className="fs18 fw300 pt-5 col14">
             Already have an account?
             <span className="fw500 pointer pl-1">
-              <button  onClick={(e) => {
+            Already have an account
+              <Button className="btnTyp5 ml-3"  onClick={(e) => {
                         this.handleLogin(3);
-                      }}>Login hereter</button>
+                      }}>Login here</Button> 
             </span>
           </div>
         </div>{' '}

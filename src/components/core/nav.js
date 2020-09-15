@@ -24,8 +24,10 @@ import linkedin from "../../assets/images/linkedin.svg";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import Mailicon from "../../assets/images/mail_icon.svg";
 import Bellicon from "../../assets/images/bell_icons.svg";
+import Msgbox from "../../assets/images/msg_box.svg";
+import Masklayer from "../../assets/images/mask_layer.png"; 
 import Signup from "../jsx/listenersignup/signup";
-import ProfessionalSignup from "../signup/professionalSignup";
+import ProfessionalSignup from "../signup/professionalSignup";  
 import UserSignup from "../signup/userSignup";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
@@ -326,6 +328,13 @@ class NavBar extends Component {
             )}
           </Navbar.Collapse>
         </Navbar>
+
+        <div className="email_verified d-none">  
+            <div class="verifys">
+                 <Image src={Msgbox} alt="" /> 
+                 <span className="fs20 fw600 col18 ml-2">Email not verified</span> 
+            </div>
+        </div>
 
         {/* user registration start */}
 
