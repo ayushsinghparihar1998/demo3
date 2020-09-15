@@ -54,7 +54,7 @@ class Userprofiledetail extends Component {
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
                         <Row>
-                            <Col md={3} className="pr-1">
+                            <Col md={4} lg={3}  className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
@@ -70,7 +70,7 @@ class Userprofiledetail extends Component {
                                     </div>
                                 </div>
                             </Col>
-                            <Col md={9} className="pl-1">
+                            <Col md={8} lg={9} className="pl-1">  
                                 <div className="myprofile w-100">
                                     <div className="text-center profile_top melisa">
                                         <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />

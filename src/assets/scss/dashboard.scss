@@ -866,3 +866,9 @@
         }
     }
 }
+
+@media (min-width: 768px) and (max-width: 991px) { 
+    .profile_layout .myprofile .layout .w40 {
+        width: 75% !important; 
+    }
+}

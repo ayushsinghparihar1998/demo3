@@ -38,7 +38,7 @@ class Becomelistener extends Component {
           <Container>
             <div className="listener_layout mt-4 mb-4">
               <Row>
-                <Col md={8}>
+                <Col md={7} lg={8}> 
                   <div className="col10 fs40 fw600 mb-1 mt-4 pt-2">
                     Become a Listener
                   </div>
@@ -88,8 +88,8 @@ class Becomelistener extends Component {
                       <Link to={`/login`}>Login here</Link>
                     </span>
                   </div>
-                </Col>
-                <Col md={4}>
+                </Col> 
+                <Col md={5} lg={4}> 
                   <Image src={WomenListener} alt="" className="w-100" />
                 </Col>
               </Row>
