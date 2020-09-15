@@ -110,6 +110,8 @@ class Editprofile extends Component {
           rating: profile.u_rating,
           stateId: profile.u_state,
           mobileNumber: profile.u_mobile,
+          profileImg:'',
+          backgroud_img:''
         }, () => {
           this.getState();
           this.getCity();
