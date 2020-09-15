@@ -64,7 +64,7 @@ const Videocall = (props) => {
 
     })();
     socket.on('endVideoCall', data => {
-      showErrorMessage("Call has been ended.")
+      // showErrorMessage("Call has been ended.")
       setTimeout(() => {
         history.push('/')
       }, 2000);

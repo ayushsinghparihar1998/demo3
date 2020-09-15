@@ -52,11 +52,11 @@ function ActiveUsers({ onRedirect }) {
         <span
         // onClick={() => this.call()}
         >
-          Currently Active Listeners
+          Currently Active {user.u_role_id == "3" ? 'Listeners' : 'Users'}
       </span>
       </div>
       <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-        <Tab eventKey="home" title="Listener">
+        <Tab eventKey="home" title={user.u_role_id == "3" ? 'Listeners' : 'Users'}>
           <div className="chat-border"></div>
           {activeUsers &&
             activeUsers.map((item, ind) => {

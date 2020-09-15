@@ -49,7 +49,7 @@ const AudioCall = (props) => {
 
   useEffect(() => {
     socket.on('endVideoCall', () => {
-      showErrorMessage("Call has been ended.")
+      // showErrorMessage("Call has been ended.")
       setTimeout(() => {
         history.push('/')
       }, 1000);
