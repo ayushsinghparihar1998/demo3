@@ -80,6 +80,7 @@
 .email_verified {
     position: relative;
     text-align: center;
+    z-index: 999;
 
     .verifys {
         position: absolute;  
