@@ -15,7 +15,7 @@ import Menuicon from "../../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../../assets/images/delete_icon.svg";
 
-class Adminlistener extends Component { 
+class Adminlistener extends Component {       
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +24,7 @@ class Adminlistener extends Component {
         };
     }
     componentDidMount() {
-        this.getProfileListing('', "listner");
+        this.getProfileListing('', "listner"); 
     }
 
     getListnerListing = (e, activaClass) => {
@@ -54,7 +54,7 @@ class Adminlistener extends Component {
     //         }
     //     });
     // }
-    render() {
+    render() { 
         let userActveClass = this.state.activeProfile == 'user' ? "position-relative active" : "position-relative";
         let professnalActveClass = this.state.activeProfile == 'professional' ? "position-relative active" : "position-relative";
         let listnerActveClass = this.state.activeProfile == 'listner' ? "position-relative active" : "position-relative";
@@ -150,7 +150,7 @@ class Adminlistener extends Component {
     }
 }
 
-export default connect(null, {
+export default connect(null, { 
     actionGetListnerListing,
     actionGetUserListing,
     actionGetProfessionalListing

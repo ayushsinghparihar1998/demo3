@@ -237,6 +237,19 @@
     max-width: 50px; 
 }
 
+.emogy {
+    background: $col18; 
+    height: 90px; 
+    .smile { 
+        display: flex;
+        padding-top: 15px;
+
+        img {
+            padding-left: 24px;         
+        }
+    }
+}
+
 
 
 

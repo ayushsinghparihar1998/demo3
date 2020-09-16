@@ -280,7 +280,8 @@ class Chat extends Component {
                                                 </div>
                                             </Form.Group>
                                         </Form>
-                                    </div>
+                                    </div> 
+                                
                                 </div>
                             </Col>
                         </Row>
@@ -291,4 +292,4 @@ class Chat extends Component {
         );
     }
 }
-export default Chat;
+export default Chat; 

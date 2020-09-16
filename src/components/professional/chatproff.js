@@ -10,10 +10,13 @@ import {
   Form,
   Tabs,
   Tab,
-} from "react-bootstrap";
+  Modal
+} from "react-bootstrap"; 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import UserChat from "../../assets/images/user_chat.svg";
+import Deleteusers from "../../assets/images/delete_users.svg";
+import Blueicons from "../../assets/images/blue_cross.svg";
 import UserChat2 from "../../assets/images/user_chat2.svg";
 import UserChat3 from "../../assets/images/user_chat3.svg";
 import UserChat4 from "../../assets/images/user_chat4.svg";
@@ -30,18 +33,31 @@ import Videos from "../../assets/images/videos.svg";
 import Errors from "../../assets/images/errors.svg";
 import Chatcross2 from "../../assets/images/chat_cross2.svg";
 import Chatplus from "../../assets/images/user_plus.svg";
+import Smileone from "../../assets/images/smile1.svg";
+import Smilesad from "../../assets/images/smile_sad.svg";
+import Smiletwo from "../../assets/images/smile2.svg";
+import Smilethree from "../../assets/images/smile3.svg";
+import Smilefour from "../../assets/images/smile4.svg";
+import Smilefive from "../../assets/images/smile5.svg";
+import Smilesix from "../../assets/images/smile6.svg"; 
+import Smileeight from "../../assets/images/smile8.svg"; 
+import Smilenine from "../../assets/images/smile9.svg"; 
+import Deleteicon from "../../assets/images/delete_icon.svg";
+// import Blueicons from "../../assets/images/blue_cross.svg";
+
 import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
-import SocketIOClient from "socket.io-client";
-import moment from "moment";
+import SocketIOClient from "socket.io-client"; 
+import moment from "moment"; 
 import socketClass from "../../common/utility/socketClass";
 import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 
+
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
-const socket = socketClass.getSocket();
-class ChatProff extends Component {
+const socket = socketClass.getSocket(); 
+class ChatProff extends Component {  
   constructor(props) {
     super(props);
     this.state = {
@@ -52,9 +68,18 @@ class ChatProff extends Component {
       showChat: false,
       response: {},
       user_id: getLocalStorage("userInfoProff").u_id,
-      userMeta: {}
+      userMeta: {}, 
+      show6: false, 
     };
   }
+  
+  handleblockModal2 = () => {
+    this.setState({ show6: true });
+  };
+
+  handleblockClose2 = () => {
+    this.setState({ show6: false });
+  };
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
@@ -435,6 +460,7 @@ class ChatProff extends Component {
                           <Image
                             src={Dangers}
                             alt=""
+                            onClick={this.handleblockModal2}  
                             className="pointer mr-2"
                           />
                           <Image
@@ -530,9 +556,9 @@ class ChatProff extends Component {
                         ""
                       )}
                   </div>
-                  <div className="chat_bottom">
+                  <div className="chat_bottom">  
                     <div>
-                      <Form.Group>
+                      <Form.Group> 
                         <div className="d-flex">
                           <Form.Control
                             type="text"
@@ -544,21 +570,72 @@ class ChatProff extends Component {
                             onKeyUp={this.startTyping.bind(this)}
                             name="message"
                           />
-                          <Button
+                          <Button 
                             className="btnTyp7"
                             disabled={!this.state.message}
                             onClick={this.handleSendMessage}
                           >
                             Send
-                          </Button>
+                          </Button> 
                         </div>
                       </Form.Group>
                     </div>
                   </div>
+
                 </div>
+                <div className="emogy mt-4">  
+                        <div className="smile">
+                            <Image src={Smileone} />
+                            <Image src={Smilesad} />
+                            <Image src={Smiletwo} />
+                            <Image src={Smilethree} />
+                            <Image src={Smilefour} />
+                            <Image src={Smilefive} />
+                            <Image src={Smilesix} />
+                            <Image src={Smileeight} />
+                            <Image src={Smilenine} /> 
+                        </div>
+                  </div> 
               </Col>
             </Row>
           </Container>
+
+          {/* Block popup modal start */}
+                  <Modal 
+                        show={this.state.show6} 
+                        // onHide={this.handleCloseConformation}
+                        className="custom-popUp confirmation-box delete_modal block_modal" 
+                        bsSize="small"
+                    >
+                        <Modal.Body>
+                            <div className="delete_user mt-4">    
+                                <Image src={Deleteusers} alt="" /> 
+                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handleblockClose2} /> 
+                                <div className="text-center fs24 mt-4 col64 mb-4">
+                                    Are you sure want to delete </div> 
+
+                                <div className="text-center mb-5"> 
+                                    <button
+                                        className="btn btn-success text-uppercase">
+                                        Yes
+                                    </button> 
+                                    <button 
+                                        className="btn btn-default text-uppercase sm-btn">
+                                        No
+                                   </button>
+                                </div>
+                                <div className="fs18 fw500 col10 pointer write_txt mb-4">
+                                    WRITE A REASON
+                                </div> 
+                                <button> 
+                                    SUBMIT & DELETE
+                                 </button>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+
+                    {/* Block popup modal end */}
+
         </div>
         <Footer />
       </div>

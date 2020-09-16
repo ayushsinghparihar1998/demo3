@@ -63,7 +63,7 @@ class NavBar extends Component {
     this.setState({ show3: false });
   };
 
-  handleLogoutAdmin = () => {
+  handleLogoutAdmin = () => { 
     let data = {};
     this.props
       .actionLogout(data)
