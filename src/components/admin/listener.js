@@ -288,13 +288,13 @@ class Adminlistener extends Component {
                                         }
                                     >
                                         Yes
-                        </button>
+                                    </button> 
                                     <button
                                         className="btn btn-default text-uppercase sm-btn"
                                         onClick={this.handleCloseConformation}
                                     >
                                         No
-                        </button>
+                                    </button> 
                                 </div>
                                 <div className="fs18 fw500 col10 pointer write_txt mb-4">WRITE A REASON
                                 </div>

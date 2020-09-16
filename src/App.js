@@ -6,14 +6,14 @@ import AdminHeader from './components/core/topbar/AdminHeader';
 import { getLocalStorage } from './common/helpers/Utils'; 
 import ELPRoute from './route/ELPRoute';
 
-class App extends React.Component {  
+class App extends React.Component {      
   constructor(props) {
     super(props);
     this.state = {
       access_token: ''
     };
   }
-  componentDidMount() { 
+  componentDidMount() {     
     let userInfo = getLocalStorage('userInfo');
     if (userInfo) {
       if (userInfo.token) {
@@ -25,7 +25,7 @@ class App extends React.Component {
     }
   }
 
-  render() {
+  render() { 
     console.log("this.state.access_token", this.state.access_token)
     return (
       <React.Fragment>
@@ -40,4 +40,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App; 

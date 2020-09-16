@@ -219,7 +219,7 @@ class Userdashboard extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+          <NavBar {...this.props} /> 
         </div>
         <div className="userdashboards pt-4 pb-5">
           <Container>
