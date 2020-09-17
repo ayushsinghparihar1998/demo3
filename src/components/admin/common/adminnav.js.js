@@ -422,7 +422,7 @@ handleLogoutAdmin = () => {
                     label="Excepteur sint occaecat cupidatat non proident."
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox12" className="d-flex">
+                <Form.Group controlId="formBasicCheckbox12" className="d-flex">    
                   <Form.Check
                     type="checkbox"
                     className="fw300 fs17 col28 mt-1 checkboxTyp1"
@@ -439,4 +439,6 @@ handleLogoutAdmin = () => {
     );
   }
 }
-export default connect(null, { actionLogout })(NavBar);
+export default connect(null, { actionLogout })(NavBar); 
+
+

@@ -407,11 +407,11 @@ class Userdashboard extends Component {
                           </div>
                         </div>
                       </Tab>
-                    </Tabs>
+                    </Tabs> 
 
                     <div className="fs15 fw600 col23 p-3 pointer show-more">
                       Show More
-                    </div>
+                    </div> 
                   </div>
                 </div>
               </Col>
@@ -666,3 +666,5 @@ export default connect(null, {
   actionGetRecentJoin,
   actionGetListnerDashBoard,
 })(Userdashboard);
+
+

@@ -240,7 +240,7 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">User name*</Form.Label>
+                <Form.Label className="fs20 fw600 col14">User name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter User name"
@@ -262,8 +262,8 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Label className="fs20 fw600 col14">
-                Date of birth*
-              </Form.Label>
+                Date of birth
+              </Form.Label> 
               <Row>
                 <Col md={4}>
                   <Form.Group controlId="exampleForm.ControlSelect1">
@@ -364,9 +364,10 @@ class ProfessionalSignup extends Component {
                   name="u_school_code"
                   value={this.state.u_school_code ? true : false}
                   onChange={this.handleChange}
-                  className="fw300 fs15 col14 mt-3 checkboxTyp1"
-                  label="I have a School/Organization code."
+                  className="checkboxTyp1"
+                  label=""
                 />
+                <span className="fw300 fs15 mt-4 col14">I have a School/Organization code.</span>
               </Form.Group>
             </Col>
 

@@ -64,7 +64,7 @@ class Myprofile extends Component {
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>
                     <div className="border_bottoms mt-3"></div>
                   </div>
-                  <div className="text-center user_tab">
+                  <div className="text-center user_tab"> 
                     <Tabs defaultActiveKey="home">
                       <Tab eventKey="home" title="Home">
                         <div className="layout mt-5">

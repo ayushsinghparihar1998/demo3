@@ -7,7 +7,7 @@ class Adminlogin extends Component {
     console.log('this.propsthis.props', this.props);
     return (
       <div>
-        <Login {...this.props} roleType={CONSTANTS.ROLES.SUPER_ADMIN} />
+        <Login {...this.props} roleType={CONSTANTS.ROLES.SUPER_ADMIN} /> 
       </div>
     );
   }

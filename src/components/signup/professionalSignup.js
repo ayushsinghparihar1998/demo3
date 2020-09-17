@@ -371,7 +371,7 @@ class ProfessionalSignup extends Component {
                     <div className="fs18 fw300 pt-5 col14">
                         Already have an account?
                         <span className="fw500 pointer pl-1" onClick={this.goToLoginPage}>Login here</span>
-                    </div>
+                    </div> 
                 </div>
 
             </div>)

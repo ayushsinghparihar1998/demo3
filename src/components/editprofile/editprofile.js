@@ -299,7 +299,7 @@ class Editprofile extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5">
+        <div className="profile_layout pt-4 pb-5"> 
           <Container>
             <Row>
               <div className="myprofile">
@@ -342,7 +342,7 @@ class Editprofile extends Component {
                     <Image src={Camera} alt="" className="camera" />
                   </div>
                 </div>
-                <div className="mt-4 mb-4 pb-2"></div> 
+                <div className="mt-4 mb-4 pb-2"></div>   
                 <div className="text-center user_tab">
                   <Tabs defaultActiveKey="home">
                     <Tab eventKey="home" title="profile info">
@@ -360,7 +360,7 @@ class Editprofile extends Component {
                               className="inputTyp2"
                               disabled={true}
                             />
-                          </Form.Group>
+                          </Form.Group> 
 
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
@@ -427,7 +427,7 @@ class Editprofile extends Component {
                           </Form.Group>
                           <Form.Label className="fs20 fw600 col14 mt-2">
                             Country:
-                          </Form.Label>
+                          </Form.Label> 
                           <Row>
                             <Col md={4}>
                               <Select
@@ -593,7 +593,7 @@ class Editprofile extends Component {
                                       type="switch"
                                       id="custom-switch"
                                       label=""
-                                      checked
+                                      
                                     />
                                   </li>
                                 </ul>

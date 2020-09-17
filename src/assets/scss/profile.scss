@@ -198,8 +198,100 @@
                 max-width: 900px;  
                 margin-top: 3rem !important; 
 
-                .edit_dropdown {
-                    display: none; 
+            }
+        }
+
+        .edit_dropdown {
+            background: $col24;
+            border: 1px solid $col23;
+            position: absolute;
+            z-index: 9;
+            top: 23%;
+            left: 12%;
+            text-align: left; 
+            width: 220px; 
+
+            .custom-control.custom-switch {  
+                input {
+                    box-shadow: none;
+                    outline: 0; 
+                    cursor: pointer;
+
+                    &:hover {
+                        box-shadow: none !important;
+                    }
+                    &:focus {
+                        box-shadow: none !important;      
+                    }
+                }
+            }
+
+            .custom-control-input:checked~.custom-control-label::before {
+                color: $col18; 
+                border-color: $col23;
+                background-color: $col23;
+                height: 11px;
+                width: 32px; 
+                cursor: pointer;
+            }
+            .custom-switch .custom-control-input:checked~.custom-control-label::after {
+                background-color: $col1; 
+                transform: translateX(.75rem);
+                width: 15px;
+                height: 15px;
+                right: 0;
+                top: 2px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .custom-switch .custom-control-label::before {
+                left: -2.25rem;
+                width: 1.75rem;
+                pointer-events: all;
+                border-radius: .5rem;
+                color: $col18; 
+                border-color: $col23;
+                background-color: $col23;
+                height: 11px;
+                width: 32px; 
+                cursor: pointer;
+            }
+
+            .custom-switch .custom-control-label::after {
+                top: calc(.25rem + 2px);
+                left: calc(-2.25rem + 2px);
+                width: calc(1rem - 4px);
+                height: calc(1rem - 4px);
+                background-color: $col34; 
+                border-radius: .5rem;
+                transition: transform .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                top: 2px;
+                cursor: pointer; 
+            }
+
+            ul {
+                position: relative;
+                width: 100%;
+                margin: 0;
+                padding: 12px 21px;
+                
+                li {
+                    list-style: none;   
+                    color: $col1; 
+                    border-bottom: solid 1px $col23; 
+                    padding: 10px 0;
+                    font-size: 15px;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                    &:nth-last-child(2) {
+                        border-bottom: none; 
+                    }
                 }
             }
         }

@@ -189,7 +189,7 @@ class Adminlistener extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout pt-4 pb-5">
+                <div className="profile_layout pt-4 pb-5">  
                     <Container>
                         <Row>
                             <Col md={4} lg={3} className="pr-1">
@@ -208,12 +208,12 @@ class Adminlistener extends Component {
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div className={listnerActveClass} onClick={(e) => { this.getListnerListing(e, "listner", 1) }}>
-                                                <div className="fs14 col23 fw500"><Image src={Menuiconblue} alt="" className="mr-1" /> LISTENER LISTING</div>
+                                                <div className="fs14 col23 fw500"><Image src={Menuiconblue} alt="" className="mr-1" /> LISTENER LISTING</div> 
                                             </div>
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div className="position-relative">
-                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> LISTENER Q&A</div>
+                                                <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" /> LISTENER Q&A</div> 
                                             </div>
                                         </div>
                                     </div>
@@ -260,12 +260,12 @@ class Adminlistener extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> 
                                         )
                                     })}
                             </Col>
                         </Row>
-                    </Container> 
+                    </Container>  
 
                     <Modal 
                         show={this.state.deleteConformationModal}
@@ -280,7 +280,7 @@ class Adminlistener extends Component {
                                 <div className="text-center fs24 mt-4 col64 mb-4">
                                     Are you sure want to delete <br /> {profileName}? </div>
 
-                                <div className="text-center mb-5">
+                                <div className="text-center mb-5">   
                                     <button
                                         className="btn btn-success text-uppercase"
                                         onClick={event =>
