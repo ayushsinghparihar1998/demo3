@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import HttpsRedirect from 'react-https-redirect';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
@@ -14,11 +15,13 @@ import './assets/scss/style.scss';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <ELPRoute />
-    </Provider>
-  </BrowserRouter>,
+  <HttpsRedirect>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ELPRoute />
+      </Provider>
+    </BrowserRouter>
+  </HttpsRedirect>,
   document.getElementById('root')
 );
 
