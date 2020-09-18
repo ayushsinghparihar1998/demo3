@@ -63,14 +63,14 @@ class Userdashboard extends Component {
       this.setState({
         sucess: true,
         result: true,
-        message: "your score is " + result + "%",
+        message: "your score is " + " " + result + "%",
       });
     } else {
       this.setState({
         sucess: true,
         result: false,
-        message: "your score is " + result + "%",
-      });
+        message: "your score is " + " " + result + "%",
+      }); 
     }
 
     socket.on("connect", function () {
@@ -665,6 +665,6 @@ class Userdashboard extends Component {
 export default connect(null, {
   actionGetRecentJoin,
   actionGetListnerDashBoard,
-})(Userdashboard);
+})(Userdashboard); 
 
 

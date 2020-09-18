@@ -420,10 +420,14 @@
         box-shadow: none !important;
     }
 
-}
+}  
 
-.categorys {
-    position: relative;
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+    left: 70px !important; 
+} 
+
+.categorys { 
+    position: relative; 
 
     .category_listing {  
         width: 100%;
