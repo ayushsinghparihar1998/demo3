@@ -321,7 +321,7 @@ class Editprofile extends Component {
                 </div>
                 <div className="text-center profile_top">
                   <Image  
-                    src={this.state.profileImg ? this.state.profileImg : Profileimg} 
+                    src={this.state.u_image ? this.state.u_image : Profileimg} 
                     alt=""
                     className="r50 border_profile"
                   />
@@ -332,7 +332,7 @@ class Editprofile extends Component {
                       id="custom-fileone" 
                       autoComplete="off"
                       onChange={e =>
-                        this.handleUploadPicture(e,'profileImg')
+                        this.handleUploadPicture(e,'u_image')
                       }
                       onClick={(event) => {
                         event.target.value = null; this.actionOnUpload(event)

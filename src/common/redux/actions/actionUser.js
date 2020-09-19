@@ -26,7 +26,7 @@ import {
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
-  SEARCH_LISTNER,
+  SEARCH_LISTNER,LOGOUT_SUCCESS,
   ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL,
   CHANGE_PASSWORD,SET_RATING,UPLOAD_PICTURE
 } from '../types';
@@ -71,11 +71,15 @@ export const actionListnerSignupSuccess = (data) => (dispatch) => {
 };
 
 export const actionLogout = (data) => async (dispatch) => {
-  const request = await 'test';
+ // const request = await 'test';
+   const request = ELPViewApiService('logout',data);
   dispatch({ type: LOGOUT, payload: request.data });
   return request;
 };
-
+export const actionLogoutSuccess = (data) => async (dispatch) => {
+  dispatch({ type: LOGOUT_SUCCESS, payload: data });
+  return data;
+};
 export const actionGetQuestion = () => async (dispatch) => {
   const request = ELPViewApiService('getQuestion');
   dispatch({ type: GET_QUESTION, payload: request.data });
@@ -165,9 +169,7 @@ export const actionGetProfileById = (data) => async (dispatch) => {
   return request;
 };
 export const actionUpdateUserDetails = (data) => async (dispatch) => {
-  console.log('request', data);
   const request = ELPViewApiService('editUserDetails', data);
-  console.log('request', request);
   dispatch({ type: UPDATE_USER_DETAILS, payload: data });
   return request;
 };
@@ -240,7 +242,6 @@ export const actionAddrating = (data) => async (dispatch) => {
 };
 
 export const actionUploadImage = data => async (dispatch) => {
-  console.log("datadata",data)
   const url = "http://103.76.253.131:81/elp/uploadimage";
   const config = {
     headers: {
