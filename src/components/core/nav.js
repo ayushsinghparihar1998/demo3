@@ -12,7 +12,7 @@ import {
   Modal,
   Row,
   Col,
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
 import insta from "../../assets/images/insta.svg";

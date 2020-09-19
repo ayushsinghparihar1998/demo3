@@ -31,9 +31,10 @@ import Adminlistener from "../components/admin/listener";
 import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
+import Menubar from "../components/core/menu"; 
 
 import getUserProfile from "../common/utility/getUserProfile";
-import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
+import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils"; 
 import socketClass from "../common/utility/socketClass";
 import VideoCalling from "../components/VideoComponents/VideoCalling/VideoCalling";
 import CallingTo from "../components/videoaudio/CallingTo/CallingTo";
@@ -80,6 +81,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
           <PublicRoute path="/userotp" component={Userotp} />
+          <PublicRoute path="/menu" component={Menubar} /> 
           {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
           {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />

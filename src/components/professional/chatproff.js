@@ -660,13 +660,13 @@ class ChatProff extends Component {
                             <div className="delete_user mt-4">    
                                 <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlerblockuserClose2} />    
 
-                                <div className="text-center mt-5 mb-3"> 
+                                <div className="text-center mt-5 mb-3">  
                                     <Button
-                                        className="btn btn-success btnTyp11 text-uppercase w-auto">
+                                        className="btnTyp24 bt4 text-uppercase w-auto">
                                         REPORT 
                                     </Button> 
                                     <Button 
-                                        className="btn btn-default btnTyp12 text-uppercase sm-btn w-auto">
+                                        className="btnTyp24 bt5 text-uppercase sm-btn w-auto">
                                         BLOCK 
                                    </Button>
                                 </div>
