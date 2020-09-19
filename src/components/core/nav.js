@@ -17,7 +17,7 @@ import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
 import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
-import { actionLogout } from "../../common/redux/actions";
+import { actionLogout,actionLogoutSuccess } from "../../common/redux/actions";
 import fb from "../../assets/images/fb.svg";
 import twit from "../../assets/images/twit.svg";
 import linkedin from "../../assets/images/linkedin.svg";
@@ -68,12 +68,22 @@ class NavBar extends Component {
     this.props
       .actionLogout(data)
       .then((result) => {
+      if (result && result.status === 200) {
+        this.props.actionLogoutSuccess(data)
+      .then((result) => {
         this.props.history.push({
           pathname: "adminlogin",
           state: { roleType: 4 },
         });
 
         localStorage.clear();
+
+        })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+        
       })
       .catch((error) => {
         console.log(error);
@@ -84,27 +94,37 @@ class NavBar extends Component {
     // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
-    let roleType = "";
-    if (getLocalStorage("customerInfo")) {
-      roleType = 3;
-    } else if (getLocalStorage("userInfo")) {
-      roleType = 1;
-    } else if (getLocalStorage("userInfoProff")) {
-      roleType = 2;
-    }
+     let roleType = "";
+    // if (getLocalStorage("customerInfo")) {
+    //   roleType = 3;
+    // } else if (getLocalStorage("userInfo")) {
+    //   roleType = 1;
+    // } else if (getLocalStorage("userInfoProff")) {
+    //   roleType = 2;
+    // }
 
     let data = {};
     this.props
       .actionLogout(data)
       .then((result) => {
+ if (result && result.status === 200) {
+        this.props.actionLogoutSuccess(data)
+      .then((result) => {
+
         socketClass.disconnect();
-        console.log("rnv roleType", roleType);
         this.props.history.push({
           pathname: "login",
           state: { roleType: roleType },
         });
 
         localStorage.clear();
+
+        })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
       })
       .catch((error) => {
         console.log(error);
@@ -492,4 +512,4 @@ class NavBar extends Component {
     );
   }
 }
-export default connect(null, { actionLogout })(NavBar);
+export default connect(null, { actionLogout ,actionLogoutSuccess })(NavBar);

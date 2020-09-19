@@ -5,24 +5,25 @@ import {
   showErrorToast,
   showSuccessToast,
   getLocalStorage,
+  clearLocalStorage
 } from '../helpers/Utils';
 let apiFailCounter = 0;
 // axios.defaults.baseURL = 'http://103.76.253.131:81';
-axios.defaults.baseURL = 'http://eatluvnpray.org/';
+axios.defaults.baseURL = 'https://www.eatluvnpray.org/';
 //axios.defaults.baseURL = 'http://103.21.53.11:3004';
 axios.interceptors.request.use(
   function (config) {
+   
     let access_token = '';
     let userInfo =
       getLocalStorage('userInfo') ||
       getLocalStorage('customerInfo') ||
       getLocalStorage('userInfoProff') ||
       getLocalStorage('userInfoAdmin');
-
     if (userInfo) {
       if (userInfo.u_accesstoken) {
         access_token = userInfo.u_accesstoken;
-        config.headers.accesstoken = `${access_token}`;
+        config.headers.Accesstoken = `${access_token}`;
       }
     }
     return config;
@@ -52,8 +53,15 @@ const injectParamsToUrl = (_url_, paramObj) => {
 };
 
 const handleErrorByStatus = (error) => {
-  console.log("error3424",error)
-  if (error && error.status === 'error') {
+if (error && error.status === 'error' && error.message === "100") {
+          // axios({
+          //   url: '/elp/logout',
+          //   method: 'GET',
+          //   data: {}
+          // }).then(response => {
+             clearLocalStorage();
+          // });
+}else if (error && error.status === 'error') {
     const message = error.message;
     showErrorToast(message);
   }
@@ -72,7 +80,6 @@ const spikeViewApiService = (apiKeyName, data) => {
   requestObject.url = injectParamsToUrl(requestObject.url, data);
   return axios(requestObject)
     .then(function (result) {
-      console.log("result",result)
       apiFailCounter = 0;
       if (
         result.data &&

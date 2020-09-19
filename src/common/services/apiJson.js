@@ -74,10 +74,7 @@ export default {
   logout: {
     url: "elp/logout",
     method: "GET",
-    data: {
-      email: "",
-      password: "",
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
