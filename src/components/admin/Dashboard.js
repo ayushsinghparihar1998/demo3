@@ -9,14 +9,14 @@ import { encrypt, decrypt, setLocalStorage } from "../../common/helpers/Utils";
 // const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
 
-class Dashboard extends Component {
+class Dashboard extends Component {  
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
     };
-    this.validator = new SimpleReactValidator({
+    this.validator = new SimpleReactValidator({    
       autoForceUpdate: this,
       className: "msgcolor",
       messages: {

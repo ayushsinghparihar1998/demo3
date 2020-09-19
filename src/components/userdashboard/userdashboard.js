@@ -63,14 +63,14 @@ class Userdashboard extends Component {
       this.setState({
         sucess: true,
         result: true,
-        message: "your score is " + result + "%",
+        message: "your score is " + " " + result + "%",
       });
     } else {
       this.setState({
         sucess: true,
         result: false,
-        message: "your score is " + result + "%",
-      });
+        message: "your score is " + " " + result + "%",
+      }); 
     }
 
     socket.on("connect", function () {
@@ -407,11 +407,11 @@ class Userdashboard extends Component {
                           </div>
                         </div>
                       </Tab>
-                    </Tabs>
+                    </Tabs> 
 
                     <div className="fs15 fw600 col23 p-3 pointer show-more">
                       Show More
-                    </div>
+                    </div> 
                   </div>
                 </div>
               </Col>
@@ -665,4 +665,6 @@ class Userdashboard extends Component {
 export default connect(null, {
   actionGetRecentJoin,
   actionGetListnerDashBoard,
-})(Userdashboard);
+})(Userdashboard); 
+
+

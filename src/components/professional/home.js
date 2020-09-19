@@ -14,7 +14,7 @@ import Requestuserthree from "../../assets/images/pro_img3.svg";
 import Aflag from "../../assets/images/australia_flag.svg";
 import Iflag from "../../assets/images/india_flag.svg";  
 
-class Homepage extends Component { 
+class Homepage extends Component {  
     render() {
         return (
             <div className="page__wrapper innerpage">
@@ -38,7 +38,7 @@ class Homepage extends Component {
                                     <div className="col27 fw400 fs14">Finding myself....</div>
                                     <div className="border_bottoms mt-3"></div>
                                 </div>
-                                <div className="text-center user_tab">  
+                                <div className="text-center user_tab">     
                                     <Tabs defaultActiveKey="request">
                                         <Tab eventKey="request" title="Requested">
                                             <div className="p-5">
@@ -46,7 +46,7 @@ class Homepage extends Component {
                                                     <div className="mr-4">
                                                         <Image src={Requestuser} alt="" className="r50" /> 
                                                     </div>
-                                                    <div className="pl-2">         
+                                                    <div className="pl-2">           
                                                         <div className="d-flex justify-content-between">      
                                                             <div>
                                                                 <div className="col1 fw500 fs18 pb-1">Veronica Wade-Hampton</div> 
