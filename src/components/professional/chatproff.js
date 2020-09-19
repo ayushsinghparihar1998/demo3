@@ -80,6 +80,20 @@ class ChatProff extends Component {
   handleblockClose2 = () => {
     this.setState({ show6: false });
   };
+  handlereportModal2 = () => {
+    this.setState({ show7: true });
+  };
+
+  handlereportClose2 = () => {             
+    this.setState({ show7: false });
+  };
+  handleblockuserModal2 = () => {
+    this.setState({ show8: true });
+  };
+
+  handlerblockuserClose2 = () => {             
+    this.setState({ show8: false }); 
+  };
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
@@ -454,23 +468,25 @@ class ChatProff extends Component {
                           <Image
                             src={Fullscreen}
                             alt=""
-                            className="pointer mr-2"
+                            className="pointer mr-2" 
                           />
                           <Image src={Sounds} alt="" className="pointer mr-2" />
                           <Image
                             src={Dangers}
                             alt=""
-                            onClick={this.handleblockModal2}  
+                            onClick={this.handleblockuserModal2} 
                             className="pointer mr-2"
                           />
                           <Image
                             src={Deletes}
                             alt=""
+                            onClick={this.handleblockModal2} 
                             className="pointer mr-2"
                           />
                           <Image
                             src={Questions}
                             alt=""
+                            onClick={this.handlereportModal2} 
                             className="pointer mr-2"
                           />
                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
@@ -608,33 +624,95 @@ class ChatProff extends Component {
                         bsSize="small"
                     >
                         <Modal.Body>
+                        <div className="col10 fw500 fs28 text-left">Block User</div>
                             <div className="delete_user mt-4">    
                                 <Image src={Deleteusers} alt="" /> 
                                 <Image src={Blueicons} alt="" className="close pointer" onClick={this.handleblockClose2} /> 
                                 <div className="text-center fs24 mt-4 col64 mb-4">
-                                    Are you sure want to delete </div> 
+                                Are you sure want to Block <br /> Melisa? </div> 
 
                                 <div className="text-center mb-5"> 
-                                    <button
+                                    <Button
                                         className="btn btn-success text-uppercase">
-                                        Yes
-                                    </button> 
-                                    <button 
+                                        Yes 
+                                    </Button> 
+                                    <Button 
                                         className="btn btn-default text-uppercase sm-btn">
-                                        No
-                                   </button>
+                                        No 
+                                   </Button>
                                 </div>
-                                <div className="fs18 fw500 col10 pointer write_txt mb-4">
-                                    WRITE A REASON
-                                </div> 
-                                <button> 
-                                    SUBMIT & DELETE
-                                 </button>
+                                
                             </div>
                         </Modal.Body>
                     </Modal>
 
-                    {/* Block popup modal end */}
+                    {/* Block popup modal end */} 
+
+                    {/* Block Report User modal start */}
+                  <Modal 
+                        show={this.state.show8} 
+                        // onHide={this.handleCloseConformation}
+                        className="custom-popUp confirmation-box delete_modal block_modal" 
+                        bsSize="small"
+                    >
+                        <Modal.Body>
+                        <div className="col10 fw500 fs28 text-left">Report/Block User</div>
+                            <div className="delete_user mt-4">    
+                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlerblockuserClose2} />    
+
+                                <div className="text-center mt-5 mb-3"> 
+                                    <Button
+                                        className="btn btn-success btnTyp11 text-uppercase w-auto">
+                                        REPORT 
+                                    </Button> 
+                                    <Button 
+                                        className="btn btn-default btnTyp12 text-uppercase sm-btn w-auto">
+                                        BLOCK 
+                                   </Button>
+                                </div>
+                                
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+
+                    {/* Block Report User modal end */} 
+
+                     {/* Report Listener popup modal start */}
+                  <Modal 
+                        show={this.state.show7} 
+                        // onHide={this.handleCloseConformation}
+                        className="custom-popUp confirmation-box delete_modal block_modal" 
+                        bsSize="small"
+                    >
+                        <Modal.Body> 
+                            <div className="col10 fw500 fs28 text-left">Report Listener</div>
+                            <div className="col14 fs20 fw400 text-left mt-2">Please select a problem to continue</div>
+                            <div className="delete_user mt-4"> 
+                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlereportClose2} />  
+                               
+                               <ul className="block_users"> 
+                                   <li>Requesting/Sharing personal contact information</li>
+                                   <li>Inappropriate/Sex chat</li>
+                                   <li>Harassing/Threatening Behaviour</li>
+                                   <li>Other</li> 
+                               </ul>
+                               <Form.Group controlId="exampleForm.ControlTextarea1" className="pb-2 mt-3 mb-4">
+                                    <Form.Control as="textarea" rows="3" className="inputTyp2 col28 fs20 fw400" placeholder="Comments" />  
+                              </Form.Group>
+                                <div className="text-left">   
+                                    <Button
+                                        className="btnTyp5 w-auto btn btn-success text-uppercase">
+                                        SUBMIT 
+                                    </Button> 
+                                </div>
+                                
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+
+                    {/* Report Listener modal end */}
+
+                    
 
         </div>
         <Footer />
