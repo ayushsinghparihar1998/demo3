@@ -63,7 +63,7 @@ class Admincategory extends Component {
                                                 <div className="w-100">
                                                     <Form.Label className="fs20 fw600 col14">
                                                         Add Category
-                                                </Form.Label>
+                                                </Form.Label> 
                                                     <Form.Control
                                                         type="category"
                                                         placeholder=""

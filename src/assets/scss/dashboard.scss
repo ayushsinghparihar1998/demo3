@@ -459,6 +459,14 @@
     }
 }
 
+.addQa {
+    min-height: 100vh; 
+
+    .questiontwo {
+        margin-top: 130px;   
+    }
+}
+
 .main_calender { 
     background-color: $col22; 
     min-height: calc(100vh - 146px); 

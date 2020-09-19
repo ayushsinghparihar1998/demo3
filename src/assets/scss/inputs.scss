@@ -74,6 +74,16 @@ a:hover {
   font-size: $fs18 !important;  
 }
 
+.inputTyp2.form-control.cate2 {
+  background-color: $col24 !important;  
+  font-size: 1rem !important;
+  font-weight: 300 !important; 
+}
+
+textarea.inputTyp2.form-control.cate2 {
+  height: 7rem !important;  
+}
+
 .inputTyp2.categoryInput {        
   height: 2.9rem;
 }
@@ -207,12 +217,18 @@ a:hover {
 
 .selectTyp1.select3 {    
   height: 2.5rem !important; 
-  background-color: #ffffff !important; 
+  background-color: $col18 !important; 
   color: $col10 !important;
   font-size: $fs16 !important;
   font-weight: 300 !important;
   padding-left: 15px !important;
   box-shadow: none;  
+}
+
+.selectTyp1.selectnew {
+  background-color: $col24 !important;  
+  font-size: 1rem !important;
+  font-weight: 300 !important; 
 }
 
 .selectTyp1.p3 { 
