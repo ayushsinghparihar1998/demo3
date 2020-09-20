@@ -256,68 +256,34 @@ class Menubar extends Component {
                       <NavLink to="/becomeListener" className="nav-link">
                         Volunteer as a Listener
                       </NavLink>,
-                      <NavDropdown title="CSR" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Another</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown title="Communities" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
-                        <NavDropdown.Item href="#">
-                          Women Rights
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
-                      </NavDropdown>,
+                    
                       <Nav.Link onClick={this.handleModal3}>
                         Professionals
                       </Nav.Link>,
                       <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
                     ]}
-                {getLocalStorage("userInfo") ||
-                getLocalStorage("userInfoProff") ||
-                getLocalStorage("customerInfo") ? (
-                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-                ) : (
-                  <NavDropdown
-                    title="Login"
-                    id="login-nav-dropdown"
-                    className="btnTypeone"
-                  >
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(1);
-                      }}
-                    >
-                      Listener Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(2);
-                      }}
-                    >
-                      Professional Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(3);
-                      }}
-                    >
-                      User Login
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                )}
+                
 
-                <span className="userprofiles d-flex">  
+                <span className="userprofiles menus">        
                   <Nav.Link> 
                     <Image src={Mailicon} alt="" className="pointer" />
                   </Nav.Link>
                   <Nav.Link>
                     <Image src={Bellicon} alt="" className="pointer" />
                   </Nav.Link>
-                  <NavDropdown title="Profile" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  </NavDropdown>
+                  {/* <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Profile
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Profile</a> 
+                      </div>
+                </li>  */} 
+                  <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon ml-3 mr-5"> 
+                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>  
+                    <NavDropdown.Item href="#">Logout</NavDropdown.Item>  
+                  </NavDropdown> 
                 </span>
               </Nav>
             )}
