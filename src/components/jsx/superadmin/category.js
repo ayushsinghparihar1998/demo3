@@ -245,5 +245,5 @@ export default connect(
     actionAddCategory,
     actionDeleteCategory,
     actionEditCategory }
-)(ProfessionalSignup);
-export default Admincategory;
+)(Admincategory);
+
