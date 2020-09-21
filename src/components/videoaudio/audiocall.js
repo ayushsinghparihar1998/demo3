@@ -118,7 +118,6 @@ const AudioCall = (props) => {
     }).then(roomjoined);
   }
   const roomjoined = (room) => {
-    runTimer();
     roomRef.current = room;
     if (room.localParticipant) {
       attachParticipantTracks(room.localParticipant, localVideoRef.current, 'local');
@@ -166,6 +165,9 @@ const AudioCall = (props) => {
       setTracks(prev => ({ ...prev, remote: tracks }))
       if (remoteVideoRef.current && remoteVideoRef.current.querySelector('video')) {
         return false;
+      }
+      if (!callTimerRef.current) {
+        runTimer();
       }
     }
     tracks.forEach(track => {
