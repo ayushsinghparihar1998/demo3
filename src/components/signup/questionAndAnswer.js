@@ -72,11 +72,14 @@ class QuestionAndAnswer extends Component {
     };
     console.log('datadatadata', data);
     this.props.actionSubmitQuestion(data).then((result) => {
-      console.log('cwerwerwer', result.data.data);
+      console.log(result,'@@@@@@',result.data,'cwerwerwer', result.data.data);
       if (result && result.status === 200) {
         if (result.data.data >= 60) setLocalStorage('loggedIn', true);
         setLocalStorage('signup', true);
+        if(result.data && result.data.data)
         setLocalStorage('result', result.data.data);
+
+      
         this.props.history.push({ pathname: '/userDashboard' });
       }
     });
@@ -100,15 +103,22 @@ class QuestionAndAnswer extends Component {
     console.log('event', event);
     const { name, checked } = event.target;
     let question = this.state.question;
-
-    console.log(
+    question && question[index] && 
+      question[index].question_answer.forEach(function (item, catIndex) {
+        item.active = false
+    })
+    console.log(question,
       question[index],
       'checked',
       checked,
       question[index].question_answer
     );
-    question[index].question_answer[subIndex].active = checked;
-    this.setState({ question: question });
+    question[index].active = id;
+    question[index].question_answer[subIndex].active = true;
+
+    this.setState({ question: question },()=>{
+      console.log("qweqweqwe",this.state.question)
+    });
   };
   handleClose = () => {
     this.setState({
@@ -143,7 +153,7 @@ class QuestionAndAnswer extends Component {
                               className="d-flex"
                             >
                               <Form.Check
-                                name={'active' + index + subIndex}
+                                name={'active' + index}
                                 onChange={(event) => {
                                   this.handleChangeQuestion(
                                     event,
@@ -153,7 +163,7 @@ class QuestionAndAnswer extends Component {
                                   );
                                 }}
                                 type="checkbox"
-                                checked={elem.active ? elem.active : false}
+                                checked={item.active == elem.qa_id? true : false}
                                 className="fw300 fs17 col28 mt-1 checkboxTyp1"
                                 label={elem.qa_options}
                               />

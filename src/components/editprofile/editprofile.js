@@ -249,10 +249,18 @@ class Editprofile extends Component {
     });
 
   }
-  handleMobileChange = (value) => {
-    this.setState({
-      mobileNumber: value,
+  handleMobileChange = (e) => {
+
+const re = /^[0-9\b]+$/; //rules
+if (e.target.value === "" || re.test(e.target.value)) {
+  this.setState({
+      mobileNumber: e.target.value,
     });
+}
+
+    // this.setState({
+    //   mobileNumber: value,
+    // });
   }
   handleCancel =()=>{
     this.props.history.push({
@@ -355,6 +363,7 @@ class Editprofile extends Component {
                             <Form.Control
                               type="text"
                               name="userName"
+                              placeholder="User Name"
                               //onChange={this.handleChange}
                               value={this.state.userName}
                               className="inputTyp2"
@@ -369,6 +378,7 @@ class Editprofile extends Component {
                             <Form.Control
                               type="email"
                               name="userEmail"
+                              placeholder="Email"
                               value={this.state.userEmail}
                               className="inputTyp2"
                               readOnly
@@ -398,11 +408,14 @@ class Editprofile extends Component {
                             <Form.Label className="fs20 fw600 mt-2 col14">
                               Mobile Number:
                             </Form.Label>
-                            <PhoneInput
-                              className="inputTyp2"
-                              placeholder="Enter phone number"
+                            <Form.Control
+                             type="text"
+                              name="mobileNumber"
+                               placeholder="Mobile Number"
+                              onChange={this.handleMobileChange}
                               value={this.state.mobileNumber}
-                              onChange={this.handleMobileChange} />
+                              className="inputTyp2"
+                              />
                           </Form.Group>
 
                           <Form.Group className="genders">
@@ -415,7 +428,7 @@ class Editprofile extends Component {
                           </Form.Group>
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
-                              Description:
+                              BIO:
                             </Form.Label>
                             <Form.Control
                               type="textarea"
@@ -423,6 +436,7 @@ class Editprofile extends Component {
                               onChange={this.handleChange}
                               value={this.state.bio}
                               className="inputTyp2"
+                              placeholder="Bio"
                             />
                           </Form.Group>
                           <Form.Label className="fs20 fw600 col14 mt-2">

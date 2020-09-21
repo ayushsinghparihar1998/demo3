@@ -9,7 +9,6 @@ import validateInput from '../../common/validations/validationSignup';
 import { setLocalStorage } from '../../common/helpers/Utils';
 import { Link } from 'react-router-dom';
 class ProfessionalSignup extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +21,7 @@ class ProfessionalSignup extends Component {
       month: '',
       username: '',
       errors: {},
+      u_school_code:false,
       organisationName: '',
       showLoader: false,
       fristSignUp: true,
@@ -31,7 +31,6 @@ class ProfessionalSignup extends Component {
   }
 
   componentDidMount() {}
-
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -88,11 +87,12 @@ class ProfessionalSignup extends Component {
           
           if (result && result.data && result.data.status === 'success') {
             this.props.handleSet()
-            this.props.history.push({
-              pathname: '/login',
-              state: { roleType: this.state.roleType },
-            });
-            
+              setTimeout(() =>{
+                  this.props.history.push({
+                    pathname: '/login',
+                    state: { roleType: this.state.roleType },
+                  });
+                },1000);
           } else {
             this.setState({
               showLoader: false,
@@ -139,8 +139,6 @@ class ProfessionalSignup extends Component {
   handleChangeQuestion = (event, index, subIndex) => {
     const { name, checked } = event.target;
     let question = this.state.question;
-    console.log('index, subIndex', index, subIndex);
-    console.log('checked', checked);
     question[index].list[subIndex].active = checked;
     this.setState({ question: question });
   };
@@ -279,7 +277,6 @@ class ProfessionalSignup extends Component {
                       value={this.state.day}
                       onChange={(day) => {
                         this.setState({ day });
-                        console.log(day);
                       }}
                     />
                     <div className="error alignLeft">{errors.day}</div>
@@ -299,7 +296,6 @@ class ProfessionalSignup extends Component {
                       value={this.state.month}
                       onChange={(month) => {
                         this.setState({ month });
-                        console.log(month);
                       }}
                     />
                     <div className="error alignLeft">{errors.month}</div>
@@ -317,7 +313,6 @@ class ProfessionalSignup extends Component {
                       value={this.state.year}
                       onChange={(year) => {
                         this.setState({ year });
-                        console.log(year);
                       }}
                     />
                     <div className="error alignLeft">{errors.year}</div>
@@ -325,30 +320,6 @@ class ProfessionalSignup extends Component {
                 </Col>
               </Row>
             </Col>
-
-{/*                        <Col md={6}>
-                            <Form.Group>
-                                <Form.Label className="fs20 fw600 col14 mt-2">
-                                    Password </Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Password" className="inputTyp2"
-                                    error={errors.password ? true : false}
-                                    id="outlined-pwd"
-                                    label="Password"
-                                    variant="outlined"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
-                                    minLength="8"    
-                                    maxLength="15"                                
-                                    inputProps={{
-                                        maxLength: 15,
-                                    }}
-                                />
-                                <div className="error alignLeft">{errors.password}</div>
-                            </Form.Group> 
-                        </Col>*/}
 
             <Col md={12} lg={6}>
               <div className="fs13 fw300 mt-2 col27">
@@ -369,6 +340,8 @@ class ProfessionalSignup extends Component {
                 />
                 <span className="fw300 fs15 mt-4 col14">I have a School/Organization code.</span>
               </Form.Group>
+                                  <div className="error alignLeft">{errors.u_school_code}</div>
+
             </Col>
 
             <Col md={12}>

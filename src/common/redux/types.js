@@ -34,6 +34,11 @@ export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const SET_RATING = 'SET_RATING';
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const GET_CATEGORY = 'GET_CATEGORY';
+
 
 
 

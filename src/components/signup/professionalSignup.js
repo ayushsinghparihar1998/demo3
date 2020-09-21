@@ -23,7 +23,8 @@ class ProfessionalSignup extends Component {
             showLoader: false,
             fristSignUp: true,
             listOfCategory: [],
-            question: []
+            question: [],
+            u_school_code:false
         };
     }
 
@@ -77,15 +78,17 @@ class ProfessionalSignup extends Component {
                 screen_name: this.state.screenName,
                 // question: this.state.question,
             };
-            console.log("rwerwerwe", data)
+
             this.props.actionProfessionalSignup(data).then((result) => {
-                console.log(result && result.data && result.data.status,
-                    "result321321312", result)
+
                 if (result && result.data && result.data.status === "success") {
                     //setLocalStorage("userInfoProff", result.data.data);
-                    this.props.history.push({ pathname: "/professionalLogin" });
-                    console.log(result && result.data && result.data.status,
-                        "result321321312", result)
+
+                    setTimeout(() =>{
+                       this.props.handleSet()
+                       this.props.history.push({ pathname: "/professionalLogin" });
+                      },1000);
+
                 } else {
                     this.setState({
                         showLoader: false,
@@ -129,8 +132,6 @@ class ProfessionalSignup extends Component {
     handleChangeQuestion = (event, index, subIndex) => {
         const { name, checked } = event.target;
         let question = this.state.question;
-        console.log("index, subIndex", index, subIndex);
-        console.log("checked", checked);
         question[index].list[subIndex].active = checked
         this.setState({ question: question })
     }
@@ -155,7 +156,6 @@ class ProfessionalSignup extends Component {
         this.props.handleSet()
     }
     handleRemoveCategory = (e, idx) => {
-        console.log("dsdasdasdas", idx)
         let listOfCategory = this.state.listOfCategory;
         if (idx > -1) {
             listOfCategory.splice(idx, 1);
@@ -226,6 +226,7 @@ class ProfessionalSignup extends Component {
                                         label="Password"
                                         variant="outlined"
                                         name="password"
+                                        autoComplete="off"
                                         value={this.state.password}
                                         onChange={this.handleChange}
                                         minLength = "8"
@@ -255,7 +256,6 @@ class ProfessionalSignup extends Component {
                                                 value={this.state.day}
                                                 onChange={day => {
                                                     this.setState({ day });
-                                                    console.log(day);
                                                 }}
                                             />
                                         </Form.Group>
@@ -274,7 +274,6 @@ class ProfessionalSignup extends Component {
                                                 value={this.state.month}
                                                 onChange={month => {
                                                     this.setState({ month });
-                                                    console.log(month);
                                                 }}
                                             />
                                         </Form.Group>
@@ -292,7 +291,6 @@ class ProfessionalSignup extends Component {
                                                 value={this.state.year}
                                                 onChange={year => {
                                                     this.setState({ year });
-                                                    console.log(year);
                                                 }}
                                             />
                                         </Form.Group>
@@ -310,6 +308,7 @@ class ProfessionalSignup extends Component {
                                         placeholder="Category" className="inputTyp2"
                                         error={errors.category ? true : false}
                                         id="outlined-pwd"
+                                        autoComplete="off"
                                         label="category"
                                         variant="outlined"
                                         name="category"
@@ -327,14 +326,7 @@ class ProfessionalSignup extends Component {
                                         <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3">Add</Button> 
                                         </div> 
                                 </div>
-
                                     <div className="error alignLeft">{errors.category}</div>
-
-
-                                    {/* <div className="fs13 fw300 col27 pb-2">
-                                        Password must contain at least 8 characters.
-                                        </div> */}
-
                                 </Form.Group>
 
                                 {this.state.listOfCategory &&
@@ -348,7 +340,6 @@ class ProfessionalSignup extends Component {
                                         );
                                     })}
                             </Col>
-
                             <Col md={12}>
                                 <Form.Group controlId="formBasicCheckbox21" className="d-flex">
                                     <Form.Check type="checkbox"
@@ -359,6 +350,8 @@ class ProfessionalSignup extends Component {
                                         className="fw300 fs18 col14 mt-3 checkboxTyp1"
                                         label="I have a School/Organization code." />
                                 </Form.Group>
+                            <div className="error alignLeft">{errors.u_school_code}</div>
+
                             </Col>
 
                             <Col md={6}>
@@ -368,7 +361,8 @@ class ProfessionalSignup extends Component {
                         </Row>
                     </Form>
 
-                    <div className="fs18 fw300 pt-5 col14">
+                    <div className="fs18 
+                     pt-5 col14">
                         Already have an account?
                         <span className="fw500 pointer pl-1" onClick={this.goToLoginPage}>Login here</span>
                     </div> 

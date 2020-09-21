@@ -61,7 +61,6 @@ class Login extends Component {
         email: "Enter a valid email",
       },
     });
-    console.log("this.props.roleType", this.props.roleType);
   }
 
   componentWillReceiveProps(next) {
@@ -76,19 +75,16 @@ class Login extends Component {
   }
   componentDidMount() {
     const { location } = this.props;
-    console.log("location", location);
     if (location.search) {
       const parsed = qs.parse(location.search);
       if (parsed.type === "emailverification") {
-        console.log("helloverify");
-
         let email = parsed.email;
         let type = parsed.type;
         let authCode = parsed.authcode;
+         let roleType = parsed.role.replace(/\s/g, '+');
         this.verifyEmail(email, type, authCode);
       }
     } else {
-      console.log("not varification");
       if (getLocalStorage("userInfoProff")) {
         this.props.history.push({ pathname: "/userDashboardproff" });
       } else if (getLocalStorage("userInfo")) {
@@ -106,53 +102,59 @@ class Login extends Component {
         authcode,
       };
       let _this = this;
-      //  console.log(data);
       ELPRxApiService("emailVerification", data)
-        .then((response) => {
+        .then((response) => {alert('dfgdfgdfg')
           if (response.data.status === "success") {
             let u_email;
             if (getLocalStorage("userInfoProff")) {
               let data = getLocalStorage("userInfoProff");
               u_email = data.u_email;
-
-              console.log(u_email, email, u_email == email);
-
               if (u_email == email) {
                 data.u_verified = 1;
                 setLocalStorage("userInfoProff", data);
 
                 _this.props.history.push({ pathname: "/userDashboardproff" });
               } else {
-                _this.props.history.push("/login");
+                
+                this.props.history.push({
+                  pathname: 'login',
+                  state: { roleType: this.state.roleType }
+                });
               }
             } else if (getLocalStorage("userInfo")) {
               let data = getLocalStorage("userInfo");
               u_email = data.u_email;
-
-              console.log(u_email, email, u_email == email);
               if (u_email == email) {
                 data.u_verified = 1;
                 setLocalStorage("userInfo", data);
 
                 _this.props.history.push({ pathname: "/userDashboard" });
               } else {
-                _this.props.history.push("/login");
+                this.props.history.push({
+                  pathname: 'login',
+                  state: { roleType: this.state.roleType }
+                });
               }
             } else if (getLocalStorage("customerInfo")) {
               let data = getLocalStorage("customerInfo");
 
               u_email = data.u_email;
-              console.log(u_email, email, u_email == email);
               if (u_email == email) {
                 data.u_verified = 1;
                 setLocalStorage("customerInfo", data);
                 _this.props.history.push({ pathname: "/userDashboardcust" });
               } else {
-                _this.props.history.push("/login");
+                this.props.history.push({
+                  pathname: 'login',
+                  state: { roleType: this.state.roleType }
+                });
               }
             }
           } else {
-            _this.props.history.push("/login");
+             this.props.history.push({
+                  pathname: 'login',
+                  state: { roleType: this.state.roleType }
+                });
           }
         })
         .catch((err) => {
@@ -316,7 +318,6 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
-    console.log("errors", errors);
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">

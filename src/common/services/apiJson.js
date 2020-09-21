@@ -108,7 +108,7 @@ export default {
       uc_cat_name: [],
       screen_name: "",
     },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
   userSignup: {

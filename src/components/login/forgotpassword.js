@@ -15,7 +15,7 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 
 import { actionForGotPassword } from "../../common/redux/actions";
-
+import * as qs from 'query-string';
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationForgotPassword";
 
@@ -30,6 +30,17 @@ class Forgotpassword extends Component {
       roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
         this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
     }; 
+  }
+  componentDidMount() {
+    const { url } = this.props.match;
+    const { location } = this.props;
+    if (location) {
+      const parsed = qs.parse(location.search);
+      let role = parsed.role.replace(/\s/g, '+');
+      this.setState({
+        roleType:role
+      });
+    }
   }
 
   componentWillReceiveProps(next) {

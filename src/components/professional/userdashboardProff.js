@@ -72,7 +72,6 @@ class ProfessionalDashboard extends Component {
     this.getRecentJoinUsers();
     this.getProfesionalDashBoard();
     let result = getLocalStorage('result');
-    console.log('getLocalStorage', getLocalStorage('result'));
     if (getLocalStorage('result') >= 60) {
       this.setState({
         sucess: true,
@@ -88,16 +87,7 @@ class ProfessionalDashboard extends Component {
     }
 
     socket.on("connect", function () {
-      // socket.emit(
-      //   "chat-login",
-      //   JSON.stringify({
-      //     user_id: getLocalStorage("userInfoProff").u_id,
-      //     user_type: getLocalStorage("userInfoProff").u_role_id,
-      //   }),
-      //   function (data) {
-      //     console.log(data, "authenticateSocket");
-      //   }
-      // );
+
     });
     socket.on("newUserForActivityList", (data) => {
       if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
@@ -113,7 +103,6 @@ class ProfessionalDashboard extends Component {
         user_id: getLocalStorage('userInfoProff').u_id,
       }),
       (d) => {
-        console.log("getRecentsChatedUsers", d);
         this.setState(
           {
             recentChatUsers: d.data,
@@ -130,28 +119,21 @@ class ProfessionalDashboard extends Component {
         page: '1',
       }),
       function (d) {
-        console.log('getActiveListnersOrCustomers', d);
         this.setState(
           {
             activeChatUsers: d.data,
-          },
-          () => {
-            console.log(this.state.activeChatUsers);
-          }
-        );
+          });
       }.bind(this)
     );
   }
 
   handleOk = (e) => {
-    console.log(e);
     this.setState({
       sucess: false,
     });
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.setState({
       sucess: false,
     });
@@ -163,10 +145,8 @@ class ProfessionalDashboard extends Component {
   getRecentJoinUsers() {
     let userInfo = getLocalStorage('userInfo');
     this.props.actionGetRecentJoin({}).then((result) => {
-      console.log('vvvvvv', result);
       if (result && result.status === 200) {
-        // let res = result.data.data.u_mem_list;
-        //this.setState({ recentJoin: res })
+
       }
     });
   }
@@ -184,9 +164,8 @@ class ProfessionalDashboard extends Component {
     copyText.select();
     copyText.setSelectionRange(0, 99999);
     document.execCommand('copy');
-    // alert("Copied the text: " + copyText.value);
   }
-  // "/chatproff/" + item.id
+
   handleRedirectRecentChat = (data) => () => {
     const { user_id } = this.state;
     const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;

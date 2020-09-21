@@ -9,6 +9,8 @@ import Discussanything from '../landing/discussAnything';
 import Footer from '../core/footer';
 class Home extends Component {
   render() {
+
+    
     return (
       <div className="page__wrapper">
         <div className="main_baner">

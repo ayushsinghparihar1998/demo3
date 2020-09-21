@@ -22,7 +22,7 @@ function validateInput(data) {
       errors.screenName = ValidationMessages.screenName.required;
     }
   }
-
+console.log("datadata",data)
   if (data.action == 'user_signup') {
     if (Validator.isEmpty(data.username)) {
       errors.username = ValidationMessages.username.required;
@@ -41,9 +41,13 @@ function validateInput(data) {
     errors.day = ValidationMessages.day.required;
   }
 
-  // if (Validator.isEmpty(data.listOfCategory)) {
-  //   errors.listOfCategory = ValidationMessages.category.required;
-  // }
+  if (Validator.isEmpty(data.day)) {
+    errors.day = ValidationMessages.day.required;
+  }
+
+  if (!data.u_school_code) {
+    errors.u_school_code = ValidationMessages.required;
+  }
 
   return {
     errors,

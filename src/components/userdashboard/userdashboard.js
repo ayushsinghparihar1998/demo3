@@ -54,11 +54,9 @@ class Userdashboard extends Component {
     };
   }
   componentDidMount() {
-    console.log(getLocalStorage("userInfo"));
     this.getRecentJoinUsers();
     this.getListnerDashBoard();
     let result = getLocalStorage("result");
-    console.log("getLocalStorage", getLocalStorage("result"));
     if (getLocalStorage("result") >= 60) {
       this.setState({
         sucess: true,
@@ -74,7 +72,7 @@ class Userdashboard extends Component {
     }
 
     socket.on("connect", function () {
-      console.log("connected");
+
     });
     socket.emit(
       "chat-login",
@@ -83,7 +81,7 @@ class Userdashboard extends Component {
         user_type: getLocalStorage("u_role_id"),
       }),
       function (data) {
-        console.log(data, "authenticateSocket");
+        
       }
     );
 
@@ -93,18 +91,11 @@ class Userdashboard extends Component {
         user_id: getLocalStorage("u_id"),
       }),
       function (d) {
-        console.log("getRecentsChatedUsers", d);
+        
       }
     );
   }
   call() {
-    console.log("call");
-    console.log("obj", {
-      user_type: getLocalStorage("u_role_id"),
-      user_id: getLocalStorage("u_id"),
-      pagination: "10",
-      page: "1",
-    });
     socket.emit(
       "getActiveListnersOrCustomers",
       JSON.stringify({
@@ -114,24 +105,20 @@ class Userdashboard extends Component {
         page: "1",
       }),
       function (d) {
-        console.log("getActiveListnersOrCustomers", d);
+        
       }
     );
   }
   handleOk = (e) => {
-    console.log(e);
     this.setState({
       sucess: false,
     });
   };
 
   handleCancel = (e) => {
-    console.log(e);
-    // if (this.state.result) {
     this.setState({
       sucess: false,
     });
-    // }
   };
 
   getRecentJoinUsers() {

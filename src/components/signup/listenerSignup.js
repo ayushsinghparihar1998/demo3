@@ -42,6 +42,7 @@ class Listenersignup extends Component {
       showLoader: false,
       fristSignUp: true,
       listOfCategory: [],
+      u_school_code:false
     };
   }
 
@@ -448,7 +449,9 @@ class Listenersignup extends Component {
                         className="fw300 fs18 col14 mt-3 checkboxTyp1"
                         label="I have a School/Organization code."
                       />
+
                     </Form.Group>
+                    <div className="error alignLeft">{errors.u_school_code}</div>
                     <div className="fs18 col14 mt-3 mb-3 fw300">
                       I am not in crisis, homicidal, sucidal or abusing anyone,
                       and i agree to the Eat Luv N Pray{' '}

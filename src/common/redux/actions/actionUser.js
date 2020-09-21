@@ -28,7 +28,8 @@ import {
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
   SEARCH_LISTNER,LOGOUT_SUCCESS,
   ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL,
-  CHANGE_PASSWORD,SET_RATING,UPLOAD_PICTURE
+  CHANGE_PASSWORD,SET_RATING,UPLOAD_PICTURE,
+  ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY,GET_CATEGORY
 } from '../types';
 
 export const actionLogin = (data) => async (dispatch) => {
@@ -252,3 +253,28 @@ export const actionUploadImage = data => async (dispatch) => {
   dispatch({ type: UPLOAD_PICTURE, payload: request });
   return request;
 };
+
+export const actionGetCategory = (data) => async (dispatch) => {
+  const request = ELPViewApiService('superadmin_getcategory', data);
+  dispatch({ type: GET_CATEGORY, payload: request });
+  return request;
+};
+export const actionDeleteCategory = (data) => async (dispatch) => {
+  const request = ELPViewApiService('superadmin_deletecategory', data);
+  dispatch({ type: DELETE_CATEGORY, payload: request });
+  return request;
+};
+export const actionEditCategory = (data) => async (dispatch) => {
+  const request = ELPViewApiService('superadmin_changequestatus', data);
+  dispatch({ type: EDIT_CATEGORY, payload: request });
+  return request;
+};
+export const actionAddCategory = (data) => async (dispatch) => {
+  const request = ELPViewApiService('superadmin_addcategory', data);
+  dispatch({ type: ADD_CATEGORY, payload: request });
+  return request;
+};
+
+
+
+

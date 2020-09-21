@@ -22,9 +22,9 @@ function validateInput(data) {
     errors.screenName = ValidationMessages.screenName.required;
   }
 
-  // if (Validator.isEmpty(data.listOfCategory)) {
-  //   errors.listOfCategory = ValidationMessages.category.required;
-  // }
+  if (!data.u_school_code) {
+    errors.u_school_code = ValidationMessages.required;
+  }
 
   return {
     errors,
