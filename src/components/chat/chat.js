@@ -285,7 +285,7 @@ class Chat extends Component {
                                 </div>
                             </Col>
                         </Row>
-                    </Container>
+                    </Container> 
                 </div>
                 <Footer />
             </div>

@@ -31,13 +31,16 @@ import Adminlistener from "../components/admin/listener";
 import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
+import Menubar from "../components/core/menu"; 
 
 import getUserProfile from "../common/utility/getUserProfile";
-import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
+import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils"; 
 import socketClass from "../common/utility/socketClass";
 import VideoCalling from "../components/VideoComponents/VideoCalling/VideoCalling";
 import CallingTo from "../components/videoaudio/CallingTo/CallingTo";
 import Admincategory from "../components/jsx/superadmin/category";
+import Addquestionanswer from "../components/jsx/superadmin/addquestionanswer";
+import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory"; 
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 
@@ -78,6 +81,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
           <PublicRoute path="/userotp" component={Userotp} />
+          <PublicRoute path="/menu" component={Menubar} /> 
           {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
           {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />
@@ -117,6 +121,8 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
+          <PublicRoute path="/addquestionanswer" component={Addquestionanswer} /> 
+          <PublicRoute path="/adminselectcategory" component={Adminselectcategory} /> 
           <PrivateRoutes
             path="/professionalSearch"
             component={ProfessionalChatSearch}

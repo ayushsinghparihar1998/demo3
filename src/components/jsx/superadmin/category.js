@@ -116,8 +116,7 @@ class Admincategory extends Component {
                                                     }}
                                                     //onKeyPress={this.handleEnter}
                                                 />
-                                                    
-                                                </div>
+                                                                                                    </div>
                                                 <div className="mt-4 pt-2">
                                                     <Button onClick={this.handleEnter} className="btnTyp11 cbttyp2 ml-3 pointer">Add</Button>
                                                 </div>
