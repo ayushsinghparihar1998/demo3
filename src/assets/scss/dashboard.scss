@@ -7,9 +7,10 @@
             background: $col18;  
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
-
+            .border-bottom.bottom2 { 
+                border-bottom: 1px solid #E4E4E4 !important;
+            }
             .border-bottom {
-
                 & > div.position-relative {
                     & > img {
                         max-width: 45px; 
@@ -34,6 +35,11 @@
             background-color: $col23; 
             height: 3.5rem; 
             line-height: 3.5rem;
+        }
+        .chat-bgyellow {
+            background-color: $col67;
+            height: 62px;
+            align-items: center; 
         }
         .chat-border {
             height: 1px; 
@@ -82,9 +88,49 @@
     }
 
     .user_body { 
+
+        .funfact {
+            text-align: left;
+            padding: 0px 0px 10px 30px;
+            overflow: hidden;
+            margin-bottom: 10px; 
+            &.blue {
+                background-color: $col69;
+            }
+            &.lightpink {
+                background-color: $col72;
+            }
+            &.lightgreen {
+                background-color: $col74;
+            }
+        }
         .inner_body  { 
             background: linear-gradient(180deg, $col37 0%, $col18 100%); 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+
+            ul.emoji_manages {
+                width: 100%;
+                text-align: center;
+                padding: 0;
+                margin: 0; 
+                display: flex;
+                justify-content: center;
+                padding-bottom: 10px; 
+                li {
+                    list-style: none;
+                    list-style: none;
+                    margin-right: 15px;
+                    background: $col18;
+                    border: 0.5px solid $col68;  
+                    box-sizing: border-box;
+                    border-radius: 5px;
+                    padding: 8px 10px 0px; 
+
+                    & > div {
+                        font-size: 9px; 
+                    }
+                }
+            }
 
             .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
                 stroke: $col38;
@@ -249,7 +295,7 @@
 
         .border_yellow {
             border-top: solid 10px $col38; 
-            padding: 25px;
+            padding: 10px;
         }
         .border-gray {
             border-bottom: solid 1px $col39; 
@@ -268,7 +314,7 @@
             background-color: $col7;  
             height: 3.5rem; 
             line-height: 3.5rem;
-            display: none;
+            display: block;
         }
         .right_inner_side {  
             background: $col18; 

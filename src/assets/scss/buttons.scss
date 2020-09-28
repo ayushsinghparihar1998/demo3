@@ -382,4 +382,50 @@
     border-color    : $col4 !important;
     background-color: $col4 !important;
   }
+
+  .btnType16 { 
+    background-color: $col71 !important;
+    border-color: $col71 !important; 
+    color: $col14; 
+    font-weight: 500;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    position: relative;
+    top: -12px;
+    right: -15px; 
+  }
+
+  .btnType16.funbtn2 {
+    background-color: $col73 !important;
+    border-color: $col73 !important;  
+  }
+
+  .btnType16.funbtn2:hover,
+  .btnType16.funbtn2:focus,
+  .btnType16.funbtn2:active:focus {
+    background-color: $col73 !important;
+    border-color: $col73 !important;  
+  }
+
+  .btnType16.funbtn3 {
+    background-color: $col75 !important;
+    border-color: $col75 !important;  
+  }
+
+  .btnType16.funbtn3:hover,
+  .btnType16.funbtn3:focus,
+  .btnType16.funbtn3:active:focus {
+    background-color: $col75 !important;
+    border-color: $col75 !important;          
+  }
+
+  .btnType16:hover,
+  .btnType16:focus,
+  .btnType16:active:focus {    
+    border-color    : $col71 !important;
+    background-color: $col71 !important;
+    color           : $col14 !important; 
+    box-shadow      : none !important;            
+  }
   

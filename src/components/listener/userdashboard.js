@@ -46,6 +46,23 @@ import Stars from '../../assets/images/stars.svg';
 import Hearttwo from '../../assets/images/heart2.svg';
 import Medals from '../../assets/images/medals.svg';
 import Rflag from '../../assets/images/r_flag.svg';
+import Listimg from '../../assets/images/listimg.png'; 
+import Starsone from '../../assets/images/stars.png'; 
+import Speakers from '../../assets/images/speakers.svg'; 
+import Gmail from '../../assets/images/gmail1.svg';
+import Whatsapp from '../../assets/images/whatsapp1.svg'; 
+import Emojione from '../../assets/images/emoji.svg';
+import Emojitwo from '../../assets/images/emoji2.svg';
+import Emojithree from '../../assets/images/emoji3.svg';
+import Emojifour from '../../assets/images/emoji4.svg';
+import Emojifive from '../../assets/images/emoji5.svg';        
+
+import Calenderone from '../../assets/images/calender_icon.svg'; 
+import Calendertwo from '../../assets/images/calender_icon2.svg'; 
+import Calenderthree from '../../assets/images/calender_icon3.svg';  
+import Topgreen from '../../assets/images/top_green.svg';
+import Bottomred from '../../assets/images/bottom_red.svg';  
+
 import SocketIOClient from 'socket.io-client';
 import {
   getLocalStorage,
@@ -248,7 +265,7 @@ class Userdashboard extends Component {
       sucess: false,
     });
   };
-  handleRedirectRecentChat = (data) => () => {
+  handleRedirectRecentChat = (data) => () => { 
     const { user_id } = this.state;
     const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
     this.props.history.push('/chat/' + id);
@@ -268,9 +285,30 @@ class Userdashboard extends Component {
           <Container>
             <Row>
               {' '}
-              <Col md={3}>
+              <Col md={3}> 
                 <div className="left_sidebar">
-                  <div className="left_sidebar">
+                  <div className="inner_side">
+                    <div className="chat-bg fs600 fs17 col18 pl-3 ">Hall of fame</div>
+                    <div className="col1 fs16 fw500 mt-2 ml-3 pb-2">CoCo of the month</div>
+                    <div className="d-flex m-3 border-bottom bottom2">  
+                        <div>
+                             <Image src={Listimg} alt="" />
+                        </div>
+                        <div className="mt-auto mb-auto pl-3">
+                            <div className="fs15 fw500 col14">Melinda Jems</div> 
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-center w-100"> 
+                        <div className="mr-3">    
+                            <Image src={Starsone} alt="" />
+                        </div> 
+                        <div className="">
+                            <div className="col23 fs14 fw600 pb-2">Monthly Rating</div>
+                            <div className="text-center col27 fs14 fw500 pb-2">4.5</div> 
+                        </div>
+                    </div>
+                  </div>
+                  <div className="left_sidebar">   
                     <RecentChat onRedirect={this.handleRedirectRecentChat} />
                     {/* <div className="inner_side">
                       <div className="chat-bg fs600 fs17 col18 pl-3 ">
@@ -381,6 +419,7 @@ class Userdashboard extends Component {
                 */}
                   </div>
                   <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+
                   {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       <span>Currently Active Listeners asdf </span>
@@ -441,17 +480,25 @@ class Userdashboard extends Component {
                     )}
                   </div>
                  */}
+                <div className="chat-bgyellow fs600 fs17 col18 pl-2 d-flex">          
+                    <div className="mr-2"><Image src={Speakers} alt="" /></div>        
+                    <div>
+                        <div className="fs12 fw500 col18">Need a COCO?(Online Listeners)</div>
+                        <div className="fs13 fw500 col18">COCO to COCO</div>
+                        <div className="fs12 fw500 col18">COming soon for now</div> 
+                    </div> 
+                </div>
                 </div>
               </Col>
-              <Col md={6}>
-                <div className="user_body">
-                  <div className="inner_body mb-3">
-                    <div className="d-flex justify-content-between border_yellow">
-                      <div className="border-gray">
+              <Col md={6}>    
+                <div className="user_body">   
+                  <div className="inner_body mb-3">   
+                    <div className="text-center border_yellow w-100"> 
+                      {/* <div className="border-gray">
                         <label className="fs18 col23 fw600 mb-0">
                           What's your goal?
                         </label>
-                        <Form.Control
+                        <Form.Control 
                           type="text"
                           className="inputTyp5 fs16 col27 fw400"
                           placeholder="take a general request"
@@ -466,10 +513,33 @@ class Userdashboard extends Component {
                           className="inputTyp5 fs16 col27 fw400"
                           placeholder="help someone new"
                         />
-                        {/* <div className="fs18 col23 fw600">What's your motivation?</div>
-                                                <div className="fs16 col27 fw400">help someone new</div> */}
-                      </div>
+                      </div> */}
+                      <div className="fw500 fs18 col23">Welcome Melisa,</div>  
+                      <div className="fs15 fw500 col27">How’s your Headspace today?</div>
                     </div>
+                    
+                    <ul className="emoji_manages"> 
+                        <li className="active"> 
+                           <spam><Image src={Emojione} alt="" /></spam>  
+                           <div className="fw500 col29 pt-2 pb-2">Awfull</div> 
+                        </li>
+                        <li>
+                           <spam><Image src={Emojitwo} alt="" /></spam>  
+                           <div className="fw500 col29 pt-2 pb-2">Bad</div> 
+                        </li>
+                        <li>
+                           <spam><Image src={Emojithree} alt="" /></spam>  
+                           <div className="fw500 col29 pt-2 pb-2">Okay</div> 
+                        </li>
+                        <li>
+                           <spam><Image src={Emojifour} alt="" /></spam>  
+                           <div className="fw500 col29 pt-2 pb-2">Good</div> 
+                        </li>
+                        <li>
+                           <spam><Image src={Emojifive} alt="" /></spam>   
+                           <div className="fw500 col29 pt-2 pb-2">Great</div>   
+                        </li>
+                    </ul>
                   </div>
 
                   {/* <div className="inner_body userbg-white mb-3">
@@ -482,12 +552,59 @@ class Userdashboard extends Component {
                     </div>
                   </div> */}
 
-                  <div className="inner_body userbg-white mb-3">
+                  <div className="inner_body userbg-white mb-3"> 
                     <div className="text-center p-4">
-                      <div className="col14 fw600 fs22 border-gray pb-3 mb-5">
-                        Activity this week
+                      <div className="col14 fw600 fs22 border-gray pb-3 mb-3">
+                      Fun Facts
+                      </div> 
+
+                      <div class="funfact blue">
+                          <Row>
+                              <Col md={9} lg={10}>
+                                  <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> 
+                                  <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div> 
+                              </Col>
+                              <Col md={3} lg={2}>
+                                  <div className="position-relative">  
+                                      <Button className="btnType16">EAT</Button> 
+                                  </div>
+                              </Col>
+                          </Row> 
                       </div>
-                      <Row className="justify-content-center">
+
+                      <div class="funfact lightpink">
+                          <Row>
+                              <Col md={9} lg={10}>
+                                  <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> 
+                                  <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div> 
+                              </Col>
+                              <Col md={3} lg={2}>
+                                  <div className="position-relative">  
+                                      <Button className="btnType16 funbtn2">EAT</Button> 
+                                  </div>
+                              </Col>
+                          </Row> 
+                      </div>
+
+                      <div class="funfact lightgreen">
+                          <Row>
+                              <Col md={9} lg={10}>
+                                  <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> 
+                                  <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div> 
+                              </Col>
+                              <Col md={3} lg={2}>
+                                  <div className="position-relative">  
+                                      <Button className="btnType16 funbtn3">EAT</Button> 
+                                  </div>
+                              </Col>
+                          </Row> 
+                      </div>
+
+                      {/* <div className="inner_body userbg-white mb-3">
+                          
+                      </div> */}
+
+                      {/* <Row className="justify-content-center">
                         <Col md={4}>
                           <Image src={Skill} alt="" />
                           <div className="fs14 col29 fw500 pt-4 pb-4">
@@ -522,61 +639,67 @@ class Userdashboard extends Component {
                             Your Personal Request Response Rate
                           </div>
                         </Col>
-                      </Row>
+                      </Row> */}
+
+
                     </div>
                   </div>
                 </div>
               </Col>
-              <Col md={3}>
-                <div className="right_sidebar">
+              <Col md={3}> 
+                <div className="right_sidebar"> 
                   <div className="right_inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      Account Summary
+                    How helpful were you?
                     </div>
-                    <div className="m-3 pb-3 bg-grays">
+                    <div className="m-3 pb-3 bg-grays"> 
                       <div className="d-flex mb-2">
-                        <span className="fs16 fw400 col14 pr-3">Novicew 1</span>
-                        <Image src={Warningtwo} alt="" />
+                        <span className="fs16 fw400 col14 pr-3">Rating Average</span>
+                        <Image src={Warningtwo} alt="" /> 
                       </div>
-                      <Image src={Progresss} alt="" />
+                      <Image src={Progresss} alt="" /> 
+                      <div className="col27 fs13 fw400">8 Progress Points to Next Level</div>
                     </div>
                     <div className="m-3 pb-3 bg-grays">
                       <div className="d-flex mb-2">
-                        <Image src={Stars} alt="" className="pointer" />
+                        <Image src={Calenderone} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                           <strong className="fs18">
                             {dashboardData.u_cheers
                               ? dashboardData.u_cheers
                               : '0'}{' '}
                           </strong>
-                          Cheers
+                          Weekly
                         </span>
+                        <Image src={Topgreen} alt="" className="ml-3 pointer" /> 
                       </div>
                     </div>
                     <div className="m-3 pb-3 bg-grays">
                       <div className="d-flex mb-2">
-                        <Image src={Hearttwo} alt="" className="pointer" />
+                      <Image src={Calendertwo} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                           <strong className="fs18">
                             {dashboardData.u_compassion_count
                               ? dashboardData.u_compassion_count
                               : '0'}{' '}
                           </strong>
-                          Compassion Hearts
+                          Monthly
                         </span>
+                        <Image src={Bottomred} alt="" className="ml-3 pointer" />
                       </div>
                     </div>
                     <div className="m-3 pb-3 bg-grays">
                       <div className="d-flex mb-2">
-                        <Image src={Medals} alt="" className="pointer" />
+                        <Image src={Calenderthree} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                           <strong className="fs18">
                             {dashboardData.u_badge_count
                               ? dashboardData.u_badge_count
                               : '0'}{' '}
                           </strong>
-                          Badges Earned
+                          Yearly
                         </span>
+                        <Image src={Topgreen} alt="" className="ml-3 pointer" /> 
                       </div>
                     </div>
                   </div>
@@ -585,7 +708,7 @@ class Userdashboard extends Component {
                     <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                       <Image src={Rflag} alt="" className="mr-2" /> Discover
                       Subcomunities
-                    </div>
+                    </div> 
                   </div>
 
                   <div className="right_inner_side">
@@ -597,7 +720,7 @@ class Userdashboard extends Component {
                         Share your link to earn rewards & help us to support
                         more people
                       </div>
-                      <Form.Group className="d-flex mt-4">
+                      <Form.Group className="d-flex mt-4 mb-1">
                         {/* <label>{dashboardData.refer_url ? dashboardData.refer_url : ''}</label> */}
                         <Form.Control
                           id="referURL"
@@ -606,7 +729,7 @@ class Userdashboard extends Component {
                           className="inputTyp4"
                           value={
                             dashboardData.refer_url
-                              ? dashboardData.refer_url
+                              ? dashboardData.refer_url 
                               : ''
                           }
                         />
@@ -614,6 +737,11 @@ class Userdashboard extends Component {
                           <Image src={Copys} alt="" className="" />
                         </Button>
                       </Form.Group>
+                      <div className="text-center"> 
+                           <span className="col14 fs10 fw400 mr-2">Share this code on Social Media:</span> 
+                           <Image src={Gmail} alt="" className="mr-2" /> 
+                           <Image src={Whatsapp} alt="" className="" />  
+                      </div>
                     </div>
                   </div>
                   <div className="right_inner_side">
