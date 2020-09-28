@@ -10,6 +10,9 @@
             .border-bottom.bottom2 { 
                 border-bottom: 1px solid #E4E4E4 !important;
             }
+            .p-3.pointer.show-more {
+                padding: 0.5rem !important; 
+            }
             .border-bottom {
                 & > div.position-relative {
                     & > img {
@@ -87,6 +90,25 @@
         }
     }
 
+    .blogs {
+        background-color: $col18; 
+        width: 100%; 
+        margin-right: 15px;
+        margin-top: 10px; 
+        padding: 15px; 
+        padding-left: 30px;
+
+        .blog_hr {
+            
+        }
+        .blog_detail {
+            text-align: center; 
+            img {
+                width: 100%; 
+            }
+        }
+    }
+
     .user_body { 
 
         .funfact {
@@ -107,6 +129,35 @@
         .inner_body  { 
             background: linear-gradient(180deg, $col37 0%, $col18 100%); 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+
+            .test_carousel {
+                height: 161px; 
+                background-color: $col18; 
+                align-items: center;
+                display: flex; 
+                padding-left: 20px; 
+
+                .carousel-indicators {
+                    bottom: -15px;
+
+                    li {
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background-color: $col76; 
+                        &.active {
+                            background-color: $col1;
+                        }
+                    }
+                }
+
+                .carousel-control-prev {
+                    display: none;
+                }
+                .carousel-control-next {    
+                    display: none;
+                }
+            }
 
             ul.emoji_manages {
                 width: 100%;
