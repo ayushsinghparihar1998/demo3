@@ -43,7 +43,7 @@ import Quotetwo from '../../assets/images/quote_two.svg';
 import Quotefour from '../../assets/images/quote4.png';
 import Blogs from '../../assets/images/blogs.svg';
 import Blogstwo from '../../assets/images/blogs2.svg';  
-import Blogsthree from '../../assets/images/blogs3.svg';         
+import Blogsthree from '../../assets/images/blogs3.svg';          
 
 import SocketIOClient from "socket.io-client";
 import {
