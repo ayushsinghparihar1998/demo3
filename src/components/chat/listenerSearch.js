@@ -182,7 +182,7 @@ class Chatsearch extends Component {
                                                                     {item.u_bio ? item.u_bio : ''}
                                                                 </div></div>}
                                                             </div>
-                                                    </Col>
+                                                    </Col> 
 
                                                 )
                                             })}

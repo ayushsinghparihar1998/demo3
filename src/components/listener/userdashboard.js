@@ -48,12 +48,14 @@ import Listimg from '../../assets/images/listimg.png';
 import Starsone from '../../assets/images/stars.png'; 
 import Speakers from '../../assets/images/speakers.svg'; 
 import Gmail from '../../assets/images/gmail1.svg';
-import Whatsapp from '../../assets/images/whatsapp1.svg'; 
+import Whatsapp from '../../assets/images/whatsapp1.svg';
+
 import Emojione from '../../assets/images/emoji.svg';
 import Emojitwo from '../../assets/images/emoji2.svg';
-import Emojithree from '../../assets/images/emoji3.svg';
-import Emojifour from '../../assets/images/emoji4.svg';
-import Emojifive from '../../assets/images/emoji5.svg';        
+import Emojithree from '../../assets/images/emoji4.svg';
+import Emojifour from '../../assets/images/emoji6.svg';
+import Emojifive from '../../assets/images/emoji7.svg';   
+
 import Calenderone from '../../assets/images/calender_icon.svg'; 
 import Calendertwo from '../../assets/images/calender_icon2.svg'; 
 import Calenderthree from '../../assets/images/calender_icon3.svg';  
@@ -62,7 +64,9 @@ import Bottomred from '../../assets/images/bottom_red.svg';
 import Quotetwo from '../../assets/images/quote_two.svg'; 
 import Blogs from '../../assets/images/blogs.svg';
 import Blogstwo from '../../assets/images/blogs2.svg';  
-import Blogsthree from '../../assets/images/blogs3.svg'; 
+import Blogsthree from '../../assets/images/blogs3.svg';
+import Ricon from '../../assets/images/r_icons.svg';
+import Quotefour from '../../assets/images/quote4.png';    
 
 import SocketIOClient from 'socket.io-client';
 import {
@@ -293,8 +297,8 @@ return (
                         <Image src={Starsone} alt="" />
                      </div>
                      <div className="">
-                        <div className="col23 fs14 fw600 pb-2">Monthly Rating</div>
-                        <div className="text-center col27 fs14 fw500 pb-2">4.5</div>
+                        <div className="col23 fs14 fw600 pb-2">Monthly Rating</div> 
+                        <div className="text-center col14 fs14 fw500 pb-2">4.5/<small>5</small></div>
                      </div>
                   </div>
                </div>
@@ -512,6 +516,8 @@ return (
                            />
                      </div>
                      */}
+                     
+                     <Image src={Ricon} alt="" className="r_icon" /> 
                      <div className="fw500 fs18 col23">Welcome Melisa,</div>
                      <div className="fs15 fw500 col27">How’s your Headspace today?</div>
                   </div>
@@ -643,16 +649,17 @@ return (
                      */}
                   </div>
                </div>
+
                <div className="inner_body"> 
-                  <Carousel className="test_carousel"> 
+                  <Carousel className="test_carousel">  
 
                      <Carousel.Item> 
                            <Row>
                               <Col md={8} lg={9}>
-                                  <Image /> 
-                                  <div className="fs15 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
+                                  <Image src={Quotefour} alt="" className="pb-3" />    
+                                  <div className="fs14 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
 typesetting industry  dummy text of the printing.</div>
-                                  <div className="fw600 fs18 fw500 mt-2">Melinda Jems</div> 
+                                  <div className="fw600 fs16 fw500 mt-2">Melinda Jems</div> 
                               </Col>
                               <Col md={4} lg={3}> 
                                   <Image src={Quotetwo} />
@@ -663,10 +670,10 @@ typesetting industry  dummy text of the printing.</div>
                      <Carousel.Item> 
                            <Row>
                               <Col md={8} lg={9}>
-                                  <Image /> 
-                                  <div className="fs15 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
+                                  <Image src={Quotefour} alt="" className="pb-3" />
+                                  <div className="fs14 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
 typesetting industry  dummy text of the printing.</div>
-                                  <div className="fw600 fs18 fw500 mt-2">Melinda Jems</div> 
+                                  <div className="fw600 fs16 fw500 mt-2">Melinda Jems</div> 
                               </Col>
                               <Col md={4} lg={3}> 
                                   <Image src={Quotetwo} />
@@ -677,10 +684,10 @@ typesetting industry  dummy text of the printing.</div>
                      <Carousel.Item> 
                            <Row>
                               <Col md={8} lg={9}>
-                                  <Image /> 
-                                  <div className="fs15 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
+                                  <Image src={Quotefour} alt="" className="pb-3" />
+                                  <div className="fs14 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
 typesetting industry  dummy text of the printing.</div>
-                                  <div className="fw600 fs18 fw500 mt-2">Melinda Jems</div> 
+                                  <div className="fw600 fs16 fw500 mt-2">Melinda Jems</div> 
                               </Col>
                               <Col md={4} lg={3}> 
                                   <Image src={Quotetwo} />
@@ -691,52 +698,56 @@ typesetting industry  dummy text of the printing.</div>
                      <Carousel.Item> 
                            <Row>
                               <Col md={8} lg={9}>
-                                  <Image /> 
-                                  <div className="fs15 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
+                                  <Image src={Quotefour} alt="" className="pb-3" />  
+                                  <div className="fs14 fw400 col11">Lorem Ipsum is simply dummy text of the printing and
 typesetting industry  dummy text of the printing.</div>
-                                  <div className="fw600 fs18 fw500 mt-2">Melinda Jems</div> 
+                                  <div className="fw600 fs16 fw500 mt-2">Melinda Jems</div> 
                               </Col>
                               <Col md={4} lg={3}> 
                                   <Image src={Quotetwo} />
                               </Col>
                            </Row> 
-                     </Carousel.Item>
+                     </Carousel.Item> 
 
                   </Carousel>
                </div>
             </div>
             </Col>
             
-            <div className="blogs"> 
-                 <div className="fs22 col14 fw600 text-center">Blogs</div> 
+            
+            <div className="blogs">  
+                 <div className="fs22 col14 fw600 text-center">Blogs</div>  
                  <hr className="blog_hr" /> 
-                 <Row>
-                     <Col md={3}>
-                         <div className="blog_detail">  
-                             <Image src={Blogs} alt="" />  
-                             <div className="fs15 pt-2">Lorem Ipsum is simply</div>
-                         </div>
-                     </Col>
-                     <Col md={3}>
-                         <div className="blog_detail">  
-                             <Image src={Blogstwo} alt="" />  
-                             <div className="fs15 pt-2">Lorem Ipsum is simply</div>
-                         </div>
-                     </Col>
-                     <Col md={3}>
-                         <div className="blog_detail">  
-                             <Image src={Blogsthree} alt="" />  
-                             <div className="fs15 pt-2">Lorem Ipsum is simply</div>
-                         </div>
-                     </Col>
-                     <Col md={3}>
-                         <div className="blog_detail">  
-                             <Image src={Blogs} alt="" />  
-                             <div className="fs15 pt-2">Lorem Ipsum is simply</div> 
-                         </div>
-                     </Col>
-                 </Row>
+                 <div className="pl-3">      
+                     <Row>
+                           <Col md={3}>
+                              <div className="blog_detail">  
+                                 <Image src={Blogs} alt="" />  
+                                 <div className="fs15 pt-2">Lorem Ipsum is simply</div>
+                              </div>
+                           </Col>
+                           <Col md={3}>
+                              <div className="blog_detail">   
+                                 <Image src={Blogstwo} alt="" />  
+                                 <div className="fs15 pt-2">Lorem Ipsum is simply</div>
+                              </div>
+                           </Col>
+                           <Col md={3}>
+                              <div className="blog_detail">  
+                                 <Image src={Blogsthree} alt="" />  
+                                 <div className="fs15 pt-2">Lorem Ipsum is simply</div>
+                              </div>
+                           </Col>
+                           <Col md={3}>
+                              <div className="blog_detail">  
+                                 <Image src={Blogs} alt="" />  
+                                 <div className="fs15 pt-2">Lorem Ipsum is simply</div> 
+                              </div>
+                           </Col>
+                     </Row>
+                 </div>
             </div>
+            
             
             </Row>
             </Col>

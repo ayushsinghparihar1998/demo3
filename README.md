@@ -36,3 +36,8 @@ Abc@1234
 User 
 usersk@yopmail.com
 12345678 
+
+User new Registration
+
+dk.singh@gmail.com
+12345678

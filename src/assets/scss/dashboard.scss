@@ -2,13 +2,36 @@
     background-color: $col22; 
     min-height: calc(100vh - 146px); 
     overflow: hidden; 
-    .left_sidebar {
-        .inner_side {
+    .left_sidebar { 
+
+        .upgrade {
+            background-image: url(../images/mask_bg.png); 
+            position: relative;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;  
+            width: 100%;
+            border-radius: 5px; 
+        }
+        .inner_side {   
             background: $col18;  
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
             .border-bottom.bottom2 { 
-                border-bottom: 1px solid #E4E4E4 !important;
+                border-bottom: 1px solid $col39 !important; 
+            }
+            .benefits {
+                background-color: $col78; 
+                text-align: center; 
+                padding-top: 14px;
+                padding-bottom: 14px; 
+            }
+            .share_user {
+                padding: 15px;
+                text-align: center;
+                background-color: $col18; 
             }
             .p-3.pointer.show-more {
                 padding: 0.5rem !important; 
@@ -96,7 +119,6 @@
         margin-right: 15px;
         margin-top: 10px; 
         padding: 15px; 
-        padding-left: 30px;
 
         .blog_hr {
             
@@ -129,6 +151,15 @@
         .inner_body  { 
             background: linear-gradient(180deg, $col37 0%, $col18 100%); 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+
+            .test_eat {
+                background-image: url(../images/test_img.png); 
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center; 
+                width: 100%; 
+            }
 
             .test_carousel {
                 height: 161px; 
@@ -344,9 +375,18 @@
 
         }
 
-        .border_yellow {
+        .border_yellow { 
             border-top: solid 10px $col38; 
             padding: 10px;
+            position: relative;
+            .form-group {
+                margin-bottom: 0; 
+            }
+
+            .r_icon {
+                position: absolute;
+                left: 0; 
+            }
         }
         .border-gray {
             border-bottom: solid 1px $col39; 
@@ -360,6 +400,10 @@
             background-color: $col23; 
             height: 3.5rem; 
             line-height: 3.5rem;
+            &.chatn {
+                height: 80px; 
+                line-height: 2.5rem; 
+            }
         }
         .chat-pink {
             background-color: $col7;  
@@ -371,6 +415,11 @@
             background: $col18; 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
+            .sharethis {
+                border: solid 1px $col1;
+                padding-top: 4px;
+                padding-bottom: 4px;
+            }
             .p-3 {
                 div.d-flex.mt-4.form-group {
                     & > input.inputTyp4 {

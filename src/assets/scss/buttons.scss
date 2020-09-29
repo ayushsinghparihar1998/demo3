@@ -144,6 +144,11 @@
     
   }
   
+  .btnTyp5.smallbtn {
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 11px;
+  }
   .btnTyp5:hover,
   .btnTyp5:focus,
   .btnTyp5:active,
@@ -428,5 +433,49 @@
     background-color: $col71 !important;
     color           : $col14 !important; 
     box-shadow      : none !important;            
+  }
+  
+  .btnType17 { 
+    background-color: transparent !important;
+    border-color: transparent !important; 
+    color: $col18;  
+    display: block;
+    padding: 0 0;
+    font-size: 15px;
+    font-weight: 500; 
+  }
+
+  .btnType17:hover,
+  .btnType17:focus,
+  .btnType17:active:focus {     
+    border-color    : transparent !important;
+    background-color: transparent !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important;      
+    border-radius: 0px !important;      
+  }
+
+  .btnType18 { 
+    background-color: $col41 !important;
+    border-color: $col10 !important; 
+    color: $col10; 
+    font-weight: 500; 
+    font-size: 15px; 
+    height: 27px; 
+    padding: 0 10px; 
+    outline: 0;
+  }
+
+  .btnType18:hover,
+  .btnType18:focus,
+  .btnType18:active:focus {          
+    border: solid 1px $col10 !important; 
+    background-color: $col18 !important;
+    color           : $col10 !important; 
+    box-shadow      : none !important;         
+  }
+  
+  .btnType18.twos {  
+    border: solid 1px $col41 !important; 
   }
   
