@@ -478,4 +478,70 @@
   .btnType18.twos {  
     border: solid 1px $col41 !important; 
   }
+
+  .btnType19 { 
+    position: relative;
+    background: transparent;
+    border: solid 1px transparent !important; 
+    color: $col10;
+    outline: 0;
+    font-size: 14px;
+    font-weight: 600; 
+  }
+
+  .btnType19:hover,
+  .btnType19:focus,
+  .btnType19:active:focus {              
+    border: solid 1px transparent !important; 
+    background-color: transparent !important;
+    color           : $col10 !important; 
+    box-shadow      : none !important;          
+  }
+
+  .btnType20 {
+    background-color: transparent !important; 
+    border-color: $col18 !important; 
+    color: $col18; 
+    font-weight: 500; 
+    font-size: 15px; 
+    height: 2.5rem; 
+    line-height: 2.5rem; 
+    padding: 0 1.5rem; 
+    border-radius: 40px; 
+    margin-right: 15px;
+    transition: 0.8s all;  
+    outline: 0;
+  }
+
+  .btnType20:hover,
+  .btnType20:focus,
+  .btnType20:active:focus {               
+    border: solid 1px $col18 !important; 
+    background-color: $col18 !important;
+    color           : $col29 !important; 
+    box-shadow      : none !important;          
+  }  
+
+  .btnType21 { 
+    background-color: $col26 !important;   
+    border-color: $col26 !important; 
+    color: $col18; 
+    font-weight: 500; 
+    font-size: 15px; 
+    height: 2.5rem; 
+    line-height: 2.5rem; 
+    padding: 0 1.5rem; 
+    border-radius: 40px;
+    transition: 0.8s all;   
+    outline: 0; 
+  }
+
+  .btnType21:hover,
+  .btnType21:focus,
+  .btnType21:active:focus {                 
+    border: solid 1px $col1 !important; 
+    background-color: $col1 !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important;          
+  } 
   

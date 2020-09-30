@@ -3,104 +3,151 @@ import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
-import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Subscribes from "../../assets/images/subscribes.svg";
+import Ngoone from "../../assets/images/ngo1.svg";
+import Ngotwo from "../../assets/images/ngo2.svg";
+import Ngothree from "../../assets/images/ngo3.svg"; 
+
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
 import {
     actionSearchListner,
     actionAddrating
-} from '../../common/redux/actions';
-class Chatsearch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            listnerList: [],
-            search:'',
-            recordCount:9
-        };
-    }
-    componentDidMount() {
-        this.getListner();
-    }
+} from '../../common/redux/actions'; 
 
-    getListner = () => {
-        let data = {};
-        if(this.state.screenName){
-            data = {
-                order_by:this.state.order_by?this.state.order_by:'',
-                search_keyword: this.state.screenName
-            }
-        }
-        this.props.actionSearchListner(data).then((result) => {
-            if (result && result.status === 200) {
-                let profile = result.data.data ? result.data.data
-                    : [];
-                this.setState({
-                    listOfSearchLisner: profile
-                });
-            }
-        });
-    };
-    ratingChanged =  (id) => (newRating) => {
-        console.log("newRating,id",newRating,id);
-           let data = {
-                to_id:id,
-                rating_count: newRating
-            }
-        this.props.actionAddrating(data)
-    };
-      handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-  handlePagination =() => {
-    let listOfSearchLisner = this.state.listOfSearchLisner;
-    let recordCount = this.state.recordCount 
-    if(listOfSearchLisner &&  listOfSearchLisner.length >0){
-        recordCount = recordCount + 9
-        this.setState({
-            recordCount: recordCount
-        });
-    }
-  }
-
-
-  content = (dropdown) => (
-    <div>
-      <div className="popup-drp m-b-30">
-       <div className="fs14 col29 fw300 content_set">
-            {dropdown}
-            </div> 
-      </div>
-    </div>
-  );
+class Ngo extends Component { 
     render() {
-        let listOfSearchLisner = this.state.listOfSearchLisner ? this.state.listOfSearchLisner : [];
-        console.log("listOfSearchLisner",listOfSearchLisner)
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div> 
-                <div></div>
+                <div className="ngo_services">
+                    <Container>
+                        <div className="ngo_listing mt-4 mb-4">   
+                            <div className="col14 fw600 fs22 text-center w-100 mt-4 pt-3">NGO</div> 
+                            <hr className="ngohr" />  
+
+                            <Row className="mt-4">        
+                                <Col lg={4} md={4} sm={12}>   
+                                    <div className="ngo_social">   
+                                        <Image src={Ngoone} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Child and Social Welfare Society</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>   
+                                    <div className="ngo_social">   
+                                        <Image src={Ngotwo} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Young Generation</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>   
+                                    <div className="ngo_social">   
+                                        <Image src={Ngothree} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Humanity Association</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>   
+                                    <div className="ngo_social">   
+                                        <Image src={Ngoone} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Child and Social Welfare Society</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>   
+                                    <div className="ngo_social">   
+                                        <Image src={Ngotwo} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Humanity Association</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>     
+                                    <div className="ngo_social">   
+                                        <Image src={Ngothree} alt="" className="w-100" />  
+                                        <div className="p-3">  
+                                            <div className="col1 fs18 fw600">Young Generation</div>
+                                            <div className="col14 fs14 fw400 pt-1">Since 1970</div>
+                                            <hr className="social_hr" />
+                                            <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
+                                            <Button className="btnType19">Read More</Button>  
+                                            <div className="ngo_overlay">
+                                                <div className="read_detail"> 
+                                                    <Button className="btnType20">READ MORE</Button>
+                                                    <Button className="btnType21">DONATE NOW</Button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
+
+                                <div className="text-center w-100 mt-3">  
+                                    <Button className="btnTyp12">show more</Button>
+                                </div>
+                            </Row>
+                        </div> 
+                    </Container>
+                </div>
                 <Footer />
             </div>
         );
     }
 }
-export default connect(null, {
-    actionSearchListner,
-    actionAddrating
-})(Chatsearch);
-
+export default Ngo

@@ -32,7 +32,8 @@ import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
 import Menubar from "../components/core/menu"; 
-import Ngo from "../components/core/ngo"; 
+import Ngo from "../components/core/ngo";
+import Ngodetail from "../components/core/ngodetail"; 
 
 import getUserProfile from "../common/utility/getUserProfile"; 
 import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils"; 
@@ -95,6 +96,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/usersignup" component={Usersignup} />
           <PublicRoute path="/ngo" component={Ngo} /> 
+          <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PrivateRouteUser path="/listenerSearch" component={ListenerSearch} />
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />

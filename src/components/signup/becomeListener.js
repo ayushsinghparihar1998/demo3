@@ -34,7 +34,7 @@ class Becomelistener extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="becomeListener">
+        <div className="becomeListener"> 
           <Container>
             <div className="listener_layout mt-4 mb-4">
               <Row>
