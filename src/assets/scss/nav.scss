@@ -44,6 +44,21 @@
                             }
                         }
                     }
+                    .profiletwo {
+
+                        .dropdown-menu {
+                            left: -130px;
+                            background: $col80;  
+                            width: 192px; 
+                            padding: 0 0;
+                            text-align: left;
+                            overflow: hidden;    
+
+                            a.dropdown-item {
+                                
+                            }
+                        }
+                    }
                 }
                 a.nav-link {
                     img {

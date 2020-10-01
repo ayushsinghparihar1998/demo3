@@ -16,7 +16,7 @@ import {
     actionAddrating
 } from '../../common/redux/actions'; 
 
-class Ngodetail extends Component {   
+class Ngodetail extends Component {    
     render() {
         return (
             <div className="page__wrapper innerpage">
@@ -32,10 +32,10 @@ class Ngodetail extends Component {
                             <hr className="ngohr" />  
                             <Row className="mt-4">          
                                 <Col lg={12}>   
-                                    <div className="ngo_details">     
+                                    <div className="ngo_details mt-2">       
                                         <Image src={Ngodetails} alt="" className="w-100" />    
                                         <div className="pt-3 pb-3">   
-                                            <div className="col1 fs18 fw600">Child and Social Welfare Society</div>
+                                            <div className="col1 fs18 fw600 mt-2">Child and Social Welfare Society</div>
                                             <div className="col14 fs14 fw400 pt-1">Founded in 1970</div> 
                                             <div className="fs14 col28 fw300 pt-3">We know taking your first chats can be challenging and often you have questions. Our community leaders are here to support you as you become the best listener possible! Here you will find a full list of our incredible Mentors, Mentor Leaders & Ambassadors!
 all new listeners are required to connect with a quality mentor in their first week. To get started, just message a mentor from the list below! Or, <strong className="col23 fw600">you can sign up to be paired with a mentor.</strong> For immediate mentor support with an ongoing chat please visit the Listener Support Room any time.</div> 

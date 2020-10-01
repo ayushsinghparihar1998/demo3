@@ -280,9 +280,9 @@ class Menubar extends Component {
                         <a class="dropdown-item" href="#">Profile</a> 
                       </div>
                 </li>  */} 
-                  <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon ml-3 mr-5"> 
+                  <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">    
                     <NavDropdown.Item href="#">Profile</NavDropdown.Item>  
-                    <NavDropdown.Item href="#">Logout</NavDropdown.Item>  
+                    <NavDropdown.Item href="#">Logout</NavDropdown.Item>        
                   </NavDropdown> 
                 </span>
               </Nav>
@@ -295,4 +295,4 @@ class Menubar extends Component {
     );
   }
 }
-export default connect(null, { actionLogout ,actionLogoutSuccess })(Menubar);
+export default Menubar;  

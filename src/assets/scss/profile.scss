@@ -312,6 +312,23 @@
 
 }
 
+.listenerprofile {
+
+    .myprofile {
+        position: relative; 
+        padding: 30px; 
+        .profile_top {
+            margin-top: 0px; 
+            
+            .flags {
+                top: 72%;
+                left: 42%;
+                max-width: 30px;
+            }
+        }
+    }
+}
+
 .location { 
     .ant-select {
         min-width: 100%;

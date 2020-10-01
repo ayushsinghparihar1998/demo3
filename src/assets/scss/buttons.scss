@@ -544,4 +544,18 @@
     color           : $col18 !important; 
     box-shadow      : none !important;          
   } 
+
+  .btnType21.greenone {
+    background-color: $col79 !important;   
+    border-color: $col79 !important; 
+  } 
+
+  .btnType21.greenone:hover,
+  .btnType21.greenone:focus,
+  .btnType21.greenone:active:focus {                   
+    border: solid 1px $col1 !important; 
+    background-color: $col1 !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important;          
+  } 
   

@@ -34,6 +34,7 @@ import Audiocall from "../components/videoaudio/audiocall";
 import Menubar from "../components/core/menu"; 
 import Ngo from "../components/core/ngo";
 import Ngodetail from "../components/core/ngodetail"; 
+import ListenerProfile from "../components/listener/listenerprofile";   
 
 import getUserProfile from "../common/utility/getUserProfile"; 
 import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils"; 
@@ -44,7 +45,7 @@ import Admincategory from "../components/jsx/superadmin/category";
 import Addquestionanswer from "../components/jsx/superadmin/addquestionanswer";
 import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory"; 
 import CalendarDemo from "../components/professional/calendar";
-import ProfessionalChatSearch from "../components/chat/professionalSearch";
+import ProfessionalChatSearch from "../components/chat/professionalSearch"; 
 
 const user =
   getLocalStorage("userInfo") ||
@@ -68,7 +69,7 @@ class ELPRoute extends Component {
   render() {
     return (
       <>
-        {this.state.socket && <VideoCalling />}
+        {this.state.socket && <VideoCalling />} 
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
@@ -83,7 +84,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
           <PublicRoute path="/userotp" component={Userotp} />
-          <PublicRoute path="/menu" component={Menubar} /> 
+          <PublicRoute path="/menu" component={Menubar} />       
           {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
           {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />
@@ -97,7 +98,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/usersignup" component={Usersignup} />
           <PublicRoute path="/ngo" component={Ngo} /> 
           <PublicRoute path="/ngodetail" component={Ngodetail} />
-          <PrivateRouteUser path="/listenerSearch" component={ListenerSearch} />
+          <PublicRoute path="/listenerprofile" component={ListenerProfile} />  
+          <PrivateRouteUser path="/listenerSearch" component={ListenerSearch} /> 
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
