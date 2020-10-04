@@ -109,6 +109,30 @@
             }
         }
     }
+
+    .dropdown.droptwo {
+        .profilesbtn { 
+            background: transparent; 
+            padding: 0;
+            border: none;
+            outline: 0 !important;
+            box-shadow: none !important;
+
+            &:hover, &:focus {
+                background: transparent; 
+                padding: 0;
+                border: none;
+                outline: 0 !important;
+                box-shadow: none !important;
+            } 
+        }
+
+        .dropdown-menu {
+            width: 500px;
+            left: -450px !important; 
+            top: 55px; 
+        }
+    }
 }
 
 .header-fixed {
@@ -141,6 +165,16 @@
             max-width: 50px; 
         }
     }
+}
+
+@media (min-width: 768px) {
+
+    .dropdown.droptwo {
+        .dropdown-menu {
+            
+        }
+    }
+
 }
 
 @media (max-width: 1250px) {  

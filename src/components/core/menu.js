@@ -12,6 +12,7 @@ import {
   Modal,
   Row,
   Col,
+  Dropdown,
 } from "react-bootstrap"; 
 import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
@@ -23,12 +24,12 @@ import twit from "../../assets/images/twit.svg";
 import linkedin from "../../assets/images/linkedin.svg";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import Mailicon from "../../assets/images/mail_icon.svg";
-import Bellicon from "../../assets/images/bell_icons.svg";
-import Msgbox from "../../assets/images/msg_box.svg";
-import Masklayer from "../../assets/images/mask_layer.png"; 
-import Signup from "../jsx/listenersignup/signup";
-import ProfessionalSignup from "../signup/professionalSignup";  
-import UserSignup from "../signup/userSignup";
+import Bellicon from "../../assets/images/bell_icons.svg";  
+import Userprofiles from "../../assets/images/user_profiles.svg";
+import Usersettings from "../../assets/images/user_settings.svg";  
+import Userenables from "../../assets/images/user_enables.svg";  
+import Userlogouts from "../../assets/images/user_logouts.svg";  
+
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
 import socketClass from "../../common/utility/socketClass";
@@ -199,6 +200,7 @@ class Menubar extends Component {
                 </Form>
               </Nav>
             ) : (
+
               <Nav className="ml-auto">
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||
@@ -207,27 +209,19 @@ class Menubar extends Component {
                       getLocalStorage("customerInfo")
                         ? [
                             <NavLink
-                              to="/professionalSearch"
+                              to=""
                               className="nav-link"
                             >
-                              Professional Search
+                              Dashboard
                             </NavLink>,
-                            <NavLink to="/listenerSearch" className="nav-link">
-                              Listener Search
+                            <NavLink to="" className="nav-link">
+                              Blogs
                             </NavLink>,
                           ]
                         : "",
                       <NavLink
-                        to={
-                          getLocalStorage("userInfo")
-                            ? "userDashboard"
-                            : getLocalStorage("userInfoProff")
-                            ? "userDashboardproff"
-                            : getLocalStorage("customerInfo")
-                            ? "userDashboardcust"
-                            : ""
-                        }
-                        className="nav-link"
+                        to="Communities" 
+                        className="nav-link"    
                       >
                         Dashboard
                       </NavLink>,
@@ -251,25 +245,56 @@ class Menubar extends Component {
                     ]
                   : [
                       <Nav.Link onClick={this.handleModal}>
-                        Connect Now
+                        Dashboard
                       </Nav.Link>,
-                      <NavLink to="/becomeListener" className="nav-link">
-                        Volunteer as a Listener
+                      <NavLink to="" className="nav-link">
+                        Blogs
                       </NavLink>,
                     
                       <Nav.Link onClick={this.handleModal3}>
-                        Professionals
+                        Communities 
                       </Nav.Link>,
-                      <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
+
+                      <Nav.Link onClick={this.handleModal3}>
+                        Communities 
+                      </Nav.Link>,
+                       
+                       <Nav.Link onClick={this.handleModal3}>
+                         Professional help  
+                      </Nav.Link>,
+
+                      <Nav.Link onClick={this.handleModal2}>Donate</Nav.Link>, 
                     ]}
                 
-
                 <span className="userprofiles menus">        
                   <Nav.Link> 
                     <Image src={Mailicon} alt="" className="pointer" />
                   </Nav.Link>
                   <Nav.Link>
-                    <Image src={Bellicon} alt="" className="pointer" />
+                      <Dropdown className="droptwo"> 
+                          <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">   
+                            <Image src={Bellicon} alt="" className="pointer" />                          
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu>
+                            <Dropdown.Item href="">
+                                <ul>
+                                    <li>
+                                        <div>
+                                          <span>Lorem</span>
+                                          William johnson Invited you to join event
+                                        </div>
+                                        <div>5 mins ago</div>
+                                    </li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </Dropdown.Item>  
+
+                            {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+
+                          </Dropdown.Menu>
+                      </Dropdown>
                   </Nav.Link>
                   {/* <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -281,12 +306,16 @@ class Menubar extends Component {
                       </div>
                 </li>  */} 
                   <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">    
-                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>  
-                    <NavDropdown.Item href="#">Logout</NavDropdown.Item>        
+                    <NavDropdown.Item href="#"><Image src={Userprofiles} alt="" className="mr-1" /> USER</NavDropdown.Item>  
+                    <NavDropdown.Item href="#"><Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>  
+                    <NavDropdown.Item href="#"><Image src={Userenables} alt="" className="mr-1" /> SWITCH ACCOUNT</NavDropdown.Item>   
+                    <NavDropdown.Item href="#"><Image src={Userlogouts} alt="" /> LOGOUT</NavDropdown.Item>       
                   </NavDropdown> 
                 </span>
               </Nav>
-            )}
+           
+           )}
+
           </Navbar.Collapse>
         </Navbar>
 
@@ -295,4 +324,5 @@ class Menubar extends Component {
     );
   }
 }
-export default Menubar;  
+export default Menubar;
+
