@@ -275,8 +275,8 @@ class Menubar extends Component {
                           <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">   
                             <Image src={Bellicon} alt="" className="pointer" />                          
                           </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item href="">
+                          <Dropdown.Menu className="d-none">  
+                            <Dropdown.Item>
                                 <ul>
                                     <li>
                                         <div>
@@ -304,7 +304,7 @@ class Menubar extends Component {
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Profile</a> 
                       </div>
-                </li>  */} 
+                </li>  */}    
                   <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">    
                     <NavDropdown.Item href="#"><Image src={Userprofiles} alt="" className="mr-1" /> USER</NavDropdown.Item>  
                     <NavDropdown.Item href="#"><Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>  

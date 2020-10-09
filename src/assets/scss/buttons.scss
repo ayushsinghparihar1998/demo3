@@ -250,6 +250,46 @@
     color           : $col18 !important; 
     box-shadow      : none !important; 
   }
+  
+  .btnTyp9.approve {
+      min-width: 130px;
+      font-size: 15px !important;
+  }
+
+  .btnTyp9.reject {
+      min-width: 130px; 
+      background: transparent !important; 
+      color: $col1 !important; 
+      border: solid 1px $col1 !important;
+      font-size: 15px !important; 
+  }
+
+  .btnTyp9.reject:hover,
+  .btnTyp9.reject:focus,
+  .btnTyp9.reject:active:focus {                    
+    border-color    : $col1 !important;
+    background: $col1 !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important; 
+  }
+
+  .btnTyp9.shows {
+    min-width: 160px;   
+    background: transparent !important; 
+    color: $col1 !important; 
+    border: solid 1px $col1 !important;
+    font-size: 15px !important; 
+    font-weight: 500; 
+  }
+
+  .btnTyp9.shows:hover,
+  .btnTyp9.shows:focus,
+  .btnTyp9.shows:active:focus {                    
+    border-color    : $col1 !important;
+    background: $col1 !important;
+    color           : $col18 !important; 
+    box-shadow      : none !important; 
+  }
 
   .btnTyp9.btnCalender {
     border-radius   : 40px;

@@ -19,10 +19,10 @@ listener : listn@yopmail.com
 Professional : profession@yopmail.com       
 12345678  
 
-Updated Production Details:-   
+Updated Production Details:-    
 
 Listener
-adidaslis@yopmail.com
+adidaslis@yopmail.com 
 12345678
 
 Professional
@@ -31,7 +31,7 @@ wildcraft@yopmail.com
 
 Superadmin
 niharika.gupta@lmsin.com
-Abc@1234
+Abc@1234 
 
 User 
 usersk@yopmail.com

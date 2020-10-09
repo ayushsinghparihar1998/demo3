@@ -1,0 +1,33 @@
+.myprofile.reviewrequest {
+    border-top: none; 
+    padding-top: 30px; 
+
+    .requests {
+        padding: 0 30px;
+    }
+    .border-grays {  
+        border-bottom: 0.5px solid $col50; 
+        &:last-child {
+            // border-bottom: none; 
+        }
+    }
+
+    .user_tab {
+        .nav-tabs {
+            a {
+                &.nav-link { 
+                    border: solid 1px $col1; 
+                    transition: 0.5s all;
+                    text-transform: uppercase;     
+                    &:hover {
+                        background: $col40; 
+                        border: solid 1px $col40; 
+                    }
+                }
+                &.active {
+                    border: solid 1px $col40; 
+                }
+            }
+        }
+    }
+}

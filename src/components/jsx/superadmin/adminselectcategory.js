@@ -23,6 +23,7 @@ class Adminselectcategory extends Component {
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
                         <Row>
+                            
                             <Col md={3} className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
@@ -55,6 +56,8 @@ class Adminselectcategory extends Component {
                                     </div>
                                 </div>
                             </Col>
+                            
+                            
                             <Col md={9} className="pl-1">
                                 <div className="adminlistener categorys addQa p-3 mb-3">
                                     <div className="col10 fw600 fs28 mb-4 pb-2">Question Answer</div>

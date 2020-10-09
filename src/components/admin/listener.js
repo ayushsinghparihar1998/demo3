@@ -219,7 +219,7 @@ class Adminlistener extends Component {
                                     </div>
                                 </div>
                             </Col>
-                            <Col md={8} lg={9} className="pl-1">  
+                            <Col md={8} lg={9} className="pl-1">   
                                 {profileListing && profileListing.length > 0 &&
                                     profileListing.map((item, index) => {
                                         let categryLen = item.uc_cat_name ? item.uc_cat_name.length : 0;
