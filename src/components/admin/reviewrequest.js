@@ -14,7 +14,7 @@ import Requestuserthree from "../../assets/images/pro_img3.svg";
 import Aflag from "../../assets/images/australia_flag.svg";
 import Iflag from "../../assets/images/india_flag.svg";
 
-class Reviewrequest extends Component {                                 
+class Reviewrequest extends Component {                                  
     render() {
         return (
             <div className="page__wrapper innerpage">

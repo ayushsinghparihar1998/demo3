@@ -664,11 +664,11 @@ class ChatProff extends Component {
                                     <Button
                                         className="text-uppercase w-auto btnTyp9 report mr-4">    
                                         REPORT 
-                                    </Button> 
+                                    </Button>  
                                     <Button 
                                         className="text-uppercase w-auto btnTyp9 blocks">
                                         BLOCK 
-                                   </Button>
+                                   </Button> 
                                 </div>
                                 
                             </div>

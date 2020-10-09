@@ -11,10 +11,10 @@ import Chatuser from "../../assets/images/chat_user.svg";
 
 import { getLocalStorage } from "../../common/helpers/Utils";      
 
-class ListenerProfile extends Component { 
+class ListenerProfile extends Component {   
   render() { 
     return (
-      <div className="page__wrapper innerpage">  
+      <div className="page__wrapper innerpage">    
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>

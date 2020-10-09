@@ -46,7 +46,8 @@ import Addquestionanswer from "../components/jsx/superadmin/addquestionanswer";
 import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory"; 
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
-import Reviewrequest from "../components/admin/reviewrequest"; 
+import Reviewrequest from "../components/admin/reviewrequest";
+import Reviewcomments from "../components/user/reviewcomments";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -101,8 +102,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />  
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          <PublicRoute path="/reviewrequest" component={Reviewrequest} />    
-          {/* LIst */}
+          <PublicRoute path="/reviewrequest" component={Reviewrequest} />  
+          <PublicRoute path="/reviewcomments" component={Reviewcomments} />                                           
+          {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
