@@ -167,6 +167,19 @@
     }
 }
 
+.socials {
+    padding-left: 15px;  
+    
+    form {
+        span {
+            margin-left: 15px;
+            img {
+                max-width: 26px; 
+            }
+        }
+    }
+}
+
 @media (min-width: 768px) {
 
     .dropdown.droptwo {
