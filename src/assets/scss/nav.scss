@@ -9,6 +9,12 @@
             color: $col8; 
         }
         .navbar-nav {
+
+            .loginnav  {
+                .dropdown-menu {
+                    left: -100px; 
+                }
+            }
             a.nav-link {
                 padding-right: $fs14;
                 color: $col3;

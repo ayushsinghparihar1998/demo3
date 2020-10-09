@@ -277,12 +277,12 @@ class NavBar extends Component {
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||
                 getLocalStorage("customerInfo") ? (
-                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>          
                 ) : (
                   <NavDropdown
                     title="Login"
                     id="login-nav-dropdown"
-                    className="btnTypeone"
+                    className="btnTypeone loginnav" 
                   >
                     <NavDropdown.Item
                       onClick={(e) => {
@@ -303,7 +303,7 @@ class NavBar extends Component {
                         this.handleLogin(3);
                       }}
                     >
-                      User Login
+                      User Login 
                     </NavDropdown.Item>
                   </NavDropdown>
                 )}

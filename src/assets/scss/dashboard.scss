@@ -911,7 +911,7 @@
     }
 }
 
-.custom-popUp.confirmation-box.modal.delete_modal {     
+.custom-popUp.confirmation-box.modal.delete_modal {      
     .modal-content {
         max-width: 600px; 
         margin: auto;
@@ -930,7 +930,7 @@
                 top: 12px;
               }
 
-              .write_txt {
+              .write_txt { 
                 text-transform: uppercase;
                 text-decoration: underline;
                 text-underline-position: under;
@@ -973,6 +973,24 @@
                     margin-right: 0px;
                 }
             }
+
+            button.btnTyp9.report {
+                border-color: $col40 !important;
+                background-color: $col40 !important;
+                &:hover {
+                    border-color: $col1 !important;
+                    background-color: $col1 !important;
+                }
+            }
+            button.blocks {
+                border-color: $col1 !important;
+                background-color: $col18 !important;
+                color: $col1 !important; 
+                
+                &:hover {
+                    color: $col18 !important;  
+                }
+            } 
         }
     }
 }

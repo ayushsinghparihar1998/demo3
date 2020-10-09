@@ -633,9 +633,9 @@ class ChatProff extends Component {
 
                                 <div className="text-center mb-5"> 
                                     <Button
-                                        className="btn btn-success text-uppercase">
+                                        className="btn btn-success text-uppercase ">
                                         Yes 
-                                    </Button> 
+                                    </Button>  
                                     <Button 
                                         className="btn btn-default text-uppercase sm-btn">
                                         No 
@@ -662,11 +662,11 @@ class ChatProff extends Component {
 
                                 <div className="text-center mt-5 mb-3">  
                                     <Button
-                                        className="btnTyp24 bt4 text-uppercase w-auto">
+                                        className="text-uppercase w-auto btnTyp9 report mr-4">    
                                         REPORT 
                                     </Button> 
                                     <Button 
-                                        className="btnTyp24 bt5 text-uppercase sm-btn w-auto">
+                                        className="text-uppercase w-auto btnTyp9 blocks">
                                         BLOCK 
                                    </Button>
                                 </div>
