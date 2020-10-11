@@ -6,10 +6,10 @@
     .requests {
         padding: 0 30px;
     }
-    .border-grays {   
+    .border-grays {    
         border-bottom: 0.5px solid $col50; 
         &:last-child {
-            // border-bottom: none; 
+            // border-bottom: none;  
         }
     }
 
@@ -144,6 +144,56 @@
                     color: $col1; 
                 }
             }
+        }
+    }
+}
+
+.donatedatas {
+
+    .myprofile {
+        position: relative;
+        padding: 30px; 
+    }
+    
+    .participates {
+        background-image: url('../images/participate_btn.svg'); 
+        height: 65px;
+        max-width: 800px;
+        margin: auto;
+        background-size: cover;
+        display: flex;
+        align-items: center; 
+        justify-content: center; 
+        font-size: $fs28;
+        color: $col18;
+        font-weight: 400;
+        padding: 0 3.5rem;
+        cursor: pointer; 
+    }
+    .faqs {
+        background-color: $col44; 
+        padding: 10px 0 20px;   
+        .pl-30 {
+            padding-left: 30px; 
+        }
+        .questions { 
+            background-color: $col84; 
+            height: 35px;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            color: $col29; 
+            font-weight: 300;
+            font-size: 18px; 
+        }
+        .answers {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            font-size: 15px;
+            color: $col14;
+            font-weight: 300; 
         }
     }
 }

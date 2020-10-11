@@ -49,6 +49,7 @@ import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 import Reviewrequest from "../components/admin/reviewrequest";
 import Reviewcomments from "../components/user/reviewcomments";
+import Donatedata from "../components/user/donatedata";  
 
 const user =
   getLocalStorage("userInfo") ||
@@ -105,7 +106,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/reviewrequest" component={Reviewrequest} />  
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
-          <PublicRoute path="/compaign" component={Compaign} />                                      
+          <PublicRoute path="/compaign" component={Compaign} />   
+          <PublicRoute path="/donatedata" component={Donatedata} />
+
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
