@@ -48,8 +48,10 @@ import Adminselectcategory from "../components/jsx/superadmin/adminselectcategor
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 import Reviewrequest from "../components/admin/reviewrequest";
-import Reviewcomments from "../components/user/reviewcomments";
+import Ratingrequest from "../components/admin/ratingrequest";
+import Reviewcomments from "../components/user/reviewcomments"; 
 import Donatedata from "../components/user/donatedata";  
+import Foundation from "../components/user/foundation";        
 
 const user =
   getLocalStorage("userInfo") ||
@@ -105,9 +107,11 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />  
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/reviewrequest" component={Reviewrequest} />  
+          <PublicRoute path="/ratingrequest" component={Ratingrequest} />
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
           <PublicRoute path="/compaign" component={Compaign} />   
           <PublicRoute path="/donatedata" component={Donatedata} />
+          <PublicRoute path="/foundation" component={Foundation} />   
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />

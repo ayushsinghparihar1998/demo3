@@ -3,11 +3,8 @@ import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 
-import Donationheart from "../../assets/images/donation_heart.png";
-import Contentbox from "../../assets/images/boxes.png";
-import Nextbtn from "../../assets/images/next-button.png"; 
 
-class Compaign extends Component { 
+class Compaign extends Component {   
     render() {
         return (
             <div className="page__wrapper innerpage">

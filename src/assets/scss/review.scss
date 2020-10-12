@@ -198,3 +198,127 @@
     }
 }
 
+.foundation {   
+    background-color: #f3fdff;     
+    min-height: calc(100vh - 146px);
+
+    .myprofile {
+        background-image: url('../images/foundations.svg');
+        background-size: cover;
+        width: 100%; 
+        
+        .foundtwo {
+            background-image: url('../images/fondsape.svg'); 
+            background-size: 70%; 
+            background-repeat: no-repeat;
+            width: 100%;
+            display: flex; 
+            align-items: center;
+            justify-content: start; 
+            height: 700px;
+
+            .inner_found { 
+                position: relative;
+                max-width: 45%; 
+                padding-left: 7%;  
+
+                .form-group {
+                    margin-left: 0; 
+                }
+                
+                .firstbtn {
+                    background: rgba(255, 255, 255, 0);
+                    border: solid 1px rgba(255, 255, 255, 0.5);           
+                    height: 50px;
+                    line-height: 50px;
+                    position: relative;
+                    min-width: 220px; 
+                    margin-right: 20px;
+                    border-radius: 4px;   
+                    &.active { 
+                        background: rgba(255, 255, 255, 0.5);  
+                    }
+
+                    label {
+                        text-transform: capitalize; 
+                        color: $col18; 
+                    }
+
+                    .form-check { 
+                        
+                        input {
+                            position: absolute;
+                            right: 10px;
+                            top: 11px; 
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+                }
+
+                .input_price {
+                    max-width: 400px; 
+                    margin-top: 30px;
+                    .d-flex {
+                        position: relative;
+
+                        input {
+                            height: 50px;
+                            border-radius: 10px 0px 0px 10px;
+                            padding-left: 40px; 
+                        }
+
+                        button {
+                            min-width: 100px;
+                            height: 50px;
+                            border-radius: 0px 10px 10px 0px; 
+                            text-transform: uppercase;
+                            font-size: 16px;
+                            background: $col26;
+                            border: solid 1px $col26; 
+                        }
+                    }
+
+                    span.dollors {
+                        position: absolute;
+                        top: 6px;
+                        left: 14px;
+                        color: #666;
+                        height: 36px;
+                        line-height: 36px; 
+                        font-size: 20px;
+                        display: inline-block;
+                        width: 22px;
+                        border-right: solid 1px #333;
+                    }
+                }
+                
+            }
+        }
+
+    }
+
+    .educations {
+        padding-bottom: 150px;
+
+        .iframe_video {
+            padding-top: 30px;
+            max-width: 85%;
+        }
+    }
+    .foundthree { 
+        background-image: url('../images/fondsapetwo.svg'); 
+        background-size: 92.6%; 
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 300px; 
+        padding: 30px 20px 20px;
+
+        .inner_second {  
+            max-width: 83%; 
+            margin-top: 30px;  
+        }
+    }
+    
+}
+

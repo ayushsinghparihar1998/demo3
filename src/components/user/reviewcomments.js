@@ -79,7 +79,7 @@ class Reviewcomments extends Component {
                                 </span>
                                 <span className="col82 fs18 fw600">
                                     Good! <Image src={Checkgreen} alt="" />
-                                </span>
+                                </span> 
                             </div>
 
                             <div className="reviewcomment mt-4 mb-4">    
