@@ -11,7 +11,7 @@ import Checkgreen from "../../assets/images/checkgreen.svg";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 
-class Reviewcomments extends Component {
+class Reviewcomments extends Component {         
     render() {
         return (
             <div className="page__wrapper innerpage">

@@ -51,10 +51,11 @@ import Reviewrequest from "../components/admin/reviewrequest";
 import Ratingrequest from "../components/admin/ratingrequest";
 import Reviewcomments from "../components/user/reviewcomments"; 
 import Donatedata from "../components/user/donatedata";  
-import Foundation from "../components/user/foundation";        
+import Foundation from "../components/user/foundation";
+import Paymentdetail from "../components/admin/paymentdetail";                
 
 const user =
-  getLocalStorage("userInfo") ||
+  getLocalStorage("userInfo") || 
   getLocalStorage("userInfoProff") ||
   getLocalStorage("customerInfo") ||
   getLocalStorage("userInfoAdmin");
@@ -72,8 +73,8 @@ class ELPRoute extends Component {
   componentWillUnmount() {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
-  render() { 
-    return (
+  render() {  
+    return ( 
       <>
         {this.state.socket && <VideoCalling />} 
         <Switch>
@@ -111,7 +112,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
           <PublicRoute path="/compaign" component={Compaign} />   
           <PublicRoute path="/donatedata" component={Donatedata} />
-          <PublicRoute path="/foundation" component={Foundation} />   
+          <PublicRoute path="/foundation" component={Foundation} />
+          <PublicRoute path="/paymentdetail" component={Paymentdetail} />
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />

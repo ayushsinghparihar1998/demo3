@@ -322,3 +322,55 @@
     
 }
 
+.table_paymentlayout { 
+    position: relative;
+    table {
+        tr th {
+            border: solid 1px $col85;
+            border-collapse: collapse;
+            background-color: $col10;  
+            font-weight: 500;
+            color: $col18;
+            text-align: center;
+            font-size: $fs15;
+            height: 50px;
+            line-height: 50px;   
+        }
+
+        tr td {
+            border: solid 1px $col85;
+            border-collapse: collapse;
+            font-weight: 400;
+            background-color: $col18;
+            color: $col29; 
+            text-align: center;
+            font-size: $fs15; 
+            height: 70px; 
+            line-height: 70px;  
+
+            .btnTyp9.reject {
+
+                &.color1 {
+                    background: #F5FDFF !important;
+                    border: 1px solid #5AAE81 !important; 
+                    color: #5AAE81 !important; 
+                }
+                &.color2 {
+                    background: #F5FDFF !important;
+                    border: 1px solid #AB6BFD !important; 
+                    color: #AB6BFD !important; 
+                }
+                &.color3 {
+                    background: #F5FDFF !important;
+                    border: 1px solid #C3A7FF !important; 
+                    color: #C3A7FF !important;  
+                }
+                &.color4 {
+                    background: #F5FDFF !important;
+                    border: 1px solid #D26D6D !important; 
+                    color: #D26D6D !important; 
+                } 
+            }
+        }    
+    }
+}
