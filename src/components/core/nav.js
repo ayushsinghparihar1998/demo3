@@ -277,12 +277,12 @@ class NavBar extends Component {
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||
                 getLocalStorage("customerInfo") ? (
-                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>          
                 ) : (
                   <NavDropdown
                     title="Login"
                     id="login-nav-dropdown"
-                    className="btnTypeone"
+                    className="btnTypeone loginnav" 
                   >
                     <NavDropdown.Item
                       onClick={(e) => {
@@ -303,13 +303,13 @@ class NavBar extends Component {
                         this.handleLogin(3);
                       }}
                     >
-                      User Login
+                      User Login 
                     </NavDropdown.Item>
                   </NavDropdown>
                 )}
 
-                <Form inline>
-                  <span className="d-none">
+                <Form inline>  
+                  <span className="d-none">  
                     {getLocalStorage("loggedIn") ? (
                       <div onClick={this.handleLogout} className="btnType1">
                         Logout
@@ -320,7 +320,7 @@ class NavBar extends Component {
                       </NavLink>
                     )}
                   </span>
-                  <span>
+                  {/* <span>
                     <Image src={insta} alt="" className="pointer" />
                   </span>
                   <span>
@@ -331,7 +331,7 @@ class NavBar extends Component {
                   </span>
                   <span>
                     <Image src={linkedin} alt="" className="pointer" />
-                  </span>
+                  </span> */} 
                 </Form>
                 <span className="userprofiles d-flex">
                   <Nav.Link>

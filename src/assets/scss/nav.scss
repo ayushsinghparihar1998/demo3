@@ -9,6 +9,12 @@
             color: $col8; 
         }
         .navbar-nav {
+
+            .loginnav  {
+                .dropdown-menu {
+                    left: -100px; 
+                }
+            }
             a.nav-link {
                 padding-right: $fs14;
                 color: $col3;
@@ -163,6 +169,19 @@
 
         & > img {
             max-width: 50px; 
+        }
+    }
+}
+
+.socials {
+    padding-left: 15px;  
+    
+    form {
+        span {
+            margin-left: 15px;
+            img {
+                max-width: 26px; 
+            }
         }
     }
 }

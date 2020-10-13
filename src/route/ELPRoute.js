@@ -33,8 +33,9 @@ import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
 import Menubar from "../components/core/menu";
 import Ngo from "../components/core/ngo";
-import Ngodetail from "../components/core/ngodetail";
+import Ngodetail from "../components/core/ngodetail"; 
 import ListenerProfile from "../components/listener/listenerprofile";
+import Compaign from "../components/user/campaign";   
 
 import getUserProfile from "../common/utility/getUserProfile";
 import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
@@ -47,9 +48,14 @@ import Adminselectcategory from "../components/jsx/superadmin/adminselectcategor
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 import Reviewrequest from "../components/admin/reviewrequest";
+import Ratingrequest from "../components/admin/ratingrequest";
+import Reviewcomments from "../components/user/reviewcomments"; 
+import Donatedata from "../components/user/donatedata";  
+import Foundation from "../components/user/foundation";
+import Paymentdetail from "../components/admin/paymentdetail";                
 
 const user =
-  getLocalStorage("userInfo") ||
+  getLocalStorage("userInfo") || 
   getLocalStorage("userInfoProff") ||
   getLocalStorage("customerInfo") ||
   getLocalStorage("userInfoAdmin");
@@ -102,6 +108,15 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/reviewrequest" component={Reviewrequest} />
           {/* LIst */}
+          {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
+          <PublicRoute path="/ratingrequest" component={Ratingrequest} />
+          <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
+          <PublicRoute path="/compaign" component={Compaign} />   
+          <PublicRoute path="/donatedata" component={Donatedata} />
+          <PublicRoute path="/foundation" component={Foundation} />
+          <PublicRoute path="/paymentdetail" component={Paymentdetail} />
+
+          {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
