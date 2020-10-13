@@ -11,7 +11,7 @@ import {
   Tabs,
   Tab,
   Modal
-} from "react-bootstrap"; 
+} from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import UserChat from "../../assets/images/user_chat.svg";
@@ -39,25 +39,26 @@ import Smiletwo from "../../assets/images/smile2.svg";
 import Smilethree from "../../assets/images/smile3.svg";
 import Smilefour from "../../assets/images/smile4.svg";
 import Smilefive from "../../assets/images/smile5.svg";
-import Smilesix from "../../assets/images/smile6.svg"; 
-import Smileeight from "../../assets/images/smile8.svg"; 
-import Smilenine from "../../assets/images/smile9.svg"; 
+import Smilesix from "../../assets/images/smile6.svg";
+import Smileeight from "../../assets/images/smile8.svg";
+import Smilenine from "../../assets/images/smile9.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 // import Blueicons from "../../assets/images/blue_cross.svg";
 
 import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
-import SocketIOClient from "socket.io-client"; 
-import moment from "moment"; 
+import SocketIOClient from "socket.io-client";
+import moment from "moment";
 import socketClass from "../../common/utility/socketClass";
 import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
+import BlockModal from "../modals/BlockModal";
 
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
-const socket = socketClass.getSocket(); 
-class ChatProff extends Component {  
+const socket = socketClass.getSocket();
+class ChatProff extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,11 +69,12 @@ class ChatProff extends Component {
       showChat: false,
       response: {},
       user_id: getLocalStorage("userInfoProff").u_id,
-      userMeta: {}, 
-      show6: false, 
+      userMeta: {},
+      show6: false,
     };
+    this.blockModal = React.createRef();
   }
-  
+
   handleblockModal2 = () => {
     this.setState({ show6: true });
   };
@@ -84,15 +86,16 @@ class ChatProff extends Component {
     this.setState({ show7: true });
   };
 
-  handlereportClose2 = () => {             
+  handlereportClose2 = () => {
     this.setState({ show7: false });
   };
   handleblockuserModal2 = () => {
+    // alert("ASd")
     this.setState({ show8: true });
   };
 
-  handlerblockuserClose2 = () => {             
-    this.setState({ show8: false }); 
+  handlerblockuserClose2 = () => {
+    this.setState({ show8: false });
   };
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
@@ -468,25 +471,26 @@ class ChatProff extends Component {
                           <Image
                             src={Fullscreen}
                             alt=""
-                            className="pointer mr-2" 
+                            className="pointer mr-2"
                           />
                           <Image src={Sounds} alt="" className="pointer mr-2" />
                           <Image
                             src={Dangers}
                             alt=""
-                            onClick={this.handleblockuserModal2} 
+                            onClick={() => this.blockModal.current.openModal()}
+                            // onClick={this.handleblockuserModal2} 
                             className="pointer mr-2"
                           />
                           <Image
                             src={Deletes}
                             alt=""
-                            onClick={this.handleblockModal2} 
+                            onClick={this.handleblockModal2}
                             className="pointer mr-2"
                           />
                           <Image
                             src={Questions}
                             alt=""
-                            onClick={this.handlereportModal2} 
+                            onClick={this.handlereportModal2}
                             className="pointer mr-2"
                           />
                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
@@ -572,9 +576,9 @@ class ChatProff extends Component {
                         ""
                       )}
                   </div>
-                  <div className="chat_bottom">  
+                  <div className="chat_bottom">
                     <div>
-                      <Form.Group> 
+                      <Form.Group>
                         <div className="d-flex">
                           <Form.Control
                             type="text"
@@ -586,38 +590,38 @@ class ChatProff extends Component {
                             onKeyUp={this.startTyping.bind(this)}
                             name="message"
                           />
-                          <Button 
+                          <Button
                             className="btnTyp7"
                             disabled={!this.state.message}
                             onClick={this.handleSendMessage}
                           >
                             Send
-                          </Button> 
+                          </Button>
                         </div>
                       </Form.Group>
                     </div>
                   </div>
 
                 </div>
-                <div className="emogy mt-4">  
-                        <div className="smile">
-                            <Image src={Smileone} />
-                            <Image src={Smilesad} />
-                            <Image src={Smiletwo} />
-                            <Image src={Smilethree} />
-                            <Image src={Smilefour} />
-                            <Image src={Smilefive} />
-                            <Image src={Smilesix} />
-                            <Image src={Smileeight} />
-                            <Image src={Smilenine} /> 
-                        </div>
-                  </div> 
+                <div className="emogy mt-4">
+                  <div className="smile">
+                    <Image src={Smileone} />
+                    <Image src={Smilesad} />
+                    <Image src={Smiletwo} />
+                    <Image src={Smilethree} />
+                    <Image src={Smilefour} />
+                    <Image src={Smilefive} />
+                    <Image src={Smilesix} />
+                    <Image src={Smileeight} />
+                    <Image src={Smilenine} />
+                  </div>
+                </div>
               </Col>
             </Row>
           </Container>
-
+          <BlockModal ref={this.blockModal}  userId={this.props.match.params.id} />
           {/* Block popup modal start */}
-                  <Modal 
+          {/* <Modal 
                         show={this.state.show6} 
                         // onHide={this.handleCloseConformation}
                         className="custom-popUp confirmation-box delete_modal block_modal" 
@@ -644,75 +648,75 @@ class ChatProff extends Component {
                                 
                             </div>
                         </Modal.Body>
-                    </Modal>
+                    </Modal> */}
 
-                    {/* Block popup modal end */} 
+          {/* Block popup modal end */}
 
-                    {/* Block Report User modal start */}
-                  <Modal 
-                        show={this.state.show8} 
-                        // onHide={this.handleCloseConformation}
-                        className="custom-popUp confirmation-box delete_modal block_modal" 
-                        bsSize="small"
-                    >
-                        <Modal.Body>
-                        <div className="col10 fw500 fs28 text-left">Report/Block User</div>
-                            <div className="delete_user mt-4">    
-                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlerblockuserClose2} />    
+          {/* Block Report User modal start */}
+          <Modal
+            show={this.state.show8}
+            // onHide={this.handleCloseConformation}
+            className="custom-popUp confirmation-box delete_modal block_modal"
+            bsSize="small"
+          >
+            <Modal.Body>
+              <div className="col10 fw500 fs28 text-left">Report/Block User</div>
+              <div className="delete_user mt-4">
+                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlerblockuserClose2} />
 
-                                <div className="text-center mt-5 mb-3">  
-                                    <Button
-                                        className="text-uppercase w-auto btnTyp9 report mr-4">    
-                                        REPORT 
-                                    </Button>  
-                                    <Button 
-                                        className="text-uppercase w-auto btnTyp9 blocks">
-                                        BLOCK 
-                                   </Button> 
-                                </div>
-                                
-                            </div>
-                        </Modal.Body>
-                    </Modal>
+                <div className="text-center mt-5 mb-3">
+                  <Button
+                    className="text-uppercase w-auto btnTyp9 report mr-4">
+                    REPORT
+                                    </Button>
+                  <Button
+                    className="text-uppercase w-auto btnTyp9 blocks">
+                    BLOCK
+                                   </Button>
+                </div>
 
-                    {/* Block Report User modal end */} 
+              </div>
+            </Modal.Body>
+          </Modal>
 
-                     {/* Report Listener popup modal start */}
-                  <Modal 
-                        show={this.state.show7} 
-                        // onHide={this.handleCloseConformation}
-                        className="custom-popUp confirmation-box delete_modal block_modal" 
-                        bsSize="small"
-                    >
-                        <Modal.Body> 
-                            <div className="col10 fw500 fs28 text-left">Report Listener</div>
-                            <div className="col14 fs20 fw400 text-left mt-2">Please select a problem to continue</div>
-                            <div className="delete_user mt-4"> 
-                                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlereportClose2} />  
-                               
-                               <ul className="block_users"> 
-                                   <li>Requesting/Sharing personal contact information</li>
-                                   <li>Inappropriate/Sex chat</li>
-                                   <li>Harassing/Threatening Behaviour</li>
-                                   <li>Other</li> 
-                               </ul>
-                               <Form.Group controlId="exampleForm.ControlTextarea1" className="pb-2 mt-3 mb-4">
-                                    <Form.Control as="textarea" rows="3" className="inputTyp2 col28 fs20 fw400" placeholder="Comments" />  
-                              </Form.Group>
-                                <div className="text-left">   
-                                    <Button
-                                        className="btnTyp5 w-auto btn btn-success text-uppercase">
-                                        SUBMIT 
-                                    </Button> 
-                                </div>
-                                
-                            </div>
-                        </Modal.Body>
-                    </Modal>
+          {/* Block Report User modal end */}
 
-                    {/* Report Listener modal end */}
+          {/* Report Listener popup modal start */}
+          <Modal
+            show={this.state.show7}
+            // onHide={this.handleCloseConformation}
+            className="custom-popUp confirmation-box delete_modal block_modal"
+            bsSize="small"
+          >
+            <Modal.Body>
+              <div className="col10 fw500 fs28 text-left">Report Listener</div>
+              <div className="col14 fs20 fw400 text-left mt-2">Please select a problem to continue</div>
+              <div className="delete_user mt-4">
+                <Image src={Blueicons} alt="" className="close pointer" onClick={this.handlereportClose2} />
 
-                    
+                <ul className="block_users">
+                  <li>Requesting/Sharing personal contact information</li>
+                  <li>Inappropriate/Sex chat</li>
+                  <li>Harassing/Threatening Behaviour</li>
+                  <li>Other</li>
+                </ul>
+                <Form.Group controlId="exampleForm.ControlTextarea1" className="pb-2 mt-3 mb-4">
+                  <Form.Control as="textarea" rows="3" className="inputTyp2 col28 fs20 fw400" placeholder="Comments" />
+                </Form.Group>
+                <div className="text-left">
+                  <Button
+                    className="btnTyp5 w-auto btn btn-success text-uppercase">
+                    SUBMIT
+                                    </Button>
+                </div>
+
+              </div>
+            </Modal.Body>
+          </Modal>
+
+          {/* Report Listener modal end */}
+
+
 
         </div>
         <Footer />

@@ -444,4 +444,31 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+
+  blockChat: {
+    url: "elp/superadmin_Blockuserstatus",
+    method: "POST",
+    data: {
+      userid: '',
+      status: '',
+
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+
+  reportUser: {
+    url: "elp/add_blockreasonuser",
+    method: "POST",
+    data: {
+      br_reason: "",
+      br_comment: "",
+      br_from_id: "",
+      br_to_id: ""
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  }
+
 };

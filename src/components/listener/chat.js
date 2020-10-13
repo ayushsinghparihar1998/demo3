@@ -38,6 +38,7 @@ import socketClass from "../../common/utility/socketClass";
 import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
+import BlockModal from "../modals/BlockModal";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -66,8 +67,12 @@ class Chat extends Component {
       ans33: false,
       typing: "",
       user_id: getLocalStorage("userInfo").u_id,
-      userMeta: {}
+      userMeta: {},
+
     };
+
+    this.blockModal = React.createRef();
+
   }
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
@@ -439,6 +444,7 @@ class Chat extends Component {
                           <Image src={Sounds} alt="" className="pointer mr-2" />
                           <Image
                             src={Dangers}
+                            onClick={() => this.blockModal.current.openModal()}
                             alt=""
                             className="pointer mr-2"
                           />
@@ -576,6 +582,9 @@ class Chat extends Component {
           </Container>
         </div>
         <Footer />
+
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
+
         {/* <Modal show={this.state.closeFlag} className="CreateAccount question">
           <Modal.Header>
             <Button onClick={this.handleClose2}>
