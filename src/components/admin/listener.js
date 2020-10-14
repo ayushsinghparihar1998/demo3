@@ -433,6 +433,53 @@ class Adminlistener extends Component {
       );
     });
   };
+
+  getRatinguserListing = (offset, count, block_type) => {
+    // 0:Processing,1:Accept,2:Reject
+    // offset - page no
+    // count - perpage item
+    console.log(count, offset, block_type);
+    let data = {
+      count: count,
+      offset: offset,
+      block_type: block_type,
+    };
+    console.log(data);
+    if (block_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("getRatinguserListing", data).then((result) => {
+      console.log("result", result);
+      let ratingList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        ratingList =
+          result && result.data && result.data.data
+            ? result.data.data.block_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "ratingList",
+          ratingList,
+          totalRecordCount,
+          count,
+          offset,
+          block_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    });
+  };
+
   changeStatusReview = (rv_id, rv_status) => {
     let data = {
       rv_id,
@@ -468,14 +515,22 @@ class Adminlistener extends Component {
     });
   };
 
-  onChangeTab(key) {
+  onChangeTab(key, type) {
     if (key === "request") {
-      this.getBlockuserListing(1, 10, 0);
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 0)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 0)
+        : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
       });
     } else if (key === "reject") {
-      this.getBlockuserListing(1, 10, 2);
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 2)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 2)
+        : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
       });
@@ -483,14 +538,19 @@ class Adminlistener extends Component {
       this.setState({
         key: "completed",
       });
-      this.getBlockuserListing(1, 10, 1);
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 1)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 1)
+        : this.getReviewListing(1, 10, 1);
     }
   }
-  onChangeTabRev(key) {
-    if (key === "request") this.getReviewListing(1, 10, 0);
-    else if (key === "reject") this.getReviewListing(1, 10, 2);
-    else this.getReviewListing(1, 10, 1);
-  }
+
+  // onChangeTabRev(key) {
+  //   if (key === "request") this.getReviewListing(1, 10, 0);
+  //   else if (key === "reject") this.getReviewListing(1, 10, 2);
+  //   else this.getReviewListing(1, 10, 1);
+  // }
   render() {
     let totalRecord = this.state.totalRecord;
     let userActveClass =
@@ -716,7 +776,7 @@ class Adminlistener extends Component {
                       <Tabs
                         defaultActiveKey="request"
                         activeKey={this.state.key}
-                        onSelect={(key) => this.onChangeTab(key)}
+                        onSelect={(key) => this.onChangeTab(key, "block")}
                       >
                         <Tab eventKey="request" title="Requested">
                           <div className="requests">
@@ -863,7 +923,7 @@ class Adminlistener extends Component {
                     <div className="text-center user_tab">
                       <Tabs
                         defaultActiveKey="request"
-                        onSelect={(key) => this.onChangeTabRev(key)}
+                        onSelect={(key) => this.onChangeTab(key, "review")}
                       >
                         <Tab eventKey="request" title="Requested">
                           <div className="requests">
@@ -1008,7 +1068,10 @@ class Adminlistener extends Component {
                 <Col md={8} lg={9} className="pl-1">
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
-                      <Tabs defaultActiveKey="request">
+                      <Tabs
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "rating")}
+                      >
                         <Tab eventKey="request" title="Requested">
                           <div className="requests">
                             <div className="d-flex pt-4 pb-4 text-left border-grays">
