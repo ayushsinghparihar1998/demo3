@@ -445,4 +445,51 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+
+  blockChat: {
+    url: "elp/superadmin_Blockuserstatus",
+    method: "POST",
+    data: {
+      userid: '',
+      status: '',
+
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+
+  reportUser: {
+    url: "elp/add_blockreasonuser",
+    method: "POST",
+    data: {
+      br_reason: "",
+      br_comment: "",
+      br_from_id: "",
+      br_to_id: ""
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+  getSurveyList: {
+    url: "elp/getsurveylist",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  submitSurvey: {
+    url: "elp/submitsurvey",
+    method: "POST",
+    data: {
+      survey_submit:[]
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  }
+
 };
