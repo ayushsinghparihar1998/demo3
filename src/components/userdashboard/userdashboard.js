@@ -13,15 +13,9 @@ import {
   Tab,
   Modal,
 } from "react-bootstrap";
+
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import moment from "moment";
-import {
-  actionGetRecentJoin,
-  actionGetListnerDashBoard,
-} from "../../common/redux/actions";
-import CONSTANTS from "../../common/helpers/Constants";
-import validateInput from "../../common/validations/validationSignup";
 import UserChat from "../../assets/images/user_chat.svg";
 import UserChat2 from "../../assets/images/user_chat2.svg";
 import UserChat3 from "../../assets/images/user_chat3.svg";
@@ -40,113 +34,190 @@ import Hearttwo from "../../assets/images/heart2.svg";
 import Medals from "../../assets/images/medals.svg";
 import Rflag from "../../assets/images/r_flag.svg";
 import SocketIOClient from "socket.io-client";
-import { getLocalStorage } from "../../common/helpers/Utils";
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
-const socket = SocketIOClient(SOCKET_IO_URL);
-socket.connect();
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from "../../common/helpers/Utils";
+import {
+  actionGetRecentJoin,
+  actionGetUserDashBoard,
+} from "../../common/redux/actions";
+import socketClass from "../../common/utility/socketClass";
+import RecentChat from "../ChatShared/RecentChat/RecentChat";
+import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
+// const SOCKET_IO_URL = "http://103.76.253.131:8282";
+const socket = socketClass.getSocket();
+// SocketIOClient(SOCKET_IO_URL);
+
+// socket.connect();
 
 class Userdashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recentJoin: [],
       dashboardData: [],
+      showVal: 4,
+      activeChatUsers: [],
+      user_id: getLocalStorage("customerInfo").u_id
     };
   }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
+    this.unmount();
+  }
+  unmount = () => {
+    // if (socket) {
+    //   socket.disconnect();
+    // }
+  }
   componentDidMount() {
+    // if (!socket.connected) {
+    //   socket.connect();
+    // }
+    window.addEventListener("beforeunload", this.unmount)
     this.getRecentJoinUsers();
-    this.getListnerDashBoard();
-    let result = getLocalStorage("result");
-    if (getLocalStorage("result") >= 60) {
-      this.setState({
-        sucess: true,
-        result: true,
-        message: "your score is " + " " + result + "%",
-      });
-    } else {
-      this.setState({
-        sucess: true,
-        result: false,
-        message: "your score is " + " " + result + "%",
-      }); 
+    this.getUserDashBoard();
+    // abhi start
+    // let result = getLocalStorage("result");
+    // console.log("getLocalStorage", getLocalStorage("result"));
+    // if (getLocalStorage("result") >= 60) {
+    //   this.setState({
+    //     sucess: true,
+    //     result: true,
+    //     message: "your score is " + result,
+    //   });
+    // } else {
+    //   this.setState({
+    //     sucess: true,
+    //     result: false,
+    //     message: "your score is" + result,
+    //   });
+    // }
+
+    if (getLocalStorage("onScreenIdUser")) {
+      socket.emit(
+        "onScreen",
+        JSON.stringify({
+          user_id: getLocalStorage("customerInfo").u_id,
+          user_type: getLocalStorage("customerInfo").u_role_id,
+          status: 0,
+        }),
+        function (d) {
+          console.log("onScreen", d);
+          removeLocalStorage("onScreenIdUser");
+        }
+      );
     }
 
     socket.on("connect", function () {
-
     });
-    socket.emit(
-      "chat-login",
-      JSON.stringify({
-        user_id: getLocalStorage("u_id"),
-        user_type: getLocalStorage("u_role_id"),
-      }),
-      function (data) {
-        
+    // socket.emit(
+    //   "chat-login",
+    //   JSON.stringify({
+    //     user_id: getLocalStorage("customerInfo").u_id,
+    //     user_type: getLocalStorage("customerInfo").u_role_id,
+    //   }),
+    //   function (data) {
+    //     console.log(data, "authenticateSocket");
+    //   }
+    // );
+    socket.on("newUserForActivityList", (data) => {
+      if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
+        this.setState(prev => ({
+          activeChatUsers: [...prev.activeChatUsers, data]
+        }))
       }
-    );
+    });
 
     socket.emit(
       "getRecentsChatedUsers",
       JSON.stringify({
-        user_id: getLocalStorage("u_id"),
+        user_id: getLocalStorage("customerInfo").u_id,
       }),
       function (d) {
-        
-      }
+        console.log("getRecentsChatedUsers", d);
+        this.setState(
+          {
+            recentChatUsers: d.data,
+          },
+          () => {
+            console.log(this.state.recentChatUsers);
+          }
+        );
+      }.bind(this)
     );
-  }
-  call() {
     socket.emit(
       "getActiveListnersOrCustomers",
       JSON.stringify({
-        user_type: getLocalStorage("u_role_id"),
-        user_id: getLocalStorage("u_id"),
+        user_id: getLocalStorage("customerInfo").u_id,
+        user_type: getLocalStorage("customerInfo").u_role_id,
         pagination: "10",
         page: "1",
       }),
       function (d) {
-        
-      }
+        console.log("getActiveListnersOrCustomers", d);
+        this.setState(
+          {
+            activeChatUsers: d.data,
+          },
+          () => {
+            console.log(this.state.activeChatUsers);
+          }
+        );
+      }.bind(this)
     );
   }
+
   handleOk = (e) => {
+    console.log(e);
     this.setState({
       sucess: false,
     });
   };
 
   handleCancel = (e) => {
+    console.log(e);
+    // if (this.state.result) {
     this.setState({
       sucess: false,
     });
+    // }
   };
 
-  getRecentJoinUsers() {
-    let userInfo = getLocalStorage("userInfo");
+  getRecentJoinUsers = () => {
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.u_mem_list;
-        this.setState({ recentJoin: res });
+        let res = result.data.data && result.data.data.u_mem_list?result.data.data.u_mem_list:[];
+        this.setState({ recentJoin: res })
       }
-    });
+    })
   }
-  getListnerDashBoard() {
-    let userInfo = getLocalStorage("userInfo");
-    this.props.actionGetListnerDashBoard({}).then((result) => {
+  getUserDashBoard = () => {
+    this.props.actionGetUserDashBoard({}).then((result) => {
       if (result && result.status === 200) {
-        let res = result.data.data.dashboard_list;
-        this.setState({ dashboardData: res });
+        let res = result.data.data && result.data.data.dashboard_list?result.data.data.dashboard_list:[];
+        this.setState({ dashboardData: res })
       }
-    });
+    })
   }
   copyReferUrl = () => {
     var copyText = document.getElementById("referURL");
     copyText.select();
-    copyText.setSelectionRange(0, 99999);
+    copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
     // alert("Copied the text: " + copyText.value);
+  }
+  changepath = (path) => {
+    this.props.history.push(path);
   };
-
+  handleRedirectRecentChat = (data) => () => {
+    const { user_id } = this.state;
+    const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
+    this.props.history.push('/chatuser/' + id);
+  }
+  handleRedirectActiveUsers = (data) => () => {
+    this.props.history.push('/chatuser/' + data.id);
+  }
   render() {
     let recentJoin = this.state.recentJoin;
     let dashboardData = this.state.dashboardData;
@@ -160,246 +231,109 @@ class Userdashboard extends Component {
             <Row>
               <Col md={3}>
                 <div className="left_sidebar">
-                  <div className="inner_side">
+                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
                     </div>
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="pointer cross_btn"
-                        />
-                      </div>
-                    </div>
+                    {this.state.recentChatUsers &&
+                      this.state.recentChatUsers.map((item) => {
+                        return (
+                          <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
+                            <div className="position-relative">
+                              <Image
+                                src={item.from_image ? item.from_image : UserChat}
+                                alt=""
+                                className="r50 pt-1"
+                              />
+                              <span className={(item.from_user_id ==
+                                getLocalStorage("customerInfo").u_id
+                                ? item.to_user_online
+                                : item.from_user_online) == "1" ? 'online' : ''}></span>
+                            </div>
+                            <div className="position-relative pl-3">
+                              <div className="fs15 col23 fw500 pr-2">
+                                {item.from_user_id ==
+                                  getLocalStorage("customerInfo").u_id
+                                  ? item.to_user_name
+                                  : item.from_user_name}
+                              </div>
+                              <div className="col27 fs13 fw500">
+                                {item.message}
+                              </div>
+                              <Image
+                                src={ChatCross}
+                                alt=""
+                                className="pointer cross_btn"
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div> */}
 
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat2} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">John</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat3} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Melinda</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat4} alt="" className="r50 pt-1" />
-                        <span className="online"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Stiv</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex m-3 border-bottom">
-                      <div className="position-relative">
-                        <Image src={UserChat5} alt="" className="r50 pt-1" />
-                        <span className="offline"></span>
-                      </div>
-                      <div className="position-relative pl-3">
-                        <div className="fs15 col23 fw500 pr-2">Jinny</div>
-                        <div className="col27 fs13 fw500">
-                          Apr 30 - Type your name below exactly as you'd me...
-                        </div>
-                        <Image
-                          src={ChatCross}
-                          alt=""
-                          className="cross_btn pointer"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="inner_side">
+                  {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      <span onClick={() => this.call()}>
-                        Currently Active Listeners
-                      </span>
+                      <span>Currently Active Listeners </span>
                     </div>
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
                         <div className="chat-border"></div>
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image src={UserChat} alt="" className="r50 pt-1" />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@Jinni_1254</div>
-                          </div>
-                        </div>
+                        {this.state.activeChatUsers &&
+                          this.state.activeChatUsers.map((item, ind) => {
+                            return ind < this.state.showVal ? (
+                              <div className="d-flex m-3 border-bottom pointer"
+                                onClick={() =>
+                                  this.changepath("/chatuser/" + item.id)
+                                }
+                              >
+                                <div className="position-relative">
+                                  <Image
+                                    src={item.u_image ? item.u_image : UserChat}
+                                    alt=""
+                                    className="r50 pt-1"
+                                  />
+                                </div>
+                                <div className="position-relative pl-3 mt-auto mb-auto">
+                                  <div
+                                    className="fs14 col14 fw500"
 
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat2}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@RedPanda101</div>
-                          </div>
-                        </div>
-
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat3}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">
-                              @Duane Johnson
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat4}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@Mark</div>
-                          </div>
-                        </div>
-
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat5}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">
-                              @Melinda Jems
-                            </div>
-                          </div>
-                        </div>
+                                  >
+                                    {item.u_name}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                                ""
+                              );
+                          })}
                       </Tab>
-                      <Tab eventKey="profile" title="Chats">
-                        <div className="chat-border"></div>
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat3}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">
-                              @Duane Johnson
-                            </div>
-                          </div>
+                    </Tabs>
+                    {this.state.showVal == 4 ? (
+                      <div
+                        className="fs15 fw600 col23 p-3 pointer show-more"
+                        onClick={() => {
+                          this.setState({
+                            showVal: this.state.activeChatUsers.length,
+                          });
+                        }}
+                      >
+                        Show More
+                      </div>
+                    ) : (
+                        <div
+                          className="fs15 fw600 col23 p-3 pointer show-more"
+                          onClick={() => {
+                            this.setState({
+                              showVal: 4,
+                            });
+                          }}
+                        >
+                          Show Less
                         </div>
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat2}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@RedPanda101</div>
-                          </div>
-                        </div>
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image src={UserChat} alt="" className="r50 pt-1" />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@Jinni_1254</div>
-                          </div>
-                        </div>
-
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat4}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">@Mark</div>
-                          </div>
-                        </div>
-
-                        <div className="d-flex m-3 border-bottom">
-                          <div className="position-relative">
-                            <Image
-                              src={UserChat5}
-                              alt=""
-                              className="r50 pt-1"
-                            />
-                          </div>
-                          <div className="position-relative pl-3 mt-auto mb-auto">
-                            <div className="fs14 col14 fw500">
-                              @Melinda Jems
-                            </div>
-                          </div>
-                        </div>
-                      </Tab>
-                    </Tabs> 
-
-                    <div className="fs15 fw600 col23 p-3 pointer show-more">
-                      Show More
-                    </div> 
-                  </div>
+                      )}
+                  </div> */}
                 </div>
               </Col>
 
@@ -456,28 +390,24 @@ class Userdashboard extends Component {
                         </Col>
                         <Col md={4}>
                           <Image src={Skill2} alt="" />
-
                           <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
                             General Request Response Rate
                           </div>
                         </Col>
                         <Col md={4}>
                           <Image src={Skill3} alt="" />
-
                           <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
                             Your Personal Request Response Rate
                           </div>
                         </Col>
                         <Col md={4}>
                           <Image src={Skill3} alt="" />
-
                           <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
                             People Referred to Eat Luv N Pray
                           </div>
                         </Col>
                         <Col md={4}>
                           <Image src={Skill3} alt="" />
-
                           <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
                             Your Personal Request Response Rate
                           </div>
@@ -505,11 +435,7 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Stars} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">
-                            {dashboardData.u_cheers
-                              ? dashboardData.u_cheers
-                              : "0"}{" "}
-                          </strong>
+                          <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong>
                           Cheers
                         </span>
                       </div>
@@ -518,11 +444,7 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Hearttwo} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">
-                            {dashboardData.u_compassion_count
-                              ? dashboardData.u_compassion_count
-                              : "0"}{" "}
-                          </strong>
+                          <strong className="fs18">{dashboardData.u_compassion_count ? dashboardData.u_compassion_count : '0'} </strong>
                           Compassion Hearts
                         </span>
                       </div>
@@ -531,11 +453,7 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Medals} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">
-                            {dashboardData.u_badge_count
-                              ? dashboardData.u_badge_count
-                              : "0"}{" "}
-                          </strong>
+                          <strong className="fs18">{dashboardData.u_badge_count ? dashboardData.u_badge_count : '0'} </strong>
                           Badges Earned
                         </span>
                       </div>
@@ -565,11 +483,7 @@ class Userdashboard extends Component {
                           type="text"
                           readOnly
                           className="inputTyp4"
-                          value={
-                            dashboardData.refer_url
-                              ? dashboardData.refer_url
-                              : ""
-                          }
+                          value={dashboardData.refer_url ? dashboardData.refer_url : ''}
                         />
                         <Button className="btnTyp8" onClick={this.copyReferUrl}>
                           <Image src={Copys} alt="" className="" />
@@ -583,27 +497,21 @@ class Userdashboard extends Component {
                     </div>
 
                     {recentJoin &&
-                      recentJoin.map((data, index) => {
-                        return (
-                          <div className="d-flex m-3 border-bottom">
-                            <div className="position-relative">
-                              <Image
-                                src={data.u_image ? data.u_image : ""}
-                                alt=""
-                                className="r50 pt-1"
-                              />
-                            </div>
-                            <div className="mt-auto mb-auto pl-3">
-                              <div className="fs15 col14 fw500">
-                                {data.u_username ? data.u_username : ""}
+                      recentJoin.map(
+                        (data, index) => {
+                          return (
+                            <div className="d-flex m-3 border-bottom">
+                              <div className="position-relative">
+                                <Image src={data.u_image ? data.u_image : ''} alt="" className="r50 pt-1" />
                               </div>
-                              <div className="col27 fs13 fw500">
-                                {data.u_role_txt ? data.u_role_txt : ""}
+                              <div className="mt-auto mb-auto pl-3">
+                                <div className="fs15 col14 fw500">{data.u_username ? data.u_username : ''}</div>
+                                <div className="col27 fs13 fw500">{data.u_role_txt ? data.u_role_txt : ''}</div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          )
+                        })
+                    }
 
                     {/* <div className="d-flex m-3 border-bottom">
                       <div className="position-relative">
@@ -614,35 +522,14 @@ class Userdashboard extends Component {
                         <div className="col27 fs13 fw500">Listeners</div>
                       </div>
                     </div> */}
+
                   </div>
                 </div>
               </Col>
             </Row>
           </Container>
         </div>
-        {/* <Modal
-          show={this.state.sucess}
-          onHide={event => {
-            this.handleCancel(event);
-          }}
-          className="custom-popUp confirmation-box"
-          bsSize="small"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
 
-          <Modal.Body>
-            <p>{this.state.message}</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onHide={event => {
-              this.handleCancel(event);
-            }}>Close</Button>
-            <Button variant="primary">Save changes</Button>
-          </Modal.Footer>
-        </Modal> */}
         <Footer />
       </div>
     );
@@ -651,7 +538,5 @@ class Userdashboard extends Component {
 
 export default connect(null, {
   actionGetRecentJoin,
-  actionGetListnerDashBoard,
-})(Userdashboard); 
-
-
+  actionGetUserDashBoard,
+})(Userdashboard);

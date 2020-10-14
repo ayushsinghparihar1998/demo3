@@ -434,30 +434,30 @@ class Adminlistener extends Component {
     });
   };
 
-  getRatinguserListing = (offset, count, block_type) => {
+  getRatinguserListing = (offset, count, review_type) => {
     // 0:Processing,1:Accept,2:Reject
     // offset - page no
     // count - perpage item
-    console.log(count, offset, block_type);
+    console.log(count, offset, review_type);
     let data = {
       count: count,
       offset: offset,
-      block_type: block_type,
+      review_type: review_type,
     };
     console.log(data);
-    if (block_type == 0) {
+    if (review_type == 0) {
       this.setState({
         key: "request",
       });
     }
-    ELPViewApiService("getRatinguserListing", data).then((result) => {
+    ELPViewApiService("getRatingdetails", data).then((result) => {
       console.log("result", result);
       let ratingList = [];
       let totalRecordCount = 0;
       if (result && result.status === 200) {
         ratingList =
           result && result.data && result.data.data
-            ? result.data.data.block_list
+            ? result.data.data.rating_list
             : [];
         totalRecordCount =
           result && result.data && result.data.data
@@ -471,7 +471,7 @@ class Adminlistener extends Component {
           totalRecordCount,
           count,
           offset,
-          block_type,
+          review_type,
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -490,8 +490,26 @@ class Adminlistener extends Component {
 
       if (result && result.status === 200) {
         this.getReviewListing(
-          this.state.count,
           this.state.offset,
+          this.state.count,
+          this.state.review_type
+        );
+      }
+    });
+  };
+  changeStatusRating = (ur_id, ur_status) => {
+    let data = {
+      ur_id,
+      ur_status,
+    };
+    ELPViewApiService("changestatusrating", data).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        this.getRatinguserListing(
+          this.state.offset,
+
+          this.state.count,
           this.state.review_type
         );
       }
@@ -507,8 +525,9 @@ class Adminlistener extends Component {
 
       if (result && result.status === 200) {
         this.getBlockuserListing(
-          this.state.count,
           this.state.offset,
+
+          this.state.count,
           this.state.block_type
         );
       }
@@ -663,7 +682,7 @@ class Adminlistener extends Component {
                       <div
                         className={ratingActveClass}
                         onClick={(e) => {
-                          this.getReviewListing(1, 10, 0);
+                          this.getRatinguserListing(1, 10, 0);
                         }}
                       >
                         <div className="fs14 col28 fw500">
@@ -816,10 +835,22 @@ class Adminlistener extends Component {
                                       </div>
 
                                       <div className="mt-3">
-                                        <Button className="btnTyp9 approve mr-4">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={this.blockUserStatus(
+                                            item.ur_id,
+                                            1
+                                          )}
+                                        >
                                           APPROVE
                                         </Button>
-                                        <Button className="btnTyp9 reject">
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={this.blockUserStatus(
+                                            item.ur_id,
+                                            2
+                                          )}
+                                        >
                                           REJECT
                                         </Button>
                                       </div>
@@ -922,6 +953,7 @@ class Adminlistener extends Component {
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
+                        activeKey={this.state.key}
                         defaultActiveKey="request"
                         onSelect={(key) => this.onChangeTab(key, "review")}
                       >
@@ -963,10 +995,26 @@ class Adminlistener extends Component {
                                       </div>
 
                                       <div className="mt-3">
-                                        <Button className="btnTyp9 approve mr-4">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              1
+                                            )
+                                          }
+                                        >
                                           APPROVE
                                         </Button>
-                                        <Button className="btnTyp9 reject">
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              2
+                                            )
+                                          }
+                                        >
                                           REJECT
                                         </Button>
                                       </div>
@@ -1069,188 +1117,204 @@ class Adminlistener extends Component {
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
+                        activeKey={this.state.key}
                         defaultActiveKey="request"
                         onSelect={(key) => this.onChangeTab(key, "rating")}
                       >
                         <Tab eventKey="request" title="Requested">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2 w-100">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
-
-                                <div className="mb-4">
-                                  <span className="mr-4">
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image src={Yellowstar} alt="" />
-                                  </span>
-                                  <span className="col82 fs18 fw600">
-                                    Good! <Image src={Checkgreen} alt="" />
-                                  </span>
-                                </div>
-
-                                <div className="mt-3">
-                                  <Button className="btnTyp9 approve mr-4">
-                                    APPROVE
-                                  </Button>
-                                  <Button className="btnTyp9 reject">
-                                    REJECT
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
+                                );
+                              })}{" "}
                           </div>
                         </Tab>
                         <Tab eventKey="completed" title="COMPLETED">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2 w-100">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                <div>
-                                  <span className="mr-4">
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image src={Yellowstar} alt="" />
-                                  </span>
-                                  <span className="col82 fs18 fw600">
-                                    Good! <Image src={Checkgreen} alt="" />
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                           </div>
                         </Tab>
 
                         <Tab eventKey="reject" title="REJECTED">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2 w-100">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                <div>
-                                  <span className="mr-4">
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image
-                                      src={Yellowstar}
-                                      alt=""
-                                      className="mr-1"
-                                    />
-                                    <Image src={Yellowstar} alt="" />
-                                  </span>
-                                  <span className="col82 fs18 fw600">
-                                    Good! <Image src={Checkgreen} alt="" />
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
                           </div>
                         </Tab>
                       </Tabs>
