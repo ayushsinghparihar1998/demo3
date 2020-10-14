@@ -469,6 +469,26 @@ export default {
     },
     showResultMessage: true,
     showErrorMessage: true,
+  },
+
+  getSurveyList: {
+    url: "elp/getsurveylist",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  submitSurvey: {
+    url: "elp/submitsurvey",
+    method: "POST",
+    data: {
+      survey_submit:[]
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
   }
 
 };
