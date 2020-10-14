@@ -53,6 +53,7 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
+import MessageCount from "../modals/MessageCount";
 
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
@@ -597,7 +598,10 @@ class ChatProff extends Component {
                           >
                             Send
                           </Button>
+                          
                         </div>
+                        
+                        <MessageCount userId={this.props.match.params.id}/>
                       </Form.Group>
                     </div>
                   </div>

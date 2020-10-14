@@ -9,8 +9,9 @@ import {
 } from '../helpers/Utils';
 let apiFailCounter = 0;
 // axios.defaults.baseURL = 'http://103.76.253.131:81';
-axios.defaults.baseURL = 'https://www.eatluvnpray.org/';
-//axios.defaults.baseURL = 'http://103.21.53.11:3004';
+// axios.defaults.baseURL = 'https://www.eatluvnpray.org/';
+axios.defaults.baseURL = 'https://staging.eatluvnpray.org/';
+
 axios.interceptors.request.use(
   function (config) {
    

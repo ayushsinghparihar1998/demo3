@@ -9,6 +9,8 @@ import {
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
 } from "../../common/redux/actions";
+import Checkgreen from "../../assets/images/checkgreen.svg";
+import Yellowstar from "../../assets/images/stars.png";
 import {
   Button,
   NavDropdown,
@@ -22,6 +24,8 @@ import {
   Tab,
   Modal,
 } from "react-bootstrap";
+import moment from "moment";
+
 import Pagination from "react-js-pagination";
 import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/navAdmin";
@@ -37,6 +41,7 @@ import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
 
 import { result, stubFalse } from "lodash";
+import { getLocalStorage, range } from "../../common/helpers/Utils";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -51,10 +56,120 @@ class Adminlistener extends Component {
       userProfileName: "",
       reasonForDelete: "",
       pageType: "",
+
+      pageno: 1,
+      records: 5,
+      totalCount: "",
+
+      count: 10,
+      offset: 0,
+      block_type: 0,
+      review_type: 0,
     };
   }
   componentDidMount() {
     this.getListnerListing("", "listner", 1);
+  }
+
+  // getBlockuserListing = (pageno, records) =>{
+  //     this.setState({
+  //         showLoader: true,
+  //         pageno: pageno,
+  //         records: records,
+  //       });
+  //       delivaApiService("deliveryAgentList", {
+  //         pageNumber: pageno,
+  //         records: records,
+  //         // sort: sort,
+  //         // keyword: keyword,
+  //         // search: search,
+  //       })
+  //         .then((response) => {
+  //             this.setState({showLoader: false});
+  //             console.log('deliveryAgentList-response',response);
+  //             if(response.data.status == 200){
+  //                 this.setState({
+  //                   delivery_agent_list: response.data.resourceData.dAList,
+  //                   totalCount: response.data.resourceData.totalCount
+  //                 });
+  //                 this.getPager(response.data.resourceData.totalCount);
+  //             }
+  //       }).catch((error) => {
+  //           this.setState({
+  //             showLoader: false,
+  //           });
+  //       });
+  // }
+
+  //manage page counts
+  getPager(total) {
+    let startPage = this.state.startPage;
+    let endPage = this.state.endPage;
+    let totalPage = Math.ceil(total / this.state.records);
+    console.log("totalPage", totalPage);
+    let pageno = this.state.pageno;
+
+    if (totalPage <= 5) {
+      startPage = 1;
+      endPage = totalPage;
+    } else {
+      if (pageno <= 3) {
+        startPage = 1;
+        endPage = 5;
+      } else if (pageno + 1 >= totalPage) {
+        startPage = totalPage - 4;
+        endPage = totalPage;
+      } else {
+        startPage = pageno - 2;
+        endPage = pageno + 2;
+      }
+    }
+    let startIndex = (pageno - 1) * this.state.records;
+    let endIndex = Math.min(startIndex + this.state.records - 1, totalPage - 1);
+
+    // create an array of pages to ng-repeat in the pager control
+    let pageArray;
+    if (startPage == endPage) {
+      console.log("startPage, endPage", startPage, endPage);
+
+      pageArray = [1];
+    } else {
+      pageArray = range(startPage, endPage);
+      console.log("startPage, endPage", startPage, endPage);
+    }
+    this.setState({
+      // records: this.state.records,
+      totalPage: totalPage,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pageArray: pageArray,
+    });
+  }
+
+  // change page
+
+  onChangePage(page) {
+    console.log(page);
+    console.log(this.state.pageno);
+    if (page == this.state.pageno) {
+    } else {
+      if (this.state.pageType == "blockList") {
+        this.getBlockuserListing(
+          this.state.count,
+          this.state.offset,
+          this.state.block_type
+        );
+      } else if (this.state.pageType == "reviewList") {
+        this.getProfessionalListing(
+          this.state.count,
+          this.state.offset,
+          this.state.review_type
+        );
+      } else {
+      }
+    }
   }
 
   handlePageChange = (newPageNumber) => {
@@ -69,7 +184,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
 
   getListnerListing = (e, activaClass, pageNumber) => {
@@ -158,7 +272,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   adminChangeUserStatus = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let userStatus = status ? 0 : 1;
@@ -176,7 +289,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   adminUserDelete = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let chkUserProfile = this.state.activeProfile;
@@ -194,14 +306,12 @@ class Adminlistener extends Component {
       }
     });
   };
-
   userProfile = (e, uid) => {
     this.props.history.push({
       pathname: "/myprofile",
       state: { userId: uid },
     });
   };
-
   adminUserDeleteConfirm = (e, uid, name) => {
     this.setState({
       deleteConformationModal: true,
@@ -209,14 +319,12 @@ class Adminlistener extends Component {
       userProfileName: name,
     });
   };
-
   handleCloseConformation = () => {
     this.setState({
       deleteConformationModal: false,
       profileId: "",
     });
   };
-
   handleChange(e) {
     const name = e.target.name;
     let value = e.target.value;
@@ -225,7 +333,6 @@ class Adminlistener extends Component {
       reasonForDelete: value,
     });
   }
-
   adminUserDeleteReason = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let reason = this.state.reasonForDelete;
@@ -245,12 +352,22 @@ class Adminlistener extends Component {
     });
   };
 
-  getBlockuserListing = (e, count, offset) => {
+  getBlockuserListing = (offset, count, block_type) => {
+    // 0:Processing,1:Accept,2:Reject
+    // offset - page no
+    // count - perpage item
+    console.log(count, offset, block_type);
     let data = {
       count: count,
       offset: offset,
-      block_type: 2,
+      block_type: block_type,
     };
+    console.log(data);
+    if (block_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
     ELPViewApiService("getBlockuserListing", data).then((result) => {
       console.log("result", result);
       let blockList = [];
@@ -265,22 +382,27 @@ class Adminlistener extends Component {
             ? result.data.data.totalRecordCount
             : 0;
       }
-      this.setState({
-        pageType: "blockList",
-        blockList,
-        totalRecordCount,
-      });
+      this.setState(
+        {
+          pageType: "blockList",
+          blockList,
+          totalRecordCount,
+          count,
+          offset,
+          block_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
     });
   };
 
-  getReviewListing = (e, count, offset) => {
-    this.setState({
-      pageType: "reviewList",
-    });
+  getReviewListing = (offset, count, review_type) => {
     let data = {
       count: count,
       offset: offset,
-      review_type: 2,
+      review_type: review_type,
     };
     ELPViewApiService("getReviewListing", data).then((result) => {
       console.log("result", result);
@@ -289,21 +411,75 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         reviewList =
           result && result.data && result.data.data
-            ? result.data.data.block_list
+            ? result.data.data.review_list
             : [];
         totalRecordCount =
           result && result.data && result.data.data
             ? result.data.data.totalRecordCount
             : 0;
       }
-      this.setState({
-        pageType: "reviewList",
-        reviewList,
-        totalRecordCount,
-      });
+      this.setState(
+        {
+          pageType: "reviewList",
+          reviewList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+          review_type: review_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
     });
   };
-  
+
+  getRatinguserListing = (offset, count, review_type) => {
+    // 0:Processing,1:Accept,2:Reject
+    // offset - page no
+    // count - perpage item
+    console.log(count, offset, review_type);
+    let data = {
+      count: count,
+      offset: offset,
+      review_type: review_type,
+    };
+    console.log(data);
+    if (review_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("getRatingdetails", data).then((result) => {
+      console.log("result", result);
+      let ratingList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        ratingList =
+          result && result.data && result.data.data
+            ? result.data.data.rating_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "ratingList",
+          ratingList,
+          totalRecordCount,
+          count,
+          offset,
+          review_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    });
+  };
+
   changeStatusReview = (rv_id, rv_status) => {
     let data = {
       rv_id,
@@ -313,7 +489,29 @@ class Adminlistener extends Component {
       console.log("result", result);
 
       if (result && result.status === 200) {
-        this.getReviewListing();
+        this.getReviewListing(
+          this.state.offset,
+          this.state.count,
+          this.state.review_type
+        );
+      }
+    });
+  };
+  changeStatusRating = (ur_id, ur_status) => {
+    let data = {
+      ur_id,
+      ur_status,
+    };
+    ELPViewApiService("changestatusrating", data).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        this.getRatinguserListing(
+          this.state.offset,
+
+          this.state.count,
+          this.state.review_type
+        );
       }
     });
   };
@@ -326,11 +524,52 @@ class Adminlistener extends Component {
       console.log("result", result);
 
       if (result && result.status === 200) {
-        this.getReviewListing();
+        this.getBlockuserListing(
+          this.state.offset,
+
+          this.state.count,
+          this.state.block_type
+        );
       }
     });
   };
 
+  onChangeTab(key, type) {
+    if (key === "request") {
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 0)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 0)
+        : this.getReviewListing(1, 10, 0);
+      this.setState({
+        key: "request",
+      });
+    } else if (key === "reject") {
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 2)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 2)
+        : this.getReviewListing(1, 10, 2);
+      this.setState({
+        key: "reject",
+      });
+    } else {
+      this.setState({
+        key: "completed",
+      });
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 1)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 1)
+        : this.getReviewListing(1, 10, 1);
+    }
+  }
+
+  // onChangeTabRev(key) {
+  //   if (key === "request") this.getReviewListing(1, 10, 0);
+  //   else if (key === "reject") this.getReviewListing(1, 10, 2);
+  //   else this.getReviewListing(1, 10, 1);
+  // }
   render() {
     let totalRecord = this.state.totalRecord;
     let userActveClass =
@@ -352,6 +591,10 @@ class Adminlistener extends Component {
         : "position-relative";
     let reviewActveClass =
       this.state.pageType == "reviewList"
+        ? "position-relative active"
+        : "position-relative";
+    let ratingActveClass =
+      this.state.pageType == "ratingList"
         ? "position-relative active"
         : "position-relative";
     let profileListing = this.state.profileListing;
@@ -413,7 +656,20 @@ class Adminlistener extends Component {
                       <div
                         className={blockActveClass}
                         onClick={(e) => {
-                          this.getBlockuserListing(e);
+                          this.getBlockuserListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> BLOCK
+                          REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={reviewActveClass}
+                        onClick={(e) => {
+                          this.getReviewListing(1, 10, 0);
                         }}
                       >
                         <div className="fs14 col28 fw500">
@@ -424,14 +680,14 @@ class Adminlistener extends Component {
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
-                        className={reviewActveClass}
+                        className={ratingActveClass}
                         onClick={(e) => {
-                          this.getReviewListing(e);
+                          this.getRatinguserListing(1, 10, 0);
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> BLOCK
-                          REQUESTS
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          RATING REQUESTS
                         </div>
                       </div>
                     </div>
@@ -536,489 +792,320 @@ class Adminlistener extends Component {
                 <Col md={8} lg={9} className="pl-1">
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
-                      <Tabs defaultActiveKey="request">
+                      <Tabs
+                        defaultActiveKey="request"
+                        activeKey={this.state.key}
+                        onSelect={(key) => this.onChangeTab(key, "block")}
+                      >
                         <Tab eventKey="request" title="Requested">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
 
-                                <div className="mt-3">
-                                  <Button className="btnTyp9 approve mr-4">
-                                    APPROVE
-                                  </Button>
-                                  <Button className="btnTyp9 reject">
-                                    REJECT
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={this.blockUserStatus(
+                                            item.ur_id,
+                                            1
+                                          )}
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={this.blockUserStatus(
+                                            item.ur_id,
+                                            2
+                                          )}
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Venesa Josef
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-
-                                <div className="mt-3">
-                                  <Button className="btnTyp9 approve mr-4">
-                                    APPROVE
-                                  </Button>
-                                  <Button className="btnTyp9 reject">
-                                    REJECT
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Miranda jackson
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-
-                                <div className="mt-3">
-                                  <Button className="btnTyp9 approve mr-4">
-                                    APPROVE
-                                  </Button>
-                                  <Button className="btnTyp9 reject">
-                                    REJECT
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Naina William
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-
-                                <div className="mt-3">
-                                  <Button className="btnTyp9 approve mr-4">
-                                    APPROVE
-                                  </Button>
-                                  <Button className="btnTyp9 reject">
-                                    REJECT
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="text-center mt-5">
-                              <Button className="btnTyp9 shows">
-                                show more
-                              </Button>
-                            </div>
+                                );
+                              })}
                           </div>
                         </Tab>
                         <Tab eventKey="completed" title="COMPLETED">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Venesa Josef
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Miranda jackson
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Naina William
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="text-center mt-5">
-                              <Button className="btnTyp9 shows">
-                                show more
-                              </Button>
-                            </div>
+                                );
+                              })}
                           </div>
                         </Tab>
-
                         <Tab eventKey="reject" title="REJECTED">
                           <div className="requests">
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
-                                    </div>
-                                  </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Mic Hegrid
-                                  </div>
-                                </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
-                                    </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Venesa Josef
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestuser}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      John Wade-Hampton
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "reviewList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "review")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Miranda jackson
-                                  </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex pt-4 pb-4 text-left border-grays">
-                              <div className="mr-4">
-                                <Image
-                                  src={Requestusertwo}
-                                  alt=""
-                                  className="r50"
-                                />
-                              </div>
-                              <div className="pl-2">
-                                <div className="d-flex justify-content-between">
-                                  <div>
-                                    <div className="col1 fw500 fs18 pb-1">
-                                      William Jack
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
                                     </div>
-                                    <div className="fs14 fw400 col54 pb-1">
-                                      Thu Apr 30, 2020 1.12 pm
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="col81 fs15 fs400 pr-3">
-                                    Review for - Naina William
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-
-                                <div className="col28 fs14 fw400 pt-1">
-                                  I enjoy working with individuals of all
-                                  capacities as I view the role of therapist as
-                                  one in which you help the client learn to cope
-                                  with the pressures of daily life.{" "}
-                                  <span className="col40 fw500 pointer">
-                                    Read more...
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="text-center mt-5">
-                              <Button className="btnTyp9 shows">
-                                show more
-                              </Button>
-                            </div>
+                                );
+                              })}
                           </div>
                         </Tab>
                       </Tabs>
@@ -1026,7 +1113,214 @@ class Adminlistener extends Component {
                   </div>
                 </Col>
               ) : (
-                ""
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "rating")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
               )}
             </Row>
           </Container>
@@ -1095,7 +1389,9 @@ class Adminlistener extends Component {
               </div>
             </Modal.Body>
           </Modal>
-          {totalRecord && totalRecord > customPagination.paginationPageSize ? (
+          {this.state.pageType == "userlist" &&
+          totalRecord &&
+          totalRecord > customPagination.paginationPageSize ? (
             <div className="paginationWrapper">
               <Pagination
                 activePage={this.state.pageNumber}
@@ -1110,7 +1406,74 @@ class Adminlistener extends Component {
               />
             </div>
           ) : (
-            ""
+            <div className="paginationWrapper">
+              <nav aria-label="Page navigation">
+                <ul class="pagination pg-blue deliva-pagination justify-content-end">
+                  <li class="page-item">
+                    <button
+                      class="page-link rotate-180 control-btn"
+                      aria-label="Previous"
+                      onClick={() => this.onChangePage(this.state.pageno - 1)}
+                      disabled={
+                        this.state.pageno == 1 || this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-next"></span>
+                      <span
+                        //className="prevNext"
+                        className={`sr-only ${
+                          this.state.pageno == 1 || this.state.totalPage == 0
+                            ? ""
+                            : "active"
+                        }`}
+                      >
+                        Previous
+                      </span>
+                    </button>
+                  </li>
+
+                  {this.state.totalPage > 0 &&
+                    this.state.pageArray.map((page, ind) => {
+                      return (
+                        <li class="page-item">
+                          <a
+                            className={`page-link ${
+                              this.state.pageno == page ? "active" : ""
+                            }`}
+                            onClick={() => this.onChangePage(page)}
+                          >
+                            {page}
+                          </a>
+                        </li>
+                      );
+                    })}
+
+                  <li class="page-item">
+                    <button
+                      class="page-link control-btn"
+                      aria-label="Next"
+                      onClick={() => this.onChangePage(this.state.pageno + 1)}
+                      disabled={
+                        this.state.pageno == this.state.totalPage ||
+                        this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-next"></span>
+                      <span
+                        className={`sr-only ${
+                          this.state.pageno == this.state.totalPage ||
+                          this.state.totalPage == 0
+                            ? ""
+                            : "active"
+                        }`}
+                      >
+                        Next
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           )}
         </div>
         <Footer />

@@ -207,6 +207,17 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getRatingdetails: {
+    url: "elp/superadmin_getratingdetails",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      review_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   changeStatusReview: {
     url: "elp/superadmin_changestatusreview",
     method: "POST",
@@ -214,7 +225,17 @@ export default {
       rv_id: "",
       rv_status: "",
     },
-    showResultMessage: false,
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  changestatusrating: {
+    url: "elp/superadmin_changestatusrating",
+    method: "POST",
+    data: {
+      ur_id: "",
+      ur_status: "",
+    },
+    showResultMessage: true,
     showErrorMessage: true,
   },
   blockUserStatus: {
@@ -224,7 +245,7 @@ export default {
       userid: "",
       status: "",
     },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
 
@@ -407,6 +428,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+
   searchlistener: {
     url: "elp/searchlistener",
     method: "POST",
@@ -449,14 +471,12 @@ export default {
     url: "elp/superadmin_Blockuserstatus",
     method: "POST",
     data: {
-      userid: '',
-      status: '',
-
+      userid: "",
+      status: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
-
 
   reportUser: {
     url: "elp/add_blockreasonuser",
@@ -465,7 +485,7 @@ export default {
       br_reason: "",
       br_comment: "",
       br_from_id: "",
-      br_to_id: ""
+      br_to_id: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -474,9 +494,7 @@ export default {
   getSurveyList: {
     url: "elp/getsurveylist",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
@@ -485,10 +503,20 @@ export default {
     url: "elp/submitsurvey",
     method: "POST",
     data: {
-      survey_submit:[]
+      survey_submit: []
     },
     showResultMessage: true,
     showErrorMessage: true,
-  }
-
+  },
+  submitRatings: {
+    url: "elp/addrating",
+    method: "POST",
+    data: {
+      rating_count: "",
+      to_id: "",      
+      from_id:''
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
 };
