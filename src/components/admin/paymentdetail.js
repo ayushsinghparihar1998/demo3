@@ -63,7 +63,7 @@ class Paymentdetail extends Component {
                                     <Table bordered>
                                         <thead>
                                             <tr>
-                                                <th>User</th>
+                                                <th>Email</th>
                                                 <th>Amount</th>
                                                 <th>Status</th> 
                                             </tr>

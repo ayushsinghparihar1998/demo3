@@ -30,6 +30,11 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
 
     const _submitsRatingHandler = async () => {
         try {
+            let submitReview = await ELPRxApiService("submitReview", {
+                rv_text: rating,
+                rv_from_id: localStorage.getItem('customerInfo').u_id,
+                rv_to_id: userId
+            })
             let response = await ELPRxApiService("submitRatings", {
                 rating_count: ratingCount,
                 to_id: userId,
