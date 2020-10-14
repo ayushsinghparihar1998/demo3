@@ -375,6 +375,11 @@
     background-color: $col1 !important;
     border-color: $col1 !important; 
   }
+  .btnTyp12.btnT12.h-rem { 
+      height: 3.5rem !important;
+      line-height: 3.5rem !important; 
+      min-width: 140px; 
+  }
   .btnTyp13 { 
     background-color: $col40 !important;
     box-shadow      : none !important;
