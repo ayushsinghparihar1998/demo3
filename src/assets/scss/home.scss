@@ -603,6 +603,27 @@
 
 }
 
+.CreateAccount.Payment {  
+    
+    .modal-dialog {
+        max-width: 650px;   
+    }
+}
+
+.CreateAccount.Rate_us {      
+    
+    .modal-dialog {
+        max-width: 650px;  
+    }
+}
+
+.manage_ratings {
+    position: relative; 
+    background-color: $col86; 
+    display: inline-block;
+    padding: 10px 24px 14px;
+}
+
 
 @media (min-width: 1500px) {
     

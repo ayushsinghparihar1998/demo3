@@ -117,4 +117,4 @@ class Paymentdetail extends Component {
         );
     }
 }
-export default Paymentdetail; 
+export default Paymentdetail;

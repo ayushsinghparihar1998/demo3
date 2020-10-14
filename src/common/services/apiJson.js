@@ -503,7 +503,18 @@ export default {
     url: "elp/submitsurvey",
     method: "POST",
     data: {
-      survey_submit: [],
+      survey_submit: []
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  submitRatings: {
+    url: "elp/addrating",
+    method: "POST",
+    data: {
+      rating_count: "",
+      to_id: "",      
+      from_id:''
     },
     showResultMessage: true,
     showErrorMessage: true,

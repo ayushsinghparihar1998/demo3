@@ -1,8 +1,8 @@
 import SocketIOClient from 'socket.io-client';
 
-export const SOCKET_IO_URL = 'http://103.76.253.131:8282';
+// export const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // export const SOCKET_IO_URL = 'http://148.66.136.214:8443';
-// export const SOCKET_IO_URL = 'https://eatluvnpray.org:8443';
+export const SOCKET_IO_URL = 'https://eatluvnpray.org:8443';
 
 // const socket = SocketIOClient(SOCKET_IO_URL);
 

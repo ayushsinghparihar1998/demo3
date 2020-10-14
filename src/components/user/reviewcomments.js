@@ -77,7 +77,7 @@ class Reviewcomments extends Component {
                                     <Image src={Yellowstar} alt="" className="mr-1" />
                                     <Image src={Yellowstar} alt="" />
                                 </span>
-                                <span className="col82 fs18 fw600">
+                                <span className="col82 fs18 fw600"> 
                                     Good! <Image src={Checkgreen} alt="" />
                                 </span> 
                             </div>

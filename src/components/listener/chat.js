@@ -31,6 +31,11 @@ import Videos from "../../assets/images/videos.svg";
 import Errors from "../../assets/images/errors.svg";
 import Chatcross2 from "../../assets/images/chat_cross2.svg";
 import Chatplus from "../../assets/images/user_plus.svg";
+import Livechatcomment from "../../assets/images/livechatcomment.svg";
+import Starfillone from "../../assets/images/starfillone.svg";
+import Starfillempty from "../../assets/images/staremptyone.svg";
+import Checkgreentwo from "../../assets/images/checkgreen2.svg";
+
 import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
 import SocketIOClient from "socket.io-client";
 import moment from "moment";
@@ -39,8 +44,8 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
-import SurveyModal from "../modals/SurveyModal";
-
+import SurveyModal from "../modals/SurveyModal"
+import MessageCount from "../modals/MessageCount";
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
@@ -50,6 +55,8 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      show6: false,
+      show7: false,
       activeListners: [],
       activeChatUsers: [],
       showVal: 4,
@@ -74,29 +81,28 @@ class Chat extends Component {
 
     this.blockModal = React.createRef();
     this.surveyModal = React.createRef();
-    this.getActiveConversationInfo()
-  }
 
-  getActiveConversationInfo = () => {
-    const getData = () => {
-      console.log("AS", this.props.match.params.id,)
-      socket.emit(
-        "get-active-conversation",
-        {
-          user_id: this.props.match.params.id,
-        },
-        (data) => {
-
-          console.log('status data ===>', data);
-        }
-      );
-    }
-    setInterval(() => {
-      getData()
-    }, 5000)
-    getData()
+    
 
   }
+
+
+  
+
+
+  handleEndchatModal = () => {
+    this.setState({ show6: true });
+  };
+  handleEndchatClose = () => {
+    this.setState({ show6: false });
+  };
+
+  handleRateusModal = () => {
+    this.setState({ show7: true });
+  };
+  handleRateusClose = () => {
+    this.setState({ show7: false });
+  };
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
@@ -490,6 +496,9 @@ class Chat extends Component {
                           >
                             end chat
                           </Button>
+
+
+
                         </div>
                       </Col>
                     </Row>
@@ -597,18 +606,24 @@ class Chat extends Component {
                           Send
                         </Button>
                       </div>
+                      <MessageCount userId={this.props.match.params.id}/>
                     </Form.Group>
                     {/* </Form> */}
                   </div>
                 </div>
               </Col>
             </Row>
+
           </Container>
         </div>
         <Footer />
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
         <SurveyModal ref={this.surveyModal} />
+
+
+
+
         {/* <Modal show={this.state.closeFlag} className="CreateAccount question">
           <Modal.Header>
             <Button onClick={this.handleClose2}>
@@ -741,6 +756,12 @@ class Chat extends Component {
           </Modal.Body>
         </Modal>
        */}
+
+
+
+
+
+
       </div>
     );
   }
