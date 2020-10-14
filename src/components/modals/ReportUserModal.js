@@ -7,6 +7,7 @@ import {
     Modal
 } from "react-bootstrap";
 import ELPRxApiService from "../../common/services/apiService";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 const ReportUserModal = forwardRef(({ userId }, ref) => {
 
@@ -31,15 +32,15 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
     useEffect(() => {
         let title = 'Report '
         let id = null
-        if (localStorage.getItem('userInfo')) {
+        if (getLocalStorage('userInfo')) {
             title = title + 'user'
-            id = localStorage.getItem('userInfo').u_id
-        } else if (localStorage.getItem('customerInfo')) {
+            id = getLocalStorage('userInfo').u_id
+        } else if (getLocalStorage('customerInfo')) {
             title = title + 'listener'
-            id = localStorage.getItem('customerInfo').u_id
-        } else if (localStorage.getItem('userInfoProff')) {
+            id = getLocalStorage('customerInfo').u_id
+        } else if (getLocalStorage('userInfoProff')) {
             title = title + 'listener'
-            id = localStorage.getItem('userInfoProff').u_id
+            id = getLocalStorage('userInfoProff').u_id 
         }
         setModalTittle(title)
         setSelfId(id)
