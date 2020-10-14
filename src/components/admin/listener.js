@@ -837,19 +837,17 @@ class Adminlistener extends Component {
                                       <div className="mt-3">
                                         <Button
                                           className="btnTyp9 approve mr-4"
-                                          onClick={this.blockUserStatus(
-                                            item.ur_id,
-                                            1
-                                          )}
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 1)
+                                          }
                                         >
                                           APPROVE
                                         </Button>
                                         <Button
                                           className="btnTyp9 reject"
-                                          onClick={this.blockUserStatus(
-                                            item.ur_id,
-                                            2
-                                          )}
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 2)
+                                          }
                                         >
                                           REJECT
                                         </Button>
@@ -1405,7 +1403,7 @@ class Adminlistener extends Component {
                 nextPageText={">"}
               />
             </div>
-          ) : (
+          ) : this.state.totalPage > 0 ? (
             <div className="paginationWrapper">
               <nav aria-label="Page navigation">
                 <ul class="pagination pg-blue deliva-pagination justify-content-end">
@@ -1418,7 +1416,7 @@ class Adminlistener extends Component {
                         this.state.pageno == 1 || this.state.totalPage == 0
                       }
                     >
-                      <span className="icon-next"></span>
+                      <span className="icon-prev"></span>
                       <span
                         //className="prevNext"
                         className={`sr-only ${
@@ -1474,7 +1472,13 @@ class Adminlistener extends Component {
                 </ul>
               </nav>
             </div>
+          ) : (
+            <div className="recordfound">No Record Found</div>
           )}
+          {/* {this.state.totalRecordCount == 0 ? (
+          ) : (
+            ""
+          )} */}
         </div>
         <Footer />
       </div>

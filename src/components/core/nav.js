@@ -49,6 +49,8 @@ class NavBar extends Component {
 
     let data = getLocalStorage("userInfo")
       ? getLocalStorage("userInfo")
+      : getLocalStorage("customerInfo")
+      ? getLocalStorage("customerInfo")
       : getLocalStorage("userInfoProff");
     console.log("data", data);
 
@@ -236,6 +238,7 @@ class NavBar extends Component {
                             </NavLink>,
                           ]
                         : "",
+
                       <NavLink
                         to={
                           getLocalStorage("userInfo")
@@ -250,17 +253,15 @@ class NavBar extends Component {
                       >
                         Dashboard
                       </NavLink>,
-                      <NavLink
-                        to={
-                          getLocalStorage("userInfoProff") ||
-                          getLocalStorage("userInfo")
-                            ? "calendar"
-                            : ""
-                        }
-                        className="nav-link"
-                      >
-                        My Schedule
-                      </NavLink>,
+                      ,
+                      getLocalStorage("userInfoProff") ||
+                      getLocalStorage("userInfo")
+                        ? [
+                            <NavLink to={"calendar"} className="nav-link">
+                              My Schedule
+                            </NavLink>,
+                          ]
+                        : "",
                       <NavLink to="/myprofile" className="nav-link">
                         My Profile
                       </NavLink>,
@@ -274,6 +275,9 @@ class NavBar extends Component {
                       </Nav.Link>,
                       <NavLink to="/becomeListener" className="nav-link">
                         Volunteer as a Listener
+                      </NavLink>,
+                      <NavLink to="/compaign" className="nav-link">
+                        Donate
                       </NavLink>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
                         <NavDropdown.Item

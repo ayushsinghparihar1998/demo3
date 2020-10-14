@@ -71,7 +71,10 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
                             </div>
                             <div className="comments mb-4">
                                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                                    <Form.Control onChange={(e) => setRating(e.target.value)} as="textarea" rows="3" className="inputTyp2 cate2" placeholder="Write your review here.." />
+                                    <Form.Control onChange={(e) => setRating(e.target.value)}
+                                        as="textarea" rows="3"
+                                      className="inputTyp2 cate2" 
+                                      placeholder="Write your review here.." />
                                 </Form.Group>
                             </div>
                             {/* <Image src={Livechatcomment} alt="Livechatcomments" className="mb-4" /> */}
