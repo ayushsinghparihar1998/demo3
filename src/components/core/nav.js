@@ -12,12 +12,12 @@ import {
   Modal,
   Row,
   Col,
-} from "react-bootstrap"; 
+} from "react-bootstrap";
 import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
 import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
-import { actionLogout,actionLogoutSuccess } from "../../common/redux/actions";
+import { actionLogout, actionLogoutSuccess } from "../../common/redux/actions";
 import fb from "../../assets/images/fb.svg";
 import twit from "../../assets/images/twit.svg";
 import linkedin from "../../assets/images/linkedin.svg";
@@ -25,9 +25,9 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import Mailicon from "../../assets/images/mail_icon.svg";
 import Bellicon from "../../assets/images/bell_icons.svg";
 import Msgbox from "../../assets/images/msg_box.svg";
-import Masklayer from "../../assets/images/mask_layer.png"; 
+import Masklayer from "../../assets/images/mask_layer.png";
 import Signup from "../jsx/listenersignup/signup";
-import ProfessionalSignup from "../signup/professionalSignup";  
+import ProfessionalSignup from "../signup/professionalSignup";
 import UserSignup from "../signup/userSignup";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
@@ -39,7 +39,29 @@ class NavBar extends Component {
       show: false,
       show2: false,
       show3: false,
+      email_varified: false,
     };
+  }
+
+  componentDidMount() {
+    console.log("hello");
+    console.log(getLocalStorage("userInfo"));
+
+    let data = getLocalStorage("userInfo")
+      ? getLocalStorage("userInfo")
+      : getLocalStorage("userInfoProff");
+    console.log("data", data);
+
+    if (data) {
+      this.setState(
+        {
+          email_varified: data.u_verified == 1 ? false : true,
+        },
+        () => {
+          console.log("email_varified", this.state.email_varified);
+        }
+      );
+    }
   }
   handleModal = () => {
     this.setState({ show: true });
@@ -63,27 +85,26 @@ class NavBar extends Component {
     this.setState({ show3: false });
   };
 
-  handleLogoutAdmin = () => { 
+  handleLogoutAdmin = () => {
     let data = {};
     this.props
       .actionLogout(data)
       .then((result) => {
-      if (result && result.status === 200) {
-        this.props.actionLogoutSuccess(data)
-      .then((result) => {
-        this.props.history.push({
-          pathname: "adminlogin",
-          state: { roleType: 4 },
-        });
+        if (result && result.status === 200) {
+          this.props
+            .actionLogoutSuccess(data)
+            .then((result) => {
+              this.props.history.push({
+                pathname: "adminlogin",
+                state: { roleType: 4 },
+              });
 
-        localStorage.clear();
-
-        })
-      .catch((error) => {
-        console.log(error);
-      });
-}
-        
+              localStorage.clear();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -94,7 +115,7 @@ class NavBar extends Component {
     // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
-     let roleType = "";
+    let roleType = "";
     // if (getLocalStorage("customerInfo")) {
     //   roleType = 3;
     // } else if (getLocalStorage("userInfo")) {
@@ -107,24 +128,22 @@ class NavBar extends Component {
     this.props
       .actionLogout(data)
       .then((result) => {
- if (result && result.status === 200) {
-        this.props.actionLogoutSuccess(data)
-      .then((result) => {
+        if (result && result.status === 200) {
+          this.props
+            .actionLogoutSuccess(data)
+            .then((result) => {
+              socketClass.disconnect();
+              this.props.history.push({
+                pathname: "login",
+                state: { roleType: roleType },
+              });
 
-        socketClass.disconnect();
-        this.props.history.push({
-          pathname: "login",
-          state: { roleType: roleType },
-        });
-
-        localStorage.clear();
-
-        })
-      .catch((error) => {
-        console.log(error);
-      });
-}
-
+              localStorage.clear();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -256,8 +275,22 @@ class NavBar extends Component {
                       <NavLink to="/becomeListener" className="nav-link">
                         Volunteer as a Listener
                       </NavLink>,
+                      <NavDropdown title="Media" id="basic-nav-dropdown">
+                        <NavDropdown.Item
+                          target="_blank"
+                          href="https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995"
+                        >
+                          Onlymyhealth
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                          target="_blank"
+                          href="http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/"
+                        >
+                          BW Wellbeingworld
+                        </NavDropdown.Item>
+                      </NavDropdown>,
                       <NavDropdown title="CSR" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#">Another</NavDropdown.Item>
                         <NavDropdown.Item href="#">Something</NavDropdown.Item>
                       </NavDropdown>,
@@ -277,12 +310,12 @@ class NavBar extends Component {
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||
                 getLocalStorage("customerInfo") ? (
-                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>          
+                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
                 ) : (
                   <NavDropdown
                     title="Login"
                     id="login-nav-dropdown"
-                    className="btnTypeone loginnav" 
+                    className="btnTypeone loginnav"
                   >
                     <NavDropdown.Item
                       onClick={(e) => {
@@ -303,13 +336,13 @@ class NavBar extends Component {
                         this.handleLogin(3);
                       }}
                     >
-                      User Login 
+                      User Login
                     </NavDropdown.Item>
                   </NavDropdown>
                 )}
 
-                <Form inline>  
-                  <span className="d-none">  
+                <Form inline>
+                  <span className="d-none">
                     {getLocalStorage("loggedIn") ? (
                       <div onClick={this.handleLogout} className="btnType1">
                         Logout
@@ -331,7 +364,7 @@ class NavBar extends Component {
                   </span>
                   <span>
                     <Image src={linkedin} alt="" className="pointer" />
-                  </span> */} 
+                  </span> */}
                 </Form>
                 <span className="userprofiles d-flex">
                   <Nav.Link>
@@ -349,13 +382,16 @@ class NavBar extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-        <div className="email_verified d-none">  
+        {this.state.email_varified ? (
+          <div className="email_verified">
             <div class="verifys">
-                 <Image src={Msgbox} alt="" /> 
-                 <span className="fs20 fw600 col18 ml-2">Email not verified</span> 
+              <Image src={Msgbox} alt="" />
+              <span className="fs20 fw600 col18 ml-2">Email not verified</span>
             </div>
-        </div>
-
+          </div>
+        ) : (
+          ""
+        )}
         {/* user registration start */}
 
         <Modal show={this.state.show} className="CreateAccount">
@@ -512,4 +548,4 @@ class NavBar extends Component {
     );
   }
 }
-export default connect(null, { actionLogout ,actionLogoutSuccess })(NavBar);
+export default connect(null, { actionLogout, actionLogoutSuccess })(NavBar);

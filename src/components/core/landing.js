@@ -39,7 +39,7 @@ class Home extends Component {
                 <div className="text-center d-none mb-5">  
                     <Button className="" onClick={this.handlePaymentModal}>Payment</Button> 
                 </div>
-
+                
                 <Modal show={this.state.show5} className="CreateAccount Payment">
                     <Modal.Header> 
                       <Button onClick={this.handlePaymentClose}>

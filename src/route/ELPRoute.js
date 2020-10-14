@@ -31,20 +31,20 @@ import Adminlistener from "../components/admin/listener";
 import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
-import Menubar from "../components/core/menu"; 
+import Menubar from "../components/core/menu";
 import Ngo from "../components/core/ngo";
 import Ngodetail from "../components/core/ngodetail"; 
 import ListenerProfile from "../components/listener/listenerprofile";
 import Compaign from "../components/user/campaign";   
 
-import getUserProfile from "../common/utility/getUserProfile"; 
-import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils"; 
+import getUserProfile from "../common/utility/getUserProfile";
+import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
 import socketClass from "../common/utility/socketClass";
 import VideoCalling from "../components/VideoComponents/VideoCalling/VideoCalling";
 import CallingTo from "../components/videoaudio/CallingTo/CallingTo";
 import Admincategory from "../components/jsx/superadmin/category";
 import Addquestionanswer from "../components/jsx/superadmin/addquestionanswer";
-import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory"; 
+import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory";
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 import Reviewrequest from "../components/admin/reviewrequest";
@@ -62,7 +62,7 @@ const user =
 class ELPRoute extends Component {
   state = {};
   componentDidMount() {
-    window.addEventListener("beforeunload", socketClass.disconnect); 
+    window.addEventListener("beforeunload", socketClass.disconnect);
     if (getUserProfile()) {
       // console.log("socketClass", socketClass.connect);
       socketClass.connect(getUserProfile());
@@ -73,10 +73,10 @@ class ELPRoute extends Component {
   componentWillUnmount() {
     window.removeEventListener("beforeunload", socketClass.disconnect);
   }
-  render() {  
-    return ( 
+  render() {
+    return (
       <>
-        {this.state.socket && <VideoCalling />} 
+        {this.state.socket && <VideoCalling />}
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
@@ -91,7 +91,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
           <PublicRoute path="/userotp" component={Userotp} />
-          <PublicRoute path="/menu" component={Menubar} />        
+          <PublicRoute path="/menu" component={Menubar} />
           {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
           {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
           <PublicRoute path="/adminlistener" component={Adminlistener} />
@@ -101,13 +101,14 @@ class ELPRoute extends Component {
           <PrivateRouteList path="/chat/:id" component={Chat} />
 
           {/* Proff */}
-          <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/usersignup" component={Usersignup} />
-          <PublicRoute path="/ngo" component={Ngo} /> 
+          <PublicRoute path="/ngo" component={Ngo} />
           <PublicRoute path="/ngodetail" component={Ngodetail} />
-          <PublicRoute path="/listenerprofile" component={ListenerProfile} />  
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          <PublicRoute path="/reviewrequest" component={Reviewrequest} />  
+          <PublicRoute path="/listenerprofile" component={ListenerProfile} />
+          <PublicRoute path="/reviewrequest" component={Reviewrequest} />
+          {/* LIst */}
+          {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
           <PublicRoute path="/compaign" component={Compaign} />   
@@ -121,14 +122,14 @@ class ELPRoute extends Component {
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
 
           {/* Proff */}
-          <PrivateRouteProff 
+          <PrivateRouteProff
             path="/userDashboardproff"
             component={UserdashboardProff}
           />
           {/*User*/}
           <PrivateRouteUser
             path="/userDashboardcust"
-            component={UserdashboardCust} 
+            component={UserdashboardCust}
           />
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
@@ -142,13 +143,22 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/audiocall/:id" component={Audiocall} />
           <PrivateRoutes path="/calling" component={CallingTo} />
           <PublicRoute path="/admincategory" component={Admincategory} />
-          <PublicRoute path="/addquestionanswer" component={Addquestionanswer} /> 
-          <PublicRoute path="/adminselectcategory" component={Adminselectcategory} /> 
+          <PublicRoute
+            path="/addquestionanswer"
+            component={Addquestionanswer}
+          />
+          <PublicRoute
+            path="/adminselectcategory"
+            component={Adminselectcategory}
+          />
+          <PublicRoute path="/adminlistener" component={Adminlistener} />
+          <PublicRoute path="/adminlisting" component={Reviewrequest} />
+
           <PrivateRoutes
             path="/professionalSearch"
             component={ProfessionalChatSearch}
           />
-        </Switch> 
+        </Switch>
       </>
     );
   }

@@ -48,7 +48,7 @@ export default {
       userid: "",
       email: "",
       password: "",
-      authcode:''
+      authcode: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -183,6 +183,86 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  // new
+  getBlockuserListing: {
+    url: "elp/superadmin_getblockuserlisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      block_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  getReviewListing: {
+    url: "elp/superadmin_getreviewlisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      review_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  changeStatusReview: {
+    url: "elp/superadmin_changestatusreview",
+    method: "POST",
+    data: {
+      rv_id: "",
+      rv_status: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  blockUserStatus: {
+    url: "elp/superadmin_Blockuserstatus",
+    method: "POST",
+    data: {
+      userid: "",
+      status: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  blockReasonUser: {
+    url: "elp/add_blockreasonuser",
+    method: "POST",
+    data: {
+      br_reason: "",
+      br_comment: "",
+      br_from_id: "",
+      br_to_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  addReview: {
+    url: "elp/addreview",
+    method: "POST",
+    data: {
+      rv_text: "",
+      rv_from_id: "",
+      rv_to_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  getReview: {
+    url: "elp/getreview",
+    method: "POST",
+    data: { count: "", offset: "", to_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  // end new
+
   getProfessionalListing: {
     url: "elp/superadmin_getprofessionalist",
     method: "POST",
@@ -346,22 +426,49 @@ export default {
     showErrorMessage: true,
   },
   changepassword: {
-    url: 'elp/changepassword',
-    method: 'POST',
+    url: "elp/changepassword",
+    method: "POST",
     data: {
-     password:''
+      password: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
   addrating: {
-    url: 'elp/addrating',
-    method: 'POST',
+    url: "elp/addrating",
+    method: "POST",
     data: {
-     rating_count:'',
-     to_id:''
+      rating_count: "",
+      to_id: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+  blockChat: {
+    url: "elp/superadmin_Blockuserstatus",
+    method: "POST",
+    data: {
+      userid: '',
+      status: '',
+
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+
+  reportUser: {
+    url: "elp/add_blockreasonuser",
+    method: "POST",
+    data: {
+      br_reason: "",
+      br_comment: "",
+      br_from_id: "",
+      br_to_id: ""
     },
     showResultMessage: true,
     showErrorMessage: true,
   }
+
 };
