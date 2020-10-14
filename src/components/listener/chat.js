@@ -39,6 +39,7 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
+import SurveyModal from "../modals/SurveyModal";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -72,8 +73,31 @@ class Chat extends Component {
     };
 
     this.blockModal = React.createRef();
+    this.surveyModal = React.createRef();
+    this.getActiveConversationInfo()
+  }
+
+  getActiveConversationInfo = () => {
+    const getData = () => {
+      console.log("AS", this.props.match.params.id,)
+      socket.emit(
+        "get-active-conversation",
+        {
+          user_id: this.props.match.params.id,
+        },
+        (data) => {
+
+          console.log('status data ===>', data);
+        }
+      );
+    }
+    setInterval(() => {
+      getData()
+    }, 5000)
+    getData()
 
   }
+
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
@@ -462,7 +486,7 @@ class Chat extends Component {
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           <Button
                             className="btnTyp6 text-uppercase"
-                            onClick={() => this.handleClose2()}
+                            onClick={() => this.surveyModal.current.openModal()}
                           >
                             end chat
                           </Button>
@@ -584,7 +608,7 @@ class Chat extends Component {
         <Footer />
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
-
+        <SurveyModal ref={this.surveyModal} />
         {/* <Modal show={this.state.closeFlag} className="CreateAccount question">
           <Modal.Header>
             <Button onClick={this.handleClose2}>
