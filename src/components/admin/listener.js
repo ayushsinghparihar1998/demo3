@@ -9,6 +9,8 @@ import {
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
 } from "../../common/redux/actions";
+import Checkgreen from "../../assets/images/checkgreen.svg";
+import Yellowstar from "../../assets/images/stars.png";
 import {
   Button,
   NavDropdown,
