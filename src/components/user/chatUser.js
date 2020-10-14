@@ -38,6 +38,7 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
+import UserEndChatModal from "../modals/UserEndChatModal";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -58,6 +59,8 @@ class ChatUser extends Component {
       userMeta: {}
     };
     this.blockModal = React.createRef();
+
+    this.userEndChatModal = React.createRef();
   }
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
@@ -465,7 +468,10 @@ class ChatUser extends Component {
                           />
                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
-                          <Button className="btnTyp6 text-uppercase">
+                          <Button
+                            className="btnTyp6 text-uppercase"
+                            onClick={() => this.userEndChatModal.current.openModal()}
+                          >
                             end chat
                           </Button>
                         </div>
@@ -579,6 +585,7 @@ class ChatUser extends Component {
         <Footer />
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
+        <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id}/>
 
         {/* <Modal show={this.state.show2} className="CreateAccount question">
           <Modal.Header>

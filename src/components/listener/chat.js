@@ -44,7 +44,8 @@ import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
-
+import SurveyModal from "../modals/SurveyModal"
+import MessageCount from "../modals/MessageCount";
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
@@ -79,34 +80,41 @@ class Chat extends Component {
     };
 
     this.blockModal = React.createRef();
+    this.surveyModal = React.createRef();
+
+    
 
   }
 
-  handleEndchatModal = () => {  
+
+  
+
+
+  handleEndchatModal = () => {
     this.setState({ show6: true });
   };
-  handleEndchatClose = () => {  
-    this.setState({ show6: false });  
+  handleEndchatClose = () => {
+    this.setState({ show6: false });
   };
 
-  handleRateusModal = () => {  
-    this.setState({ show7: true }); 
+  handleRateusModal = () => {
+    this.setState({ show7: true });
   };
-  handleRateusClose = () => {  
-    this.setState({ show7: false });  
+  handleRateusClose = () => {
+    this.setState({ show7: false });
   };
 
-  componentWillUnmount() { 
-    window.removeEventListener("beforeunload", this.unmount); 
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
   }
-  unmount = () => { 
+  unmount = () => {
     if (socket) {
       //   socket.disconnect();
       //   console.log("DISCOnnected ================================================")
     }
   }
-  componentDidMount() { 
+  componentDidMount() {
     if (this.state.user_id == this.props.match.params.id) {
       this.props.history.push('/');
     }
@@ -473,8 +481,8 @@ class Chat extends Component {
                           <Image
                             src={Deletes}
                             alt=""
-                            className="pointer mr-2" 
-                           /> 
+                            className="pointer mr-2"
+                          />
                           <Image
                             src={Questions}
                             alt=""
@@ -482,18 +490,15 @@ class Chat extends Component {
                           />
                           <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
-                          {/* <Button
-                            className="btnTyp6 text-uppercase"
-                            onClick={() => this.handleClose2()}
-                          >
-                            end chat
-                          </Button> */} 
                           <Button
                             className="btnTyp6 text-uppercase"
-                            onClick={this.handleEndchatModal} 
+                            onClick={() => this.surveyModal.current.openModal()}
                           >
                             end chat
                           </Button>
+
+
+
                         </div>
                       </Col>
                     </Row>
@@ -601,17 +606,23 @@ class Chat extends Component {
                           Send
                         </Button>
                       </div>
+                      <MessageCount userId={this.props.match.params.id}/>
                     </Form.Group>
                     {/* </Form> */}
                   </div>
                 </div>
               </Col>
             </Row>
+
           </Container>
         </div>
         <Footer />
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
+        <SurveyModal ref={this.surveyModal} />
+
+
+
 
         {/* <Modal show={this.state.closeFlag} className="CreateAccount question">
           <Modal.Header>
@@ -745,69 +756,12 @@ class Chat extends Component {
           </Modal.Body>
         </Modal>
        */}
-                  {/* live chat modal start code html */}
-                  <Modal show={this.state.show6} className="CreateAccount Payment">
-                    <Modal.Header> 
-                      <Button onClick={this.handleEndchatClose}>
-                        <Image src={Crossbtn} alt="" />
-                      </Button>
-                    </Modal.Header>
 
-                    <Modal.Body>
-                      <Container>
-                        <div className="layout_box text-center mt-3 mb-4">                  
-                          <div className="col10 fs30 fw600 mt-4 pb-2 mb-4">Live Chat Session Completed</div>
-                          <Image src={Livechatcomment} alt="Livechatcomments" className="mb-4" />     
-                          <div className="fs300 fs20 col14 mb-4 pb-2">
-                          We hope you had a great conversation <br /> & are feeling better 
-                          </div> 
-                          <Button className="btnTyp12 btnT12 h-rem fs18 mr-5">OKAY</Button>
-                          <Button className="btnTyp12 fs18 h-rem btnT12" onClick={this.handleRateusModal}>RATE US</Button> 
-                        </div>
-                      </Container>
-                    </Modal.Body>
-                  </Modal>
-                  {/* live chat modal end code html */}
 
-                  {/* rate us modal start code html */} 
-                  <Modal show={this.state.show7} className="CreateAccount Rate_us">  
-                    <Modal.Header> 
-                      <Button onClick={this.handleRateusClose}>   
-                        <Image src={Crossbtn} alt="" />
-                      </Button>
-                    </Modal.Header>
 
-                    <Modal.Body>
-                      <Container>
-                        <div className="layout_box text-center mt-3 mb-4">                  
-                          <div className="col10 fs30 fw600 mt-2 pb-2 text-left">Rate Us</div>  
-                          <div className="fs300 fs20 col14 mb-4 pb-2 text-left">
-                               Give us a quick rating 
-                          </div> 
-                          <Image src={Checkgreentwo} alt="" className="mb-3" />
-                          <div className="col82 fs18 fw600 mb-3">   
-                              Good! 
-                          </div> 
-                          <div className="manage_ratings mb-3">   
-                              <Image src={Starfillone} alt="" className="mr-2" />
-                              <Image src={Starfillone} alt="" className="mr-2" />
-                              <Image src={Starfillone} alt="" className="mr-2" />
-                              <Image src={Starfillone} alt="" className="mr-2" />
-                              <Image src={Starfillempty} alt="" />
-                          </div>
-                          <div className="comments mb-4">   
-                              <Form.Group controlId="exampleForm.ControlTextarea1"> 
-                                  <Form.Control as="textarea" rows="3" className="inputTyp2 cate2" placeholder="Write your review here.." />
-                              </Form.Group>
-                          </div>
-                          {/* <Image src={Livechatcomment} alt="Livechatcomments" className="mb-4" /> */}
-                          <Button className="btnTyp12 btnT12 h-rem fs18">SUBMIT</Button> 
-                        </div>
-                      </Container>
-                    </Modal.Body>
-                  </Modal>
-                  {/* rate us modal end code html */}
-       
+
+
+
       </div>
     );
   }
