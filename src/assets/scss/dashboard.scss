@@ -390,7 +390,7 @@
         }
         .border-gray {
             border-bottom: solid 1px $col39; 
-            line-height: 30px;
+            line-height: 30px; 
         }
     }
 
@@ -1011,6 +1011,52 @@
                 text-align: center;
                 margin-right: -1px;  
 
+                &.page-item {
+                    padding: 0;
+                    line-height: 34px; 
+                    cursor: pointer;
+
+                    button {
+                        padding: 10px; 
+                        margin: 0;
+                        border: none;
+                        background-color: transparent !important;
+                        outline: 0; 
+                        display: inline-block;
+                        cursor: pointer; 
+                    }
+
+                    .icon-prev:before {
+                        content: "<";
+                        font-size: 18px;
+                        color: #333; 
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%); 
+
+                    }
+
+                    .icon-next:before {
+                        content: ">";
+                        font-size: 18px;
+                        color: #333; 
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+
+                    a.page-link {
+                        padding: 10px;
+                        position: relative; 
+
+                        &.active {
+                            background: #8AD1E7;
+                            border: solid 1px #8AD1E7;    
+                        }
+                    }
+                }
                 & > a {
                     color: $col28; 
                     text-decoration: none;
