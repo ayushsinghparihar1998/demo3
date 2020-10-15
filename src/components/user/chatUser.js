@@ -56,7 +56,8 @@ class ChatUser extends Component {
       showChat: false,
       response: {},
       user_id: getLocalStorage("customerInfo").u_id,
-      userMeta: {}
+      userMeta: {},
+      isMessageDisabled: false
     };
     this.blockModal = React.createRef();
 
@@ -212,7 +213,11 @@ class ChatUser extends Component {
       });
     }
   };
-
+  disableInputHandler = () => {
+    this.setState({
+      isMessageDisabled: true
+    })
+  }
   sendMessage(message, type) {
     let object = {
       message: message,
@@ -554,26 +559,30 @@ class ChatUser extends Component {
                   <div className="chat_bottom">
                     {/* <Form> */}
                     <Form.Group>
-                      <div className="d-flex">
-                        <Form.Control
-                          type="text"
-                          placeholder="Type your message here..."
-                          className="inputTyp3"
-                          value={this.state.message}
-                          onChange={this.handleChange.bind(this)}
-                          onKeyDown={this.addMessage}
-                          onKeyUp={this.startTyping.bind(this)}
-                          name="message"
-                        />
-                        <Button
-                          className="btnTyp7"
-                          type="button"
-                          disabled={!this.state.message}
-                          onClick={() => this.handleSendMessage()}
-                        >
-                          Send
-                        </Button>
-                      </div>
+                      {
+                        !this.state.isMessageDisabled ?
+                          <div className="d-flex">
+                            <Form.Control
+                              type="text"
+                              placeholder="Type your message here..."
+                              className="inputTyp3"
+                              value={this.state.message}
+                              onChange={this.handleChange.bind(this)}
+                              onKeyDown={this.addMessage}
+                              onKeyUp={this.startTyping.bind(this)}
+                              name="message"
+                            />
+                            <Button
+                              className="btnTyp7"
+                              type="button"
+                              disabled={!this.state.message}
+                              onClick={() => this.handleSendMessage()}
+                            >
+                              Send
+                         </Button>
+                          </div> : null
+                      }
+
                     </Form.Group>
                     {/* </Form> */}
                   </div>
@@ -585,7 +594,7 @@ class ChatUser extends Component {
         <Footer />
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
-        <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id}/>
+        <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
 
         {/* <Modal show={this.state.show2} className="CreateAccount question">
           <Modal.Header>

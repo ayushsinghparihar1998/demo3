@@ -7,10 +7,19 @@ import {
 import Blueicons from "../../assets/images/blue_cross.svg";
 import Deleteusers from "../../assets/images/delete_users.svg";
 import ELPRxApiService from "../../common/services/apiService";
+import { getLocalStorage } from "../../common/helpers/Utils";
+import socketClass from "../../common/utility/socketClass";
+import {    
+    showSuccessToast,    
+  } from '../../common/helpers/Utils';
 
-const BlockConfirmation = forwardRef(({userId}, ref) => {
+const socket = socketClass.getSocket();
 
-    const [isOpen, setIsOpen] = useState(false)
+const BlockConfirmation = forwardRef(({ userId }, ref) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selfId, setSelfId] = useState(null);
+
     useImperativeHandle(
         ref,
         () => ({
@@ -20,13 +29,34 @@ const BlockConfirmation = forwardRef(({userId}, ref) => {
         }),
     )
 
+    useEffect(() => {
+     
+        let id = null
+        if (getLocalStorage('userInfo')) {
+            id = getLocalStorage('userInfo').u_id
+        } else if (getLocalStorage('customerInfo')) {
+            id = getLocalStorage('customerInfo').u_id
+        } else if (getLocalStorage('userInfoProff')) {
+            id = getLocalStorage('userInfoProff').u_id
+        }
+        setSelfId(id)
+    }, [])
+
     const _blockChatHandler = async () => {
-        try {      
-            let response = await ELPRxApiService("blockChat", {
-                userid:userId,
-                status: '3'
-            })
-            console.log(response)
+        try {
+            socket.emit("block-user", {
+                from_user_id: selfId,
+                to_user_id: userId
+            }, (data) => {
+                console.log('active data', data);
+                // showSuccessToast(data.msg)
+                setIsOpen(false)
+            });
+            // let response = await ELPRxApiService("blockChat", {
+            //     from_user_id: selfId,
+            //     to_user_id: userId
+            // })
+            // console.log(response)
         } catch (err) {
             console.log(err);
         }

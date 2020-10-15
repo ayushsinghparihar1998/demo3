@@ -20,8 +20,8 @@ const MessageCount = ({ userId }) => {
             socket.emit("get-active-conversation", {
                 user_id: userId
             }, (data) => {
-                console.log('active data', data);
-                setData(data.result)
+                // console.log('active data', data);
+                setData({...data.result})
             });
         }
         setInterval(() => {

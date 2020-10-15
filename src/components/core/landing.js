@@ -72,9 +72,9 @@ class Home extends Component {
             <Container>
               <div className="layout_box text-center mt-3 mb-4">
                 <Image src={Payments} alt="" className="mt-5 mb-4" />
-                <div className="col10 fs30 fw600 mb-4">Payment Successful</div>
+                <div className="col10 fs30 fw600 mb-4">Donation Successful</div>
                 <div className="fs300 fs20 col14 mb-5 pb-2">
-                  You payment has been successfully completed
+                  Thank you for supporting our cause
                 </div>
                 {/* <Button className="btnTyp12 btnT12">OKAY</Button> */}
               </div>

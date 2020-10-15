@@ -14,7 +14,7 @@ import Starfillempty from "../../assets/images/staremptyone.svg";
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
 
-const RateUsModal = forwardRef(({ userId }, ref) => {
+const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [ratingCount, setRatingCount] = useState(0)
@@ -43,6 +43,7 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
             })
             console.log(response)
             setIsOpen(false)
+            disableInputHandler()
         } catch (err) {
             console.log(err);
         }
@@ -52,7 +53,7 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
         <>
             <Modal show={isOpen} className="CreateAccount Rate_us">
                 <Modal.Header>
-                    <Button onClick={() => setIsOpen(isOpen)}>
+                    <Button onClick={() => setIsOpen(false)}>
                         <Image src={Crossbtn} alt="" />
                     </Button>
                 </Modal.Header>

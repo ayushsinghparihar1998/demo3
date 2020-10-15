@@ -69,7 +69,7 @@ class SurveyModal extends Component {
             console.log(response);
 
             this.handleClose()
-
+            this.props.disableInputHandler()
         } catch (err) {
             console.log(err)
         }

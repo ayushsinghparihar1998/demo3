@@ -468,11 +468,11 @@ export default {
   },
 
   blockChat: {
-    url: "elp/superadmin_Blockuserstatus",
+    url: "elp/block-user",
     method: "POST",
     data: {
-      userid: "",
-      status: "",
+      from_user_id: "",
+      to_user_id: ""
     },
     showResultMessage: true,
     showErrorMessage: true,

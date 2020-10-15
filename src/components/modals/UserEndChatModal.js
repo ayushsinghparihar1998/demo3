@@ -10,7 +10,7 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import Livechatcomment from "../../assets/images/livechatcomment.svg";
 import RateUsModal from './RateUsModal'
 
-const UserEndChatModal = forwardRef(({ userId }, ref) => {
+const UserEndChatModal = forwardRef(({ userId,disableInputHandler }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const rateUsModal = React.createRef();
@@ -54,7 +54,7 @@ const UserEndChatModal = forwardRef(({ userId }, ref) => {
                     </Container>
                 </Modal.Body>
             </Modal>
-            <RateUsModal ref={rateUsModal} userId={userId} />
+            <RateUsModal ref={rateUsModal} userId={userId} disableInputHandler={disableInputHandler}/>
         </>
     )
 })

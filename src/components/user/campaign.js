@@ -59,13 +59,14 @@ class Compaign extends Component {
                 </Col>
                 <Col lg={5} col={12} className="pr-0">
                   <div class="donate_data">
-                    {/* <Link to={`/donatedata`}>Donate My Data</Link> */}
+                    {/* <Link to={`/paytm_demo`}>Donate My Data</Link> */}
                     {/*https://eatluvnpray.org/paytm_demo/  */}
                     <a
                       // target="_blank"
-                      href="https://eatluvnpray.org/paytm_demo/"
+                      href="https://staging.eatluvnpray.org/paytm_demo/"
+                      // href="https://eatluvnpray.org/paytm_demo/"
                     >
-                      Donate My Data
+                      Donate
                     </a>
                   </div>
                 </Col>
