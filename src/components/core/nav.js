@@ -390,7 +390,7 @@ class NavBar extends Component {
           <div className="email_verified">
             <div class="verifys">
               <Image src={Msgbox} alt="" />
-              <span className="fs20 fw600 col18 ml-2">Email not verified</span>
+              <span className="fs18 fw500 col18 ml-2">Email not verified</span>
             </div>
           </div>
         ) : (

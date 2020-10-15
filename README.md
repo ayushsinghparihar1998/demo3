@@ -23,7 +23,7 @@ Updated Production Details:-
 
 Listener
 adidaslis@yopmail.com 
-12345678
+12345678  
 
 Professional
 wildcraft@yopmail.com
@@ -41,6 +41,10 @@ User new Registration
 
 dk.singh@gmail.com
 12345678
+
+Admin credentials  
+niharika.gupta@lmsin.com  
+Abc@1234
 
 
 
