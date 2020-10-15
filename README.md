@@ -42,5 +42,9 @@ User new Registration
 dk.singh@gmail.com
 12345678
 
+Admin credentials  
+niharika.gupta@lmsin.com  
+Abc@1234
+
 
 
