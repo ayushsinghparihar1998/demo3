@@ -12,6 +12,7 @@ import Checkgreentwo from "../../assets/images/checkgreen2.svg";
 import Starfillone from "../../assets/images/starfillone.svg";
 import Starfillempty from "../../assets/images/staremptyone.svg";
 import ELPRxApiService from "../../common/services/apiService";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 const RateUsModal = forwardRef(({ userId }, ref) => {
 
@@ -32,13 +33,13 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
         try {
             let submitReview = await ELPRxApiService("submitReview", {
                 rv_text: rating,
-                rv_from_id: localStorage.getItem('customerInfo').u_id,
+                rv_from_id: getLocalStorage('customerInfo').u_id,
                 rv_to_id: userId
             })
             let response = await ELPRxApiService("submitRatings", {
                 rating_count: ratingCount,
                 to_id: userId,
-                from_id: localStorage.getItem('customerInfo').u_id
+                from_id: getLocalStorage('customerInfo').u_id
             })
             console.log(response)
             setIsOpen(false)
