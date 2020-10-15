@@ -12,8 +12,9 @@ import Checkgreentwo from "../../assets/images/checkgreen2.svg";
 import Starfillone from "../../assets/images/starfillone.svg";
 import Starfillempty from "../../assets/images/staremptyone.svg";
 import ELPRxApiService from "../../common/services/apiService";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
-const RateUsModal = forwardRef(({ userId }, ref) => {
+const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [ratingCount, setRatingCount] = useState(0)
@@ -30,13 +31,19 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
 
     const _submitsRatingHandler = async () => {
         try {
+            let submitReview = await ELPRxApiService("submitReview", {
+                rv_text: rating,
+                rv_from_id: getLocalStorage('customerInfo').u_id,
+                rv_to_id: userId
+            })
             let response = await ELPRxApiService("submitRatings", {
                 rating_count: ratingCount,
                 to_id: userId,
-                from_id: localStorage.getItem('customerInfo').u_id
+                from_id: getLocalStorage('customerInfo').u_id
             })
             console.log(response)
             setIsOpen(false)
+            disableInputHandler()
         } catch (err) {
             console.log(err);
         }
@@ -46,7 +53,7 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
         <>
             <Modal show={isOpen} className="CreateAccount Rate_us">
                 <Modal.Header>
-                    <Button onClick={() => setIsOpen(isOpen)}>
+                    <Button onClick={() => setIsOpen(false)}>
                         <Image src={Crossbtn} alt="" />
                     </Button>
                 </Modal.Header>
@@ -71,7 +78,10 @@ const RateUsModal = forwardRef(({ userId }, ref) => {
                             </div>
                             <div className="comments mb-4">
                                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                                    <Form.Control onChange={(e) => setRating(e.target.value)} as="textarea" rows="3" className="inputTyp2 cate2" placeholder="Write your review here.." />
+                                    <Form.Control onChange={(e) => setRating(e.target.value)}
+                                        as="textarea" rows="3"
+                                      className="inputTyp2 cate2" 
+                                      placeholder="Write your review here.." />
                                 </Form.Group>
                             </div>
                             {/* <Image src={Livechatcomment} alt="Livechatcomments" className="mb-4" /> */}

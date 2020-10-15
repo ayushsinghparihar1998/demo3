@@ -81,7 +81,7 @@ class Login extends Component {
         let email = parsed.email;
         let type = parsed.type;
         let authCode = parsed.authcode;
-         let roleType = parsed.role.replace(/\s/g, '+');
+        //  let roleType = parsed.role.replace(/\s/g, '+');
         this.verifyEmail(email, type, authCode);
       }
     } else {
@@ -103,7 +103,7 @@ class Login extends Component {
       };
       let _this = this;
       ELPRxApiService("emailVerification", data)
-        .then((response) => {alert('dfgdfgdfg')
+        .then((response) => {
           if (response.data.status === "success") {
             let u_email;
             if (getLocalStorage("userInfoProff")) {
@@ -115,10 +115,9 @@ class Login extends Component {
 
                 _this.props.history.push({ pathname: "/userDashboardproff" });
               } else {
-                
                 this.props.history.push({
-                  pathname: 'login',
-                  state: { roleType: this.state.roleType }
+                  pathname: "login",
+                  state: { roleType: this.state.roleType },
                 });
               }
             } else if (getLocalStorage("userInfo")) {
@@ -131,8 +130,8 @@ class Login extends Component {
                 _this.props.history.push({ pathname: "/userDashboard" });
               } else {
                 this.props.history.push({
-                  pathname: 'login',
-                  state: { roleType: this.state.roleType }
+                  pathname: "login",
+                  state: { roleType: this.state.roleType },
                 });
               }
             } else if (getLocalStorage("customerInfo")) {
@@ -145,16 +144,16 @@ class Login extends Component {
                 _this.props.history.push({ pathname: "/userDashboardcust" });
               } else {
                 this.props.history.push({
-                  pathname: 'login',
-                  state: { roleType: this.state.roleType }
+                  pathname: "login",
+                  state: { roleType: this.state.roleType },
                 });
               }
             }
           } else {
-             this.props.history.push({
-                  pathname: 'login',
-                  state: { roleType: this.state.roleType }
-                });
+            this.props.history.push({
+              pathname: "login",
+              state: { roleType: this.state.roleType },
+            });
           }
         })
         .catch((err) => {

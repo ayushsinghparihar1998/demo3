@@ -59,20 +59,28 @@ class Compaign extends Component {
                 </Col>
                 <Col lg={5} col={12} className="pr-0">
                   <div class="donate_data">
-                    <Link to={`/donatedata`}>Donate My Data</Link>
+                    {/* <Link to={`/paytm_demo`}>Donate My Data</Link> */}
                     {/*https://eatluvnpray.org/paytm_demo/  */}
+                    <a
+                      // target="_blank"
+                      href="https://staging.eatluvnpray.org/paytm_demo/"
+                      // href="https://eatluvnpray.org/paytm_demo/"
+                    >
+                      Donate
+                    </a>
                   </div>
                 </Col>
               </div>
 
               <div className="donate_btn text-center mb-5 mt-5">
                 <Button className="btnTyp4 text-uppercase">
-                  <a
+                  <Link to={`/donatedata`}>back elnp foundation</Link>
+                  {/* <a
                     // target="_blank"
                     href="https://eatluvnpray.org/paytm_demo/"
                   >
                     back elnp foundation
-                  </a>
+                  </a> */}
                 </Button>
               </div>
 

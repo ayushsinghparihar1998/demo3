@@ -986,7 +986,7 @@ class Adminlistener extends Component {
                                       </div>
 
                                       <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
+                                        {item.rv_text}{" "}
                                         {/* <span className="col40 fw500 pointer">
                                           Read more...
                                         </span> */}
@@ -1053,7 +1053,7 @@ class Adminlistener extends Component {
                                       </div>
 
                                       <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
+                                        {item.rv_text}{" "}
                                         {/* <span className="col40 fw500 pointer">
                                           Read more...
                                         </span> */}
@@ -1095,7 +1095,7 @@ class Adminlistener extends Component {
                                       </div>
 
                                       <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
+                                        {item.rv_text}{" "}
                                         {/* <span className="col40 fw500 pointer">
                                           Read more...
                                         </span> */}

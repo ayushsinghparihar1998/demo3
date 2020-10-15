@@ -468,11 +468,11 @@ export default {
   },
 
   blockChat: {
-    url: "elp/superadmin_Blockuserstatus",
+    url: "elp/block-user",
     method: "POST",
     data: {
-      userid: "",
-      status: "",
+      from_user_id: "",
+      to_user_id: ""
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -513,10 +513,30 @@ export default {
     method: "POST",
     data: {
       rating_count: "",
-      to_id: "",      
-      from_id:''
+      to_id: "",
+      from_id: ''
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
+  getAdminPaymentDetail: {
+    url: "elp/superadmin_getpaymentdetails",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  submitReview: {
+    url: "elp/addreview",
+    method: "POST",
+    data: {
+      rv_text: "",
+      rv_from_id: "",
+      rv_to_id: ""
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  }
 };

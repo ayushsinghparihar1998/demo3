@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   Button,
   NavDropdown,
@@ -10,17 +10,18 @@ import {
   Image,
   Form,
   Tabs,
-  Tab, Modal
+  Tab,
+  Modal,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import moment from 'moment';
-import { actionGetRecentJoin, actionGetListnerDashBoard } from '../../common/redux/actions';
+import moment from "moment";
+import {
+  actionGetRecentJoin,
+  actionGetListnerDashBoard,
+} from "../../common/redux/actions";
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationSignup";
-
-
-
 
 import UserChat from "../../assets/images/user_chat.svg";
 import UserChat2 from "../../assets/images/user_chat2.svg";
@@ -41,7 +42,7 @@ import Medals from "../../assets/images/medals.svg";
 import Rflag from "../../assets/images/r_flag.svg";
 import SocketIOClient from "socket.io-client";
 import { getLocalStorage } from "../../common/helpers/Utils";
-const SOCKET_IO_URL = "http://103.76.253.131:8282";
+const SOCKET_IO_URL = "https://eatluvnpray.org:8443";
 const socket = SocketIOClient(SOCKET_IO_URL);
 socket.connect();
 
@@ -49,37 +50,40 @@ class Userdashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recentJoin: [], dashboardData: [],activeChatUsers:[], user_id: getLocalStorage("u_id")
+      recentJoin: [],
+      dashboardData: [],
+      activeChatUsers: [],
+      user_id: getLocalStorage("u_id"),
     };
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener("beforeunload", this.unmount);
     this.unmount();
   }
   unmount = () => {
-    if(socket) {
+    if (socket) {
       socket.disconnect();
     }
-  }
+  };
   componentDidMount() {
     socket.connect();
     window.addEventListener("beforeunload", this.unmount);
     this.getRecentJoinUsers();
     this.actionGetListnerDashBoard();
-    let result = getLocalStorage("result")
-    console.log("getLocalStorage", getLocalStorage("result"))
+    let result = getLocalStorage("result");
+    console.log("getLocalStorage", getLocalStorage("result"));
     if (getLocalStorage("result") >= 60) {
       this.setState({
         sucess: true,
         result: true,
-        message: "your score is " + result
-      })
+        message: "your score is " + result,
+      });
     } else {
       this.setState({
         sucess: true,
         result: false,
-        message: "your score is" + result
-      })
+        message: "your score is" + result,
+      });
     }
 
     socket.on("connect", function () {
@@ -94,9 +98,6 @@ class Userdashboard extends Component {
         }
       );
     });
-    
-
-    
 
     socket.emit(
       "getActiveListnersOrCustomers",
@@ -151,8 +152,8 @@ class Userdashboard extends Component {
     }
   }
   call() {
-    console.log('call');
-    console.log('obj', {
+    console.log("call");
+    console.log("obj", {
       user_type: getLocalStorage("u_role_id"),
       user_id: getLocalStorage("u_id"),
       pagination: "10",
@@ -171,14 +172,14 @@ class Userdashboard extends Component {
       }
     );
   }
-  handleOk = e => {
+  handleOk = (e) => {
     console.log(e);
     this.setState({
       sucess: false,
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     // if (this.state.result) {
     this.setState({
@@ -188,30 +189,30 @@ class Userdashboard extends Component {
   };
 
   getRecentJoinUsers() {
-    let userInfo = getLocalStorage('userInfo');
+    let userInfo = getLocalStorage("userInfo");
     this.props.actionGetRecentJoin({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.u_mem_list;
-        this.setState({ recentJoin: res })
+        this.setState({ recentJoin: res });
       }
-    })
+    });
   }
   actionGetListnerDashBoard() {
-    let userInfo = getLocalStorage('userInfo');
+    let userInfo = getLocalStorage("userInfo");
     this.props.actionGetListnerDashBoard({}).then((result) => {
       if (result && result.status === 200) {
         let res = result.data.data.dashboard_list;
-        this.setState({ dashboardData: res })
+        this.setState({ dashboardData: res });
       }
-    })
+    });
   }
   copyReferUrl = () => {
     var copyText = document.getElementById("referURL");
     copyText.select();
-    copyText.setSelectionRange(0, 99999)
+    copyText.setSelectionRange(0, 99999);
     document.execCommand("copy");
     // alert("Copied the text: " + copyText.value);
-  }
+  };
 
   render() {
     let recentJoin = this.state.recentJoin;
@@ -323,8 +324,9 @@ class Userdashboard extends Component {
 
                   <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      <span onClick={() => this.call()}>Currently Active
-                      Listeners</span>
+                      <span onClick={() => this.call()}>
+                        Currently Active Listeners
+                      </span>
                     </div>
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                       <Tab eventKey="home" title="Listener">
@@ -570,7 +572,11 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Stars} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_cheers
+                              ? dashboardData.u_cheers
+                              : "0"}{" "}
+                          </strong>
                           Cheers
                         </span>
                       </div>
@@ -579,7 +585,11 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Hearttwo} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_compassion_count ? dashboardData.u_compassion_count : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_compassion_count
+                              ? dashboardData.u_compassion_count
+                              : "0"}{" "}
+                          </strong>
                           Compassion Hearts
                         </span>
                       </div>
@@ -588,7 +598,11 @@ class Userdashboard extends Component {
                       <div className="d-flex mb-2">
                         <Image src={Medals} alt="" className="pointer" />
                         <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                          <strong className="fs18">{dashboardData.u_badge_count ? dashboardData.u_badge_count : '0'} </strong>
+                          <strong className="fs18">
+                            {dashboardData.u_badge_count
+                              ? dashboardData.u_badge_count
+                              : "0"}{" "}
+                          </strong>
                           Badges Earned
                         </span>
                       </div>
@@ -618,7 +632,11 @@ class Userdashboard extends Component {
                           type="text"
                           readOnly
                           className="inputTyp4"
-                          value={dashboardData.refer_url ? dashboardData.refer_url : ''}
+                          value={
+                            dashboardData.refer_url
+                              ? dashboardData.refer_url
+                              : ""
+                          }
                         />
                         <Button className="btnTyp8" onClick={this.copyReferUrl}>
                           <Image src={Copys} alt="" className="" />
@@ -632,21 +650,27 @@ class Userdashboard extends Component {
                     </div>
 
                     {recentJoin &&
-                      recentJoin.map(
-                        (data, index) => {
-                          return (
-                            <div className="d-flex m-3 border-bottom">
-                              <div className="position-relative">
-                                <Image src={data.u_image ? data.u_image : ''} alt="" className="r50 pt-1" />
+                      recentJoin.map((data, index) => {
+                        return (
+                          <div className="d-flex m-3 border-bottom">
+                            <div className="position-relative">
+                              <Image
+                                src={data.u_image ? data.u_image : ""}
+                                alt=""
+                                className="r50 pt-1"
+                              />
+                            </div>
+                            <div className="mt-auto mb-auto pl-3">
+                              <div className="fs15 col14 fw500">
+                                {data.u_username ? data.u_username : ""}
                               </div>
-                              <div className="mt-auto mb-auto pl-3">
-                                <div className="fs15 col14 fw500">{data.u_username ? data.u_username : ''}</div>
-                                <div className="col27 fs13 fw500">{data.u_role_txt ? data.u_role_txt : ''}</div>
+                              <div className="col27 fs13 fw500">
+                                {data.u_role_txt ? data.u_role_txt : ""}
                               </div>
                             </div>
-                          )
-                        })
-                    }
+                          </div>
+                        );
+                      })}
 
                     {/* <div className="d-flex m-3 border-bottom">
                       <div className="position-relative">
@@ -657,7 +681,6 @@ class Userdashboard extends Component {
                         <div className="col27 fs13 fw500">Listeners</div>
                       </div>
                     </div> */}
-
                   </div>
                 </div>
               </Col>
@@ -693,7 +716,7 @@ class Userdashboard extends Component {
   }
 }
 
-export default connect(
-  null,
-  { actionGetRecentJoin, actionGetListnerDashBoard }
-)(Userdashboard);
+export default connect(null, {
+  actionGetRecentJoin,
+  actionGetListnerDashBoard,
+})(Userdashboard);
