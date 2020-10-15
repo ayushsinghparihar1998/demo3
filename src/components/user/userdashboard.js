@@ -345,13 +345,13 @@ return (
 
                   <div className="inner_side">
                       <div className="upgrade">   
-                          <Button className="btnType17">Upgrade to Premium Account</Button> 
+                          <Button onClick={()=>this.props.history.push('/coming-soon')} className="btnType17">Upgrade to Premium Account</Button> 
                       </div> 
                   </div>
                   <div className="inner_side">
                       <div className="benefits">
                           <div className="pb-2 col14 fw500 fs15">Benefits of becoming a CoCo</div>
-                          <Button className="btnType18">Learn More</Button>
+                          <Button onClick={()=>this.props.history.push('/coco/learn-more')} className="btnType18">Learn More</Button>
                       </div>
                   </div>
                   <div className="inner_side">

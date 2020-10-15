@@ -51,8 +51,10 @@ import Reviewrequest from "../components/admin/reviewrequest";
 import Ratingrequest from "../components/admin/ratingrequest";
 import Reviewcomments from "../components/user/reviewcomments"; 
 import Donatedata from "../components/user/donatedata";  
+import CocoLearnMore from "../components/user/cocoLearnMore";  
 import Foundation from "../components/user/foundation";
 import Paymentdetail from "../components/admin/paymentdetail";                
+import ComingSoon from "../components/comingSoon";
 
 const user =
   getLocalStorage("userInfo") || 
@@ -80,6 +82,7 @@ class ELPRoute extends Component {
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
+         
           <PublicRoute path="/adminLogin" component={AdminLogin} />
           <PublicRoute path="/becomeListener" component={Becomelistener} />
           <PublicRoute path="/listenersignup" component={Listenersignup} />
@@ -131,6 +134,8 @@ class ELPRoute extends Component {
             path="/userDashboardcust"
             component={UserdashboardCust}
           />
+           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
+          <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           {/* <PrivateRouteProff path="/calendar" component={CalendarDemo} /> */}

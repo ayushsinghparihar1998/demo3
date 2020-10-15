@@ -1176,41 +1176,19 @@ class Adminlistener extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>John Wade</td>
-                          <td>50/-</td>
-                          <td><Button className="btnTyp9 reject color1">Transfered</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Rechard D’souza</td>
-                          <td>1000/-</td>
-                          <td><Button className="btnTyp9 reject color2">Inprocess</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Florence Smith</td>
-                          <td>2000/-</td>
-                          <td><Button className="btnTyp9 reject color3">Pending</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Daniel Taylor</td>
-                          <td>10000/-</td>
-                          <td><Button className="btnTyp9 reject color4">Failed</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Stephen Thomas</td>
-                          <td>20000/-</td>
-                          <td><Button className="btnTyp9 reject color1">Transfered</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Harriet Evans</td>
-                          <td>30000/-</td>
-                          <td><Button className="btnTyp9 reject color2">Inprocess</Button></td>
-                        </tr>
-                        <tr>
-                          <td>Michael Davies</td>
-                          <td>40000/-</td>
-                          <td><Button className="btnTyp9 reject color1">Transfered</Button></td>
-                        </tr>
+                        {
+                          this.state.paymentList.map(elem=>{
+                            return (
+                              <tr>
+                              <td>{elem.pr_email||'-'}</td>
+                              <td>{elem.pr_txamount||'-'}</td>
+                              <td><Button className="btnTyp9 reject color1">{elem.pr_status.split('_')[1]||'-'}</Button></td>
+                            </tr>
+                            )
+                          })
+                        }
+                       
+                        
 
                       </tbody>
                     </Table>

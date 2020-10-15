@@ -11,7 +11,7 @@ import {
   Image,
   Modal,
   Row,
-  Col,
+  Dropdown,
 } from "react-bootstrap";
 import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
@@ -32,6 +32,13 @@ import UserSignup from "../signup/userSignup";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
 import socketClass from "../../common/utility/socketClass";
+
+import Userprofiles from "../../assets/images/user_profiles.svg";
+import Usersettings from "../../assets/images/user_settings.svg";
+import Userenables from "../../assets/images/user_enables.svg";
+import Userlogouts from "../../assets/images/user_logouts.svg";
+
+
 class NavBar extends Component {
   constructor() {
     super();
@@ -50,8 +57,8 @@ class NavBar extends Component {
     let data = getLocalStorage("userInfo")
       ? getLocalStorage("userInfo")
       : getLocalStorage("customerInfo")
-      ? getLocalStorage("customerInfo")
-      : getLocalStorage("userInfoProff");
+        ? getLocalStorage("customerInfo")
+        : getLocalStorage("userInfoProff");
     console.log("data", data);
 
     if (data) {
@@ -220,23 +227,23 @@ class NavBar extends Component {
                 </Form>
               </Nav>
             ) : (
-              <Nav className="ml-auto">
-                {getLocalStorage("userInfo") ||
-                getLocalStorage("userInfoProff") ||
-                getLocalStorage("customerInfo")
-                  ? [
+                <Nav className="ml-auto">
+                  {getLocalStorage("userInfo") ||
+                    getLocalStorage("userInfoProff") ||
+                    getLocalStorage("customerInfo")
+                    ? [
                       getLocalStorage("customerInfo")
                         ? [
-                            <NavLink
-                              to="/professionalSearch"
-                              className="nav-link"
-                            >
-                              Professional Search
+                          <NavLink
+                            to="/professionalSearch"
+                            className="nav-link"
+                          >
+                            Professional Search
                             </NavLink>,
-                            <NavLink to="/listenerSearch" className="nav-link">
-                              Listener Search
+                          <NavLink to="/listenerSearch" className="nav-link">
+                            Listener Search
                             </NavLink>,
-                          ]
+                        ]
                         : "",
 
                       <NavLink
@@ -244,10 +251,10 @@ class NavBar extends Component {
                           getLocalStorage("userInfo")
                             ? "userDashboard"
                             : getLocalStorage("userInfoProff")
-                            ? "userDashboardproff"
-                            : getLocalStorage("customerInfo")
-                            ? "userDashboardcust"
-                            : ""
+                              ? "userDashboardproff"
+                              : getLocalStorage("customerInfo")
+                                ? "userDashboardcust"
+                                : ""
                         }
                         className="nav-link"
                       >
@@ -255,12 +262,12 @@ class NavBar extends Component {
                       </NavLink>,
                       ,
                       getLocalStorage("userInfoProff") ||
-                      getLocalStorage("userInfo")
+                        getLocalStorage("userInfo")
                         ? [
-                            <NavLink to={"calendar"} className="nav-link">
-                              My Schedule
+                          <NavLink to={"calendar"} className="nav-link">
+                            My Schedule
                             </NavLink>,
-                          ]
+                        ]
                         : "",
                       <NavLink to="/myprofile" className="nav-link">
                         My Profile
@@ -269,7 +276,7 @@ class NavBar extends Component {
                         Edit Profile
                       </NavLink>,
                     ]
-                  : [
+                    : [
                       <Nav.Link onClick={this.handleModal}>
                         Connect Now
                       </Nav.Link>,
@@ -311,53 +318,102 @@ class NavBar extends Component {
                       </Nav.Link>,
                       <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
                     ]}
-                {getLocalStorage("userInfo") ||
-                getLocalStorage("userInfoProff") ||
-                getLocalStorage("customerInfo") ? (
-                  <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-                ) : (
-                  <NavDropdown
-                    title="Login"
-                    id="login-nav-dropdown"
-                    className="btnTypeone loginnav"
-                  >
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(1);
-                      }}
-                    >
-                      Listener Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(2);
-                      }}
-                    >
-                      Professional Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(3);
-                      }}
-                    >
-                      User Login
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                )}
+                  {getLocalStorage("userInfo") ||
+                    getLocalStorage("userInfoProff") ||
+                    getLocalStorage("customerInfo") ? (
 
-                <Form inline>
-                  <span className="d-none">
-                    {getLocalStorage("loggedIn") ? (
-                      <div onClick={this.handleLogout} className="btnType1">
-                        Logout
-                      </div>
+
+                      <span className="userprofiles menus">
+                        <Nav.Link>
+                          <Image src={Mailicon} alt="" className="pointer" />
+                        </Nav.Link>
+                        <Nav.Link>
+                          <Dropdown className="droptwo">
+                            <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
+                              <Image src={Bellicon} alt="" className="pointer" />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="d-none">
+                              <Dropdown.Item>
+                                <ul>
+                                  <li>
+                                    <div>
+                                      <span>Lorem</span>
+                                              William johnson Invited you to join event
+                                            </div>
+                                    <div>5 mins ago</div>
+                                  </li>
+                                  <li></li>
+                                  <li></li>
+                                </ul>
+                              </Dropdown.Item>
+
+                              {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </Nav.Link>
+                        {/* <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Profile
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Profile</a> 
+                          </div>
+                    </li>  */}
+                        <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
+                          <NavDropdown.Item href="#"><Image src={Userprofiles} alt="" className="mr-1" /> USER</NavDropdown.Item>
+                          <NavDropdown.Item href="#"><Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
+                          <NavDropdown.Item href="#"><Image src={Userenables} alt="" className="mr-1" /> SWITCH ACCOUNT</NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> LOGOUT</NavDropdown.Item>
+                        </NavDropdown>
+                      </span>
+
+                      // <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
                     ) : (
-                      <NavLink to="/login" className="btnType1">
-                        Login
-                      </NavLink>
+                      <NavDropdown
+                        title="Login"
+                        id="login-nav-dropdown"
+                        className="btnTypeone loginnav"
+                      >
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(1);
+                          }}
+                        >
+                          Listener Login
+                    </NavDropdown.Item>
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(2);
+                          }}
+                        >
+                          Professional Login
+                    </NavDropdown.Item>
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(3);
+                          }}
+                        >
+                          User Login
+                    </NavDropdown.Item>
+                      </NavDropdown>
                     )}
-                  </span>
-                  {/* <span>
+
+                  <Form inline>
+                    <span className="d-none">
+                      {getLocalStorage("loggedIn") ? (
+                        <div onClick={this.handleLogout} className="btnType1">
+                          Logout
+                        </div>
+                      ) : (
+                          <NavLink to="/login" className="btnType1">
+                            Login
+                          </NavLink>
+                        )}
+                    </span>
+                    {/* <span>
                     <Image src={insta} alt="" className="pointer" />
                   </span>
                   <span>
@@ -369,20 +425,20 @@ class NavBar extends Component {
                   <span>
                     <Image src={linkedin} alt="" className="pointer" />
                   </span> */}
-                </Form>
-                <span className="userprofiles d-flex">
-                  <Nav.Link>
-                    <Image src={Mailicon} alt="" className="pointer" />
-                  </Nav.Link>
-                  <Nav.Link>
-                    <Image src={Bellicon} alt="" className="pointer" />
-                  </Nav.Link>
-                  <NavDropdown title="Profile" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  </NavDropdown>
-                </span>
-              </Nav>
-            )}
+                  </Form>
+                  <span className="userprofiles d-flex">
+                    <Nav.Link>
+                      <Image src={Mailicon} alt="" className="pointer" />
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Image src={Bellicon} alt="" className="pointer" />
+                    </Nav.Link>
+                    <NavDropdown title="Profile" id="basic-nav-dropdown">
+                      <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                    </NavDropdown>
+                  </span>
+                </Nav>
+              )}
           </Navbar.Collapse>
         </Navbar>
 
@@ -394,8 +450,8 @@ class NavBar extends Component {
             </div>
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
         {/* user registration start */}
 
         <Modal show={this.state.show} className="CreateAccount">
