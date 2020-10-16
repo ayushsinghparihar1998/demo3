@@ -273,6 +273,23 @@
     box-shadow      : none !important; 
   }
 
+  .btnTyp9.unblock {
+    min-width: 130px; 
+    background: $col87 !important; 
+    color: $col88 !important; 
+    border: solid 1px $col88 !important; 
+    font-size: 15px !important; 
+}
+
+.btnTyp9.unblock:hover,
+.btnTyp9.unblock:focus,
+.btnTyp9.unblock:active:focus {                    
+  border-color    : $col88 !important;
+  background: $col88 !important;
+  color           : $col18 !important; 
+  box-shadow      : none !important; 
+}
+
   .btnTyp9.shows {
     min-width: 160px;   
     background: transparent !important; 

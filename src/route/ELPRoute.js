@@ -52,7 +52,8 @@ import Ratingrequest from "../components/admin/ratingrequest";
 import Reviewcomments from "../components/user/reviewcomments"; 
 import Donatedata from "../components/user/donatedata";  
 import Foundation from "../components/user/foundation";
-import Paymentdetail from "../components/admin/paymentdetail";                
+import Paymentdetail from "../components/admin/paymentdetail";
+import Mysetting from "../components/admin/mysetting";         
 
 const user =
   getLocalStorage("userInfo") || 
@@ -115,6 +116,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
+          <PublicRoute path="/mysetting" component={Mysetting} />  
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
@@ -163,4 +165,4 @@ class ELPRoute extends Component {
     );
   }
 }
-export default ELPRoute;
+export default ELPRoute; 
