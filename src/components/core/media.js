@@ -7,24 +7,16 @@ import Ngoone from "../../assets/images/ngo1.svg";
 import Ngotwo from "../../assets/images/ngo2.svg";
 import Ngothree from "../../assets/images/ngo3.svg";   
 
-import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component"; 
-import { Popover } from 'antd';
-import {
-    actionSearchListner,
-    actionAddrating
-} from '../../common/redux/actions';   
-
 class Media extends Component { 
     render() {
         return (
-            <div className="page__wrapper innerpage"> 
+            <div className="page__wrapper innerpage">      
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div> 
                 <div className="ngo_services">
                     <Container>
-                        <div className="ngo_listing mt-4 mb-4">   
+                        <div className="ngo_listing  mt-4 mb-4">   
                             <div className="col14 fw600 fs22 text-center w-100 mt-4 pt-3">Media</div>  
                             <hr className="ngohr" />  
 
@@ -37,16 +29,10 @@ class Media extends Component {
                                             <div className="col14 fs14 fw400 pt-1">Since 1970</div>
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
-                                            <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
+                                            <Button className="btnType19">Read More</Button>
                                         </div>
                                     </div>
-                                </Col>
+                                </Col> 
                                 <Col lg={4} md={4} sm={12}>   
                                     <div className="ngo_social">   
                                         <Image src={Ngotwo} alt="" className="w-100" />  
@@ -56,12 +42,6 @@ class Media extends Component {
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
                                             <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </Col>
@@ -73,13 +53,7 @@ class Media extends Component {
                                             <div className="col14 fs14 fw400 pt-1">Since 1970</div>
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
-                                            <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
+                                            <Button className="btnType19">Read More</Button> 
                                         </div>
                                     </div>
                                 </Col>
@@ -91,13 +65,7 @@ class Media extends Component {
                                             <div className="col14 fs14 fw400 pt-1">Since 1970</div>
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
-                                            <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
+                                            <Button className="btnType19">Read More</Button>
                                         </div>
                                     </div>
                                 </Col>
@@ -110,12 +78,6 @@ class Media extends Component {
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
                                             <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </Col>
@@ -127,13 +89,7 @@ class Media extends Component {
                                             <div className="col14 fs14 fw400 pt-1">Since 1970</div>
                                             <hr className="social_hr" />
                                             <div className="fs14 col29 fw300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div> 
-                                            <Button className="btnType19">Read More</Button>  
-                                            <div className="ngo_overlay">
-                                                <div className="read_detail"> 
-                                                    <Button className="btnType20">READ MORE</Button>
-                                                    <Button className="btnType21">DONATE NOW</Button>  
-                                                </div>
-                                            </div>
+                                            <Button className="btnType19">Read More</Button> 
                                         </div>
                                     </div>
                                 </Col>

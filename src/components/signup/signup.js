@@ -248,7 +248,7 @@ class Signup extends Component {
               <Col md={12}>
                 <Form.Group>
                   <Form.Label className="fs20 fw600 col14">
-                    Add Categor
+                    Add Category
                   </Form.Label>
                   <Form.Control
                     type="category"
