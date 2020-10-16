@@ -240,9 +240,9 @@ class NavBar extends Component {
                           >
                             Professional Search
                             </NavLink>,
-                          <NavLink to="/listenerSearch" className="nav-link">
-                            Listener Search
-                            </NavLink>,
+                          // <NavLink to="/listenerSearch" className="nav-link">
+                          //   Listener Search
+                          //   </NavLink>,
                         ]
                         : "",
 
@@ -269,12 +269,12 @@ class NavBar extends Component {
                             </NavLink>,
                         ]
                         : "",
-                      <NavLink to="/myprofile" className="nav-link">
-                        My Profile
-                      </NavLink>,
-                      <NavLink to="/editprofile" className="nav-link">
-                        Edit Profile
-                      </NavLink>,
+                      // <NavLink to="/myprofile" className="nav-link">
+                      //   My Profile
+                      // </NavLink>,
+                      // <NavLink to="/editprofile" className="nav-link">
+                      //   Edit Profile
+                      // </NavLink>,
                     ]
                     : [
                       <Nav.Link onClick={this.handleModal}>
@@ -363,9 +363,14 @@ class NavBar extends Component {
                           </div>
                     </li>  */}
                         <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
-                          <NavDropdown.Item href="#"><Image src={Userprofiles} alt="" className="mr-1" /> USER</NavDropdown.Item>
-                          <NavDropdown.Item href="#"><Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
-                          <NavDropdown.Item href="#"><Image src={Userenables} alt="" className="mr-1" /> SWITCH ACCOUNT</NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" className="mr-1" />
+                            USER
+                          </NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
+                            <Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" className="mr-1" />
+                              Edit Profile
+                          </NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> LOGOUT</NavDropdown.Item>
                         </NavDropdown>
                       </span>

@@ -54,7 +54,7 @@ import Donatedata from "../components/user/donatedata";
 import CocoLearnMore from "../components/user/cocoLearnMore";  
 import Foundation from "../components/user/foundation";
 import Paymentdetail from "../components/admin/paymentdetail";
-import Mysetting from "../components/admin/mysetting";                  
+import MySetting from "../components/admin/mysetting";                  
 import ComingSoon from "../components/comingSoon";
 import Media from "../components/core/media";  
 import Mediadetails from "../components/core/mediadetails"; 
@@ -121,9 +121,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
-          <PublicRoute path="/mysetting" component={Mysetting} /> 
+         
           <PublicRoute path="/media" component={Media} />  
-          <PublicRoute path="/mediadetails" component={Mediadetails} />
+   
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
@@ -135,6 +135,7 @@ class ELPRoute extends Component {
             path="/userDashboardproff"
             component={UserdashboardProff}
           />
+          
           {/*User*/}
           <PrivateRouteUser
             path="/userDashboardcust"
@@ -145,7 +146,8 @@ class ELPRoute extends Component {
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           {/* <PrivateRouteProff path="/calendar" component={CalendarDemo} /> */}
-
+          <PrivateRoutes path="/mysetting" component={MySetting} /> 
+          <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />
           <PrivateRoutes path="/calendar" component={CalendarDemo} />
 
           <PrivateRoutes path="/myprofile" component={MyProfile} />

@@ -30,7 +30,7 @@ class ListenerProfile extends Component {
                         </div>
                         <div className="mt-3 mb-4 pb-2 ml-4">   
                             <div className="fs18 fw600 col1 pb-1">Melisa R. Wright</div>
-                            <div className="col23 fs16 fw500 pb-1">Listener - Novice
+                            <div className="col23 fs16 fw500 pb-1">Listener
                                 <Image src={warningS} alt="" className="ml-2" />  
                             </div>
                             <div className="mt-1 col27 fw400">Finding myself....</div> 
