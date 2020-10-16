@@ -538,5 +538,23 @@ export default {
     },
     showResultMessage: false,
     showErrorMessage: true,
+  },
+  getBlogList: {
+    url: "elp/getblog",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getCategoryList: {
+    url: "elp/autoconnectgetallcategories",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
   }
 };

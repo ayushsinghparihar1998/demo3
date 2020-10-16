@@ -37,7 +37,7 @@ const MessageCount = ({ userId }) => {
             socket.emit("get-active-conversation", {
                 user_id: selfId 
             }, (data) => { 
-                // console.log('active data', data);
+                console.log('active data', data);
                 setData({...data.result})
             });
         }

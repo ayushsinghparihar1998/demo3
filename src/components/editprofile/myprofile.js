@@ -27,11 +27,12 @@ class Myprofile extends Component {
 
         let res = result.data.data &&
           result.data.data.profile_list ? result.data.data.profile_list : {};
+        console.log('=================>>>',res)
         this.setState({ userData: res })
       }
     })
   }
-  handleEdit = ()=>{
+  handleEdit = () => {
     this.props.history.push({
       pathname: "editprofile",
     });
@@ -52,19 +53,19 @@ class Myprofile extends Component {
                   <Image src={Profileban} alt="" className="w-100" />
                   <div className="text-center profile_top">
                     <Image src={Profileimg} alt="" className="r50 border_profile" />
-                    <Image src={userData.flag ? userData.flag : Usaflag} 
-                  alt="" width='50px' className="r50 flags" />
+                    <Image src={userData.flag ? userData.flag : Usaflag}
+                      alt="" width='50px' className="r50 flags" />
                     <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button>
                   </div>
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
-                    <div className="col23 fs16 fw500 pb-1">Listener - Novice
+                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id==1?'Listener':'Member'}
                          <Image src={warningS} alt="" className="ml-2" />
                     </div>
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>
                     <div className="border_bottoms mt-3"></div>
                   </div>
-                  <div className="text-center user_tab"> 
+                  <div className="text-center user_tab">
                     <Tabs defaultActiveKey="home">
                       <Tab eventKey="home" title="Home">
                         <div className="layout mt-5">
@@ -73,7 +74,7 @@ class Myprofile extends Component {
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_rating}</div>
                           </div>
                         </div>
-                         <div className="layout">
+                        <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Email:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
@@ -88,7 +89,7 @@ class Myprofile extends Component {
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Country:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name }</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
                           </div>
                         </div>
                         <div className="layout">
@@ -108,11 +109,11 @@ class Myprofile extends Component {
                             <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.listento}</div>
                           </div>
-                        </div>{console.log("userDatauserData",userData)}
+                        </div>{console.log("userDatauserData", userData)}
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Languages:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.language?userData.language:''}</div>
+                            <div className="fs16 col14 fw400 text-left w40">{userData.language ? userData.language : ''}</div>
                           </div>
                         </div>
                         <div className="layout">
