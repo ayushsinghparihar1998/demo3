@@ -651,4 +651,18 @@
 }
 
 /* media screen start */
- 
+.coming_soon { 
+    /*background-color: #f3fdff;*/
+    overflow: hidden;
+    min-height: calc(100vh - 80px);   
+    background-image: url(../images/bgcoming.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.coming_soon .comings {                                                     
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);  
+}
