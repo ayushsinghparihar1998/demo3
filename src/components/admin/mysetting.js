@@ -17,7 +17,7 @@ class Mysetting extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout pt-4 pb-5">
+                <div className="profile_layout pt-4 pb-5"> 
                     <Container>
                         <div className="mysetting">
                             <div className="search_listeners">

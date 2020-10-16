@@ -8,24 +8,24 @@ import Ngotwo from "../../assets/images/ngo2.svg";
 import Ngothree from "../../assets/images/ngo3.svg";   
 
 import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component";
+import ReactStars from "react-rating-stars-component"; 
 import { Popover } from 'antd';
 import {
     actionSearchListner,
     actionAddrating
 } from '../../common/redux/actions';   
 
-class Ngo extends Component { 
+class Media extends Component { 
     render() {
         return (
-            <div className="page__wrapper innerpage">
+            <div className="page__wrapper innerpage"> 
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div> 
                 <div className="ngo_services">
                     <Container>
                         <div className="ngo_listing mt-4 mb-4">   
-                            <div className="col14 fw600 fs22 text-center w-100 mt-4 pt-3">NGO</div> 
+                            <div className="col14 fw600 fs22 text-center w-100 mt-4 pt-3">Media</div>  
                             <hr className="ngohr" />  
 
                             <Row className="mt-4">        
@@ -150,4 +150,4 @@ class Ngo extends Component {
         );
     }
 }
-export default Ngo
+export default Media; 

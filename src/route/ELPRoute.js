@@ -56,6 +56,7 @@ import Foundation from "../components/user/foundation";
 import Paymentdetail from "../components/admin/paymentdetail";
 import Mysetting from "../components/admin/mysetting";                  
 import ComingSoon from "../components/comingSoon";
+import Media from "../components/core/media"; 
 
 const user =
   getLocalStorage("userInfo") || 
@@ -119,7 +120,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
-          <PublicRoute path="/mysetting" component={Mysetting} />  
+          <PublicRoute path="/mysetting" component={Mysetting} /> 
+          <PublicRoute path="/media" component={Media} />  
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
