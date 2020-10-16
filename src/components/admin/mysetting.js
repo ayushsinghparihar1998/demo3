@@ -44,6 +44,7 @@ const MySetting = (props) => {
         }
     }
     const _unblockUserHandler = (userId) => {
+       
         socket.emit("block-user", {
             from_user_id: selfId,
             to_user_id: userId,

@@ -123,7 +123,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
          
           <PublicRoute path="/media" component={Media} />  
-          <PublicRoute path="/mediadetails" component={Mediadetails} />
+   
 
           {/* LIst */} 
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
@@ -147,6 +147,7 @@ class ELPRoute extends Component {
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           {/* <PrivateRouteProff path="/calendar" component={CalendarDemo} /> */}
           <PrivateRoutes path="/mysetting" component={MySetting} /> 
+          <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />
           <PrivateRoutes path="/calendar" component={CalendarDemo} />
 
           <PrivateRoutes path="/myprofile" component={MyProfile} />

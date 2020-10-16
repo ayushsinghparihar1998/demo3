@@ -548,6 +548,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getBlogDetail: {
+    url: "elp/getBlogdetails",
+    method: "POST",
+    data: { bl_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   getCategoryList: {
     url: "elp/autoconnectgetallcategories",
     method: "GET",

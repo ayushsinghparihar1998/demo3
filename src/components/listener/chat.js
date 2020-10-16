@@ -106,6 +106,16 @@ class Chat extends Component {
   };
 
   componentWillUnmount() {
+    socket.emit(
+      "onScreen",
+      JSON.stringify({
+        from_user_id: getLocalStorage("userInfo").u_id,
+        to_user_id: this.props.match.params.id,
+        status: 1,
+      }), (data) =>{
+        console.log('chat component unmounted')
+      }
+    );
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
   }

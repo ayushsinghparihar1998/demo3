@@ -6,8 +6,8 @@ import {
  } from "react-bootstrap";
  import Blogs from '../../assets/images/blogs.svg';
  import ELPRxApiService from "../../common/services/apiService";
-
-const BlogList = () => {
+import {NavLink} from 'react-router-dom';
+const BlogList = (props) => {
     const [blogList, setBlogList] = useState([])
     useEffect(()=>{
         _getBlogListHandler()
@@ -30,9 +30,11 @@ const BlogList = () => {
                         blogList.map(data=>{
                             return (
                                 <Col md={3}>
-                                <div className="blog_detail">
+                                <div  className="blog_detail">
+                                    <NavLink to={`/mediadetails/${data.bl_id}`}>
                                     <Image src={data.bl_image} alt="" />
                                     <div className="fs15 pt-2">{data.bl_title}</div>
+                                    </NavLink>
                                 </div>
                             </Col>
                             )
