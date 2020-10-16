@@ -48,8 +48,8 @@ import ELPRxApiService from "../../common/services/apiService";
 
 import {
    FacebookIcon,
-   FacebookShareButton,       
- } from "react-share";
+   FacebookShareButton,
+} from "react-share";
 
 import SocketIOClient from "socket.io-client";
 import {
@@ -76,7 +76,8 @@ class Userdashboard extends Component {
          dashboardData: [],
          showVal: 4,
          activeChatUsers: [],
-         categories_list:[],
+         categories_list: [],
+         selectedCategory: null,
          user_id: getLocalStorage("customerInfo").u_id
       };
    }
@@ -85,10 +86,10 @@ class Userdashboard extends Component {
       this.unmount();
    }
    unmount = () => {
-      
+
    }
    componentDidMount() {
-     
+
       window.addEventListener("beforeunload", this.unmount)
       this.getRecentJoinUsers();
       this.getUserDashBoard();
@@ -212,14 +213,35 @@ class Userdashboard extends Component {
    handleRedirectActiveUsers = (data) => () => {
       this.props.history.push('/chatuser/' + data.id);
    }
-   _getCategoriesListHandler = async () =>{
-      try{
+   _getCategoriesListHandler = async () => {
+      try {
          let response = await ELPRxApiService("getCategoryList")
-        console.log('===>RESO==>.',response)
-        this.setState({
-           categories_list:response.data.data.categories_list
-        })
-      }catch(err){
+         console.log('===>RESO==>.', response)
+         this.setState({
+            categories_list: response.data.data.categories_list
+         })
+      } catch (err) {
+         console.log(err)
+      }
+   }
+   _getRandomChatHandler = () => {
+      try {
+         console.log({
+            user_id: this.state.user_id,
+            cat_id: this.state.selectedCategory
+         })
+         socket.emit(
+            "connect-randomly",
+            {
+               user_id: this.state.user_id,
+               cat_id: this.state.selectedCategory
+            },
+            (d) => {
+               console.log("_getRandomChatHandler", d);
+
+            }
+         );
+      } catch (err) {
          console.log(err)
       }
    }
@@ -377,20 +399,24 @@ class Userdashboard extends Component {
                                              <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Control as="select"
                                                    className="selectTyp1 select3"
-                                                   name="date">
+                                                   name="date"
+                                                   onChange={(e) => this.setState({ selectedCategory: e.target.value })}
+                                                >
                                                    <option>Select Category</option>
 
                                                    {
-                                                      this.state.categories_list.map(data=>{
-                                                         return <option>{data.cat_name}</option>
+                                                      this.state.categories_list.map(data => {
+                                                         return <option value={data.cat_id}>
+                                                            {data.cat_name}
+                                                         </option>
                                                       })
-                                                   }                                                   
+                                                   }
 
                                                 </Form.Control>
                                              </Form.Group>
                                           </Col>
                                           <Col lg={2} md={3} className="text-right">
-                                             <Button className="btnTyp5 smallbtn">chat</Button>
+                                             <Button onClick={this._getRandomChatHandler} className="btnTyp5 smallbtn">chat</Button>
                                           </Col>
                                        </Row>
                                     </div>
@@ -491,7 +517,7 @@ class Userdashboard extends Component {
                            </Col>
 
 
-                         <BlogList/>
+                           <BlogList />
 
                         </Row>
                      </Col>

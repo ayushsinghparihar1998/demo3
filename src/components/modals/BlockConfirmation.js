@@ -46,7 +46,8 @@ const BlockConfirmation = forwardRef(({ userId }, ref) => {
         try {
             socket.emit("block-user", {
                 from_user_id: selfId,
-                to_user_id: userId
+                to_user_id: userId,
+                block:1
             }, (data) => {
                 console.log('active data', data);
                 // showSuccessToast(data.msg)

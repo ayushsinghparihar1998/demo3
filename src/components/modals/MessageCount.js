@@ -43,7 +43,7 @@ const MessageCount = ({ userId }) => {
         }
         setInterval(() => {
             getData()
-        }, 5000)
+        }, 20000)
         getData()
     }
 

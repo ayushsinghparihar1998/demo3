@@ -366,7 +366,8 @@ class NavBar extends Component {
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" className="mr-1" />
                             USER
                           </NavDropdown.Item>
-                          <NavDropdown.Item href="#"><Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
+                            <Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" className="mr-1" />
                               Edit Profile
                           </NavDropdown.Item>

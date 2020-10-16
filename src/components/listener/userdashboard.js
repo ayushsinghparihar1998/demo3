@@ -652,12 +652,12 @@ class Userdashboard extends Component {
                                     </div>
                                  </div>
 
-                                 <Quotes/>
+                                 <Quotes />
                               </div>
                            </Col>
 
 
-                          <BlogList/>
+                           <BlogList />
 
 
                         </Row>
@@ -668,7 +668,7 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  How helpful were you?
-                  </div>
+                           </div>
                               <div className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <span className="fs16 fw400 col14 pr-3">Rating Average</span>
