@@ -52,3 +52,46 @@
         }
     }
 }
+
+.media_details {
+
+    .ngo_details {
+
+        .line_txt {
+            line-height: 22px; 
+        }
+
+        .mdetalinput {
+            max-width: 60%; 
+            margin-top: 40px;      
+
+            .form-group {
+                display: flex; 
+            }
+            input {
+                height: 3rem !important;
+                line-height: 3rem !important;
+                border-radius: 5px 0px 0px 5px; 
+            }
+            button {
+                background-color: $col10;
+                border-radius: 0px 5px 5px 0px;
+                border-color: $col10; 
+                height: 3rem;
+                padding: 0 1.2rem;  
+                box-shadow: none;
+                outline: 0; 
+
+                &:hover, &:focus, &:active {
+                    background-color: $col10;
+                    border-radius: 0px 5px 5px 0px;
+                    border-color: $col10; 
+                }
+            }
+            img {
+                max-width: 20px;
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
