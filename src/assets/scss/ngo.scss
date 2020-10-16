@@ -53,12 +53,20 @@
     }
 }
 
-.media_details {
-
-    .ngo_details {
+.ngo_services.media_details { 
 
         .line_txt {
             line-height: 22px; 
+        }
+
+        .ngo_social {  
+            text-align: left;
+
+            .media_list {  
+                width: 100%; 
+                display: flex;
+                justify-content: space-between; 
+            }
         }
 
         .mdetalinput {
@@ -93,5 +101,4 @@
                 transform: rotate(180deg);
             }
         }
-    }
 }
