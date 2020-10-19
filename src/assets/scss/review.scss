@@ -424,6 +424,7 @@
             left: 50%;
             transform: translate(-50%, 60%);
             cursor: pointer;
+            pointer-events: none;
         }
 
         .form-group {
