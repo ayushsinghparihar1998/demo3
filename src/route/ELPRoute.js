@@ -33,9 +33,9 @@ import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
 import Menubar from "../components/core/menu";
 import Ngo from "../components/core/ngo";
-import Ngodetail from "../components/core/ngodetail"; 
+import Ngodetail from "../components/core/ngodetail";
 import ListenerProfile from "../components/listener/listenerprofile";
-import Compaign from "../components/user/campaign";   
+import Compaign from "../components/user/campaign";
 
 import getUserProfile from "../common/utility/getUserProfile";
 import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
@@ -49,20 +49,20 @@ import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
 import Reviewrequest from "../components/admin/reviewrequest";
 import Ratingrequest from "../components/admin/ratingrequest";
-import Reviewcomments from "../components/user/reviewcomments"; 
-import Donatedata from "../components/user/donatedata";  
-import CocoLearnMore from "../components/user/cocoLearnMore";  
+import Reviewcomments from "../components/user/reviewcomments";
+import Donatedata from "../components/user/donatedata";
+import CocoLearnMore from "../components/user/cocoLearnMore";
 import Foundation from "../components/user/foundation";
 import Paymentdetail from "../components/admin/paymentdetail";
-import MySetting from "../components/admin/mysetting";                  
+import MySetting from "../components/admin/mysetting";
 import ComingSoon from "../components/comingSoon";
-import Media from "../components/core/media";  
-import Mediadetails from "../components/core/mediadetails"; 
-import Helpcenter from "../components/core/helpcenter";  
+import Media from "../components/admin/blogs";
+import Mediadetails from "../components/core/mediadetails";
+import Helpcenter from "../components/core/helpcenter";
 import Createblogs from "../components/admin/createblog";
-
+import BlogDetail from "../components/admin/blogDetail";
 const user =
-  getLocalStorage("userInfo") || 
+  getLocalStorage("userInfo") ||
   getLocalStorage("userInfoProff") ||
   getLocalStorage("customerInfo") ||
   getLocalStorage("userInfoAdmin");
@@ -87,7 +87,7 @@ class ELPRoute extends Component {
         <Switch>
           <PublicRoute exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
-         
+
           <PublicRoute path="/adminLogin" component={AdminLogin} />
           <PublicRoute path="/becomeListener" component={Becomelistener} />
           <PublicRoute path="/listenersignup" component={Listenersignup} />
@@ -118,17 +118,17 @@ class ELPRoute extends Component {
           {/* LIst */}
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
-          <PublicRoute path="/reviewcomments" component={Reviewcomments} />  
-          <PublicRoute path="/compaign" component={Compaign} />   
+          <PublicRoute path="/reviewcomments" component={Reviewcomments} />
+          <PublicRoute path="/compaign" component={Compaign} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
-          <PublicRoute path="/media" component={Media} />  
-          <PublicRoute path="/helpcenter" component={Helpcenter} />
-          <PublicRoute path="/createblog" component={Createblogs} /> 
-   
 
-          {/* LIst */} 
+          <PublicRoute path="/helpcenter" component={Helpcenter} />
+
+
+
+          {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
@@ -138,18 +138,18 @@ class ELPRoute extends Component {
             path="/userDashboardproff"
             component={UserdashboardProff}
           />
-          
+
           {/*User*/}
           <PrivateRouteUser
             path="/userDashboardcust"
             component={UserdashboardCust}
           />
-           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
+          <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
           <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           {/* <PrivateRouteProff path="/calendar" component={CalendarDemo} /> */}
-          <PrivateRoutes path="/mysetting" component={MySetting} /> 
+          <PrivateRoutes path="/mysetting" component={MySetting} />
           <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />
           <PrivateRoutes path="/calendar" component={CalendarDemo} />
 
@@ -169,6 +169,9 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/adminlisting" component={Reviewrequest} />
+          <PublicRoute path="/blogs" component={Media} />
+          <PublicRoute path="/createblog" component={Createblogs} />
+          <PublicRoute path="/blogsDetail" component={BlogDetail} />
 
           <PrivateRoutes
             path="/professionalSearch"

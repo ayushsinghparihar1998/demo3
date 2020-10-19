@@ -79,6 +79,7 @@ import RecentChat from '../ChatShared/RecentChat/RecentChat';
 import ActiveUsers from '../ChatShared/ActiveUsers/ActiveUsers';
 import Quotes from '../quotes';
 import BlogList from '../blogList';
+import FunFact from '../funfacts';
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
@@ -567,90 +568,7 @@ class Userdashboard extends Component {
                   </div>
                </div>
                */}
-                                 <div className="inner_body userbg-white mb-3">
-                                    <div className="text-center p-4">
-                                       <div className="col14 fw600 fs22 border-gray pb-3 mb-3">
-                                          Fun Facts
-                     </div>
-                                       <div class="funfact blue">
-                                          <Row>
-                                             <Col md={9} lg={10}>
-                                                <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div>
-                                                <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div>
-                                             </Col>
-                                             <Col md={3} lg={2}>
-                                                <div className="position-relative">
-                                                   <Button className="btnType16">EAT</Button>
-                                                </div>
-                                             </Col>
-                                          </Row>
-                                       </div>
-                                       <div class="funfact lightpink">
-                                          <Row>
-                                             <Col md={9} lg={10}>
-                                                <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div>
-                                                <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div>
-                                             </Col>
-                                             <Col md={3} lg={2}>
-                                                <div className="position-relative">
-                                                   <Button className="btnType16 funbtn2">LOVE</Button>
-                                                </div>
-                                             </Col>
-                                          </Row>
-                                       </div>
-                                       <div class="funfact lightgreen">
-                                          <Row>
-                                             <Col md={9} lg={10}>
-                                                <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div>
-                                                <div className="col11 fw400 fs13">If you were to spell out numbers from one; you whould not find the letter ‘A’ until you reach ‘One Thousand’.</div>
-                                             </Col>
-                                             <Col md={3} lg={2}>
-                                                <div className="position-relative">
-                                                   <Button className="btnType16 funbtn3">PRAY</Button>
-                                                </div>
-                                             </Col>
-                                          </Row>
-                                       </div>
-                                       {/* 
-                     <div className="inner_body userbg-white mb-3">
-                     </div>
-                     */}
-                                       {/* 
-                     <Row className="justify-content-center">
-                        <Col md={4}>
-                        <Image src={Skill} alt="" />
-                        <div className="fs14 col29 fw500 pt-4 pb-4">
-                           Supportive Conversations
-                        </div>
-                        </Col>
-                        <Col md={4}>
-                        <Image src={Skill2} alt="" />
-                        <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
-                           General Request Response Rate
-                        </div>
-                        </Col>
-                        <Col md={4}>
-                        <Image src={Skill3} alt="" />
-                        <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
-                           Your Personal Request Response Rate
-                        </div>
-                        </Col>
-                        <Col md={4}>
-                        <Image src={Skill3} alt="" />
-                        <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
-                           People Referred to Eat Luv N Pray
-                        </div>
-                        </Col>
-                        <Col md={4}>
-                        <Image src={Skill3} alt="" />
-                        <div className="fs14 col29 fw500 fw500 pt-4 pb-4">
-                           Your Personal Request Response Rate
-                        </div>
-                        </Col>
-                     </Row>
-                     */}
-                                    </div>
-                                 </div>
+                                 <FunFact />
 
                                  <Quotes />
                               </div>

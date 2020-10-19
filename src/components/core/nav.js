@@ -217,7 +217,10 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage("userInfoAdmin") ? (
+
               <Nav className="ml-auto">
+
+               
                 <Form inline>
                   <span>
                     <div onClick={this.handleLogoutAdmin} className="btnType1">
@@ -278,14 +281,15 @@ class NavBar extends Component {
                     ]
                     : [
                       <Nav.Link onClick={this.handleModal}>
-                        Connect Now
+                        Talk/Connect
                       </Nav.Link>,
                       <NavLink to="/becomeListener" className="nav-link">
-                        Volunteer as a Listener
+                       Volunteer
                       </NavLink>,
                       <NavLink to="/compaign" className="nav-link">
                         Donate
                       </NavLink>,
+                     
                       <NavDropdown title="Media" id="basic-nav-dropdown">
                         <NavDropdown.Item
                           target="_blank"
@@ -300,23 +304,28 @@ class NavBar extends Component {
                           BW Wellbeingworld
                         </NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="CSR" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Another</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown title="Communities" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
-                        <NavDropdown.Item href="#">
-                          Women Rights
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
-                      </NavDropdown>,
-                      <Nav.Link onClick={this.handleModal3}>
-                        Professionals
-                      </Nav.Link>,
-                      <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
+                      
+                      <Nav.Link> Professional Help</Nav.Link>,
+                      <Nav.Link> About</Nav.Link>,
+                      <Nav.Link> Blog</Nav.Link>,
+
+                      // <NavDropdown title="CSR" id="basic-nav-dropdown">
+                      //   <NavDropdown.Item href="">Action</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Another</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Something</NavDropdown.Item>
+                      // </NavDropdown>,
+                      // <NavDropdown title="Communities" id="basic-nav-dropdown">
+                      //   <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">
+                      //     Women Rights
+                      //   </NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
+                      // </NavDropdown>,
+                      // <Nav.Link onClick={this.handleModal3}>
+                      //   ELNP Coaches
+                      // </Nav.Link>,
+                      
                     ]}
                   {getLocalStorage("userInfo") ||
                     getLocalStorage("userInfoProff") ||
@@ -409,7 +418,9 @@ class NavBar extends Component {
                   <Form inline>
                     <span className="d-none">
                       {getLocalStorage("loggedIn") ? (
+                        
                         <div onClick={this.handleLogout} className="btnType1">
+                          
                           Logout
                         </div>
                       ) : (
@@ -447,16 +458,18 @@ class NavBar extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-        {this.state.email_varified ? (
-          <div className="email_verified">
-            <div class="verifys">
-              <Image src={Msgbox} alt="" />
-              <span className="fs18 fw500 col18 ml-2">Email not verified</span>
+        {
+          this.state.email_varified ? (
+            <div className="email_verified">
+              <div class="verifys">
+                <Image src={Msgbox} alt="" />
+                <span className="fs18 fw500 col18 ml-2">Email not verified</span>
+              </div>
             </div>
-          </div>
-        ) : (
-            ""
-          )}
+          ) : (
+              ""
+            )
+        }
         {/* user registration start */}
 
         <Modal show={this.state.show} className="CreateAccount">
@@ -609,7 +622,7 @@ class NavBar extends Component {
         </Modal>
 
         {/* question answer end */}
-      </div>
+      </div >
     );
   }
 }

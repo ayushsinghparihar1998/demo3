@@ -72,7 +72,7 @@ class ChatUser extends Component {
         status: 1,
       }),
       (data) => {
-       console.log('chat component unmounted')
+        console.log('chat component unmounted')
       }
     );
     window.removeEventListener("beforeunload", this.unmount);
@@ -101,6 +101,11 @@ class ChatUser extends Component {
     socket.on("connect", function () {
       console.log("COnnected ================================================")
     });
+
+    socket.on("block-user", (data) => {
+      console.log(data)
+    })
+
     // socket.emit(
     //   "chat-login",
     //   JSON.stringify({
@@ -241,6 +246,7 @@ class ChatUser extends Component {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
+      console.log(data)
       if (data.success === 1) {
         this.updateChat(object);
       } else {

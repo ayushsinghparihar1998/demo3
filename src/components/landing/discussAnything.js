@@ -17,21 +17,16 @@ class Discussanything extends Component {
 
                     <Col md={7}> 
                         <div className="discuss">  
-                            <div className="fs50 col8 fw700 w-100">Discuss anytime with 
-                            <span className="d-block">anyone!</span> 
+                            <div className="fs50 col8 fw700 w-100">Discuss anytime 
+                            <span className="d-block">anywhere with anyone.</span> 
                             </div>
 
-                            <div className="fs30 col8 fs300 pt-4">Get support from an online therapist</div>
+                            <div className="fs30 col8 fs300 pt-4">Get guidance from an ELNP Coach.</div>
 
                             <div className="col16 fs18 fw300 w-100 pt-4">
-                            Want a little extra help? You can get ongoing support and guidance from a 
-    licensed therapist when you sign up for online therapy.
+                            Want to bring about a positive change in your life? Get confidential guidance and counselling from our ELNP Coach.
                             </div>
-
-                            <div className="col16 fs20 fw300 w-100 pt-3 pb-3"> 
-                            Our confidential online therapy & counseling is available for those 
-    aged 18+ for $150 per month.
-                            </div>
+                           
 
                             <Button variant="primary" className="btnTyp3 mt-3">
                                 Get Started 

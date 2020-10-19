@@ -563,5 +563,37 @@ export default {
     },
     showResultMessage: false,
     showErrorMessage: true,
+  },
+  blogListing: {
+    url: "elp/superadmin_getblog",
+    method: "POST",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  createBlog: {
+    url: "elp/superadmin_addblog",
+    method: "POST",
+    data: {
+      bl_title: "",
+      bl_image: "",
+      bl_desc: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  updateBlog:{
+    url: "elp/superadmin_editblog",
+    method: "POST",
+    data: {
+      bl_title: "",
+      bl_image: "",
+      bl_desc: "",
+      bl_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
   }
 };
