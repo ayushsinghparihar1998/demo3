@@ -588,4 +588,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getListenerCategoryList: {
+    url: "elp/getcategories",
+    method: "GET",
+    data: {
+
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  }
 };

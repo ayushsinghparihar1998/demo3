@@ -100,11 +100,15 @@ class ChatUser extends Component {
     setLocalStorage("onScreenIdUser", this.props.match.params.id);
     socket.on("connect", function () {
       console.log("COnnected ================================================")
+      socket.on("block-user", (data) => {
+        console.log('block-user ====>', data)
+        if (data.block == 1) {
+          showErrorMessage("You have been blocked by " + data.name)
+        }
+      })
     });
 
-    socket.on("block-user", (data) => {
-      console.log(data)
-    })
+
 
     // socket.emit(
     //   "chat-login",

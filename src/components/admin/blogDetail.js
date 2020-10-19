@@ -136,11 +136,11 @@ class BlogDetail extends Component {
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
                         <Form.Control value={this.state.bl_desc} onChange={(e) => this.setState({ bl_desc: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" />
                       </Form.Group>
-                      <Form.Group controlId="formBasicEmail">
+                      {/* <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Link to be shared</Form.Label>
                         <Form.Control type="text" placeholder="htttp://socialwelfare.com" className="inputTyp2" />
 
-                      </Form.Group>
+                      </Form.Group> */}
 
                       <Button disabled={this.state.isUploading} className="btnTyp4 mt-4" onClick={this._updateBlogHandler}>
                         {this.state.isUploading ? 'UPLOADING' : 'UPDATE'}

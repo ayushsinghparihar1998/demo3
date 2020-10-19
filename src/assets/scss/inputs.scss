@@ -100,6 +100,16 @@ textarea.inputTyp2.form-control.cate2 {
   color: $col10 !important; 
 }
 
+.inputType5.form-control {   
+  color       : $col25 !important; 
+  background  : $col18 !important;
+  border: solid 0.5px $col18 !important;
+  box-shadow  : none;
+  height: 3.5rem; 
+  border-radius: 0px; 
+  font-size: $fs18 !important;  
+}
+
 .PhoneInputInput {   
   color       : $col25 !important; 
   background  : $col22 !important;

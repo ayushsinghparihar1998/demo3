@@ -9,6 +9,8 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import { setLocalStorage } from "../../common/helpers/Utils";
 import { Link } from 'react-router-dom';
 import Crossblue from "../../assets/images/cross_blue.svg";
+import ELPRxApiService from "../../common/services/apiService";
+
 class ProfessionalSignup extends Component {
     constructor(props) {
         super(props);
@@ -17,21 +19,32 @@ class ProfessionalSignup extends Component {
             email: "",
             password: "",
             screenName: "",
-            category: "",
+            category: [],
             errors: {},
             organisationName: "",
             showLoader: false,
             fristSignUp: true,
             listOfCategory: [],
             question: [],
-            u_school_code:false
+            u_school_code: false
         };
     }
 
     componentDidMount() {
-
+        this._getCategoriesHandler()
     }
-
+    _getCategoriesHandler = async () => {
+        try {
+          let response = await ELPRxApiService("getCategoryList")
+          console.log('=== categories ===', response)
+          this.setState({
+            category: response.data.data.categories_list
+          })
+    
+        } catch (err) {
+          console.log(err);
+        }
+      }
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({
@@ -84,10 +97,10 @@ class ProfessionalSignup extends Component {
                 if (result && result.data && result.data.status === "success") {
                     //setLocalStorage("userInfoProff", result.data.data);
 
-                    setTimeout(() =>{
-                       this.props.handleSet()
-                       this.props.history.push({ pathname: "/professionalLogin" });
-                      },1000);
+                    setTimeout(() => {
+                        this.props.handleSet()
+                        this.props.history.push({ pathname: "/professionalLogin" });
+                    }, 1000);
 
                 } else {
                     this.setState({
@@ -123,12 +136,14 @@ class ProfessionalSignup extends Component {
             })
         }
     }
-    addCategory = () => {
-        let cat = this.state.category;
+    addCategory = (e) => {
+        console.log('---e', JSON.parse(e.target.value))
+        let cat = JSON.parse(e.target.value);
         let listOfCategory = this.state.listOfCategory;
-        listOfCategory.push({ "uc_cat_name": cat })
-        this.setState({ listOfCategory: listOfCategory, category: '' })
-    }
+        listOfCategory.push({ uc_cat_name: cat.cat_name, uc_admin_cat_id: cat.cat_id });
+        console.log(listOfCategory)
+        this.setState({ listOfCategory: listOfCategory });
+    };
     handleChangeQuestion = (event, index, subIndex) => {
         const { name, checked } = event.target;
         let question = this.state.question;
@@ -140,14 +155,14 @@ class ProfessionalSignup extends Component {
             secondSignUp: true,
         })
     }
-     handleEnter = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.addCategory();
-    }else{
-        this.addCategory();
-    }
-  };
+    handleEnter = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            this.addCategory(event);
+        } else {
+            this.addCategory(event);
+        }
+    };
     goToLoginPage = () => {
         this.props.history.push({
             pathname: 'login',
@@ -184,7 +199,7 @@ class ProfessionalSignup extends Component {
                                         value={this.state.screenName}
                                         onChange={this.handleChange}
                                         autoComplete="off"
-                                        maxLength = "50"
+                                        maxLength="50"
                                         inputProps={{
                                             maxLength: 50,
                                         }}
@@ -205,7 +220,7 @@ class ProfessionalSignup extends Component {
                                         value={this.state.email}
                                         onChange={this.handleChange}
                                         autoComplete="off"
-                                        maxLength = "50"
+                                        maxLength="50"
                                         inputProps={{
                                             maxLength: 50,
                                         }}
@@ -229,8 +244,8 @@ class ProfessionalSignup extends Component {
                                         autoComplete="off"
                                         value={this.state.password}
                                         onChange={this.handleChange}
-                                        minLength = "8"
-                                        maxLength = "15"
+                                        minLength="8"
+                                        maxLength="15"
                                         inputProps={{
                                             maxLength: 30,
                                         }}
@@ -300,32 +315,39 @@ class ProfessionalSignup extends Component {
 
                             <Col md={12}>
                                 <Form.Group>
-                                <div className="d-flex"> 
-                                    <div className="w-100"> 
-                                    <Form.Label className="fs20 fw600 col14">Add Category</Form.Label>
-                                    <Form.Control
-                                        type="category"
-                                        placeholder="Category" className="inputTyp2"
-                                        error={errors.category ? true : false}
-                                        id="outlined-pwd"
-                                        autoComplete="off"
-                                        label="category"
-                                        variant="outlined"
-                                        name="category"
-                                        value={this.state.category}
-                                        onChange={this.handleChange}
-                                        maxLength = "30"
-                                        inputProps={{
-                                            maxLength: 30,
-                                        }}
-                                        //onKeyPress={this.handleEnter}
-                                    />
-                                       
+                                    <div className="d-flex">
+                                        <div className="w-100">
+                                            <Form.Label className="fs20 fw600 col14">Add Category</Form.Label>
+                                            <Form.Control
+                                                as="select"
+                                                // className="selectTyp1 select3"                           
+                                                placeholder="Category"
+                                                className="inputTyp2"
+                                                error={errors.category ? true : false}
+                                                id="outlined-pwd"
+                                                label="category"
+                                                variant="outlined"
+                                                name="category"
+                                                value={this.state.category}
+                                                // onChange={this.handleChange}
+                                                inputProps={{
+                                                    maxLength: 30,
+                                                }}
+                                                onChange={this.handleEnter}
+                                            >
+                                                {
+                                                    this.state.category.map(obj => {
+                                                        return <option value={JSON.stringify(obj)}>{obj.cat_name}</option>
+                                                    })
+                                                }
+
+                                            </Form.Control>
+
+                                        </div>
+                                        {/* <div className="mt-4 pt-2">
+                                            <Button disabled={this.state.category ? false : true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3">Add</Button>
+                                        </div> */}
                                     </div>
-                                        <div className="mt-4 pt-2">
-                                        <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3">Add</Button> 
-                                        </div> 
-                                </div>
                                     <div className="error alignLeft">{errors.category}</div>
                                 </Form.Group>
 
@@ -350,7 +372,7 @@ class ProfessionalSignup extends Component {
                                         className="fw300 fs18 col14 mt-3 checkboxTyp1"
                                         label="I have a School/Organization code." />
                                 </Form.Group>
-                            <div className="error alignLeft">{errors.u_school_code}</div>
+                                <div className="error alignLeft">{errors.u_school_code}</div>
 
                             </Col>
 
@@ -365,7 +387,7 @@ class ProfessionalSignup extends Component {
                      pt-5 col14">
                         Already have an account?
                         <span className="fw500 pointer pl-1" onClick={this.goToLoginPage}>Login here</span>
-                    </div> 
+                    </div>
                 </div>
 
             </div>)
