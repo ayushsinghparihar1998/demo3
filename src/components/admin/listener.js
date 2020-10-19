@@ -58,11 +58,11 @@ class Adminlistener extends Component {
       pageType: "",
       paymentList: [],
       pageno: 1,
-      records: 5,
+      records: 10,
       totalCount: "",
 
       count: 10,
-      offset: 0,
+      offset: 1,
       block_type: 0,
       review_type: 0,
     };
@@ -153,28 +153,24 @@ class Adminlistener extends Component {
   onChangePage(page) {
     console.log(page);
     console.log(this.state.pageno);
+    this.setState({
+      pageno: page,
+    });
     if (page == this.state.pageno) {
     } else {
       if (this.state.pageType == "blockList") {
-        this.getBlockuserListing(
-          this.state.count,
-          this.state.offset,
-          this.state.block_type
-        );
+        console.log(page, "page");
+        this.getBlockuserListing(page, this.state.count, this.state.block_type);
       } else if (this.state.pageType == "reviewList") {
-        this.getReviewListing(
-          this.state.count,
-          this.state.offset,
-          this.state.review_type
-        );
+        this.getReviewListing(page, this.state.count, this.state.review_type);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
+          page,
           this.state.count,
-          this.state.offset,
           this.state.review_type
         );
       } else if (this.state.pageType == "paymentList") {
-        this.getPaymentListHandler(this.state.count, this.state.offset);
+        this.getPaymentListHandler(page, this.state.count);
       } else {
       }
     }
@@ -365,6 +361,12 @@ class Adminlistener extends Component {
     // offset - page no
     // count - perpage item
     console.log(count, offset, block_type);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+
     let data = {
       count: count,
       offset: offset,
@@ -412,6 +414,16 @@ class Adminlistener extends Component {
       offset: offset,
       review_type: review_type,
     };
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    if (review_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
     ELPViewApiService("getReviewListing", data).then((result) => {
       console.log("result", result);
       let reviewList = [];
@@ -453,6 +465,11 @@ class Adminlistener extends Component {
       review_type: review_type,
     };
     console.log(data);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
     if (review_type == 0) {
       this.setState({
         key: "request",
@@ -578,7 +595,8 @@ class Adminlistener extends Component {
       let result = await ELPViewApiService("getAdminPaymentDetail", {
         count: count,
         offset: offset,
-      });
+      }
+      );
       console.log(result);
       let paymentList = [];
       let totalRecordCount = 0;
@@ -730,7 +748,7 @@ class Adminlistener extends Component {
                       <div
                         className={paymentActveClass}
                         onClick={(e) => {
-                          this.getPaymentListHandler(0, 10);
+                          this.getPaymentListHandler(1, 10);
                         }}
                       >
                         <div className="fs14 col28 fw500">
