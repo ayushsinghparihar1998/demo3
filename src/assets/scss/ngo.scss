@@ -1,5 +1,5 @@
 .ngo_services {
-    background-color: #f3fdff;
+    background-color: $col22;
     overflow: hidden;
     min-height: calc(100vh - 146px);
 
@@ -53,12 +53,23 @@
     }
 }
 
-.media_details {
+.ngo_services.media_details { 
 
-    .ngo_details {
-
+        .ngo_listing {
+            padding: 20px 30px 0px; 
+        }
         .line_txt {
             line-height: 22px; 
+        }
+
+        .ngo_social {  
+            text-align: left;
+
+            .media_list {  
+                width: 100%; 
+                display: flex;
+                justify-content: space-between; 
+            }
         }
 
         .mdetalinput {
@@ -93,5 +104,20 @@
                 transform: rotate(180deg);
             }
         }
+}
+
+.helpcenter {
+    background-color: $col22;
+    overflow: hidden;
+    min-height: calc(100vh - 146px);
+
+    .helpfirst { 
+        width: 100%;
+        background-color: $col18;
+        margin: auto;
+        box-shadow: 0px 0px 15px rgba(62, 178, 221, 0.1);
+        border-top: solid 10px $col23; 
+        padding: 0 30px 0; 
+        padding-bottom: 3rem !important;  
     }
 }
