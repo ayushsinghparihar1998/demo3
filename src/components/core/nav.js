@@ -281,14 +281,15 @@ class NavBar extends Component {
                     ]
                     : [
                       <Nav.Link onClick={this.handleModal}>
-                        Connect Now
+                        Talk/Connect
                       </Nav.Link>,
                       <NavLink to="/becomeListener" className="nav-link">
-                        Become a CoCo
+                       Volunteer
                       </NavLink>,
                       <NavLink to="/compaign" className="nav-link">
                         Donate
                       </NavLink>,
+                     
                       <NavDropdown title="Media" id="basic-nav-dropdown">
                         <NavDropdown.Item
                           target="_blank"
@@ -303,23 +304,28 @@ class NavBar extends Component {
                           BW Wellbeingworld
                         </NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="CSR" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Another</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown title="Communities" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
-                        <NavDropdown.Item href="#">
-                          Women Rights
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
-                      </NavDropdown>,
-                      <Nav.Link onClick={this.handleModal3}>
-                        ELNP Coaches
-                      </Nav.Link>,
-                      <Nav.Link onClick={this.handleModal2}>FAQ</Nav.Link>,
+                      
+                      <Nav.Link> Professional Help</Nav.Link>,
+                      <Nav.Link> About</Nav.Link>,
+                      <Nav.Link> Blog</Nav.Link>,
+
+                      // <NavDropdown title="CSR" id="basic-nav-dropdown">
+                      //   <NavDropdown.Item href="">Action</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Another</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Something</NavDropdown.Item>
+                      // </NavDropdown>,
+                      // <NavDropdown title="Communities" id="basic-nav-dropdown">
+                      //   <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">
+                      //     Women Rights
+                      //   </NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">LGBTQA</NavDropdown.Item>
+                      //   <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
+                      // </NavDropdown>,
+                      // <Nav.Link onClick={this.handleModal3}>
+                      //   ELNP Coaches
+                      // </Nav.Link>,
+                      
                     ]}
                   {getLocalStorage("userInfo") ||
                     getLocalStorage("userInfoProff") ||

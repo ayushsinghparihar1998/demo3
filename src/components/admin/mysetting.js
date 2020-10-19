@@ -29,13 +29,14 @@ const MySetting = (props) => {
     }, [selfId])
     const _getBlockedUserListHandler = async () => {
         try {
+            console.log("selfId ==============>", selfId)
             socket.emit("blocked-users", {
                 user_id: selfId
             }, (data) => {
                 console.log('=== blocked user list ====', data);
                 if (data.data && typeof data.data !== 'string') {
                     setUserList([...data.data])
-                }else{
+                } else {
                     setUserList([])
                 }
             });
@@ -44,7 +45,11 @@ const MySetting = (props) => {
         }
     }
     const _unblockUserHandler = (userId) => {
-       
+        console.log({
+            from_user_id: selfId,
+            to_user_id: userId,
+            block: 0
+        })
         socket.emit("block-user", {
             from_user_id: selfId,
             to_user_id: userId,
