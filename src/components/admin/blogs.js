@@ -64,12 +64,12 @@ class Blogs extends Component {
 
                                                         <div className="fs14 col29 fw300">{element.bl_desc}</div>
                                                         <hr className="social_hr" />
-                                                        <div className="media_list">
+                                                        {/* <div className="media_list">
                                                             <div className="col10 fs14 fw600 pointer">http:socialwelfare.com</div>
                                                             <div className="position-relative">
                                                                 <Image src={Sharebtnblue} alt="Sharebtnblues" className="pointer" />
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </Col>
@@ -78,9 +78,9 @@ class Blogs extends Component {
                                 }
 
 
-                                <div className="text-center w-100 mt-3">
+                                {/* <div className="text-center w-100 mt-3">
                                     <Button className="btnTyp12">show more</Button>
-                                </div>
+                                </div> */}
                             </Row>
                         </div>
                     </Container>

@@ -24,6 +24,8 @@ import Signup from './signup';
 import QuestionAndAnswer from './questionAndAnswer';
 import { setLocalStorage } from '../../common/helpers/Utils';
 import Crossblue from '../../assets/images/cross_blue.svg';
+import ELPRxApiService from "../../common/services/apiService";
+
 class Listenersignup extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ class Listenersignup extends Component {
       email: '',
       screenName: '',
       password: '',
-      category: '',
+      category: [],
       errors: {},
       day: '',
       month: '',
@@ -42,12 +44,25 @@ class Listenersignup extends Component {
       showLoader: false,
       fristSignUp: true,
       listOfCategory: [],
-      u_school_code:false
+      u_school_code: false
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this._getCategoriesHandler()
+  }
+  _getCategoriesHandler = async () => {
+    try {
+      let response = await ELPRxApiService("getCategoryList")
+      console.log('=== categories ===', response)
+      this.setState({
+        category: response.data.data.categories_list
+      })
 
+    } catch (err) {
+      console.log(err);
+    }
+  }
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -138,11 +153,13 @@ class Listenersignup extends Component {
       });
     }
   };
-  addCategory = () => {
-    let cat = this.state.category;
+  addCategory = (e) => {
+    console.log('---e', JSON.parse(e.target.value))
+    let cat = JSON.parse(e.target.value);
     let listOfCategory = this.state.listOfCategory;
-    listOfCategory.push({ uc_cat_name: cat });
-    this.setState({ listOfCategory: listOfCategory, category: '' });
+    listOfCategory.push({ uc_cat_name: cat.cat_name, uc_admin_cat_id: cat.cat_id });
+    console.log(listOfCategory)
+    this.setState({ listOfCategory: listOfCategory });
   };
   handleChangeQuestion = (event, index, subIndex) => {
     const { name, checked } = event.target;
@@ -160,9 +177,9 @@ class Listenersignup extends Component {
   handleEnter = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      this.addCategory();
-    }else{
-        this.addCategory();
+      this.addCategory(event);
+    } else {
+      this.addCategory(event);
     }
   };
   handleRemoveCategory = (e, idx) => {
@@ -279,13 +296,14 @@ class Listenersignup extends Component {
                   </Col>
                   <Col md={12}>
                     <Form.Group>
-                      <div className="d-flex"> 
-                          <div className="w-100"> 
+                      <div className="d-flex">
+                        <div className="w-100">
                           <Form.Label className="fs20 fw600 col14">
                             Add Category
                           </Form.Label>
                           <Form.Control
-                            type="category"
+                            as="select"
+                            // className="selectTyp1 select3"                           
                             placeholder="Category"
                             className="inputTyp2"
                             error={errors.category ? true : false}
@@ -294,16 +312,23 @@ class Listenersignup extends Component {
                             variant="outlined"
                             name="category"
                             value={this.state.category}
-                            onChange={this.handleChange}
+                            // onChange={this.handleChange}
                             inputProps={{
                               maxLength: 30,
                             }}
-                            //onKeyPress={this.handleEnter}
-                          />
-                          </div>
-                          <div className="mt-4 pt-2"> 
-                          <Button  disabled={this.state.category?false:true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3 pointer">Add</Button>
-                          </div>
+                            onChange={this.handleEnter}
+                          >
+                            {
+                              this.state.category.map(obj => {
+                                return <option value={JSON.stringify(obj)}>{obj.cat_name}</option>
+                              })
+                            }
+
+                          </Form.Control>
+                        </div>
+                        {/* <div className="mt-4 pt-2">
+                          <Button disabled={this.state.category ? false : true} onClick={this.handleEnter} className="btnTyp11 bttyp2 ml-3 pointer">Add</Button>
+                        </div> */}
                       </div>
                       <div className="error alignLeft">{errors.category}</div>
                     </Form.Group>
@@ -526,8 +551,8 @@ class Listenersignup extends Component {
                   </Button>
                 </Row>
               ) : (
-                ''
-              )}
+                    ''
+                  )}
 
               <div className="fs18 fw300 pt-5 col14">
                 Already have an account?

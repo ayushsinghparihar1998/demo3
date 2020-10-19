@@ -50,7 +50,7 @@ const Mediadetails = (props) => {
                                             </div>
                                         <div className="fs14 col28 fw300 pt-3 line_txt"> {blogDetail.bl_desc}</div>
 
-                                        <div className="mdetalinput">
+                                        {/* <div className="mdetalinput">
                                             <Form.Group>
                                                 <Form.Control
                                                     type="text"
@@ -62,7 +62,7 @@ const Mediadetails = (props) => {
                                                 />
                                                 <Button className=""><Image src={Sharebtn} alt="Sharebtn" /></Button>
                                             </Form.Group>
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                 </div>

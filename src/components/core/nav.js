@@ -220,7 +220,7 @@ class NavBar extends Component {
 
               <Nav className="ml-auto">
 
-               
+
                 <Form inline>
                   <span>
                     <div onClick={this.handleLogoutAdmin} className="btnType1">
@@ -284,27 +284,12 @@ class NavBar extends Component {
                         Talk/Connect
                       </Nav.Link>,
                       <NavLink to="/becomeListener" className="nav-link">
-                       Volunteer
+                        Volunteer
                       </NavLink>,
                       <NavLink to="/compaign" className="nav-link">
                         Donate
                       </NavLink>,
-                     
-                      <NavDropdown title="Media" id="basic-nav-dropdown">
-                        <NavDropdown.Item
-                          target="_blank"
-                          href="https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995"
-                        >
-                          Onlymyhealth
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          target="_blank"
-                          href="http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/"
-                        >
-                          BW Wellbeingworld
-                        </NavDropdown.Item>
-                      </NavDropdown>,
-                      
+                      <Nav.Link> Media</Nav.Link>,
                       <Nav.Link> Professional Help</Nav.Link>,
                       <Nav.Link> About</Nav.Link>,
                       <Nav.Link> Blog</Nav.Link>,
@@ -325,7 +310,7 @@ class NavBar extends Component {
                       // <Nav.Link onClick={this.handleModal3}>
                       //   ELNP Coaches
                       // </Nav.Link>,
-                      
+
                     ]}
                   {getLocalStorage("userInfo") ||
                     getLocalStorage("userInfoProff") ||
@@ -418,9 +403,9 @@ class NavBar extends Component {
                   <Form inline>
                     <span className="d-none">
                       {getLocalStorage("loggedIn") ? (
-                        
+
                         <div onClick={this.handleLogout} className="btnType1">
-                          
+
                           Logout
                         </div>
                       ) : (

@@ -584,7 +584,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  updateBlog:{
+  updateBlog: {
     url: "elp/superadmin_editblog",
     method: "POST",
     data: {
@@ -592,6 +592,15 @@ export default {
       bl_image: "",
       bl_desc: "",
       bl_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getListenerCategoryList: {
+    url: "elp/getcategories",
+    method: "GET",
+    data: {
+
     },
     showResultMessage: false,
     showErrorMessage: true,
