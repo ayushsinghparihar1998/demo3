@@ -121,7 +121,8 @@ class Userdashboard extends Component {
       //     console.log(data, "authenticateSocket");
       //   }
       // );
-      socket.on("newUserForActivityList", (data) => {
+      socket.on("newUserForActivityList", (data) => { 
+         console.log('data====',data )
          if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
             this.setState(prev => ({
                activeChatUsers: [...prev.activeChatUsers, data]

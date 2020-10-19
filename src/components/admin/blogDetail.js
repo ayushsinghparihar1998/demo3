@@ -28,18 +28,31 @@ import Iflag from "../../assets/images/india_flag.svg";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 
-class Createblogs extends Component {
+class BlogDetail extends Component {
 
 
   state = {
     isUploading: false,
     filepath: null,
-    title: null,
-    description: null,
-    filename: null
+    filename: null,
+
+    bl_id: null,
+    bl_title: null,
+    bl_desc: null,
+    bl_image: null,
 
   }
 
+  componentDidMount() {
+    console.log('load =', this.props.location.state)
+    this.setState({
+      bl_id: this.props.location.state.bl_id,
+      bl_title: this.props.location.state.bl_title,
+      bl_desc: this.props.location.state.bl_desc,
+      filepath: this.props.location.state.bl_image,
+      filename: this.props.location.state.bl_image.split('/').reverse()[0],
+    })
+  }
 
   handleUploadPicture = async (event, name) => {
     const fileObject = event.target.files[0];
@@ -70,14 +83,15 @@ class Createblogs extends Component {
     }
   }
 
-  _saveBlogHandler = async () => {
+  _updateBlogHandler = async () => {
     try {
-      let response = await ELPRxApiService("createBlog", {
-        bl_title: this.state.title,
+      let response = await ELPRxApiService("updateBlog", {
+        bl_title: this.state.bl_title,
         bl_image: this.state.filepath,
-        bl_desc: this.state.description,
+        bl_desc: this.state.bl_desc,
+        bl_id: this.state.bl_id
       });
-      this.props.history.push('/blogs')      
+      this.props.history.push('/blogs')
     } catch (err) {
       console.log(err)
     }
@@ -95,10 +109,7 @@ class Createblogs extends Component {
 
               <Col sm={12} className="pl-1">
                 <div className="createblog">
-                  {/* <div className="d-flex mb-4">
-                    <div className="col23 fs28 fw600">Create Blog</div>
-                    <Button className="btnTyp9 approve">EDIT BLOG</Button>
-                  </div> */}
+
 
                   <div className="blog_form">
                     <Form>
@@ -118,12 +129,12 @@ class Createblogs extends Component {
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Title of the blog</Form.Label>
-                        <Form.Control onChange={(e) => this.setState({ title: e.target.value })} type="text" className="inputTyp2" />
+                        <Form.Control value={this.state.bl_title} onChange={(e) => this.setState({ bl_title: e.target.value })} type="text" className="inputTyp2" />
 
                       </Form.Group>
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
-                        <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" />
+                        <Form.Control value={this.state.bl_desc} onChange={(e) => this.setState({ bl_desc: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" />
                       </Form.Group>
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Link to be shared</Form.Label>
@@ -131,8 +142,8 @@ class Createblogs extends Component {
 
                       </Form.Group>
 
-                      <Button disabled={this.state.isUploading} className="btnTyp4 mt-4" onClick={this._saveBlogHandler}>
-                        {this.state.isUploading ? 'UPLOADING' : 'SUBMIT'}
+                      <Button disabled={this.state.isUploading} className="btnTyp4 mt-4" onClick={this._updateBlogHandler}>
+                        {this.state.isUploading ? 'UPLOADING' : 'UPDATE'}
                       </Button>
 
                     </Form>
@@ -147,4 +158,4 @@ class Createblogs extends Component {
     );
   }
 }
-export default Createblogs;
+export default BlogDetail;

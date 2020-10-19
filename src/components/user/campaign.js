@@ -32,22 +32,21 @@ class Compaign extends Component {
             <div className="myprofile w-100">
               <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>
               <div className="fs16 fw300 col14 mb-4">
-                We believe that every human deserves free, emotional support, no
-                matter where they are or what they’re going through. We want to
-                make sure nobody has to struggle through difficult times alone,
-                without a listening ear. Our mission is to be there for as many
-                people as possible, but we need help to get there.
+                We believe that every human deserves free, emotional support, no matter where they are or what
+                they’re going through. We want to make sure nobody has to struggle through difficult times alone,
+                without a listening ear. Our mission is to be there for as many people as possible, but we need help
+                to get there.
               </div>
-              <div className="today_goals mb-4">
+              {/* <div className="today_goals mb-4">
                 <Image src={Donationheart} alt="" className="mr-3" />
                 <div className="fs20 fw500 col83">
                   Today’s goal is 19 New Contributors So far we have 3
                 </div>
-              </div>
+              </div> */}
               <div className="fs16 fw400 col14 compaign_para mb-4">
-                Every time someone backs ELNP or upgrades to a premium account,
-                we are one step closer making sure support is available
-                on-demand to anyone who needs it.
+                We wish to provide a Constant Companion (CoCo) to over a million lives in 2021. Every time
+                someone backs ELNP, we are one step closer making sure support is available on-demand to anyone
+                who needs it.
               </div>
 
               <div className="keep_kindness mb-4">
@@ -64,7 +63,7 @@ class Compaign extends Component {
                     <a
                       // target="_blank"
                       href="https://staging.eatluvnpray.org/paytm_demo/"
-                      // href="https://eatluvnpray.org/paytm_demo/"
+                    // href="https://eatluvnpray.org/paytm_demo/"
                     >
                       Donate
                     </a>
@@ -72,17 +71,7 @@ class Compaign extends Component {
                 </Col>
               </div>
 
-              <div className="donate_btn text-center mb-5 mt-5">
-                <Button className="btnTyp4 text-uppercase">
-                  <Link to={`/donatedata`}>back elnp foundation</Link>
-                  {/* <a
-                    // target="_blank"
-                    href="https://eatluvnpray.org/paytm_demo/"
-                  >
-                    back elnp foundation
-                  </a> */}
-                </Button>
-              </div>
+           
 
               <div className="right_donate">
                 <Image src={Contentbox} alt="" />

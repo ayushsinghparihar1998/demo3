@@ -58,7 +58,7 @@ class NavBar extends Component {
     this.setState({ show3: false });
   };
 
-handleLogoutAdmin = () => {  
+  handleLogoutAdmin = () => {
 
     let data = {};
     this.props
@@ -82,17 +82,14 @@ handleLogoutAdmin = () => {
     // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1 
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
-    let roleType = '';    
-    if(getLocalStorage('customerInfo'))
-    {
+    let roleType = '';
+    if (getLocalStorage('customerInfo')) {
       roleType = 3;
-    }else if(getLocalStorage('userInfo'))
-    {
+    } else if (getLocalStorage('userInfo')) {
       roleType = 1;
-    }else if(getLocalStorage('userInfoProff'))
-    {
+    } else if (getLocalStorage('userInfoProff')) {
       roleType = 2;
-    }   
+    }
 
     let data = {};
     this.props
@@ -129,7 +126,7 @@ handleLogoutAdmin = () => {
       show: false,
       show3: false,
     });
-  }; 
+  };
 
   goToLoginPage = () => {
     this.props.history.push({
@@ -168,17 +165,23 @@ handleLogoutAdmin = () => {
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-          {getLocalStorage('userInfoAdmin') ?
-                            <Nav className="ml-auto">
-                                <Form inline>
-                                    <span >
-                                        <div onClick={this.handleLogoutAdmin} className="btnType1">
-                                            Logout
-                                        </div>
-                                    </span>
-                                </Form></Nav>
-                            :
-                            ('')}
+            {getLocalStorage('userInfoAdmin') ?
+              <Nav className="ml-auto">
+                <NavLink to={"adminlistener"} className="nav-link">
+                  DASHBOARD
+                </NavLink>
+                <NavLink to={"blogs"} className="nav-link">
+                  BLOGS
+                </NavLink>
+                <Form inline>
+                  <span >
+                    <div onClick={this.handleLogoutAdmin} className="btnType1">
+                      Logout
+                    </div>
+                  </span>
+                </Form></Nav>
+              :
+              ('')}
           </Navbar.Collapse>
         </Navbar>
       </div>

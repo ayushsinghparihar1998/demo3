@@ -217,7 +217,10 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage("userInfoAdmin") ? (
+
               <Nav className="ml-auto">
+
+               
                 <Form inline>
                   <span>
                     <div onClick={this.handleLogoutAdmin} className="btnType1">
@@ -409,7 +412,9 @@ class NavBar extends Component {
                   <Form inline>
                     <span className="d-none">
                       {getLocalStorage("loggedIn") ? (
+                        
                         <div onClick={this.handleLogout} className="btnType1">
+                          
                           Logout
                         </div>
                       ) : (
@@ -447,16 +452,18 @@ class NavBar extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-        {this.state.email_varified ? (
-          <div className="email_verified">
-            <div class="verifys">
-              <Image src={Msgbox} alt="" />
-              <span className="fs18 fw500 col18 ml-2">Email not verified</span>
+        {
+          this.state.email_varified ? (
+            <div className="email_verified">
+              <div class="verifys">
+                <Image src={Msgbox} alt="" />
+                <span className="fs18 fw500 col18 ml-2">Email not verified</span>
+              </div>
             </div>
-          </div>
-        ) : (
-            ""
-          )}
+          ) : (
+              ""
+            )
+        }
         {/* user registration start */}
 
         <Modal show={this.state.show} className="CreateAccount">
@@ -609,7 +616,7 @@ class NavBar extends Component {
         </Modal>
 
         {/* question answer end */}
-      </div>
+      </div >
     );
   }
 }

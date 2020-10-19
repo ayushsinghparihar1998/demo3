@@ -34,43 +34,46 @@ class Becomelistener extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="becomeListener"> 
+        <div className="becomeListener">
           <Container>
             <div className="listener_layout mt-4 mb-4">
               <Row>
-                <Col md={7} lg={8}> 
+                <Col md={7} lg={8}>
                   <div className="col10 fs40 fw600 mb-1 mt-4 pt-2">
-                    Become a Listener
-                  </div>
-                  <div className="fw300 fs20 col14">
-                    Welcome. We’re happy to have you!
+                    Become a CoCo
                   </div>
                   <div className="fw300 fs15 col28 pt-2">
-                    We are building a world-class listening service made up of
-                    compassionate, caring individuals like you. Thank you for
-                    offering to lend an ear to those in need of support.
+                    “You have not lived today until you have done something for someone who can never repay you.”
+                    ― John Bunyan
+                  </div>
+                  <br />
+                  <div className="fw300 fs20 col14">
+                    Welcome. We’re thrilled to have you on-board!
+                  </div>
+                  <div className="fw300 fs15 col28 pt-2">
+                    This is a unique listening service made up of compassionate, caring individuals like you. Thank you
+                    for offering to lend an ear to those in need of support to make real difference.
                   </div>
                   <div className="fw500 fs20 col29 pt-3">How does it work?</div>
                   <div className="fw300 fs15 col28 pt-2">
-                    Getting started as an active listener is easy and rewarding
-                    in many ways. You’re in complete control over your displayed
-                    availability, so you can listen as often as you like.
+                    Getting started as a CoCo (Constant Companion) is easy and rewarding in many ways. You’re in
+                    complete control over your displayed availability, so you can help others as often as you like.
                   </div>
                   <div className="fw500 fs20 col29 pt-3 mb-2">
-                    Here is the two-step registration process:
+                  Here is the two-step registration process:
                   </div>
 
                   <ol className="pl-3">
                     <li>
                       <div className="fw300 fs15 col28">
                         {' '}
-                        Complete the active listening course
+                        Complete the Active listening course & Practice Chat.
                       </div>
                     </li>
                     <li>
                       <div className="fw300 fs15 col28">
                         {' '}
-                        Create your listener profile
+                        Create your CoCo profile.
                       </div>
                     </li>
                   </ol>
@@ -88,8 +91,8 @@ class Becomelistener extends Component {
                       <Link to={`/login`}>Login here</Link>
                     </span>
                   </div>
-                </Col> 
-                <Col md={5} lg={4}> 
+                </Col>
+                <Col md={5} lg={4}>
                   <Image src={WomenListener} alt="" className="w-100" />
                 </Col>
               </Row>
