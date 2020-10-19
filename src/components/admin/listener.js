@@ -162,11 +162,19 @@ class Adminlistener extends Component {
           this.state.block_type
         );
       } else if (this.state.pageType == "reviewList") {
-        this.getProfessionalListing(
+        this.getReviewListing(
           this.state.count,
           this.state.offset,
           this.state.review_type
         );
+      } else if (this.state.pageType == "ratingList") {
+        this.getRatinguserListing(
+          this.state.count,
+          this.state.offset,
+          this.state.review_type
+        );
+      } else if (this.state.pageType == "paymentList") {
+        this.getPaymentListHandler(this.state.count, this.state.offset);
       } else {
       }
     }
@@ -539,8 +547,8 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 0)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 0)
-          : this.getReviewListing(1, 10, 0);
+        ? this.getRatinguserListing(1, 10, 0)
+        : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
       });
@@ -548,8 +556,8 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 2)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 2)
-          : this.getReviewListing(1, 10, 2);
+        ? this.getRatinguserListing(1, 10, 2)
+        : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
       });
@@ -560,8 +568,8 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 1)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 1)
-          : this.getReviewListing(1, 10, 1);
+        ? this.getRatinguserListing(1, 10, 1)
+        : this.getReviewListing(1, 10, 1);
     }
   }
 
@@ -596,11 +604,10 @@ class Adminlistener extends Component {
           this.getPager(this.state.totalRecordCount);
         }
       );
-
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   // onChangeTabRev(key) {
   //   if (key === "request") this.getReviewListing(1, 10, 0);
@@ -615,7 +622,7 @@ class Adminlistener extends Component {
         : "position-relative";
     let professnalActveClass =
       this.state.pageType == "userlist" &&
-        this.state.activeProfile == "professional"
+      this.state.activeProfile == "professional"
         ? "position-relative active"
         : "position-relative";
     let listnerActveClass =
@@ -728,7 +735,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
-                         PAYMENT LIST
+                          PAYMENT LIST
                         </div>
                       </div>
                     </div>
@@ -1176,234 +1183,233 @@ class Adminlistener extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {
-                          this.state.paymentList.map(elem=>{
-                            return (
-                              <tr>
-                              <td>{elem.pr_email||'-'}</td>
-                              <td>{elem.pr_txamount||'-'}</td>
-                              <td><Button className="btnTyp9 reject color1">{elem.pr_status.split('_')[1]||'-'}</Button></td>
+                        {this.state.paymentList.map((elem) => {
+                          return (
+                            <tr>
+                              <td>{elem.pr_email || "-"}</td>
+                              <td>{elem.pr_txamount || "-"}</td>
+                              <td>
+                                <Button className="btnTyp9 reject color1">
+                                  {elem.pr_status.split("_")[1] || "-"}
+                                </Button>
+                              </td>
                             </tr>
-                            )
-                          })
-                        }
-                       
-                        
-
+                          );
+                        })}
                       </tbody>
                     </Table>
                   </div>
                 </Col>
               ) : (
-                        <Col md={8} lg={9} className="pl-1">
-                          <div className="myprofile reviewrequest">
-                            <div className="text-center user_tab">
-                              <Tabs
-                                activeKey={this.state.key}
-                                defaultActiveKey="request"
-                                onSelect={(key) => this.onChangeTab(key, "rating")}
-                              >
-                                <Tab eventKey="request" title="Requested">
-                                  <div className="requests">
-                                    {this.state.ratingList &&
-                                      this.state.ratingList.map((item) => {
-                                        return (
-                                          <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                            <div className="mr-4">
-                                              <Image
-                                                src={item.u_image ? item.u_image : ""}
-                                                alt=""
-                                                className="r50"
-                                              />
-                                            </div>
-                                            <div className="pl-2 w-100">
-                                              <div className="d-flex justify-content-between">
-                                                <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
-                                                    {item.fromname}
-                                                  </div>
-                                                  <div className="fs14 fw400 col54 pb-1">
-                                                    {moment(item.br_datetime).format(
-                                                      "dddd MMM Do YYYY HH:mm"
-                                                    )}
-                                                  </div>
-                                                </div>
-                                                <div className="col81 fs15 fs400 pr-3">
-                                                  Review for - {item.toname}
-                                                </div>
-                                              </div>
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "rating")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                              <div className="mb-4">
-                                                <span className="mr-4">
-                                                  {[
-                                                    ...Array(
-                                                      item.ur_rating
-                                                        ? +item.ur_rating
-                                                        : 4
-                                                    ),
-                                                  ].map((e, i) => (
-                                                    <Image
-                                                      src={Yellowstar}
-                                                      alt=""
-                                                      className="mr-1"
-                                                    />
-                                                  ))}
-                                                </span>
-                                                <span className="col82 fs18 fw600">
-                                                  Good!{" "}
-                                                  <Image src={Checkgreen} alt="" />
-                                                </span>
-                                              </div>
-                                              <div className="mt-3">
-                                                <Button
-                                                  className="btnTyp9 approve mr-4"
-                                                  onClick={() =>
-                                                    this.changeStatusRating(
-                                                      item.ur_id,
-                                                      1
-                                                    )
-                                                  }
-                                                >
-                                                  APPROVE
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
                                         </Button>
-                                                <Button
-                                                  className="btnTyp9 reject"
-                                                  onClick={() =>
-                                                    this.changeStatusRating(
-                                                      item.ur_id,
-                                                      2
-                                                    )
-                                                  }
-                                                >
-                                                  REJECT
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
                                         </Button>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        );
-                                      })}{" "}
+                                      </div>
+                                    </div>
                                   </div>
-                                </Tab>
-                                <Tab eventKey="completed" title="COMPLETED">
-                                  <div className="requests">
-                                    {this.state.ratingList &&
-                                      this.state.ratingList.map((item) => {
-                                        return (
-                                          <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                            <div className="mr-4">
-                                              <Image
-                                                src={item.u_image ? item.u_image : ""}
-                                                alt=""
-                                                className="r50"
-                                              />
-                                            </div>
-                                            <div className="pl-2 w-100">
-                                              <div className="d-flex justify-content-between">
-                                                <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
-                                                    {item.fromname}
-                                                  </div>
-                                                  <div className="fs14 fw400 col54 pb-1">
-                                                    {moment(item.br_datetime).format(
-                                                      "dddd MMM Do YYYY HH:mm"
-                                                    )}
-                                                  </div>
-                                                </div>
-                                                <div className="col81 fs15 fs400 pr-3">
-                                                  Review for - {item.toname}
-                                                </div>
-                                              </div>
-
-                                              <div className="mb-4">
-                                                <span className="mr-4">
-                                                  {[
-                                                    ...Array(
-                                                      item.ur_rating
-                                                        ? +item.ur_rating
-                                                        : 4
-                                                    ),
-                                                  ].map((e, i) => (
-                                                    <Image
-                                                      src={Yellowstar}
-                                                      alt=""
-                                                      className="mr-1"
-                                                    />
-                                                  ))}
-                                                </span>
-                                                <span className="col82 fs18 fw600">
-                                                  Good!{" "}
-                                                  <Image src={Checkgreen} alt="" />
-                                                </span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        );
-                                      })}
-                                  </div>
-                                </Tab>
-
-                                <Tab eventKey="reject" title="REJECTED">
-                                  <div className="requests">
-                                    {this.state.ratingList &&
-                                      this.state.ratingList.map((item) => {
-                                        return (
-                                          <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                            <div className="mr-4">
-                                              <Image
-                                                src={item.u_image ? item.u_image : ""}
-                                                alt=""
-                                                className="r50"
-                                              />
-                                            </div>
-                                            <div className="pl-2 w-100">
-                                              <div className="d-flex justify-content-between">
-                                                <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
-                                                    {item.fromname}
-                                                  </div>
-                                                  <div className="fs14 fw400 col54 pb-1">
-                                                    {moment(item.br_datetime).format(
-                                                      "dddd MMM Do YYYY HH:mm"
-                                                    )}
-                                                  </div>
-                                                </div>
-                                                <div className="col81 fs15 fs400 pr-3">
-                                                  Review for - {item.toname}
-                                                </div>
-                                              </div>
-
-                                              <div className="mb-4">
-                                                <span className="mr-4">
-                                                  {[
-                                                    ...Array(
-                                                      item.ur_rating
-                                                        ? +item.ur_rating
-                                                        : 4
-                                                    ),
-                                                  ].map((e, i) => (
-                                                    <Image
-                                                      src={Yellowstar}
-                                                      alt=""
-                                                      className="mr-1"
-                                                    />
-                                                  ))}
-                                                </span>
-                                                <span className="col82 fs18 fw600">
-                                                  Good!{" "}
-                                                  <Image src={Checkgreen} alt="" />
-                                                </span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        );
-                                      })}{" "}
-                                  </div>
-                                </Tab>
-                              </Tabs>
-                            </div>
+                                );
+                              })}{" "}
                           </div>
-                        </Col>
-                      )}
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col1 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              )}
             </Row>
           </Container>
 
@@ -1472,90 +1478,93 @@ class Adminlistener extends Component {
             </Modal.Body>
           </Modal>
           {this.state.pageType == "userlist" &&
-            totalRecord &&
-            totalRecord > customPagination.paginationPageSize ? (
-              <div className="paginationWrapper">
-                <Pagination
-                  activePage={this.state.pageNumber}
-                  itemsCountPerPage={customPagination.itemsCountPerPage}
-                  totalItemsCount={totalRecord}
-                  pageRangeDisplayed={customPagination.pageRangeDisplayed}
-                  onChange={this.handlePageChange.bind(this)}
-                  firstPageText={"<<"}
-                  lastPageText={">>"}
-                  prevPageText={"<"}
-                  nextPageText={">"}
-                />
-              </div>
-            ) : this.state.totalPage > 0 ? (
-              <div className="paginationWrapper">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination pg-blue deliva-pagination justify-content-end">
-                    <li class="page-item">
-                      <button
-                        class="page-link rotate-180 control-btn"
-                        aria-label="Previous"
-                        onClick={() => this.onChangePage(this.state.pageno - 1)}
-                        disabled={
+          totalRecord &&
+          totalRecord > customPagination.paginationPageSize ? (
+            <div className="paginationWrapper">
+              <Pagination
+                activePage={this.state.pageNumber}
+                itemsCountPerPage={customPagination.itemsCountPerPage}
+                totalItemsCount={totalRecord}
+                pageRangeDisplayed={customPagination.pageRangeDisplayed}
+                onChange={this.handlePageChange.bind(this)}
+                firstPageText={"<<"}
+                lastPageText={">>"}
+                prevPageText={"<"}
+                nextPageText={">"}
+              />
+            </div>
+          ) : this.state.totalPage > 0 ? (
+            <div className="paginationWrapper">
+              <nav aria-label="Page navigation">
+                <ul class="pagination pg-blue deliva-pagination justify-content-end">
+                  <li class="page-item">
+                    <button
+                      class="page-link rotate-180 control-btn"
+                      aria-label="Previous"
+                      onClick={() => this.onChangePage(this.state.pageno - 1)}
+                      disabled={
+                        this.state.pageno == 1 || this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-prev"></span>
+                      <span
+                        //className="prevNext"
+                        className={`sr-only ${
                           this.state.pageno == 1 || this.state.totalPage == 0
-                        }
-                      >
-                        <span className="icon-prev"></span>
-                        <span
-                          //className="prevNext"
-                          className={`sr-only ${this.state.pageno == 1 || this.state.totalPage == 0
                             ? ""
                             : "active"
-                            }`}
-                        >
-                          Previous
+                        }`}
+                      >
+                        Previous
                       </span>
-                      </button>
-                    </li>
+                    </button>
+                  </li>
 
-                    {this.state.totalPage > 0 &&
-                      this.state.pageArray.map((page, ind) => {
-                        return (
-                          <li class="page-item">
-                            <a
-                              className={`page-link ${this.state.pageno == page ? "active" : ""
-                                }`}
-                              onClick={() => this.onChangePage(page)}
-                            >
-                              {page}
-                            </a>
-                          </li>
-                        );
-                      })}
+                  {this.state.totalPage > 0 &&
+                    this.state.pageArray.map((page, ind) => {
+                      return (
+                        <li class="page-item">
+                          <a
+                            className={`page-link ${
+                              this.state.pageno == page ? "active" : ""
+                            }`}
+                            onClick={() => this.onChangePage(page)}
+                          >
+                            {page}
+                          </a>
+                        </li>
+                      );
+                    })}
 
-                    <li class="page-item">
-                      <button
-                        class="page-link control-btn"
-                        aria-label="Next"
-                        onClick={() => this.onChangePage(this.state.pageno + 1)}
-                        disabled={
+                  <li class="page-item">
+                    <button
+                      class="page-link control-btn"
+                      aria-label="Next"
+                      onClick={() => this.onChangePage(this.state.pageno + 1)}
+                      disabled={
+                        this.state.pageno == this.state.totalPage ||
+                        this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-next"></span>
+                      <span
+                        className={`sr-only ${
                           this.state.pageno == this.state.totalPage ||
                           this.state.totalPage == 0
-                        }
-                      >
-                        <span className="icon-next"></span>
-                        <span
-                          className={`sr-only ${this.state.pageno == this.state.totalPage ||
-                            this.state.totalPage == 0
                             ? ""
                             : "active"
-                            }`}
-                        >
-                          Next
+                        }`}
+                      >
+                        Next
                       </span>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            ) : (
-                <div className="recordfound">No Record Found</div>
-              )}
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          ) : (
+            <div className="recordfound">No Record Found</div>
+          )}
           {/* {this.state.totalRecordCount == 0 ? (
           ) : (
             ""
