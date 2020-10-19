@@ -9,9 +9,9 @@ import Deleteusers from "../../assets/images/delete_users.svg";
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import socketClass from "../../common/utility/socketClass";
-import {    
-    showSuccessToast,    
-  } from '../../common/helpers/Utils';
+import {
+    showSuccessToast,
+} from '../../common/helpers/Utils';
 
 const socket = socketClass.getSocket();
 
@@ -19,6 +19,7 @@ const BlockConfirmation = forwardRef(({ userId }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selfId, setSelfId] = useState(null);
+    const [selfName, setSelfName] = useState(null);
 
     useImperativeHandle(
         ref,
@@ -30,16 +31,21 @@ const BlockConfirmation = forwardRef(({ userId }, ref) => {
     )
 
     useEffect(() => {
-     
+        let name = null
         let id = null
         if (getLocalStorage('userInfo')) {
+
             id = getLocalStorage('userInfo').u_id
+            name = getLocalStorage('userInfo').u_email
         } else if (getLocalStorage('customerInfo')) {
+            name = getLocalStorage('customerInfo').u_email
             id = getLocalStorage('customerInfo').u_id
         } else if (getLocalStorage('userInfoProff')) {
+            name = getLocalStorage('userInfoProff').u_email
             id = getLocalStorage('userInfoProff').u_id
         }
         setSelfId(id)
+        setSelfName(name)
     }, [])
 
     const _blockChatHandler = async () => {
@@ -47,12 +53,13 @@ const BlockConfirmation = forwardRef(({ userId }, ref) => {
             console.log({
                 from_user_id: selfId,
                 to_user_id: userId,
-                block:1
+                block: 1
             })
             socket.emit("block-user", {
                 from_user_id: selfId,
                 to_user_id: userId,
-                block:1
+                block: 1,
+                name: selfName
             }, (data) => {
                 console.log('active data', data);
                 // showSuccessToast(data.msg)

@@ -55,11 +55,11 @@ class Home extends Component {
         <Supporting />
         <Discussanything />
 
-        <div className="text-center  mb-5">
+        {/* <div className="text-center  mb-5">
           <Button className="" onClick={this.handlePaymentModal}>
             Payment
           </Button>
-        </div>
+        </div> */}
 
         <Modal show={this.state.show5} className="CreateAccount Payment">
           <Modal.Header>

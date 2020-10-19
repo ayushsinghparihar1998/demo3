@@ -112,7 +112,7 @@ class Chat extends Component {
         from_user_id: getLocalStorage("userInfo").u_id,
         to_user_id: this.props.match.params.id,
         status: 1,
-      }), (data) =>{
+      }), (data) => {
         console.log('chat component unmounted')
       }
     );
@@ -140,6 +140,12 @@ class Chat extends Component {
 
     socket.on("connect", function () {
       console.log("COnnected ================================================")
+      socket.on("block-user", (data) => {
+        console.log('block-user ====>', data)
+        if (data.block == 1) {
+          showErrorMessage("You have been blocked by " + data.name)
+        }
+      })
     });
     // socket.emit(
     //   "chat-login",
@@ -250,7 +256,7 @@ class Chat extends Component {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      console.log(data,object);
+      console.log(data, object);
       if (data.success === 1) {
         this.updateChat(object);
       } else {
@@ -627,7 +633,7 @@ class Chat extends Component {
                             Send
                         </Button>
                         </div> : null
-                        }
+                      }
 
                       <MessageCount userId={this.props.match.params.id} />
                     </Form.Group>

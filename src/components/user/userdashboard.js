@@ -264,6 +264,7 @@ class Userdashboard extends Component {
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
                                  {/* <ActiveUsers onRedirect={this.handleRedirectActiveUsers} /> */}
+
                                  {/* 
                   <div className="inner_side">
                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -306,67 +307,7 @@ class Userdashboard extends Component {
                   </div>
                   */}
 
-                                 <div className="inner_side">
-                                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                       <span>Currently Active Listeners </span>
-                                    </div>
-                                    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-                                       <Tab eventKey="home" title="Listener">
-                                          <div className="chat-border"></div>
-                                          {this.state.activeChatUsers &&
-                                             this.state.activeChatUsers.map((item, ind) => {
-                                                return ind < this.state.showVal ? (
-                                                   <div className="d-flex m-3 border-bottom pointer"
-                                                      onClick={() =>
-                                                         this.changepath("/chatuser/" + item.id)
-                                                      }
-                                                   >
-                                                      <div className="position-relative">
-                                                         <Image
-                                                            src={item.u_image ? item.u_image : UserChat}
-                                                            alt=""
-                                                            className="r50 pt-1"
-                                                         />
-                                                      </div>
-                                                      <div className="position-relative pl-3 mt-auto mb-auto">
-                                                         <div
-                                                            className="fs14 col14 fw500"
-                                                         >
-                                                            {item.u_name}
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                ) : (
-                                                      ""
-                                                   );
-                                             })}
-                                       </Tab>
-                                    </Tabs>
-                                    {this.state.showVal == 4 ? (
-                                       <div
-                                          className="fs15 fw600 col23 p-3 pointer show-more"
-                                          onClick={() => {
-                                             this.setState({
-                                                showVal: this.state.activeChatUsers.length,
-                                             });
-                                          }}
-                                       >
-                                          Show More
-                                       </div>
-                                    ) : (
-                                          <div
-                                             className="fs15 fw600 col23 p-3 pointer show-more"
-                                             onClick={() => {
-                                                this.setState({
-                                                   showVal: 4,
-                                                });
-                                             }}
-                                          >
-                                             Show Less
-                                          </div>
-                                       )}
-                                 </div>
-
+                               
 
                                  <div className="inner_side">
                                     <div className="upgrade">
