@@ -7,7 +7,7 @@ import Ngoone from "../../assets/images/ngo1.svg";
 import Ngotwo from "../../assets/images/ngo2.svg";
 import Ngothree from "../../assets/images/ngo3.svg";    
 
-class Media extends Component { 
+class Media extends Component {    
     render() {
         return (
             <div className="page__wrapper innerpage">        
