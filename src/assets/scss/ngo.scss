@@ -49,6 +49,11 @@
 
         .ngo_details {
             position: relative; 
+
+            & > img { 
+                max-height: 400px;
+                object-fit: cover;
+            }
         }
     }
 }
