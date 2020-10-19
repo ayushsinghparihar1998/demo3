@@ -281,7 +281,7 @@ class NavBar extends Component {
                         Connect Now
                       </Nav.Link>,
                       <NavLink to="/becomeListener" className="nav-link">
-                        Volunteer as a Listener
+                        Become a CoCo
                       </NavLink>,
                       <NavLink to="/compaign" className="nav-link">
                         Donate
@@ -314,9 +314,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href="#">Men Rights</NavDropdown.Item>
                       </NavDropdown>,
                       <Nav.Link onClick={this.handleModal3}>
-                        Professionals
+                        ELNP Coaches
                       </Nav.Link>,
-                      <Nav.Link onClick={this.handleModal2}>Faq</Nav.Link>,
+                      <Nav.Link onClick={this.handleModal2}>FAQ</Nav.Link>,
                     ]}
                   {getLocalStorage("userInfo") ||
                     getLocalStorage("userInfoProff") ||

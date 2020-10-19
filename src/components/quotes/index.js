@@ -11,16 +11,16 @@ const Quotes = () => {
 
     const [quotes, setQuotes] = useState([
         {
-            text: 'One of the most sincere forms of respect is actually listening to what another has to say.',
-            author: 'Bryant H. McGill'
+            text: 'It’s up to you today to start making healthy choices. Not choices that are just healthy for your body, but healthy for your mind.',
+            author: 'Steve Maraboli'
         },
         {
-            text: 'Listening is an art that requires attention over talent, spirit over ego, others over self.',
-            author: 'Dean Jackson'
+            text: 'What mental health needs is more sunlight, more candour, and more unashamed conversation.',
+            author: 'Glenn Close'
         },
         {
-            text: 'Listening is an attitude of the heart, a genuine desire to be with another which both attracts and heals.',
-            author: 'L. J. Isham'
+            text: 'It doesn’t have to take over your life, it doesn’t have to define you as a person, it’s just important that you ask for help. It’s not a sign of weakness.',
+            author: 'Demi Lovato'
         },
     ])
 
