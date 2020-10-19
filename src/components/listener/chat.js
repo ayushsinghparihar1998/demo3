@@ -250,7 +250,7 @@ class Chat extends Component {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-      console.log(data);
+      console.log(data,object);
       if (data.success === 1) {
         this.updateChat(object);
       } else {

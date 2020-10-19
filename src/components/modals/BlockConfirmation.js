@@ -44,6 +44,11 @@ const BlockConfirmation = forwardRef(({ userId }, ref) => {
 
     const _blockChatHandler = async () => {
         try {
+            console.log({
+                from_user_id: selfId,
+                to_user_id: userId,
+                block:1
+            })
             socket.emit("block-user", {
                 from_user_id: selfId,
                 to_user_id: userId,
