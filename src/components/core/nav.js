@@ -289,7 +289,7 @@ class NavBar extends Component {
                       <NavLink to="/compaign" className="nav-link">
                         Donate
                       </NavLink>,
-                      <Nav.Link> Media</Nav.Link>,
+                      <Nav.Link href="blogs"> Media</Nav.Link>,
                       <Nav.Link onClick={()=>this.setState({show3:true})}> Professional Help</Nav.Link>,
                       <Nav.Link href="#about_us_container"> About</Nav.Link>,
                       <Nav.Link> Blog</Nav.Link>,
