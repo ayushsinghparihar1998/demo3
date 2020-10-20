@@ -242,10 +242,13 @@ textarea.inputTyp2.form-control.cate2 {
 }
 
 .selectTyp1.p3 { 
-   padding-left: 1rem !important;
+   padding-left: 1rem !important; 
+}
+.selectTyp1.request_select { 
+    background                : url('../images/arrow.svg') no-repeat 98% 50% $col22 !important; 
 }
 
-.form-group {
+.form-group { 
   label {
       text-transform: capitalize; 
   }

@@ -451,3 +451,70 @@
         }
     }
 }
+
+.helprequest { 
+
+    .createblog {
+        padding: 20px 45px 20px;
+        min-height: inherit; 
+
+        form {
+            .form-group {
+                margin-bottom: 1.5rem; 
+
+                &.txtcomments {
+                    margin-bottom: .5rem;
+                }
+            }
+            .fileType2.form-file {
+                height: 3.5rem;
+                
+                .form-control-file {
+                    height: 3.5rem; 
+                }
+            }
+
+            label {
+                margin-bottom: 10px; 
+            }
+            .tesxtfills {
+                top: 42%; 
+            }
+        }
+    }
+}
+
+.memberfaq {
+    position: relative; 
+    .QuestionAnswer {  
+        padding: 0 40px 0; 
+
+        .accordion {
+            .card {
+                margin-bottom: 20px;
+                text-align: left; 
+                border: solid 1px $col23; 
+
+                .card-header {
+                    background: $col24; 
+                    border-bottom: solid 1px $col23; 
+                    font-size: 18px;
+                    color: $col11;
+                    cursor: pointer;
+                    height: 50px;  
+                    background                : url('../images/arrow.svg') no-repeat 98% 50% $col22 !important;
+                }
+
+                .collapse { 
+                    border-top: none;  
+                }
+
+                .card-body {
+                    font-weight: 400;
+                    color: $col11;       
+                }
+
+            }
+        }
+    }
+}
