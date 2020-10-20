@@ -338,7 +338,7 @@ class Signup extends Component {
                   />
                 </Form.Group>
 
-                {/* <Form.Group controlId="exampleForm.ControlSelect1">
+                            {/* <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Control as="select"
                                         name="month"
                                         onChange={this.handleChange}
@@ -367,7 +367,7 @@ class Signup extends Component {
                     }}
                   />
                 </Form.Group>
-                {/* <Form.Group controlId="exampleForm.ControlSelect1">
+                              {/* <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Control
                                         name="year"
                                         onChange={this.handleChange}

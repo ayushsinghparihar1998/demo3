@@ -14,7 +14,7 @@ import Requestdetails from "../../../assets/images/register2.svg";
 import Deleteicon from "../../../assets/images/delete_icon.svg";
 import Crossbtn from '../../../assets/images/blue_cross.svg';
 
-class Admincategory extends Component {
+class Admincategory extends Component { 
       constructor(props) {
         super(props);
         this.state = {
