@@ -164,6 +164,17 @@
     }
 } 
 
+.bannerset {
+    position: relative;
+    
+    .user_set {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+
 .footer { 
     background-color: $col1;
     padding: 20px 0;
@@ -200,7 +211,7 @@ img {
 }
 
 /* media screen start */ 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) { 
     .happyPatient .italic_style .invertedtwo {  
         right: -8%;
         max-width: 60px;
@@ -375,7 +386,13 @@ img {
 
 @media (min-width: 768px) and (max-width: 991px) { 
     .main_baner {
+        .bannerset {
+            .user_set {
+                bottom: 30px; 
+            }
+        }
         .mj_nav {
+            
             div.navbar-collapse {
                 background: #fff;
                 padding: 15px 0;

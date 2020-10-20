@@ -22,8 +22,8 @@ class Supporting extends Component {
     return (
       <div className="Supporting">
         <Container>
-          <div className="fw700 fs44 col10 col1 w-100">Supported Organizations</div>
-          <div className="col14 fs20 fw500 w-100 pt-3 mb-5 pb-3">Eat Luv N Pray works with organisations in helping them increase productivity and mitigate delays by providing mental health support to their employees. Get started today.</div>
+          <div className="fw700 fs40 col10 col1 w-100">Supported Organizations</div>
+          <div className="col14 fs18 fw500 w-100 pt-3 mb-5 pb-3">Eat Luv N Pray works with organisations in helping them increase productivity and mitigate delays by providing mental health support to their employees. Get started today.</div>
 
           <Slider {...settings}>
             <div className="organise_carousel">

@@ -9,7 +9,7 @@ class Happypatient extends Component {
     return (
         <div className="happyPatient">    
             <Container>
-                    <div className="fs44 col10 fw700 w-100">Happy Users</div>
+                    <div className="fs40 col10 fw700 w-100">Happy Users</div>
                     <div className="col14 fs20 fw500 w-100 pt-3 mb-4">What people say about us. Here are comments from individuals who have visited Counselor.</div>
                     <Carousel>
                         <Carousel.Item>   
@@ -33,9 +33,9 @@ class Happypatient extends Component {
                             back to a normal way of life! 
 
                             <Image src={Invertedtwo} alt="" className="invertedtwo" />
-                            </div>
+                            </div> 
                             <Image src={Testimonials} alt="" className="mt-4 mb-2" /> 
-                            <div className="fs20 col12 fw500 mb-2">Susan Merdinger</div> 
+                            <div className="fs18 col12 fw500 mb-2">Susan Merdinger</div> 
                             <div className="fs15 col13">Monday, May 2</div>
                         </Carousel.Item> 
 

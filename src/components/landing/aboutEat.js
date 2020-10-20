@@ -46,7 +46,7 @@ class Abouteat extends Component {
                 <Container>
                     <Row>
                         <Col md={7}>
-                            <div className="fs44 col14 fw700 w-100">About Eat Luv N Pray</div>
+                            <div className="fs40 col14 fw700 w-100">About Eat Luv N Pray</div>
                             <div className="col14 fs16 fw300 w-100 pt-3">
                                 <div className="pb-4">Eat Luv N Pray was founded by a Group of individuals who have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
 
@@ -58,16 +58,16 @@ class Abouteat extends Component {
                                 <div className="pb-2">NEVER ALONE. </div>
                             </div>
                         </Col>
-                        <Col md={5}>
-                            <div className="subscribe_here">
-                                <div className="fs40 fw700 col1">Subscribe to Newsletter</div>
-                                <div className="fs22 fw300 col10 mb-3">Are you ready to excel in your life? Get a free newsletter about holistic wellness delivered to your email.</div>
+                        <Col md={5}> 
+                            <div className="subscribe_here"> 
+                                <div className="fs30 fw700 col1">Subscribe to Newsletter</div>
+                                <div className="fs18 fw300 col10 mb-3">Are you ready to excel in your life? Get a free newsletter about holistic wellness delivered to your email.</div>
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Control
                                         type="email"
                                         placeholder="Email address"
                                         error={errors.email ? true : false}
-                                        className="inputTyp1"
+                                        className="inputTyp1 fs20"
                                         name="email"
                                         value={email}
                                         placeholder="Email"
@@ -76,8 +76,8 @@ class Abouteat extends Component {
                                     <div className="error alignLeft">{errors.email}</div>
                                 </Form.Group>
                                 <Button variant="primary"
-                                    onClick={this.getSubscribe}
-                                    type="submit" className="btnTyp2 mt-3">
+                                    onClick={this.getSubscribe} 
+                                    type="submit" className="btnTyp2 mt-1">   
                                     SUBSCRIBE
                                 </Button>
 
