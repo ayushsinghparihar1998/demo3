@@ -57,11 +57,11 @@ function RecentChat({ onRedirect }) {
                 <div className="col27 fs13 fw500">
                   {item.message}
                 </div>
-                <Image
+                {/* <Image
                   src={ChatCross}
                   alt=""
                   className="pointer cross_btn"
-                />
+                /> */}
               </div>
             </div>
           );

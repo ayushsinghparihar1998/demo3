@@ -121,8 +121,8 @@ class Userdashboard extends Component {
       //     console.log(data, "authenticateSocket");
       //   }
       // );
-      socket.on("newUserForActivityList", (data) => { 
-         console.log('data====',data )
+      socket.on("newUserForActivityList", (data) => {
+         console.log('data====', data)
          if (this.state.activeChatUsers.findIndex(u => u.id === data.id) === -1) {
             this.setState(prev => ({
                activeChatUsers: [...prev.activeChatUsers, data]
@@ -240,6 +240,9 @@ class Userdashboard extends Component {
             },
             (d) => {
                console.log("_getRandomChatHandler", d);
+               if (d.data) {
+                  this.props.history.push('chatuser/' + d.data.id)
+               }
 
             }
          );
@@ -307,7 +310,7 @@ class Userdashboard extends Component {
                   </div>
                   */}
 
-                               
+
 
                                  <div className="inner_side">
                                     <div className="upgrade">
@@ -317,7 +320,7 @@ class Userdashboard extends Component {
                                  <div className="inner_side">
                                     <div className="benefits">
                                        <div className="pb-2 col14 fw500 fs15">Benefits of becoming a CoCo</div>
-                                       <Button onClick={() => this.props.history.push('/coco/learn-more')} className="btnType18">Learn More</Button>
+                                       <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType18">Learn More</Button>
                                     </div>
                                  </div>
                                  <div className="inner_side">
