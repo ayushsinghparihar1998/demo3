@@ -55,6 +55,7 @@ import SocketIOClient from "socket.io-client";
 import {
    getLocalStorage,
    removeLocalStorage,
+   showErrorMessage,
 } from "../../common/helpers/Utils";
 import {
    actionGetRecentJoin,
@@ -244,6 +245,11 @@ class Userdashboard extends Component {
                   this.props.history.push('chatuser/' + d.data.id)
                }
 
+               if(!d.success){
+                  
+                  showErrorMessage(d.msg)
+               }
+
             }
          );
       } catch (err) {
@@ -388,7 +394,7 @@ class Userdashboard extends Component {
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
-                                 Hi Nancy D’souza
+                              Hi {  getLocalStorage("customerInfo").u_email}
                      <Button className="btnType18 d-block twos">My Account</Button>
                               </div>
 

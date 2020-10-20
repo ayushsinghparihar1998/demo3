@@ -604,5 +604,39 @@ export default {
     },
     showResultMessage: false,
     showErrorMessage: true,
-  }
+  },
+  getListenerCategoryList: {
+    url: "elp/getcategories",
+    method: "GET",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  addCategory: {
+    url: "elp/addcategories",
+    method: "POST",
+    data: {
+      uc_cat_name: "",     
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getSuperAdminCategories: {
+    url: "elp/superadmin_getcategory",
+    method: "GET",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  addCategorySuperAdmin: {
+    url: "elp/superadmin_addcategory",
+    method: "POST",
+    data: {
+      uc_cat_name: "",     
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  
+  
 };

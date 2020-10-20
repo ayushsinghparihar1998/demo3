@@ -61,6 +61,7 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/admin/blogDetail";
+import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq"; 
 
@@ -176,6 +177,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/blogs" component={Media} />
           <PublicRoute path="/createblog" component={Createblogs} />
           <PublicRoute path="/blogsDetail" component={BlogDetail} />
+          <PublicRoute path="/categoryadmin" component={Categoryadmin} />
           <PublicRoute path="/helprequest" component={Helprequest} /> 
 
           <PrivateRoutes
