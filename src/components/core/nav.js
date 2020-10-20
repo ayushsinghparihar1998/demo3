@@ -289,16 +289,16 @@ class NavBar extends Component {
                       <NavLink to="/compaign" className="nav-link">
                         Donate
                       </NavLink>,
-                      <Nav.Link href="blogs"> Media</Nav.Link>,
+                      // <Nav.Link > Media</Nav.Link>,
+                      <NavDropdown title="Media" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995" target="__blank">My Help</NavDropdown.Item>
+                        <NavDropdown.Item href="http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/" target="__blank">BW well being world</NavDropdown.Item>                        
+                      </NavDropdown>,
                       <Nav.Link onClick={()=>this.setState({show3:true})}> Professional Help</Nav.Link>,
                       <Nav.Link href="#about_us_container"> About</Nav.Link>,
-                      <Nav.Link> Blog</Nav.Link>,
+                      // <Nav.Link> Blog</Nav.Link>,
 
-                      // <NavDropdown title="CSR" id="basic-nav-dropdown">
-                      //   <NavDropdown.Item href="">Action</NavDropdown.Item>
-                      //   <NavDropdown.Item href="#">Another</NavDropdown.Item>
-                      //   <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                      // </NavDropdown>,
+                      
                       // <NavDropdown title="Communities" id="basic-nav-dropdown">
                       //   <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
                       //   <NavDropdown.Item href="#">

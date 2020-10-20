@@ -114,9 +114,13 @@ class Chat extends Component {
       JSON.stringify({
         from_user_id: getLocalStorage("userInfo").u_id,
         to_user_id: this.props.match.params.id,
-        status: 1,
+        status: 0,
       }), (data) => {
-        console.log('chat component unmounted')
+        console.log('onScreen called ===>>>', data, {
+          from_user_id: getLocalStorage("userInfo").u_id,
+          to_user_id: this.props.match.params.id,
+          status: 0,
+        })
       }
     );
     window.removeEventListener("beforeunload", this.unmount);
@@ -353,7 +357,7 @@ class Chat extends Component {
     }),
       (data) => {
         console.log(data)
-        if (data.data ) {
+        if (data.data) {
           this.setState({ allMessages: data.data.reverse() })
         }
       }
