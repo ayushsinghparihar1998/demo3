@@ -61,6 +61,10 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/admin/blogDetail";
+import Categoryadmin from "../components/admin/admincategory";
+import Helprequest from "../components/core/helprequest";
+import Faq from "../components/core/faq"; 
+
 const user =
   getLocalStorage("userInfo") ||
   getLocalStorage("userInfoProff") ||
@@ -125,6 +129,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
+          <PublicRoute path="/faq" component={Faq} />
 
 
 
@@ -166,12 +171,14 @@ class ELPRoute extends Component {
           <PublicRoute
             path="/adminselectcategory"
             component={Adminselectcategory}
-          />
+          /> 
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           <PublicRoute path="/adminlisting" component={Reviewrequest} />
           <PublicRoute path="/blogs" component={Media} />
           <PublicRoute path="/createblog" component={Createblogs} />
           <PublicRoute path="/blogsDetail" component={BlogDetail} />
+          <PublicRoute path="/categoryadmin" component={Categoryadmin} />
+          <PublicRoute path="/helprequest" component={Helprequest} /> 
 
           <PrivateRoutes
             path="/professionalSearch"

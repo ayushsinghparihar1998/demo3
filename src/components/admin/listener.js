@@ -278,7 +278,7 @@ class Adminlistener extends Component {
   };
   adminChangeUserStatus = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
-    let userStatus = status ? 0 : 1;
+    let userStatus = status == '1' ? 0 : 1;
     let chkUserProfile = this.state.activeProfile;
     let data = { userid: uid, u_status: userStatus };
     this.props.actionAdminChangeUserStatus(data).then((result) => {
@@ -845,7 +845,7 @@ class Adminlistener extends Component {
                                           item.u_status
                                         );
                                       }}
-                                      checked={item.u_status ? true : false}
+                                      checked={item.u_status =='1' ? true : false}
                                     />
                                   </span>
                                   <span

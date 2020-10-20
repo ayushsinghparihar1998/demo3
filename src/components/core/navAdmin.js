@@ -167,6 +167,9 @@ class NavBar extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage('userInfoAdmin') ?
               <Nav className="ml-auto">
+                <NavLink to={"Categoryadmin"} className="nav-link">
+                  CATEGORY
+                </NavLink>
                 <NavLink to={"adminlistener"} className="nav-link">
                   DASHBOARD
                 </NavLink>
