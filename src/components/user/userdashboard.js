@@ -240,8 +240,8 @@ class Userdashboard extends Component {
             },
             (d) => {
                console.log("_getRandomChatHandler", d);
-               if (d.getActiveUsersRes[0]) {
-                  this.props.history.push('chatuser/' + d.getActiveUsersRes[0].id)
+               if (d.data) {
+                  this.props.history.push('chatuser/' + d.data.id)
                }
 
             }

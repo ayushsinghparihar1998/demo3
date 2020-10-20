@@ -39,6 +39,8 @@ import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
 import UserEndChatModal from "../modals/UserEndChatModal";
+import DeleteConfirmation from "../modals/DeleteConfirmation";
+import MessageCount from "../modals/MessageCount";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -62,6 +64,9 @@ class ChatUser extends Component {
     this.blockModal = React.createRef();
 
     this.userEndChatModal = React.createRef();
+
+    this.deleteConfirmation = React.createRef();
+
   }
   componentWillUnmount() {
     socket.emit(
@@ -198,6 +203,22 @@ class ChatUser extends Component {
           }
         );
       }.bind(this)
+    );
+  }
+
+  recallChatList = () => {
+    socket.emit("chatHistory", JSON.stringify({
+      from_user_id: getLocalStorage("customerInfo").u_id,
+      to_user_id: this.props.match.params.id,
+      'page': 1,
+      'pagination': 20
+    }),
+      (data) => {
+        if (data.data) {
+          console.log("message debugg history", data.data)
+          this.setState({ allMessages: data.data.reverse() })
+        }
+      }
     );
   }
 
@@ -465,7 +486,7 @@ class ChatUser extends Component {
                       </Col>
                       <Col xs={9}>
                         <div className="mt-auto mb-auto text-right">
-                          <Image
+                          {/* <Image
                             src={Warningnotification}
                             alt=""
                             className="pointer mr-2"
@@ -475,7 +496,7 @@ class ChatUser extends Component {
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image src={Sounds} alt="" className="pointer mr-2" />
+                          <Image src={Sounds} alt="" className="pointer mr-2" /> */}
                           <Image
                             src={Dangers}
                             onClick={() => this.blockModal.current.openModal()}
@@ -485,13 +506,14 @@ class ChatUser extends Component {
                           <Image
                             src={Deletes}
                             alt=""
+                            onClick={() => this.deleteConfirmation.current.openModal()}
                             className="pointer mr-2"
                           />
-                          <Image
+                          {/* <Image
                             src={Questions}
                             alt=""
                             className="pointer mr-2"
-                          />
+                          /> */}
                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           <Button
@@ -603,7 +625,7 @@ class ChatUser extends Component {
                          </Button>
                           </div> : null
                       }
-
+ <MessageCount userId={this.props.match.params.id} />
                     </Form.Group>
                     {/* </Form> */}
                   </div>
@@ -614,8 +636,9 @@ class ChatUser extends Component {
         </div>
         <Footer />
 
-        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={userMeta.u_username} />
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
+        <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList}/>
 
         {/* <Modal show={this.state.show2} className="CreateAccount question">
           <Modal.Header>
