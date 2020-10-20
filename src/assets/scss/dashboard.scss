@@ -125,8 +125,13 @@
         }
         .blog_detail {
             text-align: center; 
+            div.fs15 {
+                color: $col14; 
+            }
             img {
                 width: 100%; 
+                height: 150px;
+                object-fit: cover;
             }
         }
     }
@@ -375,7 +380,7 @@
 
         }
 
-        .border_yellow { 
+        .border_yellow {   
             border-top: solid 10px $col38; 
             padding: 10px;
             position: relative;
