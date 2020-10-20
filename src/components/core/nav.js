@@ -290,8 +290,8 @@ class NavBar extends Component {
                         Donate
                       </NavLink>,
                       <Nav.Link> Media</Nav.Link>,
-                      <Nav.Link> Professional Help</Nav.Link>,
-                      <Nav.Link> About</Nav.Link>,
+                      <Nav.Link onClick={()=>this.setState({show3:true})}> Professional Help</Nav.Link>,
+                      <Nav.Link href="#about_us_container"> About</Nav.Link>,
                       <Nav.Link> Blog</Nav.Link>,
 
                       // <NavDropdown title="CSR" id="basic-nav-dropdown">
@@ -605,7 +605,7 @@ class NavBar extends Component {
             </Container>
           </Modal.Body>
         </Modal>
-
+       
         {/* question answer end */}
       </div >
     );

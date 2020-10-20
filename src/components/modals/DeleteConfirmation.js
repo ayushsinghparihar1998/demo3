@@ -15,7 +15,7 @@ import {
 
 const socket = socketClass.getSocket();
 
-const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
+const DeleteConfirmation = forwardRef(({ userId, userName, recallChatList }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selfId, setSelfId] = useState(null);
@@ -48,21 +48,19 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
         setSelfName(name)
     }, [])
 
-    const _blockChatHandler = async () => {
+    const _deleteChatHandler = async () => {
         try {
             console.log({
                 from_user_id: selfId,
                 to_user_id: userId,
-                block: 1
+               
             })
-            socket.emit("block-user", {
+            socket.emit("delete-conversation", {
                 from_user_id: selfId,
-                to_user_id: userId,
-                block: 1,
-                name: selfName
+                to_user_id: userId,              
             }, (data) => {
                 console.log('active data', data);
-                // showSuccessToast(data.msg)
+                recallChatList()
                 setIsOpen(false)
             });
             // let response = await ELPRxApiService("blockChat", {
@@ -83,16 +81,16 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
             bsSize="small"
         >
             <Modal.Body>
-                <div className="col10 fw500 fs28 text-left">Block User</div>
+                <div className="col10 fw500 fs28 text-left">Delete Conversation</div>
                 <div className="delete_user mt-4">
                     <Image src={Deleteusers} alt="" />
                     <Image src={Blueicons} alt="" className="close pointer" onClick={() => setIsOpen(false)} />
                     <div className="text-center fs24 mt-4 col64 mb-4">
-                        Are you sure want to Block <br /> {userName} ? </div>
+                        Are you sure want to delete the conversation with <br /> {userName} ? </div>
 
                     <div className="text-center mb-5">
                         <Button
-                            onClick={_blockChatHandler}
+                            onClick={_deleteChatHandler}
                             className="btn btn-success text-uppercase ">
                             Yes
                         </Button>
@@ -109,4 +107,4 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
     )
 })
 
-export default BlockConfirmation
+export default DeleteConfirmation

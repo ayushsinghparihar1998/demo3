@@ -42,7 +42,7 @@ class Abouteat extends Component {
         const { email, password } = this.state;
         const { errors } = this.state;
         return (
-            <div className="aboutEats">
+            <div className="aboutEats" id="about_us_container">
                 <Container>
                     <Row>
                         <Col md={7}>

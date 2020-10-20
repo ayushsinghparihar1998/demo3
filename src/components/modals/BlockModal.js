@@ -8,7 +8,7 @@ import Blueicons from "../../assets/images/blue_cross.svg";
 import BlockConfirmation from './BlockConfirmation'
 import ReportUserModal from "./ReportUserModal";
 
-const BlockModal = forwardRef(({ userId }, ref) => {
+const BlockModal = forwardRef(({ userId ,userName}, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const blockConfirmation = React.createRef();
@@ -63,7 +63,7 @@ const BlockModal = forwardRef(({ userId }, ref) => {
                     </div>
                 </Modal.Body>
             </Modal>
-            <BlockConfirmation ref={blockConfirmation} userId={userId} />
+            <BlockConfirmation ref={blockConfirmation} userId={userId} userName={userName}/>
             <ReportUserModal ref={reportUserModal} userId={userId} />
         </>
     )
