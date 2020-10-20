@@ -434,13 +434,13 @@
     }
 
     &.cbttyp2 {
-       height: 2.9rem; 
+       height: 50px;
        background-color: $col18 !important; 
-       border-radius: solid 1px $col10 !important; 
+       border: solid 1px $col10 !important; 
        color: $col10 !important; 
-       font-size: $fs15 !important;
        font-weight: 500;
-       border-radius: 25px !important;
+       border-radius: 30px !important;
+       margin-top: 4px;
     }
   }
   

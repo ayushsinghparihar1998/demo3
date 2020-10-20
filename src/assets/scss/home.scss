@@ -29,7 +29,7 @@
 
 .innerpage {
     .main_baner {
-        background: #fff; 
+        background: $col18; 
     }
 }
 
@@ -193,6 +193,10 @@
             }
         }
     }
+}
+
+img {
+    max-width: 100%; 
 }
 
 /* media screen start */ 
