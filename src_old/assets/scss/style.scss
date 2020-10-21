@@ -1,0 +1,32 @@
+@import 'fonts.scss';
+@import 'color.scss';
+@import 'nav.scss';
+@import 'home.scss';
+@import 'login.scss';
+@import 'register.scss';  
+@import 'buttons.scss';
+@import 'inputs.scss';
+@import 'dashboard.scss'; 
+@import 'chat.scss';  
+@import 'profile.scss'; 
+@import 'videoaudio.scss';   
+@import 'ngo.scss';
+@import 'review.scss'; 
+
+html,
+body {
+  font-family: $Poppins !important;  
+  font-size       : $baseFontSize;  
+  font-weight     : 500;
+  line-height     : 1.321;
+  height          : 100%;
+  background-color: $col18;
+  color           : $col11;
+  height          : 100%; 
+}
+
+.r50 {
+   border-radius: 50% !important; 
+}
+
+

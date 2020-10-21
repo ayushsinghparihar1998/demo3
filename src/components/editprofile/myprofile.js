@@ -27,7 +27,7 @@ class Myprofile extends Component {
 
         let res = result.data.data &&
           result.data.data.profile_list ? result.data.data.profile_list : {};
-        console.log('=================>>>',res)
+        console.log('=================>>>', res)
         this.setState({ userData: res })
       }
     })
@@ -59,8 +59,8 @@ class Myprofile extends Component {
                   </div>
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
-                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id==1?'Listener':'Member'}
-                         <Image src={warningS} alt="" className="ml-2" />
+                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == 1 ? 'Listener' : 'Member'}
+                      <Image src={warningS} alt="" className="ml-2" />
                     </div>
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>
                     <div className="border_bottoms mt-3"></div>
@@ -118,7 +118,7 @@ class Myprofile extends Component {
                         </div>
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
+                            <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
                           </div>
                         </div>
@@ -141,7 +141,7 @@ class Myprofile extends Component {
                           </div>
                         </div>
                       </Tab>
-                      <Tab eventKey="videos" title="videos">
+                      {/* <Tab eventKey="videos" title="videos">
                         videos 23
                                         </Tab>
                       <Tab eventKey="badgesawards" title="Badges & Awards">
@@ -149,7 +149,7 @@ class Myprofile extends Component {
                                         </Tab>
                       <Tab eventKey="Categories" title="Categories">
                         Categoriesasd
-                                        </Tab>
+                                        </Tab> */}
                     </Tabs>
                   </div>
                 </div>

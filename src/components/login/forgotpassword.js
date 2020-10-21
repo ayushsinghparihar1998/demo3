@@ -1,4 +1,4 @@
-import React, { Component } from "react"; 
+import React, { Component } from "react";
 
 import {
   Button,
@@ -19,8 +19,8 @@ import * as qs from 'query-string';
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationForgotPassword";
 
-class Forgotpassword extends Component { 
-  
+class Forgotpassword extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class Forgotpassword extends Component {
       password: "",
       roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
         this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
-    }; 
+    };
   }
   componentDidMount() {
     console.log(this.props.location)
@@ -40,7 +40,7 @@ class Forgotpassword extends Component {
       const parsed = qs.parse(location.search);
       let role = this.props.location.state.roleType.replace(/\s/g, '+');
       this.setState({
-        roleType:role
+        roleType: role
       });
     }
   }
@@ -55,25 +55,25 @@ class Forgotpassword extends Component {
   handleSubmitUser = () => {
     if (this.isValid()) {
       let data = {
-        email: this.state.email.toLowerCase().trim(),       
+        email: this.state.email.toLowerCase().trim(),
       };
       this.props
         .actionForGotPassword(data)
         .then(result => {
-          if (result && result.data && result.data.status === "success") {  
-          setTimeout(() => {
-          this.props.history.push({
-          pathname: 'login',
-          state: { roleType: this.state.roleType }
-          });
-          }, 3000);
+          if (result && result.data && result.data.status === "success") {
+            // setTimeout(() => {
+              this.props.history.push({
+                pathname: 'login',
+                state: { roleType: parseInt(this.state.roleType) }
+              });
+            // }, 1000);
 
           }
         })
         .catch(error => {
           console.log(error);
         });
-      }
+    }
   };
 
   isValid() {
@@ -83,7 +83,7 @@ class Forgotpassword extends Component {
     }
     return isValid;
   }
-  
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -92,24 +92,24 @@ class Forgotpassword extends Component {
 
 
   render() {
-    
+
     const { email, password } = this.state;
     const { errors } = this.state;
 
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} /> 
+          <NavBar {...this.props} />
         </div>
         <div className="Loginlayout">
-          <Container> 
+          <Container>
             <div className="col10 fs40 fw600 pt-4 mb-2">
-                Forgot Password
+              Forgot Password
             </div>
             <div className="col14 fs25 fw300 mb-4 pb-2">Enter Your email address</div>
 
-            <div className="layout_box forgots mb-4">   
-                <Form.Group className="mb-4 pb-2">
+            <div className="layout_box forgots mb-4">
+              <Form.Group className="mb-4 pb-2">
                 <Form.Control
                   type="email"
                   placeholder="Email Id"
@@ -121,16 +121,16 @@ class Forgotpassword extends Component {
                   onChange={this.handleChange}
                 />
                 <div className="error alignLeft">{errors.email}</div>
-               </Form.Group>
+              </Form.Group>
 
-                <Button onClick={this.handleSubmitUser} className="btnTyp4 text-uppercase"> 
-                  Submit
-                </Button>   
+              <Button onClick={this.handleSubmitUser} className="btnTyp4 text-uppercase">
+                Submit
+                </Button>
             </div>
 
           </Container>
         </div>
-       
+
         <Footer />
       </div>
     );

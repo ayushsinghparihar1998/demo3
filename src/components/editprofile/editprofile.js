@@ -621,7 +621,7 @@ class Editprofile extends Component {
                         </Form>
                       </Col>
                     </Tab>
-                    <Tab eventKey="videos" title="videos">
+                    {/* <Tab eventKey="videos" title="videos">
                       <div className="mx-wcustomtwo m-auto">
                         <Row>
                           <Col md={6}>
@@ -846,8 +846,10 @@ class Editprofile extends Component {
                           </Col>
                         </Row>
                       </div>
-                    </Tab>
-                    <Tab eventKey="badgesawards" title="Badges & Awards">
+                    </Tab> */}
+                   
+                   
+                    {/* <Tab eventKey="badgesawards" title="Badges & Awards">
                       <Col md={6} className="m-auto text-left pt-5">
                         <div className="mw-40 m-auto d-flex">
                           <div className="w-50 pl-5">
@@ -888,8 +890,9 @@ class Editprofile extends Component {
                           </div>
                         </div>
                       </Col>
-                    </Tab>
-                    <Tab eventKey="Categories" title="Categories">
+                    </Tab> */}
+
+                    {/* <Tab eventKey="Categories" title="Categories">
                       <Col md={8} className="m-auto">
                         <Form className="text-left mt-5">
                           <Form.Group>
@@ -940,8 +943,8 @@ class Editprofile extends Component {
                           <Button className="btnTyp10 mt-5">cancel</Button>
                         </Form>
                       </Col>
-                    </Tab>
-                  </Tabs>
+                    </Tab> */}
+                    </Tabs>
                 </div>
               </div>
             </Row>

@@ -342,7 +342,17 @@ class Login extends Component {
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
                 Don’t have an account?
-                <strong className="fw500"> Become a Member</strong>
+                <strong className="fw500"> Become a 
+                {this.state.roleType === CONSTANTS.ROLES.LISTNER
+                ? " Listener"
+                : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
+                ? " Professional"
+                : this.state.roleType === CONSTANTS.ROLES.USER
+                ? " Member"
+                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                ? " Admin"
+                : ""}
+                </strong>
               </div>
             ) : (
               ""

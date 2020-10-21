@@ -1,0 +1,206 @@
+.videochat {
+    position: relative; 
+    background-image: url(../images/womanvideo.jpg); 
+    min-height: 89vh;  
+    background-repeat: no-repeat;  
+    background-size: cover;    
+    .container {  
+        position: relative; 
+    }
+    
+    .chat_dashboard { 
+        max-width: 470px; 
+        position: absolute;
+        bottom: 0;
+        left: 2px;
+        right: 0; 
+
+        .chat_middle {
+            & > div.mt-auto {
+                max-height: 380px;
+                overflow: auto;
+
+                & > div.pl-3.pr-3.pb-3 > .d-flex {  
+                    & > div.mt-auto { 
+                        width: 100%; 
+                    }
+                }
+            }
+            
+        }
+    }
+    
+
+    .videocontrol {
+        position: absolute; 
+        left: 0;
+        top: 200%; 
+        bottom: 0;
+
+        .localMedia {
+            padding-right: 10%;
+            video {
+                max-width: 300px;  
+            }
+        }
+
+        .mw-250 { 
+            max-width: 250px;
+            margin-right: 7%; 
+        }
+
+        .videocontrolicon {
+
+            button {
+                background-color: transparent;
+                border-color: transparent; 
+                box-shadow: none; 
+                border: none; 
+                outline: 0; 
+
+                &:hover, &:focus { 
+                    background-color: transparent !important; 
+                    border-color: transparent !important; 
+                    box-shadow: none !important;  
+                }
+
+                &:first-child {
+                    padding: 0; 
+                }
+            }
+        }
+    }
+    
+    .userdetail { 
+        z-index: 999;
+        position: relative;
+        .online_user {
+            width: 14px; 
+            height: 14px;
+            background: #79EE1D;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+            top: 36%;
+            left: 11%;
+        }
+        span {
+            position: relative;
+            margin-right: 15px;     
+            position: relative;
+            margin-right: 15px;
+            color: #fff !important;
+            opacity: 1;
+
+            img.uone {
+                max-width: 70px;
+                border: solid 1px #ccc;
+            }
+            .online {
+                background: $col32;
+                width: 14px;
+                height: 14px;
+                display: inline-block;
+                border-radius: 50%;
+                position: absolute;
+                right: -10px; 
+            }
+        }
+
+    }
+}
+
+.videochat {  
+
+    .chat_dashboard { 
+        z-index: 9999;
+    }
+
+    .remoteMedia {  
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;  
+        top: 86px;  
+        
+        video {  
+            display: block;
+            width: 100%; 
+        }
+    }
+}
+
+.audiochat {   
+    background: $col65;     
+    min-height: 89vh; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+
+    .chat_dashboard {
+        position: fixed;
+        left: 2px;
+        bottom: 0;
+        max-width: 470px;
+        width: 100%;
+
+        .chat_middle {
+            & > div.mt-auto {
+                max-height: 380px;
+                overflow: auto;
+
+                & > div.pl-3.pr-3.pb-3 > .d-flex {  
+                    & > div.mt-auto { 
+                        width: 100%; 
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    .audiocontrol {  
+        .audiocontrolicon  { 
+            button { 
+                background-color: transparent;
+                border-color: transparent; 
+                box-shadow: none; 
+                border: none; 
+                outline: 0; 
+
+                &:hover, &:focus { 
+                    background-color: transparent !important; 
+                    border-color: transparent !important; 
+                    box-shadow: none !important;  
+                }
+            }
+        }
+    }
+
+    .audiocontrol {
+        text-align: center; 
+        .mw-150 { 
+            max-width: 150px; 
+            border-radius: 50%;
+            border: solid 5px $col18; 
+        }
+    }
+
+    .audiocontrolicon {
+        position: relative;
+        top: 110px; 
+    }
+}
+
+@media (max-width: 1400px) {   
+
+    .videochat {   
+        .videocontrol {
+            top: 170%;   
+        }
+    }
+
+}
