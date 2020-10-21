@@ -11,6 +11,7 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import Payments from "../../assets/images/payment_chk.svg";
 import { Button, Modal, Image, Container, Form } from "react-bootstrap";
 import * as qs from "query-string";
+import ReactGA from 'react-ga';
 
 class Home extends Component {
   constructor() {
@@ -20,6 +21,8 @@ class Home extends Component {
     };
   }
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+
     const { location } = this.props;
     if (location.search) {
       const parsed = qs.parse(location.search);
