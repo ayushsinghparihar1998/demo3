@@ -77,7 +77,7 @@ class Compaign extends Component {
 
            
 
-              <div style={{bottom: '-100px'}} className="right_donate" >
+              <div className="right_donate" >
                 <Image src={Contentbox} alt="" style={{marginTop:'50px'}} />
               </div>
 
