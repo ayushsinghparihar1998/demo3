@@ -50,7 +50,7 @@
 
     &.ss1 {
         .myprofile {
-            min-height: 80vh; 
+            min-height: 82vh; 
             padding: 30px 0px 0 30px; 
         }
     }
@@ -111,13 +111,13 @@
             padding: 0px 1.5rem; 
         }
     }
-    .right_donate {
-        position: relative;
+    .right_donate { 
+        position: absolute;
         right: 0;
         bottom: 0;
         text-align: right;
         img {
-            max-width: 390px; 
+            max-width: 380px; 
         }
     }
     .donate_ul {
@@ -571,10 +571,21 @@
 }
 
 .myprofile {
-    
+
     .campan_manage {
         position: relative;
         max-width: 94%;
         padding-right: 30px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .compaigns { 
+
+        &.ss1 {
+            .myprofile {
+                min-height: 90vh; 
+            }
+        }
     }
 }
