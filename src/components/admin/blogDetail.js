@@ -66,7 +66,8 @@ class BlogDetail extends Component {
       console.log("formDataformData", formData)
 
 
-      const url = "https://staging.eatluvnpray.org/elp/uploadblogimage";
+      // const url = "https://staging.eatluvnpray.org/elp/uploadblogimage";
+      const url = "https://eatluvnpray.org/elp/uploadblogimage";
       const config = {
         headers: {
           "content-type": "multipart/form-data"

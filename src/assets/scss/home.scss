@@ -68,14 +68,16 @@
 
         .invertedone {
             position: absolute;
-            left: -70px;
+            left: -56px;
             top: 8px;
+            max-width: 50px;
         }
 
         .invertedtwo {
             position: absolute;
             right: 8%; 
-            top: 85px; 
+            top: 114px; 
+            max-width: 50px;
         }
     }
 
@@ -222,6 +224,10 @@
 
 img {
     max-width: 100%; 
+}
+
+.footer ul.social li > a { 
+    font-size: 14px;
 }
 
 /* media screen start */ 

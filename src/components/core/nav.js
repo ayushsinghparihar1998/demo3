@@ -285,7 +285,7 @@ class NavBar extends Component {
                       </Nav.Link>,
                       <NavLink disabled to="/becomeListener" className="nav-link" style={{ textAlign: 'center' }}>
                         Volunteer<br />
-                        coming soon
+                        <span className="comings">coming soon</span>
                       </NavLink>,
                       <NavLink to="/compaign" className="nav-link">
                         Donate
@@ -297,13 +297,13 @@ class NavBar extends Component {
                       </NavDropdown>,
                       <Nav.Link disabled onClick={() => this.setState({ show3: true })} style={{ textAlign: 'center' }}>
                         Professional Help
-                        <br />
-                        coming soon
+                        <br /> 
+                        <span className="comings">coming soon</span>
                       </Nav.Link>,
                       <Nav.Link disabled href="#about_us_container" style={{ textAlign: 'center' }}>
                         About
                         <br />
-                        coming soon
+                        <span className="comings">coming soon</span>
                       </Nav.Link>,
                       // <Nav.Link> Blog</Nav.Link>,
 

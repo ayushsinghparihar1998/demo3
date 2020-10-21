@@ -66,8 +66,8 @@ class Compaign extends Component {
                     {/*https://eatluvnpray.org/paytm_demo/  */}
                     <a
                       // target="_blank"
-                      href="https://staging.eatluvnpray.org/paytm_demo/"
-                    // href="https://eatluvnpray.org/paytm_demo/"
+                      // href="https://staging.eatluvnpray.org/paytm_demo/"
+                    href="https://eatluvnpray.org/paytm_demo/"
                     >
                       Donate
                     </a>
@@ -77,7 +77,7 @@ class Compaign extends Component {
 
            
 
-              <div style={{bottom: '-100px'}} className="right_donate" >
+              <div className="right_donate" >
                 <Image src={Contentbox} alt="" style={{marginTop:'50px'}} />
               </div>
 

@@ -16,7 +16,7 @@ import {
 import NavBar from "../core/nav";
 import Footer from "../core/footer"; 
 
-class Privacypolicy extends Component {
+class Privacypolicy extends Component { 
   render() {
     return (
       <div className="page__wrapper innerpage">

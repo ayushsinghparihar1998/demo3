@@ -2,6 +2,10 @@
 @import 'color.scss';
 
 .mj_nav { 
+    span.comings {
+        position: relative;
+        font-size: 13px;
+    }
     .navbar-light {
         .navbar-brand {
             font-size: $fs23;
