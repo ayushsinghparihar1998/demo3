@@ -342,7 +342,7 @@ class Login extends Component {
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
                 Don’t have an account?
-                <strong className="fw500">Become a Member</strong>
+                <strong className="fw500"> Become a Member</strong>
               </div>
             ) : (
               ""
@@ -423,16 +423,16 @@ class Login extends Component {
                   onClick={() =>
                     this.props.history.push({
                       pathname: "forgotpassword",
-                      state: { roleType: this.state.roleType },
+                      state: { roleType: JSON.stringify(this.state.roleType) },
                     })
                   }
                 >
-                  Reset it Here
+                  Reset now
                 </span>
               </div>
             </div>
 
-            {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
+            {/* {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="fs18 fw300 pb-5 col14">
                 Interested in becoming a Listener?
                 <span
@@ -444,7 +444,7 @@ class Login extends Component {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </Container>
         </div>
         <Modal

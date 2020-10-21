@@ -29,12 +29,12 @@ class Supporting extends Component {
             <div className="organise_carousel">
               <Image src={Organise} alt="Organise" />
             </div>
-            <div className="organise_carousel">
+            {/* <div className="organise_carousel">
               <Image src={Organisetwo} alt="Organisetwo" />
             </div>
             <div className="organise_carousel">
               <Image src={Organisethree} alt="Organisethree" />
-            </div>
+            </div> */}
             <div className="organise_carousel">
               <Image src={Organisefour} alt="Organisefour" />
             </div>
@@ -42,8 +42,11 @@ class Supporting extends Component {
               <Image src={Organise} alt="Organise" />
             </div>
             <div className="organise_carousel">
-              <Image src={Organisetwo} alt="Organisetwo" />
+              <Image src={Organisefour} alt="Organisefour" />
             </div>
+            {/* <div className="organise_carousel">
+              <Image src={Organisetwo} alt="Organisetwo" />
+            </div> */}
           </Slider>
         </Container>
       </div>

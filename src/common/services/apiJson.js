@@ -472,7 +472,7 @@ export default {
     method: "POST",
     data: {
       from_user_id: "",
-      to_user_id: ""
+      to_user_id: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -503,7 +503,7 @@ export default {
     url: "elp/submitsurvey",
     method: "POST",
     data: {
-      survey_submit: []
+      survey_submit: [],
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -514,17 +514,15 @@ export default {
     data: {
       rating_count: "",
       to_id: "",
-      from_id: ''
+      from_id: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
   getAdminPaymentDetail: {
     url: "elp/superadmin_getpaymentdetails",
-    method: "GET",
-    data: {
-
-    },
+    method: "POST",
+    data: { count: "", offset: "" },
     showResultMessage: false,
     showErrorMessage: true,
   },
@@ -534,7 +532,7 @@ export default {
     data: {
       rv_text: "",
       rv_from_id: "",
-      rv_to_id: ""
+      rv_to_id: "",
     },
     showResultMessage: false,
     showErrorMessage: true,
@@ -542,9 +540,7 @@ export default {
   getBlogList: {
     url: "elp/getblog",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
@@ -558,18 +554,14 @@ export default {
   getCategoryList: {
     url: "elp/autoconnectgetallcategories",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
   blogListing: {
     url: "elp/superadmin_getblog",
     method: "POST",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },

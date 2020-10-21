@@ -32,11 +32,13 @@ class Forgotpassword extends Component {
     }; 
   }
   componentDidMount() {
+    console.log(this.props.location)
+    // alert("ASd")
     const { url } = this.props.match;
     const { location } = this.props;
     if (location) {
       const parsed = qs.parse(location.search);
-      let role = parsed.role.replace(/\s/g, '+');
+      let role = this.props.location.state.roleType.replace(/\s/g, '+');
       this.setState({
         roleType:role
       });

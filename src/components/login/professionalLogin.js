@@ -62,7 +62,7 @@ class Login extends Component {
         <div className="Loginlayout">
           <Container>
             <div className="col10 fs40 fw600 pt-4 mb-2">Professional Login</div>
-            <div className="col14 fs25 fw300 mb-4 pb-2">Don’t have an account? <strong className="fw500">Become a Member</strong></div>
+            <div className="col14 fs25 fw300 mb-4 pb-2">Don’t have an account? <strong className="fw500"> Become a Member</strong></div>
             <div className="layout_box mb-4">
               <Form>
                 <Form.Group className="mb-4 pb-2">
@@ -94,12 +94,12 @@ class Login extends Component {
                   LOGIN
               </Button>
                 <div className="pt-2 fs18 fw300 col14">Forgot your password?
-                        <span className="fw500 pointer pl-1">Reset it Here</span></div>
+                        <span className="fw500 pointer pl-1">Reset now</span></div>
               </Form>
             </div>
 
-            <div className="fs18 fw300 pb-5 col14">Interested in becoming a Listener?
-                <span className="fw500 pointer pl-1">Reset it Here</span></div>
+            {/* <div className="fs18 fw300 pb-5 col14">Interested in becoming a Listener?
+                <span className="fw500 pointer pl-1">Reset now</span></div> */}
           </Container>
         </div>
 
