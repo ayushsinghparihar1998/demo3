@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button,Modal, Image, Container, Row, Col } from "react-bootstrap";
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, Row, Col } from "react-bootstrap";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import { connect } from 'react-redux';
 import validationSubscribe from '../../common/validations/validationSubscribe';
 import { actionSubscribe } from '../../common/redux/actions';
-import UserSignup from '../signup/userSignup';
-import Crossbtn from '../../assets/images/blue_cross.svg';
+
 
 class Abouteat extends Component {
     constructor(props) {
@@ -90,19 +89,7 @@ class Abouteat extends Component {
 
                     </Row>
                 </Container>
-                <Modal show={this.state.show} className="CreateAccount modaltwo">
-                    <Modal.Header>
-                        <Button onClick={this.handleClose}>
-                            <Image src={Crossbtn} alt="" />
-                        </Button>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        <Container>
-                            <UserSignup {...this.props} />
-                        </Container>
-                    </Modal.Body>
-                </Modal>
+               
             </div>
         )
     }
