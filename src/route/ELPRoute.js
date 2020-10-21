@@ -64,6 +64,7 @@ import BlogDetail from "../components/admin/blogDetail";
 import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq"; 
+import Termcondition from "../components/core/termcondition"; 
 
 const user =
   getLocalStorage("userInfo") ||
@@ -130,8 +131,7 @@ class ELPRoute extends Component {
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute path="/faq" component={Faq} />
-
-
+          <PublicRoute path="/termcondition" component={Termcondition} />    
 
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
