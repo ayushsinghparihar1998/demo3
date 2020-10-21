@@ -245,8 +245,8 @@ class Userdashboard extends Component {
                   this.props.history.push('chatuser/' + d.data.id)
                }
 
-               if(!d.success){
-                  
+               if (!d.success) {
+
                   showErrorMessage(d.msg)
                }
 
@@ -394,44 +394,44 @@ class Userdashboard extends Component {
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
-                              Hi {  getLocalStorage("customerInfo").u_email}
-                     <Button className="btnType18 d-block twos">My Account</Button>
+                                 Hi {getLocalStorage("customerInfo").u_email}
+                                 <Button onClick={()=>this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
-                              <div className="m-3 pb-3 bg-grays">
+                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Creditcard} alt="" className="pointer" />
-                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span   className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
-                        Video Call Credit Lefts
-                        </span>
+                                      Video Call Credit Lefts
+                                   </span>
                                  </div>
                               </div>
-                              <div className="m-3 pb-3 bg-grays">
+                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
-                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span  className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_compassion_count ? dashboardData.u_compassion_count : '0'} </strong> */}
-                        Subscriptions
-                        </span>
+                                       Subscriptions
+                                    </span>
                                  </div>
                               </div>
-                              <div className="m-3 pb-3 bg-grays">
+                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Paymentmethod} alt="" className="pointer" />
-                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span  className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_badge_count ? dashboardData.u_badge_count : '0'} </strong> */}
-                        Payments
-                        </span>
+                                       Payments
+                                    </span>
                                  </div>
                               </div>
                            </div>
-                           <div className="right_inner_side">
-                              <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
+                           <div onClick={()=>this.props.history.push('/coming-soon')} className="right_inner_side">
+                              <div  className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                     Discover
-                     Subcomunities
-                  </div>
+                                    Discover
+                                    Subcomunities
+                              </div>
                            </div>
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">

@@ -3,47 +3,47 @@ import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, 
 import insta from "../../assets/images/insta.svg";
 import fb from "../../assets/images/fb.svg";
 import twit from "../../assets/images/twit.svg";
-import linkedin from "../../assets/images/linkedin.svg"; 
+import linkedin from "../../assets/images/linkedin.svg";
 
-class Footer extends Component {       
-  render() {
-    return (
-        <div className="footer">      
-            <Container fluid>
-                <Row>
-                    <Col md={7}>
-                        <div className="d-flex flex-wrap">  
-                            <div className="fs15 fw300 col17">© 2020 EatLoveNPray. All rights reserved. </div>
-                            <div className="socials"> 
-                                <Form inline>    
-                                    <span>
-                                        <Image src={insta} alt="" className="pointer" />
-                                    </span>
-                                    <span>
-                                        <Image src={fb} alt="" className="pointer" />
-                                    </span>
-                                    <span>
-                                        <Image src={twit} alt="" className="pointer" />
-                                    </span>
-                                    <span>
-                                        <Image src={linkedin} alt="" className="pointer" />
-                                    </span>
-                                </Form>
+class Footer extends Component {
+    render() {
+        return (
+            <div className="footer">
+                <Container fluid>
+                    <Row>
+                        <Col md={7}>
+                            <div className="d-flex flex-wrap">
+                                <div className="fs15 fw300 col17">© 2020 Eat Luv N Pray. All rights reserved. </div>
+                                <div className="socials">
+                                    <Form inline>
+                                        <span>
+                                            <a href="https://www.instagram.com/eatluvnpray/" target="_blank"> <Image src={insta} alt="" className="pointer" /></a>
+                                        </span>
+                                        <span>
+                                            <a href="https://www.facebook.com/eatluvnpray2020/" target="_blank"><Image src={fb} alt="" className="pointer" /></a>
+                                        </span>
+                                        <span>
+                                            <a href="https://twitter.com/eat_luvnpray?s=08" target="_blank"><Image src={twit} alt="" className="pointer" /></a>
+                                        </span>
+                                        <span>
+                                            <a href="https://www.linkedin.com/company/eatluvnpray" target="_blank"> <Image src={linkedin} alt="" className="pointer" /></a>
+                                        </span>
+                                    </Form>
+                                </div>
                             </div>
-                        </div>
-                    </Col> 
-                    <Col md={5}>
-                        <ul class="social"> 
-                            <li className="pointer">Privacy Policy</li>
-                            <li className="pointer">Terms & Conditions</li>
-                            <li className="pointer">Site Map</li> 
-                        </ul>
-                    </Col> 
-                </Row>
-            </Container>
-        </div>
-    )
-  }
+                        </Col>
+                        <Col md={5}>
+                            <ul class="social">
+                                <li className="pointer">Privacy Policy</li>
+                                <li className="pointer">Terms & Conditions</li>
+                                {/* <li className="pointer">Site Map</li> */}
+                            </ul>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        )
+    }
 }
 
 export default Footer; 

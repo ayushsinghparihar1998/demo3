@@ -21,7 +21,7 @@ class ProfessionalSignup extends Component {
       month: '',
       username: '',
       errors: {},
-      u_school_code:false,
+      u_school_code:true,
       organisationName: '',
       showLoader: false,
       fristSignUp: true,
@@ -192,7 +192,7 @@ class ProfessionalSignup extends Component {
                     <Row>
                         <Col md={12} lg={6}>
                             <Form.Group>
-                                <Form.Label className="fs20 fw600 col14">Email address</Form.Label>
+                                <Form.Label className="fs20 fw600 col14">Email address *</Form.Label>
                                 <Form.Control type="email"
                                     placeholder="Enter email"
                                     className="inputTyp2"
@@ -215,7 +215,7 @@ class ProfessionalSignup extends Component {
                         <Col md={12} lg={6}>
                             <Form.Group>
                                 <Form.Label className="fs20 fw600 col14">
-                                    Password </Form.Label>
+                                    Password *</Form.Label>
                                 <Form.Control
                                     type="password"
                                     placeholder="Password" className="inputTyp2"
@@ -238,7 +238,7 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">User name</Form.Label>
+                <Form.Label className="fs20 fw600 col14">Screen name *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter User name"
@@ -260,7 +260,7 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Label className="fs20 fw600 col14">
-                Date of birth
+                Date of birth *
               </Form.Label> 
               <Row>
                 <Col md={4}>
@@ -328,7 +328,7 @@ class ProfessionalSignup extends Component {
               </div>
             </Col>
 
-            <Col md={12} lg={6}>
+            {/* <Col md={12} lg={6}>
               <Form.Group controlId="formBasicCheckbox" className="d-flex">
                 <Form.Check
                   type="checkbox"
@@ -342,14 +342,14 @@ class ProfessionalSignup extends Component {
               </Form.Group>
                                   <div className="error alignLeft">{errors.u_school_code}</div>
 
-            </Col>
+            </Col> */}
 
             <Col md={12}>
               <div className="fs18 col14 mt-3 mb-3 fw300">
-                I am not in crisis, homicidal, sucidal or abusing anyone, and i
+                I am not in crisis, homicidal, sucidal or abusing anyone, by continuing i
                 agree to the Eat Luv N Pray{' '}
                 <span className="fw500 pointer">
-                  Terms of service & Privacy Policy
+                  Terms of service & Privacy Policy.
                 </span>
               </div>
             </Col>
@@ -362,7 +362,7 @@ class ProfessionalSignup extends Component {
           </Row>
 
           <div className="fs18 fw300 pt-5 col14">
-            Already have an account?
+            {/* Already have an account? */}
             <span className="fw500 pointer pl-1">
             Already have an account
               <Button className="btnTyp5 ml-3"  onClick={(e) => {
