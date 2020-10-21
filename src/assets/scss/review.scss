@@ -180,6 +180,7 @@
 
         .campan_manage {
             position: relative; 
+            
         }
     }
     
@@ -566,5 +567,14 @@
         a {
             color:#1890ff; 
         }
+    }
+}
+
+.myprofile {
+    
+    .campan_manage {
+        position: relative;
+        max-width: 94%;
+        padding-right: 30px;
     }
 }

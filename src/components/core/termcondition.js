@@ -27,7 +27,7 @@ class Termcondition extends Component {
           <NavBar {...this.props} />
         </div>
         <div className="profile_layout pt-4 pb-5">
-          <Container>
+          <Container> 
             <Row> 
               <Col md={12} lg={12} className="pl-1">
                 <div className="myprofile terms">
