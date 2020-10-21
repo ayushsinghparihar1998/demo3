@@ -537,8 +537,25 @@
 
 .terms {
     padding: 30px;
+    ol {
+        li {
+            font-weight: 400;
+            font-size: 15px;
+        }
+    }
+
+    ul {
+        li {
+            font-weight: 400;
+            font-size: 15px;
+        }
+    }
 
     p {
-        
+        font-weight: 400; 
+        font-size: 15px;
+        a {
+            color:#1890ff; 
+        }
     }
 }

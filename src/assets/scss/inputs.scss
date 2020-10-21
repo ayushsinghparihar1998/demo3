@@ -229,10 +229,12 @@ textarea.inputTyp2.form-control.cate2 {
   height: 2.5rem !important; 
   background-color: $col18 !important; 
   color: $col10 !important;
-  font-size: $fs16 !important;
+  // font-size: $fs16 !important;
+  font-size: $fs14 !important;
   font-weight: 300 !important;
-  padding-left: 15px !important;
   box-shadow: none;  
+  padding: 0 2rem 0 2rem !important;
+  padding-left: 15px !important;
 }
 
 .selectTyp1.selectnew {
