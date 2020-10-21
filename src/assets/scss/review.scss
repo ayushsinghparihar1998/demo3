@@ -50,7 +50,8 @@
 
     &.ss1 {
         .myprofile {
-            min-height: 80vh;  
+            min-height: 80vh; 
+            padding: 30px 0px 0 30px; 
         }
     }
     .today_goals {
@@ -111,11 +112,12 @@
         }
     }
     .right_donate {
-        position: absolute;
+        position: relative;
         right: 0;
         bottom: 0;
+        text-align: right;
         img {
-            max-width: 380px; 
+            max-width: 390px; 
         }
     }
     .donate_ul {
@@ -175,6 +177,10 @@
     .myprofile {
         position: relative;
         padding: 30px; 
+
+        .campan_manage {
+            position: relative; 
+        }
     }
     
     .participates {
@@ -221,8 +227,8 @@
 }
 
 .foundation {   
-    background-color: $col22;      
-    min-height: calc(100vh - 146px);
+    background-color: $col22;
+    min-height: calc(100vh - 146px); 
 
     .myprofile {
         background-image: url('../images/foundations.svg');
