@@ -41,6 +41,9 @@ class Supporting extends Component {
             <div className="organise_carousel">
               <Image src={Organise} alt="Organise" />
             </div>
+            <div className="organise_carousel">
+              <Image src={Organisefour} alt="Organisefour" />
+            </div>
             {/* <div className="organise_carousel">
               <Image src={Organisetwo} alt="Organisetwo" />
             </div> */}

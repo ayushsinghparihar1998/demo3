@@ -327,14 +327,14 @@ class NavBar extends Component {
 
 
                       <span className="userprofiles menus">
-                        <Nav.Link>
+                        {/* <Nav.Link>
                           <Image src={Mailicon} alt="" className="pointer" />
-                        </Nav.Link>
+                        </Nav.Link> */}
                         <Nav.Link>
                           <Dropdown className="droptwo">
-                            <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
+                            {/* <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                               <Image src={Bellicon} alt="" className="pointer" />
-                            </Dropdown.Toggle>
+                            </Dropdown.Toggle> */}
                             <Dropdown.Menu className="d-none">
                               <Dropdown.Item>
                                 <ul>

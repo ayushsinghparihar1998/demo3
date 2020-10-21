@@ -4,7 +4,7 @@ import insta from "../../assets/images/insta.svg";
 import fb from "../../assets/images/fb.svg";
 import twit from "../../assets/images/twit.svg";
 import linkedin from "../../assets/images/linkedin.svg";
-
+import {NavLink} from 'react-router-dom'
 class Footer extends Component {
     render() {
         return (
@@ -34,8 +34,8 @@ class Footer extends Component {
                         </Col>
                         <Col md={5}>
                             <ul class="social">
-                                <li className="pointer">Privacy Policy</li>
-                                <li className="pointer">Terms & Conditions</li>
+                                <li className="pointer"><NavLink style={{color:'white'}} to="/privacypolicy">Privacy Policy</NavLink></li>
+                                <li  className="pointer"><NavLink style={{color:'white'}} to="/termcondition">Terms & Conditions</NavLink></li>
                                 {/* <li className="pointer">Site Map</li> */}
                             </ul>
                         </Col>
