@@ -47,6 +47,12 @@
 }
 
 .compaigns { 
+
+    &.ss1 {
+        .myprofile {
+            min-height: 80vh;  
+        }
+    }
     .today_goals {
         display: inline-flex;
         flex-wrap: wrap;
@@ -89,9 +95,14 @@
             font-weight: 500;
             padding-left: 56px;
             cursor: pointer;
+
+            &>a {
+                color: $col18;
+                text-transform: uppercase; 
+            }
         }
     }
-    .donate_btn  {
+    .donate_btn  { 
         max-width: 58%; 
         padding-bottom: 160px; 
         
@@ -108,32 +119,37 @@
         }
     }
     .donate_ul {
-        position: relative; 
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0; 
         
         .overlays_bottom {
             background-image: url('../images/left_bottom.png');  
             background-size: cover;
             height: 170px;
-            width: 164px;
-            position: absolute;
-            left: -32px;
-            top: -22px;
+            width: 18%; 
+            position: relative;
+            left: 0;
+            top: 0;
             z-index: 0;
+            padding-left: 15px;
+            padding-top: 22px;
         }
 
         ul {
             width: 100%;
             margin: 0;
             padding: 0;
-            position: relative;
-            left: 0;
-            top: 0px; 
+            position: absolute;
+            left: 18%;
+            top: 10%; 
 
             li {
                 font-family: Poppins;
                 font-style: normal;
                 font-weight: 300;
-                font-size: 14px;
+                font-size: 13px;
                 line-height: 21px;
                 color: $col14;
                 list-style: none;

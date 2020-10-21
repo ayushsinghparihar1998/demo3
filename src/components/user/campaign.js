@@ -27,10 +27,10 @@ class Compaign extends Component {
           <NavBar {...this.props} />
         </div>
 
-        <div className="profile_layout listenerprofile compaigns pt-4 pb-5">
+        <div className="profile_layout listenerprofile compaigns ss1 pt-4 pb-5"> 
           <Container>
             <div className="myprofile w-100">
-              <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>
+              <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>   
               <div className="fs16 fw300 col14 mb-4">
                 We believe that every human deserves free, emotional support, no matter where they are or what
                 they’re going through. We want to make sure nobody has to struggle through difficult times alone,
@@ -71,29 +71,29 @@ class Compaign extends Component {
                 </Col>
               </div>
 
-           
-
               <div className="right_donate">
-                <Image src={Contentbox} alt="" />
+                <Image src={Contentbox} alt="" />  
               </div>
 
               <div className="donate_ul">
-                <div className="overlays_bottom"></div>
-                <ul>
-                  <li className="first">Spread the world</li>
-                  <li>
-                    Share on Facebook{" "}
-                    <Image src={Nextbtn} className="ml-1" alt="" />
-                  </li>
-                  <li>
-                    Share on Twitter{" "}
-                    <Image src={Nextbtn} className="ml-1" alt="" />
-                  </li>
-                  <li>
-                    Tell other ELNP members & Listeners{" "}
-                    <Image src={Nextbtn} className="ml-1" alt="" />
-                  </li>
-                </ul>
+                <div className="overlays_bottom"> 
+                    <ul>
+                      <li className="first">Spread the world</li>
+                      <li>
+                        Share on Facebook{" "}
+                        <Image src={Nextbtn} className="ml-1" alt="" />
+                      </li>
+                      <li>
+                        Share on Twitter{" "}
+                        <Image src={Nextbtn} className="ml-1" alt="" />
+                      </li>
+                      <li>
+                        Tell other ELNP members & Listeners{" "}
+                        <Image src={Nextbtn} className="ml-1" alt="" />
+                      </li>
+                    </ul>
+                </div>
+                
               </div>
             </div>
           </Container>

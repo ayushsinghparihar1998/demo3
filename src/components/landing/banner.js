@@ -21,7 +21,7 @@ Our trained CoCos are ready to extend their helping hand.</div>
                             <Image src={community} alt="" className="pt-2" />
                             <div className="fs18 fw600 col5 pt-2">Community / CSR</div>
                             <div className="col14 fs13 fw300 pt-1 pl-4 pr-4">Your employees are at the core of your success. Increase productivity and create positive work environment by our EAP (Employee Assistance Program).</div> 
-                            <Image src={user} alt="" className="pt-3 mt-3 pointer user_set" />
+                            <Image src={user} alt="" className="pt-3 mt-3 user_set" />
 
                         </div>
                     </Col>
@@ -30,7 +30,7 @@ Our trained CoCos are ready to extend their helping hand.</div>
                             <Image src={freechat} alt="" className="pt-2" />
                             <div className="fs18 fw600 col6 pt-2">Free Chat</div>
                             <div className="col16 fs13 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive CoCos.</div>
-                            <Image src={usercomment} alt="" className="pt-3 pointer user_set" />
+                            <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>
                     </Col>
                     <Col md={3}>
@@ -38,7 +38,7 @@ Our trained CoCos are ready to extend their helping hand.</div>
                             <Image src={therapy} alt="" className="pt-2" />
                             <div className="fs18 fw600 col7 pt-2">Online Coaching</div> 
                             <div className="col14 fs13 fw300 pt-1 pl-4 pr-4">Trusted advice, counselling and guidance for weight loss and management, relationship issues and mental health, it is relatively inexpensive compared to traditional therapy.</div>
-                            <Image src={usersend} alt="" className="pt-3 mt-3 pointer user_set" />
+                            <Image src={usersend} alt="" className="pt-3 mt-3 user_set" />
                         </div>
                     </Col>
                     <Col md={3}>
