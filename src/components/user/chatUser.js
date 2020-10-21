@@ -139,7 +139,7 @@ class ChatUser extends Component {
       'pagination': 20
     }),
       (data) => {
-        if (data.data && data.data.length > 0) {
+        if (data.data) {
           console.log("message debugg history", data.data)
           this.setState({ allMessages: data.data.reverse() })
         }

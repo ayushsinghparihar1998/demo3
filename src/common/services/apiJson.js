@@ -629,6 +629,15 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  
+  blockUserStatusSuperAdmin: {
+    url: "elp/superadmin_blockreasonchangestatus",
+    method: "POST",
+    data: {
+      br_id: '',
+      br_status:'',
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
   
 };

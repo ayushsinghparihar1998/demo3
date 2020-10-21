@@ -17,6 +17,9 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer"; 
 
 class Termcondition extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  } 
   render() {
     return (
       <div className="page__wrapper innerpage">

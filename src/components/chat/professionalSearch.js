@@ -342,7 +342,7 @@ class Professionalchatsearch extends Component {
                                                                     //     cat.categoryChk ? cat.categoryChk : false
                                                                     // }
                                                                     className="fw300 fs14 col3 mt-1 checkboxTyp1 check2"
-                                                                    label={cat.uc_cat_name ? cat.uc_cat_name : ''}
+                                                                    label={cat.cat_name ? cat.cat_name : ''}
                                                                 />
                                                             </Form.Group>
 
