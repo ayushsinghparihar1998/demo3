@@ -12,7 +12,8 @@ const ComingSoon = (props) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <img src={comingText} alt="coming_img" className="comings" />
+                            {/* <img src={comingText} alt="coming_img" className="comings" /> */}
+                            <div className="coming_txt comings">Coming Soon</div>  
                         </div>
                     </div>
                 </div>

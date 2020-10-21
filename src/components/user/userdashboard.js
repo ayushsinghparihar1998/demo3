@@ -441,7 +441,7 @@ class Userdashboard extends Component {
                                     Subcomunities
                               </div>
                            </div>
-                           <div className="right_inner_side">
+                           {/* <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  My Personal Link
                   </div>
@@ -451,7 +451,7 @@ class Userdashboard extends Component {
                                     more people
                      </div>
                                  <Form.Group className="d-flex mt-4">
-                                    {/* <label>{dashboardData.refer_url ? dashboardData.refer_url : ''}</label> */}
+                                    
                                     <Form.Control
                                        id="referURL"
                                        type="text"
@@ -469,7 +469,7 @@ class Userdashboard extends Component {
                                     <Image src={Whatsapp} alt="" className="" />
                                  </div>
                               </div>
-                           </div>
+                           </div> */}
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  Recent join

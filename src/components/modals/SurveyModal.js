@@ -117,7 +117,7 @@ class SurveyModal extends Component {
             <Modal
                 show={this.state.isOpen}
                 onHide={this.handleClose}
-                className="custom-popUp confirmation-box"
+                className="custom-popUp confirmation-box survay_modals"
                 bsSize="small"
             >
                 <Modal.Body>
@@ -125,8 +125,8 @@ class SurveyModal extends Component {
                         <div className="layout_box mt-3 mb-4">
                             <div className="col10 fs30 fw600 mb-2">ELP Survey</div>
                             <div className="fs300 fs20 col14 mb-4 pb-2">
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry.
+                                {/* Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. */}
                             </div>
 
                             <div>
@@ -139,12 +139,12 @@ class SurveyModal extends Component {
                                                     return (
                                                         <div>
                                                             <div className="col11 fs20 fw500">
-                                                                <span className="fw600 col29">Question {index + 1} </span>
+                                                                {/* <span className="fw600 col29">Question {index + 1} </span> */}
                                                                 {item.sq_text}
                                                             </div>
                                                             <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
                                                             {item.survey_answer &&
-                                                                item.survey_answer.map((elem, subIndex) => {
+                                                                item.survey_answer.map((elem, subIndex) => { 
                                                                     return (
                                                                         <Form.Group controlId={'formBasicCheckbox4' + index + subIndex} className="d-flex">
                                                                             <Form.Check name={'active' + index + subIndex}

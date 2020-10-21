@@ -706,5 +706,9 @@ img {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 50%);  
-}
+    transform: translate(-50%, 320%); 
+    font-size: 62px;
+    width: 100%;
+    text-align: center;
+    color: $col18; 
+}     

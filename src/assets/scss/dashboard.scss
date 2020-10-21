@@ -136,13 +136,17 @@
         }
     }
 
-    .user_body { 
+    .user_body {  
 
         .funfact {
             text-align: left;
-            padding: 0px 0px 2px 30px;
+            padding: 0px 0px 0px 30px;
             overflow: hidden;
             margin-bottom: 10px; 
+            & .row {
+                width: 100%;
+                align-items: center; 
+            }
             &.blue {
                 background-color: $col69;
             }
@@ -1191,4 +1195,15 @@
     }
 }
 
+.confirmation-box.survay_modals { 
+    position: relative;
+    .modal-body {
+        padding-left: 30px;
 
+        form {
+            .row {
+                margin-left: 0;
+            }
+        }
+    }
+}
