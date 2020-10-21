@@ -23,10 +23,10 @@ import {
   TwitterShareButton,
   FacebookShareButton,
 } from "react-share";
-class Compaign extends Component {
+class Compaign extends Component { 
   render() {
     return (
-      <div className="page__wrapper innerpage">
+      <div className="page__wrapper innerpage"> 
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -34,12 +34,14 @@ class Compaign extends Component {
         <div className="profile_layout listenerprofile compaigns ss1 pt-4 pb-5"> 
           <Container style={{overflow:'hidden'}}>
             <div className="myprofile w-100">
-              <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>   
-              <div className="fs16 fw300 col14 mb-4">
-                We believe that every human deserves free, emotional support, no matter where they are or what
-                they’re going through. We want to make sure nobody has to struggle through difficult times alone,
-                without a listening ear. Our mission is to be there for as many people as possible, but we need help
-                to get there.
+              <div className="campan_manage"> 
+                  <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>   
+                  <div className="fs16 fw300 col14 mb-4">
+                    We believe that every human deserves free, emotional support, no matter where they are or what
+                    they’re going through. We want to make sure nobody has to struggle through difficult times alone,
+                    without a listening ear. Our mission is to be there for as many people as possible, but we need help
+                    to get there.
+                  </div>
               </div>
               {/* <div className="today_goals mb-4">
                 <Image src={Donationheart} alt="" className="mr-3" />
@@ -60,7 +62,7 @@ class Compaign extends Component {
                     compassion flowing?
                   </div>
                 </Col>
-                <Col lg={5} col={12} className="pr-0">
+                <Col lg={5} col={12} className="pr-0"> 
                   <div class="donate_data">
                     {/* <Link to={`/paytm_demo`}>Donate My Data</Link> */}
                     {/*https://eatluvnpray.org/paytm_demo/  */}
@@ -75,10 +77,8 @@ class Compaign extends Component {
                 </Col>
               </div>
 
-           
-
-              <div className="right_donate" >
-                <Image src={Contentbox} alt="" style={{marginTop:'50px'}} />
+              <div className="right_donate"> 
+                <Image src={Contentbox} alt="" className="mt-3" />      
               </div>
 
               <div className="donate_ul">
