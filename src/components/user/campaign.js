@@ -19,6 +19,10 @@ import Donationheart from "../../assets/images/donation_heart.png";
 import Contentbox from "../../assets/images/boxes.png";
 import Nextbtn from "../../assets/images/next-button.png";
 
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+} from "react-share";
 class Compaign extends Component {
   render() {
     return (
@@ -27,10 +31,10 @@ class Compaign extends Component {
           <NavBar {...this.props} />
         </div>
 
-        <div className="profile_layout listenerprofile compaigns pt-4 pb-5">
-          <Container>
+        <div className="profile_layout listenerprofile compaigns ss1 pt-4 pb-5"> 
+          <Container style={{overflow:'hidden'}}>
             <div className="myprofile w-100">
-              <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>
+              <div className="col10 fw600 fs32 mb-2">Compassion Campaign</div>   
               <div className="fs16 fw300 col14 mb-4">
                 We believe that every human deserves free, emotional support, no matter where they are or what
                 they’re going through. We want to make sure nobody has to struggle through difficult times alone,
@@ -44,7 +48,7 @@ class Compaign extends Component {
                 </div>
               </div> */}
               <div className="fs16 fw400 col14 compaign_para mb-4">
-                We wish to provide a Constant Companion (CoCo) to over a million lives in 2021. Every time
+                We wish to provide a listeners to over a million lives in 2021. Every time
                 someone backs ELNP, we are one step closer making sure support is available on-demand to anyone
                 who needs it.
               </div>
@@ -73,26 +77,26 @@ class Compaign extends Component {
 
            
 
-              <div className="right_donate">
-                <Image src={Contentbox} alt="" />
+              <div style={{bottom: '-100px'}} className="right_donate" >
+                <Image src={Contentbox} alt="" style={{marginTop:'50px'}} />
               </div>
 
               <div className="donate_ul">
                 <div className="overlays_bottom"></div>
                 <ul>
-                  <li className="first">Spread the world</li>
+                  <li className="first">Spread the word</li>
                   <li>
                     Share on Facebook{" "}
-                    <Image src={Nextbtn} className="ml-1" alt="" />
+                   <FacebookShareButton url={'https://eatluvnpray.org/compaign'}><Image src={Nextbtn} className="ml-1" alt="" /></FacebookShareButton> 
                   </li>
                   <li>
                     Share on Twitter{" "}
-                    <Image src={Nextbtn} className="ml-1" alt="" />
+                   <TwitterShareButton url={'https://eatluvnpray.org/compaign'}> <Image src={Nextbtn} className="ml-1" alt="" /></TwitterShareButton>
                   </li>
-                  <li>
+                  {/* <li>
                     Tell other ELNP members & Listeners{" "}
                     <Image src={Nextbtn} className="ml-1" alt="" />
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

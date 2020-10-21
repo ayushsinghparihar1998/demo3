@@ -30,36 +30,35 @@ class Becomelistener extends Component {
   };
   render() {
     return (
-      <div className="page__wrapper innerpage">
+      <div className="page__wrapper innerpage"> 
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
         <div className="becomeListener">
           <Container>
-            <div className="listener_layout mt-4 mb-4">
+            <div className="listener_layout mt-2 mb-2">
               <Row>
-                <Col md={7} lg={8}>
-                  <div className="col10 fs40 fw600 mb-1 mt-4 pt-2">
+                <Col md={7} lg={8}> 
+                  <div className="col10 fs40 fw600 mb-1 mt-2 pt-1">
                     Become a CoCo
                   </div>
-                  <div className="fw300 fs15 col28 pt-2">
+                  <div className="fw300 fs15 col28 pt-1">
                     “You have not lived today until you have done something for someone who can never repay you.”
                     ― John Bunyan
                   </div>
-                  <br />
-                  <div className="fw300 fs20 col14">
+                  <div className="fw300 fs18 col14 mt-3">
                     Welcome. We’re thrilled to have you on-board!
                   </div>
-                  <div className="fw300 fs15 col28 pt-2">
+                  <div className="fw300 fs15 col28 pt-1">
                     This is a unique listening service made up of compassionate, caring individuals like you. Thank you
                     for offering to lend an ear to those in need of support to make real difference.
                   </div>
-                  <div className="fw500 fs20 col29 pt-3">How does it work?</div>
+                  <div className="fw500 fs18 col29 pt-1">How does it work?</div>
                   <div className="fw300 fs15 col28 pt-2">
                     Getting started as a CoCo (Constant Companion) is easy and rewarding in many ways. You’re in
                     complete control over your displayed availability, so you can help others as often as you like.
                   </div>
-                  <div className="fw500 fs20 col29 pt-3 mb-2">
+                  <div className="fw500 fs18 col29 pt-1 mb-2">
                   Here is the two-step registration process:
                   </div>
 
@@ -80,7 +79,7 @@ class Becomelistener extends Component {
 
                   <NavLink
                     to="/listenersignup"
-                    className="btnTyp4 mb-4 mt-5 d-inline-block"
+                    className="btnTyp4 mb-0 mt-3 d-inline-block"
                   >
                     Become a Listener
                   </NavLink>

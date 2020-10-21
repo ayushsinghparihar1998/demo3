@@ -319,7 +319,7 @@ class Faq extends Component {
                                             <div>2) Pan Card</div>
                                             <div>3) Driving License</div> 
                                         </Card.Body>
-                                        </Accordion.Collapse>
+                                        </Accordion.Collapse> 
                                     </Card>
                                     <Card>
                                         <Accordion.Toggle as={Card.Header} eventKey="6">
@@ -335,7 +335,7 @@ class Faq extends Component {
                                         </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                    </Accordion>
+                                    </Accordion> 
                             </div>
                       
                       </Tab>
@@ -351,6 +351,6 @@ class Faq extends Component {
     );
   }
 }
-export default Faq; 
+export default Faq;  
 
 

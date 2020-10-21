@@ -7,7 +7,7 @@ import { actionUserSignup } from '../../common/redux/actions';
 import CONSTANTS from '../../common/helpers/Constants';
 import validateInput from '../../common/validations/validationSignup';
 import { setLocalStorage } from '../../common/helpers/Utils';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 class ProfessionalSignup extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ class ProfessionalSignup extends Component {
       month: '',
       username: '',
       errors: {},
-      u_school_code:false,
+      u_school_code: true,
       organisationName: '',
       showLoader: false,
       fristSignUp: true,
@@ -30,7 +30,7 @@ class ProfessionalSignup extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -84,15 +84,15 @@ class ProfessionalSignup extends Component {
       this.props
         .actionUserSignup(data)
         .then((result) => {
-          
+
           if (result && result.data && result.data.status === 'success') {
             this.props.handleSet()
-              setTimeout(() =>{
-                  this.props.history.push({
-                    pathname: '/login',
-                    state: { roleType: this.state.roleType },
-                  });
-                },1000);
+            setTimeout(() => {
+              this.props.history.push({
+                pathname: '/login',
+                state: { roleType: this.state.roleType },
+              });
+            }, 1000);
           } else {
             this.setState({
               showLoader: false,
@@ -154,27 +154,27 @@ class ProfessionalSignup extends Component {
       event.preventDefault();
       this.addCategory();
     }
-   };
+  };
 
-    handleClose = () => {
-        this.setState({
-            secondSignUp: true,
-        })
+  handleClose = () => {
+    this.setState({
+      secondSignUp: true,
+    })
+  }
+
+  handleEnter = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.addCategory();
     }
+  };
 
-    handleEnter = (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            this.addCategory();
-        }
-    };
-
-    goToLoginPage = () => {
-        this.props.history.push({
-            pathname: 'login',
-            state: { roleType: this.state.roleType }
-        });
-    }
+  goToLoginPage = () => {
+    this.props.history.push({
+      pathname: 'login',
+      state: { roleType: this.state.roleType }
+    });
+  }
   handleLogin(roleType) {
     this.props.handleSet()
     this.props.history.push({
@@ -182,63 +182,63 @@ class ProfessionalSignup extends Component {
       state: { roleType: roleType },
     });
   }
-    render() {
-        const { errors } = this.state;
-        return (
-            <div>
-                <div className="layout_box mt-3 mb-4">
-                    <div className="col10 fs30 fw600 mb-4">Create Your Account</div>
+  render() {
+    const { errors } = this.state;
+    return (
+      <div>
+        <div className="layout_box mt-3 mb-4">
+          <div className="col10 fs30 fw600 mb-4">Create Your Account</div>
 
-                    <Row>
-                        <Col md={12} lg={6}>
-                            <Form.Group>
-                                <Form.Label className="fs20 fw600 col14">Email address</Form.Label>
-                                <Form.Control type="email"
-                                    placeholder="Enter email"
-                                    className="inputTyp2"
-                                    error={errors.email ? true : false}
-                                    id="outlined-email"
-                                    variant="outlined"
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange={this.handleChange}
-                                    autoComplete="off"
-                                    maxLength="50" 
-                                    inputProps={{
-                                        maxLength: 50,
-                                    }}
-                                />
-                                <div className="error alignLeft">{errors.email}</div>
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={12} lg={6}>
-                            <Form.Group>
-                                <Form.Label className="fs20 fw600 col14">
-                                    Password </Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Password" className="inputTyp2"
-                                    error={errors.password ? true : false}
-                                    id="outlined-pwd"
-                                    label="Password"
-                                    variant="outlined"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
-                                    minLength="8"    
-                                    maxLength="15"                                
-                                    inputProps={{
-                                        maxLength: 15,
-                                    }}
-                                />
-                                <div className="error alignLeft">{errors.password}</div>
-                            </Form.Group> 
-                        </Col>
+          <Row>
+            <Col md={12} lg={6}>
+              <Form.Group>
+                <Form.Label className="fs20 fw600 col14">Email address *</Form.Label>
+                <Form.Control type="email"
+                  placeholder="Enter email"
+                  className="inputTyp2"
+                  error={errors.email ? true : false}
+                  id="outlined-email"
+                  variant="outlined"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  autoComplete="off"
+                  maxLength="50"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                />
+                <div className="error alignLeft">{errors.email}</div>
+              </Form.Group>
+            </Col>
 
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">User name</Form.Label>
+                <Form.Label className="fs20 fw600 col14">
+                  Password *</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password" className="inputTyp2"
+                  error={errors.password ? true : false}
+                  id="outlined-pwd"
+                  label="Password"
+                  variant="outlined"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  minLength="8"
+                  maxLength="15"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
+                />
+                <div className="error alignLeft">{errors.password}</div>
+              </Form.Group>
+            </Col>
+
+            <Col md={12} lg={6}>
+              <Form.Group>
+                <Form.Label className="fs20 fw600 col14">Screen name *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter User name"
@@ -260,8 +260,8 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Label className="fs20 fw600 col14">
-                Date of birth
-              </Form.Label> 
+                Date of birth *
+              </Form.Label>
               <Row>
                 <Col md={4}>
                   <Form.Group controlId="exampleForm.ControlSelect1">
@@ -328,7 +328,7 @@ class ProfessionalSignup extends Component {
               </div>
             </Col>
 
-            <Col md={12} lg={6}>
+            {/* <Col md={12} lg={6}>
               <Form.Group controlId="formBasicCheckbox" className="d-flex">
                 <Form.Check
                   type="checkbox"
@@ -342,14 +342,14 @@ class ProfessionalSignup extends Component {
               </Form.Group>
                                   <div className="error alignLeft">{errors.u_school_code}</div>
 
-            </Col>
+            </Col> */}
 
             <Col md={12}>
               <div className="fs18 col14 mt-3 mb-3 fw300">
-                I am not in crisis, homicidal, sucidal or abusing anyone, and i
+                I am not in crisis, homicidal, sucidal or abusing anyone, by continuing i
                 agree to the Eat Luv N Pray{' '}
                 <span className="fw500 pointer">
-                  Terms of service & Privacy Policy
+                  <NavLink to="/termcondition">Terms of service</NavLink>  & <NavLink to="/privacypolicy"> Privacy Policy.</NavLink>
                 </span>
               </div>
             </Col>
@@ -357,17 +357,17 @@ class ProfessionalSignup extends Component {
             <Col md={6}>
               <Button onClick={this.handleSubmit} className="btnTyp5 mt-3">
                 continue
-              </Button> 
+              </Button>
             </Col>
           </Row>
 
           <div className="fs18 fw300 pt-5 col14">
-            Already have an account?
+            {/* Already have an account? */}
             <span className="fw500 pointer pl-1">
-            Already have an account
-              <Button className="btnTyp5 ml-3"  onClick={(e) => {
-                        this.handleLogin(3);
-                      }}>Login here</Button> 
+              Already have an account
+              <Button className="btnTyp5 ml-3" onClick={(e) => {
+                this.handleLogin(3);
+              }}>Login here</Button>
             </span>
           </div>
         </div>{' '}

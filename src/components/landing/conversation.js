@@ -10,18 +10,18 @@ class Conversations extends Component {
             <Container>
                 <Row>
                     <Col md={6}> 
-                        <Image src={conversations} alt="" /> 
-                        <div className="fs48 fw700 col9">40,997,916</div> 
-                        <div className="col3 fs40 fw600">Conversations</div>
-                        <div className="fs25 fw300 col14 pt-2">The World's Largest Emotional Support System</div> 
+                        <Image src={conversations} alt="" />  
+                        <div className="fs40 fw700 col9">1,000</div> 
+                        <div className="col3 fs36 fw600">Conversations</div>
+                        <div className="fs22 fw300 col14 pt-2">The World's Largest Emotional Support System</div> 
                     </Col>
 
                     <Col md={6}>
                         <Image src={professionals} alt="" className="pt-4 mt-4" />
-                        <div className="fs48 fw700 col9">180</div> 
-                        <div className="col3 fs40 fw600">Professional Therapists</div>
-                        <div className="fs25 fw300 col14 pt-2">Over 300,000 trained listeners Helped
-                        over 25 million people</div>
+                        <div className="fs40 fw700 col9">180</div> 
+                        <div className="col3 fs36 fw600">Professional Therapists</div>
+                        <div className="fs22 fw300 col14 pt-2">Over 60 trained listeners Helped
+                        over<br/> 200 people</div>
                     </Col>
                 </Row>
             </Container>

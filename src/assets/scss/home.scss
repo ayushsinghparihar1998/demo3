@@ -45,6 +45,20 @@
     text-align: center; 
     padding: 3rem 0 5rem;  
 
+    .carousel-inner {
+        .carousel-item {
+            .italic_style { 
+                &+ img { 
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            
+        }
+    }
+
     .italic_style {
         font-style: italic;
         width: 70%;
@@ -164,6 +178,17 @@
     }
 } 
 
+.bannerset {
+    position: relative;
+    
+    .user_set {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+
 .footer { 
     background-color: $col1;
     padding: 20px 0;
@@ -200,7 +225,7 @@ img {
 }
 
 /* media screen start */ 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) { 
     .happyPatient .italic_style .invertedtwo {  
         right: -8%;
         max-width: 60px;
@@ -375,7 +400,13 @@ img {
 
 @media (min-width: 768px) and (max-width: 991px) { 
     .main_baner {
+        .bannerset {
+            .user_set {
+                bottom: 30px; 
+            }
+        }
         .mj_nav {
+            
             div.navbar-collapse {
                 background: #fff;
                 padding: 15px 0;
@@ -492,6 +523,7 @@ img {
 
     .happyPatient {
         .container {
+           
             .italic_style {
                 font-size: 15px !important; 
 
