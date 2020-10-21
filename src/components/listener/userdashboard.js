@@ -521,7 +521,7 @@ class Userdashboard extends Component {
                      */}
 
                                        <Image src={Ricon} alt="" className="r_icon" />
-                                       <div className="fw500 fs18 col23">Welcome Melisa,</div>
+                                       <div className="fw500 fs18 col23">Welcome {getLocalStorage("userInfo").u_username},</div>
                                        <div className="fs15 fw500 col27">How’s your Headspace today?</div>
                                     </div>
                                     <ul className="emoji_manages">

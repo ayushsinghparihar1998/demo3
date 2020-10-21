@@ -96,6 +96,9 @@ class Userdashboard extends Component {
       this.getRecentJoinUsers();
       this.getUserDashBoard();
       this._getCategoriesListHandler();
+
+      console.log('getLocalStorage ==',getLocalStorage("customerInfo"))
+
       if (getLocalStorage("onScreenIdUser")) {
          socket.emit(
             "onScreen",
@@ -229,29 +232,34 @@ class Userdashboard extends Component {
    }
    _getRandomChatHandler = () => {
       try {
-         console.log({
-            user_id: this.state.user_id,
-            cat_id: this.state.selectedCategory
-         })
-         socket.emit(
-            "connect-randomly",
-            {
+         if(this.state.selectedCategory){
+            console.log({
                user_id: this.state.user_id,
                cat_id: this.state.selectedCategory
-            },
-            (d) => {
-               console.log("_getRandomChatHandler", d);
-               if (d.data) {
-                  this.props.history.push('chatuser/' + d.data.id)
+            })
+            socket.emit(
+               "connect-randomly",
+               {
+                  user_id: this.state.user_id,
+                  cat_id: this.state.selectedCategory
+               },
+               (d) => {
+                  console.log("_getRandomChatHandler", d);
+                  if (d.data) {
+                     this.props.history.push('chatuser/' + d.data.id)
+                  }
+   
+                  if (!d.success) {
+   
+                     showErrorMessage(d.msg)
+                  }
+   
                }
-
-               if (!d.success) {
-
-                  showErrorMessage(d.msg)
-               }
-
-            }
-         );
+            );
+         }else{
+            showErrorMessage('Please select the category first')
+         }
+       
       } catch (err) {
          console.log(err)
       }
@@ -373,7 +381,7 @@ class Userdashboard extends Component {
                                        </Row>
                                     </div>
                                  </div>
-                                 <div className="inner_body mb-3">
+                                 <div onClick={()=>this.props.history.push('/coming-soon')} className="inner_body mb-3">
                                     <div className="test_eat fs18 col18">Test your Eat Luv Pray Quotient</div>
                                  </div>
 
@@ -394,7 +402,7 @@ class Userdashboard extends Component {
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
-                                 Hi {getLocalStorage("customerInfo").u_email}
+                                 Hi {getLocalStorage("customerInfo").u_username}
                                  <Button onClick={()=>this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 

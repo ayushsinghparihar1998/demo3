@@ -116,6 +116,7 @@ class Editprofile extends Component {
           rating: profile.u_rating,
           stateId: profile.u_state,
           mobileNumber: profile.u_mobile,
+          u_image:profile.u_image,
           profileImg: '',
           backgroud_img: ''
         }, () => {
@@ -371,7 +372,7 @@ class Editprofile extends Component {
                 </div>
                 <div className="text-center profile_top">
                   <Image
-                    src={this.state.u_image ? this.state.u_image : Profileimg}
+                    src={this.state.u_image}
                     alt=""
                     className="r50 border_profile"
                   />
@@ -467,6 +468,7 @@ class Editprofile extends Component {
                             <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
                             <span>
                               <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
+                              <span><input type="radio" checked={this.state.gender === 'Others' ? true : false} value="Others" name="gender" onChange={this.handleChange} /> Others</span>
                           </Form.Group>
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">

@@ -412,7 +412,7 @@ class Adminlistener extends Component {
     let data = {
       count: count,
       offset: offset,
-      review_type: review_type,
+      rating_type: review_type,
     };
     if (offset == 1) {
       this.setState({
@@ -424,7 +424,7 @@ class Adminlistener extends Component {
         key: "request",
       });
     }
-    ELPViewApiService("getReviewListing", data).then((result) => {
+    ELPViewApiService("getReviewListing", data).then((result) => { 
       console.log("result", result);
       let reviewList = [];
       let totalRecordCount = 0;

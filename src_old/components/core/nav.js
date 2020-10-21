@@ -37,6 +37,7 @@ import Userprofiles from "../../assets/images/user_profiles.svg";
 import Usersettings from "../../assets/images/user_settings.svg";
 import Userenables from "../../assets/images/user_enables.svg";
 import Userlogouts from "../../assets/images/user_logouts.svg";
+import ELPRxApiService from "../../common/services/apiService";
 
 
 class NavBar extends Component {
@@ -53,24 +54,51 @@ class NavBar extends Component {
   componentDidMount() {
     console.log("hello");
     console.log(getLocalStorage("userInfo"));
-
-    let data = getLocalStorage("userInfo")
-      ? getLocalStorage("userInfo")
-      : getLocalStorage("customerInfo")
-        ? getLocalStorage("customerInfo")
-        : getLocalStorage("userInfoProff");
-    console.log("data", data);
-
-    if (data) {
-      this.setState(
-        {
-          email_varified: data.u_verified == 1 ? false : true,
-        },
-        () => {
-          console.log("email_varified", this.state.email_varified);
-        }
-      );
+    // listner_dashboard
+    // customer_dashboard
+    // professional_dashboard
+    let type
+    if (getLocalStorage('userInfo')) {
+      type = 'listner'
+    } else if (getLocalStorage('customerInfo')) {
+      type = 'customer'
+    } else if (getLocalStorage('userInfoProff')) {
+      type = 'professional'
     }
+    if (type) {
+      ELPRxApiService(type + "DashboardDetail").then(res => {
+        console.log('------- res ---------');
+        console.log(res)
+        console.log('------- res ---------');
+        this.setState({
+          email_varified: res.data.data.dashboard_list.u_verified == '1' ? false : true,
+        })
+        if (res.data.dashboard_list.u_verified) {
+
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+
+
+    // let data = getLocalStorage("userInfo")
+    //   ? getLocalStorage("userInfo")
+    //   : getLocalStorage("customerInfo")
+    //     ? getLocalStorage("customerInfo")
+    //     : getLocalStorage("userInfoProff");
+    // console.log("data", data);
+
+    // if (data) {
+    //   this.setState(
+    //     {
+    //       email_varified: data.u_verified == 1 ? false : true,
+    //     },
+    //     () => {
+    //       console.log("email_varified", this.state.email_varified);
+    //     }
+    //   );
+    // }
   }
   handleModal = () => {
     this.setState({ show: true });
@@ -463,7 +491,7 @@ class NavBar extends Component {
             <div className="email_verified">
               <div class="verifys">
                 <Image src={Msgbox} alt="" />
-                <span className="fs18 fw500 col18 ml-2">Email not verified</span>
+                <span className="fs15 fw500 col18 ml-2">Please verify your email to begin chatting</span>
               </div>
             </div>
           ) : (

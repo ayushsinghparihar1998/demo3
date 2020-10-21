@@ -48,6 +48,7 @@ class NavBar extends Component {
       show2: false,
       show3: false,
       email_varified: false,
+      profileImage:null
     };
   }
 
@@ -58,18 +59,18 @@ class NavBar extends Component {
     // customer_dashboard
     // professional_dashboard
     let type
+    let profileImage
     if (getLocalStorage('userInfo')) {
       type = 'listner'
     } else if (getLocalStorage('customerInfo')) {
       type = 'customer'
+      console.log("getLocalStorage('customerInfo')", getLocalStorage('customerInfo'))
     } else if (getLocalStorage('userInfoProff')) {
       type = 'professional'
     }
     if (type) {
       ELPRxApiService(type + "DashboardDetail").then(res => {
-        console.log('------- res ---------');
-        console.log(res)
-        console.log('------- res ---------');
+
         this.setState({
           email_varified: res.data.data.dashboard_list.u_verified == '1' ? false : true,
         })
@@ -79,8 +80,21 @@ class NavBar extends Component {
       }).catch(err => {
         console.log(err);
       })
+      
     }
 
+
+    ELPRxApiService("getprofile").then(res => {
+
+      this.setState({
+        profileImage: res.data.data.profile_list.u_image,
+      })
+      if (res.data.dashboard_list.u_verified) {
+
+      }
+    }).catch(err => {
+      console.log(err);
+    })
 
     // let data = getLocalStorage("userInfo")
     //   ? getLocalStorage("userInfo")
@@ -266,7 +280,8 @@ class NavBar extends Component {
                       getLocalStorage("customerInfo")
                         ? [
                           <NavLink
-                            to="/professionalSearch"
+                            // to="/professionalSearch"
+                            to="/coming-soon"
                             className="nav-link"
                           >
                             Professional Search
@@ -398,7 +413,7 @@ class NavBar extends Component {
                     </li>  */}
                         <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" className="mr-1" />
-                            USER
+                            MY PROFILE
                           </NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
                             <Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
@@ -491,7 +506,7 @@ class NavBar extends Component {
             <div className="email_verified">
               <div class="verifys">
                 <Image src={Msgbox} alt="" />
-                <span className="fs18 fw500 col18 ml-2">Please verify your email to begin chatting</span>
+                <span className="fs15 fw500 col18 ml-2">Please verify your email to begin chatting</span>
               </div>
             </div>
           ) : (

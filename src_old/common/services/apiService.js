@@ -14,7 +14,7 @@ axios.defaults.baseURL = 'https://www.eatluvnpray.org/';
 
 axios.interceptors.request.use(
   function (config) {
-   
+
     let access_token = '';
     let userInfo =
       getLocalStorage('userInfo') ||
@@ -54,16 +54,23 @@ const injectParamsToUrl = (_url_, paramObj) => {
 };
 
 const handleErrorByStatus = (error) => {
-if (error && error.status === 'error' && error.message === "100") {
-          // axios({
-          //   url: '/elp/logout',
-          //   method: 'GET',
-          //   data: {}
-          // }).then(response => {
-             clearLocalStorage();
-          // });
-}else if (error && error.status === 'error') {
+  if (error && error.status === 'error' && error.message === "100") {
+    // axios({
+    //   url: '/elp/logout',
+    //   method: 'GET',
+    //   data: {}
+    // }).then(response => {
+    clearLocalStorage();
+    // });
+  } else if (error && error.status === 'error') {
+    
     const message = error.message;
+    // alert("ERROR")
+    showErrorToast(message);
+  } else if (error && error.success === 'error') {
+    
+    const message = error.message;
+    // alert("ERROR")
     showErrorToast(message);
   }
 };
@@ -87,13 +94,14 @@ const spikeViewApiService = (apiKeyName, data) => {
         result.data &&
         result.data &&
         result.data.status === 'success'
-      ) {  
+      ) {
         if (result.data.message) {
           const message = result.data.message;
           if (requestObject.showResultMessage === true)
             showSuccessToast(message);
         }
       } else {
+
         handleErrorByStatus(result.data);
       }
       return result;

@@ -333,15 +333,15 @@ class Userdashboard extends Component {
                                  </div>
                                  <div className="inner_side">
                                     <div className="benefits">
-                                       <div className="pb-2 col14 fw500 fs15">Benefits of becoming a CoCo</div>
+                                       <div className="pb-2 col14 fw500 fs15">Benefits of becoming a Listener</div>
                                        <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType18">Learn More</Button>
                                     </div>
                                  </div>
                                  <div className="inner_side">
                                     <div className="share_user">
                                        <span className="col1 fs18 fw500 mr-3">Share us on:</span>
-                                       <span className="mr-2"><FacebookShareButton url={'https://www.google.co.in/'}><FacebookIcon size={22} round={true} /></FacebookShareButton></span>
-                                       <span><Image src={Instagramnew} alt="Facebook" /></span>
+                                       <span className="mr-2"><FacebookShareButton url={'https://eatluvnpray.org/'}><FacebookIcon size={22} round={true} /></FacebookShareButton></span>
+                                       {/* <span><Image src={Instagramnew} alt="Facebook" /></span> */}
                                     </div>
                                  </div>
                               </div>
@@ -411,7 +411,7 @@ class Userdashboard extends Component {
                                     <Image src={Creditcard} alt="" className="pointer" />
                                     <span   className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
-                                      Video Call Credit Lefts
+                                       Remaining Credits
                                    </span>
                                  </div>
                               </div>

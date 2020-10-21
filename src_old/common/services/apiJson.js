@@ -27,7 +27,7 @@ export default {
       email: "",
       password: "",
     },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
 
@@ -608,7 +608,7 @@ export default {
     url: "elp/addcategories",
     method: "POST",
     data: {
-      uc_cat_name: "",     
+      uc_cat_name: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -624,7 +624,7 @@ export default {
     url: "elp/superadmin_addcategory",
     method: "POST",
     data: {
-      uc_cat_name: "",     
+      uc_cat_name: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -634,10 +634,39 @@ export default {
     method: "POST",
     data: {
       br_id: '',
-      br_status:'',
+      br_status: '',
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
-  
+
+
+  listnerDashboardDetail: {
+    url: "elp/listner_dashboard",
+    method: "GET",
+    data: {
+    
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  customerDashboardDetail: {
+    url: "elp/customer_dashboard",
+    method: "GET",
+    data: {
+     
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  professionalDashboardDetail: {
+    url: "elp/professional_dashboard",
+    method: "GET",
+    data: {
+    
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+
 };

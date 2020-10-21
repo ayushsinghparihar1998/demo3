@@ -52,7 +52,7 @@ class Myprofile extends Component {
                 <div className="myprofile">
                   <Image src={Profileban} alt="" className="w-100" />
                   <div className="text-center profile_top">
-                    <Image src={Profileimg} alt="" className="r50 border_profile" />
+                    <Image src={userData.u_image} alt="" className="r50 border_profile" />
                     <Image src={userData.flag ? userData.flag : Usaflag}
                       alt="" width='50px' className="r50 flags" />
                     <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button>
@@ -68,12 +68,12 @@ class Myprofile extends Component {
                   <div className="text-center user_tab">
                     <Tabs defaultActiveKey="home">
                       <Tab eventKey="home" title="Home">
-                        <div className="layout mt-5">
+                        {/* <div className="layout mt-5">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Number of Ratings:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_rating}</div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Email:</div>
@@ -104,18 +104,18 @@ class Myprofile extends Component {
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
                           </div>
                         </div>
-                        <div className="layout">
+                        {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.listento}</div>
                           </div>
-                        </div>{console.log("userDatauserData", userData)}
-                        <div className="layout">
+                        </div>{console.log("userDatauserData", userData)} */}
+                        {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Languages:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.language ? userData.language : ''}</div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Member Since:</div>

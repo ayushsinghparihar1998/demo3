@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from "../core/menu";
+import NavBar from "../core/nav";
 
 const comingText = require('../../assets/images/coming_img.png')
 const ComingSoon = (props) => {

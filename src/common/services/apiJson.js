@@ -202,7 +202,7 @@ export default {
     data: {
       count: "",
       offset: "",
-      review_type: "",
+      rating_type: "",
     },
     showResultMessage: false,
     showErrorMessage: true,
