@@ -16,14 +16,12 @@ class Happypatient extends Component {
                         <Carousel.Item>
                             <div className="fs17 italic_style col11 fw400 mb-5">
                                 <Image src={Inverted} alt="" className="invertedone" />
-                            After having a bad luck on some relationships, I was all cloaked in depression. if it would'nt for the counselling at ELNP, i
-would have never been able to move forward in life. This platform totally allows one to vent out at the times of need
-giving me a reason to love myself and live a better life
+                                After having a bad luck on some relationships, I was all cloaked in depression. if it would'nt be for counselling at ELNP, i would never have been able to move forward in life. This platform totally allows one to vent out at the times of need giving me a reason to love myself and live a better life
                             <Image src={Invertedtwo} alt="" className="invertedtwo" />
                             </div>
                             <Image src={Testimonials2} alt="Testimonials" className="mt-4 mb-2" />
-                            <div className="fs20 col12 fw500 mb-2">Sonal Puri </div>
-                            <div className="fs15 col13">Monday, May 2</div>
+                            <div className="fs20 col12 fw500 mb-2">Sonal Puri (Member)</div>
+                            <div className="fs15 col13">Saturday, October 10</div>
                         </Carousel.Item>
 
                         <Carousel.Item>
@@ -36,8 +34,8 @@ such a wonderful experience.
                             <Image src={Invertedtwo} alt="" className="invertedtwo" />
                             </div>
                             <Image src={Testimonials1} alt="" className="mt-4 mb-2" />
-                            <div className="fs18 col12 fw500 mb-2">Megha Bhatia</div>
-                            <div className="fs15 col13">Monday, May 2</div>
+                            <div className="fs18 col12 fw500 mb-2">Megha Bhatia (Member)</div>
+                            <div className="fs15 col13">Monday, October 5</div>
                         </Carousel.Item>
 
                     </Carousel>

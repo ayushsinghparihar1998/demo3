@@ -245,7 +245,7 @@ handleLogoutAdmin = () => {
                       this.handleLogin(3);
                     }}
                   >
-                    User Login
+                    Member Login
                   </NavDropdown.Item> 
                 </NavDropdown>
               )}

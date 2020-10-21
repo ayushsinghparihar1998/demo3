@@ -13,7 +13,7 @@ class Conversations extends Component {
                         <Image src={conversations} alt="" />  
                         <div className="fs40 fw700 col9">1,000</div> 
                         <div className="col3 fs36 fw600">Conversations</div>
-                        <div className="fs22 fw300 col14 pt-2">The World's Largest Emotional Support System</div> 
+                        <div className="fs22 fw300 col14 pt-2">The India's Largest Emotional Support System</div> 
                     </Col>
 
                     <Col md={6}>

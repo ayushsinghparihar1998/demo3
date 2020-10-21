@@ -66,8 +66,8 @@ class Compaign extends Component {
                     {/*https://eatluvnpray.org/paytm_demo/  */}
                     <a
                       // target="_blank"
-                      href="https://staging.eatluvnpray.org/paytm_demo/"
-                    // href="https://eatluvnpray.org/paytm_demo/"
+                      // href="https://staging.eatluvnpray.org/paytm_demo/"
+                    href="https://eatluvnpray.org/paytm_demo/"
                     >
                       Donate
                     </a>

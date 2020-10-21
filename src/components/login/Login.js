@@ -334,7 +334,7 @@ class Login extends Component {
                 : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
                 ? "Professional Login"
                 : this.state.roleType === CONSTANTS.ROLES.USER
-                ? "User Login"
+                ? "Member Login"
                 : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
                 ? "Admin Login"
                 : ""}
