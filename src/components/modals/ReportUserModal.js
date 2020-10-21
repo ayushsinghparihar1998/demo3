@@ -78,7 +78,7 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
 
                         <ul className="block_users">
                             {
-                                reasons.map(element => <li onClick={() => setSelectedReason(element)}>{element}</li>)
+                                reasons.map(element => <li style={selectedReason == element?{color:'white', backgroundColor:'#8ad1e7'}:{}} onClick={() => setSelectedReason(element)}>{element}</li>)
                             }
                         </ul>
 

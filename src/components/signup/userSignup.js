@@ -176,7 +176,7 @@ class ProfessionalSignup extends Component {
     });
   }
   handleLogin(roleType) {
-    this.props.handleSet()
+    // this.props.handleSet()
     this.props.history.push({
       pathname: "login",
       state: { roleType: roleType },

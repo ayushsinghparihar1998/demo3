@@ -40,9 +40,12 @@ import Checkediconfour from '../../assets/images/checked_icon4.svg';
 import Crossblue from '../../assets/images/cross_blue.svg';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
-import { setLocalStorage, getLocalStorage,capitalizeFirstLetter } from '../../common/helpers/Utils';
+import { setLocalStorage, getLocalStorage, capitalizeFirstLetter } from '../../common/helpers/Utils';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import ELPRxApiService from "../../common/services/apiService";
+
+
 class Editprofile extends Component {
   constructor(props) {
     super(props);
@@ -69,13 +72,16 @@ class Editprofile extends Component {
       lang: '',
       rating: '',
       stateId: '',
-      mobileNumber:'',
+      mobileNumber: '',
+      category: [],
+      selectedCategories: []
     };
   }
 
   componentDidMount() {
     this.getProfile();
     this.getCountry();
+    this._getCategoriesHandler()
   }
 
   getProfile = () => {
@@ -83,11 +89,11 @@ class Editprofile extends Component {
       if (result && result.status === 200) {
         let profile = result.data.data &&
           result.data.data.profile_list && result.data.data.profile_list
-            ? result.data.data.profile_list
-            : {};
+          ? result.data.data.profile_list
+          : {};
         let dob = profile.u_birthdate ? profile.u_birthdate.split('/') : ['', '', ''];
-        if(dob && dob.length>0 && dob[1] !== 0 ){
-         dob[1] = dob[1]-1
+        if (dob && dob.length > 0 && dob[1] !== 0) {
+          dob[1] = dob[1] - 1
         }
         this.setState({
           userData: profile,
@@ -110,8 +116,8 @@ class Editprofile extends Component {
           rating: profile.u_rating,
           stateId: profile.u_state,
           mobileNumber: profile.u_mobile,
-          profileImg:'',
-          backgroud_img:''
+          profileImg: '',
+          backgroud_img: ''
         }, () => {
           this.getState();
           this.getCity();
@@ -209,7 +215,7 @@ class Editprofile extends Component {
       };
     }
 
-   this.props.actionUpdateUserDetails(data).then((result) => {
+    this.props.actionUpdateUserDetails(data).then((result) => {
 
     });
   };
@@ -251,18 +257,18 @@ class Editprofile extends Component {
   }
   handleMobileChange = (e) => {
 
-const re = /^[0-9\b]+$/; //rules
-if (e.target.value === "" || re.test(e.target.value)) {
-  this.setState({
-      mobileNumber: e.target.value,
-    });
-}
+    const re = /^[0-9\b]+$/; //rules
+    if (e.target.value === "" || re.test(e.target.value)) {
+      this.setState({
+        mobileNumber: e.target.value,
+      });
+    }
 
     // this.setState({
     //   mobileNumber: value,
     // });
   }
-  handleCancel =()=>{
+  handleCancel = () => {
     this.props.history.push({
       pathname: "/",
     });
@@ -280,77 +286,113 @@ if (e.target.value === "" || re.test(e.target.value)) {
       formData.append('isCreateThumbnail', true);
       formData.append('fileKey', fileObject.name);
       formData.append('filePath', fileObject.name);
-      console.log("formDataformData",formData)
+      console.log("formDataformData", formData)
 
       this.props.actionUploadImage(formData)
         .then((result, error) => {
 
-          console.log(name,"resultresultresult",result)
+          console.log(name, "resultresultresult", result)
           let file = result.data.data.filepath;
-          console.log("filefile",file)
+          console.log("filefile", file)
           this.setState({
             [name]: file
           });
         })
         .catch(e => {
-          
+
         });
     }
   }
-    actionOnUpload(event) {
+  actionOnUpload(event) {
     toast.dismiss();
   }
-  render() { 
+  _getCategoriesHandler = async () => {
+    try {
+      let response = await ELPRxApiService("getCategoryList")
+      console.log('=== categories ===', response)
+      this.setState({
+        category: response.data.data.categories_list
+      })
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  handleCategoryChange = (e) => {
+    try {
+      let selectedCategories = this.state.selectedCategories;
+      selectedCategories.push(JSON.parse(e.target.value))
+      this.setState({
+        selectedCategories
+      })
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  _removeCategory = (i) => {
+    try {
+      let selectedCategories = this.state.selectedCategories;
+      selectedCategories.splice(i, 1)
+      this.setState({
+        selectedCategories
+      })
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  render() {
     const { errors } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5"> 
+        <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
               <div className="myprofile">
-                <Image src={this.state.backgroud_img ? this.state.backgroud_img : Profileban} 
-                alt="" className="w-100" />
+                <Image src={this.state.backgroud_img ? this.state.backgroud_img : Profileban}
+                  alt="" className="w-100" />
                 <div className="upload_bg">
                   <Form.File
-                      id="custom-filetwo" 
-                      autoComplete="off"
-                      onChange={e =>
-                        this.handleUploadPicture(e,'backgroud_img')
-                      }
-                      onClick={(event) => {
-                        event.target.value = null; this.actionOnUpload(event)
-                      }}
-                     // accept={customConstant.acceptedFormat.imageAcceptFormatType}
-                    />
+                    id="custom-filetwo"
+                    autoComplete="off"
+                    onChange={e =>
+                      this.handleUploadPicture(e, 'backgroud_img')
+                    }
+                    onClick={(event) => {
+                      event.target.value = null; this.actionOnUpload(event)
+                    }}
+                  // accept={customConstant.acceptedFormat.imageAcceptFormatType}
+                  />
                   <Image src={Cameratwo} alt="" className="camera2" />
                 </div>
                 <div className="text-center profile_top">
-                  <Image  
-                    src={this.state.u_image ? this.state.u_image : Profileimg} 
+                  <Image
+                    src={this.state.u_image ? this.state.u_image : Profileimg}
                     alt=""
                     className="r50 border_profile"
                   />
-                  <Image src={this.state.flag ? this.state.flag : Usaflag} 
-                  alt="" width='50px' className="r50 flags" />
+                  <Image src={this.state.flag ? this.state.flag : Usaflag}
+                    alt="" width='50px' className="r50 flags" />
                   <div className="upload_pic">
                     <Form.File
-                      id="custom-fileone" 
+                      id="custom-fileone"
                       autoComplete="off"
                       onChange={e =>
-                        this.handleUploadPicture(e,'u_image')
+                        this.handleUploadPicture(e, 'u_image')
                       }
                       onClick={(event) => {
                         event.target.value = null; this.actionOnUpload(event)
                       }}
-                     // accept={customConstant.acceptedFormat.imageAcceptFormatType}
+                    // accept={customConstant.acceptedFormat.imageAcceptFormatType}
                     />
                     <Image src={Camera} alt="" className="camera" />
                   </div>
                 </div>
-                <div className="mt-4 mb-4 pb-2"></div>   
+                <div className="mt-4 mb-4 pb-2"></div>
                 <div className="text-center user_tab">
                   <Tabs defaultActiveKey="home">
                     <Tab eventKey="home" title="profile info">
@@ -359,7 +401,7 @@ if (e.target.value === "" || re.test(e.target.value)) {
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
                               User Name:
-                            </Form.Label> 
+                            </Form.Label>
                             <Form.Control
                               type="text"
                               name="userName"
@@ -369,7 +411,7 @@ if (e.target.value === "" || re.test(e.target.value)) {
                               className="inputTyp2"
                               disabled={true}
                             />
-                          </Form.Group> 
+                          </Form.Group>
 
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
@@ -409,22 +451,22 @@ if (e.target.value === "" || re.test(e.target.value)) {
                               Mobile Number:
                             </Form.Label>
                             <Form.Control
-                             type="text"
+                              type="text"
                               name="mobileNumber"
-                               placeholder="Mobile Number"
+                              placeholder="Mobile Number"
                               onChange={this.handleMobileChange}
                               value={this.state.mobileNumber}
                               className="inputTyp2"
-                              />
+                            />
                           </Form.Group>
 
                           <Form.Group className="genders">
                             <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
                               Gender:
-                            </Form.Label>                            
+                            </Form.Label>
                             <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
                             <span>
-                            <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
+                              <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
                           </Form.Group>
                           <Form.Group>
                             <Form.Label className="fs20 fw600 col14">
@@ -441,7 +483,7 @@ if (e.target.value === "" || re.test(e.target.value)) {
                           </Form.Group>
                           <Form.Label className="fs20 fw600 col14 mt-2">
                             Country:
-                          </Form.Label> 
+                          </Form.Label>
                           <Row>
                             <Col md={4}>
                               <Select
@@ -575,7 +617,7 @@ if (e.target.value === "" || re.test(e.target.value)) {
                           >
                             save
                           </Button>
-                          <Button  onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
+                          <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
                         </Form>
                       </Col>
                     </Tab>
@@ -607,7 +649,7 @@ if (e.target.value === "" || re.test(e.target.value)) {
                                       type="switch"
                                       id="custom-switch"
                                       label=""
-                                      
+
                                     />
                                   </li>
                                 </ul>
@@ -853,29 +895,44 @@ if (e.target.value === "" || re.test(e.target.value)) {
                           <Form.Group>
                             <div className="d-flex">
                               <Form.Control
-                                type="text"
-                                value="Categories |"
-                                className="inputTyp2 col23"
-                              />
-                              <Button className="btnTyp11 ml-3">Add</Button>
+                                as="select"
+                                // className="selectTyp1 select3"                           
+                                placeholder="Category"
+                                className="inputTyp2"
+                                // error={errors.category ? true : false}
+                                id="outlined-pwd"
+                                label="category"
+                                variant="outlined"
+                                name="category"
+                                value={this.state.category}
+                                // onChange={this.handleChange}
+                                inputProps={{
+                                  maxLength: 30,
+                                }}
+                                onChange={this.handleCategoryChange}
+                              >
+                                <option >select category </option>
+                                {
+                                  this.state.category.map(obj => {
+                                    return <option value={JSON.stringify(obj)}>{obj.cat_name}</option>
+                                  })
+                                }
+
+                              </Form.Control>
                             </div>
                             <div className="d-flex mw-customtree">
-                              <span className="multiple_d">
-                                Work Stress
-                                <Image src={Crossblue} alt="" />
-                              </span>
-                              <span className="multiple_d">
-                                Eating Disorders
-                                <Image src={Crossblue} alt="" />
-                              </span>
-                              <span className="multiple_d">
-                                Work Stress
-                                <Image src={Crossblue} alt="" />
-                              </span>
-                              <span className="multiple_d">
-                                Eating Disorders
-                                <Image src={Crossblue} alt="" />
-                              </span>
+                              {
+                                this.state.selectedCategories.map((ele, i) => {
+                                  return (
+                                    <span className="multiple_d">
+                                      {ele.cat_name}
+                                      <Image onClick={() => { this._removeCategory(i) }} src={Crossblue} alt="" />
+                                    </span>
+                                  )
+                                })
+                              }
+
+
                             </div>
                           </Form.Group>
 

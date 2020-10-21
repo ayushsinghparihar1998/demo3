@@ -56,7 +56,7 @@ class Home extends Component {
         <Happypatient />
         <Abouteat {...this.props} />
         <Supporting />
-        <Discussanything />
+        <Discussanything {...this.props} />
 
         {/* <div className="text-center  mb-5">
           <Button className="" onClick={this.handlePaymentModal}>

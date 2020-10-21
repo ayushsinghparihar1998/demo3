@@ -297,7 +297,7 @@ class NavBar extends Component {
                       </NavDropdown>,
                       <Nav.Link disabled onClick={() => this.setState({ show3: true })} style={{ textAlign: 'center' }}>
                         Professional Help
-                        <br /> 
+                        <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
                       <Nav.Link disabled href="#about_us_container" style={{ textAlign: 'center' }}>
@@ -305,6 +305,9 @@ class NavBar extends Component {
                         <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
+                      <NavLink to="/faq" className="nav-link">
+                        FAQ
+                   </NavLink>,
                       // <Nav.Link> Blog</Nav.Link>,
 
 
@@ -384,7 +387,7 @@ class NavBar extends Component {
                         title="Login"
                         id="login-nav-dropdown"
                         className="btnTypeone loginnav"
-                        style={{height:'38px'}}
+                        style={{ height: '38px' }}
                       >
                         <NavDropdown.Item
                           onClick={(e) => {
@@ -394,7 +397,7 @@ class NavBar extends Component {
                           Listener Login
                     </NavDropdown.Item>
                         <NavDropdown.Item
-                        disabled
+                          disabled
                           onClick={(e) => {
                             this.handleLogin(2);
                           }}

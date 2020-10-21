@@ -61,7 +61,7 @@ class Listenersignup extends Component {
 
     } catch (err) {
       console.log(err);
-    }
+    } 
   }
   handleChange = (event) => {
     const { name, value } = event.target;
