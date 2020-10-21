@@ -45,6 +45,20 @@
     text-align: center; 
     padding: 3rem 0 5rem;  
 
+    .carousel-inner {
+        .carousel-item {
+            .italic_style { 
+                &+ img { 
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            
+        }
+    }
+
     .italic_style {
         font-style: italic;
         width: 70%;
@@ -509,6 +523,7 @@ img {
 
     .happyPatient {
         .container {
+           
             .italic_style {
                 font-size: 15px !important; 
 
