@@ -45,6 +45,7 @@ import Blogs from '../../assets/images/blogs.svg';
 import Blogstwo from '../../assets/images/blogs2.svg';
 import Blogsthree from '../../assets/images/blogs3.svg';
 import ELPRxApiService from "../../common/services/apiService";
+import constant from '../../constant'
 
 import {
    FacebookIcon,
@@ -97,7 +98,7 @@ class Userdashboard extends Component {
       this.getUserDashBoard();
       this._getCategoriesListHandler();
 
-      console.log('getLocalStorage ==',getLocalStorage("customerInfo"))
+      console.log('getLocalStorage ==', getLocalStorage("customerInfo"))
 
       if (getLocalStorage("onScreenIdUser")) {
          socket.emit(
@@ -197,6 +198,8 @@ class Userdashboard extends Component {
       this.props.actionGetUserDashBoard({}).then((result) => {
          if (result && result.status === 200) {
             let res = result.data.data && result.data.data.dashboard_list ? result.data.data.dashboard_list : [];
+            console.log(res)
+            // alert('asasd')
             this.setState({ dashboardData: res })
          }
       })
@@ -232,7 +235,7 @@ class Userdashboard extends Component {
    }
    _getRandomChatHandler = () => {
       try {
-         if(this.state.selectedCategory){
+         if (this.state.selectedCategory) {
             console.log({
                user_id: this.state.user_id,
                cat_id: this.state.selectedCategory
@@ -248,18 +251,18 @@ class Userdashboard extends Component {
                   if (d.data) {
                      this.props.history.push('chatuser/' + d.data.id)
                   }
-   
+
                   if (!d.success) {
-   
+
                      showErrorMessage(d.msg)
                   }
-   
+
                }
             );
-         }else{
+         } else {
             showErrorMessage('Please select the category first')
          }
-       
+
       } catch (err) {
          console.log(err)
       }
@@ -355,7 +358,7 @@ class Userdashboard extends Component {
                                           <Col lg={5} md={4} className="pr-0">
                                              <div className="col1 fw500 fs15 mt-2">Need to talk to someone?</div>
                                           </Col>
-                                          <Col lg={6} md={5} className="pl-0">  
+                                          <Col lg={6} md={5} className="pl-0">
                                              <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Control as="select"
                                                    className="selectTyp1 select3"
@@ -381,7 +384,7 @@ class Userdashboard extends Component {
                                        </Row>
                                     </div>
                                  </div>
-                                 <div onClick={()=>this.props.history.push('/coming-soon')} className="inner_body mb-3">
+                                 <div onClick={() => this.props.history.push('/coming-soon')} className="inner_body mb-3">
                                     <div className="test_eat fs18 col18">Test your Eat Luv Pray Quotient</div>
                                  </div>
 
@@ -403,45 +406,45 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
                                  Hi {getLocalStorage("customerInfo").u_username}
-                                 <Button onClick={()=>this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
+                                 <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
-                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
+                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Creditcard} alt="" className="pointer" />
-                                    <span   className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
                                        Remaining Credits
                                    </span>
                                  </div>
                               </div>
-                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
+                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
-                                    <span  className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_compassion_count ? dashboardData.u_compassion_count : '0'} </strong> */}
                                        Subscriptions
                                     </span>
                                  </div>
                               </div>
-                              <div onClick={()=>this.props.history.push('/coming-soon')}  className="m-3 pb-3 bg-grays">
+                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Paymentmethod} alt="" className="pointer" />
-                                    <span  className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_badge_count ? dashboardData.u_badge_count : '0'} </strong> */}
                                        Payments
                                     </span>
                                  </div>
                               </div>
                            </div>
-                           <div onClick={()=>this.props.history.push('/coming-soon')} className="right_inner_side">
-                              <div  className="chat-pink fs600 fs17 col18 pl-3 pointer">
+                           <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
+                              <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
                                     Discover
                                     Subcomunities
                               </div>
                            </div>
-                           {/* <div className="right_inner_side">
+                           <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  My Personal Link
                   </div>
@@ -451,13 +454,13 @@ class Userdashboard extends Component {
                                     more people
                      </div>
                                  <Form.Group className="d-flex mt-4">
-                                    
+
                                     <Form.Control
                                        id="referURL"
                                        type="text"
                                        readOnly
                                        className="inputTyp4"
-                                       value={dashboardData.refer_url ? dashboardData.refer_url : ''}
+                                       value={constant.WEB_BASE_URL + 'share-profile?'+ (dashboardData.refer_url?dashboardData.refer_url.split('?').reverse()[0]:'')}
                                     />
                                     <Button className="btnTyp8" onClick={this.copyReferUrl}>
                                        <Image src={Copys} alt="" className="" />
@@ -469,7 +472,7 @@ class Userdashboard extends Component {
                                     <Image src={Whatsapp} alt="" className="" />
                                  </div>
                               </div>
-                           </div> */}
+                           </div>
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  Recent join

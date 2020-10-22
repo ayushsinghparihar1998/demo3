@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap';
-import UserChat from '../../../assets/images/user_chat.svg';
+import UserChat from '../../../assets/images/user_chat.png';
 import getUserProfile from '../../../common/utility/getUserProfile'
 import socketClass from '../../../common/utility/socketClass'
 import ChatCross from '../../../assets/images/chat_cross.svg';

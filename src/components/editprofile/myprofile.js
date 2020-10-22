@@ -4,13 +4,15 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Profileban from "../../assets/images/profile_ban.svg";
 import Profileimg from "../../assets/images/profile_img.svg";
-import Usaflag from "../../assets/images/usa_flag.svg";
+import Usaflag from "../../assets/images/india_flag.svg";
 import warningS from "../../assets/images/w_signal.svg";
 import { connect } from 'react-redux';
 import { actionGetProfile } from '../../common/redux/actions';
 import * as moment from 'moment';
 import UserProfile from "./userprofiledetail";
 import { getLocalStorage } from "../../common/helpers/Utils";
+import CONSTANTS from "../../common/helpers/Constants";
+
 class Myprofile extends Component {
   constructor(props) {
     super(props);
@@ -60,14 +62,14 @@ class Myprofile extends Component {
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
                     <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == 1 ? 'Listener' : 'Member'}
-                      <Image src={warningS} alt="" className="ml-2" />
+                      {/* <Image src={warningS} alt="" className="ml-2" /> */}
                     </div>
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>
                     <div className="border_bottoms mt-3"></div>
                   </div>
                   <div className="text-center user_tab">
-                    <Tabs defaultActiveKey="home">
-                      <Tab eventKey="home" title="Home">
+                    {/* <Tabs defaultActiveKey="home">
+                      <Tab eventKey="home" title="Home"> */}
                         {/* <div className="layout mt-5">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Number of Ratings:</div>
@@ -116,12 +118,31 @@ class Myprofile extends Component {
                             <div className="fs16 col14 fw400 text-left w40">{userData.language ? userData.language : ''}</div>
                           </div>
                         </div> */}
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
-                          </div>
-                        </div>
+
+                        {
+                          userData.u_role_id == CONSTANTS.ROLES.LISTNER ?
+                            (
+                              <div className="layout">
+                                <div className="d-flex m-auto w35 border2">
+                                  <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
+                                  <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
+                                </div>
+                              </div>
+                            ) : userData.u_role_id == CONSTANTS.ROLES.USER ?
+                              (
+                                <div className="layout">
+                                  <div className="d-flex m-auto w35 border2">
+                                    <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
+                                    <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
+                                  </div>
+                                </div>
+                              ) : null
+
+                        }
+
+
+
+
                         <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Last Active:</div>
@@ -140,7 +161,7 @@ class Myprofile extends Component {
                             <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
                           </div>
                         </div>
-                      </Tab>
+                      {/* </Tab> */}
                       {/* <Tab eventKey="videos" title="videos">
                         videos 23
                                         </Tab>
@@ -150,7 +171,7 @@ class Myprofile extends Component {
                       <Tab eventKey="Categories" title="Categories">
                         Categoriesasd
                                         </Tab> */}
-                    </Tabs>
+                    {/* </Tabs> */}
                   </div>
                 </div>
               </Row>

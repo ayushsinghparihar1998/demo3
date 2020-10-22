@@ -412,7 +412,7 @@ class Adminlistener extends Component {
     let data = {
       count: count,
       offset: offset,
-      rating_type: review_type,
+      review_type: review_type,
     };
     if (offset == 1) {
       this.setState({
@@ -424,7 +424,7 @@ class Adminlistener extends Component {
         key: "request",
       });
     }
-    ELPViewApiService("getReviewListing", data).then((result) => { 
+    ELPViewApiService("getReviewListing", data).then((result) => {
       console.log("result", result);
       let reviewList = [];
       let totalRecordCount = 0;
@@ -726,8 +726,8 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> BLOCK
-                          REQUESTS
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          REPORT REQUEST
                         </div>
                       </div>
                     </div>
@@ -1528,8 +1528,8 @@ class Adminlistener extends Component {
                         <span
                           //className="prevNext"
                           className={`sr-only ${this.state.pageno == 1 || this.state.totalPage == 0
-                              ? ""
-                              : "active"
+                            ? ""
+                            : "active"
                             }`}
                         >
                           Previous
@@ -1565,9 +1565,9 @@ class Adminlistener extends Component {
                         <span className="icon-next"></span>
                         <span
                           className={`sr-only ${this.state.pageno == this.state.totalPage ||
-                              this.state.totalPage == 0
-                              ? ""
-                              : "active"
+                            this.state.totalPage == 0
+                            ? ""
+                            : "active"
                             }`}
                         >
                           Next

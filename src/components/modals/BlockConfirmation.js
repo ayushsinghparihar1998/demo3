@@ -62,7 +62,7 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
                 name: selfName
             }, (data) => {
                 console.log('active data', data);
-                // showSuccessToast(data.msg)
+                showSuccessToast(data.msg)
                 setIsOpen(false)
             });
             // let response = await ELPRxApiService("blockChat", {

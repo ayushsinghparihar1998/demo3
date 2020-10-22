@@ -67,56 +67,70 @@ const MySetting = (props) => {
             </div>
             <div className="profile_layout pt-4 pb-5">
                 <Container>
-                    <div className="mysetting">
-                        <div className="search_listeners">
-                            <Col md={9} lg={9} col={12} className="m-auto">
-                                <Row>
-                                    <Col lg={3} md={4}>
-                                        <div className="col1 fw500 fs18 mt-2">Search Listeners</div>
-                                    </Col>
-                                    <Col lg={5} md={5}>
-                                        <Form.Group>
-                                            <Form.Control type="text" placeholder="Find Keywords" className="inputTyp2 input3" id="outlined-email" variant="outlined" name="screenName" />
-                                        </Form.Group>
-                                    </Col>
-                                    <Col lg={3} md={3}>
-                                        <Button className="btnTyp5 bTyp5">Search</Button>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </div>
-
-                        <Row>
-                            <Col md={9} lg={9} col={12} className="m-auto">
-                                <div className="table_paymentlayout">
-                                    <Table bordered>
-                                        <thead>
-                                            <tr>
-                                                <th>Listener</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                usersList.map(data => {
-                                                    return (
-                                                        <tr>
-                                                            <td>{data.u_username}</td>
-                                                            <td>
-                                                                <Button onClick={() => _unblockUserHandler(data.id)} className="btnTyp9 unblock">Unblock</Button>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
+                    <Row>
+                        <Col xss={12}>
+                            <div className="myprofile">
 
 
-                                        </tbody>
-                                    </Table>
+
+                                <div className="text-center user_tab">
+                                    <br/>
+                                    <Tabs defaultActiveKey="blocked_users">
+                                        <Tab eventKey="blocked_users" title="Blocked Users">
+                                            <div className="search_listeners">
+                                                <Col xss={12} className="m-auto">
+                                                    <Row>
+                                                        <Col lg={3} md={4}>
+                                                            <div className="col1 fw500 fs18 mt-2">Search Listeners</div>
+                                                        </Col>
+                                                        <Col lg={5} md={5}>
+                                                            <Form.Group>
+                                                                <Form.Control type="text" placeholder="Find Keywords" className="inputTyp2 input3" id="outlined-email" variant="outlined" name="screenName" />
+                                                            </Form.Group>
+                                                        </Col>
+                                                        <Col lg={3} md={3}>
+                                                            <Button className="btnTyp5 bTyp5">Search</Button>
+                                                        </Col>
+                                                    </Row>
+                                                </Col>
+                                            </div>
+
+                                            <Row>
+                                                <Col md={9} lg={9} col={12} className="m-auto">
+                                                    <div className="table_paymentlayout">
+                                                        <Table bordered>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Listener</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    usersList.map(data => {
+                                                                        return (
+                                                                            <tr>
+                                                                                <td>{data.u_username}</td>
+                                                                                <td>
+                                                                                    <Button onClick={() => _unblockUserHandler(data.id)} className="btnTyp9 unblock">Unblock</Button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        )
+                                                                    })
+                                                                }
+
+
+                                                            </tbody>
+                                                        </Table>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Tab>
+                                    </Tabs>
                                 </div>
-                            </Col>
-                        </Row>
-                    </div>
+                            </div>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
             <Footer />

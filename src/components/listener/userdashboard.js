@@ -67,6 +67,7 @@ import Blogstwo from '../../assets/images/blogs2.svg';
 import Blogsthree from '../../assets/images/blogs3.svg';
 import Ricon from '../../assets/images/r_icons.svg';
 import Quotefour from '../../assets/images/quote4.png';
+import constant from '../../constant'
 
 import SocketIOClient from 'socket.io-client';
 import {
@@ -284,7 +285,7 @@ class Userdashboard extends Component {
                         <Row>
                            <Col md={4} className="pl-0">
                               <div className="left_sidebar">
-                                 <div className="inner_side">
+                                 {/* <div className="inner_side">
                                     <div className="chat-bg fs600 fs17 col18 pl-3 ">Hall of fame</div>
                                     <div className="col1 fs16 fw500 mt-2 ml-3 pb-2">CoCo of the month</div>
                                     <div className="d-flex m-3 border-bottom bottom2">
@@ -304,7 +305,7 @@ class Userdashboard extends Component {
                                           <div className="text-center col14 fs14 fw500 pb-2">4.5/<small>5</small></div>
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> */}
                                  <div className="left_sidebar">
                                     <RecentChat onRedirect={this.handleRedirectRecentChat} />
                                     {/* 
@@ -645,7 +646,7 @@ class Userdashboard extends Component {
                      Subcomunities
                   </div>
                            </div>
-                           {/* <div className="right_inner_side">
+                           <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  My Personal Link
                   </div>
@@ -661,11 +662,7 @@ class Userdashboard extends Component {
                                        type="text"
                                        readOnly
                                        className="inputTyp4"
-                                       value={
-                                          dashboardData.refer_url
-                                             ? dashboardData.refer_url
-                                             : ''
-                                       }
+                                       value={constant.WEB_BASE_URL + 'share-profile?'+ (dashboardData.refer_url?dashboardData.refer_url.split('?').reverse()[0]:'')}
                                     />
                                     <Button className="btnTyp8" onClick={this.copyReferUrl}>
                                        <Image src={Copys} alt="" className="" />
@@ -677,7 +674,7 @@ class Userdashboard extends Component {
                                     <Image src={Whatsapp} alt="" className="" />
                                  </div>
                               </div>
-                           </div> */}
+                           </div>
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  Recent join

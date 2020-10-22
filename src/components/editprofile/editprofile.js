@@ -30,7 +30,7 @@ import NavBar from '../core/nav';
 import Footer from '../core/footer';
 import Profileban from '../../assets/images/profile_ban.svg';
 import Profileimg from '../../assets/images/profile_img.svg';
-import Usaflag from '../../assets/images/usa_flag.svg';
+import Usaflag from '../../assets/images/india_flag.svg';
 import warningS from '../../assets/images/w_signal.svg';
 import Camera from '../../assets/images/camera.svg';
 import Cameratwo from '../../assets/images/camera-white.svg';
@@ -116,7 +116,7 @@ class Editprofile extends Component {
           rating: profile.u_rating,
           stateId: profile.u_state,
           mobileNumber: profile.u_mobile,
-          u_image:profile.u_image,
+          u_image: profile.u_image,
           profileImg: '',
           backgroud_img: ''
         }, () => {
@@ -395,235 +395,238 @@ class Editprofile extends Component {
                 </div>
                 <div className="mt-4 mb-4 pb-2"></div>
                 <div className="text-center user_tab">
-                  <Tabs defaultActiveKey="home">
-                    <Tab eventKey="home" title="profile info">
-                      <Col md={8} className="m-auto">
-                        <Form className="text-left mt-5">
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
-                              User Name:
+                  {/* <Tabs defaultActiveKey="home">
+                    <Tab eventKey="home" title="profile info"> */}
+                  <Col md={8} className="m-auto">
+                    <Form className="text-left mt-5">
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14">
+                          User Name:
                             </Form.Label>
-                            <Form.Control
-                              type="text"
-                              name="userName"
-                              placeholder="User Name"
-                              //onChange={this.handleChange}
-                              value={this.state.userName}
-                              className="inputTyp2"
-                              disabled={true}
-                            />
-                          </Form.Group>
+                        <Form.Control
+                          type="text"
+                          name="userName"
+                          placeholder="User Name"
+                          //onChange={this.handleChange}
+                          value={this.state.userName}
+                          className="inputTyp2"
+                          disabled={true}
+                        />
+                      </Form.Group>
 
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
-                              Email:
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14">
+                          Email:
                             </Form.Label>
-                            <Form.Control
-                              type="email"
-                              name="userEmail"
-                              placeholder="Email"
-                              value={this.state.userEmail}
-                              className="inputTyp2"
-                              readOnly
-                            />
-                          </Form.Group>
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 col14 mt-2">
-                              Password:
+                        <Form.Control
+                          type="email"
+                          name="userEmail"
+                          placeholder="Email"
+                          value={this.state.userEmail}
+                          className="inputTyp2"
+                          readOnly
+                        />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14 mt-2">
+                          Password:
                             </Form.Label>
-                            <div className="d-flex">
-                              <Form.Control
-                                type="password"
-                                name="userPassword"
-                                onChange={this.handleChange}
-                                value={this.state.userPassword}
-                                className="inputTyp2"
-                              />
-                              <Button
-                                className="btnTyp11 ml-3"
-                                onClick={this.handleResetPassword}>
-                                reset
-                              </Button>
-                            </div>
-                          </Form.Group>
-
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 mt-2 col14">
-                              Mobile Number:
-                            </Form.Label>
-                            <Form.Control
-                              type="text"
-                              name="mobileNumber"
-                              placeholder="Mobile Number"
-                              onChange={this.handleMobileChange}
-                              value={this.state.mobileNumber}
-                              className="inputTyp2"
-                            />
-                          </Form.Group>
-
-                          <Form.Group className="genders">
-                            <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
-                              Gender:
-                            </Form.Label>
-                            <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
-                            <span>
-                              <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
-                              <span><input type="radio" checked={this.state.gender === 'Others' ? true : false} value="Others" name="gender" onChange={this.handleChange} /> Others</span>
-                          </Form.Group>
-                          <Form.Group>
-                            <Form.Label className="fs20 fw600 col14">
-                              BIO:
-                            </Form.Label>
-                            <Form.Control
-                              type="textarea"
-                              name="bio"
-                              onChange={this.handleChange}
-                              value={this.state.bio}
-                              className="inputTyp2"
-                              placeholder="Bio"
-                            />
-                          </Form.Group>
-                          <Form.Label className="fs20 fw600 col14 mt-2">
-                            Country:
-                          </Form.Label>
-                          <Row>
-                            <Col md={4}>
-                              <Select
-                                classes="form-control selectTyp1"
-                                showSearch
-                                style={{ width: 200 }}
-                                placeholder="Select a Country"
-                                optionFilterProp="children"
-                                onChange={event => this.onChangeSelection(event)}
-                                value={this.state.countryId}
-                              >
-                                <option value="">Select a Country</option>
-                                {this.state.countryList && this.state.countryList.map(
-                                  (item, index) => {
-                                    return (
-                                      <option value={item.country_id}>
-                                        {capitalizeFirstLetter(item.country_name)}
-                                      </option>
-                                    );
-                                  }
-                                )}
-                              </Select>
-                            </Col>
-                            <Col md={4}>
-                              <Select
-                                classes="form-control selectTyp1"
-                                showSearch
-                                style={{ width: 200 }}
-                                placeholder="Select a State"
-                                optionFilterProp="children"
-                                onChange={event => this.onChangeSelectionState(event)}
-                                value={this.state.stateId}
-                              >
-                                <option value="">Select a State</option>
-                                {this.state.stateList && this.state.stateList.map(
-                                  (item, index) => {
-                                    return (
-                                      <option value={item.state_id}>
-                                        {capitalizeFirstLetter(item.state_name)}
-                                      </option>
-                                    );
-                                  }
-                                )}
-                              </Select>
-                            </Col>
-                            <Col md={4}>
-                              <Select
-                                classes="form-control selectTyp1"
-                                showSearch
-                                style={{ width: 200 }}
-                                placeholder="Select a City"
-                                optionFilterProp="children"
-                                onChange={event => this.onChangeSelectionCity(event)}
-                                value={this.state.cityId}>
-                                <option value="">Select a City</option>
-                                {this.state.cityList && this.state.cityList.map(
-                                  (item, index) => {
-                                    return (
-                                      <option value={item.ct_id}>
-                                        {capitalizeFirstLetter(item.city)}
-                                      </option>
-                                    );
-                                  }
-                                )}
-                              </Select>
-                            </Col>
-                          </Row>
-                          <Form.Label className="fs20 fw600 col14 mt-4">
-                            Date of birth:
-                          </Form.Label>
-                          <Row>
-                            <Col md={4}>
-                              <Form.Group controlId="exampleForm.ControlSelect1">
-                                <DayPicker
-                                  defaultValue="Day"
-                                  id="day"
-                                  name="day"
-                                  classes="form-control selectTyp1"
-                                  year={this.state.year}
-                                  month={this.state.month}
-                                  minDate={moment().startOf('year')}
-                                  endYearGiven
-                                  value={this.state.day}
-                                  onChange={(day) => {
-                                    this.setState({ day });
-                                    console.log(day, typeof day);
-                                  }}
-                                />
-                              </Form.Group>
-                            </Col>
-
-                            <Col md={4}>
-                              <Form.Group controlId="exampleForm.ControlSelect1">
-                                <MonthPicker
-                                  id="month"
-                                  name="month"
-                                  classes="form-control selectTyp1"
-                                  defaultValue={'Months'}
-                                  short
-                                  endYearGiven
-                                  year={this.state.year}
-                                  value={this.state.month}
-                                  onChange={(month) => {
-                                    this.setState({ month });
-                                  }}
-                                />
-                              </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                              <Form.Group controlId="exampleForm.ControlSelect1">
-                                <YearPicker
-                                  id="year"
-                                  name="year"
-                                  classes="form-control selectTyp1"
-                                  defaultValue="Year"
-                                  end={moment().year()}
-                                  reverse
-                                  value={this.state.year}
-                                  onChange={(year) => {
-                                    this.setState({ year });
-                                    console.log(year);
-                                  }}
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Row>
-
+                        <div className="d-flex">
+                          <Form.Control
+                            type="password"
+                            name="userPassword"
+                            onChange={this.handleChange}
+                            value={this.state.userPassword}
+                            className="inputTyp2"
+                          />
                           <Button
-                            className="btnTyp5 mt-5 mr-3"
-                            onClick={this.handleSubmit}
+                            className="btnTyp11 ml-3"
+                            onClick={this.handleResetPassword}>
+                            reset
+                              </Button>
+                        </div>
+                      </Form.Group>
+
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 mt-2 col14">
+                          Mobile Number:
+                            </Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="mobileNumber"
+                          placeholder="Mobile Number"
+                          onChange={this.handleMobileChange}
+                          value={this.state.mobileNumber}
+                          className="inputTyp2"
+                        />
+                      </Form.Group>
+
+                      <Form.Group className="genders">
+                        <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
+                          Gender:
+                            </Form.Label>
+                        <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
+                        <span>
+                          <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
+                        <span><input type="radio" checked={this.state.gender === 'Others' ? true : false} value="Others" name="gender" onChange={this.handleChange} /> Others</span>
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14">
+                          BIO:
+                            </Form.Label>
+                        <Form.Control
+                          type="textarea"
+                          name="bio"
+                          onChange={this.handleChange}
+                          value={this.state.bio}
+                          className="inputTyp2"
+                          placeholder="Bio"
+                        />
+                      </Form.Group>
+                      <Form.Label className="fs20 fw600 col14 mt-2">
+                        Country:
+                          </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Select
+                            classes="form-control selectTyp1"
+                            showSearch
+                            style={{ width: 200 }}
+                            placeholder="Select a Country"
+                            optionFilterProp="children"
+                            onChange={event => this.onChangeSelection(event)}
+                            value={this.state.countryId}
                           >
-                            save
+                            <option value="">Select a Country</option>
+                            {this.state.countryList && this.state.countryList.map(
+                              (item, index) => {
+                                return (
+                                  <option value={item.country_id}>
+                                    {capitalizeFirstLetter(item.country_name)}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </Select>
+                        </Col>
+                        <Col md={4}>
+                          <Select
+                            classes="form-control selectTyp1"
+                            showSearch
+                            style={{ width: 200 }}
+                            placeholder="Select a State"
+                            optionFilterProp="children"
+                            onChange={event => this.onChangeSelectionState(event)}
+                            value={this.state.stateId}
+                          >
+                            <option value="">Select a State</option>
+                            {this.state.stateList && this.state.stateList.map(
+                              (item, index) => {
+                                return (
+                                  <option value={item.state_id}>
+                                    {capitalizeFirstLetter(item.state_name)}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </Select>
+                        </Col>
+                        <Col md={4}>
+                          <Select
+                            classes="form-control selectTyp1"
+                            showSearch
+                            style={{ width: 200 }}
+                            placeholder="Select a City"
+                            optionFilterProp="children"
+                            onChange={event => this.onChangeSelectionCity(event)}
+                            value={this.state.cityId}>
+                            <option value="">Select a City</option>
+                            {this.state.cityList && this.state.cityList.map(
+                              (item, index) => {
+                                return (
+                                  <option value={item.ct_id}>
+                                    {capitalizeFirstLetter(item.city)}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </Select>
+                        </Col>
+                      </Row>
+                      <Form.Label className="fs20 fw600 col14 mt-4">
+                        Date of birth:
+                          </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Form.Group controlId="exampleForm.ControlSelect1">
+                            <DayPicker
+                              disabled
+                              defaultValue="Day"
+                              id="day"
+                              name="day"
+                              classes="form-control selectTyp1"
+                              year={this.state.year}
+                              month={this.state.month}
+                              minDate={moment().startOf('year')}
+                              endYearGiven
+                              value={this.state.day}
+                              onChange={(day) => {
+                                this.setState({ day });
+                                console.log(day, typeof day);
+                              }}
+                            />
+                          </Form.Group>
+                        </Col>
+
+                        <Col md={4}>
+                          <Form.Group controlId="exampleForm.ControlSelect1">
+                            <MonthPicker
+                              disabled
+                              id="month"
+                              name="month"
+                              classes="form-control selectTyp1"
+                              defaultValue={'Months'}
+                              short
+                              endYearGiven
+                              year={this.state.year}
+                              value={this.state.month}
+                              onChange={(month) => {
+                                this.setState({ month });
+                              }}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={4}>
+                          <Form.Group controlId="exampleForm.ControlSelect1">
+                            <YearPicker
+                              disabled
+                              id="year"
+                              name="year"
+                              classes="form-control selectTyp1"
+                              defaultValue="Year"
+                              end={moment().year()}
+                              reverse
+                              value={this.state.year}
+                              onChange={(year) => {
+                                this.setState({ year });
+                                console.log(year);
+                              }}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+
+                      <Button
+                        className="btnTyp5 mt-5 mr-3"
+                        onClick={this.handleSubmit}
+                      >
+                        save
                           </Button>
-                          <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
-                        </Form>
-                      </Col>
-                    </Tab>
-                    {/* <Tab eventKey="videos" title="videos">
+                      <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
+                    </Form>
+                  </Col>
+                  {/* </Tab> */}
+                  {/* <Tab eventKey="videos" title="videos">
                       <div className="mx-wcustomtwo m-auto">
                         <Row>
                           <Col md={6}>
@@ -849,9 +852,9 @@ class Editprofile extends Component {
                         </Row>
                       </div>
                     </Tab> */}
-                   
-                   
-                    {/* <Tab eventKey="badgesawards" title="Badges & Awards">
+
+
+                  {/* <Tab eventKey="badgesawards" title="Badges & Awards">
                       <Col md={6} className="m-auto text-left pt-5">
                         <div className="mw-40 m-auto d-flex">
                           <div className="w-50 pl-5">
@@ -894,7 +897,7 @@ class Editprofile extends Component {
                       </Col>
                     </Tab> */}
 
-                    {/* <Tab eventKey="Categories" title="Categories">
+                  {/* <Tab eventKey="Categories" title="Categories">
                       <Col md={8} className="m-auto">
                         <Form className="text-left mt-5">
                           <Form.Group>
@@ -946,7 +949,7 @@ class Editprofile extends Component {
                         </Form>
                       </Col>
                     </Tab> */}
-                    </Tabs>
+                  {/* </Tabs> */}
                 </div>
               </div>
             </Row>

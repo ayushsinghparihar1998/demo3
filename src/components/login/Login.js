@@ -15,6 +15,7 @@ import {
 } from "../../common/helpers/Utils";
 import * as qs from "query-string";
 import ELPRxApiService from "../../common/services/apiService";
+import UserSignup from '../signup/userSignup';
 
 import {
   Button,
@@ -47,12 +48,12 @@ class Login extends Component {
       show3: false,
       roleType:
         this.props.location &&
-        this.props.location.state &&
-        this.props.location.state.roleType
+          this.props.location.state &&
+          this.props.location.state.roleType
           ? this.props.location.state.roleType
           : this.props.roleType
-          ? this.props.roleType
-          : CONSTANTS.ROLES.LISTNER,
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
@@ -69,8 +70,8 @@ class Login extends Component {
         next.location && next.location.state && next.location.state.roleType
           ? next.location.state.roleType
           : this.props.roleType
-          ? this.props.roleType
-          : CONSTANTS.ROLES.LISTNER,
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
     });
   }
   componentDidMount() {
@@ -93,6 +94,25 @@ class Login extends Component {
         this.props.history.push({ pathname: "/userDashboardcust" });
       }
     }
+    window.addEventListener('keypress', this.handleEnterKeyPress)
+
+  }
+  handleEnterKeyPress = (e) => {
+
+    if (e.key === 'Enter') {
+      if (this.state.roleType === CONSTANTS.ROLES.LISTNER) {
+        this.handleSubmitListener()
+      } else if (this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL) {
+        this.handleSubmitProfessional()
+      } else if (this.state.roleType === CONSTANTS.ROLES.USER) {
+        this.handleSubmitUser()
+      } else if (this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN) {
+        this.handleSubmitAdmin()
+      }
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keypress', this.handleEnterKeyPress)
   }
   verifyEmail = (email, type, authcode) => {
     if (email && type) {
@@ -323,8 +343,8 @@ class Login extends Component {
           {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
             <NavBarAdmin {...this.props} />
           ) : (
-            <NavBar {...this.props} />
-          )}
+              <NavBar {...this.props} />
+            )}
         </div>
         <div className="Loginlayout">
           <Container>
@@ -332,31 +352,31 @@ class Login extends Component {
               {this.state.roleType === CONSTANTS.ROLES.LISTNER
                 ? "Listener Login"
                 : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                ? "Professional Login"
-                : this.state.roleType === CONSTANTS.ROLES.USER
-                ? "Member Login"
-                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                ? "Admin Login"
-                : ""}
+                  ? "Professional Login"
+                  : this.state.roleType === CONSTANTS.ROLES.USER
+                    ? "Member Login"
+                    : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                      ? "Admin Login"
+                      : ""}
             </div>
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
                 Don’t have an account?
-                <strong className="fw500"> Become a 
-                {this.state.roleType === CONSTANTS.ROLES.LISTNER
-                ? " Listener"
-                : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                ? " Professional"
-                : this.state.roleType === CONSTANTS.ROLES.USER
-                ? " Member"
-                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                ? " Admin"
-                : ""}
+                <strong className="fw500">
+                  {this.state.roleType === CONSTANTS.ROLES.LISTNER
+                    ? " Become a Listener"
+                    : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
+                      ? " Become a Professional"
+                      : this.state.roleType === CONSTANTS.ROLES.USER
+                        ? <span sty onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
+                        : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                          ? " Become a Admin"
+                          : ""}
                 </strong>
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
 
             <div className="layout_box mb-4">
               <Form.Group className="mb-4 pb-2">
@@ -424,8 +444,8 @@ class Login extends Component {
                   LOGIN
                 </Button>
               ) : (
-                ""
-              )}
+                        ""
+                      )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
                 <span
@@ -490,6 +510,21 @@ class Login extends Component {
                   {...this.props}
                 />
               </div>
+            </Container>
+          </Modal.Body>
+        </Modal>
+        {/* user registration start */}
+
+        <Modal show={this.state.userSignUp} className="CreateAccount modaltwo">
+          <Modal.Header>
+            <Button onClick={() => this.setState({ userSignUp: false })}>
+              <Image src={Crossbtn} alt="" />
+            </Button>
+          </Modal.Header>
+
+          <Modal.Body>
+            <Container>
+              <UserSignup {...this.props} />
             </Container>
           </Modal.Body>
         </Modal>

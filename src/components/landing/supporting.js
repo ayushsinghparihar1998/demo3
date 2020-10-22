@@ -16,8 +16,8 @@ class Supporting extends Component {
       infinite: true,
       autoplay: true,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4
+      slidesToShow: 2,
+      slidesToScroll: 2
     };
     return (
       <div className="Supporting">
@@ -26,9 +26,9 @@ class Supporting extends Component {
           <div className="col14 fs18 fw500 w-100 pt-3 mb-5 pb-3">Eat Luv N Pray works with organisations in helping them increase productivity and mitigate delays by providing mental health support to their employees. Get started today.</div>
 
           <Slider {...settings}>
-            <div className="organise_carousel">
+            {/* <div className="organise_carousel">
               <Image src={Organise} alt="Organise" />
-            </div>
+            </div> */}
             {/* <div className="organise_carousel">
               <Image src={Organisetwo} alt="Organisetwo" />
             </div>
@@ -41,9 +41,9 @@ class Supporting extends Component {
             <div className="organise_carousel">
               <Image src={Organise} alt="Organise" />
             </div>
-            <div className="organise_carousel">
+            {/* <div className="organise_carousel">
               <Image src={Organisefour} alt="Organisefour" />
-            </div>
+            </div> */}
             {/* <div className="organise_carousel">
               <Image src={Organisetwo} alt="Organisetwo" />
             </div> */}

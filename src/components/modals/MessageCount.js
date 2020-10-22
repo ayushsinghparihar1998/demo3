@@ -14,7 +14,7 @@ const MessageCount = ({ userId }) => {
 
     useEffect(() => {
         getActiveConversation()
-    }, [])
+    }, [selfId])
     useEffect(() => {
         let title = 'Report '
         let id = null
@@ -23,6 +23,7 @@ const MessageCount = ({ userId }) => {
             id = getLocalStorage('userInfo').u_id
         } else if (getLocalStorage('customerInfo')) {
             title = title + 'listener'
+            console.log('===??ASD',getLocalStorage('customerInfo').u_id)
             id = getLocalStorage('customerInfo').u_id
         } else if (getLocalStorage('userInfoProff')) {
             title = title + 'listener'
@@ -34,6 +35,7 @@ const MessageCount = ({ userId }) => {
     const getActiveConversation = () => {
 
         const getData = () => {
+            console.log('user_id =======>',selfId);
             socket.emit("get-active-conversation", {
                 user_id: selfId 
             }, (data) => { 

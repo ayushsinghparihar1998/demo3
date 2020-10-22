@@ -15,8 +15,8 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import UserChat from "../../assets/images/user_chat.svg";
 import UserChat2 from "../../assets/images/user_chat2.svg";
-import UserChat3 from "../../assets/images/user_chat3.svg";
-import UserChat4 from "../../assets/images/user_chat4.svg";
+import UserChat3 from "../../assets/images/user_chat.png";
+import UserChat4 from "../../assets/images/user_chat.png";
 import UserChat5 from "../../assets/images/user_chat5.svg";
 import ChatCross from "../../assets/images/chat_cross.svg";
 import Warningnotification from "../../assets/images/notification_warning.svg";
@@ -69,17 +69,20 @@ class ChatUser extends Component {
 
   }
   componentWillUnmount() {
-    socket.emit(
-      "onScreen",
-      JSON.stringify({
-        from_user_id: getLocalStorage("customerInfo").u_id,
-        to_user_id: this.props.match.params.id,
-        status: 1,
-      }),
-      (data) => {
-        console.log('chat component unmounted')
-      }
-    );
+    if (getLocalStorage("customerInfo")) {
+      socket.emit(
+        "onScreen",
+        JSON.stringify({
+          from_user_id: getLocalStorage("customerInfo").u_id,
+          to_user_id: this.props.match.params.id,
+          status: 1,
+        }),
+        (data) => {
+          console.log('chat component unmounted')
+        }
+      );
+    }
+
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
   }
@@ -625,7 +628,7 @@ class ChatUser extends Component {
                          </Button>
                           </div> : null
                       }
- <MessageCount userId={this.props.match.params.id} />
+                      <MessageCount userId={this.props.match.params.id} />
                     </Form.Group>
                     {/* </Form> */}
                   </div>
@@ -638,7 +641,7 @@ class ChatUser extends Component {
 
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={userMeta.u_username} />
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
-        <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList}/>
+        <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
         {/* <Modal show={this.state.show2} className="CreateAccount question">
           <Modal.Header>

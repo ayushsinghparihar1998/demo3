@@ -54,8 +54,11 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
                 br_from_id: selfId,
                 br_to_id: userId
             })
-            console.log(response)
-            setIsOpen(false)
+            console.log(response.data.success)
+            if(response.data.success != 'error'){
+                setIsOpen(false)
+            }
+            // 
         } catch (err) {
             console.log(err);
         }
