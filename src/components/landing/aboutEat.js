@@ -54,8 +54,7 @@ class Abouteat extends Component {
 
                                 <div className="pb-4">Today, Eat Luv N Pray remedies that problem by giving virtual leasing space to many NGO’s who would help connecting you with trained listeners as well as resolve various life matters with empathy and compassion. We will also provide database of highly capable consultants from walks of Eat, Love and Pray respectively. </div>
 
-                                <div classNam="pb-4">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a listener on this platform specially, who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend.</div>
-                                <br />
+                                <div classNam="pb-4">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a listener on this platform specially, who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend.</div> 
                                 {/* <div className="pb-2">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a CoCo who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend. </div> */}
                                 <div className="pb-2">Please remember, you’re NEVER ALONE !</div>
                             </div>

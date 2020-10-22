@@ -326,7 +326,7 @@ class NavBar extends Component {
                       <Nav.Link onClick={this.handleModal}>
                         Talk/Connect
                       </Nav.Link>,
-                      <NavLink disabled to="/becomeListener" className="nav-link" style={{ textAlign: 'center' }}>
+                      <NavLink disabled to="/becomeListener" className="nav-link text-c">
                         Volunteer<br />
                         <span className="comings">coming soon</span>
                       </NavLink>,
@@ -338,12 +338,12 @@ class NavBar extends Component {
                         <NavDropdown.Item href="https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995" target="__blank">My Help</NavDropdown.Item>
                         <NavDropdown.Item href="http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/" target="__blank">BW well being world</NavDropdown.Item>
                       </NavDropdown>,
-                      <Nav.Link disabled onClick={() => this.setState({ show3: true })} style={{ textAlign: 'center' }}>
+                      <Nav.Link disabled onClick={() => this.setState({ show3: true })} className="nav-link text-c">
                         Professional Help
                         <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
-                      <Nav.Link disabled href="#about_us_container" style={{ textAlign: 'center' }}>
+                      <Nav.Link disabled href="#about_us_container" className="nav-link text-c"> 
                         About
                         <br />
                         <span className="comings">coming soon</span>

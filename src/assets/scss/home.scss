@@ -129,9 +129,13 @@
     }
 }
 
-.Supporting { 
+.Supporting {  
     padding: 3rem 0 7rem; 
     text-align: center;  
+
+    .supportives {
+        justify-content: center; 
+    }
     .slick-dots { 
         li {
             top: 50px; 
@@ -185,7 +189,7 @@
     
     .user_set {
         position: absolute;
-        bottom: 50px;
+        bottom: 0;
         left: 50%;
         transform: translate(-50%, 0);
     }
@@ -254,6 +258,14 @@ img {
         max-width: 60px;
     }
     .main_baner {
+        .bannerset {  
+           
+            .fs12.pl-4.pr-4 {
+                font-size: 11px !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important; 
+            }
+        }
         .baner1, .baner2, .baner3 { 
             div.fs18 {
                 font-size: 13px !important; 
@@ -338,6 +350,13 @@ img {
         max-width: 60px;
     }
     .main_baner {
+        .bannerset {
+            .fs12.pl-4.pr-4 {
+                font-size: 11px !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important; 
+            }
+        }
         .baner1, .baner2, .baner3 { 
             div.fs18 {
                 font-size: 13px !important; 
@@ -404,11 +423,19 @@ img {
 
 }
 
-@media (min-width: 768px) and (max-width: 991px) { 
+@media (min-width: 768px) and (max-width: 991px) {  
     .main_baner {
+        .container {
+            max-width: 790px;
+        }
         .bannerset {
             .user_set {
-                bottom: 30px; 
+                bottom: -20px;   
+            }
+            .fs12.pl-4.pr-4 {
+                font-size: 9.5px !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important; 
             }
         }
         .mj_nav {
@@ -426,7 +453,7 @@ img {
                 border: solid 1px #ddd;
 
                 .navbar-nav a.nav-link {
-                    margin-bottom: 10px; 
+                    // margin-bottom: 10px; 
                 }
                 form.form-inline {
                     margin-top: 12px;
@@ -437,8 +464,13 @@ img {
                 // border: none;
                 outline: 0;     
             }
+            .dropdown-menu {
+                & a {
+                    font-size: 13px; 
+                }
+            }
             div.btnTypeone.dropdown {
-                max-width: 200px;
+                // max-width: 200px;
 
                 a.dropdown-toggle.nav-link {
                     margin-bottom: 0px;
@@ -446,6 +478,8 @@ img {
                 div.dropdown-menu {
                     position: absolute;
                     border: solid 1px #ddd;
+                    width: 98%; 
+                    left: inherit; 
                 }
             }
         }
@@ -532,15 +566,19 @@ img {
            
             .italic_style {
                 font-size: 15px !important; 
+                margin-bottom: 20px !important;
+                padding-top: 25px;
 
                 .invertedone {
-                    max-width: 50px; 
-                    left: -35px;
+                    max-width: 40px;
+                    left: -50px;
+                    top: 20px;
                 }
                 .invertedtwo {  
-                    max-width: 50px;
-                    right: -1%;
-                    top: 100px;      
+                    position: relative; 
+                    max-width: 40px;
+                    right: -4%;
+                    top: 8px;        
                 }
             }
             .fs44 {
@@ -554,8 +592,19 @@ img {
 
     .aboutEats {
         .container {
-            div.fs44  {
-                font-size: 36px !important; 
+            div.fs40  {
+                // font-size: 2.5rem !important; 
+            }
+            .col-md-5 {
+                .subscribe_here { 
+                    position: relative;
+                    top: -6px; 
+
+                    div.fs30.fw700 {
+                        margin-bottom: 10px; 
+                    }
+                }
+                
             }
             div.fs16  {
                 font-size: 14px !important;  
@@ -666,9 +715,69 @@ img {
     padding: 10px 24px 14px;
 }
 
+@media (min-width: 992px) {
+    .main_baner {
+        .mj_nav {
+            .navbar-light {
+                .navbar-nav {
+                    a.text-c {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width: 991px) {
+    .main_baner {
+        .mj_nav {
+            div.navbar-collapse {
+                padding-top: 5px;
+                padding-bottom: 0; 
+            }
+            .navbar-light {
+                .navbar-nav {
+                    a.nav-link {
+                        border-bottom: solid 1px #ddd; 
+                        text-align: center;
+                        &+.btnTypeone {
+                            margin-top: 10px; 
+                            margin-right: 10px;
+                            margin-left: 10px;
+                            margin-bottom: -2px; 
+                            & a { 
+                                border-bottom: none; 
+                            }
+                        }
+                    }
+
+                    .dropdown-menu {
+                        padding: 0;
+                        a.dropdown-item {
+                            border-bottom: solid 1px #ddd !important;
+
+                            &:last-child {
+                                border-bottom: none !important; 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
 @media (max-width: 767px) { 
 
     .main_baner { 
+
+        .mb-5 {
+            margin-bottom: 2.5rem!important;
+        }
         .pt-120 {
             padding-top: 50px;
             font-size: 30px !important;
@@ -681,7 +790,13 @@ img {
                 font-size: 15px !important; 
             }
         }
+        .col-md-3 {
+            text-align: center;
 
+            img {
+                max-width: 250px; 
+            }
+        }
         .baner1, .baner2, .baner3 { 
             background-size: 100% 100%;
             min-height: 270px;
@@ -698,18 +813,145 @@ img {
         }
         .mj_nav {
             .navbar-light {
-                
+                .navbar-toggler {
+                    outline: 0; 
+                }
                 .navbar-brand {
                     padding-left: 0px;
                     font-size: 15px;  
 
                     img {
-                        max-width: 50px; 
+                        max-width: 50px;
+                    }
+                }
+                .navbar-collapse {
+                    flex-basis: 100%;
+                    flex-grow: 1;
+                    align-items: center;
+                    background: #ffffff;
+                    padding: 15px 0;
+                    border-radius: 12px;
+                    position: absolute;
+                    top: 90%;
+                    left: 3%;
+                    right: 0;
+                    z-index: 99;
+                    max-width: 94%;
+                    border: solid 1px #ddd;
+                    padding-top: 5px;  
+                }
+                .navbar-nav {
+                    background: $col18;
+                    border-radius: 10px;  
+                }
+            }
+        }
+    } 
+    
+    .conversations {
+        .col-md-6 {
+            & > img {
+                position: relative;
+                width: 100%; 
+
+                &.mt-4 {
+                    margin-top: 0px !important; 
+                }
+            } 
+            &:first-child {
+                & > img {
+                    position: relative;
+                    width: 380px;  
+                } 
+            }
+            div:nth-child(2) { 
+                font-size: 36px !important;
+            }
+            div:nth-child(3) {
+                font-size: 24px !important;
+            }
+            div:nth-child(4) { 
+                font-size: 15px !important;
+            }
+            &:last-child {
+                div:nth-child(2) {
+                    
+                }
+            }
+        }
+    }
+
+    .happyPatient  {
+        .container  {
+            .fs20 {
+                font-size: 16px !important;
+            }
+            .fs40 {
+                font-size: 2rem !important;
+            }
+
+            .carousel-item {
+                & .fs17 {
+                    font-size: 14px !important; 
+                }
+                .italic_style {
+                    padding-top: 20px;
+                    margin-bottom: 20px !important;
+                    .invertedone {
+                        left: -40px; 
+                        max-width: 34px; 
+                        top: 5px; 
+                    }
+                    .invertedtwo { 
+                        right: -10px;
+                        max-width: 34px;
+                        position: relative;
+                        top: 0;
                     }
                 }
             }
         }
-    }      
+    }
+
+    .aboutEats {
+        padding: 40px 0;
+        padding-bottom: 0;
+        text-align: center; 
+        .container {
+            div.fs40  {
+                font-size: 2rem !important; 
+            }
+            .subscribe_here { 
+                padding-left: 0;
+                .fs18.fw300 {
+                    padding-top: 10px;
+                    margin-bottom: 10px !important; 
+                }
+            }
+            div.fs16  {
+                font-size: 14px !important;  
+
+                & > div {
+                    padding-bottom: 10px !important; 
+                }
+            }
+            .subscribe_here { 
+                div.fs40 {
+                    font-size: 30px !important;
+                }
+                div.fs22 {
+                    font-size: 18px !important; 
+                }
+                button.btnTyp2  {
+                    margin-top: 0px !important;
+                }
+                input.inputTyp1 {
+                    height: 3rem !important;
+                    font-size: 16px !important; 
+                }
+            }
+        }
+    }
 
 
 }
