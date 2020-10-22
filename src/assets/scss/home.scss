@@ -666,8 +666,52 @@ img {
     padding: 10px 24px 14px;
 }
 
-@media (max-width: 767px) {
-    
+@media (max-width: 767px) { 
+
+    .main_baner { 
+        .pt-120 {
+            padding-top: 50px;
+            font-size: 30px !important;
+            line-height: 34px;
+            text-align: center;
+
+            &+div {
+                margin-top: 10px;
+                text-align: center;
+                font-size: 15px !important; 
+            }
+        }
+
+        .baner1, .baner2, .baner3 { 
+            background-size: 100% 100%;
+            min-height: 270px;
+            max-width: 280px; 
+            margin: auto;
+        }
+        .bannerset {
+            .user_set {
+                bottom: -20px;
+            }
+            div.fs12 {
+                font-size: 13px !important; 
+            }
+        }
+        .mj_nav {
+            .navbar-light {
+                
+                .navbar-brand {
+                    padding-left: 0px;
+                    font-size: 15px;  
+
+                    img {
+                        max-width: 50px; 
+                    }
+                }
+            }
+        }
+    }      
+
+
 }
  
 
