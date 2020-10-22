@@ -16,7 +16,7 @@ class Banner extends Component {
                 <div className="fw300 col2 fs20 mb-5">Time to get out of that imaginary confined space.<br />
 Our trained Listener are ready to extend their helping hand.</div>
                 <Row>
-                    <Col md={3}>
+                    <Col md={3} col={12} className="mb-5">  
                         <div className="baner1 bannerset">
                             <Image src={community} alt="" className="pt-2" />
                             <div className="fs18 fw600 col5 pt-2">Community / CSR</div>
@@ -25,15 +25,15 @@ Our trained Listener are ready to extend their helping hand.</div>
 
                         </div>
                     </Col>
-                    <Col md={3}>
+                    <Col md={3} col={12} className="mb-5">   
                         <div className="baner2 bannerset">
                             <Image src={freechat} alt="" className="pt-2" />
                             <div className="fs18 fw600 col6 pt-2">Free Chat</div>
-                            <div className="col16 fs12 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive CoCos.</div>
+                            <div className="col14 fs12 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive CoCos.</div>
                             <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>
                     </Col>
-                    <Col md={3}>
+                    <Col md={3} col={12} className="mb-5">   
                         <div className="baner3 bannerset">
                             <Image src={therapy} alt="" className="pt-2" />
                             <div className="fs18 fw600 col7 pt-2">Professional Help</div> 
@@ -41,12 +41,12 @@ Our trained Listener are ready to extend their helping hand.</div>
                             <Image src={usersend} alt="" className="pt-3 mt-3 user_set" />
                         </div>
                     </Col>
-                    <Col md={3}>
-                        <Image src={women} alt="" className="w-100" />
+                    <Col md={3} col={12}>     
+                        <Image src={women} alt="" className="w-100" />  
                     </Col>
                 </Row>
 
-            </Container>
+            </Container> 
         )
     }
 }
