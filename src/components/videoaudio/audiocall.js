@@ -25,6 +25,9 @@ import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
+import CONSTANTS from "../../common/helpers/Constants";
+
+
 const socket = socketClass.getSocket();
 let tmp = 0;
 const AudioCall = (props) => {
@@ -44,15 +47,20 @@ const AudioCall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
+  const openChatWindow = () =>{
+    setShowChat(true)
+  }
   const { caller, id: paramsid } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     socket.on('endVideoCall', () => {
       // showErrorMessage("Call has been ended.")
-      setTimeout(() => {
-        history.push('/')
-      }, 1000);
+      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+        history.push('/chatuser/'+paramsid)
+      }else{
+        history.push('/chat/'+paramsid)
+      }
     });
     //get the token
     (async () => {
@@ -104,7 +112,11 @@ const AudioCall = (props) => {
       if (token) {
         socket.emit('endVideoCall', payload);
       }
-      history.push('/')
+      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+        history.push('/chatuser/'+paramsid)
+      }else{
+        history.push('/chat/'+paramsid)
+      }
     }
   }
   const connectTwillio = (token, room) => {
@@ -244,7 +256,7 @@ const AudioCall = (props) => {
         </Container>
         {/* {showChat && } */}
         {userDetails &&
-          <ChatInCall show={showChat} toggle={toggleChat} user={userDetails} />
+          <ChatInCall show={showChat} toggle={toggleChat} openChatWindow={openChatWindow} user={userDetails} />
         }
       </div>
     </div>

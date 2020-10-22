@@ -23,6 +23,7 @@ import Videomuteov from "../../assets/images/mute_ov.svg";
 
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
+import CONSTANTS from "../../common/helpers/Constants";
 
 // import Videomute from "../../assets/images/mute.svg"; 
 // import Videomuteov from "../../assets/images/mute_ov.svg";  
@@ -48,6 +49,9 @@ const Videocall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
+  const openChatWindow = () =>{
+    setShowChat(true)
+  }
   const { caller, id: paramsid } = useParams();
   const history = useHistory();
 
@@ -57,6 +61,17 @@ const Videocall = (props) => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
       const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
       const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
+      // let token = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzlhNGY3MTA5OGU4NzgxY2ViYTA5ZWQ1YzIxNTI4NTBiLTE2MDMzNjI3NTIiLCJncmFudHMiOnsiaWRlbnRpdHkiOiJsbXM0NTIxIiwidmlkZW8iOnsicm9vbSI6InJvb21fMTIzNDU2In19LCJpYXQiOjE2MDMzNjI3NTIsImV4cCI6MTYwMzM2NjM1MiwiaXNzIjoiU0s5YTRmNzEwOThlODc4MWNlYmEwOWVkNWMyMTUyODUwYiIsInN1YiI6IkFDNGZhZDRjMDU1NGYyNjk4MTE2OTAxOGQ0ZWEwM2JiYjkifQ.FTHe9vOiG-k4eTBi3XmGOj0I1_FplIHtJNOra1_vZwg','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzlhNGY3MTA5OGU4NzgxY2ViYTA5ZWQ1YzIxNTI4NTBiLTE2MDMzNjI3ODEiLCJncmFudHMiOnsiaWRlbnRpdHkiOiJsbXM0NTIyIiwidmlkZW8iOnsicm9vbSI6InJvb21fMTIzNDU2In19LCJpYXQiOjE2MDMzNjI3ODEsImV4cCI6MTYwMzM2NjM4MSwiaXNzIjoiU0s5YTRmNzEwOThlODc4MWNlYmEwOWVkNWMyMTUyODUwYiIsInN1YiI6IkFDNGZhZDRjMDU1NGYyNjk4MTE2OTAxOGQ0ZWEwM2JiYjkifQ.RlRg3uW9wn49tIDMt3yVImxV5Orr-n826nB37prtn1g']
+      // if (window.location.host == 'localhost:3000') {
+      //   token = token[0]
+      // } else {
+      //   token = token[1]
+      // }
+      // console.log('random ===========', token);
+
+      
+
+
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
@@ -65,9 +80,15 @@ const Videocall = (props) => {
     })();
     socket.on('endVideoCall', data => {
       // showErrorMessage("Call has been ended.")
-      setTimeout(() => {
-        history.push('/')
-      }, 2000);
+      // setTimeout(() => {
+        // history.push('/')
+        
+        if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+          history.push('/chatuser/'+paramsid)
+        }else{
+          history.push('/chat/'+paramsid)
+        }
+      // }, 2000);
     })
     return () => {
       if (roomRef.current != null) {
@@ -114,8 +135,12 @@ const Videocall = (props) => {
           console.log(data)
         });
       }
-
-      history.push('/')
+      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+        history.push('/chatuser/'+paramsid)
+      }else{
+        history.push('/chat/'+paramsid)
+      }
+      
     }
   }
   const connectTwillio = (token, room) => {
@@ -127,7 +152,7 @@ const Videocall = (props) => {
       name: room,
       // video: false
       video: { width: 640 }
-    }).then(roomjoined);
+    }).then(roomjoined).catch(err => console.log('err connect ===>>', err));
   }
   const roomjoined = (room) => {
     roomRef.current = room;
@@ -293,8 +318,8 @@ const Videocall = (props) => {
           </div>
         </Container>
         {userDetails &&
-          <ChatInCall show={showChat} toggle={toggleChat} user={userDetails} />}
-          }
+          <ChatInCall show={showChat} toggle={toggleChat} openChatWindow={openChatWindow} user={userDetails} />}
+
       </div>
     </div>
   );

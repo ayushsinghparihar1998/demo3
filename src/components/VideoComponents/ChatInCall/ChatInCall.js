@@ -6,7 +6,7 @@ import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, 
 import socketClass from '../../../common/utility/socketClass';
 import getUserProfile from '../../../common/utility/getUserProfile';
 const socket = socketClass.getSocket();
-function ChatInCall({ show, toggle, user }) {
+function ChatInCall({ show, toggle, user,openChatWindow }) {
   const [allMsg, setAllMsg] = useState([]);
   const [msgInput, setMsgInput] = useState("");
   useEffect(() => {
@@ -28,6 +28,7 @@ function ChatInCall({ show, toggle, user }) {
     socket.on("sendMessage", (data) => {
       // console.log("SEND_MESSAGE On", data);
       if (data.from_user_id == user.id) {
+        openChatWindow()
         setAllMsg(prev => [...prev, data]);
       }
     });

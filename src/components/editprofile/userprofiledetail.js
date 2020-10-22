@@ -32,6 +32,7 @@ class Userprofiledetail extends Component {
                 if (result && result.status === 200) {
                     let res = result.data.data &&
                         result.data.data[0] ? result.data.data[0] : {};
+                        
                     this.setState({ userData: res })
                 }
             })

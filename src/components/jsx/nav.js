@@ -26,6 +26,7 @@ import Signup from '../jsx/listenersignup/signup';
 import ProfessionalSignup from '../signup/professionalSignup';
 import UserSignup from '../signup/userSignup';
 import { getLocalStorage, setLocalStorage } from '../../common/helpers/Utils';
+
 class NavBar extends Component {
   constructor() {
     super();

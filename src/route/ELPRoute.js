@@ -66,6 +66,7 @@ import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq";
 import Termcondition from "../components/core/termcondition";
 import Privacypolicy from "../components/core/privacypolicy";
+import ShareProfile from "../components/core/ShareProfile"
 
 const user =
   getLocalStorage("userInfo") ||
@@ -141,8 +142,9 @@ class ELPRoute extends Component {
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
-          <Route path="/termcondition" render={props => <Termcondition />} />
-          <Route path="/privacypolicy" render={props => <Privacypolicy />} />
+          <Route path="/termcondition" render={props => <Termcondition {...props} />} />
+          <Route path="/privacypolicy" render={props => <Privacypolicy {...props} />} />
+          <Route path="/share-profile" render={props => <ShareProfile {...props} />} />
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
           {/* Proff */}

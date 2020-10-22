@@ -41,7 +41,7 @@ const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
                 to_id: userId,
                 from_id: getLocalStorage('customerInfo').u_id
             })
-            console.log(response)
+            console.log(submitReview,response)
             setIsOpen(false)
             disableInputHandler()
         } catch (err) {

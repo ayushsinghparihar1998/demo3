@@ -30,7 +30,7 @@ import Signup from "../jsx/listenersignup/signup";
 import ProfessionalSignup from "../signup/professionalSignup";
 import UserSignup from "../signup/userSignup";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
-import CONSTANTS from "../../common/helpers/Constants";
+
 import socketClass from "../../common/utility/socketClass";
 
 import Userprofiles from "../../assets/images/user_profiles.svg";
@@ -38,6 +38,7 @@ import Usersettings from "../../assets/images/user_settings.svg";
 import Userenables from "../../assets/images/user_enables.svg";
 import Userlogouts from "../../assets/images/user_logouts.svg";
 import ELPRxApiService from "../../common/services/apiService";
+import CONSTANTS from "../../common/helpers/Constants";
 
 
 class NavBar extends Component {
@@ -48,13 +49,13 @@ class NavBar extends Component {
       show2: false,
       show3: false,
       email_varified: false,
-      profileImage:null
+      profileImage: null
     };
   }
 
   componentDidMount() {
     console.log("hello");
-    console.log(getLocalStorage("userInfo"));
+    console.log(getLocalStorage("customerInfo"));
     // listner_dashboard
     // customer_dashboard
     // professional_dashboard
@@ -80,21 +81,26 @@ class NavBar extends Component {
       }).catch(err => {
         console.log(err);
       })
-      
+
     }
 
+    let elem = document.getElementsByClassName('profile_icon')[0]
+    if (elem) {
+      elem.children[0].style['background-image'] = 'none'
+      ELPRxApiService("getprofile").then(res => {
+        console.log('res == .. image', res)
 
-    ELPRxApiService("getprofile").then(res => {
+        elem.children[0].style['background-image'] = `url(${res.data.data.profile_list.u_image})`
+        console.log(elem)
+        this.setState({
+          profileImage: res.data.data.profile_list.u_image,
+        })
 
-      this.setState({
-        profileImage: res.data.data.profile_list.u_image,
+      }).catch(err => {
+        console.log(err);
       })
-      if (res.data.dashboard_list.u_verified) {
+    }
 
-      }
-    }).catch(err => {
-      console.log(err);
-    })
 
     // let data = getLocalStorage("userInfo")
     //   ? getLocalStorage("userInfo")
@@ -167,13 +173,13 @@ class NavBar extends Component {
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
     let roleType = "";
-    // if (getLocalStorage("customerInfo")) {
-    //   roleType = 3;
-    // } else if (getLocalStorage("userInfo")) {
-    //   roleType = 1;
-    // } else if (getLocalStorage("userInfoProff")) {
-    //   roleType = 2;
-    // }
+    if (getLocalStorage("customerInfo")) {
+      roleType = CONSTANTS.ROLES.USER;
+    } else if (getLocalStorage("userInfo")) {
+      roleType = CONSTANTS.ROLES.LISTNER;
+    } else if (getLocalStorage("userInfoProff")) {
+      roleType = CONSTANTS.ROLES.PROFESSIONAL;
+    }
 
     let data = {};
     this.props

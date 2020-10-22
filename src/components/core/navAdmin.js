@@ -160,7 +160,7 @@ class NavBar extends Component {
         {/* Same as */}
         <ToastContainer />
         <Navbar bg="" expand="lg">
-          <NavLink to="/" className="nav-link navbar-brand">
+          <NavLink to="/adminlistener" className="nav-link navbar-brand">
             <Image src={logo} alt="" /> Eat Luv N Pray
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import constant from '../../constant'
 import ApiJson from './apiJson';
 import {
   showErrorToast,
@@ -9,7 +9,7 @@ import {
 } from '../helpers/Utils';
 let apiFailCounter = 0;
 // axios.defaults.baseURL = 'http://103.76.253.131:81';
-axios.defaults.baseURL = 'https://www.eatluvnpray.org/';
+axios.defaults.baseURL = constant.SERVER_URL;
 // axios.defaults.baseURL = 'https://staging.eatluvnpray.org/';
 
 axios.interceptors.request.use(
@@ -63,12 +63,12 @@ const handleErrorByStatus = (error) => {
     clearLocalStorage();
     // });
   } else if (error && error.status === 'error') {
-    
+
     const message = error.message;
     // alert("ERROR")
     showErrorToast(message);
   } else if (error && error.success === 'error') {
-    
+
     const message = error.message;
     // alert("ERROR")
     showErrorToast(message);

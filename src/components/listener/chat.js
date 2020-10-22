@@ -16,8 +16,8 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import UserChat from "../../assets/images/user_chat.svg";
 import UserChat2 from "../../assets/images/user_chat2.svg";
-import UserChat3 from "../../assets/images/user_chat3.svg";
-import UserChat4 from "../../assets/images/user_chat4.svg";
+import UserChat3 from "../../assets/images/user_chat.png";
+import UserChat4 from "../../assets/images/user_chat.png";
 import UserChat5 from "../../assets/images/user_chat5.svg";
 import ChatCross from "../../assets/images/chat_cross.svg";
 import Warningnotification from "../../assets/images/notification_warning.svg";
@@ -109,20 +109,23 @@ class Chat extends Component {
   };
 
   componentWillUnmount() {
-    socket.emit(
-      "onScreen",
-      JSON.stringify({
-        from_user_id: getLocalStorage("userInfo").u_id,
-        to_user_id: this.props.match.params.id,
-        status: 0,
-      }), (data) => {
-        console.log('onScreen called ===>>>', data, {
+    if (getLocalStorage("userInfo")) {
+      socket.emit(
+        "onScreen",
+        JSON.stringify({
           from_user_id: getLocalStorage("userInfo").u_id,
           to_user_id: this.props.match.params.id,
           status: 0,
-        })
-      }
-    );
+        }), (data) => {
+          console.log('onScreen called ===>>>', data, {
+            from_user_id: getLocalStorage("userInfo").u_id,
+            to_user_id: this.props.match.params.id,
+            status: 0,
+          })
+        }
+      );
+    }
+
     window.removeEventListener("beforeunload", this.unmount);
     // this.unmount();
   }
@@ -171,7 +174,7 @@ class Chat extends Component {
       'pagination': 20
     }),
       (data) => {
-        if (data.data ) {
+        if (data.data) {
           this.setState({ allMessages: data.data.reverse() })
         }
       }
@@ -671,7 +674,7 @@ class Chat extends Component {
         </div>
         <Footer />
 
-        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} />
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={userMeta.u_username} />
         <SurveyModal ref={this.surveyModal} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
