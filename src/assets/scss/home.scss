@@ -414,7 +414,7 @@ img {
         .mj_nav {
             
             div.navbar-collapse {
-                background: #fff;
+                background: $col18; 
                 padding: 15px 0;
                 border-radius: 12px;
                 position: absolute;
@@ -666,6 +666,10 @@ img {
     padding: 10px 24px 14px;
 }
 
+@media (max-width: 767px) {
+    
+}
+ 
 
 @media (min-width: 1500px) {
     
@@ -702,7 +706,7 @@ img {
     background-size: cover;
     position: relative;
 }
-.coming_soon .comings {                                                     
+.coming_soon .comings {                                                      
     position: absolute;
     top: 50%;
     left: 50%;
