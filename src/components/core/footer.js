@@ -11,7 +11,7 @@ class Footer extends Component {
             <div className="footer">
                 <Container fluid>
                     <Row>
-                        <Col md={7}>
+                        <Col md={7} col={12}>   
                             <div className="d-flex flex-wrap">
                                 <div className="fs15 fw300 col17">© 2020 Eat Luv N Pray. All rights reserved. </div>
                                 <div className="socials">
@@ -32,7 +32,7 @@ class Footer extends Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col md={5}>
+                        <Col md={5} col={12}>
                             <ul class="social">
                                 <li className="pointer"><NavLink style={{color:'white'}} to="/privacypolicy">Privacy Policy</NavLink></li>
                                 <li  className="pointer"><NavLink style={{color:'white'}} to="/termcondition">Terms & Conditions</NavLink></li>

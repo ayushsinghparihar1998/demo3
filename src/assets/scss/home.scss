@@ -160,13 +160,13 @@
             
     }        
 
-    .organise_carousel {
+    .organise_carousel { 
         background-color: $col21; 
         border-radius: 50%;
-        max-width: 230px;
+        max-width: 270px;
         text-align: center;
         margin: auto;
-        height: 230px;
+        height: 270px;
         line-height: 221px;
         display: flex !important;
         img {
@@ -433,7 +433,7 @@ img {
                 bottom: -20px;   
             }
             .fs12.pl-4.pr-4 {
-                font-size: 9.5px !important;
+                font-size: 9px !important;
                 padding-left: 1rem !important;
                 padding-right: 1rem !important; 
             }
@@ -632,6 +632,7 @@ img {
     }
 
     .Supporting {
+        padding: 3rem 0 4rem; 
         .container {
             div.fs44  {
                 font-size: 36px !important; 
@@ -640,10 +641,10 @@ img {
                 font-size: 16px !important; 
             }
             .organise_carousel {
-                max-width: 160px;
-                height: 160px; 
+                max-width: 280px;
+                height: 280px;
                 & > img {
-                    max-width: 130px;
+                    max-width: 190px; 
                     width: 100%;
                 }
             }
@@ -652,11 +653,16 @@ img {
 
     .Discussanything {
         .container {
-            div.fs50  { 
-                font-size: 30px !important; 
+            div.fs44  { 
+                font-size: 2.5rem !important; 
             }
             div.fs20  {
                 font-size: 16px !important;  
+            } 
+            div.fs28  {
+                font-size: 22px !important;  
+                padding-top: 10px !important;
+                padding-bottom: 10px !important; 
             } 
             div {
                 & > img {
@@ -676,8 +682,12 @@ img {
                 font-size: 14px !important;
                 padding-top: 10px !important; 
             }
+            .discuss {
+                padding-left: 5%; 
+            }
         }
     }
+    
 
     .footer {
         .container-fluid {
@@ -949,6 +959,52 @@ img {
                     height: 3rem !important;
                     font-size: 16px !important; 
                 }
+            }
+        }
+    }
+
+    .Supporting {
+        padding: 3rem 0 1.5rem; 
+        .container {
+            .organise_carousel {
+                max-width: 250px;
+                height: 250px;
+                margin-bottom: 30px; 
+            }
+            div.fs40 {
+                font-size: 2rem !important; 
+            }
+            div.fs18 {
+                font-size: 15px !important;
+                margin-bottom: 20px !important;  
+            }
+        }
+    }
+    
+    .Discussanything {
+        padding: 0px 0 50px;
+        
+        div.col-md-5 {
+            &>div {
+                width: 100%;
+                text-align: center; 
+                img {
+                    max-width: 400px;
+                }
+            }
+        }
+        div.fs44 {
+            font-size: 2rem !important; 
+        }
+        div.fs28 {
+            font-size: 20px !important;
+            padding-top: 10px !important;
+        }
+        div.fs18 {
+            font-size: 16px !important;
+            padding-top: 10px !important; 
+            & + button.btnTyp3 {
+                margin-top: 30px !important;  
             }
         }
     }
