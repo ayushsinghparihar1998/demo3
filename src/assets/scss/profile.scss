@@ -374,3 +374,56 @@
         max-width: 325px; 
     }
 }
+
+
+
+@media (max-width: 767px) { 
+
+    .profile_layout {
+        .myprofile {
+            & > img { 
+                height: 100px;
+                object-fit: cover; 
+            }
+            .profile_top {  
+                margin-top: -40px; 
+                .border_profile {
+                    max-width: 90px; 
+                }
+                .flags {
+                    left: 46%; 
+                }
+                .btn_set { 
+                    padding: 0 1rem;
+                    font-size: 12px !important; 
+                    top: 55px;
+                    right: 8px; 
+                } 
+            }
+            .layout {
+                padding-left: 0;  
+                .w35 {
+                    max-width: 80%; 
+                    .fs16 {
+                        font-size: 14px !important; 
+                    }
+                }
+            }
+        }
+    } 
+
+}
+
+@media (max-width: 450px) { 
+    .profile_layout {
+        .myprofile {
+            .layout {
+                .w35 {
+                    .fs16 { 
+                        font-size: 12px !important; 
+                    }
+                } 
+            }
+        } 
+    }
+}
