@@ -246,6 +246,15 @@ class NavBar extends Component {
       show3: false,
     });
   };
+
+
+  _resendVerificationMail = async () => {
+    try {
+      const response = await ELPRxApiService("getprofile")
+    } catch (err) {
+      console.log(err)
+    }
+  }
   render() {
     return (
       <div className="mj_nav">
@@ -349,7 +358,7 @@ class NavBar extends Component {
                         <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
-                      <Nav.Link disabled href="#about_us_container" className="nav-link text-c"> 
+                      <Nav.Link disabled href="#about_us_container" className="nav-link text-c">
                         About
                         <br />
                         <span className="comings">coming soon</span>
@@ -512,7 +521,9 @@ class NavBar extends Component {
             <div className="email_verified">
               <div class="verifys">
                 <Image src={Msgbox} alt="" />
-                <span className="fs15 fw500 col18 ml-2">Please verify your email to begin chatting</span>
+                <span className="fs15 fw500 col18 ml-2">Please verify your email to begin chatting  <span onClick={() => { this._resendVerificationMail() }} style={{ cursor: 'pointer' }}>Resend mail.</span></span>
+
+
               </div>
             </div>
           ) : (

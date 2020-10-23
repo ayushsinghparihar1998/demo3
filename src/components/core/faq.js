@@ -124,7 +124,7 @@ class Faq extends Component {
                       
                       </Tab>
 
-                      <Tab eventKey="completed" title="Members FAQ">
+                      {/* <Tab eventKey="completed" title="Members FAQ">
                       <div className="fw400 col29 fs28 text-center mt-4 mb-2">  
                             Members FAQ
                       </div>
@@ -338,7 +338,7 @@ class Faq extends Component {
                                     </Accordion> 
                             </div>
                       
-                      </Tab>
+                      </Tab> */}
                     </Tabs>
                   </div>
                 </div>

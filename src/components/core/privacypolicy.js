@@ -232,7 +232,7 @@ Information in countries outside of the country of your residence. Such countrie
 
                     <div className="fs20 fw600 col29 mt-2 mb-2">16. Do Not Track</div>
 
-                    <p>The Services do not support Do Not Track with respect to the Services at this time. Do Not Track is a privacy preference that you can set in your web browser to indicate that you do not want certain information about your webpage visits collected across websites when you have not interacted with that service on the page. For all the details, including how to turn on Do Not Track, visit<a> https://www.donottrack.us. </a></p>
+                    <p>The Services do not support Do Not Track with respect to the Services at this time. Do Not Track is a privacy preference that you can set in your web browser to indicate that you do not want certain information about your webpage visits collected across websites when you have not interacted with that service on the page. </p>
 
                     <div className="fs20 fw600 col29 mt-2 mb-2">17. Notices</div>
 
