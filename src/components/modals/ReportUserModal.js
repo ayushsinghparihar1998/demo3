@@ -7,7 +7,7 @@ import {
     Modal
 } from "react-bootstrap";
 import ELPRxApiService from "../../common/services/apiService";
-import { getLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage, showErrorMessage } from "../../common/helpers/Utils";
 
 const ReportUserModal = forwardRef(({ userId }, ref) => {
 
@@ -48,16 +48,23 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
 
     const _submitReportHandler = async () => {
         try {
-            let response = await ELPRxApiService("reportUser", {
-                br_reason: selectedReason,
-                br_comment: comment,
-                br_from_id: selfId,
-                br_to_id: userId
-            })
-            console.log(response.data.success)
-            if (response.data.success != 'error') {
-                setIsOpen(false)
+            if((selectedReason == 'other' && comment) || selectedReason !== 'other'){
+                let response = await ELPRxApiService("reportUser", {
+                    br_reason: selectedReason,
+                    br_comment: comment,
+                    br_from_id: selfId,
+                    br_to_id: userId
+                })
+                console.log(response.data.success)
+                if (response.data.success != 'error') {
+                    setSelectedReason(null)
+                    setComment(null)
+                    setIsOpen(false)
+                }
+            }else{
+                showErrorMessage('Please add comment')
             }
+            
             // 
         } catch (err) {
             console.log(err);
