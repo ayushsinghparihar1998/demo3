@@ -590,6 +590,24 @@
     }
 }
 
+@media (min-width: 767px) and (max-width: 991px) {  
+    .compaigns {
+        .right_donate {
+            img {
+                max-width: 55%; 
+            }
+        }
+        .keep_kindness {
+            .fs16 {
+                font-size: 14px !important; 
+            }
+            .donate_data {
+                font-size: 15px; 
+            }
+        }
+    }
+}
+
 @media (max-width: 767px) {  
 
     .memberfaq {
@@ -638,8 +656,85 @@
     }
 
     .compaigns {
-        
+        &.ss1 {
+            .compaign_para {
+                max-width: 100%; 
+                font-size: 14px !important; 
+            }
+            .campan_manage {
+                max-width: 100%;
+                padding-right: 0;
+
+                div.fs32 {
+                    font-size: 1.5rem !important;
+                }
+                div.fs16 {
+                    font-size: 14px !important; 
+                }
+            }
+            .myprofile {
+                padding: 15px 20px 0 20px; 
+            }
+            .keep_kindness {
+                max-width: 100%;
+                display: flex;
+                flex-wrap: inherit;
+                .donate_data {
+                    a {
+                        font-size: 14px; 
+                    }
+                }
+                .col-lg-7 {
+                    padding-right: 0px; 
+                    .fs16 {
+                        font-size: 13px !important; 
+                    }
+                }
+            }
+            .right_donate {  
+                position: relative;
+                text-align: right;
+                margin-bottom: 30px; 
+
+                img {
+                    width: 100%; 
+                }
+            }
+            .donate_ul {  
+                position: relative; 
+                ul {
+                    left: 5px;
+                    top: 28%;
+                }
+                .overlays_bottom { 
+                    position: relative;
+                    left: -21px;
+                    width: 100%;
+                    height: 160px;  
+                    max-width: 65%;
+                }
+                 
+            }
+        }
+
     }
 
 
+}
+
+@media (max-width: 450px) { 
+    .compaigns.ss1 
+        {
+            .keep_kindness {
+                .col-lg-7 {
+                    padding-right: 0px;
+                    .fs16 {
+                        font-size: 10px !important; 
+                    }
+                }
+                .col-lg-5 {
+                    padding-left: 0px;             
+                }
+            }
+        }
 }
