@@ -9,7 +9,7 @@ function validateInput(data) {
   } else if (/\s/.test(data.password)) { 
     errors.password = ValidationMessages.password.spaceAvoid;
   } else if (
-    /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(data.password)
+    /^(.{0,5}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(data.password)
   ) { 
     errors.password = ValidationMessages.password.passwordPattern;
   }

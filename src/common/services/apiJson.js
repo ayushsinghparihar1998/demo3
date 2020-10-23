@@ -349,6 +349,8 @@ export default {
       u_country: "",
       u_mobile: "",
       u_state: "",
+      u_image: "",
+      u_cover_image: ""
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -452,7 +454,7 @@ export default {
     method: "POST",
     data: {
       password: "",
-      old_password:""
+      old_password: ""
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -646,7 +648,7 @@ export default {
     url: "elp/listner_dashboard",
     method: "GET",
     data: {
-    
+
     },
     showResultMessage: false,
     showErrorMessage: false,
@@ -655,7 +657,7 @@ export default {
     url: "elp/customer_dashboard",
     method: "GET",
     data: {
-     
+
     },
     showResultMessage: false,
     showErrorMessage: false,
@@ -664,10 +666,18 @@ export default {
     url: "elp/professional_dashboard",
     method: "GET",
     data: {
-    
+
     },
     showResultMessage: false,
     showErrorMessage: false,
   },
-  
+
+  resendVerificationMail: {
+    url: "elp/resendemail",
+    method: "GET",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true,
+  }
+
 };

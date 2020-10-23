@@ -250,7 +250,8 @@ class NavBar extends Component {
 
   _resendVerificationMail = async () => {
     try {
-      const response = await ELPRxApiService("getprofile")
+      const response = await ELPRxApiService("resendVerificationMail");
+      console.log(response);
     } catch (err) {
       console.log(err)
     }
@@ -310,11 +311,11 @@ class NavBar extends Component {
                       <NavLink
                         to={
                           getLocalStorage("userInfo")
-                            ? "userDashboard"
+                            ? "/userDashboard"
                             : getLocalStorage("userInfoProff")
-                              ? "userDashboardproff"
+                              ? "/userDashboardproff"
                               : getLocalStorage("customerInfo")
-                                ? "userDashboardcust"
+                                ? "/userDashboardcust"
                                 : ""
                         }
                         className="nav-link"
@@ -325,7 +326,7 @@ class NavBar extends Component {
                       getLocalStorage("userInfoProff") ||
                         getLocalStorage("userInfo")
                         ? [
-                          <NavLink to={"calendar"} className="nav-link">
+                          <NavLink to={"/calendar"} className="nav-link">
                             My Schedule
                             </NavLink>,
                         ]
@@ -345,7 +346,7 @@ class NavBar extends Component {
                         Volunteer<br />
                         <span className="comings">coming soon</span>
                       </NavLink>,
-                      <NavLink to="/compaign" className="nav-link">
+                      <NavLink to="/campaign" className="nav-link">
                         Donate
                       </NavLink>,
                       // <Nav.Link > Media</Nav.Link>,

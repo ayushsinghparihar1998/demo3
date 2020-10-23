@@ -14,7 +14,7 @@ class Banner extends Component {
             <Container>
                 <div className="fs40 pt-120 col1 fw700">Need someone to talk to?</div>
                 <div className="fw300 col2 fs20 mb-5">Time to get out of that imaginary confined space.<br />
-Our trained Listener are ready to extend their helping hand.</div>
+Our trained Listeners are ready to extend their helping hand.</div>
                 <Row>
                     <Col md={3} col={12} className="mb-5">  
                         <div className="baner1 bannerset">

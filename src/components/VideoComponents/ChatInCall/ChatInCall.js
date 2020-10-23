@@ -32,21 +32,25 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
       if (data.from_user_id == user.id) {
         openChatWindow()
         setAllMsg(prev => [...prev, data]);
+        setTimeout(()=>{
+          scrollToBottom()
+        },2000)
       }
     });
   }, [])
   const scrollToBottom = () => {
-    if (messagesEnd.current) {
+    console.log(messagesEnd)
+    if(messagesEnd && messagesEnd.current){      
       messagesEnd.current.scrollIntoView({ behavior: "smooth" });
     }
+    
 
   }
   useEffect(() => {
-    setTimeout(() => {
-      // scrollToBottom()
-    }, 1000)
+    
+      scrollToBottom()   
 
-  }, [allMsg])
+  }, [allMsg,show])
 
 
 
@@ -102,7 +106,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
                 </div> */}
 
 
-                <div className="mt-auto">
+                <div className="mt-auto" >
                   {allMsg.map((msg, index) => {
                     return msg.from_user_id ==
                       getUserProfile().u_id ? (
@@ -140,7 +144,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
                   })}
 
                   <div style={{ float: "left", clear: "both" }}
-                    ref={(el) => { messagesEnd = el; }}>
+                    ref={messagesEnd}>
                   </div>
                 </div>
 
