@@ -56,14 +56,14 @@ class Compaign extends Component {
               </div>
 
               <div className="keep_kindness mb-4">
-                <Col lg={7} col={12} className="pl-0">
+                <Col lg={7} md={7} col={12} className="pl-0">
                   <div className="fw500 fs16 col14">
                     Can you help us fill the jar and keep kindness and
                     compassion flowing?
                   </div>
                 </Col>
-                <Col lg={5} col={12} className="pr-0"> 
-                  <div class="donate_data">
+                <Col lg={5} md={5} col={12} className="pr-0"> 
+                  <div class="donate_data"> 
                     {/* <Link to={`/paytm_demo`}>Donate My Data</Link> */}
                     {/*https://eatluvnpray.org/paytm_demo/  */}
                     <a
