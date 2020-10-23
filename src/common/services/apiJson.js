@@ -452,6 +452,7 @@ export default {
     method: "POST",
     data: {
       password: "",
+      old_password:""
     },
     showResultMessage: true,
     showErrorMessage: true,

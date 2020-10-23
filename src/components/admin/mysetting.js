@@ -14,9 +14,9 @@ const MySetting = (props) => {
     useEffect(() => {
         let id = null
         if (getLocalStorage('userInfo')) {
-            id = getLocalStorage('userInfo').u_id
+            id = getLocalStorage('userInfo').u_id;            
         } else if (getLocalStorage('customerInfo')) {
-            id = getLocalStorage('customerInfo').u_id
+            id = getLocalStorage('customerInfo').u_id            
         } else if (getLocalStorage('userInfoProff')) {
             id = getLocalStorage('userInfoProff').u_id
         }
@@ -81,7 +81,7 @@ const MySetting = (props) => {
                                                 <Col xss={12} className="m-auto">
                                                     <Row>
                                                         <Col lg={3} md={4}>
-                                                            <div className="col1 fw500 fs18 mt-2">Search Listeners</div>
+                                                            <div className="col1 fw500 fs18 mt-2">Search Users</div>
                                                         </Col>
                                                         <Col lg={5} md={5}>
                                                             <Form.Group>

@@ -125,7 +125,7 @@ class Termcondition extends Component {
                   <p>If you do not comply with these terms, and we don’t take action right away, that doesn’t mean that we will give up any rights that we may have (such as taking action in the future)</p>
 
                   <p>For more information about how to contact Eat Luv Pray Pvt. Ltd., please visit our
-                        <a> FAQ Page. </a></p>
+                        <NavLink to="/faq"> FAQ Page. </NavLink></p>
 
                 </div>
               </Col>

@@ -6,9 +6,11 @@ import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, 
 import socketClass from '../../../common/utility/socketClass';
 import getUserProfile from '../../../common/utility/getUserProfile';
 const socket = socketClass.getSocket();
-function ChatInCall({ show, toggle, user,openChatWindow }) {
+function ChatInCall({ show, toggle, user, openChatWindow }) {
   const [allMsg, setAllMsg] = useState([]);
+  let messagesEnd = React.createRef()
   const [msgInput, setMsgInput] = useState("");
+
   useEffect(() => {
     const payload = JSON.stringify({
       from_user_id: getUserProfile().u_id,
@@ -33,6 +35,19 @@ function ChatInCall({ show, toggle, user,openChatWindow }) {
       }
     });
   }, [])
+  const scrollToBottom = () => {
+    if (messagesEnd.current) {
+      messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    }
+
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      // scrollToBottom()
+    }, 1000)
+
+  }, [allMsg])
+
 
 
   const addMessage = (e) => {
@@ -123,7 +138,12 @@ function ChatInCall({ show, toggle, user,openChatWindow }) {
                         </div>
                       );
                   })}
+
+                  <div style={{ float: "left", clear: "both" }}
+                    ref={(el) => { messagesEnd = el; }}>
+                  </div>
                 </div>
+
 
 
 
@@ -143,6 +163,8 @@ function ChatInCall({ show, toggle, user,openChatWindow }) {
             </div> */}
           </div>
         </div>
+
+
         <div className="chat_bottom">
           <div>
             <Form.Group className="mb-0">

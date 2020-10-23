@@ -124,7 +124,7 @@ class Login extends Component {
       let _this = this;
       ELPRxApiService("emailVerification", data)
         .then((response) => {
-          if (response.data.status === "success") {
+          // if (response.data.status === "success") {
             let u_email;
             if (getLocalStorage("userInfoProff")) {
               let data = getLocalStorage("userInfoProff");
@@ -156,25 +156,26 @@ class Login extends Component {
               }
             } else if (getLocalStorage("customerInfo")) {
               let data = getLocalStorage("customerInfo");
-
+              
               u_email = data.u_email;
               if (u_email == email) {
                 data.u_verified = 1;
                 setLocalStorage("customerInfo", data);
                 _this.props.history.push({ pathname: "/userDashboardcust" });
               } else {
+                console.log('verification email =======>>', data)
                 this.props.history.push({
                   pathname: "login",
                   state: { roleType: this.state.roleType },
                 });
               }
             }
-          } else {
-            this.props.history.push({
-              pathname: "login",
-              state: { roleType: this.state.roleType },
-            });
-          }
+          // } else {
+            // this.props.history.push({
+            //   pathname: "login",
+            //   state: { roleType: this.state.roleType },
+            // });
+          // }
         })
         .catch((err) => {
           console.log(err);

@@ -55,6 +55,7 @@ class Editprofile extends Component {
       userName: '',
       userEmail: '',
       userPassword: '',
+      oldPassword: '',
       day: '',
       month: '',
       year: '',
@@ -224,6 +225,7 @@ class Editprofile extends Component {
   handleResetPassword = () => {
     let data = {
       password: this.state.userPassword,
+      old_password: this.state.oldPassword
     };
     this.props.actionChangePassword(data).then((result) => {
       console.log('actionChangePassword', result);
@@ -429,9 +431,26 @@ class Editprofile extends Component {
                       </Form.Group>
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14 mt-2">
+                          Old Password:
+                            </Form.Label>
+                        <div className="d-flex">
+                          <Form.Control
+                            type="password"
+                            name="oldPassword"
+                            onChange={this.handleChange}
+                            value={this.state.oldPassword}
+                            className="inputTyp2"
+                          />
+
+                        </div>
+                      </Form.Group>
+
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14 mt-2">
                           Password:
                             </Form.Label>
                         <div className="d-flex">
+
                           <Form.Control
                             type="password"
                             name="userPassword"
