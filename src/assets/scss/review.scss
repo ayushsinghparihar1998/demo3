@@ -597,19 +597,45 @@
                 max-width: 55%; 
             }
         }
+        .donate_ul {
+            .overlays_bottom {
+                width: 30%; 
+            }
+        } 
         .keep_kindness {
             .fs16 {
                 font-size: 14px !important; 
             }
             .donate_data {
-                font-size: 15px; 
+                font-size: 15px;
             }
         }
     }
 }
 
-@media (max-width: 767px) {  
+@media (max-width: 767px) {   
 
+    .terms {
+        position: relative; 
+        padding: 20px;
+        .fs32, .fs36 {
+            font-size: 1.5rem !important;  
+        }
+        .fs20 {
+            font-size: 1rem !important; 
+        }                                          
+        p {
+            font-size: 14px; 
+        }
+        ol, ul {
+            margin: 0;
+            padding-left: 15px; 
+
+            li {
+                font-size: 14px; 
+            }
+        }
+    }
     .memberfaq {
         position: relative;
         .user_tab {

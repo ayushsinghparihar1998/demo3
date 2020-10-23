@@ -30,7 +30,7 @@ class Termcondition extends Component {
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={12} lg={12} className="pl-1">
+              <Col md={12} lg={12}> 
                 <div className="myprofile terms">
                   <div className="fs36 fw600 col29">Terms of Service</div>
                   <div className="fs20 fw600 col29 mt-2 mb-2">Welcome to Eat Luv N Pray Foundation!</div>
