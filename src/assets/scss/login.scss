@@ -3,6 +3,8 @@
     min-height: calc(100vh - 146px); 
     text-align: center; 
     overflow: hidden;
+    padding-bottom: 40px;
+
 
     .layout_box {
         width: 100%; 
@@ -12,5 +14,21 @@
         box-shadow: 0px 0px 15px rgba(62, 178, 221, 0.1);
         border-top: solid 10px $col23;
         padding: 60px;  
+    }
+}
+
+// media screen start
+
+@media (max-width: 767px) {  
+    .Loginlayout {
+        .fs40 {
+            font-size: 2rem !important; 
+        }
+        .fs25 {
+            font-size: 20px !important; 
+        }
+        .layout_box  {
+            padding: 30px; 
+        }
     }
 }

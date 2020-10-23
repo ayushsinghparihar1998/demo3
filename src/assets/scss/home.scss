@@ -1014,6 +1014,7 @@ img {
         width: 100%; 
         .fs15 {
             padding-bottom: 15px; 
+            text-align: center; 
         }
     }
 
@@ -1022,8 +1023,15 @@ img {
         padding-top: 15px;   
     }
 
-    .footer ul.social li > a {
+    .footer ul.social li > a { 
         font-size: 13px;
+    }
+
+    .socials {
+        padding-left: 0; 
+        justify-content: center;
+        text-align: center;
+        margin: auto; 
     }
 
 
