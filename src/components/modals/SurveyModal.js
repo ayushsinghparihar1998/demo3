@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal } from "react-bootstrap";
+import { Button, Container, Row, Image, Form, Modal } from "react-bootstrap";
+
+import Blueicons from "../../assets/images/blue_cross.svg";
 
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationSignup";
@@ -122,11 +124,11 @@ class SurveyModal extends Component {
             >
                 <Modal.Body>
                     <Container>
+                    <Image src={Blueicons} alt="" className="close pointer" onClick={() => this.handleClose(false)} />
                         <div className="layout_box mt-3 mb-4">
                             <div className="col10 fs30 fw600 mb-2">ELNP Survey</div>
                             <div className="fs300 fs20 col14 mb-4 pb-2">
-                                {/* Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. */}
+                            
                             </div>
 
                             <div>

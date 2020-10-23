@@ -27,6 +27,7 @@ import Aflag from "../../assets/images/australia_flag.svg";
 import Iflag from "../../assets/images/india_flag.svg";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
+import constant from "../../constant"
 
 class Createblogs extends Component {
 
@@ -54,7 +55,8 @@ class Createblogs extends Component {
 
 
       // const url = "https://staging.eatluvnpray.org/elp/uploadblogimage";
-      const url = "https://eatluvnpray.org/elp/uploadblogimage";
+      // "https://eatluvnpray.org/elp/uploadblogimage";
+      const url = constant.SERVER_URL + 'elp/uploadblogimage'
       const config = {
         headers: {
           "content-type": "multipart/form-data"

@@ -20,7 +20,7 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
         "Requesting/Sharing personal contact information",
         "Inappropriate/Sex chat",
         "Harassing/Threatening Behaviour",
-        "Other"
+        "other"
     ])
 
     useImperativeHandle(ref, () => ({
@@ -40,7 +40,7 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
             id = getLocalStorage('customerInfo').u_id
         } else if (getLocalStorage('userInfoProff')) {
             title = title + 'listener'
-            id = getLocalStorage('userInfoProff').u_id 
+            id = getLocalStorage('userInfoProff').u_id
         }
         setModalTittle(title)
         setSelfId(id)
@@ -55,7 +55,7 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
                 br_to_id: userId
             })
             console.log(response.data.success)
-            if(response.data.success != 'error'){
+            if (response.data.success != 'error') {
                 setIsOpen(false)
             }
             // 
@@ -81,13 +81,16 @@ const ReportUserModal = forwardRef(({ userId }, ref) => {
 
                         <ul className="block_users">
                             {
-                                reasons.map(element => <li style={selectedReason == element?{color:'white', backgroundColor:'#8ad1e7'}:{}} onClick={() => setSelectedReason(element)}>{element}</li>)
+                                reasons.map(element => <li style={selectedReason == element ? { color: 'white', backgroundColor: '#8ad1e7' } : {}} onClick={() => setSelectedReason(element)}>{element}</li>)
                             }
                         </ul>
+                        {
+                            selectedReason == 'other' ?
+                                <Form.Group controlId="exampleForm.ControlTextarea1" className="pb-2 mt-3 mb-4">
+                                    <Form.Control onChange={(e) => setComment(e.target.value)} as="textarea" rows="3" className="inputTyp2 col28 fs20 fw400" placeholder="Comments" />
+                                </Form.Group> : null
+                        }
 
-                        <Form.Group controlId="exampleForm.ControlTextarea1" className="pb-2 mt-3 mb-4">
-                            <Form.Control onChange={(e) => setComment(e.target.value)} as="textarea" rows="3" className="inputTyp2 col28 fs20 fw400" placeholder="Comments" />
-                        </Form.Group>
 
                         <div className="text-left">
                             <Button

@@ -50,7 +50,7 @@ class Abouteat extends Component {
                         <Col md={7}>
                             <div className="fs40 col14 fw700 w-100">About Eat Luv N Pray</div>
                             <div className="col14 fs16 fw300 w-100 pt-3">
-                                <div className="pb-4">Eat Luv N Pray Foundation Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
+                                <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
 
                                 <div className="pb-4">Today, Eat Luv N Pray remedies that problem by giving virtual leasing space to many NGO’s who would help connecting you with trained listeners as well as resolve various life matters with empathy and compassion. We will also provide database of highly capable consultants from walks of Eat, Love and Pray respectively. </div>
 

@@ -74,6 +74,8 @@ class Editprofile extends Component {
       rating: '',
       stateId: '',
       mobileNumber: '',
+      isUploadingImage: false,
+      isUploadingCoverImage: false,
       category: [],
       selectedCategories: []
     };
@@ -119,7 +121,7 @@ class Editprofile extends Component {
           mobileNumber: profile.u_mobile,
           u_image: profile.u_image,
           profileImg: '',
-          backgroud_img: ''
+          u_cover_image: profile.u_cover_image,
         }, () => {
           this.getState();
           this.getCity();
@@ -195,12 +197,13 @@ class Editprofile extends Component {
         u_birthdate: dob,
         u_name: this.state.userName,
         u_gender: this.state.gender,
-        u_image: this.state.image,
         u_country: this.state.countryId,
         u_state: this.state.stateId,
         u_city: this.state.cityId,
         u_bio: this.state.bio,
-        u_mobile: this.state.mobileNumber
+        u_mobile: this.state.mobileNumber,
+        u_image: this.state.u_image,
+        u_cover_image: this.state.u_cover_image,
       };
     } else {
       data = {
@@ -208,12 +211,13 @@ class Editprofile extends Component {
         u_birthdate: dob,
         u_name: this.state.userName,
         u_gender: this.state.gender,
-        u_image: this.state.image,
         u_country: this.state.countryId,
         u_state: this.state.stateId,
         u_city: this.state.cityId,
         u_bio: this.state.bio,
-        u_mobile: this.state.mobileNumber
+        u_mobile: this.state.mobileNumber,
+        u_image: this.state.u_image,
+        u_cover_image: this.state.u_cover_image,
       };
     }
 
@@ -279,6 +283,17 @@ class Editprofile extends Component {
   handleUploadPicture(event, name) {
     const fileObject = event.target.files[0];
     if (fileObject) {
+
+      if (name ==  'u_image') {
+        this.setState({
+          isUploadingImage: true
+        })
+      } else {
+        this.setState({
+          isUploadingCoverImage: true
+        })
+      }
+
       let _this = this;
       let uploadPicturesResponse = {};
       let reqArray = [];
@@ -300,6 +315,17 @@ class Editprofile extends Component {
           this.setState({
             [name]: file
           });
+
+          if (name == 'u_image') {
+            this.setState({
+              isUploadingImage: false
+            })
+          } else {
+            this.setState({
+              isUploadingCoverImage: false
+            })
+          }
+
         })
         .catch(e => {
 
@@ -356,15 +382,16 @@ class Editprofile extends Component {
           <Container>
             <Row>
               <div className="myprofile">
-                <Image src={this.state.backgroud_img ? this.state.backgroud_img : Profileban}
+                <Image src={this.state.u_cover_image ? this.state.u_cover_image : Profileban}
                   alt="" className="w-100" />
                 <div className="upload_bg">
                   <Form.File
                     id="custom-filetwo"
                     autoComplete="off"
-                    onChange={e =>
-                      this.handleUploadPicture(e, 'backgroud_img')
-                    }
+                    onChange={e =>{
+                      // alert("ASd")
+                      this.handleUploadPicture(e, 'u_cover_image')
+                    }}
                     onClick={(event) => {
                       event.target.value = null; this.actionOnUpload(event)
                     }}
@@ -638,9 +665,10 @@ class Editprofile extends Component {
                       <Button
                         className="btnTyp5 mt-5 mr-3"
                         onClick={this.handleSubmit}
+                        disabled={this.state.isUploadingImage || this.state.isUploadingCoverImage}
                       >
-                        save
-                          </Button>
+                        {this.state.isUploadingImage || this.state.isUploadingCoverImage ? 'uploading image...' : 'save'}
+                      </Button>
                       <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
                     </Form>
                   </Col>

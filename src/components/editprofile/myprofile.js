@@ -52,7 +52,7 @@ class Myprofile extends Component {
             <Container>
               <Row>
                 <div className="myprofile">
-                  <Image src={Profileban} alt="" className="w-100" />
+                  <Image src={userData.u_cover_image} alt="" className="w-100" />
                   <div className="text-center profile_top">
                     <Image src={userData.u_image} alt="" className="r50 border_profile" />
                     <Image src={userData.flag ? userData.flag : Usaflag}

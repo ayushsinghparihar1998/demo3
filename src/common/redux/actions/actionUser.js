@@ -26,12 +26,12 @@ import {
   GET_PROFILE_BY_ID,
   UPDATE_USER_DETAILS,
   SUBSCRIBE, GET_COUNTRY, GET_STATE, GET_CITY,
-  SEARCH_LISTNER,LOGOUT_SUCCESS,
+  SEARCH_LISTNER, LOGOUT_SUCCESS,
   ADMIN_USER_DELETE_REASON, GET_ADMIN_CATEGORY, SEARCH_PROFESSIONAL,
-  CHANGE_PASSWORD,SET_RATING,UPLOAD_PICTURE,
-  ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY,GET_CATEGORY
+  CHANGE_PASSWORD, SET_RATING, UPLOAD_PICTURE,
+  ADD_CATEGORY, EDIT_CATEGORY, DELETE_CATEGORY, GET_CATEGORY
 } from '../types';
-
+import constant from '../../../constant'
 export const actionLogin = (data) => async (dispatch) => {
   const request = ELPViewApiService('login', data);
   dispatch({ type: LOGIN, payload: request });
@@ -72,8 +72,8 @@ export const actionListnerSignupSuccess = (data) => (dispatch) => {
 };
 
 export const actionLogout = (data) => async (dispatch) => {
- // const request = await 'test';
-   const request = ELPViewApiService('logout',data);
+  // const request = await 'test';
+  const request = ELPViewApiService('logout', data);
   dispatch({ type: LOGOUT, payload: request.data });
   return request;
 };
@@ -243,7 +243,7 @@ export const actionAddrating = (data) => async (dispatch) => {
 };
 
 export const actionUploadImage = data => async (dispatch) => {
-  const url = "http://103.76.253.131:81/elp/uploadimage";
+  const url = constant.SERVER_URL + "elp/uploadimage";
   const config = {
     headers: {
       "content-type": "multipart/form-data"

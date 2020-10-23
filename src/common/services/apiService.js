@@ -24,7 +24,7 @@ axios.interceptors.request.use(
     if (userInfo) {
       if (userInfo.u_accesstoken) {
         access_token = userInfo.u_accesstoken;
-        config.headers.Accesstoken = `${access_token}`;
+        config.headers.accesstoken = `${access_token}`;
       }
     }
     return config;
