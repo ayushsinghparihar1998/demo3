@@ -49,7 +49,50 @@ class NavBar extends Component {
       show2: false,
       show3: false,
       email_varified: false,
-      profileImage: null
+      profileImage: null,
+      mediaLinks:[
+        {
+          href:"https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995",
+          label:"Only my Help"
+        },
+        {
+          href:"http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/",
+          label:"Lend me thy ears"
+        },
+        {
+          href:"http://bwwellbeingworld.businessworld.in/article/Speak-your-heart-out-with-India-s-largest-virtual-listening-platform-Eat-Luv-N-Pray-/21-10-2020-333999/",
+          label:"Speak with your heart "
+        },
+        {
+          href:"https://www.santabanta.com/bollywood/148145/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray",
+          label:"Santabanta"
+        },
+        {
+          href:"https://m.dailyhunt.in/news/india/english/santabanta+english-epaper-santaen/speak+your+heart+out+with+india+s+largest+virtual+listening+platform+eat+luv+n+pray-newsid-n223741478",
+          label:"Dailyhunt"
+        },
+        {
+          href:"https://healthvision.in/speak-your-heart-out-with-eat-luv-n-pray/",
+          label:"Health vision"
+        },
+        {
+          href:"https://www.cityairnews.com/content/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label:"City Air News"
+        },
+        {
+          href:"http://mediabulletins.com/business-world/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label:"Media Bulletins"
+        },
+        {
+          href:"https://ajmernama.com/national/349538/",
+          label:"Ajmernama"
+        },
+        {
+          href:"http://businessnewsthisweek.com/business/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label:"Business news this week"
+        }
+        
+      ]
     };
   }
 
@@ -351,8 +394,12 @@ class NavBar extends Component {
                       </NavLink>,
                       // <Nav.Link > Media</Nav.Link>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995" target="__blank">My Help</NavDropdown.Item>
-                        <NavDropdown.Item href="http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/" target="__blank">BW well being world</NavDropdown.Item>
+                        {
+                          this.state.mediaLinks.map(data=>{
+                            return <NavDropdown.Item href={data.href} target="__blank">{data.label}</NavDropdown.Item>    
+                          })
+                        }
+                        
                       </NavDropdown>,
                       <Nav.Link disabled onClick={() => this.setState({ show3: true })} className="nav-link text-c">
                         Professional Help

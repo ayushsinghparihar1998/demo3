@@ -341,11 +341,11 @@ class Login extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
+          {/* {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
             <NavBarAdmin {...this.props} />
-          ) : (
+          ) : ( */}
               <NavBar {...this.props} />
-            )}
+            {/* )} */}
         </div>
         <div className="Loginlayout">
           <Container>

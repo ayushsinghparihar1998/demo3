@@ -29,8 +29,8 @@ class Faq extends Component {
               <Col md={12} lg={12}> 
                 <div className="myprofile reviewrequest memberfaq"> 
                   <div className="text-center user_tab">
-                    <Tabs defaultActiveKey="request">  
-                      <Tab eventKey="request" title="General FAQ"> 
+                    {/* <Tabs defaultActiveKey="request">  
+                      <Tab eventKey="request" title="General FAQ">  */}
                         <div className="fw400 col29 fs28 text-center mt-4 mb-2">  
                             General FAQ
                         </div>
@@ -122,7 +122,7 @@ class Faq extends Component {
                                 </Accordion>
                         </div>
                       
-                      </Tab>
+                      {/* </Tab> */}
 
                       {/* <Tab eventKey="completed" title="Members FAQ">
                       <div className="fw400 col29 fs28 text-center mt-4 mb-2">  
@@ -339,7 +339,7 @@ class Faq extends Component {
                             </div>
                       
                       </Tab> */}
-                    </Tabs>
+                    {/* </Tabs> */}
                   </div>
                 </div>
               </Col>
