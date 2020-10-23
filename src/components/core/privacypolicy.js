@@ -29,7 +29,7 @@ class Privacypolicy extends Component {
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row> 
-              <Col md={12} lg={12} className="pl-1"> 
+              <Col md={12} lg={12}>  
                 <div className="myprofile terms">
                     <div className="fs32 fw600 col29 mb-2">EAT LUV N PRAY PVT. LTD.</div>
                     <div className="fs32 fw600 col29 mb-2">Privacy Policy – Effective Date Oct 1st 2020</div>

@@ -114,24 +114,25 @@
             }
         }
         
-        .border_bottoms {   
+        .border_bottoms {    
             border-bottom: 0.5px solid $col50; 
             width: 100%;
             max-width: 250px;
             text-align: center;
             margin: auto;
         }
-        .profile_top {
+        .profile_top { 
             margin-top: -60px;
             position: relative;
             .border_profile {
                 border: solid 3px $col18; 
             }
-            .flags {
+            .flags { 
                 position: absolute;
                 top: 85%; 
                 left: 49%;
-                max-width: 31px; 
+                max-width: 30px; 
+                width: 30px; 
             }
             .btn_set {
                 position: absolute;
@@ -139,7 +140,7 @@
                 right: 20px; 
             }
 
-            &.melisa {
+            &.melisa { 
                 margin-top: 105px; 
             }
         }
