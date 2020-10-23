@@ -97,9 +97,9 @@
             padding-left: 56px;
             cursor: pointer;
 
-            &>a {
+            &>a { 
                 color: $col18;
-                text-transform: uppercase; 
+                text-transform: uppercase;  
             }
         }
     }
@@ -126,7 +126,7 @@
         bottom: 0;
         left: 0; 
         
-        .overlays_bottom {
+        .overlays_bottom { 
             background-image: url('../images/left_bottom.png');  
             background-size: cover;
             height: 170px;
@@ -588,4 +588,58 @@
             }
         }
     }
+}
+
+@media (max-width: 767px) {  
+
+    .memberfaq {
+        position: relative;
+        .user_tab {
+            
+            .nav-tabs {
+                a.nav-item {
+                    margin-bottom: 10px; 
+                }
+            }
+
+            .tab-content {
+                .tab-pane {
+                    div.fs28  {
+                        font-size: 24px !important; 
+                        margin-top: 0px !important; 
+                    }
+                    div.fs20 {
+                        font-size: 16px !important; 
+                        margin-bottom: 30px !important;
+                        padding: 0 15px; 
+                    }
+                }
+            }
+        }
+        .QuestionAnswer {  
+            padding: 0 20px 0;
+
+            .accordion {
+                .card {
+                    .card-header { 
+                        font-size: 14px;
+                        height: 60px; 
+                        display: flex;
+                        align-items: center;
+                        padding-left: 15px; 
+                    }
+                    .card-body {
+                        font-size: 14px;
+                        padding: 1rem; 
+                    }
+                }
+            }
+        }
+    }
+
+    .compaigns {
+        
+    }
+
+
 }

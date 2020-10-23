@@ -23,10 +23,10 @@ class Faq extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5">
+        <div className="profile_layout pt-4 pb-5 faqone"> 
           <Container>
             <Row> 
-              <Col md={12} lg={12} className="pl-1">
+              <Col md={12} lg={12}> 
                 <div className="myprofile reviewrequest memberfaq"> 
                   <div className="text-center user_tab">
                     <Tabs defaultActiveKey="request">  
