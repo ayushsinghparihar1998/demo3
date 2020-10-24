@@ -13,13 +13,45 @@
             color: $col8; 
         }
         .navbar-nav {
-
+            .userprofiles {
+                .profile_icon.profiletwo {
+                    .dropdown-menu  {
+                        .dropdown-item {
+                            text-transform: uppercase; 
+                            & > img {
+                                width: 16px;
+                                // position: relative;
+                                // left: -7px;
+                                // top: -1px;
+                                // margin-right: 0px !important;
+                            }
+                            &:nth-child(2) {
+                                position: relative;
+                                & > span {
+                                    padding-left: 8px;
+                                } 
+                            }
+                            &:nth-child(3) {
+                                position: relative;
+                                span {
+                                    padding-left: 14px; 
+                                }
+                            }
+                            
+                            span {
+                                padding-left: 10px;
+                            }
+                            
+                        }
+                    }
+                }
+            }
             .loginnav  {
                 .dropdown-menu {
                     left: -100px; 
                 }
             }
-            a.nav-link {
+            a.nav-link { 
                 padding-right: $fs14;
                 color: $col3;
                 font-weight: 500; 
@@ -29,7 +61,7 @@
                 }
             } 
 
-            .userprofiles {  
+            .userprofiles {    
                 display: none !important; 
                 &.menus { 
                     display: flex !important;
@@ -145,16 +177,16 @@
     }
 }
 
-.header-fixed { 
+.header-fixed {  
     z-index: 9999;
     position: relative; 
 }
 
-.email_verified {
+.email_verified { 
     position: relative;
     text-align: center;
 
-    .verifys {
+    .verifys { 
         position: absolute;  
         background-color: $col26; 
         background-image: url(../images/mask_layer.png); 
@@ -172,6 +204,7 @@
         align-items: center;
         padding: 12px;
         z-index: 9;
+        text-align: left;   
 
         & > img {
             max-width: 40px; 
@@ -231,13 +264,13 @@
             .navbar-nav {
                 a.nav-link {
                     padding-right: 8px;
-                    color: #1B1B28;
+                    color: $col3;
                     font-weight: 500;
                     font-size: 12px;
                     padding: 10px 12px;
     
                     &:hover {
-                        color: $col1; 
+                        color: $col3; 
                     }
                 } 
     
@@ -280,7 +313,7 @@
     }
 }
 
-@media (min-width: 1350px) { 
+@media (min-width: 1350px) {  
     .mj_nav {
         .navbar-light {
             .navbar-nav {
@@ -288,7 +321,7 @@
                     padding: 10px 18px;
                     font-size: $fs14;
                     &:hover {
-                        color: $col1; 
+                        color: $col3; 
                     }
                 } 
     

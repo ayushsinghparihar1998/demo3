@@ -336,7 +336,7 @@ class NavBar extends Component {
                     ? [
                       getLocalStorage("customerInfo")
                         ? [
-                          <NavLink
+                          <NavLink 
                             // to="/professionalSearch"
                             to="/coming-soon"
                             className="nav-link"
@@ -473,15 +473,15 @@ class NavBar extends Component {
                           </div>
                     </li>  */}
                         <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
-                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" className="mr-1" />
-                            MY PROFILE
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" />
+                            <span>MY PROFILE</span>
                           </NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
-                            <Image src={Usersettings} alt="" className="mr-1" /> MY SETTINGS</NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" className="mr-1" />
-                              Edit Profile
+                            <Image src={Usersettings} alt="" /> <span>MY SETTINGS</span></NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" />
+                              <span>Edit Profile</span>
                           </NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> LOGOUT</NavDropdown.Item>
+                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> <span>LOGOUT</span></NavDropdown.Item> 
                         </NavDropdown>
                       </span>
 
