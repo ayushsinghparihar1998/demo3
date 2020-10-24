@@ -718,7 +718,7 @@ img {
     }
 }
 
-.manage_ratings {
+.manage_ratings { 
     position: relative; 
     background-color: $col86; 
     display: inline-block;
@@ -730,9 +730,16 @@ img {
         .mj_nav {
             .navbar-light {
                 .navbar-nav {
-                    a.text-c {
+                    a.text-c { 
                         text-align: center;
                     }
+                    .dropdown {
+                        .dropdown-menu {  
+                            position: absolute;
+                            left: -75px; 
+                        }
+                    }
+                    
                 }
             }
         }
