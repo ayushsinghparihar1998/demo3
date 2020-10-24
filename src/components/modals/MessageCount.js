@@ -3,6 +3,7 @@ import socketClass from "../../common/utility/socketClass";
 import { getLocalStorage } from "../../common/helpers/Utils";
 
 const socket = socketClass.getSocket();
+let interval
 
 const MessageCount = ({ userId }) => {
 
@@ -10,10 +11,13 @@ const MessageCount = ({ userId }) => {
         conversation: 0,
         unreadMessage: 0,
     })
-    const [selfId, setSelfId] = useState(null)
+    const [selfId, setSelfId] = useState(null);
+
 
     useEffect(() => {
-        getActiveConversation()
+        if (selfId) {
+            getActiveConversation()
+        }
     }, [selfId])
     useEffect(() => {
         let title = 'Report '
@@ -23,29 +27,37 @@ const MessageCount = ({ userId }) => {
             id = getLocalStorage('userInfo').u_id
         } else if (getLocalStorage('customerInfo')) {
             title = title + 'listener'
-            console.log('===??ASD',getLocalStorage('customerInfo').u_id)
+            console.log('===??ASD', getLocalStorage('customerInfo').u_id)
             id = getLocalStorage('customerInfo').u_id
         } else if (getLocalStorage('userInfoProff')) {
             title = title + 'listener'
-            id = getLocalStorage('userInfoProff').u_id 
+            id = getLocalStorage('userInfoProff').u_id
         }
-        
-        setSelfId(id)
+
+        setSelfId(id);
+
+        return () => {
+            console.log(interval)
+            clearInterval(interval)
+        }
     }, [])
     const getActiveConversation = () => {
 
         const getData = () => {
-            console.log('user_id =======>',selfId);
+            console.log('user_id =======>', selfId);
+
             socket.emit("get-active-conversation", {
-                user_id: selfId 
-            }, (data) => { 
+                user_id: selfId
+            }, (data) => {
                 console.log('active data', data);
-                setData({...data.result})
+                setData({ ...data.result })
             });
         }
-        setInterval(() => {
+        clearInterval(interval)
+        interval = setInterval(() => {
             getData()
-        }, 20000)
+        }, 2000)
+        
         getData()
     }
 

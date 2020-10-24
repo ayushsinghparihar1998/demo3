@@ -114,13 +114,11 @@ class NavBar extends Component {
     }
     if (type) {
       ELPRxApiService(type + "DashboardDetail").then(res => {
-
+        console.log('res ============>', res)
         this.setState({
           email_varified: res.data.data.dashboard_list.u_verified == '1' ? false : true,
         })
-        if (res.data.dashboard_list.u_verified) {
-
-        }
+      
       }).catch(err => {
         console.log(err);
       })
