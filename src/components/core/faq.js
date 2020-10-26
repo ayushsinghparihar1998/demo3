@@ -26,7 +26,7 @@ class Faq extends Component {
         <div className="profile_layout pt-4 pb-5 faqone"> 
           <Container>
             <Row> 
-              <Col md={12} lg={12}> 
+              <Col md={12} lg={12}>    
                 <div className="myprofile reviewrequest memberfaq"> 
                   <div className="text-center user_tab">
                     {/* <Tabs defaultActiveKey="request">  
@@ -35,7 +35,7 @@ class Faq extends Component {
                             General FAQ
                         </div>
                         <div className="fs20 fw400 col27 mb-5">   
-                            FAQ about ENLP, Listener & Member Accounts, and more.
+                            FAQ about ELNP, Listener & Member Accounts, and more.
                         </div>
                         <div className="QuestionAnswer"> 
                             <Accordion defaultActiveKey="0">    

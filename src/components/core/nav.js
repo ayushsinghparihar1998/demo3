@@ -512,7 +512,7 @@ class NavBar extends Component {
                           }}
                         >
                           Professional Login <br />
-                          coming soon
+                          <span className="comings">coming soon</span> 
                     </NavDropdown.Item>
                         <NavDropdown.Item
                           onClick={(e) => {
