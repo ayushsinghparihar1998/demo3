@@ -446,7 +446,7 @@ export default {
     url: "elp/emailverification",
     method: "POST",
     data: { email: "", authcode: "" },
-    showResultMessage: false,
+    showResultMessage: true,
     showErrorMessage: true,
   },
   changepassword: {

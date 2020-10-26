@@ -61,7 +61,7 @@ class Faq extends Component {
                                     <Card.Body>  
                                         Active Listening is hearing in a way that exhibits compassion and 
                                         empathy while keeping in mind the importance of anonymity. Our 
-                                        listeners are called “CoCo” (your constant companion) who will be all 
+                                        listeners are called Listener (your constant companion) who will be all 
                                         ears to ensure you feel valued and heard.
                                     </Card.Body>
                                     </Accordion.Collapse>

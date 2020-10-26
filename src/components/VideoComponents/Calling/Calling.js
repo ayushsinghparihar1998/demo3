@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import NavBar from "../../core/nav";
-import Videousertwo from "../../../assets/images/videousers.svg";
+import Videousertwo from "../../../assets/images/placeholder_user.png";
 
 import Videothree from "../../../assets/images/video.svg";
 import Videodisconnect from "../../../assets/images/dissconect.svg";
@@ -51,6 +51,7 @@ const Calling = (props) => {
   useEffect(() => {
     socket.emit('userDetail', { "user_id": id }, data => {
       if (data.success === 1) {
+        console.log('====> DATA ===>>',data)
         setUserDetails(data.userDetail);
         notAnswered(id, data.userDetail);
       } else {
@@ -68,7 +69,7 @@ const Calling = (props) => {
           {!!userDetails ?
             <div className="w-100 audiocontrol">
               <div className="mb-5">
-                <Image src={Videousertwo} alt="" className="mw-150" />
+                <Image src={userDetails.u_image|| Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name} </div>
                 <div className="fs16 col18 fw300">{type} Calling...</div>
               </div>

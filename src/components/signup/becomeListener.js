@@ -40,7 +40,7 @@ class Becomelistener extends Component {
               <Row>
                 <Col md={7} lg={8}> 
                   <div className="col10 fs40 fw600 mb-1 mt-2 pt-1">
-                    Become a CoCo
+                    Become a Listener
                   </div>
                   <div className="fw300 fs15 col28 pt-1">
                     “You have not lived today until you have done something for someone who can never repay you.”
@@ -55,7 +55,7 @@ class Becomelistener extends Component {
                   </div>
                   <div className="fw500 fs18 col29 pt-1">How does it work?</div>
                   <div className="fw300 fs15 col28 pt-2">
-                    Getting started as a CoCo (Constant Companion) is easy and rewarding in many ways. You’re in
+                    Getting started as a Listener (Constant Companion) is easy and rewarding in many ways. You’re in
                     complete control over your displayed availability, so you can help others as often as you like.
                   </div>
                   <div className="fw500 fs18 col29 pt-1 mb-2">
@@ -72,7 +72,7 @@ class Becomelistener extends Component {
                     <li>
                       <div className="fw300 fs15 col28">
                         {' '}
-                        Create your CoCo profile.
+                        Create your Listener profile.
                       </div>
                     </li>
                   </ol>

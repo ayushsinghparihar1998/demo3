@@ -87,11 +87,11 @@ class Compaign extends Component {
                   <li className="first">Spread the word</li>
                   <li>
                     Share on Facebook{" "}
-                   <FacebookShareButton url={'https://eatluvnpray.org/compaign'}><Image src={Nextbtn} className="ml-1" alt="" /></FacebookShareButton> 
+                   <FacebookShareButton url={'https://eatluvnpray.org/campaign'}><Image src={Nextbtn} className="ml-1" alt="" /></FacebookShareButton> 
                   </li>
                   <li>
                     Share on Twitter{" "}
-                   <TwitterShareButton url={'https://eatluvnpray.org/compaign'}> <Image src={Nextbtn} className="ml-1" alt="" /></TwitterShareButton>
+                   <TwitterShareButton url={'https://eatluvnpray.org/campaign'}> <Image src={Nextbtn} className="ml-1" alt="" /></TwitterShareButton>
                   </li>
                   {/* <li>
                     Tell other ELNP members & Listeners{" "}
