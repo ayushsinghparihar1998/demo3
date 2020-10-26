@@ -176,6 +176,12 @@
        
         .user_tab {
             padding-bottom: 3rem; 
+            .d-flex {
+                .btnTyp11.ml-3 {
+                    font-size: 15px;
+                    line-height: 20px; 
+                }
+            }
             .tab-content {
                 padding-top: 20px; 
             }            
@@ -183,6 +189,8 @@
             .nav-tabs {
                 justify-content: center;
                 border-bottom: none;
+                
+                
                 a {
                     height: 2.5rem;
                     border: solid 1px $col40;        
