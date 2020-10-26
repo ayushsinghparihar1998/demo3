@@ -400,15 +400,20 @@ class NavBar extends Component {
                         
                       </NavDropdown>,
                       <Nav.Link disabled onClick={() => this.setState({ show3: true })} className="nav-link text-c">
-                        Professional Help
+                        Professional Help 
                         <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
-                      <Nav.Link disabled href="#about_us_container" className="nav-link text-c">
-                        About
-                        <br />
-                        <span className="comings">coming soon</span>
-                      </Nav.Link>,
+                      // <Nav.Link disabled href="#about_us_container" className="nav-link text-c">
+                      //   About Us
+                      //   <br />
+                      //   <span className="comings">coming soon</span>
+                      // </Nav.Link>,
+                      <NavLink to="/about" className="nav-link text-c"> 
+                      About Us
+                      {/* <br /> */}
+                      {/* <span className="comings">coming soon</span>   */}
+                    </NavLink>,
                       <NavLink to="/faq" className="nav-link">
                         FAQ
                    </NavLink>,

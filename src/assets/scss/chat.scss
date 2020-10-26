@@ -60,9 +60,17 @@
         outline: 1px solid slategrey;
     }
     
-    .chat_middle {   
+    .chat_middle {     
         min-height: 380px;
         display: grid;
+        .mt-auto {
+            .d-flex {
+                img.r50 {
+                    width: 32px;
+                    height: 32px; 
+                }
+            }
+        }
         & > .mt-auto {
             max-height: 300px; 
             overflow: auto; 

@@ -17,7 +17,7 @@ User : nkuser12@yopmail.com
 listener : listn@yopmail.com
 12345678
 
-Professional : profession@yopmail.com       
+Professional : profession@yopmail.com                                    
 12345678  
 
 Updated Production Details:-    
@@ -55,4 +55,17 @@ New Member Login
 
 userop@yopmail.com              
 12345678  
+
+updated details:- 
+
+member login
+userop@yopmail.com
+
+123456789 
+
+Listener login
+nlistner@yopmail.com
+
+12345678
+
 

@@ -216,7 +216,7 @@ class Privacypolicy extends Component {
 
                     <p>ELNP does not and shall not discriminate on the basis of race, colour, religion (creed), gender, gender expression, age, national origin (ancestry), disability, marital status, sexual orientation, or military status, in any of its activities or operations.</p>
 
-                    <div>11. Children’s Data</div>
+                    <div className="fs20 fw600 col29 mt-2 mb-2">11. Children’s Data</div> 
 
                     <p>ELNP complies with the Children’s Online Privacy Protection Act and Our Site and
 Services clearly specify that users must be at least 13 years old. Children between the ages of 13-17 years old may only participate in our Services with parental consent. If a parent or guardian becomes aware that his or her child has provided us with Personal Information without their consent, he or she should contact us at support@eatluvnpray.org. If we become aware that a child under 18 (or between the ages of 13-17 years old without parental consent) has provided us with Personal Information, we will take steps to delete such information from our files. Separately, a child under 18 may request deletion of information they posted on our Site or Services, which may be accomplished through anonymization.</p>

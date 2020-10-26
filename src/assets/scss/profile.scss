@@ -9,6 +9,7 @@
     }
 
     .myprofile {
+        width: 100%;
         &>img {
             &.w-100 {
                 max-height: 155px;
@@ -134,8 +135,11 @@
             }
             margin-top: -60px;
             position: relative;
-            .border_profile {
+            .border_profile { 
                 border: solid 3px $col18; 
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
             }
             .flags { 
                 position: absolute;
@@ -326,6 +330,7 @@
 .listenerprofile {
 
     .myprofile {
+        width: 100%; 
         position: relative; 
         padding: 30px;
         .profile_top {
@@ -473,10 +478,13 @@
                 margin-top: -40px; 
                 .border_profile {
                     max-width: 90px; 
+                    width: 90px;
+                    height: 90px;
                 }
                 .flags {
                     left: 50%;
                     transform: translate(-50%, 0);
+                    object-fit: cover; 
                 }
                 .btn_set { 
                     padding: 0 1rem;
