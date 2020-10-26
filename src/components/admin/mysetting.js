@@ -80,17 +80,17 @@ const MySetting = (props) => {
                                             <div className="search_listeners">
                                                 <Col xss={12} className="m-auto">
                                                     <Row>
-                                                        <Col lg={3} md={4}>
+                                                        {/* <Col lg={3} md={4}>
                                                             <div className="col1 fw500 fs18 mt-2">Search Users</div>
                                                         </Col>
                                                         <Col lg={5} md={5}>
                                                             <Form.Group>
                                                                 <Form.Control type="text" placeholder="Find Keywords" className="inputTyp2 input3" id="outlined-email" variant="outlined" name="screenName" />
                                                             </Form.Group>
-                                                        </Col>
-                                                        <Col lg={3} md={3}>
+                                                        </Col> */}
+                                                        {/* <Col lg={3} md={3}>
                                                             <Button className="btnTyp5 bTyp5">Search</Button>
-                                                        </Col>
+                                                        </Col> */}
                                                     </Row>
                                                 </Col>
                                             </div>

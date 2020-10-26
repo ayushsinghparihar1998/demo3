@@ -541,12 +541,15 @@ class Chat extends Component {
                           /> */}
                           <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
-                          <Button
-                            className="btnTyp6 text-uppercase"
-                            onClick={() => this.surveyModal.current.openModal()}
-                          >
-                            end chat
-                          </Button>
+                          {
+                            !this.state.isMessageDisabled ?
+                              <Button
+                                className="btnTyp6 text-uppercase"
+                                onClick={() => this.surveyModal.current.openModal()}
+                              >
+                                end chat
+                          </Button> : null
+                          }
 
 
 
