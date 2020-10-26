@@ -488,7 +488,7 @@ class Editprofile extends Component {
                           <Button
                             className="btnTyp11 ml-3"
                             onClick={this.handleResetPassword}>
-                            reset
+                            Change Password
                               </Button>
                         </div>
                       </Form.Group>

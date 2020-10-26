@@ -502,7 +502,7 @@ class Listenersignup extends Component {
           </Container>
         </div>
         <Modal
-          show={this.state.secondSignUp}
+          show={true||this.state.secondSignUp}
           onHide={this.handleClose}
           className="custom-popUp confirmation-box"
           bsSize="small"

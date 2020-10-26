@@ -61,12 +61,12 @@ class Forgotpassword extends Component {
         .actionForGotPassword(data)
         .then(result => {
           if (result && result.data && result.data.status === "success") {
-            // setTimeout(() => {
+            setTimeout(() => {
               this.props.history.push({
                 pathname: 'login',
                 state: { roleType: parseInt(this.state.roleType) }
               });
-            // }, 1000);
+            }, 1000);
 
           }
         })

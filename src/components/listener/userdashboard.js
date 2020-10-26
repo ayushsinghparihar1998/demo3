@@ -485,8 +485,8 @@ class Userdashboard extends Component {
                                        <Image src={Speakers} alt="" />
                                     </div>
                                     <div>
-                                       <div className="fs12 fw500 col18">Need a COCO?(Online Listeners)</div>
-                                       <div className="fs13 fw500 col18">COCO to COCO</div>
+                                       <div className="fs12 fw500 col18">Need a Listener?(Online Listeners)</div>
+                                       <div className="fs13 fw500 col18">Listener to Listener</div>
                                        <div className="fs12 fw500 col18">COming soon for now</div>
                                     </div>
                                  </div>
@@ -734,7 +734,7 @@ class Userdashboard extends Component {
                            <div className="col9 fs44 fw600 mb-2">Congratulation</div>
                            <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
                               for being a coach on ELNP
-               </div>
+                            </div>
                            {/* 
                <Image src={Educationmarks} alt="" />
                */}
@@ -748,7 +748,7 @@ class Userdashboard extends Component {
                               </span>
                               <div class="progress-value">
                                  {getLocalStorage('result')}%
-                  </div>
+                              </div>
                            </div>
                         </div>
                      ) : (

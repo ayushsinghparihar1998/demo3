@@ -12,7 +12,7 @@ import {
 } from '../../common/redux/actions';
 import CONSTANTS from '../../common/helpers/Constants';
 import validateInput from '../../common/validations/validationSignup';
-import { setLocalStorage } from '../../common/helpers/Utils';
+import { setLocalStorage, showErrorMessage, showSuccessToast } from '../../common/helpers/Utils';
 class QuestionAndAnswer extends Component {
   constructor(props) {
     super(props);
@@ -71,18 +71,28 @@ class QuestionAndAnswer extends Component {
       question_submit: question_submit,
     };
     console.log('datadatadata', data);
-    this.props.actionSubmitQuestion(data).then((result) => {
-      console.log(result,'@@@@@@',result.data,'cwerwerwer', result.data.data);
-      if (result && result.status === 200) {
-        if (result.data.data >= 60) setLocalStorage('loggedIn', true);
-        setLocalStorage('signup', true);
-        if(result.data && result.data.data)
-        setLocalStorage('result', result.data.data);
-
-      
-        this.props.history.push({ pathname: '/userDashboard' });
-      }
-    });
+    if(data.question_submit.length  == question.length) {
+      this.props.actionSubmitQuestion(data).then((result) => {
+        console.log(result,'@@@@@@',result.data,'cwerwerwer', result.data.data);
+        if (result && result.status === 200) {
+          if (result.data.data >= 60) setLocalStorage('loggedIn', true);
+          setLocalStorage('signup', true);
+          if(result.data && result.data.data)
+          setLocalStorage('result', result.data.data);
+  
+        
+          this.props.history.push({ pathname: '/userDashboard' });
+          showSuccessToast(result.data.message)
+        }else{
+          showErrorMessage(result.data.message)
+        }
+  
+        
+      });
+    }else {
+      showErrorMessage('Please fille up the form first.')
+    }
+    
 
     // } else {
     // this.setState({

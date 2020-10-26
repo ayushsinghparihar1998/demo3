@@ -9,7 +9,7 @@ import {
 
 import NavBar from "../core/nav";
 import Backicon from "../../assets/images/backicon.svg";
-import Videouser from "../../assets/images/pro_img2.svg";
+import Videouser from "../../assets/images/placeholder_user.png";
 import Videousertwo from "../../assets/images/videousers.svg";
 import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
@@ -67,7 +67,7 @@ const Videocall = (props) => {
       // } else {
       //   token = token[1]
       // }
-      // console.log('random ===========', token);
+      console.log('random ===========', token);
 
       
 
@@ -123,24 +123,25 @@ const Videocall = (props) => {
       //   debugger;
       //   track.track.stop()
       // });
-      const payload = {
-        reciver_id: paramsid,
-        reciver_type: userDetails?.u_role_id,
-        // "sender": {},
-        type: "video",
-        sender_id: getUserProfile().u_id
-      }
-      if (token) {
-        socket.emit('endVideoCall', payload, data => {
-          console.log(data)
-        });
-      }
-      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-        history.push('/chatuser/'+paramsid)
-      }else{
-        history.push('/chat/'+paramsid)
-      }
-      
+    }
+
+
+    const payload = {
+      reciver_id: paramsid,
+      reciver_type: userDetails?.u_role_id,
+      // "sender": {},
+      type: "video",
+      sender_id: getUserProfile().u_id
+    }
+    if (token) {
+      socket.emit('endVideoCall', payload, data => {
+        console.log(data)
+      });
+    }
+    if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+      history.push('/chatuser/'+paramsid)
+    }else{
+      history.push('/chat/'+paramsid)
     }
   }
   const connectTwillio = (token, room) => {
@@ -281,7 +282,7 @@ const Videocall = (props) => {
         <Container>
           <div className="userdetail pt-5">
             <span><Image src={Backicon} alt="" className="pointer" /></span>
-            <span><Image src={Videouser} alt="" className="r50" /></span>
+            <span><Image src={userDetails?.u_image||Videouser} alt="" className="r50" /></span>
             <span className="online_user"></span>
             <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
           </div>

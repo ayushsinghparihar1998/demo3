@@ -102,21 +102,23 @@ const AudioCall = (props) => {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
-      const payload = {
-        reciver_id: paramsid,
-        reciver_type: userDetails?.u_role_id,
-        // "sender": {},
-        type: "audio",
-        sender_id: getUserProfile().u_id
-      }
-      if (token) {
-        socket.emit('endVideoCall', payload);
-      }
-      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-        history.push('/chatuser/'+paramsid)
-      }else{
-        history.push('/chat/'+paramsid)
-      }
+     
+    }
+
+    const payload = {
+      reciver_id: paramsid,
+      reciver_type: userDetails?.u_role_id,
+      // "sender": {},
+      type: "audio",
+      sender_id: getUserProfile().u_id
+    }
+    if (token) {
+      socket.emit('endVideoCall', payload);
+    }
+    if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
+      history.push('/chatuser/'+paramsid)
+    }else{
+      history.push('/chat/'+paramsid)
     }
   }
   const connectTwillio = (token, room) => {
@@ -149,7 +151,10 @@ const AudioCall = (props) => {
         attachParticipantTracks(participant, remoteContainer, 'remote');
       }, 1000);
       participant.on('trackSubscribed', track => {
-        remoteContainer.appendChild(track.attach());
+        if(remoteContainer){
+          remoteContainer.appendChild(track.attach());
+        }
+        
       });
     });
   }
@@ -183,7 +188,10 @@ const AudioCall = (props) => {
       }
     }
     tracks.forEach(track => {
-      container.appendChild(track.attach());
+      if(container){
+        container.appendChild(track.attach());
+      }
+      
     });
   }
   // console.log(props, getUserProfile, token)

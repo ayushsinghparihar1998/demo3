@@ -126,7 +126,6 @@ class ELPRoute extends Component {
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
-          <PublicRoute path="/campaign" component={Compaign} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
@@ -145,6 +144,7 @@ class ELPRoute extends Component {
           <Route path="/privacypolicy" render={props => <Privacypolicy {...props} />} />
           <Route path="/share-profile" render={props => <ShareProfile {...props} />} />
           <Route path="/faq" render={props => <Faq {...props} />} />
+          <Route path="/campaign" render={props => <Compaign {...props} />} />
 
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}

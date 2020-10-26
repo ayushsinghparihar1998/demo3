@@ -29,7 +29,7 @@ Our trained Listeners are ready to extend their helping hand.</div>
                         <div className="baner2 bannerset">
                             <Image src={freechat} alt="" className="pt-2" />
                             <div className="fs18 fw600 col6 pt-2">Free Chat</div>
-                            <div className="col14 fs12 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive CoCos.</div>
+                            <div className="col14 fs12 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive Listeners.</div>
                             <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>
                     </Col>
