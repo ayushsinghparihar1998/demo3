@@ -542,6 +542,17 @@
     }
 }
 
+.aboutpage {
+    .detail_listing  {
+        
+    }
+    div {
+        img.mx-w {
+            max-width: 340px; 
+        }
+    }
+
+}
 .terms {
     padding: 30px;
     position: relative; 
@@ -590,7 +601,7 @@
     }
 }
 
-@media (min-width: 767px) and (max-width: 991px) {  
+@media (min-width: 768px) and (max-width: 991px) {   
     .compaigns {
         .right_donate {
             img {
@@ -611,9 +622,28 @@
             }
         }
     }
+
+    .aboutpage {
+        .detail_listing  {
+            p.fs16 {
+                font-size: 14px !important;
+            }
+        }
+    
+    }
+
+
 }
 
-@media (max-width: 767px) {   
+@media (max-width: 767px) {
+    .aboutpage {
+        text-align: center; 
+        .col-lg-9 {
+            .fs22.fw600 {
+                margin-top: 15px; 
+            }
+        }      
+    }   
 
     .terms {
         position: relative; 

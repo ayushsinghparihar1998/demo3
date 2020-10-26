@@ -275,7 +275,7 @@ class Userdashboard extends Component {
             <div className="main_baner">
                <NavBar {...this.props} />
             </div>
-            <div className="userdashboards pt-4 pb-5">
+            <div className="userdashboards pt-4 pb-5">   
                <Container>
                   <Row>
                      <Col md={9}>

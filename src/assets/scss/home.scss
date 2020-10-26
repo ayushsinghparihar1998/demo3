@@ -67,17 +67,25 @@
         padding-top: 45px;
 
         .invertedone {
+            // position: absolute;
+            // left: -56px;
+            // top: 8px;
+            // max-width: 50px;
             position: absolute;
-            left: -56px;
-            top: 8px;
-            max-width: 50px;
+            left: -38px;
+            top: 26px;
+            max-width: 40px;         
         }
 
         .invertedtwo {
-            position: absolute;
-            right: 8%; 
-            top: 114px; 
-            max-width: 50px;
+            // position: absolute;
+            // right: 8%; 
+            // top: 114px; 
+            // max-width: 50px;
+            position: relative;       
+            right: -15px;
+            top: 0;
+            max-width: 40px;
         }
     }
 

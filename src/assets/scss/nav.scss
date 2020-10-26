@@ -2,9 +2,11 @@
 @import 'color.scss';
 
 .mj_nav { 
-    span.comings {
-        position: relative;
+    span.comings { 
+        position: relative; 
         font-size: 13px;
+        color: gray; 
+        font-weight: 400; 
     }
     .navbar-light {
         .navbar-brand {

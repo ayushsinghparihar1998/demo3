@@ -66,7 +66,8 @@ import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq";
 import Termcondition from "../components/core/termcondition";
 import Privacypolicy from "../components/core/privacypolicy";
-import ShareProfile from "../components/core/ShareProfile"
+import ShareProfile from "../components/core/ShareProfile";
+import About from "../components/core/about";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -75,7 +76,7 @@ const user =
   getLocalStorage("userInfoAdmin");
 class ELPRoute extends Component {
   state = {};
-  componentDidMount() {
+  componentDidMount() { 
     window.addEventListener("beforeunload", socketClass.disconnect);
     if (getUserProfile()) {
       // console.log("socketClass", socketClass.connect);
@@ -131,6 +132,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
+          <PublicRoute path="/about" component={About} />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
