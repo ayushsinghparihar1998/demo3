@@ -350,15 +350,15 @@ class Userdashboard extends Component {
                               </div>
                            </Col>
 
-                           <Col md={8} className="pl-0">
-                              <div className="user_body">
-                                 <div className="inner_body mb-3">
+                           <Col md={8} className="pl-0">    
+                              <div className="user_body"> 
+                                 <div className="inner_body mb-3"> 
                                     <div className="d-flex justify-content-between border_yellow">
                                        <Row className="w-100">
-                                          <Col lg={5} md={4} className="pr-0">
-                                             <div className="col1 fw500 fs15 mt-2">Need to talk to someone?</div>
+                                          <Col lg={4} md={4} xs={12} className="pr-0">
+                                             <div className="col1 fw400 fs13 mt-2">Need to talk to someone?</div>
                                           </Col>
-                                          <Col lg={6} md={5} className="pl-0">
+                                          <Col lg={6} md={6} xs={10} className="pl-0">
                                              <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Control as="select"
                                                    className="selectTyp1 select3"
@@ -375,10 +375,10 @@ class Userdashboard extends Component {
                                                       })
                                                    }
 
-                                                </Form.Control>
+                                                </Form.Control> 
                                              </Form.Group>
                                           </Col>
-                                          <Col lg={1} md={3} className="text-right">
+                                          <Col lg={2} md={2} xs={2} className="text-right">  
                                              <Button onClick={this._getRandomChatHandler} className="btnTyp5 smallbtn">chat</Button>
                                           </Col>
                                        </Row>
@@ -388,9 +388,9 @@ class Userdashboard extends Component {
                                     <div className="test_eat fs18 col18">Test your Eat Luv Pray Quotient</div>
                                  </div>
 
-                                 <FunFact />
+                                 <FunFact /> 
 
-                                 <Quotes />
+                                 <Quotes /> 
 
                               </div>
                            </Col>
@@ -401,23 +401,23 @@ class Userdashboard extends Component {
                         </Row>
                      </Col>
 
-                     <Col md={3}>
-                        <div className="right_sidebar">
-                           <div className="right_inner_side">
-                              <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
+                     <Col md={3}>   
+                        <div className="right_sidebar">   
+                           <div className="right_inner_side"> 
+                              <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer"> 
                                  Hi {getLocalStorage("customerInfo").u_username}
                                  <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
                               <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
-                                 <div className="d-flex mb-2">
+                                 <div className="d-flex mb-2">  
                                     <Image src={Creditcard} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
                                        Remaining Credits
                                    </span>
                                  </div>
-                              </div>
+                              </div> 
                               <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
@@ -440,21 +440,19 @@ class Userdashboard extends Component {
                            <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
                               <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                                    Discover
-                                    Subcomunities
+                                 <span className="d_text"> Discover Subcomunities </span> 
                               </div>
                            </div>
-                           <div className="right_inner_side">
+                           <div className="right_inner_side"> 
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                 My Personal Link
-                  </div>
-                              <div className="p-3">
+                                 My Personal Link       
+                              </div>
+                              <div className="p-3"> 
                                  <div className="fs14 col14 fw400">
                                     Share your link to earn rewards & help us to support
                                     more people
-                     </div>
-                                 <Form.Group className="d-flex mt-4">
-
+                                 </div> 
+                                 <Form.Group className="d-flex mt-4">  
                                     <Form.Control
                                        id="referURL"
                                        type="text"

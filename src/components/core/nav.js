@@ -568,11 +568,11 @@ class NavBar extends Component {
         </Navbar>
 
         {
-          this.state.email_varified ? (
+          this.state.email_varified ? ( 
             <div className="email_verified">
               <div class="verifys">
-                <Image src={Msgbox} alt="" />
-                <span className="fs15 fw500 col18 ml-2">Please verify your email to begin chatting  <span onClick={() => { this._resendVerificationMail() }} style={{ cursor: 'pointer' }}>Resend mail.</span></span>
+                <Image src={Msgbox} alt="" /> 
+                <span className="fs13 fw500 col18 ml-2">Please verify your email to begin chatting  <span className="email_link" onClick={() => { this._resendVerificationMail() }} style={{ cursor: 'pointer' }}>Resend verification email.</span></span>
 
 
               </div>

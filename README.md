@@ -73,4 +73,3 @@ for banner login
 a@yopmail.com
 Abc@1234
 
-
