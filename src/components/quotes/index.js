@@ -33,12 +33,12 @@ const Quotes = () => {
                         return (
                             <Carousel.Item>
                                 <Row>
-                                    <Col md={8} lg={9}>
+                                    <Col md={8} lg={9} xs={12}> 
                                         <Image src={Quotefour} alt="" className="pb-3" />
                                         <div className="fs14 fw400 col11">{data.text}</div>
                                         <div className="fw600 fs16 fw500 mt-2">{data.author}</div>
                                     </Col>
-                                    <Col md={4} lg={3}>
+                                    <Col md={4} lg={3} xs={12}>  
                                         <Image src={Quotetwo} />
                                     </Col>
                                 </Row>

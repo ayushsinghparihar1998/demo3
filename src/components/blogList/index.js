@@ -29,7 +29,7 @@ const BlogList = (props) => {
                     {
                         blogList.map(data=>{
                             return (
-                                <Col md={3}>
+                                <Col md={3} sm={6}> 
                                 <div  className="blog_detail">
                                     <NavLink to={`/mediadetails/${data.bl_id}`}>
                                     <Image src={data.bl_image} alt="" />

@@ -69,7 +69,7 @@
                     display: flex !important;
 
                     .profile_icon {
-                        & > a.nav-link {
+                        & > a.nav-link { 
                             background-image: url(../images/user_chat3.svg);
                             border-radius: 50%; 
                             background-size: cover;
@@ -78,6 +78,7 @@
                             background-repeat: no-repeat;
                             position: relative;
                             top: 5px;
+                            background-position: center; 
 
                             &::after {
                                 margin-left: 25px; 
@@ -190,6 +191,9 @@
     text-align: center;
 
     .verifys { 
+        .email_link {
+            text-decoration: underline; 
+        }
         position: absolute;  
         background-color: $col26; 
         background-image: url(../images/mask_layer.png); 
@@ -259,7 +263,23 @@
     }
 } 
 
-} 
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .mj_nav {
+        .navbar-light {
+            .userprofiles.menus {
+                .profile_icon {
+                    a.nav-link { 
+                        &:after {
+                            margin-left: 32px !important; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @media (min-width: 768px) and (max-width: 1190px) {   
     .mj_nav {
@@ -331,4 +351,36 @@
             }
         }
     }
+}
+
+@media (max-width: 767px) { 
+
+    .mj_nav {
+        .navbar-light {
+            .navbar-nav {
+                .userprofiles.menus {
+                    .profile_icon > a.nav-link {       
+                        width: 30px;
+                        height: 30px; 
+                        top: 8px; 
+                    }
+                    & > a.nav-link {
+                        border-bottom: none; 
+                        padding-top: 8px;
+                    }
+                    justify-content: center;
+                    .profiletwo {
+                        .dropdown-menu {
+                            position: absolute;
+                            left: -80px;
+                            right: 0;
+                        }
+                    }
+                }
+                
+    
+            }
+        }
+    }
+
 }

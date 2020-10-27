@@ -185,6 +185,7 @@
         .mw-150 { 
             width: 100px; 
             height: 100px;
+            object-fit: cover;
             border-radius: 50%;
             border: solid 5px $col18; 
         }

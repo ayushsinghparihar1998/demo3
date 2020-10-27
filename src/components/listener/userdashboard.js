@@ -586,7 +586,7 @@ class Userdashboard extends Component {
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                 How helpful were you?
+                                 How helpful were you? 
                            </div>
                               <div className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
@@ -642,8 +642,7 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                     Discover
-                     Subcomunities
+                                 <span className="d_text">Discover Subcomunities</span> 
                   </div>
                            </div>
                            <div className="right_inner_side">
