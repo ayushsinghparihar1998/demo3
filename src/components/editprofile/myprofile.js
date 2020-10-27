@@ -55,13 +55,13 @@ class Myprofile extends Component {
                   <Image src={userData.u_cover_image} alt="" className="w-100" />
                   <div className="text-center profile_top">
                     <Image src={userData.u_image} alt="" className="r50 border_profile" />
-                    <Image src={userData.flag ? userData.flag : Usaflag}
+                    <Image src={userData.u_flag ? userData.u_flag : Usaflag}
                       alt="" width='50px' className="r50 flags" />
                     <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button>
                   </div>
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
-                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == 1 ? 'Listener' : 'Member'}
+                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == CONSTANTS.ROLES.LISTNER ? 'Listener' : 'Member'}
                       {/* <Image src={warningS} alt="" className="ml-2" /> */}
                     </div>
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>
@@ -70,99 +70,99 @@ class Myprofile extends Component {
                   <div className="text-center user_tab">
                     {/* <Tabs defaultActiveKey="home">
                       <Tab eventKey="home" title="Home"> */}
-                        {/* <div className="layout mt-5">
+                    {/* <div className="layout mt-5">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Number of Ratings:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_rating}</div>
                           </div>
                         </div> */}
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Email:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Country:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">BIO:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
-                          </div>
-                        </div>
-                        {/* <div className="layout">
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Email:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Country:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">BIO:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
+                      </div>
+                    </div>
+                    {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.listento}</div>
                           </div>
                         </div>{console.log("userDatauserData", userData)} */}
-                        {/* <div className="layout">
+                    {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Languages:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.language ? userData.language : ''}</div>
                           </div>
                         </div> */}
 
-                        {
-                          userData.u_role_id == CONSTANTS.ROLES.LISTNER ?
-                            (
-                              <div className="layout">
-                                <div className="d-flex m-auto w35 border2">
-                                  <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
-                                  <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
-                                </div>
+                    {
+                      userData.u_role_id == CONSTANTS.ROLES.LISTNER ?
+                        (
+                          <div className="layout">
+                            <div className="d-flex m-auto w35 border2">
+                              <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
+                              <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
+                            </div>
+                          </div>
+                        ) : userData.u_role_id == CONSTANTS.ROLES.USER ?
+                          (
+                            <div className="layout">
+                              <div className="d-flex m-auto w35 border2">
+                                <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
+                                <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
                               </div>
-                            ) : userData.u_role_id == CONSTANTS.ROLES.USER ?
-                              (
-                                <div className="layout">
-                                  <div className="d-flex m-auto w35 border2">
-                                    <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
-                                    <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
-                                  </div>
-                                </div>
-                              ) : null
+                            </div>
+                          ) : null
 
-                        }
+                    }
 
 
 
 
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Last Active:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.lastactive ? moment(userData.lastactive).format('DD/MM/YYYY') : ''}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Gender:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
-                          </div>
-                        </div>
-                        <div className="layout">
-                          <div className="d-flex m-auto w35 border2">
-                            <div className="fs16 col23 fw400 text-left w60">Chats:</div>
-                            <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
-                          </div>
-                        </div>
-                      {/* </Tab> */}
-                      {/* <Tab eventKey="videos" title="videos">
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Last Active:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.lastactive ? moment(userData.lastactive).format('DD/MM/YYYY') : ''}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Gender:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
+                      </div>
+                    </div>
+                    <div className="layout">
+                      <div className="d-flex m-auto w35 border2">
+                        <div className="fs16 col23 fw400 text-left w60">Chats:</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
+                      </div>
+                    </div>
+                    {/* </Tab> */}
+                    {/* <Tab eventKey="videos" title="videos">
                         videos 23
                                         </Tab>
                       <Tab eventKey="badgesawards" title="Badges & Awards">

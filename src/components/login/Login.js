@@ -525,7 +525,7 @@ class Login extends Component {
 
           <Modal.Body>
             <Container>
-              <UserSignup {...this.props} />
+              <UserSignup {...this.props} handleSet={()=>this.setState({userSignUp:false})} />
             </Container>
           </Modal.Body>
         </Modal>

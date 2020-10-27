@@ -82,6 +82,8 @@ class Chat extends Component {
 
     };
 
+    this.messagesEnd = React.createRef();
+
     this.blockModal = React.createRef();
     this.surveyModal = React.createRef();
 
@@ -91,7 +93,14 @@ class Chat extends Component {
   }
 
 
+  scrollToBottom = () => {
 
+    if (this.messagesEnd && this.messagesEnd.current) {
+      this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    }
+
+
+  }
 
 
   handleEndchatModal = () => {
@@ -175,7 +184,9 @@ class Chat extends Component {
     }),
       (data) => {
         if (data.data) {
-          this.setState({ allMessages: data.data.reverse() })
+          this.setState({ allMessages: data.data.reverse() }, () => {
+            this.scrollToBottom()
+          })
         }
       }
     );
@@ -237,7 +248,9 @@ class Chat extends Component {
     this.setState({ message: "" });
   };
   updateChat(data) {
-    this.setState({ allMessages: [...this.state.allMessages, data] });
+    this.setState({ allMessages: [...this.state.allMessages, data] }, () => {
+      this.scrollToBottom()
+    });
     console.log("AllMessages", this.state.allMessages);
   }
 
@@ -361,7 +374,9 @@ class Chat extends Component {
       (data) => {
         console.log(data)
         if (data.data) {
-          this.setState({ allMessages: data.data.reverse() })
+          this.setState({ allMessages: data.data.reverse() }, () => {
+            this.scrollToBottom()
+          })
         }
       }
     );
@@ -625,6 +640,11 @@ class Chat extends Component {
                               </div>
                             );
                         })}
+
+                        <div style={{ float: "left", clear: "both" }}
+                          ref={this.messagesEnd}>
+                        </div>
+
                       </div>
                     ) : (
                         ""

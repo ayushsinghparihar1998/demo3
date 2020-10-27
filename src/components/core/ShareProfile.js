@@ -11,11 +11,11 @@ import { actionGetProfile } from '../../common/redux/actions';
 import * as moment from 'moment';
 import UserProfile from "../editprofile/userprofiledetail";
 import { getLocalStorage } from "../../common/helpers/Utils";
-import ELPRxApiService from "../../common/services/apiService";
+import CONSTANTS from "../../common/helpers/Constants";
 import Axios from "axios";
-import constant from '../../constant'
+import constant from "../../constant"
 
-class ShareProfile extends Component {
+class Myprofile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,10 +23,9 @@ class ShareProfile extends Component {
         };
     }
     componentDidMount() {
-
         this.getProfile();
     }
-    getProfile = async () => {
+    async getProfile() {
         try {
             console.log(window.location.search)
             let response = await Axios.get(constant.SERVER_URL + 'elp/userdashboard' + window.location.search)
@@ -35,15 +34,6 @@ class ShareProfile extends Component {
         } catch (err) {
             console.log(err);
         }
-        // this.props.actionGetProfile({}).then((result) => {
-        //   if (result && result.status === 200) {
-
-        //     let res = result.data.data &&
-        //       result.data.data.profile_list ? result.data.data.profile_list : {};
-        //     console.log('=================>>>', res)
-        //     this.setState({ userData: res })
-        //   }
-        // })
     }
     handleEdit = () => {
         this.props.history.push({
@@ -58,107 +48,137 @@ class ShareProfile extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-
-                <div className="profile_layout pt-4 pb-5">
-                    <Container>
-                        <Row>
-                            <div className="myprofile">
-                                <Image src={Profileban} alt="" className="w-100" />
-                                <div className="text-center profile_top">
-                                    <Image src={userData.u_image} alt="" className="r50 border_profile" />
-                                    <Image src={userData.flag ? userData.flag : Usaflag}
-                                        alt="" width='50px' className="r50 flags" />
-                                    {/* <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button> */}
-                                </div>
-                                <div className="text-center mt-4 mb-4 pb-2">
-                                    <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
-                                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == 1 ? 'Listener' : 'Member'}
-                                        <Image src={warningS} alt="" className="ml-2" />
+                {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> :
+                    <div className="profile_layout pt-4 pb-5">
+                        <Container>
+                            <Row>
+                                <div className="myprofile">
+                                    <Image src={userData.u_cover_image} alt="" className="w-100" />
+                                    <div className="text-center profile_top">
+                                        <Image src={userData.u_image} alt="" className="r50 border_profile" />
+                                        <Image src={userData.u_flag ? userData.u_flag : Usaflag}
+                                            alt="" width='50px' className="r50 flags" />
+                                        {/* <Button onClick={this.handleEdit} className="btnTyp9 fs15 fw500 btn_set">edit profile</Button> */}
                                     </div>
-                                    <div className="col27 fw400 fs14">{userData.u_bio}</div>
-                                    <div className="border_bottoms mt-3"></div>
-                                </div>
-                                <div className="text-center user_tab">
-
-                                    {/* <div className="layout mt-5">
+                                    <div className="text-center mt-4 mb-4 pb-2">
+                                        <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
+                                        <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == CONSTANTS.ROLES.LISTNER ? 'Listener' : 'Member'}
+                                            {/* <Image src={warningS} alt="" className="ml-2" /> */}
+                                        </div>
+                                        <div className="col27 fw400 fs14">{userData.u_bio}</div>
+                                        <div className="border_bottoms mt-3"></div>
+                                    </div>
+                                    <div className="text-center user_tab">
+                                        {/* <Tabs defaultActiveKey="home">
+                      <Tab eventKey="home" title="Home"> */}
+                                        {/* <div className="layout mt-5">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Number of Ratings:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.u_rating}</div>
                           </div>
                         </div> */}
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Email:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Email:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Country:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Country:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">BIO:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">BIO:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/* <div className="layout">
+                                        {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Listens to:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.listento}</div>
                           </div>
                         </div>{console.log("userDatauserData", userData)} */}
-                                    {/* <div className="layout">
+                                        {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">
                             <div className="fs16 col23 fw400 text-left w60">Languages:</div>
                             <div className="fs16 col14 fw400 text-left w40">{userData.language ? userData.language : ''}</div>
                           </div>
                         </div> */}
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
-                                        </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Last Active:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.lastactive ? moment(userData.lastactive).format('DD/MM/YYYY') : ''}</div>
-                                        </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Gender:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
-                                        </div>
-                                    </div>
-                                    <div className="layout">
-                                        <div className="d-flex m-auto w35 border2">
-                                            <div className="fs16 col23 fw400 text-left w60">Chats:</div>
-                                            <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
-                                        </div>
-                                    </div>
 
+                                        {
+                                            userData.u_role_id == CONSTANTS.ROLES.LISTNER ?
+                                                (
+                                                    <div className="layout">
+                                                        <div className="d-flex m-auto w35 border2">
+                                                            <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
+                                                            <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
+                                                        </div>
+                                                    </div>
+                                                ) : userData.u_role_id == CONSTANTS.ROLES.USER ?
+                                                    (
+                                                        <div className="layout">
+                                                            <div className="d-flex m-auto w35 border2">
+                                                                <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
+                                                                <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
+                                                            </div>
+                                                        </div>
+                                                    ) : null
+
+                                        }
+
+
+
+
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Last Active:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.lastactive ? moment(userData.lastactive).format('DD/MM/YYYY') : ''}</div>
+                                            </div>
+                                        </div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Gender:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
+                                            </div>
+                                        </div>
+                                        <div className="layout">
+                                            <div className="d-flex m-auto w35 border2">
+                                                <div className="fs16 col23 fw400 text-left w60">Chats:</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
+                                            </div>
+                                        </div>
+                                        {/* </Tab> */}
+                                        {/* <Tab eventKey="videos" title="videos">
+                        videos 23
+                                        </Tab>
+                      <Tab eventKey="badgesawards" title="Badges & Awards">
+                        Badges & Awards
+                                        </Tab>
+                      <Tab eventKey="Categories" title="Categories">
+                        Categoriesasd
+                                        </Tab> */}
+                                        {/* </Tabs> */}
+                                    </div>
                                 </div>
-                            </div>
-                        </Row>
-                    </Container>
-                </div>
-
+                            </Row>
+                        </Container>
+                    </div>
+                }
                 <Footer />
             </div>
         );
@@ -167,4 +187,5 @@ class ShareProfile extends Component {
 export default connect(
     null,
     { actionGetProfile }
-)(ShareProfile); 
+)(Myprofile); 
+

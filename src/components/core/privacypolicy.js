@@ -36,7 +36,7 @@ class Privacypolicy extends Component {
                     <p>Eat Luv N Pray Pvt. Ltd. ("ELNP," "we," "us" and "our") provides virtual access to emotional and social support, and to promote early detection of mental health symptoms. Privacy is extremely important to us, so we have taken several steps to protect your information and put you in control.</p>
                     {/* <div className="fs20 fw600 col29 mt-2 mb-2">Using our Services</div>  */}
 
-                    <p>This privacy policy ("Privacy Policy") describes how we collect, use, disclose and store Personal Information you provide to us through the website and mobile application tools that provide the services described above (collectively, the "Services"). Please review this Privacy Policy carefully and in its entirety. If you have questions about this Privacy Policy, you can contact us at support@eatluvnpray.org.</p>
+                    <p>This privacy policy ("Privacy Policy") describes how we collect, use, disclose and store Personal Information you provide to us through the website and mobile application tools that provide the services described above (collectively, the "Services"). Please review this Privacy Policy carefully and in its entirety. If you have questions about this Privacy Policy, you can contact us at   <a href="mailto:support@eatluvnpray.org"> support@eatluvnpray.org </a>.</p>
 
                     <div className="fs20 fw600 col29 mt-2 mb-2">This Privacy Policy describes</div>
 
@@ -219,7 +219,7 @@ class Privacypolicy extends Component {
                     <div className="fs20 fw600 col29 mt-2 mb-2">11. Children’s Data</div> 
 
                     <p>ELNP complies with the Children’s Online Privacy Protection Act and Our Site and
-Services clearly specify that users must be at least 13 years old. Children between the ages of 13-17 years old may only participate in our Services with parental consent. If a parent or guardian becomes aware that his or her child has provided us with Personal Information without their consent, he or she should contact us at support@eatluvnpray.org. If we become aware that a child under 18 (or between the ages of 13-17 years old without parental consent) has provided us with Personal Information, we will take steps to delete such information from our files. Separately, a child under 18 may request deletion of information they posted on our Site or Services, which may be accomplished through anonymization.</p>
+Services clearly specify that users must be at least 13 years old. Children between the ages of 13-17 years old may only participate in our Services with parental consent. If a parent or guardian becomes aware that his or her child has provided us with Personal Information without their consent, he or she should contact us at   <a href="mailto:support@eatluvnpray.org"> support@eatluvnpray.org </a>. If we become aware that a child under 18 (or between the ages of 13-17 years old without parental consent) has provided us with Personal Information, we will take steps to delete such information from our files. Separately, a child under 18 may request deletion of information they posted on our Site or Services, which may be accomplished through anonymization.</p>
 
                     <div className="fs20 fw600 col29 mt-2 mb-2">12. Therapists as Mandated Reporters</div>
 
@@ -236,7 +236,7 @@ Information in countries outside of the country of your residence. Such countrie
 
                     <div className="fs20 fw600 col29 mt-2 mb-2">17. Notices</div>
 
-                    <p>Please send all questions, comments and notices regarding this Privacy Policy to ELNP at support@eatluvnpray.org.</p>
+                    <p>Please send all questions, comments and notices regarding this Privacy Policy to ELNP at    <a href="mailto:support@eatluvnpray.org"> support@eatluvnpray.org </a>.</p>
 
 
 

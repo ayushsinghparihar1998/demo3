@@ -277,7 +277,7 @@ class Editprofile extends Component {
   }
   handleCancel = () => {
     this.props.history.push({
-      pathname: "/",
+      pathname: "/myprofile",
     });
   }
   handleUploadPicture(event, name) {

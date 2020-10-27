@@ -281,7 +281,7 @@ const Videocall = (props) => {
       <div className="videochat">
         <Container>
           <div className="userdetail pt-5">
-            <span><Image src={Backicon} alt="" className="pointer" /></span>
+            {/* <span><Image src={Backicon} alt="" className="pointer" /></span> */}
             <span><Image src={userDetails?.u_image||Videouser} alt="" className="r50" /></span>
             <span className="online_user"></span>
             <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
