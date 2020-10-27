@@ -66,8 +66,15 @@ class ChatUser extends Component {
     this.userEndChatModal = React.createRef();
 
     this.deleteConfirmation = React.createRef();
-
+    this.messagesEnd = React.createRef();
   }
+
+  scrollToBottom = () => {
+    if (this.messagesEnd && this.messagesEnd.current) {    
+      this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
   componentWillUnmount() {
     if (getLocalStorage("customerInfo")) {
       socket.emit(
@@ -144,7 +151,9 @@ class ChatUser extends Component {
       (data) => {
         if (data.data) {
           console.log("message debugg history", data.data)
-          this.setState({ allMessages: data.data.reverse() })
+          this.setState({ allMessages: data.data.reverse() }, () => {
+            this.scrollToBottom()
+          })
         }
       }
     );
@@ -219,7 +228,9 @@ class ChatUser extends Component {
       (data) => {
         if (data.data) {
           console.log("message debugg history", data.data)
-          this.setState({ allMessages: data.data.reverse() })
+          this.setState({ allMessages: data.data.reverse() }, () => {
+            this.scrollToBottom()
+          })
         }
       }
     );
@@ -241,7 +252,9 @@ class ChatUser extends Component {
   };
   updateChat(data) {
     console.log("message debugg", data);
-    this.setState({ allMessages: [...this.state.allMessages, data] });
+    this.setState({ allMessages: [...this.state.allMessages, data] }, () => {
+      this.scrollToBottom()
+    });
     console.log("AllMessages", this.state.allMessages);
   }
 
@@ -601,10 +614,18 @@ class ChatUser extends Component {
                               </div>
                             );
                         })}
+
+                        <div style={{ float: "left", clear: "both" }}
+                          ref={this.messagesEnd}>
+                        </div>
                       </div>
                     ) : (
                         ""
                       )}
+
+
+
+
                   </div>
                   <div className="chat_bottom">
                     {/* <Form> */}

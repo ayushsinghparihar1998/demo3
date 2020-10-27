@@ -34,10 +34,12 @@ function RecentChat({ onRedirect }) {
           return (
             <div className="d-flex m-3 border-bottom pointer" key={item.id} onClick={onRedirect(item)} >
               {/* this.handleRedirectRecentChat(item) */}
+              {console.log(item)}
               <div className="position-relative">
                 <Image
                   src={
-                    item.from_image ? item.from_image : UserChat
+                    item.from_user_id == user.u_id ? item.to_image || UserChat : item.from_image || UserChat
+                    // item.to_image ? item.to_image : UserChat
                   }
                   alt=""
                   className="r50 pt-1"

@@ -79,7 +79,7 @@ class Faq extends Component {
                                     </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>
-                                <Card>
+                                {/* <Card>
                                     <Accordion.Toggle as={Card.Header} eventKey="3">
                                     How do I change my username
                                     </Accordion.Toggle>
@@ -91,7 +91,7 @@ class Faq extends Component {
                                         along with reason by an email on contact@eatluvnpray.org
                                     </Card.Body>
                                     </Accordion.Collapse>
-                                </Card>
+                                </Card> */}
                                 <Card>
                                     <Accordion.Toggle as={Card.Header} eventKey="4">
                                     How do I change my username

@@ -48,7 +48,7 @@ class Discussanything extends Component {
 
                     <Modal.Body>
                         <Container>
-                            <UserSignup {...this.props} />
+                            <UserSignup {...this.props} handleSet={()=>this.setState({show:false})}/>
                         </Container>
                     </Modal.Body>
                 </Modal>
