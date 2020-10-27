@@ -90,7 +90,7 @@ class QuestionAndAnswer extends Component {
         
       });
     }else {
-      showErrorMessage('Please fille up the form first.')
+      showErrorMessage('Please fill up the form first.')
     }
     
 

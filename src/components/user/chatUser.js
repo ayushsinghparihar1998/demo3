@@ -519,12 +519,16 @@ class ChatUser extends Component {
                           /> */}
                           <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
-                          <Button
-                            className="btnTyp6 text-uppercase"
-                            onClick={() => this.userEndChatModal.current.openModal()}
-                          >
-                            end chat
-                          </Button>
+                          {
+                            !this.state.isMessageDisabled ?
+                              <Button
+                                className="btnTyp6 text-uppercase"
+                                onClick={() => this.userEndChatModal.current.openModal()}
+                              >
+                                end chat
+                          </Button> : null
+                          }
+
                         </div>
                       </Col>
                     </Row>
