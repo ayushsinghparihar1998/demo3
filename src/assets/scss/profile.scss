@@ -175,6 +175,15 @@
         }
        
         .user_tab {
+            &.v_hode {
+                position: relative; 
+                nav.nav-tabs {
+                    & a.nav-item {
+                        // visibility: hidden;
+                        display: none; 
+                    }    
+                }
+            }
             padding-bottom: 3rem; 
             .d-flex {
                 .btnTyp11.ml-3 {
@@ -331,6 +340,10 @@
             }
         }
         
+    }
+
+    .mysetting {
+        // min-height: 600px; 
     }
 
 }

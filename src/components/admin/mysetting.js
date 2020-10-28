@@ -61,7 +61,7 @@ const MySetting = (props) => {
         });
     }
     return (
-        <div className="page__wrapper innerpage">
+        <div className="page__wrapper innerpage"> 
             <div className="main_baner">
                 <NavBar {...props} />
             </div>
@@ -69,16 +69,15 @@ const MySetting = (props) => {
                 <Container>
                     <Row>
                         <Col xss={12}>
-                            <div className="myprofile">
+                            <div className="myprofile mysetting">   
 
-
-
-                                <div className="text-center user_tab">
+                                <div className="text-center user_tab v_hode"> 
                                     <br/>
+                                    <div className="col10 fw600 fs32">Blocked Users</div>  
                                     <Tabs defaultActiveKey="blocked_users">
-                                        <Tab eventKey="blocked_users" title="Blocked Users">
-                                            <div className="search_listeners">
-                                                <Col xss={12} className="m-auto">
+                                        <Tab eventKey="blocked_users" title="Blocked Users" className="v_hide">   
+                                            <div className="search_listeners2">
+                                                <Col xss={12} className="m-auto"> 
                                                     <Row>
                                                         {/* <Col lg={3} md={4}>
                                                             <div className="col1 fw500 fs18 mt-2">Search Users</div>

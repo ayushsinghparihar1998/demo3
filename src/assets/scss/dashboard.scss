@@ -124,7 +124,7 @@
                     &>img.r50 {
                         width: 40px;
                         height: 40px;
-                        // object-fit: contain;
+                        object-fit: cover; 
                     }
                 }
             }
@@ -262,6 +262,7 @@
                     box-sizing: border-box;
                     border-radius: 5px;
                     padding: 8px 10px 0px; 
+                    width: 50px;
 
                     & > div {
                         font-size: 9px; 
@@ -467,6 +468,17 @@
             display: block;
         }
         .right_inner_side {  
+            .bg-grays {
+                .d-flex {
+                    span.pl-3 {
+                        & > strong {
+                            opacity: 0;
+                            display: none;   
+                        }
+                    }
+                }
+            }
+
             background: $col18; 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
@@ -625,9 +637,18 @@
 
 }  
 
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
-    left: 70px !important; 
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before { 
+    // left: 70px !important; 
+    // transform: rotate(2deg); 
 } 
+
+.react-datepicker__navigation--next {
+    outline: none !important; 
+}
+
+.react-datepicker__navigation--previous {
+    outline: none !important; 
+}
 
 .categorys { 
     position: relative; 
@@ -1294,7 +1315,18 @@
     }
 
     .userdashboards {
+        
         .inner_body {
+            .test_carousel {
+                padding-left: 15px !important; 
+                padding: 0 15px; 
+                .carousel-item {
+                    div.col-md-4 > img {
+                        width: 80px !important;
+                        margin-top: 34px;
+                    }
+                }
+            }
         .row {
             &>.col-md-3 {
                 padding-left: 0;
@@ -1314,6 +1346,11 @@
         }
     }
         .left_sidebar {
+            .chat-bgyellow {
+                height: auto; 
+                padding-top: 5px;
+                padding-bottom: 5px; 
+            }
             .inner_side  {
                 .chat-bg.fs17 {
                     font-size: 14px !important;
@@ -1359,6 +1396,11 @@
                 .funfact {
                     button.btnType16 {
                         font-size: 11px; 
+                    }
+                    .col11.fw400 { 
+                        height: auto !important; 
+                        padding-top: 5px;
+                        padding-bottom: 5px;
                     }
                 }
                 .text-center.p-4 {
@@ -1471,6 +1513,9 @@
 
 @media (max-width: 767px) {
     .userdashboards {
+        .pl-0.col-md-3 {
+            padding-left: 15px !important;   
+        }
         .right_sidebar {
             .right_inner_side {
                 .p-3 div.d-flex.mt-4.form-group > input.inputTyp4 {
@@ -1544,8 +1589,12 @@
             }
         }
         .blogs { 
-            margin-left: 15px; 
+            margin-left: 15px;
+            & > .pl-3 {
+                padding-left: 0px !important; 
+            }  
             .blog_detail {
+                
                 div.fs15 {
                     height: auto; 
                 } 
@@ -1557,15 +1606,33 @@
             }
         }
     }
+
+    .coming_soon {
+        .comings {
+            transform: translate(-50%, 50%); 
+            font-size: 54px;
+        }
+    } 
+
 }
 
 @media (max-width: 575px) { 
     .userdashboards {
+        .user_body {
+            .inner_body {
+                ul.emoji_manages {
+                    li {
+                        margin-left: 5px; 
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
         .blogs {
             .blog_detail { 
                 & > a {
                     & > img {
-                        height: 220px; 
+                        height: auto; 
                     }
                 }
             }
@@ -1573,5 +1640,19 @@
     }
 }
 
-
-
+@media (max-width: 375px) {
+    .userdashboards {
+        .user_body {
+            .inner_body {
+                ul.emoji_manages {
+                    li {
+                        padding: 6px 0px 0px;
+                        width: 40px;
+                        margin: auto;
+                        margin-right: auto; 
+                    }
+                }
+            }
+        }
+    }
+}

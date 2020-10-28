@@ -58,7 +58,7 @@
     }
 }
 
-.ngo_services.media_details { 
+.ngo_services.media_details {  
 
         .ngo_listing {
             padding: 20px 30px 0px; 
@@ -67,7 +67,17 @@
             line-height: 22px; 
         }
 
-        .ngo_social {  
+        .ngo_social {    
+            height: 480px;
+            overflow: hidden;
+            & > img {
+                height: 200px;
+                object-fit: cover;
+            }
+            .fs14.col29 { 
+                height: 110px;
+                overflow: hidden;
+            }
             text-align: left;
 
             .media_list {  
@@ -212,6 +222,14 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .ngo_services.media_details {  
+        .ngo_listing {
+            padding: 0 0 0px;  
         }
     }
 }

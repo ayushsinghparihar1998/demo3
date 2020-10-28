@@ -19,7 +19,8 @@ import { NavLink } from 'react-router-dom';
 import Aboutlogo from '../../assets/images/about_logo.jpg';
 import Aboutprofileone from '../../assets/images/Priyanka-Wadhera.jpg'; 
 import Aboutprofiletwo from '../../assets/images/Manoj-Agrawal.jpg';
-import Aboutprofilethree from '../../assets/images/Sonia-Arora-Sood.jpg'; 
+import Aboutprofilethree from '../../assets/images/Sonia-Arora-Sood.jpg';
+import Tickicons from '../../assets/images/tick_icon.png'; 
 
 class About extends Component {          
   componentDidMount() {
@@ -31,7 +32,7 @@ class About extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5">
+        <div className="profile_layout pt-4 pb-5"> 
           <Container>
             <Row>
               <Col md={12} lg={12}> 
@@ -45,35 +46,57 @@ class About extends Component {
 
                   <p>It aims to touch and elevate overall wellbeing of at least 10 million lives and help generate livelihood for the inclusive section. It also supports NGO’s in likes of ELNP Foundation by providing virtual leased space on its platform and help them function with ease. It provides preventive care to its members by listening and simply enabling users to vent out their innermost voice with the sure promise of anonymity in order to eradicate evils of society and avoid acute mental illnesses. </p>
 
-                  <div className="fs32 fw600 col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
-                  <p>Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</p>
+                  <div className="bg-pinks">   
+                      <div className="fs32 fw500 calibri col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
+                      <p>
+                        <span className="leftone"> 
+                            <Image src={Tickicons} alt="icon" />     
+                         </span>
+                      <span className="righttwo">Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span></p>
+                      
+                      <p>
+                        <span className="leftone"> 
+                            <Image src={Tickicons} alt="icon" />     
+                         </span>
+                      <span className="righttwo">Will take care of various NGO’s, it’s employees, stakeholders and customers by picking services which in some manner contribute to a bigger social cause.
+                      </span></p>
 
-                  <p>Will take care of various NGO’s, it’s employees, stakeholders and customers by picking services which in some manner contribute to a bigger social cause.</p>
-                 
-                  <div className="fs32 fw600 col29 mt-2 mb-2">Mission – Eat Luv N Pray Pvt. Ltd.</div>
-                  <p>Will provide a focussed but a widely spread platform to conscious service providers, specially abled people, LGBTQ, NGO’s, children of criminals, prostitutes, acid attack survivors etc. to help them create livelihood for themselves.</p>
-                  <p>Will offer services globally in Eat Luv n Pray areas to provide holistic wellbeing in daily lives of people.</p> 
+                      <div className="fs32 fw500 calibri col29 mt-2 mb-2">Mission – Eat Luv N Pray Pvt. Ltd.</div>
+                      <p>
+                        <span className="leftone"> 
+                            <Image src={Tickicons} alt="icon" />     
+                         </span>
+                      <span className="righttwo">Will provide a focussed but a widely spread platform to conscious service providers, specially abled people, LGBTQ, NGO’s, children of criminals, prostitutes, acid attack survivors etc. to help them create livelihood for themselves.
+                      </span></p>
 
-                  <div className="fs32 fw600 col29 mt-4 mb-5 text-center">Founders</div> 
-                  <div className="detail_listing mb-3"> 
+                      <p>
+                        <span className="leftone"> 
+                            <Image src={Tickicons} alt="icon" />     
+                         </span>
+                      <span className="righttwo">Will offer services globally in Eat Luv n Pray areas to provide holistic wellbeing in daily lives of people.
+                      </span></p> 
+                  </div>
+
+                  <div className="fs32 fw600 col92 mt-4 mb-5 text-center">Founders</div> 
+                  <div className="detail_listing mb-3">  
                         <Row>
                             <Col lg={2} md={3} xs={12}>
-                                    <Image src={Aboutprofileone} />
+                                    <Image src={Aboutprofileone} /> 
                             </Col>
-                            <Col lg={9} md={9}> 
-                                    <div className="fs22 fw600 col1 mb-3">Priyanka Wadhera</div> 
+                            <Col lg={9} md={9} className="mt-auto mb-auto">  
+                                    <div className="fs22 fw600 col92 br_set mb-3">Priyanka Wadhera</div> 
                                     <p className="fs16">16 years of rich experience in various fields like aviation, SAAS, customer experience, Product Organization. Certain personal experiences bring about a new passion for Mental Health and feels like now is my time to give back to the society by making people know the benefits of good health and providing them with resources to achieve it. Priyanka’s educational qualifications are from DU and IIM Lucknow.</p>
                             </Col>
                         </Row>
                   </div>
 
-                  <div className="detail_listing mb-3"> 
+                  <div className="detail_listing mb-3">  
                         <Row>
                             <Col lg={2} md={3} xs={12}>
                                     <Image src={Aboutprofiletwo} />
                             </Col>
-                            <Col lg={9} md={9}> 
-                                    <div className="fs22 fw600 col1 mb-3">Manoj Agrawal</div> 
+                            <Col lg={9} md={9} className="mt-auto mb-auto">  
+                                    <div className="fs22 fw600 col92 br_set mb-3">Manoj Agrawal</div> 
                                     <p className="fs16">30 years of rich experience in IT including service and product IT companies of all sizes in India. Manoj is an innovator and has a history of product championing and technology development.  Manoj holds Engineering graduate and post-graduate degrees from IITs (Bombay and Delhi respectively) and his secondary education from Scindia School, Gwalior.</p>
                             </Col>
                         </Row>
@@ -84,8 +107,8 @@ class About extends Component {
                             <Col lg={2} md={3} xs={12}> 
                                     <Image src={Aboutprofilethree} /> 
                             </Col>
-                            <Col lg={9} md={9}> 
-                                    <div className="fs22 fw600 col1 mb-3">Sonia Arora Sood</div> 
+                            <Col lg={9} md={9} className="mt-auto mb-auto">  
+                                    <div className="fs22 fw600 col92 br_set mb-3">Sonia Arora Sood</div> 
                                     <p className="fs16">Overall 18 years of experience in Sales and Marketing along with 10 years of Entrepreneurial experience in the field of Art and Culture which brings about great passion for Psychology and concept of holistic wellness.  Sonia’s educational experience is from Berlin University and Sotheby's London.
                                     </p>  
                             </Col>

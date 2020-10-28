@@ -47,9 +47,9 @@ class Myprofile extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> :
+        {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> : 
           <div className="profile_layout pt-4 pb-5">
-            <Container>
+            <Container> 
               <Row>
                 <div className="myprofile">
                   <Image src={userData.u_cover_image} alt="" className="w-100" />

@@ -52,7 +52,7 @@ class Blogs extends Component {
                                 {
                                     this.state.blogList.map(element => {
                                         return (
-                                            <Col onClick={() => { this.props.history.push('/blogsDetail', { ...element }) }} lg={4} md={4} sm={12}>
+                                            <Col onClick={() => { this.props.history.push('/blogsDetail', { ...element }) }} lg={4} md={6} sm={6}> 
                                                 <div className="ngo_social">
                                                     <Image src={element.bl_image} alt="" className="w-100" />
                                                     <div className="p-3">
