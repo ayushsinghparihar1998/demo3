@@ -582,7 +582,7 @@ class Userdashboard extends Component {
                         </Row>
                      </Col>
 
-                     <Col md={3}>
+                     <Col md={3} className="pl-0"> 
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">

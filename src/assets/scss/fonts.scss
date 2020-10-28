@@ -61,7 +61,7 @@ $fs55 :3.4375rem;
     font-weight: 900 !important;
 }
 
-.lineHeightAuto {
+.lineHeightAuto { 
     line-height: normal;
 }
 
@@ -73,7 +73,9 @@ sans-serif;
 $Roboto: 'Roboto',
 sans-serif;
 
-
+.calibri {
+    font-family: Calibri;  
+}
 
 .fs10 {
     font-size: $fs10 !important;

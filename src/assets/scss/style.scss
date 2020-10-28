@@ -13,6 +13,11 @@
 @import 'ngo.scss';
 @import 'review.scss'; 
 
+@font-face {  
+  font-family: Calibri;  
+  src: url(../fonts/Calibri_Regular.ttf);     
+}
+
 html,
 body {
   font-family: $Poppins !important;  
