@@ -28,6 +28,10 @@ import Iflag from "../../assets/images/india_flag.svg";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 
+
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 class BlogDetail extends Component {
 
 
@@ -135,7 +139,33 @@ class BlogDetail extends Component {
                       </Form.Group>
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
-                        <Form.Control value={this.state.bl_desc} onChange={(e) => this.setState({ bl_desc: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" />
+                        {
+                          this.state.bl_desc ?
+                            <CKEditor
+                              config={{
+                                height: 500
+                              }}
+                              editor={ClassicEditor}
+                              data={this.state.bl_desc}
+
+                              onReady={editor => {
+                                // You can store the "editor" and use when it is needed.
+                                console.log('Editor is ready to use!', editor);
+                              }}
+                              onChange={(event, editor) => {
+                                const data = editor.getData();
+                                this.setState({ bl_desc: data })
+                              }}
+                              onBlur={(event, editor) => {
+                                console.log('Blur.', editor);
+                              }}
+                              onFocus={(event, editor) => {
+                                console.log('Focus.', editor);
+                              }}
+                            /> : null
+                        }
+
+                        {/* <Form.Control value={this.state.bl_desc} onChange={(e) => this.setState({ bl_desc: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       </Form.Group>
                       {/* <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Link to be shared</Form.Label>

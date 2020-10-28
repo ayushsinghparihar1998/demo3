@@ -5,6 +5,7 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
+import moment from "moment";
 
 
 import NavBar from "../core/nav";
@@ -24,6 +25,7 @@ import Videomuteov from "../../assets/images/mute_ov.svg";
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import CONSTANTS from "../../common/helpers/Constants";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 // import Videomute from "../../assets/images/mute.svg"; 
 // import Videomuteov from "../../assets/images/mute_ov.svg";  
@@ -113,6 +115,27 @@ const Videocall = (props) => {
       }
     })
   }
+  const sendMessage = (message, type = 1) => {
+    console.log("_____________________ DATA ________")
+    console.log(props)
+    console.log("_____________________ DATA ________")
+
+    let object = {
+      message: message,
+      from_user_id:getUserProfile().u_id,
+      to_user_id: props.match.params.id,
+      message_type: type,
+      date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      // user_type: this.state.userMeta.user_type,
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm:ss")
+    };
+    console.log('==== send message ',object)
+    socket.emit("sendMessage", JSON.stringify(object), (data) => {
+    
+    });
+  }
+
   const disconnect = () => {
     if (roomRef.current != null) {
       setToken(null)
@@ -125,6 +148,9 @@ const Videocall = (props) => {
       // });
     }
 
+    // alert("AASD")
+
+    sendMessage(`video call end`, 2)
 
     const payload = {
       reciver_id: paramsid,

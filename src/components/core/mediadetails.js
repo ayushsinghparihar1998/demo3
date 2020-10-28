@@ -35,8 +35,8 @@ const Mediadetails = (props) => {
                 <Container>
                     <div className="ngo_listing mt-4 mb-4">
                         <div className="col1 fw600 fs22 text-center w-100 mt-4 pt-3">
-                           {blogDetail.bl_title}
-                            </div>
+                            {blogDetail.bl_title}
+                        </div>
                         <hr className="ngohr" />
                         <Row className="mt-4">
                             <Col lg={12}>
@@ -44,11 +44,11 @@ const Mediadetails = (props) => {
                                     <Image src={blogDetail.bl_image} alt="" className="w-100" />
                                     <div className="pt-3 pb-3">
                                         <div className="col1 fs18 fw600 mt-2">{blogDetail.bl_title}
-                                            </div>
+                                        </div>
                                         <div className="col14 fs14 fw400 pt-1">
-                                        {blogDetail.bl_datetime}
-                                            </div>
-                                        <div className="fs14 col28 fw300 pt-3 line_txt"> {blogDetail.bl_desc}</div>
+                                            {blogDetail.bl_datetime}
+                                        </div>
+                                        <div className="fs14 col28 fw300 pt-3 line_txt" dangerouslySetInnerHTML={{ __html: blogDetail.bl_desc }}></div>
 
                                         {/* <div className="mdetalinput">
                                             <Form.Group>

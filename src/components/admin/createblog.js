@@ -29,6 +29,9 @@ import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import constant from "../../constant"
 
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 class Createblogs extends Component {
 
 
@@ -80,7 +83,7 @@ class Createblogs extends Component {
         bl_image: this.state.filepath,
         bl_desc: this.state.description,
       });
-      this.props.history.push('/blogs')      
+      this.props.history.push('/blogs')
     } catch (err) {
       console.log(err)
     }
@@ -126,7 +129,29 @@ class Createblogs extends Component {
                       </Form.Group>
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
-                        <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" />
+                        <CKEditor
+                          config={{
+                            height:500
+                          }}
+                          editor={ClassicEditor}
+                          // data="<p>Hello from CKEditor 5!</p>"
+                          
+                          onReady={editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log('Editor is ready to use!', editor);
+                          }}
+                          onChange={(event, editor) => {
+                            const data = editor.getData();
+                            this.setState({ description: data })
+                          }}
+                          onBlur={(event, editor) => {
+                            console.log('Blur.', editor);
+                          }}
+                          onFocus={(event, editor) => {
+                            console.log('Focus.', editor);
+                          }}
+                        />
+                        {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       </Form.Group>
                       {/* <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Link to be shared</Form.Label>

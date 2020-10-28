@@ -18,6 +18,7 @@ import { actionForGotPassword } from "../../common/redux/actions";
 import * as qs from 'query-string';
 import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationForgotPassword";
+import { showErrorMessage } from "../../common/helpers/Utils";
 
 class Forgotpassword extends Component {
 
@@ -60,6 +61,7 @@ class Forgotpassword extends Component {
       this.props
         .actionForGotPassword(data)
         .then(result => {
+          // alert(':ASD')
           if (result && result.data && result.data.status === "success") {
             setTimeout(() => {
               this.props.history.push({
@@ -68,6 +70,8 @@ class Forgotpassword extends Component {
               });
             }, 1000);
 
+          }else{
+            // showErrorMessage( result.data.message)
           }
         })
         .catch(error => {

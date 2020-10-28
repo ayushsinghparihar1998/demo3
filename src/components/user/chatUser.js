@@ -70,7 +70,7 @@ class ChatUser extends Component {
   }
 
   scrollToBottom = () => {
-    if (this.messagesEnd && this.messagesEnd.current) {    
+    if (this.messagesEnd && this.messagesEnd.current) {
       this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
     }
   }
@@ -275,12 +275,12 @@ class ChatUser extends Component {
       isMessageDisabled: true
     })
   }
-  sendMessage(message, type) {
+  sendMessage(message, type = 1) {
     let object = {
       message: message,
       from_user_id: getLocalStorage("customerInfo").u_id,
       to_user_id: this.props.match.params.id,
-      message_type: 1,
+      message_type: type,
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type,
       date: moment().format("YYYY-MM-DD"),
@@ -340,6 +340,7 @@ class ChatUser extends Component {
     this.changeChatpath(data.id);
   }
   initCall = (type) => () => {
+    this.sendMessage(`${type} call started`, 2)
     const { userMeta } = this.state;
     const { u_email, u_id, u_role_id } = getUserProfile();
     const payload = {
@@ -353,8 +354,9 @@ class ChatUser extends Component {
     }
     socket.emit("makeVideoCall", payload, (data) => {
       if (data.success === 1) {
-        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type })
+        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("customerInfo").u_id })
       } else {
+        this.sendMessage(`${type} call end`, 2)
         showErrorMessage(data.msg)
       }
     })
@@ -580,30 +582,13 @@ class ChatUser extends Component {
                     {this.state.allMessages.length > 0 ? (
                       <div className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
-                          return msg.from_user_id ==
-                            getLocalStorage("customerInfo").u_id ? (
-                              <div className="pl-3 pr-3 pb-3">
-                                <div className="text-right">
-                                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
-                                    {msg.message}
-                                  </div>
-                                  <div className="fs10 fw300 col47">
-                                    {moment(msg.date_time).format("hh:mm a")}
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="pl-3 pr-3 pb-3">
-                                <div className="d-flex">
-                                  <div className="mt-auto mb-auto">
-                                    <Image
-                                      src={UserChat4}
-                                      alt=""
-                                      className="r50 mr-3"
-                                    />
-                                  </div>
-                                  <div className="mt-auto mb-auto">
-                                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                          return msg.message_type == 2 ?
+                            <p style={{ textAlign: 'center' }}>{msg.message}</p>
+                            : msg.from_user_id ==
+                              getLocalStorage("customerInfo").u_id ? (
+                                <div className="pl-3 pr-3 pb-3">
+                                  <div className="text-right">
+                                    <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
                                       {msg.message}
                                     </div>
                                     <div className="fs10 fw300 col47">
@@ -611,8 +596,27 @@ class ChatUser extends Component {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            );
+                              ) : (
+                                <div className="pl-3 pr-3 pb-3">
+                                  <div className="d-flex">
+                                    <div className="mt-auto mb-auto">
+                                      <Image
+                                        src={UserChat4}
+                                        alt=""
+                                        className="r50 mr-3"
+                                      />
+                                    </div>
+                                    <div className="mt-auto mb-auto">
+                                      <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                                        {msg.message}
+                                      </div>
+                                      <div className="fs10 fw300 col47">
+                                        {moment(msg.date_time).format("hh:mm a")}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
                         })}
 
                         <div style={{ float: "left", clear: "both" }}
@@ -668,114 +672,6 @@ class ChatUser extends Component {
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
-        {/* <Modal show={this.state.show2} className="CreateAccount question">
-          <Modal.Header>
-            <Button onClick={this.handleClose2}>
-              <Image src={Crossbtn} alt="" />
-            </Button>
-          </Modal.Header>
-
-          <Modal.Body>
-            <Container>
-              <div className="layout_box mt-3 mb-4">
-                <div className="col10 fs30 fw600 mb-2">Create Your Account</div>
-                <div className="fs300 fs20 col14 mb-4 pb-2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </div>
-                <div className="col11 fs20 fw500">
-                  <span className="fw600 col29">Question 1.</span> Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit?
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                <Form.Group controlId="formBasicCheckbox4" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    checked="checked"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox5" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox6" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-
-                <div className="col11 fs20 fw500 mt-4">
-                  <span className="fw600 col29">Question 2.</span> Section
-                  1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero
-                  in 45 BC
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                <Form.Group controlId="formBasicCheckbox7" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox8" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox9" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    checked="checked"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-
-                <div className="col11 fs20 fw500 mt-4">
-                  <span className="fw600 col29">Question 3.</span> At vero eos
-                  et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                  praesentium.
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                <Form.Group controlId="formBasicCheckbox10" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox11" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    checked="checked"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox12" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-              </div>
-            </Container>
-          </Modal.Body>
-        </Modal>
-       */}
       </div>
     );
   }

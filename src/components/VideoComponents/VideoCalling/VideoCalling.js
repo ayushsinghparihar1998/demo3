@@ -30,7 +30,7 @@ function VideoCalling() {
       }, 1000)
     })
   }, [socket])
-  const acceptCall = (type) => {
+  const acceptCall = (type,payloadData) => {
     const payload = {
       // ...caller
       reciver_id: caller.sender.u_id,
@@ -46,7 +46,8 @@ function VideoCalling() {
     socket.emit('acceptVideoCall', payload, data => {
       if (data.success === 1) {
         if (type === "accept") {
-          history.push((caller.type === "video" ? '/videocall/' : '/audiocall/') + caller.sender.u_id, { caller: caller.sender })
+          
+          history.push((caller.type === "video" ? '/videocall/' : '/audiocall/') + caller.sender.u_id, { caller: caller.sender, ...payloadData })
           setCaller(null)
         } else {
           setCaller(null)

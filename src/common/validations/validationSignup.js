@@ -14,8 +14,9 @@ function validateInput(data) {
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = ValidationMessages.password.required;
-  }
+    errors.password = ValidationMessages.password.required;  
+    
+  } 
 
   if (data.action == 'listener_signup') {
     if (Validator.isEmpty(data.screenName)) {

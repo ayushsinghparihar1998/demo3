@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^23.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.0",
     "@fullcalendar/core": "^5.3.1",
     "@fullcalendar/daygrid": "^5.3.1",
     "@fullcalendar/interaction": "^5.3.1",
