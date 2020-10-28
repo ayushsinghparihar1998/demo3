@@ -50,48 +50,48 @@ class NavBar extends Component {
       show3: false,
       email_varified: false,
       profileImage: null,
-      mediaLinks:[
+      mediaLinks: [
         {
-          href:"https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995",
-          label:"Only my Help"
+          href: "https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995",
+          label: "Only my Help"
         },
         {
-          href:"http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/",
-          label:"Lend me thy ears"
+          href: "http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/",
+          label: "Lend me thy ears"
         },
         {
-          href:"http://bwwellbeingworld.businessworld.in/article/Speak-your-heart-out-with-India-s-largest-virtual-listening-platform-Eat-Luv-N-Pray-/21-10-2020-333999/",
-          label:"Speak with your heart "
+          href: "http://bwwellbeingworld.businessworld.in/article/Speak-your-heart-out-with-India-s-largest-virtual-listening-platform-Eat-Luv-N-Pray-/21-10-2020-333999/",
+          label: "Speak with your heart "
         },
         {
-          href:"https://www.santabanta.com/bollywood/148145/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray",
-          label:"Santabanta"
+          href: "https://www.santabanta.com/bollywood/148145/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray",
+          label: "Santabanta"
         },
         {
-          href:"https://m.dailyhunt.in/news/india/english/santabanta+english-epaper-santaen/speak+your+heart+out+with+india+s+largest+virtual+listening+platform+eat+luv+n+pray-newsid-n223741478",
-          label:"Dailyhunt"
+          href: "https://m.dailyhunt.in/news/india/english/santabanta+english-epaper-santaen/speak+your+heart+out+with+india+s+largest+virtual+listening+platform+eat+luv+n+pray-newsid-n223741478",
+          label: "Dailyhunt"
         },
         {
-          href:"https://healthvision.in/speak-your-heart-out-with-eat-luv-n-pray/",
-          label:"Health vision"
+          href: "https://healthvision.in/speak-your-heart-out-with-eat-luv-n-pray/",
+          label: "Health vision"
         },
         {
-          href:"https://www.cityairnews.com/content/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label:"City Air News"
+          href: "https://www.cityairnews.com/content/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "City Air News"
         },
         {
-          href:"http://mediabulletins.com/business-world/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label:"Media Bulletins"
+          href: "http://mediabulletins.com/business-world/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "Media Bulletins"
         },
         {
-          href:"https://ajmernama.com/national/349538/",
-          label:"Ajmernama"
+          href: "https://ajmernama.com/national/349538/",
+          label: "Ajmernama"
         },
         {
-          href:"http://businessnewsthisweek.com/business/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label:"Business news this week"
+          href: "http://businessnewsthisweek.com/business/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "Business news this week"
         }
-        
+
       ]
     };
   }
@@ -118,7 +118,7 @@ class NavBar extends Component {
         this.setState({
           email_varified: res.data.data.dashboard_list.u_verified == '1' ? false : true,
         })
-      
+
       }).catch(err => {
         console.log(err);
       })
@@ -336,13 +336,32 @@ class NavBar extends Component {
                     ? [
                       getLocalStorage("customerInfo")
                         ? [
-                          <NavLink 
+                          <NavLink
                             // to="/professionalSearch"
                             to="/coming-soon"
                             className="nav-link"
                           >
                             Professional Search
                             </NavLink>,
+                          <NavLink to="/campaign" className="nav-link">
+                            Donate
+                             </NavLink>,
+                          <NavDropdown title="Media" id="basic-nav-dropdown">
+                            {
+                              this.state.mediaLinks.map(data => {
+                                return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
+                              })
+                            }
+
+                          </NavDropdown>,
+                          <NavLink to="/about" className="nav-link text-c">
+                            About Us
+                             {/* <br /> */}
+                            {/* <span className="comings">coming soon</span>   */}
+                          </NavLink>,
+                          <NavLink to="/faq" className="nav-link">
+                            FAQ
+                          </NavLink>,
                           // <NavLink to="/listenerSearch" className="nav-link">
                           //   Listener Search
                           //   </NavLink>,
@@ -393,14 +412,14 @@ class NavBar extends Component {
                       // <Nav.Link > Media</Nav.Link>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
                         {
-                          this.state.mediaLinks.map(data=>{
-                            return <NavDropdown.Item href={data.href} target="__blank">{data.label}</NavDropdown.Item>    
+                          this.state.mediaLinks.map(data => {
+                            return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
                           })
                         }
-                        
+
                       </NavDropdown>,
                       <Nav.Link disabled onClick={() => this.setState({ show3: true })} className="nav-link text-c">
-                        Professional Help 
+                        Professional Help
                         <br />
                         <span className="comings">coming soon</span>
                       </Nav.Link>,
@@ -409,11 +428,11 @@ class NavBar extends Component {
                       //   <br />
                       //   <span className="comings">coming soon</span>
                       // </Nav.Link>,
-                      <NavLink to="/about" className="nav-link text-c"> 
-                      About Us
+                      <NavLink to="/about" className="nav-link text-c">
+                        About Us
                       {/* <br /> */}
-                      {/* <span className="comings">coming soon</span>   */}
-                    </NavLink>,
+                        {/* <span className="comings">coming soon</span>   */}
+                      </NavLink>,
                       <NavLink to="/faq" className="nav-link">
                         FAQ
                    </NavLink>,
@@ -484,9 +503,9 @@ class NavBar extends Component {
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
                             <Image src={Usersettings} alt="" /> <span>MY SETTINGS</span></NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" />
-                              <span>Edit Profile</span>
+                            <span>Edit Profile</span>
                           </NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> <span>LOGOUT</span></NavDropdown.Item> 
+                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> <span>LOGOUT</span></NavDropdown.Item>
                         </NavDropdown>
                       </span>
 
@@ -512,8 +531,8 @@ class NavBar extends Component {
                           }}
                         >
                           Professional Login <br />
-                          <span className="comings">coming soon</span> 
-                    </NavDropdown.Item>
+                          <span className="comings">coming soon</span>
+                        </NavDropdown.Item>
                         <NavDropdown.Item
                           onClick={(e) => {
                             this.handleLogin(3);
@@ -568,10 +587,10 @@ class NavBar extends Component {
         </Navbar>
 
         {
-          this.state.email_varified ? ( 
+          this.state.email_varified ? (
             <div className="email_verified">
               <div class="verifys">
-                <Image src={Msgbox} alt="" /> 
+                <Image src={Msgbox} alt="" />
                 <span className="fs13 fw500 col18 ml-2">Please verify your email to begin chatting  <span className="email_link" onClick={() => { this._resendVerificationMail() }} style={{ cursor: 'pointer' }}>Resend verification email.</span></span>
 
 

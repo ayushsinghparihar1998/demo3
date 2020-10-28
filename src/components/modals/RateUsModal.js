@@ -14,7 +14,7 @@ import Starfillempty from "../../assets/images/staremptyone.svg";
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
 
-const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
+const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [ratingCount, setRatingCount] = useState(0)
@@ -41,12 +41,28 @@ const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
                 to_id: userId,
                 from_id: getLocalStorage('customerInfo').u_id
             })
-            console.log(submitReview,response)
+            console.log(submitReview, response)
             setIsOpen(false)
             disableInputHandler()
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const getName = () => {
+        let text = null
+        if (ratingCount == 1) {
+            text = "Very Bad!"
+        } else if (ratingCount == 2) {
+            text = "Bad!"
+        } else if (ratingCount == 3) {
+            text = "Good!"
+        } else if (ratingCount == 4) {
+            text = "Very Good!"
+        } else if (ratingCount == 5) {
+            text = "Excellent!"
+        }
+        return text
     }
 
     return (
@@ -67,8 +83,8 @@ const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
                           </div>
                             <Image src={Checkgreentwo} alt="" className="mb-3" />
                             <div className="col82 fs18 fw600 mb-3">
-                                Good!
-                          </div>
+                                {getName()}
+                            </div>
                             <div className="manage_ratings mb-3">
                                 <Image onClick={() => setRatingCount(1)} src={ratingCount >= 1 ? Starfillone : Starfillempty} alt="" className="mr-2" />
                                 <Image onClick={() => setRatingCount(2)} src={ratingCount >= 2 ? Starfillone : Starfillempty} alt="" className="mr-2" />
@@ -80,8 +96,8 @@ const RateUsModal = forwardRef(({ userId ,disableInputHandler}, ref) => {
                                 <Form.Group controlId="exampleForm.ControlTextarea1">
                                     <Form.Control onChange={(e) => setRating(e.target.value)}
                                         as="textarea" rows="3"
-                                      className="inputTyp2 cate2" 
-                                      placeholder="Write your review here.." />
+                                        className="inputTyp2 cate2"
+                                        placeholder="Write your review here.." />
                                 </Form.Group>
                             </div>
                             {/* <Image src={Livechatcomment} alt="Livechatcomments" className="mb-4" /> */}

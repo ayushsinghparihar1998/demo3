@@ -10,9 +10,13 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect } from "react";
 import socketClass from "../../../common/utility/socketClass";
 import { showErrorMessage } from "../../../common/helpers/Utils";
+
+import { getLocalStorage } from "../../../common/helpers/Utils";
+import moment from "moment";
+
 const socket = socketClass.getSocket();
 const Calling = (props) => {
-  const { id, mode, type } = props;
+  const { id, mode, type, to_id, from_id } = props;
   const history = useHistory();
   const [userDetails, setUserDetails] = useState(null);
   const notAnswered = (_id, _ud) => {
@@ -31,8 +35,28 @@ const Calling = (props) => {
       }, 1000 * 30);
     }
   }
+
+  const sendMessage = (message, type = 1) => {
+
+    let object = {
+      message: message,
+      from_user_id: from_id,
+      to_user_id: to_id,
+      message_type: type,
+      date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      // user_type: this.state.userMeta.user_type,
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm:ss")
+    };
+    console.log('==== send message ', object, props)
+    socket.emit("sendMessage", JSON.stringify(object), (data) => {
+      console.log('==== send message ', data)
+    });
+  }
   // console.log("props", props)
   const cancelCall = () => {
+
+    sendMessage(`${type} call end`, 2)
     if (mode === "incoming") {
       props.handleAction('decline');
     } else {
@@ -46,12 +70,14 @@ const Calling = (props) => {
         console.log("Call Cancelled", data)
       })
       history.goBack();
+
+
     }
   }
   useEffect(() => {
     socket.emit('userDetail', { "user_id": id }, data => {
       if (data.success === 1) {
-        console.log('====> DATA ===>>',data)
+        console.log('====> DATA ===>>', data)
         setUserDetails(data.userDetail);
         notAnswered(id, data.userDetail);
       } else {
@@ -69,7 +95,7 @@ const Calling = (props) => {
           {!!userDetails ?
             <div className="w-100 audiocontrol">
               <div className="mb-5">
-                <Image src={userDetails.u_image|| Videousertwo} alt="" className="mw-150" />
+                <Image src={userDetails.u_image || Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name} </div>
                 <div className="fs16 col18 fw300">{type} Calling...</div>
               </div>

@@ -267,12 +267,12 @@ class Chat extends Component {
     }
   };
 
-  sendMessage(message, type) {
+  sendMessage(message, type = 1) {
     let object = {
       message: message,
       from_user_id: getLocalStorage("userInfo").u_id,
       to_user_id: this.props.match.params.id,
-      message_type: 1,
+      message_type: type,
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type,
       date: moment().format("YYYY-MM-DD"),
@@ -338,6 +338,9 @@ class Chat extends Component {
     this.changeChatpath(data.id);
   }
   initCall = (type) => () => {
+
+    this.sendMessage(`${type} call started`, 2)
+
     const { userMeta } = this.state;
     const { u_email, u_id, u_role_id } = getUserProfile();
     const payload = {
@@ -351,8 +354,9 @@ class Chat extends Component {
     }
     socket.emit("makeVideoCall", payload, (data) => {
       if (data.success === 1) {
-        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type })
+        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("userInfo").u_id })
       } else {
+        this.sendMessage(`${type} call started`, 2)
         showErrorMessage(data.msg);
       }
     })
@@ -606,30 +610,13 @@ class Chat extends Component {
                     {this.state.allMessages.length > 0 ? (
                       <div className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
-                          return msg.from_user_id ==
-                            getLocalStorage("userInfo").u_id ? (
-                              <div className="pl-3 pr-3 pb-3">
-                                <div className="text-right">
-                                  <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
-                                    {msg.message}
-                                  </div>
-                                  <div className="fs10 fw300 col47">
-                                    {moment(msg.date_time).format("hh:mm a")}
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="pl-3 pr-3 pb-3">
-                                <div className="d-flex">
-                                  <div className="mt-auto mb-auto">
-                                    <Image
-                                      src={UserChat4}
-                                      alt=""
-                                      className="r50 mr-3"
-                                    />
-                                  </div>
-                                  <div className="mt-auto mb-auto">
-                                    <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                          return msg.message_type == 2 ?
+                            <p style={{ textAlign: 'center' }}>{msg.message}</p>
+                            : msg.from_user_id ==
+                              getLocalStorage("userInfo").u_id ? (
+                                <div className="pl-3 pr-3 pb-3">
+                                  <div className="text-right">
+                                    <div className="p-2 bg_gray d-inline-block fs15 fw500 col29">
                                       {msg.message}
                                     </div>
                                     <div className="fs10 fw300 col47">
@@ -637,8 +624,27 @@ class Chat extends Component {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            );
+                              ) : (
+                                <div className="pl-3 pr-3 pb-3">
+                                  <div className="d-flex">
+                                    <div className="mt-auto mb-auto">
+                                      <Image
+                                        src={UserChat4}
+                                        alt=""
+                                        className="r50 mr-3"
+                                      />
+                                    </div>
+                                    <div className="mt-auto mb-auto">
+                                      <div className="p-2 bg_blue d-inline-block fs15 fw500 col29">
+                                        {msg.message}
+                                      </div>
+                                      <div className="fs10 fw300 col47">
+                                        {moment(msg.date_time).format("hh:mm a")}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
                         })}
 
                         <div style={{ float: "left", clear: "both" }}

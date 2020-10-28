@@ -48,6 +48,7 @@ export const showErrorToast = (errorMessage) => {
 // Tostr without condition
 export const showErrorMessage = (errorMessage) => {
   if (!toast.isActive(toastId)) {
+  //   alert("ASd")
     toastId = toast.error(errorMessage, {
       position: toast.POSITION.TOP_RIGHT,
       hideProgressBar: true,
@@ -62,14 +63,15 @@ export const showErrorMessage = (errorMessage) => {
 
 // toastr messages for success
 export const showSuccessToast = (message) => {
-  if (!toast.isActive(toastId)) {
+  // if (!toast.isActive(toastId)) {
+    toast.dismiss()
     toastId = toast.success(message, {
-      position: toast.POSITION.TOP_RIGHT,
+      position: toast.POSITION.TOP_RIGHT, 
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
     });
-  }
+  // }
 };
 
 export const setLocalStorage = (key, value) => {

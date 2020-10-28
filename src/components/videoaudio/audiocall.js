@@ -47,7 +47,7 @@ const AudioCall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
-  const openChatWindow = () =>{
+  const openChatWindow = () => {
     setShowChat(true)
   }
   const { caller, id: paramsid } = useParams();
@@ -56,10 +56,10 @@ const AudioCall = (props) => {
   useEffect(() => {
     socket.on('endVideoCall', () => {
       // showErrorMessage("Call has been ended.")
-      if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-        history.push('/chatuser/'+paramsid)
-      }else{
-        history.push('/chat/'+paramsid)
+      if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
+        history.push('/chatuser/' + paramsid)
+      } else {
+        history.push('/chat/' + paramsid)
       }
     });
     //get the token
@@ -76,7 +76,8 @@ const AudioCall = (props) => {
       if (callTimerRef.current) {
         clearInterval(callTimerRef.current);
       }
-      disconnect();
+      // disconnect();
+      
     }
   }, [])
   const runTimer = () => {
@@ -97,12 +98,37 @@ const AudioCall = (props) => {
       }
     })
   }
+
+  const sendMessage = (message, type = 1) => {
+    console.log("_____________________ DATA ________")
+    console.log(props)
+    console.log("_____________________ DATA ________")
+
+    let object = {
+      message: message,
+      from_user_id: getUserProfile().u_id,
+      to_user_id: props.match.params.id,
+      message_type: type,
+      date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      // user_type: this.state.userMeta.user_type,
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm:ss")
+    };
+    console.log('==== send message ', object)
+    socket.emit("sendMessage", JSON.stringify(object), (data) => {
+
+    });
+  }
+
   const disconnect = () => {
+    
+
+    sendMessage(`audio call end`, 2)
     if (roomRef.current != null) {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
-     
+
     }
 
     const payload = {
@@ -115,10 +141,10 @@ const AudioCall = (props) => {
     if (token) {
       socket.emit('endVideoCall', payload);
     }
-    if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-      history.push('/chatuser/'+paramsid)
-    }else{
-      history.push('/chat/'+paramsid)
+    if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
+      history.push('/chatuser/' + paramsid)
+    } else {
+      history.push('/chat/' + paramsid)
     }
   }
   const connectTwillio = (token, room) => {
@@ -151,10 +177,10 @@ const AudioCall = (props) => {
         attachParticipantTracks(participant, remoteContainer, 'remote');
       }, 1000);
       participant.on('trackSubscribed', track => {
-        if(remoteContainer){
+        if (remoteContainer) {
           remoteContainer.appendChild(track.attach());
         }
-        
+
       });
     });
   }
@@ -188,10 +214,10 @@ const AudioCall = (props) => {
       }
     }
     tracks.forEach(track => {
-      if(container){
+      if (container) {
         container.appendChild(track.attach());
       }
-      
+
     });
   }
   // console.log(props, getUserProfile, token)

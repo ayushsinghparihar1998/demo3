@@ -61,9 +61,9 @@ class Blogs extends Component {
                                                             <div className="col14 fs14 fw400 pt-1">220 views</div>
                                                         </div>
                                                         <div className="col1 fs18 fw600 mb-3">{element.bl_title}</div>
-
-                                                        <div className="fs14 col29 fw300">{element.bl_desc}</div>
                                                         <hr className="social_hr" />
+                                                        <div className="fs14 col29 fw300" dangerouslySetInnerHTML={{ __html:element.bl_desc }}></div>
+                                                      
                                                         {/* <div className="media_list">
                                                             <div className="col10 fs14 fw600 pointer">http:socialwelfare.com</div>
                                                             <div className="position-relative">
