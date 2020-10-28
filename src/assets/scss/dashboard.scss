@@ -585,6 +585,11 @@
 
     div & img { 
         max-width: 67px; 
+        &.r50 {
+            width: 60px;
+            height: 60px;
+            object-fit: cover; 
+        }
     }
 
     .d-flex.justify-content-between { 
