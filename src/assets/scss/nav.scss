@@ -353,6 +353,38 @@
     }
 }
 
+@media (max-width: 991px) {
+
+    .mj_nav {
+        .navbar-light {
+            .navbar-nav {
+                .userprofiles.menus {
+                    .profile_icon > a.nav-link {       
+                        width: 30px;
+                        height: 30px; 
+                        top: 8px; 
+                    }
+                    & > a.nav-link {
+                        border-bottom: none; 
+                        padding-top: 8px;
+                    }
+                    justify-content: center;
+                    .profiletwo {
+                        .dropdown-menu {
+                            position: absolute;
+                            left: -80px;
+                            right: 0;
+                        }
+                    }
+                }
+                
+    
+            }
+        }
+    }
+
+}
+
 @media (max-width: 767px) {   
     .mj_nav {
         .navbar-light {
