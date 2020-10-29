@@ -44,7 +44,7 @@ class About extends Component {
                   {/* <div className="fs20 fw600 col29 mt-2 mb-2">Welcome to Eat Luv N Pray Foundation!</div> */}
                   <p>Eat Luv N Pray Pvt. Ltd. is an EPO (Emotion Process Outsourcing) platform promising anonymity at all times. It is by far the largest virtual ‘free listening platform’ in the country making mental health a core to cure any ailment and issues by providing research-based emotional support over the phone, video discussions, forums, and social media. </p>
 
-                  <p>It aims to touch and elevate overall wellbeing of at least 10 million lives and help generate livelihood for the inclusive section. It also supports NGO’s in likes of ELNP Foundation by providing virtual leased space on its platform and help them function with ease. It provides preventive care to its members by listening and simply enabling users to vent out their innermost voice with the sure promise of anonymity in order to eradicate evils of society and avoid acute mental illnesses. </p>
+                  <p>It aims to touch and elevate overall wellbeing of at least 10 million lives and help generate livelihood for the inclusive section. It also supports NGO’s in likes of ELNP Foundation by providing virtual leased space on its platform and help them function with ease. It provides preventive care to its members by listening and simply enabling users to vent out their innermost voice with the sure promise of anonymity in order to eradicate evils of society and avoid acute mental illnesses. </p> 
 
                   <div className="bg-pinks">   
                       <div className="fs32 fw500 calibri col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
@@ -52,7 +52,7 @@ class About extends Component {
                         <span className="leftone"> 
                             <Image src={Tickicons} alt="icon" />     
                          </span>
-                      <span className="righttwo">Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span></p>
+                      <span className="righttwo">Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span></p> 
                       
                       <p>
                         <span className="leftone"> 
@@ -63,8 +63,8 @@ class About extends Component {
 
                       <div className="fs32 fw500 calibri col29 mt-2 mb-2">Mission – Eat Luv N Pray Pvt. Ltd.</div>
                       <p>
-                        <span className="leftone"> 
-                            <Image src={Tickicons} alt="icon" />     
+                        <span className="leftone">   
+                            <Image src={Tickicons} alt="icon" />      
                          </span>
                       <span className="righttwo">Will provide a focussed but a widely spread platform to conscious service providers, specially abled people, LGBTQ, NGO’s, children of criminals, prostitutes, acid attack survivors etc. to help them create livelihood for themselves.
                       </span></p>
@@ -78,7 +78,7 @@ class About extends Component {
                   </div>
 
                   <div className="fs32 fw600 col92 mt-4 mb-5 text-center">Founders</div> 
-                  <div className="detail_listing mb-3">  
+                  <div className="detail_listing mb-3">   
                         <Row>
                             <Col lg={2} md={3} xs={12}>
                                     <Image src={Aboutprofileone} /> 

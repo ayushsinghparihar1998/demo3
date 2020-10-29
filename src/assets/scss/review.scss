@@ -544,51 +544,51 @@
 
 .profile_layout {
 
-.aboutpage {
-    font-family: Calibri; 
-    .detail_listing  { 
-        position: relative;
-        .br_set {
-            border-bottom: solid 2px $col92;
-            display: inline-block; 
+    .aboutpage {   
+        font-family: Calibri;  
+        .detail_listing  { 
+            position: relative;
+            .br_set {
+                border-bottom: solid 2px $col92;
+                display: inline-block; 
+            }
         }
-    }
-    p {
-        font-size: 18px;
-    }
-    p.fs16 {
-        font-size: 18px !important;  
-    }
-    .bg-pinks {
-        position: relative;
-        background-color: $col91; 
-        padding: 20px; 
         p {
-            font-family: Calibri; 
-            font-size: 17px;
-            line-height: 22px;
-            display: flex;
-            position: relative; 
+            font-size: 18px;
+        }
+        p.fs16 {
+            font-size: 18px !important;  
+        }
+        .bg-pinks {
+            position: relative;
+            background-color: $col91; 
+            padding: 20px; 
+            p {
+                font-family: Calibri; 
+                font-size: 17px;
+                line-height: 22px;
+                display: flex;
+                position: relative; 
 
-            .leftone {
-                margin-right: 7px; 
-                position: absolute; 
-                img {
-                    width: 1rem;   
+                .leftone {
+                    margin-right: 7px; 
+                    position: absolute; 
+                    img {
+                        width: 1rem;   
+                    }
+                }
+                .righttwo {
+                    padding-left: 30px; 
                 }
             }
-            .righttwo {
-                padding-left: 30px; 
+        }
+        div {
+            img.mx-w {
+                max-width: 340px; 
             }
         }
-    }
-    div {
-        img.mx-w {
-            max-width: 340px; 
-        }
-    }
 
-}
+    }
 
 }
 .terms {

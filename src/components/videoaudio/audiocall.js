@@ -200,7 +200,7 @@ const AudioCall = (props) => {
     // console.log(tracks, container, type);
     attachTracks(tracks, container, type);
   }
-  const attachTracks = (tracks, container, type) => {
+  const attachTracks = (tracks, container, type) => { 
     console.log('tracks', tracks);
     if (type == 'local') {
       setTracks(prev => ({ ...prev, local: tracks }))
