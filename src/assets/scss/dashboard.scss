@@ -16,6 +16,22 @@
             border-radius: 5px; 
         }
         .inner_side {   
+            .border-bottom {
+                div.counts {
+                    position: absolute;
+                    background: $col93; 
+                    right: -9px; 
+                    top: 12px;
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    border-radius: 50%;
+                    font-size: 12px;
+                    text-align: center;
+                    color: $col18; 
+                }
+            }
             background: $col18;  
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px; 
@@ -56,7 +72,14 @@
 
                 .position-relative {
                     & > div {
-                        word-break: break-all; 
+                        word-break: break-all;
+                        
+                        &:nth-child(1) {
+                            padding-right: 14px !important;; 
+                        }
+                        &:nth-child(2) {
+                            padding-right: 14px !important;
+                        }
                     }
                 }
             }
@@ -211,7 +234,7 @@
                 .carousel-item {
                     .row {
                         div.fs14.fw400 {
-                            height: 51px;
+                            height: 56px;
                             overflow: hidden;  
                         }
                     }
@@ -499,9 +522,7 @@
                 overflow: hidden;
             }
 
-            .border-bottom { 
-
-                
+            .border-bottom {  
                 border-bottom: solid 1px $col31; 
                 padding-bottom: 10px !important;    
                 img {
@@ -829,6 +850,10 @@
             }  
         }
         .modal-body {  
+
+            .col10.fw500.fs28.text-left {
+                text-align: center !important; 
+            }
             p {
                 text-transform: capitalize; 
             }
@@ -1364,6 +1389,17 @@
                     margin: 0.5rem !important;
                     & .position-relative {
                         min-width: 30px !important; 
+                    }
+                    .position-relative.pl-3 {
+                        padding-left: 10px !important; 
+                    }
+                    div.counts {
+                        width: 16px;
+                        height: 16px;
+                        line-height: 16px;
+                        font-size: 11px;
+                        right: -6px; 
+                        top: 15px; 
                     }
                     div {
                         img.r50 {

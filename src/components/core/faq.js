@@ -41,7 +41,7 @@ class Faq extends Component {
                             <Accordion defaultActiveKey="0">    
                                 <Card>
                                     <Accordion.Toggle as={Card.Header} eventKey="0">
-                                      What is ELNP Foundation?
+                                       What is ELNP Foundation?
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="0">
                                     <Card.Body> 
@@ -58,10 +58,10 @@ class Faq extends Component {
                                     What is active listening?
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="1">
-                                    <Card.Body>  
+                                    <Card.Body>    
                                         Active Listening is hearing in a way that exhibits compassion and 
                                         empathy while keeping in mind the importance of anonymity. Our 
-                                        listeners are called Listener (your constant companion) who will be all 
+                                        listeners are called “CoCo” (your constant companion) who will be all 
                                         ears to ensure you feel valued and heard.
                                     </Card.Body>
                                     </Accordion.Collapse>
@@ -72,10 +72,10 @@ class Faq extends Component {
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="2"> 
                                     <Card.Body>  
-                                        Professionals have undergone years of training and testing to earn an 
-                                        accredited qualification in their respective fields. Listeners also 
-                                        undergo certified training module designed by our professional 
-                                        experts to polish their listening and soft skills.
+                                    Professionals have undergone years of training and testing to earn an 
+                                    accredited qualification in their respective fields. Listeners also 
+                                    undergo certified training module designed by our professional 
+                                    experts to polish their listening and soft skills.
                                     </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>
@@ -93,29 +93,82 @@ class Faq extends Component {
                                     </Accordion.Collapse>
                                 </Card> */}
                                 <Card>
-                                    <Accordion.Toggle as={Card.Header} eventKey="4">
+                                    <Accordion.Toggle as={Card.Header} eventKey="3">
                                     How do I change my username
                                     </Accordion.Toggle>
-                                    <Accordion.Collapse eventKey="4"> 
+                                    <Accordion.Collapse eventKey="3"> 
                                     <Card.Body>   
-                                        If you have been a member/listener for less than 2 weeks then you 
-                                        can do this from settings. After two weeks you can only change your 
-                                        username for valid reasons, you can request a username change 
-                                        along with reason by an email on contact@eatluvnpray.org
+                                    If you have been a member/listener for less than 2 weeks then you 
+                                    can do this from settings. After two weeks you can only change your 
+                                    username for valid reasons, you can request a username change 
+                                    along with reason by an email on contact@eatluvnpray.org
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="4">
+                                    I entered the wrong birthday so my age group is incorrect, what do I do?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="4">  
+                                    <Card.Body>     
+                                    Please write to contact@eatluvnpray.org with your username and 
+                                    correct birthday along with any of the following documents:
+                                        <div className="mt-2">1) Aadhaar Card</div> 
+                                        <div>2) Pan Card</div>
+                                        <div>3) Driving License</div> 
                                     </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>
                                 <Card>
                                     <Accordion.Toggle as={Card.Header} eventKey="5">
-                                    I entered the wrong birthday so my age group is incorrect, what do I do?
+                                    How do I modify my profile and settings?
                                     </Accordion.Toggle>
-                                    <Accordion.Collapse eventKey="5">  
-                                    <Card.Body>     
-                                        Please write to contact@eatluvnpray.org with your username and 
-                                        correct birthday along with any of the following documents:
-                                        <div className="mt-2">1) Aadhaar Card</div>
-                                        <div>2) Pan Card</div>
-                                        <div>3) Driving License</div> 
+                                    <Accordion.Collapse eventKey="5"> 
+                                    <Card.Body>   
+                                    Click on your profile pic in the top right to open your account drop 
+                                    down menu and select My Settings. Here you can add a little info 
+                                    about yourself and a custom photo. You can also change your email 
+                                    notification settings and update your password among various other 
+                                    things from My Settings .
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="6">
+                                    How do I connect with a Listener?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="6"> 
+                                    <Card.Body>   
+                                    You can connect to a listener in two ways.
+                                    <div className="mb-2"><strong>Connect Now:</strong> Click the connect now button on the top left of your screen. 
+                                    It will ask you to either sign up as a member or log into your existing 
+                                    member account. Please click what applies, once you have 
+                                    registered/logged in, your request for a listener will be placed and a 
+                                    listener will pick up your request.</div>
+                                    <div className="mb-1"> 
+                                    If you are already logged in as a member then you can find the ““Need 
+                                    Someone to talk to” button on top center of the page. Click on the button 
+                                    and select a Category in which you are seeking support. You will then be 
+                                    connected to an available listener.</div>
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="7">
+                                    My Listener is inappropriate, what do I do?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="7">  
+                                    <Card.Body>   
+                                    <div className="mb-2">
+                                        Please leave a written review for your listener. You can rate & review 
+                                        the listener at the end of the chat. We use your written reviews to 
+                                        give listeners direct feedback on how to improve. Please keep your 
+                                        reviews honest and thoughtful. We are all here to grow together. You 
+                                        can use one of the following options to control contact with the 
+                                        listener.
+                                    </div>
+                                    <div className="mb-2"><strong>Block:</strong> Cut off communication between you and a listener.</div>
+                                    <div className="mb-1"><strong>Report Abuse:</strong> Report the listener for violating terms of service of the website with the appropriate reason. Please use this only if you feel this listener could be harmful for other members as well.</div>
                                     </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>

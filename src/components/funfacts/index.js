@@ -38,7 +38,7 @@ const FunFact = () => {
                         </Col>
                         <Col md={3} lg={2} xs={2}>
                             <div className="position-relative">
-                                <Button className="btnType16 funbtn2">LOVE</Button>
+                                <Button className="btnType16 funbtn2">Luv</Button>
                             </div>
                         </Col>
                     </Row>

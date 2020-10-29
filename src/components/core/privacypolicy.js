@@ -230,11 +230,11 @@ Services clearly specify that users must be at least 13 years old. Children betw
                     <p>As a global entity, ELNP may store, transfer, and otherwise process your Personal
 Information in countries outside of the country of your residence. Such countries may have data protection laws that are less protective than the laws of the jurisdiction in which you reside. If you do not want your information transferred to, processed, or maintained outside of the country or jurisdiction where you are located, you should immediately stop accessing or using the Services.</p>
 
-                    <div className="fs20 fw600 col29 mt-2 mb-2">16. Do Not Track</div>
+                    <div className="fs20 fw600 col29 mt-2 mb-2">14. Do Not Track</div>
 
                     <p>The Services do not support Do Not Track with respect to the Services at this time. Do Not Track is a privacy preference that you can set in your web browser to indicate that you do not want certain information about your webpage visits collected across websites when you have not interacted with that service on the page. </p>
 
-                    <div className="fs20 fw600 col29 mt-2 mb-2">17. Notices</div>
+                    <div className="fs20 fw600 col29 mt-2 mb-2">15. Notices</div>
 
                     <p>Please send all questions, comments and notices regarding this Privacy Policy to ELNP at    <a href="mailto:support@eatluvnpray.org"> support@eatluvnpray.org </a>.</p>
 

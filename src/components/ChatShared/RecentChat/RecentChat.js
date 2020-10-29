@@ -56,7 +56,7 @@ function RecentChat({ onRedirect }) {
                     ? item.to_user_name
                     : item.from_user_name}
                 </div>
-                <div className="col27 fs13 fw500">
+                <div className="col27 fs13 fw500 pr-2">
                   {item.message}
                 </div>
                 {/* <Image
@@ -64,6 +64,7 @@ function RecentChat({ onRedirect }) {
                   alt=""
                   className="pointer cross_btn"
                 /> */}
+                <div className="counts">01</div> 
               </div>
             </div>
           );

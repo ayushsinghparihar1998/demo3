@@ -474,7 +474,7 @@ class Editprofile extends Component {
 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14 mt-2">
-                          Password:
+                          New Password: 
                             </Form.Label>
                         <div className="d-flex">
 

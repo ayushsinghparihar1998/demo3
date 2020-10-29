@@ -280,7 +280,7 @@ class Userdashboard extends Component {
                   <Row>
                      <Col md={9}>
                         <Row>
-                           <Col md={4} className="pl-0">
+                           <Col md={4} className="pl-0">  
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
                                  {/* <ActiveUsers onRedirect={this.handleRedirectActiveUsers} /> */}

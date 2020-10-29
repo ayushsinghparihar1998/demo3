@@ -562,7 +562,10 @@
         .bg-pinks {
             position: relative;
             background-color: $col91; 
-            padding: 20px; 
+            padding: 20px;
+            padding-top: 10px;
+            border: solid 1px rgba(89, 84, 84, .12); 
+            box-shadow: 0px 3px 3px rgba(0, 0, 0, .10); 
             p {
                 font-family: Calibri; 
                 font-size: 17px;
@@ -572,13 +575,14 @@
 
                 .leftone {
                     margin-right: 7px; 
-                    position: absolute; 
+                    position: absolute;
+                    left: -26px;   
                     img {
                         width: 1rem;   
                     }
                 }
                 .righttwo {
-                    padding-left: 30px; 
+                    padding-left: 0;  
                 }
             }
         }
