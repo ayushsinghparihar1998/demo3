@@ -10,7 +10,8 @@ import {
   Tab,
   Modal,
   Tooltip,
-  OverlayTrigger,  
+  OverlayTrigger,
+     
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 
@@ -53,7 +54,6 @@ import DeleteConfirmation from "../modals/DeleteConfirmation";
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
 // socket.connect();
-const socket = socketClass.getSocket();
 
 const renderTooltip = (props) => (
   <Tooltip id="button-tooltip" {...props}>
@@ -74,7 +74,9 @@ const renderTooltipfour = (props) => (
   <Tooltip id="button-tooltip" {...props}>
     Video Call  
   </Tooltip>
-);
+); 
+
+const socket = socketClass.getSocket();
 
 class Chat extends Component {
   constructor(props) {
