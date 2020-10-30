@@ -28,6 +28,7 @@ import Iflag from "../../assets/images/india_flag.svg";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 
+import constant from "../../constant"
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -71,7 +72,7 @@ class BlogDetail extends Component {
 
 
       // const url = "https://staging.eatluvnpray.org/elp/uploadblogimage";
-      const url = "https://eatluvnpray.org/elp/uploadblogimage";
+      const url = constant.SERVER_URL + "elp/uploadblogimage";
       const config = {
         headers: {
           "content-type": "multipart/form-data"

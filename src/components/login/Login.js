@@ -39,21 +39,25 @@ import ProfessionalSignup from "../signup/professionalSignup";
 import socketClass from "../../common/utility/socketClass";
 
 class Login extends Component {
+
   constructor(props) {
     super(props);
+    const parsed = qs.parse(this.props.location.search);
     this.state = {
       email: "",
       errors: {},
       password: "",
       show3: false,
-      roleType:
-        this.props.location &&
+      roleType: parsed.u_role_id
+        ? parseInt(parsed.u_role_id)
+        : this.props.location &&
           this.props.location.state &&
           this.props.location.state.roleType
           ? this.props.location.state.roleType
           : this.props.roleType
             ? this.props.roleType
             : CONSTANTS.ROLES.LISTNER,
+
     };
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
@@ -66,12 +70,13 @@ class Login extends Component {
 
   componentWillReceiveProps(next) {
     this.setState({
-      roleType:
-        next.location && next.location.state && next.location.state.roleType
-          ? next.location.state.roleType
-          : this.props.roleType
-            ? this.props.roleType
-            : CONSTANTS.ROLES.LISTNER,
+      roleType: this.state
+        ? this.state.roleType
+        : next.location && next.location.state && next.location.state.roleType
+        ? next.location.state.roleType
+        : this.props.roleType
+        ? this.props.roleType
+        : CONSTANTS.ROLES.LISTNER,
     });
   }
   componentDidMount() {
@@ -125,56 +130,56 @@ class Login extends Component {
       ELPRxApiService("emailVerification", data)
         .then((response) => {
           // if (response.data.status === "success") {
-            let u_email;
-            if (getLocalStorage("userInfoProff")) {
-              let data = getLocalStorage("userInfoProff");
-              u_email = data.u_email;
-              if (u_email == email) {
-                data.u_verified = 1;
-                setLocalStorage("userInfoProff", data);
+          let u_email;
+          if (getLocalStorage("userInfoProff")) {
+            let data = getLocalStorage("userInfoProff");
+            u_email = data.u_email;
+            if (u_email == email) {
+              data.u_verified = 1;
+              setLocalStorage("userInfoProff", data);
 
-                _this.props.history.push({ pathname: "/userDashboardproff" });
-              } else {
-                this.props.history.push({
-                  pathname: "login",
-                  state: { roleType: this.state.roleType },
-                });
-              }
-            } else if (getLocalStorage("userInfo")) {
-              let data = getLocalStorage("userInfo");
-              u_email = data.u_email;
-              if (u_email == email) {
-                data.u_verified = 1;
-                setLocalStorage("userInfo", data);
-
-                _this.props.history.push({ pathname: "/userDashboard" });
-              } else {
-                this.props.history.push({
-                  pathname: "login",
-                  state: { roleType: this.state.roleType },
-                });
-              }
-            } else if (getLocalStorage("customerInfo")) {
-              let data = getLocalStorage("customerInfo");
-              
-              u_email = data.u_email;
-              if (u_email == email) {
-                data.u_verified = 1;
-                setLocalStorage("customerInfo", data);
-                _this.props.history.push({ pathname: "/userDashboardcust" });
-              } else {
-                console.log('verification email =======>>', data)
-                this.props.history.push({
-                  pathname: "login",
-                  state: { roleType: this.state.roleType },
-                });
-              }
+              _this.props.history.push({ pathname: "/userDashboardproff" });
+            } else {
+              this.props.history.push({
+                pathname: "login",
+                state: { roleType: this.state.roleType },
+              });
             }
+          } else if (getLocalStorage("userInfo")) {
+            let data = getLocalStorage("userInfo");
+            u_email = data.u_email;
+            if (u_email == email) {
+              data.u_verified = 1;
+              setLocalStorage("userInfo", data);
+
+              _this.props.history.push({ pathname: "/userDashboard" });
+            } else {
+              this.props.history.push({
+                pathname: "login",
+                state: { roleType: this.state.roleType },
+              });
+            }
+          } else if (getLocalStorage("customerInfo")) {
+            let data = getLocalStorage("customerInfo");
+
+            u_email = data.u_email;
+            if (u_email == email) {
+              data.u_verified = 1;
+              setLocalStorage("customerInfo", data);
+              _this.props.history.push({ pathname: "/userDashboardcust" });
+            } else {
+              console.log('verification email =======>>', data)
+              this.props.history.push({
+                pathname: "login",
+                state: { roleType: this.state.roleType },
+              });
+            }
+          }
           // } else {
-            // this.props.history.push({
-            //   pathname: "login",
-            //   state: { roleType: this.state.roleType },
-            // });
+          // this.props.history.push({
+          //   pathname: "login",
+          //   state: { roleType: this.state.roleType },
+          // });
           // }
         })
         .catch((err) => {
@@ -344,8 +349,8 @@ class Login extends Component {
           {/* {this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
             <NavBarAdmin {...this.props} />
           ) : ( */}
-              <NavBar {...this.props} />
-            {/* )} */}
+          <NavBar {...this.props} />
+          {/* )} */}
         </div>
         <div className="Loginlayout">
           <Container>
@@ -525,7 +530,7 @@ class Login extends Component {
 
           <Modal.Body>
             <Container>
-              <UserSignup {...this.props} handleSet={()=>this.setState({userSignUp:false})} />
+              <UserSignup {...this.props} handleSet={() => this.setState({ userSignUp: false })} />
             </Container>
           </Modal.Body>
         </Modal>

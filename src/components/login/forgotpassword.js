@@ -28,29 +28,41 @@ class Forgotpassword extends Component {
       email: "",
       errors: {},
       password: "",
-      roleType: this.props.location && this.props.location.state && this.props.location.state.roleType ?
-        this.props.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
+      roleType: props.location.state
+        ? props.location.state.roleType
+        : this.props.location &&
+          this.props.location.state &&
+          this.props.location.state.roleType
+          ? this.props.location.state.roleType
+          : this.props.roleType
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
     };
   }
   componentDidMount() {
-    console.log(this.props.location)
-    // alert("ASd")
     const { url } = this.props.match;
     const { location } = this.props;
     if (location) {
       const parsed = qs.parse(location.search);
-      let role = this.props.location.state.roleType.replace(/\s/g, '+');
+      let role = this.props.location.state
+        ? parseInt(this.props.location.state.roleType)
+        : this.props.location.state.roleType.replace(/\s/g, "+");
       this.setState({
-        roleType: role
+        roleType: role,
       });
     }
   }
 
   componentWillReceiveProps(next) {
     this.setState({
-      roleType: next.location && next.location.state && next.location.state.roleType ?
-        next.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
-    })
+      roleType: this.state
+        ? this.state.roleType
+        : next.location && next.location.state && next.location.state.roleType
+        ? next.location.state.roleType
+        : this.props.roleType
+        ? this.props.roleType
+        : CONSTANTS.ROLES.LISTNER,
+    });
   }
 
   handleSubmitUser = () => {
@@ -70,7 +82,7 @@ class Forgotpassword extends Component {
               });
             }, 1000);
 
-          }else{
+          } else {
             // showErrorMessage( result.data.message)
           }
         })
