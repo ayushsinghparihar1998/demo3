@@ -607,11 +607,12 @@ class Chat extends Component {
                         />
                       </div>
                     </div>
+                    {console.log("+++++++++++==>",this.state.allMessages)}
                     {this.state.allMessages.length > 0 ? (
                       <div className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
                           return msg.message_type == 2 ?
-                            <p style={{ textAlign: 'center' }}>{msg.message}</p>
+                            <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
                             : msg.from_user_id ==
                               getLocalStorage("userInfo").u_id ? (
                                 <div className="pl-3 pr-3 pb-3">
@@ -625,11 +626,13 @@ class Chat extends Component {
                                   </div>
                                 </div>
                               ) : (
+                                
                                 <div className="pl-3 pr-3 pb-3">
                                   <div className="d-flex">
                                     <div className="mt-auto mb-auto">
+                                      {console.log(msg)}
                                       <Image
-                                        src={UserChat4}
+                                        src={msg.from_image||UserChat4}
                                         alt=""
                                         className="r50 mr-3"
                                       />

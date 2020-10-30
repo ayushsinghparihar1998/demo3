@@ -10,7 +10,7 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import Livechatcomment from "../../assets/images/livechatcomment.svg";
 import RateUsModal from './RateUsModal'
 
-const UserEndChatModal = forwardRef(({ userId,disableInputHandler }, ref) => {
+const UserEndChatModal = forwardRef(({ userId, disableInputHandler }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const rateUsModal = React.createRef();
@@ -48,13 +48,16 @@ const UserEndChatModal = forwardRef(({ userId,disableInputHandler }, ref) => {
                             <div className="fs300 fs20 col14 mb-4 pb-2">
                                 We hope you had a great conversation <br /> & are feeling better
                           </div>
-                            <Button className="btnTyp12 btnT12 h-rem fs18 mr-5" onClick={() => setIsOpen(false)}>OKAY</Button>
+                            <Button className="btnTyp12 btnT12 h-rem fs18 mr-5" onClick={() => {
+                                setIsOpen(false)
+                                disableInputHandler()
+                            }}>OKAY</Button>
                             <Button className="btnTyp12 fs18 h-rem btnT12" onClick={openRateUsModal} >RATE US</Button>
                         </div>
                     </Container>
                 </Modal.Body>
             </Modal>
-            <RateUsModal ref={rateUsModal} userId={userId} disableInputHandler={disableInputHandler}/>
+            <RateUsModal ref={rateUsModal} userId={userId} disableInputHandler={disableInputHandler} />
         </>
     )
 })

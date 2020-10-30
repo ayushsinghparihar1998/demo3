@@ -73,7 +73,7 @@ class Resetpassword extends Component {
   }
 
   handleSubmitUser = () => {
-    if (this.isValid()) {
+    // if (this.isValid()) {
       let data = {
         email: this.state.email.toLowerCase().trim(),
         password: this.state.password.trim(),
@@ -98,7 +98,7 @@ class Resetpassword extends Component {
         .catch(error => {
           console.log(error);
         });
-    }
+    // }
   };
 
   isValid() {
@@ -132,11 +132,11 @@ class Resetpassword extends Component {
                   type="password"
                   value={this.state.password}
                   onChange={this.handleChange}
-                  error={errors.password ? true : false}
+                  // error={errors.password ? true : false}
                   placeholder="New Password"
                   className="inputTyp2"
                 />
-                <div className="error alignLeft">{errors.password}</div>
+                {/* <div className="error alignLeft">{errors.password}</div> */}
               </Form.Group>
 
               <Form.Group className="mb-4 pb-2">
@@ -145,11 +145,11 @@ class Resetpassword extends Component {
                   type="password"
                   value={this.state.confirmPassword}
                   onChange={this.handleChange}
-                  error={errors.confirmPassword ? true : false}
+                  // error={errors.confirmPassword ? true : false}
                   placeholder="Confirm Password"
                   className="inputTyp2"
                 />
-                <div className="error alignLeft">{errors.confirmPassword}</div>
+                {/* <div className="error alignLeft">{errors.confirmPassword}</div> */}
               </Form.Group>
 
               <Button onClick={this.handleSubmitUser} className="btnTyp4 text-uppercase">
