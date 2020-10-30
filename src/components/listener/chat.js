@@ -9,6 +9,8 @@ import {
   Tabs,
   Tab,
   Modal,
+  Tooltip,
+  OverlayTrigger,  
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 
@@ -53,6 +55,27 @@ import DeleteConfirmation from "../modals/DeleteConfirmation";
 // socket.connect();
 const socket = socketClass.getSocket();
 
+const renderTooltip = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Block User
+  </Tooltip>
+);
+const renderTooltiptwo = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Delete User
+  </Tooltip>
+);
+const renderTooltipthree = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Audio Call 
+  </Tooltip>
+);
+const renderTooltipfour = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Video Call  
+  </Tooltip>
+);
+
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +111,6 @@ class Chat extends Component {
     this.surveyModal = React.createRef();
 
     this.deleteConfirmation = React.createRef();
-
 
   }
 
@@ -541,25 +563,57 @@ class Chat extends Component {
                             className="pointer mr-2"
                           />
                           <Image src={Sounds} alt="" className="pointer mr-2" /> */}
-                          <Image
+                          
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltip}
+                          >
+                            <Image
                             src={Dangers}
                             onClick={() => this.blockModal.current.openModal()}
                             alt=""
                             className="pointer mr-2"
                           />
-                          <Image
+                          </OverlayTrigger>  
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltiptwo} 
+                          >
+                            <Image
                             src={Deletes}
                             alt=""
                             onClick={() => this.deleteConfirmation.current.openModal()}
                             className="pointer mr-2"
                           />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipthree} 
+                          >
+                            <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipfour} 
+                          >
+                            <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
+                          </OverlayTrigger>
+
                           {/* <Image
                             src={Questions}
                             alt=""
                             className="pointer mr-2"
-                          /> */}
-                          <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
-                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
+                          /> */} 
+                          {/* <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
+                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} /> */}
                           {
                             !this.state.isMessageDisabled ?
                               <Button
