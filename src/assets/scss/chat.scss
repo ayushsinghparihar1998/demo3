@@ -286,6 +286,7 @@
 
         .chat_top { 
             .col-3 {
+                position: relative; 
                 .mt-auto.mb-auto { 
                     & > span { 
                         font-size: 15px !important;
