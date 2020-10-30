@@ -41,6 +41,7 @@ import BlockModal from "../modals/BlockModal";
 import UserEndChatModal from "../modals/UserEndChatModal";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
 import MessageCount from "../modals/MessageCount";
+import ELPRxApiService from "../../common/services/apiService";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -100,6 +101,18 @@ class ChatUser extends Component {
     }
   }
   componentDidMount() {
+
+    ELPRxApiService("getprofile").then(res => {
+      console.log('res == .. image', res)
+
+      this.setState({
+        profileImage: res.data.data.profile_list.u_image,
+      })
+
+    }).catch(err => {
+      console.log(err);
+    })
+
     if (this.state.user_id == this.props.match.params.id) {
       this.props.history.push('/');
     }
@@ -284,7 +297,8 @@ class ChatUser extends Component {
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type,
       date: moment().format("YYYY-MM-DD"),
-      time: moment().format("HH:mm:ss")
+      time: moment().format("HH:mm:ss"),
+      from_image: this.state.profileImage,
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
       console.log(data)
