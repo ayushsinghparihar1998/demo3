@@ -386,7 +386,7 @@ class Chat extends Component {
     );
   }
 
-  render() {
+  render() { 
     const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
@@ -515,10 +515,10 @@ class Chat extends Component {
               </Col>
 
               <Col md={9}>
-                <div className="chat_dashboard">
+                <div className="chat_dashboard"> 
                   <div className="chat_top">
                     <Row>
-                      <Col xs={3}>
+                      <Col xs={3} md={3} sm={4}> 
                         <div className="mt-auto mb-auto">
                           <Image
                             src={userMeta.u_image || UserChat3}
@@ -528,7 +528,7 @@ class Chat extends Component {
                           <span className="fs17 fw600 col18 pl-3">{userMeta.u_username}</span>
                         </div>
                       </Col>
-                      <Col xs={9}>
+                      <Col xs={9} md={9} sm={8}>     
                         <div className="mt-auto mb-auto text-right">
                           {/* <Image
                             src={Warningnotification}
@@ -855,4 +855,4 @@ class Chat extends Component {
     );
   }
 }
-export default Chat;
+export default Chat; 

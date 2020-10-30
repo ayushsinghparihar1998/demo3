@@ -41,6 +41,9 @@
         padding: 0 15px; 
 
         .mt-auto.mb-auto { 
+            img.pointer {
+                
+            }
             & span {
                 font-size: 14px !important; 
             }
@@ -128,7 +131,7 @@
         background-color: $col61; 
         padding: 20px 30px;
     }
-    .search-listing {  
+    .search-listing {    
         background-color: $col18;  
         padding: 40px 30px;  
         text-align: center;
@@ -275,6 +278,171 @@
     }
 }
 
+/* media query screen start */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .chat_dashboard {  
+
+        .chat_top { 
+            .col-3 {
+                .mt-auto.mb-auto { 
+                    & > span { 
+                        font-size: 15px !important;
+                        position: absolute;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+@media (max-width: 767px) { 
+    .chat_dashboard { 
+
+        .chat_top { 
+            height: 3.5rem;
+            line-height: 3.5rem;
+            background: $col40;  
+            padding: 0 15px; 
+            .col-3 {
+                padding-left: 8px;
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                    width: 36px !important;
+                    height: 36px !important;
+                    object-fit: cover;
+                    margin-right: 10px !important;
+
+                    }
+                    & > span {
+                        font-size: 15px !important;
+                        position: absolute;
+                        left: 40px; 
+                    }
+                }
+            }
+
+            .col-9 {
+                padding-right: 8px; 
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                        width: 28px !important;
+                        height: 28px !important;
+                        object-fit: cover;
+                        margin-right: 5px !important;
+                    }
+                    button.btnTyp6 { 
+                        padding: 0 .5rem;
+                        font-size: 11px !important;
+                        margin-left: 3px;
+                        height: 2rem;
+                    }
+                }
+            }
+            
+        }
+    }
+
+}
+
+@media (max-width: 575px) {
+    .chat_dashboard { 
+
+        .chat_top { 
+            height: 3.5rem;
+            line-height: 3.5rem;
+            background: $col40;  
+            padding: 0 15px; 
+            .col-3 {
+                padding-left: 8px;
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                        width: 30px !important;
+                        height: 30px !important;
+                        object-fit: cover;
+                        margin-right: 5px !important; 
+                    }
+                    & > span {
+                        font-size: 11px !important;
+                        position: absolute;
+                        left: 32px; 
+                    }
+                }
+            }
+
+            .col-9 {
+                padding-right: 8px; 
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                        width: 25px !important;
+                        height: 25px !important;
+                        object-fit: cover;
+                        margin-right: 5px !important;
+                    }
+                    button.btnTyp6 {
+                        padding: 0 .5rem;
+                        font-size: 11px !important; 
+                        margin-left: 3px;
+                        height: 1.5rem;
+                    }
+                }
+            }
+            
+        }
+    }
+
+}
+
+@media (max-width: 375px) {
+    .chat_dashboard { 
+
+        .chat_top { 
+            height: 3.5rem; 
+            line-height: 3.5rem;
+            background: $col40;  
+            padding: 0 15px; 
+            .col-3 {
+                padding-left: 8px;
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                        width: 25px !important;
+                        height: 25px !important;
+                        object-fit: cover;
+                        margin-right: 5px !important; 
+                    }
+                    & > span {
+                        font-size: 11px !important;
+                        position: absolute;
+                        left: 28px;
+                    }
+                }
+            }
+
+            .col-9 {
+                padding-right: 8px; 
+                .mt-auto.mb-auto {   
+                    img.pointer { 
+                        width: 18px !important;
+                        height: 18px !important;
+                        object-fit: cover;
+                        margin-right: 2px !important;
+                    }
+                    button.btnTyp6 {
+                        padding: 0 .5rem;
+                        font-size: 11px !important; 
+                        margin-left: 3px;
+                        height: 1.5rem;
+                    }
+                }
+            }
+            
+        }
+    }
+
+}
 
 
 

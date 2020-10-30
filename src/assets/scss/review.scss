@@ -692,6 +692,29 @@
 
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+    .memberfaq {
+        .QuestionAnswer {  
+            padding: 0 20px 0; 
+            .accordion {
+                .card {
+                    .card-header { 
+                        font-size: 14px;
+                        height: 60px; 
+                        display: flex;
+                        align-items: center;
+                        padding-left: 15px; 
+                    }
+                    .card-body {
+                        font-size: 14px;
+                        padding: 1rem; 
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 768px) {
 
     .aboutpage {
