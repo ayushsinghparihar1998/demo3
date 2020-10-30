@@ -374,7 +374,8 @@
         }
     }
 
-    .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body {
+    .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body { 
+        position: relative; 
         padding: 20px; 
     }
     .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body button.btn:first-child {

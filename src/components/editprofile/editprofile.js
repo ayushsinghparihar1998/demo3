@@ -413,9 +413,9 @@ class Editprofile extends Component {
                     }}
                   // accept={customConstant.acceptedFormat.imageAcceptFormatType}
                   />
-                  <Image src={Cameratwo} alt="" className="camera2" />
+                  <span className="camspam"><Image src={Cameratwo} alt="" className="camera2" /></span> 
                 </div>
-                <div className="text-center profile_top">
+                <div className="text-center profile_top"> 
                   <Image
                     src={this.state.u_image}
                     alt=""
@@ -475,7 +475,7 @@ class Editprofile extends Component {
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14 mt-2">
                           Old Password:
-                            </Form.Label>
+                            </Form.Label> 
                         <div className="d-flex">
                           <Form.Control
                             type="password"
@@ -510,7 +510,7 @@ class Editprofile extends Component {
                             Change Password
                               </Button>
                         </div>
-                      </Form.Group>
+                      </Form.Group> 
 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 mt-2 col14">
@@ -575,7 +575,7 @@ class Editprofile extends Component {
                               }
                             )}
                           </Select>
-                        </Col>
+                        </Col> 
                         <Col md={4}>
                           <Select
                             classes="form-control selectTyp1"
