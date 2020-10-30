@@ -49,6 +49,7 @@ import BlockModal from "../modals/BlockModal";
 import SurveyModal from "../modals/SurveyModal"
 import MessageCount from "../modals/MessageCount";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
+import ELPRxApiService from "../../common/services/apiService";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -167,6 +168,18 @@ class Chat extends Component {
     }
   }
   componentDidMount() {
+
+    ELPRxApiService("getprofile").then(res => {
+      console.log('res == .. image', res)
+
+      this.setState({
+        profileImage: res.data.data.profile_list.u_image,
+      })
+
+    }).catch(err => {
+      console.log(err);
+    })
+
     if (this.state.user_id == this.props.match.params.id) {
       this.props.history.push('/');
     }
@@ -219,7 +232,10 @@ class Chat extends Component {
         from_user_id: getLocalStorage("userInfo").u_id,
         to_user_id: this.props.match.params.id,
         status: 1,
-      }), data => this.setState({ userMeta: data.userDetail })
+      }), data => {
+        console.log('data ====?', data)
+        this.setState({ userMeta: data.userDetail })
+      }
     );
     socket.on("startTyping", (data) => {
       this.setState({ response: data });
@@ -290,6 +306,7 @@ class Chat extends Component {
   };
 
   sendMessage(message, type = 1) {
+    console.log('sss334',getLocalStorage("userInfo"))
     let object = {
       message: message,
       from_user_id: getLocalStorage("userInfo").u_id,
@@ -298,7 +315,8 @@ class Chat extends Component {
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: this.state.userMeta.user_type,
       date: moment().format("YYYY-MM-DD"),
-      time: moment().format("HH:mm:ss")
+      time: moment().format("HH:mm:ss"),
+      from_image: this.state.profileImage,
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
       console.log(data, object);
@@ -661,7 +679,7 @@ class Chat extends Component {
                         />
                       </div>
                     </div>
-                    {console.log("+++++++++++==>",this.state.allMessages)}
+                    {/* {console.log("+++++++++++==>",this.state.allMessages)} */}
                     {this.state.allMessages.length > 0 ? (
                       <div className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {

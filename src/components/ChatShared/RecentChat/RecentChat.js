@@ -18,6 +18,9 @@ function RecentChat({ onRedirect }) {
   }, [])
   const getRecentChats = () => {
     socket.emit('getRecentsChatedUsers', JSON.stringify({ user_id: user.u_id }), data => {
+
+      console.warn("getRecentsChatedUsers", data)
+
       if (data.success)
         setRecentChats(data.data)
       else
@@ -64,7 +67,7 @@ function RecentChat({ onRedirect }) {
                   alt=""
                   className="pointer cross_btn"
                 /> */}
-                <div className="counts">01</div> 
+                <div className="counts">{item.from_user_id == user.u_id ? item.from_user_online:item.to_user_unread_count }</div> 
               </div>
             </div>
           );

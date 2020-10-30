@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import ChatCross from "../../../assets/images/cross2s.svg";
-import UserChat4 from "../../../assets/images/user_chat4.svg";
+import UserChat4 from "../../../assets/images/placeholder_user.png";
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import socketClass from '../../../common/utility/socketClass';
 import getUserProfile from '../../../common/utility/getUserProfile';
@@ -24,6 +24,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
         console.log(data)
         if (data.data && data.data.length > 0) {
           setAllMsg(data.data.reverse());
+          
         }
       }
     );
@@ -66,6 +67,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
       message: message,
       from_user_id: getUserProfile().u_id,
       to_user_id: user.id,
+      to_image:user.u_image,  
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: user.u_role_id,
@@ -73,6 +75,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
       time: moment().format("HH:mm:ss")
     };
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
+      console.log(data)
       setAllMsg(prev => [...prev, object]);
     });
     setMsgInput("")
@@ -125,7 +128,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
                           <div className="d-flex">
                             <div className="mt-auto mb-auto">
                               <Image
-                                src={UserChat4}
+                                src={msg.to_image ||UserChat4}
                                 alt=""
                                 className="r50 mr-3"
                               />

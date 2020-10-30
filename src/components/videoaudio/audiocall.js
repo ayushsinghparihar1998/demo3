@@ -9,7 +9,7 @@ import moment from 'moment';
 import NavBar from "../core/nav";
 import Backicon from "../../assets/images/backicon.svg";
 import Videouser from "../../assets/images/pro_img2.svg";
-import Videousertwo from "../../assets/images/videousers.svg";
+import Videousertwo from "../../assets/images/placeholder_user.png";
 import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
 import Videothree from "../../assets/images/video.svg";
@@ -260,7 +260,7 @@ const AudioCall = (props) => {
           <div className="w-100 audiocontrol">
             {!!userDetails &&
               <div className="mb-5">
-                <Image src={Videousertwo} alt="" className="mw-150" />
+                <Image src={userDetails.u_image || Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div>
                 <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
               </div>
