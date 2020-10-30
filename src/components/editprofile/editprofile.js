@@ -87,6 +87,22 @@ class Editprofile extends Component {
     this._getCategoriesHandler()
   }
 
+  handlePasswordChange = (event) => {
+    const { name, value } = event.target;
+    if (event.target.value.length > 8) {
+      var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+      var test = reg.test(value.trim());
+      if (test) {
+        // alert("pass");
+      } else {
+        alert(
+          "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+        );
+      }
+    }
+    this.setState({ [name]: value.trim() });
+  };
+
   getProfile = () => {
     this.props.actionGetProfile({}).then((result) => {
       if (result && result.status === 200) {
@@ -284,7 +300,7 @@ class Editprofile extends Component {
     const fileObject = event.target.files[0];
     if (fileObject) {
 
-      if (name ==  'u_image') {
+      if (name == 'u_image') {
         this.setState({
           isUploadingImage: true
         })
@@ -374,7 +390,7 @@ class Editprofile extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="page__wrapper innerpage">    
+      <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -388,7 +404,7 @@ class Editprofile extends Component {
                   <Form.File
                     id="custom-filetwo"
                     autoComplete="off"
-                    onChange={e =>{
+                    onChange={e => {
                       // alert("ASd")
                       this.handleUploadPicture(e, 'u_cover_image')
                     }}
@@ -474,15 +490,18 @@ class Editprofile extends Component {
 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14 mt-2">
-                          New Password: 
+                          New Password:
                             </Form.Label>
                         <div className="d-flex">
 
                           <Form.Control
                             type="password"
                             name="userPassword"
-                            onChange={this.handleChange}
+                            onChange={this.handlePasswordChange}
                             value={this.state.userPassword}
+                            minLength="8"
+                            maxLength="15"
+                            inputProps={{ maxLength: 15, }}
                             className="inputTyp2"
                           />
                           <Button
@@ -511,12 +530,12 @@ class Editprofile extends Component {
                         <Form.Label className="fs20 fw600 mt-2 mb-2 col14">
                           Gender:
                             </Form.Label>
-                            <span> 
-                              <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
-                              <span>
-                                <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
-                              <span><input type="radio" checked={this.state.gender === 'Others' ? true : false} value="Others" name="gender" onChange={this.handleChange} /> Others</span>
-                            </span>  
+                        <span>
+                          <span><input type="radio" checked={this.state.gender === 'Male' ? true : false} value="Male" name="gender" onChange={this.handleChange} /> Male</span>
+                          <span>
+                            <input type="radio" checked={this.state.gender === 'Female' ? true : false} value="Female" name="gender" onChange={this.handleChange} /> Female </span>
+                          <span><input type="radio" checked={this.state.gender === 'Others' ? true : false} value="Others" name="gender" onChange={this.handleChange} /> Others</span>
+                        </span>
                       </Form.Group>
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14">
@@ -663,15 +682,15 @@ class Editprofile extends Component {
                           </Form.Group>
                         </Col>
                       </Row>
-                      <div className="m-auto txt-center">   
-                          <Button
-                            className="btnTyp5 mt-5 mr-3"
-                            onClick={this.handleSubmit}
-                            disabled={this.state.isUploadingImage || this.state.isUploadingCoverImage}
-                          >
-                            {this.state.isUploadingImage || this.state.isUploadingCoverImage ? 'uploading image...' : 'save'}
-                          </Button>
-                          <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
+                      <div className="m-auto txt-center">
+                        <Button
+                          className="btnTyp5 mt-5 mr-3"
+                          onClick={this.handleSubmit}
+                          disabled={this.state.isUploadingImage || this.state.isUploadingCoverImage}
+                        >
+                          {this.state.isUploadingImage || this.state.isUploadingCoverImage ? 'uploading image...' : 'save'}
+                        </Button>
+                        <Button onClick={this.handleCancel} className="btnTyp10 mt-5">cancel</Button>
                       </div>
                     </Form>
                   </Col>

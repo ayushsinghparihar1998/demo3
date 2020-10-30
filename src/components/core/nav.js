@@ -232,8 +232,8 @@ class NavBar extends Component {
             .then((result) => {
               socketClass.disconnect();
               this.props.history.push({
-                pathname: "login",
-                state: { roleType: roleType },
+                pathname: "/",
+                // state: { roleType: roleType },
               });
 
               localStorage.clear();
@@ -343,25 +343,7 @@ class NavBar extends Component {
                           >
                             Professional Search
                             </NavLink>,
-                          <NavLink to="/campaign" className="nav-link">
-                            Donate
-                             </NavLink>,
-                          <NavDropdown title="Media" id="basic-nav-dropdown">
-                            {
-                              this.state.mediaLinks.map(data => {
-                                return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
-                              })
-                            }
-
-                          </NavDropdown>,
-                          <NavLink to="/about" className="nav-link text-c">
-                            About Us
-                             {/* <br /> */}
-                            {/* <span className="comings">coming soon</span>   */}
-                          </NavLink>,
-                          <NavLink to="/faq" className="nav-link">
-                            FAQ
-                          </NavLink>,
+                          
                           // <NavLink to="/listenerSearch" className="nav-link">
                           //   Listener Search
                           //   </NavLink>,
@@ -382,6 +364,25 @@ class NavBar extends Component {
                       >
                         Dashboard
                       </NavLink>,
+                      <NavLink to="/campaign" className="nav-link">
+                      Donate
+                       </NavLink>,
+                    <NavDropdown title="Media" id="basic-nav-dropdown">
+                      {
+                        this.state.mediaLinks.map(data => {
+                          return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
+                        })
+                      }
+
+                    </NavDropdown>,
+                    <NavLink to="/about" className="nav-link text-c">
+                      About Us
+                       {/* <br /> */}
+                      {/* <span className="comings">coming soon</span>   */}
+                    </NavLink>,
+                    <NavLink to="/faq" className="nav-link">
+                      FAQ
+                    </NavLink>,
                       ,
                       getLocalStorage("userInfoProff") ||
                         getLocalStorage("userInfo")
