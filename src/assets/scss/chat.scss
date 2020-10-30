@@ -345,6 +345,43 @@
             }
             
         }
+        .chat_bottom {
+            .form-group {
+                div {
+                    p > span {
+                        font-size: 12px; 
+                    }
+                }
+            }
+        }
+    }
+
+    .confirmation-box.delete_modal.block_modal.modal {
+        .modal-content {
+            .modal-body {
+                .delete_user {
+                    button.btnTyp9 {
+                        height: 3rem !important;
+                        padding: 0 1.2rem !important;
+                        font-size: 15px !important;
+                        
+                        &.mr-4 {
+                            margin-right: 10px !important; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body {
+        padding: 20px; 
+    }
+    .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body button.btn:first-child {
+        margin-right: 15px;
+    }
+    .custom-popUp.confirmation-box.modal.delete_modal .modal-content .modal-body button.btn:last-child {
+        margin-right: 0; 
     }
 
 }
