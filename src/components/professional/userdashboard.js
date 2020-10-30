@@ -42,7 +42,9 @@ import Medals from "../../assets/images/medals.svg";
 import Rflag from "../../assets/images/r_flag.svg";
 import SocketIOClient from "socket.io-client";
 import { getLocalStorage } from "../../common/helpers/Utils";
-const SOCKET_IO_URL = "https://eatluvnpray.org:8443";
+import constant from "../../constant"
+
+const SOCKET_IO_URL = constant.SOCKET_URL;
 const socket = SocketIOClient(SOCKET_IO_URL);
 socket.connect();
 
