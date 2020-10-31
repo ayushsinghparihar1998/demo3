@@ -196,11 +196,11 @@ class Chat extends Component {
                                                     </div>
                                                     <div className="position-relative pl-3 mt-auto mb-auto">
                                                         <div className="fs14 col14 fw500">@Melinda Jems</div>
-                                                    </div>
+                                                    </div> 
                                                     <div className="ml-auto mt-auto mb-auto col48 num-bg">5</div>
                                                 </div>
                                             </Tab>
-                                        </Tabs>
+                                        </Tabs> 
 
                                         <div className="fs15 fw600 col23 p-3 pointer show-more">Show More</div>
                                     </div>

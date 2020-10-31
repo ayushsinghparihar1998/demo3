@@ -11,7 +11,7 @@ import {
   Modal,
   Tooltip,
   OverlayTrigger,
-     
+
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 
@@ -665,7 +665,7 @@ class Chat extends Component {
                           alt=""
                           className="ml-auto pointer"
                         />
-                      </div>
+                      </div> 
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
