@@ -100,7 +100,7 @@ const MySetting = (props) => {
                                                         <Table bordered>
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Listener</th>
+                                                                    <th>User</th>  
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
