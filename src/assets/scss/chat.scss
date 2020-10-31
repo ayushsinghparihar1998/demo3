@@ -489,9 +489,23 @@ img.c_bad {
 
 }
 
+@media (max-width: 420px) {
+    .block_modal {
+        ul.block_users {
+            li {
+                height: auto;
+                line-height: inherit;
+                text-align: center;
+                width: 100%; 
+                padding: 10px 15px; 
+            } 
+        }
+    }
+}
+
 @media (max-width: 375px) {
     .chat_dashboard { 
-
+        position: relative; 
         .chat_top { 
             height: 3.5rem; 
             line-height: 3.5rem;
