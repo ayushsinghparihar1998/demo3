@@ -69,8 +69,11 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(next) {
+    const { location } = this.props;
+    const parsed = qs.parse(location.search);
+    // alert("ASD")
     this.setState({
-      roleType: this.state
+      roleType: parsed.u_role_id
         ? this.state.roleType
         : next.location && next.location.state && next.location.state.roleType
         ? next.location.state.roleType
@@ -80,6 +83,7 @@ class Login extends Component {
     });
   }
   componentDidMount() {
+   
     const { location } = this.props;
     if (location.search) {
       const parsed = qs.parse(location.search);
@@ -374,7 +378,7 @@ class Login extends Component {
                     : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
                       ? " Become a Professional"
                       : this.state.roleType === CONSTANTS.ROLES.USER
-                        ? <span sty onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
+                        ? <span style={{cursor:'pointer'}} onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
                         : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
                           ? " Become a Admin"
                           : ""}

@@ -626,7 +626,21 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
-
+  getRatingName = (ratingCount) => {
+    let text = null
+    if (ratingCount == 1) {
+        text = "Very Bad!"
+    } else if (ratingCount == 2) {
+        text = "Bad!"
+    } else if (ratingCount == 3) {
+        text = "Good!"
+    } else if (ratingCount == 4) {
+        text = "Very Good!"
+    } else if (ratingCount == 5) {
+        text = "Excellent!"
+    }
+    return text
+}
   // onChangeTabRev(key) {
   //   if (key === "request") this.getReviewListing(1, 10, 0);
   //   else if (key === "reject") this.getReviewListing(1, 10, 2);
@@ -1274,9 +1288,9 @@ class Adminlistener extends Component {
                                                     />
                                                   ))}
                                                 </span>
-                                                <span className="col82 fs18 fw600">
-                                                  Good!{" "}
-                                                  <Image src={Checkgreen} alt="" />
+                                                <span className="fs18 fw600" style={{color:item.ur_rating < 3? 'red':'green'}}>
+                                                 {this.getRatingName(item.ur_rating)}{" "}
+                                                  {/* <Image src={Checkgreen} alt="" /> */}
                                                 </span>
                                               </div>
                                               <div className="mt-3">

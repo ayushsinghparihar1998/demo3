@@ -40,7 +40,7 @@ class BlogDetail extends Component {
     isUploading: false,
     filepath: null,
     filename: null,
-
+    isShowCKEditor:false,
     bl_id: null,
     bl_title: null,
     bl_desc: null,
@@ -54,6 +54,7 @@ class BlogDetail extends Component {
       bl_id: this.props.location.state.bl_id,
       bl_title: this.props.location.state.bl_title,
       bl_desc: this.props.location.state.bl_desc,
+      isShowCKEditor:true,
       filepath: this.props.location.state.bl_image,
       filename: this.props.location.state.bl_image.split('/').reverse()[0],
     })
@@ -141,7 +142,7 @@ class BlogDetail extends Component {
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
                         {
-                          this.state.bl_desc ?
+                          this.state.isShowCKEditor ?
                             <CKEditor
                               config={{
                                 height: 500

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
-import Profileimg from "../../assets/images/profile_img.svg";
-import Usaflag from "../../assets/images/usa_flag.svg";
+import Profileimg from "../../assets/images/placeholder_user.png";
+import Usaflag from "../../assets/images/india_flag.svg";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionGetProfile, actionGetProfileById } from '../../common/redux/actions';
@@ -55,7 +55,7 @@ class Userprofiledetail extends Component {
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
                         <Row>
-                            <Col md={4} lg={3}  className="pr-1">
+                            {/* <Col md={4} lg={3}  className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
@@ -70,8 +70,8 @@ class Userprofiledetail extends Component {
 
                                     </div>
                                 </div>
-                            </Col>
-                            <Col md={8} lg={9} className="pl-1">  
+                            </Col> */}
+                            <Col md={12} lg={12} className="pl-1">  
                                 <div className="myprofile w-100">
                                     <div className="text-center profile_top melisa">
                                         <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />

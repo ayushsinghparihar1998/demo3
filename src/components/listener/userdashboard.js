@@ -582,11 +582,11 @@ class Userdashboard extends Component {
                         </Row>
                      </Col>
 
-                     <Col md={3} className="pl-0"> 
+                     <Col md={3} className="pl-0">
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                 How helpful were you? 
+                                 How helpful were you?
                            </div>
                               <div className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
@@ -642,8 +642,8 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                                 <span className="d_text">Discover Subcomunities</span> 
-                  </div>
+                                 <span className="d_text">Discover Subcomunities</span>
+                              </div>
                            </div>
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -655,13 +655,13 @@ class Userdashboard extends Component {
                                     more people
                      </div>
                                  <Form.Group className="d-flex mt-4 mb-1">
-                                   
+
                                     <Form.Control
                                        id="referURL"
                                        type="text"
                                        readOnly
                                        className="inputTyp4"
-                                       value={constant.WEB_BASE_URL + 'share-profile?'+ (dashboardData.refer_url?dashboardData.refer_url.split('?').reverse()[0]:'')}
+                                       value={constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')}
                                     />
                                     <Button className="btnTyp8" onClick={this.copyReferUrl}>
                                        <Image src={Copys} alt="" className="" />
@@ -669,8 +669,14 @@ class Userdashboard extends Component {
                                  </Form.Group>
                                  <div className="text-center">
                                     <span className="col14 fs10 fw400 mr-2">Share this code on Social Media:</span>
-                                    <Image src={Gmail} alt="" className="mr-2" />
-                                    <Image src={Whatsapp} alt="" className="" />
+                                    <Image onClick={() => {
+                                       let msgbody = constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')
+                                       let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=My+Profile&body=' + msgbody + '&ui=2&tf=1&pli=1';
+                                       window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
+                                    }} src={Gmail} alt="" className="mr-2" />
+                                    <a href={"whatsapp://send?text="+(constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : ''))}> <Image src={Whatsapp} alt="" className="" /></a>
+
+
                                  </div>
                               </div>
                            </div>
