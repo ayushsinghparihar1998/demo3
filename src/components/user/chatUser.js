@@ -10,6 +10,8 @@ import {
   Form,
   Tabs,
   Tab,
+  Tooltip,
+  OverlayTrigger,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -45,6 +47,27 @@ import ELPRxApiService from "../../common/services/apiService";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
+
+const renderTooltip = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Block User
+  </Tooltip>
+);
+const renderTooltiptwo = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Delete User
+  </Tooltip>
+);
+const renderTooltipthree = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Audio Call 
+  </Tooltip>
+);
+const renderTooltipfour = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Video Call  
+  </Tooltip>
+); 
 
 const socket = socketClass.getSocket();
 
@@ -529,7 +552,53 @@ class ChatUser extends Component {
                             className="pointer mr-2"
                           />
                           <Image src={Sounds} alt="" className="pointer mr-2" /> */}
-                          <Image
+
+                          {/* start */}
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltip}
+                          >
+                            <Image
+                            src={Dangers}
+                            onClick={() => this.blockModal.current.openModal()}
+                            alt=""
+                            className="pointer mr-2"
+                          />
+                          </OverlayTrigger>  
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltiptwo} 
+                          >
+                            <Image
+                            src={Deletes}
+                            alt=""
+                            onClick={() => this.deleteConfirmation.current.openModal()}
+                            className="pointer mr-2"
+                          />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipthree} 
+                          >
+                            <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipfour} 
+                          >
+                            <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
+                          </OverlayTrigger>
+                          {/* end */}
+
+                          {/* old */}
+                          {/* <Image
                             src={Dangers}
                             onClick={() => this.blockModal.current.openModal()}
                             alt=""
@@ -540,14 +609,14 @@ class ChatUser extends Component {
                             alt=""
                             onClick={() => this.deleteConfirmation.current.openModal()}
                             className="pointer mr-2"
-                          />
+                          /> */}
                           {/* <Image
                             src={Questions}
                             alt=""
                             className="pointer mr-2"
                           /> */}
-                          <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
-                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
+                          {/* <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
+                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} /> */} 
                           {
                             !this.state.isMessageDisabled ?
                               <Button
@@ -562,7 +631,7 @@ class ChatUser extends Component {
                       </Col>
                     </Row>
                     <div></div>
-                  </div>
+                  </div> 
 
                   <div className="chat_middle">
                     <div className="p-3">
@@ -570,7 +639,7 @@ class ChatUser extends Component {
                         <Image src={Errors} alt="" className="mr-3" />
                         <span className="fs14 fw300 col1 pr-1">
                           For your own safety, do not share your personal
-                          details, contact infoor social media handles.
+                          details, contact info or social media handles.
                         </span>
                         <Image
                           src={Chatcross2}

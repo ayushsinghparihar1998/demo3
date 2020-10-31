@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 
 import Crossbtn from "../../assets/images/blue_cross.svg";
+import Crossbad from "../../assets/images/cross_bad.png";  
 import Checkgreentwo from "../../assets/images/checkgreen2.svg";
 import Starfillone from "../../assets/images/starfillone.svg";
 import Starfillempty from "../../assets/images/staremptyone.svg";
@@ -74,7 +75,7 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
 
     return (
         <>
-            <Modal show={isOpen} className="CreateAccount Rate_us">
+            <Modal show={isOpen} className="CreateAccount Rate_us"> 
                 <Modal.Header>
                     <Button onClick={() => setIsOpen(false)}>
                         <Image src={Crossbtn} alt="" />
@@ -91,7 +92,12 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
                             <Image src={Checkgreentwo} alt="" className="mb-3" />
                             <div className="col82 fs18 fw600 mb-3">
                                 {getName()}
-                            </div>
+                            </div> 
+                            {/* Bad reviews */}
+                            <Image src={Crossbad} alt="" className="mb-3 d-none c_bad" />  
+                            <div className="col33 fs18 fw600 mb-3">  
+                                Bad! 
+                            </div> 
                             <div className="manage_ratings mb-3">
                                 <Image onClick={() => setRatingCount(1)} src={ratingCount >= 1 ? Starfillone : Starfillempty} alt="" className="mr-2" />
                                 <Image onClick={() => setRatingCount(2)} src={ratingCount >= 2 ? Starfillone : Starfillempty} alt="" className="mr-2" />
@@ -117,4 +123,4 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
     )
 })
 
-export default RateUsModal
+export default RateUsModal;

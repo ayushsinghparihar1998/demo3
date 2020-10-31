@@ -278,6 +278,52 @@
     }
 }
 
+.modal.Rate_us {
+    .modal-content {
+        .modal-body {
+            img.c_bad {
+                max-width: 25px;
+            }
+        }
+    }
+}
+
+img.c_bad {
+    max-width: 25px;
+}
+
+.main_blockuser {
+    background-color: $col22;
+    min-height: calc(100vh - 146px);
+
+    .blockusers {
+        background: $col18;
+        border-top: solid 10px $col23;  
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+        min-height: 600px;
+        align-self: center; 
+        text-align: center;  
+        width: 100%;
+
+        img.blockone {
+            display: block;
+            text-align: center;
+            width: auto;
+            max-width: 100%;
+            margin: auto;
+        }
+        img.blocktwo {
+            display: block;
+            width: auto;  
+            text-align: center;
+            max-width: 100%;
+            margin: auto;
+            margin-top: -15px; 
+
+        }
+    }
+}
+
 /* media query screen start */
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -301,8 +347,16 @@
 }
 
 @media (max-width: 767px) { 
+    .main_blockuser {
+        position: relative;
+    
+        .blockusers {
+            .col1.fw500.fs28 {
+                font-size: 22px !important; 
+            }
+        }
+    }
     .chat_dashboard { 
-
         .chat_top { 
             height: 3.5rem;
             line-height: 3.5rem;
