@@ -324,6 +324,25 @@ img.c_bad {
     }
 }
 
+.question.calendar_manages.modal { 
+    .modal-dialog {
+        max-width: 720px;  
+        .modal-body {
+            padding: 20px 20px;        
+
+            .form-group {
+                .react-datepicker-wrapper {
+                    width: 100%;
+                }
+                .selectTyp1.selectWidth {
+                    max-width: 30%; 
+                }
+            }
+            
+        }
+    }
+}
+
 /* media query screen start */
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -347,6 +366,32 @@ img.c_bad {
 }
 
 @media (max-width: 767px) { 
+    .question.calendar_manages.modal { 
+        .modal-dialog {
+            .modal-body {
+                .d-flex.align-items-center.form-group {
+                    flex-wrap: wrap; 
+                    width: 100%;
+    
+                    &>label {
+                        width: 100%;
+                    }
+                    &>select {
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                    &>div {
+                        width: 100%;
+                        &.ml-3 {
+                            margin-left: 0px !important;
+                            margin-top: 10px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .main_blockuser {
         position: relative;
     
