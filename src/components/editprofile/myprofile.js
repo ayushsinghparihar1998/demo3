@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import UserProfile from "./userprofiledetail";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
+import NavBarAdmin from "../core/navAdmin";
 
 class Myprofile extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class Myprofile extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+        {getLocalStorage('isAdmin') ? <NavBarAdmin {...this.props} /> : <NavBar {...this.props} />}
         </div>
         {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> : 
           <div className="profile_layout pt-4 pb-5">
@@ -133,7 +134,7 @@ class Myprofile extends Component {
                             <div className="layout">
                               <div className="d-flex m-auto w35 border2">
                                 <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
-                                <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
+                                <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
                               </div>
                             </div>
                           ) : null

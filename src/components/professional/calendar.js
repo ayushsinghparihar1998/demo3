@@ -389,7 +389,7 @@ export default class CalendarDemo extends Component {
 
         <Modal
           show={this.state.show5}
-          className="CreateAccount question calender_model"
+          className="CreateAccount question "
         >
           <Modal.Header>
             <Button onClick={this.handleClose5}>

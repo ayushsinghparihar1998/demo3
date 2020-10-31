@@ -36,14 +36,21 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
                 rv_from_id: getLocalStorage('customerInfo').u_id,
                 rv_to_id: userId
             })
-            let response = await ELPRxApiService("submitRatings", {
-                rating_count: ratingCount,
-                to_id: userId,
-                from_id: getLocalStorage('customerInfo').u_id
-            })
-            console.log(submitReview, response)
-            setIsOpen(false)
-            disableInputHandler()
+            console.log("ASAS,", submitReview)
+            if (submitReview.data.status == "success") {
+                let response = await ELPRxApiService("submitRatings", {
+                    rating_count: ratingCount,
+                    to_id: userId,
+                    from_id: getLocalStorage('customerInfo').u_id
+                })
+                console.log(response, response)
+                if (response.data.status == "success") {
+                    setIsOpen(false)
+                disableInputHandler()
+                }
+                
+            }
+
         } catch (err) {
             console.log(err);
         }
