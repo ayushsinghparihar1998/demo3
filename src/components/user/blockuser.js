@@ -4,14 +4,13 @@ import NavBar from '../core/nav';
 import Footer from '../core/footer';
 import Blogstar from "../../assets/images/blog_star.svg";
 import Blogsearch from "../../assets/images/blog_search.svg";
+import {NavLink} from "react-router-dom"
 
 class Blockuser extends Component {  
     render() {
         return (
             <div className="page__wrapper innerpage">
-                <div className="main_baner">
-                    <NavBar {...this.props} />
-                </div>
+              
                 
                 <div className="main_blockuser pt-4 pb-5"> 
                     <Container>
@@ -20,13 +19,13 @@ class Blockuser extends Component {
                                 <Image src={Blogstar} className="blockone" />
                                 <Image src={Blogsearch} className="blocktwo" />  
                                 <div className="col1 fw500 fs28 mt-4 pt-1 pb-1 mb-4">No blocked Users yet!</div>
-                                <Button className="btnTyp5">BACK</Button> 
+                                <NavLink to="/"> <Button  className="btnTyp5">BACK</Button> </NavLink>
                             </div>
                         </div>
                     </Container>
                 </div>
 
-                <Footer />
+                
             </div>
         );
     }
