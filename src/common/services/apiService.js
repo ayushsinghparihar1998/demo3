@@ -61,6 +61,7 @@ const handleErrorByStatus = (error) => {
     //   data: {}
     // }).then(response => {
     clearLocalStorage();
+    window.location= '/'
     // });
   } else if (error && error.status === 'error') {
 
@@ -101,7 +102,7 @@ const spikeViewApiService = (apiKeyName, data) => {
             showSuccessToast(message);
         }
       } else {
-
+        // alert("ASd")
         handleErrorByStatus(result.data);
       }
       return result;

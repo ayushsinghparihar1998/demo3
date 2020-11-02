@@ -350,7 +350,7 @@ class ProfessionalSignup extends Component {
                 I am not in crisis, homicidal, sucidal or abusing anyone, by continuing i
                 agree to the Eat Luv N Pray{' '}
                 <span className="fw500 pointer">
-                  <NavLink to="/termcondition">Terms of service</NavLink>  & <NavLink to="/privacypolicy"> Privacy Policy.</NavLink>
+                  <NavLink target="_blank" to="/termcondition">Terms of service</NavLink>  & <NavLink target="_blank" to="/privacypolicy"> Privacy Policy.</NavLink>
                 </span>
               </div>
             </Col>

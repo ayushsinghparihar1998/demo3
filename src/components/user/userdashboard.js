@@ -466,8 +466,12 @@ class Userdashboard extends Component {
                                  </Form.Group>
                                  <div className="text-center sharethis">
                                     <span className="col1 fs12 fw500 mr-1">Share this code on Social Media:</span>
-                                    <Image src={Gmail} alt="" className="mr-1" />
-                                    <Image src={Whatsapp} alt="" className="" />
+                                    <Image style={{ cursor: 'pointer' }} onClick={() => {
+                                       let msgbody = constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')
+                                       let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=My+Profile&body=' + msgbody + '&ui=2&tf=1&pli=1';
+                                       window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
+                                    }} src={Gmail} alt="" className="mr-2" />
+                                    <a href={"whatsapp://send?text=" + (constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : ''))}> <Image src={Whatsapp} alt="" className="" /></a>
                                  </div>
                               </div>
                            </div>

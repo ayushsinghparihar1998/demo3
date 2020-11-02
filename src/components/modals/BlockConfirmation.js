@@ -59,7 +59,7 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
                 from_user_id: selfId,
                 to_user_id: userId,
                 block: 1,
-                name: selfName
+                name: userName
             }, (data) => {
                 console.log('active data', data);
                 showSuccessToast(data.msg)

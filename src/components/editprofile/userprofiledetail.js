@@ -16,7 +16,7 @@ class Userprofiledetail extends Component {
                 this.props.location.state.userId : '',
         };
     }
-    componentDidMount() { 
+    componentDidMount() {
         this.getProfile();
     }
     componentWillReceiveProps = (nextProps) => {
@@ -32,7 +32,7 @@ class Userprofiledetail extends Component {
                 if (result && result.status === 200) {
                     let res = result.data.data &&
                         result.data.data[0] ? result.data.data[0] : {};
-                        
+
                     this.setState({ userData: res })
                 }
             })
@@ -55,23 +55,23 @@ class Userprofiledetail extends Component {
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
                         <Row>
-                            {/* <Col md={4} lg={3}  className="pr-1">
+                            <Col md={4} lg={3} className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
-                                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
+                                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Quick Links</div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" />
-                                                    <Link to={`/adminlistener`}> USER LISTING</Link>
-
-                                                </div> 
+                                                    <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                                                    
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                            </Col> */}
-                            <Col md={12} lg={12} className="pl-1">  
+                            </Col>
+                            <Col md={8} lg={9} className="pl-1">
                                 <div className="myprofile w-100">
                                     <div className="text-center profile_top melisa">
                                         <Image src={userData.u_image ? userData.u_image : Profileimg} alt="" className="r50 border_profile" />
