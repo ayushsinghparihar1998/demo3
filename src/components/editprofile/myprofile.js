@@ -159,7 +159,7 @@ class Myprofile extends Component {
                     <div className="layout">
                       <div className="d-flex m-auto w35 border2">
                         <div className="fs16 col23 fw400 text-left w60">Chats:</div>
-                        <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
+                        <div className="fs16 col14 fw400 text-left w40">{userData.u_listener_chat}</div>
                       </div>
                     </div>
                     {/* </Tab> */}

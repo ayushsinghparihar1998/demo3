@@ -111,7 +111,9 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
 
                 <div className="mt-auto" >
                   {allMsg.map((msg, index) => {
-                    return msg.from_user_id ==
+                    return msg.message_type == 2 ?
+                    <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
+                    : msg.from_user_id ==
                       getUserProfile().u_id ? (
                         <div className="pl-3 pr-3 pb-3">
                           <div className="text-right">
@@ -122,7 +124,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
                               {moment(msg.date_time).format('hh:mm a')}
                             </div>
                           </div>
-                        </div>
+                        </div> 
                       ) : (
                         <div className="pl-3 pr-3 pb-3">
                           <div className="d-flex">
