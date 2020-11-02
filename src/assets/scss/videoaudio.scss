@@ -147,11 +147,15 @@
             width: 100%; 
         }
     }
+    .chat_dashboard {
+        position: fixed; 
+        left: 0;
+    } 
 }
 
 .audiochat {   
     background: $col65;     
-    min-height: 89vh; 
+    min-height: 87.7vh; 
     width: 100%;
     display: flex;
     justify-content: center;
@@ -159,10 +163,11 @@
 
     .chat_dashboard {
         position: fixed;
-        left: 2px;
+        left: 0;
         bottom: 0;
         max-width: 470px;
         width: 100%;
+        margin-bottom: 0; 
 
         .chat_middle {
             & > div.mt-auto {
@@ -210,24 +215,56 @@
 
     .audiocontrolicon {
         position: relative;
-        top: 110px; 
+        bottom: -110px; 
     }
 }
 
-@media (max-width: 1400px) {   
 
+
+@media (max-width: 1400px) {   
+    .audiochat { 
+        min-height: 88vh;     
+    }
     .videochat {   
         .videocontrol {
-            // height: 100%;
             top: auto;
             bottom: -400px;
+        }
+        .chat_dashboard {
+            position: fixed; 
+            max-width: 400px; 
+            .chat_middle {
+                min-height: 300px;
+    
+                & > div.mt-auto {
+                    max-height: 300px; 
+                }
+            }
+        }
+    }
+
+    .audiochat {   
+        
+        .chat_dashboard {
+            position: fixed; 
+            max-width: 400px; 
+            margin-bottom: 0px; 
+            .chat_middle {
+                min-height: 300px;
+    
+                & > div.mt-auto {
+                    max-height: 300px; 
+                }
+            }
         }
     }
 
 }
 
 @media (min-width: 1400px) {
-
+    .audiochat { 
+        min-height: 89.1vh;     
+    }      
     .videochat {
         .videocontrol { 
             // height: 100%;
@@ -248,3 +285,29 @@
     } 
 
 }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .userdashboards {
+        .container {
+            & > .row {
+                & > .col-md-3 {
+                    padding-right: 0px; 
+                }
+            }
+        }
+    }
+
+    .audiochat {
+        .chat_dashboard {
+            max-width: 360px; 
+        }
+    }
+    .videochat {
+        .chat_dashboard {
+            max-width: 360px; 
+        }
+    }
+}
+
+
+
