@@ -59,6 +59,7 @@ class Login extends Component {
             : CONSTANTS.ROLES.LISTNER,
 
     };
+   
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
       className: "msgcolor",

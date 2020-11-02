@@ -4,13 +4,15 @@ import UserChat from '../../../assets/images/user_chat.png';
 import getUserProfile from '../../../common/utility/getUserProfile'
 import socketClass from '../../../common/utility/socketClass'
 import ChatCross from '../../../assets/images/chat_cross.svg';
+import moment from "moment";
+
 const socket = socketClass.getSocket();
 function RecentChat({ onRedirect }) {
   const user = getUserProfile();
   const [recentChats, setRecentChats] = useState([]);
   useEffect(() => {
     getRecentChats();
-    socket.on("messageReceived", ()=>{
+    socket.on("messageReceived", () => {
       getRecentChats()
     });
     socket.on("sendMessage", getRecentChats);
@@ -20,9 +22,13 @@ function RecentChat({ onRedirect }) {
     socket.emit('getRecentsChatedUsers', JSON.stringify({ user_id: user.u_id }), data => {
 
       console.warn("getRecentsChatedUsers", data)
-
-      if (data.success)
+      // alert(moment())
+      if (data.success) {
+        data.data.map(obj => {
+          obj.date_time = moment(obj.date_time).fromNow()
+        })
         setRecentChats(data.data)
+      }
       else
         console.warn("Error, getRecentsChatedUsers", data)
     });
@@ -62,12 +68,16 @@ function RecentChat({ onRedirect }) {
                 <div className="col27 fs13 fw500 pr-2">
                   {item.message}
                 </div>
+                <div className="col27 fs13 fw500 pr-2">
+
+                  {item.date_time}
+                </div>
                 {/* <Image
                   src={ChatCross}
                   alt=""
                   className="pointer cross_btn"
                 /> */}
-                <div className="counts">{item.from_user_id == user.u_id ? item.from_user_online:item.to_user_unread_count }</div> 
+                <div className="counts">{item.from_user_id == user.u_id ? item.from_user_online : item.to_user_unread_count}</div>
               </div>
             </div>
           );

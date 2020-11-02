@@ -691,7 +691,7 @@ class Adminlistener extends Component {
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      Links
+                    Quick Links
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div

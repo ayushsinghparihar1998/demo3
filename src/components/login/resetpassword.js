@@ -48,11 +48,13 @@ class Resetpassword extends Component {
       let email = parsed.email.replace(/\s/g, '+');
       let userid = parseInt(parsed.userid);
       let authcode = parsed.authcode;
+      let roleType = parsed.u_role_id;
 
       this.setState({
         email,
         userid,
-        authcode
+        authcode,
+        roleType
       });
 
     }
@@ -66,10 +68,10 @@ class Resetpassword extends Component {
   };
 
   componentWillReceiveProps(next) {
-    this.setState({
-      roleType: next.location && next.location.state && next.location.state.roleType ?
-        next.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
-    })
+    // this.setState({
+    //   roleType: next.location && next.location.state && next.location.state.roleType ?
+    //     next.location.state.roleType : this.props.roleType ? this.props.roleType : CONSTANTS.ROLES.LISTNER,
+    // })
   }
 
   handleSubmitUser = () => {
@@ -83,19 +85,24 @@ class Resetpassword extends Component {
       this.props
         .actionResetPassword(data)
         .then(result => {
+          // alert( this.state.roleType)
           if (result && result.data && result.data.status === "success") {
-            let roleType = "1"
+          
+            let roleType = this.state.roleType
             setTimeout(() => {
               this.props.history.push({
                 pathname: 'login',
-                state: { roleType: roleType }
+                state: { roleType: parseInt(roleType) }
               });
             }, 2000);
 
 
           }
+
+          
         })
         .catch(error => {
+         
           console.log(error);
         });
     // }
@@ -144,7 +151,7 @@ class Resetpassword extends Component {
                   name="confirmPassword"
                   type="password"
                   value={this.state.confirmPassword}
-                  onChange={this.handleChange}
+                  onChange={this.handleChange} 
                   // error={errors.confirmPassword ? true : false}
                   placeholder="Confirm Password"
                   className="inputTyp2"
