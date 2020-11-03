@@ -81,6 +81,9 @@ import ActiveUsers from '../ChatShared/ActiveUsers/ActiveUsers';
 import Quotes from '../quotes';
 import BlogList from '../blogList';
 import FunFact from '../funfacts';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
@@ -733,6 +736,10 @@ class Userdashboard extends Component {
                <Modal.Body>
                   <p className="text-center fs24">{this.state.message}</p>
                   <Container>
+
+                     {/* new loader here */}
+
+
                      {getLocalStorage('result') >= 60 ? (
                         <div className="layout_box text-center mt-3 mb-4 p-4">
                            <Image src={Educations} alt="" className="mb-4" />
@@ -743,18 +750,28 @@ class Userdashboard extends Component {
                            {/* 
                <Image src={Educationmarks} alt="" />
                */}
-                           <div class="progress blue">
-                              <span className="progress-full"></span>
-                              <span class="progress-left">
-                                 <span class="progress-bar"></span>
-                              </span>
-                              <span class="progress-right">
-                                 <span class="progress-bar"></span>
-                              </span>
-                              <div class="progress-value">
-                                 {getLocalStorage('result')}%
-                              </div>
-                           </div>
+                           <CircularProgressbar minValue={0} maxValue={100} styles={{
+                              root: { width: "130px" },
+                              path: {
+                                 stroke: `#8AD1E7`,
+                                 transition: 'stroke-dashoffset 0.5s ease 0s',
+                              },
+                              trail: {
+                                 // Trail color
+                                 stroke: '#d6d6d6',
+                                 // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                                 strokeLinecap: 'butt',
+                                 // Rotate the trail
+                                 transform: 'rotate(0.25turn)',
+                                 transformOrigin: 'center center',
+                              },
+                              text: {
+                                 // Text color
+                                 fill: '#595454',
+                                 // Text size
+                                 fontSize: '25px',
+                              },
+                           }} value={getLocalStorage('result')} text={`${getLocalStorage('result')}%`} />
                         </div>
                      ) : (
                            <div className="layout_box text-center mt-3 mb-4 p-4">
@@ -762,22 +779,30 @@ class Userdashboard extends Component {
                               <div className="col9 fs44 fw600 mb-2">Sorry</div>
                               <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
                                  please take the survey again or contact Admin
-               </div>
-                              {/* 
-               <Image src={Educationmarktwo} alt="" />
-               */}
-                              <div class="progress yellow">
-                                 <span className="progress-full"></span>
-                                 <span class="progress-left">
-                                    <span class="progress-bar"></span>
-                                 </span>
-                                 <span class="progress-right">
-                                    <span class="progress-bar"></span>
-                                 </span>
-                                 <div class="progress-value">
-                                    {getLocalStorage('result')}%
-                  </div>
-                              </div>
+                               </div>
+                              
+                              <CircularProgressbar minValue={0} maxValue={100} styles={{
+                                 root: { width: "130px" },
+                                 path: {
+                                    stroke: `#8AD1E7`,
+                                    transition: 'stroke-dashoffset 0.5s ease 0s',
+                                 },
+                                 trail: {
+                                    // Trail color
+                                    stroke: '#d6d6d6',
+                                    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                                    strokeLinecap: 'butt',
+                                    // Rotate the trail
+                                    transform: 'rotate(0.25turn)',
+                                    transformOrigin: 'center center',
+                                 },
+                                 text: {
+                                    // Text color
+                                    fill: '#595454',
+                                    // Text size
+                                    fontSize: '25px',
+                                 },
+                              }} value={getLocalStorage('result')} text={`${getLocalStorage('result')}%`} />
                            </div>
                         )}
                   </Container>

@@ -94,9 +94,14 @@ class ChatUser extends Component {
   }
 
   scrollToBottom = () => {
-    if (this.messagesEnd && this.messagesEnd.current) {
-      this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    // if (this.messagesEnd && this.messagesEnd.current) {
+    //   this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    // }
+    var element = document.getElementById("message-container");
+    if(element){
+      element.scrollTop = element.scrollHeight;
     }
+    
   }
 
   componentWillUnmount() {
@@ -409,9 +414,9 @@ class ChatUser extends Component {
         <div className="userdashboards pt-4 pb-5">
           <Container>
             <Row>
-          {console.log('===ASDASD ++ASd',this.props.location)}
+              {console.log('===ASDASD ++ASd', this.props.location)}
               {
-                !this.props.location.state ||!this.props.location.state.hideSuggestion ? <Col md={3}>
+                !this.props.location.state || !this.props.location.state.hideSuggestion ? <Col md={3}>
                   <div className="left_sidebar">
                     <div className="left_sidebar">
                       <RecentChat onRedirect={this.handleRedirectRecentChat} />
@@ -424,7 +429,7 @@ class ChatUser extends Component {
 
 
 
-              <Col md={!this.props.location.state ||!this.props.location.state.hideSuggestion?9:12}>
+              <Col md={!this.props.location.state || !this.props.location.state.hideSuggestion ? 9 : 12}>
                 <div className="chat_dashboard">
                   <div className="chat_top">
                     <Row>
@@ -562,7 +567,7 @@ class ChatUser extends Component {
                       </div>
                     </div>
                     {this.state.allMessages.length > 0 ? (
-                      <div className="mt-auto">
+                      <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
                           return msg.message_type == 2 ?
                             <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>

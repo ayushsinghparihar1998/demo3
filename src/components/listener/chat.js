@@ -68,14 +68,14 @@ const renderTooltiptwo = (props) => (
 );
 const renderTooltipthree = (props) => (
   <Tooltip id="button-tooltip" {...props}>
-    Audio Call 
+    Audio Call
   </Tooltip>
 );
 const renderTooltipfour = (props) => (
   <Tooltip id="button-tooltip" {...props}>
-    Video Call  
+    Video Call
   </Tooltip>
-); 
+);
 
 const socket = socketClass.getSocket();
 
@@ -120,8 +120,13 @@ class Chat extends Component {
 
   scrollToBottom = () => {
 
-    if (this.messagesEnd && this.messagesEnd.current) {
-      this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    // if (this.messagesEnd && this.messagesEnd.current) {
+    //   this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    // }
+
+    var element = document.getElementById("message-container");
+    if(element){
+      element.scrollTop = element.scrollHeight;
     }
 
 
@@ -308,7 +313,7 @@ class Chat extends Component {
   };
 
   sendMessage(message, type = 1) {
-    console.log('sss334',getLocalStorage("userInfo"))
+    console.log('sss334', getLocalStorage("userInfo"))
     let object = {
       message: message,
       from_user_id: getLocalStorage("userInfo").u_id,
@@ -428,7 +433,7 @@ class Chat extends Component {
     );
   }
 
-  render() { 
+  render() {
     const { userMeta = {} } = this.state;
     return (
       <div className="page__wrapper innerpage">
@@ -557,10 +562,10 @@ class Chat extends Component {
               </Col>
 
               <Col md={9}>
-                <div className="chat_dashboard"> 
+                <div className="chat_dashboard">
                   <div className="chat_top">
                     <Row>
-                      <Col xs={3} md={3} sm={4}> 
+                      <Col xs={3} md={3} sm={4}>
                         <div className="mt-auto mb-auto">
                           <Image
                             src={userMeta.u_image || UserChat3}
@@ -570,7 +575,7 @@ class Chat extends Component {
                           <span className="fs17 fw600 col18 pl-3">{userMeta.u_username}</span>
                         </div>
                       </Col>
-                      <Col xs={9} md={9} sm={8}>     
+                      <Col xs={9} md={9} sm={8}>
                         <div className="mt-auto mb-auto text-right">
                           {/* <Image
                             src={Warningnotification}
@@ -583,7 +588,7 @@ class Chat extends Component {
                             className="pointer mr-2"
                           />
                           <Image src={Sounds} alt="" className="pointer mr-2" /> */}
-                          
+
 
                           <OverlayTrigger
                             placement="top"
@@ -591,30 +596,30 @@ class Chat extends Component {
                             overlay={renderTooltip}
                           >
                             <Image
-                            src={Dangers}
-                            onClick={() => this.blockModal.current.openModal()}
-                            alt=""
-                            className="pointer mr-2"
-                          />
-                          </OverlayTrigger>  
-
-                          <OverlayTrigger
-                            placement="top"
-                            delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltiptwo} 
-                          >
-                            <Image
-                            src={Deletes}
-                            alt=""
-                            onClick={() => this.deleteConfirmation.current.openModal()}
-                            className="pointer mr-2"
-                          />
+                              src={Dangers}
+                              onClick={() => this.blockModal.current.openModal()}
+                              alt=""
+                              className="pointer mr-2"
+                            />
                           </OverlayTrigger>
 
                           <OverlayTrigger
                             placement="top"
                             delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltipthree} 
+                            overlay={renderTooltiptwo}
+                          >
+                            <Image
+                              src={Deletes}
+                              alt=""
+                              onClick={() => this.deleteConfirmation.current.openModal()}
+                              className="pointer mr-2"
+                            />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipthree}
                           >
                             <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
                           </OverlayTrigger>
@@ -622,7 +627,7 @@ class Chat extends Component {
                           <OverlayTrigger
                             placement="top"
                             delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltipfour} 
+                            overlay={renderTooltipfour}
                           >
                             <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           </OverlayTrigger>
@@ -631,7 +636,7 @@ class Chat extends Component {
                             src={Questions}
                             alt=""
                             className="pointer mr-2"
-                          /> */} 
+                          /> */}
                           {/* <Image src={Calls} alt="" className="pointer mr-2" onClick={this.initCall('audio')} />
                           <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} /> */}
                           {
@@ -665,7 +670,7 @@ class Chat extends Component {
                           alt=""
                           className="ml-auto pointer"
                         />
-                      </div> 
+                      </div>
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
@@ -683,7 +688,7 @@ class Chat extends Component {
                     </div>
                     {/* {console.log("+++++++++++==>",this.state.allMessages)} */}
                     {this.state.allMessages.length > 0 ? (
-                      <div className="mt-auto">
+                      <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
                           return msg.message_type == 2 ?
                             <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
@@ -700,13 +705,13 @@ class Chat extends Component {
                                   </div>
                                 </div>
                               ) : (
-                                
+
                                 <div className="pl-3 pr-3 pb-3">
                                   <div className="d-flex">
                                     <div className="mt-auto mb-auto">
                                       {console.log(msg)}
                                       <Image
-                                        src={msg.from_image||UserChat4}
+                                        src={msg.from_image || UserChat4}
                                         alt=""
                                         className="r50 mr-3"
                                       />
