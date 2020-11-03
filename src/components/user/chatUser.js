@@ -98,10 +98,10 @@ class ChatUser extends Component {
     //   this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
     // }
     var element = document.getElementById("message-container");
-    if(element){
+    if (element) {
       element.scrollTop = element.scrollHeight;
     }
-    
+
   }
 
   componentWillUnmount() {
@@ -370,7 +370,10 @@ class ChatUser extends Component {
   changeChatpath = (id) => {
     this.props.history.replace(`/reload`);
     setTimeout(() => {
-      this.props.history.push("/chatuser/" + id);
+      this.props.history.push({
+        pathname: "/chatuser/" + id,
+        state: this.props.location.state
+      });
     });
   };
   handleRedirectRecentChat = (data) => () => {
@@ -415,21 +418,22 @@ class ChatUser extends Component {
           <Container>
             <Row>
               {console.log('===ASDASD ++ASd', this.props.location)}
-              {
-                !this.props.location.state || !this.props.location.state.hideSuggestion ? <Col md={3}>
+              <Col md={3}>
+                <div className="left_sidebar">
                   <div className="left_sidebar">
-                    <div className="left_sidebar">
-                      <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                      <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
-                    </div>
+                    <RecentChat onRedirect={this.handleRedirectRecentChat} hideSuggestion={this.props.location.state ? this.props.location.state.hideSuggestion : false} />
+                    {
+                      !this.props.location.state || !this.props.location.state.hideSuggestion ? <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                        : null
+                    }
                   </div>
-                </Col> : null
-              }
+                </div>
+              </Col>
 
 
 
 
-              <Col md={!this.props.location.state || !this.props.location.state.hideSuggestion ? 9 : 12}>
+              <Col md={9}>
                 <div className="chat_dashboard">
                   <div className="chat_top">
                     <Row>
