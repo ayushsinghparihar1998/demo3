@@ -80,31 +80,31 @@ class Myprofile extends Component {
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Email:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.email}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.email || '-'}</div>
                                             </div>
                                         </div>
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Mobile Number:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_mobile || '-'}</div>
                                             </div>
                                         </div>
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Country:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_country_name}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_country || '-'}</div>
                                             </div>
                                         </div>
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Date of Birth:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_birthdate || '-'}</div>
                                             </div>
                                         </div>
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">BIO:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_bio || '-'}</div>
                                             </div>
                                         </div>
                                         {/* <div className="layout">
@@ -126,7 +126,7 @@ class Myprofile extends Component {
                                                     <div className="layout">
                                                         <div className="d-flex m-auto w35 border2">
                                                             <div className="fs16 col23 fw400 text-left w60">Listener Since:</div>
-                                                            <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : ''}</div>
+                                                            <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : '-'}</div>
                                                         </div>
                                                     </div>
                                                 ) : userData.u_role_id == CONSTANTS.ROLES.USER ?
@@ -134,7 +134,7 @@ class Myprofile extends Component {
                                                         <div className="layout">
                                                             <div className="d-flex m-auto w35 border2">
                                                                 <div className="fs16 col23 fw400 text-left w60">Member Since:</div>
-                                                                <div className="fs16 col14 fw400 text-left w40">{userData.membersince ? moment(userData.membersince).format('DD/MM/YYYY') : ''}</div>
+                                                                <div className="fs16 col14 fw400 text-left w40">{userData.listnersince ? moment(userData.listnersince).format('DD/MM/YYYY') : '-'}</div>
                                                             </div>
                                                         </div>
                                                     ) : null
@@ -153,13 +153,13 @@ class Myprofile extends Component {
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Gender:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_gender}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_gender || '-'}</div>
                                             </div>
                                         </div>
                                         <div className="layout">
                                             <div className="d-flex m-auto w35 border2">
                                                 <div className="fs16 col23 fw400 text-left w60">Chats:</div>
-                                                <div className="fs16 col14 fw400 text-left w40">{userData.chats}</div>
+                                                <div className="fs16 col14 fw400 text-left w40">{userData.u_listener_chat || '-'}</div>
                                             </div>
                                         </div>
                                         {/* </Tab> */}

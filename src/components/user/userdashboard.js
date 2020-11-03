@@ -217,10 +217,16 @@ class Userdashboard extends Component {
    handleRedirectRecentChat = (data) => () => {
       const { user_id } = this.state;
       const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
-      this.props.history.push('/chatuser/' + id);
+      this.props.history.push({
+         pathname: '/chatuser/' + id,
+
+      });
    }
    handleRedirectActiveUsers = (data) => () => {
-      this.props.history.push('/chatuser/' + data.id);
+      this.props.history.push({
+         pathname: '/chatuser/' + data.id,
+
+      });
    }
    _getCategoriesListHandler = async () => {
       try {
@@ -249,7 +255,12 @@ class Userdashboard extends Component {
                (d) => {
                   console.log("_getRandomChatHandler", d);
                   if (d.data) {
-                     this.props.history.push('chatuser/' + d.data.id)
+                     this.props.history.push({
+                        pathname: 'chatuser/' + d.data.id,
+                        state: {
+                           hideSuggestion: true
+                        }
+                     })
                   }
 
                   if (!d.success) {
@@ -275,12 +286,12 @@ class Userdashboard extends Component {
             <div className="main_baner">
                <NavBar {...this.props} />
             </div>
-            <div className="userdashboards pt-4 pb-5">   
+            <div className="userdashboards pt-4 pb-5">
                <Container>
                   <Row>
                      <Col md={9}>
                         <Row>
-                           <Col md={4} className="pl-0">  
+                           <Col md={4} className="pl-0">
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
                                  {/* <ActiveUsers onRedirect={this.handleRedirectActiveUsers} /> */}
@@ -350,9 +361,9 @@ class Userdashboard extends Component {
                               </div>
                            </Col>
 
-                           <Col md={8} className="pl-0">    
-                              <div className="user_body"> 
-                                 <div className="inner_body mb-3"> 
+                           <Col md={8} className="pl-0">
+                              <div className="user_body">
+                                 <div className="inner_body mb-3">
                                     <div className="d-flex justify-content-between border_yellow">
                                        <Row className="w-100">
                                           <Col lg={4} md={4} xs={12} className="pr-0">
@@ -375,10 +386,10 @@ class Userdashboard extends Component {
                                                       })
                                                    }
 
-                                                </Form.Control> 
+                                                </Form.Control>
                                              </Form.Group>
                                           </Col>
-                                          <Col lg={2} md={2} xs={2} className="text-right">  
+                                          <Col lg={2} md={2} xs={2} className="text-right">
                                              <Button onClick={this._getRandomChatHandler} className="btnTyp5 smallbtn">chat</Button>
                                           </Col>
                                        </Row>
@@ -388,9 +399,9 @@ class Userdashboard extends Component {
                                     <div className="test_eat fs18 col18">Test your Eat Luv Pray Quotient</div>
                                  </div>
 
-                                 <FunFact /> 
+                                 <FunFact />
 
-                                 <Quotes /> 
+                                 <Quotes />
 
                               </div>
                            </Col>
@@ -401,23 +412,23 @@ class Userdashboard extends Component {
                         </Row>
                      </Col>
 
-                     <Col md={3}>   
-                        <div className="right_sidebar">   
-                           <div className="right_inner_side"> 
-                              <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer"> 
+                     <Col md={3}>
+                        <div className="right_sidebar">
+                           <div className="right_inner_side">
+                              <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
                                  Hi {getLocalStorage("customerInfo").u_username}
                                  <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
                               <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
-                                 <div className="d-flex mb-2">  
+                                 <div className="d-flex mb-2">
                                     <Image src={Creditcard} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
                                        Remaining Credits
                                    </span>
                                  </div>
-                              </div> 
+                              </div>
                               <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
@@ -440,25 +451,25 @@ class Userdashboard extends Component {
                            <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
                               <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                                 <span className="d_text"> Discover Subcomunities </span> 
+                                 <span className="d_text"> Discover Subcomunities </span>
                               </div>
                            </div>
-                           <div className="right_inner_side"> 
+                           <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                 My Personal Link       
+                                 My Personal Link
                               </div>
-                              <div className="p-3"> 
+                              <div className="p-3">
                                  <div className="fs14 col14 fw400">
                                     Share your link to earn rewards & help us to support
                                     more people
-                                 </div> 
-                                 <Form.Group className="d-flex mt-4">  
+                                 </div>
+                                 <Form.Group className="d-flex mt-4">
                                     <Form.Control
                                        id="referURL"
                                        type="text"
                                        readOnly
                                        className="inputTyp4"
-                                       value={constant.WEB_BASE_URL + 'share-profile?'+ (dashboardData.refer_url?dashboardData.refer_url.split('?').reverse()[0]:'')}
+                                       value={constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')}
                                     />
                                     <Button className="btnTyp8" onClick={this.copyReferUrl}>
                                        <Image src={Copys} alt="" className="" />

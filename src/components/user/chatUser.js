@@ -60,14 +60,14 @@ const renderTooltiptwo = (props) => (
 );
 const renderTooltipthree = (props) => (
   <Tooltip id="button-tooltip" {...props}>
-    Audio Call 
+    Audio Call
   </Tooltip>
 );
 const renderTooltipfour = (props) => (
   <Tooltip id="button-tooltip" {...props}>
-    Video Call  
+    Video Call
   </Tooltip>
-); 
+);
 
 const socket = socketClass.getSocket();
 
@@ -409,123 +409,22 @@ class ChatUser extends Component {
         <div className="userdashboards pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3}>
-                <div className="left_sidebar">
+          {console.log('===ASDASD ++ASd',this.props.location)}
+              {
+                !this.props.location.state ||!this.props.location.state.hideSuggestion ? <Col md={3}>
                   <div className="left_sidebar">
-                    <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                    <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
-                    {/* <div className="inner_side">
-                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        Chat
-                      </div>
-                      {this.state.recentChatUsers &&
-                        this.state.recentChatUsers.map((item) => {
-                          return (
-                            <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
-                              <div className="position-relative">
-                                <Image
-                                  src={
-                                    item.from_image ? item.from_image : UserChat
-                                  }
-                                  alt=""
-                                  className="r50 pt-1"
-                                />
-                                <span className={(item.from_user_id ==
-                                    getLocalStorage("customerInfo").u_id
-                                    ? item.to_user_online
-                                    : item.from_user_online) == "1" ? 'online' : ''}></span>
-                              </div>
-                              <div className="position-relative pl-3">
-                                <div className="fs15 col23 fw500 pr-2">
-                                  {item.from_user_id ==
-                                    getLocalStorage("customerInfo").u_id
-                                    ? item.to_user_name
-                                    : item.from_user_name}
-                                </div>
-                                <div className="col27 fs13 fw500">
-                                  {item.message}
-                                </div>
-                                <Image
-                                  src={ChatCross}
-                                  alt=""
-                                  className="pointer cross_btn"
-                                />
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div> */}
-
-                    {/* <div className="inner_side">
-                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        <span>Currently Active Listeners</span>
-                      </div>
-                      <Tabs
-                        defaultActiveKey="home"
-                        id="uncontrolled-tab-example"
-                      >
-                        <Tab eventKey="home" title="Listener">
-                          <div className="chat-border"></div>
-                          {this.state.activeChatUsers &&
-                            this.state.activeChatUsers.map((item, ind) => {
-                              return ind < this.state.showVal ? (
-                                <div className="d-flex m-3 border-bottom pointer"
-                                  onClick={() =>
-                                    this.changeChatpath(item.id)
-                                  }
-                                >
-                                  <div className="position-relative">
-                                    <Image
-                                      src={
-                                        item.u_image ? item.u_image : UserChat
-                                      }
-                                      alt=""
-                                      className="r50 pt-1"
-                                    />
-                                  </div>
-                                  <div className="position-relative pl-3 mt-auto mb-auto">
-                                    <div
-                                      className="fs14 col14 fw500"
-
-                                    >
-                                      {item.u_name}
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                  ""
-                                );
-                            })}
-                        </Tab>
-                      </Tabs>
-                      {this.state.showVal == 4 ? (
-                        <div
-                          className="fs15 fw600 col23 p-3 show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: this.state.activeChatUsers.length,
-                            });
-                          }}
-                        >
-                          Show More
-                        </div>
-                      ) : (
-                          <div
-                            className="fs15 fw600 col23 p-3 pointer show-more"
-                            onClick={() => {
-                              this.setState({
-                                showVal: 4,
-                              });
-                            }}
-                          >
-                            Show Less
-                          </div>
-                        )}
-                    </div> */}
+                    <div className="left_sidebar">
+                      <RecentChat onRedirect={this.handleRedirectRecentChat} />
+                      <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={9}>
+                </Col> : null
+              }
+
+
+
+
+              <Col md={!this.props.location.state ||!this.props.location.state.hideSuggestion?9:12}>
                 <div className="chat_dashboard">
                   <div className="chat_top">
                     <Row>
@@ -560,30 +459,30 @@ class ChatUser extends Component {
                             overlay={renderTooltip}
                           >
                             <Image
-                            src={Dangers}
-                            onClick={() => this.blockModal.current.openModal()}
-                            alt=""
-                            className="pointer mr-2"
-                          />
-                          </OverlayTrigger>  
-
-                          <OverlayTrigger
-                            placement="top"
-                            delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltiptwo} 
-                          >
-                            <Image
-                            src={Deletes}
-                            alt=""
-                            onClick={() => this.deleteConfirmation.current.openModal()}
-                            className="pointer mr-2"
-                          />
+                              src={Dangers}
+                              onClick={() => this.blockModal.current.openModal()}
+                              alt=""
+                              className="pointer mr-2"
+                            />
                           </OverlayTrigger>
 
                           <OverlayTrigger
                             placement="top"
                             delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltipthree} 
+                            overlay={renderTooltiptwo}
+                          >
+                            <Image
+                              src={Deletes}
+                              alt=""
+                              onClick={() => this.deleteConfirmation.current.openModal()}
+                              className="pointer mr-2"
+                            />
+                          </OverlayTrigger>
+
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 100, hide: 200 }}
+                            overlay={renderTooltipthree}
                           >
                             <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
                           </OverlayTrigger>
@@ -591,7 +490,7 @@ class ChatUser extends Component {
                           <OverlayTrigger
                             placement="top"
                             delay={{ show: 100, hide: 200 }}
-                            overlay={renderTooltipfour} 
+                            overlay={renderTooltipfour}
                           >
                             <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} />
                           </OverlayTrigger>
@@ -616,7 +515,7 @@ class ChatUser extends Component {
                             className="pointer mr-2"
                           /> */}
                           {/* <Image src={Calls} alt="" onClick={this.initCall('audio')} className="pointer mr-2" />
-                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} /> */} 
+                          <Image src={Videos} alt="" className="pointer mr-2" onClick={this.initCall('video')} /> */}
                           {
                             !this.state.isMessageDisabled ?
                               <Button
@@ -631,7 +530,7 @@ class ChatUser extends Component {
                       </Col>
                     </Row>
                     <div></div>
-                  </div> 
+                  </div>
 
                   <div className="chat_middle">
                     <div className="p-3">
@@ -684,7 +583,7 @@ class ChatUser extends Component {
                                   <div className="d-flex">
                                     <div className="mt-auto mb-auto">
                                       <Image
-                                        src={msg.from_image||UserChat4}
+                                        src={msg.from_image || UserChat4}
                                         alt=""
                                         className="r50 mr-3"
                                       />
