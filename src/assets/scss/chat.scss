@@ -376,10 +376,24 @@ img.c_bad {
     
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-
+@media (min-width: 992px) and (max-width: 1199px) { 
     .chat_dashboard {  
+        .chat_top { 
+            .col-3 {
+                position: relative; 
+                .mt-auto.mb-auto { 
+                    & > span { 
+                        font-size: 15px !important;
+                        position: absolute;
+                    }
+                }
+            }
+        }
+    }
+}
 
+@media (min-width: 768px) and (max-width: 991px) {   
+    .chat_dashboard {  
         .chat_top { 
             .col-3 {
                 position: relative; 
