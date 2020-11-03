@@ -244,6 +244,7 @@ class Menubar extends Component {
                       </NavLink>,
                     ]
                   : [
+                      
                       <Nav.Link onClick={this.handleModal}>
                         Dashboard
                       </Nav.Link>,
@@ -266,7 +267,7 @@ class Menubar extends Component {
                       <Nav.Link onClick={this.handleModal2}>Donate</Nav.Link>, 
                     ]}
                 
-                <span className="userprofiles menus">        
+                <span className="userprofiles menus">         
                   <Nav.Link> 
                     <Image src={Mailicon} alt="" className="pointer" />
                   </Nav.Link>
@@ -288,7 +289,7 @@ class Menubar extends Component {
                                     <li></li>
                                     <li></li>
                                 </ul>
-                            </Dropdown.Item>  
+                            </Dropdown.Item>    
 
                             {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
