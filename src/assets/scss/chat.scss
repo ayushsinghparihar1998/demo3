@@ -345,6 +345,37 @@ img.c_bad {
 
 /* media query screen start */
 
+@media (max-width: 1400px) { 
+    .audiochat {
+        .chat_dashboard {
+            .chat_bottom {
+                .mb-0.form-group {
+                    .d-flex {
+                        .inputTyp3 {
+                            max-width: 290px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .videochat {
+        .chat_dashboard {
+            .chat_bottom {
+                .mb-0.form-group {
+                    .d-flex {
+                        .inputTyp3 {
+                            max-width: 290px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
 
     .chat_dashboard {  

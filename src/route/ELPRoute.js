@@ -133,14 +133,14 @@ class ELPRoute extends Component {
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} /> 
-          <PublicRoute path="/blockuser" component={Blockuser} /> 
+          <PublicRoute path="/blockuser" component={Blockuser} />            
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
 
 
-          {/* LIst */}
-          <PrivateRouteList path="/userDashboard" component={Userdashboard} />
+          {/* LIst */} 
+          <PrivateRouteList path="/userDashboard" component={Userdashboard} /> 
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
           <Route path="/termcondition" render={props => <Termcondition {...props} />} />
@@ -148,7 +148,7 @@ class ELPRoute extends Component {
           <Route path="/share-profile" render={props => <ShareProfile {...props} />} />
           <Route path="/faq" render={props => <Faq {...props} />} />
           <Route path="/campaign" render={props => <Compaign {...props} />} />
-          <Route path="/about"  render={props => <About {...props} />} />
+          <Route path="/about"  render={props => <About {...props} />} />  
 
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
