@@ -509,6 +509,12 @@
                 border: solid 1px $col1;
                 padding-top: 4px;
                 padding-bottom: 4px;
+
+                span {
+                    & + img.mr-2 {
+                        margin-right: 4px !important;  
+                    }
+                }
             }
             .p-3 {
                 div.d-flex.mt-4.form-group { 
