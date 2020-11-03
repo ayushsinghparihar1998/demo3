@@ -5,7 +5,8 @@
     min-height: inherit; 
     background-repeat: no-repeat;  
     background-size: cover;  
-    top: 86px;
+    top: 86px; 
+    height: calc(100vh - 86px); 
 
     .container {  
         position: relative; 
@@ -85,7 +86,7 @@
             display: inline-block;
             position: absolute;
             top: 36%;
-            left: 11%;
+            left: 10.5%;  
         }
         span {
             position: relative;
@@ -309,5 +310,22 @@
     }
 }
 
+@media (min-width: 1200px) { 
+    .videochat {
+        .userdetail {
+            .online_user {
+                left: 8.8%;
+            }
+        }
+    }
+}
 
-
+@media (max-width: 991px) {  
+    .videochat {
+        .userdetail { 
+            .online_user {
+                left: 14%; 
+            }
+        }
+    }
+}
