@@ -25,7 +25,8 @@ function RecentChat({ onRedirect }) {
       // alert(moment())
       if (data.success) {
         data.data.map(obj => {
-          obj.date_time = moment(obj.date_time).fromNow()
+
+          obj.date_time = moment.utc(obj.date_time).calendar();
         })
         setRecentChats(data.data)
 
@@ -79,9 +80,9 @@ function RecentChat({ onRedirect }) {
                   className="pointer cross_btn"
                 /> */}
                 {
-                  item.from_user_id == user.u_id ? item.from_user_online != 0 ?
-                    <div className="counts">{item.from_user_id == user.u_id ? item.from_user_online : item.to_user_unread_count}</div> : null
-                    : item.to_user_unread_count != 0 ? <div className="counts">{item.from_user_id == user.u_id ? item.from_user_online : item.to_user_unread_count}</div> : null
+                  item.from_user_id != user.u_id ?
+                    item.to_user_unread_count != 0 ? <div className="counts">{item.to_user_unread_count}</div> : null
+                    : item.from_user_unread_count != 0 ? <div className="counts">{item.from_user_unread_count}</div> : null
                 }
 
               </div>
