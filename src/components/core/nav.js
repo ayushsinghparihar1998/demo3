@@ -39,6 +39,7 @@ import Userenables from "../../assets/images/user_enables.svg";
 import Userlogouts from "../../assets/images/user_logouts.svg";
 import ELPRxApiService from "../../common/services/apiService";
 import CONSTANTS from "../../common/helpers/Constants";
+import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
 
 class NavBar extends Component {
@@ -102,6 +103,7 @@ class NavBar extends Component {
     // listner_dashboard
     // customer_dashboard
     // professional_dashboard
+    this.callDisconnectConfirmation = React.createRef()
     let type
     let profileImage
     if (getLocalStorage('userInfo')) {
@@ -297,9 +299,28 @@ class NavBar extends Component {
       console.log(err)
     }
   }
+
+  verifyInCallNavigation = (path) => {
+    switch (this.props.match.path) {
+      case "/audiocall/:id":
+        this.callDisconnectConfirmation.current.openModal(path)
+        break;
+      case "/callin":
+        this.callDisconnectConfirmation.current.openModal(path)
+        break;
+      case "/videocall/:id":
+        this.callDisconnectConfirmation.current.openModal(path)
+        break;
+      default:
+        this.props.history.push(path)
+        break
+    }
+  }
+
   render() {
     return (
       <div className="mj_nav">
+        <CallDisconnectConfirmation ref={this.callDisconnectConfirmation} history={this.props.history} />
         <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -310,9 +331,11 @@ class NavBar extends Component {
         {/* Same as */}
         <ToastContainer />
         <Navbar bg="" expand="lg">
-          <NavLink to="/" className="nav-link navbar-brand">
+          <a onClick={() => {
+            this.verifyInCallNavigation('/')
+          }} className="nav-link navbar-brand">
             <Image src={logo} alt="" /> Eat Luv N Pray
-          </NavLink>
+          </a>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage("userInfoAdmin") ? (
@@ -336,60 +359,52 @@ class NavBar extends Component {
                     ? [
                       getLocalStorage("customerInfo")
                         ? [
-                          <NavLink
-                            // to="/professionalSearch"
-                            to="/coming-soon"
+                          <a
+                            onClick={() => this.verifyInCallNavigation('/coming-soon')}
+
                             className="nav-link"
                           >
                             Professional Search
-                            </NavLink>,
-                          
+                            </a>,
+
                           // <NavLink to="/listenerSearch" className="nav-link">
                           //   Listener Search
                           //   </NavLink>,
                         ]
                         : "",
 
-                      <NavLink
-                        to={
-                          getLocalStorage("userInfo")
-                            ? "/userDashboard"
-                            : getLocalStorage("userInfoProff")
-                              ? "/userDashboardproff"
-                              : getLocalStorage("customerInfo")
-                                ? "/userDashboardcust"
-                                : ""
-                        }
+                      <a
+                        onClick={() => this.verifyInCallNavigation('/')}
                         className="nav-link"
                       >
                         Dashboard
-                      </NavLink>,
-                      <NavLink to="/campaign" className="nav-link">
-                      Donate
-                       </NavLink>,
-                    <NavDropdown title="Media" id="basic-nav-dropdown">
-                      {
-                        this.state.mediaLinks.map(data => {
-                          return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
-                        })
-                      }
+                      </a>,
+                      <a onClick={() => this.verifyInCallNavigation('/campaign')} className="nav-link">
+                        Donate
+                       </a>,
+                      <NavDropdown title="Media" id="basic-nav-dropdown">
+                        {
+                          this.state.mediaLinks.map(data => {
+                            return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
+                          })
+                        }
 
-                    </NavDropdown>,
-                    <NavLink to="/about" className="nav-link text-c">
-                      About Us
+                      </NavDropdown>,
+                      <a onClick={() => this.verifyInCallNavigation('/about')} className="nav-link text-c">
+                        About Us
                        {/* <br /> */}
-                      {/* <span className="comings">coming soon</span>   */}
-                    </NavLink>,
-                    <NavLink to="/faq" className="nav-link">
-                      FAQ
-                    </NavLink>,
+                        {/* <span className="comings">coming soon</span>   */}
+                      </a>,
+                      <a  onClick={() => this.verifyInCallNavigation('/faq')}  className="nav-link">
+                        FAQ
+                    </a>,
                       ,
                       getLocalStorage("userInfoProff") ||
                         getLocalStorage("userInfo")
                         ? [
-                          <NavLink to={"/calendar"} className="nav-link">
+                          <a onClick={() => this.verifyInCallNavigation('/calendar')} className="nav-link">
                             My Schedule
-                            </NavLink>,
+                            </a>,
                         ]
                         : "",
                       // <NavLink to="/myprofile" className="nav-link">
@@ -498,12 +513,12 @@ class NavBar extends Component {
                           </div>
                     </li>  */}
                         <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
-                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/myprofile')} ><Image src={Userprofiles} alt="" />
+                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/myprofile')} ><Image src={Userprofiles} alt="" />
                             <span>MY PROFILE</span>
                           </NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/mysetting')} >
+                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/mysetting')} >
                             <Image src={Usersettings} alt="" /> <span>MY SETTINGS</span></NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={() => this.props.history.push('/editprofile')} ><Image src={Userenables} alt="" />
+                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/editprofile')} ><Image src={Userenables} alt="" />
                             <span>Edit Profile</span>
                           </NavDropdown.Item>
                           <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> <span>LOGOUT</span></NavDropdown.Item>
