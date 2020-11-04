@@ -559,16 +559,16 @@ class NavBar extends Component {
                       </NavDropdown>
                     )}
 
-                  <Form inline>
+                  <Form inline> 
                     <span className="d-none">
                       {getLocalStorage("loggedIn") ? (
 
-                        <div onClick={this.handleLogout} className="btnType1">
+                        <div onClick={this.handleLogout} className="btnType1"> 
 
                           Logout
                         </div>
                       ) : (
-                          <NavLink to="/login" className="btnType1">
+                          <NavLink to="/login" className="btnType1">  
                             Login
                           </NavLink>
                         )}

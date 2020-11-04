@@ -156,13 +156,15 @@
         }
     }
 
-    .dropdown.droptwo {
-        .profilesbtn { 
+    .dropdown.droptwo.notifications {
+        text-align: left;
+        .profilesbtn {  
             background: transparent; 
             padding: 0;
             border: none;
             outline: 0 !important;
             box-shadow: none !important;
+             
 
             &:hover, &:focus {
                 background: transparent; 
@@ -173,10 +175,82 @@
             } 
         }
 
-        .dropdown-menu {
+        .dropdown-menu {   
             width: 500px;
             left: -450px !important; 
-            top: 55px; 
+            top: 55px;
+            border-radius: 0;
+            box-shadow: 8px 0px 20px rgba(0, 0, 0, 0.1);
+            background-color: $col18; 
+            border-color: $col18;
+            padding: 0;
+
+            .dropdown-item { 
+                position: relative;
+                span.polyicons {
+                    position: absolute; 
+                    top: -21px; 
+                    right: 28px;
+
+                    & img {
+                        max-width: 20px; 
+                    }
+                } 
+                &:hover {
+                    background: transparent; 
+                }    
+                padding: 0;    
+                ul.notes {
+                    text-align: left;
+                    padding: 0;
+                    padding-top: 10px;
+
+                    li {
+                        position: relative; 
+                        display: flex;
+                        flex-wrap: wrap;
+                        border-bottom: solid 1px #ccc; 
+                        margin: 0px 18px 0 36px;
+                        margin-bottom: -1px;
+                        padding: 12px 0;
+
+                        & .col-md-9 {
+                            padding-left: 0px; 
+                        }
+                        & .col-md-3 {
+                            text-align: right; 
+                        }
+                        &:before {
+                            content: "";
+                            width: 8px;
+                            height: 8px;
+                            background: #FFA030;
+                            display: inline-block;
+                            border-radius: 50%;
+                            position: absolute;
+                            top: 17px;
+                            left: -20px; 
+                        }
+                        &:last-child {
+                            justify-content: center; 
+                            border: none;
+                            &:before {
+                                display: none;
+                            }
+                        }
+                    }
+                    
+                }
+                .btns_all {
+                    position: relative;
+                    background: transparent;
+                    padding: 0;
+                    outline: 0; 
+                    color: $col95;
+                    border: none; 
+                }
+            }
+
         }
     }
 }
