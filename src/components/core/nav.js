@@ -42,10 +42,13 @@ import CONSTANTS from "../../common/helpers/Constants";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
 
+const socket = socketClass.getSocket();
+
 class NavBar extends Component {
   constructor() {
     super();
     this.state = {
+      isNotification: false,
       show: false,
       show2: false,
       show3: false,
@@ -98,6 +101,18 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
+
+    if (getLocalStorage("userInfo")) {
+      socket.on("changeUserOnlineStatus", (data) => {
+        console.log('----------------------- >> changeUserOnlineStatus << -----------------', data)
+      });
+    }
+
+
+
+
+
+
     console.log("hello");
     console.log(getLocalStorage("customerInfo"));
     // listner_dashboard
@@ -395,7 +410,7 @@ class NavBar extends Component {
                        {/* <br /> */}
                         {/* <span className="comings">coming soon</span>   */}
                       </a>,
-                      <a  onClick={() => this.verifyInCallNavigation('/faq')}  className="nav-link">
+                      <a onClick={() => this.verifyInCallNavigation('/faq')} className="nav-link">
                         FAQ
                     </a>,
                       ,
@@ -477,19 +492,22 @@ class NavBar extends Component {
                         {/* <Nav.Link>
                           <Image src={Mailicon} alt="" className="pointer" />
                         </Nav.Link> */}
-                        <Nav.Link>
-                          <Dropdown className="droptwo">
-                            {/* <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
+                        {/* <Nav.Link>
+                          <Dropdown isOpen={this.state.isNotification} toggle={() => this.setState({ isNotification: !this.state.isNotification })} className="droptwo">
+                            <Dropdown.Toggle onClick={() => {
+                              // alert("ASd")
+                              this.setState({ isNotification: !this.state.isNotification })
+                            }} className="profilesbtn">
                               <Image src={Bellicon} alt="" className="pointer" />
-                            </Dropdown.Toggle> */}
-                            <Dropdown.Menu className="d-none">
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu >
                               <Dropdown.Item>
                                 <ul>
                                   <li>
                                     <div>
                                       <span>Lorem</span>
-                                              William johnson Invited you to join event
-                                            </div>
+                                      William johnson Invited you to join event
+                                    </div>
                                     <div>5 mins ago</div>
                                   </li>
                                   <li></li>
@@ -497,12 +515,12 @@ class NavBar extends Component {
                                 </ul>
                               </Dropdown.Item>
 
-                              {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+                              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
 
                             </Dropdown.Menu>
                           </Dropdown>
-                        </Nav.Link>
+                        </Nav.Link> */}
                         {/* <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              Profile
@@ -512,6 +530,7 @@ class NavBar extends Component {
                             <a class="dropdown-item" href="#">Profile</a> 
                           </div>
                     </li>  */}
+
                         <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
                           <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/myprofile')} ><Image src={Userprofiles} alt="" />
                             <span>MY PROFILE</span>

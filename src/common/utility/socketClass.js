@@ -12,13 +12,18 @@ class socketClass {
     this.socket = SocketIOClient(SOCKET_IO_URL);
   }
   connect(user) {
+    this.socket.on('connect', () => {
+      console.log('---- user reconnected ----->>')
+      this.chatlogin(user);
+    })
     this.socket.connect();
+
     // console.log('chat-login = connected to socket')
     this.chatlogin(user);
   }
   disconnect() {
-    if(this.socket){
-      this.socket.disconnect(); 
+    if (this.socket) {
+      this.socket.disconnect();
     }
   }
   getSocket() {
