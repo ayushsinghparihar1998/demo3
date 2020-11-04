@@ -119,7 +119,7 @@ class SurveyModal extends Component {
             <Modal
                 show={this.state.isOpen}
                 onHide={this.handleClose}
-                className="custom-popUp confirmation-box survay_modals"
+                className="custom-popUp confirmation-box survay_modals serveytwo" 
                 bsSize="small"
             >
                 <Modal.Body>
