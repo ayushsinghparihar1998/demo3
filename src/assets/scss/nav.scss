@@ -158,6 +158,21 @@
 
     .dropdown.droptwo.notifications {
         text-align: left;
+        position: relative;
+        .counttwo {
+            background: linear-gradient(157.23deg, #D63305 8.86%, #CF3004 38.81%, #BC2602 82.43%, #B72401 90.69%);
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            line-height: 15px; 
+            color: $col18;
+            text-align: center;
+            font-size: 10px;
+            position: absolute;
+            top: 0;
+            right: 12px;
+            border-radius: 50%;
+        }
         .profilesbtn {  
             background: transparent; 
             padding: 0;

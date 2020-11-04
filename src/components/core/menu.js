@@ -274,7 +274,8 @@ class Menubar extends Component {
                   <Nav.Link>
                       <Dropdown className="droptwo notifications"> 
                           <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">   
-                            <Image src={Bellicon} alt="" className="pointer" />                          
+                            <Image src={Bellicon} alt="" className="pointer" />   
+                            <span className="counttwo">2</span>                       
                           </Dropdown.Toggle> 
                           <Dropdown.Menu>     
                             <Dropdown.Item>  
