@@ -492,7 +492,7 @@ class NavBar extends Component {
                         {/* <Nav.Link>
                           <Image src={Mailicon} alt="" className="pointer" />
                         </Nav.Link> */}
-                        <Nav.Link>
+                        {/* <Nav.Link>
                           <Dropdown isOpen={this.state.isNotification} toggle={() => this.setState({ isNotification: !this.state.isNotification })} className="droptwo">
                             <Dropdown.Toggle onClick={() => {
                               // alert("ASd")
@@ -520,7 +520,7 @@ class NavBar extends Component {
 
                             </Dropdown.Menu>
                           </Dropdown>
-                        </Nav.Link>
+                        </Nav.Link> */}
                         {/* <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              Profile
