@@ -63,7 +63,7 @@ const renderTooltip = (props) => (
 );
 const renderTooltiptwo = (props) => (
   <Tooltip id="button-tooltip" {...props}>
-    Delete User
+    Delete Chat 
   </Tooltip>
 );
 const renderTooltipthree = (props) => (

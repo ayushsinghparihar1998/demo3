@@ -24,11 +24,12 @@ import twit from "../../assets/images/twit.svg";
 import linkedin from "../../assets/images/linkedin.svg";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import Mailicon from "../../assets/images/mail_icon.svg";
-import Bellicon from "../../assets/images/bell_icons.svg";  
+import Bellicon from "../../assets/images/bell.png";  
 import Userprofiles from "../../assets/images/user_profiles.svg";
 import Usersettings from "../../assets/images/user_settings.svg";  
 import Userenables from "../../assets/images/user_enables.svg";  
 import Userlogouts from "../../assets/images/user_logouts.svg";  
+import Polygonimg from "../../assets/images/Polygon.png"; 
 
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
@@ -268,27 +269,73 @@ class Menubar extends Component {
                 
                 <span className="userprofiles menus">        
                   <Nav.Link> 
-                    <Image src={Mailicon} alt="" className="pointer" />
+                    <Image src={Mailicon} alt="" className="pointer" /> 
                   </Nav.Link>
                   <Nav.Link>
-                      <Dropdown className="droptwo"> 
+                      <Dropdown className="droptwo notifications"> 
                           <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">   
-                            <Image src={Bellicon} alt="" className="pointer" />                          
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu className="d-none">  
-                            <Dropdown.Item>
-                                <ul>
-                                    <li>
-                                        <div>
-                                          <span>Lorem</span>
-                                          William johnson Invited you to join event
-                                        </div>
-                                        <div>5 mins ago</div>
+                            <Image src={Bellicon} alt="" className="pointer" />   
+                            <span className="counttwo">2</span>                       
+                          </Dropdown.Toggle> 
+                          <Dropdown.Menu>     
+                            <Dropdown.Item>  
+                                <span className="polyicons">
+                                    <Image src={Polygonimg} alt="" className="pointer" />
+                                </span>
+                                <ul className="notes">   
+                                    <li>   
+                                        <Col md={9}>  
+                                          <div className="col10 fs17 fw400">Lorem</div> 
+                                          <div className="fs15 col94 fw400">William johnson Invited you to join event</div>
+                                        </Col>
+                                        <Col md={3}>  
+                                            <div className="fs15 col94 fw400">5 mins ago</div> 
+                                        </Col>
                                     </li>
-                                    <li></li>
-                                    <li></li>
+                                    <li>   
+                                        <Col md={9}> 
+                                          <div className="col10 fs17 fw400">Lorem</div> 
+                                          <div className="fs15 col94 fw400">William johnson Invited you to join event</div>
+                                        </Col>
+                                        <Col md={3}>  
+                                            <div className="fs15 col94 fw400">25 mins ago</div> 
+                                        </Col>
+                                    </li>
+                                    <li>   
+                                        <Col md={9}> 
+                                          <div className="col10 fs17 fw400">Yesterday</div> 
+                                          <div className="fs15 col94 fw400">Lizzy Mac  Invited you to join event</div>
+                                        </Col>
+                                        <Col md={3}>  
+                                            <div className="fs15 col94 fw400">Yesterday</div> 
+                                        </Col>
+                                    </li>
+                                    <li>   
+                                        <Col md={9}> 
+                                          <div className="col10 fs17 fw400">Processing Agent</div> 
+                                          <div className="fs15 col94 fw400">Nikki Michel cancelled the Rocking Event Concert</div>
+                                        </Col>
+                                        <Col md={3}>  
+                                            <div className="fs15 col94 fw400">Tuesday</div> 
+                                        </Col>
+                                    </li>
+                                    <li>   
+                                        <Col md={9}> 
+                                          <div className="col10 fs17 fw400">Lorem</div> 
+                                          <div className="fs15 col94 fw400">William johnson Invited you to join event</div>
+                                        </Col>
+                                        <Col md={3}>  
+                                            <div className="fs15 col94 fw400">4 days ago</div> 
+                                        </Col>
+                                    </li> 
+                                    <li> 
+                                        <div className="text-center">
+                                          <Button className="btns_all">See All</Button>  
+                                      </div>
+                                    </li>
                                 </ul>
-                            </Dropdown.Item>  
+                                
+                            </Dropdown.Item> 
 
                             {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}

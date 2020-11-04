@@ -192,6 +192,9 @@
             padding: 0px 0px 0px 30px;
             overflow: hidden;
             margin-bottom: 10px; 
+            .btnType16.funbtn2 {
+                text-transform: uppercase;
+            }
             & .row {
                 width: 100%;
                 align-items: center; 
@@ -512,7 +515,7 @@
 
                 span {
                     & + img.mr-2 {
-                        margin-right: 4px !important;  
+                        margin-right: 4px !important;    
                     }
                 }
             }
