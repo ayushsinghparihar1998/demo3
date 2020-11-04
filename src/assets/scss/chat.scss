@@ -360,6 +360,11 @@ img.c_bad {
     }
 }
 
+.confirmation-box.delete_modal.block_modal {  
+    z-index: 9999;
+    top: 75px; 
+}
+
 /* media query screen start */
 
 @media (max-width: 1400px) { 
