@@ -64,12 +64,13 @@ class NavBar extends Component {
     this.props
       .actionLogout(data)
       .then((result) => {
+        localStorage.clear();
         this.props.history.push({
-          pathname: 'adminlogin',
-          state: { roleType: 4 },
+          pathname: '/',
+          // state: { roleType: 4 },
         });
 
-        localStorage.clear();
+      
       })
       .catch((error) => {
         console.log(error);

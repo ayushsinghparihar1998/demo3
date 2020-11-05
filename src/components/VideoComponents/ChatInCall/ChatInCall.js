@@ -18,7 +18,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
       'page': 1,
       'pagination': 20
     })
-    console.log(payload);
+    console.log('--asd-asd-asd',payload);
     socket.emit("chatHistory", payload,
       (data) => {
         console.log(data)
@@ -67,7 +67,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
       message: message,
       from_user_id: getUserProfile().u_id,
       to_user_id: user.id,
-      to_image:user.u_image,  
+      from_image:localStorage.getItem('chat_from_image'),  
       message_type: 1,
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       user_type: user.u_role_id,
@@ -130,7 +130,7 @@ function ChatInCall({ show, toggle, user, openChatWindow }) {
                           <div className="d-flex">
                             <div className="mt-auto mb-auto">
                               <Image
-                                src={msg.to_image ||UserChat4}
+                                src={msg.from_image ||UserChat4} 
                                 alt=""
                                 className="r50 mr-3"
                               />

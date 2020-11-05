@@ -345,7 +345,7 @@ const Videocall = (props) => {
           </div>
         </Container>
         {userDetails &&
-          <ChatInCall show={showChat} toggle={toggleChat} openChatWindow={openChatWindow} user={userDetails} />}
+          <ChatInCall fromImage={userDetails?.u_image} show={showChat} toggle={toggleChat} openChatWindow={openChatWindow} user={userDetails} />}
 
       </div>
     </div>
