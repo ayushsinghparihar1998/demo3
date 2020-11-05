@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import RRule from "rrule";
+import ReactDOM from 'react-dom';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -20,6 +20,8 @@ import {
   Tabs,
   Tab,
   Modal,
+  OverlayTrigger,
+  Popover
 } from "react-bootstrap";
 
 import ELPRxApiService from "../../common/services/apiService";
@@ -61,6 +63,10 @@ export default class CalendarDemo extends Component {
   }
 
   componentDidMount() {
+
+
+
+
     let data = getLocalStorage("userInfo")
       ? getLocalStorage("userInfo")
       : getLocalStorage("userInfoProff");
@@ -72,6 +78,7 @@ export default class CalendarDemo extends Component {
     let calendarApi = this.calendarComponentRef.current.getApi();
     console.log("calendarApi", calendarApi);
     console.log(calendarApi.view);
+
   }
 
   setStartDate(date, type) {
@@ -147,13 +154,26 @@ export default class CalendarDemo extends Component {
             listOfCalendarEventResponse
           );
 
+
           this.setState(
             {
               calendarEvents,
               listOfCalendarEventResponse,
             },
             () => {
-              console.log("calendarEvents", this.state.calendarEvents);
+              setTimeout(() => {
+                console.log("calendarEvents", this.state.calendarEvents);
+                console.log('=++++===+++>>', document.getElementsByClassName('fc-timegrid-event'));
+                let elements = document.getElementsByClassName('fc-timegrid-event')
+
+                for(let i=0; i<elements.length; i++){
+                  elements[i].click()
+                }
+
+               
+              }, 2000)
+
+
             }
           );
         }
@@ -226,7 +246,7 @@ export default class CalendarDemo extends Component {
     // );
   };
   handleModal5 = () => {
-    this.setState({ show5: true }); 
+    this.setState({ show5: true });
   };
 
   handleClose5 = () => {
@@ -286,6 +306,29 @@ export default class CalendarDemo extends Component {
       });
     }
   };
+  eventRender = (info) => {
+    console.log(info)
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">{info.event.title}</Popover.Title>
+        <Popover.Content>
+
+        </Popover.Content>
+      </Popover>
+    );
+
+    let evtId = "event-" + info.event.id;
+    const content = (
+      <OverlayTrigger placement="bottom" overlay={popover}>
+        <div className="fc-content" style={{ overflow: 'hidden', color: 'white', fontSize: '13px' }} id={evtId}>
+          <span style={{ fontSize: '12px' }} className="fc-title">{moment(info.event.startStr).format("hh:mm") + '-' + moment(info.event.endStr).format("hh:mm")}</span><br />
+          <span className="fc-title">{info.event.title}</span>
+        </div>
+      </OverlayTrigger>
+    );
+    ReactDOM.render(content, info.el);
+    //  ReactDOM
+  }
   render() {
     const { listOfCalendarEventResponse } = this.state;
     return (
@@ -294,10 +337,10 @@ export default class CalendarDemo extends Component {
           <NavBar {...this.props} />
         </div>
 
-        <div className="main_calender pt-5 pb-5"> 
+        <div className="main_calender pt-5 pb-5">
           <Container>
             <div className="calenderset">
-              <div className="bg-white light-shadow p-3 pb-5">       
+              <div className="bg-white light-shadow p-3 pb-5">
                 <div className="mb-2 py-2 d-flex justify-content-between align-items-center fc-cal-head">
                   <div>
                     <button
@@ -352,6 +395,10 @@ export default class CalendarDemo extends Component {
                         dayGridPlugin,
                         interactionPlugin,
                       ]}
+
+                      eventClick={(e) => {
+                        this.eventRender(e)
+                      }}
                       ref={this.calendarComponentRef}
                       weekends={this.state.calendarWeekends}
                       events={this.state.calendarEvents}

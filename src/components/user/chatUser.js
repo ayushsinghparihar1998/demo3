@@ -385,7 +385,7 @@ class ChatUser extends Component {
     this.changeChatpath(data.id);
   }
   initCall = (type) => () => {
-    this.sendMessage(`${type} call started`, 2)
+    this.sendMessage(`${type} call started at`, 2)
     const { userMeta } = this.state;
     const { u_email, u_id, u_role_id } = getUserProfile();
     const payload = {
@@ -574,7 +574,7 @@ class ChatUser extends Component {
                       <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
                           return msg.message_type == 2 ?
-                            <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
+                            <p style={{ textAlign: 'center', textTransform:'capitalize' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
                             : msg.from_user_id ==
                               getLocalStorage("customerInfo").u_id ? (
                                 <div className="pl-3 pr-3 pb-3">

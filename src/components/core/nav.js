@@ -104,7 +104,7 @@ class NavBar extends Component {
 
     if (getLocalStorage("userInfo")) {
       socket.on("changeUserOnlineStatus", (data) => {
-        console.log('----------------------- >> changeUserOnlineStatus << -----------------', data)
+        // console.log('----------------------- >> changeUserOnlineStatus << -----------------', data)
       });
     }
 
