@@ -320,14 +320,18 @@ class ProfessionalSignup extends Component {
                   </Form.Group>
                 </Col>
               </Row>
-            </Col>
-
-            <Col md={12} lg={6}>
-              <div className="fs13 fw300 mt-2 col27">
+              <div className="fs13 fw300 col27">
                 Please make sure you enter the correct date. You will be unable
                 to change this later.
               </div>
             </Col>
+
+            {/* <Col md={12} lg={6}> 
+              <div className="fs13 fw300 mt-2 col27">
+                Please make sure you enter the correct date. You will be unable
+                to change this later.
+              </div>
+            </Col> */}
 
             {/* <Col md={12} lg={6}>
               <Form.Group controlId="formBasicCheckbox" className="d-flex">

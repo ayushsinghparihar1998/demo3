@@ -360,9 +360,17 @@ img.c_bad {
     }
 }
 
-.confirmation-box.delete_modal.block_modal {  
+.confirmation-box.delete_modal.block_modal {   
     z-index: 9999;
     top: 75px; 
+}
+
+.emojy_manage {
+    position: relative;
+    text-align: center;  
+    img {
+        margin-right: 8px; 
+    }
 }
 
 /* media query screen start */
