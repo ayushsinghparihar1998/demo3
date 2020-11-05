@@ -15,7 +15,9 @@
             width: 100%;
             border-radius: 5px; 
         }
-        .inner_side {   
+        .inner_side {        
+            max-height: 650px;
+            overflow: auto;
             .border-bottom {
                 div.counts {
                     position: absolute;
@@ -1399,7 +1401,7 @@
             .chat-bgyellow {
                 height: auto; 
                 padding-top: 5px;
-                padding-bottom: 5px; 
+                padding-bottom: 5px;
             }
             .inner_side  {
                 .chat-bg.fs17 {

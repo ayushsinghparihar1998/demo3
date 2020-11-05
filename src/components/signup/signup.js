@@ -415,7 +415,7 @@ class Signup extends Component {
                 <div className="col10 fs30 fw600 mb-2">Create Your Account</div>
                 <div className="fs300 fs20 col14 mb-4 pb-2">
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
+                  typesetting industry. 
                 </div>
 
                 {this.state.question &&
