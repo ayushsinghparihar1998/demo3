@@ -238,8 +238,8 @@ class Chat extends Component {
                                         <div className="p-3">
                                             <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                                                 <Image src={Errors} alt="" className="mr-3" />
-                                                <span className="fs14 fw300 col1 pr-1">For your own safety, do not share your personal details, contact infoor social media handles.</span>
-                                                <Image src={Chatcross2} alt="" className="ml-auto pointer" />
+                                                <span className="fs14 fw300 col1 pr-1">For your own safety, do not share your personal details, contact info or social media handles.</span>
+                                                <Image src={Chatcross2} alt="" className="ml-auto pointer" /> 
                                             </div>
 
                                             <div className="bg_gray mt-auto mb-auto d-flex align-items-center">

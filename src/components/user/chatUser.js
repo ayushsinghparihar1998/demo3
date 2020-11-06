@@ -79,7 +79,7 @@ class ChatUser extends Component {
       activeChatUsers: [],
       showVal: 4,
       allMessages: [],
-      showChat: false,
+      showChat: false, 
       response: {},
       user_id: getLocalStorage("customerInfo").u_id,
       userMeta: {},
