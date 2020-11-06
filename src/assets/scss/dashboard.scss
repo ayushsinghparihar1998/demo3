@@ -16,7 +16,7 @@
             border-radius: 5px; 
         }
         .inner_side {        
-            max-height: 650px;
+            max-height: 300px;  
             overflow: auto;
             .border-bottom {
                 div.counts {
@@ -88,8 +88,11 @@
         }
         .chat-bg {
             background-color: $col23; 
-            height: 3.5rem; 
+            height: 3.5rem;
             line-height: 3.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 99; 
         }
         .chat-bgyellow {
             background-color: $col67;
@@ -495,7 +498,14 @@
             line-height: 3.5rem;
             display: block;
         }
-        .right_inner_side {  
+        .right_inner_side { 
+            max-height: 400px; 
+            overflow: auto; 
+            .chat-bg {
+                position: sticky;
+                top: 0;
+                z-index: 99; 
+            }
             .bg-grays {
                 .d-flex {
                     span.pl-3 {
