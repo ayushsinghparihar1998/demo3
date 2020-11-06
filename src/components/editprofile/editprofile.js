@@ -210,7 +210,7 @@ class Editprofile extends Component {
       data = {
         email: this.state.userEmail,
         password: this.state.userPassword,
-        u_birthdate: dob,
+        u_birthdate: dob, 
         u_name: this.state.userName,
         u_gender: this.state.gender,
         u_country: this.state.countryId,

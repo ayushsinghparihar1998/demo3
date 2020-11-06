@@ -56,7 +56,8 @@ const Calling = (props) => {
   // console.log("props", props)
   const cancelCall = () => {
 
-    sendMessage(`${type} call end`, 2)
+    sendMessage(`${type== 'audio'?'Audio':'Video'} call ended at`, 2)
+    
     if (mode === "incoming") {
       props.handleAction('decline');
     } else {

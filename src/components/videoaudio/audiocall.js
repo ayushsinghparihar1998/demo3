@@ -77,7 +77,7 @@ const AudioCall = (props) => {
         clearInterval(callTimerRef.current);
       }
       // disconnect();
-      
+
     }
   }, [])
   const runTimer = () => {
@@ -121,9 +121,9 @@ const AudioCall = (props) => {
   }
 
   const disconnect = () => {
-    
 
-    sendMessage(`audio call end`, 2)
+
+    sendMessage(`Audio call ended at`, 2)
     if (roomRef.current != null) {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
@@ -200,7 +200,7 @@ const AudioCall = (props) => {
     // console.log(tracks, container, type);
     attachTracks(tracks, container, type);
   }
-  const attachTracks = (tracks, container, type) => { 
+  const attachTracks = (tracks, container, type) => {
     console.log('tracks', tracks);
     if (type == 'local') {
       setTracks(prev => ({ ...prev, local: tracks }))
@@ -253,7 +253,11 @@ const AudioCall = (props) => {
   return (
     <div className="page__wrapper innerpage">
       <div className="main_baner">
-        <NavBar {...props} />
+        <NavBar {...props} disconnectPayload={{
+          reciver_id: paramsid,
+          reciver_type: userDetails?.u_role_id,
+          type:"Audio"
+        }} />
       </div>
       <div className="audiochat">
         <Container>
@@ -262,7 +266,7 @@ const AudioCall = (props) => {
               <div className="mb-5">
                 <Image src={userDetails.u_image || Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div>
-                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
+                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div> 
               </div>
             }
 

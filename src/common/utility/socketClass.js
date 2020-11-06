@@ -40,7 +40,7 @@ class socketClass {
       }),
       function (data) {
         console.log("chat-login socket=== authenticateSocket", data);
-        localStorage.setItem('chat_from_image',data.result.u_image)
+        localStorage.setItem('chat_from_image',data.result?data.result.u_image:null)
       }
     );
   }
