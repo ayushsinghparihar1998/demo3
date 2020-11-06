@@ -37,6 +37,7 @@ export const decryptedData = (data) => {
 // toastr messages for error
 export const showErrorToast = (errorMessage) => {
   if (!toast.isActive(toastId)) {
+    toast.dismiss()
     toastId = toast.error(errorMessage, {
       position: toast.POSITION.TOP_RIGHT,
       hideProgressBar: true,
@@ -48,7 +49,8 @@ export const showErrorToast = (errorMessage) => {
 // Tostr without condition
 export const showErrorMessage = (errorMessage) => {
   if (!toast.isActive(toastId)) {
-  //   alert("ASd")
+    //   alert("ASd")
+    toast.dismiss()
     toastId = toast.error(errorMessage, {
       position: toast.POSITION.TOP_RIGHT,
       hideProgressBar: true,
@@ -64,13 +66,13 @@ export const showErrorMessage = (errorMessage) => {
 // toastr messages for success
 export const showSuccessToast = (message) => {
   // if (!toast.isActive(toastId)) {
-    toast.dismiss()
-    toastId = toast.success(message, {
-      position: toast.POSITION.TOP_RIGHT, 
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-    });
+  toast.dismiss()
+  toastId = toast.success(message, {
+    position: toast.POSITION.TOP_RIGHT,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
   // }
 };
 
@@ -127,11 +129,11 @@ export const isValidURL = (URL) => {
 export const isURL = (str) => {
   var pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$",
+    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|" + // domain name
+    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+    "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // fragment locator
   return pattern.test(str);

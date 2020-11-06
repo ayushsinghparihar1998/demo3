@@ -51,11 +51,13 @@ const Videocall = (props) => {
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
-  const openChatWindow = () =>{
+  const openChatWindow = () => {
     setShowChat(true)
   }
   const { caller, id: paramsid } = useParams();
   const history = useHistory();
+  const [timerStr, setTimerStr] = useState(null);
+  const callTimerRef = useRef(null);
 
   useEffect(() => {
     //get the token
@@ -71,7 +73,7 @@ const Videocall = (props) => {
       // }
       console.log('random ===========', token);
 
-      
+
 
 
       setRoomId(room);
@@ -79,17 +81,28 @@ const Videocall = (props) => {
       connectTwillio(token, room);
       getUserDetails(paramsid);
 
+      return () => {
+        if (callTimerRef.current) {
+          clearInterval(callTimerRef.current);
+        }
+        // disconnect();
+
+      }
+
     })();
+    socket.on('muteAndUnmute', data => {
+      console.log('-------  muteAndUnmute', data)
+    })
     socket.on('endVideoCall', data => {
       // showErrorMessage("Call has been ended.")
       // setTimeout(() => {
-        // history.push('/')
-        
-        if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-          history.push('/chatuser/'+paramsid)
-        }else{
-          history.push('/chat/'+paramsid)
-        }
+      // history.push('/')
+
+      if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
+        history.push('/chatuser/' + paramsid)
+      } else {
+        history.push('/chat/' + paramsid)
+      }
       // }, 2000);
     })
     return () => {
@@ -122,7 +135,7 @@ const Videocall = (props) => {
 
     let object = {
       message: message,
-      from_user_id:getUserProfile().u_id,
+      from_user_id: getUserProfile().u_id,
       to_user_id: props.match.params.id,
       message_type: type,
       date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
@@ -130,9 +143,9 @@ const Videocall = (props) => {
       date: moment().format("YYYY-MM-DD"),
       time: moment().format("HH:mm:ss")
     };
-    console.log('==== send message ',object)
+    console.log('==== send message ', object)
     socket.emit("sendMessage", JSON.stringify(object), (data) => {
-    
+
     });
   }
 
@@ -148,9 +161,9 @@ const Videocall = (props) => {
       // });
     }
 
-    // alert("AASD")
+    // alert("AASD")ed
 
-    sendMessage(`video call end`, 2)
+    sendMessage(`Video call ended at`, 2)
 
     const payload = {
       reciver_id: paramsid,
@@ -164,10 +177,10 @@ const Videocall = (props) => {
         console.log(data)
       });
     }
-    if(getUserProfile().u_role_id == CONSTANTS.ROLES.USER){
-      history.push('/chatuser/'+paramsid)
-    }else{
-      history.push('/chat/'+paramsid)
+    if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
+      history.push('/chatuser/' + paramsid)
+    } else {
+      history.push('/chat/' + paramsid)
     }
   }
   const connectTwillio = (token, room) => {
@@ -256,7 +269,7 @@ const Videocall = (props) => {
     attachTracks(tracks, container, type);
   }
   const attachTracks = (tracks, container, type) => {
-    console.log('tracks', tracks);
+    console.log('tracks ++++===+', tracks);
     if (type == 'local') {
       setTracks(prev => ({ ...prev, local: tracks }))
     } else {
@@ -264,6 +277,10 @@ const Videocall = (props) => {
       if (remoteVideoRef.current.querySelector('video')) {
         return false;
       }
+      
+    }
+    if (!callTimerRef.current) {
+      runTimer();
     }
     tracks.forEach(track => {
       container.appendChild(track.attach());
@@ -298,17 +315,28 @@ const Videocall = (props) => {
       })
     }
   }
-
+  const runTimer = () => {
+    const curr = new Date().getTime();
+    callTimerRef.current = setInterval(() => {
+      const diff = Date.now() - curr;
+      const time = moment.duration(diff);
+      setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`)
+    }, 1000)
+  }
   return (
     <div className="page__wrapper innerpage">
       <div className="main_baner header-fixed">
-        <NavBar {...props} />
+        <NavBar {...props} disconnectPayload={{
+          reciver_id: paramsid,
+          reciver_type: userDetails?.u_role_id,
+          type: "Video"
+        }} />
       </div>
       <div className="videochat">
         <Container>
           <div className="userdetail pt-5">
             {/* <span><Image src={Backicon} alt="" className="pointer" /></span> */}
-            <span><Image src={userDetails?.u_image||Videouser} alt="" className="r50" /></span>
+            <span><Image src={userDetails?.u_image || Videouser} alt="" className="r50" /></span>
             <span className="online_user"></span>
             <span className="fs20 fw600 col60">{userDetails?.u_name}</span>
           </div>
@@ -318,6 +346,7 @@ const Videocall = (props) => {
               <div ref={localVideoRef} className="localMedia"></div>
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
+            <div style={{ textAlign: 'center' }} className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
             <div className="videocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
@@ -337,6 +366,7 @@ const Videocall = (props) => {
                     <Image src={Videoov} alt="" />
                   </button>
               }
+
               {/* <Image src={Videomute} className="mr-3 pointer" />
               <Image src={Videothree} className="mr-3 pointer" /> */}
               <Image src={Videochat} className="mr-3 pointer" onClick={toggleChat} />

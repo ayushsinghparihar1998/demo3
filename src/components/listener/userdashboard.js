@@ -190,13 +190,13 @@ class Userdashboard extends Component {
             this.setState({
                sucess: true,
                result: true,
-               message: 'your score is ' + result + '%',
+               message: 'your score is ' + (result || 0) + '%',
             });
          } else {
             this.setState({
                sucess: true,
                result: false,
-               message: 'your score is' + result + '%',
+               message: 'your score is ' + (result || 0) + '%',
             });
          }
       }
@@ -771,7 +771,7 @@ class Userdashboard extends Component {
                                  // Text size
                                  fontSize: '25px',
                               },
-                           }} value={getLocalStorage('result')} text={`${getLocalStorage('result')}%`} />
+                           }} value={getLocalStorage('result')|| 0} text={`${getLocalStorage('result')||0}%`} />
                         </div>
                      ) : (
                            <div className="layout_box text-center mt-3 mb-4 p-4">
@@ -802,7 +802,7 @@ class Userdashboard extends Component {
                                     // Text size
                                     fontSize: '25px',
                                  },
-                              }} value={getLocalStorage('result')} text={`${getLocalStorage('result')}%`} />
+                              }} value={getLocalStorage('result')||0} text={`${getLocalStorage('result')||0}%`} />
                            </div>
                         )}
                   </Container>

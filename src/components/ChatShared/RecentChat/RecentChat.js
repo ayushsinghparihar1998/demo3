@@ -27,6 +27,9 @@ function RecentChat({ onRedirect }) {
         data.data.map(obj => {
 
           obj.date_time = moment.utc(obj.date_time).calendar();
+          // let d = new Date(new Date(obj.date_time));
+          // console.log(d)
+          // obj.date_time =  moment.utc(new Date(d)).startOf('hour').fromNow();  
         })
         setRecentChats(data.data)
 

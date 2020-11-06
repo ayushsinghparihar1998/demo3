@@ -1253,7 +1253,18 @@
         }
     }
 }
+.serveytwo{
+    .modal-body {
+        padding-left: 30px;
 
+        form {
+            .row {
+                margin-left: 0;
+            }
+        }
+    }
+
+}
 .confirmation-box.survay_modals { 
     position: relative;
     .modal-body {

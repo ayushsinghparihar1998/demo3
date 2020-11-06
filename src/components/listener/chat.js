@@ -386,7 +386,7 @@ class Chat extends Component {
   }
   initCall = (type) => () => {
 
-    this.sendMessage(`${type} call started at`, 2)
+    this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
 
     const { userMeta } = this.state;
     const { u_email, u_id, u_role_id } = getUserProfile();
@@ -403,7 +403,7 @@ class Chat extends Component {
       if (data.success === 1) {
         this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("userInfo").u_id })
       } else {
-        this.sendMessage(`${type} call started at`, 2)
+        this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
         showErrorMessage(data.msg);
       }
     })
@@ -447,116 +447,7 @@ class Chat extends Component {
                 <div className="left_sidebar">
                   <div className="left_sidebar">
                     <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                    <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />  
-                    {/* <div className="inner_side">
-                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        Chat
-                      </div>
-                      {this.state.recentChatUsers &&
-                        this.state.recentChatUsers.map((item) => {
-                          return (
-                            <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
-                              <div className="position-relative">
-                                <Image
-                                  src={
-                                    item.from_image ? item.from_image : UserChat
-                                  }
-                                  alt=""
-                                  className="r50 pt-1"
-                                />
-
-                                <span className={(item.from_user_id ==
-                                  getLocalStorage("userInfo").u_id
-                                  ? item.to_user_online
-                                  : item.from_user_online) == "1" ? 'online' : ''}></span>
-                              </div>
-                              <div className="position-relative pl-3">
-                                <div className="fs15 col23 fw500 pr-2">
-                                  {item.from_user_id ==
-                                    getLocalStorage("userInfo").u_id
-                                    ? item.to_user_name
-                                    : item.from_user_name}
-                                </div>
-                                <div className="col27 fs13 fw500">
-                                  {item.message}
-                                </div>
-                                <Image
-                                  src={ChatCross}
-                                  alt=""
-                                  className="pointer cross_btn"
-                                />
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div> */}
-
-                    {/* <div className="inner_side">
-                      <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        <span>Currently Active Listeners</span>
-                      </div>
-                      <Tabs
-                        defaultActiveKey="home"
-                        id="uncontrolled-tab-example"
-                      >
-                        <Tab eventKey="home" title="Listener">
-                          <div className="chat-border"></div>
-                          {this.state.activeChatUsers &&
-                            this.state.activeChatUsers.map((item, ind) => {
-                              return ind < this.state.showVal ? (
-                                <div className="d-flex m-3 border-bottom pointer"
-                                  onClick={() =>
-                                    this.changeChatpath(item.id)
-                                  }
-                                >
-                                  <div className="position-relative">
-                                    <Image
-                                      src={
-                                        item.u_image ? item.u_image : UserChat
-                                      }
-                                      alt=""
-                                      className="r50 pt-1"
-                                    />
-                                  </div>
-                                  <div className="position-relative pl-3 mt-auto mb-auto">
-                                    <div
-                                      className="fs14 col14 fw500"
-
-                                    >
-                                      {item.u_name}
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                  ""
-                                );
-                            })}
-                        </Tab>
-                      </Tabs>
-                      {this.state.showVal == 4 ? (
-                        <div className="fs15 fw600 col23 p-3 pointer show-more"
-                          onClick={() => {
-                            this.setState({
-                              showVal: this.state.activeChatUsers.length,
-                            });
-                          }}
-                        >
-                          Show More
-                        </div>
-                      ) : (
-                          <div
-                            className="fs15 fw600 col23 p-3 pointer show-more"
-                            onClick={() => {
-                              this.setState({
-                                showVal: 4,
-                              });
-                            }}
-                          >
-                            Show Less
-                          </div>
-                        )}
-                    </div> */}
-
+                    <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
                   </div>
                 </div>
               </Col>
@@ -691,7 +582,7 @@ class Chat extends Component {
                       <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
                           return msg.message_type == 2 ?
-                            <p style={{ textAlign: 'center', textTransform: 'capitalize' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
+                            <p style={{ textAlign: 'center' }}>{msg.message}  {moment(msg.date_time).format("hh:mm a")}</p>
                             : msg.from_user_id ==
                               getLocalStorage("userInfo").u_id ? (
                                 <div className="pl-3 pr-3 pb-3">
@@ -785,145 +676,11 @@ class Chat extends Component {
         </div>
         <Footer />
 
-        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={userMeta.u_username} />
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id}   userName={getUserProfile().u_username} />
         <SurveyModal ref={this.surveyModal} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
 
-
-
-        {/* <Modal show={this.state.closeFlag} className="CreateAccount question">
-          <Modal.Header>
-            <Button onClick={this.handleClose2}>
-              <Image src={Crossbtn} alt="" />
-            </Button>
-          </Modal.Header>
-
-          <Modal.Body>
-            <Container>
-              <div className="layout_box mt-3 mb-4">
-                <div className="col10 fs30 fw600 mb-2">Create Your Account</div>
-                <div className="fs300 fs20 col14 mb-4 pb-2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </div>
-                <div className="col11 fs20 fw500">
-                  <span className="fw600 col29">Question 1.</span> Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit?
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                <Form.Group controlId="formBasicCheckbox4" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    onChange={(e) => this.handleQue1(e, "ans12" ,'ans13')}
-                    name="ans11"
-                    checked={this.state.ans11}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox5" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans12"
-                    checked={this.state.ans12}
-                    onChange={(e) => this.handleQue1(e, "ans11" ,'ans13')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox6" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans13"
-                    checked={this.state.ans13}
-                    onChange={(e) => this.handleQue1(e, "ans12" ,'ans11')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-
-                <div className="col11 fs20 fw500 mt-4">
-                  <span className="fw600 col29">Question 2.</span> Section
-                  1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero
-                  in 45 BC
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                
-                <Form.Group controlId="formBasicCheckbox1" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    onChange={(e) => this.handleQue1(e, "ans22" ,'ans23')}
-                    name="ans21"
-                    checked={this.state.ans21}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox2" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans22"
-                    checked={this.state.ans22}
-                    onChange={(e) => this.handleQue1(e, "ans21" ,'ans23')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox3" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans23"
-                    checked={this.state.ans23}
-                    onChange={(e) => this.handleQue1(e, "ans22" ,'ans21')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-                <div className="col11 fs20 fw500 mt-4">
-                  <span className="fw600 col29">Question 3.</span> At vero eos
-                  et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                  praesentium.
-                </div>
-                <div className="col30 fw600 fs20 mt-4 pb-3">Answer:</div>
-
-                <Form.Group controlId="formBasicCheckbox10" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    onChange={(e) => this.handleQue1(e, "ans32" ,'ans33')}
-                    name="ans31"
-                    checked={this.state.ans31}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="iste natus error sit voluptatem accusantium."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox12" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans32"
-                    checked={this.state.ans32}
-                    onChange={(e) => this.handleQue1(e, "ans31" ,'ans33')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Excepteur sint occaecat cupidatat non proident."
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox13" className="d-flex">
-                  <Form.Check
-                    type="checkbox"
-                    name="ans33"
-                    checked={this.state.ans33}
-                    onChange={(e) => this.handleQue1(e, "ans32" ,'ans31')}
-                    className="fw300 fs17 col28 mt-1 checkboxTyp1"
-                    label="Duis aute irure dolor in reprehenderit."
-                  />
-                </Form.Group>
-              </div>
-            </Container>
-          </Modal.Body>
-        </Modal>
-       */}
 
 
 

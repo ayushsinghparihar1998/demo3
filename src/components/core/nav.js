@@ -147,8 +147,12 @@ class NavBar extends Component {
       elem.children[0].style['background-image'] = 'none'
       ELPRxApiService("getprofile").then(res => {
         console.log('res == .. image', res)
-
+        console.log(document.getElementsByClassName('profile_icon'))
         elem.children[0].style['background-image'] = `url(${res.data.data.profile_list.u_image})`
+        setTimeout(()=>{
+          elem = document.getElementsByClassName('profile_icon')[0]
+          elem.children[0].style['background-image'] = `url(${res.data.data.profile_list.u_image})`
+        },1000)
         console.log(elem)
         this.setState({
           profileImage: res.data.data.profile_list.u_image,
@@ -332,10 +336,10 @@ class NavBar extends Component {
     }
   }
 
-  render() {
+  render() { 
     return (
       <div className="mj_nav">
-        <CallDisconnectConfirmation ref={this.callDisconnectConfirmation} history={this.props.history} />
+        <CallDisconnectConfirmation ref={this.callDisconnectConfirmation} history={this.props.history} disconnectPayload={this.props.disconnectPayload} />
         <ToastContainer
           position="top-right"
           autoClose={1000}
