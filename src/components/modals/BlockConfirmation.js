@@ -15,7 +15,7 @@ import {
 
 const socket = socketClass.getSocket();
 
-const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
+const BlockConfirmation = forwardRef(({ userId, userName,chatUserName }, ref) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selfId, setSelfId] = useState(null);
@@ -88,7 +88,7 @@ const BlockConfirmation = forwardRef(({ userId, userName }, ref) => {
                     <Image src={Deleteusers} alt="" />
                     <Image src={Blueicons} alt="" className="close pointer" onClick={() => setIsOpen(false)} />
                     <div className="text-center fs24 mt-4 col64 mb-4">
-                        Are you sure want to Block <br /> {userName} ? </div>
+                        Are you sure want to Block <br /> {chatUserName} ? </div>
 
                     <div className="text-center mb-5">
                         <Button

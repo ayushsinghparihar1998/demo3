@@ -17,6 +17,7 @@ function VideoCalling() {
       if (data.actiontype === "accept") {
         history.push((data.type === "video" ? '/videocall/' : '/audiocall/') + data.sender.u_id, { caller: data.sender })
       } else {
+        // alert("DECLINED")
         showErrorMessage("your call request has been declined");
         setTimeout(() => {
           history.goBack()
@@ -24,6 +25,7 @@ function VideoCalling() {
       }
     })
     socket.on("cancelCall", data => {
+      console.log('cancelCall === called')
       showErrorMessage(data.msg);
       setTimeout(() => {
         setCaller(null)

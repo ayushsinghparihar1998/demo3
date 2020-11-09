@@ -256,7 +256,8 @@ const AudioCall = (props) => {
         <NavBar {...props} disconnectPayload={{
           reciver_id: paramsid,
           reciver_type: userDetails?.u_role_id,
-          type:"Audio"
+          type:"Audio",
+          disconnect:disconnect
         }} />
       </div>
       <div className="audiochat">

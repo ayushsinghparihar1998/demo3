@@ -14,6 +14,7 @@ import Videouser from "../../assets/images/placeholder_user.png";
 import Videousertwo from "../../assets/images/videousers.svg";
 import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
+import VideomuteInverse from "../../assets/images/mute-inverse.svg";
 import Videothree from "../../assets/images/video.svg";
 import Videoov from "../../assets/images/video_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
@@ -41,6 +42,7 @@ const Videocall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
   const [muteAudio, setMuteAudio] = useState(false);
+  const [userMuted, setUserMuted] = useState(false)
   const [userDetails, setUserDetails] = useState(null);
   const [token, setToken] = useState();
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
@@ -91,7 +93,8 @@ const Videocall = (props) => {
 
     })();
     socket.on('muteAndUnmute', data => {
-      console.log('-------  muteAndUnmute', data)
+      console.log('-------  muteAndUnmute', data);
+      setUserMuted(data.isMute)
     })
     socket.on('endVideoCall', data => {
       // showErrorMessage("Call has been ended.")
@@ -277,7 +280,7 @@ const Videocall = (props) => {
       if (remoteVideoRef.current.querySelector('video')) {
         return false;
       }
-      
+
     }
     if (!callTimerRef.current) {
       runTimer();
@@ -294,11 +297,19 @@ const Videocall = (props) => {
           switch (todo) {
             case 'enable':
               track.enable();
-              setMuteAudio(false)
+              setMuteAudio(false);
+              socket.emit('muteAndUnmute', {
+                reciver_id: paramsid,
+                isMute: false
+              })
               break;
             case 'disable':
               track.disable();
-              setMuteAudio(true)
+              setMuteAudio(true);
+              socket.emit('muteAndUnmute', {
+                reciver_id: paramsid,
+                isMute: true
+              })
               break;
             case 'enablev':
               track.enable();
@@ -329,7 +340,8 @@ const Videocall = (props) => {
         <NavBar {...props} disconnectPayload={{
           reciver_id: paramsid,
           reciver_type: userDetails?.u_role_id,
-          type: "Video"
+          type: "Video",
+          disconnect:disconnect
         }} />
       </div>
       <div className="videochat">
@@ -346,7 +358,13 @@ const Videocall = (props) => {
               <div ref={localVideoRef} className="localMedia"></div>
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
-            <div style={{ textAlign: 'center' }} className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
+            {
+              userMuted ? <div style={{ textAlign: 'center' }} className="fs16 col18 fw300"><Image style={{width:'18px'}} src={VideomuteInverse} alt="" /> {userDetails?.u_name + ' muted this call'}</div> : null
+            } <br />
+
+            <div style={{ textAlign: 'center' }} className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div> <br />
+
+
             <div className="videocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {

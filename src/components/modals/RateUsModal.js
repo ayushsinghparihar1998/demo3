@@ -18,7 +18,7 @@ import { getLocalStorage } from "../../common/helpers/Utils";
 import Emojibad from '../../assets/images/emoji2.svg';
 import Emojiverybad from '../../assets/images/emoji2.svg';
 import Emojigood from '../../assets/images/emoji6.svg';
-import Emojigreat from '../../assets/images/emoji7.svg'; 
+import Emojigreat from '../../assets/images/emoji7.svg';
 
 const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
 
@@ -62,7 +62,7 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
         }
     }
 
-    const getName = () => { 
+    const getName = () => {
         let text = null
         if (ratingCount == 1) {
             text = "Very Bad!"
@@ -77,29 +77,45 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
         }
         return text
     }
+    const getImage = () => {
+        let image = null
+        if (ratingCount == 1) {
+            image = <Image src={Emojibad} alt="emoji" className="oneemoji" />
+        } else if (ratingCount == 2) {
+            image = <Image src={Emojiverybad} alt="emoji" className="twoemoji" />
+        } else if (ratingCount == 3) {
+            image = <Image src={Emojigood} alt="emoji" className="threeemoji" />
+        } else if (ratingCount == 4) {
+            image = <Image src={Emojigood} alt="emoji" className="threeemoji" />
+        } else if (ratingCount == 5) {
+            image = <Image src={Emojigreat} alt="emoji" className="fouremoji" />
+        }
+        return image
+    }
 
-    return ( 
+    return (
         <>
-            <Modal show={isOpen} className="CreateAccount Rate_us">  
+            <Modal show={isOpen} className="CreateAccount Rate_us">
                 <Modal.Header>
-                    <Button onClick={() => setIsOpen(false)}>                   
+                    <Button onClick={() => setIsOpen(false)}>
                         <Image src={Crossbtn} alt="" />
                     </Button>
-                </Modal.Header> 
+                </Modal.Header>
 
-                <Modal.Body> 
+                <Modal.Body>
                     <Container>
                         <div className="layout_box text-center mt-3 mb-4">
                             <div className="col10 fs30 fw600 mt-2 pb-2 text-left">Rate Us</div>
                             <div className="fs300 fs20 col14 mb-4 pb-2 text-left">
-                                Give us a quick rating 
+                                Give us a quick rating
                           </div>
 
-                            <div className="emojy_manage mb-3 d-none">     
-                                <Image src={Emojibad} alt="emoji" className="oneemoji" /> 
-                                <Image src={Emojiverybad} alt="emoji" className="twoemoji" /> 
-                                <Image src={Emojigood} alt="emoji" className="threeemoji" /> 
-                                <Image src={Emojigreat} alt="emoji" className="fouremoji" />         
+                            <div className="emojy_manage mb-3 ">
+                                {getImage()}
+
+
+
+
                             </div>
                             {/* <Image src={Checkgreentwo} alt="" className="mb-3" /> */}
                             {
@@ -108,7 +124,7 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
                                         {getName()}
                                     </div> :
                                     <div className="col33 fs18 fw600 mb-3">
-                                       {getName()}
+                                        {getName()}
                                     </div>
                             }
 

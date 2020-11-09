@@ -659,7 +659,7 @@ class ChatUser extends Component {
         </div>
         <Footer />
 
-        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={getUserProfile().u_username} /> 
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={getUserProfile().u_username} chatUserName={userMeta.u_username}  /> 
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 

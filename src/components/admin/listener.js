@@ -1136,7 +1136,7 @@ class Adminlistener extends Component {
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
+                                            {moment(item.rv_datetime).format(
                                               "dddd MMM Do YYYY HH:mm"
                                             )}
                                           </div>
@@ -1178,7 +1178,7 @@ class Adminlistener extends Component {
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
+                                            {moment(item.rv_datetime).format(
                                               "dddd MMM Do YYYY HH:mm"
                                             )}
                                           </div>
