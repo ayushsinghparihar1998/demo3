@@ -706,7 +706,7 @@ class Chat extends Component {
                       <p className="mb-2">If you're in need of an emergency or instant response service, please refer to the following
                       <br/>helplines :-  <br/>National Institute of Mental Health and Neurosciences</p> 
                       <p className="mb-2"><strong>(Available 24x7) :-</strong> 08046110007</p> 
-                      <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 /+91 7304599837/18602662345/18002333330 </p>
+                      <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 / +91 7304599837 / 18602662345 / 18002333330 </p>
                       <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
                       <p>Samaritans <br/> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
                        <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 </p> 
