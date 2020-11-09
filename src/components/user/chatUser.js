@@ -673,7 +673,7 @@ class ChatUser extends Component {
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
-         {/* modal isEmergencyInfo start */} 
+         {/* modal isEmergencyInfo start */}  
         <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
                 <Modal.Header>              
                     <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  

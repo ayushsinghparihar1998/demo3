@@ -568,7 +568,7 @@ class Chat extends Component {
                         <Image src={Errors} alt="" className="mr-3" />
                         <span className="fs14 fw300 col1 pr-1">
                           For your own safety, do not share your personal
-                          details, contact infoor social media handles.
+                          details, contact info or social media handles.
                         </span>
                         <Image
                           src={Chatcross2}
@@ -696,7 +696,7 @@ class Chat extends Component {
 
 
 
-        {/* modal isEmergencyInfo start */} 
+        {/* modal isEmergencyInfo start */}   
         <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
                 <Modal.Header>              
                     <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  
