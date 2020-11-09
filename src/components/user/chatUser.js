@@ -12,6 +12,7 @@ import {
   Tab,
   Tooltip,
   OverlayTrigger,
+  Modal
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -44,6 +45,7 @@ import UserEndChatModal from "../modals/UserEndChatModal";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
 import MessageCount from "../modals/MessageCount";
 import ELPRxApiService from "../../common/services/apiService";
+import Crossbtn from "../../assets/images/blue_cross.svg"; 
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -69,14 +71,15 @@ const renderTooltipfour = (props) => (
   </Tooltip>
 );
 
-const socket = socketClass.getSocket();
+const socket = socketClass.getSocket(); 
 
-class ChatUser extends Component {
+class ChatUser extends Component { 
   constructor(props) {
     super(props);
     this.state = {
       activeListners: [],
       activeChatUsers: [],
+      isEmergencyInfo: false,
       showVal: 4,
       allMessages: [],
       showChat: false, 
@@ -92,6 +95,13 @@ class ChatUser extends Component {
     this.deleteConfirmation = React.createRef();
     this.messagesEnd = React.createRef();
   }
+
+  chatinfoOpen = () => { 
+    this.setState({ isEmergencyInfo: true });
+  };
+  chatinfoClose = () => { 
+    this.setState({ isEmergencyInfo: false });
+  };
 
   scrollToBottom = () => {
     // if (this.messagesEnd && this.messagesEnd.current) {
@@ -558,7 +568,7 @@ class ChatUser extends Component {
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
-                          <Image src={Chatplus} alt="" className="pointer" />
+                          <Image src={Chatplus} alt="" className="pointer" onClick={this.chatinfoOpen} />
                         </span>
                         <span className="fs14 fw300 col1 ml-3 pr-1">
                           Click here to advice and crisis referral information.
@@ -662,6 +672,25 @@ class ChatUser extends Component {
         <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={getUserProfile().u_username} /> 
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
+
+         {/* modal isEmergencyInfo start */}
+         <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
+                <Modal.Header>              
+                    <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  
+                </Modal.Header>   
+              <Modal.Body>
+                  <div className="col14 fs15 fw400">
+                      <p>If you're in need of an emergency or instant response service, please refer to the following helplines:  National Institute of Mental Health and Neurosciences</p> 
+                      <p><strong>(Available 24x7) :-</strong> 08046110007</p> 
+                      <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 /+91 7304599837/18602662345/18002333330 </p>
+                      <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
+                      <p>Samaritans <br/> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
+                       <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 Kiran (Available 24x7): 18005990019</p> 
+                  </div>
+              </Modal.Body>
+             
+            </Modal>
+        {/* modal isEmergencyInfo end */}
 
       </div>
     );

@@ -10,10 +10,9 @@ import {
   Tab,
   Modal,
   Tooltip,
-  OverlayTrigger,
+  OverlayTrigger, 
 
-} from "react-bootstrap";
-import Crossbtn from "../../assets/images/blue_cross.svg";
+} from "react-bootstrap"; 
 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -40,17 +39,18 @@ import Starfillempty from "../../assets/images/staremptyone.svg";
 import Checkgreentwo from "../../assets/images/checkgreen2.svg";
 
 import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
-import SocketIOClient from "socket.io-client";
-import moment from "moment";
+import SocketIOClient from "socket.io-client"; 
+import moment from "moment"; 
 import socketClass from "../../common/utility/socketClass";
 import getUserProfile from "../../common/utility/getUserProfile";
 import RecentChat from "../ChatShared/RecentChat/RecentChat";
 import ActiveUsers from "../ChatShared/ActiveUsers/ActiveUsers";
 import BlockModal from "../modals/BlockModal";
-import SurveyModal from "../modals/SurveyModal"
+import SurveyModal from "../modals/SurveyModal";
 import MessageCount from "../modals/MessageCount";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
-import ELPRxApiService from "../../common/services/apiService";
+import ELPRxApiService from "../../common/services/apiService"; 
+import Crossbtn from "../../assets/images/blue_cross.svg"; 
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -77,12 +77,16 @@ const renderTooltipfour = (props) => (
   </Tooltip>
 );
 
-const socket = socketClass.getSocket();
+const socket = socketClass.getSocket(); 
 
 class Chat extends Component {
+  
+
   constructor(props) {
+    
     super(props);
     this.state = {
+      isEmergencyInfo: false,
       show6: false,
       show7: false,
       activeListners: [],
@@ -108,12 +112,15 @@ class Chat extends Component {
 
     };
 
+   
     this.messagesEnd = React.createRef();
 
     this.blockModal = React.createRef();
     this.surveyModal = React.createRef();
 
     this.deleteConfirmation = React.createRef();
+
+    
 
   }
 
@@ -147,8 +154,15 @@ class Chat extends Component {
     this.setState({ show7: false });
   };
 
+  chatinfoOpen = () => { 
+    this.setState({ isEmergencyInfo: true });
+  };
+  chatinfoClose = () => { 
+    this.setState({ isEmergencyInfo: false });
+  };
+
   componentWillUnmount() {
-    if (getLocalStorage("userInfo")) {
+    if (getLocalStorage("userInfo")) {  
       socket.emit(
         "onScreen",
         JSON.stringify({
@@ -174,7 +188,7 @@ class Chat extends Component {
       //   console.log("DISCOnnected ================================================")
     }
   }
-  componentDidMount() {
+  componentDidMount() { 
 
     ELPRxApiService("getprofile").then(res => {
       console.log('res == .. image', res)
@@ -207,7 +221,7 @@ class Chat extends Component {
           showErrorMessage("You have been blocked by " + data.name)
         }
       })
-    });
+    }); 
     // socket.emit(
     //   "chat-login",
     //   JSON.stringify({
@@ -225,7 +239,7 @@ class Chat extends Component {
       'pagination': 20
     }),
       (data) => {
-        if (data.data) {
+        if (data.data) { 
           this.setState({ allMessages: data.data.reverse() }, () => {
             this.scrollToBottom()
           })
@@ -564,10 +578,10 @@ class Chat extends Component {
                       </div>
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
-                        <span className="cirles">
-                          <Image src={Chatplus} alt="" className="pointer" />
+                        <span className="cirles">  
+                          <Image src={Chatplus} alt="" className="pointer" onClick={this.chatinfoOpen} />
                         </span>
-                        <span className="fs14 fw300 col1 ml-3 pr-1">
+                        <span className="fs14 fw300 col1 ml-3 pr-1"> 
                           Click here to advice and crisis referral information.
                         </span>
                         <Image
@@ -682,8 +696,24 @@ class Chat extends Component {
 
 
 
-
-
+        {/* modal isEmergencyInfo start */}
+            <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
+                <Modal.Header>              
+                    <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  
+                </Modal.Header>   
+              <Modal.Body>
+                  <div className="col14 fs15 fw400">
+                      <p>If you're in need of an emergency or instant response service, please refer to the following helplines:  National Institute of Mental Health and Neurosciences</p> 
+                      <p><strong>(Available 24x7) :-</strong> 08046110007</p> 
+                      <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 /+91 7304599837/18602662345/18002333330 </p>
+                      <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
+                      <p>Samaritans <br/> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
+                       <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 Kiran (Available 24x7): 18005990019</p> 
+                  </div>
+              </Modal.Body>
+             
+            </Modal>
+        {/* modal isEmergencyInfo end */}
 
 
 
