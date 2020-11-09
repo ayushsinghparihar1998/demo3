@@ -23,7 +23,7 @@ Professional : profession@yopmail.com
 Updated Production Details:-    
 
 Listener
-adidaslis@yopmail.com 
+adidaslis@yopmail.com  
 12345678  
 
 Professional

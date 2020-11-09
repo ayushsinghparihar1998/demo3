@@ -434,7 +434,7 @@ class NavBar extends Component {
                       // </NavLink>,
                     ]
                     : [
-                      <Nav.Link onClick={this.handleModal}>
+                      <Nav.Link onClick={this.handleModal}>  
                         Talk/Connect
                       </Nav.Link>,
                       <NavLink disabled to="/becomeListener" className="nav-link text-c">
