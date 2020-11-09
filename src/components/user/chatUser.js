@@ -680,12 +680,15 @@ class ChatUser extends Component {
                 </Modal.Header>   
               <Modal.Body>
                   <div className="col14 fs15 fw400">
-                      <p>If you're in need of an emergency or instant response service, please refer to the following helplines:  National Institute of Mental Health and Neurosciences</p> 
-                      <p><strong>(Available 24x7) :-</strong> 08046110007</p> 
+                      <p>If you're in need of an emergency or instant response service, please refer to the following</p> 
+                      <p className="mb-2">helplines :- <br/> National Institute of Mental Health and Neurosciences
+                      </p>    
+                      <p className="mb-2"><strong>(Available 24x7) :-</strong> 08046110007</p> 
                       <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 /+91 7304599837/18602662345/18002333330 </p>
                       <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
                       <p>Samaritans <br/> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
-                       <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 Kiran (Available 24x7): 18005990019</p> 
+                       <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 </p> 
+                       <p>Kiran  <br/> <strong>(Available 24x7) :-</strong> 18005990019</p>
                   </div>
               </Modal.Body>
              
@@ -696,4 +699,4 @@ class ChatUser extends Component {
     );
   }
 }
-export default ChatUser;
+export default ChatUser; 
