@@ -673,16 +673,15 @@ class ChatUser extends Component {
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
-         {/* modal isEmergencyInfo start */}
-         <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
+         {/* modal isEmergencyInfo start */} 
+        <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
                 <Modal.Header>              
                     <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  
                 </Modal.Header>   
               <Modal.Body>
                   <div className="col14 fs15 fw400">
-                      <p>If you're in need of an emergency or instant response service, please refer to the following</p> 
-                      <p className="mb-2">helplines :- <br/> National Institute of Mental Health and Neurosciences
-                      </p>    
+                      <p className="mb-2">If you're in need of an emergency or instant response service, please refer to the following
+                      <br/>helplines :-  <br/>National Institute of Mental Health and Neurosciences</p> 
                       <p className="mb-2"><strong>(Available 24x7) :-</strong> 08046110007</p> 
                       <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 /+91 7304599837/18602662345/18002333330 </p>
                       <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
