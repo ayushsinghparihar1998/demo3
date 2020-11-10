@@ -449,7 +449,7 @@ class Userdashboard extends Component {
                               </div>
                            </div>
                            <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
-                              <div className="chat-pink fs600 fs16 col18 pl-3 pointer">
+                              <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
                                  <span className="d_text"> Discover Subcommunities </span>   
                               </div>
