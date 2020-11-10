@@ -564,7 +564,7 @@ class ChatUser extends Component {
                           alt=""
                           className="ml-auto pointer"
                         />
-                      </div>
+                      </div> 
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
@@ -579,7 +579,7 @@ class ChatUser extends Component {
                           className="ml-auto pointer"
                         />
                       </div>
-                    </div>
+                    </div>  
                     {this.state.allMessages.length > 0 ? (
                       <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
