@@ -84,7 +84,7 @@ import FunFact from '../funfacts';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
@@ -525,7 +525,7 @@ class Userdashboard extends Component {
                      </div>
                      */}
 
-                                       <Image src={Ricon} alt="" className="r_icon" /> 
+                                       <Image src={Ricon} alt="" className="r_icon" />
                                        <div className="fw500 fs18 col23">Welcome {getLocalStorage("userInfo").u_username},</div>
                                        <div className="fs15 fw500 col27">How’s your Headspace today?</div>
                                     </div>
@@ -643,10 +643,11 @@ class Userdashboard extends Component {
                                  </div>
                               </div>
                            </div>
+
                            <div className="right_inner_side">
-                              <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
+                              <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                                <NavLink to="coming-soon"> <span style={{color:'white'}} className="d_text">Discover Subcomunities</span></NavLink>
+                                 <NavLink to="coming-soon"> <span style={{ color: 'white' }} className="d_text">Discover Subcomunities</span></NavLink>
                               </div>
                            </div>
                            <div className="right_inner_side">
@@ -772,7 +773,7 @@ class Userdashboard extends Component {
                                  // Text size
                                  fontSize: '25px',
                               },
-                           }} value={getLocalStorage('result')|| 0} text={`${getLocalStorage('result')||0}%`} />
+                           }} value={getLocalStorage('result') || 0} text={`${getLocalStorage('result') || 0}%`} />
                         </div>
                      ) : (
                            <div className="layout_box text-center mt-3 mb-4 p-4">
@@ -781,7 +782,7 @@ class Userdashboard extends Component {
                               <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
                                  please take the survey again or contact Admin
                                </div>
-                              
+
                               <CircularProgressbar minValue={0} maxValue={100} styles={{
                                  root: { width: "130px" },
                                  path: {
@@ -803,7 +804,7 @@ class Userdashboard extends Component {
                                     // Text size
                                     fontSize: '25px',
                                  },
-                              }} value={getLocalStorage('result')||0} text={`${getLocalStorage('result')||0}%`} />
+                              }} value={getLocalStorage('result') || 0} text={`${getLocalStorage('result') || 0}%`} />
                            </div>
                         )}
                   </Container>

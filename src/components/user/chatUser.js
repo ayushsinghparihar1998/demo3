@@ -415,7 +415,7 @@ class ChatUser extends Component {
       socket.emit("makeVideoCall", payload, (data) => {
         setTimeout(()=>{
           this.setState({
-            blockCallButton:false
+            blockCallButton:false 
           })
         },4000)
         if (data.success === 1) {

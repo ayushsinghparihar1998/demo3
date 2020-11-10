@@ -452,11 +452,11 @@ img {
                 background: $col18; 
                 padding: 15px 0;
                 border-radius: 12px;
-                position: absolute;
+                position: absolute;            
                 top: 90%;
                 left: 3%;
                 right: 0;
-                z-index: 99;
+                z-index: 999;
                 max-width: 94%;
                 border: solid 1px #ddd;
 
@@ -860,7 +860,7 @@ img {
                     top: 90%;
                     left: 3%;
                     right: 0;
-                    z-index: 99;
+                    z-index: 999;
                     max-width: 94%;
                     border: solid 1px #ddd;
                     padding-top: 5px;  
