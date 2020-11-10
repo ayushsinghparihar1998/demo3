@@ -1595,6 +1595,14 @@
 
 }
 
+@media (min-width: 1200px) {       
+    .right_sidebar {
+        .chat-pink.fs17.fs_set {
+            font-size: 1rem !important; 
+        }
+    }
+}
+
 
 @media (max-width: 767px) {
     .userdashboards {

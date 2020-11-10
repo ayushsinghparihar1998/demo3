@@ -642,10 +642,10 @@ class Userdashboard extends Component {
                                  </div>
                               </div>
                            </div>
-                           <div className="right_inner_side">
-                              <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
-                                 <Image src={Rflag} alt="" className="mr-2" />
-                                 <span className="d_text">Discover Subcomunities</span>
+                           <div className="right_inner_side">   
+                              <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">
+                                 <Image src={Rflag} alt="" className="mr-2" /> 
+                                 <span className="d_text">Discover Subcommunities</span>   
                               </div>
                            </div>
                            <div className="right_inner_side">
