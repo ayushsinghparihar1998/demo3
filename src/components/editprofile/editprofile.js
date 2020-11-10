@@ -92,13 +92,13 @@ class Editprofile extends Component {
     if (event.target.value.length > 8) {
       var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
       var test = reg.test(value.trim());
-      if (test) {
-        // alert("pass");
-      } else {
-        alert(
-          "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-        );
-      }
+      // if (test) {
+      //   // alert("pass");
+      // } else {
+      //   alert(
+      //     "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+      //   );
+      // }
     }
     this.setState({ [name]: value.trim() });
   };
