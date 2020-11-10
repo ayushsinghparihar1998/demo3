@@ -45,6 +45,10 @@ export const showErrorToast = (errorMessage) => {
       pauseOnHover: true,
     });
   }
+  setTimeout(() => {
+    toastId = ''
+    // toast.dismiss()
+  }, 3000);
 };
 // Tostr without condition
 export const showErrorMessage = (errorMessage) => {
@@ -60,6 +64,7 @@ export const showErrorMessage = (errorMessage) => {
   }
   setTimeout(() => {
     toastId = ''
+    // toast.dismiss()
   }, 3000);
 };
 
