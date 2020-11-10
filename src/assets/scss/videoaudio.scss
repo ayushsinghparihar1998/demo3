@@ -1,7 +1,7 @@
 .videochat {
     position: relative; 
     background-image: url(../images/womanvideo.jpg);  
-    background: #000 !important;
+    background: #000 !important; 
     min-height: inherit;
     background-repeat: no-repeat;
     background-size: cover;
@@ -144,10 +144,10 @@
         bottom: 0;
         top: 86px; 
         
-        video {  
+        video {   
             display: block;
             width: 100%;
-            /* height: 100vh; */
+            height: 100vh; 
             background-position: center;  
         }
     }

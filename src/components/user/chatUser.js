@@ -564,7 +564,7 @@ class ChatUser extends Component {
                           alt=""
                           className="ml-auto pointer"
                         />
-                      </div>
+                      </div> 
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
