@@ -579,7 +579,7 @@ class ChatUser extends Component {
                           className="ml-auto pointer"
                         />
                       </div>
-                    </div>
+                    </div>  
                     {this.state.allMessages.length > 0 ? (
                       <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
