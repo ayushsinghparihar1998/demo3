@@ -105,6 +105,7 @@ class Chat extends Component {
       ans31: false,
       ans32: false,
       ans33: false,
+      blockCallButton:false,
       typing: "",
       user_id: getLocalStorage("userInfo").u_id,
       userMeta: {},
@@ -399,28 +400,39 @@ class Chat extends Component {
     this.changeChatpath(data.id);
   }
   initCall = (type) => () => {
-
-    this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
-
-    const { userMeta } = this.state;
-    const { u_email, u_id, u_role_id } = getUserProfile();
-    const payload = {
-      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
-      "date": moment().format("YYYY-MM-DD"),
-      "time": moment().format("HH:mm:ss"),
-      "sender_id": u_id,
-      "sender": {
-        u_email, u_id, u_role_id
-      }, type: type
-    }
-    socket.emit("makeVideoCall", payload, (data) => {
-      if (data.success === 1) {
-        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("userInfo").u_id })
-      } else {
-        this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
-        showErrorMessage(data.msg);
+    if(!this.state.blockCallButton){
+      this.setState({
+        blockCallButton:true
+      })
+      this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
+  
+      const { userMeta } = this.state;
+      const { u_email, u_id, u_role_id } = getUserProfile();
+      const payload = {
+        "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+        "date": moment().format("YYYY-MM-DD"),
+        "time": moment().format("HH:mm:ss"),
+        "sender_id": u_id,
+        "sender": {
+          u_email, u_id, u_role_id
+        }, type: type
       }
-    })
+      socket.emit("makeVideoCall", payload, (data) => {
+        setTimeout(()=>{
+          this.setState({
+            blockCallButton:false
+          })
+        },4000)
+       
+        if (data.success === 1) {
+          this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("userInfo").u_id })
+        } else {
+          this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
+          showErrorMessage(data.msg);
+        }
+      })
+    }
+  
   }
 
   disableInputHandler = () => {

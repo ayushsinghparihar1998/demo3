@@ -45,7 +45,7 @@ import UserEndChatModal from "../modals/UserEndChatModal";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
 import MessageCount from "../modals/MessageCount";
 import ELPRxApiService from "../../common/services/apiService";
-import Crossbtn from "../../assets/images/blue_cross.svg"; 
+import Crossbtn from "../../assets/images/blue_cross.svg";
 
 // const SOCKET_IO_URL = "http://103.76.253.131:8282";
 // const socket = SocketIOClient(SOCKET_IO_URL);
@@ -71,9 +71,9 @@ const renderTooltipfour = (props) => (
   </Tooltip>
 );
 
-const socket = socketClass.getSocket(); 
+const socket = socketClass.getSocket();
 
-class ChatUser extends Component { 
+class ChatUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +82,8 @@ class ChatUser extends Component {
       isEmergencyInfo: false,
       showVal: 4,
       allMessages: [],
-      showChat: false, 
+      showChat: false,
+      blockCallButton:false,
       response: {},
       user_id: getLocalStorage("customerInfo").u_id,
       userMeta: {},
@@ -96,10 +97,10 @@ class ChatUser extends Component {
     this.messagesEnd = React.createRef();
   }
 
-  chatinfoOpen = () => { 
+  chatinfoOpen = () => {
     this.setState({ isEmergencyInfo: true });
   };
-  chatinfoClose = () => { 
+  chatinfoClose = () => {
     this.setState({ isEmergencyInfo: false });
   };
 
@@ -395,26 +396,36 @@ class ChatUser extends Component {
     this.changeChatpath(data.id);
   }
   initCall = (type) => () => {
-    this.sendMessage(`${type== 'audio'?'Audio':'Video'} call started at`, 2)
-    const { userMeta } = this.state;
-    const { u_email, u_id, u_role_id } = getUserProfile();
-    const payload = {
-      "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
-      "date": moment().format("YYYY-MM-DD"),
-      "time": moment().format("HH:mm:ss"),
-      "sender_id": u_id,
-      "sender": {
-        u_email, u_id, u_role_id
-      }, type: type
-    }
-    socket.emit("makeVideoCall", payload, (data) => {
-      if (data.success === 1) {
-        this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("customerInfo").u_id })
-      } else {
-        this.sendMessage(`${type == 'audio'?'Audio':'Video'} call ended at`, 2)
-        showErrorMessage(data.msg)
+    if (!this.state.blockCallButton) {
+      this.setState({
+        blockCallButton:true
+      })
+      this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call started at`, 2)
+      const { userMeta } = this.state;
+      const { u_email, u_id, u_role_id } = getUserProfile();
+      const payload = {
+        "reciver_id": userMeta.id, "reciver_type": userMeta.user_type,
+        "date": moment().format("YYYY-MM-DD"),
+        "time": moment().format("HH:mm:ss"),
+        "sender_id": u_id,
+        "sender": {
+          u_email, u_id, u_role_id
+        }, type: type
       }
-    })
+      socket.emit("makeVideoCall", payload, (data) => {
+        setTimeout(()=>{
+          this.setState({
+            blockCallButton:false
+          })
+        },4000)
+        if (data.success === 1) {
+          this.props.history.push('/calling', { id: userMeta.id, mode: 'outgoing', type: type, to_id: this.props.match.params.id, from_id: getLocalStorage("customerInfo").u_id })
+        } else {
+          this.sendMessage(`${type == 'audio' ? 'Audio' : 'Video'} call ended at`, 2)
+          showErrorMessage(data.msg)
+        }
+      })
+    }
   }
   render() {
     const { userMeta = {} } = this.state;
@@ -564,7 +575,7 @@ class ChatUser extends Component {
                           alt=""
                           className="ml-auto pointer"
                         />
-                      </div> 
+                      </div>
 
                       <div className="bg_gray mt-auto mb-auto d-flex align-items-center">
                         <span className="cirles">
@@ -579,7 +590,7 @@ class ChatUser extends Component {
                           className="ml-auto pointer"
                         />
                       </div>
-                    </div>  
+                    </div>
                     {this.state.allMessages.length > 0 ? (
                       <div id="message-container" className="mt-auto">
                         {this.state.allMessages.map((msg, index) => {
@@ -669,29 +680,29 @@ class ChatUser extends Component {
         </div>
         <Footer />
 
-        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={getUserProfile().u_username} chatUserName={userMeta.u_username}  /> 
+        <BlockModal ref={this.blockModal} userId={this.props.match.params.id} userName={getUserProfile().u_username} chatUserName={userMeta.u_username} />
         <UserEndChatModal ref={this.userEndChatModal} userId={this.props.match.params.id} disableInputHandler={this.disableInputHandler} />
         <DeleteConfirmation ref={this.deleteConfirmation} userName={userMeta.u_username} userId={this.props.match.params.id} recallChatList={this.recallChatList} />
 
-         {/* modal isEmergencyInfo start */}  
-        <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">   
-                <Modal.Header>              
-                    <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />  
-                </Modal.Header>   
-              <Modal.Body>
-                  <div className="col14 fs15 fw400">
-                      <p className="mb-2">If you're in need of an emergency or instant response service, please refer to the following
-                      <br/>helplines :-  <br/>National Institute of Mental Health and Neurosciences</p> 
-                      <p className="mb-2"><strong>(Available 24x7) :-</strong> 08046110007</p> 
-                      <p>Vandrevala Foundation <br/> <strong>(Available 24x7) :-</strong> +91 7304599836 / +91 7304599837 / 18602662345 / 18002333330 </p>
-                      <p>Fortis Stress Helpline <br/> <strong>(Available 24x7) :-</strong> +9183768 04102 </p> 
-                      <p>Samaritans <br/> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
-                       <p>MPower Minds <br/> <strong>(Available 24x7) :-</strong> 1800120820050 </p> 
-                       <p>Kiran  <br/> <strong>(Available 24x7) :-</strong> 18005990019</p>
-                  </div>
-              </Modal.Body>
-             
-            </Modal>
+        {/* modal isEmergencyInfo start */}
+        <Modal show={this.state.isEmergencyInfo} className="emergency_info custom-popUp confirmation-box">
+          <Modal.Header>
+            <Image src={Crossbtn} alt="" onClick={this.chatinfoClose} className="pointer" />
+          </Modal.Header>
+          <Modal.Body>
+            <div className="col14 fs15 fw400">
+              <p className="mb-2">If you're in need of an emergency or instant response service, please refer to the following
+                      <br />helplines :-  <br />National Institute of Mental Health and Neurosciences</p>
+              <p className="mb-2"><strong>(Available 24x7) :-</strong> 08046110007</p>
+              <p>Vandrevala Foundation <br /> <strong>(Available 24x7) :-</strong> +91 7304599836 / +91 7304599837 / 18602662345 / 18002333330 </p>
+              <p>Fortis Stress Helpline <br /> <strong>(Available 24x7) :-</strong> +9183768 04102 </p>
+              <p>Samaritans <br /> <strong>(Available 5pm-8pm everyday) :-</strong> +91 84229 84528 / +91 84229 84529 / +91 84229 84530 </p>
+              <p>MPower Minds <br /> <strong>(Available 24x7) :-</strong> 1800120820050 </p>
+              <p>Kiran  <br /> <strong>(Available 24x7) :-</strong> 18005990019</p>
+            </div>
+          </Modal.Body>
+
+        </Modal>
         {/* modal isEmergencyInfo end */}
 
       </div>
