@@ -13,7 +13,7 @@ import Checkgreentwo from "../../assets/images/checkgreen2.svg";
 import Starfillone from "../../assets/images/starfillone.svg";
 import Starfillempty from "../../assets/images/staremptyone.svg";
 import ELPRxApiService from "../../common/services/apiService";
-import { getLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage,showErrorMessage } from "../../common/helpers/Utils";
 
 import Emojibad from '../../assets/images/emoji2.svg';
 import Emojiverybad from '../../assets/images/emoji2.svg';
@@ -37,25 +37,30 @@ const RateUsModal = forwardRef(({ userId, disableInputHandler }, ref) => {
 
     const _submitsRatingHandler = async () => {
         try {
-            let submitReview = await ELPRxApiService("submitReview", {
-                rv_text: rating,
-                rv_from_id: getLocalStorage('customerInfo').u_id,
-                rv_to_id: userId
-            })
-            console.log("ASAS,", submitReview)
-            if (submitReview.data.status == "success") {
-                let response = await ELPRxApiService("submitRatings", {
-                    rating_count: ratingCount,
-                    to_id: userId,
-                    from_id: getLocalStorage('customerInfo').u_id
+            if(rating && ratingCount){
+                let submitReview = await ELPRxApiService("submitReview", {
+                    rv_text: rating,
+                    rv_from_id: getLocalStorage('customerInfo').u_id,
+                    rv_to_id: userId
                 })
-                console.log(response, response)
-                if (response.data.status == "success") {
-                    setIsOpen(false)
-                    disableInputHandler()
+                console.log("ASAS,", submitReview)
+                if (submitReview.data.status == "success") {
+                    let response = await ELPRxApiService("submitRatings", {
+                        rating_count: ratingCount,
+                        to_id: userId,
+                        from_id: getLocalStorage('customerInfo').u_id
+                    })
+                    console.log(response, response)
+                    if (response.data.status == "success") {
+                        setIsOpen(false)
+                        disableInputHandler()
+                    }
+    
                 }
-
+            }else {
+                showErrorMessage('Please rate the Listener to help us improve your experience.')
             }
+           
 
         } catch (err) {
             console.log(err);

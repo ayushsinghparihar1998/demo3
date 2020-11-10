@@ -84,6 +84,7 @@ import FunFact from '../funfacts';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import {NavLink} from "react-router-dom"
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
@@ -645,7 +646,7 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-pink fs600 fs17 col18 pl-3 pointer">
                                  <Image src={Rflag} alt="" className="mr-2" />
-                                 <span className="d_text">Discover Subcomunities</span>
+                                <NavLink to="coming-soon"> <span style={{color:'white'}} className="d_text">Discover Subcomunities</span></NavLink>
                               </div>
                            </div>
                            <div className="right_inner_side">
