@@ -46,25 +46,26 @@ const CallDisconnectConfirmation = forwardRef(({ history, disconnectPayload }, r
             sender_id: getUserProfile().u_id
         }
         // if (token) {
-            socket.emit('endVideoCall', payload);
-            let object = {
-                message: disconnectPayload.type +' call ended at',
-                from_user_id: getUserProfile().u_id,
-                to_user_id: disconnectPayload.reciver_id,
-                // from_image:localStorage.getItem('chat_from_image'),  
-                message_type: 2,
-                date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-                // user_type: user.u_role_id,
-                date: moment().format("YYYY-MM-DD"),
-                time: moment().format("HH:mm:ss")
-              };
-              socket.emit("sendMessage", JSON.stringify(object), (data) => {
-                console.log(data)
-                history.push(path)
-              });
+        socket.emit('endVideoCall', payload);
+        let object = {
+            message: disconnectPayload.type + ' call ended at',
+            from_user_id: getUserProfile().u_id,
+            to_user_id: disconnectPayload.reciver_id,
+            // from_image:localStorage.getItem('chat_from_image'),  
+            message_type: 2,
+            date_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+            // user_type: user.u_role_id,
+            date: moment().format("YYYY-MM-DD"),
+            time: moment().format("HH:mm:ss")
+        };
+        disconnectPayload.disconnect()
+        socket.emit("sendMessage", JSON.stringify(object), (data) => {
+            console.log(data)
+            history.push(path)
+        });
         // }
- 
-      
+
+
     }
 
     return (
