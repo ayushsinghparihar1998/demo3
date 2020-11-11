@@ -17,6 +17,8 @@ import Videomuteov from "../../assets/images/mute_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
 import Audioreceivecall from "../../assets/images/receive_call.svg";
+import VideomuteInverse from "../../assets/images/mute-inverse.svg";
+
 import UserChat4 from "../../assets/images/user_chat4.svg";
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
@@ -44,6 +46,8 @@ const AudioCall = (props) => {
   const localVideoRef = useRef(null)
   const remoteVideoRef = useRef(null)
   const callTimerRef = useRef(null);
+  const [userMuted, setUserMuted] = useState(false)
+
   const toggleChat = () => {
     setShowChat(prev => !prev)
   }
@@ -54,6 +58,10 @@ const AudioCall = (props) => {
   const history = useHistory();
 
   useEffect(() => {
+    socket.on('muteAndUnmute', data => {
+      console.log('-------  muteAndUnmute', data);
+      setUserMuted(data.isMute)
+    })
     socket.on('endVideoCall', () => {
       // showErrorMessage("Call has been ended.")
       if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
@@ -229,10 +237,18 @@ const AudioCall = (props) => {
             case 'enable':
               track.enable();
               setMuteAudio(false)
+              socket.emit('muteAndUnmute', {
+                reciver_id: paramsid,
+                isMute: false
+              })
               break;
             case 'disable':
               track.disable();
               setMuteAudio(true)
+              socket.emit('muteAndUnmute', {
+                reciver_id: paramsid,
+                isMute: true
+              })
               break;
             case 'enablev':
               track.enable();
@@ -256,8 +272,8 @@ const AudioCall = (props) => {
         <NavBar {...props} disconnectPayload={{
           reciver_id: paramsid,
           reciver_type: userDetails?.u_role_id,
-          type:"Audio",
-          disconnect:disconnect
+          type: "Audio",
+          disconnect: disconnect
         }} />
       </div>
       <div className="audiochat">
@@ -266,8 +282,11 @@ const AudioCall = (props) => {
             {!!userDetails &&
               <div className="mb-5">
                 <Image src={userDetails.u_image || Videousertwo} alt="" className="mw-150" />
-                <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div>
-                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div> 
+                <div className="fs20 col18 fw500 mt-3">{userDetails.u_name}</div><br />
+                {
+                  userMuted ? <div style={{ textAlign: 'center' }} className="fs16 col18 fw300"><Image style={{ width: '18px' }} src={VideomuteInverse} alt="" /> {userDetails?.u_name + ' muted this call'}</div> : null
+                } <br />
+                <div className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div>
               </div>
             }
 
