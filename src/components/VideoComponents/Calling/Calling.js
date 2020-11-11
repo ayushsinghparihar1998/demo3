@@ -98,7 +98,7 @@ const Calling = (props) => {
               <div className="mb-5">
                 <Image src={userDetails.u_image || Videousertwo} alt="" className="mw-150" />
                 <div className="fs20 col18 fw500 mt-3">{userDetails.u_name} </div>
-                <div className="fs16 col18 fw300">{type} Calling...</div>
+                <div className="fs16 col18 fw300">{type == 'audio'?"Audio":"Video"} Calling...</div>
               </div>
               <div className="audiocontrolicon text-center">
                 {mode === "incoming" && props.handleAction ?
