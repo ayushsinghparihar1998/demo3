@@ -55,7 +55,9 @@
         }
 
         .videocontrolicon {
-
+            & > img {
+                max-width: 50px;
+            }
             button {
                 background-color: transparent;
                 border-color: transparent; 
@@ -147,7 +149,7 @@
         video {   
             display: block;
             width: 100%;
-            height: 100vh; 
+            height: calc(100vh - 86px);       
             background-position: center;  
         }
     }
@@ -190,6 +192,9 @@
     
     .audiocontrol {  
         .audiocontrolicon  { 
+            & > img {
+                max-width: 50px;
+            }
             button { 
                 background-color: transparent;
                 border-color: transparent; 
