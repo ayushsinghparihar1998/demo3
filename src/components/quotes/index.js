@@ -11,16 +11,16 @@ const Quotes = () => {
 
     const [quotes, setQuotes] = useState([
         {
-            text: 'It’s up to you today to start making healthy choices. Not choices that are just healthy for your body, but healthy for your mind.',
-            author: 'Steve Maraboli'
+            text: 'There is hope, even when your brain tells you there isn’t.',
+            author: 'John Green'
         },
         {
-            text: 'What mental health needs is more sunlight, more candour, and more unashamed conversation.',
-            author: 'Glenn Close'
+            text: 'If you are broken, you do not have to stay broken.',
+            author: 'Selena Gomez'
         },
         {
-            text: 'It doesn’t have to take over your life, it doesn’t have to define you as a person, it’s just important that you ask for help. It’s not a sign of weakness.',
-            author: 'Demi Lovato'
+            text: 'My dark days made me stronger. Or maybe I already was strong, and they made me prove it.',
+            author: 'Emery Lord'
         },
     ])
 
