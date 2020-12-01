@@ -12,7 +12,7 @@ class Banner extends Component {
     render() {
         return (
             <Container>
-                <div className="fs40 pt-120 col1 fw700">Need someone to talk to?</div>
+                <div className="fs40 pt-120 col1 fw700">Need a Constant Companion? Come talk to us, you're never alone</div>
                 <div className="fw300 col2 fs20 mb-5">Time to get out of that imaginary confined space.<br />
 Our trained Listeners are ready to extend their helping hand.</div>
                 <Row>
