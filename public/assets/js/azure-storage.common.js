@@ -6074,7 +6074,7 @@ SharedKey.prototype._getCanonicalizedResource = function (webResource) {
 * name to lowercase. 3. Sort the headers lexicographically by header name,
 * in ascending order. Each header may appear only once in the
 * string. 4. Unfold the string by replacing any breaking white space with a
-* single space. 5. Trim any white space around the colon in the header. 6.
+* single 5. Trim any white space around the colon in the header. 6.
 * Finally, append a new line character to each canonicalized header in the
 * resulting list. Construct the CanonicalizedHeaders string by
 * concatenating all headers in this list into a single string.
