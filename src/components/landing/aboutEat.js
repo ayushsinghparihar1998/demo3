@@ -47,8 +47,8 @@ class Abouteat extends Component {
             <div className="aboutEats" id="about_us_container">
                 <Container>
                     <Row>
-                        <Col md={7}>
-                            <div className="fs40 col14 fw700 w-100">About Eat Luv N Pray</div>
+                        <Col md={12} lg={12}>         
+                            <div className="fs40 col14 fw600 w-100">About Eat Luv N Pray</div>
                             <div className="col14 fs16 fw300 w-100 pt-3">
                                 <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
 
@@ -59,12 +59,12 @@ class Abouteat extends Component {
                                 <div className="pb-2">Please remember, you’re NEVER ALONE !</div>
                             </div>
                         </Col>
-                        <Col md={5}>
+                        {/* <Col md={5}>   
                             <div className="subscribe_here">
                                 <div className="fs30 fw700 col1">Subscribe to Newsletter</div>
                                 <div className="fs18 fw300 col10 mb-3">Are you ready to excel in your life? Get a free newsletter about holistic wellness delivered to your email.</div>
                                 <div className="fs30 fw700 col1">Coming Soon</div>
-                                {/* <Form.Group controlId="formBasicEmail">
+                                <Form.Group controlId="formBasicEmail">
                                     <Form.Control
                                         type="email"
                                         placeholder="Email address"
@@ -81,10 +81,10 @@ class Abouteat extends Component {
                                     onClick={this.getSubscribe} 
                                     type="submit" className="btnTyp2 mt-1">   
                                     SUBSCRIBE
-                                </Button> */}
+                                </Button>
 
                             </div>
-                        </Col>
+                        </Col> */}
 
                     </Row>
                 </Container>

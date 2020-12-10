@@ -821,7 +821,7 @@ class Adminlistener extends Component {
                                     this.userProfile(e, item.id);
                                   }}
                                 >
-                                  <div className="col1 fw500 fs18 pb-1">
+                                  <div className="col3 fw500 fs18 pb-1">
                                     {item.u_name ? item.u_name : ""}
                                   </div>
                                   <div className="col40 fs15 fw400 pb-1">
@@ -906,7 +906,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -967,7 +967,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -1009,7 +1009,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -1064,7 +1064,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -1132,7 +1132,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -1174,7 +1174,7 @@ class Adminlistener extends Component {
                                     <div className="pl-2">
                                       <div className="d-flex justify-content-between">
                                         <div>
-                                          <div className="col1 fw500 fs18 pb-1">
+                                          <div className="col3 fw500 fs18 pb-1">
                                             {item.fromname}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
@@ -1258,7 +1258,7 @@ class Adminlistener extends Component {
                                             <div className="pl-2 w-100">
                                               <div className="d-flex justify-content-between">
                                                 <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
+                                                  <div className="col3 fw500 fs18 pb-1">
                                                     {item.fromname}
                                                   </div>
                                                   <div className="fs14 fw400 col54 pb-1">
@@ -1339,7 +1339,7 @@ class Adminlistener extends Component {
                                             <div className="pl-2 w-100">
                                               <div className="d-flex justify-content-between">
                                                 <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
+                                                  <div className="col3 fw500 fs18 pb-1">
                                                     {item.fromname}
                                                   </div>
                                                   <div className="fs14 fw400 col54 pb-1">
@@ -1381,7 +1381,7 @@ class Adminlistener extends Component {
                                   </div>
                                 </Tab>
 
-                                <Tab eventKey="reject" title="REJECTED">
+                                <Tab eventKey="reject" title="REJECTED"> 
                                   <div className="requests">
                                     {this.state.ratingList &&
                                       this.state.ratingList.map((item) => {
@@ -1397,7 +1397,7 @@ class Adminlistener extends Component {
                                             <div className="pl-2 w-100">
                                               <div className="d-flex justify-content-between">
                                                 <div>
-                                                  <div className="col1 fw500 fs18 pb-1">
+                                                  <div className="col3 fw500 fs18 pb-1">
                                                     {item.fromname}
                                                   </div>
                                                   <div className="fs14 fw400 col54 pb-1">
@@ -1444,7 +1444,7 @@ class Adminlistener extends Component {
                         </Col>
                       )}
             </Row>
-          </Container>
+          </Container> 
 
           <Modal
             show={this.state.deleteConformationModal}

@@ -188,7 +188,7 @@ class ProfessionalSignup extends Component {
     return (
       <div>
         <div className="layout_box mt-3 mb-4">
-          <div className="col10 fs30 fw600 mb-4">Create Your Account</div>
+          <div className="col14 fs30 fw600 mb-4">Create Your Account</div>
 
           <Row>
             <Col md={12} lg={6}>

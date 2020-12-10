@@ -60,7 +60,7 @@ class Blogs extends Component {
                                                             <div className="col14 fs14 fw400 pt-1">{element.bl_datetime}</div>
                                                             <div className="col14 fs14 fw400 pt-1">220 views</div>
                                                         </div>
-                                                        <div className="col1 fs18 fw600 mb-3">{element.bl_title}</div>
+                                                        <div className="col3 fs18 fw600 mb-3">{element.bl_title}</div>
                                                         <hr className="social_hr" />
                                                         <div className="fs14 col29 fw300" dangerouslySetInnerHTML={{ __html:element.bl_desc }}></div>
                                                       

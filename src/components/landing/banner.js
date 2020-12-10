@@ -3,21 +3,27 @@ import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, 
 import community from '../../assets/images/community.svg';
 import freechat from '../../assets/images/free-chat.svg';
 import therapy from '../../assets/images/therapy.svg';
-import women from '../../assets/images/women.svg';
+import women from '../../assets/images/header_banner2.svg';
 import user from '../../assets/images/user.svg';
 import usercomment from '../../assets/images/user-comment.svg';
-import usersend from '../../assets/images/user-send.svg';
+import usersend from '../../assets/images/user-send.svg';                                             
 
-class Banner extends Component { 
+class Banner extends Component {              
     render() {
         return (
             <Container>
-                <div className="fs40 pt-120 col1 fw700">Need a Constant Companion? Come talk to us, you're never alone</div>
-                <div className="fw300 col2 fs20 mb-5">Time to get out of that imaginary confined space<br />
-Our trained Listeners are ready to extend their helping hand</div>
                 <Row>
-                   
-                    <Col md={3} col={12} className="mb-5">   
+                    <Col md={6}>  
+                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div>
+                        <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
+        Our trained Listeners are ready to extend their helping hand</div>
+                    </Col>
+                    <div className="header2banner"> 
+                        <Image src={women} alt="" className="w-100" />
+                    </div>
+                </Row>
+                <Row className="d-none">  
+                    <Col md={3} col={12} className="mb-5">      
                         <div className="baner2 bannerset">
                             <Image src={freechat} alt="" className="pt-2" />
                             <div className="fs18 fw600 col6 pt-2">Free Chat</div>
@@ -25,7 +31,7 @@ Our trained Listeners are ready to extend their helping hand</div>
                             <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>
                     </Col>
-                    <Col md={3} col={12} className="mb-5">   
+                    <Col md={3} col={12} className="mb-5">    
                         <div className="baner3 bannerset">
                             <Image src={therapy} alt="" className="pt-2" />
                             <div className="fs18 fw600 col7 pt-2">Professional Help</div> 
