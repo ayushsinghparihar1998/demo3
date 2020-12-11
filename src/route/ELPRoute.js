@@ -68,7 +68,9 @@ import Termcondition from "../components/core/termcondition";
 import Privacypolicy from "../components/core/privacypolicy";
 import ShareProfile from "../components/core/ShareProfile";
 import About from "../components/core/about";
-import Blockuser from "../components/user/blockuser"; 
+import Blockuser from "../components/user/blockuser";
+import ProfessionalLsting from "../components/professional/professionalListing";
+import ProfessionalDetails from "../components/professional/professionalDetails"; 
 
 const user =
   getLocalStorage("userInfo") ||
@@ -127,6 +129,8 @@ class ELPRoute extends Component {
           {/* LIst */}
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
+          <PublicRoute path="/professionalListing" component={ProfessionalLsting} /> 
+          <PublicRoute path="/professionalDetails" component={ProfessionalDetails} />   
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />

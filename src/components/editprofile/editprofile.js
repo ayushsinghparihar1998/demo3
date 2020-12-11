@@ -390,11 +390,11 @@ class Editprofile extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="page__wrapper innerpage">
+      <div className="page__wrapper innerpage"> 
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5">
+        <div className="profile_layout pt-4 pb-5">  
           <Container>
             <Row>
               <div className="myprofile">

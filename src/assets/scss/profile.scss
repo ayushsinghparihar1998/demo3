@@ -369,6 +369,116 @@
 
 }
 
+.professinal_list {
+    .chatsearch  {
+        background: $col18; 
+        padding: 40px;
+        padding-top: 20px;
+        .mx-w70 {
+            max-width: 70%;
+            margin: auto; 
+        }
+        .search-listing {
+            padding: 40px 0;
+            padding-top: 20px;
+            .listing2 {
+                margin-bottom: 30px;
+
+                .eat_category {  
+                    display: flex;
+                    width: 100%;
+                    justify-content: center;
+                    margin-top: -15px; 
+
+                    span.eatcat {
+                        background: $col98;
+                        color: $col3; 
+                        padding: 7px 20px;
+                        border-radius: 20px;
+                        margin-right: 10px; 
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                    span.luvcat {
+                        background: $col99;
+                        color: $col3; 
+                        padding: 7px 20px;
+                        border-radius: 20px;
+                        margin-right: 10px;
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                    span.praycat {
+                        background: $col100; 
+                        color: $col3;  
+                        padding: 7px 20px;
+                        border-radius: 20px;
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .subscribes {
+                img {
+                    width: 100%;
+                }
+                .read2 {
+                    a {
+                        color: #03A9F4; 
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        text-decoration: underline; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+.profileban2 {
+    .user_tab {
+        .layout {
+            padding-left: 0; 
+        }
+        .tab-content {
+            padding-left: 15%;
+        }
+        .nav-tabs {
+            
+            a.nav-item {
+                text-align: center; 
+            }
+        }
+    }
+}
+
+.profiledetails {
+    position: relative; 
+    padding: 40px; 
+
+    .detailone {
+        background: $col62; 
+        padding: 40px; 
+    }
+}
+
+.bookSession {
+    .modal-dialog {
+        max-width: 716px;
+
+        .modal-body {
+            padding: 30px;
+
+            .selectTyp1 {
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                background: url(/static/media/arrow.9b016ddf.svg) no-repeat 97% 50% !important;
+                padding: 0 3rem 0 1rem !important; 
+            }
+        }
+    }
+}
+
 .listenerprofile {
 
     .myprofile {
