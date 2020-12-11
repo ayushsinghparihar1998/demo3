@@ -46,7 +46,7 @@ class ProfessionalLsting extends Component {
                     <Container>
                         <div className="chatsearch w-100"> 
                             <div class="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div> 
-                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70">   
+                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">   
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                             </div>  
                             <div className="search-listing"> 
@@ -106,8 +106,8 @@ class ProfessionalLsting extends Component {
                                                 <Button variant="primary" onClick={this.bookSessionOpen}  className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                         </div> 
                                         </Col>
-                                        <div className="text-center w-100 m-auto">   
-                                            <Button className="btnTyp12"> show more </Button> 
+                                        <div className="text-center w-100 m-auto pt-4">     
+                                            <Button className="btnTyp12"> show more </Button>    
                                         </div> 
                                     </Row>
                                 </div> 

@@ -55,8 +55,8 @@ class Myprofile extends Component {
                                                     </Button> 
 
                                                     <Button variant="primary" type="submit" className="btnTyp5">  
-                                                        Call 
-                                                    </Button> 
+                                                        Call  
+                                                    </Button>   
                                                 </div>
                                             </div>
                                         </Col>
