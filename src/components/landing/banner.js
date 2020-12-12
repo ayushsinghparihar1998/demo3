@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, Row, Col } from "react-bootstrap";
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, Row, Col, Carousel } from "react-bootstrap";
 import community from '../../assets/images/community.svg';
 import freechat from '../../assets/images/free-chat.svg';
 import therapy from '../../assets/images/therapy.svg';
@@ -8,15 +8,24 @@ import user from '../../assets/images/user.svg';
 import usercomment from '../../assets/images/user-comment.svg';
 import usersend from '../../assets/images/user-send.svg';                                             
 
-class Banner extends Component {              
+class Banner extends Component {               
     render() {
         return (
             <Container>
                 <Row>
-                    <Col md={6}>  
+                    <Col md={6}> 
+                    <Carousel className="baner_carousel">  
+                        <Carousel.Item>
                         <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div>
-                        <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
-        Our trained Listeners are ready to extend their helping hand</div>
+                                    <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
+                    Our trained Listeners are ready to extend their helping hand</div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div>
+                                    <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
+                    Our trained Listeners are ready to extend their helping hand</div>
+                        </Carousel.Item> 
+                    </Carousel>
                     </Col>
                     <div className="header2banner"> 
                         <Image src={women} alt="" className="w-100" />

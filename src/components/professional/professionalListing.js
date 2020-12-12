@@ -1,25 +1,14 @@
 import React, { Component } from "react";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
+import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal, DatePicker } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
-import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Subscribes from "../../assets/images/subscribes.svg";
 import Ritikaimg from "../../assets/images/Ritika.png";
 import Samyukthaimg from "../../assets/images/Samyuktha.png";
 import Shrishtiimg from "../../assets/images/Shrishti.png"; 
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
-import { Popover } from 'antd'; 
+import { Popover } from 'antd';
 
 class ProfessionalLsting extends Component {  
     constructor() {
@@ -42,15 +31,15 @@ class ProfessionalLsting extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout professinal_list pt-4 pb-5">  
+                <div className="profile_layout professinal_list pt-4 pb-5">    
                     <Container>
                         <div className="chatsearch w-100"> 
                             <div class="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div> 
                             <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">   
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                             </div>  
-                            <div className="search-listing"> 
-                                <div className="listing2">
+                            <div className="search-listing">  
+                                <div className="listing2"> 
                                     <Row>
                                         <Col lg={4} md={6}>      
                                             <div className="subscribes"> 
@@ -61,7 +50,7 @@ class ProfessionalLsting extends Component {
                                                         <span className="luvcat">Luv</span>
                                                         <span className="praycat">Pray</span>       
                                                     </div> 
-                                                </div>
+                                                </div> 
                                                 <div className="col3 fs18 fw600 mt-3 mb-2">Ritika Aggarwal</div>
                                                 <div className="fs14 col14 fw400">Lorem Ipsum is simply dummy text of the printing and typesetting industry... </div>
                                                 <div className="read2">
@@ -134,7 +123,16 @@ class ProfessionalLsting extends Component {
                                         <Form.Label className="fs20 fw600 col14">Title</Form.Label>
                                         <Form.Control type="text" placeholder="title" className="inputTyp2" /> 
                                     </Form.Group>
-
+                                    <Form.Group>
+                                    <Form.Label className="fs20 fw600 col14 d-block">
+                                        Date:
+                                    </Form.Label>
+                                    {/* <DatePicker
+                                        selected={date}
+                                        onSelect={handleDateSelect} //when day is clicked
+                                        onChange={handleDateChange} //only when value has changed
+                                        /> */} 
+                                    </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Starting at:</Form.Label>
                                         <Form.Control type="text" placeholder="2.00 am" className="inputTyp2" /> 

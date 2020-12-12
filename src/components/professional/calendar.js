@@ -97,8 +97,7 @@ export default class CalendarDemo extends Component {
     this.setState({
       date,
     });
-
-    console.log(this.state.date);
+    console.log(this.state.date); 
   };
 
   getAllevents = (start, end, x) => {
@@ -472,7 +471,7 @@ export default class CalendarDemo extends Component {
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14 d-block">
                         Date:
-                      </Form.Label>
+                      </Form.Label> 
                       {/* <Form.Control
                               type="text"
                               placeholder="Friday 5/8/2020"

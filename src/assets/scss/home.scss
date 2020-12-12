@@ -43,6 +43,18 @@
     }
 }
 
+.baner_carousel {
+    .carousel-control-prev {
+        display: none;
+    }
+    .carousel-control-next {
+        display: none; 
+    }
+    .carousel-indicators {
+        display: none; 
+    }
+}
+
 .innerpage {
     .main_baner {
         background: $col18; 

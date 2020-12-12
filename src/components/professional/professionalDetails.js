@@ -33,22 +33,21 @@ class Myprofile extends Component {
                                             </div>
                                         </Col>
                                         <Col md={8}>
-                                            <div className="rightprofile"> 
-                                                <div className="fs24 col3 fw600">Ritika Aggarwal</div> 
-                                                <div className="col3 fw500 mt-1 mb-1">Location: 
-                                                <span className="col14 fw400 ml-2">Indore</span></div>
-
-                                                <div className="col3 fw500 mt-1 mb-1">Work Experience: 
+                                            <div className="rightprofile">              
+                                                <div className="fs24 col3 fw600 mb-1">Ritika Aggarwal</div> 
+                                                
+                                                <div className="col3 fw500 mt-1 mb-2">Work Experience: 
                                                 <span className="col14 fw400 ml-2">10 Years</span></div>
+
+                                                <div className="col3 fw500 mt-1 mb-2">Language: 
+                                                <span className="col14 fw400 ml-2">Hindi, English and Marathi</span></div>
                                                
-                                                <div className="col3 fw500 mt-1 mb-1">Age: 
+                                                <div className="col3 fw500 mt-1 mb-2">Age: 
                                                 <span className="col14 fw400 ml-2">35 Years</span></div>
 
-                                                <div className="col3 fw500 mt-1 mb-1">Hourly Fee Range: 
-                                                <span className="col14 fw400 ml-2">INR 1100 - 3000</span></div> 
-
-                                                <div className="col3 fw500 mt-1 mb-1">Phone Nomber: 
-                                                <span className="col14 fw400 ml-2">1800-2000-180</span></div> 
+                                                <div className="col3 fw500 mt-1 mb-2">Qualifications: 
+                                                <span className="col14 fw400 ml-2">Master of Arts in Counselling Psychology, Columbia University</span></div> 
+ 
                                                 <div className="d-flex mt-4">
                                                     <Button variant="primary" type="submit" className="btnTyp5 mr-3">  
                                                         Email 
@@ -63,7 +62,7 @@ class Myprofile extends Component {
                                     </Row>
                                 </div> 
 
-                                <div className="detailtwo">
+                                <div className="detailtwo">   
                                     <Col md={12}> 
                                         <div className="fs32 col3 text-center fw500 mb-4"> 
                                             Master of Education in Counselling Psychology; Mental Health Track, Columbia University
@@ -75,7 +74,7 @@ class Myprofile extends Component {
                                             Postgraduate Diploma in Counselling Psychological Skills, St. Francis College
                                         </div> 
                                     </Col>
-                                </div>
+                                </div> 
 
                                 <div className="detailthree"> 
                                     <Col md={12}>
@@ -100,5 +99,5 @@ class Myprofile extends Component {
     }
 }
 
-export default Myprofile; 
+export default Myprofile;  
 

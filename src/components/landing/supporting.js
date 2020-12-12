@@ -15,36 +15,36 @@ class Supporting extends Component {
     return (
       <div className="Supporting">
         <Container>
-          <div className="fw600 fs40 col14 col1 w-100">Supported Organizations</div>
+          <div className="fw600 fs40 col14 col1 w-100">Supported Organizations</div> 
           <div className="col14 fs18 fw500 w-100 pt-3 mb-5 pb-3">Eat Luv N Pray works with organisations in helping them increase productivity and mitigate delays by providing mental health support to their employees. Get started today.</div>
           <Row className="m-auto supportives">       
-               <Col md={3} md={6} lg={4} col={12}>   
-                <div className="organise_carousel">
-                  <Image src={Organise} alt="Organise" /> 
-                </div>
+               <Col md={3} md={6} lg={4} col={12}>    
+                  <div className="organise_carousel"> 
+                    <Image src={Organise} alt="Organise" /> 
+                  </div>
                </Col>
-                {/* <div className="organise_carousel">
-                  <Image src={Organisetwo} alt="Organisetwo" />
-                </div>
-                <div className="organise_carousel">
-                  <Image src={Organisethree} alt="Organisethree" />
-                </div> */}
-                <Col md={3} md={6} lg={4} col={12}>  
+               <Col md={3} md={6} lg={4} col={12}>
                   <div className="organise_carousel">
-                    <Image src={Organisefour} alt="Organisefour" />    
+                    <Image src={Organisetwo} alt="Organisetwo" />
                   </div>
                 </Col>
+                <Col md={3} md={6} lg={4} col={12}>
+                  <div className="organise_carousel">
+                    <Image src={Organisethree} alt="Organisethree" />
+                  </div>
+                </Col>
+                
                 {/* <div className="organise_carousel">
                   <Image src={Organise} alt="Organise" />
                 </div>
                 <div className="organise_carousel">
                   <Image src={Organisefour} alt="Organisefour" />
                 </div> */} 
-            </Row>
-        </Container>
+            </Row>     
+        </Container>     
       </div>
     )
   }
 }
 
-export default Supporting;
+export default Supporting; 
