@@ -22,7 +22,7 @@ import {
   Modal,
   OverlayTrigger,
   Popover
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
@@ -37,7 +37,6 @@ export default class CalendarDemo extends Component {
     this.calendarComponentRef = React.createRef();
     this.state = {
       show5: false,
-
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
@@ -63,9 +62,6 @@ export default class CalendarDemo extends Component {
   }
 
   componentDidMount() {
-
-
-
 
     let data = getLocalStorage("userInfo")
       ? getLocalStorage("userInfo")

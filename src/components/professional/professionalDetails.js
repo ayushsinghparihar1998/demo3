@@ -14,7 +14,7 @@ import CONSTANTS from "../../common/helpers/Constants";
 import NavBarAdmin from "../core/navAdmin";
 import Ritikaimg from "../../assets/images/Ritika.png"; 
 
-class Myprofile extends Component { 
+class Myprofile extends Component {  
     render() {
         return (
             <div className="page__wrapper innerpage">
@@ -48,14 +48,14 @@ class Myprofile extends Component {
                                                 <div className="col3 fw500 mt-1 mb-2">Qualifications: 
                                                 <span className="col14 fw400 ml-2">Master of Arts in Counselling Psychology, Columbia University</span></div> 
  
-                                                <div className="d-flex mt-4">
+                                                <div className="d-flex mt-4">   
                                                     <Button variant="primary" type="submit" className="btnTyp5 mr-3">  
                                                         Email 
                                                     </Button> 
 
                                                     <Button variant="primary" type="submit" className="btnTyp5">  
                                                         Call  
-                                                    </Button>   
+                                                    </Button> 
                                                 </div>
                                             </div>
                                         </Col>
@@ -78,7 +78,7 @@ class Myprofile extends Component {
 
                                 <div className="detailthree"> 
                                     <Col md={12}>
-                                        <div className="fs32 col3 fw600 text-center mb-4">Therapy Style</div>
+                                        <div className="fs32 col3 fw600 text-center mb-4">Biography</div>
                                         <div className="fs17 col3 fw500 mb-2">Which bucket would your therapy style fit into primarily?</div>
                                         <div className="fs15 col14 fw400 mb-3">It is essential to explore the struggles that one brings into the therapy room before deciding the therapeutic approach and the interventions. I draw from various therapeutic modalities, including Cognitive Behavioural Therapy, mindfulness-based psychotherapy, and psychodynamic therapy, depending on the individual’s needs. It becomes crucial to explore the past with some individuals; in that case, I would supplement my Cognitive Behavioural Therapy with psychodynamic interventions.</div>
 

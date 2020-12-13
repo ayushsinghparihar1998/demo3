@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal, DatePicker } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -9,6 +10,11 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
+// import React, { useState } from "react"; 
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+
+// const [selectedDate, setSelectedDate] = useState(null);
 
 class ProfessionalLsting extends Component {  
     constructor() {
@@ -24,8 +30,10 @@ class ProfessionalLsting extends Component {
       bookSessionClose = () => {
         this.setState({ show3: false });
       };
+      
 
     render() {
+        
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
@@ -123,6 +131,12 @@ class ProfessionalLsting extends Component {
                                         <Form.Label className="fs20 fw600 col14">Title</Form.Label>
                                         <Form.Control type="text" placeholder="title" className="inputTyp2" /> 
                                     </Form.Group>
+
+                                    <Form.Group controlId="formBasicEmail">
+                                        <Form.Label className="fs20 fw600 col14">Issue</Form.Label> 
+                                        <Form.Control type="text" placeholder="" className="inputTyp2" /> 
+                                    </Form.Group>
+
                                     <Form.Group>
                                     <Form.Label className="fs20 fw600 col14 d-block">
                                         Date:
@@ -131,7 +145,8 @@ class ProfessionalLsting extends Component {
                                         selected={date}
                                         onSelect={handleDateSelect} //when day is clicked
                                         onChange={handleDateChange} //only when value has changed
-                                        /> */} 
+                                        /> */}  
+                                        {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" />   */} 
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Starting at:</Form.Label>
