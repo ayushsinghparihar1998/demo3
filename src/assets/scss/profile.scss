@@ -369,6 +369,20 @@
 
 }
 
+.pro_signup {
+    input[type="file"] {
+        color: #9F9F9F !important;
+        background: #f3fdff !important;
+        border: solid 0.5px #8AD1E7 !important;
+        box-shadow: none;
+        height: 3.5rem;
+        border-radius: 0px;
+        font-size: 1.125rem !important;
+        padding-top: 14px;
+        padding-left: 15px; 
+    }
+} 
+
 .professinal_list {
     .chatsearch  {
         background: $col18; 
@@ -484,7 +498,7 @@
             padding: 8px 0px;
         }
     }
-    .detailthree { 
+    .detailthree {  
         background: $col62; 
         padding: 40px; 
         margin-bottom: 40px; 
