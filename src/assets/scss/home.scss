@@ -76,18 +76,26 @@
 
     .carousel-inner {   
         max-width: 70%;
-        margin: auto; 
-        box-shadow: 0px 0px 8px rgba(119, 55, 116, 0.5);
-        border-radius: 15px;
-        background: $col18; 
+        margin: auto;
+        padding: 50px 20px 10px;
+
         .carousel-item {     
-            padding: 50px; 
-            .italic_style {  
+            padding: 50px;
+            padding-top: 0px;
+            box-shadow: 0px 0px 8px rgba(119, 55, 116, 0.5);
+            border-radius: 15px;
+            background: $col18;  
+
+            .italic_style {
+                .profileImage {
+                    margin-top: -40px; 
+                }  
                 & div > img {        
                     width: 80px;
                     height: 80px;
                     object-fit: cover;
                     border-radius: 50%;
+                    
                 }
             }
 
@@ -1039,9 +1047,13 @@ img {
         .container  {
             .carousel-inner {
                 max-width: 100%; 
+                padding: 50px 10px 10px;
                 .carousel-item {
                     padding: 20px; 
                     .italic_style {
+                        .profileImage {
+                            margin-top: -80px;
+                        }
                         .txt_testi {
                             font-size: 15px; 
                         }

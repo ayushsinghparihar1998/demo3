@@ -45,17 +45,21 @@ class Myprofile extends Component {
                                                 <div className="col3 fw500 mt-1 mb-2">Age: 
                                                 <span className="col14 fw400 ml-2">35 Years</span></div>
 
-                                                <div className="col3 fw500 mt-1 mb-2">Qualifications: 
-                                                <span className="col14 fw400 ml-2">Master of Arts in Counselling Psychology, Columbia University</span></div> 
+                                                {/* <div className="col3 fw500 mt-1 mb-2">Qualifications: 
+                                                <span className="col14 fw400 ml-2">Master of Arts in Counselling Psychology, Columbia University</span></div>  */}
  
                                                 <div className="d-flex mt-4">   
                                                     <Button variant="primary" type="submit" className="btnTyp5 mr-3">  
                                                         Email 
                                                     </Button> 
 
-                                                    <Button variant="primary" type="submit" className="btnTyp5">  
+                                                    <Button variant="primary" type="submit" className="btnTyp5 mr-3">  
                                                         Call  
                                                     </Button> 
+
+                                                    <Button variant="primary" type="submit" className="btnTyp5">  
+                                                        BOOK A SESSION  
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </Col>
