@@ -74,16 +74,15 @@ class ProfessionalList extends Component {
                                                     </Button>
                                                 </Col>
                                             </Row>
-                                        </Form>
-                                        <div className="checkCategory">      
-                                            <Form> 
+                                        
+                                            <div className="checkCategory">  
                                                 <Form.Group controlId="formBasicCheckbox1" className="row">
                                                     <Form.Check type="checkbox" className="checkone" label="Eat" />  
                                                     <Form.Check type="checkbox" className="checktwo" label="Luv" />
                                                     <Form.Check type="checkbox" className="checkthree active" label="Pray" />           
                                                 </Form.Group> 
-                                            </Form>  
-                                        </div>
+                                            </div>
+                                        </Form>
                                 </div>    
 
                                 <div className="adminlistener p-4 mb-3">

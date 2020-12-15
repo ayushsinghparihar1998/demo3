@@ -615,7 +615,7 @@
             margin: auto;
             justify-content: center;
             display: flex;
-            form {
+            
                 .form-check { 
                     position: relative;
                     margin-right: 40px;
@@ -623,11 +623,9 @@
                     padding: 7px 30px;
                     text-align: center;
                     border-radius: 30px;
-                    &.checkone, &.checktwo {
+                    &.checkone, &.checktwo, &.checkthree {  
                         background: transparent; 
                         border: solid 1px $col1; 
-                    }
-                    &.checkthree {
                         &.active {
                             background: $col40; 
                             border: solid 1px $col40;
@@ -636,6 +634,7 @@
                             }
                         } 
                     }
+                    
                     label {
                         text-transform: uppercase;
                         // padding-top: 10px; 
@@ -649,7 +648,7 @@
                         opacity: 0;        
                     }
                 }
-            }    
+          
         }
     }
 
