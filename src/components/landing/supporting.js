@@ -8,6 +8,9 @@ import Organise from '../../assets/images/organise.svg';
 import Organisetwo from '../../assets/images/organise2.svg';
 import Organisethree from '../../assets/images/organise3.svg';
 import Organisefour from '../../assets/images/organise4.svg';
+import Organisefive from '../../assets/images/Zoapi_io.png';
+import Organisesix from '../../assets/images/Karabi_Art_Community.png';
+import Organiseone from '../../assets/images/Lorem_Insights.png';
 
 class Supporting extends Component {
   render() {
@@ -32,6 +35,21 @@ class Supporting extends Component {
                 <Col md={3} md={6} lg={4} col={12}>  
                   <div className="organise_carousel">
                     <Image src={Organisefour} alt="Organisefour" />    
+                  </div>
+                </Col>
+                <Col md={3} md={6} lg={4} col={12}>  
+                  <div className="organise_carousel">
+                    <Image src={Organisesix} alt="Organisefour" />    
+                  </div>
+                </Col>
+                <Col md={3} md={6} lg={4} col={12}>  
+                  <div className="organise_carousel">
+                    <Image src={Organiseone} alt="Organisefour" />    
+                  </div>
+                </Col>
+                <Col md={3} md={6} lg={4} col={12}>  
+                  <div className="organise_carousel">
+                    <Image src={Organisefive} alt="Organisefour" />    
                   </div>
                 </Col>
                 {/* <div className="organise_carousel">

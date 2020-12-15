@@ -69,6 +69,7 @@ import Privacypolicy from "../components/core/privacypolicy";
 import ShareProfile from "../components/core/ShareProfile";
 import About from "../components/core/about";
 import Blockuser from "../components/user/blockuser"; 
+import professionalSignup from "../components/signup/professionalSignup";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -103,6 +104,10 @@ class ELPRoute extends Component {
           <PublicRoute
             path="/professionalLogin"
             component={ProfessionalLogin}
+          />
+          <PublicRoute
+            path="/professionalSignup"
+            component={professionalSignup}
           />
           <PublicRoute path="/logout" component={Chat} />
           <PublicRoute path="/reset" component={Resetpassword} />

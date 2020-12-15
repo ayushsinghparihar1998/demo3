@@ -453,7 +453,8 @@ class NavBar extends Component {
                         }
 
                       </NavDropdown>,
-                      <Nav.Link disabled onClick={() => this.setState({ show3: true })} className="nav-link text-c">
+                      <Nav.Link disabled 
+                      onClick={() => this.setState({ show3: true })} className="nav-link text-c">
                         Professional Help
                         <br />
                         <span className="comings">coming soon</span>
@@ -564,7 +565,7 @@ class NavBar extends Component {
                           Listener Login
                     </NavDropdown.Item>
                         <NavDropdown.Item
-                          disabled
+                          // disabled
                           onClick={(e) => {
                             this.handleLogin(2);
                           }}
