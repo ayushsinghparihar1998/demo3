@@ -27,7 +27,7 @@ import Userotp from "../components/login/userotp";
 import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";
 
 import AdminLogin from "../components/admin/adminlogin";
-import Adminlistener from "../components/admin/listener";
+import Adminlistener from "../components/admin/listener"; 
 import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
@@ -71,7 +71,8 @@ import About from "../components/core/about";
 import Blockuser from "../components/user/blockuser";
 import ProfessionalLsting from "../components/professional/professionalListing";
 import ProfessionalDetails from "../components/professional/professionalDetails"; 
-import ProfessionalSignup from "../components/professional/professionalSignup"; 
+import ProfessionalSignup from "../components/professional/professionalSignup";
+import ProfessionalList from "../components/admin/professionalList";  
 
 const user =
   getLocalStorage("userInfo") ||
@@ -133,6 +134,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/professionalListing" component={ProfessionalLsting} /> 
           <PublicRoute path="/professionalDetails" component={ProfessionalDetails} />    
           <PublicRoute path="/professionalSignup" component={ProfessionalSignup} />
+          <PublicRoute path="/professionalList" component={ProfessionalList} />                     
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />

@@ -9,8 +9,8 @@ import Shrishtiimg from "../../assets/images/Shrishti.png";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
-import { Popover } from 'antd';
-import moment from "moment";
+import { Popover } from 'antd'; 
+import moment from "moment";    
 // import React, { useState } from "react"; 
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
@@ -20,9 +20,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";   
 
 // const [selectedDate, setSelectedDate] = useState(null);
-// const [startDate, setStartDate] = useState(new Date()); 
-
-
+// const [startDate, setStartDate] = useState(new Date());   
 
 class ProfessionalLsting extends Component {    
     constructor() {

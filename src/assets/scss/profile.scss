@@ -540,8 +540,51 @@
     }
 }
 
-.r_comments { 
-    
+.adminProfessinal {
+    .adminlistener {
+        padding-bottom: 30px !important; 
+    }
+    .eat_category {
+        margin-top: 20px;  
+        span.eatcat {
+            background:$col98; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        span.luvcat { 
+            background: $col99; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 15px;
+            cursor: pointer; 
+        }
+        span.praycat { 
+            background: $col100; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+    .e_detai {
+        display: flex; 
+        strong {
+            display: block; 
+            min-width: 85px;
+        }
+        span {
+            display: block;  
+        }
+    }
+
+
 }
 
 .location { 

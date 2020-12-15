@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import { Link } from 'react-router-dom';
 class ProfessionalSignup extends Component {
-  render() {
+  render() { 
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -139,8 +139,8 @@ class ProfessionalSignup extends Component {
                       </Form.Group>
                     </Col> 
 
-                    <Col md={6}>   
-                      <Form.Group>   
+                    <Col md={6}>    
+                      <Form.Group>    
                         <Form.Label className="fs20 fw600 col14">
                         Keyword       
                         </Form.Label> 
@@ -153,7 +153,7 @@ class ProfessionalSignup extends Component {
                           name="booksession" 
                         />
                       </Form.Group> 
-                    </Col>
+                    </Col> 
                     
                     <Col md={12}> 
                       <Form.Group>  
