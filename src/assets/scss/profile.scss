@@ -583,7 +583,31 @@
             display: block;  
         }
     }
+    .professor_search { 
+        padding: 10px 30px 50px; 
+        form {
+            .form-group {
+                .inputTyp2.inputpProcess {
+                    height: 40px; 
+                    font-size: 15px !important;
+                    background: $col18 !important;
+                    color: $col3;
+                    &::placeholder {
+                        color: $col10 !important; 
+                    }
+                }
+            }
+            .process_btn {
+                background: $col26;
+                border-radius: 40px;
+                border: solid 1px $col26; 
+                height: 40px;
+                padding: 0 24px;
+                text-transform: uppercase;
 
+            }
+        }
+    }
 
 }
 

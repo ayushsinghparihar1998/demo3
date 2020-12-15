@@ -55,8 +55,28 @@ class ProfessionalList extends Component {
                             </Col>  
                             <Col md={9} className="pl-1">
                                 <div className="professor_search">
-                                    
+                                     <div className="fs16 col1 mb-4">Search Professional</div> 
+                                        <Form className="p_form"> 
+                                           <Row> 
+                                                <Col md="5">  
+                                                    <Form.Group controlId="formBasicTexts">
+                                                        <Form.Control type="text" placeholder="Search name" className="inputTyp2 inputpProcess" />       
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col md="5">  
+                                                    <Form.Group controlId="formBasickeyword"> 
+                                                        <Form.Control type="text" placeholder="Search keyword" className="inputTyp2 inputpProcess" />      
+                                                    </Form.Group> 
+                                                </Col>
+                                                <Col md="2"> 
+                                                    <Button variant="primary process_btn" type="submit">
+                                                        search
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
                                 </div>    
+
                                 <div className="adminlistener p-4 mb-3">
                                     <div className="d-flex text-left">
                                         <div className="mr-2 pt-1">
