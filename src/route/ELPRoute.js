@@ -107,10 +107,10 @@ class ELPRoute extends Component {
             path="/professionalLogin"
             component={ProfessionalLogin}
           />
-          <PublicRoute
+          {/* <PublicRoute
             path="/professionalSignup"
             component={professionalSignup}
-          />
+          /> */}
           <PublicRoute path="/logout" component={Chat} />
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />

@@ -3,6 +3,7 @@ import { Row, Col, Image } from "react-bootstrap";
 import Blogs from "../../assets/images/blogs.svg";
 import ELPRxApiService from "../../common/services/apiService";
 import { NavLink } from "react-router-dom";
+
 const BlogList = (props) => {
   const [blogList, setBlogList] = useState([]);
   useEffect(() => {
