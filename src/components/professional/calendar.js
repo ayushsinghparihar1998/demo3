@@ -22,7 +22,7 @@ import {
   Modal,
   OverlayTrigger,
   Popover
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
@@ -37,7 +37,6 @@ export default class CalendarDemo extends Component {
     this.calendarComponentRef = React.createRef();
     this.state = {
       show5: false,
-
       end_at: "",
       duration: "1 hour",
       recurring: "daily",
@@ -63,9 +62,6 @@ export default class CalendarDemo extends Component {
   }
 
   componentDidMount() {
-
-
-
 
     let data = getLocalStorage("userInfo")
       ? getLocalStorage("userInfo")
@@ -97,8 +93,7 @@ export default class CalendarDemo extends Component {
     this.setState({
       date,
     });
-
-    console.log(this.state.date);
+    console.log(this.state.date); 
   };
 
   getAllevents = (start, end, x) => {
@@ -472,7 +467,7 @@ export default class CalendarDemo extends Component {
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14 d-block">
                         Date:
-                      </Form.Label>
+                      </Form.Label> 
                       {/* <Form.Control
                               type="text"
                               placeholder="Friday 5/8/2020"

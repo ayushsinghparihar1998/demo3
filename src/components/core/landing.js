@@ -6,6 +6,7 @@ import Happypatient from "../landing/happyPatient";
 import Abouteat from "../landing/aboutEat";
 import Supporting from "../landing/supporting";
 import Discussanything from "../landing/discussAnything";
+import SubscribeHere from "../landing/subscribes";
 import Footer from "../core/footer";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import Payments from "../../assets/images/payment_chk.svg";
@@ -48,7 +49,7 @@ class Home extends Component {
   render() {
     return (
       <div className="page__wrapper">
-        <div className="main_baner">
+        <div className="main_baner home_banner">
           <NavBar {...this.props} />
           <Banner />
         </div>
@@ -56,7 +57,16 @@ class Home extends Component {
         <Happypatient />
         <Abouteat {...this.props} />
         <Supporting />
-        <Discussanything {...this.props} />
+        <Discussanything {...this.props} /> 
+        <SubscribeHere />
+
+        {/* <div className="subscribe_here">
+            <Row>
+                <Col>
+
+                </Col>
+            </Row> 
+        </div> */}
 
         {/* <div className="text-center  mb-5">
           <Button className="" onClick={this.handlePaymentModal}>
@@ -84,7 +94,7 @@ class Home extends Component {
             </Container>
           </Modal.Body>
         </Modal>
-        <Footer />
+        <Footer /> 
       </div>
     );
   }

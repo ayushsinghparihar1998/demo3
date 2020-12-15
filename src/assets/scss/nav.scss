@@ -1,6 +1,36 @@
 @import 'fonts.scss';
 @import 'color.scss';
 
+.home_banner {  
+    .mj_nav {
+        .navbar-light {
+            &.navbar  {
+                .navbar-brand { 
+                    color: $col18;
+                }  
+    
+                .navbar-nav {
+                     a.nav-link {  
+                        color: $col18;
+                    }
+                    a > span.comings {  
+                        color: #333; 
+                    }
+                }
+            }     
+            .btnTypeone {   
+                background: $col18 !important;
+                border-color: $col18 !important;
+                color: $col10 !important; 
+                & > a {
+                    color: $col10 !important; 
+                }
+            }
+        }
+    }
+}
+
+
 .mj_nav { 
     span.comings { 
         position: relative; 

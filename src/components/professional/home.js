@@ -23,13 +23,13 @@ class Homepage extends Component {
                 </div>
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
-                        <Row>
+                        <Row> 
                             <div className="myprofile">
                                 <Image src={Profileban} alt="" className="w-100" /> 
                                 <div className="text-center profile_top">
                                     <Image src={Profileimg} alt="" className="r50 border_profile" />
                                 </div>
-                                <div className="text-center mt-4 mb-4 pb-2">
+                                <div className="text-center mt-4 mb-4 pb-2"> 
                                     <div className="fs18 fw600 col1 pb-1">Melisa R. Wright</div>
                                     <div className="col23 fs16 fw500 pb-1">
                                         Listener - Novice 
@@ -38,7 +38,7 @@ class Homepage extends Component {
                                     <div className="col27 fw400 fs14">Finding myself....</div>
                                     <div className="border_bottoms mt-3"></div>
                                 </div>
-                                <div className="text-center user_tab">     
+                                <div className="text-center user_tab">    
                                     <Tabs defaultActiveKey="request">
                                         <Tab eventKey="request" title="Requested">
                                             <div className="p-5">

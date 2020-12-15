@@ -23,7 +23,7 @@ import {
   TwitterShareButton,
   FacebookShareButton,
 } from "react-share";
-class Compaign extends Component { 
+class Compaign extends Component {  
   render() {
     return (
       <div className="page__wrapper innerpage"> 
@@ -35,7 +35,7 @@ class Compaign extends Component {
           <Container style={{overflow:'hidden'}}>
             <div className="myprofile w-100">
               <div className="campan_manage"> 
-                  <div className="col10 fw600 fs32 mb-2">Compassion campaign</div>   
+                  <div className="col14 fw600 fs32 mb-2">Compassion campaign</div>   
                   <div className="fs16 fw300 col14 mb-4">
                     We believe that every human deserves free, emotional support, no matter where they are or what
                     they’re going through. We want to make sure nobody has to struggle through difficult times alone,

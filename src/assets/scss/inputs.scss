@@ -48,7 +48,6 @@ a:hover {
   font-weight: 300 !important;
 }
 
-
 .inputTyp1.form-control:focus { 
   color       : $col1;
   background  : $col18;
@@ -168,6 +167,10 @@ textarea.inputTyp2.form-control.cate2 {
 
 .textTypes1::placeholder { 
     color: $col46; 
+}
+
+.inputTyp2.text_bio {
+    height: 7rem; 
 }
 
 .inputTyp4 {

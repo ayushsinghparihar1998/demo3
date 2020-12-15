@@ -22,8 +22,10 @@
     border-radius: 1.5625rem;
     background: rgba(0, 186, 255, 0.60) !important;
     border-color: rgba(0, 186, 255, 0.60) !important;
+    // background: $col18 !important;
+    // border-color: $col18 !important; 
     // padding: 8px 24px; 
-    color: $col18; 
+    color: $col23 !important;
     text-decoration: none; 
     padding: 0 5px;
     text-align: center;
@@ -33,19 +35,19 @@
     & > a {
         color: $col18 !important; 
         padding: 10px 0;
-        text-transform: uppercase;
+        text-transform: uppercase; 
     }
-  }
+  }   
   
   .btnTypeone:hover,
   .btnTypeone:focus,
   .btnTypeone:active,
   .btnTypeone:active:focus,
-  .btnTypeone.btn-outline-info:not(:disabled):not(.disabled).active {
+  .btnTypeone.btn-outline-info:not(:disabled):not(.disabled).active { 
     background: $col10 !important;
-    border-color: $col10 !important;
-    color: $col18; 
-    text-decoration: none; 
+    border-color: $col10 !important;  
+    color: $col18;  
+    text-decoration: none;  
   }
   
   .btnTyp2 {
@@ -83,6 +85,11 @@
     padding: 0 2rem;
   }
   
+  .btnTyp3.discussBtn {
+    border-color    : $col10 !important;
+    background-color: $col10 !important;
+  }
+
   .btnTyp3:hover,
   .btnTyp3:focus,
   .btnTyp3:active,
@@ -98,8 +105,10 @@
     font-weight: 600;
     font-size: $fs15;
     border-radius: 40px;
-    border-color    : $col26 !important;
-    background-color: $col26 !important;
+    // border-color    : $col26 !important;
+    // background-color: $col26 !important;
+    border-color    : $col10 !important;
+    background-color: $col10 !important;        
     color           : $col18 !important;
     box-shadow      : none !important;
     height: 3.5rem; 
@@ -123,18 +132,20 @@
     text-decoration: none; 
   }
 
-  .btnTyp4.serchone {
+  .btnTyp4.serchone { 
     height: 3rem; 
     line-height: 3rem; 
     padding: 0 2.5rem;
   }
   
-  .btnTyp5 {
+  .btnTyp5 {  
     font-weight: 600;
     font-size: $fs15;
     border-radius: 40px;
-    border-color    : $col26 !important;
-    background-color: $col26 !important;
+    // border-color    : $col26 !important;
+    // background-color: $col26 !important; 
+    border-color    : $col10 !important;
+    background-color: $col10 !important;
     color           : $col18 !important;
     box-shadow      : none !important;
     height: 3.5rem; 

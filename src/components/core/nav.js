@@ -42,15 +42,15 @@ import CONSTANTS from "../../common/helpers/Constants";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
 
-const socket = socketClass.getSocket();
+const socket = socketClass.getSocket(); 
 
 class NavBar extends Component {
   constructor() {
     super();
     this.state = {
       isNotification: false,
-      show: false,
-      show2: false,
+      show: false, 
+      show2: false, 
       show3: false,
       email_varified: false,
       profileImage: null,
