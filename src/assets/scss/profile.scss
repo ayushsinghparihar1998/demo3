@@ -623,11 +623,17 @@
                     padding: 7px 30px;
                     text-align: center;
                     border-radius: 30px;
+<<<<<<< HEAD
                     &.checkone, &.checktwo {
                         background: transparent; 
                         border: solid 1px $col1; 
                     }
                     &.checkthree {
+=======
+                    &.checkone, &.checktwo, &.checkthree {  
+                        background: transparent; 
+                        border: solid 1px $col1; 
+>>>>>>> ba92acfc21d0505050e92eeb423d0fe8566f16b6
                         &.active {
                             background: $col40; 
                             border: solid 1px $col40;
@@ -636,6 +642,10 @@
                             }
                         } 
                     }
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> ba92acfc21d0505050e92eeb423d0fe8566f16b6
                     label {
                         text-transform: uppercase;
                         // padding-top: 10px; 

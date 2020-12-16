@@ -143,9 +143,9 @@ class ProfessionalLsting extends Component {
                                     </Form.Group>
 
                                     <Form.Group>
-                                    <Form.Label className="fs20 fw600 col14 d-block">
+                                    {/* <Form.Label className="fs20 fw600 col14 d-block">
                                         Date:
-                                    </Form.Label>
+                                    </Form.Label> */} 
                                        {/* <DatePicker
                                         selected={date}
                                         onSelect={handleDateSelect} //when day is clicked

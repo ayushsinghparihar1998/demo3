@@ -18,7 +18,7 @@ class ProfessionalList extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout adminProfessinal pt-4 pb-5"> 
+                <div className="profile_layout adminProfessinal pt-4 pb-5">  
                     <Container>
                         <Row>
                             <Col md={3} className="pr-1">
@@ -56,7 +56,7 @@ class ProfessionalList extends Component {
                             <Col md={9} className="pl-1">
                                 <div className="professor_search">
                                      <div className="fs16 col1 mb-4">Search Professional</div> 
-                                        <Form className="p_form"> 
+                                        <Form className="p_form">   
                                            <Row> 
                                                 <Col md="5">  
                                                     <Form.Group controlId="formBasicTexts">
@@ -74,6 +74,14 @@ class ProfessionalList extends Component {
                                                     </Button>
                                                 </Col>
                                             </Row>
+                                        
+                                            <div className="checkCategory">  
+                                                <Form.Group controlId="formBasicCheckbox1" className="row">
+                                                    <Form.Check type="checkbox" className="checkone" label="Eat" />  
+                                                    <Form.Check type="checkbox" className="checktwo" label="Luv" />
+                                                    <Form.Check type="checkbox" className="checkthree active" label="Pray" />           
+                                                </Form.Group> 
+                                            </div>
                                         </Form>
                                 </div>    
 
