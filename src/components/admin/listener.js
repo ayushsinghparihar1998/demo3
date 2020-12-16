@@ -68,6 +68,10 @@ class Adminlistener extends Component {
       offset: 1,
       block_type: 0,
       review_type: 0,
+      name: "",
+      status: "",
+      keyword: "",
+      category: "'Pray','luv','eat'",
     };
   }
   componentDidMount() {
@@ -153,6 +157,16 @@ class Adminlistener extends Component {
 
   // change page
 
+  onSearch() {
+    this.getProffListing(
+      this.state.pageno,
+      this.state.count,
+      this.state.name,
+      this.state.status,
+      this.state.keyword,
+      this.state.category
+    );
+  }
   onChangePage(page) {
     console.log(page);
     console.log(this.state.pageno);
@@ -174,6 +188,15 @@ class Adminlistener extends Component {
         );
       } else if (this.state.pageType == "paymentList") {
         this.getPaymentListHandler(page, this.state.count);
+      } else if (this.state.pageType == "proffList") {
+        this.getProffListing(
+          page,
+          this.state.count,
+          this.state.name,
+          this.state.status,
+          this.state.keyword,
+          this.state.category
+        );
       } else {
       }
     }
@@ -332,6 +355,12 @@ class Adminlistener extends Component {
       profileId: "",
     });
   };
+
+  handleOpenConformation = () => {
+    this.setState({
+      deleteConformationModal: true,
+    });
+  };
   handleChange(e) {
     const name = e.target.name;
     let value = e.target.value;
@@ -405,6 +434,10 @@ class Adminlistener extends Component {
           totalRecordCount,
           count,
           offset,
+          name,
+          status,
+          keyword,
+          category,
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -736,7 +769,7 @@ class Adminlistener extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout pt-4 pb-5">
+        <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
               <Col md={4} lg={3} className="pr-1">
@@ -758,7 +791,7 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom" onCl>
+                    <div className="d-flex m-3 pb-3 border-bottom">
                       <div
                         className={professnalActveClass}
                         onClick={(e) => {
@@ -1296,47 +1329,158 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="search-listing">
-                    <div className="listing2">
+                  <div className="professor_search">
+                    <div className="fs16 col1 mb-4">Search Professional</div>
+                    <Form className="p_form">
                       <Row>
-                        {this.state.proffList &&
-                          this.state.proffList.map((item) => {
-                            <Col lg={4} md={6}>
-                              <div className="subscribes">
-                                <div className="text-center position-relative">
-                                  <Image src={Ritikaimg} alt="" />
+                        <Col md="5">
+                          <Form.Group controlId="formBasicTexts">
+                            <Form.Control
+                              type="text"
+                              placeholder="Search name"
+                              className="inputTyp2 inputpProcess"
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md="5">
+                          <Form.Group controlId="formBasickeyword">
+                            <Form.Control
+                              type="text"
+                              placeholder="Search keyword"
+                              className="inputTyp2 inputpProcess"
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md="2">
+                          <Button variant="primary process_btn" type="submit">
+                            search
+                          </Button>
+                        </Col>
+                      </Row>
+
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                          <Form.Check
+                            type="checkbox"
+                            className="checkone"
+                            label="Eat"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checktwo"
+                            label="Luv"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checkthree active"
+                            label="Pray"
+                          />
+                        </Form.Group>
+                      </div>
+                    </Form>{" "}
+                  </div>
+                  {this.state.proffList &&
+                    this.state.proffList.map((item) => {
+                      // return(
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image src={Requestuser} alt="" className="r50" />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {item.u_name}
+                                    </div>
+                                    <div className="d-flex ml-auto">
+                                      <span className="pr-3 fs14 col47 fw400">
+                                        {item.u_status == 1
+                                          ? "Active"
+                                          : "Inactive"}
+                                      </span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id="custom-switch5"
+                                          label=""
+                                          checked={
+                                            item.u_status == 0 ? false : true
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.handleOpenConformation()
+                                          }
+                                        />
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Age:</strong> {item.u_age}
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Work Experince:</strong>{" "}
+                                    {item.u_work_experience}
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Languages:</strong> {item.u_lang}
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                    <strong className="m_w25">
+                                      Education:{" "}
+                                    </strong>
+                                    <span>{item.u_education}</span>
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                    <strong>Biogropy: </strong>
+                                    <span>
+                                      {item.u_bio}{" "}
+                                      <a className="col10">Read more...</a>
+                                    </span>
+                                  </div>
+
                                   <div className="eat_category">
-                                    <span className="eatcat">Eat</span>
-                                    <span className="luvcat">Luv</span>
-                                    <span className="praycat">Pray</span>
+                                    {item.cat_child_array &&
+                                      item.cat_child_array.map((val) => {
+                                        return (
+                                          <span
+                                            className={
+                                              val == "Eat"
+                                                ? "eatcat"
+                                                : val == "Luv"
+                                                ? "luvcat"
+                                                : "praycat"
+                                            }
+                                          >
+                                            {val}
+                                          </span>
+                                        );
+                                      })}
                                   </div>
                                 </div>
-                                <div className="col3 fs18 fw600 mt-3 mb-2">
-                                  Ritika Aggarwal
-                                </div>
-                                <div className="fs14 col14 fw400">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing and typesetting industry...{" "}
-                                </div>
-                                <div className="read2">
-                                  <a>read more</a>
-                                </div>
-                                <Button
-                                  variant="primary"
-                                  onClick={this.bookSessionOpen}
-                                  className="btnTyp9 report mt-4 mb-4"
-                                >
-                                  Book A Session
-                                </Button>
                               </div>
-                            </Col>;
-                          })}
-                        <div className="text-center w-100 m-auto pt-4">
-                          <Button className="btnTyp12"> show more </Button>
+                            </div>
+                          </div>
                         </div>
-                      </Row>
-                    </div>
-                  </div>
+                      );
+
+                      // );
+                    })}
                 </Col>
               ) : (
                 <Col md={8} lg={9} className="pl-1">

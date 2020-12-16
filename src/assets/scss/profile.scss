@@ -540,8 +540,119 @@
     }
 }
 
-.r_comments { 
-    
+.adminProfessinal {
+    .adminlistener {
+        padding-bottom: 30px !important; 
+    }
+    .eat_category {
+        margin-top: 20px;  
+        span.eatcat {
+            background:$col98; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        span.luvcat { 
+            background: $col99; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 15px;
+            cursor: pointer; 
+        }
+        span.praycat { 
+            background: $col100; 
+            color: $col3; 
+            padding: 7px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+    .e_detai {
+        display: flex; 
+        strong {
+            display: block; 
+            min-width: 85px;
+        }
+        span {
+            display: block;  
+        }
+    }
+    .professor_search { 
+        padding: 10px 30px 50px; 
+        form {
+            .form-group {
+                .inputTyp2.inputpProcess {
+                    height: 40px; 
+                    font-size: 15px !important;
+                    background: $col18 !important;
+                    color: $col3;
+                    &::placeholder {
+                        color: $col10 !important; 
+                    }
+                }
+            }
+            .process_btn {  
+                background: $col26;
+                border-radius: 40px;
+                border: solid 1px $col26; 
+                height: 40px;
+                padding: 0 24px;
+                text-transform: uppercase;
+
+            }
+        }
+        .checkCategory { 
+            margin-top: 50px; 
+            padding: 0 30px;
+            padding-top: 30px; 
+            text-align: center;
+            margin: auto;
+            justify-content: center;
+            display: flex;
+            
+                .form-check { 
+                    position: relative;
+                    margin-right: 40px;
+                    cursor: pointer;
+                    padding: 7px 30px;
+                    text-align: center;
+                    border-radius: 30px;
+                    &.checkone, &.checktwo {
+                        background: transparent; 
+                        border: solid 1px $col1; 
+                    }
+                    &.checkthree {
+                        &.active {
+                            background: $col40; 
+                            border: solid 1px $col40;
+                            label {
+                                color: $col18; 
+                            }
+                        } 
+                    }
+                    label {
+                        text-transform: uppercase;
+                        // padding-top: 10px; 
+                        color: $col1; 
+                    }
+                    .form-check-input {
+                        width: 36px;
+                        height: 36px;
+                        margin: auto;
+                        cursor: pointer;
+                        opacity: 0;        
+                    }
+                }
+          
+        }
+    }
+
 }
 
 .location { 
