@@ -654,6 +654,30 @@
 
 }
 
+.corporateMember {
+    position: relative;
+    background: #fff;
+    padding: 20px 30px;
+    min-height: 100vh;    
+
+    table {      
+        tr { 
+            th { 
+                background: $col10; 
+                color: $col18; 
+                font-weight: 500;
+                justify-content: center; 
+            }
+            td {
+                justify-content: center;
+                font-size: 15px;
+                font-weight: 400;
+                color: #666;
+            }
+        }
+    }
+}
+
 .location { 
     .ant-select {
         min-width: 100%;
