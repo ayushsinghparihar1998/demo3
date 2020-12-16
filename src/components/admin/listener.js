@@ -727,6 +727,9 @@ class Adminlistener extends Component {
     return text;
   };
 
+  changepath = (path) => {
+    this.props.history.push(path);
+  };
   render() {
     let totalRecord = this.state.totalRecord;
     let userActveClass =
@@ -1450,7 +1453,14 @@ class Adminlistener extends Component {
                                     <strong>Biogropy: </strong>
                                     <span>
                                       {item.u_bio}{" "}
-                                      <a className="col10">Read more...</a>
+                                      <a
+                                        className="col10"
+                                        onClick={() =>
+                                          this.changepath("/professionalDetails/admin/" + item.id)
+                                        }
+                                      >
+                                        Read more...
+                                      </a>
                                     </span>
                                   </div>
 
@@ -1861,7 +1871,7 @@ class Adminlistener extends Component {
             ""
           )} */}
         </div>
-        <Footer /> 
+        <Footer />
       </div>
     );
   }

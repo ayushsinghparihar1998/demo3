@@ -136,7 +136,7 @@ class ELPRoute extends Component {
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
           <PublicRoute path="/professionalListing" component={ProfessionalLsting} /> 
-          <PublicRoute path="/professionalDetails" component={ProfessionalDetails} />    
+          <PublicRoute path="/professionalDetails/:type/:id" component={ProfessionalDetails} />    
           <PublicRoute path="/professionalSignup" component={ProfessionalSignup} />
           <PublicRoute path="/professionalList" component={ProfessionalList} />                     
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />

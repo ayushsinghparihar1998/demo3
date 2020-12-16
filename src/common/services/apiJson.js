@@ -674,12 +674,30 @@ export default {
     url: "elp/superadminprofessionallisting",
     method: "POST",
     data: {
-      count: '',
-      offset: '',
+      count: "",
+      offset: "",
       name: "",
       status: "",
       keyword: "",
       category: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadminprofessionaluserdetail: {
+    url: "elp/superadminprofessionaluserdetail",
+    method: "POST",
+    data: {
+      userid: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  corporateprofessionaluserdetail: {
+    url: "elp/corporateprofessionaluserdetail",
+    method: "POST",
+    data: {
+      userid: "",
     },
     showResultMessage: false,
     showErrorMessage: false,
