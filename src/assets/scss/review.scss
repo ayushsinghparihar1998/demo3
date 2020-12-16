@@ -39,6 +39,40 @@
     }
 }
 
+.layout_box {
+    .ck-editor .ck-editor__main .ck-content {
+        min-height: 150px;
+        background: $col22; 
+    }
+    .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items { 
+        background: $col22;
+    }
+    .ck.ck-editor__editable_inline {
+        border: 1px solid $col23 !important; 
+    }
+    .ck.ck-editor .ck-editor__top .ck-sticky-panel .ck-toolbar {  
+        border: 1px solid $col23 !important;
+        border-bottom: none !important; 
+    }
+}
+
+.createblog {
+    .ck-editor .ck-editor__main .ck-content {
+        min-height: 150px;
+        background: $col22; 
+    }
+    .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items { 
+        background: $col22;
+    }
+    .ck.ck-editor__editable_inline {
+        border: 1px solid $col23 !important; 
+    }
+    .ck.ck-editor .ck-editor__top .ck-sticky-panel .ck-toolbar {  
+        border: 1px solid $col23 !important;
+        border-bottom: none !important; 
+    }
+}
+
 .reviewcomment {
 
     .border-grays {
