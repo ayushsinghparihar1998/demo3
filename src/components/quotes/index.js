@@ -11,16 +11,16 @@ const Quotes = () => {
 
     const [quotes, setQuotes] = useState([
         {
-            text: 'There is hope, even when your brain tells you there isn’t.',
-            author: 'John Green'
+            text: 'My personal goals are to be happy, healthy and to be surrounded by loved ones.” ',
+            author: 'Kiana Tom'
         },
         {
-            text: 'If you are broken, you do not have to stay broken.',
-            author: 'Selena Gomez'
+            text: '“He who has health, has hope; and he who has hope, has everything.” ',
+            author: 'Thomas Carlyle'
         },
         {
-            text: 'My dark days made me stronger. Or maybe I already was strong, and they made me prove it.',
-            author: 'Emery Lord'
+            text: '“Love yourself first and everything falls into line.” ',
+            author: 'Lucille Ball'
         },
     ])
 
