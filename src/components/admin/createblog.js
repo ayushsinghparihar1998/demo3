@@ -30,10 +30,9 @@ import ELPRxApiService from "../../common/services/apiService";
 import constant from "../../constant"
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
 
 class Createblogs extends Component {
-
 
   state = {
     isUploading: false,
@@ -127,7 +126,7 @@ class Createblogs extends Component {
                         <Form.Control onChange={(e) => this.setState({ title: e.target.value })} type="text" className="inputTyp2" />
 
                       </Form.Group>
-                      <Form.Group controlId="exampleForm.ControlTextarea1">
+                      <Form.Group controlId="exampleForm.ControlTextarea1"> 
                         <Form.Label className="col14 fw600 fs18">Description</Form.Label>
                         <CKEditor
                           config={{

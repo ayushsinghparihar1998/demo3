@@ -264,6 +264,7 @@ class ProfessionalSignup extends Component {
                 Date of birth *
               </Form.Label>
               <Row>
+
                 <Col md={4}>
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <DayPicker
@@ -281,7 +282,7 @@ class ProfessionalSignup extends Component {
                       }}
                     />
                     <div className="error alignLeft">{errors.day}</div>
-                  </Form.Group>
+                  </Form.Group> 
                 </Col>
 
                 <Col md={4}>
@@ -319,7 +320,9 @@ class ProfessionalSignup extends Component {
                     <div className="error alignLeft">{errors.year}</div>
                   </Form.Group>
                 </Col>
+
               </Row>
+
               <div className="fs13 fw300 col27">
                 Please make sure you enter the correct date. You will be unable
                 to change this later.

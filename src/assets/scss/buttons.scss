@@ -138,20 +138,20 @@
     padding: 0 2.5rem;
   }
   
-  .btnTyp5 {  
+  .btnTyp5 {         
     font-weight: 600;
     font-size: $fs15;
     border-radius: 40px;
-    // border-color    : $col26 !important;
-    // background-color: $col26 !important; 
-    border-color    : $col10 !important;
-    background-color: $col10 !important;
+    border-color    : $col26 !important;
+    background-color: $col26 !important; 
+    // border-color    : $col10 !important;
+    // background-color: $col10 !important;
     color           : $col18 !important;
     box-shadow      : none !important;
     height: 3.5rem; 
     padding: 0 2.5rem;
     font-size: $fs20; 
-    text-transform: uppercase;   
+    text-transform: uppercase;     
   }
 
   .btnTyp5.bTyp5 {

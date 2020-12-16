@@ -5,8 +5,10 @@ import Footer from '../core/footer';
 import { connect } from 'react-redux';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import moment from 'moment'; 
-
 import { Link } from 'react-router-dom';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+
 class ProfessionalSignup extends Component {
   render() { 
     return (
@@ -111,7 +113,7 @@ class ProfessionalSignup extends Component {
                       </Form.Group>
                     </Col>
                     
-                    <Col md={6}>
+                    <Col md={6}> 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14">
                           Language
@@ -123,23 +125,8 @@ class ProfessionalSignup extends Component {
                         </Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col md={6}>   
-                      <Form.Group>   
-                        <Form.Label className="fs20 fw600 col14">
-                         Qualification  
-                        </Form.Label> 
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Your Qualification"
-                          className="inputTyp2"
-                          id="outlined-email"
-                          variant="outlined"
-                          name="qualification" 
-                        />
-                      </Form.Group>
-                    </Col> 
-
-                    <Col md={6}>    
+                    
+                    <Col md={12}>    
                       <Form.Group>    
                         <Form.Label className="fs20 fw600 col14">
                         Keyword       
@@ -180,13 +167,68 @@ class ProfessionalSignup extends Component {
                       </Form.Group> 
                     </Col>
 
+                    <Col md={12}> 
+                        <Form.Group controlId="exampleForm.ControlTextarea1">   
+                          <Form.Label className="col14 fw600 fs18">Qualification</Form.Label>
+                          <CKEditor
+                            config={{
+                              height:500
+                            }}
+                            editor={ClassicEditor}
+                            // data="<p>Hello from CKEditor 5!</p>"
+                            
+                            onReady={editor => {
+                              // You can store the "editor" and use when it is needed.
+                              console.log('Editor is ready to use!', editor);
+                            }}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              this.setState({ description: data })
+                            }}
+                            onBlur={(event, editor) => {
+                              console.log('Blur.', editor);
+                            }}
+                            onFocus={(event, editor) => {
+                              console.log('Focus.', editor);
+                            }}
+                          />
+                          {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                      </Form.Group>
+                    </Col> 
                     <Col md={12}>  
-                      <Form.Group controlId="exampleForm.ControlTextarea1">
+                      {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">Biography</Form.Label>  
                         <Form.Control as="textarea" rows={3} className="inputTyp2 text_bio"/> 
-                      </Form.Group> 
+                      </Form.Group>  */}
+
+                      <Form.Group controlId="exampleForm.ControlTextarea1">   
+                          <Form.Label className="col14 fw600 fs18">Biography</Form.Label>
+                          <CKEditor
+                            config={{
+                              height:500
+                            }}
+                            editor={ClassicEditor}
+                            // data="<p>Hello from CKEditor 5!</p>"
+                            
+                            onReady={editor => {
+                              // You can store the "editor" and use when it is needed.
+                              console.log('Editor is ready to use!', editor);
+                            }}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              this.setState({ description: data })
+                            }}
+                            onBlur={(event, editor) => {
+                              console.log('Blur.', editor);
+                            }}
+                            onFocus={(event, editor) => {
+                              console.log('Focus.', editor);
+                            }}
+                          />
+                          {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                      </Form.Group>
                     </Col>
-                     
+
                     <Col md={12}>
                       <Button
                         className="btnTyp5 mt-3">Signup</Button> 
