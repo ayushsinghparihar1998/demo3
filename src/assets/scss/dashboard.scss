@@ -221,7 +221,9 @@
 
                 .col11.fw400 { 
                     height: 36px; 
-                    overflow: hidden;    
+                    overflow: hidden;  
+                    display: flex;
+                    align-items: center;   
                 }
             }
             .test_eat {

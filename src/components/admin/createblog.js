@@ -119,7 +119,7 @@ class Createblogs extends Component {
                               <><strong className="col23">Add file</strong> or drop files here</>
                           }
                         </div>
-                      </Form.Group>
+                      </Form.Group> 
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="col14 fw600 fs18">Title of the blog</Form.Label>

@@ -75,7 +75,8 @@ import ProfessionalSignup from "../components/professional/professionalSignup";
 import ProfessionalList from "../components/admin/professionalList"; 
 import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain"; 
-import DomainDetail from "../components/admin/domainDetail";  
+import DomainDetail from "../components/admin/domainDetail";
+import DomainListing from "../components/admin/domenListing";   
 
 const user =
   getLocalStorage("userInfo") ||
@@ -149,6 +150,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/corporateMember" component={CorporateMember} />
           <PublicRoute path="/addDomain" component={AddDomain} />       
           <PublicRoute path="/domainDetail" component={DomainDetail} /> 
+          <PublicRoute path="/domainListing" component={DomainListing} />       
 
           <PublicRoute path="/helpcenter" component={Helpcenter} /> 
           <PublicRoute path="/blockuser" component={Blockuser} />            

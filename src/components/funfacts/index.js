@@ -21,7 +21,7 @@ const FunFact = () => {
                     <Row>
                         <Col md={9} lg={10} xs={10}>
                             {/* <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> */}
-                            <div className="col11 fw400 fs13">Cranberries will bounce like rubber balls when they're ripe.</div>
+                            <div className="col11 fw400 fs13">Bananas are berries... and strawberries aren't!</div>
                         </Col>
                         <Col md={3} lg={2} xs={2}> 
                             <div className="position-relative">
@@ -34,7 +34,8 @@ const FunFact = () => {
                     <Row>
                         <Col md={9} lg={10} xs={10}>
                             {/* <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> */}
-                            <div className="col11 fw400 fs13">Dilated Pupils Show Your Attraction to Someone And Makes You More Attractive.</div>
+                            <div className="col11 fw400 fs13">Holding a Loved one’s Hand Relieves Pain and Stress.
+                            </div>
                         </Col>
                         <Col md={3} lg={2} xs={2}>
                             <div className="position-relative">
@@ -47,7 +48,7 @@ const FunFact = () => {
                     <Row>
                         <Col md={9} lg={10} xs={10}>
                             {/* <div className="fs15 fw500 col70 mb-1 mt-2">Did you know?</div> */}
-                            <div className="col11 fw400 fs13">There are more than 100 styles of yoga.</div>
+                            <div className="col11 fw400 fs13">Meditation can be a more effective painkiller than morphine.</div> 
                         </Col>
                         <Col md={3} lg={2} xs={2}> 
                             <div className="position-relative">

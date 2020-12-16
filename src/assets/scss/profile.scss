@@ -659,6 +659,15 @@
     background: #fff;
     padding: 20px 30px;
     min-height: 100vh;    
+    .domainSave {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .btnTyp5 {
+            height: 3rem;
+        } 
+    }
 
     table {      
         tr { 
