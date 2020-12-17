@@ -81,22 +81,7 @@ class Myprofile extends Component {
                       <div className="leftprofile">
                         <Image src={proffDetail.u_image} alt="" />
                       </div>
-                    </Col>
-                    {/* cat_array: []
-cat_child_array: (2) ["Luv", "Eat"]
-email: "prostaging7@yopmail.com"
-id: "453"
-u_bio: ""
-u_birthdate: "22/08/1992"
-u_education: "B.E. From CS branch"
-u_hourly_fee: "INR 1000"
-u_image: "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-u_lang: "Hindi"
-u_location: "Indore"
-u_mobile: "918817493061"
-u_name: "prostaging7"
-u_therapy_style: "test me"
-u_work_experience: "5 Years" */}
+                    </Col>                    
                     <Col md={8}>
                       <div className="rightprofile">
                         <div className="fs24 col3 fw600 mb-1">
@@ -118,16 +103,13 @@ u_work_experience: "5 Years" */}
                         </div>
 
                         <div className="col3 fw500 mt-1 mb-2">
-                          Age:
+                          DOB:
                           <span className="col14 fw400 ml-2">
-                            {proffDetail.u_age}
+                            {proffDetail.u_birthdate}
                           </span>
                         </div>
 
-                        {/* <div className="col3 fw500 mt-1 mb-2">Qualifications: 
-                                                <span className="col14 fw400 ml-2">Master of Arts in Counselling Psychology, Columbia University</span></div>  */}
-
-                        <div className="d-flex mt-4">
+                         <div className="d-flex mt-4">
                           <Button
                             variant="primary"
                             type="submit"

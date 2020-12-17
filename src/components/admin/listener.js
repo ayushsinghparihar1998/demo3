@@ -1354,6 +1354,26 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
+                      </Row>
+                      <Row>
+                        <Col md="5">
+                          <Form.Group
+                            controlId="formBasicCheckbox2"
+                            className="row"
+                          >
+                            <Form.Check
+                              type="checkbox"
+                              className="checkone"
+                              label="Active"
+                            />
+                            <Form.Check
+                              type="checkbox"
+                              className="checktwo"
+                              label="Inactive"
+                            />
+                          </Form.Group>
+                        </Col>
+
                         <Col md="2">
                           <Button variant="primary process_btn" type="submit">
                             search
@@ -1456,7 +1476,10 @@ class Adminlistener extends Component {
                                       <a
                                         className="col10"
                                         onClick={() =>
-                                          this.changepath("/professionalDetails/admin/" + item.id)
+                                          this.changepath(
+                                            "/professionalDetails/admin/" +
+                                              item.id
+                                          )
                                         }
                                       >
                                         Read more...
