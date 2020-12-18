@@ -121,7 +121,7 @@ class Chatsearch extends Component {
                                     </Button>
                                     </Col>
                                 </Row>
-                            </div>
+                            </div> 
 
                             <div className="search-listing">   
                                 <Row>

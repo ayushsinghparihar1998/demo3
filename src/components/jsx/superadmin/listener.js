@@ -67,8 +67,8 @@ class Adminlistener extends Component {
                 <div className="profile_layout pt-4 pb-5">
                     <Container>
                         <Row>
-                            <Col md={3} className="pr-1">
-                                <div className="adminsidebar">
+                            <Col md={3} className="pr-1"> 
+                                <div className="adminsidebar"> 
                                     <div className="inner_area">
                                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
@@ -99,12 +99,12 @@ class Adminlistener extends Component {
                                     </div>
                                 </div>
                             </Col> 
-                            <Col md={9} className="pl-1"> 
+                            <Col md={9} className="pl-1">   
                                 {profileListing && profileListing.length > 0 &&
                                     profileListing.map((item, index) => {
                                         let categryLen = item.uc_cat_name ? item.uc_cat_name.length : 0;
                                         return (
-                                            <div className="adminlistener p-4 mb-3">
+                                            <div className="adminlistener p-4 mb-3"> 
                                                 <div className="d-flex text-left">
                                                     <div className="mr-2 pt-1">
                                                         <Image src={item.u_image ? item.u_image : Requestuser} alt="" className="r50" />

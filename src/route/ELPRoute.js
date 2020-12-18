@@ -77,6 +77,10 @@ import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain"; 
 import DomainDetail from "../components/admin/domainDetail";
 import DomainListing from "../components/admin/domenListing";   
+import SessionRequest from "../components/admin/sessionRequest";
+import CorporateLogin from "../components/professional/corporateLogin"; 
+import CorporateDashboard from "../components/professional/corporateDashboard"; 
+import ListenerBrowse from "../components/professional/listenerBrowse";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -150,10 +154,15 @@ class ELPRoute extends Component {
           <PublicRoute path="/corporateMember" component={CorporateMember} />
           <PublicRoute path="/addDomain" component={AddDomain} />       
           <PublicRoute path="/domainDetail" component={DomainDetail} /> 
-          <PublicRoute path="/domainListing" component={DomainListing} />       
+          <PublicRoute path="/domainListing" component={DomainListing} />
+          <PublicRoute path="/sessionRequest" component={SessionRequest} />                           
+          <PublicRoute path="/corporateLogin" component={CorporateLogin} />
+          <PublicRoute path="/corporateDashboard" component={CorporateDashboard} />
+          <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />   
 
           <PublicRoute path="/helpcenter" component={Helpcenter} /> 
-          <PublicRoute path="/blockuser" component={Blockuser} />            
+          <PublicRoute path="/blockuser" component={Blockuser} />
+          
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
