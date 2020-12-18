@@ -409,7 +409,7 @@ class Signup extends Component {
                                                                     <Form.Check name={'name' + subIndex} onChange={e => { this.handleChangeQuestion(e, index, subIndex) }}
                                                                         type="checkbox" checked={elem.active ? elem.active : false} className="fw300 fs17 col28 mt-1 checkboxTyp1" label={elem.name} />
                                                                     {index} === {subIndex}
-                                                                </Form.Group>
+                                                                </Form.Group> 
                                                             )
                                                         })}
                                                 </div>
