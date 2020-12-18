@@ -29,6 +29,7 @@ class ProfessionalSignup extends Component {
                          upload Picture
                         </Form.Label> 
                         <Form.File id="exampleFormControlFile1" className="inputTyp2" />  
+                        <div className="error alignLeft d-none">Upload Pic</div>  
                       </Form.Group>
                     </Col>
 
@@ -44,8 +45,8 @@ class ProfessionalSignup extends Component {
                           id="outlined-email"
                           variant="outlined"
                           name="name"
-                         
-                        />
+                        /> 
+                        <div className="error alignLeft d-none">Enter Name</div>
                       </Form.Group>
                     </Col>
 
@@ -60,9 +61,9 @@ class ProfessionalSignup extends Component {
                           className="inputTyp2"
                           id="outlined-email"
                           variant="outlined"
-                          name="email"
-                         
+                          name="email" 
                         />
+                        <div className="error alignLeft d-none">Email Address</div>   
                       </Form.Group>
                     </Col>
                     <Col md={6}>
@@ -77,8 +78,8 @@ class ProfessionalSignup extends Component {
                           id="outlined-email"
                           variant="outlined"
                           name="phone"
-                         
                         />
+                        <div className="error alignLeft d-none">Enter Phone</div> 
                       </Form.Group>
                     </Col> 
                     <Col md={6}>
@@ -88,16 +89,17 @@ class ProfessionalSignup extends Component {
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          placeholder="Enter Work Experience "
+                          placeholder="Enter Work Experience" 
                           className="inputTyp2"
                           id="outlined-email"
                           variant="outlined"
                           name="name" 
                         />
+                        <div className="error alignLeft d-none">Enter Work Experience</div> 
                       </Form.Group>
                     </Col>
 
-                    <Col md={6}> 
+                    <Col md={6}>  
                       <Form.Group>  
                         <Form.Label className="fs20 fw600 col14">
                          Age 
@@ -110,6 +112,7 @@ class ProfessionalSignup extends Component {
                           variant="outlined"
                           name="age" 
                         />
+                        <div className="error alignLeft d-none">Enter Your Age</div> 
                       </Form.Group>
                     </Col>
                     
@@ -123,6 +126,7 @@ class ProfessionalSignup extends Component {
                             <option>Hindi</option>
                             <option>Marathi</option>
                         </Form.Control>
+                        <div className="error alignLeft d-none">Language</div>  
                       </Form.Group>
                     </Col>
                     
@@ -139,6 +143,8 @@ class ProfessionalSignup extends Component {
                           variant="outlined"
                           name="booksession" 
                         />
+                        <div className="error alignLeft d-none">Keyboard</div> 
+                        
                       </Form.Group> 
                     </Col> 
                     
@@ -151,7 +157,7 @@ class ProfessionalSignup extends Component {
                         <Col md={4}>
                             <Form.Group controlId="formBasicCheckbox">
                               <Form.Check type="checkbox" label="EAT" className="checkboxTyp1" /> 
-                            </Form.Group>
+                            </Form.Group> 
                         </Col>
                         <Col md={4}>
                             <Form.Group controlId="formBasicCheckboxtwo">
@@ -164,6 +170,7 @@ class ProfessionalSignup extends Component {
                             </Form.Group>
                         </Col>
                         </Row>
+                        <div className="error alignLeft d-none">Select Category</div> 
                       </Form.Group> 
                     </Col>
 
@@ -193,6 +200,7 @@ class ProfessionalSignup extends Component {
                             }}
                           />
                           {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                          <div className="error alignLeft d-none">Enter Your Qualification</div> 
                       </Form.Group>
                     </Col> 
                     <Col md={12}>  
@@ -226,6 +234,7 @@ class ProfessionalSignup extends Component {
                             }}
                           />
                           {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                          <div className="error alignLeft d-none">Enter Your Biography</div>
                       </Form.Group>
                     </Col>
 
