@@ -350,7 +350,7 @@ export default {
       u_mobile: "",
       u_state: "",
       u_image: "",
-      u_cover_image: ""
+      u_cover_image: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -454,7 +454,7 @@ export default {
     method: "POST",
     data: {
       password: "",
-      old_password: ""
+      old_password: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -594,9 +594,7 @@ export default {
   getListenerCategoryList: {
     url: "elp/getcategories",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
@@ -636,38 +634,31 @@ export default {
     url: "elp/superadmin_blockreasonchangestatus",
     method: "POST",
     data: {
-      br_id: '',
-      br_status: '',
+      br_id: "",
+      br_status: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
   },
 
-
   listnerDashboardDetail: {
     url: "elp/listner_dashboard",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: false,
   },
   customerDashboardDetail: {
     url: "elp/customer_dashboard",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: false,
   },
   professionalDashboardDetail: {
     url: "elp/professional_dashboard",
     method: "GET",
-    data: {
-
-    },
+    data: {},
     showResultMessage: false,
     showErrorMessage: false,
   },
@@ -678,6 +669,37 @@ export default {
     data: {},
     showResultMessage: true,
     showErrorMessage: true,
-  }
-
+  },
+  superadminprofessionallisting: {
+    url: "elp/superadminprofessionallisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      name: "",
+      status: "",
+      keyword: "",
+      category: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadminprofessionaluserdetail: {
+    url: "elp/superadminprofessionaluserdetail",
+    method: "POST",
+    data: {
+      userid: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  corporateprofessionaluserdetail: {
+    url: "elp/corporateprofessionaluserdetail",
+    method: "POST",
+    data: {
+      userid: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };

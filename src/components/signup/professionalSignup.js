@@ -98,7 +98,7 @@ class ProfessionalSignup extends Component {
                     //setLocalStorage("userInfoProff", result.data.data);
 
                     setTimeout(() => {
-                        this.props.handleSet()
+                        // this.props.handleSet()
                         this.props.history.push({ pathname: "/professionalLogin" });
                     }, 1000);
 
@@ -168,7 +168,7 @@ class ProfessionalSignup extends Component {
             pathname: 'login',
             state: { roleType: this.state.roleType }
         });
-        this.props.handleSet()
+        // this.props.handleSet()
     }
     handleRemoveCategory = (e, idx) => {
         let listOfCategory = this.state.listOfCategory;
