@@ -33,9 +33,10 @@ class ProfessionalSignup extends Component {
       u_work_experience: "",
       u_education: "",
       u_image: "",
+      u_area_service: "",
+
       professional_keyword: [],
       professional_cat_name: [],
-      u_area_service: "",
       errors: {},
     };
   }
@@ -59,7 +60,9 @@ class ProfessionalSignup extends Component {
     this.setState(
       {
         [name]:
-          name == "phoneNumber" ? value.replace(/[^0-9]/g, "") : value.trim(),
+          name == "u_mobile" || name == "u_birthdate"
+            ? value.replace(/[^0-9]/g, "")
+            : value.trim(),
       },
       () => {
         console.log(this.state);
@@ -81,55 +84,70 @@ class ProfessionalSignup extends Component {
         showLoader: true,
       });
       let data = {
-        firstName: this.state.firstName ? this.state.firstName.trim() : "",
-        lastName: this.state.lastName ? this.state.lastName.trim() : "",
+        screen_name: this.state.screen_name
+          ? this.state.screen_name.trim()
+          : "",
+        u_birthdate: this.state.u_birthdate,
+        screen_name: this.state.screen_name,
+        u_lang: this.state.u_lang,
+        u_mobile: this.state.u_mobile,
+
+        u_location: "",
+        device_token: "",
+        device_type: "",
+        type: "",
+        u_therapy_style: "",
+        u_hourly_fee: "",
+        u_school_code: "",
+
+        u_work_experience: this.state.u_work_experience,
+        u_education: this.state.u_education,
+        u_image: this.state.u_image,
+        u_area_service: this.state.u_area_service,
+
         email: this.state.email ? this.state.email.toLowerCase().trim() : "",
         password: this.state.password ? this.state.password.trim() : "",
-        organisation: this.state.organisationName
-          ? this.state.organisationName.trim()
-          : "",
-        phone_number: this.state.phoneNumber
-          ? this.state.phoneNumber.trim()
-          : "",
-        type: this.state.roleType,
+        u_lang: this.state.u_lang ? this.state.u_lang.trim() : "",
+        u_mobile: this.state.u_mobile ? this.state.u_mobile.trim() : "",
       };
+      console.log(data);
 
-      ELPViewApiService("signup", data)
-        .then((result) => {
-          if (result && result.data && result.data.status === "SUCCESS") {
-            setTimeout(
-              function () {
-                // if (this.state.roleType == CONSTANTS.ROLES.VENDOR) {
-                //   this.props.history.push("/vendor/login");
-                // } else {
-                //   this.props.history.push("/organizer/login");
-                // }
-              }.bind(this),
-              3000
-            );
-            this.setState({
-              firstName: "",
-              lastName: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-              phoneNumber: "",
-              organisationName: "",
-              showLoader: false,
-              errors: {},
-            });
-          } else {
-            this.setState({
-              showLoader: false,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.setState({
-            showLoader: false,
-          });
-        });
+      // ELPViewApiService("signup", data)
+      //   .then((result) => {
+      //     if (result && result.data && result.data.status === "SUCCESS") {
+      //       setTimeout(
+      //         function () {
+      //           // if (this.state.roleType == CONSTANTS.ROLES.VENDOR) {
+      //           //   this.props.history.push("/vendor/login");
+      //           // } else {
+      //           //   this.props.history.push("/organizer/login");
+      //           // }
+      //         }.bind(this),
+      //         3000
+      //       );
+      //       this.setState({
+      //         firstName: "",
+      //         lastName: "",
+      //         email: "",
+      //         password: "",
+      //         confirmPassword: "",
+      //         phoneNumber: "",
+      //         organisationName: "",
+      //         showLoader: false,
+      //         errors: {},
+      //       });
+      //     } else {
+      //       this.setState({
+      //         showLoader: false,
+      //       });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     this.setState({
+      //       showLoader: false,
+      //     });
+      //   });
     } else {
       this.setState({
         showLoader: false,
@@ -189,7 +207,7 @@ class ProfessionalSignup extends Component {
                       <Form.Control
                         type="text"
                         placeholder="Enter Name"
-                        isInvalid={errors.screen_name ? true : false}
+                        // isInvalid={errors.screen_name ? true : false}
                         name="screen_name"
                         value={this.state.screen_name}
                         onChange={(e) => this.handleChange(e)}
@@ -213,6 +231,8 @@ class ProfessionalSignup extends Component {
                         id="outlined-email"
                         variant="outlined"
                         name="email"
+                        value={this.state.email}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </Form.Group>
                   </Col>
@@ -227,7 +247,9 @@ class ProfessionalSignup extends Component {
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="phone"
+                        name="u_mobile"
+                        value={this.state.u_mobile}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </Form.Group>
                   </Col>
@@ -242,21 +264,25 @@ class ProfessionalSignup extends Component {
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="name"
+                        name="u_birthdate"
+                        value={this.state.u_birthdate}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </Form.Group>
                   </Col>
 
                   <Col md={6}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age</Form.Label>
+                      <Form.Label className="fs20 fw600 col14">DOB</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter Your Age"
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="age"
+                        name="u_birthdate"
+                        value={this.state.u_birthdate}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </Form.Group>
                   </Col>
@@ -266,10 +292,15 @@ class ProfessionalSignup extends Component {
                       <Form.Label className="fs20 fw600 col14">
                         Language
                       </Form.Label>
-                      <Form.Control as="select" className="selectTyp1">
+                      <Form.Control
+                        as="select"
+                        className="selectTyp1"
+                        name="u_lang"
+                        value={this.state.u_lang}
+                        onChange={(e) => this.handleChange(e)}
+                      >
                         <option>English</option>
                         <option>Hindi</option>
-                        <option>Marathi</option>
                       </Form.Control>
                     </Form.Group>
                   </Col>
@@ -285,7 +316,9 @@ class ProfessionalSignup extends Component {
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="booksession"
+                        name="professional_keyword"
+                        value={this.state.professional_keyword}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </Form.Group>
                   </Col>
@@ -345,7 +378,7 @@ class ProfessionalSignup extends Component {
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({ description: data });
+                          this.setState({ u_education: data });
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -380,7 +413,7 @@ class ProfessionalSignup extends Component {
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({ description: data });
+                          this.setState({ u_bio: data });
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -396,7 +429,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}>
                     <Button
                       className="btnTyp5 mt-3"
-                      onClick={() => this.isValid()}
+                      onClick={() => this.handleSubmit()}
                     >
                       Signup
                     </Button>
