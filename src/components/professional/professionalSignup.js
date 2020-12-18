@@ -336,7 +336,7 @@ class ProfessionalSignup extends Component {
                     </Form.Group>
                   </Col>
 
-                  <Col md={12}>
+                  <Col md={12}> 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
                         Qualification
@@ -386,7 +386,7 @@ class ProfessionalSignup extends Component {
 
                         onReady={(editor) => {
                           // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor);
+                          console.log("Editor is ready to use!", editor); 
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
@@ -424,3 +424,6 @@ class ProfessionalSignup extends Component {
   }
 }
 export default ProfessionalSignup;
+
+
+

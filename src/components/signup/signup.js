@@ -192,7 +192,7 @@ class Signup extends Component {
                     An email will be sent to verify your account. We won’t share
                     your email address with anyone.
                   </div>
-                  <Form.Control
+                  <Form.Control 
                     type="email"
                     placeholder="Enter email"
                     className="inputTyp2"

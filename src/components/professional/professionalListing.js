@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal, } from "react-bootstrap";
+import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Ritikaimg from "../../assets/images/Ritika.png";
@@ -16,8 +16,12 @@ import moment from "moment";
 // import "react-datepicker/dist/react-datepicker.css";
 
 // import React, { useState } from "react";
-import DatePicker from "react-datepicker"; 
-import "react-datepicker/dist/react-datepicker.css";   
+// import DatePicker from "react-datepicker"; 
+// import "react-datepicker/dist/react-datepicker.css";   
+
+// import DatePicker from "react-datepicker"; 
+// import "react-datepicker/dist/react-datepicker.css";
+
 
 // const [selectedDate, setSelectedDate] = useState(null);
 // const [startDate, setStartDate] = useState(new Date());   
@@ -29,6 +33,7 @@ class ProfessionalLsting extends Component {
           show3: false,
         }
       } 
+
       bookSessionOpen = () => {
         this.setState({ show3: true });
       };
@@ -130,16 +135,18 @@ class ProfessionalLsting extends Component {
                     <Modal.Body>      
                         <Container> 
                             <div className="layout_box mt-3 mb-4">
-                                <div class="col3 fs30 fw600 mb-4 pb-1">Add Scheduled Listening Shift</div> 
+                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div> 
                                 <Form> 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Title</Form.Label>
-                                        <Form.Control type="text" placeholder="title" className="inputTyp2" /> 
+                                        <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
+                                        <Form.Control type="text" className="inputTyp2" /> 
+                                        <div className="error alignLeft d-none">Enter Professional Email</div>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Issue</Form.Label> 
-                                        <Form.Control type="text" placeholder="" className="inputTyp2" /> 
+                                        <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label> 
+                                        <Form.Control type="text" className="inputTyp2" />
+                                        <div className="error alignLeft d-none">Enter Appointment Subject</div> 
                                     </Form.Group>
 
                                     <Form.Group>
@@ -156,30 +163,35 @@ class ProfessionalLsting extends Component {
                                         {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
                                          
                                     </Form.Group>
+
+                                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label className="fs20 fw600 col14">Description</Form.Label> 
+                                        <Form.Control as="textarea" rows={3} className="inputTyp2 cate2" />
+                                        <div className="error alignLeft d-none">Enter Description</div> 
+                                    </Form.Group>
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Starting at:</Form.Label>
-                                        <Form.Control type="text" placeholder="2.00 am" className="inputTyp2" /> 
+                                        <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
+
+                                        {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" /> */}
+                                        {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
+
+                                        <Form.Control type="text" className="inputTyp2" />
+
+                                        <div className="error alignLeft d-none">Enter Appointment Date</div>  
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Lasting: </Form.Label>
+                                        <Form.Label className="fs20 fw600 col14">Appointment Time </Form.Label>
                                         <Form.Control as="select" className="selectTyp1">             
                                             <option>1 Hour</option>
                                             <option>2 Hour</option>
                                             <option>3 Hour</option>
                                             <option>4 Hour</option>
                                             <option>5 Hour</option>
-                                        </Form.Control> 
+                                        </Form.Control>
+                                        <div className="error alignLeft d-none">Enter Appointment Time</div>
                                     </Form.Group>
-
-                                    <Form.Group controlId="formBasicEmail"> 
-                                        <Form.Label className="fs20 fw600 col14">Recurring: </Form.Label>
-                                        <Form.Control as="select" className="selectTyp1">             
-                                            <option>Daily</option>
-                                            <option>Weekly</option> 
-                                        </Form.Control> 
-                                    </Form.Group> 
-                                    
+                                                                              
                                     <Button variant="primary" type="submit" className="btnTyp5 mt-4">  
                                         Submit
                                     </Button> 
@@ -193,5 +205,5 @@ class ProfessionalLsting extends Component {
     }
 }
 
-export default ProfessionalLsting; 
+export default ProfessionalLsting;  
 
