@@ -33,7 +33,7 @@ class ListenerBrowse extends Component {
                       <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
                       </Col>
                       <Col lg={3} md={5}>
-                      <Form.Group>
+                      <Form.Group> 
                          <Form.Control
                             type="text"
                             placeholder="Find Keywords"

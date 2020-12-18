@@ -38,6 +38,7 @@ class CorporateLogin extends Component {
                     className="inputTyp2"
                     name="email"
                   />
+                  <div className="error alignLeft d-none">Email address</div>
                 </Form.Group>
 
                 <Form.Group className="mb-4 pb-2">       
@@ -47,10 +48,12 @@ class CorporateLogin extends Component {
                     placeholder="Password"
                     className="inputTyp2"
                   /> 
+                  <div className="error alignLeft d-none">Enter Password</div>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicCheckbox4" className="mb-4">  
                     <Form.Check type="checkbox" className="fw300 fs17 col28 mt-1 checkboxTyp1 text-left" label="Corporate Member" />   
+                    <div className="error alignLeft d-none">Corporate Member</div> 
                 </Form.Group>
 
                 <Button className="btnTyp4 mb-4">  

@@ -198,6 +198,7 @@ class ProfessionalSignup extends Component {
                         id="exampleFormControlFile1"
                         className="inputTyp2"
                       />
+                      <div className="error alignLeft d-none">Upload Pic</div>
                     </Form.Group>
                   </Col>
 
@@ -216,6 +217,7 @@ class ProfessionalSignup extends Component {
                         variant="outlined"
                         // name="name"
                       />
+                      <div className="error alignLeft d-none">Enter Name</div>
                     </Form.Group>
                   </Col>
 
@@ -234,6 +236,7 @@ class ProfessionalSignup extends Component {
                         value={this.state.email}
                         onChange={(e) => this.handleChange(e)}
                       />
+                      <div className="error alignLeft d-none">Email Address</div> 
                     </Form.Group>
                   </Col>
                   <Col md={6}>
@@ -251,6 +254,7 @@ class ProfessionalSignup extends Component {
                         value={this.state.u_mobile}
                         onChange={(e) => this.handleChange(e)}
                       />
+                      <div className="error alignLeft d-none">Enter Phone</div>
                     </Form.Group>
                   </Col>
                   <Col md={6}>
@@ -268,6 +272,7 @@ class ProfessionalSignup extends Component {
                         value={this.state.u_birthdate}
                         onChange={(e) => this.handleChange(e)}
                       />
+                      <div className="error alignLeft d-none">Enter Work Experience</div> 
                     </Form.Group>
                   </Col>
 
@@ -284,6 +289,7 @@ class ProfessionalSignup extends Component {
                         value={this.state.u_birthdate}
                         onChange={(e) => this.handleChange(e)}
                       />
+                      <div className="error alignLeft d-none">Enter Your Age</div>
                     </Form.Group>
                   </Col>
 
@@ -302,6 +308,7 @@ class ProfessionalSignup extends Component {
                         <option>English</option>
                         <option>Hindi</option>
                       </Form.Control>
+                      <div className="error alignLeft d-none">Language</div>
                     </Form.Group>
                   </Col>
 
@@ -320,6 +327,7 @@ class ProfessionalSignup extends Component {
                         value={this.state.professional_keyword}
                         onChange={(e) => this.handleChange(e)}
                       />
+                      <div className="error alignLeft d-none">Keyboard</div>
                     </Form.Group>
                   </Col>
 
@@ -357,6 +365,7 @@ class ProfessionalSignup extends Component {
                           </Form.Group>
                         </Col>
                       </Row>
+                      <div className="error alignLeft d-none">Select Category</div>
                     </Form.Group>
                   </Col>
 
@@ -387,7 +396,8 @@ class ProfessionalSignup extends Component {
                           console.log("Focus.", editor);
                         }}
                       />
-                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                       <div className="error alignLeft d-none">Enter Your Qualification</div>
                     </Form.Group>
                   </Col>
                   <Col md={12}>
@@ -422,7 +432,8 @@ class ProfessionalSignup extends Component {
                           console.log("Focus.", editor);
                         }}
                       />
-                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}  
+                       <div className="error alignLeft d-none">Enter Your Biography</div>
                     </Form.Group>
                   </Col>
 
