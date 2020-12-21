@@ -622,8 +622,12 @@
     .professor_search { 
         padding: 10px 30px 50px; 
         .checkone.form-check {   
-            padding-left: 1rem;
+            padding-left: 0; 
             margin-right: 20px;
+            label {
+                padding-left: 2.5rem;
+                font-size: 15px; 
+            }
         }
         .pro_cbtn {
             button.btnTyp5 {

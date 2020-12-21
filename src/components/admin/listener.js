@@ -1405,7 +1405,7 @@ class Adminlistener extends Component {
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div>
                       </Col>
-                      <Col md={4}>
+                      <Col md={4}>  
                         <div className="text-right pro_cbtn">
                           <Button
                             type="button"
@@ -1422,8 +1422,8 @@ class Adminlistener extends Component {
                     <div className="fs16 col1 mb-4">Search Professional</div>
                     <Form className="p_form">
                       <Row>
-                        <Col md="5">
-                          <Form.Group controlId="formBasicTexts">
+                        <Col md="6">
+                          <Form.Group controlId="formBasicTexts" className="mb-4"> 
                             <Form.Control
                               type="text"
                               placeholder="Search name"
@@ -1434,8 +1434,8 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
-                        <Col md="5">
-                          <Form.Group controlId="formBasickeyword">
+                        <Col md="6">
+                          <Form.Group controlId="formBasickeyword" className="mb-4">
                             <Form.Control
                               type="text"
                               placeholder="Search keyword"
@@ -1446,22 +1446,14 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
-                        <Col md="2">
-                          <Button
-                            variant="primary process_btn"
-                            type="button"
-                            onClick={() => this.searchSubmit()}
-                          >
-                            search
-                          </Button>
-                        </Col>
                       </Row>
                       <Row>
-                        <Col md="5">
+                        <Col md="6">
                           <Form.Group
                             controlId="formBasicCheckbox2"
-                            className="row"
+                            className="row mb-4 statusCat"
                           >
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-2">Status</span> 
                             {this.state.keywordArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1489,11 +1481,12 @@ class Adminlistener extends Component {
                           </Form.Group>
                         </Col>
 
-                        <Col md="5">
+                        <Col md="6">  
                           <Form.Group
                             controlId="formBasicCheckbox4"
-                            className="row"
+                            className="row mb-4 statusCat"
                           >
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-2">Category</span>
                             {this.state.catArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1513,13 +1506,21 @@ class Adminlistener extends Component {
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
-                            })}
+                            })} 
 
-                            {/* 4 : inactive
-1 : active
-"" : all */}
                           </Form.Group>
                         </Col>
+
+                        <Col md="4" className="mt-2">                 
+                          <Button
+                            variant="primary process_btn"
+                            type="button"
+                            onClick={() => this.searchSubmit()}
+                          >
+                            search
+                          </Button>
+                        </Col>
+
                       </Row>
 
                       <div className="checkCategory">
