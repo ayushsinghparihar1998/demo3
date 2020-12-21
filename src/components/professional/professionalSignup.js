@@ -233,7 +233,7 @@ class ProfessionalSignup extends Component {
       ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
           if (result && result.data && result.data.status ==="success") {
-            this.props.history.push("/professionalSignup");
+            this.props.history.push("/adminlistener");
             this.clear();
           } else {
             this.setState({

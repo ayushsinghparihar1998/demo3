@@ -751,7 +751,7 @@ export default {
     url: "elp/superadmineditprofessional",
     method: "POST",
     data: {
-      pro_id: "",
+      pro_u_id: "",
       email: "",
       u_birthdate: "",
       u_school_code: "",
