@@ -569,7 +569,7 @@ class ProfessionalSignup extends Component {
                                     className="checkboxTyp1"
                                     name={cat.pc_name}
                                     id={cat.pc_id}
-                                    handleCheck={this.state.eat}
+                                    // handleCheck={this.state.eat}
                                     // checked = {}
                                     onChange={(e) => this.handleCheck(e)}
                                   />

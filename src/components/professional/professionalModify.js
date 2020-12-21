@@ -13,6 +13,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
+import Item from "antd/lib/list/Item";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class ProfessionalSignup extends Component {
       luv: false,
       pray: false,
       errors: {},
+      proffCat: [],
       proffDetail: {},
     };
   }
@@ -52,7 +54,6 @@ class ProfessionalSignup extends Component {
   componentDidMount() {
     const { url } = this.props.match;
     //
-    this.getProffDetails("superadminprofessionaluserdetail");
     this.getProffCat();
   }
   getProffCat = () => {
@@ -65,14 +66,10 @@ class ProfessionalSignup extends Component {
               ? result.data.data.domain_list
               : [];
         }
-        this.setState(
-          {
-            proffCat,
-          },
-          () => {
-            console.log("ProffCat", this.state.proffCat);
-          }
-        );
+        this.setState({
+          proffCat,
+        });
+        this.getProffDetails("superadminprofessionaluserdetail");
       }
     );
   };
@@ -85,16 +82,38 @@ class ProfessionalSignup extends Component {
     ELPViewApiService(type, data).then((result) => {
       console.log("result", result);
       let proffDetail = [];
+      let proffCat = this.state.proffCat;
       if (result && result.status === 200) {
         proffDetail =
           result && result.data && result.data.data ? result.data.data[0] : [];
       }
+      let keyw = "";
+      proffDetail.professional_keyword.map((item) => {
+        keyw = keyw + item.pk_keyword + ",";
+      });
+      let cats = [];
+      proffDetail.professional_cat_name.map((item) => {
+        cats.push(item.pu_cat_id);
+      });
+      console.log("cats", cats);
+      proffCat.map((item) => {
+        if (cats.includes(item.pc_id)) {
+          item.flag = true;
+        } else {
+          item.flag = false;
+        }
+        return item;
+      });
+      keyw = keyw.trim(",");
+      proffDetail.professional_keyword = keyw;
       this.setState(
         {
           proffDetail,
+          proffCat,
         },
         () => {
           console.log("ProffDetail", this.state.proffDetail);
+          console.log("proffCat", this.state.proffCat);
         }
       );
     });
@@ -122,33 +141,19 @@ class ProfessionalSignup extends Component {
   };
 
   handleCheck = (event) => {
-    const { name, value, id } = event.target;
+    const { name, checked, value, id } = event.target;
 
-    let professional_cat_name = this.state.professional_cat_name;
-    let obj = {
-      pu_cat_name: name,
-      pu_cat_id: id,
-    };
-    let ind;
+    console.log("value , checked", value, checked);
+    let proffCat = this.state.proffCat;
+    var index = proffCat.findIndex((el) => el.pc_id == id);
+    proffCat[index].flag = checked;
 
-    var isInArray =
-      professional_cat_name.find(function (el) {
-        return el.pu_cat_id == id;
-      }) !== undefined;
-    var index = professional_cat_name.findIndex((el) => el.pu_cat_id == id);
-
-    console.log(isInArray, index);
-    if (index > -1) {
-      professional_cat_name.splice(index, 1);
-    } else {
-      professional_cat_name.push(obj);
-    }
     this.setState(
       {
-        professional_cat_name,
+        proffCat,
       },
       () => {
-        console.log(this.state);
+        console.log(this.state.proffCat);
       }
     );
   };
@@ -211,6 +216,13 @@ class ProfessionalSignup extends Component {
         showLoader: true,
       });
       let proffDetail = this.state.proffDetail;
+      let ar = [];
+      proffDetail.professional_keyword.split(",").map((item) => {
+        let obj = {
+          pk_keyword: item,
+        };
+        ar.push(obj);
+      });
       let data = {
         // screen_name: this.state.screen_name
         //   ? this.state.screen_name.trim()
@@ -239,8 +251,13 @@ class ProfessionalSignup extends Component {
         u_lang: proffDetail.u_lang ? proffDetail.u_lang.trim() : "",
         u_mobile: proffDetail.u_mobile ? proffDetail.u_mobile.trim() : "",
 
-        professional_keyword: proffDetail.professional_keyword,
-        professional_cat_name: proffDetail.professional_cat_name,
+        professional_keyword: ar,
+        professional_cat_name: this.state.proffCat.map((item) => {
+          if (item.flag == true) {
+            return item;
+          }
+          return null;
+        }),
       };
       console.log(data);
 
@@ -313,9 +330,9 @@ class ProfessionalSignup extends Component {
     let proffDetail = this.state.proffDetail;
     let data = {
       password: this.state.userPassword,
-      old_password: proffDetail.password ? proffDetail.password : "",
+      user_id: proffDetail.id ? proffDetail.id : "",
     };
-    this.props.actionChangePassword(data).then((result) => {
+    ELPViewApiService("superadminchangepassword", data).then((result) => {
       console.log("actionChangePassword", result);
     });
   };
@@ -623,8 +640,9 @@ class ProfessionalSignup extends Component {
                                     className="checkboxTyp1"
                                     name={cat.pc_name}
                                     id={cat.pc_id}
-                                    handleCheck={this.state.eat}
-                                    // checked = {}
+                                    handleCheck={cat.flag}
+                                    value={cat.flag}
+                                    checked={cat.flag == true}
                                     onChange={(e) => this.handleCheck(e)}
                                   />
                                 </Form.Group>
