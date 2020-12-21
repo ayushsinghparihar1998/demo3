@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Form, Modal } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
+import { actionChangePassword } from "../../common/redux/actions";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -299,6 +300,25 @@ class ProfessionalSignup extends Component {
       errors: {},
     });
   }
+  handlePasswordChange = (event) => {
+    const { name, value } = event.target;
+    if (event.target.value.length > 8) {
+      var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+      var test = reg.test(value.trim());
+    }
+    this.setState({ [name]: value.trim() });
+  };
+
+  handleResetPassword = () => {
+    let proffDetail = this.state.proffDetail;
+    let data = {
+      password: this.state.userPassword,
+      old_password: proffDetail.password ? proffDetail.password : "",
+    };
+    this.props.actionChangePassword(data).then((result) => {
+      console.log("actionChangePassword", result);
+    });
+  };
 
   handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -396,9 +416,9 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Password
+                        New Password
                       </Form.Label>
-                      <Form.Control
+                      {/* <Form.Control
                         type="text"
                         placeholder="Password"
                         className="inputTyp2"
@@ -408,7 +428,23 @@ class ProfessionalSignup extends Component {
                         value={proffDetail.password}
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
+                      /> */}
+                      <Form.Control
+                        type="password"
+                        name="userPassword"
+                        onChange={this.handlePasswordChange}
+                        value={this.state.userPassword}
+                        minLength="8"
+                        maxLength="15"
+                        inputProps={{ maxLength: 15 }}
+                        className="inputTyp2"
                       />
+                      <Button
+                        className="btnTyp11 ml-3"
+                        onClick={this.handleResetPassword}
+                      >
+                        Change Password
+                      </Button>
                       <div
                         className={`alignLeft  ${
                           errors.password ? "error " : "d-none "
@@ -762,4 +798,6 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default ProfessionalSignup;
+export default connect(null, {
+  actionChangePassword,
+})(ProfessionalSignup);
