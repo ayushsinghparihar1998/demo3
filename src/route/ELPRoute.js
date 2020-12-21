@@ -83,7 +83,8 @@ import SessionRequest from "../components/admin/sessionRequest";
 import CorporateLogin from "../components/professional/corporateLogin";
 import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
-import BlogUser from "../components/professional/blogUser";
+import BlogUser from "../components/professional/blogUser"; 
+import ProfessinalBlog from "../components/professional/professinalBlog";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -178,10 +179,11 @@ class ELPRoute extends Component {
             component={CorporateDashboard}
           />
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
+          <PublicRoute path="/blogUser" component={BlogUser} />        
+          <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
           <PublicRoute path="/blogUser" component={BlogUser} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
-          <PublicRoute path="/blockuser" component={Blockuser} />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
