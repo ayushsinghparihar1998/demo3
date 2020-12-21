@@ -72,13 +72,21 @@ class Adminlistener extends Component {
       name: "",
       status: "",
       keyword: "",
+      keywordArray: [
+        { name: "Active", value: 1, flag: true },
+        { name: "Inactive", value: 4, flag: true },
+      ],
+      catArray: [
+        { name: "Eat", value: 5, flag: true },
+        { name: "Luv", value: 2, flag: true },
+        { name: "Pray", value: 3, flag: true },
+      ],
       category: "'Pray','luv','eat'",
     };
   }
   componentDidMount() {
     // this.getListnerListing("", "listner", 1);
     this.getCustomerListing("", "user", 1);
-
   }
 
   getPager(total) {
@@ -360,6 +368,64 @@ class Adminlistener extends Component {
     });
   };
 
+  handleSearch = (e) => {
+    let { name, value } = e.target;
+    console.log(name, value);
+    this.setState({
+      [name]: value,
+    });
+  };
+  handleCheckSearch = (e, type) => {
+    let { name, value, checked } = e.target;
+    console.log(name, value, checked);
+    let keywordArray = this.state.keywordArray;
+    let catArray = this.state.catArray;
+    if (type == "cat") {
+      var index = catArray.findIndex((el) => el.value == value);
+      catArray[index].flag = checked;
+    } else {
+      var index = keywordArray.findIndex((el) => el.value == value);
+      keywordArray[index].flag = checked;
+    }
+    this.setState(
+      {
+        keywordArray,
+        catArray,
+      },
+      () => {
+        console.log(this.state.keywordArray);
+        console.log(this.state.catArray);
+      }
+    );
+  };
+  searchSubmit = () => {
+    console.log("this.state.name", this.state.name);
+    console.log("this.state.keyword", this.state.keyword);
+    console.log("this.state.status", this.state.status);
+    console.log("this.state.category", this.state.category);
+    let catval = [];
+    this.state.catArray.map((cat) => {
+      if (cat.flag == true) {
+        catval.push("'" + cat.name + "'");
+      }
+    });
+    let statusval = 0;
+    this.state.keywordArray.map((cat) => {
+      if (cat.flag == true) {
+        statusval = statusval + cat.value;
+      }
+    });
+    console.log("this.state.category", catval.join(","));
+    console.log("this.state.category", statusval);
+    this.getProffListing(
+      this.state.offset,
+      this.state.count,
+      this.state.name,
+      statusval > 4 ? "" : statusval,
+      this.state.keyword,
+      catval.join(",")
+    );
+  };
   getProffListing = (offset, count, name, status, keyword, category) => {
     console.log(
       "count, offset, name, status, keyword, category",
@@ -1327,6 +1393,9 @@ class Adminlistener extends Component {
                               type="text"
                               placeholder="Search name"
                               className="inputTyp2 inputpProcess"
+                              name="name"
+                              value={this.state.name}
+                              onChange={(e) => this.handleSearch(e)}
                             />
                           </Form.Group>
                         </Col>
@@ -1336,11 +1405,18 @@ class Adminlistener extends Component {
                               type="text"
                               placeholder="Search keyword"
                               className="inputTyp2 inputpProcess"
+                              name="keyword"
+                              value={this.state.keyword}
+                              onChange={(e) => this.handleSearch(e)}
                             />
                           </Form.Group>
                         </Col>
                         <Col md="2">
-                          <Button variant="primary process_btn" type="submit">
+                          <Button
+                            variant="primary process_btn"
+                            type="button"
+                            onClick={() => this.searchSubmit()}
+                          >
                             search
                           </Button>
                         </Col>
@@ -1351,18 +1427,62 @@ class Adminlistener extends Component {
                             controlId="formBasicCheckbox2"
                             className="row"
                           >
-                            <Form.Check
-                              type="checkbox"
-                              className="checkone checkboxTyp1 "
-                              label="Active"
-                              id="onechk"
-                            />
-                            <Form.Check
-                              type="checkbox"
-                              className="checktwo checkboxTyp1"
-                              label="Inactive"
-                              id="twochk"
-                            />
+                            {this.state.keywordArray.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className="checkone checkboxTyp1 "
+                                  label={item.name}
+                                  id={item.value}
+                                  name={item.name}
+                                  value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(e, "keyword")
+                                  }
+                                  handleCheck={item.flag}
+                                  value={item.value}
+                                  checked={item.flag == true}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
+
+                            {/* 4 : inactive
+1 : active
+"" : all */}
+                          </Form.Group>
+                        </Col>
+
+                        <Col md="5">
+                          <Form.Group
+                            controlId="formBasicCheckbox4"
+                            className="row"
+                          >
+                            {this.state.catArray.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className="checkone checkboxTyp1 "
+                                  label={item.name}
+                                  id={item.value}
+                                  name={item.name}
+                                  value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(e, "cat")
+                                  }
+                                  handleCheck={item.flag}
+                                  value={item.value}
+                                  checked={item.flag == true}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
+
+                            {/* 4 : inactive
+1 : active
+"" : all */}
                           </Form.Group>
                         </Col>
                       </Row>
@@ -1372,21 +1492,30 @@ class Adminlistener extends Component {
                           controlId="formBasicCheckbox1"
                           className="row"
                         >
-                          <Form.Check
+                          {/*         <Form.Check
                             type="checkbox"
                             className="checkone"
                             label="Eat"
+                            name="Eat"
+                            // handleCheck={this.state.Eat}
+                            onChange={(e) => this.handleCheck(e)}
                           />
                           <Form.Check
                             type="checkbox"
                             className="checktwo"
                             label="Luv"
+                            name="Luv"
+                            // handleCheck={this.state.Luv}
+                            onChange={(e) => this.handleCheck(e)}
                           />
                           <Form.Check
                             type="checkbox"
                             className="checkthree active"
                             label="Pray"
-                          />
+                            name="Pray"
+                            // handleCheck={this.state.Pray}
+                            onChange={(e) => this.handleCheck(e)}
+                          /> */}
                         </Form.Group>
                       </div>
                     </Form>{" "}
@@ -1487,7 +1616,7 @@ class Adminlistener extends Component {
                                           )
                                         }
                                       >
-                                      {"  "}Read more...
+                                        {"  "}Read more...
                                       </a>
                                     </span>
                                   </div>

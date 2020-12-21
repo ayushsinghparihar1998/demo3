@@ -112,8 +112,6 @@ class ProfessionalSignup extends Component {
       pu_cat_name: name,
       pu_cat_id: id,
     };
-    let ind;
-
     var isInArray =
       professional_cat_name.find(function (el) {
         return el.pu_cat_id == id;
