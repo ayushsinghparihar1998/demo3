@@ -291,10 +291,19 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         if (chkUserProfile === "user") {
           this.getCustomerListing(e, "user", pageNumber);
-        } else if (chkUserProfile === "professional") {
-          this.getProfessionalListing(e, "professional", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
         } else if (chkUserProfile === "listner") {
           this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing(
+            this.state.pageno,
+            this.state.count,
+            this.state.name,
+            this.state.status,
+            this.state.keyword,
+            this.state.category
+          );
         }
       }
     });
@@ -308,10 +317,19 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         if (chkUserProfile === "user") {
           this.getCustomerListing(e, "user", pageNumber);
-        } else if (chkUserProfile === "professional") {
-          this.getProfessionalListing(e, "professional", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
         } else if (chkUserProfile === "listner") {
           this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing(
+            this.state.pageno,
+            this.state.count,
+            this.state.name,
+            this.state.status,
+            this.state.keyword,
+            this.state.category
+          );
         }
       }
     });
@@ -359,10 +377,12 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         if (chkUserProfile === "user") {
           this.getCustomerListing(e, "user", pageNumber);
-        } else if (chkUserProfile === "professional") {
-          this.getProfessionalListing(e, "professional", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
         } else if (chkUserProfile === "listner") {
           this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing();
         }
       }
     });
@@ -417,6 +437,10 @@ class Adminlistener extends Component {
     });
     console.log("this.state.category", catval.join(","));
     console.log("this.state.category", statusval);
+    this.setState({
+      status: statusval > 4 ? "" : statusval,
+      category: catval.join(","),
+    });
     this.getProffListing(
       this.state.offset,
       this.state.count,
@@ -476,6 +500,7 @@ class Adminlistener extends Component {
           status,
           keyword,
           category,
+          activeProfile: "professional",
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -1370,19 +1395,29 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search"> 
-                    <Row className="mb-5"> 
-                        <Col md={8}>
-                            <div className="fs22 fw600 col10">Professional listing</div> 
-                            <div className="fs16 col14 fw300">Lorem Ipsum is simply dummy and typesetting industry.</div>  
-                        </Col>
-                        <Col md={4}>
-                            <div className="text-right pro_cbtn"> 
-                                <Button type="submit" className="btnTyp5">  
-                                    create professional   
-                                </Button>
-                            </div> 
-                        </Col>
+                  <div className="professor_search">
+                    <Row className="mb-5">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Professional listing
+                        </div>
+                        <div className="fs16 col14 fw300">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath("/professionalSignup")
+                            }
+                          >
+                            create professional
+                          </Button>
+                        </div>
+                      </Col>
                     </Row>
                     <div className="fs16 col1 mb-4">Search Professional</div>
                     <Form className="p_form">
@@ -1521,7 +1556,7 @@ class Adminlistener extends Component {
                     </Form>{" "}
                   </div>
                   {this.state.proffList &&
-                    this.state.proffList.map((item) => {
+                    this.state.proffList.map((item, index) => {
                       // return(
                       return (
                         <div className="adminlistener p-4 mb-3">
@@ -1536,7 +1571,54 @@ class Adminlistener extends Component {
                                     <div className="col1 fw600 fs18 pb-1">
                                       {item.u_name}
                                     </div>
+
                                     <div className="d-flex ml-auto">
+                                      <span className="pr-3 fs14 col47 fw400">
+                                        {item.u_status == "1" ? "Active" : "Inactive"}
+                                      </span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id={"custom-switch" + index}
+                                          name={"status" + index}
+                                          label=""
+                                          onClick={(e) => {
+                                            this.adminChangeUserStatus(
+                                              e,
+                                              item.id,
+                                              item.u_status
+                                            );
+                                          }}
+                                          checked={
+                                            item.u_status == "1" ? true : false
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.props.history.push(
+                                              `/professionalModify/${item.id}`
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span
+                                        onClick={(e) => {
+                                          this.adminUserDeleteConfirm(
+                                            e,
+                                            item.id,
+                                            item.u_name
+                                          );
+                                        }}
+                                      >
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+
+                                    {/* <div className="d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
                                         {item.u_status == 1
                                           ? "Active"
@@ -1552,7 +1634,7 @@ class Adminlistener extends Component {
                                           }
                                         />
                                       </span>
-                                      <span>    
+                                      <span>
                                         <Image
                                           src={Editicon}
                                           alt=""
@@ -1572,7 +1654,7 @@ class Adminlistener extends Component {
                                           }
                                         />
                                       </span>
-                                    </div>
+                                    </div>*/}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
