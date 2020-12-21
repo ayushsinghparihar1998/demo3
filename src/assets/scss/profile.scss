@@ -603,6 +603,7 @@
             border-radius: 20px;
             font-size: 15px;
             cursor: pointer;
+            margin-right: 10px; 
         }
     }
     .e_detai {
@@ -612,7 +613,10 @@
             min-width: 85px;
         }
         span {
-            display: block;  
+            display: block; 
+            a {
+                padding-left: 10px; 
+            }  
         }
     }
     .professor_search { 

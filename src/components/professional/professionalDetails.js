@@ -77,32 +77,14 @@ class Myprofile extends Component {
             <Col md={4} lg={3} className="pr-1"> 
                 <div className="adminsidebar">
                     <div className="inner_area">
-                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Links</div>
+                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Quick Links</div>
                         <div className="d-flex m-3 pb-3 border-bottom">
-                            <div className="">
-                                <div className="fs14 col28 fw500"> USER LISTING</div>
+                             <div>
+                                <div className="fs14 col28 fw500">
+                                    <a href="/adminlistener">Back</a>  
+                                </div>
                             </div>
                         </div> 
-                        <div className="d-flex m-3 pb-3 border-bottom">
-                            <div className="">
-                                <div className="fs14 col28 fw500"> PROFESSIONAL LISTING</div>
-                            </div>
-                        </div>
-                        <div className="d-flex m-3 pb-3 border-bottom">
-                            <div className=""> 
-                                <div className="fs14 col23 fw500"> LISTENER LISTING</div>
-                            </div>
-                        </div>
-                        <div className="d-flex m-3 pb-3 border-bottom">
-                            <div className="position-relative">
-                                <div className="fs14 col28 fw500"> LISTENER Q&A</div>
-                            </div>
-                        </div> 
-                        <div className="d-flex m-3 pb-3 border-bottom"> 
-                            <div className="position-relative">
-                                <div className="fs14 col28 fw500"> CATEGORY</div> 
-                            </div> 
-                        </div>
                     </div>
                 </div>
             </Col> 
@@ -234,3 +216,4 @@ class Myprofile extends Component {
 }
 
 export default Myprofile;
+
