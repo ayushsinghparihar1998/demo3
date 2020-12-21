@@ -5,7 +5,7 @@ import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, 
 import NavBar from "../core/nav"; 
 import Footer from "../core/footer"; 
 
-class CorporateMember extends Component {                                        
+class CorporateMember extends Component {                                         
     render() {  
         return (
             <div className="page__wrapper innerpage"> 
@@ -14,7 +14,7 @@ class CorporateMember extends Component {
                 </div>
                 <div className="profile_layout adminProfessinal pt-4 pb-5">  
                     <Container>
-                        <Row>
+                        <Row> 
                             <Col md={3} className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
