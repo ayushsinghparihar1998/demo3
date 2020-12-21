@@ -1333,7 +1333,20 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search">
+                  <div className="professor_search"> 
+                    <Row className="mb-5"> 
+                        <Col md={8}>
+                            <div className="fs22 fw600 col10">Professional listing</div> 
+                            <div className="fs16 col14 fw300">Lorem Ipsum is simply dummy and typesetting industry.</div>  
+                        </Col>
+                        <Col md={4}>
+                            <div className="text-right pro_cbtn"> 
+                                <Button type="submit" className="btnTyp5">  
+                                    create professional   
+                                </Button>
+                            </div> 
+                        </Col>
+                    </Row>
                     <div className="fs16 col1 mb-4">Search Professional</div>
                     <Form className="p_form">
                       <Row>
@@ -1440,7 +1453,7 @@ class Adminlistener extends Component {
                                           }
                                         />
                                       </span>
-                                      <span>  
+                                      <span>    
                                         <Image
                                           src={Editicon}
                                           alt=""

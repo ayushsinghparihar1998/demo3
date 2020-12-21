@@ -62,7 +62,7 @@ class DomainDetail extends Component {
                                                     <th>ACTION</th>             
                                                 </tr>
                                             </thead>
-                                            <tbody>       
+                                            <tbody>        
                                                 <tr>
                                                     <td>Mr. Andrew d’souza</td>  
                                                     <td>andrew@gmail.com</td>

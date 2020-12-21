@@ -13,6 +13,7 @@ import Searches from "../../assets/images/searches.svg";
 import Starblank from "../../assets/images/starempty.svg";
 import Starfill from "../../assets/images/starfill.svg";
 import Subscribes from "../../assets/images/subscribes.svg";
+import Searchbtn from "../../assets/images/search_btn.png";  
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
@@ -29,10 +30,10 @@ class ListenerBrowse extends Component {
              <div className="chatsearch w-100">
                 <div className="search-box">
                    <Row>
-                      <Col lg={3} md={4}>
+                      <Col lg={3} md={3}>
                       <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
                       </Col>
-                      <Col lg={3} md={5}>
+                      <Col lg={3} md={3}>
                       <Form.Group> 
                          <Form.Control
                             type="text"
@@ -45,13 +46,27 @@ class ListenerBrowse extends Component {
                       </Form.Group>
                       </Col>
                       <Col lg={3} md={3}>
-                      <Button className="btnTyp5 bTyp5">
-                      Search
-                      </Button>
+                      <Form.Group controlId="exampleForm.ControlSelect1" className="setSelectbtn">
+                           <Form.Control as="select" className="selectTyp1"> 
+                              <option>Sort By</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                           </Form.Control>
+                     </Form.Group>
+                      </Col>
+                      <Col lg={3} md={3}>
+                           <div className="searchByOrder">
+                              <Button className="btnTyp5 bTyp5">
+                                 Search
+                              </Button>
+                              <a className="ml-4"><Image src={Searchbtn} alt="Search bar" /></a> 
+                           </div>
                       </Col>
                    </Row>
                 </div>
-                <div className="search-listing">
+                <div className="search-listing"> 
                    <Row>
                       <Col lg={4} md={6}>
                       <div className="subscribes active">
@@ -194,7 +209,7 @@ class ListenerBrowse extends Component {
                          <Button
                             className="btnTyp12"
                             >
-                         show more
+                              show more
                          </Button>
                       </div>
                    </Row>
@@ -207,5 +222,5 @@ class ListenerBrowse extends Component {
     );
     }
     }
-    export default ListenerBrowse;
+    export default ListenerBrowse; 
 

@@ -429,7 +429,7 @@ class ProfessionalSignup extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
                       /> */}
-                      <div className="motivate_pwd">   
+                      <div className="motivate_pwd">    
                           <Form.Control
                             type="password"
                             name="userPassword"
