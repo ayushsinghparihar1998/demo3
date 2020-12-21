@@ -330,6 +330,18 @@ img {
     font-size: 14px;
 }
 
+@media (max-width: 1400px) { 
+    .main_baner {
+        .header2banner {
+            & > img {
+                bottom: -26px;
+                max-width: 560px;
+            }
+        } 
+    } 
+
+}
+
 /* media screen start */ 
 @media (max-width: 1200px) { 
     .happyPatient .italic_style .invertedtwo {  
