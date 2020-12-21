@@ -27,7 +27,7 @@ import Userotp from "../components/login/userotp";
 import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";
 
 import AdminLogin from "../components/admin/adminlogin";
-import Adminlistener from "../components/admin/listener"; 
+import Adminlistener from "../components/admin/listener";
 import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
@@ -70,16 +70,18 @@ import ShareProfile from "../components/core/ShareProfile";
 import About from "../components/core/about";
 import Blockuser from "../components/user/blockuser";
 import ProfessionalLsting from "../components/professional/professionalListing";
-import ProfessionalDetails from "../components/professional/professionalDetails"; 
+import ProfessionalDetails from "../components/professional/professionalDetails";
 import ProfessionalSignup from "../components/professional/professionalSignup";
-import ProfessionalList from "../components/admin/professionalList"; 
+import ProfessionalModify from "../components/professional/professionalModify.js";
+
+import ProfessionalList from "../components/admin/professionalList";
 import CorporateMember from "../components/admin/corporateMember";
-import AddDomain from "../components/admin/addDomain"; 
+import AddDomain from "../components/admin/addDomain";
 import DomainDetail from "../components/admin/domainDetail";
-import DomainListing from "../components/admin/domenListing";   
+import DomainListing from "../components/admin/domenListing";
 import SessionRequest from "../components/admin/sessionRequest";
-import CorporateLogin from "../components/professional/corporateLogin"; 
-import CorporateDashboard from "../components/professional/corporateDashboard"; 
+import CorporateLogin from "../components/professional/corporateLogin";
+import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser"; 
 import ProfessinalBlog from "../components/professional/professinalBlog";
@@ -91,7 +93,7 @@ const user =
   getLocalStorage("userInfoAdmin");
 class ELPRoute extends Component {
   state = {};
-  componentDidMount() { 
+  componentDidMount() {
     window.addEventListener("beforeunload", socketClass.disconnect);
     if (getUserProfile()) {
       // console.log("socketClass", socketClass.connect);
@@ -145,43 +147,66 @@ class ELPRoute extends Component {
           {/* LIst */}
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
-          <PublicRoute path="/professionalListing" component={ProfessionalLsting} /> 
-          <PublicRoute path="/professionalDetails/:type/:id" component={ProfessionalDetails} />    
-          <PublicRoute path="/professionalSignup" component={ProfessionalSignup} />
-          <PublicRoute path="/professionalList" component={ProfessionalList} />                     
+          <PublicRoute
+            path="/professionalListing"
+            component={ProfessionalLsting}
+          />
+          <PublicRoute
+            path="/professionalDetails/:type/:id"
+            component={ProfessionalDetails}
+          />
+          <PublicRoute
+            path="/professionalSignup"
+            component={ProfessionalSignup}
+          />
+          <PublicRoute
+            path="/professionalModify/:id"
+            component={ProfessionalModify}
+          />
+          <PublicRoute path="/professionalList" component={ProfessionalList} />
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
           <PublicRoute path="/corporateMember" component={CorporateMember} />
-          <PublicRoute path="/addDomain" component={AddDomain} />       
-          <PublicRoute path="/domainDetail" component={DomainDetail} /> 
+          <PublicRoute path="/addDomain" component={AddDomain} />
+          <PublicRoute path="/domainDetail" component={DomainDetail} />
           <PublicRoute path="/domainListing" component={DomainListing} />
-          <PublicRoute path="/sessionRequest" component={SessionRequest} />                           
+          <PublicRoute path="/sessionRequest" component={SessionRequest} />
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
-          <PublicRoute path="/corporateDashboard" component={CorporateDashboard} />
+          <PublicRoute
+            path="/corporateDashboard"
+            component={CorporateDashboard}
+          />
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />        
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
+          <PublicRoute path="/blogUser" component={BlogUser} />
 
-          <PublicRoute path="/helpcenter" component={Helpcenter} /> 
-          <PublicRoute path="/blockuser" component={Blockuser} />
-          
+          <PublicRoute path="/helpcenter" component={Helpcenter} />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
 
-
-          {/* LIst */} 
-          <PrivateRouteList path="/userDashboard" component={Userdashboard} /> 
+          {/* LIst */}
+          <PrivateRouteList path="/userDashboard" component={Userdashboard} />
           <PrivateRouteList path="/chat/:id" component={Chat} />
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
-          <Route path="/termcondition" render={props => <Termcondition {...props} />} />
-          <Route path="/privacypolicy" render={props => <Privacypolicy {...props} />} />
-          <Route path="/share-profile" render={props => <ShareProfile {...props} />} />
-          <Route path="/faq" render={props => <Faq {...props} />} />
-          <Route path="/campaign" render={props => <Compaign {...props} />} />
-          <Route path="/about"  render={props => <About {...props} />} />  
+          <Route
+            path="/termcondition"
+            render={(props) => <Termcondition {...props} />}
+          />
+          <Route
+            path="/privacypolicy"
+            render={(props) => <Privacypolicy {...props} />}
+          />
+          <Route
+            path="/share-profile"
+            render={(props) => <ShareProfile {...props} />}
+          />
+          <Route path="/faq" render={(props) => <Faq {...props} />} />
+          <Route path="/campaign" render={(props) => <Compaign {...props} />} />
+          <Route path="/about" render={(props) => <About {...props} />} />
 
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
@@ -236,4 +261,4 @@ class ELPRoute extends Component {
     );
   }
 }
-export default ELPRoute; 
+export default ELPRoute;

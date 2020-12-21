@@ -702,4 +702,42 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+  superadmingetprofessioanalcategory: {
+    url: "elp/superadmingetprofessioanalcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadminregisterprofessional: {
+    url: "elp/superadminregisterprofessional",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+      u_birthdate: "",
+      u_school_code: "",
+      screen_name: "",
+      u_lang: "",
+      u_mobile: "",
+      u_location: "",
+
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+
+      u_hourly_fee: "",
+      u_work_experience: "",
+      u_education: "",
+      u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
+      professional_keyword: "",
+      professional_cat_name: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };

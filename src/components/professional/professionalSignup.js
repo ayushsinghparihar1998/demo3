@@ -10,6 +10,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import validateInput from "../../common/validations/validationProfessionalSignup";
 import ELPViewApiService from "../../common/services/apiService";
+import { post } from "axios";
+import constant from "../../constant";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -33,10 +35,16 @@ class ProfessionalSignup extends Component {
       u_work_experience: "",
       u_education: "",
       u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
       professional_keyword: [],
       professional_cat_name: [],
-      u_area_service: "",
+      eat: false,
+      luv: false,
+      pray: false,
       errors: {},
+      proffCat: [],
     };
   }
 
@@ -51,15 +59,44 @@ class ProfessionalSignup extends Component {
     //     roleType: CONSTANTS.ROLES.VENDOR,
     //   });
     // }
+    this.getProffCat();
   }
-
+  getProffCat = () => {
+    let proffCat = this.state.proffCat;
+    ELPViewApiService("superadmingetprofessioanalcategory", {}).then(
+      (result) => {
+        if (result && result.status === 200) {
+          proffCat =
+            result && result.data && result.data.data
+              ? result.data.data.domain_list
+              : [];
+        }
+        this.setState(
+          {
+            proffCat,
+          },
+          () => {
+            console.log("ProffCat", this.state.proffCat);
+          }
+        );
+      }
+    );
+  };
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
     this.setState(
       {
         [name]:
-          name == "phoneNumber" ? value.replace(/[^0-9]/g, "") : value.trim(),
+          name == "u_mobile" ||
+          name == "u_birthdate" ||
+          name == "u_work_experience"
+            ? value.replace(/[^0-9]/g, "")
+            : name == "u_lang" || name == "professional_keyword"
+            ? value.replace(/[^a-zA-Z,]/g, "")
+            : name == "u_lang"
+            ? value.replace(/[^a-zA-Z ]/g, "")
+            : value.trim(),
       },
       () => {
         console.log(this.state);
@@ -67,6 +104,52 @@ class ProfessionalSignup extends Component {
     );
   };
 
+  handleCheck = (event) => {
+    const { name, value, id } = event.target;
+
+    let professional_cat_name = this.state.professional_cat_name;
+    let obj = {
+      pu_cat_name: name,
+      pu_cat_id: id,
+    };
+    let ind;
+
+    var isInArray =
+      professional_cat_name.find(function (el) {
+        return el.pu_cat_id == id;
+      }) !== undefined;
+    var index = professional_cat_name.findIndex((el) => el.pu_cat_id == id);
+
+    console.log(isInArray, index);
+    if (index > -1) {
+      professional_cat_name.splice(index, 1);
+    } else {
+      professional_cat_name.push(obj);
+    }
+    this.setState(
+      {
+        professional_cat_name,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  };
+
+  handleKeyWord = (e) => {
+    let val = e.target.value;
+    let arr = val.split(",");
+    let ar = [];
+
+    this.setState(
+      {
+        professional_keyword: arr,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  };
   isValid() {
     const { errors, isValid } = validateInput(this.state);
     if (!isValid) {
@@ -74,50 +157,84 @@ class ProfessionalSignup extends Component {
     }
     return isValid;
   }
+  handleUploadPicture = async (event, name) => {
+    const fileObject = event.target.files[0];
+    console.log();
+    if (fileObject) {
+      this.setState({
+        isUploading: true,
+      });
+      const formData = new FormData();
+      formData.set("u_image", fileObject);
+      console.log("formDataformData", formData);
+
+      const url = constant.SERVER_URL + "elp/uploadimage";
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const response = await post(url, formData, config);
+      console.log(name, "resultresultresult", response);
+
+      this.setState({
+        isUploading: false,
+        u_image: response.data.data.filepath,
+        filename: fileObject.name,
+      });
+    }
+  };
 
   handleSubmit = () => {
     if (this.isValid()) {
       this.setState({
         showLoader: true,
       });
+      let ar = [];
+      this.state.professional_keyword.map((item) => {
+        let obj = {
+          pk_keyword: item,
+        };
+        ar.push(obj);
+      });
       let data = {
-        firstName: this.state.firstName ? this.state.firstName.trim() : "",
-        lastName: this.state.lastName ? this.state.lastName.trim() : "",
+        // screen_name: this.state.screen_name
+        //   ? this.state.screen_name.trim()
+        //   : "",
+        u_birthdate: this.state.u_birthdate,
+        screen_name: this.state.screen_name,
+        u_lang: this.state.u_lang,
+        u_mobile: this.state.u_mobile,
+
+        u_location: "",
+        device_token: "",
+        device_type: "",
+        type: "",
+        u_therapy_style: "",
+        u_hourly_fee: "",
+        u_school_code: "",
+
+        u_work_experience: this.state.u_work_experience,
+        u_education: this.state.u_education,
+        u_image: this.state.u_image,
+        u_bio: this.state.u_bio,
+        u_area_service: this.state.u_area_service,
+
         email: this.state.email ? this.state.email.toLowerCase().trim() : "",
         password: this.state.password ? this.state.password.trim() : "",
-        organisation: this.state.organisationName
-          ? this.state.organisationName.trim()
-          : "",
-        phone_number: this.state.phoneNumber
-          ? this.state.phoneNumber.trim()
-          : "",
-        type: this.state.roleType,
-      };
+        u_lang: this.state.u_lang ? this.state.u_lang.trim() : "",
+        u_mobile: this.state.u_mobile ? this.state.u_mobile.trim() : "",
 
-      ELPViewApiService("signup", data)
+        professional_keyword: ar,
+        professional_cat_name: this.state.professional_cat_name,
+      };
+      console.log(data);
+
+      ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
-          if (result && result.data && result.data.status === "SUCCESS") {
-            setTimeout(
-              function () {
-                // if (this.state.roleType == CONSTANTS.ROLES.VENDOR) {
-                //   this.props.history.push("/vendor/login");
-                // } else {
-                //   this.props.history.push("/organizer/login");
-                // }
-              }.bind(this),
-              3000
-            );
-            this.setState({
-              firstName: "",
-              lastName: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-              phoneNumber: "",
-              organisationName: "",
-              showLoader: false,
-              errors: {},
-            });
+          if (result && result.data && result.data.status ==="success") {
+            this.props.history.push("/professionalSignup");
+            this.clear();
           } else {
             this.setState({
               showLoader: false,
@@ -138,13 +255,29 @@ class ProfessionalSignup extends Component {
   };
   clear() {
     this.setState({
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
-      phoneNumber: "",
-      organisationName: "",
+      u_birthdate: "",
+      u_school_code: "",
+      screen_name: "",
+      u_lang: "",
+      u_mobile: "",
+      u_location: "",
+
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+
+      u_hourly_fee: "",
+      u_work_experience: "",
+      u_education: "",
+      u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
+      professional_keyword: [],
+      professional_cat_name: [],
       showLoader: false,
       errors: {},
     });
@@ -158,7 +291,7 @@ class ProfessionalSignup extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, proffCat } = this.state;
 
     return (
       <div className="page__wrapper innerpage">
@@ -179,30 +312,44 @@ class ProfessionalSignup extends Component {
                       <Form.File
                         id="exampleFormControlFile1"
                         className="inputTyp2"
+                        onChange={(e) =>
+                          this.handleUploadPicture(e, "backgroud_img")
+                        }
                       />
-                      <div className="error alignLeft d-none">Upload Pic</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_image ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_image}
+                      </div>
                     </Form.Group>
                   </Col>
 
-                  <Col md={6}>
+                  <Col md={12}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">Name</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter Name"
-                        isInvalid={errors.screen_name ? true : false}
+                        placeholder="Name"
+                        // isInvalid={errors.screen_name ? true : false}
                         name="screen_name"
                         value={this.state.screen_name}
                         onChange={(e) => this.handleChange(e)}
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        // name="name"
+                        maxLength={100}
                       />
-                      <div className="error alignLeft d-none">Enter Name</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.screen_name ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.screen_name}
+                      </div>
                     </Form.Group>
                   </Col>
-
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -210,13 +357,48 @@ class ProfessionalSignup extends Component {
                       </Form.Label>
                       <Form.Control
                         type="email"
-                        placeholder="Enter Email"
+                        placeholder="Email"
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
                         name="email"
+                        value={this.state.email}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={100}
                       />
-                      <div className="error alignLeft d-none">Email Address</div> 
+                      <div
+                        className={`alignLeft  ${
+                          errors.email ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.email}
+                      </div>
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6}>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Password
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Password"
+                        className="inputTyp2"
+                        id="outlined-password"
+                        variant="outlined"
+                        name="password"
+                        value={this.state.password}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={40}
+                      />
+                      <div
+                        className={`alignLeft  ${
+                          errors.password ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.password}
+                      </div>
                     </Form.Group>
                   </Col>
                   <Col md={6}>
@@ -226,13 +408,22 @@ class ProfessionalSignup extends Component {
                       </Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter Phone"
+                        placeholder="Phone"
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="phone"
+                        name="u_mobile"
+                        value={this.state.u_mobile}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={11}
                       />
-                      <div className="error alignLeft d-none">Enter Phone</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_mobile ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_mobile}
+                      </div>
                     </Form.Group>
                   </Col>
                   <Col md={6}>
@@ -242,13 +433,22 @@ class ProfessionalSignup extends Component {
                       </Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter Work Experience "
+                        placeholder="Work Experience "
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="name"
+                        name="u_work_experience"
+                        value={this.state.u_work_experience}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={3}
                       />
-                      <div className="error alignLeft d-none">Enter Work Experience</div> 
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_work_experience ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_work_experience}
+                      </div>
                     </Form.Group>
                   </Col>
 
@@ -257,13 +457,22 @@ class ProfessionalSignup extends Component {
                       <Form.Label className="fs20 fw600 col14">Age</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter Your Age"
+                        placeholder="Age"
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="age"
+                        name="u_birthdate"
+                        value={this.state.u_birthdate}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={3}
                       />
-                      <div className="error alignLeft d-none">Enter Your Age</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_birthdate ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_birthdate}
+                      </div>
                     </Form.Group>
                   </Col>
 
@@ -272,16 +481,28 @@ class ProfessionalSignup extends Component {
                       <Form.Label className="fs20 fw600 col14">
                         Language
                       </Form.Label>
-                      <Form.Control as="select" className="selectTyp1">
-                        <option>English</option>
-                        <option>Hindi</option>
-                        <option>Marathi</option>
-                      </Form.Control>
-                      <div className="error alignLeft d-none">Language</div>
+                      <Form.Control
+                        type="text"
+                        placeholder="Language"
+                        className="inputTyp2"
+                        id="outlined-email"
+                        variant="outlined"
+                        name="u_lang"
+                        value={this.state.u_lang}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={100}
+                      />
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_lang ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_lang}
+                      </div>
                     </Form.Group>
                   </Col>
 
-                  <Col md={12}>
+                  <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
                         Keyword
@@ -292,12 +513,82 @@ class ProfessionalSignup extends Component {
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="booksession"
+                        name="professional_keyword"
+                        value={this.state.professional_keyword}
+                        onChange={(e) => this.handleKeyWord(e)}
+                        maxLength={200}
                       />
-                      <div className="error alignLeft d-none">Keyboard</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.professional_keyword ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.professional_keyword}
+                      </div>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Service
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Area for services"
+                        className="inputTyp2"
+                        id="outlined-email"
+                        variant="outlined"
+                        name="u_area_service"
+                        value={this.state.u_area_service}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={100}
+                      />
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_area_service ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_area_service}
+                      </div>
+                    </Form.Group>
+                  </Col>
+                  <Col md={12}>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Select Category
+                      </Form.Label>
+                      <Row>
+                        {proffCat &&
+                          proffCat.map((cat) => {
+                            return (
+                              <Col md={4}>
+                                <Form.Group controlId="formBasicCheckbox">
+                                  <Form.Check
+                                    type="checkbox"
+                                    label={cat.pc_name}
+                                    className="checkboxTyp1"
+                                    name={cat.pc_name}
+                                    id={cat.pc_id}
+                                    handleCheck={this.state.eat}
+                                    // checked = {}
+                                    onChange={(e) => this.handleCheck(e)}
+                                  />
+                                </Form.Group>
+                              </Col>
+                            );
+                          })}
+                      </Row>
+                      <div
+                        className={`alignLeft  ${
+                          errors.professional_cat_name ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.professional_cat_name}
+                      </div>
                     </Form.Group>
                   </Col>
 
+                  {/* 
                   <Col md={12}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -308,8 +599,11 @@ class ProfessionalSignup extends Component {
                           <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
                               type="checkbox"
-                              label="EAT"
+                              label="Eat"
                               className="checkboxTyp1"
+                              name="Eat"
+                              handleCheck={this.state.eat}
+                              onChange={(e) => this.handleCheck(e)}
                             />
                           </Form.Group>
                         </Col>
@@ -317,8 +611,11 @@ class ProfessionalSignup extends Component {
                           <Form.Group controlId="formBasicCheckboxtwo">
                             <Form.Check
                               type="checkbox"
-                              label="LUV"
+                              label="Luv"
                               className="checkboxTyp1"
+                              name="Luv"
+                              handleCheck={this.state.luv}
+                              onChange={(e) => this.handleCheck(e)}
                             />
                           </Form.Group>
                         </Col>
@@ -326,17 +623,26 @@ class ProfessionalSignup extends Component {
                           <Form.Group controlId="formBasicCheckboxthree">
                             <Form.Check
                               type="checkbox"
-                              label="PRAY"
+                              label="Pray"
                               className="checkboxTyp1"
+                              name="Pray"
+                              handleCheck={this.state.pray}
+                              onChange={(e) => this.handleCheck(e)}
                             />
                           </Form.Group>
                         </Col>
                       </Row>
-                      <div className="error alignLeft d-none">Select Category</div>
+                      <div
+                        className={`alignLeft  ${
+                          errors.professional_cat_name ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.professional_cat_name}
+                      </div>
                     </Form.Group>
                   </Col>
-
-                  <Col md={12}> 
+ */}
+                  <Col md={12}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
                         Qualification
@@ -354,7 +660,7 @@ class ProfessionalSignup extends Component {
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({ description: data });
+                          this.setState({ u_education: data });
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -363,8 +669,14 @@ class ProfessionalSignup extends Component {
                           console.log("Focus.", editor);
                         }}
                       />
-                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
-                       <div className="error alignLeft d-none">Enter Your Qualification</div>
+                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_education ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_education}
+                      </div>
                     </Form.Group>
                   </Col>
                   <Col md={12}>
@@ -390,7 +702,7 @@ class ProfessionalSignup extends Component {
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({ description: data });
+                          this.setState({ u_bio: data });
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -399,15 +711,21 @@ class ProfessionalSignup extends Component {
                           console.log("Focus.", editor);
                         }}
                       />
-                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}  
-                       <div className="error alignLeft d-none">Enter Your Biography</div>
+                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                      <div
+                        className={`alignLeft  ${
+                          errors.u_bio ? "error " : "d-none "
+                        }`}
+                      >
+                        {errors.u_bio}
+                      </div>
                     </Form.Group>
                   </Col>
 
                   <Col md={12}>
                     <Button
                       className="btnTyp5 mt-3"
-                      onClick={() => this.isValid()}
+                      onClick={() => this.handleSubmit()}
                     >
                       Signup
                     </Button>
@@ -424,6 +742,3 @@ class ProfessionalSignup extends Component {
   }
 }
 export default ProfessionalSignup;
-
-
-
