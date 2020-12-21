@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal } from "react-bootstrap";
+import { Button, Container, Row, Col, Form, Modal, Image } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
@@ -12,6 +12,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
+import UploadDetail from "../../assets/images/upload_detail.svg";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -303,10 +304,13 @@ class ProfessionalSignup extends Component {
               <Form>
                 <Row>
                   <Col md={12}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        upload Picture
-                      </Form.Label>
+                    <Form.Group> 
+                      <Form.Label className="fs20 fw600 col14">   
+                          Change Picture
+                      </Form.Label> 
+                      <div className="mt-1 mb-3 imgSetProfile">         
+                          <Image src={UploadDetail} className="" /> 
+                      </div>
                       <Form.File
                         id="exampleFormControlFile1"
                         className="inputTyp2"

@@ -1453,7 +1453,7 @@ class Adminlistener extends Component {
                             controlId="formBasicCheckbox2"
                             className="row mb-4 statusCat"
                           >
-                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-2">Status</span> 
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">Status</span> 
                             {this.state.keywordArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1486,7 +1486,7 @@ class Adminlistener extends Component {
                             controlId="formBasicCheckbox4"
                             className="row mb-4 statusCat"
                           >
-                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-2">Category</span>
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">Category</span>
                             {this.state.catArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1511,7 +1511,7 @@ class Adminlistener extends Component {
                           </Form.Group>
                         </Col>
 
-                        <Col md="4" className="mt-2">                 
+                        <Col md="4">                    
                           <Button
                             variant="primary process_btn"
                             type="button"

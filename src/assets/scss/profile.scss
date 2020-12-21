@@ -564,6 +564,14 @@
     }
 }
 
+.imgSetProfile {
+    position: relative;
+
+    img {
+        max-width: 100px; 
+    }
+}
+
 .adminProfessinal {
     .adminlistener {
         padding-bottom: 30px !important; 
