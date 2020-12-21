@@ -81,7 +81,7 @@ class Myprofile extends Component {
                       <div className="leftprofile">
                         <Image src={proffDetail.u_image} alt="" />
                       </div>
-                    </Col>                    
+                    </Col>
                     <Col md={8}>
                       <div className="rightprofile">
                         <div className="fs24 col3 fw600 mb-1">
@@ -109,7 +109,7 @@ class Myprofile extends Component {
                           </span>
                         </div>
 
-                         <div className="d-flex mt-4">
+                        <div className="d-flex mt-4">
                           <Button
                             variant="primary"
                             type="submit"
@@ -149,7 +149,12 @@ class Myprofile extends Component {
                     <div className="fs32 col3 text-center fw500 mb-4">
                       Education
                     </div>
-                    <div className="boxexone">{proffDetail.u_education}</div>
+                    <div
+                      className="boxexone"
+                      dangerouslySetInnerHTML={{
+                        __html: proffDetail.u_education,
+                      }}
+                    ></div>
                   </Col>
                 </div>
 
@@ -161,8 +166,13 @@ class Myprofile extends Component {
                     {/* <div className="fs17 col3 fw500 mb-2">
                       Which bucket would your therapy style fit into primarily?
                     </div> */}
-                    <div className="fs15 col14 fw400 mb-3">
-                      {proffDetail.u_bio}
+                    <div
+                      className="fs15 col14 fw400 mb-3"
+                      dangerouslySetInnerHTML={{
+                        __html: proffDetail.u_bio,
+                      }}
+                    >
+                      {/* {proffDetail.u_bio} */}
                     </div>
 
                     {/* <div className="fs15 col14 fw400 mb-3">

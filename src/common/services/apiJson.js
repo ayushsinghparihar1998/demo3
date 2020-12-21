@@ -702,6 +702,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+  superadminchangepassword: {
+    url: "elp/superadminchangepassword",
+    method: "POST",
+    data: { user_id: "", password: "" },
+    showResultMessage: true,
+    showErrorMessage: false,
+  },
   superadmingetprofessioanalcategory: {
     url: "elp/superadmingetprofessioanalcategory",
     method: "POST",
@@ -715,6 +722,37 @@ export default {
     data: {
       email: "",
       password: "",
+      u_birthdate: "",
+      u_school_code: "",
+      screen_name: "",
+      u_lang: "",
+      u_mobile: "",
+      u_location: "",
+
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+
+      u_hourly_fee: "",
+      u_work_experience: "",
+      u_education: "",
+      u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
+      professional_keyword: "",
+      professional_cat_name: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadmineditprofessional: {
+    url: "elp/superadmineditprofessional",
+    method: "POST",
+    data: {
+      pro_u_id: "",
+      email: "",
       u_birthdate: "",
       u_school_code: "",
       screen_name: "",

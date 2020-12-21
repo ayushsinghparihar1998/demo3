@@ -39,7 +39,7 @@ import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import Blueicons from "../../assets/images/blue_cross.svg";
-import Editicon from "../../assets/images/edit_icon.svg"; 
+import Editicon from "../../assets/images/edit_icon.svg";
 // import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
@@ -76,40 +76,11 @@ class Adminlistener extends Component {
     };
   }
   componentDidMount() {
-    this.getListnerListing("", "listner", 1);
+    // this.getListnerListing("", "listner", 1);
+    this.getCustomerListing("", "user", 1);
+
   }
 
-  // getBlockuserListing = (pageno, records) =>{
-  //     this.setState({
-  //         showLoader: true,
-  //         pageno: pageno,
-  //         records: records,
-  //       });
-  //       delivaApiService("deliveryAgentList", {
-  //         pageNumber: pageno,
-  //         records: records,
-  //         // sort: sort,
-  //         // keyword: keyword,
-  //         // search: search,
-  //       })
-  //         .then((response) => {
-  //             this.setState({showLoader: false});
-  //             console.log('deliveryAgentList-response',response);
-  //             if(response.data.status == 200){
-  //                 this.setState({
-  //                   delivery_agent_list: response.data.resourceData.dAList,
-  //                   totalCount: response.data.resourceData.totalCount
-  //                 });
-  //                 this.getPager(response.data.resourceData.totalCount);
-  //             }
-  //       }).catch((error) => {
-  //           this.setState({
-  //             showLoader: false,
-  //           });
-  //       });
-  // }
-
-  //manage page counts
   getPager(total) {
     let startPage = this.state.startPage;
     let endPage = this.state.endPage;
@@ -797,7 +768,7 @@ class Adminlistener extends Component {
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
-                        className={professnalActveClass}
+                        className={proffActveClass}
                         onClick={(e) => {
                           this.getProffListing(
                             1,
@@ -892,7 +863,7 @@ class Adminlistener extends Component {
                 </div>
               </Col>
 
-              {this.state.pageType == "userlist" ? ( 
+              {this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   {profileListing &&
                     profileListing.length > 0 &&
@@ -907,7 +878,7 @@ class Adminlistener extends Component {
                               <Image
                                 src={item.u_image ? item.u_image : Requestuser}
                                 alt=""
-                                className="r50" 
+                                className="r50"
                               />
                             </div>
                             <div className="pl-2 w-100">
@@ -1359,7 +1330,7 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
-                        <Col md="5">  
+                        <Col md="5">
                           <Form.Group controlId="formBasickeyword">
                             <Form.Control
                               type="text"
@@ -1372,15 +1343,15 @@ class Adminlistener extends Component {
                           <Button variant="primary process_btn" type="submit">
                             search
                           </Button>
-                        </Col> 
+                        </Col>
                       </Row>
                       <Row>
-                        <Col md="5"> 
+                        <Col md="5">
                           <Form.Group
                             controlId="formBasicCheckbox2"
                             className="row"
                           >
-                            <Form.Check  
+                            <Form.Check
                               type="checkbox"
                               className="checkone checkboxTyp1 "
                               label="Active"
@@ -1390,11 +1361,10 @@ class Adminlistener extends Component {
                               type="checkbox"
                               className="checktwo checkboxTyp1"
                               label="Inactive"
-                              id="twochk" 
+                              id="twochk"
                             />
                           </Form.Group>
-                        </Col> 
-
+                        </Col>
                       </Row>
 
                       <div className="checkCategory">
@@ -1460,7 +1430,6 @@ class Adminlistener extends Component {
                                           onClick={() =>
                                             this.props.history.push(
                                               `/professionalModify/${item.id}`
-                                              
                                             )
                                           }
                                         />
@@ -1477,7 +1446,7 @@ class Adminlistener extends Component {
                                     </div>
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1"> 
+                                  <div className="fs14 fw400 col14 pb-1">
                                     <strong>Age:</strong> {item.u_age}
                                   </div>
 
@@ -1494,13 +1463,21 @@ class Adminlistener extends Component {
                                     <strong className="m_w25">
                                       Education:{" "}
                                     </strong>
-                                    <span>{item.u_education}</span>
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.u_education,
+                                      }}
+                                    ></span>
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1 e_detai">
                                     <strong>Biogropy: </strong>
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.u_bio,
+                                      }}
+                                    ></span>
                                     <span>
-                                      {item.u_bio}{" "}
                                       <a
                                         className="col10"
                                         onClick={() =>
@@ -1510,7 +1487,7 @@ class Adminlistener extends Component {
                                           )
                                         }
                                       >
-                                        Read more...
+                                      {"  "}Read more...
                                       </a>
                                     </span>
                                   </div>

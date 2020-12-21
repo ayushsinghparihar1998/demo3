@@ -233,7 +233,7 @@ class ProfessionalSignup extends Component {
       ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
           if (result && result.data && result.data.status ==="success") {
-            this.props.history.push("/professionalSignup");
+            this.props.history.push("/adminlistener");
             this.clear();
           } else {
             this.setState({
@@ -569,7 +569,7 @@ class ProfessionalSignup extends Component {
                                     className="checkboxTyp1"
                                     name={cat.pc_name}
                                     id={cat.pc_id}
-                                    handleCheck={this.state.eat}
+                                    // handleCheck={this.state.eat}
                                     // checked = {}
                                     onChange={(e) => this.handleCheck(e)}
                                   />

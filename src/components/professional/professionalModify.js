@@ -13,6 +13,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
+import Item from "antd/lib/list/Item";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class ProfessionalSignup extends Component {
       luv: false,
       pray: false,
       errors: {},
+      proffCat: [],
       proffDetail: {},
     };
   }
@@ -52,7 +54,6 @@ class ProfessionalSignup extends Component {
   componentDidMount() {
     const { url } = this.props.match;
     //
-    this.getProffDetails("superadminprofessionaluserdetail");
     this.getProffCat();
   }
   getProffCat = () => {
@@ -65,14 +66,10 @@ class ProfessionalSignup extends Component {
               ? result.data.data.domain_list
               : [];
         }
-        this.setState(
-          {
-            proffCat,
-          },
-          () => {
-            console.log("ProffCat", this.state.proffCat);
-          }
-        );
+        this.setState({
+          proffCat,
+        });
+        this.getProffDetails("superadminprofessionaluserdetail");
       }
     );
   };
@@ -85,16 +82,40 @@ class ProfessionalSignup extends Component {
     ELPViewApiService(type, data).then((result) => {
       console.log("result", result);
       let proffDetail = [];
+      let proffCat = this.state.proffCat;
       if (result && result.status === 200) {
         proffDetail =
           result && result.data && result.data.data ? result.data.data[0] : [];
       }
+      let keyw = "";
+      proffDetail.professional_keyword.map((item) => {
+        keyw = keyw + item.pk_keyword + ",";
+      });
+      proffDetail.screen_name = proffDetail.u_name;
+      delete proffDetail.u_name;
+      let cats = [];
+      proffDetail.professional_cat_name.map((item) => {
+        cats.push(item.pu_cat_id);
+      });
+      console.log("cats", cats);
+      proffCat.map((item) => {
+        if (cats.includes(item.pc_id)) {
+          item.flag = true;
+        } else {
+          item.flag = false;
+        }
+        return item;
+      });
+      keyw = keyw.trim(",");
+      proffDetail.professional_keyword = keyw;
       this.setState(
         {
           proffDetail,
+          proffCat,
         },
         () => {
           console.log("ProffDetail", this.state.proffDetail);
+          console.log("proffCat", this.state.proffCat);
         }
       );
     });
@@ -122,33 +143,19 @@ class ProfessionalSignup extends Component {
   };
 
   handleCheck = (event) => {
-    const { name, value, id } = event.target;
+    const { name, checked, value, id } = event.target;
 
-    let professional_cat_name = this.state.professional_cat_name;
-    let obj = {
-      pu_cat_name: name,
-      pu_cat_id: id,
-    };
-    let ind;
+    console.log("value , checked", value, checked);
+    let proffCat = this.state.proffCat;
+    var index = proffCat.findIndex((el) => el.pc_id == id);
+    proffCat[index].flag = checked;
 
-    var isInArray =
-      professional_cat_name.find(function (el) {
-        return el.pu_cat_id == id;
-      }) !== undefined;
-    var index = professional_cat_name.findIndex((el) => el.pu_cat_id == id);
-
-    console.log(isInArray, index);
-    if (index > -1) {
-      professional_cat_name.splice(index, 1);
-    } else {
-      professional_cat_name.push(obj);
-    }
     this.setState(
       {
-        professional_cat_name,
+        proffCat,
       },
       () => {
-        console.log(this.state);
+        console.log(this.state.proffCat);
       }
     );
   };
@@ -168,8 +175,8 @@ class ProfessionalSignup extends Component {
       }
     );
   };
-  isValid() {
-    const { errors, isValid } = validateInput(this.state.proffDetail);
+  isValid(data) {
+    const { errors, isValid } = validateInput(data);
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
@@ -206,48 +213,75 @@ class ProfessionalSignup extends Component {
   };
 
   handleSubmit = () => {
-    if (this.isValid()) {
+    let proffDetail = this.state.proffDetail;
+    let ar = [];
+    let catar = [];
+    proffDetail.professional_keyword.split(",").map((item) => {
+      let obj = {
+        pk_keyword: item,
+      };
+      ar.push(obj);
+    });
+    this.state.proffCat.map((item) => {
+      if (item.flag == true) {
+        item.pu_cat_id = item.pc_id;
+        item.pu_cat_name = item.pc_name;
+        delete item.flag;
+        delete item.pc_name;
+        delete item.pc_id;
+        catar.push(item);
+      }
+      // return null;
+    });
+    let data = {
+      // screen_name: this.state.screen_name
+      //   ? this.state.screen_name.trim()
+      //   : "",
+      pro_u_id: proffDetail.id,
+      u_birthdate: proffDetail.u_birthdate,
+      screen_name: proffDetail.screen_name,
+      //   screen_name: "",
+
+      u_lang: proffDetail.u_lang,
+      u_mobile: proffDetail.u_mobile,
+
+      u_location: "",
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+      u_hourly_fee: "",
+      u_school_code: "",
+
+      u_work_experience: proffDetail.u_work_experience,
+      u_education: proffDetail.u_education,
+      u_image: proffDetail.u_image,
+      u_bio: proffDetail.u_bio,
+      u_area_service: proffDetail.u_area_service,
+
+      email: proffDetail.email ? proffDetail.email.toLowerCase().trim() : "",
+      //   email: "",
+
+      password: proffDetail.password ? proffDetail.password.trim() : "",
+      u_lang: proffDetail.u_lang ? proffDetail.u_lang.trim() : "",
+      u_mobile: proffDetail.u_mobile ? proffDetail.u_mobile.trim() : "",
+
+      professional_keyword: ar,
+      professional_cat_name: catar,
+    };
+    console.log(data);
+    if (this.isValid(data)) {
       this.setState({
         showLoader: true,
       });
-      let proffDetail = this.state.proffDetail;
-      let data = {
-        // screen_name: this.state.screen_name
-        //   ? this.state.screen_name.trim()
-        //   : "",
-        u_birthdate: proffDetail.u_birthdate,
-        screen_name: proffDetail.screen_name,
-        u_lang: proffDetail.u_lang,
-        u_mobile: proffDetail.u_mobile,
-
-        u_location: "",
-        device_token: "",
-        device_type: "",
-        type: "",
-        u_therapy_style: "",
-        u_hourly_fee: "",
-        u_school_code: "",
-
-        u_work_experience: proffDetail.u_work_experience,
-        u_education: proffDetail.u_education,
-        u_image: proffDetail.u_image,
-        u_bio: proffDetail.u_bio,
-        u_area_service: proffDetail.u_area_service,
-
-        email: proffDetail.email ? proffDetail.email.toLowerCase().trim() : "",
-        password: proffDetail.password ? proffDetail.password.trim() : "",
-        u_lang: proffDetail.u_lang ? proffDetail.u_lang.trim() : "",
-        u_mobile: proffDetail.u_mobile ? proffDetail.u_mobile.trim() : "",
-
-        professional_keyword: proffDetail.professional_keyword,
-        professional_cat_name: proffDetail.professional_cat_name,
-      };
-      console.log(data);
-
-      ELPViewApiService("superadminregisterprofessional", data)
+      data.email = "";
+      data.screen_name = "";
+      ELPViewApiService("superadmineditprofessional", data)
         .then((result) => {
-          if (result && result.data && result.data.status === "SUCCESS") {
-            this.props.history.push("/professionalSignup");
+          console.log(result.data);
+          console.log(result.data.status);
+          if (result && result.data && result.data.status === "success") {
+            this.props.history.push("/adminlistener");
             this.clear();
           } else {
             this.setState({
@@ -313,9 +347,9 @@ class ProfessionalSignup extends Component {
     let proffDetail = this.state.proffDetail;
     let data = {
       password: this.state.userPassword,
-      old_password: proffDetail.password ? proffDetail.password : "",
+      user_id: proffDetail.id ? proffDetail.id : "",
     };
-    this.props.actionChangePassword(data).then((result) => {
+    ELPViewApiService("superadminchangepassword", data).then((result) => {
       console.log("actionChangePassword", result);
     });
   };
@@ -338,7 +372,9 @@ class ProfessionalSignup extends Component {
         <div className="RegistrationLayout pro_signup">
           <Container>
             <div className="layout_box mt-5 mb-4">
-              <div className="col3 fs40 fw600 mb-4">Professional Signup</div>
+              <div className="col3 fs40 fw600 mb-4">
+                Modify Professional Details
+              </div>
               <Form>
                 <Row>
                   <Col md={12}>
@@ -377,6 +413,7 @@ class ProfessionalSignup extends Component {
                         id="outlined-email"
                         variant="outlined"
                         maxLength={100}
+                        disabled
                       />
                       <div
                         className={`alignLeft  ${
@@ -402,6 +439,7 @@ class ProfessionalSignup extends Component {
                         value={proffDetail.email}
                         onChange={(e) => this.handleChange(e)}
                         maxLength={100}
+                        disabled
                       />
                       <div
                         className={`alignLeft  ${
@@ -429,7 +467,7 @@ class ProfessionalSignup extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
                       /> */}
-                      <div className="motivate_pwd">    
+                      <div className="motivate_pwd">      
                           <Form.Control
                             type="password"
                             name="userPassword"
@@ -625,8 +663,9 @@ class ProfessionalSignup extends Component {
                                     className="checkboxTyp1"
                                     name={cat.pc_name}
                                     id={cat.pc_id}
-                                    handleCheck={this.state.eat}
-                                    // checked = {}
+                                    handleCheck={cat.flag}
+                                    value={cat.flag}
+                                    checked={cat.flag == true}
                                     onChange={(e) => this.handleCheck(e)}
                                   />
                                 </Form.Group>
@@ -708,7 +747,7 @@ class ProfessionalSignup extends Component {
                         }}
                         editor={ClassicEditor}
                         // data="<p>Hello from CKEditor 5!</p>"
-
+                        data={proffDetail.u_education}
                         onReady={(editor) => {
                           // You can store the "editor" and use when it is needed.
                           console.log("Editor is ready to use!", editor);
@@ -751,8 +790,7 @@ class ProfessionalSignup extends Component {
                           height: 500,
                         }}
                         editor={ClassicEditor}
-                        // data="<p>Hello from CKEditor 5!</p>"
-
+                        data={proffDetail.u_bio}
                         onReady={(editor) => {
                           // You can store the "editor" and use when it is needed.
                           console.log("Editor is ready to use!", editor);
@@ -786,7 +824,7 @@ class ProfessionalSignup extends Component {
                       className="btnTyp5 mt-3"
                       onClick={() => this.handleSubmit()}
                     >
-                      Signup
+                      Submit
                     </Button>
                   </Col>
                 </Row>
