@@ -82,6 +82,7 @@ import CorporateLogin from "../components/professional/corporateLogin";
 import CorporateDashboard from "../components/professional/corporateDashboard"; 
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser"; 
+import ProfessinalBlog from "../components/professional/professinalBlog";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -161,6 +162,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/corporateDashboard" component={CorporateDashboard} />
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />        
+          <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} /> 
           <PublicRoute path="/blockuser" component={Blockuser} />
