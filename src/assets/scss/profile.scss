@@ -381,6 +381,17 @@
         padding-top: 14px;
         padding-left: 15px; 
     }
+    .motivate_pwd {
+        display: flex; 
+        position: relative; 
+
+        .btnTyp11 {
+            margin-left: 0rem !important;
+            border-radius: 0px !important; 
+            padding: 0 2rem;
+            font-size: 15px;
+        }
+    }
 } 
 
 .professinal_list {
@@ -543,6 +554,14 @@
 .adminProfessinal {
     .adminlistener {
         padding-bottom: 30px !important; 
+
+        .d-flex.ml-auto {
+            span.pr-3 {
+                & + span {
+                    padding-right: 7px;
+                }
+            }
+        }
     }
     .eat_category {
         margin-top: 20px;  
@@ -585,6 +604,10 @@
     }
     .professor_search { 
         padding: 10px 30px 50px; 
+        .checkone.form-check {   
+            padding-left: 1rem;
+            margin-right: 20px;
+        }
         form {
             .form-group {
                 .inputTyp2.inputpProcess {
@@ -607,7 +630,7 @@
 
             }
         }
-        .checkCategory { 
+        .checkCategory {     
             margin-top: 50px; 
             padding: 0 30px;
             padding-top: 30px; 
@@ -654,7 +677,7 @@
 
 }
 
-.align-items-center {
+.align-items-center {       
     align-items: center; 
 }
 

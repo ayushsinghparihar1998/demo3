@@ -39,6 +39,7 @@ import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import Blueicons from "../../assets/images/blue_cross.svg";
+import Editicon from "../../assets/images/edit_icon.svg"; 
 // import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
@@ -891,7 +892,7 @@ class Adminlistener extends Component {
                 </div>
               </Col>
 
-              {this.state.pageType == "userlist" ? (
+              {this.state.pageType == "userlist" ? ( 
                 <Col md={8} lg={9} className="pl-1">
                   {profileListing &&
                     profileListing.length > 0 &&
@@ -906,7 +907,7 @@ class Adminlistener extends Component {
                               <Image
                                 src={item.u_image ? item.u_image : Requestuser}
                                 alt=""
-                                className="r50"
+                                className="r50" 
                               />
                             </div>
                             <div className="pl-2 w-100">
@@ -1345,7 +1346,7 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
-                        <Col md="5">
+                        <Col md="5">  
                           <Form.Group controlId="formBasickeyword">
                             <Form.Control
                               type="text"
@@ -1354,31 +1355,33 @@ class Adminlistener extends Component {
                             />
                           </Form.Group>
                         </Col>
-                      </Row>
-                      <Row>
-                        <Col md="5">
-                          <Form.Group
-                            controlId="formBasicCheckbox2"
-                            className="row"
-                          >
-                            <Form.Check
-                              type="checkbox"
-                              className="checkone"
-                              label="Active"
-                            />
-                            <Form.Check
-                              type="checkbox"
-                              className="checktwo"
-                              label="Inactive"
-                            />
-                          </Form.Group>
-                        </Col>
-
                         <Col md="2">
                           <Button variant="primary process_btn" type="submit">
                             search
                           </Button>
-                        </Col>
+                        </Col> 
+                      </Row>
+                      <Row>
+                        <Col md="5"> 
+                          <Form.Group
+                            controlId="formBasicCheckbox2"
+                            className="row"
+                          >
+                            <Form.Check  
+                              type="checkbox"
+                              className="checkone checkboxTyp1 "
+                              label="Active"
+                              id="onechk"
+                            />
+                            <Form.Check
+                              type="checkbox"
+                              className="checktwo checkboxTyp1"
+                              label="Inactive"
+                              id="twochk" 
+                            />
+                          </Form.Group>
+                        </Col> 
+
                       </Row>
 
                       <div className="checkCategory">
@@ -1437,9 +1440,9 @@ class Adminlistener extends Component {
                                           }
                                         />
                                       </span>
-                                      <span>
+                                      <span>  
                                         <Image
-                                          src={Deleteicon}
+                                          src={Editicon}
                                           alt=""
                                           onClick={() =>
                                             this.props.history.push(
@@ -1461,7 +1464,7 @@ class Adminlistener extends Component {
                                     </div>
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1">
+                                  <div className="fs14 fw400 col14 pb-1"> 
                                     <strong>Age:</strong> {item.u_age}
                                   </div>
 
