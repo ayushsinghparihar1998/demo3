@@ -1,6 +1,6 @@
 export default {
   email: {
-    required: "Please enter your email address.",
+    required: "Please enter email address.",
     invalid: "Please enter a valid email address.",
   },
   username: {
@@ -13,7 +13,7 @@ export default {
     required: "Please enter a valid name.",
   },
   professional_keyword: {
-    required: "Please enter a valid keyword.",
+    required: "Please enter atlest one keyword.",
   },
   professional_cat_name: {
     required: "Please select atleast one category.",
@@ -21,17 +21,20 @@ export default {
   u_image: {
     required: "Please upload a profile image.",
   },
+  u_bio: {
+    required: "Please write in brief about the professional.",
+  },
   u_lang: {
     required: "Please fill the language field.",
   },
   u_education: {
-    required: "Please fill the education field.",
+    required: "Please write something about the proffessional's qualification.",
   },
   u_work_experience: {
-    required: "Please fill the education field.",
+    required: "Please enter a valid experience in years.",
   },
   u_area_service: {
-    required: "Please fill the education field.",
+    required: "Please fill the area for service.",
   },
   u_mobile: {
     required: "Please enter mobile number.",

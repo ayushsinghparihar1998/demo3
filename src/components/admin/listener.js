@@ -804,7 +804,7 @@ class Adminlistener extends Component {
                             "",
                             "",
                             "",
-                            "'Pray','luv','eat'"
+                            "'Pray','Luv','Eat'"
                           );
                         }}
                       >
@@ -1434,6 +1434,18 @@ class Adminlistener extends Component {
                                           label=""
                                           checked={
                                             item.u_status == 0 ? false : true
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.props.history.push(
+                                              `/professionalModify/${item.id}`
+                                              
+                                            )
                                           }
                                         />
                                       </span>
