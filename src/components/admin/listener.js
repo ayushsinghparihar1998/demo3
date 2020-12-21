@@ -1448,7 +1448,7 @@ class Adminlistener extends Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col md="6">
+                        <Col md="6">         
                           <Form.Group
                             controlId="formBasicCheckbox2"
                             className="row mb-4 statusCat"
