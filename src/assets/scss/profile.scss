@@ -394,6 +394,18 @@
     }
 } 
 
+.search-box {
+    .setSelectbtn {
+        .selectTyp1 {
+            height: 2.5rem !important;
+            background-color: #ffffff !important;
+            padding: 0 3rem 0 1rem !important;
+            color: $col10 !important; 
+            font-size: 1rem !important;
+            font-weight: 300 !important;
+        }
+    }
+}
 .professinal_list {
     .chatsearch  {
         background: $col18; 
@@ -440,6 +452,7 @@
                         border-radius: 20px;
                         font-size: 15px;
                         cursor: pointer;
+                        margin-right: 10px; 
                     }
                 }
             }
@@ -608,6 +621,15 @@
             padding-left: 1rem;
             margin-right: 20px;
         }
+        .pro_cbtn {
+            button.btnTyp5 {
+                position: relative;
+                font-size: 16px;
+                padding: 0 1.5rem;
+                height: 3rem; 
+            }
+        }
+
         form {
             .form-group {
                 .inputTyp2.inputpProcess {

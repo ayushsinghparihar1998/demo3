@@ -467,23 +467,23 @@ class ProfessionalSignup extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
                       /> */}
-                      <div className="motivate_pwd">
-                        <Form.Control
-                          type="password"
-                          name="userPassword"
-                          onChange={this.handlePasswordChange}
-                          value={this.state.userPassword}
-                          minLength="8"
-                          maxLength="15"
-                          inputProps={{ maxLength: 15 }}
-                          className="inputTyp2"
-                        />
-                        <Button
-                          className="btnTyp11 ml-3"
-                          onClick={this.handleResetPassword}
-                        >
-                          Change Password
-                        </Button>
+                      <div className="motivate_pwd">      
+                          <Form.Control
+                            type="password"
+                            name="userPassword"
+                            onChange={this.handlePasswordChange}
+                            value={this.state.userPassword}
+                            minLength="8"
+                            maxLength="15"
+                            inputProps={{ maxLength: 15 }}
+                            className="inputTyp2"
+                          />
+                          <Button
+                            className="btnTyp11 ml-3"
+                            onClick={this.handleResetPassword}
+                          >
+                            Change Password
+                          </Button>
                       </div>
                       <div
                         className={`alignLeft  ${
