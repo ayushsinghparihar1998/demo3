@@ -76,20 +76,26 @@ class Myprofile extends Component {
         <div className="profile_layout pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={4} lg={3} className="pr-1">
+            <Col md={4} lg={3} className="pr-1">  
                 <div className="adminsidebar">
-                  <div className="inner_area">
-                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      Links
+                    <div className="inner_area">
+                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">Quick Links</div>
+                        <div className="d-flex m-3 pb-3 border-bottom">
+                             <div>
+                                <div className="fs14 col28 fw500">
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
+                    {/* <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="fs14 col28 fw500">
                         <Image src={Menuicon} alt="" className="mr-1" />
                         <Link to={{ pathname: `/adminlistener` }}>Back</Link>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
-                </div>
+                {/* </div> */}
               </Col>
               <Col md={8} lg={9} className="pl-1">
                 <div className="myprofile profiledetails">
@@ -217,3 +223,4 @@ class Myprofile extends Component {
 }
 
 export default Myprofile;
+

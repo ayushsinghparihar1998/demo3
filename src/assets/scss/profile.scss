@@ -603,6 +603,7 @@
             border-radius: 20px;
             font-size: 15px;
             cursor: pointer;
+            margin-right: 10px; 
         }
     }
     .e_detai {
@@ -612,14 +613,21 @@
             min-width: 85px;
         }
         span {
-            display: block;  
+            display: block; 
+            a {
+                padding-left: 10px; 
+            }  
         }
     }
     .professor_search { 
         padding: 10px 30px 50px; 
         .checkone.form-check {   
-            padding-left: 1rem;
+            padding-left: 0; 
             margin-right: 20px;
+            label {
+                padding-left: 2.5rem;
+                font-size: 15px; 
+            }
         }
         .pro_cbtn {
             button.btnTyp5 {
