@@ -14,6 +14,8 @@ import {
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Profileban from "../../assets/images/profile_ban.svg";
+import { Link } from "react-router-dom";
+import Menuicon from "../../assets/images/menu_icon.svg";
 import Profileimg from "../../assets/images/profile_img.svg";
 import Usaflag from "../../assets/images/india_flag.svg";
 import warningS from "../../assets/images/w_signal.svg";
@@ -81,118 +83,123 @@ class Myprofile extends Component {
                         <div className="d-flex m-3 pb-3 border-bottom">
                              <div>
                                 <div className="fs14 col28 fw500">
-                                    <a href="/adminlistener">Back</a>  
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
                                 </div>
                             </div>
                         </div> 
                     </div>
-                </div>
-            </Col> 
-             <Col md={8} lg={9} className="pl-1">
-
-              <div className="myprofile profiledetails"> 
-              
-                <div className="detailone">
-                  <Row>
-                    <Col md={4}>
-                      <div className="leftprofile">
-                        <Image src={proffDetail.u_image} alt="" />
+                    {/* <div className="d-flex m-3 pb-3 border-bottom">
+                      <div className="fs14 col28 fw500">
+                        <Image src={Menuicon} alt="" className="mr-1" />
+                        <Link to={{ pathname: `/adminlistener` }}>Back</Link>
                       </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="rightprofile">
-                        <div className="fs24 col3 fw600 mb-1">
-                          {proffDetail.u_name}
+                    </div> */}
+                  </div>
+                {/* </div> */}
+              </Col>
+              <Col md={8} lg={9} className="pl-1">
+                <div className="myprofile profiledetails">
+                  <div className="detailone">
+                    <Row>
+                      <Col md={4}>
+                        <div className="leftprofile">
+                          <Image src={proffDetail.u_image} alt="" />
                         </div>
+                      </Col>
+                      <Col md={8}>
+                        <div className="rightprofile">
+                          <div className="fs24 col3 fw600 mb-1">
+                            {proffDetail.u_name}
+                          </div>
 
-                        <div className="col3 fw500 mt-1 mb-2">
-                          Work Experience:
-                          <span className="col14 fw400 ml-2">
-                            {proffDetail.u_work_experience}
-                          </span>
+                          <div className="col3 fw500 mt-1 mb-2">
+                            Work Experience:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.u_work_experience}
+                            </span>
+                          </div>
+
+                          <div className="col3 fw500 mt-1 mb-2">
+                            Language:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.u_lang}
+                            </span>
+                          </div>
+
+                          <div className="col3 fw500 mt-1 mb-2">
+                            DOB:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.u_birthdate}
+                            </span>
+                          </div>
+
+                          <div className="d-flex mt-4">
+                            <Button
+                              variant="primary"
+                              type="submit"
+                              className="btnTyp5 mr-3"
+                            >
+                              {proffDetail.email}
+                            </Button>
+                            {this.props.match.params.type == "admin" ? (
+                              ""
+                            ) : (
+                              <>
+                                <Button
+                                  variant="primary"
+                                  type="submit"
+                                  className="btnTyp5 mr-3"
+                                >
+                                  Call
+                                </Button>
+
+                                <Button
+                                  variant="primary"
+                                  type="submit"
+                                  className="btnTyp5"
+                                >
+                                  BOOK A SESSION
+                                </Button>
+                              </>
+                            )}
+                          </div>
                         </div>
+                      </Col>
+                    </Row>
+                  </div>
 
-                        <div className="col3 fw500 mt-1 mb-2">
-                          Language:
-                          <span className="col14 fw400 ml-2">
-                            {proffDetail.u_lang}
-                          </span>
-                        </div>
-
-                        <div className="col3 fw500 mt-1 mb-2">
-                          DOB:
-                          <span className="col14 fw400 ml-2">
-                            {proffDetail.u_birthdate}
-                          </span>
-                        </div>
-
-                        <div className="d-flex mt-4">
-                          <Button
-                            variant="primary"
-                            type="submit"
-                            className="btnTyp5 mr-3"
-                          >
-                            {proffDetail.email}
-                          </Button>
-                          {this.props.match.params.type == "admin" ? (
-                            ""
-                          ) : (
-                            <>
-                              <Button
-                                variant="primary"
-                                type="submit"
-                                className="btnTyp5 mr-3"
-                              >
-                                Call
-                              </Button>
-
-                              <Button
-                                variant="primary"
-                                type="submit"
-                                className="btnTyp5"
-                              >
-                                BOOK A SESSION
-                              </Button>
-                            </>
-                          )}
-                        </div>
+                  <div className="detailtwo">
+                    <Col md={12}>
+                      <div className="fs32 col3 text-center fw500 mb-4">
+                        Education
                       </div>
+                      <div
+                        className="boxexone"
+                        dangerouslySetInnerHTML={{
+                          __html: proffDetail.u_education,
+                        }}
+                      ></div>
                     </Col>
-                  </Row>
-                </div>
+                  </div>
 
-                <div className="detailtwo">
-                  <Col md={12}>
-                    <div className="fs32 col3 text-center fw500 mb-4">
-                      Education
-                    </div>
-                    <div
-                      className="boxexone"
-                      dangerouslySetInnerHTML={{
-                        __html: proffDetail.u_education,
-                      }}
-                    ></div>
-                  </Col>
-                </div>
-
-                <div className="detailthree">
-                  <Col md={12}>
-                    <div className="fs32 col3 fw600 text-center mb-4">
-                      Biography
-                    </div>
-                    {/* <div className="fs17 col3 fw500 mb-2">
+                  <div className="detailthree">
+                    <Col md={12}>
+                      <div className="fs32 col3 fw600 text-center mb-4">
+                        Biography
+                      </div>
+                      {/* <div className="fs17 col3 fw500 mb-2">
                       Which bucket would your therapy style fit into primarily?
                     </div> */}
-                    <div
-                      className="fs15 col14 fw400 mb-3"
-                      dangerouslySetInnerHTML={{
-                        __html: proffDetail.u_bio,
-                      }}
-                    >
-                      {/* {proffDetail.u_bio} */}
-                    </div>
+                      <div
+                        className="fs15 col14 fw400 mb-3"
+                        dangerouslySetInnerHTML={{
+                          __html: proffDetail.u_bio,
+                        }}
+                      >
+                        {/* {proffDetail.u_bio} */}
+                      </div>
 
-                    {/* <div className="fs15 col14 fw400 mb-3">
+                      {/* <div className="fs15 col14 fw400 mb-3">
                       Therapy helps to alter self-defeating narratives into
                       powerful ones filled with acceptance and compassion. For
                       long-lasting alterations, it helps the individual realize
@@ -202,9 +209,9 @@ class Myprofile extends Component {
                       much of this conditioning and replacing old beliefs with
                       more realistic, compassionate and empowering ones.
                     </div> */}
-                  </Col>
+                    </Col>
+                  </div>
                 </div>
-              </div>
               </Col>
             </Row>
           </Container>
