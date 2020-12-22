@@ -305,7 +305,7 @@ class ProfessionalSignup extends Component {
                 <Row>
                   <Col md={12}>
                     <Form.Group> 
-                      <Form.Label className="fs20 fw600 col14">   
+                      <Form.Label className="fs20 fw600 col14">    
                           Change Picture
                       </Form.Label> 
                       <div className="mt-1 mb-3 imgSetProfile">         
@@ -561,7 +561,7 @@ class ProfessionalSignup extends Component {
                       </Form.Label>
                       <Row>
                         {proffCat &&
-                          proffCat.map((cat) => {
+                          proffCat.map((cat) => {  
                             return (
                               <Col md={4}>
                                 <Form.Group controlId="formBasicCheckbox">
@@ -644,7 +644,7 @@ class ProfessionalSignup extends Component {
                     </Form.Group>
                   </Col>
  */}
-                  <Col md={12}>
+                  <Col md={12}> 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
                         Qualification
@@ -681,7 +681,7 @@ class ProfessionalSignup extends Component {
                       </div>
                     </Form.Group>
                   </Col>
-                  <Col md={12}>
+                  <Col md={12}> 
                     {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">Biography</Form.Label>  
                         <Form.Control as="textarea" rows={3} className="inputTyp2 text_bio"/> 

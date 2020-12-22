@@ -383,8 +383,8 @@ class ProfessionalSignup extends Component {
                       <Form.Label className="fs20 fw600 col14">   
                           Change Picture
                       </Form.Label> 
-                      <div className="mt-1 mb-3 imgSetProfile">     
-                          <Image src={UploadDetail} className="" /> 
+                      <div className="mt-1 mb-3 imgSetProfile">       
+                          <Image src={UploadDetail} className="" />     
                       </div>
                       <Form.File
                         id="exampleFormControlFile1"

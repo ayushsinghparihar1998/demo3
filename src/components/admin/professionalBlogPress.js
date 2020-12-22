@@ -8,10 +8,10 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import UploadDetail from "../../assets/images/upload_detail.svg"; 
 
-class ProfessinalBlogCreate extends Component {                                         
+class ProfessinalBlogPress extends Component {                                           
     render() {  
         return (
-            <div className="page__wrapper innerpage"> 
+            <div className="page__wrapper innerpage">  
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
@@ -52,7 +52,7 @@ class ProfessinalBlogCreate extends Component {
                             </Col>  
                             <Col md={9} className="pl-1">             
                                 <div className="corporateMember layout_box">     
-                                     <div className="fs28 col10 fw600">Create Blog</div>
+                                     <div className="fs28 col10 fw600">Create Press</div> 
                                      <div className="col14 fs16 fw300 mt-1 mb-4">        
                                           Lorem Ipsum is simply dummy and typesetting industry.
                                      </div>
@@ -102,17 +102,23 @@ class ProfessinalBlogCreate extends Component {
                                                     }}
                                                 />            
                                             </Form.Group> 
-
+                                            
+                                            <Form.Group>
+                                                <Form.Label className="fs20 fw600 col14">Written by
+                                                </Form.Label>
+                                                <Form.Control type="text" className="inputTyp2" /> 
+                                            </Form.Group>
+                                            
                                             <Form.Group> 
                                                 <Form.Label className="fs20 fw600 col14">
-                                                    Select Category
+                                                     Post in 
                                                 </Form.Label>
                                                 <Row>
                                                     <Col md={4}>
                                                         <Form.Group controlId="formBasicCheckbox">
                                                         <Form.Check
                                                             type="checkbox"
-                                                            label="EAT"
+                                                            label="Featured"
                                                             className="checkboxTyp1"
                                                             id="eatone" 
                                                         />
@@ -122,7 +128,7 @@ class ProfessinalBlogCreate extends Component {
                                                         <Form.Group controlId="formBasicCheckbox">
                                                         <Form.Check
                                                             type="checkbox"
-                                                            label="LUV"
+                                                            label="Coverage"
                                                             className="checkboxTyp1"
                                                             id="luvone" 
                                                         />
@@ -132,7 +138,7 @@ class ProfessinalBlogCreate extends Component {
                                                         <Form.Group controlId="formBasicCheckbox">
                                                         <Form.Check
                                                             type="checkbox"
-                                                            label="PRAY" 
+                                                            label="Press Releases" 
                                                             className="checkboxTyp1"
                                                             id="prayone"  
                                                         />
@@ -140,12 +146,6 @@ class ProfessinalBlogCreate extends Component {
                                                     </Col>
                                                 </Row>
                                             </Form.Group> 
-
-                                            <Form.Group>
-                                                <Form.Label className="fs20 fw600 col14">Blog written by
-                                                </Form.Label>
-                                                <Form.Control type="text" className="inputTyp2" /> 
-                                            </Form.Group>
 
                                             <Button variant="primary btnTyp5 mt-4" type="submit">
                                                 create
@@ -162,7 +162,8 @@ class ProfessinalBlogCreate extends Component {
     }
 }
 
-export default ProfessinalBlogCreate;
+export default ProfessinalBlogPress; 
+
 
 
 

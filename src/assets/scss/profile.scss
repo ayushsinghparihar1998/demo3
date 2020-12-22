@@ -733,6 +733,19 @@
             height: 3rem;
         } 
     }
+    .form-group {
+        input[type="file"] {      
+            color: #9F9F9F !important;
+            background: #f3fdff !important;
+            border: solid 0.5px $col23 !important; 
+            box-shadow: none;
+            height: 3.5rem;
+            border-radius: 0px;
+            font-size: 1.125rem !important;
+            padding-top: 14px;
+            padding-left: 15px;
+        }
+    }
 
     table {      
         tr { 
