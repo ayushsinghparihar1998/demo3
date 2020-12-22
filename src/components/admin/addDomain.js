@@ -62,13 +62,33 @@ class CorporateMember extends Component {
                                                     If you already have a member account, you can use the same email and password for easy switching.
                                                 </div>     
                                             </Form.Group>
+
                                             <Form.Group>
-                                                <Form.Label className="fs20 fw600 col14">Total Audio/Video (hrs)</Form.Label>
-                                                <Form.Control type="text" className="inputTyp2" /> 
+                                                <Form.Label className="fs20 fw600 col14">Total Audio (min hrs)
+                                                </Form.Label>
+                                                <Form.Control type="text" className="inputTyp2" />   
                                                 <div className="col27 fs14 fw400 mt-2">
-                                                    Password must contain at least 8 characters.
+                                                    Enter Audio hours
                                                 </div>           
                                             </Form.Group> 
+
+                                            <Form.Group>
+                                                <Form.Label className="fs20 fw600 col14">Audio Status
+                                                </Form.Label>
+                                                <Form.Control as="select" className="selectTyp1"> 
+                                                    <option>Active</option>
+                                                    <option>InActive</option> 
+                                                </Form.Control>
+                                            </Form.Group> 
+
+                                            <Form.Group>
+                                                <Form.Label className="fs20 fw600 col14">Video Status
+                                                </Form.Label>
+                                                <Form.Control as="select" className="selectTyp1"> 
+                                                    <option>Active</option>
+                                                    <option>InActive</option> 
+                                                </Form.Control>
+                                            </Form.Group>
 
                                             <Button variant="primary btnTyp5 mt-4" type="submit">
                                                 ADD

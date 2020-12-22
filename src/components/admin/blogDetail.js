@@ -35,7 +35,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class BlogDetail extends Component {
 
-
   state = {
     isUploading: false,
     filepath: null,
@@ -44,8 +43,7 @@ class BlogDetail extends Component {
     bl_id: null,
     bl_title: null,
     bl_desc: null,
-    bl_image: null,
-
+    bl_image: null, 
   }
 
   componentDidMount() {

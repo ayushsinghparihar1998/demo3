@@ -31,7 +31,7 @@ class ListenerBrowse extends Component {
                 <div className="search-box">
                    <Row>
                       <Col lg={3} md={3}>
-                      <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
+                        <div className="col1 fw500 fs18 mt-2">Need to talk to someone?</div>
                       </Col>
                       <Col lg={3} md={3}>
                       <Form.Group> 
@@ -66,7 +66,7 @@ class ListenerBrowse extends Component {
                       </Col>
                    </Row>
                 </div>
-                <div className="search-listing"> 
+                <div className="search-listing">  
                    <Row>
                       <Col lg={4} md={6}>
                       <div className="subscribes active">
