@@ -49,9 +49,49 @@ class ProfessionalLsting extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout professinal_list pt-4 pb-5">    
+                <div className="profile_layout professinal_list adminProfessinal pt-4 pb-5">    
                     <Container>
+                        
                         <div className="chatsearch w-100"> 
+                        <div className="professor_search"> 
+                            <div className="fs20 col1 fw500 mb-4">Search Professional</div>  
+                            <Form className="p_form">     
+                                <Row> 
+                                    <Col md="3">  
+                                        <Form.Group controlId="formBasicTexts">
+                                            <Form.Control type="text" placeholder="Search name" className="inputTyp2 inputpProcess" />       
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md="3">  
+                                        <Form.Group controlId="formBasickeyword"> 
+                                            <Form.Control type="text" placeholder="Search keyword" className="inputTyp2 inputpProcess" />      
+                                        </Form.Group> 
+                                    </Col>
+                                    <Col md="3">  
+                                        <Form.Group controlId="formBasickeyword"> 
+                                        <Form.Control as="select" className="selectTyp1 selectsetone">
+                                            <option>Search by professional</option>
+                                            <option>professional</option> 
+                                        </Form.Control>     
+                                        </Form.Group> 
+                                    </Col>
+                                    <Col md="3" className="text-center">    
+                                        <Button variant="primary process_btn" type="submit">
+                                            search
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            
+                                <div className="checkCategory">  
+                                    <Form.Group controlId="formBasicCheckbox1" className="row">
+                                        <Form.Check type="checkbox" className="checkone checkfirst" label="Eat" />  
+                                        <Form.Check type="checkbox" className="checktwo" label="Luv" />
+                                        <Form.Check type="checkbox" className="checkthree active" label="Pray" />           
+                                    </Form.Group> 
+                                </div>
+                            </Form>
+                        </div>
+                        
                             <div class="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div> 
                             <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">   
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s

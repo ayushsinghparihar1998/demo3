@@ -18,7 +18,8 @@ import BlogProcessTwo from "../../assets/images/p_blogs2.svg";
 import BlogProcessThree from "../../assets/images/p_blogs3.svg";
 import BlogProcessFour from "../../assets/images/p_blogs4.svg";   
 import BlogProcessFive from "../../assets/images/blog4.png";
-import BlogProcessSix from "../../assets/images/blog5.svg";    
+import BlogProcessSix from "../../assets/images/blog5.svg"; 
+import BlogProcessSeven from "../../assets/images/blog6.png";     
 import blogclock from "../../assets/images/blogclock.png";
 import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
@@ -62,20 +63,69 @@ class ProfessionalBlogList extends Component {
                                               </div>    
                                          </Col>
                                          <Col md={5}>   
-                                              <div className="fs20 fw600 col64">LATEST</div>   
-                                              <Row>
-                                                  <Col md={9}>
-                                                      <div className=""> 
-                                                          <div className="col14 fs16 fw300">
-                                                              Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
-                                                          </div>  
-                                                          <div className=""></div>
-                                                      </div>
-                                                  </Col>
-                                                  <Col md={3}>
-                                                      <Image src={BlogProcessTwo} className="w-100" /> 
-                                                  </Col>    
-                                              </Row> 
+                                              <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>  
+                                              <div className="mb-4 pb-2">     
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
                                               
                                                 
                                          </Col>
@@ -99,17 +149,7 @@ class ProfessionalBlogList extends Component {
                             </div> 
                         </Tab>
                      </Tabs>
-                       <div className="ml-auto w-100 pt-5 pb-5 mt-5 mb-5 d-flex justify-content-end">  
-                           <div>
-                              <div className="fs40 fw500">  
-                                 Get in touch 
-                              </div>
-                              <div className="col14 fs16 fw300 mb-2">
-                                 For all press inquiries, please email
-                              </div>
-                              <div className="col8 fs16 fw300">press@elphealth.com</div> 
-                           </div>
-                       </div>
+                       
                    </div>
              </div>
           </Container>
