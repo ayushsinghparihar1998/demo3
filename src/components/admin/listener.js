@@ -1564,10 +1564,7 @@ class Adminlistener extends Component {
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           Professional listing
-                        </div>
-                        <div className="fs16 col14 fw300">
-                          Lorem Ipsum is simply dummy and typesetting industry.
-                        </div>
+                        </div> 
                       </Col>
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
@@ -1837,8 +1834,8 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Work Experince:</strong>{" "}
-                                    {item.u_work_experience}
+                                    <strong>Work Experience:</strong>{" "}  
+                                    {item.u_work_experience}  
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
@@ -1857,13 +1854,13 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1 e_detai">
-                                    <strong>Biogropy: </strong>
+                                    <strong>Biography : </strong>
                                     <span
                                       dangerouslySetInnerHTML={{
                                         __html: item.u_bio,
                                       }}
                                     ></span>
-                                    <span>
+                                    <span className="mx-100w"> 
                                       <a
                                         className="col10"
                                         onClick={() =>
@@ -1876,6 +1873,7 @@ class Adminlistener extends Component {
                                         {"  "}Read more...
                                       </a>
                                     </span>
+
                                   </div>
 
                                   <div className="eat_category">

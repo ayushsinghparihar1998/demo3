@@ -575,7 +575,9 @@
 .adminProfessinal {
     .adminlistener {
         padding-bottom: 30px !important; 
-
+        span.mx-100w {
+            min-width: 100px;
+        }    
         .d-flex.ml-auto {
             span.pr-3 {
                 & + span {
@@ -628,7 +630,7 @@
         }
     }
     .professor_search { 
-        padding: 10px 30px 50px; 
+        padding: 10px 30px 0;  
         .checkone.form-check {   
             padding-left: 0; 
             margin-right: 20px;
