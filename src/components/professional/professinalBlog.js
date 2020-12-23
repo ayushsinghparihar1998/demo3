@@ -18,7 +18,7 @@ import BlogProcessTwo from "../../assets/images/p_blogs2.svg";
 import BlogProcessThree from "../../assets/images/p_blogs3.svg";
 import BlogProcessFour from "../../assets/images/p_blogs4.svg";   
 import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component";
+import ReactStars from "react-rating-stars-component"; 
 import { Popover } from 'antd';
 
 class ProfessinalBlog extends Component { 
@@ -252,7 +252,7 @@ class ProfessinalBlog extends Component {
                                          </Col> 
                                     </Row>
                                 </div>
-                                <div className="coverageList">       
+                                <div className="coverageList">        
                                     <Row>
                                          <Col md={8}>
                                               <div className="fw600 fs16 col64"> 

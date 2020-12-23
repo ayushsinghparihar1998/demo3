@@ -817,9 +817,30 @@
         max-width: 50%; 
     }
     .blogMain {
+        &.ListsUI {
+            position: relative;
+            .nav-tabs { 
+                .nav-item {
+                    width: 25%; 
+
+                    &.active {
+                        &::after {
+                            content: ""; 
+                            width: 140px; 
+                            left: calc(50% - 70px); 
+                        }
+                    }
+                }
+            } 
+            .wSet-50 {
+                max-width: 50px; 
+            }
+            .wSet-20 {
+                max-width: 20px; 
+            }
+        }    
         .nav-tabs {
             border-bottom: solid 1px $col23;
-
             .nav-item {
                 width: 33%;
                 text-align: center;

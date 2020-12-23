@@ -116,7 +116,7 @@ class ProfessinalBlogCreate extends Component {
                                                             className="checkboxTyp1"
                                                             id="eatone" 
                                                         />
-                                                        </Form.Group>
+                                                        </Form.Group>  
                                                     </Col>
                                                     <Col md={4}>
                                                         <Form.Group controlId="formBasicCheckbox">

@@ -85,6 +85,7 @@ import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser"; 
 import ProfessinalBlog from "../components/professional/professinalBlog";
+import ProfessionalBlogList from "../components/professional/professionalBlogList";  
 import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
 import ProfessinalBlogPress from "../components/admin/professionalBlogPress";                      
 
@@ -183,6 +184,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />        
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
+          <PublicRoute path="/professionalBlogList" component={ProfessionalBlogList} />  
           <PublicRoute path="/blogUser" component={BlogUser} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
@@ -193,8 +195,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
 
           {/* LIst */}
-          <PrivateRouteList path="/userDashboard" component={Userdashboard} />
-          <PrivateRouteList path="/chat/:id" component={Chat} />
+          <PrivateRouteList path="/userDashboard" component={Userdashboard} /> 
+          <PrivateRouteList path="/chat/:id" component={Chat} />  
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
           <Route
             path="/termcondition"
