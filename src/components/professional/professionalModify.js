@@ -395,7 +395,7 @@ class ProfessionalSignup extends Component {
                       />
                       <div
                         className={`alignLeft  ${
-                          errors.u_image ? "error " : "d-none "
+                          errors.u_image ? "error " : "d-none" 
                         }`}
                       >
                         {errors.u_image}

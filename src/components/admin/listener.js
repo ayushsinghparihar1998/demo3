@@ -31,7 +31,7 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";
+} from "react-bootstrap";      
 import moment from "moment";
 
 import Pagination from "react-js-pagination";
@@ -1906,17 +1906,17 @@ class Adminlistener extends Component {
                       // );
                     })}
                 </Col>
-              ) : this.state.pageType == "domainList" ? (
+              ) : this.state.pageType == "domainList" ? ( 
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="corporateMember d_detail">
+                  <div className="corporateMember adminlistener d_detail">         
                     <div className="domainSave">
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div>
-                        <div className="fs15 fw400 col14 mb-4">
+                        <div className="fs22 col10 mb-1">Domain listing</div> 
+                        <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div>
                       </div>
-                      <div className="ml-auto">
+                      <div className="ml-auto">  
                         <Button
                           variant="primary"
                           type="button"
@@ -1961,53 +1961,59 @@ class Adminlistener extends Component {
                                 <td>50</td>
                                 <td>{item.cd_audio_min / 60}</td>
                                 <td>{item.cd_video_min / 60}</td>
-                                <td>
-                                  <span className="pr-3 fs14 col47 fw400">
-                                    {item.cd_status == 1
-                                      ? "Active"
-                                      : "Inactive"}
-                                  </span>
-                                  <span className="pr-3 disabled">
-                                    <Form.Check
-                                      type="switch"
-                                      id={"custom-switch" + index}
-                                      name={"status" + index}
-                                      label=""
-                                      onClick={(e) => {
-                                        this.modifyDomainContent(
-                                          item,
-                                          this.state.deleteId,
-                                          "superadminchangestatusCorporatedomain",
-                                          item.cd_status == "1" ? "0" : "1"
-                                        );
-                                      }}
-                                      checked={item.cd_status == "1"}
-                                    />
-                                  </span>
-                                  <span>
-                                    <Image
-                                      src={Editicon}
-                                      alt=""
-                                      onClick={() =>
-                                        this.props.history.push(
-                                          `/adddomain/${item.cd_id}`
-                                          // `/adddomain`
-                                        )
-                                      }
-                                    />
-                                  </span>
-                                  <span>
-                                    <Image
-                                      src={Deleteicon}
-                                      alt=""
-                                      onClick={() =>
-                                        this.handleOpenConformation(
-                                          "other",
-                                          item
-                                        )
-                                      }
-                                    />
-                                  </span>{" "}
+                                <td className="blogTables">  
+                                  <div> 
+                                      <span className="disabled text-center"> 
+                                        <Form.Check
+                                          type="switch"
+                                          id={"custom-switch" + index}
+                                          name={"status" + index}
+                                          label=""
+                                          onClick={(e) => {
+                                            this.modifyDomainContent(
+                                              item,
+                                              this.state.deleteId,
+                                              "superadminchangestatusCorporatedomain",
+                                              item.cd_status == "1" ? "0" : "1"
+                                            );
+                                          }}
+                                          checked={item.cd_status == "1"}
+                                        />
+                                      </span>
+                                      <span className="pr-2 fs13 col47 fw500"> 
+                                        {item.cd_status == 1
+                                          ? "Active"
+                                          : "Inactive"}
+                                      </span> 
+                                  </div>
+
+                                  <div>  
+                                      <span className="mr-2">
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.props.history.push(
+                                              `/adddomain/${item.cd_id}`
+                                              // `/adddomain`
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.handleOpenConformation(
+                                              "other",
+                                              item
+                                            )
+                                          }
+                                        />
+                                      </span>{" "}
+                                  </div>
+
                                 </td>
                               </tr>
                             );
@@ -2018,7 +2024,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "addMember" ? (
                 <Col md={9} className="pl-1">
-                  <div className="corporateMember">
+                  <div className="corporateMember adminlistener">  
                     <div className="fs28 col10 mb-4">
                       Become a Corporate Member
                     </div>
@@ -2044,7 +2050,7 @@ class Adminlistener extends Component {
                           maxLength={100}
                         />
 
-                        <div className="col27 fs14 fw400 mt-2">
+                        <div className="col27 fs14 fw400 mt-2 error">
                           {errors.email}
                         </div>
                       </Form.Group>
@@ -2063,7 +2069,7 @@ class Adminlistener extends Component {
                           onChange={(e) => this.handleChangeCorpMember(e)}
                           maxLength={40}
                         />{" "}
-                        <div className="col27 fs14 fw400 mt-2">
+                        <div className="col27 fs14 fw400 mt-2 error">  
                           {errors.password}{" "}
                         </div>
                       </Form.Group>

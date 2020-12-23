@@ -47,65 +47,40 @@ class ProfessionalBlogList extends Component {
                                                     Lorem Ipsum is simply dummy text 2020 of the printing and typesetting industry. 
                                               </div>
                                               <Image src={BlogProcessFive} className="w-100" /> 
-                                              <div className="">
-                                                  <Image src="BlogProcessSix" className="wSet-50" />
+                                              <div className="blogClocks mb-3 mt-3">   
+                                                  <Image src={BlogProcessSix} className="wSet-50 mr-3" /> 
                                                   <div>  
-                                                      <div>Written by Salena Gomez </div> 
-                                                      <div>
-                                                          <Image src="BlogClock" className="wSet-20" />  
+                                                      <span className="fs18 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span>  
+                                                      <span className="ml-3">  
+                                                          <Image src={blogclock} className="wSet-20 mr-2" />      
                                                            11 Minute read
-                                                      </div> 
+                                                      </span> 
                                                   </div>
-                                              </div>
-                                              <div className="col14 fs16 fw300">
+                                              </div> 
+                                              <div className="col14 fs18 fw400"> 
                                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                                               </div>    
                                          </Col>
                                          <Col md={5}>   
-                                              <Image src={BlogProcessTwo} className="w-100" /> 
-                                              <div className="col14 fs16 fw300">
-                                                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                              </div>    
+                                              <div className="fs20 fw600 col64">LATEST</div>   
+                                              <Row>
+                                                  <Col md={9}>
+                                                      <div className=""> 
+                                                          <div className="col14 fs16 fw300">
+                                                              Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                          </div>  
+                                                          <div className=""></div>
+                                                      </div>
+                                                  </Col>
+                                                  <Col md={3}>
+                                                      <Image src={BlogProcessTwo} className="w-100" /> 
+                                                  </Col>    
+                                              </Row> 
+                                              
+                                                
                                          </Col>
                                     </Row>
-                                    <div className="mt-4 mb-4 border_blog"></div>
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="socialWelfar">
-                                                   <Row>
-                                                        <Col md={6}>
-                                                            <Image src={BlogProcessThree} className="w-100" /> 
-                                                            <div className="col14 fw300 fs16 mt-2 mb-2">Feather Hashmi</div>
-                                                            <div className="col14 fw400 fs16">Lorem dummy content</div> 
-                                                         </Col> 
-                                                        <Col md={6}>
-                                                             <div className="col64 fw600 fs18">
-                                                                Child and Social Welfar Society lorem dummy content
-                                                             </div>
-                                                        </Col>
-                                                   </Row>
-                                              </div> 
-                                         </Col>
-                                         <Col md={6}>
-                                         <div className="socialWelfar">
-                                                   <Row>
-                                                        <Col md={6}>
-                                                            <Image src={BlogProcessFour} className="w-100" /> 
-                                                         </Col> 
-                                                        <Col md={6}>
-                                                             <div className="col64 fw600 fs18">
-                                                                Child and Social Welfar Society lorem dummy content
-                                                             </div>
-                                                        </Col>
-                                                        <Col md={12}>
-                                                              <div className="col14 fs16 fw300 mt-3">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. 
-                                                              </div>
-                                                        </Col>
-                                                   </Row>
-                                              </div> 
-                                         </Col>
-                                    </Row>
+                                    {/* <div className="mt-4 mb-4 border_blog"></div> */}    
                               </div>
                         </Tab>
                         <Tab eventKey="EAT" title="EAT">  
