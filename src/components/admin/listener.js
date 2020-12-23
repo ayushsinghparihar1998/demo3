@@ -14,6 +14,11 @@ import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
 import Samyukthaimg from "../../assets/images/Samyuktha.png";
 import Shrishtiimg from "../../assets/images/Shrishti.png";
+import DatePicker from "react-datepicker";
+import Validator from "validator";
+
+import "react-datepicker/dist/react-datepicker.css";
+// import moment from "moment";
 import {
   Button,
   NavDropdown,
@@ -64,6 +69,7 @@ class Adminlistener extends Component {
       pageno: 1,
       records: 10,
       totalCount: "",
+      deleteModalType: "admin",
 
       count: 10,
       offset: 1,
@@ -82,6 +88,11 @@ class Adminlistener extends Component {
         { name: "Pray", value: 3, flag: true },
       ],
       category: "'Pray','luv','eat'",
+      errors: {},
+      memberObj: {
+        email: "",
+        password: "",
+      },
     };
   }
   componentDidMount() {
@@ -134,19 +145,6 @@ class Adminlistener extends Component {
       pageArray: pageArray,
     });
   }
-
-  // change page
-
-  onSearch() {
-    this.getProffListing(
-      this.state.pageno,
-      this.state.count,
-      this.state.name,
-      this.state.status,
-      this.state.keyword,
-      this.state.category
-    );
-  }
   onChangePage(page) {
     console.log(page);
     console.log(this.state.pageno);
@@ -180,6 +178,19 @@ class Adminlistener extends Component {
       } else {
       }
     }
+  }
+
+  // change page
+
+  onSearch() {
+    this.getProffListing(
+      this.state.pageno,
+      this.state.count,
+      this.state.name,
+      this.state.status,
+      this.state.keyword,
+      this.state.category
+    );
   }
 
   handlePageChange = (newPageNumber) => {
@@ -354,8 +365,11 @@ class Adminlistener extends Component {
     });
   };
 
-  handleOpenConformation = () => {
+  handleOpenConformation = (type, obj) => {
     this.setState({
+      deleteModalType: type ? type : "admin",
+      deleteUser: obj ? obj.cd_domain_name : "",
+      deleteId: obj ? obj.cd_id : "",
       deleteConformationModal: true,
     });
   };
@@ -366,6 +380,62 @@ class Adminlistener extends Component {
     this.setState({
       reasonForDelete: value,
     });
+  }
+  handleChangeCorpMember(e) {
+    const name = e.target.name;
+    let value = e.target.value;
+    let memberObj = this.state.memberObj;
+    memberObj[name] = value.trim();
+    this.setState({
+      memberObj,
+    });
+  }
+  handleSubmitCorpMember() {
+    let memberObj = this.state.memberObj;
+    let errors = this.state.errors;
+    var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+    // var test = reg.test(value.trim());
+    errors.email =
+      memberObj.email.length == 0
+        ? "Please Enter email id"
+        : !Validator.isEmail(memberObj.email)
+        ? "Please enter a valid email"
+        : "";
+    errors.password =
+      memberObj.password.length == 0
+        ? "Please Enter password"
+        : !reg.test(memberObj.password.trim())
+        ? "Please enter a valid password"
+        : "";
+
+    this.setState({
+      errors,
+    });
+    if (errors.email.length == 0 && errors.password.length == 0) {
+      console.log("submit");
+      ELPViewApiService("superadmincorporatecustomerregister", memberObj)
+        .then((result) => {
+          if (result && result.data && result.data.status === "success") {
+            let memberObj = {
+              email: "",
+              password: "",
+            };
+            this.setState({
+              memberObj,
+            });
+          } else {
+            this.setState({
+              showLoader: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            showLoader: false,
+          });
+        });
+    }
   }
   adminUserDeleteReason = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
@@ -509,6 +579,66 @@ class Adminlistener extends Component {
       );
     });
   };
+
+  handleDate = (date) => {
+    console.log("date", date);
+    this.setState({
+      date,
+    });
+    console.log(this.state.date);
+  };
+  modifyDomainContent = (item, id, api, status) => {
+    let data = { cd_id: id ? id : item.cd_id, cd_status: status };
+    ELPViewApiService(api, data).then((result) => {
+      this.setState({ deleteConformationModal: false });
+      if (result && result.status === 200) {
+        this.getDomainListing(this.state.pageno, this.state.count);
+      }
+    });
+  };
+  getDomainListing = (offset, count) => {
+    console.log("count, offset", count, offset);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    let data = {
+      count: count,
+      offset: offset,
+    };
+    console.log(data);
+
+    ELPViewApiService("superadmingetcorporatedomain", data).then((result) => {
+      console.log("result", result);
+      let domainList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        domainList =
+          result && result.data && result.data.data
+            ? result.data.data.domain_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          domainList,
+          totalRecordCount,
+          pageType: "domainList",
+          count,
+          offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+          console.log("domainList", this.state.domainList);
+        }
+      );
+    });
+  };
+
   getBlockuserListing = (offset, count, block_type) => {
     // 0:Processing,1:Accept,2:Reject
     // offset - page no
@@ -794,7 +924,7 @@ class Adminlistener extends Component {
     this.props.history.push(path);
   };
   render() {
-    let totalRecord = this.state.totalRecord;
+    const { errors, totalRecord, memberObj } = this.state;
     let userActveClass =
       this.state.pageType == "userlist" && this.state.activeProfile == "user"
         ? "position-relative active"
@@ -826,6 +956,14 @@ class Adminlistener extends Component {
         : "position-relative";
     let proffActveClass =
       this.state.pageType == "proffList"
+        ? "position-relative active"
+        : "position-relative";
+    let domainActveClass =
+      this.state.pageType == "domainList"
+        ? "position-relative active"
+        : "position-relative";
+    let addMemberActveClass =
+      this.state.pageType == "addMember"
         ? "position-relative active"
         : "position-relative";
     let profileListing = this.state.profileListing;
@@ -887,6 +1025,32 @@ class Adminlistener extends Component {
                         <div className="fs14 col23 fw500">
                           <Image src={Menuiconblue} alt="" className="mr-1" />{" "}
                           LISTENER LISTING
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={domainActveClass}
+                        onClick={(e) => {
+                          this.getDomainListing(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          DOMAIN LIST
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={addMemberActveClass}
+                        onClick={(e) => {
+                          this.setState({ pageType: "addMember" });
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          ADD CORPORATE MEMBER
                         </div>
                       </div>
                     </div>
@@ -1405,7 +1569,7 @@ class Adminlistener extends Component {
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div>
                       </Col>
-                      <Col md={4}>  
+                      <Col md={4}>
                         <div className="text-right pro_cbtn">
                           <Button
                             type="button"
@@ -1423,7 +1587,10 @@ class Adminlistener extends Component {
                     <Form className="p_form">
                       <Row>
                         <Col md="6">
-                          <Form.Group controlId="formBasicTexts" className="mb-4"> 
+                          <Form.Group
+                            controlId="formBasicTexts"
+                            className="mb-4"
+                          >
                             <Form.Control
                               type="text"
                               placeholder="Search name"
@@ -1435,7 +1602,10 @@ class Adminlistener extends Component {
                           </Form.Group>
                         </Col>
                         <Col md="6">
-                          <Form.Group controlId="formBasickeyword" className="mb-4">
+                          <Form.Group
+                            controlId="formBasickeyword"
+                            className="mb-4"
+                          >
                             <Form.Control
                               type="text"
                               placeholder="Search keyword"
@@ -1448,12 +1618,14 @@ class Adminlistener extends Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col md="6">         
+                        <Col md="6">
                           <Form.Group
                             controlId="formBasicCheckbox2"
                             className="row mb-4 statusCat"
                           >
-                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">Status</span> 
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
+                              Status
+                            </span>
                             {this.state.keywordArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1481,12 +1653,14 @@ class Adminlistener extends Component {
                           </Form.Group>
                         </Col>
 
-                        <Col md="6">  
+                        <Col md="6">
                           <Form.Group
                             controlId="formBasicCheckbox4"
                             className="row mb-4 statusCat"
                           >
-                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">Category</span>
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
+                              Category
+                            </span>
                             {this.state.catArray.map((item) => {
                               return (
                                 <Form.Check
@@ -1506,12 +1680,11 @@ class Adminlistener extends Component {
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
-                            })} 
-
+                            })}
                           </Form.Group>
                         </Col>
 
-                        <Col md="4">                    
+                        <Col md="4">
                           <Button
                             variant="primary process_btn"
                             type="button"
@@ -1520,7 +1693,6 @@ class Adminlistener extends Component {
                             search
                           </Button>
                         </Col>
-
                       </Row>
 
                       <div className="checkCategory">
@@ -1575,7 +1747,9 @@ class Adminlistener extends Component {
 
                                     <div className="d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
-                                        {item.u_status == "1" ? "Active" : "Inactive"}
+                                        {item.u_status == "1"
+                                          ? "Active"
+                                          : "Inactive"}
                                       </span>
                                       <span className="pr-3 disabled">
                                         <Form.Check
@@ -1731,6 +1905,202 @@ class Adminlistener extends Component {
 
                       // );
                     })}
+                </Col>
+              ) : this.state.pageType == "domainList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="corporateMember d_detail">
+                    <div className="domainSave">
+                      <div>
+                        <div className="fs22 col10 mb-1">Domain listing</div>
+                        <div className="fs15 fw400 col14 mb-4">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </div>
+                      <div className="ml-auto">
+                        <Button
+                          variant="primary"
+                          type="button"
+                          className="btnTyp5"
+                          onClick={() =>
+                            this.props.history.push(
+                              `/adddomain/0`
+                              // `/adddomain`
+                            )
+                          }
+                        >
+                          Add Domain
+                        </Button>
+                      </div>
+                      <div></div>
+                    </div>
+                    <Table bordered>
+                      <thead>
+                        <tr>
+                          <th>Domain</th>
+                          <th>No. of Employees</th>
+                          <th>Total Audio(minutes)</th>
+                          <th>Total Video(minutes)</th>
+                          <th>ACTION</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.domainList &&
+                          this.state.domainList.map((item, index) => {
+                            return (
+                              <tr>
+                                <td
+                                  onClick={() =>
+                                    this.props.history.push(
+                                      `/domainDetails/${item.cd_domain_name}/${item.cd_id}`
+                                      // `/adddomain`
+                                    )
+                                  }
+                                >
+                                  {item.cd_domain_name}
+                                </td>
+                                <td>50</td>
+                                <td>{item.cd_audio_min / 60}</td>
+                                <td>{item.cd_video_min / 60}</td>
+                                <td>
+                                  <span className="pr-3 fs14 col47 fw400">
+                                    {item.cd_status == 1
+                                      ? "Active"
+                                      : "Inactive"}
+                                  </span>
+                                  <span className="pr-3 disabled">
+                                    <Form.Check
+                                      type="switch"
+                                      id={"custom-switch" + index}
+                                      name={"status" + index}
+                                      label=""
+                                      onClick={(e) => {
+                                        this.modifyDomainContent(
+                                          item,
+                                          this.state.deleteId,
+                                          "superadminchangestatusCorporatedomain",
+                                          item.cd_status == "1" ? "0" : "1"
+                                        );
+                                      }}
+                                      checked={item.cd_status == "1"}
+                                    />
+                                  </span>
+                                  <span>
+                                    <Image
+                                      src={Editicon}
+                                      alt=""
+                                      onClick={() =>
+                                        this.props.history.push(
+                                          `/adddomain/${item.cd_id}`
+                                          // `/adddomain`
+                                        )
+                                      }
+                                    />
+                                  </span>
+                                  <span>
+                                    <Image
+                                      src={Deleteicon}
+                                      alt=""
+                                      onClick={() =>
+                                        this.handleOpenConformation(
+                                          "other",
+                                          item
+                                        )
+                                      }
+                                    />
+                                  </span>{" "}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    </Table>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "addMember" ? (
+                <Col md={9} className="pl-1">
+                  <div className="corporateMember">
+                    <div className="fs28 col10 mb-4">
+                      Become a Corporate Member
+                    </div>
+                    <Form>
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14">
+                          Email/ Domain address
+                        </Form.Label>
+                        {/* <div className="col27 fs14 fw400 mb-2">
+                          An email will be sent to verify your account. We won’t
+                          share your email address with anyone.
+                        </div> */}
+                        <Form.Control
+                          type="email"
+                          placeholder="Email"
+                          className="inputTyp2"
+                          id="outlined-email"
+                          variant="outlined"
+                          name="email"
+                          isInvalid={errors.email}
+                          value={memberObj.email}
+                          onChange={(e) => this.handleChangeCorpMember(e)}
+                          maxLength={100}
+                        />
+
+                        <div className="col27 fs14 fw400 mt-2">
+                          {errors.email}
+                        </div>
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="fs20 fw600 col14">
+                          Create a Password
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Password"
+                          className="inputTyp2"
+                          id="outlined-password"
+                          variant="outlined"
+                          name="password"
+                          value={memberObj.password}
+                          onChange={(e) => this.handleChangeCorpMember(e)}
+                          maxLength={40}
+                        />{" "}
+                        <div className="col27 fs14 fw400 mt-2">
+                          {errors.password}{" "}
+                        </div>
+                      </Form.Group>
+                      {/* <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label className="fs20 fw600 col14">
+                          Birthday
+                        </Form.Label>
+                        <div className="col27 fs14 fw400 mb-2">
+                          Applicants must be at least 18 years old or 15 years
+                          old with parental consent.
+                        </div>
+                        <Row>
+                          <Col md={4}>
+                            <DatePicker
+                              placeholderText="Click to select a date"
+                              selected={memberObj.date}
+                              value={memberObj.date}
+                              onChange={(event) => this.handleDate(event)}
+                              maxDate={new Date()}
+                              className="form-control inputTyp2"
+                            />
+                          </Col>
+                        </Row>
+                        <div className="col27 fs14 fw400 mt-2">
+                          Please make sure you enter the correct date. You will
+                          be unable to change this later.
+                        </div>
+                      </Form.Group> */}
+                      <Button
+                        variant="primary btnTyp5 mt-4"
+                        type="button"
+                        onClick={() => this.handleSubmitCorpMember()}
+                      >
+                        Submit
+                      </Button>
+                    </Form>
+                  </div>
                 </Col>
               ) : (
                 <Col md={8} lg={9} className="pl-1">
@@ -1969,14 +2339,25 @@ class Adminlistener extends Component {
                   onClick={this.handleCloseConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete <br /> {profileName}?{" "}
+                  Are you sure want to delete <br />{" "}
+                  {this.state.deleteModalType == "admin"
+                    ? profileName
+                    : this.state.deleteUser}
+                  ?{" "}
                 </div>
 
                 <div className="text-center mb-5">
                   <button
                     className="btn btn-success text-uppercase"
                     onClick={(event) =>
-                      this.adminUserDelete(event, this.state.profileId, 2)
+                      this.state.deleteModalType == "admin"
+                        ? this.adminUserDelete(event, this.state.profileId, 2)
+                        : this.modifyDomainContent(
+                            "",
+                            this.state.deleteId,
+                            "superadmindeletecorporatedomain",
+                            2
+                          )
                     }
                   >
                     Yes
@@ -1988,32 +2369,46 @@ class Adminlistener extends Component {
                     No
                   </button>
                 </div>
-                <div className="fs18 fw500 col10 pointer write_txt mb-4">
-                  WRITE A REASON
-                </div>
+                {this.state.deleteModalType == "admin" ? (
+                  this.state.activeProfile == "professional" ? (
+                    ""
+                  ) : (
+                    <>
+                      <div className="fs18 fw500 col10 pointer write_txt mb-4">
+                        WRITE A REASON
+                      </div>
 
-                <Form.Group
-                  controlId="exampleForm.ControlTextarea1"
-                  className="mb-4"
-                >
-                  <Form.Control
-                    as="textarea"
-                    className="textTypes1"
-                    name="reason"
-                    onChange={(event) => {
-                      this.handleChange(event);
-                    }}
-                  />
-                </Form.Group>
+                      <Form.Group
+                        controlId="exampleForm.ControlTextarea1"
+                        className="mb-4"
+                      >
+                        <Form.Control
+                          as="textarea"
+                          className="textTypes1"
+                          name="reason"
+                          onChange={(event) => {
+                            this.handleChange(event);
+                          }}
+                        />
+                      </Form.Group>
 
-                <button
-                  className="btn btn-success bt-submit text-uppercase"
-                  onClick={(event) =>
-                    this.adminUserDeleteReason(event, this.state.profileId, 2)
-                  }
-                >
-                  SUBMIT & DELETE
-                </button>
+                      <button
+                        className="btn btn-success bt-submit text-uppercase"
+                        onClick={(event) =>
+                          this.adminUserDeleteReason(
+                            event,
+                            this.state.profileId,
+                            2
+                          )
+                        }
+                      >
+                        SUBMIT & DELETE
+                      </button>
+                    </>
+                  )
+                ) : (
+                  ""
+                )}
               </div>
             </Modal.Body>
           </Modal>

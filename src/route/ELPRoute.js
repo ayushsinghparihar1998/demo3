@@ -78,12 +78,12 @@ import ProfessionalList from "../components/admin/professionalList";
 import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain";
 import DomainDetail from "../components/admin/domainDetail";
-import DomainListing from "../components/admin/domenListing";
+// import DomainListing from "../components/admin/domenListing";
 import SessionRequest from "../components/admin/sessionRequest";
 import CorporateLogin from "../components/professional/corporateLogin";
 import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
-import BlogUser from "../components/professional/blogUser"; 
+import BlogUser from "../components/professional/blogUser";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 
 const user =
@@ -169,9 +169,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/foundation" component={Foundation} />
           <PublicRoute path="/paymentdetail" component={Paymentdetail} />
           <PublicRoute path="/corporateMember" component={CorporateMember} />
-          <PublicRoute path="/addDomain" component={AddDomain} />
-          <PublicRoute path="/domainDetail" component={DomainDetail} />
-          <PublicRoute path="/domainListing" component={DomainListing} />
+          <PublicRoute path="/addDomain/:id" component={AddDomain} />
+          <PublicRoute path="/domainDetails/:name/:id" component={DomainDetail} />
+          {/* <PublicRoute path="/domainListing" component={DomainListing} /> */}
           <PublicRoute path="/sessionRequest" component={SessionRequest} />
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
           <PublicRoute
@@ -179,7 +179,7 @@ class ELPRoute extends Component {
             component={CorporateDashboard}
           />
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
-          <PublicRoute path="/blogUser" component={BlogUser} />        
+          <PublicRoute path="/blogUser" component={BlogUser} />
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
           <PublicRoute path="/blogUser" component={BlogUser} />
 

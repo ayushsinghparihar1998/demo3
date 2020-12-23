@@ -41,128 +41,137 @@ import ELPRxApiService from "../../common/services/apiService";
 import CONSTANTS from "../../common/helpers/Constants";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
-
-const socket = socketClass.getSocket(); 
+const socket = socketClass.getSocket();
 
 class NavBar extends Component {
   constructor() {
     super();
     this.state = {
       isNotification: false,
-      show: false, 
-      show2: false, 
+      show: false,
+      show2: false,
       show3: false,
       email_varified: false,
       profileImage: null,
       mediaLinks: [
         {
-          href: "https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995",
-          label: "Only my Help"
+          href:
+            "https://www.onlymyhealth.com/feeling-too-depressed-to-do-anything-here-are-some-simple-ways-to-get-your-life-back-on-track-1601550995",
+          label: "Only my Help",
         },
         {
-          href: "http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/",
-          label: "Lend me thy ears"
+          href:
+            "http://bwwellbeingworld.businessworld.in/article/Lend-me-thy-ears-Let-s-talk-about-listening-this-Mental-Health-Day/10-10-2020-329866/",
+          label: "Lend me thy ears",
         },
         {
-          href: "http://bwwellbeingworld.businessworld.in/article/Speak-your-heart-out-with-India-s-largest-virtual-listening-platform-Eat-Luv-N-Pray-/21-10-2020-333999/",
-          label: "Speak with your heart "
+          href:
+            "http://bwwellbeingworld.businessworld.in/article/Speak-your-heart-out-with-India-s-largest-virtual-listening-platform-Eat-Luv-N-Pray-/21-10-2020-333999/",
+          label: "Speak with your heart ",
         },
         {
-          href: "https://www.santabanta.com/bollywood/148145/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray",
-          label: "Santabanta"
+          href:
+            "https://www.santabanta.com/bollywood/148145/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray",
+          label: "Santabanta",
         },
         {
-          href: "https://m.dailyhunt.in/news/india/english/santabanta+english-epaper-santaen/speak+your+heart+out+with+india+s+largest+virtual+listening+platform+eat+luv+n+pray-newsid-n223741478",
-          label: "Dailyhunt"
+          href:
+            "https://m.dailyhunt.in/news/india/english/santabanta+english-epaper-santaen/speak+your+heart+out+with+india+s+largest+virtual+listening+platform+eat+luv+n+pray-newsid-n223741478",
+          label: "Dailyhunt",
         },
         {
-          href: "https://healthvision.in/speak-your-heart-out-with-eat-luv-n-pray/",
-          label: "Health vision"
+          href:
+            "https://healthvision.in/speak-your-heart-out-with-eat-luv-n-pray/",
+          label: "Health vision",
         },
         {
-          href: "https://www.cityairnews.com/content/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label: "City Air News"
+          href:
+            "https://www.cityairnews.com/content/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "City Air News",
         },
         {
-          href: "http://mediabulletins.com/business-world/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label: "Media Bulletins"
+          href:
+            "http://mediabulletins.com/business-world/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "Media Bulletins",
         },
         {
           href: "https://ajmernama.com/national/349538/",
-          label: "Ajmernama"
+          label: "Ajmernama",
         },
         {
-          href: "http://businessnewsthisweek.com/business/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
-          label: "Business news this week"
-        }
-
-      ]
+          href:
+            "http://businessnewsthisweek.com/business/speak-your-heart-out-with-indias-largest-virtual-listening-platform-eat-luv-n-pray/",
+          label: "Business news this week",
+        },
+      ],
     };
   }
 
   componentDidMount() {
-
     if (getLocalStorage("userInfo")) {
       socket.on("changeUserOnlineStatus", (data) => {
         // console.log('----------------------- >> changeUserOnlineStatus << -----------------', data)
       });
     }
 
-
-
-
-
-
     console.log("hello");
     console.log(getLocalStorage("customerInfo"));
     // listner_dashboard
     // customer_dashboard
     // professional_dashboard
-    this.callDisconnectConfirmation = React.createRef()
-    let type
-    let profileImage
-    if (getLocalStorage('userInfo')) {
-      type = 'listner'
-    } else if (getLocalStorage('customerInfo')) {
-      type = 'customer'
-      console.log("getLocalStorage('customerInfo')", getLocalStorage('customerInfo'))
-    } else if (getLocalStorage('userInfoProff')) {
-      type = 'professional'
+    this.callDisconnectConfirmation = React.createRef();
+    let type;
+    let profileImage;
+    if (getLocalStorage("userInfo")) {
+      type = "listner";
+    } else if (getLocalStorage("customerInfo")) {
+      type = "customer";
+      console.log(
+        "getLocalStorage('customerInfo')",
+        getLocalStorage("customerInfo")
+      );
+    } else if (getLocalStorage("userInfoProff")) {
+      type = "professional";
     }
     if (type) {
-      ELPRxApiService(type + "DashboardDetail").then(res => {
-        console.log('res ============>', res)
-        this.setState({
-          email_varified: res.data.data.dashboard_list.u_verified == '1' ? false : true,
+      ELPRxApiService(type + "DashboardDetail")
+        .then((res) => {
+          console.log("res ============>", res);
+          this.setState({
+            email_varified:
+              res.data.data.dashboard_list.u_verified == "1" ? false : true,
+          });
         })
-
-      }).catch(err => {
-        console.log(err);
-      })
-
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    let elem = document.getElementsByClassName('profile_icon')[0]
+    let elem = document.getElementsByClassName("profile_icon")[0];
     if (elem) {
-      elem.children[0].style['background-image'] = 'none'
-      ELPRxApiService("getprofile").then(res => {
-        console.log('res == .. image', res)
-        console.log(document.getElementsByClassName('profile_icon'))
-        elem.children[0].style['background-image'] = `url(${res.data.data.profile_list.u_image})`
-        setTimeout(()=>{
-          elem = document.getElementsByClassName('profile_icon')[0]
-          elem.children[0].style['background-image'] = `url(${res.data.data.profile_list.u_image})`
-        },1000)
-        console.log(elem)
-        this.setState({
-          profileImage: res.data.data.profile_list.u_image,
+      elem.children[0].style["background-image"] = "none";
+      ELPRxApiService("getprofile")
+        .then((res) => {
+          console.log("res == .. image", res);
+          console.log(document.getElementsByClassName("profile_icon"));
+          elem.children[0].style[
+            "background-image"
+          ] = `url(${res.data.data.profile_list.u_image})`;
+          setTimeout(() => {
+            elem = document.getElementsByClassName("profile_icon")[0];
+            elem.children[0].style[
+              "background-image"
+            ] = `url(${res.data.data.profile_list.u_image})`;
+          }, 1000);
+          console.log(elem);
+          this.setState({
+            profileImage: res.data.data.profile_list.u_image,
+          });
         })
-
-      }).catch(err => {
-        console.log(err);
-      })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-
 
     // let data = getLocalStorage("userInfo")
     //   ? getLocalStorage("userInfo")
@@ -309,37 +318,40 @@ class NavBar extends Component {
     });
   };
 
-
   _resendVerificationMail = async () => {
     try {
       const response = await ELPRxApiService("resendVerificationMail");
       console.log(response);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   verifyInCallNavigation = (path) => {
     switch (this.props.match.path) {
       case "/audiocall/:id":
-        this.callDisconnectConfirmation.current.openModal(path)
+        this.callDisconnectConfirmation.current.openModal(path);
         break;
       case "/callin":
-        this.callDisconnectConfirmation.current.openModal(path)
+        this.callDisconnectConfirmation.current.openModal(path);
         break;
       case "/videocall/:id":
-        this.callDisconnectConfirmation.current.openModal(path)
+        this.callDisconnectConfirmation.current.openModal(path);
         break;
       default:
-        this.props.history.push(path)
-        break
+        this.props.history.push(path);
+        break;
     }
-  }
+  };
 
-  render() { 
+  render() {
     return (
       <div className="mj_nav">
-        <CallDisconnectConfirmation ref={this.callDisconnectConfirmation} history={this.props.history} disconnectPayload={this.props.disconnectPayload} />
+        <CallDisconnectConfirmation
+          ref={this.callDisconnectConfirmation}
+          history={this.props.history}
+          disconnectPayload={this.props.disconnectPayload}
+        />
         <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -350,18 +362,18 @@ class NavBar extends Component {
         {/* Same as */}
         <ToastContainer />
         <Navbar bg="" expand="lg">
-          <a onClick={() => {
-            this.verifyInCallNavigation('/')
-          }} className="nav-link navbar-brand">
+          <a
+            onClick={() => {
+              this.verifyInCallNavigation("/");
+            }}
+            className="nav-link navbar-brand"
+          >
             <Image src={logo} alt="" /> Eat Luv N Pray
           </a>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage("userInfoAdmin") ? (
-
               <Nav className="ml-auto">
-
-
                 <Form inline>
                   <span>
                     <div onClick={this.handleLogoutAdmin} className="btnType1">
@@ -371,60 +383,76 @@ class NavBar extends Component {
                 </Form>
               </Nav>
             ) : (
-                <Nav className="ml-auto">
-                  {getLocalStorage("userInfo") ||
-                    getLocalStorage("userInfoProff") ||
-                    getLocalStorage("customerInfo")
-                    ? [
+              <Nav className="ml-auto">
+                {getLocalStorage("userInfo") ||
+                getLocalStorage("userInfoProff") ||
+                getLocalStorage("customerInfo")
+                  ? [
                       getLocalStorage("customerInfo")
                         ? [
-                          <a
-                            onClick={() => this.verifyInCallNavigation('/coming-soon')}
-
-                            className="nav-link"
-                          >
-                            Professional Search
+                            <a
+                              onClick={() =>
+                                this.verifyInCallNavigation("/coming-soon")
+                              }
+                              className="nav-link"
+                            >
+                              Professional Search
                             </a>,
 
-                          // <NavLink to="/listenerSearch" className="nav-link">
-                          //   Listener Search
-                          //   </NavLink>,
-                        ]
+                            // <NavLink to="/listenerSearch" className="nav-link">
+                            //   Listener Search
+                            //   </NavLink>,
+                          ]
                         : "",
 
                       <a
-                        onClick={() => this.verifyInCallNavigation('/')}
+                        onClick={() => this.verifyInCallNavigation("/")}
                         className="nav-link"
                       >
                         Dashboard
                       </a>,
-                      <a onClick={() => this.verifyInCallNavigation('/campaign')} className="nav-link">
+                      <a
+                        onClick={() => this.verifyInCallNavigation("/campaign")}
+                        className="nav-link"
+                      >
                         Donate
-                       </a>,
+                      </a>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
-                        {
-                          this.state.mediaLinks.map(data => {
-                            return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
-                          })
-                        }
-
+                        {this.state.mediaLinks.map((data) => {
+                          return (
+                            <NavDropdown.Item href={data.href} target="_blank">
+                              {data.label}
+                            </NavDropdown.Item>
+                          );
+                        })}
                       </NavDropdown>,
-                      <a onClick={() => this.verifyInCallNavigation('/about')} className="nav-link text-c">
+                      <a
+                        onClick={() => this.verifyInCallNavigation("/about")}
+                        className="nav-link text-c"
+                      >
                         About Us
-                       {/* <br /> */}
+                        {/* <br /> */}
                         {/* <span className="comings">coming soon</span>   */}
                       </a>,
-                      <a onClick={() => this.verifyInCallNavigation('/faq')} className="nav-link">
+                      <a
+                        onClick={() => this.verifyInCallNavigation("/faq")}
+                        className="nav-link"
+                      >
                         FAQ
-                    </a>,
+                      </a>,
                       ,
                       getLocalStorage("userInfoProff") ||
-                        getLocalStorage("userInfo")
+                      getLocalStorage("userInfo")
                         ? [
-                          <a onClick={() => this.verifyInCallNavigation('/calendar')} className="nav-link">
-                            My Schedule
+                            <a
+                              onClick={() =>
+                                this.verifyInCallNavigation("/calendar")
+                              }
+                              className="nav-link"
+                            >
+                              My Schedule
                             </a>,
-                        ]
+                          ]
                         : "",
                       // <NavLink to="/myprofile" className="nav-link">
                       //   My Profile
@@ -433,12 +461,17 @@ class NavBar extends Component {
                       //   Edit Profile
                       // </NavLink>,
                     ]
-                    : [
-                      <Nav.Link onClick={this.handleModal}>  
+                  : [
+                      <Nav.Link onClick={this.handleModal}>
                         Talk/Connect
                       </Nav.Link>,
-                      <NavLink disabled to="/becomeListener" className="nav-link text-c">
-                        Volunteer<br />
+                      <NavLink
+                        disabled
+                        to="/becomeListener"
+                        className="nav-link text-c"
+                      >
+                        Volunteer
+                        <br />
                         <span className="comings">coming soon</span>
                       </NavLink>,
                       <NavLink to="/campaign" className="nav-link">
@@ -446,15 +479,19 @@ class NavBar extends Component {
                       </NavLink>,
                       // <Nav.Link > Media</Nav.Link>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
-                        {
-                          this.state.mediaLinks.map(data => {
-                            return <NavDropdown.Item href={data.href} target="_blank">{data.label}</NavDropdown.Item>
-                          })
-                        }
-
+                        {this.state.mediaLinks.map((data) => {
+                          return (
+                            <NavDropdown.Item href={data.href} target="_blank">
+                              {data.label}
+                            </NavDropdown.Item>
+                          );
+                        })}
                       </NavDropdown>,
-                      <Nav.Link disabled 
-                      onClick={() => this.setState({ show3: true })} className="nav-link text-c">
+                      <Nav.Link
+                        disabled
+                        onClick={() => this.setState({ show3: true })}
+                        className="nav-link text-c"
+                      >
                         Professional Help
                         <br />
                         <span className="comings">coming soon</span>
@@ -466,14 +503,18 @@ class NavBar extends Component {
                       // </Nav.Link>,
                       <NavLink to="/about" className="nav-link text-c">
                         About Us
-                      {/* <br /> */}
+                        {/* <br /> */}
+                        {/* <span className="comings">coming soon</span>   */}
+                      </NavLink>,
+                      <NavLink to="/adminLogin" className="nav-link text-c">
+                        Admin
+                        {/* <br /> */}
                         {/* <span className="comings">coming soon</span>   */}
                       </NavLink>,
                       <NavLink to="/faq" className="nav-link">
                         FAQ
-                   </NavLink>,
+                      </NavLink>,
                       // <Nav.Link> Blog</Nav.Link>,
-
 
                       // <NavDropdown title="Communities" id="basic-nav-dropdown">
                       //   <NavDropdown.Item href="#">Anxiety</NavDropdown.Item>
@@ -486,18 +527,15 @@ class NavBar extends Component {
                       // <Nav.Link onClick={this.handleModal3}>
                       //   ELNP Coaches
                       // </Nav.Link>,
-
                     ]}
-                  {getLocalStorage("userInfo") ||
-                    getLocalStorage("userInfoProff") ||
-                    getLocalStorage("customerInfo") ? (
-
-
-                      <span className="userprofiles menus">
-                        {/* <Nav.Link>
+                {getLocalStorage("userInfo") ||
+                getLocalStorage("userInfoProff") ||
+                getLocalStorage("customerInfo") ? (
+                  <span className="userprofiles menus">
+                    {/* <Nav.Link>
                           <Image src={Mailicon} alt="" className="pointer" />
                         </Nav.Link> */}
-                        {/* <Nav.Link>
+                    {/* <Nav.Link>
                           <Dropdown isOpen={this.state.isNotification} toggle={() => this.setState({ isNotification: !this.state.isNotification })} className="droptwo">
                             <Dropdown.Toggle onClick={() => {
                               // alert("ASd")
@@ -526,7 +564,7 @@ class NavBar extends Component {
                             </Dropdown.Menu>
                           </Dropdown>
                         </Nav.Link> */}
-                        {/* <li class="nav-item dropdown">
+                    {/* <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              Profile
                           </a>
@@ -536,68 +574,90 @@ class NavBar extends Component {
                           </div>
                     </li>  */}
 
-                        <NavDropdown title="" id="basic-nav-dropdown" className="profile_icon profiletwo ml-3 mr-5">
-                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/myprofile')} ><Image src={Userprofiles} alt="" />
-                            <span>MY PROFILE</span>
-                          </NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/mysetting')} >
-                            <Image src={Usersettings} alt="" /> <span>MY SETTINGS</span></NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={() => this.verifyInCallNavigation('/editprofile')} ><Image src={Userenables} alt="" />
-                            <span>Edit Profile</span>
-                          </NavDropdown.Item>
-                          <NavDropdown.Item href="#" onClick={this.handleLogout} ><Image src={Userlogouts} alt="" /> <span>LOGOUT</span></NavDropdown.Item>
-                        </NavDropdown>
-                      </span>
-
-                      // <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-                    ) : (
-                      <NavDropdown
-                        title="Login"
-                        id="login-nav-dropdown"
-                        className="btnTypeone loginnav"
-                        style={{ height: '38px' }}
+                    <NavDropdown
+                      title=""
+                      id="basic-nav-dropdown"
+                      className="profile_icon profiletwo ml-3 mr-5"
+                    >
+                      <NavDropdown.Item
+                        href="#"
+                        onClick={() =>
+                          this.verifyInCallNavigation("/myprofile")
+                        }
                       >
-                        <NavDropdown.Item
-                          onClick={(e) => {
-                            this.handleLogin(1);
-                          }}
-                        >
-                          Listener Login
+                        <Image src={Userprofiles} alt="" />
+                        <span>MY PROFILE</span>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        href="#"
+                        onClick={() =>
+                          this.verifyInCallNavigation("/mysetting")
+                        }
+                      >
+                        <Image src={Usersettings} alt="" />{" "}
+                        <span>MY SETTINGS</span>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        href="#"
+                        onClick={() =>
+                          this.verifyInCallNavigation("/editprofile")
+                        }
+                      >
+                        <Image src={Userenables} alt="" />
+                        <span>Edit Profile</span>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="#" onClick={this.handleLogout}>
+                        <Image src={Userlogouts} alt="" /> <span>LOGOUT</span>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </span>
+                ) : (
+                  // <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                  <NavDropdown
+                    title="Login"
+                    id="login-nav-dropdown"
+                    className="btnTypeone loginnav"
+                    style={{ height: "38px" }}
+                  >
+                    <NavDropdown.Item
+                      onClick={(e) => {
+                        this.handleLogin(1);
+                      }}
+                    >
+                      Listener Login
                     </NavDropdown.Item>
-                        <NavDropdown.Item
-                          // disabled
-                          onClick={(e) => {
-                            this.handleLogin(2);
-                          }}
-                        >
-                          Professional Login <br />
-                          <span className="comings">coming soon</span>
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          onClick={(e) => {
-                            this.handleLogin(3);
-                          }}
-                        >
-                          Member Login
+                    <NavDropdown.Item
+                      // disabled
+                      onClick={(e) => {
+                        this.handleLogin(2);
+                      }}
+                    >
+                      Professional Login <br />
+                      <span className="comings">coming soon</span>
                     </NavDropdown.Item>
-                      </NavDropdown>
+                    <NavDropdown.Item
+                      onClick={(e) => {
+                        this.handleLogin(3);
+                      }}
+                    >
+                      Member Login
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                )}
+
+                <Form inline>
+                  <span className="d-none">
+                    {getLocalStorage("loggedIn") ? (
+                      <div onClick={this.handleLogout} className="btnType1">
+                        Logout
+                      </div>
+                    ) : (
+                      <NavLink to="/login" className="btnType1">
+                        Login
+                      </NavLink>
                     )}
-
-                  <Form inline> 
-                    <span className="d-none">
-                      {getLocalStorage("loggedIn") ? (
-
-                        <div onClick={this.handleLogout} className="btnType1"> 
-
-                          Logout
-                        </div>
-                      ) : (
-                          <NavLink to="/login" className="btnType1">  
-                            Login
-                          </NavLink>
-                        )}
-                    </span>
-                    {/* <span>
+                  </span>
+                  {/* <span>
                     <Image src={insta} alt="" className="pointer" />
                   </span>
                   <span>
@@ -609,37 +669,44 @@ class NavBar extends Component {
                   <span>
                     <Image src={linkedin} alt="" className="pointer" />
                   </span> */}
-                  </Form>
-                  <span className="userprofiles d-flex">
-                    <Nav.Link>
-                      <Image src={Mailicon} alt="" className="pointer" />
-                    </Nav.Link>
-                    <Nav.Link>
-                      <Image src={Bellicon} alt="" className="pointer" />
-                    </Nav.Link>
-                    <NavDropdown title="Profile" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                    </NavDropdown>
-                  </span>
-                </Nav>
-              )}
+                </Form>
+                <span className="userprofiles d-flex">
+                  <Nav.Link>
+                    <Image src={Mailicon} alt="" className="pointer" />
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Image src={Bellicon} alt="" className="pointer" />
+                  </Nav.Link>
+                  <NavDropdown title="Profile" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                  </NavDropdown>
+                </span>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Navbar>
 
-        {
-          this.state.email_varified ? (
-            <div className="email_verified">
-              <div class="verifys">
-                <Image src={Msgbox} alt="" />
-                <span className="fs13 fw500 col18 ml-2">Please verify your email to begin chatting  <span className="email_link" onClick={() => { this._resendVerificationMail() }} style={{ cursor: 'pointer' }}>Resend verification email.</span></span>
-
-
-              </div>
+        {this.state.email_varified ? (
+          <div className="email_verified">
+            <div class="verifys">
+              <Image src={Msgbox} alt="" />
+              <span className="fs13 fw500 col18 ml-2">
+                Please verify your email to begin chatting{" "}
+                <span
+                  className="email_link"
+                  onClick={() => {
+                    this._resendVerificationMail();
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Resend verification email.
+                </span>
+              </span>
             </div>
-          ) : (
-              ""
-            )
-        }
+          </div>
+        ) : (
+          ""
+        )}
         {/* user registration start */}
 
         <Modal show={this.state.show} className="CreateAccount">
@@ -792,7 +859,7 @@ class NavBar extends Component {
         </Modal>
 
         {/* question answer end */}
-      </div >
+      </div>
     );
   }
 }
