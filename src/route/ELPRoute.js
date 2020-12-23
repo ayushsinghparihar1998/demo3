@@ -85,6 +85,8 @@ import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser";
 import ProfessinalBlog from "../components/professional/professinalBlog";
+import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
+import ProfessinalBlogPress from "../components/admin/professionalBlogPress";                      
 
 const user =
   getLocalStorage("userInfo") ||
@@ -155,11 +157,11 @@ class ELPRoute extends Component {
             path="/professionalDetails/:type/:id"
             component={ProfessionalDetails}
           />
-          <PublicRoute
+          <PublicRoute 
             path="/professionalSignup"
             component={ProfessionalSignup}
           />
-          <PublicRoute
+          <PublicRoute 
             path="/professionalModify/:id"
             component={ProfessionalModify}
           />
@@ -184,6 +186,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/blogUser" component={BlogUser} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
+          <PublicRoute path="/professinalBlogCreate" component={ProfessinalBlogCreate} />
+          <PublicRoute path="/professinalBlogPress" component={ProfessinalBlogPress} />               
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}

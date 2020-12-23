@@ -733,6 +733,19 @@
             height: 3rem;
         } 
     }
+    .form-group {
+        input[type="file"] {      
+            color: #9F9F9F !important;
+            background: #f3fdff !important;
+            border: solid 0.5px $col23 !important; 
+            box-shadow: none;
+            height: 3.5rem;
+            border-radius: 0px;
+            font-size: 1.125rem !important;
+            padding-top: 14px;
+            padding-left: 15px;
+        }
+    }
 
     table {      
         tr { 
@@ -792,6 +805,63 @@
         max-width: 325px; 
     }
 }
+
+.processBlog {
+    position: relative; 
+    background: $col18; 
+    border-top: solid 10px $col23; 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
+    padding: 30px; 
+
+    .mxw-50 {
+        max-width: 50%; 
+    }
+    .blogMain {
+        .nav-tabs {
+            border-bottom: solid 1px $col23;
+
+            .nav-item {
+                width: 33%;
+                text-align: center;
+                font-size: 1rem;
+                color: $col64;  
+                font-weight: 500; 
+                border: none; 
+                padding: 20px 0;
+                margin-bottom: 0px; 
+                position: relative; 
+
+                &.active {
+                    &::after {
+                        content: "";
+                        width: 240px;
+                        background: $col23;
+                        height: 6px;
+                        position: absolute;
+                        bottom: 0;
+                        left: calc(50% - 125px); 
+                    }
+                }
+            }
+        }
+        .tab-content {
+            padding-top: 30px; 
+            .coverageTab {
+                .coverageList {
+                    position: relative; 
+                    border-bottom: 0.5px solid #ccc; 
+                    padding: 24px 0; 
+                } 
+            }
+
+            .border_blog {
+                border-bottom: solid 1px $col101; 
+                opacity: 0.5;  
+            }
+        }
+    }
+}
+
 
 @media (min-width: 992px) and (max-width: 1199px) {       
     .profile_layout { 

@@ -8,7 +8,7 @@ import {
   actionadminUserDelete,
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
-} from "../../common/redux/actions";
+} from "../../common/redux/actions"; 
 import Checkgreen from "../../assets/images/checkgreen.svg";
 import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
