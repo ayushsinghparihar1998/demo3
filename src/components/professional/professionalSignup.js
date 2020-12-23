@@ -86,6 +86,8 @@ class ProfessionalSignup extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
+    var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+
     this.setState(
       {
         [name]:
@@ -95,8 +97,10 @@ class ProfessionalSignup extends Component {
             ? value.replace(/[^0-9]/g, "")
             : name == "u_lang" || name == "professional_keyword"
             ? value.replace(/[^a-zA-Z,]/g, "")
-            : name == "u_lang"
+            : name == "screen_name"
             ? value.replace(/[^a-zA-Z ]/g, "")
+            // : name == "password"
+            // ? reg.test(memberObj.password.trim())
             : value.trim(),
       },
       () => {

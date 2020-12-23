@@ -73,4 +73,19 @@ export default {
   username: {
     required: "Please enter username.",
   },
+  cd_domain_name: {
+    required: "Please enter domain name.",
+  },
+  cd_audio_min: {
+    required: "Please enter audio time in minutes.",
+  },
+  cd_video_min: {
+    required: "Please enter video time in minutes.",
+  },
+  cd_audio_status: {
+    required: "Please enter audio status.",
+  },
+  cd_video_status: {
+    required: "Please enter video status.",
+  },
 };
