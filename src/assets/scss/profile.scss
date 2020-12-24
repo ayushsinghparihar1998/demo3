@@ -407,6 +407,21 @@
     }
 }
 .professinal_list {
+    &.proListTwo {
+        .chatsearch  {
+            background: $col18;
+            border-top: solid 10px $col38;  
+            padding: 30px 0;
+            .search-listing {
+                padding: 40px 40px; 
+            }
+        }    
+        .professor_search {
+            border-bottom: solid 5px $col23;
+            padding: 10px 40px 30px;
+            margin-bottom: 10px; 
+        }
+    }
     .chatsearch  {
         background: $col18; 
         padding: 40px;

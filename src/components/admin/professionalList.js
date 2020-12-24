@@ -53,7 +53,7 @@ class ProfessionalList extends Component {
                                     </div>
                                 </div>
                             </Col>  
-                            <Col md={9} className="pl-1">  
+                            <Col md={9} className="pl-1">    
                                 <div className="professor_search">
                                      <div className="fs16 col1 mb-4">Search Professional</div> 
                                         <Form className="p_form">   

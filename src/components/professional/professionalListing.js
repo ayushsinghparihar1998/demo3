@@ -49,7 +49,7 @@ class ProfessionalLsting extends Component {
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>
-                <div className="profile_layout professinal_list adminProfessinal pt-4 pb-5">    
+                <div className="profile_layout professinal_list proListTwo adminProfessinal pt-4 pb-5">      
                     <Container>
                         
                         <div className="chatsearch w-100"> 
