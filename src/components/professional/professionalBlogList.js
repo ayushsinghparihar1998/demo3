@@ -32,10 +32,10 @@ class ProfessionalBlogList extends Component {
        <div className="main_baner">
           <NavBar {...this.props} />
        </div>
-       <div className="profile_layout pt-4 pb-5">
+       <div className="profile_layout pt-4">
           <Container>
-             <div className="processBlog w-100"> 
-                   <div className="text-center fs28 fw500 col64 mb-2">Press</div>  
+             <div className="processBlog pb-5 w-100"> 
+                   <div className="text-center fs28 fw500 col64 mb-2">Blog</div>   
                    <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
 
                    <div className="blogMain ListsUI"> 
@@ -135,7 +135,7 @@ class ProfessionalBlogList extends Component {
                                     <div className="subscribe_here2 eatBlog mt-5 mb-5">       
                                         <Container>
                                             <Row>
-                                                <Col md={4} lg={4}>
+                                                <Col md={5} lg={5}>
                                                     <div className="subscribe_left"> 
                                                         <div>                
                                                             <div className="fs36 col64 fw600 w-100">Subscribe Here</div> 
@@ -145,7 +145,7 @@ class ProfessionalBlogList extends Component {
                                                         </div>
                                                     </div> 
                                                 </Col>
-                                                <Col md={6} lg={6}>         
+                                                <Col md={5} lg={5}>         
                                                     <div className="subscribe_form">
                                                         <Form>
                                                             <Form.Group className="fgroups" controlId="formBasicEmail">    
@@ -161,11 +161,10 @@ class ProfessionalBlogList extends Component {
                                                     </div>
                                                 </Col>
                                                 <Col md={2} lg={2}> 
-                                                    <div className="">
+                                                    <div className="mt-2"> 
                                                         <Button variant="primary"
-                                                            onClick={this.getSubscribe} 
-                                                            type="submit" className="btnTyp2 mt-1">   
-                                                            SUBSCRIBE
+                                                            type="submit" className="btnTyp2">   
+                                                            SUBSCRIBE 
                                                         </Button> 
                                                     </div>
                                                 </Col>
@@ -176,9 +175,214 @@ class ProfessionalBlogList extends Component {
                               </div>
                         </Tab>
                         <Tab eventKey="EAT" title="EAT">  
-                            <div className="coverageTab">
-                                Hello Tab2 
-                            </div>
+                        <div className="featuredTab"> 
+                                    <Row>
+                                         <Col md={7}>
+                                             <Row>
+                                                 <Col md={6} className="mb-4">   
+                                                    <div className="fw600 fs20 col64 mb-3">     
+                                                        Lorem Ipsum is simply.
+                                                    </div>
+                                                    <Image src={BlogProcessFive} className="w-100" /> 
+                                                    <div className="blogClocks mb-3 mt-3">   
+                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" /> 
+                                                        <div>  
+                                                            <span className="fs14 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span> <br />  
+                                                            <span>   
+                                                                <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                                11 Minute read
+                                                            </span> 
+                                                        </div>
+                                                    </div> 
+                                                    <div className="col64 fs16 fw400">          
+                                                        Lorem Ipsum is simply dummy text of the printing... 
+                                                    </div> 
+                                                </Col>
+                                                <Col md={6} className="mb-4">   
+                                                    <div className="fw600 fs20 col64 mb-3">    
+                                                        Lorem Ipsum is simply.
+                                                    </div>
+                                                    <Image src={BlogProcessFive} className="w-100" /> 
+                                                    <div className="blogClocks mb-3 mt-3">   
+                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" /> 
+                                                        <div>  
+                                                            <span className="fs14 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span> <br />   
+                                                            <span>    
+                                                                <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                                11 Minute read
+                                                            </span> 
+                                                        </div>
+                                                    </div> 
+                                                    <div className="col64 fs16 fw400">          
+                                                        Lorem Ipsum is simply dummy text of the printing... 
+                                                    </div>
+                                                </Col> 
+                                                <Col md={6} className="mb-4">   
+                                                    <div className="fw600 fs20 col64 mb-3">    
+                                                        Lorem Ipsum is simply.
+                                                    </div>
+                                                    <Image src={BlogProcessFive} className="w-100" /> 
+                                                    <div className="blogClocks mb-3 mt-3">   
+                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" /> 
+                                                        <div>  
+                                                            <span className="fs14 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span> <br />   
+                                                            <span>    
+                                                                <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                                11 Minute read
+                                                            </span> 
+                                                        </div>
+                                                    </div> 
+                                                    <div className="col64 fs16 fw400">          
+                                                        Lorem Ipsum is simply dummy text of the printing... 
+                                                    </div>
+                                                </Col>
+                                                <Col md={6} className="mb-4">   
+                                                    <div className="fw600 fs20 col64 mb-3">    
+                                                        Lorem Ipsum is simply.
+                                                    </div>
+                                                    <Image src={BlogProcessFive} className="w-100" /> 
+                                                    <div className="blogClocks mb-3 mt-3">   
+                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" /> 
+                                                        <div>  
+                                                            <span className="fs14 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span> <br />   
+                                                            <span>    
+                                                                <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                                11 Minute read
+                                                            </span> 
+                                                        </div>
+                                                    </div> 
+                                                    <div className="col64 fs16 fw400">          
+                                                        Lorem Ipsum is simply dummy text of the printing... 
+                                                    </div>
+                                                </Col>  
+                                              </Row> 
+                                         </Col>
+                                         <Col md={5}>   
+                                              <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>  
+                                              <div className="mb-4 pb-2">     
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+                                              
+                                              <div className="mb-4 pb-2">  
+                                                 <Row>
+                                                    <Col md={9}>
+                                                        <div className=""> 
+                                                            <div className="col64 fs17 fw500">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry ?
+                                                            </div>  
+                                                            <div className="col14 fs16 fw300 mt-3">Wednesday, Dec 16</div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Image src={BlogProcessSeven} className="w-100" /> 
+                                                    </Col>    
+                                                </Row>
+                                              </div> 
+                                                
+                                         </Col>
+                                    </Row>
+                                    {/* <div className="mt-4 mb-4 border_blog"></div> */}    
+
+                                    <div className="subscribe_here2 eatBlog mt-5 mb-5">       
+                                        <Container>
+                                            <Row>
+                                                <Col md={5} lg={5}>
+                                                    <div className="subscribe_left"> 
+                                                        <div>                
+                                                            <div className="fs36 col64 fw600 w-100">Subscribe Here</div> 
+                                                            <div className="col14 fs20 fw300 w-100">  
+                                                                Get updates about Eat Luv N Pray
+                                                            </div> 
+                                                        </div>
+                                                    </div> 
+                                                </Col>
+                                                <Col md={5} lg={5}>         
+                                                    <div className="subscribe_form">
+                                                        <Form>
+                                                            <Form.Group className="fgroups" controlId="formBasicEmail">    
+                                                                <Form.Control
+                                                                    type="email"
+                                                                    placeholder="Email address" 
+                                                                    className="inputTyp1 fs20"
+                                                                    name="email"
+                                                                />
+                                                            </Form.Group> 
+                                                            
+                                                        </Form>
+                                                    </div>
+                                                </Col>
+                                                <Col md={2} lg={2}> 
+                                                    <div className="mt-2"> 
+                                                        <Button variant="primary"
+                                                            type="submit" className="btnTyp2">   
+                                                            SUBSCRIBE 
+                                                        </Button> 
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+               
+            </div>
+                              </div>
                         </Tab>
                         <Tab eventKey="LUV" title="LUV">
                              <div className="coverageTab">
