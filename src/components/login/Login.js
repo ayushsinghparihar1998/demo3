@@ -48,6 +48,7 @@ class Login extends Component {
       errors: {},
       password: "",
       show3: false,
+      isCorporateLogin: false,
       roleType: parsed.u_role_id
         ? parseInt(parsed.u_role_id)
         : this.props.location &&
@@ -59,7 +60,7 @@ class Login extends Component {
             : CONSTANTS.ROLES.LISTNER,
 
     };
-   
+
     this.validator = new SimpleReactValidator({
       autoForceUpdate: this,
       className: "msgcolor",
@@ -77,14 +78,14 @@ class Login extends Component {
       roleType: parsed.u_role_id
         ? this.state.roleType
         : next.location && next.location.state && next.location.state.roleType
-        ? next.location.state.roleType
-        : this.props.roleType
-        ? this.props.roleType
-        : CONSTANTS.ROLES.LISTNER,
+          ? next.location.state.roleType
+          : this.props.roleType
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
     });
   }
   componentDidMount() {
-   
+
     const { location } = this.props;
     if (location.search) {
       const parsed = qs.parse(location.search);
@@ -274,7 +275,7 @@ class Login extends Component {
         password: this.state.password.trim(),
         // password: encrypt(this.state.password.trim())
       };
-
+      // if(this.state.isCorporateLogin){}
       this.props
         .actionUserLogin(data)
         .then((result) => {
@@ -379,7 +380,7 @@ class Login extends Component {
                     : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
                       ? " Become a Professional"
                       : this.state.roleType === CONSTANTS.ROLES.USER
-                        ? <span style={{cursor:'pointer'}} onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
+                        ? <span style={{ cursor: 'pointer' }} onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
                         : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
                           ? " Become a Admin"
                           : ""}
@@ -425,7 +426,16 @@ class Login extends Component {
                 />
                 <div className="error alignLeft">{errors.password}</div>
               </Form.Group>
-
+              {
+                this.state.roleType === CONSTANTS.ROLES.USER ?
+                  <Form.Check
+                    type="checkbox"
+                    label="Corporate Member"
+                    className="checkboxTyp1 mb-4"
+                    id="isCorporate"
+                    onChange={(e) => { this.setState({ isCorporateLogin: e.target.checked }) }}
+                  /> : null
+              }
               {this.state.roleType === CONSTANTS.ROLES.LISTNER ? (
                 <Button
                   className="btnTyp4 mb-4"
