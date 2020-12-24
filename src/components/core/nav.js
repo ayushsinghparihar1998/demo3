@@ -346,7 +346,11 @@ class NavBar extends Component {
 
   render() {
     return (
+      
       <div className="mj_nav">
+        <div class="verifystwo">             
+            <span className="fs18 fw500 col1">Please verify your email to start using our services. </span> 
+        </div> 
         <CallDisconnectConfirmation
           ref={this.callDisconnectConfirmation}
           history={this.props.history}
@@ -707,7 +711,7 @@ class NavBar extends Component {
         ) : (
           ""
         )}
-        {/* user registration start */}
+        {/* user registration start */}         
 
         <Modal show={this.state.show} className="CreateAccount">
           <Modal.Header>
