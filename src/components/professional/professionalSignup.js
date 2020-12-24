@@ -304,7 +304,7 @@ class ProfessionalSignup extends Component {
         <div className="RegistrationLayout pro_signup">
           <Container>
             <div className="layout_box mt-5 mb-4">
-              <div className="col3 fs40 fw600 mb-4">Professional Signup</div>
+              <div className="col3 fs40 fw600 mb-4">Professional Signup</div> 
               <Form>
                 <Row>
                   <Col md={12}>
@@ -460,7 +460,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={6}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age</Form.Label>
+                      <Form.Label className="fs20 fw600 col14">Age</Form.Label> 
                       <Form.Control
                         type="text"
                         placeholder="Age"

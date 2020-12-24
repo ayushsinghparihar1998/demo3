@@ -488,9 +488,31 @@
     }
 }
 
-.subscribe_here2 {
+.subscribe_here2 { 
     &.eatBlog {
-        position: relative; 
+        position: relative;
+        background-image: url(../images/blognewBanner.png);
+        background-repeat: no-repeat;  
+
+        .subscribe_form  {
+            .fgroups {
+                max-width: 100%;
+                .inputTyp1 {
+                    padding-right: 17px;
+                    font-size: 18px !important;
+                    color: #333 !important;
+                    font-weight: 500 !important; 
+                }
+            }
+        }
+
+        .btnTyp2 {
+            background: $col10 !important;
+            border-color: $col10 !important; 
+            padding: 0 2rem !important; 
+            height: 3.5rem !important;
+            border-radius: 40px; 
+        }
     }
 }
 
