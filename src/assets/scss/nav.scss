@@ -300,6 +300,16 @@
     }
 }
 
+.verifystwo { 
+    background: $col102; 
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+    border: solid 1px $col23
+}
+
 .email_verified { 
     position: relative;
     text-align: center;
