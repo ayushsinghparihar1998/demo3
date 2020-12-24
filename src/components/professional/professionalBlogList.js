@@ -132,10 +132,10 @@ class ProfessionalBlogList extends Component {
                                     </Row>
                                     {/* <div className="mt-4 mb-4 border_blog"></div> */}    
 
-                                    <div className="subscribe_here2 eatBlog">     
+                                    <div className="subscribe_here2 eatBlog mt-5 mb-5">       
                                         <Container>
                                             <Row>
-                                                <Col md={6} lg={6}>
+                                                <Col md={4} lg={4}>
                                                     <div className="subscribe_left"> 
                                                         <div>                
                                                             <div className="fs36 col64 fw600 w-100">Subscribe Here</div> 
@@ -145,7 +145,7 @@ class ProfessionalBlogList extends Component {
                                                         </div>
                                                     </div> 
                                                 </Col>
-                                                <Col md={6} lg={6}>        
+                                                <Col md={6} lg={6}>         
                                                     <div className="subscribe_form">
                                                         <Form>
                                                             <Form.Group className="fgroups" controlId="formBasicEmail">    
@@ -155,16 +155,20 @@ class ProfessionalBlogList extends Component {
                                                                     className="inputTyp1 fs20"
                                                                     name="email"
                                                                 />
-                                                                <Button variant="primary"
-                                                                    onClick={this.getSubscribe} 
-                                                                    type="submit" className="btnTyp2 mt-1">   
-                                                                    SUBSCRIBE
-                                                                </Button> 
                                                             </Form.Group> 
                                                             
                                                         </Form>
                                                     </div>
-                                                </Col> 
+                                                </Col>
+                                                <Col md={2} lg={2}> 
+                                                    <div className="">
+                                                        <Button variant="primary"
+                                                            onClick={this.getSubscribe} 
+                                                            type="submit" className="btnTyp2 mt-1">   
+                                                            SUBSCRIBE
+                                                        </Button> 
+                                                    </div>
+                                                </Col>
                                             </Row>
                                         </Container>
                
