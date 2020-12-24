@@ -30,7 +30,16 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
+  corporateLogin: {
+    url: "elp/corporatecustomer_register",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
   forgotpassword: {
     url: "elp/forgotpassword",
     method: "POST",

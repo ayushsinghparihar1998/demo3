@@ -54,6 +54,13 @@ export const actionUserLogin = (data) => async (dispatch) => {
   return request;
 };
 
+
+export const actionCorporatorLogin = (data) => async (dispatch) => {
+  const request = ELPViewApiService('corporateLogin', data);
+  dispatch({ type: USER_LOGIN, payload: request });
+  return request;
+};
+
 export const actionProfessionalSignup = (data) => async (dispatch) => {
   const request = ELPViewApiService('professionalSignup', data);
   dispatch({ type: PROFESSIONAL_SIGNUP, payload: request });

@@ -194,9 +194,10 @@ class ELPRoute extends Component {
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
 
-          {/* LIst */}
+          {/* List */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} /> 
           <PrivateRouteList path="/chat/:id" component={Chat} />  
+
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
           <Route
             path="/termcondition"
@@ -206,10 +207,12 @@ class ELPRoute extends Component {
             path="/privacypolicy"
             render={(props) => <Privacypolicy {...props} />}
           />
+
           <Route
             path="/share-profile"
             render={(props) => <ShareProfile {...props} />}
           />
+
           <Route path="/faq" render={(props) => <Faq {...props} />} />
           <Route path="/campaign" render={(props) => <Compaign {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
@@ -231,7 +234,6 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
-          {/* <PrivateRouteProff path="/calendar" component={CalendarDemo} /> */}
           <PrivateRoutes path="/mysetting" component={MySetting} />
           <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />
           <PrivateRoutes path="/calendar" component={CalendarDemo} />
