@@ -348,7 +348,7 @@ class NavBar extends Component {
     return (
       
       <div className="mj_nav">
-        <div class="verifystwo">             
+        <div class="verifystwo d-none">              
             <span className="fs18 fw500 col1">Please verify your email to start using our services. </span> 
         </div> 
         <CallDisconnectConfirmation
