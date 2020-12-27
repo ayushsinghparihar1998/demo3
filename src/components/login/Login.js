@@ -6,6 +6,7 @@ import {
   actionProfessionalLogin,
   actionUserLogin,
   actionAdminLogin,
+  actionCorporatorLogin
 } from "../../common/redux/actions";
 import {
   encrypt,
@@ -275,20 +276,36 @@ class Login extends Component {
         password: this.state.password.trim(),
         // password: encrypt(this.state.password.trim())
       };
-      // if(this.state.isCorporateLogin){}
-      this.props
-        .actionUserLogin(data)
-        .then((result) => {
-          if (result && result.data && result.data.status === "success") {
-            socketClass.connect(result.data.data);
-            setLocalStorage("customerInfo", result.data.data);
-            setLocalStorage("loggedIn", true);
-            this.props.history.push({ pathname: "/userDashboardcust" });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.state.isCorporateLogin) {
+        this.props
+          .actionCorporatorLogin(data)
+          .then((result) => {
+            if (result && result.data && result.data.status === "success") {
+              socketClass.connect(result.data.data);
+              setLocalStorage("customerInfo", result.data.data);
+              setLocalStorage("loggedIn", true);
+              this.props.history.push({ pathname: "/userDashboardcust" });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        this.props
+          .actionUserLogin(data)
+          .then((result) => {
+            if (result && result.data && result.data.status === "success") {
+              socketClass.connect(result.data.data);
+              setLocalStorage("customerInfo", result.data.data);
+              setLocalStorage("loggedIn", true);
+              this.props.history.push({ pathname: "/userDashboardcust" });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
     }
   };
 
@@ -560,4 +577,5 @@ export default connect(null, {
   actionProfessionalLogin,
   actionUserLogin,
   actionAdminLogin,
+  actionCorporatorLogin
 })(Login);

@@ -216,7 +216,7 @@ class Userdashboard extends Component {
    };
    handleRedirectRecentChat = (data) => () => {
       const { user_id } = this.state;
-      const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
+      const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
       this.props.history.push({
          pathname: '/chatuser/' + id,
 
@@ -295,52 +295,49 @@ class Userdashboard extends Component {
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
                                  {/* <ActiveUsers onRedirect={this.handleRedirectActiveUsers} /> */}
+                                 {/* <div className="inner_side">
+                                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                                       Chat
+                                    </div>
+                                    {this.state.recentChatUsers &&
+                                    this.state.recentChatUsers.map((item) => {
+                                    return (
+                                    <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
+                                       <div className="position-relative">
+                                          <Image
+                                             src={item.from_image ? item.from_image : UserChat}
+                                             alt=""
+                                             className="r50 pt-1"
+                                             />
+                                          <span className={(item.from_user_id ==
+                                          getLocalStorage("customerInfo").u_id
+                                          ? item.to_user_online
+                                          : item.from_user_online) == "1" ? 'online' : ''}></span>
+                                       </div>
+                                       <div className="position-relative pl-3">
+                                          <div className="fs15 col23 fw500 pr-2">
+                                             {item.from_user_id ==
+                                             getLocalStorage("customerInfo").u_id
+                                             ? item.to_user_name
+                                             : item.from_user_name}
+                                          </div>
+                                          <div className="col27 fs13 fw500">
+                                             {item.message}
+                                          </div>
+                                          <Image
+                                             src={ChatCross}
+                                             alt=""
+                                             className="pointer cross_btn"
+                                             />
+                                       </div>
+                                    </div>
+                                       );
+                                       })}
+                                    </div>
+                                    */}
 
-                                 {/* 
-                  <div className="inner_side">
-                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        Chat
-                     </div>
-                     {this.state.recentChatUsers &&
-                     this.state.recentChatUsers.map((item) => {
-                     return (
-                     <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
-                        <div className="position-relative">
-                           <Image
-                              src={item.from_image ? item.from_image : UserChat}
-                              alt=""
-                              className="r50 pt-1"
-                              />
-                           <span className={(item.from_user_id ==
-                           getLocalStorage("customerInfo").u_id
-                           ? item.to_user_online
-                           : item.from_user_online) == "1" ? 'online' : ''}></span>
-                        </div>
-                        <div className="position-relative pl-3">
-                           <div className="fs15 col23 fw500 pr-2">
-                              {item.from_user_id ==
-                              getLocalStorage("customerInfo").u_id
-                              ? item.to_user_name
-                              : item.from_user_name}
-                           </div>
-                           <div className="col27 fs13 fw500">
-                              {item.message}
-                           </div>
-                           <Image
-                              src={ChatCross}
-                              alt=""
-                              className="pointer cross_btn"
-                              />
-                        </div>
-                     </div>
-                     );
-                     })}
-                  </div>
-                  */}
-
-                                 {
-                                    getLocalStorage("customerInfo").u_role_id != constant.roles.CORPORATE_CUSTOMER ?
-                                       <>
+                                 { getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
+                                       <>s
                                           <div className="inner_side">
                                              <div className="upgrade">
                                                 <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType17">Upgrade to Premium Account</Button>
@@ -361,8 +358,6 @@ class Userdashboard extends Component {
                                           </div>
                                        </> : null
                                  }
-
-
 
                               </div>
                            </Col>
@@ -454,8 +449,7 @@ class Userdashboard extends Component {
                                  </div>
                               </div>
                            </div>
-                           {
-                              getLocalStorage("customerInfo").u_role_id != constant.roles.CORPORATE_CUSTOMER ?
+                           { getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
                                  <>
                                     <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
                                        <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">

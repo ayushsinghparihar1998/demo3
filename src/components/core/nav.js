@@ -139,7 +139,7 @@ class NavBar extends Component {
           console.log("res ============>", res);
           this.setState({
             email_varified:
-              res.data.data.dashboard_list.u_verified == "1" ? false : true,
+              res.data.data.dashboard_list.u_verified === "1" ? false : true,
           });
         })
         .catch((err) => {
@@ -152,7 +152,7 @@ class NavBar extends Component {
       elem.children[0].style["background-image"] = "none";
       ELPRxApiService("getprofile")
         .then((res) => {
-          console.log("res == .. image", res);
+          console.log("res === .. image", res);
           console.log(document.getElementsByClassName("profile_icon"));
           elem.children[0].style[
             "background-image"
@@ -183,7 +183,7 @@ class NavBar extends Component {
     // if (data) {
     //   this.setState(
     //     {
-    //       email_varified: data.u_verified == 1 ? false : true,
+    //       email_varified: data.u_verified === 1 ? false : true,
     //     },
     //     () => {
     //       console.log("email_varified", this.state.email_varified);
@@ -402,6 +402,14 @@ class NavBar extends Component {
                             >
                               Professional Search
                             </a>,
+                            <a
+                                onClick={() =>
+                                    this.verifyInCallNavigation("/professionalList")
+                                }
+                                className="nav-link"
+                            >
+                              Professional Help
+                            </a>
 
                             // <NavLink to="/listenerSearch" className="nav-link">
                             //   Listener Search
@@ -491,15 +499,12 @@ class NavBar extends Component {
                           );
                         })}
                       </NavDropdown>,
-                      <Nav.Link
-                        disabled
-                        onClick={() => this.setState({ show3: true })}
-                        className="nav-link text-c"
-                      >
+                      <NavLink to="/professionalList" className="nav-link text-c">
+                      {/*<NavLink to="/professionalList" onClick={() => this.setState({ show3: true })} className="nav-link text-c">*/}
                         Professional Help
-                        <br />
-                        <span className="comings">coming soon</span>
-                      </Nav.Link>,
+                        {/*<br />*/}
+                        {/*<span className="comings">coming soon</span>*/}
+                      </NavLink>,
                       // <Nav.Link disabled href="#about_us_container" className="nav-link text-c">
                       //   About Us
                       //   <br />

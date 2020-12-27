@@ -212,7 +212,7 @@ class Userdashboard extends Component {
   };
   handleRedirectRecentChat = (data) => () => {
     const { user_id } = this.state;
-    const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
+    const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
     this.props.history.push('/chatuser/' + id);
   }
   handleRedirectActiveUsers = (data) => () => {
