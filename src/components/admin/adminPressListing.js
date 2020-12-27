@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";  
+import { connect } from "react-redux"; 
 
 import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
 import NavBar from "../core/nav"; 
@@ -11,16 +11,16 @@ import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg"; 
 
-class ProfessionalList extends Component {          
+class AdminPressListing extends Component {                   
     render() {  
         return (
-            <div className="page__wrapper innerpage"> 
+            <div className="page__wrapper innerpage">  
                 <div className="main_baner">
-                    <NavBar {...this.props} />
+                    <NavBar {...this.props} />  
                 </div>
                 <div className="profile_layout adminProfessinal pt-4 pb-5">  
-                    <Container>
-                        <Row>
+                    <Container> 
+                        <Row>      
                             <Col md={3} className="pr-1">
                                 <div className="adminsidebar">
                                     <div className="inner_area">
@@ -55,31 +55,33 @@ class ProfessionalList extends Component {
                             </Col>  
                             <Col md={9} className="pl-1">    
                                 <div className="professor_search">
-                                     <div className="fs16 col1 mb-4">Search Professional</div> 
-                                        <Form className="p_form">   
-                                           <Row> 
-                                                <Col md="5">  
-                                                    <Form.Group controlId="formBasicTexts">
-                                                        <Form.Control type="text" placeholder="Search name" className="inputTyp2 inputpProcess" />       
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col md="5">  
-                                                    <Form.Group controlId="formBasickeyword"> 
-                                                        <Form.Control type="text" placeholder="Search keyword" className="inputTyp2 inputpProcess" />      
-                                                    </Form.Group>   
-                                                </Col>
-                                                <Col md="2"> 
-                                                    <Button variant="primary process_btn" type="submit">
-                                                        search
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-                                        
+                                    <Row className="mb-4"> 
+                                        <Col md={8}>
+                                            <div className="fs22 fw600 col10">
+                                                Press Listing
+                                            </div>
+                                            <div className="fw300 fs16 col14">Lorem Ipsum is simply dummy and typesetting industry.</div> 
+                                        </Col>
+                                        <Col md={4}>
+                                            <div className="text-right pro_cbtn">
+                                            <Button
+                                                type="button"
+                                                className="btnTyp5"
+                                                onClick={() =>
+                                                this.changepath("/professionalSignup")
+                                                }
+                                            >
+                                                create press  
+                                            </Button>
+                                            </div>
+                                        </Col>
+                                    </Row> 
+                                        <Form className="p_form mb-4">                 
                                             <div className="checkCategory">  
                                                 <Form.Group controlId="formBasicCheckbox1" className="row">
-                                                    <Form.Check type="checkbox" className="checkone checkSet"  label="Eat" />  
-                                                    <Form.Check type="checkbox" className="checktwo" label="Luv" />
-                                                    <Form.Check type="checkbox" className="checkthree active" label="Pray" />           
+                                                    <Form.Check type="checkbox" className="checkone checkSet"  label="Featured" />  
+                                                    <Form.Check type="checkbox" className="checktwo" label="Coverage" />
+                                                    <Form.Check type="checkbox" className="checkthree active" label="Press releases" />           
                                                 </Form.Group> 
                                             </div>
                                         </Form>
@@ -90,7 +92,7 @@ class ProfessionalList extends Component {
                                         <div className="mr-2 pt-1">
                                             <Image src={Requestuser} alt="" className="r50" />
                                         </div>
-                                        <div className="pl-2 w-100">
+                                        <div className="pl-2 w-100">  
                                             <div className="d-flex justify-content-between"> 
                                                 <div className="w-100">     
                                                     <div className="d-flex">  
@@ -147,9 +149,9 @@ class ProfessionalList extends Component {
                                     </div>
                                 </div> 
 
-                                <div className="adminlistener p-4 mb-3">
-                                    <div className="d-flex text-left">
-                                        <div className="mr-2 pt-1">
+                                <div className="adminlistener p-4 mb-3">  
+                                    <div className="d-flex text-left"> 
+                                        <div className="mr-2 pt-1">  
                                             <Image src={Requestuser} alt="" className="r50" />
                                         </div>
                                         <div className="pl-2 w-100">
@@ -210,7 +212,7 @@ class ProfessionalList extends Component {
                                 </div> 
 
                                 
-                            </Col>
+                            </Col> 
                         </Row>
                     </Container>
                 </div>
@@ -220,4 +222,5 @@ class ProfessionalList extends Component {
     }
 }
 
-export default ProfessionalList; 
+export default AdminPressListing; 
+

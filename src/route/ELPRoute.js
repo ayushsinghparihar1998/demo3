@@ -87,7 +87,9 @@ import BlogUser from "../components/professional/blogUser";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";  
 import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
-import ProfessinalBlogPress from "../components/admin/professionalBlogPress";                      
+import ProfessinalBlogPress from "../components/admin/professionalBlogPress";   
+import AdminBlogListing from "../components/admin/adminBlogListing";  
+import AdminPressListing from "../components/admin/adminPressListing";                                           
 
 const user =
   getLocalStorage("userInfo") ||
@@ -186,6 +188,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
           <PublicRoute path="/professionalBlogList" component={ProfessionalBlogList} />  
           <PublicRoute path="/blogUser" component={BlogUser} />
+          <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
+          <PublicRoute path="/adminPressListing" component={AdminPressListing} />    
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute path="/professinalBlogCreate" component={ProfessinalBlogCreate} />
