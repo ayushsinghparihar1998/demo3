@@ -865,4 +865,18 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  getblogcategory: {
+    url: "elp/getblogcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getpressblogcategory: {
+    url: "elp/getpressblogcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };

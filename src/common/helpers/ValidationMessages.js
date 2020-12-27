@@ -10,10 +10,12 @@ export default {
     required: "Please enter a valid birth date.",
   },
   screen_name: {
-    required: "Please enter a valid name.",
+    required: "Please enter  name.",
+    alphaOnly: "Please enter a valid screen name.",
   },
   professional_keyword: {
     required: "Please enter atlest one keyword.",
+    validtext: "Please enter some valid text.",
   },
   professional_cat_name: {
     required: "Please select atleast one category.",
@@ -26,6 +28,7 @@ export default {
   },
   u_lang: {
     required: "Please fill the language field.",
+    validtext: "Please enter some valid text.",
   },
   u_education: {
     required: "Please write something about the proffessional's qualification.",
@@ -35,6 +38,7 @@ export default {
   },
   u_area_service: {
     required: "Please fill the area for service.",
+    validtext: "Please enter some valid text.",
   },
   u_mobile: {
     required: "Please enter mobile number.",
@@ -42,7 +46,7 @@ export default {
   },
 
   password: {
-    required: "Please enter your password.",
+    required: "Please enter password.",
     newPassword: "Please enter new password.",
     oldPassword: "Please enter current password.",
     confirmNewPassword: "Please enter confirm new password.",

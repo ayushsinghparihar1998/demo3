@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal, Image } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Form,
+  Modal,
+  Image,
+} from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
@@ -86,8 +94,11 @@ class ProfessionalSignup extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
+    // var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
     var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+    var regcomma = /^(?!,)(?!.*,.*,)/;
 
+    console.log("name", regcomma.test(value));
     this.setState(
       {
         [name]:
@@ -98,9 +109,9 @@ class ProfessionalSignup extends Component {
             : name == "u_lang" || name == "professional_keyword"
             ? value.replace(/[^a-zA-Z,]/g, "")
             : name == "screen_name"
-            ? value.replace(/[^a-zA-Z ]/g, "")
-            // : name == "password"
-            // ? reg.test(memberObj.password.trim())
+            ? value
+            : name == "u_area_service"
+            ? value.replace(/[^a-zA-Z0-9,]/g, "")
             : value.trim(),
       },
       () => {
@@ -235,7 +246,7 @@ class ProfessionalSignup extends Component {
 
       ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
-          if (result && result.data && result.data.status ==="success") {
+          if (result && result.data && result.data.status === "success") {
             this.props.history.push("/adminlistener");
             this.clear();
           } else {
@@ -304,16 +315,16 @@ class ProfessionalSignup extends Component {
         <div className="RegistrationLayout pro_signup">
           <Container>
             <div className="layout_box mt-5 mb-4">
-              <div className="col3 fs40 fw600 mb-4">Professional Signup</div> 
+              <div className="col3 fs40 fw600 mb-4">Professional Signup</div>
               <Form>
                 <Row>
                   <Col md={12}>
-                    <Form.Group> 
-                      <Form.Label className="fs20 fw600 col14">    
-                          Change Picture
-                      </Form.Label> 
-                      <div className="mt-1 mb-3 imgSetProfile">         
-                          <Image src={UploadDetail} className="" /> 
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Change Picture
+                      </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={UploadDetail} className="" />
                       </div>
                       <Form.File
                         id="exampleFormControlFile1"
@@ -421,7 +432,7 @@ class ProfessionalSignup extends Component {
                         name="u_mobile"
                         value={this.state.u_mobile}
                         onChange={(e) => this.handleChange(e)}
-                        maxLength={11}
+                        maxLength={10}
                       />
                       <div
                         className={`alignLeft  ${
@@ -460,7 +471,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={6}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age</Form.Label> 
+                      <Form.Label className="fs20 fw600 col14">Age</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Age"
@@ -522,7 +533,7 @@ class ProfessionalSignup extends Component {
                         name="professional_keyword"
                         value={this.state.professional_keyword}
                         onChange={(e) => this.handleKeyWord(e)}
-                        maxLength={200}
+                        maxLength={255}
                       />
                       <div
                         className={`alignLeft  ${
@@ -547,7 +558,7 @@ class ProfessionalSignup extends Component {
                         name="u_area_service"
                         value={this.state.u_area_service}
                         onChange={(e) => this.handleChange(e)}
-                        maxLength={100}
+                        maxLength={255}
                       />
                       <div
                         className={`alignLeft  ${
@@ -565,7 +576,7 @@ class ProfessionalSignup extends Component {
                       </Form.Label>
                       <Row>
                         {proffCat &&
-                          proffCat.map((cat) => {  
+                          proffCat.map((cat) => {
                             return (
                               <Col md={4}>
                                 <Form.Group controlId="formBasicCheckbox">
@@ -648,7 +659,7 @@ class ProfessionalSignup extends Component {
                     </Form.Group>
                   </Col>
  */}
-                  <Col md={12}> 
+                  <Col md={12}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
                         Qualification
@@ -685,7 +696,7 @@ class ProfessionalSignup extends Component {
                       </div>
                     </Form.Group>
                   </Col>
-                  <Col md={12}> 
+                  <Col md={12}>
                     {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">Biography</Form.Label>  
                         <Form.Control as="textarea" rows={3} className="inputTyp2 text_bio"/> 
@@ -704,7 +715,7 @@ class ProfessionalSignup extends Component {
 
                         onReady={(editor) => {
                           // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor); 
+                          console.log("Editor is ready to use!", editor);
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();

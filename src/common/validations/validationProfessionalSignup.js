@@ -8,6 +8,8 @@ function validateInput(data) {
   let errors = {};
   console.log("datadatadatadata", data);
   var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+  var regname = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/;
+  var regcomma = /^(?!,)(?!.*,.*,)/;
   // var test = reg.test(value.trim());
   if (Validator.isEmpty(data.email)) {
     errors.email = ValidationMessages.email.required;
@@ -18,6 +20,8 @@ function validateInput(data) {
   if (Validator.isEmpty(data.password)) {
     errors.password = ValidationMessages.password.required;
   } else if (!reg.test(data.password.trim())) {
+    errors.password = ValidationMessages.password.passwordPattern;
+  } else if (data.password.trim().length < 8) {
     errors.password = ValidationMessages.password.passwordPattern;
   }
 
@@ -39,9 +43,12 @@ function validateInput(data) {
       "ValidationMessages.screen_name.required",
       ValidationMessages.screen_name.required
     );
-  } else if (!Validator.matches(data.screen_name, ValidateRegex.alphaOnly)) {
+  } else if (!regname.test(data.screen_name.trim())) {
     errors.screen_name = ValidationMessages.screen_name.alphaOnly;
   }
+  // } else if (!Validator.matches(data.screen_name, ValidateRegex.alphaOnly)) {
+  //   errors.screen_name = ValidationMessages.screen_name.alphaOnly;
+  // }
 
   if (Validator.isEmpty(data.u_lang) || data.u_lang.trim() === "") {
     errors.u_lang = ValidationMessages.u_lang.required;
@@ -49,16 +56,16 @@ function validateInput(data) {
       "ValidationMessages.u_lang.required",
       ValidationMessages.u_lang.required
     );
-  } else if (!Validator.matches(data.u_lang, ValidateRegex.alphaOnly)) {
-    errors.u_lang = ValidationMessages.u_lang.alphaOnly;
+  } else if (!regcomma.test(data.u_lang.trim())) {
+    errors.u_lang = ValidationMessages.u_lang.validtext;
   }
 
   if (Validator.isEmpty(data.u_mobile) || data.u_mobile.trim() === "") {
     errors.u_mobile = ValidationMessages.u_mobile.required;
-  } else if (data.u_mobile.toString().length < 6) {
+  } else if (data.u_mobile.toString().length < 10) {
     errors.u_mobile = ValidationMessages.u_mobile.invalid;
-  } else if (data.u_mobile.toString().length > 15) {
-    errors.u_mobile = ValidationMessages.u_mobile.invalid;
+  // } else if (data.u_mobile.toString().length > 15) {
+  //   errors.u_mobile = ValidationMessages.u_mobile.invalid;
   }
 
   if (
@@ -73,6 +80,8 @@ function validateInput(data) {
     data.u_area_service.trim() === ""
   ) {
     errors.u_area_service = ValidationMessages.u_area_service.required;
+  } else if (!regcomma.test(data.u_area_service)) {
+    errors.u_area_service = ValidationMessages.u_area_service.validtext;
   }
 
   if (!data.u_education) {
@@ -82,27 +91,14 @@ function validateInput(data) {
   if (data.professional_keyword.length == 0) {
     errors.professional_keyword =
       ValidationMessages.professional_keyword.required;
+  } else if (!regcomma.test(data.professional_keyword)) {
+    errors.professional_keyword =
+      ValidationMessages.professional_keyword.validtext;
   }
 
   if (data.professional_cat_name.length == 0) {
     errors.professional_cat_name =
       ValidationMessages.professional_cat_name.required;
-  }
-
-  if (Validator.isEmpty(data.cd_domain_name)) {
-    errors.cd_domain_name = ValidationMessages.cd_domain_name.required;
-  }
-  if (Validator.isEmpty(data.cd_audio_min)) {
-    errors.cd_audio_min = ValidationMessages.cd_audio_min.required;
-  }
-  if (Validator.isEmpty(data.cd_video_min)) {
-    errors.cd_video_min = ValidationMessages.cd_video_min.required;
-  }
-  if (Validator.isEmpty(data.cd_audio_status)) {
-    errors.cd_audio_status = ValidationMessages.cd_audio_status.required;
-  }
-  if (Validator.isEmpty(data.cd_video_status)) {
-    errors.cd_video_status = ValidationMessages.cd_video_status.required;
   }
 
   return {

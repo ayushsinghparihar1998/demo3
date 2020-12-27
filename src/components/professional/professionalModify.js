@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal, Image } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Form,
+  Modal,
+  Image,
+} from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
@@ -13,7 +21,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import Item from "antd/lib/list/Item"; 
+import Item from "antd/lib/list/Item";
 import UploadDetail from "../../assets/images/upload_detail.svg";
 
 class ProfessionalSignup extends Component {
@@ -53,7 +61,7 @@ class ProfessionalSignup extends Component {
   }
 
   componentDidMount() {
-    const { url } = this.props.match;
+    console.log(" this.props.match", this.props.match);
     //
     this.getProffCat();
   }
@@ -380,11 +388,11 @@ class ProfessionalSignup extends Component {
                 <Row>
                   <Col md={12}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">   
-                          Change Picture
-                      </Form.Label> 
-                      <div className="mt-1 mb-3 imgSetProfile">       
-                          <Image src={UploadDetail} className="" />     
+                      <Form.Label className="fs20 fw600 col14">
+                        Change Picture
+                      </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={UploadDetail} className="" />
                       </div>
                       <Form.File
                         id="exampleFormControlFile1"
@@ -395,7 +403,7 @@ class ProfessionalSignup extends Component {
                       />
                       <div
                         className={`alignLeft  ${
-                          errors.u_image ? "error " : "d-none" 
+                          errors.u_image ? "error " : "d-none"
                         }`}
                       >
                         {errors.u_image}
@@ -471,23 +479,23 @@ class ProfessionalSignup extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
                       /> */}
-                      <div className="motivate_pwd">      
-                          <Form.Control
-                            type="password"
-                            name="userPassword"
-                            onChange={this.handlePasswordChange}
-                            value={this.state.userPassword}
-                            minLength="8"
-                            maxLength="15"
-                            inputProps={{ maxLength: 15 }}
-                            className="inputTyp2"
-                          />
-                          <Button
-                            className="btnTyp11 ml-3"
-                            onClick={this.handleResetPassword}
-                          >
-                            Change Password
-                          </Button>
+                      <div className="motivate_pwd">
+                        <Form.Control
+                          type="password"
+                          name="userPassword"
+                          onChange={this.handlePasswordChange}
+                          value={this.state.userPassword}
+                          minLength="8"
+                          maxLength="15"
+                          inputProps={{ maxLength: 15 }}
+                          className="inputTyp2"
+                        />
+                        <Button
+                          className="btnTyp11 ml-3"
+                          onClick={this.handleResetPassword}
+                        >
+                          Change Password
+                        </Button>
                       </div>
                       <div
                         className={`alignLeft  ${
