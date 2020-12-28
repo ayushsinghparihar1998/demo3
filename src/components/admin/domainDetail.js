@@ -139,8 +139,8 @@ class DomainDetail extends Component {
     );
   };
   adminUserDelete = (deleteUser) => {
-    let data = { cd_id: deleteUser.id, cd_status: 2 };
-    ELPViewApiService("superadmindeletecorporatedomain", data).then(
+    let data = { userid: deleteUser.id, u_status: 2 };
+    ELPViewApiService("adminUserDelete", data).then(
       (result) => {
         this.getDetails(this.props.match.params.id);
         console.log(result.data);
@@ -148,6 +148,7 @@ class DomainDetail extends Component {
       }
     );
   };
+ 
   handleCloseConformation = () => {
     this.setState({
       deleteConformationModal: false,

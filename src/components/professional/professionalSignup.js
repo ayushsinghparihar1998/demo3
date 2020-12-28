@@ -96,9 +96,12 @@ class ProfessionalSignup extends Component {
     console.log(name, value);
     // var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
     var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
-    var regcomma = /^(?!,)(?!.*,.*,)/;
-
-    console.log("name", regcomma.test(value));
+    var regcomma = /^(?!,)/i;
+    var rg = /^.*[^,]$/i;
+    var rg2 = /^(?!.*([.,-])\1)[a-zA-Z0-9\s.,-]+$/;
+    console.log("stat", regcomma.test(value));
+    console.log("end", rg.test(value));
+    console.log("multiple", rg2.test(value));
     this.setState(
       {
         [name]:

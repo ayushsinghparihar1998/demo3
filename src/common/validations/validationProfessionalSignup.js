@@ -9,7 +9,10 @@ function validateInput(data) {
   console.log("datadatadatadata", data);
   var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
   var regname = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/;
-  var regcomma = /^(?!,)(?!.*,.*,)/;
+  // var regcomma = /^(?!,)(?!.*,.*,.*,.*,.*,.*,.*,.*,.*,.*,.*,.*,.*,.*,)/i;
+  var regcomma = /^(?!,)/i;
+  var rg = /^.*[^,]$/i;
+  var rg2 = /^(?!.*([.,-])\1)[a-zA-Z0-9\s.,-]+$/;
   // var test = reg.test(value.trim());
   if (Validator.isEmpty(data.email)) {
     errors.email = ValidationMessages.email.required;
@@ -56,7 +59,11 @@ function validateInput(data) {
       "ValidationMessages.u_lang.required",
       ValidationMessages.u_lang.required
     );
-  } else if (!regcomma.test(data.u_lang.trim())) {
+  } else if (
+    !regcomma.test(data.u_lang.trim()) ||
+    !rg.test(data.u_lang.trim()) ||
+    !rg2.test(data.u_lang.trim())
+  ) {
     errors.u_lang = ValidationMessages.u_lang.validtext;
   }
 
@@ -64,8 +71,8 @@ function validateInput(data) {
     errors.u_mobile = ValidationMessages.u_mobile.required;
   } else if (data.u_mobile.toString().length < 10) {
     errors.u_mobile = ValidationMessages.u_mobile.invalid;
-  // } else if (data.u_mobile.toString().length > 15) {
-  //   errors.u_mobile = ValidationMessages.u_mobile.invalid;
+    // } else if (data.u_mobile.toString().length > 15) {
+    //   errors.u_mobile = ValidationMessages.u_mobile.invalid;
   }
 
   if (
@@ -80,7 +87,11 @@ function validateInput(data) {
     data.u_area_service.trim() === ""
   ) {
     errors.u_area_service = ValidationMessages.u_area_service.required;
-  } else if (!regcomma.test(data.u_area_service)) {
+  } else if (
+    !regcomma.test(data.u_area_service) ||
+    !rg.test(data.u_area_service) ||
+    !rg2.test(data.u_area_service)
+  ) {
     errors.u_area_service = ValidationMessages.u_area_service.validtext;
   }
 
@@ -91,7 +102,11 @@ function validateInput(data) {
   if (data.professional_keyword.length == 0) {
     errors.professional_keyword =
       ValidationMessages.professional_keyword.required;
-  } else if (!regcomma.test(data.professional_keyword)) {
+  } else if (
+    !regcomma.test(data.professional_keyword) ||
+    !rg.test(data.professional_keyword) ||
+    !rg2.test(data.professional_keyword)
+  ) {
     errors.professional_keyword =
       ValidationMessages.professional_keyword.validtext;
   }
