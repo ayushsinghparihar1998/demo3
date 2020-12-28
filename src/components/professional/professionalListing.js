@@ -83,7 +83,7 @@ class ProfessionalLsting extends Component {
 
     _getProfessionalListHandler = async () => {
         try {
-            let response = await ELPRxApiService("corporategetprofessionallist")
+            let response = await ELPRxApiService("switchtocorporatemember")
             console.log('===>Response Professional List==>.', response.data.data.listing)
             this.setState({
                 professional_list: response.data.data.listing

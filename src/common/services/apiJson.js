@@ -918,4 +918,13 @@ export default {
         showResultMessage: true,
         showErrorMessage: true,
     },
+    switchtocorporatemember: {
+        url: "elp/switchtocorporatemember",
+        method: "POST",
+        data: { },
+        showResultMessage: true,
+        showErrorMessage: true,
+    },
+
+
 };
