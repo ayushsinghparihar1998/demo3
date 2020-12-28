@@ -10,6 +10,9 @@ import Requestuserthree from "../../assets/images/pro_img3.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg"; 
+import blogclock from "../../assets/images/blogclock.png";
+import BlogProcessFive from "../../assets/images/blog4.png";
+import Editicon from "../../assets/images/edit_icon.svg"; 
 
 class AdminPressListing extends Component {                   
     render() {  
@@ -56,7 +59,7 @@ class AdminPressListing extends Component {
                             <Col md={9} className="pl-1">    
                                 <div className="professor_search">
                                     <Row className="mb-4"> 
-                                        <Col md={8}>
+                                        <Col md={8}> 
                                             <div className="fs22 fw600 col10">
                                                 Press Listing
                                             </div>
@@ -90,57 +93,39 @@ class AdminPressListing extends Component {
                                 <div className="adminlistener p-4 mb-3">
                                     <div className="d-flex text-left">
                                         <div className="mr-2 pt-1">
-                                            <Image src={Requestuser} alt="" className="r50" />
+                                            <Image src={BlogProcessFive} alt="" />
                                         </div>
                                         <div className="pl-2 w-100">  
                                             <div className="d-flex justify-content-between"> 
                                                 <div className="w-100">     
                                                     <div className="d-flex">  
-                                                        <div className="col1 fw600 fs18 pb-1">Andrew D’souza</div> 
+                                                        <div className="col1 fw600 fs18 pb-1">
+                                                            Veronica Wade-Hampton 
+                                                        </div> 
                                                         <div className="d-flex ml-auto">  
-                                                            <span className="pr-3 fs14 col47 fw400">Active</span> 
-                                                            <span className="pr-3 disabled">
-                                                                <Form.Check
-                                                                    type="switch"
-                                                                    id="custom-switch5"
-                                                                    label=""
-                                                                    checked="" 
-                                                                />
-                                                            </span>  
+                                                            <span className="mr-3"><Image src={Editicon} alt="" /></span>
                                                             <span><Image src={Deleteicon} alt="" /></span>
                                                         </div>
                                                     </div>
 
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Age:</strong> 32 years</div>
+                                                    <div className="mb-1">    
+                                                      <span className="fs16 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span>  
+                                                      <span className="ml-3">  
+                                                          <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                           11 Minute read
+                                                      </span> 
+                                                  </div>
 
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Work Experince:</strong> 10 years
-                                                    </div>   
-
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Languages:</strong>  Hindi, English and Marathi 
-                                                    </div>
-
-                                                    <div className="fs14 fw400 col14 pb-1 e_detai">  
-                                                        <strong className="m_w25">Education: </strong> 
-                                                         <span>
-                                                             Master of Arts in Counselling psuchology,Columbia University
-                                                             Postgraduate diploma in Counselling psuchology,Columbia University
-                                                         </span> 
-                                                    </div> 
-
-                                                    <div className="fs14 fw400 col14 pb-1 e_detai">     
-                                                        <strong>Biogropy: </strong>  
-                                                        <span>I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life. 
+                                                    <div className="fs16 fw400 col14 pb-1 e_detai">      
+                                                        <strong className="fw600">Biogropy: </strong>  
+                                                        <span className="fs14">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life. 
                                                         <a className="col10">Read more...</a></span> 
                                                     </div>
                                                     
                                                     <div className="eat_category"> 
-                                                        <span className="eatcat">Eat</span>
-                                                        <span className="luvcat">Luv</span>
-                                                        <span className="praycat">Pray</span>         
-                                                    </div>
+                                                        <span className="featureone mr-3">Featured</span>
+                                                        <span className="featureone">Coverage</span>        
+                                                    </div> 
 
                                                 </div>
                                                 
@@ -148,61 +133,43 @@ class AdminPressListing extends Component {
                                         </div>
                                     </div>
                                 </div> 
-
-                                <div className="adminlistener p-4 mb-3">  
-                                    <div className="d-flex text-left"> 
-                                        <div className="mr-2 pt-1">  
-                                            <Image src={Requestuser} alt="" className="r50" />
+                                
+                                <div className="adminlistener p-4 mb-3">
+                                    <div className="d-flex text-left">
+                                        <div className="mr-2 pt-1">
+                                            <Image src={BlogProcessFive} alt="" />
                                         </div>
-                                        <div className="pl-2 w-100">
+                                        <div className="pl-2 w-100">  
                                             <div className="d-flex justify-content-between"> 
                                                 <div className="w-100">     
                                                     <div className="d-flex">  
-                                                        <div className="col1 fw600 fs18 pb-1">Andrew D’souza</div> 
+                                                        <div className="col1 fw600 fs18 pb-1">
+                                                            Veronica Wade-Hampton 
+                                                        </div> 
                                                         <div className="d-flex ml-auto">  
-                                                            <span className="pr-3 fs14 col47 fw400">Active</span> 
-                                                            <span className="pr-3 disabled">
-                                                                <Form.Check
-                                                                    type="switch"
-                                                                    id="custom-switch5"
-                                                                    label=""
-                                                                    checked="" 
-                                                                />
-                                                            </span>  
+                                                            <span className="mr-3"><Image src={Editicon} alt="" /></span>
                                                             <span><Image src={Deleteicon} alt="" /></span>
                                                         </div>
                                                     </div>
 
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Age:</strong> 32 years</div>
+                                                    <div className="mb-1">    
+                                                      <span className="fs16 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span>  
+                                                      <span className="ml-3">  
+                                                          <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                           11 Minute read
+                                                      </span> 
+                                                  </div>
 
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Work Experince:</strong> 10 years
-                                                    </div>
-
-                                                    <div className="fs14 fw400 col14 pb-1">  
-                                                        <strong>Languages:</strong>  Hindi, English and Marathi 
-                                                    </div>
-
-                                                    <div className="fs14 fw400 col14 pb-1 e_detai">  
-                                                        <strong className="m_w25">Education: </strong> 
-                                                         <span>
-                                                             Master of Arts in Counselling psuchology,Columbia University
-                                                             Postgraduate diploma in Counselling psuchology,Columbia University
-                                                         </span> 
-                                                    </div> 
-
-                                                    <div className="fs14 fw400 col14 pb-1 e_detai">     
-                                                        <strong>Biogropy: </strong>   
-                                                        <span>I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life. 
+                                                    <div className="fs16 fw400 col14 pb-1 e_detai">      
+                                                        <strong className="fw600">Biogropy: </strong>  
+                                                        <span className="fs14">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life. 
                                                         <a className="col10">Read more...</a></span> 
                                                     </div>
                                                     
                                                     <div className="eat_category"> 
-                                                        <span className="eatcat">Eat</span>
-                                                        <span className="luvcat">Luv</span>
-                                                        <span className="praycat">Pray</span>         
-                                                    </div>
+                                                        <span className="featureone mr-3">Featured</span>
+                                                        <span className="featureone">Coverage</span>        
+                                                    </div> 
 
                                                 </div>
                                                 
@@ -210,8 +177,50 @@ class AdminPressListing extends Component {
                                         </div>
                                     </div>
                                 </div> 
+                                <div className="adminlistener p-4 mb-3">
+                                    <div className="d-flex text-left">
+                                        <div className="mr-2 pt-1">
+                                            <Image src={BlogProcessFive} alt="" />
+                                        </div>
+                                        <div className="pl-2 w-100">  
+                                            <div className="d-flex justify-content-between"> 
+                                                <div className="w-100">     
+                                                    <div className="d-flex">  
+                                                        <div className="col1 fw600 fs18 pb-1">
+                                                            Veronica Wade-Hampton 
+                                                        </div> 
+                                                        <div className="d-flex ml-auto">  
+                                                            <span className="mr-3"><Image src={Editicon} alt="" /></span>
+                                                            <span><Image src={Deleteicon} alt="" /></span>
+                                                        </div>
+                                                    </div>
 
-                                
+                                                    <div className="mb-1">    
+                                                      <span className="fs16 fw400 col14">Written by <span className="col8">Salena Gomez</span> </span>  
+                                                      <span className="ml-3">  
+                                                          <Image src={blogclock} className="wSet-20 mr-2" />      
+                                                           11 Minute read
+                                                      </span> 
+                                                  </div>
+
+                                                    <div className="fs16 fw400 col14 pb-1 e_detai">      
+                                                        <strong className="fw600">Biogropy: </strong>  
+                                                        <span className="fs14">I enjoy working with individuals of all capacities as I view the role of therapist as one in which you help the client learn to cope with the pressures of daily life. 
+                                                        <a className="col10">Read more...</a></span> 
+                                                    </div>
+                                                    
+                                                    <div className="eat_category"> 
+                                                        <span className="featureone mr-3">Featured</span>
+                                                        <span className="featureone">Coverage</span>        
+                                                    </div> 
+
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                               
                             </Col> 
                         </Row>
                     </Container>
