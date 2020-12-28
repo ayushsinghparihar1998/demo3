@@ -261,7 +261,7 @@ class Menubar extends Component {
                       </Nav.Link>,
                        
                        <Nav.Link onClick={this.handleModal3}>
-                         Professional help  
+                         Professional help
                       </Nav.Link>,
 
                       <Nav.Link onClick={this.handleModal2}>Donate</Nav.Link>, 
