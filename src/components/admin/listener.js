@@ -2091,31 +2091,31 @@ class Adminlistener extends Component {
                                     </span>
                                   </div>
 
-                                  <div>
-                                    <span className="mr-2">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        onClick={() =>
-                                          this.props.history.push(
-                                            `/adddomain/${item.cd_id}`
-                                            // `/adddomain`
-                                          )
-                                        }
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        onClick={() =>
-                                          this.handleOpenConformation(
-                                            "other",
-                                            item
-                                          )
-                                        }
-                                      />
-                                    </span>{" "}
+                                  <div>  
+                                      <span className="mr-2">
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.props.history.push(
+                                              `/adddomain/${item.cd_id}`
+                                              // `/adddomain`
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      {/* <span>
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.handleOpenConformation(
+                                              "other",
+                                              item
+                                            )
+                                          }
+                                        />
+                                      </span>{" "} */}
                                   </div>
                                 </td>
                               </tr>
