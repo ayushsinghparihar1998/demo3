@@ -14,7 +14,7 @@ import blogclock from "../../assets/images/blogclock.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg"; 
 
-class AdminPressListing extends Component {                      
+class AdminPressListing extends Component {                        
     render() {  
         return (
             <div className="page__wrapper innerpage">  
@@ -232,4 +232,9 @@ class AdminPressListing extends Component {
 }
 
 export default AdminPressListing; 
+
+
+
+
+
 

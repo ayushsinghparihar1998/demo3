@@ -1986,7 +1986,7 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div>  
-                                      <span className="mr-2">
+                                      <span className="mr-2">  
                                         <Image
                                           src={Editicon}
                                           alt=""
