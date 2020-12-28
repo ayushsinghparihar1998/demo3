@@ -7,7 +7,7 @@ import { getLocalStorage } from "./common/helpers/Utils";
 import ELPRoute from "./route/ELPRoute";
 import ReactGA from "react-ga";
 
-class App extends React.Component { 
+class App extends React.Component {   
   constructor(props) {
     super(props);
     this.state = {

@@ -1998,7 +1998,7 @@ class Adminlistener extends Component {
                                           }
                                         />
                                       </span>
-                                      <span>
+                                      {/* <span>
                                         <Image
                                           src={Deleteicon}
                                           alt=""
@@ -2009,7 +2009,7 @@ class Adminlistener extends Component {
                                             )
                                           }
                                         />
-                                      </span>{" "}
+                                      </span>{" "} */}
                                   </div>
 
                                 </td>

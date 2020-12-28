@@ -173,7 +173,7 @@ class CorporateMember extends Component {
                     </div>
                   </div>
                 </div>
-              </Col>
+              </Col>  
               <Col md={9} className="pl-1">
                 <div className="corporateMember">
                   <div className="fs28 col10 mb-4">Add Domain</div>
