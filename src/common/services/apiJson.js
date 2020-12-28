@@ -887,5 +887,28 @@ export default {
         showResultMessage: true,
         showErrorMessage: true,
     },
-
+    corporateappointmentschedule: {
+        url: "elp/corporateappointmentschedule",
+        method: "POST",
+        data: {
+            cs_pro_u_id: '',
+            cs_pro_name: "",
+            cs_pro_email_id: "",
+            cs_subject: "",
+            cs_description: "",
+            cs_date: "",
+            cs_time: [
+                {cs_time_slot: ""}
+            ]
+        },
+        showResultMessage: true,
+        showErrorMessage: true,
+    },
+    getnotificationlisting: {
+        url: "elp/getnotificationlisting",
+        method: "POST",
+        data: {user_id: ''},
+        showResultMessage: false,
+        showErrorMessage: false,
+    },
 };
