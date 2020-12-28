@@ -152,10 +152,7 @@ class ELPRoute extends Component {
           {/* LIst */}
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
           <PublicRoute path="/ratingrequest" component={Ratingrequest} />
-          <PublicRoute
-            path="/professionalListing"
-            component={ProfessionalLsting}
-          />
+
           <PublicRoute
             path="/professionalDetails/:type/:id"
             component={ProfessionalDetails}
@@ -211,7 +208,10 @@ class ELPRoute extends Component {
             path="/privacypolicy"
             render={(props) => <Privacypolicy {...props} />}
           />
-
+          <Route
+             path="/professionalListing"
+            render={(props) => <ProfessionalLsting {...props} />}
+          />
           <Route
             path="/share-profile"
             render={(props) => <ShareProfile {...props} />}

@@ -402,9 +402,8 @@ class NavBar extends Component {
                             >
                               Professional Search
                             </a>,
-                            <a
-                                onClick={() =>
-                                    this.verifyInCallNavigation("/professionalList")
+                            <a onClick={() =>
+                                    this.verifyInCallNavigation("/professionalListing")
                                 }
                                 className="nav-link"
                             >
@@ -499,7 +498,7 @@ class NavBar extends Component {
                           );
                         })}
                       </NavDropdown>,
-                      <NavLink to="/professionalList" className="nav-link text-c">
+                      <NavLink to="/campaign" className="nav-link text-c">
                       {/*<NavLink to="/professionalList" onClick={() => this.setState({ show3: true })} className="nav-link text-c">*/}
                         Professional Help
                         {/*<br />*/}
