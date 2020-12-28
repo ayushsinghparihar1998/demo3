@@ -469,6 +469,7 @@
                         cursor: pointer;
                         margin-right: 10px; 
                     }
+                    
                 }
             }
             .subscribes {
@@ -657,6 +658,12 @@
             font-size: 15px;
             cursor: pointer;
             margin-right: 10px; 
+        }
+        span.featureone { 
+            border: solid 1px #ccc; 
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 14px; 
         }
     }
     .e_detai {

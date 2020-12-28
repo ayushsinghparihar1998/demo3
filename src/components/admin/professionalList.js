@@ -11,6 +11,7 @@ import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg"; 
 
+
 class ProfessionalList extends Component {          
     render() {  
         return (
