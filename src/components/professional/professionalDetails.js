@@ -36,6 +36,7 @@ class Myprofile extends Component {
     };
   }
   componentDidMount() {
+    // console.log(this.props.location.state.isReadMore)
     console.log(this.props.match.params.id);
     console.log(this.props.match.params.type);
     this.getProffDetails(
@@ -44,28 +45,55 @@ class Myprofile extends Component {
         : "corporateprofessionaluserdetail"
     );
   }
+
+
   getProffDetails = (type) => {
     let data = {
       userid: this.props.match.params.id,
     };
 
-    ELPViewApiService(type, data).then((result) => {
-      console.log("result", result);
-      let proffDetail = [];
-      if (result && result.status === 200) {
-        proffDetail =
-          result && result.data && result.data.data ? result.data.data[0] : [];
-      }
-      this.setState(
-        {
-          proffDetail,
-        },
-        () => {
-          console.log("ProffDetail", this.state.proffDetail);
+    if (this.props.location.state.isReadMore) {
+      ELPViewApiService("corporateprofessionaluserdetail", { userid: this.props.match.params.id })
+        .then((result) => {
+          let proffDetail = [];
+          if (result && result.status === 200) {
+            proffDetail =
+              result && result.data && result.data.data ? result.data.data[0] : [];
+          }
+          this.setState(
+            {
+              proffDetail,
+            },
+            () => {
+              console.log("ProffDetail", this.state.proffDetail);
+            }
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    } else {
+      ELPViewApiService(type, data).then((result) => {
+        console.log("result", result);
+        let proffDetail = [];
+        if (result && result.status === 200) {
+          proffDetail =
+            result && result.data && result.data.data ? result.data.data[0] : [];
         }
-      );
-    });
-  };
+        this.setState(
+          {
+            proffDetail,
+          },
+          () => {
+            console.log("ProffDetail", this.state.proffDetail);
+          }
+        );
+      })
+    }
+
+
+
+  }
   render() {
     let proffDetail = this.state.proffDetail;
     return (
@@ -139,24 +167,24 @@ class Myprofile extends Component {
                             {this.props.match.params.type == "admin" ? (
                               ""
                             ) : (
-                              <>
-                                <Button
-                                  variant="primary"
-                                  type="submit"
-                                  className="btnTyp5 mr-3"
-                                >
-                                  Call
+                                <>
+                                  <Button
+                                    variant="primary"
+                                    type="submit"
+                                    className="btnTyp5 mr-3"
+                                  >
+                                    Call
                                 </Button>
 
-                                <Button
-                                  variant="primary"
-                                  type="submit"
-                                  className="btnTyp5"
-                                >
-                                  BOOK A SESSION
+                                  <Button
+                                    variant="primary"
+                                    type="submit"
+                                    className="btnTyp5"
+                                  >
+                                    BOOK A SESSION
                                 </Button>
-                              </>
-                            )}
+                                </>
+                              )}
                           </div>
                         </div>
                       </Col>
