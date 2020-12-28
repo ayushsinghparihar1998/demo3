@@ -12,7 +12,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import UploadDetail from "../../assets/images/upload_detail.svg";
+import UploadDetail from "../../assets/images/upload_detail.svg"; 
 
 class ProfessionalSignup extends Component {
   constructor(props) {

@@ -1580,7 +1580,7 @@ class Adminlistener extends Component {
                         </div>
                       </Col>
                     </Row>
-                    <div className="fs16 col1 mb-4">Search Professional</div>
+                    <div className="fs16 col1 mb-4">Search Professional</div>         
                     <Form className="p_form">
                       <Row>
                         <Col md="6">
@@ -1835,7 +1835,7 @@ class Adminlistener extends Component {
 
                                   <div className="fs14 fw400 col14 pb-1">
                                     <strong>Work Experience:</strong>{" "}  
-                                    {item.u_work_experience}  
+                                    {item.u_work_experience} Years                       
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
@@ -1853,9 +1853,9 @@ class Adminlistener extends Component {
                                     ></span>
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                  <div className="fs14 fw400 col14 pb-1 e_detai">    
                                     <strong>Biography : </strong>
-                                    <span
+                                    <span className="bio_content"  
                                       dangerouslySetInnerHTML={{
                                         __html: item.u_bio,
                                       }}
@@ -1931,7 +1931,7 @@ class Adminlistener extends Component {
                       </div>
                       <div></div>
                     </div>
-                    <Table bordered>
+                    <Table bordered className="domainTable">  
                       <thead>
                         <tr>
                           <th>Domain</th>
@@ -1997,7 +1997,7 @@ class Adminlistener extends Component {
                                             )
                                           }
                                         />
-                                      </span>
+                                      </span>  
                                       {/* <span>
                                         <Image
                                           src={Deleteicon}
@@ -2343,11 +2343,11 @@ class Adminlistener extends Component {
                   onClick={this.handleCloseConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete <br />{" "}
-                  {this.state.deleteModalType == "admin"
+                  Are you sure want to delete  <br />  {" "}
+                    {this.state.deleteModalType == "admin"
                     ? profileName
                     : this.state.deleteUser}
-                  ?{" "}
+                  ?{" "} 
                 </div>
 
                 <div className="text-center mb-5">
