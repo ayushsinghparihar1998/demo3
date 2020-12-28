@@ -39,7 +39,7 @@ class ProfessinalBlog extends Component {
                         <Tab eventKey="Featured" title="Featured">
                               <div className="featuredTab">
                                     <Row>
-                                         <Col md={7}> 
+                                         <Col md={7} className="mb-4">    
                                               <Image src={BlogProcessOne} className="w-100" /> 
                                               <div className="fs18 col64 fw600 mt-3 mb-2">American cliffhanger states remain up grabs slow count</div>
                                               <div className="col14 fs16 fw300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>   
