@@ -911,4 +911,11 @@ export default {
         showResultMessage: false,
         showErrorMessage: false,
     },
+    corporateprofessionaluserdetail: {
+        url: "elp/corporateprofessionaluserdetail",
+        method: "POST",
+        data: { userid: '' },
+        showResultMessage: true,
+        showErrorMessage: true,
+    },
 };

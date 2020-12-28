@@ -285,7 +285,10 @@ class ProfessionalLsting extends Component {
                                                          dangerouslySetInnerHTML={{__html: obj.u_bio}}>
                                                     </div>
                                                     <div className="read2">
-                                                        <a>read more</a>
+                                                        <a onClick={() => this.props.history.push({
+                                                            pathname: '/professional/' + obj.id + '/detail',
+                                                            state: { isReadMore: true }
+                                                        })}>read more</a>
                                                     </div>
                                                     <Button variant="primary" onClick={() => this.bookSessionOpen(obj)}
                                                             className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
