@@ -207,17 +207,17 @@ class ProfessionalLsting extends Component {
                                                 />
                                             </Form.Group>
                                         </Col>
-                                        <Col md="3">
-                                            <Form.Group controlId="formBasickeyword">
-                                                <Form.Control as="select" className="selectTyp1 selectsetone"
-                                                              onChange={(e) => {
-                                                                  this.setState({searchProfessional: e.target.value})
-                                                              }}>
-                                                    <option>Search by professional</option>
-                                                    <option>professional</option>
-                                                </Form.Control>
-                                            </Form.Group>
-                                        </Col>
+                                        {/*<Col md="3">*/}
+                                        {/*    <Form.Group controlId="formBasickeyword">*/}
+                                        {/*        <Form.Control as="select" className="selectTyp1 selectsetone"*/}
+                                        {/*                      onChange={(e) => {*/}
+                                        {/*                          this.setState({searchProfessional: e.target.value})*/}
+                                        {/*                      }}>*/}
+                                        {/*            <option>Search by professional</option>*/}
+                                        {/*            <option>professional</option>*/}
+                                        {/*        </Form.Control>*/}
+                                        {/*    </Form.Group>*/}
+                                        {/*</Col>*/}
                                         <Col md="3" className="text-center">
                                             <Button variant="primary process_btn"
                                                     onClick={this._getFilterProfessionalListHandler}>
