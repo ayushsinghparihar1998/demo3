@@ -879,4 +879,18 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+  superadmin_get_press_blog: {
+    url: "elp/superadmin_get_press_blog",
+    method: "POST",
+    data: { offset: "", count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadmin_getblog: {
+    url: "elp/superadmin_getblog",
+    method: "POST",
+    data: { offset: "", count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };

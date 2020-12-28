@@ -8,7 +8,7 @@ import {
   actionadminUserDelete,
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
-} from "../../common/redux/actions"; 
+} from "../../common/redux/actions";
 import Checkgreen from "../../assets/images/checkgreen.svg";
 import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
@@ -31,7 +31,7 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";      
+} from "react-bootstrap";
 import moment from "moment";
 
 import Pagination from "react-js-pagination";
@@ -904,6 +904,78 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
+  getblogListHandler = async (offset, count) => {
+    try {
+      let result = await ELPViewApiService("superadmin_getblog", {
+        count: count,
+        offset: offset,
+        category: "",
+      });
+      console.log(result);
+      let blogList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        blogList =
+          result && result.data && result.data.data
+            ? result.data.data.blog_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "blogList",
+          blogList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getpressblogListHandler = async (offset, count) => {
+    try {
+      let result = await ELPViewApiService("superadmin_get_press_blog", {
+        count: count,
+        offset: offset,
+        category: "",
+      });
+      console.log(result);
+      let pressblogList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        pressblogList =
+          result && result.data && result.data.data
+            ? result.data.data.press_blog_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "pressblogList",
+          pressblogList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   getRatingName = (ratingCount) => {
     let text = null;
     if (ratingCount == 1) {
@@ -964,6 +1036,14 @@ class Adminlistener extends Component {
         : "position-relative";
     let addMemberActveClass =
       this.state.pageType == "addMember"
+        ? "position-relative active"
+        : "position-relative";
+    let pressBlogActveClass =
+      this.state.pageType == "pressblogList"
+        ? "position-relative active"
+        : "position-relative";
+    let blogActveClass =
+      this.state.pageType == "blogList"
         ? "position-relative active"
         : "position-relative";
     let profileListing = this.state.profileListing;
@@ -1093,6 +1173,33 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={pressBlogActveClass}
+                        onClick={(e) => {
+                          this.getpressblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> PRESS
+                          PRESS BLOG LIST
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={blogActveClass}
+                        onClick={(e) => {
+                          this.getblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> BLOG
+                          LIST
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
                         className={ratingActveClass}
@@ -1564,7 +1671,7 @@ class Adminlistener extends Component {
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           Professional listing
-                        </div> 
+                        </div>
                       </Col>
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
@@ -1834,8 +1941,8 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Work Experience:</strong>{" "}  
-                                    {item.u_work_experience}  
+                                    <strong>Work Experience:</strong>{" "}
+                                    {item.u_work_experience}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
@@ -1860,7 +1967,7 @@ class Adminlistener extends Component {
                                         __html: item.u_bio,
                                       }}
                                     ></span>
-                                    <span className="mx-100w"> 
+                                    <span className="mx-100w">
                                       <a
                                         className="col10"
                                         onClick={() =>
@@ -1873,7 +1980,6 @@ class Adminlistener extends Component {
                                         {"  "}Read more...
                                       </a>
                                     </span>
-
                                   </div>
 
                                   <div className="eat_category">
@@ -1904,17 +2010,17 @@ class Adminlistener extends Component {
                       // );
                     })}
                 </Col>
-              ) : this.state.pageType == "domainList" ? ( 
+              ) : this.state.pageType == "domainList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="corporateMember adminlistener d_detail">         
+                  <div className="corporateMember adminlistener d_detail">
                     <div className="domainSave">
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div> 
-                        <div className="fs15 fw400 col14 mb-4">  
+                        <div className="fs22 col10 mb-1">Domain listing</div>
+                        <div className="fs15 fw400 col14 mb-4">
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div>
                       </div>
-                      <div className="ml-auto">  
+                      <div className="ml-auto">
                         <Button
                           variant="primary"
                           type="button"
@@ -1959,59 +2065,58 @@ class Adminlistener extends Component {
                                 <td>50</td>
                                 <td>{item.cd_audio_min / 60}</td>
                                 <td>{item.cd_video_min / 60}</td>
-                                <td className="blogTables">  
-                                  <div> 
-                                      <span className="disabled text-center"> 
-                                        <Form.Check
-                                          type="switch"
-                                          id={"custom-switch" + index}
-                                          name={"status" + index}
-                                          label=""
-                                          onClick={(e) => {
-                                            this.modifyDomainContent(
-                                              item,
-                                              this.state.deleteId,
-                                              "superadminchangestatusCorporatedomain",
-                                              item.cd_status == "1" ? "0" : "1"
-                                            );
-                                          }}
-                                          checked={item.cd_status == "1"}
-                                        />
-                                      </span>
-                                      <span className="pr-2 fs13 col47 fw500"> 
-                                        {item.cd_status == 1
-                                          ? "Active"
-                                          : "Inactive"}
-                                      </span> 
+                                <td className="blogTables">
+                                  <div>
+                                    <span className="disabled text-center">
+                                      <Form.Check
+                                        type="switch"
+                                        id={"custom-switch" + index}
+                                        name={"status" + index}
+                                        label=""
+                                        onClick={(e) => {
+                                          this.modifyDomainContent(
+                                            item,
+                                            this.state.deleteId,
+                                            "superadminchangestatusCorporatedomain",
+                                            item.cd_status == "1" ? "0" : "1"
+                                          );
+                                        }}
+                                        checked={item.cd_status == "1"}
+                                      />
+                                    </span>
+                                    <span className="pr-2 fs13 col47 fw500">
+                                      {item.cd_status == 1
+                                        ? "Active"
+                                        : "Inactive"}
+                                    </span>
                                   </div>
 
-                                  <div>  
-                                      <span className="mr-2">
-                                        <Image
-                                          src={Editicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.props.history.push(
-                                              `/adddomain/${item.cd_id}`
-                                              // `/adddomain`
-                                            )
-                                          }
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Deleteicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.handleOpenConformation(
-                                              "other",
-                                              item
-                                            )
-                                          }
-                                        />
-                                      </span>{" "}
+                                  <div>
+                                    <span className="mr-2">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        onClick={() =>
+                                          this.props.history.push(
+                                            `/adddomain/${item.cd_id}`
+                                            // `/adddomain`
+                                          )
+                                        }
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        onClick={() =>
+                                          this.handleOpenConformation(
+                                            "other",
+                                            item
+                                          )
+                                        }
+                                      />
+                                    </span>{" "}
                                   </div>
-
                                 </td>
                               </tr>
                             );
@@ -2022,7 +2127,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "addMember" ? (
                 <Col md={9} className="pl-1">
-                  <div className="corporateMember adminlistener">  
+                  <div className="corporateMember adminlistener">
                     <div className="fs28 col10 mb-4">
                       Become a Corporate Member
                     </div>
@@ -2067,7 +2172,7 @@ class Adminlistener extends Component {
                           onChange={(e) => this.handleChangeCorpMember(e)}
                           maxLength={40}
                         />{" "}
-                        <div className="col27 fs14 fw400 mt-2 error">  
+                        <div className="col27 fs14 fw400 mt-2 error">
                           {errors.password}{" "}
                         </div>
                       </Form.Group>
@@ -2104,6 +2209,416 @@ class Adminlistener extends Component {
                         Submit
                       </Button>
                     </Form>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "pressblogList" ? (
+                <Col md={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-4">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Press BLog listing
+                        </div>
+                        <div className="fw300 fs16 col14">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath("/professionalSignup")
+                            }
+                          >
+                            create press blog
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Form className="p_form mb-4">
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                          <Form.Check
+                            type="checkbox"
+                            className="checkone checkSet"
+                            label="Eat"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checktwo"
+                            label="Luv"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checkthree active"
+                            label="Pray"
+                          />
+                        </Form.Group>
+                      </div>
+                    </Form>
+                  </div>
+
+                  <div className="adminlistener p-4 mb-3">
+                    <div className="d-flex text-left">
+                      <div className="mr-2 pt-1">
+                        <Image src={Requestuser} alt="" className="r50" />
+                      </div>
+                      <div className="pl-2 w-100">
+                        <div className="d-flex justify-content-between">
+                          <div className="w-100">
+                            <div className="d-flex">
+                              {/* 
+                              pbl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
+pbl_id: "8"
+pbl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
+pbl_status: "Active"
+pbl_title: "test blog" */}
+                              <div className="col1 fw600 fs18 pb-1">
+                                Andrew D’souza
+                              </div>
+                              <div className="d-flex ml-auto">
+                                <span className="pr-3 fs14 col47 fw400">
+                                  Active
+                                </span>
+                                <span className="pr-3 disabled">
+                                  <Form.Check
+                                    type="switch"
+                                    id="custom-switch5"
+                                    label=""
+                                    checked=""
+                                  />
+                                </span>
+                                <span>
+                                  <Image src={Deleteicon} alt="" />
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Age:</strong> 32 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Work Experince:</strong> 10 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Languages:</strong> Hindi, English and
+                              Marathi
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong className="m_w25">Education: </strong>
+                              <span>
+                                Master of Arts in Counselling
+                                psuchology,Columbia University Postgraduate
+                                diploma in Counselling psuchology,Columbia
+                                University
+                              </span>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong>Biogropy: </strong>
+                              <span>
+                                I enjoy working with individuals of all
+                                capacities as I view the role of therapist as
+                                one in which you help the client learn to cope
+                                with the pressures of daily life.
+                                <a className="col10">Read more...</a>
+                              </span>
+                            </div>
+
+                            <div className="eat_category">
+                              <span className="eatcat">Eat</span>
+                              <span className="luvcat">Luv</span>
+                              <span className="praycat">Pray</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="adminlistener p-4 mb-3">
+                    <div className="d-flex text-left">
+                      <div className="mr-2 pt-1">
+                        <Image src={Requestuser} alt="" className="r50" />
+                      </div>
+                      <div className="pl-2 w-100">
+                        <div className="d-flex justify-content-between">
+                          <div className="w-100">
+                            <div className="d-flex">
+                              <div className="col1 fw600 fs18 pb-1">
+                                Andrew D’souza
+                              </div>
+                              <div className="d-flex ml-auto">
+                                <span className="pr-3 fs14 col47 fw400">
+                                  Active
+                                </span>
+                                <span className="pr-3 disabled">
+                                  <Form.Check
+                                    type="switch"
+                                    id="custom-switch5"
+                                    label=""
+                                    checked=""
+                                  />
+                                </span>
+                                <span>
+                                  <Image src={Deleteicon} alt="" />
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Age:</strong> 32 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Work Experince:</strong> 10 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Languages:</strong> Hindi, English and
+                              Marathi
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong className="m_w25">Education: </strong>
+                              <span>
+                                Master of Arts in Counselling
+                                psuchology,Columbia University Postgraduate
+                                diploma in Counselling psuchology,Columbia
+                                University
+                              </span>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong>Biogropy: </strong>
+                              <span>
+                                I enjoy working with individuals of all
+                                capacities as I view the role of therapist as
+                                one in which you help the client learn to cope
+                                with the pressures of daily life.
+                                <a className="col10">Read more...</a>
+                              </span>
+                            </div>
+
+                            <div className="eat_category">
+                              <span className="eatcat">Eat</span>
+                              <span className="luvcat">Luv</span>
+                              <span className="praycat">Pray</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "blogList" ? (
+                <Col md={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-4">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Professional listing
+                        </div>
+                        <div className="fw300 fs16 col14">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath("/professionalSignup")
+                            }
+                          >
+                            create professional
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Form className="p_form mb-4">
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                          <Form.Check
+                            type="checkbox"
+                            className="checkone checkSet"
+                            label="Eat"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checktwo"
+                            label="Luv"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checkthree active"
+                            label="Pray"
+                          />
+                        </Form.Group>
+                      </div>
+                    </Form>
+                  </div>
+
+                  <div className="adminlistener p-4 mb-3">
+                    <div className="d-flex text-left">
+                      <div className="mr-2 pt-1">
+                        <Image src={Requestuser} alt="" className="r50" />
+                      </div>
+                      <div className="pl-2 w-100">
+                        <div className="d-flex justify-content-between">
+                          <div className="w-100">
+                            <div className="d-flex">
+                              <div className="col1 fw600 fs18 pb-1">
+                                Andrew D’souza
+                              </div>
+                              <div className="d-flex ml-auto">
+                                <span className="pr-3 fs14 col47 fw400">
+                                  Active
+                                </span>
+                                <span className="pr-3 disabled">
+                                  <Form.Check
+                                    type="switch"
+                                    id="custom-switch5"
+                                    label=""
+                                    checked=""
+                                  />
+                                </span>
+                                <span>
+                                  <Image src={Deleteicon} alt="" />
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Age:</strong> 32 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Work Experince:</strong> 10 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Languages:</strong> Hindi, English and
+                              Marathi
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong className="m_w25">Education: </strong>
+                              <span>
+                                Master of Arts in Counselling
+                                psuchology,Columbia University Postgraduate
+                                diploma in Counselling psuchology,Columbia
+                                University
+                              </span>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong>Biogropy: </strong>
+                              <span>
+                                I enjoy working with individuals of all
+                                capacities as I view the role of therapist as
+                                one in which you help the client learn to cope
+                                with the pressures of daily life.
+                                <a className="col10">Read more...</a>
+                              </span>
+                            </div>
+
+                            <div className="eat_category">
+                              <span className="eatcat">Eat</span>
+                              <span className="luvcat">Luv</span>
+                              <span className="praycat">Pray</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="adminlistener p-4 mb-3">
+                    <div className="d-flex text-left">
+                      <div className="mr-2 pt-1">
+                        <Image src={Requestuser} alt="" className="r50" />
+                      </div>
+                      <div className="pl-2 w-100">
+                        <div className="d-flex justify-content-between">
+                          <div className="w-100">
+                            <div className="d-flex">
+                              <div className="col1 fw600 fs18 pb-1">
+                                Andrew D’souza
+                              </div>
+                              <div className="d-flex ml-auto">
+                                <span className="pr-3 fs14 col47 fw400">
+                                  Active
+                                </span>
+                                <span className="pr-3 disabled">
+                                  <Form.Check
+                                    type="switch"
+                                    id="custom-switch5"
+                                    label=""
+                                    checked=""
+                                  />
+                                </span>
+                                <span>
+                                  <Image src={Deleteicon} alt="" />
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Age:</strong> 32 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Work Experince:</strong> 10 years
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1">
+                              <strong>Languages:</strong> Hindi, English and
+                              Marathi
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong className="m_w25">Education: </strong>
+                              <span>
+                                Master of Arts in Counselling
+                                psuchology,Columbia University Postgraduate
+                                diploma in Counselling psuchology,Columbia
+                                University
+                              </span>
+                            </div>
+
+                            <div className="fs14 fw400 col14 pb-1 e_detai">
+                              <strong>Biogropy: </strong>
+                              <span>
+                                I enjoy working with individuals of all
+                                capacities as I view the role of therapist as
+                                one in which you help the client learn to cope
+                                with the pressures of daily life.
+                                <a className="col10">Read more...</a>
+                              </span>
+                            </div>
+
+                            <div className="eat_category">
+                              <span className="eatcat">Eat</span>
+                              <span className="luvcat">Luv</span>
+                              <span className="praycat">Pray</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </Col>
               ) : (
