@@ -50,7 +50,11 @@ import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
 
 import { result, stubFalse } from "lodash";
-import { getLocalStorage, range } from "../../common/helpers/Utils";
+import {
+  getLocalStorage,
+  range,
+  setLocalStorage,
+} from "../../common/helpers/Utils";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -97,116 +101,19 @@ class Adminlistener extends Component {
   }
   componentDidMount() {
     // this.getListnerListing("", "listner", 1);
-    this.getCustomerListing("", "user", 1);
-  }
-
-  getPager(total) {
-    let startPage = this.state.startPage;
-    let endPage = this.state.endPage;
-    let totalPage = Math.ceil(total / this.state.records);
-    console.log("totalPage", totalPage);
-    let pageno = this.state.pageno;
-
-    if (totalPage <= 5) {
-      startPage = 1;
-      endPage = totalPage;
-    } else {
-      if (pageno <= 3) {
-        startPage = 1;
-        endPage = 5;
-      } else if (pageno + 1 >= totalPage) {
-        startPage = totalPage - 4;
-        endPage = totalPage;
-      } else {
-        startPage = pageno - 2;
-        endPage = pageno + 2;
-      }
-    }
-    let startIndex = (pageno - 1) * this.state.records;
-    let endIndex = Math.min(startIndex + this.state.records - 1, totalPage - 1);
-
-    // create an array of pages to ng-repeat in the pager control
-    let pageArray;
-    if (startPage == endPage) {
-      console.log("startPage, endPage", startPage, endPage);
-
-      pageArray = [1];
-    } else {
-      pageArray = range(startPage, endPage);
-      console.log("startPage, endPage", startPage, endPage);
-    }
-    this.setState({
-      // records: this.state.records,
-      totalPage: totalPage,
-      startPage: startPage,
-      endPage: endPage,
-      startIndex: startIndex,
-      endIndex: endIndex,
-      pageArray: pageArray,
-    });
-  }
-  onChangePage(page) {
-    console.log(page);
-    console.log(this.state.pageno);
-    this.setState({
-      pageno: page,
-    });
-    if (page == this.state.pageno) {
-    } else {
-      if (this.state.pageType == "blockList") {
-        console.log(page, "page");
-        this.getBlockuserListing(page, this.state.count, this.state.block_type);
-      } else if (this.state.pageType == "reviewList") {
-        this.getReviewListing(page, this.state.count, this.state.review_type);
-      } else if (this.state.pageType == "ratingList") {
-        this.getRatinguserListing(
-          page,
-          this.state.count,
-          this.state.review_type
-        );
-      } else if (this.state.pageType == "paymentList") {
-        this.getPaymentListHandler(page, this.state.count);
-      } else if (this.state.pageType == "proffList") {
-        this.getProffListing(
-          page,
-          this.state.count,
-          this.state.name,
-          this.state.status,
-          this.state.keyword,
-          this.state.category
-        );
-      } else {
-      }
+    // this.getCustomerListing("", "user", 1);
+    console.log("get", getLocalStorage("tabToOpen"));
+    if (getLocalStorage("tabToOpen") == "user")
+      this.getCustomerListing("", "user", 1);
+    else if (getLocalStorage("tabToOpen") == "listner")
+      this.getCustomerListing("", "listner", 1);
+    else if (getLocalStorage("tabToOpen") == "getProffListing")
+      this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
+    else if (getLocalStorage("tabToOpen") == "getDomainListing")
+      this.getDomainListing(1, 10);
+    else {
     }
   }
-
-  // change page
-
-  onSearch() {
-    this.getProffListing(
-      this.state.pageno,
-      this.state.count,
-      this.state.name,
-      this.state.status,
-      this.state.keyword,
-      this.state.category
-    );
-  }
-
-  handlePageChange = (newPageNumber) => {
-    let chkUserProfile = this.state.activeProfile;
-    this.setState({ pageNumber: newPageNumber }, () => {
-      if (chkUserProfile === "user") {
-        this.getCustomerListing("", "user", newPageNumber);
-      } else if (chkUserProfile === "professional") {
-        this.getProfessionalListing("", "professional", newPageNumber);
-      } else if (chkUserProfile === "listner") {
-        this.getListnerListing("", "listner", newPageNumber);
-      }
-    });
-  };
-  /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
-
   getListnerListing = (e, activaClass, pageNumber) => {
     let chkUserProfile = this.state.activeProfile;
     this.setState({
@@ -220,35 +127,6 @@ class Adminlistener extends Component {
       offset: pageNumber,
     };
     this.props.actionGetListnerListing(data).then((result) => {
-      if (result && result.status === 200) {
-        profileListing =
-          result && result.data && result.data.data
-            ? result.data.data.listing
-            : [];
-        let totalRecord =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-        this.setState({
-          profileListing: profileListing,
-          totalRecord: totalRecord,
-        });
-      }
-    });
-  };
-  getProfessionalListing = (e, activaClass, pageNumber) => {
-    let chkUserProfile = this.state.activeProfile;
-    this.setState({
-      activeProfile: activaClass,
-      pageNumber: pageNumber,
-      pageType: "userlist",
-    });
-    let profileListing = [];
-    let data = {
-      count: customPagination.paginationPageSize,
-      offset: pageNumber,
-    };
-    this.props.actionGetProfessionalListing(data).then((result) => {
       if (result && result.status === 200) {
         profileListing =
           result && result.data && result.data.data
@@ -292,233 +170,6 @@ class Adminlistener extends Component {
         });
       }
     });
-  };
-  adminChangeUserStatus = (e, uid, status) => {
-    let pageNumber = this.state.pageNumber;
-    let userStatus = status == "1" ? 0 : 1;
-    let chkUserProfile = this.state.activeProfile;
-    let data = { userid: uid, u_status: userStatus };
-    this.props.actionAdminChangeUserStatus(data).then((result) => {
-      if (result && result.status === 200) {
-        if (chkUserProfile === "user") {
-          this.getCustomerListing(e, "user", pageNumber);
-          // } else if (chkUserProfile === "professional") {
-          //   this.getProfessionalListing(e, "professional", pageNumber);
-        } else if (chkUserProfile === "listner") {
-          this.getListnerListing(e, "listner", pageNumber);
-        } else {
-          this.getProffListing(
-            this.state.pageno,
-            this.state.count,
-            this.state.name,
-            this.state.status,
-            this.state.keyword,
-            this.state.category
-          );
-        }
-      }
-    });
-  };
-  adminUserDelete = (e, uid, status) => {
-    let pageNumber = this.state.pageNumber;
-    let chkUserProfile = this.state.activeProfile;
-    let data = { userid: uid, u_status: status };
-    this.props.actionadminUserDelete(data).then((result) => {
-      this.setState({ deleteConformationModal: false });
-      if (result && result.status === 200) {
-        if (chkUserProfile === "user") {
-          this.getCustomerListing(e, "user", pageNumber);
-          // } else if (chkUserProfile === "professional") {
-          //   this.getProfessionalListing(e, "professional", pageNumber);
-        } else if (chkUserProfile === "listner") {
-          this.getListnerListing(e, "listner", pageNumber);
-        } else {
-          this.getProffListing(
-            this.state.pageno,
-            this.state.count,
-            this.state.name,
-            this.state.status,
-            this.state.keyword,
-            this.state.category
-          );
-        }
-      }
-    });
-  };
-  userProfile = (e, uid) => {
-    this.props.history.push({
-      pathname: "/myprofile",
-      state: { userId: uid },
-    });
-  };
-  adminUserDeleteConfirm = (e, uid, name) => {
-    this.setState({
-      deleteConformationModal: true,
-      profileId: uid,
-      userProfileName: name,
-    });
-  };
-  handleCloseConformation = () => {
-    this.setState({
-      deleteConformationModal: false,
-      profileId: "",
-    });
-  };
-
-  handleOpenConformation = (type, obj) => {
-    this.setState({
-      deleteModalType: type ? type : "admin",
-      deleteUser: obj ? obj.cd_domain_name : "",
-      deleteId: obj ? obj.cd_id : "",
-      deleteConformationModal: true,
-    });
-  };
-  handleChange(e) {
-    const name = e.target.name;
-    let value = e.target.value;
-
-    this.setState({
-      reasonForDelete: value,
-    });
-  }
-  handleChangeCorpMember(e) {
-    const name = e.target.name;
-    let value = e.target.value;
-    let memberObj = this.state.memberObj;
-    memberObj[name] = value.trim();
-    this.setState({
-      memberObj,
-    });
-  }
-  handleSubmitCorpMember() {
-    let memberObj = this.state.memberObj;
-    let errors = this.state.errors;
-    var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
-    // var test = reg.test(value.trim());
-    errors.email =
-      memberObj.email.length == 0
-        ? "Please Enter email id"
-        : !Validator.isEmail(memberObj.email)
-        ? "Please enter a valid email"
-        : "";
-    errors.password =
-      memberObj.password.length == 0
-        ? "Please Enter password"
-        : !reg.test(memberObj.password.trim())
-        ? "Please enter a valid password"
-        : "";
-
-    this.setState({
-      errors,
-    });
-    if (errors.email.length == 0 && errors.password.length == 0) {
-      console.log("submit");
-      ELPViewApiService("superadmincorporatecustomerregister", memberObj)
-        .then((result) => {
-          if (result && result.data && result.data.status === "success") {
-            let memberObj = {
-              email: "",
-              password: "",
-            };
-            this.setState({
-              memberObj,
-            });
-          } else {
-            this.setState({
-              showLoader: false,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.setState({
-            showLoader: false,
-          });
-        });
-    }
-  }
-  adminUserDeleteReason = (e, uid, status) => {
-    let pageNumber = this.state.pageNumber;
-    let reason = this.state.reasonForDelete;
-    let chkUserProfile = this.state.activeProfile;
-    let data = { userid: uid, ui_status: status, ui_comment: reason };
-    this.props.actionAdminUserDeleteReason(data).then((result) => {
-      this.setState({ deleteConformationModal: false });
-      if (result && result.status === 200) {
-        if (chkUserProfile === "user") {
-          this.getCustomerListing(e, "user", pageNumber);
-          // } else if (chkUserProfile === "professional") {
-          //   this.getProfessionalListing(e, "professional", pageNumber);
-        } else if (chkUserProfile === "listner") {
-          this.getListnerListing(e, "listner", pageNumber);
-        } else {
-          this.getProffListing();
-        }
-      }
-    });
-  };
-
-  handleSearch = (e) => {
-    let { name, value } = e.target;
-    console.log(name, value);
-    this.setState({
-      [name]: value,
-    });
-  };
-  handleCheckSearch = (e, type) => {
-    let { name, value, checked } = e.target;
-    console.log(name, value, checked);
-    let keywordArray = this.state.keywordArray;
-    let catArray = this.state.catArray;
-    if (type == "cat") {
-      var index = catArray.findIndex((el) => el.value == value);
-      catArray[index].flag = checked;
-    } else {
-      var index = keywordArray.findIndex((el) => el.value == value);
-      keywordArray[index].flag = checked;
-    }
-    this.setState(
-      {
-        keywordArray,
-        catArray,
-      },
-      () => {
-        console.log(this.state.keywordArray);
-        console.log(this.state.catArray);
-      }
-    );
-  };
-  searchSubmit = () => {
-    console.log("this.state.name", this.state.name);
-    console.log("this.state.keyword", this.state.keyword);
-    console.log("this.state.status", this.state.status);
-    console.log("this.state.category", this.state.category);
-    let catval = [];
-    this.state.catArray.map((cat) => {
-      if (cat.flag == true) {
-        catval.push("'" + cat.name + "'");
-      }
-    });
-    let statusval = 0;
-    this.state.keywordArray.map((cat) => {
-      if (cat.flag == true) {
-        statusval = statusval + cat.value;
-      }
-    });
-    console.log("this.state.category", catval.join(","));
-    console.log("this.state.category", statusval);
-    this.setState({
-      status: statusval > 4 ? "" : statusval,
-      category: catval.join(","),
-    });
-    this.getProffListing(
-      this.state.offset,
-      this.state.count,
-      this.state.name,
-      statusval > 4 ? "" : statusval,
-      this.state.keyword,
-      catval.join(",")
-    );
   };
   getProffListing = (offset, count, name, status, keyword, category) => {
     console.log(
@@ -579,23 +230,6 @@ class Adminlistener extends Component {
       );
     });
   };
-
-  handleDate = (date) => {
-    console.log("date", date);
-    this.setState({
-      date,
-    });
-    console.log(this.state.date);
-  };
-  modifyDomainContent = (item, id, api, status) => {
-    let data = { cd_id: id ? id : item.cd_id, cd_status: status };
-    ELPViewApiService(api, data).then((result) => {
-      this.setState({ deleteConformationModal: false });
-      if (result && result.status === 200) {
-        this.getDomainListing(this.state.pageno, this.state.count);
-      }
-    });
-  };
   getDomainListing = (offset, count) => {
     console.log("count, offset", count, offset);
     if (offset == 1) {
@@ -638,7 +272,6 @@ class Adminlistener extends Component {
       );
     });
   };
-
   getBlockuserListing = (offset, count, block_type) => {
     // 0:Processing,1:Accept,2:Reject
     // offset - page no
@@ -785,90 +418,6 @@ class Adminlistener extends Component {
       );
     });
   };
-  changeStatusReview = (rv_id, rv_status) => {
-    let data = {
-      rv_id,
-      rv_status,
-    };
-    ELPViewApiService("changeStatusReview", data).then((result) => {
-      console.log("result", result);
-
-      if (result && result.status === 200) {
-        this.getReviewListing(
-          this.state.offset,
-          this.state.count,
-          this.state.review_type
-        );
-      }
-    });
-  };
-  changeStatusRating = (ur_id, ur_status) => {
-    let data = {
-      ur_id,
-      ur_status,
-    };
-    ELPViewApiService("changestatusrating", data).then((result) => {
-      console.log("result", result);
-
-      if (result && result.status === 200) {
-        this.getRatinguserListing(
-          this.state.offset,
-
-          this.state.count,
-          this.state.review_type
-        );
-      }
-    });
-  };
-  blockUserStatus = (userid, status) => {
-    let data = {
-      br_id: userid,
-      br_status: status,
-    };
-    ELPViewApiService("blockUserStatusSuperAdmin", data).then((result) => {
-      console.log("result", result);
-
-      if (result && result.status === 200) {
-        this.getBlockuserListing(
-          this.state.offset,
-
-          this.state.count,
-          this.state.block_type
-        );
-      }
-    });
-  };
-  onChangeTab(key, type) {
-    if (key === "request") {
-      type == "block"
-        ? this.getBlockuserListing(1, 10, 0)
-        : type == "rating"
-        ? this.getRatinguserListing(1, 10, 0)
-        : this.getReviewListing(1, 10, 0);
-      this.setState({
-        key: "request",
-      });
-    } else if (key === "reject") {
-      type == "block"
-        ? this.getBlockuserListing(1, 10, 2)
-        : type == "rating"
-        ? this.getRatinguserListing(1, 10, 2)
-        : this.getReviewListing(1, 10, 2);
-      this.setState({
-        key: "reject",
-      });
-    } else {
-      this.setState({
-        key: "completed",
-      });
-      type == "block"
-        ? this.getBlockuserListing(1, 10, 1)
-        : type == "rating"
-        ? this.getRatinguserListing(1, 10, 1)
-        : this.getReviewListing(1, 10, 1);
-    }
-  }
-
   getPaymentListHandler = async (offset, count) => {
     try {
       let result = await ELPViewApiService("getAdminPaymentDetail", {
@@ -976,6 +525,452 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
+  changepath = (path, backresult) => {
+    console.log(path);
+    setLocalStorage("tabToOpen", backresult);
+    this.props.history.push(path);
+  };
+  getPager(total) {
+    let startPage = this.state.startPage;
+    let endPage = this.state.endPage;
+    let totalPage = Math.ceil(total / this.state.records);
+    console.log("totalPage", totalPage);
+    let pageno = this.state.pageno;
+
+    if (totalPage <= 5) {
+      startPage = 1;
+      endPage = totalPage;
+    } else {
+      if (pageno <= 3) {
+        startPage = 1;
+        endPage = 5;
+      } else if (pageno + 1 >= totalPage) {
+        startPage = totalPage - 4;
+        endPage = totalPage;
+      } else {
+        startPage = pageno - 2;
+        endPage = pageno + 2;
+      }
+    }
+    let startIndex = (pageno - 1) * this.state.records;
+    let endIndex = Math.min(startIndex + this.state.records - 1, totalPage - 1);
+
+    // create an array of pages to ng-repeat in the pager control
+    let pageArray;
+    if (startPage == endPage) {
+      console.log("startPage, endPage", startPage, endPage);
+
+      pageArray = [1];
+    } else {
+      pageArray = range(startPage, endPage);
+      console.log("startPage, endPage", startPage, endPage);
+    }
+    this.setState({
+      // records: this.state.records,
+      totalPage: totalPage,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pageArray: pageArray,
+    });
+  }
+  onChangePage(page) {
+    console.log(page);
+    console.log(this.state.pageno);
+    this.setState({
+      pageno: page,
+    });
+    if (page == this.state.pageno) {
+    } else {
+      if (this.state.pageType == "blockList") {
+        console.log(page, "page");
+        this.getBlockuserListing(page, this.state.count, this.state.block_type);
+      } else if (this.state.pageType == "reviewList") {
+        this.getReviewListing(page, this.state.count, this.state.review_type);
+      } else if (this.state.pageType == "ratingList") {
+        this.getRatinguserListing(
+          page,
+          this.state.count,
+          this.state.review_type
+        );
+      } else if (this.state.pageType == "paymentList") {
+        this.getPaymentListHandler(page, this.state.count);
+      } else if (this.state.pageType == "proffList") {
+        this.getProffListing(
+          page,
+          this.state.count,
+          this.state.name,
+          this.state.status,
+          this.state.keyword,
+          this.state.category
+        );
+      } else {
+      }
+    }
+  }
+
+  // change page
+
+  onSearch() {
+    this.getProffListing(
+      this.state.pageno,
+      this.state.count,
+      this.state.name,
+      this.state.status,
+      this.state.keyword,
+      this.state.category
+    );
+  }
+
+  handlePageChange = (newPageNumber) => {
+    let chkUserProfile = this.state.activeProfile;
+    this.setState({ pageNumber: newPageNumber }, () => {
+      if (chkUserProfile === "user") {
+        this.getCustomerListing("", "user", newPageNumber);
+      } else if (chkUserProfile === "professional") {
+        this.getProfessionalListing("", "professional", newPageNumber);
+      } else if (chkUserProfile === "listner") {
+        this.getListnerListing("", "listner", newPageNumber);
+      }
+    });
+  };
+  /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
+
+  adminChangeUserStatus = (e, uid, status) => {
+    let pageNumber = this.state.pageNumber;
+    let userStatus = status == "1" ? 0 : 1;
+    let chkUserProfile = this.state.activeProfile;
+    let data = { userid: uid, u_status: userStatus };
+    this.props.actionAdminChangeUserStatus(data).then((result) => {
+      if (result && result.status === 200) {
+        if (chkUserProfile === "user") {
+          this.getCustomerListing(e, "user", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
+        } else if (chkUserProfile === "listner") {
+          this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing(
+            this.state.pageno,
+            this.state.count,
+            this.state.name,
+            this.state.status,
+            this.state.keyword,
+            this.state.category
+          );
+        }
+      }
+    });
+  };
+  adminUserDelete = (e, uid, status) => {
+    let pageNumber = this.state.pageNumber;
+    let chkUserProfile = this.state.activeProfile;
+    let data = { userid: uid, u_status: status };
+    this.props.actionadminUserDelete(data).then((result) => {
+      this.setState({ deleteConformationModal: false });
+      if (result && result.status === 200) {
+        if (chkUserProfile === "user") {
+          this.getCustomerListing(e, "user", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
+        } else if (chkUserProfile === "listner") {
+          this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing(
+            this.state.pageno,
+            this.state.count,
+            this.state.name,
+            this.state.status,
+            this.state.keyword,
+            this.state.category
+          );
+        }
+      }
+    });
+  };
+  userProfile = (e, uid, type) => {
+    this.props.history.push({
+      pathname: "/myprofile",
+      state: { userId: uid },
+    });
+    console.log(type);
+    setLocalStorage("tabToOpen", type);
+  };
+  adminUserDeleteConfirm = (e, uid, name) => {
+    this.setState({
+      deleteConformationModal: true,
+      profileId: uid,
+      userProfileName: name,
+    });
+  };
+  handleCloseConformation = () => {
+    this.setState({
+      deleteConformationModal: false,
+      profileId: "",
+    });
+  };
+
+  handleOpenConformation = (type, obj) => {
+    this.setState({
+      deleteModalType: type ? type : "admin",
+      deleteUser: obj ? obj.cd_domain_name : "",
+      deleteId: obj ? obj.cd_id : "",
+      deleteConformationModal: true,
+    });
+  };
+  handleChange(e) {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    this.setState({
+      reasonForDelete: value,
+    });
+  }
+  handleChangeCorpMember(e) {
+    const name = e.target.name;
+    let value = e.target.value;
+    let memberObj = this.state.memberObj;
+    memberObj[name] = value.trim();
+    this.setState({
+      memberObj,
+    });
+  }
+  handleSubmitCorpMember() {
+    let memberObj = this.state.memberObj;
+    let errors = this.state.errors;
+    var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+    // var test = reg.test(value.trim());
+    errors.email =
+      memberObj.email.length == 0
+        ? "Please Enter email id"
+        : !Validator.isEmail(memberObj.email)
+        ? "Please enter a valid email"
+        : "";
+    errors.password =
+      memberObj.password.length == 0
+        ? "Please Enter password"
+        : !reg.test(memberObj.password.trim())
+        ? "Please enter a valid password"
+        : "";
+
+    this.setState({
+      errors,
+    });
+    if (errors.email.length == 0 && errors.password.length == 0) {
+      console.log("submit");
+      ELPViewApiService("superadmincorporatecustomerregister", memberObj)
+        .then((result) => {
+          // setLocalStorage("tabToOpen", "getDomainListing");
+
+          if (result && result.data && result.data.status === "success") {
+            let memberObj = {
+              email: "",
+              password: "",
+            };
+            this.setState({
+              memberObj,
+            });
+            this.getDomainListing(this.state.pageno, this.state.count);
+          } else {
+            this.setState({
+              showLoader: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            showLoader: false,
+          });
+        });
+    }
+  }
+  adminUserDeleteReason = (e, uid, status) => {
+    let pageNumber = this.state.pageNumber;
+    let reason = this.state.reasonForDelete;
+    let chkUserProfile = this.state.activeProfile;
+    let data = { userid: uid, ui_status: status, ui_comment: reason };
+    this.props.actionAdminUserDeleteReason(data).then((result) => {
+      this.setState({ deleteConformationModal: false });
+      if (result && result.status === 200) {
+        if (chkUserProfile === "user") {
+          this.getCustomerListing(e, "user", pageNumber);
+          // } else if (chkUserProfile === "professional") {
+          //   this.getProfessionalListing(e, "professional", pageNumber);
+        } else if (chkUserProfile === "listner") {
+          this.getListnerListing(e, "listner", pageNumber);
+        } else {
+          this.getProffListing();
+        }
+      }
+    });
+  };
+
+  handleSearch = (e) => {
+    let { name, value } = e.target;
+    console.log(name, value);
+    this.setState({
+      [name]: value,
+    });
+  };
+  handleCheckSearch = (e, type) => {
+    let { name, value, checked } = e.target;
+    console.log(name, value, checked);
+    let keywordArray = this.state.keywordArray;
+    let catArray = this.state.catArray;
+    if (type == "cat") {
+      var index = catArray.findIndex((el) => el.value == value);
+      catArray[index].flag = checked;
+    } else {
+      var index = keywordArray.findIndex((el) => el.value == value);
+      keywordArray[index].flag = checked;
+    }
+    this.setState(
+      {
+        keywordArray,
+        catArray,
+      },
+      () => {
+        console.log(this.state.keywordArray);
+        console.log(this.state.catArray);
+      }
+    );
+  };
+  searchSubmit = () => {
+    console.log("this.state.name", this.state.name);
+    console.log("this.state.keyword", this.state.keyword);
+    console.log("this.state.status", this.state.status);
+    console.log("this.state.category", this.state.category);
+    let catval = [];
+    this.state.catArray.map((cat) => {
+      if (cat.flag == true) {
+        catval.push("'" + cat.name + "'");
+      }
+    });
+    let statusval = 0;
+    this.state.keywordArray.map((cat) => {
+      if (cat.flag == true) {
+        statusval = statusval + cat.value;
+      }
+    });
+    console.log("this.state.category", catval.join(","));
+    console.log("this.state.category", statusval);
+    this.setState({
+      status: statusval > 4 ? "" : statusval,
+      category: catval.join(","),
+    });
+    this.getProffListing(
+      this.state.offset,
+      this.state.count,
+      this.state.name,
+      statusval > 4 ? "" : statusval,
+      this.state.keyword,
+      catval.join(",")
+    );
+  };
+
+  handleDate = (date) => {
+    console.log("date", date);
+    this.setState({
+      date,
+    });
+    console.log(this.state.date);
+  };
+  modifyDomainContent = (item, id, api, status) => {
+    let data = { cd_id: id ? id : item.cd_id, cd_status: status };
+    ELPViewApiService(api, data).then((result) => {
+      this.setState({ deleteConformationModal: false });
+      if (result && result.status === 200) {
+        this.getDomainListing(this.state.pageno, this.state.count);
+      }
+    });
+  };
+
+  changeStatusReview = (rv_id, rv_status) => {
+    let data = {
+      rv_id,
+      rv_status,
+    };
+    ELPViewApiService("changeStatusReview", data).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        this.getReviewListing(
+          this.state.offset,
+          this.state.count,
+          this.state.review_type
+        );
+      }
+    });
+  };
+  changeStatusRating = (ur_id, ur_status) => {
+    let data = {
+      ur_id,
+      ur_status,
+    };
+    ELPViewApiService("changestatusrating", data).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        this.getRatinguserListing(
+          this.state.offset,
+
+          this.state.count,
+          this.state.review_type
+        );
+      }
+    });
+  };
+  blockUserStatus = (userid, status) => {
+    let data = {
+      br_id: userid,
+      br_status: status,
+    };
+    ELPViewApiService("blockUserStatusSuperAdmin", data).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        this.getBlockuserListing(
+          this.state.offset,
+
+          this.state.count,
+          this.state.block_type
+        );
+      }
+    });
+  };
+  onChangeTab(key, type) {
+    if (key === "request") {
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 0)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 0)
+        : this.getReviewListing(1, 10, 0);
+      this.setState({
+        key: "request",
+      });
+    } else if (key === "reject") {
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 2)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 2)
+        : this.getReviewListing(1, 10, 2);
+      this.setState({
+        key: "reject",
+      });
+    } else {
+      this.setState({
+        key: "completed",
+      });
+      type == "block"
+        ? this.getBlockuserListing(1, 10, 1)
+        : type == "rating"
+        ? this.getRatinguserListing(1, 10, 1)
+        : this.getReviewListing(1, 10, 1);
+    }
+  }
+
   getRatingName = (ratingCount) => {
     let text = null;
     if (ratingCount == 1) {
@@ -992,9 +987,6 @@ class Adminlistener extends Component {
     return text;
   };
 
-  changepath = (path) => {
-    this.props.history.push(path);
-  };
   render() {
     const { errors, totalRecord, memberObj } = this.state;
     let userActveClass =
@@ -1247,7 +1239,11 @@ class Adminlistener extends Component {
                               <div className="d-flex justify-content-between">
                                 <div
                                   onClick={(e) => {
-                                    this.userProfile(e, item.id);
+                                    this.userProfile(
+                                      e,
+                                      item.id,
+                                      this.state.activeProfile
+                                    );
                                   }}
                                 >
                                   <div className="col3 fw500 fs18 pb-1">
@@ -1679,7 +1675,10 @@ class Adminlistener extends Component {
                             type="button"
                             className="btnTyp5"
                             onClick={() =>
-                              this.changepath("/professionalSignup")
+                              this.changepath(
+                                "/professionalSignup",
+                                "getProffListing"
+                              )
                             }
                           >
                             create professional
@@ -1743,8 +1742,8 @@ class Adminlistener extends Component {
                                   onChange={(e) =>
                                     this.handleCheckSearch(e, "keyword")
                                   }
-                                  handleCheck={item.flag}
-                                  // value={item.value}
+                                  // handleCheck={item.flag}
+                                  value={item.value}
                                   checked={item.flag == true}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
@@ -1778,8 +1777,8 @@ class Adminlistener extends Component {
                                   onChange={(e) =>
                                     this.handleCheckSearch(e, "cat")
                                   }
-                                  handleCheck={item.flag}
-                                  // value={item.value}
+                                  // handleCheck={item.flag}
+                                  value={item.value}
                                   checked={item.flag == true}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
@@ -1839,13 +1838,26 @@ class Adminlistener extends Component {
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
                             <div className="mr-2 pt-1">
-                              <Image src={Requestuser} alt="" className="r50" />
+                              <Image
+                                src={item.u_image ? item.u_image : Requestuser}
+                                alt=""
+                                className="r50"
+                              />
                             </div>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
+                                    <div
+                                      className="col1 fw600 fs18 pb-1"
+                                      onClick={() =>
+                                        this.changepath(
+                                          "/professionalDetails/admin/" +
+                                            item.id,
+                                          "getProffListing"
+                                        )
+                                      }
+                                    >
                                       {item.u_name}
                                     </div>
 
@@ -1878,8 +1890,9 @@ class Adminlistener extends Component {
                                           src={Editicon}
                                           alt=""
                                           onClick={() =>
-                                            this.props.history.push(
-                                              `/professionalModify/${item.id}`
+                                            this.changepath(
+                                              `/professionalModify/${item.id}`,
+                                              "getProffListing"
                                             )
                                           }
                                         />
@@ -1937,7 +1950,7 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Age:</strong> {item.u_age}
+                                    <strong>Age:</strong> {item.u_birthdate}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
@@ -1946,10 +1959,13 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Languages:</strong> {item.u_lang}
+                                    <strong>Email:</strong> {item.email}
+                                  </div>
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Keywords:</strong> {item.keyword_child_array.join(',')}
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
                                     <strong className="m_w25">
                                       Education:{" "}
                                     </strong>
@@ -1959,8 +1975,8 @@ class Adminlistener extends Component {
                                       }}
                                     ></span>
                                   </div>
-
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+ */}
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
                                     <strong>Biography : </strong>
                                     <span
                                       dangerouslySetInnerHTML={{
@@ -1973,7 +1989,8 @@ class Adminlistener extends Component {
                                         onClick={() =>
                                           this.changepath(
                                             "/professionalDetails/admin/" +
-                                              item.id
+                                              item.id,
+                                            "getProffListing"
                                           )
                                         }
                                       >
@@ -1981,7 +1998,7 @@ class Adminlistener extends Component {
                                       </a>
                                     </span>
                                   </div>
-
+ */}
                                   <div className="eat_category">
                                     {item.cat_child_array &&
                                       item.cat_child_array.map((val) => {
@@ -2026,10 +2043,7 @@ class Adminlistener extends Component {
                           type="button"
                           className="btnTyp5"
                           onClick={() =>
-                            this.props.history.push(
-                              `/adddomain/0`
-                              // `/adddomain`
-                            )
+                            this.changepath(`/adddomain/0`, "getDomainListing")
                           }
                         >
                           Add Domain
@@ -2054,9 +2068,9 @@ class Adminlistener extends Component {
                               <tr>
                                 <td
                                   onClick={() =>
-                                    this.props.history.push(
-                                      `/domainDetails/${item.cd_domain_name}/${item.cd_id}`
-                                      // `/adddomain`
+                                    this.changepath(
+                                      `/domainDetails/${item.cd_domain_name}/${item.cd_id}`,
+                                      "getDomainListing"
                                     )
                                   }
                                 >
@@ -2091,20 +2105,20 @@ class Adminlistener extends Component {
                                     </span>
                                   </div>
 
-                                  <div>  
-                                      <span className="mr-2">
-                                        <Image
-                                          src={Editicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.props.history.push(
-                                              `/adddomain/${item.cd_id}`
-                                              // `/adddomain`
-                                            )
-                                          }
-                                        />
-                                      </span>
-                                      {/* <span>
+                                  <div>
+                                    <span className="mr-2">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        onClick={() =>
+                                          this.changepath(
+                                            `/adddomain/${item.cd_id}`,
+                                            "getDomainListing"
+                                          )
+                                        }
+                                      />
+                                    </span>
+                                    {/* <span>
                                         <Image
                                           src={Deleteicon}
                                           alt=""
@@ -2229,7 +2243,10 @@ class Adminlistener extends Component {
                             type="button"
                             className="btnTyp5"
                             onClick={() =>
-                              this.changepath("/professionalSignup")
+                              this.changepath(
+                                "/professionalSignup",
+                                "getProffListing"
+                              )
                             }
                           >
                             create press blog
