@@ -14,7 +14,7 @@ export default {
     alphaOnly: "Please enter a valid screen name.",
   },
   professional_keyword: {
-    required: "Please enter atlest one keyword.",
+    required: "Please enter atleast one keyword.",
     validtext: "Please enter some valid text.",
   },
   professional_cat_name: {
@@ -31,7 +31,7 @@ export default {
     validtext: "Please enter some valid text.",
   },
   u_education: {
-    required: "Please write something about the proffessional's qualification.",
+    required: "Please write something about the professional's qualification.",
   },
   u_work_experience: {
     required: "Please enter a valid experience in years.",

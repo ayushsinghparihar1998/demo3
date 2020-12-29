@@ -407,9 +407,9 @@ class NavBar extends Component {
         <ToastContainer />
         <Navbar bg="" expand="lg">
           <a
-            onClick={() => {
-              this.verifyInCallNavigation("/");
-            }}
+            // onClick={() => {
+            //   this.verifyInCallNavigation("/");
+            // }}
             className="nav-link navbar-brand"
           >
             <Image src={logo} alt="" /> Eat Luv N Pray
