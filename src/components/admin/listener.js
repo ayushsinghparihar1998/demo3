@@ -1907,12 +1907,12 @@ class Adminlistener extends Component {
               ) : this.state.pageType == "domainList" ? ( 
                 <Col md={8} lg={9} className="pl-1">
                   <div className="corporateMember adminlistener d_detail">         
-                    <div className="domainSave">
+                    <div className="domainSave mb-4 pb-2">  
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div> 
-                        <div className="fs15 fw400 col14 mb-4">  
+                        <div className="fs22 col10 mb-1">Domain listing</div>  
+                        {/* <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
-                        </div>
+                        </div> */} 
                       </div>
                       <div className="ml-auto">  
                         <Button
@@ -1928,8 +1928,7 @@ class Adminlistener extends Component {
                         >
                           Add Domain
                         </Button>
-                      </div>
-                      <div></div>
+                      </div> 
                     </div>
                     <Table bordered className="domainTable">  
                       <thead>
@@ -1938,7 +1937,7 @@ class Adminlistener extends Component {
                           <th>No. of Employees</th>
                           <th>Total Audio(minutes)</th>
                           <th>Total Video(minutes)</th>
-                          <th>ACTION</th>
+                          <th>ACTIONS</th>
                         </tr>
                       </thead>
                       <tbody>

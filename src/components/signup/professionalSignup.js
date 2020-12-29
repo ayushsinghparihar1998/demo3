@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import Crossblue from "../../assets/images/cross_blue.svg";
 import ELPRxApiService from "../../common/services/apiService";
 
-class ProfessionalSignup extends Component {
+class ProfessionalSignup extends Component {   
     constructor(props) {
         super(props);
         this.state = {

@@ -310,7 +310,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}>
                     <Form.Group> 
                       <Form.Label className="fs20 fw600 col14">    
-                          Change Picture
+                          Change Picture*
                       </Form.Label> 
                       <div className="mt-1 mb-3 imgSetProfile">         
                           <Image src={UploadDetail} className="" /> 
@@ -334,7 +334,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={12}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Name</Form.Label>
+                      <Form.Label className="fs20 fw600 col14">Name*</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Name"
@@ -359,7 +359,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Email Address
+                        Email Address*
                       </Form.Label>
                       <Form.Control
                         type="email"
@@ -385,7 +385,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Password
+                        Password*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -410,7 +410,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Phone
+                        Phone*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -435,7 +435,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Work Experience
+                        Work Experience*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -460,7 +460,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={6}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age</Form.Label> 
+                      <Form.Label className="fs20 fw600 col14">Age*</Form.Label> 
                       <Form.Control
                         type="text"
                         placeholder="Age"
@@ -485,7 +485,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Language
+                        Language*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -511,7 +511,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Keyword
+                        Keyword*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -536,7 +536,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Service
+                        Service*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -561,7 +561,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Select Category
+                        Select Category*
                       </Form.Label>
                       <Row>
                         {proffCat &&
@@ -651,7 +651,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}> 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
-                        Qualification
+                        Qualification*
                       </Form.Label>
                       <CKEditor
                         config={{
@@ -693,7 +693,7 @@ class ProfessionalSignup extends Component {
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
-                        Biography
+                        Biography*
                       </Form.Label>
                       <CKEditor
                         config={{
@@ -733,7 +733,7 @@ class ProfessionalSignup extends Component {
                       className="btnTyp5 mt-3"
                       onClick={() => this.handleSubmit()}
                     >
-                      Signup
+                      Signup* 
                     </Button>
                   </Col>
                 </Row>

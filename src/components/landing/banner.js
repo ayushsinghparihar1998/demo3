@@ -3,7 +3,8 @@ import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, 
 import community from '../../assets/images/community.svg';
 import freechat from '../../assets/images/free-chat.svg';
 import therapy from '../../assets/images/therapy.svg';
-import women from '../../assets/images/header_banner2.svg';
+// import women from '../../assets/images/header_banner2.svg';
+import women from '../../assets/images/header_banner3.png'; 
 import user from '../../assets/images/user.svg';
 import usercomment from '../../assets/images/user-comment.svg';
 import usersend from '../../assets/images/user-send.svg';                                             
