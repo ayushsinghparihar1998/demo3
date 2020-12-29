@@ -323,6 +323,55 @@ class Adminlistener extends Component {
       );
     });
   };
+
+  getSessionListing = (offset, count, cs_status) => {
+    let data = {
+      count: count,
+      offset: offset,
+      cs_status: cs_status,
+    };
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    if (cs_status == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("superadmingetcorporateappointmentlist", data).then(
+      (result) => {
+        console.log("result", result);
+        let sessionList = [];
+        let totalRecordCount = 0;
+        if (result && result.status === 200) {
+          sessionList =
+            result && result.data && result.data.data
+              ? result.data.data.appointment_list
+              : [];
+          totalRecordCount =
+            result && result.data && result.data.data
+              ? result.data.data.totalRecordCount
+              : 0;
+        }
+        this.setState(
+          {
+            pageType: "sessionList",
+            sessionList,
+            totalRecordCount,
+            count: count,
+            offset: offset,
+            // review_type: review_type,
+          },
+          () => {
+            this.getPager(this.state.totalRecordCount);
+          }
+        );
+      }
+    );
+  };
+
   getReviewListing = (offset, count, review_type) => {
     let data = {
       count: count,
@@ -887,6 +936,25 @@ class Adminlistener extends Component {
     });
   };
 
+  changeStatusSession = (cs_id, cs_status) => {
+    let data = {
+      cs_id: +cs_id,
+      cs_status,
+    };
+    ELPViewApiService("superadminCorporateappointmentchangestatus", data).then(
+      (result) => {
+        console.log("result", result);
+
+        if (result && result.status === 200) {
+          this.getSessionListing(
+            this.state.offset,
+            this.state.count,
+            1
+          );
+        }
+      }
+    );
+  };
   changeStatusReview = (rv_id, rv_status) => {
     let data = {
       rv_id,
@@ -946,6 +1014,8 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 0)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 0)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 1)
         : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
@@ -955,6 +1025,8 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 2)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 2)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 3)
         : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
@@ -967,6 +1039,8 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 1)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 1)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 2)
         : this.getReviewListing(1, 10, 1);
     }
   }
@@ -1008,6 +1082,10 @@ class Adminlistener extends Component {
         : "position-relative";
     let reviewActveClass =
       this.state.pageType == "reviewList"
+        ? "position-relative active"
+        : "position-relative";
+    let sessionActveClass =
+      this.state.pageType == "sessionList"
         ? "position-relative active"
         : "position-relative";
     let ratingActveClass =
@@ -1149,6 +1227,19 @@ class Adminlistener extends Component {
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
                           REVIEW REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={sessionActveClass}
+                        onClick={(e) => {
+                          this.getSessionListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          SESSION REQUESTS
                         </div>
                       </div>
                     </div>
@@ -1631,6 +1722,168 @@ class Adminlistener extends Component {
                     </div>
                   </div>
                 </Col>
+              ) : this.state.pageType == "sessionList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "session")}
+                      >
+                        {/* 
+                        cs_corporate_email_id: "niharika.gupta@adobe.com"
+cs_corporate_name: "niharika.gupta"
+cs_corporate_u_id: "489"
+cs_date: "0000-00-00"
+cs_description: "test"
+cs_id: "23"
+cs_pro_email_id: "qwerty@yopmail.com"
+cs_pro_name: "testprofessional"
+cs_pro_u_id: "492"
+cs_status: "Processing"
+cs_subject: "test"
+cs_time: "00:00:02" */}
+                        <Tab eventKey="request" title="REQUESTED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          CONFIRM
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              3
+                                            )
+                                          }
+                                        >
+                                          CANCEL
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="CONFIRMED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="CANCELED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
               ) : this.state.pageType == "paymentList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="table_paymentlayout">
@@ -1686,7 +1939,7 @@ class Adminlistener extends Component {
                         </div>
                       </Col>
                     </Row>
-                    <div className="fs16 col1 mb-4">Search Professional</div>         
+                    <div className="fs16 col1 mb-4">Search Professional</div>
                     <Form className="p_form">
                       <Row>
                         <Col md="6">
@@ -1962,7 +2215,8 @@ class Adminlistener extends Component {
                                     <strong>Email:</strong> {item.email}
                                   </div>
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Keywords:</strong> {item.keyword_child_array.join(',')}
+                                    <strong>Keywords:</strong>{" "}
+                                    {item.keyword_child_array.join(",")}
                                   </div>
 
                                   {/* <div className="fs14 fw400 col14 pb-1 e_detai">
@@ -2051,7 +2305,7 @@ class Adminlistener extends Component {
                       </div>
                       <div></div>
                     </div>
-                    <Table bordered className="domainTable">  
+                    <Table bordered className="domainTable">
                       <thead>
                         <tr>
                           <th>Domain</th>
@@ -2875,11 +3129,11 @@ pbl_title: "test blog" */}
                   onClick={this.handleCloseConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete  <br />  {" "}
-                    {this.state.deleteModalType == "admin"
+                  Are you sure want to delete <br />{" "}
+                  {this.state.deleteModalType == "admin"
                     ? profileName
                     : this.state.deleteUser}
-                  ?{" "} 
+                  ?{" "}
                 </div>
 
                 <div className="text-center mb-5">
