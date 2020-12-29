@@ -386,20 +386,18 @@ class NavBar extends Component {
     render() {
         return (
 
-            <div className="mj_nav">
-
-                {this.state.email_varified ? (
-
+            <div className="mj_nav">     
+                {this.state.email_varified ? ( 
                     <div className="verifystwo">
-            <span className="fs18 fw500 col1">Please verify your email to start using our services.
-        <span
-            className="email_link"
+            <span className="fs18 fw500 col26">Please verify your email to start using our services.  
+          <span
+            className="email_link pl-1" 
             onClick={() => {
                 this._resendVerificationMail();
             }}
             style={{cursor: "pointer"}}
         >
-                Resend verification email.
+                   <a>Resend verification email.</a> 
           </span>
             </span>
 
@@ -423,7 +421,7 @@ class NavBar extends Component {
                     closeOnClick
                 />
                 {/* Same as */}
-                <ToastContainer/>
+                <ToastContainer/> 
                 <Navbar bg="" expand="lg">
                     <a
                         onClick={() => {

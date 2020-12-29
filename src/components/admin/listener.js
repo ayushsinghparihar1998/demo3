@@ -345,7 +345,7 @@ class Adminlistener extends Component {
       }
     });
   };
-  userProfile = (e, uid) => {
+  userProfile = (e, uid) => { 
     this.props.history.push({
       pathname: "/myprofile",
       state: { userId: uid },
@@ -437,7 +437,7 @@ class Adminlistener extends Component {
         });
     }
   }
-  adminUserDeleteReason = (e, uid, status) => {
+  adminUserDeleteReason = (e, uid, status) => { 
     let pageNumber = this.state.pageNumber;
     let reason = this.state.reasonForDelete;
     let chkUserProfile = this.state.activeProfile;
