@@ -451,6 +451,17 @@ export default {
         showErrorMessage: true,
     },
 
+    filteredsearchlistener: {
+        url: "elp/searchlistener",
+        method: "POST",
+        data: {
+            search_keyword: "",
+            order_by: "",
+        },
+        showResultMessage: true,
+        showErrorMessage: true,
+    },
+
     emailVerification: {
         url: "elp/emailverification",
         method: "POST",
@@ -869,7 +880,7 @@ export default {
         url: "elp/corporategetprofessionallist",
         method: "POST",
         data: {},
-        showResultMessage: true,
+        showResultMessage: false,
         showErrorMessage: true,
     },
 
@@ -911,20 +922,48 @@ export default {
         showResultMessage: false,
         showErrorMessage: false,
     },
-    corporateprofessionaluserdetail: {
-        url: "elp/corporateprofessionaluserdetail",
-        method: "POST",
-        data: { userid: '' },
-        showResultMessage: true,
-        showErrorMessage: true,
-    },
+
     switchtocorporatemember: {
         url: "elp/switchtocorporatemember",
         method: "POST",
-        data: { },
+        data: {},
         showResultMessage: true,
         showErrorMessage: true,
     },
-
+    getpressblog: {
+        url: "elp/getpressblog",
+        method: "POST",
+        data: { offset: 0, count: '', category: '' },
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+    getblog: {
+        url: "elp/getblog",
+        method: "POST",
+        data: { offset: 0, count: '', category: '' },
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+    getBlogdetails: {
+        url: "elp/getBlogdetails",
+        method: "POST",
+        data: { bl_id: '' },
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+    getlatestblog: {
+        url: "elp/getlatestblog",
+        method: "POST",
+        data: {},
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+    getpressblogcategory: {
+        url: "elp/getpressblogcategory",
+        method: "POST",
+        data: {},
+        showResultMessage: false,
+        showErrorMessage: true,
+    }
 
 };
