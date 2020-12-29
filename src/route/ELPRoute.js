@@ -220,7 +220,7 @@ class ELPRoute extends Component {
           <Route path="/faq" render={(props) => <Faq {...props} />} />
           <Route path="/campaign" render={(props) => <Compaign {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
-
+          <Route path='/professional/:id/detail' render={(props) => <ProfessionalDetails {...props} />} />
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
           {/* Proff */}
