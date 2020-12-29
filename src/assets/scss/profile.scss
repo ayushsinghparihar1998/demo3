@@ -667,7 +667,7 @@
         }
     }
     .e_detai {
-        display: flex; 
+        display: flex;
         strong {
             display: block; 
             min-width: 85px;
@@ -677,6 +677,12 @@
             a {
                 padding-left: 10px; 
             }  
+        }
+        .bio_content {
+            h4 {
+                font-size: 14px;
+                font-weight: 400; 
+            }
         }
     }
     .professor_search { 
@@ -841,6 +847,15 @@
                     }
                 }    
             } 
+        }
+        &.domainTable {
+            tr {
+                td {
+                    &:first-child {         
+                        cursor: pointer;  
+                    }
+                }
+            }
         }
     }
 }

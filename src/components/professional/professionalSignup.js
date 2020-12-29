@@ -12,7 +12,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import UploadDetail from "../../assets/images/upload_detail.svg";
+import UploadDetail from "../../assets/images/upload_detail.svg"; 
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -303,14 +303,32 @@ class ProfessionalSignup extends Component {
         </div>
         <div className="RegistrationLayout pro_signup">
           <Container>
-            <div className="layout_box mt-5 mb-4">
+              <Row className="mt-4"> 
+                  <Col md={4} lg={3} className="pr-1">
+                      <div className="adminsidebar">
+                        <div className="inner_area">
+                          <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                            Quick Links
+                          </div>
+                          <div className="d-flex m-3 pb-3 border-bottom">
+                            <div>
+                              <div className="fs14 col28 fw500">
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </Col> 
+                  <Col md={8} lg={9} className="pl-1"> 
+            <div className="layout_box mb-4">
               <div className="col3 fs40 fw600 mb-4">Professional Signup</div> 
               <Form>
                 <Row>
                   <Col md={12}>
                     <Form.Group> 
                       <Form.Label className="fs20 fw600 col14">    
-                          Change Picture
+                          Change Picture*
                       </Form.Label> 
                       <div className="mt-1 mb-3 imgSetProfile">         
                           <Image src={UploadDetail} className="" /> 
@@ -334,7 +352,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={12}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Name</Form.Label>
+                      <Form.Label className="fs20 fw600 col14">Name*</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Name"
@@ -359,7 +377,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Email Address
+                        Email Address*
                       </Form.Label>
                       <Form.Control
                         type="email"
@@ -385,7 +403,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Password
+                        Password*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -410,7 +428,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Phone
+                        Phone*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -435,7 +453,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Work Experience
+                        Work Experience*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -460,7 +478,7 @@ class ProfessionalSignup extends Component {
 
                   <Col md={6}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age</Form.Label> 
+                      <Form.Label className="fs20 fw600 col14">Age*</Form.Label> 
                       <Form.Control
                         type="text"
                         placeholder="Age"
@@ -485,7 +503,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Language
+                        Language*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -511,7 +529,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Keyword
+                        Keyword*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -536,7 +554,7 @@ class ProfessionalSignup extends Component {
                   <Col md={6}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Service
+                        Service*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -561,7 +579,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Select Category
+                        Select Category*
                       </Form.Label>
                       <Row>
                         {proffCat &&
@@ -651,7 +669,7 @@ class ProfessionalSignup extends Component {
                   <Col md={12}> 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
-                        Qualification
+                        Qualification*
                       </Form.Label>
                       <CKEditor
                         config={{
@@ -693,7 +711,7 @@ class ProfessionalSignup extends Component {
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
-                        Biography
+                        Biography*
                       </Form.Label>
                       <CKEditor
                         config={{
@@ -733,12 +751,15 @@ class ProfessionalSignup extends Component {
                       className="btnTyp5 mt-3"
                       onClick={() => this.handleSubmit()}
                     >
-                      Signup
+                      Signup* 
                     </Button>
                   </Col>
                 </Row>
               </Form>
             </div>
+          
+                  </Col> 
+            </Row>
           </Container>
         </div>
 
@@ -747,4 +768,4 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default ProfessionalSignup;
+export default ProfessionalSignup; 

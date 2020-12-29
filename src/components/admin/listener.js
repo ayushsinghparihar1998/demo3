@@ -345,7 +345,7 @@ class Adminlistener extends Component {
       }
     });
   };
-  userProfile = (e, uid) => {
+  userProfile = (e, uid) => { 
     this.props.history.push({
       pathname: "/myprofile",
       state: { userId: uid },
@@ -437,7 +437,7 @@ class Adminlistener extends Component {
         });
     }
   }
-  adminUserDeleteReason = (e, uid, status) => {
+  adminUserDeleteReason = (e, uid, status) => { 
     let pageNumber = this.state.pageNumber;
     let reason = this.state.reasonForDelete;
     let chkUserProfile = this.state.activeProfile;
@@ -1580,7 +1580,7 @@ class Adminlistener extends Component {
                         </div>
                       </Col>
                     </Row>
-                    <div className="fs16 col1 mb-4">Search Professional</div>
+                    <div className="fs16 col1 mb-4">Search Professional</div>         
                     <Form className="p_form">
                       <Row>
                         <Col md="6">
@@ -1835,7 +1835,7 @@ class Adminlistener extends Component {
 
                                   <div className="fs14 fw400 col14 pb-1">
                                     <strong>Work Experience:</strong>{" "}  
-                                    {item.u_work_experience}  
+                                    {item.u_work_experience} Years                       
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
@@ -1853,9 +1853,9 @@ class Adminlistener extends Component {
                                     ></span>
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                  <div className="fs14 fw400 col14 pb-1 e_detai">    
                                     <strong>Biography : </strong>
-                                    <span
+                                    <span className="bio_content"  
                                       dangerouslySetInnerHTML={{
                                         __html: item.u_bio,
                                       }}
@@ -1907,12 +1907,12 @@ class Adminlistener extends Component {
               ) : this.state.pageType == "domainList" ? ( 
                 <Col md={8} lg={9} className="pl-1">
                   <div className="corporateMember adminlistener d_detail">         
-                    <div className="domainSave">
+                    <div className="domainSave mb-4 pb-2">  
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div> 
-                        <div className="fs15 fw400 col14 mb-4">  
+                        <div className="fs22 col10 mb-1">Domain listing</div>  
+                        {/* <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
-                        </div>
+                        </div> */} 
                       </div>
                       <div className="ml-auto">  
                         <Button
@@ -1928,17 +1928,16 @@ class Adminlistener extends Component {
                         >
                           Add Domain
                         </Button>
-                      </div>
-                      <div></div>
+                      </div> 
                     </div>
-                    <Table bordered>
+                    <Table bordered className="domainTable">  
                       <thead>
                         <tr>
                           <th>Domain</th>
                           <th>No. of Employees</th>
                           <th>Total Audio(minutes)</th>
                           <th>Total Video(minutes)</th>
-                          <th>ACTION</th>
+                          <th>ACTIONS</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1997,7 +1996,7 @@ class Adminlistener extends Component {
                                             )
                                           }
                                         />
-                                      </span>
+                                      </span>  
                                       {/* <span>
                                         <Image
                                           src={Deleteicon}
@@ -2343,11 +2342,11 @@ class Adminlistener extends Component {
                   onClick={this.handleCloseConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete <br />{" "}
-                  {this.state.deleteModalType == "admin"
+                  Are you sure want to delete  <br />  {" "}
+                    {this.state.deleteModalType == "admin"
                     ? profileName
                     : this.state.deleteUser}
-                  ?{" "}
+                  ?{" "} 
                 </div>
 
                 <div className="text-center mb-5">
