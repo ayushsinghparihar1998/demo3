@@ -303,7 +303,25 @@ class ProfessionalSignup extends Component {
         </div>
         <div className="RegistrationLayout pro_signup">
           <Container>
-            <div className="layout_box mt-5 mb-4">
+              <Row className="mt-4"> 
+                  <Col md={4} lg={3} className="pr-1">
+                      <div className="adminsidebar">
+                        <div className="inner_area">
+                          <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                            Quick Links
+                          </div>
+                          <div className="d-flex m-3 pb-3 border-bottom">
+                            <div>
+                              <div className="fs14 col28 fw500">
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </Col> 
+                  <Col md={8} lg={9} className="pl-1"> 
+            <div className="layout_box mb-4">
               <div className="col3 fs40 fw600 mb-4">Professional Signup</div> 
               <Form>
                 <Row>
@@ -739,6 +757,9 @@ class ProfessionalSignup extends Component {
                 </Row>
               </Form>
             </div>
+          
+                  </Col> 
+            </Row>
           </Container>
         </div>
 
@@ -747,4 +768,4 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default ProfessionalSignup;
+export default ProfessionalSignup; 

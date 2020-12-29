@@ -170,14 +170,14 @@ class ProfessionalSignup extends Component {
         });
         // this.props.handleSet()
     }
-    handleRemoveCategory = (e, idx) => {
+    handleRemoveCategory = (e, idx) => { 
         let listOfCategory = this.state.listOfCategory;
         if (idx > -1) {
             listOfCategory.splice(idx, 1);
         }
         this.setState({ listOfCategory: listOfCategory })
     }
-    render() {
+    render() { 
         const { errors } = this.state;
         return (
             <div>
@@ -186,7 +186,7 @@ class ProfessionalSignup extends Component {
                     <div className="fs20 fw300 col14 mb-4 pb-2">Create a member account</div>
                     <Form>
                         <Row>
-                            <Col md={12}>
+                            <Col md={12}> 
                                 <Form.Group>
                                     <Form.Label className="fs20 fw600 col14">Create a screen name:</Form.Label>
                                     <Form.Control type="text"
@@ -207,7 +207,7 @@ class ProfessionalSignup extends Component {
                                     <div className="error alignLeft">{errors.screenName}</div>
                                 </Form.Group>
                             </Col>
-                            <Col md={12}>
+                            <Col md={12}> 
                                 <Form.Group>
                                     <Form.Label className="fs20 fw600 col14">Email address</Form.Label>
                                     <Form.Control type="email"
