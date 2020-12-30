@@ -195,7 +195,10 @@ class ProfessinalBlogCreate extends Component {
         this.props.match.params.id > 0 ? "updateBlog" : "createBlog",
         data
       );
-      this.props.history.push("/adminlistener");
+      // this.props.history.push("/adminlistener");
+      setTimeout(() => {
+        this.props.history.push("/adminlistener");
+      }, 1000);
       // } catch (err) {
       //   console.log(err);
       // }

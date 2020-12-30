@@ -316,7 +316,10 @@ class ProfessionalSignup extends Component {
           console.log(result.data);
           console.log(result.data.status);
           if (result && result.data && result.data.status === "success") {
-            this.props.history.push("/adminlistener");
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({

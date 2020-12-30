@@ -218,7 +218,9 @@ class ProfessinalBlogPress extends Component {
 
           data
         );
-        this.props.history.push("/adminlistener");
+        setTimeout(() => {
+          this.props.history.push("/adminlistener");
+        }, 1000);
       } catch (err) {
         console.log(err);
       }
