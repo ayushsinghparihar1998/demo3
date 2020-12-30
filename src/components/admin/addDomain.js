@@ -12,8 +12,8 @@ import {
   Form,
   Tabs,
   Tab,
-} from "react-bootstrap"; 
-import NavBar from "../core/nav";
+} from "react-bootstrap";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
@@ -57,14 +57,15 @@ class CorporateMember extends Component {
     ELPViewApiService("superadmingetcorporatedomaindetailsbyid", data).then(
       (result) => {
         console.log("result", result);
-        let domainObj = [];
+        let domainObj = {};
         if (result && result.status === 200) {
           domainObj =
             result && result.data && result.data.data
               ? result.data.data.domain_details_list[0]
               : [];
         }
-
+        domainObj.cd_audio_min = "" + domainObj.cd_audio_min / 60;
+        domainObj.cd_video_min = "" + domainObj.cd_video_min / 60;
         this.setState(
           {
             domainObj,
@@ -87,14 +88,14 @@ class CorporateMember extends Component {
         cd_domain_name: domainObj.cd_domain_name,
         cd_audio_min: domainObj.cd_audio_min * 60,
         cd_video_min: domainObj.cd_video_min * 60,
-        cd_audio_status: domainObj.cd_audio_status == "Active" ? 1 : "",
-        cd_video_status: domainObj.cd_video_status == "Active" ? 1 : "",
+        cd_audio_status: domainObj.cd_audio_status,
+        cd_video_status: domainObj.cd_video_status,
       };
       console.log(data);
 
       if (this.props.match.params.id > 0) {
         data.cd_id = this.props.match.params.id;
-        data.cd_domain_name = '';
+        data.cd_domain_name = "";
       }
       ELPViewApiService(
         this.props.match.params.id == 0
@@ -104,7 +105,10 @@ class CorporateMember extends Component {
       )
         .then((result) => {
           if (result && result.data && result.data.status === "success") {
-            this.props.history.push("/adminlistener");
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({
@@ -131,8 +135,12 @@ class CorporateMember extends Component {
     domainObj[name] =
       name == "cd_audio_min" || name == "cd_video_min"
         ? value.replace(/[^0-9]/g, "")
-        : value.trim();
-        this.setState(
+        : // : name == "cd_audio_status" || name == "cd_video_status"
+          // ? value == "Active"
+          //   ? "1"
+          //   : "0"
+          value.trim();
+    this.setState(
       {
         domainObj,
       },
@@ -158,7 +166,7 @@ class CorporateMember extends Component {
         <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3} className="pr-1"> 
+              <Col md={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -173,10 +181,14 @@ class CorporateMember extends Component {
                     </div>
                   </div>
                 </div>
-              </Col>  
+              </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember">
-                  <div className="fs28 col10 mb-4">Add Domain</div>
+                  <div className="fs28 col10 mb-4">
+                    {this.props.match.params.id > 0
+                      ? "Modify Domain"
+                      : "Add Domain"}
+                  </div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -194,8 +206,8 @@ class CorporateMember extends Component {
                         value={domainObj.cd_domain_name}
                         onChange={(e) => this.handleChange(e)}
                         maxLength={100}
-                      /> 
-                      <div className="col27 fs14 fw400 mt-2 error">  
+                      />
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_domain_name}
                       </div>
                     </Form.Group>
@@ -214,7 +226,7 @@ class CorporateMember extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={5}
                       />
-                      <div className="col27 fs14 fw400 mt-2 error"> 
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_audio_min}
                       </div>
                     </Form.Group>
@@ -233,7 +245,7 @@ class CorporateMember extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={5}
                       />
-                      <div className="col27 fs14 fw400 mt-2 error"> 
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_video_min}
                       </div>
                     </Form.Group>
@@ -251,8 +263,8 @@ class CorporateMember extends Component {
                         <option value="" disabled>
                           Select
                         </option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>{" "}
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>{" "}
                       </Form.Control>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_audio_status}
@@ -265,7 +277,7 @@ class CorporateMember extends Component {
                       </Form.Label>
                       <Form.Control
                         as="select"
-                        className="selectTyp1" 
+                        className="selectTyp1"
                         name="cd_video_status"
                         onChange={(e) => this.handleChange(e)}
                         value={domainObj.cd_video_status}
@@ -274,8 +286,8 @@ class CorporateMember extends Component {
                         <option disabled value="">
                           Select
                         </option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>{" "}
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>{" "}
                       </Form.Control>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_video_status}

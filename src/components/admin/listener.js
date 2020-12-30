@@ -8,7 +8,7 @@ import {
   actionadminUserDelete,
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
-} from "../../common/redux/actions"; 
+} from "../../common/redux/actions";
 import Checkgreen from "../../assets/images/checkgreen.svg";
 import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
@@ -16,7 +16,10 @@ import Samyukthaimg from "../../assets/images/Samyuktha.png";
 import Shrishtiimg from "../../assets/images/Shrishti.png";
 import DatePicker from "react-datepicker";
 import Validator from "validator";
-
+import Deleteicon from "../../assets/images/delete_icon.svg";
+import blogclock from "../../assets/images/blogclock.png";
+import BlogProcessFive from "../../assets/images/blog4.png";
+import Editicon from "../../assets/images/edit_icon.svg";
 import "react-datepicker/dist/react-datepicker.css";
 // import moment from "moment";
 import {
@@ -31,7 +34,7 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";      
+} from "react-bootstrap";
 import moment from "moment";
 
 import Pagination from "react-js-pagination";
@@ -42,15 +45,17 @@ import Requestuser from "../../assets/images/pro_img.svg";
 import Deleteusers from "../../assets/images/delete_users.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
-import Deleteicon from "../../assets/images/delete_icon.svg";
 import Blueicons from "../../assets/images/blue_cross.svg";
-import Editicon from "../../assets/images/edit_icon.svg";
 // import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
 
 import { result, stubFalse } from "lodash";
-import { getLocalStorage, range } from "../../common/helpers/Utils";
+import {
+  getLocalStorage,
+  range,
+  setLocalStorage,
+} from "../../common/helpers/Utils";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -93,13 +98,545 @@ class Adminlistener extends Component {
         email: "",
         password: "",
       },
+      blogCategory: [],
+      pressBlogCategory: [],
     };
   }
   componentDidMount() {
-    // this.getListnerListing("", "listner", 1);
-    this.getCustomerListing("", "user", 1);
-  }
+    this.getBlogCat("blogCategory", "getblogcategory");
+    this.getBlogCat("pressBlogCategory", "getpressblogcategory");
+    console.log("get", getLocalStorage("tabToOpen"));
 
+    if (getLocalStorage("tabToOpen") && getLocalStorage("tabToOpen") == "user")
+      this.getCustomerListing("", "user", 1);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "listner"
+    )
+      this.getCustomerListing("", "listner", 1);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getProffListing"
+    )
+      this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getDomainListing"
+    )
+      this.getDomainListing(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getblogListHandler"
+    )
+      this.getblogListHandler(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getpressblogListHandler"
+    )
+      this.getpressblogListHandler(1, 10);
+    else {
+      this.getCustomerListing("", "user", 1);
+    }
+  }
+  getListnerListing = (e, activaClass, pageNumber) => {
+    let chkUserProfile = this.state.activeProfile;
+    this.setState({
+      activeProfile: activaClass,
+      pageNumber: pageNumber,
+      pageType: "userlist",
+    });
+    let profileListing = [];
+    let data = {
+      count: customPagination.paginationPageSize,
+      offset: pageNumber,
+    };
+    this.props.actionGetListnerListing(data).then((result) => {
+      if (result && result.status === 200) {
+        profileListing =
+          result && result.data && result.data.data
+            ? result.data.data.listing
+            : [];
+        let totalRecord =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+        this.setState({
+          profileListing: profileListing,
+          totalRecord: totalRecord,
+        });
+      }
+    });
+  };
+  getCustomerListing = (e, activaClass, pageNumber) => {
+    this.setState({
+      activeProfile: activaClass,
+      pageNumber: pageNumber,
+      pageType: "userlist",
+    });
+    let profileListing = [];
+    let data = {
+      count: customPagination.paginationPageSize,
+      offset: pageNumber,
+    };
+    this.props.actionGetCustomerListing(data).then((result) => {
+      if (result && result.status === 200) {
+        profileListing =
+          result && result.data && result.data.data
+            ? result.data.data.listing
+            : [];
+        let totalRecord =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+        this.setState({
+          profileListing: profileListing,
+          totalRecord: totalRecord,
+        });
+      }
+    });
+  };
+  getProffListing = (offset, count, name, status, keyword, category) => {
+    console.log(
+      "count, offset, name, status, keyword, category",
+      count,
+      offset,
+      name,
+      status,
+      keyword,
+      category
+    );
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    let data = {
+      count: count,
+      offset: offset,
+      name: name,
+      status: status,
+      keyword: keyword,
+      category: category,
+    };
+    console.log(data);
+
+    ELPViewApiService("superadminprofessionallisting", data).then((result) => {
+      console.log("result", result);
+      let proffList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        proffList =
+          result && result.data && result.data.data
+            ? result.data.data.listing
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "proffList",
+          proffList,
+          totalRecordCount,
+          count,
+          offset,
+          name,
+          status,
+          keyword,
+          category,
+          activeProfile: "professional",
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+          console.log("ProffList", this.state.proffList);
+        }
+      );
+    });
+  };
+  getDomainListing = (offset, count) => {
+    console.log("count, offset", count, offset);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    let data = {
+      count: count,
+      offset: offset,
+    };
+    console.log(data);
+
+    ELPViewApiService("superadmingetcorporatedomain", data).then((result) => {
+      console.log("result", result);
+      let domainList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        domainList =
+          result && result.data && result.data.data
+            ? result.data.data.domain_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          domainList,
+          totalRecordCount,
+          pageType: "domainList",
+          count,
+          offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+          console.log("domainList", this.state.domainList);
+        }
+      );
+    });
+  };
+  getBlockuserListing = (offset, count, block_type) => {
+    // 0:Processing,1:Accept,2:Reject
+    // offset - page no
+    // count - perpage item
+    console.log(count, offset, block_type);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+
+    let data = {
+      count: count,
+      offset: offset,
+      block_type: block_type,
+    };
+    console.log(data);
+    if (block_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("getBlockuserListing", data).then((result) => {
+      console.log("result", result);
+      let blockList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        blockList =
+          result && result.data && result.data.data
+            ? result.data.data.block_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "blockList",
+          blockList,
+          totalRecordCount,
+          count,
+          offset,
+          block_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    });
+  };
+
+  getSessionListing = (offset, count, cs_status) => {
+    let data = {
+      count: count,
+      offset: offset,
+      cs_status: cs_status,
+    };
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    if (cs_status == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("superadmingetcorporateappointmentlist", data).then(
+      (result) => {
+        console.log("result", result);
+        let sessionList = [];
+        let totalRecordCount = 0;
+        if (result && result.status === 200) {
+          sessionList =
+            result && result.data && result.data.data
+              ? result.data.data.appointment_list
+              : [];
+          totalRecordCount =
+            result && result.data && result.data.data
+              ? result.data.data.totalRecordCount
+              : 0;
+        }
+        this.setState(
+          {
+            pageType: "sessionList",
+            sessionList,
+            totalRecordCount,
+            count: count,
+            offset: offset,
+            // review_type: review_type,
+          },
+          () => {
+            this.getPager(this.state.totalRecordCount);
+            // console.log(new Date(this.state.sessionList[0].cs_date));
+          }
+        );
+      }
+    );
+  };
+
+  getReviewListing = (offset, count, review_type) => {
+    let data = {
+      count: count,
+      offset: offset,
+      review_type: review_type,
+    };
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    if (review_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("getReviewListing", data).then((result) => {
+      console.log("result", result);
+      let reviewList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        reviewList =
+          result && result.data && result.data.data
+            ? result.data.data.review_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "reviewList",
+          reviewList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+          review_type: review_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    });
+  };
+  getRatinguserListing = (offset, count, review_type) => {
+    // 0:Processing,1:Accept,2:Reject
+    // offset - page no
+    // count - perpage item
+    console.log(count, offset, review_type);
+    let data = {
+      count: count,
+      offset: offset,
+      rating_type: review_type,
+    };
+    console.log(data);
+    if (offset == 1) {
+      this.setState({
+        pageno: 1,
+      });
+    }
+    if (review_type == 0) {
+      this.setState({
+        key: "request",
+      });
+    }
+    ELPViewApiService("getRatingdetails", data).then((result) => {
+      console.log("result", result);
+      let ratingList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        ratingList =
+          result && result.data && result.data.data
+            ? result.data.data.rating_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "ratingList",
+          ratingList,
+          totalRecordCount,
+          count,
+          offset,
+          review_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    });
+  };
+  getPaymentListHandler = async (offset, count) => {
+    try {
+      let result = await ELPViewApiService("getAdminPaymentDetail", {
+        count: count,
+        offset: offset,
+      });
+      console.log(result);
+      let paymentList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        paymentList =
+          result && result.data && result.data.data
+            ? result.data.data.payment_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "paymentList",
+          paymentList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getblogListHandler = async (offset, count) => {
+    try {
+      let catval = [];
+      this.state.blogCategory.map((cat) => {
+        if (cat.bc_status == "1") {
+          catval.push("'" + cat.bc_name + "'");
+        }
+      });
+      console.log("catVal catVal");
+      let result = await ELPViewApiService("superadmin_getblog", {
+        count: count,
+        offset: offset,
+        category: catval.join(","),
+      });
+      console.log(result);
+      let blogList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        blogList =
+          result && result.data && result.data.data
+            ? result.data.data.blog_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "blogList",
+          blogList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getpressblogListHandler = async (offset, count) => {
+    try {
+      let catval = [];
+      this.state.pressBlogCategory.map((cat) => {
+        if (cat.pbc_status == "1") {
+          catval.push("'" + cat.pbc_name + "'");
+        }
+      });
+      let result = await ELPViewApiService("superadmin_get_press_blog", {
+        count: count,
+        offset: offset,
+        category: catval.join(","),
+      });
+      console.log(result);
+      let pressblogList = [];
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        pressblogList =
+          result && result.data && result.data.data
+            ? result.data.data.press_blog_list
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "pressblogList",
+          pressblogList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getBlogCat = (name, api) => {
+    let objBlog = [];
+    console.log(name, api);
+    // getpressblogcategory
+    ELPViewApiService(api, {}).then((result) => {
+      console.log(result.data.data);
+      if (result && result.status === 200) {
+        objBlog =
+          result && result.data && result.data.data ? result.data.data : [];
+      }
+      this.setState(
+        {
+          [name]: objBlog,
+        },
+        () => {
+          console.log(name, this.state[name]);
+        }
+      );
+    });
+  };
+  changepath = (path, backresult) => {
+    console.log(path);
+    setLocalStorage("tabToOpen", backresult);
+    this.props.history.push(path);
+  };
   getPager(total) {
     let startPage = this.state.startPage;
     let endPage = this.state.endPage;
@@ -207,92 +744,6 @@ class Adminlistener extends Component {
   };
   /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
 
-  getListnerListing = (e, activaClass, pageNumber) => {
-    let chkUserProfile = this.state.activeProfile;
-    this.setState({
-      activeProfile: activaClass,
-      pageNumber: pageNumber,
-      pageType: "userlist",
-    });
-    let profileListing = [];
-    let data = {
-      count: customPagination.paginationPageSize,
-      offset: pageNumber,
-    };
-    this.props.actionGetListnerListing(data).then((result) => {
-      if (result && result.status === 200) {
-        profileListing =
-          result && result.data && result.data.data
-            ? result.data.data.listing
-            : [];
-        let totalRecord =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-        this.setState({
-          profileListing: profileListing,
-          totalRecord: totalRecord,
-        });
-      }
-    });
-  };
-  getProfessionalListing = (e, activaClass, pageNumber) => {
-    let chkUserProfile = this.state.activeProfile;
-    this.setState({
-      activeProfile: activaClass,
-      pageNumber: pageNumber,
-      pageType: "userlist",
-    });
-    let profileListing = [];
-    let data = {
-      count: customPagination.paginationPageSize,
-      offset: pageNumber,
-    };
-    this.props.actionGetProfessionalListing(data).then((result) => {
-      if (result && result.status === 200) {
-        profileListing =
-          result && result.data && result.data.data
-            ? result.data.data.listing
-            : [];
-        let totalRecord =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-        this.setState({
-          profileListing: profileListing,
-          totalRecord: totalRecord,
-        });
-      }
-    });
-  };
-  getCustomerListing = (e, activaClass, pageNumber) => {
-    this.setState({
-      activeProfile: activaClass,
-      pageNumber: pageNumber,
-      pageType: "userlist",
-    });
-    let profileListing = [];
-    let data = {
-      count: customPagination.paginationPageSize,
-      offset: pageNumber,
-    };
-    this.props.actionGetCustomerListing(data).then((result) => {
-      if (result && result.status === 200) {
-        profileListing =
-          result && result.data && result.data.data
-            ? result.data.data.listing
-            : [];
-        let totalRecord =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-        this.setState({
-          profileListing: profileListing,
-          totalRecord: totalRecord,
-        });
-      }
-    });
-  };
   adminChangeUserStatus = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let userStatus = status == "1" ? 0 : 1;
@@ -345,11 +796,13 @@ class Adminlistener extends Component {
       }
     });
   };
-  userProfile = (e, uid) => { 
+  userProfile = (e, uid, type) => {
     this.props.history.push({
       pathname: "/myprofile",
       state: { userId: uid },
     });
+    console.log(type);
+    setLocalStorage("tabToOpen", type);
   };
   adminUserDeleteConfirm = (e, uid, name) => {
     this.setState({
@@ -415,6 +868,8 @@ class Adminlistener extends Component {
       console.log("submit");
       ELPViewApiService("superadmincorporatecustomerregister", memberObj)
         .then((result) => {
+          // setLocalStorage("tabToOpen", "getDomainListing");
+
           if (result && result.data && result.data.status === "success") {
             let memberObj = {
               email: "",
@@ -423,6 +878,7 @@ class Adminlistener extends Component {
             this.setState({
               memberObj,
             });
+            this.getDomainListing(this.state.pageno, this.state.count);
           } else {
             this.setState({
               showLoader: false,
@@ -437,7 +893,7 @@ class Adminlistener extends Component {
         });
     }
   }
-  adminUserDeleteReason = (e, uid, status) => { 
+  adminUserDeleteReason = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let reason = this.state.reasonForDelete;
     let chkUserProfile = this.state.activeProfile;
@@ -465,26 +921,45 @@ class Adminlistener extends Component {
       [name]: value,
     });
   };
-  handleCheckSearch = (e, type) => {
+  handleCheckSearch = (e, type, status) => {
     let { name, value, checked } = e.target;
     console.log(name, value, checked);
     let keywordArray = this.state.keywordArray;
+    let blogCategory = this.state.blogCategory;
+    let pressBlogCategory = this.state.pressBlogCategory;
     let catArray = this.state.catArray;
     if (type == "cat") {
       var index = catArray.findIndex((el) => el.value == value);
       catArray[index].flag = checked;
-    } else {
+    } else if (type == "keyword") {
       var index = keywordArray.findIndex((el) => el.value == value);
       keywordArray[index].flag = checked;
+    } else if (type == "blogCategory") {
+      var index = blogCategory.findIndex((el) => el.bc_id == value);
+      blogCategory[index].bc_status = status;
+    } else {
+      var index = pressBlogCategory.findIndex((el) => el.pbc_id == value);
+      console.log("index", index);
+      console.log("value", value);
+      pressBlogCategory[index].pbc_status = status;
     }
     this.setState(
       {
         keywordArray,
         catArray,
+        pressBlogCategory,
+        blogCategory,
       },
       () => {
         console.log(this.state.keywordArray);
         console.log(this.state.catArray);
+        console.log(this.state.pressBlogCategory);
+        console.log(this.state.blogCategory);
+        if (type == "blogCategory") {
+          this.getblogListHandler(1, 10);
+        } else if (type == "pressBlogCategory") {
+          this.getpressblogListHandler(1, 10);
+        }
       }
     );
   };
@@ -520,65 +995,6 @@ class Adminlistener extends Component {
       catval.join(",")
     );
   };
-  getProffListing = (offset, count, name, status, keyword, category) => {
-    console.log(
-      "count, offset, name, status, keyword, category",
-      count,
-      offset,
-      name,
-      status,
-      keyword,
-      category
-    );
-    if (offset == 1) {
-      this.setState({
-        pageno: 1,
-      });
-    }
-    let data = {
-      count: count,
-      offset: offset,
-      name: name,
-      status: status,
-      keyword: keyword,
-      category: category,
-    };
-    console.log(data);
-
-    ELPViewApiService("superadminprofessionallisting", data).then((result) => {
-      console.log("result", result);
-      let proffList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        proffList =
-          result && result.data && result.data.data
-            ? result.data.data.listing
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-      }
-      this.setState(
-        {
-          pageType: "proffList",
-          proffList,
-          totalRecordCount,
-          count,
-          offset,
-          name,
-          status,
-          keyword,
-          category,
-          activeProfile: "professional",
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
-          console.log("ProffList", this.state.proffList);
-        }
-      );
-    });
-  };
 
   handleDate = (date) => {
     console.log("date", date);
@@ -596,194 +1012,21 @@ class Adminlistener extends Component {
       }
     });
   };
-  getDomainListing = (offset, count) => {
-    console.log("count, offset", count, offset);
-    if (offset == 1) {
-      this.setState({
-        pageno: 1,
-      });
-    }
-    let data = {
-      count: count,
-      offset: offset,
-    };
-    console.log(data);
 
-    ELPViewApiService("superadmingetcorporatedomain", data).then((result) => {
-      console.log("result", result);
-      let domainList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        domainList =
-          result && result.data && result.data.data
-            ? result.data.data.domain_list
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-      }
-      this.setState(
-        {
-          domainList,
-          totalRecordCount,
-          pageType: "domainList",
-          count,
-          offset,
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
-          console.log("domainList", this.state.domainList);
-        }
-      );
-    });
-  };
+  changeStatusSession = (cs_id, cs_status) => {
+    let data = {
+      cs_id: +cs_id,
+      cs_status,
+    };
+    ELPViewApiService("superadminCorporateappointmentchangestatus", data).then(
+      (result) => {
+        console.log("result", result);
 
-  getBlockuserListing = (offset, count, block_type) => {
-    // 0:Processing,1:Accept,2:Reject
-    // offset - page no
-    // count - perpage item
-    console.log(count, offset, block_type);
-    if (offset == 1) {
-      this.setState({
-        pageno: 1,
-      });
-    }
-
-    let data = {
-      count: count,
-      offset: offset,
-      block_type: block_type,
-    };
-    console.log(data);
-    if (block_type == 0) {
-      this.setState({
-        key: "request",
-      });
-    }
-    ELPViewApiService("getBlockuserListing", data).then((result) => {
-      console.log("result", result);
-      let blockList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        blockList =
-          result && result.data && result.data.data
-            ? result.data.data.block_list
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-      }
-      this.setState(
-        {
-          pageType: "blockList",
-          blockList,
-          totalRecordCount,
-          count,
-          offset,
-          block_type,
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
+        if (result && result.status === 200) {
+          this.getSessionListing(this.state.offset, this.state.count, 1);
         }
-      );
-    });
-  };
-  getReviewListing = (offset, count, review_type) => {
-    let data = {
-      count: count,
-      offset: offset,
-      review_type: review_type,
-    };
-    if (offset == 1) {
-      this.setState({
-        pageno: 1,
-      });
-    }
-    if (review_type == 0) {
-      this.setState({
-        key: "request",
-      });
-    }
-    ELPViewApiService("getReviewListing", data).then((result) => {
-      console.log("result", result);
-      let reviewList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        reviewList =
-          result && result.data && result.data.data
-            ? result.data.data.review_list
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
       }
-      this.setState(
-        {
-          pageType: "reviewList",
-          reviewList,
-          totalRecordCount,
-          count: count,
-          offset: offset,
-          review_type: review_type,
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
-        }
-      );
-    });
-  };
-  getRatinguserListing = (offset, count, review_type) => {
-    // 0:Processing,1:Accept,2:Reject
-    // offset - page no
-    // count - perpage item
-    console.log(count, offset, review_type);
-    let data = {
-      count: count,
-      offset: offset,
-      rating_type: review_type,
-    };
-    console.log(data);
-    if (offset == 1) {
-      this.setState({
-        pageno: 1,
-      });
-    }
-    if (review_type == 0) {
-      this.setState({
-        key: "request",
-      });
-    }
-    ELPViewApiService("getRatingdetails", data).then((result) => {
-      console.log("result", result);
-      let ratingList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        ratingList =
-          result && result.data && result.data.data
-            ? result.data.data.rating_list
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-      }
-      this.setState(
-        {
-          pageType: "ratingList",
-          ratingList,
-          totalRecordCount,
-          count,
-          offset,
-          review_type,
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
-        }
-      );
-    });
+    );
   };
   changeStatusReview = (rv_id, rv_status) => {
     let data = {
@@ -844,6 +1087,8 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 0)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 0)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 1)
         : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
@@ -853,6 +1098,8 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 2)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 2)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 3)
         : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
@@ -865,45 +1112,12 @@ class Adminlistener extends Component {
         ? this.getBlockuserListing(1, 10, 1)
         : type == "rating"
         ? this.getRatinguserListing(1, 10, 1)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 2)
         : this.getReviewListing(1, 10, 1);
     }
   }
 
-  getPaymentListHandler = async (offset, count) => {
-    try {
-      let result = await ELPViewApiService("getAdminPaymentDetail", {
-        count: count,
-        offset: offset,
-      });
-      console.log(result);
-      let paymentList = [];
-      let totalRecordCount = 0;
-      if (result && result.status === 200) {
-        paymentList =
-          result && result.data && result.data.data
-            ? result.data.data.payment_list
-            : [];
-        totalRecordCount =
-          result && result.data && result.data.data
-            ? result.data.data.totalRecordCount
-            : 0;
-      }
-      this.setState(
-        {
-          pageType: "paymentList",
-          paymentList,
-          totalRecordCount,
-          count: count,
-          offset: offset,
-        },
-        () => {
-          this.getPager(this.state.totalRecordCount);
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
   getRatingName = (ratingCount) => {
     let text = null;
     if (ratingCount == 1) {
@@ -920,9 +1134,6 @@ class Adminlistener extends Component {
     return text;
   };
 
-  changepath = (path) => {
-    this.props.history.push(path);
-  };
   render() {
     const { errors, totalRecord, memberObj } = this.state;
     let userActveClass =
@@ -946,6 +1157,10 @@ class Adminlistener extends Component {
       this.state.pageType == "reviewList"
         ? "position-relative active"
         : "position-relative";
+    let sessionActveClass =
+      this.state.pageType == "sessionList"
+        ? "position-relative active"
+        : "position-relative";
     let ratingActveClass =
       this.state.pageType == "ratingList"
         ? "position-relative active"
@@ -964,6 +1179,14 @@ class Adminlistener extends Component {
         : "position-relative";
     let addMemberActveClass =
       this.state.pageType == "addMember"
+        ? "position-relative active"
+        : "position-relative";
+    let pressBlogActveClass =
+      this.state.pageType == "pressblogList"
+        ? "position-relative active"
+        : "position-relative";
+    let blogActveClass =
+      this.state.pageType == "blogList"
         ? "position-relative active"
         : "position-relative";
     let profileListing = this.state.profileListing;
@@ -1082,6 +1305,19 @@ class Adminlistener extends Component {
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
+                        className={sessionActveClass}
+                        onClick={(e) => {
+                          this.getSessionListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          SESSION REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
                         className={paymentActveClass}
                         onClick={(e) => {
                           this.getPaymentListHandler(1, 10);
@@ -1093,6 +1329,33 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={pressBlogActveClass}
+                        onClick={(e) => {
+                          this.getpressblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> PRESS
+                          PRESS BLOG LIST
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={blogActveClass}
+                        onClick={(e) => {
+                          this.getblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> BLOG
+                          LIST
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
                         className={ratingActveClass}
@@ -1140,7 +1403,11 @@ class Adminlistener extends Component {
                               <div className="d-flex justify-content-between">
                                 <div
                                   onClick={(e) => {
-                                    this.userProfile(e, item.id);
+                                    this.userProfile(
+                                      e,
+                                      item.id,
+                                      this.state.activeProfile
+                                    );
                                   }}
                                 >
                                   <div className="col3 fw500 fs18 pb-1">
@@ -1528,6 +1795,169 @@ class Adminlistener extends Component {
                     </div>
                   </div>
                 </Col>
+              ) : this.state.pageType == "sessionList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "session")}
+                      >
+                        {/* 
+                        cs_corporate_email_id: "niharika.gupta@adobe.com"
+cs_corporate_name: "niharika.gupta"
+cs_corporate_u_id: "489"
+cs_date: "0000-00-00"
+cs_description: "test"
+cs_id: "23"
+cs_pro_email_id: "qwerty@yopmail.com"
+cs_pro_name: "testprofessional"
+cs_pro_u_id: "492"
+cs_status: "Processing"
+cs_subject: "test"
+cs_time: "00:00:02" */}
+                        <Tab eventKey="request" title="REQUESTED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {moment(
+                                              new Date(item.cs_date)
+                                            ).format("dddd MMM Do YYYY")}{" "}
+                                            {/* {}  */}
+                                            {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          CONFIRM
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              3
+                                            )
+                                          }
+                                        >
+                                          CANCEL
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="CONFIRMED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="CANCELED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
               ) : this.state.pageType == "paymentList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="table_paymentlayout">
@@ -1564,7 +1994,7 @@ class Adminlistener extends Component {
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           Professional listing
-                        </div> 
+                        </div>
                       </Col>
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
@@ -1572,7 +2002,10 @@ class Adminlistener extends Component {
                             type="button"
                             className="btnTyp5"
                             onClick={() =>
-                              this.changepath("/professionalSignup")
+                              this.changepath(
+                                "/professionalSignup",
+                                "getProffListing"
+                              )
                             }
                           >
                             create professional
@@ -1580,7 +2013,7 @@ class Adminlistener extends Component {
                         </div>
                       </Col>
                     </Row>
-                    <div className="fs16 col1 mb-4">Search Professional</div>         
+                    <div className="fs16 col1 mb-4">Search Professional</div>
                     <Form className="p_form">
                       <Row>
                         <Col md="6">
@@ -1634,10 +2067,10 @@ class Adminlistener extends Component {
                                   // value={item.flag}
                                   // checked={item.flag}
                                   onChange={(e) =>
-                                    this.handleCheckSearch(e, "keyword")
+                                    this.handleCheckSearch(e, "keyword", "")
                                   }
-                                  handleCheck={item.flag}
-                                  // value={item.value}
+                                  // handleCheck={item.flag}
+                                  value={item.value}
                                   checked={item.flag == true}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
@@ -1658,26 +2091,27 @@ class Adminlistener extends Component {
                             <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
                               Category
                             </span>
-                            {this.state.catArray.map((item) => {
-                              return (
-                                <Form.Check
-                                  type="checkbox"
-                                  className="checkone checkboxTyp1 "
-                                  label={item.name}
-                                  id={item.value}
-                                  name={item.name}
-                                  // value={item.flag}
-                                  // checked={item.flag}
-                                  onChange={(e) =>
-                                    this.handleCheckSearch(e, "cat")
-                                  }
-                                  handleCheck={item.flag}
-                                  // value={item.value}
-                                  checked={item.flag == true}
-                                  // onChange={(e) => this.handleCheck(e)}
-                                />
-                              );
-                            })}
+                            {this.state.catArray &&
+                              this.state.catArray.map((item) => {
+                                return (
+                                  <Form.Check
+                                    type="checkbox"
+                                    className="checkone checkboxTyp1 "
+                                    label={item.name}
+                                    id={item.value}
+                                    name={item.name}
+                                    // value={item.flag}
+                                    // checked={item.flag}
+                                    onChange={(e) =>
+                                      this.handleCheckSearch(e, "cat", "")
+                                    }
+                                    // handleCheck={item.flag}
+                                    value={item.value}
+                                    checked={item.flag == true}
+                                    // onChange={(e) => this.handleCheck(e)}
+                                  />
+                                );
+                              })}
                           </Form.Group>
                         </Col>
 
@@ -1696,32 +2130,7 @@ class Adminlistener extends Component {
                         <Form.Group
                           controlId="formBasicCheckbox1"
                           className="row"
-                        >
-                          {/*         <Form.Check
-                            type="checkbox"
-                            className="checkone"
-                            label="Eat"
-                            name="Eat"
-                            // handleCheck={this.state.Eat}
-                            onChange={(e) => this.handleCheck(e)}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checktwo"
-                            label="Luv"
-                            name="Luv"
-                            // handleCheck={this.state.Luv}
-                            onChange={(e) => this.handleCheck(e)}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checkthree active"
-                            label="Pray"
-                            name="Pray"
-                            // handleCheck={this.state.Pray}
-                            onChange={(e) => this.handleCheck(e)}
-                          /> */}
-                        </Form.Group>
+                        ></Form.Group>
                       </div>
                     </Form>{" "}
                   </div>
@@ -1732,13 +2141,26 @@ class Adminlistener extends Component {
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
                             <div className="mr-2 pt-1">
-                              <Image src={Requestuser} alt="" className="r50" />
+                              <Image
+                                src={item.u_image ? item.u_image : Requestuser}
+                                alt=""
+                                className="r50"
+                              />
                             </div>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
+                                    <div
+                                      className="col1 fw600 fs18 pb-1"
+                                      onClick={() =>
+                                        this.changepath(
+                                          "/professionalDetails/admin/" +
+                                            item.id,
+                                          "getProffListing"
+                                        )
+                                      }
+                                    >
                                       {item.u_name}
                                     </div>
 
@@ -1771,8 +2193,9 @@ class Adminlistener extends Component {
                                           src={Editicon}
                                           alt=""
                                           onClick={() =>
-                                            this.props.history.push(
-                                              `/professionalModify/${item.id}`
+                                            this.changepath(
+                                              `/professionalModify/${item.id}`,
+                                              "getProffListing"
                                             )
                                           }
                                         />
@@ -1830,19 +2253,23 @@ class Adminlistener extends Component {
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Age:</strong> {item.u_age}
+                                    <strong>Age:</strong> {item.u_birthdate}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Work Experience:</strong>{" "}  
-                                    {item.u_work_experience} Years                       
+                                    <strong>Work Experience:</strong>{" "}
+                                    {item.u_work_experience}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Languages:</strong> {item.u_lang}
+                                    <strong>Email:</strong> {item.email}
+                                  </div>
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Keywords:</strong>{" "}
+                                    {item.keyword_child_array.join(",")}
                                   </div>
 
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
                                     <strong className="m_w25">
                                       Education:{" "}
                                     </strong>
@@ -1852,30 +2279,30 @@ class Adminlistener extends Component {
                                       }}
                                     ></span>
                                   </div>
-
-                                  <div className="fs14 fw400 col14 pb-1 e_detai">    
+ */}
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
                                     <strong>Biography : </strong>
                                     <span className="bio_content"  
                                       dangerouslySetInnerHTML={{
                                         __html: item.u_bio,
                                       }}
                                     ></span>
-                                    <span className="mx-100w"> 
+                                    <span className="mx-100w">
                                       <a
                                         className="col10"
                                         onClick={() =>
                                           this.changepath(
                                             "/professionalDetails/admin/" +
-                                              item.id
+                                              item.id,
+                                            "getProffListing"
                                           )
                                         }
                                       >
                                         {"  "}Read more...
                                       </a>
                                     </span>
-
                                   </div>
-
+ */}
                                   <div className="eat_category">
                                     {item.cat_child_array &&
                                       item.cat_child_array.map((val) => {
@@ -1904,33 +2331,30 @@ class Adminlistener extends Component {
                       // );
                     })}
                 </Col>
-              ) : this.state.pageType == "domainList" ? ( 
+              ) : this.state.pageType == "domainList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="corporateMember adminlistener d_detail">         
-                    <div className="domainSave mb-4 pb-2">  
+                  <div className="corporateMember adminlistener d_detail">
+                    <div className="domainSave mb-4 pb-2">
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div>  
+                        <div className="fs22 col10 mb-1">Domain listing</div>
                         {/* <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
-                        </div> */} 
+                        </div> */}
                       </div>
-                      <div className="ml-auto">  
+                      <div className="ml-auto">
                         <Button
                           variant="primary"
                           type="button"
                           className="btnTyp5"
                           onClick={() =>
-                            this.props.history.push(
-                              `/adddomain/0`
-                              // `/adddomain`
-                            )
+                            this.changepath(`/adddomain/0`, "getDomainListing")
                           }
                         >
                           Add Domain
                         </Button>
-                      </div> 
+                      </div>
                     </div>
-                    <Table bordered className="domainTable">  
+                    <Table bordered className="domainTable">
                       <thead>
                         <tr>
                           <th>Domain</th>
@@ -1947,57 +2371,57 @@ class Adminlistener extends Component {
                               <tr>
                                 <td
                                   onClick={() =>
-                                    this.props.history.push(
-                                      `/domainDetails/${item.cd_domain_name}/${item.cd_id}`
-                                      // `/adddomain`
+                                    this.changepath(
+                                      `/domainDetails/${item.cd_domain_name}/${item.cd_id}`,
+                                      "getDomainListing"
                                     )
                                   }
                                 >
                                   {item.cd_domain_name}
                                 </td>
-                                <td>50</td>
+                                <td>{item.member_count}</td>
                                 <td>{item.cd_audio_min / 60}</td>
                                 <td>{item.cd_video_min / 60}</td>
-                                <td className="blogTables">  
-                                  <div> 
-                                      <span className="disabled text-center"> 
-                                        <Form.Check
-                                          type="switch"
-                                          id={"custom-switch" + index}
-                                          name={"status" + index}
-                                          label=""
-                                          onClick={(e) => {
-                                            this.modifyDomainContent(
-                                              item,
-                                              this.state.deleteId,
-                                              "superadminchangestatusCorporatedomain",
-                                              item.cd_status == "1" ? "0" : "1"
-                                            );
-                                          }}
-                                          checked={item.cd_status == "1"}
-                                        />
-                                      </span>
-                                      <span className="pr-2 fs13 col47 fw500"> 
-                                        {item.cd_status == 1
-                                          ? "Active"
-                                          : "Inactive"}
-                                      </span> 
+                                <td className="blogTables">
+                                  <div>
+                                    <span className="disabled text-center">
+                                      <Form.Check
+                                        type="switch"
+                                        id={"custom-switch" + index}
+                                        name={"status" + index}
+                                        label=""
+                                        onClick={(e) => {
+                                          this.modifyDomainContent(
+                                            item,
+                                            this.state.deleteId,
+                                            "superadminchangestatusCorporatedomain",
+                                            item.cd_status == "1" ? "0" : "1"
+                                          );
+                                        }}
+                                        checked={item.cd_status == "1"}
+                                      />
+                                    </span>
+                                    <span className="pr-2 fs13 col47 fw500">
+                                      {item.cd_status == 1
+                                        ? "Active"
+                                        : "Inactive"}
+                                    </span>
                                   </div>
 
-                                  <div>  
-                                      <span className="mr-2">  
-                                        <Image
-                                          src={Editicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.props.history.push(
-                                              `/adddomain/${item.cd_id}`
-                                              // `/adddomain`
-                                            )
-                                          }
-                                        />
-                                      </span>  
-                                      {/* <span>
+                                  <div>
+                                    <span className="mr-2">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        onClick={() =>
+                                          this.changepath(
+                                            `/adddomain/${item.cd_id}`,
+                                            "getDomainListing"
+                                          )
+                                        }
+                                      />
+                                    </span>
+                                    {/* <span>
                                         <Image
                                           src={Deleteicon}
                                           alt=""
@@ -2010,7 +2434,6 @@ class Adminlistener extends Component {
                                         />
                                       </span>{" "} */}
                                   </div>
-
                                 </td>
                               </tr>
                             );
@@ -2021,7 +2444,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "addMember" ? (
                 <Col md={9} className="pl-1">
-                  <div className="corporateMember adminlistener">  
+                  <div className="corporateMember adminlistener">
                     <div className="fs28 col10 mb-4">
                       Become a Corporate Member
                     </div>
@@ -2066,7 +2489,7 @@ class Adminlistener extends Component {
                           onChange={(e) => this.handleChangeCorpMember(e)}
                           maxLength={40}
                         />{" "}
-                        <div className="col27 fs14 fw400 mt-2 error">  
+                        <div className="col27 fs14 fw400 mt-2 error">
                           {errors.password}{" "}
                         </div>
                       </Form.Group>
@@ -2104,6 +2527,336 @@ class Adminlistener extends Component {
                       </Button>
                     </Form>
                   </div>
+                </Col>
+              ) : this.state.pageType == "pressblogList" ? (
+                <Col md={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-4">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Press BLog listing
+                        </div>
+                        <div className="fw300 fs16 col14">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath(
+                                `/professinalBlogPress/0`,
+                                "getpressblogListHandler"
+                              )
+                            }
+                          >
+                            create press blog
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Form className="p_form mb-4">
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                          {this.state.pressBlogCategory &&
+                            this.state.pressBlogCategory.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className={`checkthree ${
+                                    item.pbc_status == "1" ? "active" : ""
+                                  }`}
+                                  label={item.pbc_name}
+                                  id={item.pbc_id}
+                                  name={item.pbc_name}
+                                  // value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(
+                                      e,
+                                      "pressBlogCategory",
+                                      item.pbc_status == "1" ? "0" : "1"
+                                    )
+                                  }
+                                  // handleCheck={item.flag}
+                                  value={item.pbc_id}
+                                  checked={item.pbc_status == "1"}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
+                        </Form.Group>
+                      </div>
+                    </Form>
+                  </div>
+                  {this.state.pressblogList &&
+                    this.state.pressblogList.map((item) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.pbl_image ? item.pbl_image : ""}
+                                alt=""
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {/* 
+                    pbl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
+  pbl_id: "9"
+  pbl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
+  pbl_status: "Active"
+  pbl_title: "Press blog"
+  pbl_written_by: "ife" */}
+                                      {item.pbl_title}
+                                    </div>
+                                    <div className="d-flex ml-auto">
+                                      <span className="mr-3">
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changepath(
+                                              `/professinalBlogPress/${item.pbl_id}`,
+                                              "getpressblogListHandler"
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="mb-1">
+                                    <span className="fs16 fw400 col14">
+                                      Written by{" "}
+                                      <span className="col8">
+                                        {item.pbl_written_by}
+                                      </span>{" "}
+                                    </span>
+                                    <span className="ml-3">
+                                      <Image
+                                        src={blogclock}
+                                        className="wSet-20 mr-2"
+                                      />
+                                      {moment(item.pbl_time).format(
+                                        "dddd MMM Do YYYY HH:mm"
+                                      )}
+                                    </span>
+                                  </div>
+
+                                  <div className="fs16 fw400 col14 pb-1 e_detai">
+                                    <strong className="fw600">
+                                      Description:{" "}
+                                    </strong>
+                                    <span
+                                      className="fs14"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.pbl_desc,
+                                      }}
+                                    ></span>
+                                  </div>
+
+                                  <div className="eat_category">
+                                    {item.press_blog_category &&
+                                      item.press_blog_category.map((val) => {
+                                        return (
+                                          <span className="eatcat">
+                                            {val.pbc_cat_name}
+                                          </span>
+                                        );
+                                      })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </Col>
+              ) : this.state.pageType == "blogList" ? (
+                <Col md={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-4">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">Blog listing</div>
+                        <div className="fw300 fs16 col14">
+                          Lorem Ipsum is simply dummy and typesetting industry.
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath(
+                                `/professinalBlogCreate/0`,
+                                "getblogListHandler"
+                              )
+                            }
+                          >
+                            Create Blog
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Form className="p_form mb-4">
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                          {/* <Form.Check
+                            type="checkbox"
+                            className="checkone checkSet"
+                            label="Eat"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checktwo"
+                            label="Luv"
+                          />
+                          <Form.Check
+                            type="checkbox"
+                            className="checkthree active"
+                            label="Pray"
+                          /> */}
+                          {this.state.blogCategory &&
+                            this.state.blogCategory.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className="checkthree active"
+                                  className={`checkthree ${
+                                    item.bc_status == "1" ? "active" : ""
+                                  }`}
+                                  label={item.bc_name}
+                                  id={item.bc_id}
+                                  name={item.bc_name}
+                                  // value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(
+                                      e,
+                                      "blogCategory",
+                                      item.bc_status == "1" ? "0" : "1"
+                                    )
+                                  }
+                                  // handleCheck={item.flag}
+                                  value={item.bc_id}
+                                  checked={item.bc_status == "1"}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
+                        </Form.Group>
+                      </div>
+                    </Form>
+                  </div>
+                  {this.state.blogList &&
+                    this.state.blogList.map((item) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.bl_image ? item.bl_image : ""}
+                                alt=""
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {item.bl_title}
+                                    </div>
+                                    <div className="d-flex ml-auto">
+                                      <span className="mr-3">
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changepath(
+                                              `/professinalBlogCreate/${item.bl_id}`,
+                                              "getblogListHandler"
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="mb-1">
+                                    <span className="fs16 fw400 col14">
+                                      Written by{" "}
+                                      <span className="col8">
+                                        {item.bl_written_by}
+                                      </span>{" "}
+                                    </span>
+                                    <span className="ml-3">
+                                      <Image
+                                        src={blogclock}
+                                        className="wSet-20 mr-2"
+                                      />
+                                      {moment(item.bl_time).format(
+                                        "dddd MMM Do YYYY HH:mm"
+                                      )}
+                                    </span>
+                                  </div>
+
+                                  <div className="fs16 fw400 col14 pb-1 e_detai">
+                                    <strong className="fw600">
+                                      Description:{" "}
+                                    </strong>
+                                    <span
+                                      className="fs14"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.bl_desc,
+                                      }}
+                                    ></span>
+                                  </div>
+
+                                  <div className="eat_category">
+                                    {item.blog_category.map((val) => {
+                                      return (
+                                        <span
+                                          className={
+                                            val.buc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val == "Luv"
+                                              ? "luvcat"
+                                              : "praycat"
+                                          }
+                                        >
+                                          {val.buc_cat_name}
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                 </Col>
               ) : (
                 <Col md={8} lg={9} className="pl-1">
@@ -2342,11 +3095,11 @@ class Adminlistener extends Component {
                   onClick={this.handleCloseConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete  <br />  {" "}
-                    {this.state.deleteModalType == "admin"
+                  Are you sure want to delete <br />{" "}
+                  {this.state.deleteModalType == "admin"
                     ? profileName
                     : this.state.deleteUser}
-                  ?{" "} 
+                  ?{" "}
                 </div>
 
                 <div className="text-center mb-5">

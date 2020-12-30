@@ -10,10 +10,12 @@ export default {
     required: "Please enter a valid birth date.",
   },
   screen_name: {
-    required: "Please enter a valid name.",
+    required: "Please enter  name.",
+    alphaOnly: "Please enter a valid screen name.",
   },
   professional_keyword: {
-    required: "Please enter atlest one keyword.",
+    required: "Please enter atleast one keyword.",
+    validtext: "Please enter some valid text.",
   },
   professional_cat_name: {
     required: "Please select atleast one category.",
@@ -26,15 +28,17 @@ export default {
   },
   u_lang: {
     required: "Please fill the language field.",
+    validtext: "Please enter some valid text.",
   },
   u_education: {
-    required: "Please write something about the proffessional's qualification.",
+    required: "Please write something about the professional's qualification.",
   },
   u_work_experience: {
     required: "Please enter a valid experience in years.",
   },
   u_area_service: {
     required: "Please fill the area for service.",
+    validtext: "Please enter some valid text.",
   },
   u_mobile: {
     required: "Please enter mobile number.",
@@ -42,7 +46,7 @@ export default {
   },
 
   password: {
-    required: "Please enter your password.",
+    required: "Please enter password.",
     newPassword: "Please enter new password.",
     oldPassword: "Please enter current password.",
     confirmNewPassword: "Please enter confirm new password.",
@@ -83,9 +87,24 @@ export default {
     required: "Please enter video time in minutes.",
   },
   cd_audio_status: {
-    required: "Please enter audio status.",
+    required: "Please select audio status.",
   },
   cd_video_status: {
-    required: "Please enter video status.",
+    required: "Please select video status.",
+  },
+  title: {
+    required: "Please enter title.",
+  },
+  desc: {
+    required: "Please write a brief description.",
+  },
+  writtenby: {
+    required: "Please enter the name by whom the blog is written by.",
+  },
+  cat: {
+    required: "Please selet atleast one category.",
+  },
+  image: {
+    required: "Please upload a blog image.",
   },
 };

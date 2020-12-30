@@ -28,6 +28,7 @@ import Iflag from "../../assets/images/india_flag.svg";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import constant from "../../constant";
+import ELPViewApiService from "../../common/services/apiService";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -39,8 +40,30 @@ class Createblogs extends Component {
     title: null,
     description: null,
     filename: null,
+    errors: {},
+    proffCat: [],
   };
-
+  componentDidMount() {
+    this.getProffCat();
+  }
+  getProffCat = () => {
+    let proffCat = this.state.proffCat;
+    ELPViewApiService("getblogcategory", {}).then((result) => {
+      console.log(result.data.data);
+      if (result && result.status === 200) {
+        proffCat =
+          result && result.data && result.data.data ? result.data.data : [];
+      }
+      this.setState(
+        {
+          proffCat,
+        },
+        () => {
+          console.log("ProffCat", this.state.proffCat);
+        }
+      );
+    });
+  };
   handleUploadPicture = async (event, name) => {
     const fileObject = event.target.files[0];
     console.log();
@@ -86,7 +109,7 @@ class Createblogs extends Component {
         bl_image: this.state.filepath,
         bl_desc: this.state.description,
       });
-      this.props.history.push('/blogs')
+      this.props.history.push("/blogs");
     } catch (err) {
       console.log(err);
     }

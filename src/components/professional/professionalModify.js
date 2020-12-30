@@ -1,6 +1,14 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal, Image } from "react-bootstrap";
-import NavBar from "../core/nav";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Form,
+  Modal,
+  Image,
+} from "react-bootstrap";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
 import { actionChangePassword } from "../../common/redux/actions";
@@ -13,7 +21,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import Item from "antd/lib/list/Item"; 
+import Item from "antd/lib/list/Item";
 import UploadDetail from "../../assets/images/upload_detail.svg";
 
 class ProfessionalSignup extends Component {
@@ -53,7 +61,7 @@ class ProfessionalSignup extends Component {
   }
 
   componentDidMount() {
-    const { url } = this.props.match;
+    console.log(" this.props.match", this.props.match);
     //
     this.getProffCat();
   }
@@ -89,8 +97,15 @@ class ProfessionalSignup extends Component {
           result && result.data && result.data.data ? result.data.data[0] : [];
       }
       let keyw = "";
-      proffDetail.professional_keyword.map((item) => {
-        keyw = keyw + item.pk_keyword + ",";
+      proffDetail.professional_keyword.map((item, index) => {
+        let val =
+          proffDetail.professional_keyword.length == index + 1 ? "" : ",";
+        keyw = keyw + item.pk_keyword + val;
+        console.log(
+          index,
+          item.pk_keyword,
+          proffDetail.professional_keyword.length
+        );
       });
       proffDetail.screen_name = proffDetail.u_name;
       delete proffDetail.u_name;
@@ -107,11 +122,12 @@ class ProfessionalSignup extends Component {
         }
         return item;
       });
-      keyw = keyw.trim(",");
+      // keyw = keyw.trim(",");
       proffDetail.professional_keyword = keyw;
       this.setState(
         {
           proffDetail,
+          // professional_keyword: keyw,
           proffCat,
         },
         () => {
@@ -130,8 +146,10 @@ class ProfessionalSignup extends Component {
         ? value.replace(/[^0-9]/g, "")
         : name == "u_lang" || name == "professional_keyword"
         ? value.replace(/[^a-zA-Z,]/g, "")
-        : name == "u_lang"
-        ? value.replace(/[^a-zA-Z ]/g, "")
+        : name == "screen_name"
+        ? value
+        : name == "u_area_service"
+        ? value.replace(/[^a-zA-Z0-9,]/g, "")
         : value.trim();
     this.setState(
       {
@@ -161,21 +179,23 @@ class ProfessionalSignup extends Component {
     );
   };
 
-  handleKeyWord = (e) => {
-    let val = e.target.value;
-    let arr = val.split(",");
-    let proffDetail = this.state.proffDetail;
-    proffDetail.professional_keyword = arr;
+  // handleKeyWord = (e) => {
+  //   let val = e.target.value;
+  //   let arr = val.split(",");
+  //   let professional_keyword = this.state.professional_keyword;
+  //   let proffCat = this.state.proffCat;
+  //   proffCat.professional_keyword = arr;
 
-    this.setState(
-      {
-        proffDetail,
-      },
-      () => {
-        console.log(this.state.proffDetail);
-      }
-    );
-  };
+  //   this.setState(
+  //     {
+  //       proffCat,
+  //       professional_keyword: val,
+  //     },
+  //     () => {
+  //       console.log(this.state.professional_keyword);
+  //     }
+  //   );
+  // };
   isValid(data) {
     const { errors, isValid } = validateInput(data);
     if (!isValid) {
@@ -214,6 +234,10 @@ class ProfessionalSignup extends Component {
   };
 
   handleSubmit = () => {
+    console.log(
+      "this.state.professional_keyword",
+      this.state.professional_keyword
+    );
     let proffDetail = this.state.proffDetail;
     let ar = [];
     let catar = [];
@@ -227,9 +251,9 @@ class ProfessionalSignup extends Component {
       if (item.flag == true) {
         item.pu_cat_id = item.pc_id;
         item.pu_cat_name = item.pc_name;
-        delete item.flag;
-        delete item.pc_name;
-        delete item.pc_id;
+        // delete item.flag;
+        // delete item.pc_name;
+        // delete item.pc_id;
         catar.push(item);
       }
       // return null;
@@ -263,26 +287,39 @@ class ProfessionalSignup extends Component {
       email: proffDetail.email ? proffDetail.email.toLowerCase().trim() : "",
       //   email: "",
 
-      password: proffDetail.password ? proffDetail.password.trim() : "",
+      password: this.state.userPassword ? this.state.userPassword : "Abc@1234",
       u_lang: proffDetail.u_lang ? proffDetail.u_lang.trim() : "",
       u_mobile: proffDetail.u_mobile ? proffDetail.u_mobile.trim() : "",
 
-      professional_keyword: ar,
+      professional_keyword: proffDetail.professional_keyword
+        ? proffDetail.professional_keyword.trim()
+        : "",
       professional_cat_name: catar,
     };
-    console.log(data);
     if (this.isValid(data)) {
       this.setState({
         showLoader: true,
       });
       data.email = "";
       data.screen_name = "";
+      data.professional_keyword = ar;
+      data.professional_cat_name.map((item) => {
+        delete item.flag;
+        delete item.pc_name;
+        delete item.pc_id;
+      });
+      // delete item.flag;
+      // delete item.pc_name;
+      // delete item.pc_id;
       ELPViewApiService("superadmineditprofessional", data)
         .then((result) => {
           console.log(result.data);
           console.log(result.data.status);
           if (result && result.data && result.data.status === "success") {
-            this.props.history.push("/adminlistener");
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({
@@ -372,6 +409,24 @@ class ProfessionalSignup extends Component {
         </div>
         <div className="RegistrationLayout pro_signup">
           <Container>
+            <Row>
+            <Col md={4} lg={3} className="pr-1">
+                      <div className="adminsidebar">
+                        <div className="inner_area">
+                          <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                            Quick Links
+                          </div>
+                          <div className="d-flex m-3 pb-3 border-bottom">
+                            <div>
+                              <div className="fs14 col28 fw500">
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </Col> 
+            <Col md={8} lg={9} className="pl-1">
             <div className="layout_box mt-5 mb-4">
               <div className="col3 fs40 fw600 mb-4">
                 Modify Professional Details
@@ -380,11 +435,11 @@ class ProfessionalSignup extends Component {
                 <Row>
                   <Col md={12}>
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">   
-                          Change Picture
-                      </Form.Label> 
-                      <div className="mt-1 mb-3 imgSetProfile">       
-                          <Image src={UploadDetail} className="" />     
+                      <Form.Label className="fs20 fw600 col14">
+                        Change Picture
+                      </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={proffDetail.u_image} className="" />
                       </div>
                       <Form.File
                         id="exampleFormControlFile1"
@@ -395,7 +450,7 @@ class ProfessionalSignup extends Component {
                       />
                       <div
                         className={`alignLeft  ${
-                          errors.u_image ? "error " : "d-none" 
+                          errors.u_image ? "error " : "d-none"
                         }`}
                       >
                         {errors.u_image}
@@ -471,23 +526,23 @@ class ProfessionalSignup extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={40}
                       /> */}
-                      <div className="motivate_pwd">      
-                          <Form.Control
-                            type="password"
-                            name="userPassword"
-                            onChange={this.handlePasswordChange}
-                            value={this.state.userPassword}
-                            minLength="8"
-                            maxLength="15"
-                            inputProps={{ maxLength: 15 }}
-                            className="inputTyp2"
-                          />
-                          <Button
-                            className="btnTyp11 ml-3"
-                            onClick={this.handleResetPassword}
-                          >
-                            Change Password
-                          </Button>
+                      <div className="motivate_pwd">
+                        <Form.Control
+                          type="password"
+                          name="userPassword"
+                          onChange={this.handlePasswordChange}
+                          value={this.state.userPassword}
+                          minLength="8"
+                          maxLength="15"
+                          inputProps={{ maxLength: 15 }}
+                          className="inputTyp2"
+                        />
+                        <Button
+                          className="btnTyp11 ml-3"
+                          onClick={this.handleResetPassword}
+                        >
+                          Change Password
+                        </Button>
                       </div>
                       <div
                         className={`alignLeft  ${
@@ -612,7 +667,7 @@ class ProfessionalSignup extends Component {
                         variant="outlined"
                         name="professional_keyword"
                         value={proffDetail.professional_keyword}
-                        onChange={(e) => this.handleKeyWord(e)}
+                        onChange={(e) => this.handleChange(e)}
                         maxLength={200}
                       />
                       <div
@@ -834,6 +889,9 @@ class ProfessionalSignup extends Component {
                 </Row>
               </Form>
             </div>
+            
+            </Col> 
+            </Row>            
           </Container>
         </div>
 

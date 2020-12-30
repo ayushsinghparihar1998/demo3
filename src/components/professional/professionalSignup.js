@@ -1,6 +1,14 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, Form, Modal, Image } from "react-bootstrap";
-import NavBar from "../core/nav";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Form,
+  Modal,
+  Image,
+} from "react-bootstrap";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
@@ -12,7 +20,7 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import UploadDetail from "../../assets/images/upload_detail.svg"; 
+import UploadDetail from "../../assets/images/upload_detail.svg";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -86,8 +94,14 @@ class ProfessionalSignup extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
+    // var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
     var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
-
+    var regcomma = /^(?!,)/i;
+    var rg = /^.*[^,]$/i;
+    var rg2 = /^(?!.*([.,-])\1)[a-zA-Z0-9\s.,-]+$/;
+    console.log("stat", regcomma.test(value));
+    console.log("end", rg.test(value));
+    console.log("multiple", rg2.test(value));
     this.setState(
       {
         [name]:
@@ -98,9 +112,9 @@ class ProfessionalSignup extends Component {
             : name == "u_lang" || name == "professional_keyword"
             ? value.replace(/[^a-zA-Z,]/g, "")
             : name == "screen_name"
-            ? value.replace(/[^a-zA-Z ]/g, "")
-            // : name == "password"
-            // ? reg.test(memberObj.password.trim())
+            ? value
+            : name == "u_area_service"
+            ? value.replace(/[^a-zA-Z0-9,]/g, "")
             : value.trim(),
       },
       () => {
@@ -235,8 +249,11 @@ class ProfessionalSignup extends Component {
 
       ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
-          if (result && result.data && result.data.status ==="success") {
-            this.props.history.push("/adminlistener");
+          if (result && result.data && result.data.status === "success") {
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({
@@ -303,316 +320,324 @@ class ProfessionalSignup extends Component {
         </div>
         <div className="RegistrationLayout pro_signup">
           <Container>
-              <Row className="mt-4"> 
-                  <Col md={4} lg={3} className="pr-1">
-                      <div className="adminsidebar">
-                        <div className="inner_area">
-                          <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                            Quick Links
-                          </div>
-                          <div className="d-flex m-3 pb-3 border-bottom">
-                            <div>
-                              <div className="fs14 col28 fw500">
-                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
-                              </div>
-                            </div>
-                          </div>
+            <Row className="mt-4">
+              <Col md={4} lg={3} className="pr-1">
+                <div className="adminsidebar">
+                  <div className="inner_area">
+                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                      Quick Links
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div>
+                        <div className="fs14 col28 fw500">
+                          <Link to={{ pathname: `/adminlistener` }}>Back</Link>
                         </div>
                       </div>
-                  </Col> 
-                  <Col md={8} lg={9} className="pl-1"> 
-            <div className="layout_box mb-4">
-              <div className="col3 fs40 fw600 mb-4">Professional Signup</div> 
-              <Form>
-                <Row>
-                  <Col md={12}>
-                    <Form.Group> 
-                      <Form.Label className="fs20 fw600 col14">    
-                          Change Picture*
-                      </Form.Label> 
-                      <div className="mt-1 mb-3 imgSetProfile">         
-                          <Image src={UploadDetail} className="" /> 
-                      </div>
-                      <Form.File
-                        id="exampleFormControlFile1"
-                        className="inputTyp2"
-                        onChange={(e) =>
-                          this.handleUploadPicture(e, "backgroud_img")
-                        }
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_image ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_image}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+              <Col md={8} lg={9} className="pl-1">
+                <div className="layout_box mb-4">
+                  <div className="col3 fs40 fw600 mb-4">
+                    Professional Signup
+                  </div>
+                  <Form>
+                    <Row>
+                      <Col md={12}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Change Picture*
+                          </Form.Label>
+                          <div className="mt-1 mb-3 imgSetProfile">
+                            <Image src={this.state.u_image} className="" />{" "}
+                          </div>
+                          <Form.File
+                            id="exampleFormControlFile1"
+                            className="inputTyp2"
+                            onChange={(e) =>
+                              this.handleUploadPicture(e, "backgroud_img")
+                            }
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_image ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_image}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={12}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Name*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Name"
-                        // isInvalid={errors.screen_name ? true : false}
-                        name="screen_name"
-                        value={this.state.screen_name}
-                        onChange={(e) => this.handleChange(e)}
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        maxLength={100}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.screen_name ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.screen_name}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Email Address*
-                      </Form.Label>
-                      <Form.Control
-                        type="email"
-                        placeholder="Email"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="email"
-                        value={this.state.email}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={100}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.email ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.email}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                      <Col md={12}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Name*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Name"
+                            // isInvalid={errors.screen_name ? true : false}
+                            name="screen_name"
+                            value={this.state.screen_name}
+                            onChange={(e) => this.handleChange(e)}
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            maxLength={100}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.screen_name ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.screen_name}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Email Address*
+                          </Form.Label>
+                          <Form.Control
+                            type="email"
+                            placeholder="Email"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="email"
+                            value={this.state.email}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={100}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.email ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.email}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Password*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Password"
-                        className="inputTyp2"
-                        id="outlined-password"
-                        variant="outlined"
-                        name="password"
-                        value={this.state.password}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={40}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.password ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.password}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Phone*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Phone"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="u_mobile"
-                        value={this.state.u_mobile}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={11}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_mobile ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_mobile}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Work Experience*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Work Experience "
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="u_work_experience"
-                        value={this.state.u_work_experience}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={3}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_work_experience ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_work_experience}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Password*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Password"
+                            className="inputTyp2"
+                            id="outlined-password"
+                            variant="outlined"
+                            name="password"
+                            value={this.state.password}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={40}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.password ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.password}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Phone*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Phone"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="u_mobile"
+                            value={this.state.u_mobile}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={10}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_mobile ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_mobile}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Work Experience*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Work Experience "
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="u_work_experience"
+                            value={this.state.u_work_experience}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={3}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_work_experience ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_work_experience}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">Age*</Form.Label> 
-                      <Form.Control
-                        type="text"
-                        placeholder="Age"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="u_birthdate"
-                        value={this.state.u_birthdate}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={3}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_birthdate ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_birthdate}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Age*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Age"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="u_birthdate"
+                            value={this.state.u_birthdate}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={3}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_birthdate ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_birthdate}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Language*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Language"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="u_lang"
-                        value={this.state.u_lang}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={100}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_lang ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_lang}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Language*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Language"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="u_lang"
+                            value={this.state.u_lang}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={100}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_lang ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_lang}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Keyword*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Keyword"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="professional_keyword"
-                        value={this.state.professional_keyword}
-                        onChange={(e) => this.handleKeyWord(e)}
-                        maxLength={200}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.professional_keyword ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.professional_keyword}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Service*
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Area for services"
-                        className="inputTyp2"
-                        id="outlined-email"
-                        variant="outlined"
-                        name="u_area_service"
-                        value={this.state.u_area_service}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={100}
-                      />
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_area_service ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_area_service}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={12}>
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14">
-                        Select Category*
-                      </Form.Label>
-                      <Row>
-                        {proffCat &&
-                          proffCat.map((cat) => {  
-                            return (
-                              <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox">
-                                  <Form.Check
-                                    type="checkbox"
-                                    label={cat.pc_name}
-                                    className="checkboxTyp1"
-                                    name={cat.pc_name}
-                                    id={cat.pc_id}
-                                    // handleCheck={this.state.eat}
-                                    // checked = {}
-                                    onChange={(e) => this.handleCheck(e)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                            );
-                          })}
-                      </Row>
-                      <div
-                        className={`alignLeft  ${
-                          errors.professional_cat_name ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.professional_cat_name}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Keyword*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Keyword"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="professional_keyword"
+                            value={this.state.professional_keyword}
+                            onChange={(e) => this.handleKeyWord(e)}
+                            maxLength={255}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.professional_keyword ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.professional_keyword}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Service*
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Area for services"
+                            className="inputTyp2"
+                            id="outlined-email"
+                            variant="outlined"
+                            name="u_area_service"
+                            value={this.state.u_area_service}
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength={255}
+                          />
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_area_service ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_area_service}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={12}>
+                        <Form.Group>
+                          <Form.Label className="fs20 fw600 col14">
+                            Select Category*
+                          </Form.Label>
+                          <Row>
+                            {proffCat &&
+                              proffCat.map((cat) => {
+                                return (
+                                  <Col md={4}>
+                                    <Form.Group controlId="formBasicCheckbox">
+                                      <Form.Check
+                                        type="checkbox"
+                                        label={cat.pc_name}
+                                        className="checkboxTyp1"
+                                        name={cat.pc_name}
+                                        id={cat.pc_id}
+                                        // handleCheck={this.state.eat}
+                                        // checked = {}
+                                        onChange={(e) => this.handleCheck(e)}
+                                      />
+                                    </Form.Group>
+                                  </Col>
+                                );
+                              })}
+                          </Row>
+                          <div
+                            className={`alignLeft  ${
+                              errors.professional_cat_name
+                                ? "error "
+                                : "d-none "
+                            }`}
+                          >
+                            {errors.professional_cat_name}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  {/* 
+                      {/* 
                   <Col md={12}>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -666,99 +691,98 @@ class ProfessionalSignup extends Component {
                     </Form.Group>
                   </Col>
  */}
-                  <Col md={12}> 
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label className="col14 fw600 fs18">
-                        Qualification*
-                      </Form.Label>
-                      <CKEditor
-                        config={{
-                          height: 500,
-                        }}
-                        editor={ClassicEditor}
-                        // data="<p>Hello from CKEditor 5!</p>"
+                      <Col md={12}>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                          <Form.Label className="col14 fw600 fs18">
+                            Qualification*
+                          </Form.Label>
+                          <CKEditor
+                            config={{
+                              height: 500,
+                            }}
+                            editor={ClassicEditor}
+                            // data="<p>Hello from CKEditor 5!</p>"
 
-                        onReady={(editor) => {
-                          // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor);
-                        }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          this.setState({ u_education: data });
-                        }}
-                        onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
-                        }}
-                        onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
-                        }}
-                      />
-                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_education ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_education}
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col md={12}> 
-                    {/* <Form.Group controlId="exampleForm.ControlTextarea1">
+                            onReady={(editor) => {
+                              // You can store the "editor" and use when it is needed.
+                              console.log("Editor is ready to use!", editor);
+                            }}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              this.setState({ u_education: data });
+                            }}
+                            onBlur={(event, editor) => {
+                              console.log("Blur.", editor);
+                            }}
+                            onFocus={(event, editor) => {
+                              console.log("Focus.", editor);
+                            }}
+                          />
+                          {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_education ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_education}
+                          </div>
+                        </Form.Group>
+                      </Col>
+                      <Col md={12}>
+                        {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">Biography</Form.Label>  
                         <Form.Control as="textarea" rows={3} className="inputTyp2 text_bio"/> 
                       </Form.Group>  */}
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label className="col14 fw600 fs18">
-                        Biography*
-                      </Form.Label>
-                      <CKEditor
-                        config={{
-                          height: 500,
-                        }}
-                        editor={ClassicEditor}
-                        // data="<p>Hello from CKEditor 5!</p>"
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                          <Form.Label className="col14 fw600 fs18">
+                            Biography*
+                          </Form.Label>
+                          <CKEditor
+                            config={{
+                              height: 500,
+                            }}
+                            editor={ClassicEditor}
+                            // data="<p>Hello from CKEditor 5!</p>"
 
-                        onReady={(editor) => {
-                          // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor); 
-                        }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          this.setState({ u_bio: data });
-                        }}
-                        onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
-                        }}
-                        onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
-                        }}
-                      />
-                      {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
-                      <div
-                        className={`alignLeft  ${
-                          errors.u_bio ? "error " : "d-none "
-                        }`}
-                      >
-                        {errors.u_bio}
-                      </div>
-                    </Form.Group>
-                  </Col>
+                            onReady={(editor) => {
+                              // You can store the "editor" and use when it is needed.
+                              console.log("Editor is ready to use!", editor);
+                            }}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              this.setState({ u_bio: data });
+                            }}
+                            onBlur={(event, editor) => {
+                              console.log("Blur.", editor);
+                            }}
+                            onFocus={(event, editor) => {
+                              console.log("Focus.", editor);
+                            }}
+                          />
+                          {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                          <div
+                            className={`alignLeft  ${
+                              errors.u_bio ? "error " : "d-none "
+                            }`}
+                          >
+                            {errors.u_bio}
+                          </div>
+                        </Form.Group>
+                      </Col>
 
-                  <Col md={12}>
-                    <Button
-                      className="btnTyp5 mt-3"
-                      onClick={() => this.handleSubmit()}
-                    >
-                      Signup* 
-                    </Button>
-                  </Col>
-                </Row>
-              </Form>
-            </div>
-          
-                  </Col> 
+                      <Col md={12}>
+                        <Button
+                          className="btnTyp5 mt-3"
+                          onClick={() => this.handleSubmit()}
+                        >
+                          Signup*
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </div>
+              </Col>
             </Row>
           </Container>
         </div>
@@ -768,4 +792,4 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default ProfessionalSignup; 
+export default ProfessionalSignup;
