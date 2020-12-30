@@ -65,12 +65,12 @@ const handleErrorByStatus = (error) => {
     // });
   } else if (error && error.status === "error") {
     const message = error.message;
-    // alert("ERROR")
-    showErrorToast(message);
+     
+    // showErrorToast(message);
   } else if (error && error.success === "error") {
     const message = error.message;
     // alert("ERROR")
-    showErrorToast(message);
+    // showErrorToast(message);
   }
 };
 

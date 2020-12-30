@@ -2063,13 +2063,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  getblog: {
-    url: "elp/getblog",
-    method: "POST",
-    data: { offset: 0, count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+ 
   getBlogdetails: {
     url: "elp/getBlogdetails",
     method: "POST",
@@ -2089,7 +2083,7 @@ export default {
     method: "POST",
     data: {},
     showResultMessage: false,
-    showErrorMessage: true,
+    showErrorMessage: false,
   },
 
   superadmingetcorporateappointmentlist: {

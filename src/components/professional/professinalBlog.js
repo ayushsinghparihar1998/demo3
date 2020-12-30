@@ -42,8 +42,8 @@ class ProfessinalBlog extends Component {
      componentDidMount() {
           this.getTabNames()
           this.getPressFeatured()
-          // this.getPressCoverage()
-          // this.getPressReleases()
+          this.getPressCoverage()
+          this.getPressReleases()
      }
 
      getTabNames = () => {
@@ -114,13 +114,9 @@ class ProfessinalBlog extends Component {
                                                                       <Col md={7} className="mb-4">
                                                                            <Image src={data.pbl_image} className="w-100" />
                                                                            <div className="fs18 col64 fw600 mt-3 mb-2">{data.pbl_title}</div>
-                                                                           <div className="col14 fs16 fw300">{data.pbl_desc} </div>
+                                                                           <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div>
                                                                       </Col>
-                                                                      {/* <Col md={5}>
-                                                                 <Image src={BlogProcessTwo} className="w-100" />
-                                                                 <div className="fs18 col64 fw600 mt-3 mb-2">Child and Social Welfar Society</div>
-                                                                 <div className="col14 fs16 fw300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </div>
-                                                            </Col> */}
+                                                                   
                                                                  </>
                                                             )}
 
@@ -134,13 +130,11 @@ class ProfessinalBlog extends Component {
                                                   <div className="coverageTab">
                                                        <div className="coverageList">
                                                             <Row>
-                                                                 {this.state.featured && this.state.featured.map((data, i) =>
+                                                                 {this.state.coverage && this.state.coverage.map((data, i) =>
                                                                       this.state.offset > i ? (
                                                                            <>
                                                                                 <Col md={6}>
-                                                                                     <div className="fw600 fs16 col64">
-                                                                                          {data.pbl_desc}
-                                                                                     </div>
+                                                                                     <div className="fw600 fs16 col64"  dangerouslySetInnerHTML={{ __html: data.pbl_desc }}></div>
                                                                                 </Col>
                                                                                 <Col md={3}>
                                                                                      <div className="fw400 fs15 col14">{data.pbl_time}</div>
@@ -157,7 +151,7 @@ class ProfessinalBlog extends Component {
 
                                                   </div>
 
-                                                  {this.state.featured && this.state.offset < this.state.featured.length ?
+                                                  {this.state.coverage && this.state.offset < this.state.coverage.length ?
                                                        <div className="text-center mt-5 mb-5">
                                                             <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
                                                        </div> : null
@@ -168,12 +162,12 @@ class ProfessinalBlog extends Component {
                                                   <div className="coverageTab">
                                                        <div className="coverageList">
                                                             <Row>
-                                                                 {this.state.featured && this.state.featured.map((data, i) => {
+                                                                 {this.state.pressReleases && this.state.pressReleases.map((data, i) => {
                                                                       return this.state.offset > i ?
                                                                            <>
                                                                                 <Col md={8}>
-                                                                                     <div className="fw600 fs16 col64">
-                                                                                          {data.pbl_desc}
+                                                                                     <div className="fw600 fs16 col64" dangerouslySetInnerHTML={{ __html: data.pbl_desc }}>
+                                                                                          
                                                                                      </div>
                                                                                 </Col>
                                                                                 <Col md={4}>
@@ -190,7 +184,7 @@ class ProfessinalBlog extends Component {
                                                        </div>
 
                                                   </div>
-                                                  {this.state.featured && this.state.offset < this.state.featured.length
+                                                  {this.state.pressReleases && this.state.offset < this.state.pressReleases.length
 
                                                        ?
                                                        <div className="text-center mt-5 mb-5">

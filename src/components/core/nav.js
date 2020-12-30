@@ -176,9 +176,12 @@ class NavBar extends Component {
                     ] = `url(${res.data.data.profile_list.u_image})`;
                     setTimeout(() => {
                         elem = document.getElementsByClassName("profile_icon")[0];
-                        elem.children[0].style[
-                            "background-image"
-                        ] = `url(${res.data.data.profile_list.u_image})`;
+                        if(elem){
+                            elem.children[0].style[
+                                "background-image"
+                            ] = `url(${res.data.data.profile_list.u_image})`;
+                        }
+                        
                     }, 1000);
                     console.log(elem);
                     this.setState({
