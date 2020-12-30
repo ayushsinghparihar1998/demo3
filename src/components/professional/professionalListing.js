@@ -87,6 +87,7 @@ class ProfessionalLsting extends Component {
             this.setState({
                 professional_list: response.data.data.listing
             })
+            console.log("response.data.data.listing>>>>>", response.data.data.listing)
         } catch (err) {
             console.log(err)
         }
@@ -125,9 +126,16 @@ class ProfessionalLsting extends Component {
                 }
             )
             console.log('===>Response Filtered Professional ==>.', response)
-            this.setState({
-                professional_list: response.data.data.listing
-            })
+            if (response.data.message === "No user found.") {
+                this.setState({
+                    professional_list: []
+                })
+            } else {
+                this.setState({
+                    professional_list: response.data.data.listing
+                })
+
+            }
         } catch (err) {
             console.log(err)
         }
@@ -408,7 +416,7 @@ class ProfessionalLsting extends Component {
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
                                         <Form.Control type="text" className="inputTyp2"
-                                                      value={this.state.professionalEmail} onChange={(e) => {
+                                                       onChange={(e) => {
                                             this.setState({professionalEmail: e.target.value})
                                         }}/>
                                         <div className="error alignLeft d-none">Enter Professional Email</div>
