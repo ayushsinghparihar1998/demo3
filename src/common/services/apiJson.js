@@ -764,7 +764,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
   // getListenerCategoryList: {
   //   url: "elp/getcategories",
   //   method: "GET",
@@ -959,7 +958,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
- 
+
   corporategetprofessionallist: {
     url: "elp/corporategetprofessionallist",
     method: "POST",
@@ -1032,7 +1031,7 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
- 
+
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
@@ -1075,7 +1074,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
 
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
@@ -1156,5 +1154,27 @@ export default {
     data: { cs_id: "", cs_status: "" },
     showResultMessage: false,
     showErrorMessage: false,
+  },
+
+  superadmin_changeblogstatus: {
+    url: "elp/superadmin_changeblogstatus",
+    method: "POST",
+    data: {
+      bl_id: "",
+      bl_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+
+  superadmin_change_press_blogstatus: {
+    url: "elp/superadmin_change_press_blogstatus",
+    method: "POST",
+    data: {
+      pbl_id: "",
+      pbl_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
   },
 };

@@ -1013,6 +1013,28 @@ class Adminlistener extends Component {
     });
   };
 
+  changeStatusBlog = (id, type) => {
+    let databl = {
+      bl_id: id,
+      bl_status: "2",
+    };
+    let datapbl = {
+      pbl_id: id,
+      pbl_status: "2",
+    };
+    ELPViewApiService(
+      type,
+      type == "superadmin_change_press_blogstatus" ? datapbl : databl
+    ).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        type == "superadmin_change_press_blogstatus"
+          ? this.getpressblogListHandler(this.state.offset, this.state.count)
+          : this.getblogListHandler(this.state.offset, this.state.count);
+      }
+    });
+  };
   changeStatusSession = (cs_id, cs_status) => {
     let data = {
       cs_id: +cs_id,
@@ -2633,7 +2655,16 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                       <span>
-                                        <Image src={Deleteicon} alt="" />
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changeStatusBlog(
+                                              item.pbl_id,
+                                              "superadmin_change_press_blogstatus"
+                                            )
+                                          }
+                                        />
                                       </span>
                                     </div>
                                   </div>
@@ -2798,7 +2829,16 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                       <span>
-                                        <Image src={Deleteicon} alt="" />
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changeStatusBlog(
+                                              item.bl_id,
+                                              "superadmin_changeblogstatus"
+                                            )
+                                          }
+                                        />
                                       </span>
                                     </div>
                                   </div>
