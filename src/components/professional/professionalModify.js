@@ -8,7 +8,7 @@ import {
   Modal,
   Image,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
 import { actionChangePassword } from "../../common/redux/actions";
@@ -316,7 +316,10 @@ class ProfessionalSignup extends Component {
           console.log(result.data);
           console.log(result.data.status);
           if (result && result.data && result.data.status === "success") {
-            this.props.history.push("/adminlistener");
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({
@@ -406,6 +409,24 @@ class ProfessionalSignup extends Component {
         </div>
         <div className="RegistrationLayout pro_signup">
           <Container>
+            <Row>
+            <Col md={4} lg={3} className="pr-1">
+                      <div className="adminsidebar">
+                        <div className="inner_area">
+                          <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                            Quick Links
+                          </div>
+                          <div className="d-flex m-3 pb-3 border-bottom">
+                            <div>
+                              <div className="fs14 col28 fw500">
+                                <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </Col> 
+            <Col md={8} lg={9} className="pl-1">
             <div className="layout_box mt-5 mb-4">
               <div className="col3 fs40 fw600 mb-4">
                 Modify Professional Details
@@ -868,6 +889,9 @@ class ProfessionalSignup extends Component {
                 </Row>
               </Form>
             </div>
+            
+            </Col> 
+            </Row>            
           </Container>
         </div>
 

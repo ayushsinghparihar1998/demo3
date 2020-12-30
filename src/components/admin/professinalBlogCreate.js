@@ -13,7 +13,7 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 
@@ -156,9 +156,9 @@ class ProfessinalBlogCreate extends Component {
     let catar = [];
     this.state.proffCat.map((item) => {
       if (item.bc_status == "1") {
-        console.log('itemcat' , item);
-        item.bc_cat_id = item.bc_id;
-        item.bc_cat_name = item.bc_name;
+        console.log("itemcat", item);
+        item.buc_cat_id = item.bc_id;
+        item.buc_cat_name = item.bc_name;
         catar.push(item);
       }
     });
@@ -195,7 +195,10 @@ class ProfessinalBlogCreate extends Component {
         this.props.match.params.id > 0 ? "updateBlog" : "createBlog",
         data
       );
-      this.props.history.push("/adminlistener");
+      // this.props.history.push("/adminlistener");
+      setTimeout(() => {
+        this.props.history.push("/adminlistener");
+      }, 1000);
       // } catch (err) {
       //   console.log(err);
       // }
@@ -311,8 +314,13 @@ class ProfessinalBlogCreate extends Component {
                   <Form>
                     <Form.Group>
                       <Form.Label className="col14 fw600 fs18">
-                        Upload blog image
+                        {this.props.match.params.id > 0
+                          ? "Change Picture"
+                          : "Upload blog image"}
                       </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={blobj.bl_image} className="" />
+                      </div>
                       <Form.File
                         onChange={(e) =>
                           this.handleUploadPicture(e, "backgroud_img")
@@ -345,7 +353,8 @@ class ProfessinalBlogCreate extends Component {
                             blobj: {
                               ...this.state.blobj,
                               bl_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g
+                                /[^a-zA-Z0-9 ]/g,
+                                ""
                               ),
                             },
                           })
@@ -408,7 +417,8 @@ class ProfessinalBlogCreate extends Component {
                             blobj: {
                               ...this.state.blobj,
                               bl_written_by: e.target.value.replace(
-                                /[^a-zA-Z ]/g
+                                /[^a-zA-Z ]/g,
+                                ""
                               ),
                             },
                           })
@@ -468,7 +478,7 @@ class ProfessinalBlogCreate extends Component {
                       type="button"
                       onClick={() => this._saveBlogHandler()}
                     >
-                      create
+                      {this.props.match.params.id > 0 ? "Update" : "create"}
                     </Button>
                   </Form>
                 </div>

@@ -57,7 +57,7 @@ class NavBar extends Component {
             show3: false,
             email_varified: false,
             profileImage: null,
-            notificationData: [{ no_datetime: "", no_id: "", no_status: "", no_text: "No Data Found", u_name: "" }],
+            notificationData: [],
             notificationCount: null,
             mediaLinks: [
                 {
@@ -126,7 +126,7 @@ class NavBar extends Component {
         getLocalStorage("customerInfo") && ELPRxApiService("getnotificationlisting", { user_id: getLocalStorage("customerInfo").u_id })
             .then((res) => {
                 console.log('notification data===>', res.data.data)
-                // this.setState({notificationData: res.data.data})
+                this.setState({ notificationData: res.data.data })
             })
             .catch((err) => {
                 console.log(err);
@@ -473,7 +473,8 @@ class NavBar extends Component {
                                                         >
                                                             Professional Help
                                                     </a>
-                                                        :null
+                                                        :
+                                                        null
 
                                                     // <NavLink to="/listenerSearch" className="nav-link">
                                                     //   Listener Search
@@ -557,16 +558,16 @@ class NavBar extends Component {
                                                 Volunteer
                                             <br />
                                                 <span className="comings">coming soon</span>
+                                            </NavLink>,                                         
+                                            <NavLink
+                                                disabled
+                                                to="/becomeListener"
+                                                className="nav-link text-c"
+                                            >
+                                                Professional Help
+                                            <br />
+                                                <span className="comings">coming soon</span>
                                             </NavLink>,
-                                             <NavLink
-                                             disabled
-                                             to="/becomeListener"
-                                             className="nav-link text-c"
-                                         >
-                                             Professional Help
-                                         <br />
-                                             <span className="comings">coming soon</span>
-                                         </NavLink>,
                                             <NavLink to="/campaign" className="nav-link">
                                                 Donate
                                         </NavLink>,
@@ -605,11 +606,9 @@ class NavBar extends Component {
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />
-                                                            {this.state.notificationData[0].no_text === "No Data Found" ?
-                                                                null
-                                                                :
-                                                                <span className="counttwo">{this.state.notificationData.length}</span>
-                                                            }
+
+                                                            <span className="counttwo">{this.state.notificationData.length}</span>
+
 
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
@@ -617,6 +616,22 @@ class NavBar extends Component {
                                                                 <span className="polyicons">
                                                                     <Image src={Polygonimg} alt="" className="pointer" />
                                                                 </span>
+                                                                {this.state.notificationData.length === 0 && <>
+                                                                    <ul className="notes">
+
+                                                                        <li>
+                                                                            <Col md={9}>
+                                                                                {/* {console.log(data)} */}
+                                                                                <div className="col10 fs17 fw400"></div>
+                                                                                <div className="fs15 col94 fw400">No Data Found</div>
+                                                                            </Col>
+                                                                            <Col md={3}>
+                                                                                <div className="fs15 col94 fw400"></div>
+                                                                            </Col>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </>}
                                                                 {this.state.notificationData.map(data =>
 
                                                                 (<ul className="notes">
@@ -635,59 +650,14 @@ class NavBar extends Component {
                                                                 </ul>)
                                                                 )}
 
-
-
-
                                                             </Dropdown.Item>
 
-                                                            {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
 
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </Nav.Link>
 
-                                                {/* <Nav.Link>
-                          <Image src={Mailicon} alt="" className="pointer" />
-                        </Nav.Link> */}
-                                                {/* <Nav.Link>
-                          <Dropdown isOpen={this.state.isNotification} toggle={() => this.setState({ isNotification: !this.state.isNotification })} className="droptwo">
-                            <Dropdown.Toggle onClick={() => {
-                              // alert("ASd")
-                              this.setState({ isNotification: !this.state.isNotification })
-                            }} className="profilesbtn">
-                              <Image src={Bellicon} alt="" className="pointer" />
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu >
-                              <Dropdown.Item>
-                                <ul>
-                                  <li>
-                                    <div>
-                                      <span>Lorem</span>
-                                      William johnson Invited you to join event
-                                    </div>
-                                    <div>5 mins ago</div>
-                                  </li>
-                                  <li></li>
-                                  <li></li>
-                                </ul>
-                              </Dropdown.Item>
 
-                              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        </Nav.Link> */}
-                                                {/* <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Profile
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Profile</a>
-                          </div>
-                        </li> */}
 
                                                 <NavDropdown
                                                     title=""
@@ -788,18 +758,7 @@ class NavBar extends Component {
                                                     </NavLink>
                                                 )}
                                         </span>
-                                        {/* <span>
-                    <Image src={insta} alt="" className="pointer" />
-                  </span>
-                  <span>
-                    <Image src={fb} alt="" className="pointer" />
-                  </span>
-                  <span>
-                    <Image src={twit} alt="" className="pointer" />
-                  </span>
-                  <span>
-                    <Image src={linkedin} alt="" className="pointer" />
-                  </span> */}
+
                                     </Form>
                                     <span className="userprofiles d-flex">
                                         <Nav.Link>

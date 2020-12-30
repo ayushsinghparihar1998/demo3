@@ -763,36 +763,8 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  blogListing: {
-    url: "elp/superadmin_getblog",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  createBlog: {
-    url: "elp/superadmin_addblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  updateBlog: {
-    url: "elp/superadmin_editblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-      bl_id: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+
+ 
   // getListenerCategoryList: {
   //   url: "elp/getcategories",
   //   method: "GET",
@@ -987,71 +959,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  // superadmindeletecorporatedomain: {
-  //   url: "elp/superadmindeletecorporatedomain",
-  //   method: "POST",
-  //   data: { cd_id: "", cd_status: "" },
-  //   showResultMessage: false,
-  //   showErrorMessage: false,
-  // },
-  superadminchangestatusCorporatedomain: {
-    url: "elp/superadminchangestatusCorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmineditcorporatedomain: {
-    url: "elp/superadmineditcorporatedomain",
-    method: "POST",
-    data: {
-      cd_id: "",
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminaddcorporatedomain: {
-    url: "elp/superadminaddcorporatedomain",
-    method: "POST",
-    data: {
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomaindetailsbyid: {
-    url: "elp/superadmingetcorporatedomaindetailsbyid",
-    method: "POST",
-    data: {
-      cd_id: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomaindetailuserlist: {
-    url: "elp/superadmingetcorporatedomaindetailuserlist",
-    method: "POST",
-    data: { count: "", offset: "", cd_id: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  superadmindeletecorporatedomain: {
-    url: "elp/superadmindeletecorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+ 
   corporategetprofessionallist: {
     url: "elp/corporategetprofessionallist",
     method: "POST",
@@ -1059,56 +967,7 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  switchtocorporatemember: {
-    url: "elp/switchtocorporatemember",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  getpressblog: {
-    url: "elp/getpressblog",
-    method: "POST",
-    data: { offset: 0, count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  getblog: {
-    url: "elp/getblog",
-    method: "POST",
-    data: { offset: 0, count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  getBlogdetails: {
-    url: "elp/getBlogdetails",
-    method: "POST",
-    data: { bl_id: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  getlatestblog: {
-    url: "elp/getlatestblog",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  getpressblogcategory: {
-    url: "elp/getpressblogcategory",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
 
-  superadmingetcorporatedomain: {
-    url: "elp/superadmingetcorporatedomain",
-    method: "GET",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
   superadmindeletecorporatedomain: {
     url: "elp/superadmindeletecorporatedomain",
     method: "POST",
@@ -1173,13 +1032,7 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadmindeletecorporatedomain: {
-    url: "elp/superadmindeletecorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+ 
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
@@ -1222,6 +1075,8 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+
+
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
     method: "POST",
@@ -1244,49 +1099,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  corporategetprofessionallistfilter: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {
-      count: 0,
-      offset: 0,
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  corporateappointmentschedule: {
-    url: "elp/corporateappointmentschedule",
-    method: "POST",
-    data: {
-      cs_pro_u_id: "",
-      cs_pro_name: "",
-      cs_pro_email_id: "",
-      cs_subject: "",
-      cs_description: "",
-      cs_date: "",
-      cs_time: [{ cs_time_slot: "" }],
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  getnotificationlisting: {
-    url: "elp/getnotificationlisting",
-    method: "POST",
-    data: { user_id: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  corporateprofessionaluserdetail: {
-    url: "elp/corporateprofessionaluserdetail",
-    method: "POST",
-    data: { userid: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+
   switchtocorporatemember: {
     url: "elp/switchtocorporatemember",
     method: "POST",
@@ -1329,13 +1142,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  getpressblogcategory: {
-    url: "elp/getpressblogcategory",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+
   superadmingetcorporateappointmentlist: {
     url: "elp/superadmingetcorporateappointmentlist",
     method: "POST",
