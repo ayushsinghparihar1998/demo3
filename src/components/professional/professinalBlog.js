@@ -201,8 +201,8 @@ class ProfessinalBlog extends Component {
                                                   }
 
                                              </Tab>
-                                        </Tabs>
-
+                                        </Tabs> 
+                                                  
                                         <div className="ml-auto w-100 pt-5 pb-5 mt-5 mb-5 d-flex justify-content-end">
                                              <div>
                                                   <div className="fs40 fw500">
@@ -223,5 +223,5 @@ class ProfessinalBlog extends Component {
           );
      }
 }
-export default ProfessinalBlog;
+export default ProfessinalBlog; 
 

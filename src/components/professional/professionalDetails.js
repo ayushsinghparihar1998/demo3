@@ -284,14 +284,7 @@ class Myprofile extends Component {
 
                                   </div>
 
-                                  <div className="col3 fw500 mt-1 mb-2">
-                                    Category:
-                                      </div>
-
-
-                                  <div className="col3 fw500 mt-1 mb-2">
-                                    Keywords: <span className="col14 fw400 ml-2"></span>
-                                  </div>
+                                 
 
                                   <div className="col3 fw500 mt-1 mb-2">
                                     Category:

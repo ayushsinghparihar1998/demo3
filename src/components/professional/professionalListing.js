@@ -41,7 +41,7 @@ class ProfessionalLsting extends Component {
             appointmentSubject: null,
             description: null,
             appointmentDate: null,
-            appointmentTime: "1 Hour",
+            appointmentTime: null,
 
             // validation Error
             validationError: false,
