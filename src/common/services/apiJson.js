@@ -879,7 +879,11 @@ export default {
     corporategetprofessionallist: {
         url: "elp/corporategetprofessionallist",
         method: "POST",
-        data: {},
+        data: {
+            "count": "",
+            "offset": ""
+
+        },
         showResultMessage: false,
         showErrorMessage: true,
     },
@@ -933,21 +937,21 @@ export default {
     getpressblog: {
         url: "elp/getpressblog",
         method: "POST",
-        data: { offset: 0, count: '', category: '' },
+        data: {offset: 0, count: '', category: ''},
         showResultMessage: false,
         showErrorMessage: false,
     },
     getblog: {
         url: "elp/getblog",
         method: "POST",
-        data: { offset: 0, count: '', category: '' },
+        data: {offset: 0, count: '', category: ''},
         showResultMessage: false,
         showErrorMessage: false,
     },
     getBlogdetails: {
         url: "elp/getBlogdetails",
         method: "POST",
-        data: { bl_id: '' },
+        data: {bl_id: ''},
         showResultMessage: false,
         showErrorMessage: false,
     },

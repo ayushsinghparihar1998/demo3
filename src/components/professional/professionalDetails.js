@@ -37,6 +37,7 @@ class Myprofile extends Component {
             proffDetail: {},
             show3: false,
             cat_child_array: [],
+            professional_keyword: [],
 
             // For Book a Session
             professionalId: null,
@@ -45,12 +46,10 @@ class Myprofile extends Component {
             appointmentSubject: null,
             description: null,
             appointmentDate: null,
-            appointmentTime: "1 Hour",
+            appointmentTime: null,
 
             // validation Error
             validationError: false,
-
-
         };
     }
 
@@ -79,10 +78,12 @@ class Myprofile extends Component {
                         proffDetail =
                             result && result.data && result.data.data ? result.data.data[0] : [];
                     }
+                    console.log("proffDetail>>>>>", proffDetail.professional_keyword)
                     this.setState(
                         {
                             proffDetail,
-                            cat_child_array: proffDetail.cat_child_array
+                            cat_child_array: proffDetail.cat_child_array,
+                            professional_keyword: proffDetail.professional_keyword
                         },
                         () => {
                             console.log("ProffDetail", this.state.proffDetail);
@@ -97,8 +98,7 @@ class Myprofile extends Component {
                 console.log("result", result);
                 let proffDetail = [];
                 if (result && result.status === 200) {
-                    proffDetail =
-                        result && result.data && result.data.data ? result.data.data[0] : [];
+                    proffDetail = result && result.data && result.data.data ? result.data.data[0] : [];
                 }
                 this.setState(
                     {
@@ -114,32 +114,43 @@ class Myprofile extends Component {
 
     }
     validate = () => {
+        let isValid = 0
         if (!this.state.professionalEmail) {
-            this.setState({validationError: 'This field is required...'})
-            return false
+            this.setState({validationErrorEmail: 'Please Enter Professional Email.'})
+            isValid += 1
         } else {
-            this.setState({validationError: null})
+            this.setState({validationErrorEmail: null})
         }
         if (!this.state.appointmentSubject) {
-            this.setState({validationError: 'This field is required...'})
-            return false
+            this.setState({validationErrorSubject: 'Please Enter Appointment Subject.'})
+            isValid += 1
         } else {
-            this.setState({validationError: null})
+            this.setState({validationErrorSubject: null})
         }
         if (!this.state.description) {
-            this.setState({validationError: 'This field is required...'})
-            return false
+            this.setState({validationErrorDescription: 'Please Enter Appointment Description.'})
+            isValid += 1
         } else {
-            this.setState({validationError: null})
+            this.setState({validationErrorDescription: null})
         }
         if (!this.state.appointmentDate) {
-            this.setState({validationError: 'This field is required...'})
+            this.setState({validationErrorDate: 'Please Enter Appointment Date.'})
+            isValid += 1
+        } else {
+            this.setState({validationErrorDate: null})
+        }
+        if (!this.state.appointmentTime) {
+            this.setState({validationErrorTime: 'Please Enter Appointment Time.'})
+            isValid += 1
+        } else {
+            this.setState({validationErrorTime: null})
+        }
+        if (isValid !== 0) {
             return false
         } else {
-            this.setState({validationError: null})
+            return true
         }
-        this.setState({validationError: null})
-        return true
+
     }
     postBookingData = () => {
         let isValid = this.validate()
@@ -168,7 +179,7 @@ class Myprofile extends Component {
     bookSessionOpen = (obj) => {
         console.log(obj)
         this.setState({
-            professionalEmail: obj.email,
+            // professionalEmail: obj.email,
             professionalId: obj.id,
             professionalName: obj.u_name,
             show3: true
@@ -198,7 +209,7 @@ class Myprofile extends Component {
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div>
                                                 <div className="fs14 col28 fw500">
-                                                    <Link to={{pathname: `/adminlistener`}}>Back</Link>
+                                                    <Link to={{pathname: `/professionalListing`}}>Back</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -236,9 +247,12 @@ class Myprofile extends Component {
 
                                                     <div className="col3 fw500 mt-1 mb-2">
                                                         Keywords:
-                                                        <span className="col14 fw400 ml-2">
+                                                        {this.state.professional_keyword.map((obj, i) => {
+                                                            return <span
+                                                                className="col14 fw400 ml-2">{obj.pk_keyword}</span>
+                                                        })}
 
-                            </span>
+
                                                     </div>
 
                                                     <div className="col3 fw500 mt-1 mb-2">
@@ -247,14 +261,15 @@ class Myprofile extends Component {
 
                                                         <span className="col14 fw400 ml-2">
                               {this.state.cat_child_array.map((obj, i) => {
-                                  return i === this.state.cat_child_array.length - 1 ? <span>{obj}</span> : <span>{obj},</span>
+                                  return i === this.state.cat_child_array.length - 1 ? <span>{obj}</span> :
+                                      <span>{obj},</span>
                               })}
                             </span>
                                                     </div>
 
                                                     <div className="col3 fw500 mt-1 mb-2">
                                                         Services:
-                                                        <span className="col14 fw400 ml-2">
+                                                        <span className="col14 fw400 ml-2">{proffDetail.u_area_service}
 
                             </span>
                                                     </div>
@@ -285,17 +300,32 @@ class Myprofile extends Component {
                                                                 >
                                                                     Call
                                                                 </Button>
+                                                                {getLocalStorage('customerInfo').u_verified === "0" ?
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        type="submit"
+                                                                        className="btnTyp5"
+                                                                        disabled
+                                                                        onClick={() => {
+                                                                            this.bookSessionOpen(this.state.proffDetail)
+                                                                        }}
+                                                                    >
+                                                                        BOOK A SESSION
+                                                                    </Button>
+                                                                    :
 
-                                                                <Button
-                                                                    variant="primary"
-                                                                    type="submit"
-                                                                    className="btnTyp5"
-                                                                    onClick={() => {
-                                                                        this.bookSessionOpen(this.state.proffDetail)
-                                                                    }}
-                                                                >
-                                                                    BOOK A SESSION
-                                                                </Button>
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        type="submit"
+                                                                        className="btnTyp5"
+                                                                        onClick={() => {
+                                                                            this.bookSessionOpen(this.state.proffDetail)
+                                                                        }}
+                                                                    >
+                                                                        BOOK A SESSION
+                                                                    </Button>
+                                                                }
+
                                                             </>
                                                         )}
                                                     </div>
@@ -314,7 +344,7 @@ class Myprofile extends Component {
                                                 dangerouslySetInnerHTML={{
                                                     __html: proffDetail.u_education,
                                                 }}
-                                            ></div>
+                                            />
                                         </Col>
                                     </div>
 
@@ -335,16 +365,6 @@ class Myprofile extends Component {
                                                 {/* {proffDetail.u_bio} */}
                                             </div>
 
-                                            {/* <div className="fs15 col14 fw400 mb-3">
-                      Therapy helps to alter self-defeating narratives into
-                      powerful ones filled with acceptance and compassion. For
-                      long-lasting alterations, it helps the individual realize
-                      where these self-defeating narratives are coming from,
-                      which often involves exploring the past and the influence
-                      of relationships. Then the work would involve unlearning
-                      much of this conditioning and replacing old beliefs with
-                      more realistic, compassionate and empowering ones.
-                    </div> */}
                                         </Col>
                                     </div>
                                 </div>
@@ -369,11 +389,11 @@ class Myprofile extends Component {
                                         <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
                                         <Form.Control type="text" className="inputTyp2"
                                                       onChange={(e) => {
-                                            this.setState({professionalEmail: e.target.value})
-                                        }}/>
+                                                          this.setState({professionalEmail: e.target.value})
+                                                      }}/>
                                         <div className="error alignLeft d-none">Enter Professional Email</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}
+                                    {this.state.validationErrorEmail ? <div>{this.state.validationErrorEmail}</div> : null}
 
 
                                     <Form.Group controlId="formBasicEmail">
@@ -383,23 +403,9 @@ class Myprofile extends Component {
                                         }}/>
                                         <div className="error alignLeft d-none">Enter Appointment Subject</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}
+                                    {this.state.validationErrorSubject ?
+                                        <div>{this.state.validationErrorSubject}</div> : null}
 
-
-                                    <Form.Group>
-                                        {/* <Form.Label className="fs20 fw600 col14 d-block">
-                                        Date:
-                                    </Form.Label> */}
-                                        {/* <DatePicker
-                                        selected={date}
-                                        onSelect={handleDateSelect} //when day is clicked
-                                        onChange={handleDateChange} //only when value has changed
-                                        /> */}
-                                        {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" />       */}
-
-                                        {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
-
-                                    </Form.Group>
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label className="fs20 fw600 col14">Description</Form.Label>
@@ -409,7 +415,8 @@ class Myprofile extends Component {
                                                       }}/>
                                         <div className="error alignLeft d-none">Enter Description</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}
+                                    {this.state.validationErrorDescription ?
+                                        <div>{this.state.validationErrorDescription}</div> : null}
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
@@ -417,29 +424,27 @@ class Myprofile extends Component {
                                         {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" /> */}
                                         {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
 
-                                        <Form.Control type="text" className="inputTyp2" onChange={(e) => {
+                                        <Form.Control type="date" className="inputTyp2" onChange={(e) => {
                                             this.setState({appointmentDate: e.target.value})
                                         }}/>
 
                                         <div className="error alignLeft d-none">Enter Appointment Date</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}
+                                    {this.state.validationErrorDate ?
+                                        <div>{this.state.validationErrorDate}</div> : null}
 
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Time </Form.Label>
-                                        <Form.Control as="select" className="selectTyp1" onChange={(e) => {
+                                        {/*<Form.Control as="select" className="selectTyp1" onChange={(e) => {*/}
+                                        <Form.Control type="time" className="selectTyp1" onChange={(e) => {
                                             (this.setState({appointmentTime: e.target.value}))
                                         }}>
-                                            <option>1 Hour</option>
-                                            <option>2 Hour</option>
-                                            <option>3 Hour</option>
-                                            <option>4 Hour</option>
-                                            <option>5 Hour</option>
                                         </Form.Control>
                                         <div className="error alignLeft d-none">Enter Appointment Time</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}
+                                    {this.state.validationErrorTime ?
+                                        <div>{this.state.validationErrorTime}</div> : null}
 
 
                                     <Button onClick={() => this.postBookingData()} variant="primary"

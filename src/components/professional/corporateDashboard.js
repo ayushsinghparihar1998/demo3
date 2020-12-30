@@ -134,7 +134,7 @@ class CorporateDashboard extends Component {
 
                               </div>
                            </Col>
-                           <BlogList /> 
+                           {/*<BlogList />*/}
                         </Row>
                      </Col>
 
