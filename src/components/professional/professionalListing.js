@@ -87,7 +87,6 @@ class ProfessionalLsting extends Component {
             this.setState({
                 professional_list: response.data.data.listing
             })
-            console.log("response.data.data.listing>>>>>", response.data.data.listing)
         } catch (err) {
             console.log(err)
         }
@@ -126,16 +125,9 @@ class ProfessionalLsting extends Component {
                 }
             )
             console.log('===>Response Filtered Professional ==>.', response)
-            if (response.data.message === "No user found.") {
-                this.setState({
-                    professional_list: []
-                })
-            } else {
-                this.setState({
-                    professional_list: response.data.data.listing
-                })
-
-            }
+            this.setState({
+                professional_list: response.data.data.listing
+            })
         } catch (err) {
             console.log(err)
         }
@@ -195,18 +187,18 @@ class ProfessionalLsting extends Component {
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>
-                                        <Col md="5">
+                                        <Col md="3">
                                             <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search by name"
+                                                <Form.Control type="text" placeholder="Search name"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchName: e.target.value})
                                                               }}/>
                                             </Form.Group>
                                         </Col>
-                                        <Col md="5">
+                                        <Col md="3">
                                             <Form.Group controlId="formBasickeyword">
-                                                <Form.Control type="text" placeholder="Search by keyword"  
+                                                <Form.Control type="text" placeholder="Search keyword"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchKeyword: e.target.value})
@@ -225,7 +217,7 @@ class ProfessionalLsting extends Component {
                                         {/*        </Form.Control>*/}
                                         {/*    </Form.Group>*/}
                                         {/*</Col>*/}
-                                        <Col md="2" className="text-center">
+                                        <Col md="3" className="text-center">
                                             <Button variant="primary process_btn"
                                                     onClick={this._getFilterProfessionalListHandler}>
                                                 search
@@ -411,19 +403,19 @@ class ProfessionalLsting extends Component {
                     <Modal.Body>
                         <Container>
                             <div className="layout_box mt-3 mb-4">
-                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div> 
+                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                                 <Form>
-                                    {/* <Form.Group controlId="formBasicEmail">
+                                    <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
                                         <Form.Control type="text" className="inputTyp2"
-                                                       onChange={(e) => {
+                                                      value={this.state.professionalEmail} onChange={(e) => {
                                             this.setState({professionalEmail: e.target.value})
                                         }}/>
                                         <div className="error alignLeft d-none">Enter Professional Email</div>
                                     </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}  */}
-                                    
-                                    <Form.Group controlId="formBasicEmail">  
+                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null} 
+
+                                    <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label>
                                         <Form.Control type="text" className="inputTyp2" onChange={(e) => {
                                             this.setState({appointmentSubject: e.target.value})
@@ -446,7 +438,7 @@ class ProfessionalLsting extends Component {
 
                                         {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
 
-                                    </Form.Group> 
+                                    </Form.Group>
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label className="fs20 fw600 col14">Description</Form.Label>

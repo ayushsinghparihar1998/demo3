@@ -57,7 +57,7 @@ class NavBar extends Component {
             show3: false,
             email_varified: false,
             profileImage: null,
-            notificationData: [{ no_datetime: "",no_id: "", no_status: "", no_text: "No Data Found",u_name: ""}],
+            notificationData: [],
             notificationCount: null,
             mediaLinks: [
                 {
@@ -126,7 +126,7 @@ class NavBar extends Component {
         getLocalStorage("customerInfo") && ELPRxApiService("getnotificationlisting", {user_id: getLocalStorage("customerInfo").u_id})
             .then((res) => {
                 console.log('notification data===>', res.data.data)
-                // this.setState({notificationData: res.data.data})
+                this.setState({notificationData: res.data.data})
             })
             .catch((err) => {
                 console.log(err);
@@ -597,11 +597,9 @@ class NavBar extends Component {
                           <Dropdown className="droptwo notifications">
                             <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                               <Image src={Bellicon} alt="" className="pointer"/>
-                              {this.state.notificationData[0].no_text === "No Data Found"  ?
-                                  null
-                                  :
+
                               <span className="counttwo">{this.state.notificationData.length}</span>
-                              }
+
 
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
@@ -609,6 +607,22 @@ class NavBar extends Component {
                                 <span className="polyicons">
                                   <Image src={Polygonimg} alt="" className="pointer"/>
                                 </span>
+                                  {this.state.notificationData.length ===0 &&  <>
+                                      <ul className="notes">
+
+                                          <li>
+                                              <Col md={9}>
+                                                  {/* {console.log(data)} */}
+                                                  <div className="col10 fs17 fw400"></div>
+                                                  <div className="fs15 col94 fw400">No Data Found</div>
+                                              </Col>
+                                              <Col md={3}>
+                                                  <div className="fs15 col94 fw400"></div>
+                                              </Col>
+                                          </li>
+
+                                      </ul>
+                                  </>}
                                   {this.state.notificationData.map(data =>
 
                                       (<ul className="notes">
@@ -626,9 +640,6 @@ class NavBar extends Component {
 
                                       </ul>)
                                   )}
-
-
-
 
                               </Dropdown.Item>
 

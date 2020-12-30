@@ -93,10 +93,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
-
-
-
+        } 
     getBlogAll = () => {
         ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Eat','Luv','Pray'" })
             .then((res) => {
@@ -106,9 +103,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
-
-
+        }
     getBlogdetails = (blog_id) => {
         ELPRxApiService("getBlogdetails", { bl_id: blog_id })
             .then((res) => {

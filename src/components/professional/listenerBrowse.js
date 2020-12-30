@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab} from "react-bootstrap";
+import {Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal} from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
@@ -18,6 +18,8 @@ import {connect} from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import {Popover} from 'antd';
 import ELPRxApiService from "../../common/services/apiService";
+import Crossbtn from "../../assets/images/blue_cross.svg";
+
 
 class ListenerBrowse extends Component {
     state = {
@@ -25,19 +27,21 @@ class ListenerBrowse extends Component {
         search_keyword: "",
         order_by: "",
         offset: 6,
-
+        show3: false,
+        currentData: {}
     }
 
     componentDidMount() {
         this._getListenerData()
     }
 
+
     _getListenerData = async () => {
         try {
 
             let response = await ELPRxApiService("searchlistener", {
                 search_keyword: this.state.search_keyword,
-                order_by: this.state.order_by
+                order_by: this.state.order_by,
             })
             this.setState({
                 listenerData: response.data.data
@@ -69,6 +73,19 @@ class ListenerBrowse extends Component {
             console.log(err)
         }
     }
+
+    bookSessionOpen = (obj) => {
+        console.log(obj)
+
+        this.setState({
+            show3: true,
+            currentData: obj
+        });
+    };
+
+    bookSessionClose = () => {
+        this.setState({show3: false});
+    };
 
     render() {
         return (
@@ -113,7 +130,7 @@ class ListenerBrowse extends Component {
                                             <Button className="btnTyp5 bTyp5" onClick={this._getFilteredListenerData}>
                                                 Search
                                             </Button>
-                                            <a className="ml-4"><Image src={Searchbtn} alt="Search bar"/></a>
+                                            {/* <a className="ml-4"><Image src={Searchbtn} alt="Search bar"/></a> */}
                                         </div>
                                     </Col>
                                 </Row>
@@ -175,7 +192,7 @@ class ListenerBrowse extends Component {
                                             <div className="subscribes">
                                                 <div className="text-right mt-4 mr-3">
                                                     <Image src={Messagefour} alt=""/>
-                                                    <span className="fs13 col14 fw400 ml-1">340</span>
+                                                    <span className="fs13 col14 fw400 ml-1">{obj.u_listen_to}</span>
                                                 </div>
                                                 <div className="text-center position-relative">
                                                     <span className="onlines"></span>
@@ -186,9 +203,9 @@ class ListenerBrowse extends Component {
                                                 </div>
                                                 <div className="col1 fs18 fw600 mt-4">{obj.u_name}</div>
                                                 <div className="fs14 col14 fw400">{obj.u_bio}</div>
-                                                <div className="fs14 col14 fw400">{obj.u_listen_to}
+                                                {/* <div className="fs14 col14 fw400">{obj.u_listen_to} */}
                                                 {/*<div className="fs14 col14 fw400">Listens to  Over in last week*/}
-                                                </div>
+                                                {/* </div> */}
                                                 <div className="starrating">
                                                     {/* <ReactStars
                             count={5}
@@ -207,7 +224,7 @@ class ListenerBrowse extends Component {
                                                         eiusmod tempor incididunt
                                                     </div>
                                                     <Popover content="Hello User" title="Title" trigger="click">
-                                                        <div className="mt-3 mb-3 col10 fs14 fw600 pointer">
+                                                        <div className="mt-3 mb-3 col10 fs14 fw600 pointer" onClick={() => this.bookSessionOpen(obj)}>
                                                             Read More
                                                         </div>
                                                     </Popover>
@@ -284,6 +301,28 @@ class ListenerBrowse extends Component {
                         </div>
                     </Container>
                 </div>
+
+                <Modal show={this.state.show3} className="CreateAccount bookSession">
+                    <Modal.Header>
+                        <Button onClick={this.bookSessionClose}>
+                            <Image src={Crossbtn} alt=""/>
+                        </Button>
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                    <Container>
+              <div className="layout_box text-center mt-3 mb-4">
+                {/* <Image src={this.state.currentData.u_image} alt="" className="mt-5 mb-4" /> */}
+                <div className="col10 fs30 fw600 mb-4">{this.state.currentData && this.state.currentData.u_name} (Bio)</div>
+                <div className="fs300 fs20 col14 mb-5 pb-2">
+                {this.state.currentData && this.state.currentData.u_bio ? this.state.currentData.u_bio : 'Bio does not Exist!'}
+                </div>
+              </div>
+            </Container>
+                    </Modal.Body>
+                </Modal>
+
                 <Footer/>
             </div>
         );
@@ -291,4 +330,3 @@ class ListenerBrowse extends Component {
 }
 
 export default ListenerBrowse;
-

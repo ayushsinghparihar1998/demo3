@@ -580,7 +580,7 @@ class Userdashboard extends Component {
                            </Col>
 
 
-                           <BlogList />
+                           {/*<BlogList />*/}
 
 
                         </Row>

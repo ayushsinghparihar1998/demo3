@@ -63,7 +63,7 @@ class AdminPressListing extends Component {
                                             <div className="fs22 fw600 col10">
                                                 Press Listing
                                             </div>
-                                            <div className="fw300 fs16 col14">Lorem Ipsum is simply dummy and typesetting industry.</div> 
+                                             
                                         </Col>
                                         <Col md={4}>
                                             <div className="text-right pro_cbtn">

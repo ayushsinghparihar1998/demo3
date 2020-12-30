@@ -238,7 +238,7 @@ class Editprofile extends Component {
     }
 
     this.props.actionUpdateUserDetails(data).then((result) => {
-
+      this.props.history.push("/myprofile")
     });
   };
 
