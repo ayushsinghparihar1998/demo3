@@ -1888,7 +1888,7 @@ cs_time: "00:00:02" */}
                                   <div className="d-flex pt-4 pb-4 text-left border-grays">
                                     <div className="mr-4">
                                       <Image
-                                        src={item.u_image ? item.u_image : ""}
+                                        src={item.cs_image ? item.cs_image : ""}
                                         alt=""
                                         className="r50"
                                       />
@@ -1925,7 +1925,7 @@ cs_time: "00:00:02" */}
                                   <div className="d-flex pt-4 pb-4 text-left border-grays">
                                     <div className="mr-4">
                                       <Image
-                                        src={item.u_image ? item.u_image : ""}
+                                        src={item.cs_image ? item.cs_image : ""}
                                         alt=""
                                         className="r50"
                                       />
@@ -2660,9 +2660,12 @@ cs_time: "00:00:02" */}
                                     <strong className="fw600">
                                       Description:{" "}
                                     </strong>
-                                    <span className="fs14">
-                                      {item.pbl_desc}
-                                    </span>
+                                    <span
+                                      className="fs14"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.pbl_desc,
+                                      }}
+                                    ></span>
                                   </div>
 
                                   <div className="eat_category">
@@ -2822,7 +2825,12 @@ cs_time: "00:00:02" */}
                                     <strong className="fw600">
                                       Description:{" "}
                                     </strong>
-                                    <span className="fs14">{item.bl_desc}</span>
+                                    <span
+                                      className="fs14"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.bl_desc,
+                                      }}
+                                    ></span>
                                   </div>
 
                                   <div className="eat_category">

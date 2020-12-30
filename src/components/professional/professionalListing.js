@@ -197,7 +197,7 @@ class ProfessionalLsting extends Component {
                                     <Row>
                                         <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search by name"
+                                                <Form.Control type="text" placeholder="Search name"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchName: e.target.value})
@@ -206,7 +206,7 @@ class ProfessionalLsting extends Component {
                                         </Col>
                                         <Col md="5">
                                             <Form.Group controlId="formBasickeyword">
-                                                <Form.Control type="text" placeholder="Search by keyword"  
+                                                <Form.Control type="text" placeholder="Search keyword"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchKeyword: e.target.value})

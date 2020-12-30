@@ -87,10 +87,10 @@ export default {
     required: "Please enter video time in minutes.",
   },
   cd_audio_status: {
-    required: "Please enter audio status.",
+    required: "Please select audio status.",
   },
   cd_video_status: {
-    required: "Please enter video status.",
+    required: "Please select video status.",
   },
   title: {
     required: "Please enter title.",

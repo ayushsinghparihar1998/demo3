@@ -407,11 +407,11 @@ class Userdashboard extends Component {
                               </div>
                            </Col>
 
-                           {getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_role_id === constant.roles.CORPORATE_CUSTOMER ?
-                               null
-                               :
-                               <BlogList/>
-                           }
+                           {/*{getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_role_id === constant.roles.CORPORATE_CUSTOMER ?*/}
+                           {/*    null*/}
+                           {/*    :*/}
+                           {/*    <BlogList/>*/}
+                           {/*}*/}
 
                         </Row>
                      </Col>

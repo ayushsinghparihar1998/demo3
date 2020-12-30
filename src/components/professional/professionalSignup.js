@@ -8,7 +8,7 @@ import {
   Modal,
   Image,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
@@ -250,7 +250,10 @@ class ProfessionalSignup extends Component {
       ELPViewApiService("superadminregisterprofessional", data)
         .then((result) => {
           if (result && result.data && result.data.status === "success") {
-            this.props.history.push("/adminlistener");
+            // this.props.history.push("/adminlistener");
+            setTimeout(() => {
+              this.props.history.push("/adminlistener");
+            }, 1000);
             this.clear();
           } else {
             this.setState({
