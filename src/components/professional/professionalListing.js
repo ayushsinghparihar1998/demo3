@@ -225,7 +225,7 @@ class ProfessionalLsting extends Component {
                                         </Col>
                                         <Col md="5">
                                             <Form.Group controlId="formBasickeyword">
-                                                <Form.Control type="text" placeholder="Search by keyword"  
+                                                <Form.Control type="text" placeholder="Search by keyword"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchKeyword: e.target.value})
@@ -233,22 +233,7 @@ class ProfessionalLsting extends Component {
                                                 />
                                             </Form.Group>
                                         </Col>
-<<<<<<< HEAD
                                         <Col md="3" className="text-center">
-=======
-                                        {/*<Col md="3">*/}
-                                        {/*    <Form.Group controlId="formBasickeyword">*/}
-                                        {/*        <Form.Control as="select" className="selectTyp1 selectsetone"*/}
-                                        {/*                      onChange={(e) => {*/}
-                                        {/*                          this.setState({searchProfessional: e.target.value})*/}
-                                        {/*                      }}>*/}
-                                        {/*            <option>Search by professional</option>*/}
-                                        {/*            <option>professional</option>*/}
-                                        {/*        </Form.Control>*/}
-                                        {/*    </Form.Group>*/}
-                                        {/*</Col>*/}
-                                        <Col md="2" className="text-center">
->>>>>>> e6d0363791204139a148334db66b35cc65625c88
                                             <Button variant="primary process_btn"
                                                     onClick={this._getFilterProfessionalListHandler}>
                                                 search
@@ -366,7 +351,7 @@ class ProfessionalLsting extends Component {
                     <Modal.Body>
                         <Container>
                             <div className="layout_box mt-3 mb-4">
-                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div> 
+                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                                 <Form>
                                     {/* <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
@@ -376,17 +361,9 @@ class ProfessionalLsting extends Component {
                                                       }}/>
                                         <div className="error alignLeft d-none">Enter Professional Email</div>
                                     </Form.Group>
-<<<<<<< HEAD
-                                    {this.state.validationErrorEmail ?
-                                        <div>{this.state.validationErrorEmail}</div> : null}
-
+                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}  */}
 
                                     <Form.Group controlId="formBasicEmail">
-=======
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}  */}
-                                    
-                                    <Form.Group controlId="formBasicEmail">  
->>>>>>> e6d0363791204139a148334db66b35cc65625c88
                                         <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label>
                                         <Form.Control type="text" className="inputTyp2" onChange={(e) => {
                                             this.setState({appointmentSubject: e.target.value})
@@ -396,23 +373,6 @@ class ProfessionalLsting extends Component {
                                     {this.state.validationErrorSubject ?
                                         <div>{this.state.validationErrorSubject}</div> : null}
 
-<<<<<<< HEAD
-=======
-                                    <Form.Group>
-                                        {/* <Form.Label className="fs20 fw600 col14 d-block">
-                                        Date:
-                                    </Form.Label> */}
-                                        {/* <DatePicker
-                                        selected={date}
-                                        onSelect={handleDateSelect} //when day is clicked
-                                        onChange={handleDateChange} //only when value has changed
-                                        /> */}
-                                        {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" />       */}
-
-                                        {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
-
-                                    </Form.Group> 
->>>>>>> e6d0363791204139a148334db66b35cc65625c88
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label className="fs20 fw600 col14">Description</Form.Label>
