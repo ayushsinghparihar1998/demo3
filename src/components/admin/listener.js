@@ -16,7 +16,10 @@ import Samyukthaimg from "../../assets/images/Samyuktha.png";
 import Shrishtiimg from "../../assets/images/Shrishti.png";
 import DatePicker from "react-datepicker";
 import Validator from "validator";
-
+import Deleteicon from "../../assets/images/delete_icon.svg";
+import blogclock from "../../assets/images/blogclock.png";
+import BlogProcessFive from "../../assets/images/blog4.png";
+import Editicon from "../../assets/images/edit_icon.svg";
 import "react-datepicker/dist/react-datepicker.css";
 // import moment from "moment";
 import {
@@ -42,9 +45,7 @@ import Requestuser from "../../assets/images/pro_img.svg";
 import Deleteusers from "../../assets/images/delete_users.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
-import Deleteicon from "../../assets/images/delete_icon.svg";
 import Blueicons from "../../assets/images/blue_cross.svg";
-import Editicon from "../../assets/images/edit_icon.svg";
 // import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
@@ -97,21 +98,35 @@ class Adminlistener extends Component {
         email: "",
         password: "",
       },
+      blogCategory: [],
+      pressBlogCategory: [],
     };
   }
   componentDidMount() {
-    // this.getListnerListing("", "listner", 1);
-    // this.getCustomerListing("", "user", 1);
+ 
+    this.getBlogCat("blogCategory", "getblogcategory");
+    this.getBlogCat("pressBlogCategory", "getpressblogcategory");
     console.log("get", getLocalStorage("tabToOpen"));
-    if (getLocalStorage("tabToOpen") == "user")
+
+    if (getLocalStorage("tabToOpen") && getLocalStorage("tabToOpen") == "user")
       this.getCustomerListing("", "user", 1);
-    else if (getLocalStorage("tabToOpen") == "listner")
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "listner"
+    )
       this.getCustomerListing("", "listner", 1);
-    else if (getLocalStorage("tabToOpen") == "getProffListing")
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getProffListing"
+    )
       this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
-    else if (getLocalStorage("tabToOpen") == "getDomainListing")
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getDomainListing"
+    )
       this.getDomainListing(1, 10);
     else {
+      this.getCustomerListing("", "user", 1);
     }
   }
   getListnerListing = (e, activaClass, pageNumber) => {
@@ -366,6 +381,7 @@ class Adminlistener extends Component {
           },
           () => {
             this.getPager(this.state.totalRecordCount);
+            // console.log(new Date(this.state.sessionList[0].cs_date));
           }
         );
       }
@@ -504,10 +520,17 @@ class Adminlistener extends Component {
   };
   getblogListHandler = async (offset, count) => {
     try {
+      let catval = [];
+      this.state.blogCategory.map((cat) => {
+        if (cat.bc_status == "1") {
+          catval.push("'" + cat.bc_name + "'");
+        }
+      });
+      console.log("catVal catVal");
       let result = await ELPViewApiService("superadmin_getblog", {
         count: count,
         offset: offset,
-        category: "",
+        category: catval.join(","),
       });
       console.log(result);
       let blogList = [];
@@ -540,10 +563,16 @@ class Adminlistener extends Component {
   };
   getpressblogListHandler = async (offset, count) => {
     try {
+      let catval = [];
+      this.state.pressBlogCategory.map((cat) => {
+        if (cat.pbc_status == "1") {
+          catval.push("'" + cat.pbc_name + "'");
+        }
+      });
       let result = await ELPViewApiService("superadmin_get_press_blog", {
         count: count,
         offset: offset,
-        category: "",
+        category: catval.join(","),
       });
       console.log(result);
       let pressblogList = [];
@@ -573,6 +602,26 @@ class Adminlistener extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+  getBlogCat = (name, api) => {
+    let objBlog = [];
+    console.log(name, api);
+    // getpressblogcategory
+    ELPViewApiService(api, {}).then((result) => {
+      console.log(result.data.data);
+      if (result && result.status === 200) {
+        objBlog =
+          result && result.data && result.data.data ? result.data.data : [];
+      }
+      this.setState(
+        {
+          [name]: objBlog,
+        },
+        () => {
+          console.log(name, this.state[name]);
+        }
+      );
+    });
   };
   changepath = (path, backresult) => {
     console.log(path);
@@ -863,26 +912,45 @@ class Adminlistener extends Component {
       [name]: value,
     });
   };
-  handleCheckSearch = (e, type) => {
+  handleCheckSearch = (e, type, status) => {
     let { name, value, checked } = e.target;
     console.log(name, value, checked);
     let keywordArray = this.state.keywordArray;
+    let blogCategory = this.state.blogCategory;
+    let pressBlogCategory = this.state.pressBlogCategory;
     let catArray = this.state.catArray;
     if (type == "cat") {
       var index = catArray.findIndex((el) => el.value == value);
       catArray[index].flag = checked;
-    } else {
+    } else if (type == "keyword") {
       var index = keywordArray.findIndex((el) => el.value == value);
       keywordArray[index].flag = checked;
+    } else if (type == "blogCategory") {
+      var index = blogCategory.findIndex((el) => el.bc_id == value);
+      blogCategory[index].bc_status = status;
+    } else {
+      var index = pressBlogCategory.findIndex((el) => el.pbc_id == value);
+      console.log("index", index);
+      console.log("value", value);
+      pressBlogCategory[index].pbc_status = status;
     }
     this.setState(
       {
         keywordArray,
         catArray,
+        pressBlogCategory,
+        blogCategory,
       },
       () => {
         console.log(this.state.keywordArray);
         console.log(this.state.catArray);
+        console.log(this.state.pressBlogCategory);
+        console.log(this.state.blogCategory);
+        if (type == "blogCategory") {
+          this.getblogListHandler(1, 10);
+        } else if (type == "pressBlogCategory") {
+          this.getpressblogListHandler(1, 10);
+        }
       }
     );
   };
@@ -946,11 +1014,7 @@ class Adminlistener extends Component {
         console.log("result", result);
 
         if (result && result.status === 200) {
-          this.getSessionListing(
-            this.state.offset,
-            this.state.count,
-            1
-          );
+          this.getSessionListing(this.state.offset, this.state.count, 1);
         }
       }
     );
@@ -1752,7 +1816,7 @@ cs_time: "00:00:02" */}
                                   <div className="d-flex pt-4 pb-4 text-left border-grays">
                                     <div className="mr-4">
                                       <Image
-                                        src={item.u_image ? item.u_image : ""}
+                                        src={item.cs_image ? item.cs_image : ""}
                                         alt=""
                                         className="r50"
                                       />
@@ -1765,10 +1829,11 @@ cs_time: "00:00:02" */}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
                                             {/* {console.log(item)} */}
-                                            {/* {moment(item.cs_date).format(
-                                              "dddd MMM Do YYYY"
-                                            )}{" "} */}
-                                            {item.cs_date} {item.cs_time}
+                                            {moment(
+                                              new Date(item.cs_date)
+                                            ).format("dddd MMM Do YYYY")}{" "}
+                                            {/* {}  */}
+                                            {item.cs_time}
                                           </div>
                                         </div>
                                         <div className="col81 fs15 fs400 pr-3">
@@ -1782,7 +1847,7 @@ cs_time: "00:00:02" */}
                                           onClick={() =>
                                             this.changeStatusSession(
                                               item.cs_id,
-                                              1
+                                              2
                                             )
                                           }
                                         >
@@ -1993,7 +2058,7 @@ cs_time: "00:00:02" */}
                                   // value={item.flag}
                                   // checked={item.flag}
                                   onChange={(e) =>
-                                    this.handleCheckSearch(e, "keyword")
+                                    this.handleCheckSearch(e, "keyword", "")
                                   }
                                   // handleCheck={item.flag}
                                   value={item.value}
@@ -2017,26 +2082,27 @@ cs_time: "00:00:02" */}
                             <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
                               Category
                             </span>
-                            {this.state.catArray.map((item) => {
-                              return (
-                                <Form.Check
-                                  type="checkbox"
-                                  className="checkone checkboxTyp1 "
-                                  label={item.name}
-                                  id={item.value}
-                                  name={item.name}
-                                  // value={item.flag}
-                                  // checked={item.flag}
-                                  onChange={(e) =>
-                                    this.handleCheckSearch(e, "cat")
-                                  }
-                                  // handleCheck={item.flag}
-                                  value={item.value}
-                                  checked={item.flag == true}
-                                  // onChange={(e) => this.handleCheck(e)}
-                                />
-                              );
-                            })}
+                            {this.state.catArray &&
+                              this.state.catArray.map((item) => {
+                                return (
+                                  <Form.Check
+                                    type="checkbox"
+                                    className="checkone checkboxTyp1 "
+                                    label={item.name}
+                                    id={item.value}
+                                    name={item.name}
+                                    // value={item.flag}
+                                    // checked={item.flag}
+                                    onChange={(e) =>
+                                      this.handleCheckSearch(e, "cat", "")
+                                    }
+                                    // handleCheck={item.flag}
+                                    value={item.value}
+                                    checked={item.flag == true}
+                                    // onChange={(e) => this.handleCheck(e)}
+                                  />
+                                );
+                              })}
                           </Form.Group>
                         </Col>
 
@@ -2055,32 +2121,7 @@ cs_time: "00:00:02" */}
                         <Form.Group
                           controlId="formBasicCheckbox1"
                           className="row"
-                        >
-                          {/*         <Form.Check
-                            type="checkbox"
-                            className="checkone"
-                            label="Eat"
-                            name="Eat"
-                            // handleCheck={this.state.Eat}
-                            onChange={(e) => this.handleCheck(e)}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checktwo"
-                            label="Luv"
-                            name="Luv"
-                            // handleCheck={this.state.Luv}
-                            onChange={(e) => this.handleCheck(e)}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checkthree active"
-                            label="Pray"
-                            name="Pray"
-                            // handleCheck={this.state.Pray}
-                            onChange={(e) => this.handleCheck(e)}
-                          /> */}
-                        </Form.Group>
+                        ></Form.Group>
                       </div>
                     </Form>{" "}
                   </div>
@@ -2514,190 +2555,123 @@ cs_time: "00:00:02" */}
                           controlId="formBasicCheckbox1"
                           className="row"
                         >
-                          <Form.Check
-                            type="checkbox"
-                            className="checkone checkSet"
-                            label="Eat"
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checktwo"
-                            label="Luv"
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            className="checkthree active"
-                            label="Pray"
-                          />
+                          {this.state.pressBlogCategory &&
+                            this.state.pressBlogCategory.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className={`checkthree ${
+                                    item.pbc_status == "1" ? "active" : ""
+                                  }`}
+                                  label={item.pbc_name}
+                                  id={item.pbc_id}
+                                  name={item.pbc_name}
+                                  // value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(
+                                      e,
+                                      "pressBlogCategory",
+                                      item.pbc_status == "1" ? "0" : "1"
+                                    )
+                                  }
+                                  // handleCheck={item.flag}
+                                  value={item.pbc_id}
+                                  checked={item.pbc_status == "1"}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
                         </Form.Group>
                       </div>
                     </Form>
                   </div>
+                  {this.state.pressblogList &&
+                    this.state.pressblogList.map((item) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.pbl_image ? item.pbl_image : ""}
+                                alt=""
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {/* 
+                    pbl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
+  pbl_id: "9"
+  pbl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
+  pbl_status: "Active"
+  pbl_title: "Press blog"
+  pbl_written_by: "ife" */}
+                                      {item.pbl_title}
+                                    </div>
+                                    <div className="d-flex ml-auto">
+                                      <span className="mr-3">
+                                        <Image src={Editicon} alt="" />
+                                      </span>
+                                      <span>
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+                                  </div>
 
-                  <div className="adminlistener p-4 mb-3">
-                    <div className="d-flex text-left">
-                      <div className="mr-2 pt-1">
-                        <Image src={Requestuser} alt="" className="r50" />
-                      </div>
-                      <div className="pl-2 w-100">
-                        <div className="d-flex justify-content-between">
-                          <div className="w-100">
-                            <div className="d-flex">
-                              {/* 
-                              pbl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
-pbl_id: "8"
-pbl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
-pbl_status: "Active"
-pbl_title: "test blog" */}
-                              <div className="col1 fw600 fs18 pb-1">
-                                Andrew D’souza
+                                  <div className="mb-1">
+                                    <span className="fs16 fw400 col14">
+                                      Written by{" "}
+                                      <span className="col8">
+                                        {item.pbl_written_by}
+                                      </span>{" "}
+                                    </span>
+                                    <span className="ml-3">
+                                      <Image
+                                        src={blogclock}
+                                        className="wSet-20 mr-2"
+                                      />
+                                      {moment(item.pbl_time).format(
+                                        "dddd MMM Do YYYY HH:mm"
+                                      )}
+                                    </span>
+                                  </div>
+
+                                  <div className="fs16 fw400 col14 pb-1 e_detai">
+                                    <strong className="fw600">
+                                      Description:{" "}
+                                    </strong>
+                                    <span className="fs14">
+                                      {item.pbl_desc}
+                                    </span>
+                                  </div>
+
+                                  <div className="eat_category">
+                                    {item.press_blog_category &&
+                                      item.press_blog_category.map((val) => {
+                                        return (
+                                          <span className="eatcat">
+                                            {val.pbc_cat_name}
+                                          </span>
+                                        );
+                                      })}
+                                  </div>
+                                </div>
                               </div>
-                              <div className="d-flex ml-auto">
-                                <span className="pr-3 fs14 col47 fw400">
-                                  Active
-                                </span>
-                                <span className="pr-3 disabled">
-                                  <Form.Check
-                                    type="switch"
-                                    id="custom-switch5"
-                                    label=""
-                                    checked=""
-                                  />
-                                </span>
-                                <span>
-                                  <Image src={Deleteicon} alt="" />
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Age:</strong> 32 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Work Experince:</strong> 10 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Languages:</strong> Hindi, English and
-                              Marathi
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong className="m_w25">Education: </strong>
-                              <span>
-                                Master of Arts in Counselling
-                                psuchology,Columbia University Postgraduate
-                                diploma in Counselling psuchology,Columbia
-                                University
-                              </span>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong>Biogropy: </strong>
-                              <span>
-                                I enjoy working with individuals of all
-                                capacities as I view the role of therapist as
-                                one in which you help the client learn to cope
-                                with the pressures of daily life.
-                                <a className="col10">Read more...</a>
-                              </span>
-                            </div>
-
-                            <div className="eat_category">
-                              <span className="eatcat">Eat</span>
-                              <span className="luvcat">Luv</span>
-                              <span className="praycat">Pray</span>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="adminlistener p-4 mb-3">
-                    <div className="d-flex text-left">
-                      <div className="mr-2 pt-1">
-                        <Image src={Requestuser} alt="" className="r50" />
-                      </div>
-                      <div className="pl-2 w-100">
-                        <div className="d-flex justify-content-between">
-                          <div className="w-100">
-                            <div className="d-flex">
-                              <div className="col1 fw600 fs18 pb-1">
-                                Andrew D’souza
-                              </div>
-                              <div className="d-flex ml-auto">
-                                <span className="pr-3 fs14 col47 fw400">
-                                  Active
-                                </span>
-                                <span className="pr-3 disabled">
-                                  <Form.Check
-                                    type="switch"
-                                    id="custom-switch5"
-                                    label=""
-                                    checked=""
-                                  />
-                                </span>
-                                <span>
-                                  <Image src={Deleteicon} alt="" />
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Age:</strong> 32 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Work Experince:</strong> 10 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Languages:</strong> Hindi, English and
-                              Marathi
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong className="m_w25">Education: </strong>
-                              <span>
-                                Master of Arts in Counselling
-                                psuchology,Columbia University Postgraduate
-                                diploma in Counselling psuchology,Columbia
-                                University
-                              </span>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong>Biogropy: </strong>
-                              <span>
-                                I enjoy working with individuals of all
-                                capacities as I view the role of therapist as
-                                one in which you help the client learn to cope
-                                with the pressures of daily life.
-                                <a className="col10">Read more...</a>
-                              </span>
-                            </div>
-
-                            <div className="eat_category">
-                              <span className="eatcat">Eat</span>
-                              <span className="luvcat">Luv</span>
-                              <span className="praycat">Pray</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      );
+                    })}
                 </Col>
               ) : this.state.pageType == "blogList" ? (
                 <Col md={9} className="pl-1">
                   <div className="professor_search">
                     <Row className="mb-4">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">
-                          Professional listing
-                        </div>
+                        <div className="fs22 fw600 col10">Blog listing</div>
                         <div className="fw300 fs16 col14">
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div>
@@ -2707,11 +2681,9 @@ pbl_title: "test blog" */}
                           <Button
                             type="button"
                             className="btnTyp5"
-                            onClick={() =>
-                              this.changepath("/professionalSignup")
-                            }
+                            onClick={() => this.changepath("/BlogSignup")}
                           >
-                            create professional
+                            Create Blog
                           </Button>
                         </div>
                       </Col>
@@ -2722,7 +2694,7 @@ pbl_title: "test blog" */}
                           controlId="formBasicCheckbox1"
                           className="row"
                         >
-                          <Form.Check
+                          {/* <Form.Check
                             type="checkbox"
                             className="checkone checkSet"
                             label="Eat"
@@ -2736,161 +2708,123 @@ pbl_title: "test blog" */}
                             type="checkbox"
                             className="checkthree active"
                             label="Pray"
-                          />
+                          /> */}
+                          {this.state.blogCategory &&
+                            this.state.blogCategory.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className="checkthree active"
+                                  className={`checkthree ${
+                                    item.bc_status == "1" ? "active" : ""
+                                  }`}
+                                  label={item.bc_name}
+                                  id={item.bc_id}
+                                  name={item.bc_name}
+                                  // value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(
+                                      e,
+                                      "blogCategory",
+                                      item.bc_status == "1" ? "0" : "1"
+                                    )
+                                  }
+                                  // handleCheck={item.flag}
+                                  value={item.bc_id}
+                                  checked={item.bc_status == "1"}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
                         </Form.Group>
                       </div>
                     </Form>
                   </div>
+                  {this.state.blogList &&
+                    this.state.blogList.map((item) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.bl_image ? item.bl_image : ""}
+                                alt=""
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {/* 
+                    bl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
+  bl_id: "9"
+  bl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
+  bl_status: "Active"
+  bl_title: "Press blog"
+  bl_written_by: "ife" */}
+                                      {item.bl_title}
+                                    </div>
+                                    <div className="d-flex ml-auto">
+                                      <span className="mr-3">
+                                        <Image src={Editicon} alt="" />
+                                      </span>
+                                      <span>
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+                                  </div>
 
-                  <div className="adminlistener p-4 mb-3">
-                    <div className="d-flex text-left">
-                      <div className="mr-2 pt-1">
-                        <Image src={Requestuser} alt="" className="r50" />
-                      </div>
-                      <div className="pl-2 w-100">
-                        <div className="d-flex justify-content-between">
-                          <div className="w-100">
-                            <div className="d-flex">
-                              <div className="col1 fw600 fs18 pb-1">
-                                Andrew D’souza
+                                  <div className="mb-1">
+                                    <span className="fs16 fw400 col14">
+                                      Written by{" "}
+                                      <span className="col8">
+                                        {item.bl_written_by}
+                                      </span>{" "}
+                                    </span>
+                                    <span className="ml-3">
+                                      <Image
+                                        src={blogclock}
+                                        className="wSet-20 mr-2"
+                                      />
+                                      {moment(item.bl_time).format(
+                                        "dddd MMM Do YYYY HH:mm"
+                                      )}
+                                    </span>
+                                  </div>
+
+                                  <div className="fs16 fw400 col14 pb-1 e_detai">
+                                    <strong className="fw600">
+                                      Description:{" "}
+                                    </strong>
+                                    <span className="fs14">{item.bl_desc}</span>
+                                  </div>
+
+                                  <div className="eat_category">
+                                    {item.blog_category.map((val) => {
+                                      return (
+                                        <span
+                                          className={
+                                            val.buc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val == "Luv"
+                                              ? "luvcat"
+                                              : "praycat"
+                                          }
+                                        >
+                                          {val.buc_cat_name}
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
                               </div>
-                              <div className="d-flex ml-auto">
-                                <span className="pr-3 fs14 col47 fw400">
-                                  Active
-                                </span>
-                                <span className="pr-3 disabled">
-                                  <Form.Check
-                                    type="switch"
-                                    id="custom-switch5"
-                                    label=""
-                                    checked=""
-                                  />
-                                </span>
-                                <span>
-                                  <Image src={Deleteicon} alt="" />
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Age:</strong> 32 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Work Experince:</strong> 10 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Languages:</strong> Hindi, English and
-                              Marathi
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong className="m_w25">Education: </strong>
-                              <span>
-                                Master of Arts in Counselling
-                                psuchology,Columbia University Postgraduate
-                                diploma in Counselling psuchology,Columbia
-                                University
-                              </span>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong>Biogropy: </strong>
-                              <span>
-                                I enjoy working with individuals of all
-                                capacities as I view the role of therapist as
-                                one in which you help the client learn to cope
-                                with the pressures of daily life.
-                                <a className="col10">Read more...</a>
-                              </span>
-                            </div>
-
-                            <div className="eat_category">
-                              <span className="eatcat">Eat</span>
-                              <span className="luvcat">Luv</span>
-                              <span className="praycat">Pray</span>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="adminlistener p-4 mb-3">
-                    <div className="d-flex text-left">
-                      <div className="mr-2 pt-1">
-                        <Image src={Requestuser} alt="" className="r50" />
-                      </div>
-                      <div className="pl-2 w-100">
-                        <div className="d-flex justify-content-between">
-                          <div className="w-100">
-                            <div className="d-flex">
-                              <div className="col1 fw600 fs18 pb-1">
-                                Andrew D’souza
-                              </div>
-                              <div className="d-flex ml-auto">
-                                <span className="pr-3 fs14 col47 fw400">
-                                  Active
-                                </span>
-                                <span className="pr-3 disabled">
-                                  <Form.Check
-                                    type="switch"
-                                    id="custom-switch5"
-                                    label=""
-                                    checked=""
-                                  />
-                                </span>
-                                <span>
-                                  <Image src={Deleteicon} alt="" />
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Age:</strong> 32 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Work Experince:</strong> 10 years
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1">
-                              <strong>Languages:</strong> Hindi, English and
-                              Marathi
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong className="m_w25">Education: </strong>
-                              <span>
-                                Master of Arts in Counselling
-                                psuchology,Columbia University Postgraduate
-                                diploma in Counselling psuchology,Columbia
-                                University
-                              </span>
-                            </div>
-
-                            <div className="fs14 fw400 col14 pb-1 e_detai">
-                              <strong>Biogropy: </strong>
-                              <span>
-                                I enjoy working with individuals of all
-                                capacities as I view the role of therapist as
-                                one in which you help the client learn to cope
-                                with the pressures of daily life.
-                                <a className="col10">Read more...</a>
-                              </span>
-                            </div>
-
-                            <div className="eat_category">
-                              <span className="eatcat">Eat</span>
-                              <span className="luvcat">Luv</span>
-                              <span className="praycat">Pray</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      );
+                    })}
                 </Col>
               ) : (
                 <Col md={8} lg={9} className="pl-1">

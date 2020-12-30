@@ -36,7 +36,8 @@ class Myprofile extends Component {
     };
   }
   componentDidMount() {
-    // console.log(this.props.location.state.isReadMore)
+    console.log(this.props.location.state);
+    console.log(this.props);
     console.log(this.props.match.params.id);
     console.log(this.props.match.params.type);
     this.getProffDetails(
@@ -46,19 +47,22 @@ class Myprofile extends Component {
     );
   }
 
-
   getProffDetails = (type) => {
     let data = {
       userid: this.props.match.params.id,
     };
 
-    if (this.props.location.state.isReadMore) {
-      ELPViewApiService("corporateprofessionaluserdetail", { userid: this.props.match.params.id })
+    if (this.props.location.state && this.props.location.state.isReadMore) {
+      ELPViewApiService("corporateprofessionaluserdetail", {
+        userid: this.props.match.params.id,
+      })
         .then((result) => {
           let proffDetail = [];
           if (result && result.status === 200) {
             proffDetail =
-              result && result.data && result.data.data ? result.data.data[0] : [];
+              result && result.data && result.data.data
+                ? result.data.data[0]
+                : [];
           }
           this.setState(
             {
@@ -71,14 +75,16 @@ class Myprofile extends Component {
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     } else {
       ELPViewApiService(type, data).then((result) => {
         console.log("result", result);
         let proffDetail = [];
         if (result && result.status === 200) {
           proffDetail =
-            result && result.data && result.data.data ? result.data.data[0] : [];
+            result && result.data && result.data.data
+              ? result.data.data[0]
+              : [];
         }
         this.setState(
           {
@@ -88,12 +94,9 @@ class Myprofile extends Component {
             console.log("ProffDetail", this.state.proffDetail);
           }
         );
-      })
+      });
     }
-
-
-
-  }
+  };
   render() {
     let proffDetail = this.state.proffDetail;
     return (
@@ -148,14 +151,71 @@ class Myprofile extends Component {
                               {proffDetail.u_lang}
                             </span>
                           </div>
-
                           <div className="col3 fw500 mt-1 mb-2">
-                            DOB:
+                            Keywords:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.professional_keyword &&
+                                proffDetail.professional_keyword.map((item , index) => {
+                                  return (
+                                    <>
+                                      {item.pk_keyword}
+                                      {index + 1 ==
+                                      proffDetail.professional_cat_name.length
+                                        ? ""
+                                        : ","}{" "}
+                                    </>
+                                  );
+                                })}
+                            </span>
+                          </div>
+                          <div className="col3 fw500 mt-1 mb-2">
+                            Category:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.professional_cat_name &&
+                                proffDetail.professional_cat_name.map(
+                                  (item, index) => {
+                                    return (
+                                      <>
+                                        {item.pu_cat_name}
+                                        {index + 1 ==
+                                        proffDetail.professional_cat_name.length
+                                          ? ""
+                                          : ","}{" "}
+                                      </>
+                                    );
+                                  }
+                                )}
+                            </span>
+                          </div>
+                          <div className="col3 fw500 mt-1 mb-2">
+                            Services:
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.u_area_service &&
+                                proffDetail.u_area_service
+                                  .split(",")
+                                  .map((item, index) => {
+                                    return (
+                                      <>
+                                        {item}{" "}
+                                        {index + 1 ==
+                                        proffDetail.u_area_service.split(",")
+                                          .length
+                                          ? ""
+                                          : ","}{" "}
+                                      </>
+                                    );
+                                  })}
+                            </span>
+                          </div>
+                          <div className="col3 fw500 mt-1 mb-2">
+                            Age:
                             <span className="col14 fw400 ml-2">
                               {proffDetail.u_birthdate}
                             </span>
                           </div>
-
+                          {/* professional_cat_name: [{pu_cat_id: "2", pu_cat_name: "Luv"}, {pu_cat_id: "1", pu_cat_name: "Eat"},…]
+professional_keyword: [{pk_keyword: "Nutritionst"}]
+u_area_service: */}
                           <div className="d-flex mt-4">
                             <Button
                               variant="primary"
@@ -167,24 +227,24 @@ class Myprofile extends Component {
                             {this.props.match.params.type == "admin" ? (
                               ""
                             ) : (
-                                <>
-                                  <Button
-                                    variant="primary"
-                                    type="submit"
-                                    className="btnTyp5 mr-3"
-                                  >
-                                    Call
+                              <>
+                                <Button
+                                  variant="primary"
+                                  type="submit"
+                                  className="btnTyp5 mr-3"
+                                >
+                                  Call
                                 </Button>
 
-                                  <Button
-                                    variant="primary"
-                                    type="submit"
-                                    className="btnTyp5"
-                                  >
-                                    BOOK A SESSION
+                                <Button
+                                  variant="primary"
+                                  type="submit"
+                                  className="btnTyp5"
+                                >
+                                  BOOK A SESSION
                                 </Button>
-                                </>
-                              )}
+                              </>
+                            )}
                           </div>
                         </div>
                       </Col>
