@@ -1962,7 +1962,7 @@ export default {
   },
   superadmingetcorporatedomain: {
     url: "elp/superadmingetcorporatedomain",
-    method: "GET",
+    method: "POST",
     data: { count: "", offset: "" },
     showResultMessage: false,
     showErrorMessage: false,

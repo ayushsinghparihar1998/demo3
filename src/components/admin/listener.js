@@ -695,6 +695,12 @@ class Adminlistener extends Component {
         this.getBlockuserListing(page, this.state.count, this.state.block_type);
       } else if (this.state.pageType == "reviewList") {
         this.getReviewListing(page, this.state.count, this.state.review_type);
+      } else if (this.state.pageType == "blogList") {
+        this.getBlockuserListing(page, this.state.count);
+      } else if (this.state.pageType == "pressblogList") {
+        this.getpressblogListHandler(page, this.state.count);
+      } else if (this.state.pageType == "domainList") {
+        this.getDomainListing(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
           page,
@@ -1359,7 +1365,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" />  
+                          <Image src={Menuicon} alt="" className="mr-1" />
                           PRESS BLOG LIST
                         </div>
                       </div>
