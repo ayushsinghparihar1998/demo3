@@ -41,7 +41,40 @@ class ProfessinalBlogPress extends Component {
     console.log(" this.props.match", this.props.match);
 
     this.getProffCat();
+    console.log(this.props.match.params.id);
+    console.log(this.props);
+    if (this.props.match.params.id > 0) {
+      this.getpressBlogDetails();
+    }
   }
+  getpressBlogDetails = () => {
+    let data = {
+      pbl_id: this.props.match.params.id,
+    };
+
+    ELPViewApiService("superadmingetcorporatepressBlogdetailsbyid", data).then(
+      (result) => {
+        console.log("result", result);
+        let pressBlogObj = {};
+        if (result && result.status === 200) {
+          pressBlogObj =
+            result && result.data && result.data.data
+              ? result.data.data.pressBlog_details_list[0]
+              : [];
+        }
+        pressBlogObj.pbl_audio_min = "" + pressBlogObj.pbl_audio_min / 60;
+        pressBlogObj.pbl_video_min = "" + pressBlogObj.pbl_video_min / 60;
+        this.setState(
+          {
+            pressBlogObj,
+          },
+          () => {
+            console.log("pressBlogObj", this.state.pressBlogObj);
+          }
+        );
+      }
+    );
+  };
   getProffCat = () => {
     let proffCat = this.state.proffCat;
 

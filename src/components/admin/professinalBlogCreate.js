@@ -41,8 +41,40 @@ class ProfessinalBlogCreate extends Component {
   };
   componentDidMount() {
     this.getProffCat();
+    console.log(this.props.match.params.id);
+    console.log(this.props);
+    if (this.props.match.params.id > 0) {
+      this.getblogDetails();
+    }
   }
+  getblogDetails = () => {
+    let data = {
+      pbl_id: this.props.match.params.id,
+    };
 
+    ELPViewApiService("superadmingetcorporateblogdetailsbyid", data).then(
+      (result) => {
+        console.log("result", result);
+        let blogObj = {};
+        if (result && result.status === 200) {
+          blogObj =
+            result && result.data && result.data.data
+              ? result.data.data.blog_details_list[0]
+              : [];
+        }
+        blogObj.pbl_audio_min = "" + blogObj.pbl_audio_min / 60;
+        blogObj.pbl_video_min = "" + blogObj.pbl_video_min / 60;
+        this.setState(
+          {
+            blogObj,
+          },
+          () => {
+            console.log("blogObj", this.state.blogObj);
+          }
+        );
+      }
+    );
+  };
   getProffCat = () => {
     const { url } = this.props.match;
 

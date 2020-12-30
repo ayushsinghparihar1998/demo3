@@ -103,7 +103,6 @@ class Adminlistener extends Component {
     };
   }
   componentDidMount() {
- 
     this.getBlogCat("blogCategory", "getblogcategory");
     this.getBlogCat("pressBlogCategory", "getpressblogcategory");
     console.log("get", getLocalStorage("tabToOpen"));
@@ -2539,8 +2538,8 @@ cs_time: "00:00:02" */}
                             className="btnTyp5"
                             onClick={() =>
                               this.changepath(
-                                "/professionalSignup",
-                                "getProffListing"
+                                `/professinalBlogPress/0`,
+                                "getpressblogListHandler"
                               )
                             }
                           >
@@ -2613,7 +2612,16 @@ cs_time: "00:00:02" */}
                                     </div>
                                     <div className="d-flex ml-auto">
                                       <span className="mr-3">
-                                        <Image src={Editicon} alt="" />
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changepath(
+                                              `/professinalBlogPress/${item.pbl_id}`,
+                                              "getpressblogListHandler"
+                                            )
+                                          }
+                                        />
                                       </span>
                                       <span>
                                         <Image src={Deleteicon} alt="" />
@@ -2681,7 +2689,12 @@ cs_time: "00:00:02" */}
                           <Button
                             type="button"
                             className="btnTyp5"
-                            onClick={() => this.changepath("/BlogSignup")}
+                            onClick={() =>
+                              this.changepath(
+                                `/professinalBlogCreate/0`,
+                                "getblogListHandler"
+                              )
+                            }
                           >
                             Create Blog
                           </Button>
@@ -2757,18 +2770,20 @@ cs_time: "00:00:02" */}
                                 <div className="w-100">
                                   <div className="d-flex">
                                     <div className="col1 fw600 fs18 pb-1">
-                                      {/* 
-                    bl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
-  bl_id: "9"
-  bl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
-  bl_status: "Active"
-  bl_title: "Press blog"
-  bl_written_by: "ife" */}
                                       {item.bl_title}
                                     </div>
                                     <div className="d-flex ml-auto">
                                       <span className="mr-3">
-                                        <Image src={Editicon} alt="" />
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changepath(
+                                              `/professinalBlogCreate/${item.bl_id}`,
+                                              "getblogListHandler"
+                                            )
+                                          }
+                                        />
                                       </span>
                                       <span>
                                         <Image src={Deleteicon} alt="" />

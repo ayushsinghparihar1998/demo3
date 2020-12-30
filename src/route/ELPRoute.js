@@ -189,8 +189,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/adminPressListing" component={AdminPressListing} />    
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
-          <PublicRoute path="/professinalBlogCreate" component={ProfessinalBlogCreate} />
-          <PublicRoute path="/professinalBlogPress" component={ProfessinalBlogPress} />               
+          <PublicRoute path="/professinalBlogCreate/:id" component={ProfessinalBlogCreate} />
+          <PublicRoute path="/professinalBlogPress/:id" component={ProfessinalBlogPress} />               
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
