@@ -140,7 +140,8 @@ class ChatUser extends Component {
     }
   }
   componentDidMount() {
-
+    
+    
     ELPRxApiService("getprofile").then(res => {
       console.log('res == .. image', res)
 

@@ -216,7 +216,8 @@ class Userdashboard extends Component {
    };
    handleRedirectRecentChat = (data) => () => {
       const { user_id } = this.state;
-      const id = data.from_user_id === user_id ? data.to_user_id : data.from_user_id;
+      console.log('___data___',data,user_id)
+      const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
       this.props.history.push({
          pathname: '/chatuser/' + id,
 
@@ -429,7 +430,7 @@ class Userdashboard extends Component {
                                     <Image src={Creditcard} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
                                        {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
-                                       Remaining Credits
+                                       Remaining Credits : {dashboardData.u_premium_referal_credit}
                                    </span>
                                  </div>
                               </div>

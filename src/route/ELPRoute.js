@@ -242,7 +242,9 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
           <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRoutes path="/listener-browse" component={listenerBrowse} />
-          <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
+          
+          <Route path="/chatuser/:id" render={(props) => <ChatUser {...props}/>}  />
+
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           <PrivateRoutes path="/mysetting" component={MySetting} />
           <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />

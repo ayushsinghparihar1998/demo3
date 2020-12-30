@@ -26,8 +26,10 @@ import Videomuteov from "../../assets/images/mute_ov.svg";
 import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import CONSTANTS from "../../common/helpers/Constants";
-import { getLocalStorage } from "../../common/helpers/Utils";
-
+import {
+  getLocalStorage
+} from "../../common/helpers/Utils";
+import constant from "../../constant";
 // import Videomute from "../../assets/images/mute.svg"; 
 // import Videomuteov from "../../assets/images/mute_ov.svg";  
 
@@ -332,6 +334,16 @@ const Videocall = (props) => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
       setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`)
+      if (getLocalStorage('customerInfo') && getLocalStorage('customerInfo').u_role_id == constant.roles.CORPORATE_CUSTOMER) {
+        socket.emit('updateTime', { "user_id": userDetails.id, type: 'audio' }, data => {
+          // console.log("userDetail data", data);
+          if (data.success == 2) {
+            disconnect();
+          } else {
+            // handle odd scenario
+          }
+        })
+      }
     }, 1000)
   }
   return (
@@ -341,7 +353,7 @@ const Videocall = (props) => {
           reciver_id: paramsid,
           reciver_type: userDetails?.u_role_id,
           type: "Video",
-          disconnect:disconnect
+          disconnect: disconnect
         }} />
       </div>
       <div className="videochat">
@@ -359,7 +371,7 @@ const Videocall = (props) => {
               {/* <Image src={Videousertwo} alt="" className="mw-250" /> */}
             </div>
             {
-              userMuted ? <div style={{ textAlign: 'center' }} className="fs16 col18 fw300"><Image style={{width:'18px'}} src={VideomuteInverse} alt="" /> {userDetails?.u_name + ' muted this call'}</div> : null
+              userMuted ? <div style={{ textAlign: 'center' }} className="fs16 col18 fw300"><Image style={{ width: '18px' }} src={VideomuteInverse} alt="" /> {userDetails?.u_name + ' muted this call'}</div> : null
             } <br />
 
             <div style={{ textAlign: 'center' }} className="fs16 col18 fw300">{timerStr ? timerStr : 'Connecting...'}</div> <br />

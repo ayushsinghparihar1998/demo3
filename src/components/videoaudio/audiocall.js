@@ -28,7 +28,10 @@ import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
-
+import {
+  getLocalStorage
+} from "../../common/helpers/Utils";
+import constant from "../../constant";
 
 const socket = socketClass.getSocket();
 let tmp = 0;
@@ -93,7 +96,18 @@ const AudioCall = (props) => {
     callTimerRef.current = setInterval(() => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
-      setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`)
+      setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`);
+      if(getLocalStorage('customerInfo')&&getLocalStorage('customerInfo').u_role_id == constant.roles.CORPORATE_CUSTOMER){
+        socket.emit('updateTime', { "user_id": userDetails.id,type:'video' }, data => {
+          // console.log("userDetail data", data);
+          if (data.success == 2) {
+            disconnect();
+          } else {
+            // handle odd scenario
+          }
+        })
+      }
+     
     }, 1000)
   }
   const getUserDetails = (id) => {
