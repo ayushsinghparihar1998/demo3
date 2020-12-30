@@ -1888,7 +1888,7 @@ cs_time: "00:00:02" */}
                                   <div className="d-flex pt-4 pb-4 text-left border-grays">
                                     <div className="mr-4">
                                       <Image
-                                        src={item.u_image ? item.u_image : ""}
+                                        src={item.cs_image ? item.cs_image : ""}
                                         alt=""
                                         className="r50"
                                       />
@@ -1925,7 +1925,7 @@ cs_time: "00:00:02" */}
                                   <div className="d-flex pt-4 pb-4 text-left border-grays">
                                     <div className="mr-4">
                                       <Image
-                                        src={item.u_image ? item.u_image : ""}
+                                        src={item.cs_image ? item.cs_image : ""}
                                         alt=""
                                         className="r50"
                                       />

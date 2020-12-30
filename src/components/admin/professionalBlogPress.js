@@ -445,7 +445,7 @@ class ProfessinalBlogPress extends Component {
                       type="button"
                       onClick={() => this._saveBlogHandler()}
                     >
-                      create
+                      {this.props.match.params.id > 0 ? "Update" : "create"}
                     </Button>
                   </Form>
                 </div>

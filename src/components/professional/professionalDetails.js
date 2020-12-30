@@ -69,7 +69,7 @@ class Myprofile extends Component {
       userid: this.props.match.params.id,
     };
 
-    if (this.props.location.state.isReadMore) {
+    if (this.props.location.state && this.props.location.state.isReadMore) {
       ELPViewApiService("corporateprofessionaluserdetail", {
         userid: this.props.match.params.id,
       })

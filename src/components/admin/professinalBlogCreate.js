@@ -156,7 +156,7 @@ class ProfessinalBlogCreate extends Component {
     let catar = [];
     this.state.proffCat.map((item) => {
       if (item.bc_status == "1") {
-        console.log('itemcat' , item);
+        console.log("itemcat", item);
         item.bc_cat_id = item.bc_id;
         item.bc_cat_name = item.bc_name;
         catar.push(item);
@@ -468,7 +468,7 @@ class ProfessinalBlogCreate extends Component {
                       type="button"
                       onClick={() => this._saveBlogHandler()}
                     >
-                      create
+                      {this.props.match.params.id > 0 ? "Update" : "create"}
                     </Button>
                   </Form>
                 </div>
