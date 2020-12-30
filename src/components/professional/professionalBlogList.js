@@ -93,10 +93,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
-
-
-
+        } 
     getBlogAll = () => {
         ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Eat','Luv','Pray'" })
             .then((res) => {
@@ -106,9 +103,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
-
-
+        }     
     getBlogdetails = (blog_id) => {
         ELPRxApiService("getBlogdetails", { bl_id: blog_id })
             .then((res) => {
@@ -119,8 +114,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
-
+        }       
     render() {
         return (
             <div className="page__wrapper innerpage">
@@ -145,7 +139,7 @@ class ProfessionalBlogList extends Component {
                                                             <Row>
                                                                 {this.state.blogAll && this.state.blogAll.map((data, i) =>
                                                                     this.state.offset > i ? (
-                                                                        <Col md={6} className="mb-4">
+                                                                        <Col md={12} className="mb-4 mdblogs">
                                                                             <div className="fw600 fs20 col64 mb-3">
                                                                                 {data.bl_title}
                                                                             </div>

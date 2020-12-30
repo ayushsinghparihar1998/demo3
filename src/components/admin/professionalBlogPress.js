@@ -281,10 +281,10 @@ class ProfessinalBlogPress extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember layout_box">
-                  <div className="fs28 col10 fw600">Create Press</div>
-                  <div className="col14 fs16 fw300 mt-1 mb-4">
+                  <div className="fs28 col10 fw600 mb-3">Create Press</div>
+                  {/* <div className="col14 fs16 fw300 mt-1 mb-4">
                     Lorem Ipsum is simply dummy and typesetting industry.
-                  </div>
+                  </div> */} 
                   <Form>
                     <Form.Group>
                       <Form.Label className="col14 fw600 fs18">
