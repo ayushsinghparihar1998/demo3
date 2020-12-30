@@ -473,6 +473,14 @@
                 }
             }
             .subscribes {
+                position: relative;
+                &>.text-center {
+                    min-height: 220px;
+                    &>img {
+                        height: 200px;
+                        object-fit: cover; 
+                    }
+                }
                 img {
                     width: 100%;
                 }
@@ -639,7 +647,7 @@
             border-radius: 20px;
             margin-right: 10px;
             font-size: 15px;
-            cursor: pointer;
+            cursor: default;
         }
         span.luvcat { 
             background: $col99; 
@@ -648,7 +656,7 @@
             border-radius: 20px;
             margin-right: 10px;
             font-size: 15px;
-            cursor: pointer; 
+            cursor: default; 
         }
         span.praycat { 
             background: $col100; 
@@ -656,8 +664,8 @@
             padding: 7px 20px;
             border-radius: 20px;
             font-size: 15px;
-            cursor: pointer;
-            margin-right: 10px; 
+            cursor: default; 
+            margin-right: 10px;  
         }
         span.featureone {  
             border: solid 1px #ccc; 
@@ -701,7 +709,7 @@
             }
             &.checkfirst {
                 label {
-                    padding-left: .5rem; 
+                    padding-left: 0rem;  
                 }
             }
         }

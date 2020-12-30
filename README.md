@@ -91,4 +91,14 @@ member login on videocall
 elnp123@outlook.com
 lms@123
 
+<!-- Updated member login details -->
 
+current member updated details 
+
+niharika@lms.com
+
+Abc@1234
+
+niharika.gupta@adobe.com
+
+Abc@1234 
