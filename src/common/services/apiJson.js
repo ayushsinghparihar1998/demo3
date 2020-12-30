@@ -565,14 +565,14 @@ export default {
         method: "GET",
         data: {},
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getBlogDetail: {
         url: "elp/getBlogdetails",
         method: "POST",
         data: {bl_id: ""},
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getCategoryList: {
         url: "elp/autoconnectgetallcategories",
@@ -935,35 +935,35 @@ export default {
         method: "POST",
         data: { offset: 0, count: '', category: '' },
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getblog: {
         url: "elp/getblog",
         method: "POST",
         data: { offset: 0, count: '', category: '' },
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getBlogdetails: {
         url: "elp/getBlogdetails",
         method: "POST",
         data: { bl_id: '' },
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getlatestblog: {
         url: "elp/getlatestblog",
         method: "POST",
         data: {},
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     },
     getpressblogcategory: {
         url: "elp/getpressblogcategory",
         method: "POST",
         data: {},
         showResultMessage: false,
-        showErrorMessage: true,
+        showErrorMessage: false,
     }
 
 };
