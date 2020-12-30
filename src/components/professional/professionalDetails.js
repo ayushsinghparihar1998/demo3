@@ -13,6 +13,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
+import NavBarAdmin from "../core/navAdmin";
+
 import Footer from "../core/footer";
 import Profileban from "../../assets/images/profile_ban.svg";
 import { Link } from "react-router-dom";
@@ -25,7 +27,6 @@ import { actionGetProfile } from "../../common/redux/actions";
 import * as moment from "moment";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
-import NavBarAdmin from "../core/navAdmin";
 import Ritikaimg from "../../assets/images/Ritika.png";
 import ELPViewApiService from "../../common/services/apiService";
 import Crossbtn from "../../assets/images/blue_cross.svg";
@@ -184,7 +185,11 @@ class Myprofile extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+          {this.props.match.params.type == "admin" ? (
+            <NavBarAdmin {...this.props} />
+          ) : (
+            <NavBar {...this.props} />
+          )}
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>

@@ -8,7 +8,7 @@ import {
   Modal,
   Image,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { connect } from "react-redux";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";

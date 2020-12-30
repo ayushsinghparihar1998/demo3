@@ -13,7 +13,7 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
