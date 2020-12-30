@@ -93,7 +93,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-        } 
+    }
     getBlogAll = () => {
         ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Eat','Luv','Pray'" })
             .then((res) => {
@@ -103,7 +103,7 @@ class ProfessionalBlogList extends Component {
             .catch((err) => {
                 console.log(err);
             })
-        }
+    }
     getBlogdetails = (blog_id) => {
         ELPRxApiService("getBlogdetails", { bl_id: blog_id })
             .then((res) => {
@@ -151,12 +151,12 @@ class ProfessionalBlogList extends Component {
                                                                                     <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
                                                                                     <span>
                                                                                         <Image src={blogclock} className="wSet-20 mr-2" />
-                                                             11 Minute read
-                                                         </span>
+                                                                                        11 Minute read
+                                                                                    </span>
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="col64 fs16 fw400">
-                                                                                {data.bl_desc}
+                                                                            <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                                {/* {data.bl_desc} */}
                                                                             </div>
                                                                         </Col>) : null
                                                                 )}
@@ -177,7 +177,7 @@ class ProfessionalBlogList extends Component {
                                                         {/* Detailed Blog */}
                                                         {this.state.blogDetailed && this.state.blogDetailed.map(data =>
                                                             <Col md={7}>
-                                                                <div className="fw600 fs20 col64 mb-4">
+                                                                <div className="fw600 fs20 col64 mb-4" >
                                                                     {data.bl_title}
                                                                 </div>
                                                                 <Image src={data.bl_image} className="w-100" />
@@ -189,8 +189,9 @@ class ProfessionalBlogList extends Component {
                                                                             <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col14 fs18 fw400">
-                                                                    {data.bl_written_by}
+
+                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                    {/* {data.bl_desc} */}
                                                                 </div>
                                                             </Col>
                                                         )}
@@ -208,7 +209,7 @@ class ProfessionalBlogList extends Component {
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
                                                             <Row>
                                                                 <Col md={9}>
-                                                                    <div className="">
+                                                                    <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
                                                                         <div className="col64 fs17 fw500">
                                                                             {data.bl_title}
                                                                         </div>
@@ -297,8 +298,8 @@ class ProfessionalBlogList extends Component {
                                                     </span>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="col64 fs16 fw400">
-                                                                        {data.bl_desc}
+                                                                    <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                        {/* {data.bl_desc} */}
                                                                     </div>
                                                                 </Col>) : null
                                                             )}
@@ -326,8 +327,8 @@ class ProfessionalBlogList extends Component {
                                                                             <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col14 fs18 fw400">
-                                                                    {data.bl_written_by}
+                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                    {/* {data.bl_desc} */}
                                                                 </div>
                                                             </Col>
                                                         )}
@@ -340,7 +341,7 @@ class ProfessionalBlogList extends Component {
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
                                                             <Row>
                                                                 <Col md={9}>
-                                                                    <div className="">
+                                                                    <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
                                                                         <div className="col64 fs17 fw500">
                                                                             {data.bl_title}
                                                                         </div>
@@ -427,8 +428,8 @@ class ProfessionalBlogList extends Component {
                                                      </span>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="col64 fs16 fw400">
-                                                                            {data.bl_desc}
+                                                                        <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                            {/* {data.bl_desc} */}
                                                                         </div>
                                                                     </Col>
                                                                 ) : null
@@ -457,8 +458,8 @@ class ProfessionalBlogList extends Component {
                                                                             <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col14 fs18 fw400">
-                                                                    {data.bl_written_by}
+                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                    {/* {data.bl_desc} */}
                                                                 </div>
                                                             </Col>
                                                         )}
@@ -471,7 +472,7 @@ class ProfessionalBlogList extends Component {
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
                                                             <Row>
                                                                 <Col md={9}>
-                                                                    <div className="">
+                                                                    <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
                                                                         <div className="col64 fs17 fw500">
                                                                             {data.bl_title}
                                                                         </div>
@@ -553,12 +554,12 @@ class ProfessionalBlogList extends Component {
                                                                                 <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
                                                                                 <span>
                                                                                     <Image src={blogclock} className="wSet-20 mr-2" />
-                                                         11 Minute read
-                                                     </span>
+                                                                                        11 Minute read
+                                                                                    </span>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="col64 fs16 fw400">
-                                                                            {data.bl_desc}
+                                                                        <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                            {/* {data.bl_desc} */}
                                                                         </div>
                                                                     </Col>
                                                                 ) : null
@@ -587,8 +588,8 @@ class ProfessionalBlogList extends Component {
                                                                             <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col14 fs18 fw400">
-                                                                    {data.bl_written_by}
+                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
+                                                                    {/* {data.bl_desc} */}
                                                                 </div>
                                                             </Col>
                                                         )}
@@ -601,7 +602,7 @@ class ProfessionalBlogList extends Component {
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
                                                             <Row>
                                                                 <Col md={9}>
-                                                                    <div className="">
+                                                                    <div className="" onClick={() => {this.getBlogdetails(data.bl_id)}} >
                                                                         <div className="col64 fs17 fw500">
                                                                             {data.bl_title}
                                                                         </div>
@@ -661,7 +662,8 @@ class ProfessionalBlogList extends Component {
                                                     </Row>
                                                 </Container>
 
-                                            </div>                            </div>
+                                            </div>
+                                        </div>
                                     </Tab>
                                 </Tabs>
 

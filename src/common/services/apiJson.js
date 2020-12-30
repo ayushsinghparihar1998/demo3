@@ -966,6 +966,69 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+  login: {
+    url: "elp/listner_login",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  professionalLogin: {
+    url: "elp/professional_login",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+
+  switchtocorporatemember: {
+    url: "elp/switchtocorporatemember",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getpressblog: {
+    url: "elp/getpressblog",
+    method: "POST",
+    data: { offset: 0, count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getblog: {
+    url: "elp/getblog",
+    method: "POST",
+    data: { offset: 0, count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getBlogdetails: {
+    url: "elp/getBlogdetails",
+    method: "POST",
+    data: { bl_id: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getlatestblog: {
+    url: "elp/getlatestblog",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getpressblogcategory: {
+    url: "elp/getpressblogcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
   userLogin: {
     url: "elp/customer_login",
     method: "POST",
@@ -2058,13 +2121,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  getblog: {
-    url: "elp/getblog",
-    method: "POST",
-    data: { offset: 0, count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+
   getBlogdetails: {
     url: "elp/getBlogdetails",
     method: "POST",
@@ -2084,7 +2141,7 @@ export default {
     method: "POST",
     data: {},
     showResultMessage: false,
-    showErrorMessage: true,
+    showErrorMessage: false,
   },
 
   superadmingetcorporateappointmentlist: {
