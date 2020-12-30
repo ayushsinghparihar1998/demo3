@@ -16,284 +16,212 @@ import Subscribes from "../../assets/images/subscribes.svg";
 import BlogProcessOne from "../../assets/images/p_blogs.svg";
 import BlogProcessTwo from "../../assets/images/p_blogs2.svg";
 import BlogProcessThree from "../../assets/images/p_blogs3.svg";
-import BlogProcessFour from "../../assets/images/p_blogs4.svg";   
+import BlogProcessFour from "../../assets/images/p_blogs4.svg";
 import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component"; 
+import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
+import ELPRxApiService from "../../common/services/apiService";
+import { th } from "date-fns/locale";
+import moment from 'moment'
 
-class ProfessinalBlog extends Component { 
-    render() { 
-    return (
-    <div className="page__wrapper innerpage">
-       <div className="main_baner">
-          <NavBar {...this.props} />
-       </div>
-       <div className="profile_layout pt-4 pb-5">
-          <Container>
-             <div className="processBlog w-100"> 
-                   <div className="text-center fs28 fw500 col64 mb-2">Press</div>  
-                   <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
 
-                   <div className="blogMain">
-                   <Tabs defaultActiveKey="Featured" id="uncontrolled-tab-example">
-                        <Tab eventKey="Featured" title="Featured">
-                              <div className="featuredTab">
-                                    <Row>
-                                         <Col md={7} className="mb-4">    
-                                              <Image src={BlogProcessOne} className="w-100" /> 
-                                              <div className="fs18 col64 fw600 mt-3 mb-2">American cliffhanger states remain up grabs slow count</div>
-                                              <div className="col14 fs16 fw300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>   
-                                         </Col>
-                                         <Col md={5}>   
-                                              <Image src={BlogProcessTwo} className="w-100" /> 
-                                              <div className="fs18 col64 fw600 mt-3 mb-2">Child and Social Welfar Society</div>
-                                              <div className="col14 fs16 fw300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </div>   
-                                         </Col>
-                                    </Row>
-                                    <div className="mt-4 mb-4 border_blog"></div>
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="socialWelfar">
-                                                   <Row>
-                                                        <Col md={6}>
-                                                            <Image src={BlogProcessThree} className="w-100" /> 
-                                                            <div className="col14 fw300 fs16 mt-2 mb-2">Feather Hashmi</div>
-                                                            <div className="col14 fw400 fs16">Lorem dummy content</div> 
-                                                         </Col> 
-                                                        <Col md={6}>
-                                                             <div className="col64 fw600 fs18">
-                                                                Child and Social Welfar Society lorem dummy content
-                                                             </div>
-                                                        </Col>
-                                                   </Row>
-                                              </div> 
-                                         </Col>
-                                         <Col md={6}>
-                                         <div className="socialWelfar">
-                                                   <Row>
-                                                        <Col md={6}>
-                                                            <Image src={BlogProcessFour} className="w-100" /> 
-                                                         </Col> 
-                                                        <Col md={6}>
-                                                             <div className="col64 fw600 fs18">
-                                                                Child and Social Welfar Society lorem dummy content
-                                                             </div>
-                                                        </Col>
-                                                        <Col md={12}>
-                                                              <div className="col14 fs16 fw300 mt-3">
-                                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. 
-                                                              </div>
-                                                        </Col>
-                                                   </Row>
-                                              </div> 
-                                         </Col>
-                                    </Row>
+
+class ProfessinalBlog extends Component {
+
+     constructor() {
+          super()
+          this.state = {
+               pressTabs: null,
+               coverage: null,
+               featured: null,
+               pressReleases: null,
+               offset: 6
+          }
+     }
+
+     componentDidMount() {
+          this.getTabNames()
+          this.getPressFeatured()
+          // this.getPressCoverage()
+          // this.getPressReleases()
+     }
+
+     getTabNames = () => {
+          ELPRxApiService("getpressblogcategory", {})
+               .then((res) => {
+                    this.setState({ pressTabs: res.data.data })
+                    console.log('tab names ===>', res.data.data)
+               })
+               .catch((err) => {
+                    console.log(err);
+               })
+     }
+     getPressFeatured = () => {
+          ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Featured'" })
+               .then((res) => {
+                    this.setState({ featured: res.data.data.press_blog_list })
+
+                    console.log('press featured data===>', res.data.data.press_blog_list)
+               })
+               .catch((err) => {
+                    console.log(err);
+               })
+     }
+
+     getPressCoverage = () => {
+          ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Coverage'" })
+               .then((res) => {
+                    this.setState({ coverage: res.data.data.press_blog_list })
+                    console.log('press coverage data===>', res)
+               })
+               .catch((err) => {
+                    console.log(err);
+               })
+     }
+
+     getPressReleases = () => {
+          ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Press Release'" })
+               .then((res) => {
+                    this.setState({ pressReleases: res.data.data.press_blog_list })
+
+                    console.log('press releases data===>', res)
+               })
+               .catch((err) => {
+                    console.log(err);
+               })
+     }
+
+     render() {
+          return (
+               <div className="page__wrapper innerpage">
+                    <div className="main_baner">
+                         <NavBar {...this.props} />
+                    </div>
+                    <div className="profile_layout pt-4 pb-5">
+                         <Container>
+                              <div className="processBlog w-100">
+                                   <div className="text-center fs28 fw500 col64 mb-2">Press</div>
+                                   <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
+
+                                   <div className="blogMain">
+                                        <Tabs defaultActiveKey="Featured" id="uncontrolled-tab-example">
+
+                                             <Tab eventKey="Featured" title="Featured" >
+                                                  <div className="featuredTab">
+                                                       <Row>
+                                                            {this.state.featured && this.state.featured.map(data =>
+                                                                 <>
+                                                                      <Col md={7} className="mb-4">
+                                                                           <Image src={data.pbl_image} className="w-100" />
+                                                                           <div className="fs18 col64 fw600 mt-3 mb-2">{data.pbl_title}</div>
+                                                                           <div className="col14 fs16 fw300">{data.pbl_desc} </div>
+                                                                      </Col>
+                                                                      {/* <Col md={5}>
+                                                                 <Image src={BlogProcessTwo} className="w-100" />
+                                                                 <div className="fs18 col64 fw600 mt-3 mb-2">Child and Social Welfar Society</div>
+                                                                 <div className="col14 fs16 fw300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </div>
+                                                            </Col> */}
+                                                                 </>
+                                                            )}
+
+                                                       </Row>
+                                                       <div className="mt-4 mb-4 border_blog"></div>
+
+                                                  </div>
+                                             </Tab>
+
+                                             <Tab eventKey="Coverage" title="Coverage">
+                                                  <div className="coverageTab">
+                                                       <div className="coverageList">
+                                                            <Row>
+                                                                 {this.state.featured && this.state.featured.map((data, i) =>
+                                                                      this.state.offset > i ? (
+                                                                           <>
+                                                                                <Col md={6}>
+                                                                                     <div className="fw600 fs16 col64">
+                                                                                          {data.pbl_desc}
+                                                                                     </div>
+                                                                                </Col>
+                                                                                <Col md={3}>
+                                                                                     <div className="fw400 fs15 col14">{data.pbl_time}</div>
+                                                                                </Col>
+                                                                                <Col md={3}>
+                                                                                     <div className="fw400 fs15 col14">{data.pbl_title}</div>
+                                                                                </Col>
+                                                                           </>
+                                                                      ) : null
+                                                                 )}
+
+                                                            </Row>
+                                                       </div>
+
+                                                  </div>
+
+                                                  {this.state.featured && this.state.offset < this.state.featured.length ?
+                                                       <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                       </div> : null
+                                                  }
+                                             </Tab>
+
+                                             <Tab eventKey="PressReleases" title="Press Releases">
+                                                  <div className="coverageTab">
+                                                       <div className="coverageList">
+                                                            <Row>
+                                                                 {this.state.featured && this.state.featured.map((data, i) => {
+                                                                      return this.state.offset > i ?
+                                                                           <>
+                                                                                <Col md={8}>
+                                                                                     <div className="fw600 fs16 col64">
+                                                                                          {data.pbl_desc}
+                                                                                     </div>
+                                                                                </Col>
+                                                                                <Col md={4}>
+                                                                                     <div className="fw400 fs15 col14">{data.pbl_time}</div>
+                                                                                </Col>
+                                                                           </>
+                                                                           :
+                                                                           null
+                                                                 }
+
+                                                                 )}
+
+                                                            </Row>
+                                                       </div>
+
+                                                  </div>
+                                                  {this.state.featured && this.state.offset < this.state.featured.length
+
+                                                       ?
+                                                       <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                       </div> :
+                                                       null
+
+                                                  }
+
+                                             </Tab>
+                                        </Tabs>
+
+                                        <div className="ml-auto w-100 pt-5 pb-5 mt-5 mb-5 d-flex justify-content-end">
+                                             <div>
+                                                  <div className="fs40 fw500">
+                                                       Get in touch
                               </div>
-                        </Tab>
-                        <Tab eventKey="Coverage" title="Coverage">
-                            <div className="coverageTab">
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div><div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={6}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                         <Col md={3}>
-                                              <div className="fw400 fs15 col14">Health Affairs</div>  
-                                         </Col>
-                                    </Row>
-                                </div>
-                            </div>
-
-                            <div className="text-center mt-5 mb-5">
-                              <Button 
-                                 className="btnTyp12"
-                                 >
-                                    show more
-                              </Button> 
-                            </div>
-                        </Tab>
-                        <Tab eventKey="PressReleases" title="Press Releases">
-                        <div className="coverageTab">
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div><div className="coverageList">
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div>
-                                <div className="coverageList">
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div>
-                                <div className="coverageList">        
-                                    <Row>
-                                         <Col md={8}>
-                                              <div className="fw600 fs16 col64"> 
-                                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                             </div> 
-                                         </Col>
-                                         <Col md={4}>
-                                              <div className="fw400 fs15 col14">December 14, 2020</div>
-                                         </Col> 
-                                    </Row>
-                                </div>
-                            </div>
-
-                            <div className="text-center mt-5 mb-5">
-                              <Button 
-                                 className="btnTyp12"
-                                 >
-                                    show more
-                              </Button> 
-                            </div>
-                        </Tab>
-                     </Tabs>
-                       <div className="ml-auto w-100 pt-5 pb-5 mt-5 mb-5 d-flex justify-content-end">  
-                           <div>
-                              <div className="fs40 fw500">  
-                                 Get in touch 
+                                                  <div className="col14 fs16 fw300 mb-2">
+                                                       For all press inquiries, please email
                               </div>
-                              <div className="col14 fs16 fw300 mb-2">
-                                 For all press inquiries, please email
+                                                  <div className="col8 fs16 fw300">press@elphealth.com</div>
+                                             </div>
+                                        </div>
+                                   </div>
                               </div>
-                              <div className="col8 fs16 fw300">press@elphealth.com</div> 
-                           </div>
-                       </div>
-                   </div>
-             </div>
-          </Container>
-       </div>
-       <Footer /> 
-    </div>
-    );
-    }
-    }
-    export default ProfessinalBlog; 
+                         </Container>
+                    </div>
+                    <Footer />
+               </div>
+          );
+     }
+}
+export default ProfessinalBlog;
 

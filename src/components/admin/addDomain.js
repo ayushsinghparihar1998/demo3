@@ -12,7 +12,7 @@ import {
   Form,
   Tabs,
   Tab,
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
@@ -133,7 +133,7 @@ class CorporateMember extends Component {
       name == "cd_audio_min" || name == "cd_video_min"
         ? value.replace(/[^0-9]/g, "")
         : value.trim();
-    this.setState(
+        this.setState(
       {
         domainObj,
       },
@@ -199,8 +199,8 @@ class CorporateMember extends Component {
                         value={domainObj.cd_domain_name}
                         onChange={(e) => this.handleChange(e)}
                         maxLength={100}
-                      />
-                      <div className="col27 fs14 fw400 mt-2">
+                      /> 
+                      <div className="col27 fs14 fw400 mt-2 error">  
                         {errors.cd_domain_name}
                       </div>
                     </Form.Group>
@@ -219,7 +219,7 @@ class CorporateMember extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={5}
                       />
-                      <div className="col27 fs14 fw400 mt-2">
+                      <div className="col27 fs14 fw400 mt-2 error"> 
                         {errors.cd_audio_min}
                       </div>
                     </Form.Group>
@@ -238,7 +238,7 @@ class CorporateMember extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={5}
                       />
-                      <div className="col27 fs14 fw400 mt-2">
+                      <div className="col27 fs14 fw400 mt-2 error"> 
                         {errors.cd_video_min}
                       </div>
                     </Form.Group>
@@ -248,7 +248,7 @@ class CorporateMember extends Component {
                       </Form.Label>
                       <Form.Control
                         as="select"
-                        className="selectTyp1 select3"
+                        className="selectTyp1"
                         name="cd_audio_status"
                         onChange={(e) => this.handleChange(e)}
                         value={domainObj.cd_audio_status}
@@ -259,7 +259,7 @@ class CorporateMember extends Component {
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>{" "}
                       </Form.Control>
-                      <div className="col27 fs14 fw400 mt-2">
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_audio_status}
                       </div>
                     </Form.Group>
@@ -270,7 +270,7 @@ class CorporateMember extends Component {
                       </Form.Label>
                       <Form.Control
                         as="select"
-                        className="selectTyp1 select3"
+                        className="selectTyp1" 
                         name="cd_video_status"
                         onChange={(e) => this.handleChange(e)}
                         value={domainObj.cd_video_status}
@@ -282,7 +282,7 @@ class CorporateMember extends Component {
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>{" "}
                       </Form.Control>
-                      <div className="col27 fs14 fw400 mt-2">
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_video_status}
                       </div>
                     </Form.Group>

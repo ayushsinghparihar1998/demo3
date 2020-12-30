@@ -883,7 +883,7 @@ class Adminlistener extends Component {
         });
     }
   }
-  adminUserDeleteReason = (e, uid, status) => {
+  adminUserDeleteReason = (e, uid, status) => { 
     let pageNumber = this.state.pageNumber;
     let reason = this.state.reasonForDelete;
     let chkUserProfile = this.state.activeProfile;
@@ -2323,13 +2323,13 @@ cs_time: "00:00:02" */}
                 </Col>
               ) : this.state.pageType == "domainList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="corporateMember adminlistener d_detail">
-                    <div className="domainSave">
+                  <div className="corporateMember adminlistener d_detail">         
+                    <div className="domainSave mb-4 pb-2">  
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div>
-                        <div className="fs15 fw400 col14 mb-4">
+                        <div className="fs22 col10 mb-1">Domain listing</div>  
+                        {/* <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
-                        </div>
+                        </div> */} 
                       </div>
                       <div className="ml-auto">
                         <Button
@@ -2342,8 +2342,7 @@ cs_time: "00:00:02" */}
                         >
                           Add Domain
                         </Button>
-                      </div>
-                      <div></div>
+                      </div> 
                     </div>
                     <Table bordered className="domainTable">
                       <thead>
@@ -2352,7 +2351,7 @@ cs_time: "00:00:02" */}
                           <th>No. of Employees</th>
                           <th>Total Audio(minutes)</th>
                           <th>Total Video(minutes)</th>
-                          <th>ACTION</th>
+                          <th>ACTIONS</th>
                         </tr>
                       </thead>
                       <tbody>

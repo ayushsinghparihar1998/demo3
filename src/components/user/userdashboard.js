@@ -337,7 +337,7 @@ class Userdashboard extends Component {
                                     */}
 
                                  { getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
-                                       <>s
+                                       <>
                                           <div className="inner_side">
                                              <div className="upgrade">
                                                 <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType17">Upgrade to Premium Account</Button>
@@ -407,8 +407,11 @@ class Userdashboard extends Component {
                               </div>
                            </Col>
 
-
-                           <BlogList />
+                           {getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_role_id === constant.roles.CORPORATE_CUSTOMER ?
+                               null
+                               :
+                               <BlogList/>
+                           }
 
                         </Row>
                      </Col>

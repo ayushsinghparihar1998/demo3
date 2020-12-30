@@ -1059,7 +1059,41 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
+  getpressblog: {
+    url: "elp/getpressblog",
+    method: "POST",
+    data: { offset: 0, count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getblog: {
+    url: "elp/getblog",
+    method: "POST",
+    data: { offset: 0, count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getBlogdetails: {
+    url: "elp/getBlogdetails",
+    method: "POST",
+    data: { bl_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getlatestblog: {
+    url: "elp/getlatestblog",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getpressblogcategory: {
+    url: "elp/getpressblogcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   superadmingetcorporateappointmentlist: {
     url: "elp/superadmingetcorporateappointmentlist",
     method: "POST",
