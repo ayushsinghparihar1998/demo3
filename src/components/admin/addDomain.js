@@ -57,14 +57,15 @@ class CorporateMember extends Component {
     ELPViewApiService("superadmingetcorporatedomaindetailsbyid", data).then(
       (result) => {
         console.log("result", result);
-        let domainObj = [];
+        let domainObj = {};
         if (result && result.status === 200) {
           domainObj =
             result && result.data && result.data.data
               ? result.data.data.domain_details_list[0]
               : [];
         }
-
+        domainObj.cd_audio_min = "" + domainObj.cd_audio_min / 60;
+        domainObj.cd_video_min = "" + domainObj.cd_video_min / 60;
         this.setState(
           {
             domainObj,
@@ -94,7 +95,7 @@ class CorporateMember extends Component {
 
       if (this.props.match.params.id > 0) {
         data.cd_id = this.props.match.params.id;
-        data.cd_domain_name = '';
+        data.cd_domain_name = "";
       }
       ELPViewApiService(
         this.props.match.params.id == 0
@@ -158,7 +159,7 @@ class CorporateMember extends Component {
         <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3} className="pr-1"> 
+              <Col md={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -173,10 +174,14 @@ class CorporateMember extends Component {
                     </div>
                   </div>
                 </div>
-              </Col>  
+              </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember">
-                  <div className="fs28 col10 mb-4">Add Domain</div>
+                  <div className="fs28 col10 mb-4">
+                    {this.props.match.params.id > 0
+                      ? "Modify Domain"
+                      : "Add Domain"}
+                  </div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">

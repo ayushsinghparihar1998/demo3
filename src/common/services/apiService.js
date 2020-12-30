@@ -1,12 +1,12 @@
-import axios from 'axios';
-import constant from '../../constant'
-import ApiJson from './apiJson';
+import axios from "axios";
+import constant from "../../constant";
+import ApiJson from "./apiJson";
 import {
   showErrorToast,
   showSuccessToast,
   getLocalStorage,
-  clearLocalStorage
-} from '../helpers/Utils';
+  clearLocalStorage,
+} from "../helpers/Utils";
 let apiFailCounter = 0;
 // axios.defaults.baseURL = 'http://103.76.253.131:81';
 axios.defaults.baseURL = constant.SERVER_URL;
@@ -14,13 +14,12 @@ axios.defaults.baseURL = constant.SERVER_URL;
 
 axios.interceptors.request.use(
   function (config) {
-
-    let access_token = '';
+    let access_token = "";
     let userInfo =
-      getLocalStorage('userInfo') ||
-      getLocalStorage('customerInfo') ||
-      getLocalStorage('userInfoProff') ||
-      getLocalStorage('userInfoAdmin');
+      getLocalStorage("userInfo") ||
+      getLocalStorage("customerInfo") ||
+      getLocalStorage("userInfoProff") ||
+      getLocalStorage("userInfoAdmin");
     if (userInfo) {
       if (userInfo.u_accesstoken) {
         access_token = userInfo.u_accesstoken;
@@ -39,7 +38,7 @@ const prepareDataObject = (_data_, paramObj) => {
     if (paramObj[key] || paramObj[key] === false) {
       _data_[key] = paramObj[key];
     } else {
-      if (typeof _data_[key] !== 'object') _data_[key] = '';
+      if (typeof _data_[key] !== "object") _data_[key] = "";
     }
   }
   return _data_;
@@ -48,39 +47,38 @@ const prepareDataObject = (_data_, paramObj) => {
 const injectParamsToUrl = (_url_, paramObj) => {
   var url = _url_;
   for (let key in paramObj) {
-    url = url.replace(':' + key, paramObj[key]);
+    url = url.replace(":" + key, paramObj[key]);
   }
   return url;
 };
 
 const handleErrorByStatus = (error) => {
-  if (error && error.status === 'error' && error.message === "100") {
+  if (error && error.status === "error" && error.message === "100") {
     // axios({
     //   url: '/elp/logout',
     //   method: 'GET',
     //   data: {}
     // }).then(response => {
+    // debugger;
     clearLocalStorage();
-    window.location= '/'
+    window.location = "/";
     // });
-  } else if (error && error.status === 'error') {
-
+  } else if (error && error.status === "error") {
     const message = error.message;
     // alert("ERROR")
     showErrorToast(message);
-  } else if (error && error.success === 'error') {
-
+  } else if (error && error.success === "error") {
     const message = error.message;
     // alert("ERROR")
     showErrorToast(message);
   }
 };
 
-const spikeViewApiService = (apiKeyName, data) => {
+const ELPViewApiService = (apiKeyName, data) => {
   let apiDetails = ApiJson[apiKeyName];
   if (!apiDetails) {
     throw new Error(
-      'Api configuration do not found in api-json, please check api-json.js'
+      "Api configuration do not found in api-json, please check api-json.js"
     );
   }
 
@@ -89,13 +87,8 @@ const spikeViewApiService = (apiKeyName, data) => {
   requestObject.url = injectParamsToUrl(requestObject.url, data);
   return axios(requestObject)
     .then(function (result) {
-
       apiFailCounter = 0;
-      if (
-        result.data &&
-        result.data &&
-        result.data.status === 'success'
-      ) {
+      if (result.data && result.data && result.data.status === "success") {
         if (result.data.message) {
           const message = result.data.message;
           if (requestObject.showResultMessage === true)
@@ -109,7 +102,7 @@ const spikeViewApiService = (apiKeyName, data) => {
     })
     .catch(function (error) {
       if (error && error.response) {
-        if (requestObject.showErrorMessage === true)
+        if (requestObject.showErrorMessage === true){}
           handleErrorByStatus(error.response);
       }
 
@@ -128,4 +121,4 @@ const spikeViewApiService = (apiKeyName, data) => {
     });
 };
 
-export default spikeViewApiService;
+export default ELPViewApiService;
