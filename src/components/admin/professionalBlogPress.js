@@ -23,6 +23,8 @@ import constant from "../../constant";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Link } from "react-router-dom";
+import validateInput from "../../common/validations/validationSAblog";
 
 import UploadDetail from "../../assets/images/upload_detail.svg";
 
@@ -36,6 +38,24 @@ class ProfessinalBlogPress extends Component {
     filename: null,
     errors: {},
     proffCat: [],
+    pblobj: {
+      pbl_desc: "",
+      // pbl_id: "",
+      pbl_image: "",
+      pbc_status: "",
+      pbl_title: "",
+      pbl_written_by: "",
+      press_blog_category: [],
+    },
+    errors: {
+      pbl_desc: "",
+      // pbl_id: "",
+      pbl_image: "",
+      pbc_status: "",
+      pbl_title: "",
+      pbl_written_by: "",
+      press_blog_category: "",
+    },
   };
   componentDidMount() {
     console.log(" this.props.match", this.props.match);
@@ -43,37 +63,46 @@ class ProfessinalBlogPress extends Component {
     this.getProffCat();
     console.log(this.props.match.params.id);
     console.log(this.props);
-    if (this.props.match.params.id > 0) {
-      this.getpressBlogDetails();
-    }
   }
   getpressBlogDetails = () => {
     let data = {
       pbl_id: this.props.match.params.id,
     };
+    // getBlogdetailsgetpressblogdetails
 
-    ELPViewApiService("superadmingetcorporatepressBlogdetailsbyid", data).then(
-      (result) => {
-        console.log("result", result);
-        let pressBlogObj = {};
-        if (result && result.status === 200) {
-          pressBlogObj =
-            result && result.data && result.data.data
-              ? result.data.data.pressBlog_details_list[0]
-              : [];
-        }
-        pressBlogObj.pbl_audio_min = "" + pressBlogObj.pbl_audio_min / 60;
-        pressBlogObj.pbl_video_min = "" + pressBlogObj.pbl_video_min / 60;
-        this.setState(
-          {
-            pressBlogObj,
-          },
-          () => {
-            console.log("pressBlogObj", this.state.pressBlogObj);
-          }
-        );
+    ELPViewApiService("getpressblogdetails", data).then((result) => {
+      console.log("result", result);
+      let pblobj = {};
+      if (result && result.status === 200) {
+        pblobj =
+          result && result.data && result.data.data ? result.data.data[0] : [];
       }
-    );
+      // pblobj.pbl_audio_min = "" + pblobj.pbl_audio_min / 60;
+      // pblobj.pbl_video_min = "" + pblobj.pbl_video_min / 60;
+      let cats = [];
+      let proffCat = this.state.proffCat;
+      pblobj.press_blog_category.map((item) => {
+        cats.push(item.pbc_cat_id);
+      });
+      console.log("cats", cats);
+      proffCat.map((item) => {
+        if (cats.includes(item.pbc_id)) {
+          item.pbc_status = "1";
+        } else {
+          item.pbc_status = "0";
+        }
+        return item;
+      });
+      this.setState(
+        {
+          pblobj,
+          proffCat,
+        },
+        () => {
+          console.log("pblobj", this.state.pblobj);
+        }
+      );
+    });
   };
   getProffCat = () => {
     let proffCat = this.state.proffCat;
@@ -90,6 +119,9 @@ class ProfessinalBlogPress extends Component {
         },
         () => {
           console.log("ProffCat", this.state.proffCat);
+          if (this.props.match.params.id > 0) {
+            this.getpressBlogDetails();
+          }
         }
       );
     });
@@ -115,11 +147,13 @@ class ProfessinalBlogPress extends Component {
       };
       const response = await post(url, formData, config);
       console.log(name, "resultresultresult", response);
-
+      let pblobj = this.state.pblobj;
+      pblobj.pbl_image = response.data.data.filepath;
       this.setState({
         isUploading: false,
         filepath: response.data.data.filepath,
         filename: fileObject.name,
+        pblobj,
       });
     }
   };
@@ -134,35 +168,80 @@ class ProfessinalBlogPress extends Component {
       this.state.description
     );
     let catar = [];
+    let pblobj = this.state.pblobj;
     this.state.proffCat.map((item) => {
-      if (item.flag == true) {
+      if (item.pbc_status == "1") {
+        console.log(item);
         item.pbc_cat_id = item.pbc_id;
         item.pbc_cat_name = item.pbc_name;
-        delete item.flag;
-        delete item.bc_name;
-        delete item.bc_id;
+        // delete item.flag;
+        // delete item.bc_name;
+        // delete item.bc_id;
         catar.push(item);
       }
     });
-    try {
-      let response = await ELPRxApiService("createBlog", {
-        pbl_title: this.state.title,
-        pbl_image: this.state.filepath,
-        pbl_desc: this.state.description,
-        press_blog_cat_name: this.state.cat_name,
+
+    if (
+      this.isValid({
+        title: pblobj.pbl_title,
+        image: pblobj.pbl_image,
+        desc: pblobj.pbl_desc,
+        writtenby: pblobj.pbl_written_by,
+        cat: catar,
+      })
+    ) {
+      catar.map((item) => {
+        delete item.pbc_status;
+        delete item.pbc_name;
+        delete item.pbc_id;
+        delete item.pbc_datetime;
+
+        return item;
       });
-      this.props.history.push("/blogs");
-    } catch (err) {
-      console.log(err);
+      let data = {
+        pbl_title: pblobj.pbl_title,
+        pbl_image: pblobj.pbl_image,
+        pbl_desc: pblobj.pbl_desc,
+        pbl_written_by: pblobj.pbl_written_by,
+        press_blog_cat_name: catar,
+      };
+      console.log(data);
+      if (this.props.match.params.id > 0) {
+        data.pbl_id = this.props.match.params.id;
+      }
+      console.log(data);
+      try {
+        let response = await ELPRxApiService(
+          this.props.match.params.id > 0
+            ? "updatePressBlog"
+            : "createPressBlog",
+
+          data
+        );
+        this.props.history.push("/adminlistener");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
-  handleCheck = (event) => {
+  isValid(data) {
+    console.log(data);
+    const { errors, isValid } = validateInput(data);
+    if (!isValid) {
+      this.setState({ errors }, () => console.log(this.state.errors));
+    }
+    return isValid;
+  }
+  handleCheck = (event, status) => {
     const { name, checked, value, id } = event.target;
 
     console.log("value , checked", value, checked);
     let proffCat = this.state.proffCat;
-    var index = proffCat.findIndex((el) => el.pbc_id == id);
-    proffCat[index].flag = checked;
+    // var index = proffCat.findIndex((el) => el.pbc_id == id);
+    // proffCat[index].flag = checked;
+
+    var index = proffCat.findIndex((el) => el.pbc_id == value);
+    proffCat[index].pbc_status = status;
 
     this.setState(
       {
@@ -174,38 +253,8 @@ class ProfessinalBlogPress extends Component {
     );
   };
 
-  // handleCheck = (event) => {
-  //   const { name, value, id } = event.target;
-
-  //   let cat_name = this.state.cat_name;
-  //   let obj = {
-  //     pbc_cat_name: name,
-  //     pbc_cat_id: id,
-  //   };
-  //   var isInArray =
-  //     cat_name.find(function (el) {
-  //       return el.pbc_cat_id == id;
-  //     }) !== undefined;
-  //   var index = cat_name.findIndex((el) => el.pbc_cat_id == id);
-
-  //   console.log(isInArray, index);
-  //   if (index > -1) {
-  //     cat_name.splice(index, 1);
-  //   } else {
-  //     cat_name.push(obj);
-  //   }
-  //   this.setState(
-  //     {
-  //       cat_name,
-  //     },
-  //     () => {
-  //       console.log(this.state);
-  //     }
-  //   );
-  // };
-
   render() {
-    const { proffCat } = this.state;
+    const { proffCat, pblobj, errors } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -214,41 +263,17 @@ class ProfessinalBlogPress extends Component {
         <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3} className="pr-1">
+              <Col md={4} lg={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      Links
+                      Quick Links
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="">
-                        <div className="fs14 col28 fw500"> USER LISTING</div>
-                      </div>
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="">
+                      <div>
                         <div className="fs14 col28 fw500">
-                          {" "}
-                          PROFESSIONAL LISTING
+                          <Link to={{ pathname: `/adminlistener` }}>Back</Link>
                         </div>
-                      </div>
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="">
-                        <div className="fs14 col23 fw500">
-                          {" "}
-                          LISTENER LISTING
-                        </div>
-                      </div>
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="position-relative">
-                        <div className="fs14 col28 fw500"> LISTENER Q&A</div>
-                      </div>
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="position-relative">
-                        <div className="fs14 col28 fw500"> CATEGORY</div>
                       </div>
                     </div>
                   </div>
@@ -281,6 +306,9 @@ class ProfessinalBlogPress extends Component {
                           ""
                         )}
                       </div>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.image}
+                      </div>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
@@ -289,11 +317,24 @@ class ProfessinalBlogPress extends Component {
                       </Form.Label>
                       <Form.Control
                         onChange={(e) =>
-                          this.setState({ title: e.target.value })
+                          // this.setState({ title: e.target.value })
+                          this.setState({
+                            pblobj: {
+                              ...this.state.pblobj,
+                              pbl_title: e.target.value.replace(
+                                /[^a-zA-Z0-9 ]/g
+                              ),
+                            },
+                          })
                         }
                         type="text"
+                        value={pblobj.pbl_title}
                         className="inputTyp2"
+                        maxLength={100}
                       />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.title}
+                      </div>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
@@ -304,17 +345,22 @@ class ProfessinalBlogPress extends Component {
                           height: 500,
                         }}
                         editor={ClassicEditor}
-                        // data="<p>Hello from CKEditor 5!</p>"
-
+                        data={pblobj.pbl_desc}
                         onReady={(editor) => {
                           // You can store the "editor" and use when it is needed.
                           console.log("Editor is ready to use!", editor);
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({ description: data }, () =>
-                            console.log(this.state.description, event)
-                          );
+                          this.setState({
+                            pblobj: {
+                              ...this.state.pblobj,
+                              pbl_desc: data,
+                            },
+                          });
+                          // this.setState({ description: data }, () =>
+                          //   console.log(this.state.description, event)
+                          // );
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -324,6 +370,9 @@ class ProfessinalBlogPress extends Component {
                         }}
                       />
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.desc}
+                      </div>
                     </Form.Group>
 
                     <Form.Group>
@@ -331,12 +380,24 @@ class ProfessinalBlogPress extends Component {
                         Written by
                       </Form.Label>
                       <Form.Control
-                        // onChange={(e) =>
-                        //     this.setState({ title: e.target.value })
-                        //   }
+                        onChange={(e) =>
+                          this.setState({
+                            pblobj: {
+                              ...this.state.pblobj,
+                              pbl_written_by: e.target.value.replace(
+                                /[^a-zA-Z ]/g
+                              ),
+                            },
+                          })
+                        }
                         type="text"
+                        value={pblobj.pbl_written_by}
                         className="inputTyp2"
+                        maxLength={100}
                       />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.writtenby}
+                      </div>
                     </Form.Group>
 
                     <Form.Group>
@@ -360,17 +421,30 @@ class ProfessinalBlogPress extends Component {
                                     name={cat.pbc_name}
                                     id={cat.pbc_id}
                                     // handleCheck={this.state.eat}
-                                    // checked = {}
-                                    onChange={(e) => this.handleCheck(e)}
+                                    value={cat.pbc_id}
+                                    checked={cat.pbc_status == "1"}
+                                    onChange={(e) =>
+                                      this.handleCheck(
+                                        e,
+                                        cat.pbc_status == "1" ? "0" : "1"
+                                      )
+                                    }
                                   />
                                 </Form.Group>
                               </Col>
                             );
                           })}
                       </Row>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.cat}
+                      </div>
                     </Form.Group>
 
-                    <Button variant="primary btnTyp5 mt-4" type="submit">
+                    <Button
+                      variant="primary btnTyp5 mt-4"
+                      type="button"
+                      onClick={() => this._saveBlogHandler()}
+                    >
                       create
                     </Button>
                   </Form>

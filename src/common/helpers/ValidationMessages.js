@@ -92,4 +92,19 @@ export default {
   cd_video_status: {
     required: "Please enter video status.",
   },
+  title: {
+    required: "Please enter title.",
+  },
+  desc: {
+    required: "Please write a brief description.",
+  },
+  writtenby: {
+    required: "Please enter the name by whom the blog is written by.",
+  },
+  cat: {
+    required: "Please selet atleast one category.",
+  },
+  image: {
+    required: "Please upload a blog image.",
+  },
 };
