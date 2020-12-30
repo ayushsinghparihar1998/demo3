@@ -241,28 +241,73 @@ class Myprofile extends Component {
 
                           <div className="col3 fw500 mt-1 mb-2">
                             Keywords:
-                            <span className="col14 fw400 ml-2"></span>
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.professional_keyword &&
+                                proffDetail.professional_keyword.map(
+                                  (item, index) => {
+                                    return (
+                                      <>
+                                        {item.pk_keyword}
+                                        {index + 1 ==
+                                        proffDetail.professional_cat_name.length
+                                          ? ""
+                                          : ","}{" "}
+                                      </>
+                                    );
+                                  }
+                                )}
+                            </span>
                           </div>
-
                           <div className="col3 fw500 mt-1 mb-2">
                             Category:
                             <span className="col14 fw400 ml-2">
-                              {this.state.cat_child_array.map((obj, i) => {
-                                return i ===
-                                  this.state.cat_child_array.length - 1 ? (
-                                  <span>{obj}</span>
-                                ) : (
-                                  <span>{obj},</span>
-                                );
-                              })}
+                              {this.props.match.params.type == "admin"
+                                ? proffDetail.professional_cat_name &&
+                                  proffDetail.professional_cat_name.map(
+                                    (item, index) => {
+                                      return (
+                                        <>
+                                          {item.pu_cat_name}
+                                          {index + 1 ==
+                                          proffDetail.professional_cat_name
+                                            .length
+                                            ? ""
+                                            : ","}{" "}
+                                        </>
+                                      );
+                                    }
+                                  )
+                                : this.state.cat_child_array.map((obj, i) => {
+                                    return i ===
+                                      this.state.cat_child_array.length - 1 ? (
+                                      <span>{obj}</span>
+                                    ) : (
+                                      <span>{obj},</span>
+                                    );
+                                  })}
                             </span>
                           </div>
 
                           <div className="col3 fw500 mt-1 mb-2">
                             Services:
-                            <span className="col14 fw400 ml-2"></span>
+                            <span className="col14 fw400 ml-2">
+                              {proffDetail.u_area_service &&
+                                proffDetail.u_area_service
+                                  .split(",")
+                                  .map((item, index) => {
+                                    return (
+                                      <>
+                                        {item}{" "}
+                                        {index + 1 ==
+                                        proffDetail.u_area_service.split(",")
+                                          .length
+                                          ? ""
+                                          : ","}{" "}
+                                      </>
+                                    );
+                                  })}
+                            </span>
                           </div>
-
                           <div className="col3 fw500 mt-1 mb-2">
                             Age:
                             <span className="col14 fw400 ml-2">
@@ -271,12 +316,8 @@ class Myprofile extends Component {
                           </div>
 
                           <div>
-                            <div className="mb-3">   
-                                <a
-                                  className="mr-3" 
-                                > 
-                                  {proffDetail.email}
-                                </a>
+                            <div className="mb-3">
+                              <a className="mr-3">{proffDetail.email}</a>
                             </div>
                             {this.props.match.params.type === "admin" ? (
                               ""
@@ -288,7 +329,7 @@ class Myprofile extends Component {
                                   className="btnTyp5 mr-3"
                                 >
                                   Call 
-                                </Button> */} 
+                                </Button> */}
 
                                 <Button
                                   variant="primary"
@@ -385,7 +426,7 @@ class Myprofile extends Component {
                     <div className="error alignLeft d-none">
                       Enter Professional Email
                     </div>
-                  </Form.Group> */} 
+                  </Form.Group> */}
                   {this.state.validationError ? (
                     <div>{this.state.validationError}</div>
                   ) : null}
