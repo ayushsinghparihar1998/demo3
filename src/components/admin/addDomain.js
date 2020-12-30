@@ -88,16 +88,8 @@ class CorporateMember extends Component {
         cd_domain_name: domainObj.cd_domain_name,
         cd_audio_min: domainObj.cd_audio_min * 60,
         cd_video_min: domainObj.cd_video_min * 60,
-        cd_audio_status:
-          domainObj.cd_audio_status == "Active" ||
-          domainObj.cd_audio_status == "1"
-            ? '1'
-            : "",
-        cd_video_status:
-          domainObj.cd_video_status == "Active" ||
-          domainObj.cd_video_status == "1"
-            ? '1'
-            : "",
+        cd_audio_status: domainObj.cd_audio_status,
+        cd_video_status: domainObj.cd_video_status,
       };
       console.log(data);
 
@@ -140,7 +132,11 @@ class CorporateMember extends Component {
     domainObj[name] =
       name == "cd_audio_min" || name == "cd_video_min"
         ? value.replace(/[^0-9]/g, "")
-        : value.trim();
+        : // : name == "cd_audio_status" || name == "cd_video_status"
+          // ? value == "Active"
+          //   ? "1"
+          //   : "0"
+          value.trim();
     this.setState(
       {
         domainObj,
@@ -264,8 +260,8 @@ class CorporateMember extends Component {
                         <option value="" disabled>
                           Select
                         </option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>{" "}
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>{" "}
                       </Form.Control>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_audio_status}
@@ -287,8 +283,8 @@ class CorporateMember extends Component {
                         <option disabled value="">
                           Select
                         </option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>{" "}
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>{" "}
                       </Form.Control>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.cd_video_status}
