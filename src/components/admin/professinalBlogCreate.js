@@ -157,8 +157,8 @@ class ProfessinalBlogCreate extends Component {
     this.state.proffCat.map((item) => {
       if (item.bc_status == "1") {
         console.log("itemcat", item);
-        item.bc_cat_id = item.bc_id;
-        item.bc_cat_name = item.bc_name;
+        item.buc_cat_id = item.bc_id;
+        item.buc_cat_name = item.bc_name;
         catar.push(item);
       }
     });
@@ -311,8 +311,13 @@ class ProfessinalBlogCreate extends Component {
                   <Form>
                     <Form.Group>
                       <Form.Label className="col14 fw600 fs18">
-                        Upload blog image
+                        {this.props.match.params.id > 0
+                          ? "Change Picture"
+                          : "Upload blog image"}
                       </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={blobj.bl_image} className="" />
+                      </div>
                       <Form.File
                         onChange={(e) =>
                           this.handleUploadPicture(e, "backgroud_img")
@@ -345,7 +350,8 @@ class ProfessinalBlogCreate extends Component {
                             blobj: {
                               ...this.state.blobj,
                               bl_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g
+                                /[^a-zA-Z0-9 ]/g,
+                                ""
                               ),
                             },
                           })
@@ -408,7 +414,8 @@ class ProfessinalBlogCreate extends Component {
                             blobj: {
                               ...this.state.blobj,
                               bl_written_by: e.target.value.replace(
-                                /[^a-zA-Z ]/g
+                                /[^a-zA-Z ]/g,
+                                ""
                               ),
                             },
                           })

@@ -288,8 +288,13 @@ class ProfessinalBlogPress extends Component {
                   <Form>
                     <Form.Group>
                       <Form.Label className="col14 fw600 fs18">
-                        Upload blog image
+                        {this.props.match.params.id > 0
+                          ? "Change Picture"
+                          : "Upload blog image"}
                       </Form.Label>
+                      <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={pblobj.pbl_image} className="" />
+                      </div>
                       <Form.File
                         onChange={(e) =>
                           this.handleUploadPicture(e, "backgroud_img")
@@ -322,7 +327,8 @@ class ProfessinalBlogPress extends Component {
                             pblobj: {
                               ...this.state.pblobj,
                               pbl_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g
+                                /[^a-zA-Z0-9 ]/g,
+                                ""
                               ),
                             },
                           })
@@ -385,7 +391,8 @@ class ProfessinalBlogPress extends Component {
                             pblobj: {
                               ...this.state.pblobj,
                               pbl_written_by: e.target.value.replace(
-                                /[^a-zA-Z ]/g
+                                /[^a-zA-Z ]/g,
+                                ""
                               ),
                             },
                           })
