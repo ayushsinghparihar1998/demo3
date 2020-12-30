@@ -1,5 +1,4 @@
 export default {
-<<<<<<< HEAD
     login: {
         url: "elp/listner_login",
         method: "POST",
@@ -970,28 +969,6 @@ export default {
         showResultMessage: false,
         showErrorMessage: false,
     }
-=======
-  login: {
-    url: "elp/listner_login",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  professionalLogin: {
-    url: "elp/professional_login",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
->>>>>>> e6d0363791204139a148334db66b35cc65625c88
 
   userLogin: {
     url: "elp/customer_login",
