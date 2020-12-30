@@ -265,25 +265,25 @@ class Myprofile extends Component {
                             </span>
                           </div>
 
-                          <div className="d-flex mt-4">
-                            <Button
-                              variant="primary"
-                              type="submit"
-                              className="btnTyp5 mr-3"
-                            >
-                              {proffDetail.email}
-                            </Button>
+                          <div>
+                            <div className="mb-3">   
+                                <a
+                                  className="mr-3" 
+                                > 
+                                  {proffDetail.email}
+                                </a>
+                            </div>
                             {this.props.match.params.type === "admin" ? (
                               ""
                             ) : (
                               <>
-                                <Button
+                                {/* <Button
                                   variant="primary"
                                   type="submit"
                                   className="btnTyp5 mr-3"
                                 >
-                                  Call
-                                </Button>
+                                  Call 
+                                </Button> */} 
 
                                 <Button
                                   variant="primary"
@@ -366,7 +366,7 @@ class Myprofile extends Component {
               <div className="layout_box mt-3 mb-4">
                 <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                 <Form>
-                  <Form.Group controlId="formBasicEmail">
+                  {/* <Form.Group controlId="formBasicEmail">
                     <Form.Label className="fs20 fw600 col14">
                       Professional Email:
                     </Form.Label>
@@ -380,7 +380,7 @@ class Myprofile extends Component {
                     <div className="error alignLeft d-none">
                       Enter Professional Email
                     </div>
-                  </Form.Group>
+                  </Form.Group> */} 
                   {this.state.validationError ? (
                     <div>{this.state.validationError}</div>
                   ) : null}

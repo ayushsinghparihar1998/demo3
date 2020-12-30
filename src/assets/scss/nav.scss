@@ -119,19 +119,19 @@
                             }
                         }
                     }
-                    .profiletwo {
+                    .profiletwo { 
 
-                        .dropdown-menu {
+                        .dropdown-menu { 
                             left: -130px;
                             background: $col80;  
-                            width: 192px; 
+                            width: 220px; 
                             top: 42px; 
                             padding: 0 0;
                             text-align: left;
                             overflow: hidden;    
 
                             a.dropdown-item {
-                                
+                                font-size: 13.5px; 
                             }
                         }
                     }
@@ -539,6 +539,7 @@
                             position: absolute;
                             left: -80px;
                             right: 0;
+                            
                         }
                     }
                 }

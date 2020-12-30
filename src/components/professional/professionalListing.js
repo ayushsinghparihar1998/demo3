@@ -195,18 +195,18 @@ class ProfessionalLsting extends Component {
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>
-                                        <Col md="3">
+                                        <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search name"
+                                                <Form.Control type="text" placeholder="Search by name"
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchName: e.target.value})
                                                               }}/>
                                             </Form.Group>
                                         </Col>
-                                        <Col md="3">
+                                        <Col md="5">
                                             <Form.Group controlId="formBasickeyword">
-                                                <Form.Control type="text" placeholder="Search keyword"
+                                                <Form.Control type="text" placeholder="Search by keyword"  
                                                               className="inputTyp2 inputpProcess"
                                                               onChange={(e) => {
                                                                   this.setState({searchKeyword: e.target.value})
@@ -225,7 +225,7 @@ class ProfessionalLsting extends Component {
                                         {/*        </Form.Control>*/}
                                         {/*    </Form.Group>*/}
                                         {/*</Col>*/}
-                                        <Col md="3" className="text-center">
+                                        <Col md="2" className="text-center">
                                             <Button variant="primary process_btn"
                                                     onClick={this._getFilterProfessionalListHandler}>
                                                 search
@@ -411,7 +411,7 @@ class ProfessionalLsting extends Component {
                     <Modal.Body>
                         <Container>
                             <div className="layout_box mt-3 mb-4">
-                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
+                                <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div> 
                                 <Form>
                                     {/* <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
