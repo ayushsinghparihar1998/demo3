@@ -272,6 +272,7 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           {/* <PublicRoute path="/adminlisting" component={Reviewrequest} /> */}
+          <PublicRoute path="/blogs" component={Media} />
          
           {/* <PublicRoute path="/createblog" component={Createblogs} />
           <PublicRoute path="/blogsDetail" component={BlogDetail} /> */}

@@ -159,7 +159,7 @@ class ProfessionalLsting extends Component {
     bookSessionOpen = (obj) => {
         console.log(obj)
         this.setState({
-            professionalEmail: obj.email,
+            // professionalEmail: obj.email,
             professionalId: obj.id,
             professionalName: obj.u_name,
             show3: true
@@ -342,7 +342,6 @@ class ProfessionalLsting extends Component {
                             <div className="layout_box mt-3 mb-4">
                                 <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                                 <Form>
-
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label>
