@@ -594,3 +594,4 @@ class Myprofile extends Component {
     );
   }
 }
+export default Myprofile;
