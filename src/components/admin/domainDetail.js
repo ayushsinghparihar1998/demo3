@@ -193,7 +193,7 @@ class DomainDetail extends Component {
                     {this.props.match.params.name}
                   </div>
                   <div className="fs15 fw400 col14 mb-4">
-                    Lorem Ipsum is simply dummy and typesetting industry.
+                    {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                   </div>
                   <Table bordered>
                     <thead>
