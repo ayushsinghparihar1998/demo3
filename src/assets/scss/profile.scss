@@ -583,6 +583,9 @@
             font-weight: 500;
             letter-spacing: 0.5px;
         }
+        .rightprofile {
+            word-break: break-all; 
+        }
     }
     .detailtwo {
         background: $col91;  
@@ -1099,6 +1102,30 @@
 }
 
 @media (max-width: 767px) { 
+    .p_detailone {
+        div.pr-1 {
+            padding-right: 15px !important;
+        }
+        div.pl-1 {
+            padding-left: 15px !important; 
+        }
+        .profiledetails {
+            padding: 0; 
+            background: #f3fdff; 
+            .detailone {
+                padding: 20px;
+            }
+            .detailtwo {
+                padding: 20px; 
+                .boxexone {
+                    max-width: 100%;
+                }
+            }
+            .leftprofile {
+                margin-bottom: 15px; 
+            }
+        }
+    }
     .processBlog {
         .blogMain.ListsUI {
             .tab-content {

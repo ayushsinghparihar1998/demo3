@@ -229,7 +229,7 @@ class Myprofile extends Component {
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>
-            <div className="profile_layout pt-4 pb-5">
+            <div className="profile_layout p_detailone pt-4 pb-5">
               <Container>
                 <Row>
                   <Col md={4} lg={3} className="pr-1">
