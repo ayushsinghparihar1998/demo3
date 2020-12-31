@@ -352,15 +352,16 @@ class Myprofile extends Component {
                                 </span>
                               </div>{" "}
                               <div className="col3 fw500 mt-1 mb-2">
-                                Age:
+                                Age: 
                                 <span className="col14 fw400 ml-2">
                                   {proffDetail.u_birthdate}
                                 </span>
                               </div>
                               <div className="mb-2">
                                 <div className="mb-4">
-                                    <a
-                                      className="mr-3"
+                                Email: 
+                                      <a
+                                      className="ml-2 fw400"
                                     >
                                       {proffDetail.email}
                                     </a>
