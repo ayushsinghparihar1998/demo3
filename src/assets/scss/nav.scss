@@ -244,18 +244,19 @@
                 &:hover {
                     background: transparent; 
                 }    
-                padding: 0;    
+                padding: 0;     
                 ul.notes {
                     text-align: left;
                     padding: 0;
                     padding-top: 10px;
+                    max-width: 440px;
 
                     li {
                         position: relative; 
                         display: flex;
                         flex-wrap: wrap;
                         border-bottom: solid 1px #ccc; 
-                        margin: 0px 18px 0 36px;
+                        margin: 0px 18px 0 20px; 
                         margin-bottom: -1px;
                         padding: 12px 0;
 
@@ -546,6 +547,37 @@
                 
     
             }
+        }
+    }
+
+    .professinal_list { 
+        &.proListTwo {
+            .professor_search {
+                padding: 10px 20px 20px !important; 
+
+                .checkCategory {
+                    padding: 0 15px;
+                    padding-top: 20px; 
+                    .form-check {
+                        margin-right: 10px; 
+                        padding: 7px 18px;
+                    }
+                }
+            }
+            .chatsearch {
+                padding: 10px 0 !important;  
+                .search-listing {
+                    padding: 15px 15px !important; 
+                }
+            }
+        }
+    }
+    
+    .verifystwo {
+        text-align: center;
+        padding: 0 15px; 
+        .fs18.fw500 {
+            font-size: 15px !important;   
         }
     }
 

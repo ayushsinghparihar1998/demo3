@@ -47,20 +47,20 @@ import Addquestionanswer from "../components/jsx/superadmin/addquestionanswer";
 import Adminselectcategory from "../components/jsx/superadmin/adminselectcategory";
 import CalendarDemo from "../components/professional/calendar";
 import ProfessionalChatSearch from "../components/chat/professionalSearch";
-import Reviewrequest from "../components/admin/reviewrequest";
-import Ratingrequest from "../components/admin/ratingrequest";
+// import Reviewrequest from "../components/admin/reviewrequest";
+// import Ratingrequest from "../components/admin/ratingrequest";
 import Reviewcomments from "../components/user/reviewcomments";
 import Donatedata from "../components/user/donatedata";
 import CocoLearnMore from "../components/user/cocoLearnMore";
 import Foundation from "../components/user/foundation";
-import Paymentdetail from "../components/admin/paymentdetail";
+// import Paymentdetail from "../components/admin/paymentdetail";
 import MySetting from "../components/admin/mysetting";
 import ComingSoon from "../components/comingSoon";
 import Media from "../components/admin/blogs";
 import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
-import Createblogs from "../components/admin/createblog";
-import BlogDetail from "../components/admin/blogDetail";
+// import Createblogs from "../components/admin/createblog";
+// import BlogDetail from "../components/admin/blogDetail";
 import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq";
@@ -74,13 +74,13 @@ import ProfessionalDetails from "../components/professional/professionalDetails"
 import ProfessionalSignup from "../components/professional/professionalSignup";
 import ProfessionalModify from "../components/professional/professionalModify.js";
 
-import ProfessionalList from "../components/admin/professionalList";
+// import ProfessionalList from "../components/admin/professionalList";
 import listenerBrowse from "../components/professional/listenerBrowse"
-import CorporateMember from "../components/admin/corporateMember";
+// import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain";
 import DomainDetail from "../components/admin/domainDetail";
 // import DomainListing from "../components/admin/domenListing";
-import SessionRequest from "../components/admin/sessionRequest";
+// import SessionRequest from "../components/admin/sessionRequest";
 import CorporateLogin from "../components/professional/corporateLogin";
 import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
@@ -88,8 +88,8 @@ import BlogUser from "../components/professional/blogUser";
 // ProfessionalBlog
 import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
 import ProfessinalBlogPress from "../components/admin/professionalBlogPress";   
-import AdminBlogListing from "../components/admin/adminBlogListing";  
-import AdminPressListing from "../components/admin/adminPressListing";                                           
+// import AdminBlogListing from "../components/admin/adminBlogListing";  
+// import AdminPressListing from "../components/admin/adminPressListing";                                           
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";
@@ -151,10 +151,10 @@ class ELPRoute extends Component {
           <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          <PublicRoute path="/reviewrequest" component={Reviewrequest} />
+          {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} /> */}
           {/* LIst */}
           {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
-          <PublicRoute path="/ratingrequest" component={Ratingrequest} />
+          {/* <PublicRoute path="/ratingrequest" component={Ratingrequest} /> */}
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
@@ -168,16 +168,16 @@ class ELPRoute extends Component {
             path="/professionalModify/:id"
             component={ProfessionalModify}
           />
-          <PublicRoute path="/professionalList" component={ProfessionalList} />
+          {/* <PublicRoute path="/professionalList" component={ProfessionalList} /> */}
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
-          <PublicRoute path="/paymentdetail" component={Paymentdetail} />
-          <PublicRoute path="/corporateMember" component={CorporateMember} />
+          {/* <PublicRoute path="/paymentdetail" component={Paymentdetail} /> */}
+          {/* <PublicRoute path="/corporateMember" component={CorporateMember} /> */}
           <PublicRoute path="/addDomain/:id" component={AddDomain} />
           <PublicRoute path="/domainDetails/:name/:id" component={DomainDetail} />
           {/* <PublicRoute path="/domainListing" component={DomainListing} /> */}
-          <PublicRoute path="/sessionRequest" component={SessionRequest} />
+          {/* <PublicRoute path="/sessionRequest" component={SessionRequest} /> */}
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
           <PublicRoute
             path="/corporateDashboard"
@@ -188,8 +188,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
           <PublicRoute path="/professionalBlogList" component={ProfessionalBlogList} />
           <PublicRoute path="/blogUser" component={BlogUser} />
-          <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
-          <PublicRoute path="/adminPressListing" component={AdminPressListing} />    
+          {/* <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
+          <PublicRoute path="/adminPressListing" component={AdminPressListing} />     */}
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute path="/professinalBlogCreate/:id" component={ProfessinalBlogCreate} />
@@ -242,7 +242,9 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
           <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRoutes path="/listener-browse" component={listenerBrowse} />
-          <PrivateRouteUser path="/chatuser/:id" component={ChatUser} />
+          
+          <Route path="/chatuser/:id" render={(props) => <ChatUser {...props}/>}  />
+
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           <PrivateRoutes path="/mysetting" component={MySetting} />
           <PrivateRoutes path="/mediadetails/:id" component={Mediadetails} />
@@ -263,10 +265,10 @@ class ELPRoute extends Component {
             component={Adminselectcategory}
           />
           <PublicRoute path="/adminlistener" component={Adminlistener} />
-          <PublicRoute path="/adminlisting" component={Reviewrequest} />
+          {/* <PublicRoute path="/adminlisting" component={Reviewrequest} /> */}
           <PublicRoute path="/blogs" component={Media} />
-          <PublicRoute path="/createblog" component={Createblogs} />
-          <PublicRoute path="/blogsDetail" component={BlogDetail} />
+          {/* <PublicRoute path="/createblog" component={Createblogs} />
+          <PublicRoute path="/blogsDetail" component={BlogDetail} /> */}
           <PublicRoute path="/categoryadmin" component={Categoryadmin} />
           <PublicRoute path="/helprequest" component={Helprequest} />
 

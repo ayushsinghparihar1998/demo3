@@ -113,7 +113,9 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "listner"
     )
-      this.getCustomerListing("", "listner", 1);
+      // this.getCustomerListing("", "listner", 1);
+      this.getListnerListing("", "listner", 1);
+
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "getProffListing"
@@ -695,6 +697,12 @@ class Adminlistener extends Component {
         this.getBlockuserListing(page, this.state.count, this.state.block_type);
       } else if (this.state.pageType == "reviewList") {
         this.getReviewListing(page, this.state.count, this.state.review_type);
+      } else if (this.state.pageType == "blogList") {
+        this.getBlockuserListing(page, this.state.count);
+      } else if (this.state.pageType == "pressblogList") {
+        this.getpressblogListHandler(page, this.state.count);
+      } else if (this.state.pageType == "domainList") {
+        this.getDomainListing(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
           page,
@@ -1013,6 +1021,28 @@ class Adminlistener extends Component {
     });
   };
 
+  changeStatusBlog = (id, type) => {
+    let databl = {
+      bl_id: id,
+      bl_status: "2",
+    };
+    let datapbl = {
+      pbl_id: id,
+      pbl_status: "2",
+    };
+    ELPViewApiService(
+      type,
+      type == "superadmin_change_press_blogstatus" ? datapbl : databl
+    ).then((result) => {
+      console.log("result", result);
+
+      if (result && result.status === 200) {
+        type == "superadmin_change_press_blogstatus"
+          ? this.getpressblogListHandler(this.state.offset, this.state.count)
+          : this.getblogListHandler(this.state.offset, this.state.count);
+      }
+    });
+  };
   changeStatusSession = (cs_id, cs_status) => {
     let data = {
       cs_id: +cs_id,
@@ -1337,7 +1367,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" />  
+                          <Image src={Menuicon} alt="" className="mr-1" />
                           PRESS BLOG LIST
                         </div>
                       </div>
@@ -1369,14 +1399,14 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
+                    {/* <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="position-relative">
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
                           LISTENER Q&A
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </Col>
@@ -2633,7 +2663,16 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                       <span>
-                                        <Image src={Deleteicon} alt="" />
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changeStatusBlog(
+                                              item.pbl_id,
+                                              "superadmin_change_press_blogstatus"
+                                            )
+                                          }
+                                        />
                                       </span>
                                     </div>
                                   </div>
@@ -2798,7 +2837,16 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                       <span>
-                                        <Image src={Deleteicon} alt="" />
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changeStatusBlog(
+                                              item.bl_id,
+                                              "superadmin_changeblogstatus"
+                                            )
+                                          }
+                                        />
                                       </span>
                                     </div>
                                   </div>

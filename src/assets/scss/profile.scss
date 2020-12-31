@@ -481,6 +481,23 @@
                         object-fit: cover; 
                     }
                 }
+                .col3.fs18 {
+                    // height: 46px;
+                    // overflow: hidden;  
+                }
+                .fs14.col14 {
+                    padding: 0 15px; 
+                    & > h4 {
+                        font-size: 14px;
+                        color: $col14;  
+                        height: 40px; 
+                        overflow: hidden; 
+                    }
+                    & > p {
+                        height: 40px; 
+                        overflow: hidden; 
+                    }
+                }
                 img {
                     width: 100%;
                 }
