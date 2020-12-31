@@ -174,9 +174,9 @@ class NavBar extends Component {
                 <NavLink to={"adminlistener"} className="nav-link">
                   DASHBOARD
                 </NavLink>
-                <NavLink to={"blogs"} className="nav-link">
+                {/* <NavLink to={"blogs"} className="nav-link">
                   BLOGS
-                </NavLink>
+                </NavLink> */}
                 <Form inline>
                   <span >
                     <div onClick={this.handleLogoutAdmin} className="btnType1">

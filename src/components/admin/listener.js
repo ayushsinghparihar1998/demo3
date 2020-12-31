@@ -113,7 +113,9 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "listner"
     )
-      this.getCustomerListing("", "listner", 1);
+      // this.getCustomerListing("", "listner", 1);
+      this.getListnerListing("", "listner", 1);
+
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "getProffListing"
@@ -1397,14 +1399,14 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
+                    {/* <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="position-relative">
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
                           LISTENER Q&A
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </Col>

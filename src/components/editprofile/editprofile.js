@@ -21,7 +21,7 @@ import {
   actionGetCity,
   actionUploadImage
 } from '../../common/redux/actions';
-import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
+import { DayPicker ,YearPicker, MonthPicker } from 'react-dropdown-date';
 import moment from 'moment';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -627,7 +627,6 @@ class Editprofile extends Component {
                         <Col md={4}>
                           <Form.Group controlId="exampleForm.ControlSelect1">
                             <DayPicker
-                              
                               defaultValue="Day"
                               id="day"
                               name="day"
