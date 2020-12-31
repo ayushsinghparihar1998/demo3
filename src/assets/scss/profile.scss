@@ -1044,6 +1044,12 @@
             .col64.fs17.fw500 {
                 cursor: pointer; 
             }
+
+            .featuredTab {
+                .fs18.col64.fw600 {
+                    cursor: pointer;
+                }
+            }
             padding-top: 30px; 
             .coverageTab {
                 .coverageList {
@@ -1251,6 +1257,8 @@
         .blogMain {
             .tab-content {
                 padding-top: 0; 
+
+                
             }
             .pt-5.pb-5.mt-5.mb-5.d-flex.justify-content-end {
                 padding-top: 0px !important;
