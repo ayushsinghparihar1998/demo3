@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, Row, Col } from "react-bootstrap"; 
 
 
-class SubscribeHere extends Component {       
+class SubscribeHere extends Component {        
     render() { 
         return (
             <div className="subscribe_here2">     

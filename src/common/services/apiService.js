@@ -70,7 +70,7 @@ const handleErrorByStatus = (error) => {
   } else if (error && error.success === "error") {
     const message = error.message;
     // alert("ERROR")
-    showErrorToast(message);
+    // showErrorToast(message);
   }
 };
 
