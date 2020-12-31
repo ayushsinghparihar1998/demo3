@@ -22,9 +22,10 @@ function validateInput(data) {
 
   if (Validator.isEmpty(data.password)) {
     errors.password = ValidationMessages.password.required;
-  } else if (!reg.test(data.password.trim())) {
-    errors.password = ValidationMessages.password.passwordPattern;
-  } else if (data.password.trim().length < 8) {
+  // } else if (!reg.test(data.password.trim())) {
+  //   errors.password = ValidationMessages.password.passwordPattern;
+  } 
+  else if (data.password.trim().length < 6) {
     errors.password = ValidationMessages.password.passwordPattern;
   }
 

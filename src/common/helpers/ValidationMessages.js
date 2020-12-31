@@ -51,7 +51,9 @@ export default {
     oldPassword: "Please enter current password.",
     confirmNewPassword: "Please enter confirm new password.",
     passwordPattern:
-      "Password should be min 8 characters long with one special character, number, lower and upper case letter.",
+      "Password should be min 6 characters long and keep your password strong",
+      // "Password should be min 8 characters long with one special character, number, lower and upper case letter.",
+      // 
     spaceAvoid: "Mismatch new password and confirm new password.",
     confirmed: "Password and Confirm password do not match.",
     spacialChar: "Password and Confirm password do not match.",

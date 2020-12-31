@@ -42,6 +42,7 @@ class ProfessionalBlogList extends Component {
             latestBlogs: null,
             showDetails: false,
             offset: 6,
+            subscribeMail:null
         }
     }
 
@@ -106,7 +107,17 @@ class ProfessionalBlogList extends Component {
     }
     getBlogdetails = (blog_id) => {
         this.props.history.push('/blogsDetail/' + blog_id)
+    }
 
+    subscribeNewsLatterHandler = async () =>{
+        ELPRxApiService("subscribe", { email: this.state.subscribeMail })
+        .then((res) => {
+            this.setState({ subscribeMail: ""});
+        })
+        .catch((err) => {
+            console.log(err);
+            this.setState({ subscribeMail: ""});
+        })
     }
 
     render() {
@@ -180,53 +191,8 @@ class ProfessionalBlogList extends Component {
                                                         )}
 
                                                     </div>
-
-
-
                                                 </Col>
                                             </Row>
-                                            {/* <div className="mt-4 mb-4 border_blog"></div> */}
-
-                                            <div className="subscribe_here2 eatBlog mt-5 mb-5">
-                                                <Container>
-                                                    <Row>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_left">
-                                                                <div>
-                                                                    <div className="fs36 col64 fw600 w-100">Subscribe Here</div>
-                                                                    <div className="col14 fs20 fw300 w-100">
-                                                                        Get updates about Eat Luv N Pray
-                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_form">
-                                                                <Form>
-                                                                    <Form.Group className="fgroups" controlId="formBasicEmail">
-                                                                        <Form.Control
-                                                                            type="email"
-                                                                            placeholder="Email address"
-                                                                            className="inputTyp1 fs20"
-                                                                            name="email"
-                                                                        />
-                                                                    </Form.Group>
-
-                                                                </Form>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={2} lg={2}>
-                                                            <div className="mt-2">
-                                                                <Button variant="primary"
-                                                                    type="submit" className="btnTyp2">
-                                                                    SUBSCRIBE
-                                                        </Button>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-
-                                            </div>
                                         </div>
                                     </Tab>
 
@@ -285,46 +251,7 @@ class ProfessionalBlogList extends Component {
                                             </Row>
                                             {/* <div className="mt-4 mb-4 border_blog"></div> */}
 
-                                            <div className="subscribe_here2 eatBlog mt-5 mb-5">
-                                                <Container>
-                                                    <Row>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_left">
-                                                                <div>
-                                                                    <div className="fs36 col64 fw600 w-100">Subscribe Here</div>
-                                                                    <div className="col14 fs20 fw300 w-100">
-                                                                        Get updates about Eat Luv N Pray
-                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_form">
-                                                                <Form>
-                                                                    <Form.Group className="fgroups" controlId="formBasicEmail">
-                                                                        <Form.Control
-                                                                            type="email"
-                                                                            placeholder="Email address"
-                                                                            className="inputTyp1 fs20"
-                                                                            name="email"
-                                                                        />
-                                                                    </Form.Group>
-
-                                                                </Form>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={2} lg={2}>
-                                                            <div className="mt-2">
-                                                                <Button variant="primary"
-                                                                    type="submit" className="btnTyp2">
-                                                                    SUBSCRIBE
-                                                        </Button>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-
-                                            </div>
+                                           
                                         </div>
                                     </Tab>
                                     <Tab eventKey="LUV" title="LUV">
@@ -385,84 +312,45 @@ class ProfessionalBlogList extends Component {
 
                                                 </Col>
                                             </Row>
-                                            {/* <div className="mt-4 mb-4 border_blog"></div> */}
 
-                                            <div className="subscribe_here2 eatBlog mt-5 mb-5">
-                                                <Container>
-                                                    <Row>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_left">
-                                                                <div>
-                                                                    <div className="fs36 col64 fw600 w-100">Subscribe Here</div>
-                                                                    <div className="col14 fs20 fw300 w-100">
-                                                                        Get updates about Eat Luv N Pray
-                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_form">
-                                                                <Form>
-                                                                    <Form.Group className="fgroups" controlId="formBasicEmail">
-                                                                        <Form.Control
-                                                                            type="email"
-                                                                            placeholder="Email address"
-                                                                            className="inputTyp1 fs20"
-                                                                            name="email"
-                                                                        />
-                                                                    </Form.Group>
-
-                                                                </Form>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={2} lg={2}>
-                                                            <div className="mt-2">
-                                                                <Button variant="primary"
-                                                                    type="submit" className="btnTyp2">
-                                                                    SUBSCRIBE
-                                                        </Button>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-
-                                            </div>                            </div>
+                                            
+                                        </div>
                                     </Tab>
                                     <Tab eventKey="PRAY" title="PRAY">
                                         <div className="coverageTab">
                                             <Row>
-                                                 
-                                                    <Col md={7}>
-                                                        <Row>
-                                                            {this.state.blogPray && this.state.blogPray.map((data, i) =>
-                                                                this.state.offset > i ? (
-                                                                    <Col md={6} className="mb-4">
-                                                                        <div className="fw600 fs20 col64 mb-3">
-                                                                            {data.bl_title}
-                                                                        </div>
-                                                                        <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
-                                                                        <div className="blogClocks mb-3 mt-3">
-                                                                            <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                            <div>
-                                                                                <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
-                                                                                <span>
-                                                                                    <Image src={blogclock} className="wSet-20 mr-2" />
+
+                                                <Col md={7}>
+                                                    <Row>
+                                                        {this.state.blogPray && this.state.blogPray.map((data, i) =>
+                                                            this.state.offset > i ? (
+                                                                <Col md={6} className="mb-4">
+                                                                    <div className="fw600 fs20 col64 mb-3">
+                                                                        {data.bl_title}
+                                                                    </div>
+                                                                    <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
+                                                                    <div className="blogClocks mb-3 mt-3">
+                                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" />
+                                                                        <div>
+                                                                            <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
+                                                                            <span>
+                                                                                <Image src={blogclock} className="wSet-20 mr-2" />
                                                                                         11 Minute read
                                                                                     </span>
-                                                                            </div>
                                                                         </div>
-                                                                     
-                                                                    </Col>
-                                                                ) : null
-                                                            )}
-                                                        </Row>
-                                                        {this.state.blogPray && this.state.offset < this.state.blogPray.length ?
-                                                            <div className="text-center mt-5 mb-5">
-                                                                <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                            </div> : null
-                                                        }
-                                                    </Col>
-                                              
+                                                                    </div>
+
+                                                                </Col>
+                                                            ) : null
+                                                        )}
+                                                    </Row>
+                                                    {this.state.blogPray && this.state.offset < this.state.blogPray.length ?
+                                                        <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                        </div> : null
+                                                    }
+                                                </Col>
+
 
                                                 <Col md={5}>
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
@@ -482,59 +370,56 @@ class ProfessionalBlogList extends Component {
                                                                 </Col>
                                                             </Row>
                                                         )}
-
                                                     </div>
-
-
-
                                                 </Col>
                                             </Row>
-                                            {/* <div className="mt-4 mb-4 border_blog"></div> */}
 
-                                            <div className="subscribe_here2 eatBlog mt-5 mb-5">
-                                                <Container>
-                                                    <Row>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_left">
-                                                                <div>
-                                                                    <div className="fs36 col64 fw600 w-100">Subscribe Here</div>
-                                                                    <div className="col14 fs20 fw300 w-100">
-                                                                        Get updates about Eat Luv N Pray
-                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={5} lg={5}>
-                                                            <div className="subscribe_form">
-                                                                <Form>
-                                                                    <Form.Group className="fgroups" controlId="formBasicEmail">
-                                                                        <Form.Control
-                                                                            type="email"
-                                                                            placeholder="Email address"
-                                                                            className="inputTyp1 fs20"
-                                                                            name="email"
-                                                                        />
-                                                                    </Form.Group>
-
-                                                                </Form>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={2} lg={2}>
-                                                            <div className="mt-2">
-                                                                <Button variant="primary"
-                                                                    type="submit" className="btnTyp2">
-                                                                    SUBSCRIBE
-                                                        </Button>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-
-                                            </div>
                                         </div>
                                     </Tab>
                                 </Tabs>
+                                <div className="subscribe_here2 eatBlog mt-5 mb-5">
+                                    <Container>
+                                        <Row>
+                                            <Col md={5} lg={5}>
+                                                <div className="subscribe_left">
+                                                    <div>
+                                                        <div className="fs36 col64 fw600 w-100">Subscribe Here</div>
+                                                        <div className="col14 fs20 fw300 w-100">
+                                                            Get updates about Eat Luv N Pray
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </Col>
+                                            <Col md={5} lg={5}>
+                                                <div className="subscribe_form">
+                                                    <Form>
+                                                        <Form.Group className="fgroups" controlId="formBasicEmail">
+                                                            <Form.Control
+                                                                onChange={(e)=>{this.setState({subscribeMail:e.target.value})}}
+                                                                value={this.state.subscribeMail}
+                                                                type="email"
+                                                                placeholder="Email address"
+                                                                className="inputTyp1 fs20"
+                                                                name="email"
+                                                            />
+                                                        </Form.Group>
 
+                                                    </Form>
+                                                </div>
+                                            </Col>
+                                            <Col md={2} lg={2}>
+                                                <div className="mt-2">
+                                                    <Button variant="primary"
+                                                        onClick={this.subscribeNewsLatterHandler}
+                                                        type="submit" className="btnTyp2">
+                                                        SUBSCRIBE
+                                                        </Button>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+
+                                </div>
                             </div>
                         </div>
                     </Container>

@@ -76,7 +76,7 @@ export default {
       search_keyword: "",
       order_by: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
 
@@ -411,23 +411,9 @@ export default {
       offset: "",
     },
     showResultMessage: false,
-    showErrorMessage: true,
+    showErrorMessage: false,
   },
 
-  corporategetprofessionallistfilter: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {
-      count: 0,
-      offset: 0,
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
     method: "POST",
@@ -764,13 +750,6 @@ export default {
     showErrorMessage: true,
   },
 
-  subscribe: {
-    url: "elp/usersubscriber",
-    method: "POST",
-    data: { email: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   editUserDetails: {
     url: "elp/editprofile",
     method: "POST",
@@ -1169,7 +1148,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
   getListenerCategoryList: {
     url: "elp/getcategories",
     method: "GET",
@@ -1407,16 +1385,7 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  corporategetprofessionallist: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+ 
 
   corporategetprofessionallistfilter: {
     url: "elp/corporategetprofessionallist",
@@ -1429,8 +1398,8 @@ export default {
       keyword: "",
       category: "",
     },
-    showResultMessage: true,
-    showErrorMessage: true,
+    showResultMessage: false,
+    showErrorMessage: false,
   },
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
@@ -1508,7 +1477,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
- 
+
   corporateLogin: {
     url: "elp/corporatecustomer_register",
     method: "POST",
@@ -1746,20 +1715,7 @@ export default {
     showErrorMessage: true,
   },
 
-  // getListenerCategoryList: {
-  //   url: "elp/getcategories",
-  //   method: "GET",
-  //   data: {},
-  //   showResultMessage: false,
-  //   showErrorMessage: true,
-  // },
-  getListenerCategoryList: {
-    url: "elp/getcategories",
-    method: "GET",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+  
   adminUserDelete: {
     url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
     method: "POST",
@@ -1898,8 +1854,6 @@ export default {
     showErrorMessage: true,
   },
 
-
-
   superadmindeletecorporatedomain: {
     url: "elp/superadmindeletecorporatedomain",
     method: "POST",
@@ -1918,8 +1872,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
- 
- 
 
   createBlog: {
     url: "elp/superadmin_addblog",
@@ -1978,7 +1930,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
   submitRatings: {
     url: "elp/addrating",
     method: "POST",
@@ -2024,7 +1975,6 @@ export default {
   //   showErrorMessage: true,
   // },
 
- 
   getnotificationlisting: {
     url: "elp/getnotificationlisting",
     method: "POST",
@@ -2032,14 +1982,10 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+
+
  
-  corporategetprofessionallist: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
