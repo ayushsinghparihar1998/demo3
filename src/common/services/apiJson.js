@@ -76,7 +76,7 @@ export default {
       search_keyword: "",
       order_by: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
 
@@ -414,20 +414,6 @@ export default {
     showErrorMessage: true,
   },
 
-  corporategetprofessionallistfilter: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {
-      count: 0,
-      offset: 0,
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
     method: "POST",
@@ -1428,7 +1414,7 @@ export default {
       keyword: "",
       category: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   corporateappointmentschedule: {
@@ -1745,20 +1731,7 @@ export default {
     showErrorMessage: true,
   },
 
-  // getListenerCategoryList: {
-  //   url: "elp/getcategories",
-  //   method: "GET",
-  //   data: {},
-  //   showResultMessage: false,
-  //   showErrorMessage: true,
-  // },
-  getListenerCategoryList: {
-    url: "elp/getcategories",
-    method: "GET",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+  
   adminUserDelete: {
     url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
     method: "POST",
@@ -2033,6 +2006,8 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+ 
+
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
@@ -2099,5 +2074,21 @@ export default {
     },
     showResultMessage: true,
     showErrorMessage: true,
+  },
+
+  readAllNotifications: {
+    url: "elp/read_notification",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: false,
+  },
+
+  pressBlogDetail: {
+    url: "elp/getpressblogdetails",
+    method: "POST",
+    data: {"pbl_id":""},
+    showResultMessage: false,
+    showErrorMessage: false,
   },
 };

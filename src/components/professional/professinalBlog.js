@@ -92,6 +92,11 @@ class ProfessinalBlog extends Component {
                })
      }
 
+     getBlogdetails = (blog_id) => {
+          this.props.history.push('/press/blogsDetail/' + blog_id)
+  
+      }
+
      render() {
           return (
                <div className="page__wrapper innerpage">
@@ -113,9 +118,9 @@ class ProfessinalBlog extends Component {
                                                             {this.state.featured && this.state.featured.map(data =>
                                                                  <>
                                                                       <Col md={7} className="mb-4">
-                                                                           <Image src={data.pbl_image} className="w-100" />
-                                                                           <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.setState({ showDetails: true })}>{data.pbl_title}</div>
-                                                                           {this.state.showDetails ? <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div> : null}
+                                                                           <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                                                                           <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
+                                                                           {/* {this.state.showDetails ? <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div> : null} */}
                                                                       </Col>
 
                                                                  </>
@@ -136,9 +141,9 @@ class ProfessinalBlog extends Component {
                                                                       this.state.offset > i ? (
                                                                            <>
                                                                                 <Col md={6}>
-                                                                                     {this.state.showDetails ?
-                                                                                          <div className="fw600 fs16 col64" dangerouslySetInnerHTML={{ __html: data.pbl_desc }}></div>
-                                                                                          : null}
+                                                                                     
+                                                                                          <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)}>{ data.pbl_title}</div>
+                                                                                          
                                                                                 </Col>
                                                                                 <Col md={3}>
                                                                                      <div className="fw400 fs15 col14">{data.pbl_time}</div>
@@ -150,7 +155,7 @@ class ProfessinalBlog extends Component {
                                                                       ) : null
                                                                  )}
 
-                                                            </Row>
+                                                            </Row> 
                                                        </div>
 
                                                   </div>
@@ -170,7 +175,7 @@ class ProfessinalBlog extends Component {
                                                                       return this.state.offset > i ?
                                                                            <>
                                                                                 <Col md={8}>
-                                                                                     <div className="fw600 fs16 col64" >
+                                                                                     <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)} >
                                                                                           {data.pbl_title}
                                                                                      </div>
                                                                                 </Col>

@@ -707,7 +707,12 @@
             font-size: 15px;
         }
         span {
-            display: block; 
+            display: block;
+            height: 78px; 
+            overflow: hidden;
+            p {
+                margin-bottom: 18px; 
+            }
             a {
                 padding-left: 10px; 
             }  
@@ -944,6 +949,7 @@
 
     .mxw-50 {
         max-width: 50%; 
+        opacity: 0;
     }
     .blogMain {
         &.ListsUI {
@@ -1032,6 +1038,9 @@
             }
         }
         .tab-content {
+            .col64.fs17.fw500 {
+                cursor: pointer; 
+            }
             padding-top: 30px; 
             .coverageTab {
                 .coverageList {
@@ -1039,6 +1048,14 @@
                     border-bottom: 0.5px solid #ccc; 
                     padding: 24px 0; 
                 } 
+            }
+            .featuredTab {
+                .col-md-12 {
+                    .w-100 {
+                        height: 300px;  
+                        object-fit: cover;     
+                    }
+                }
             }
 
             .border_blog {

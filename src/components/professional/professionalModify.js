@@ -407,7 +407,7 @@ class ProfessionalSignup extends Component {
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="RegistrationLayout pro_signup">
+        <div className="RegistrationLayout pro_signup pt-4">  
           <Container>
             <Row>
             <Col md={4} lg={3} className="pr-1">
@@ -427,7 +427,7 @@ class ProfessionalSignup extends Component {
                       </div>
                   </Col> 
             <Col md={8} lg={9} className="pl-1">
-            <div className="layout_box mt-5 mb-4">
+            <div className="layout_box mb-4"> 
               <div className="col3 fs40 fw600 mb-4">
                 Modify Professional Details
               </div>

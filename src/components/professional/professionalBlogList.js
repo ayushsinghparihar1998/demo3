@@ -105,15 +105,8 @@ class ProfessionalBlogList extends Component {
             })
     }
     getBlogdetails = (blog_id) => {
-        ELPRxApiService("getBlogdetails", { bl_id: blog_id })
-            .then((res) => {
+        this.props.history.push('/blogsDetail/' + blog_id)
 
-                this.setState({ blogDetailed: res.data.data.blog_list, showDetails: true })
-                console.log('blog detailed data===>', res)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     render() {
@@ -133,75 +126,39 @@ class ProfessionalBlogList extends Component {
                                     <Tab value="EAT" eventKey="All" title="All">
                                         <div className="featuredTab">
                                             <Row>
-                                                {/* Default listing  */}
-                                                {!this.state.showDetails ? (
-                                                    <>
-                                                        <Col md={7}>
-                                                            <Row>
-                                                                {this.state.blogAll && this.state.blogAll.map((data, i) =>
-                                                                    this.state.offset > i ? (
-                                                                        <Col md={6} className="mb-4">
-                                                                            <div className="fw600 fs20 col64 mb-3">
-                                                                                {data.bl_title}
-                                                                            </div>
-                                                                            <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
-                                                                            <div className="blogClocks mb-3 mt-3">
-                                                                                <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                                <div>
-                                                                                    <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
-                                                                                    <span>
-                                                                                        <Image src={blogclock} className="wSet-20 mr-2" />
-                                                                                        11 Minute read
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                                {/* {data.bl_desc} */}
-                                                                            </div>
-                                                                        </Col>) : null
-                                                                )}
 
-
-                                                            </Row>
-                                                            {this.state.blogAll && this.state.offset < this.state.blogAll.length ?
-                                                                <div className="text-center mt-5 mb-5">
-                                                                    <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                                </div> : null
-                                                            }
-
-                                                        </Col>
-                                                    </>
-
-                                                ) :
-                                                    <>
-                                                        {/* Detailed Blog */}
-                                                        {this.state.blogDetailed && this.state.blogDetailed.map(data =>
-                                                            <Col md={7}>
-                                                                <div className="fw600 fs20 col64 mb-4" >
-                                                                    {data.bl_title}
-                                                                </div>
-                                                                <Image src={data.bl_image} className="w-100" />
-                                                                <div className="blogClocks mb-3 mt-3">
-                                                                    <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                    <div>
-                                                                        <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
-                                                                        <span className="ml-3">
-                                                                            <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
+                                                <Col md={7}>
+                                                    <Row>
+                                                        {this.state.blogAll && this.state.blogAll.map((data, i) =>
+                                                            this.state.offset > i ? (
+                                                                <Col md={12}>
+                                                                    <div className="fw600 fs20 col64 mb-4" >
+                                                                        {data.bl_title}
                                                                     </div>
-                                                                </div>
+                                                                    <Image onClick={() => this.getBlogdetails(data.bl_id)} src={data.bl_image} className="w-100" />
+                                                                    <div className="blogClocks mb-3 mt-3">
+                                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" />
+                                                                        <div>
+                                                                            <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
+                                                                            <span className="ml-3">
+                                                                                <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
+                                                                        </div>
+                                                                    </div>
 
-                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                    {/* {data.bl_desc} */}
-                                                                </div>
-                                                            </Col>
+
+                                                                </Col>
+                                                            ) : null
                                                         )}
-                                                    </>
-                                                }
 
 
+                                                    </Row>
+                                                    {this.state.blogAll && this.state.offset < this.state.blogAll.length ?
+                                                        <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                        </div> : null
+                                                    }
 
-
-
+                                                </Col>
 
                                                 <Col md={5}>
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
@@ -278,63 +235,32 @@ class ProfessionalBlogList extends Component {
                                     <Tab eventKey="EAT" title="EAT" >
                                         <div className="featuredTab" >
                                             <Row>
-                                                {/* Default listing  */}
-                                                {!this.state.showDetails ? (
-                                                    <Col md={7}>
-                                                        <Row>
-                                                            {this.state.blogEat && this.state.blogEat.map((data, i) =>
-                                                                this.state.offset > i ? (<Col md={6} className="mb-4">
-                                                                    <div className="fw600 fs20 col64 mb-3">
-                                                                        {data.bl_title}
-                                                                    </div>
-                                                                    <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
-                                                                    <div className="blogClocks mb-3 mt-3">
-                                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                        <div>
-                                                                            <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
-                                                                            <span>
-                                                                                <Image src={blogclock} className="wSet-20 mr-2" />
-                                                        11 Minute read
-                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                        {/* {data.bl_desc} */}
-                                                                    </div>
-                                                                </Col>) : null
-                                                            )}
-                                                        </Row>
-                                                        {this.state.blogEat && this.state.offset < this.state.blogEat.length ?
-                                                            <div className="text-center mt-5 mb-5">
-                                                                <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                            </div> : null
-                                                        }
-                                                    </Col>
-                                                ) :
-                                                    <>
-                                                        {/* Detailed Blog */}
-                                                        {this.state.blogDetailed && this.state.blogDetailed.map(data =>
-                                                            <Col md={7}>
-                                                                <div className="fw600 fs20 col64 mb-4">
+                                                <Col md={7}>
+                                                    <Row>
+                                                        {this.state.blogEat && this.state.blogEat.map((data, i) =>
+                                                            this.state.offset > i ? (<Col md={6} className="mb-4">
+                                                                <div className="fw600 fs20 col64 mb-3">
                                                                     {data.bl_title}
                                                                 </div>
-                                                                <Image src={data.bl_image} className="w-100" />
+                                                                <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
                                                                 <div className="blogClocks mb-3 mt-3">
                                                                     <Image src={BlogProcessSix} className="wSet-50 mr-3" />
                                                                     <div>
-                                                                        <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
-                                                                        <span className="ml-3">
+                                                                        <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
+                                                                        <span>
                                                                             <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
                                                                     </div>
                                                                 </div>
-                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                    {/* {data.bl_desc} */}
-                                                                </div>
-                                                            </Col>
-                                                        )}
-                                                    </>
-                                                }
 
+                                                            </Col>) : null
+                                                        )}
+                                                    </Row>
+                                                    {this.state.blogEat && this.state.offset < this.state.blogEat.length ?
+                                                        <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                        </div> : null
+                                                    }
+                                                </Col>
                                                 <Col md={5}>
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
                                                     <div className="mb-4 pb-2">
@@ -355,9 +281,6 @@ class ProfessionalBlogList extends Component {
                                                         )}
 
                                                     </div>
-
-
-
                                                 </Col>
                                             </Row>
                                             {/* <div className="mt-4 mb-4 border_blog"></div> */}
@@ -407,64 +330,35 @@ class ProfessionalBlogList extends Component {
                                     <Tab eventKey="LUV" title="LUV">
                                         <div className="coverageTab">
                                             <Row>
-                                                {/* Default listing  */}
-                                                {!this.state.showDetails ? (
-                                                    <Col md={7}>
-                                                        <Row>
-                                                            {this.state.blogLuv && this.state.blogLuv.map((data, i) =>
-                                                                this.state.offset > i ? (
-                                                                    <Col md={6} className="mb-4">
-                                                                        <div className="fw600 fs20 col64 mb-3">
-                                                                            {data.bl_title}
-                                                                        </div>
-                                                                        <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
-                                                                        <div className="blogClocks mb-3 mt-3">
-                                                                            <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                            <div>
-                                                                                <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
-                                                                                <span>
-                                                                                    <Image src={blogclock} className="wSet-20 mr-2" />
-                                                         11 Minute read
-                                                     </span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                            {/* {data.bl_desc} */}
-                                                                        </div>
-                                                                    </Col>
-                                                                ) : null
-                                                            )}
-                                                        </Row>
-                                                        {this.state.blogLuv && this.state.offset < this.state.blogLuv.length ?
-                                                            <div className="text-center mt-5 mb-5">
-                                                                <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                            </div> : null
-                                                        }
-                                                    </Col>
-                                                ) :
-                                                    <>
-                                                        {/* Detailed Blog */}
-                                                        {this.state.blogDetailed && this.state.blogDetailed.map(data =>
-                                                            <Col md={7}>
-                                                                <div className="fw600 fs20 col64 mb-4">
-                                                                    {data.bl_title}
-                                                                </div>
-                                                                <Image src={data.bl_image} className="w-100" />
-                                                                <div className="blogClocks mb-3 mt-3">
-                                                                    <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                    <div>
-                                                                        <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
-                                                                        <span className="ml-3">
-                                                                            <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
+
+                                                <Col md={7}>
+                                                    <Row>
+                                                        {this.state.blogLuv && this.state.blogLuv.map((data, i) =>
+                                                            this.state.offset > i ? (
+                                                                <Col md={6} className="mb-4">
+                                                                    <div className="fw600 fs20 col64 mb-3">
+                                                                        {data.bl_title}
                                                                     </div>
-                                                                </div>
-                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                    {/* {data.bl_desc} */}
-                                                                </div>
-                                                            </Col>
+                                                                    <Image src={data.bl_image} className="w-100" onClick={() => this.getBlogdetails(data.bl_id)} />
+                                                                    <div className="blogClocks mb-3 mt-3">
+                                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" />
+                                                                        <div>
+                                                                            <span className="fs14 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span> <br />
+                                                                            <span>
+                                                                                <Image src={blogclock} className="wSet-20 mr-2" /> 11 Minute read</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </Col>
+                                                            ) : null
                                                         )}
-                                                    </>
-                                                }
+                                                    </Row>
+                                                    {this.state.blogLuv && this.state.offset < this.state.blogLuv.length ?
+                                                        <div className="text-center mt-5 mb-5">
+                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
+                                                        </div> : null
+                                                    }
+                                                </Col>
 
                                                 <Col md={5}>
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
@@ -537,8 +431,7 @@ class ProfessionalBlogList extends Component {
                                     <Tab eventKey="PRAY" title="PRAY">
                                         <div className="coverageTab">
                                             <Row>
-                                                {/* Default listing  */}
-                                                {!this.state.showDetails ? (
+                                                 
                                                     <Col md={7}>
                                                         <Row>
                                                             {this.state.blogPray && this.state.blogPray.map((data, i) =>
@@ -558,9 +451,7 @@ class ProfessionalBlogList extends Component {
                                                                                     </span>
                                                                             </div>
                                                                         </div>
-                                                                        <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                            {/* {data.bl_desc} */}
-                                                                        </div>
+                                                                     
                                                                     </Col>
                                                                 ) : null
                                                             )}
@@ -571,30 +462,7 @@ class ProfessionalBlogList extends Component {
                                                             </div> : null
                                                         }
                                                     </Col>
-                                                ) :
-                                                    <>
-                                                        {/* Detailed Blog */}
-                                                        {this.state.blogDetailed && this.state.blogDetailed.map(data =>
-                                                            <Col md={7}>
-                                                                <div className="fw600 fs20 col64 mb-4">
-                                                                    {data.bl_title}
-                                                                </div>
-                                                                <Image src={data.bl_image} className="w-100" />
-                                                                <div className="blogClocks mb-3 mt-3">
-                                                                    <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                    <div>
-                                                                        <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
-                                                                        <span className="ml-3">
-                                                                            <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div dangerouslySetInnerHTML={{ __html: data.bl_desc }} className="col64 fs16 fw400">
-                                                                    {/* {data.bl_desc} */}
-                                                                </div>
-                                                            </Col>
-                                                        )}
-                                                    </>
-                                                }
+                                              
 
                                                 <Col md={5}>
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
@@ -602,7 +470,7 @@ class ProfessionalBlogList extends Component {
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
                                                             <Row>
                                                                 <Col md={9}>
-                                                                    <div className="" onClick={() => {this.getBlogdetails(data.bl_id)}} >
+                                                                    <div className="" onClick={() => { this.getBlogdetails(data.bl_id) }} >
                                                                         <div className="col64 fs17 fw500">
                                                                             {data.bl_title}
                                                                         </div>
