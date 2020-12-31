@@ -115,7 +115,6 @@ class Adminlistener extends Component {
     )
       // this.getCustomerListing("", "listner", 1);
       this.getListnerListing("", "listner", 1);
-
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "getProffListing"
@@ -1866,6 +1865,12 @@ cs_time: "00:00:02" */}
                                           <div className="col3 fw500 fs18 pb-1">
                                             {item.cs_corporate_name}
                                           </div>
+                                          <div className="col28 fs14 fw400 pb-1">
+                                            {item.cs_subject} {'-'} {item.cs_description}
+                                          </div>
+                                          {/* <div className="col28 fs14 fw400 pt-1">
+                                            
+                                          </div> */}
                                           <div className="fs14 fw400 col54 pb-1">
                                             {/* {console.log(item)} */}
                                             {moment(
