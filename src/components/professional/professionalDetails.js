@@ -291,9 +291,7 @@ class Myprofile extends Component {
                                         return (
                                           <>
                                             {item.pk_keyword}
-                                            {index + 1 ==
-                                            proffDetail.professional_cat_name
-                                              .length
+                                            {proffDetail.professional_cat_name && (index + 1) == proffDetail.professional_cat_name.length
                                               ? ""
                                               : ","}{" "}
                                           </>
@@ -312,9 +310,7 @@ class Myprofile extends Component {
                                           return (
                                             <>
                                               {item.pu_cat_name}
-                                              {index + 1 ==
-                                              proffDetail.professional_cat_name
-                                                .length
+                                              {proffDetail.professional_cat_name && index + 1 == proffDetail.professional_cat_name.length
                                                 ? ""
                                                 : ","}{" "}
                                             </>

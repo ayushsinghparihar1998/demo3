@@ -61,12 +61,12 @@ const handleErrorByStatus = (error) => {
     // }).then(response => {
     // debugger;
     clearLocalStorage();
-    window.location = "/";
+    // window.location = "/";
     // });
   } else if (error && error.status === "error") {
     const message = error.message;
      
-    // showErrorToast(message);
+    showErrorToast(message);
   } else if (error && error.success === "error") {
     const message = error.message;
     // alert("ERROR")

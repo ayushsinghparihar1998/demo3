@@ -55,45 +55,41 @@ class ProfessionalLsting extends Component {
 
 
     validate = () => {
-        let isValid = 0
-        if (!this.state.professionalEmail) {
-            this.setState({validationErrorEmail: 'Please Enter Professional Email.'})
-            isValid += 1
-        } else {
-            this.setState({validationErrorEmail: null})
-        }
+        let isValid = true
+        
         if (!this.state.appointmentSubject) {
             this.setState({validationErrorSubject: 'Please Enter Appointment Subject.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorSubject: null})
         }
         if (!this.state.description) {
             this.setState({validationErrorDescription: 'Please Enter Appointment Description.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorDescription: null})
         }
         if (!this.state.appointmentDate) {
             this.setState({validationErrorDate: 'Please Enter Appointment Date.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorDate: null})
         }
         if (!this.state.appointmentTime) {
             this.setState({validationErrorTime: 'Please Enter Appointment Time.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorTime: null})
         }
-        return isValid === 0;
+
+        return isValid
 
     }
 
     _getProfessionalListHandler = async () => {
         try {
             let response = await ELPRxApiService("corporategetprofessionallist", {
-                "count": this.state.count,
+                "count": 9,
                 "offset": this.state.offset,
             })
             this.setState({
@@ -176,6 +172,7 @@ class ProfessionalLsting extends Component {
 
     postBookingData = () => {
         let isValid = this.validate()
+        
         if (isValid) {
             ELPRxApiService("corporateappointmentschedule", {
                 cs_pro_u_id: this.state.professionalId,
@@ -214,6 +211,15 @@ class ProfessionalLsting extends Component {
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>
+                                    <Col md="5">
+                                            <Form.Group controlId="formBasicTexts">
+                                                <Form.Control type="text" placeholder="Search by name"
+                                                              className="inputTyp2 inputpProcess"
+                                                              onChange={(e) => {
+                                                                  this.setState({searchName: e.target.value})
+                                                              }}/>
+                                            </Form.Group>
+                                        </Col>
                                         <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
                                                 <Form.Control type="text" placeholder="Search by name"
@@ -233,7 +239,7 @@ class ProfessionalLsting extends Component {
                                                 />
                                             </Form.Group>
                                         </Col>
-                                        <Col md="2" className="text-center">
+                                        <Col md="3" className="text-center">
                                             <Button variant="primary process_btn"
                                                     onClick={this._getFilterProfessionalListHandler}>
                                                 search
@@ -250,7 +256,7 @@ class ProfessionalLsting extends Component {
                                                         }}
 
                                                         label="Eat"/>
-                                            <Form.Check type="checkbox"
+                                            <Form.Check type="checkbox"                                            
                                                         className={this.state.luv ? "checktwo active" : "checktwo"}
                                                         onChange={(e) => {
                                                             this.setState({luv: e.target.checked})
@@ -306,18 +312,10 @@ class ProfessionalLsting extends Component {
                                                         })}>read more</a>
                                                     </div>
 
-                                                    {getLocalStorage('customerInfo').u_verified === "0" ?
-                                                        <Button variant="primary" disabled
+                                                    
+                                                        <Button variant="primary" disabled={getLocalStorage('customerInfo').u_verified !== "0" ?true:false}
                                                                 onClick={() => this.bookSessionOpen(obj)}
-                                                                className="btnTyp9 report mt-4 mb-4">Book A
-                                                            Session</Button>
-
-                                                        :
-                                                        <Button variant="primary"
-                                                                onClick={() => this.bookSessionOpen(obj)}
-                                                                className="btnTyp9 report mt-4 mb-4">Book A
-                                                            Session</Button>
-                                                    }
+                                                                className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                                 </div>
                                             </Col>
 
@@ -353,15 +351,6 @@ class ProfessionalLsting extends Component {
                             <div className="layout_box mt-3 mb-4">
                                 <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                                 <Form>
-                                    {/* <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Professional Email:</Form.Label>
-                                        <Form.Control type="text" className="inputTyp2"
-                                                      onChange={(e) => {
-                                                          this.setState({professionalEmail: e.target.value})
-                                                      }}/>
-                                        <div className="error alignLeft d-none">Enter Professional Email</div>
-                                    </Form.Group>
-                                    {this.state.validationError ? <div>{this.state.validationError}</div> : null}  */}
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label>
@@ -371,7 +360,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Subject</div>
                                     </Form.Group>
                                     {this.state.validationErrorSubject ?
-                                        <div className="error">{this.state.validationErrorSubject}</div> : null}
+                                        <div>{this.state.validationErrorSubject}</div> : null}
 
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -383,13 +372,11 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Description</div>
                                     </Form.Group>
                                     {this.state.validationErrorDescription ?
-                                        <div className="error">{this.state.validationErrorDescription}</div> : null}
+                                        <div>{this.state.validationErrorDescription}</div> : null}
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
 
-                                        {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" /> */}
-                                        {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
 
                                         <Form.Control type="date" className="inputTyp2" onChange={(e) => {
                                             this.setState({appointmentDate: e.target.value})
@@ -398,7 +385,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Date</div>
                                     </Form.Group>
                                     {this.state.validationErrorDate ?
-                                        <div className="error">{this.state.validationErrorDate}</div> : null}
+                                        <div>{this.state.validationErrorDate}</div> : null}
 
 
                                     <Form.Group controlId="formBasicEmail">
@@ -411,7 +398,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Time</div>
                                     </Form.Group>
                                     {this.state.validationErrorTime ?
-                                        <div className="error">{this.state.validationErrorTime}</div> : null}
+                                        <div>{this.state.validationErrorTime}</div> : null}
 
 
                                     <Button onClick={() => this.postBookingData()} variant="primary"
