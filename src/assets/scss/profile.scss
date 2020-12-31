@@ -707,7 +707,12 @@
             font-size: 15px;
         }
         span {
-            display: block; 
+            display: block;
+            height: 78px; 
+            overflow: hidden;
+            p {
+                margin-bottom: 18px; 
+            }
             a {
                 padding-left: 10px; 
             }  

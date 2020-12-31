@@ -329,7 +329,7 @@ class Myprofile extends Component {
                                         }
                                       )}
                                 </span>
-                              </div>
+                              </div> 
                               <div className="col3 fw500 mt-1 mb-2">
                                 Services:
                                 <span className="col14 fw400 ml-2">

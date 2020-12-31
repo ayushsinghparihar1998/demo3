@@ -2567,7 +2567,7 @@ cs_time: "00:00:02" */}
                           Press BLog listing
                         </div>
                         <div className="fw300 fs16 col14">
-                          Lorem Ipsum is simply dummy and typesetting industry.
+                          {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
                       </Col>
                       <Col md={4}>
@@ -2732,7 +2732,7 @@ cs_time: "00:00:02" */}
                       <Col md={8}>
                         <div className="fs22 fw600 col10">Blog listing</div>
                         <div className="fw300 fs16 col14">
-                          Lorem Ipsum is simply dummy and typesetting industry.
+                          {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
                       </Col>
                       <Col md={4}>

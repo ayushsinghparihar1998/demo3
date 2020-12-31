@@ -776,7 +776,7 @@ class ProfessionalSignup extends Component {
                           className="btnTyp5 mt-3"
                           onClick={() => this.handleSubmit()}
                         >
-                          Signup*
+                          Signup
                         </Button>
                       </Col>
                     </Row>

@@ -155,7 +155,7 @@ class ProfessinalBlog extends Component {
                                                                       ) : null
                                                                  )}
 
-                                                            </Row>
+                                                            </Row> 
                                                        </div>
 
                                                   </div>
