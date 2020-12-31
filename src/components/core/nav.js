@@ -576,14 +576,13 @@ class NavBar extends Component {
                                         </NavLink>,
                                             // <Nav.Link > Media</Nav.Link>,
                                             <NavDropdown title="Media" id="basic-nav-dropdown">
-                                                {this.state.mediaLinks.map((data) => {
-                                                    return (
-                                                        <NavDropdown.Item href={data.href} target="_blank">
-                                                            {data.label}
-                                                        </NavDropdown.Item>
-                                                    );
-                                                })}
-                                            </NavDropdown>,
+                                            <NavDropdown.Item href={'/blogs'}>
+                                                BLOGS
+                                        </NavDropdown.Item>
+                                            <NavDropdown.Item href={'/press'}>
+                                                PRESS
+                                        </NavDropdown.Item>
+                                        </NavDropdown>,
 
                                             <NavLink to="/about" className="nav-link text-c">
                                                 About Us

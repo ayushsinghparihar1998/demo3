@@ -55,45 +55,41 @@ class ProfessionalLsting extends Component {
 
 
     validate = () => {
-        let isValid = 0
-        if (!this.state.professionalEmail) {
-            this.setState({validationErrorEmail: 'Please Enter Professional Email.'})
-            isValid += 1
-        } else {
-            this.setState({validationErrorEmail: null})
-        }
+        let isValid = true
+        
         if (!this.state.appointmentSubject) {
             this.setState({validationErrorSubject: 'Please Enter Appointment Subject.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorSubject: null})
         }
         if (!this.state.description) {
             this.setState({validationErrorDescription: 'Please Enter Appointment Description.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorDescription: null})
         }
         if (!this.state.appointmentDate) {
             this.setState({validationErrorDate: 'Please Enter Appointment Date.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorDate: null})
         }
         if (!this.state.appointmentTime) {
             this.setState({validationErrorTime: 'Please Enter Appointment Time.'})
-            isValid += 1
+            isValid = false
         } else {
             this.setState({validationErrorTime: null})
         }
-        return isValid === 0;
+
+        return isValid
 
     }
 
     _getProfessionalListHandler = async () => {
         try {
             let response = await ELPRxApiService("corporategetprofessionallist", {
-                "count": this.state.count,
+                "count": 9,
                 "offset": this.state.offset,
             })
             this.setState({
@@ -163,7 +159,7 @@ class ProfessionalLsting extends Component {
     bookSessionOpen = (obj) => {
         console.log(obj)
         this.setState({
-            // professionalEmail: obj.email,
+            professionalEmail: obj.email,
             professionalId: obj.id,
             professionalName: obj.u_name,
             show3: true
@@ -176,6 +172,7 @@ class ProfessionalLsting extends Component {
 
     postBookingData = () => {
         let isValid = this.validate()
+        
         if (isValid) {
             ELPRxApiService("corporateappointmentschedule", {
                 cs_pro_u_id: this.state.professionalId,
@@ -214,6 +211,15 @@ class ProfessionalLsting extends Component {
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>
+                                    <Col md="5">
+                                            <Form.Group controlId="formBasicTexts">
+                                                <Form.Control type="text" placeholder="Search by name"
+                                                              className="inputTyp2 inputpProcess"
+                                                              onChange={(e) => {
+                                                                  this.setState({searchName: e.target.value})
+                                                              }}/>
+                                            </Form.Group>
+                                        </Col>
                                         <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
                                                 <Form.Control type="text" placeholder="Search by name"
@@ -250,7 +256,7 @@ class ProfessionalLsting extends Component {
                                                         }}
 
                                                         label="Eat"/>
-                                            <Form.Check type="checkbox"
+                                            <Form.Check type="checkbox"                                            
                                                         className={this.state.luv ? "checktwo active" : "checktwo"}
                                                         onChange={(e) => {
                                                             this.setState({luv: e.target.checked})
@@ -306,18 +312,10 @@ class ProfessionalLsting extends Component {
                                                         })}>read more</a>
                                                     </div>
 
-                                                    {getLocalStorage('customerInfo').u_verified === "0" ?
-                                                        <Button variant="primary" disabled
+                                                    
+                                                        <Button variant="primary" disabled={getLocalStorage('customerInfo').u_verified !== "0" ?true:false}
                                                                 onClick={() => this.bookSessionOpen(obj)}
-                                                                className="btnTyp9 report mt-4 mb-4">Book A
-                                                            Session</Button>
-
-                                                        :
-                                                        <Button variant="primary"
-                                                                onClick={() => this.bookSessionOpen(obj)}
-                                                                className="btnTyp9 report mt-4 mb-4">Book A
-                                                            Session</Button>
-                                                    }
+                                                                className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                                 </div>
                                             </Col>
 

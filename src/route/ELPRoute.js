@@ -224,6 +224,9 @@ class ELPRoute extends Component {
           <Route path="/campaign" render={(props) => <Compaign {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
           <Route path='/professional/:id/detail' render={(props) => <ProfessionalDetails {...props} />} />
+          {/* <Route path='/blogs' render={(props) => <Media {...props} />} /> */}
+          
+
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
           {/* Proff */}
@@ -266,7 +269,7 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/adminlistener" component={Adminlistener} />
           {/* <PublicRoute path="/adminlisting" component={Reviewrequest} /> */}
-          <PublicRoute path="/blogs" component={Media} />
+         
           {/* <PublicRoute path="/createblog" component={Createblogs} />
           <PublicRoute path="/blogsDetail" component={BlogDetail} /> */}
           <PublicRoute path="/categoryadmin" component={Categoryadmin} />

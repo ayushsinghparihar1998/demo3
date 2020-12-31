@@ -60,7 +60,7 @@ class ProfessinalBlog extends Component {
      getPressFeatured = () => {
           ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Featured'" })
                .then((res) => {
-                    this.setState({ featured: res.data.data.press_blog_list })
+                    this.setState({ featured: res.data.data?res.data.data.press_blog_list:[] })
 
                     console.log('press featured data===>', res.data.data.press_blog_list)
                })
@@ -72,7 +72,7 @@ class ProfessinalBlog extends Component {
      getPressCoverage = () => {
           ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Coverage'" })
                .then((res) => {
-                    this.setState({ coverage: res.data.data.press_blog_list })
+                    this.setState({ coverage:  res.data.data?res.data.data.press_blog_list:[] })
                     console.log('press coverage data===>', res)
                })
                .catch((err) => {
@@ -83,7 +83,7 @@ class ProfessinalBlog extends Component {
      getPressReleases = () => {
           ELPRxApiService("getpressblog", { offset: 1, count: 10, category: "'Press Release'" })
                .then((res) => {
-                    this.setState({ pressReleases: res.data.data.press_blog_list })
+                    this.setState({ pressReleases: res.data.data?res.data.data.press_blog_list:[]  })
 
                     console.log('press releases data===>', res)
                })
@@ -131,6 +131,7 @@ class ProfessinalBlog extends Component {
                                                   <div className="coverageTab">
                                                        <div className="coverageList">
                                                             <Row>
+                                                                 {console.log("ASDASD==>",this.state.coverage)}
                                                                  {this.state.coverage && this.state.coverage.map((data, i) =>
                                                                       this.state.offset > i ? (
                                                                            <>
@@ -169,8 +170,8 @@ class ProfessinalBlog extends Component {
                                                                       return this.state.offset > i ?
                                                                            <>
                                                                                 <Col md={8}>
-                                                                                     <div className="fw600 fs16 col64" dangerouslySetInnerHTML={{ __html: data.pbl_desc }}>
-
+                                                                                     <div className="fw600 fs16 col64" >
+                                                                                          {data.pbl_title}
                                                                                      </div>
                                                                                 </Col>
                                                                                 <Col md={4}>

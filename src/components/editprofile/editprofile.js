@@ -631,8 +631,8 @@ class Editprofile extends Component {
                               id="day"
                               name="day"
                               classes="form-control selectTyp1"
-                              year={this.state.year}
-                              month={this.state.month}
+                              // year={this.state.year}
+                              // month={this.state.month}
                               minDate={moment().startOf('year')}
                               endYearGiven
                               value={this.state.day}

@@ -425,7 +425,7 @@ class Userdashboard extends Component {
                                  <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
-                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
+                              <div  className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Creditcard} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
