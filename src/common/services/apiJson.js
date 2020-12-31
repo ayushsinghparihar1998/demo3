@@ -414,20 +414,6 @@ export default {
     showErrorMessage: true,
   },
 
-  corporategetprofessionallistfilter: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {
-      count: 0,
-      offset: 0,
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   corporateappointmentschedule: {
     url: "elp/corporateappointmentschedule",
     method: "POST",
@@ -1421,7 +1407,7 @@ export default {
       keyword: "",
       category: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   corporateappointmentschedule: {
@@ -2012,13 +1998,7 @@ export default {
     showErrorMessage: false,
   },
  
-  corporategetprofessionallist: {
-    url: "elp/corporategetprofessionallist",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
