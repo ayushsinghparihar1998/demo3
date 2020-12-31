@@ -750,13 +750,6 @@ export default {
     showErrorMessage: true,
   },
 
-  subscribe: {
-    url: "elp/usersubscriber",
-    method: "POST",
-    data: { email: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   editUserDetails: {
     url: "elp/editprofile",
     method: "POST",
