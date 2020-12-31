@@ -159,7 +159,7 @@ class ProfessionalLsting extends Component {
     bookSessionOpen = (obj) => {
         console.log(obj)
         this.setState({
-            // professionalEmail: obj.email,
+            professionalEmail: obj.email,
             professionalId: obj.id,
             professionalName: obj.u_name,
             show3: true
