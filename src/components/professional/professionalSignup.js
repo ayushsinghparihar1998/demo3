@@ -347,7 +347,7 @@ class ProfessionalSignup extends Component {
                       <Col md={12}>
                         <Form.Group>
                           <Form.Label className="fs20 fw600 col14">
-                            Change Picture*
+                            Add Picture*
                           </Form.Label>
                           <div className="mt-1 mb-3 imgSetProfile">
                             <Image src={this.state.u_image} className="" />{" "}

@@ -43,8 +43,8 @@ class ProfessinalBlog extends Component {
      componentDidMount() {
           this.getTabNames()
           this.getPressFeatured()
-          this.getPressCoverage()
-          this.getPressReleases()
+          // this.getPressCoverage()
+          // this.getPressReleases()
      }
 
      getTabNames = () => {
