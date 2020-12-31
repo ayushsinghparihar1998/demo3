@@ -583,6 +583,9 @@
             font-weight: 500;
             letter-spacing: 0.5px;
         }
+        .rightprofile {
+            word-break: break-all; 
+        }
     }
     .detailtwo {
         background: $col91;  
@@ -1041,6 +1044,12 @@
             .col64.fs17.fw500 {
                 cursor: pointer; 
             }
+
+            .featuredTab {
+                .fs18.col64.fw600 {
+                    cursor: pointer;
+                }
+            }
             padding-top: 30px; 
             .coverageTab {
                 .coverageList {
@@ -1098,7 +1107,35 @@
     }
 }
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {    
+    .p_detailone {
+        div.pr-1 {
+            padding-right: 15px !important;
+        }
+        div.pl-1 {
+            padding-left: 15px !important; 
+        }
+        .profiledetails {
+            padding: 0; 
+            background: #f3fdff; 
+            .detailone {
+                padding: 20px;
+            }
+            .detailtwo {
+                padding: 20px; 
+                .boxexone {
+                    max-width: 100%;
+                }
+            }
+            .detailthree {
+                padding: 20px;
+                text-align: center; 
+            }
+            .leftprofile {
+                margin-bottom: 15px; 
+            }
+        }
+    }
     .processBlog {
         .blogMain.ListsUI {
             .tab-content {
@@ -1220,6 +1257,8 @@
         .blogMain {
             .tab-content {
                 padding-top: 0; 
+
+                
             }
             .pt-5.pb-5.mt-5.mb-5.d-flex.justify-content-end {
                 padding-top: 0px !important;

@@ -229,7 +229,7 @@ class Myprofile extends Component {
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>
-            <div className="profile_layout pt-4 pb-5">
+            <div className="profile_layout p_detailone pt-4 pb-5"> 
               <Container>
                 <Row>
                   <Col md={4} lg={3} className="pr-1">
@@ -352,30 +352,31 @@ class Myprofile extends Component {
                                 </span>
                               </div>{" "}
                               <div className="col3 fw500 mt-1 mb-2">
-                                Age:
+                                Age: 
                                 <span className="col14 fw400 ml-2">
                                   {proffDetail.u_birthdate}
                                 </span>
                               </div>
-                              <div className="d-flex mt-4">
-                                <Button
-                                  variant="primary"
-                                  type="submit"
-                                  className="btnTyp5 mr-3"
-                                >
-                                  {proffDetail.email}
-                                </Button>
+                              <div className="mb-2">
+                                <div className="mb-4">
+                                Email: 
+                                      <a
+                                      className="ml-2 fw400"
+                                    >
+                                      {proffDetail.email}
+                                    </a>
+                                </div>
                                 {this.props.match.params.type === "admin" ? (
                                   ""
                                 ) : (
                                   <>
-                                    <Button
+                                    {/* <Button
                                       variant="primary"
                                       type="submit"
                                       className="btnTyp5 mr-3"
                                     >
                                       Call
-                                    </Button>
+                                    </Button> */} 
                                     <Button
                                         variant="primary"
                                         type="submit"
@@ -435,7 +436,7 @@ class Myprofile extends Component {
                 </Row>
               </Container>
             </div>
-            <Footer />
+            
             <Modal
               show={this.state.show3}
               className="CreateAccount bookSession"
@@ -488,10 +489,11 @@ class Myprofile extends Component {
                         <div className="error alignLeft d-none">
                           Enter Appointment Subject
                         </div>
-                      </Form.Group>
-                      {this.state.validationErrorSubject ? (
-                        <div>{this.state.validationErrorSubject}</div>
+                        {this.state.validationErrorSubject ? (
+                        <div className="error">{this.state.validationErrorSubject}</div>
                       ) : null}
+                      </Form.Group>
+                      
 
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">
@@ -508,10 +510,11 @@ class Myprofile extends Component {
                         <div className="error alignLeft d-none">
                           Enter Description
                         </div>
-                      </Form.Group>
-                      {this.state.validationErrorDescription ? (
-                        <div>{this.state.validationErrorDescription}</div>
+                        {this.state.validationErrorDescription ? (
+                        <div className="error">{this.state.validationErrorDescription}</div>
                       ) : null}
+                      </Form.Group>
+                      
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
@@ -532,10 +535,11 @@ class Myprofile extends Component {
                         <div className="error alignLeft d-none">
                           Enter Appointment Date
                         </div>
-                      </Form.Group>
-                      {this.state.validationErrorDate ? (
-                        <div>{this.state.validationErrorDate}</div>
+                        {this.state.validationErrorDate ? (
+                        <div className="error">{this.state.validationErrorDate}</div>
                       ) : null}
+                      </Form.Group>
+                      
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
@@ -552,10 +556,11 @@ class Myprofile extends Component {
                         <div className="error alignLeft d-none">
                           Enter Appointment Time
                         </div>
-                      </Form.Group>
-                      {this.state.validationErrorTime ? (
-                        <div>{this.state.validationErrorTime}</div>
+                        {this.state.validationErrorTime ? (
+                        <div className="error">{this.state.validationErrorTime}</div>
                       ) : null}
+                      </Form.Group>
+                      
 
                       <Button
                         onClick={() => this.postBookingData()}
@@ -569,10 +574,12 @@ class Myprofile extends Component {
                 </Container>
               </Modal.Body>
             </Modal>
-          </Container>
+          </Container> 
         </div>
+        <Footer /> 
       </div>
+      
     );
   }
 }
-export default Myprofile;
+export default Myprofile; 
