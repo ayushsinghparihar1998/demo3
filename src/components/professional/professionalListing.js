@@ -219,16 +219,7 @@ class ProfessionalLsting extends Component {
                                                                   this.setState({searchName: e.target.value})
                                                               }}/>
                                             </Form.Group>
-                                        </Col>
-                                        <Col md="5">
-                                            <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search by name"
-                                                              className="inputTyp2 inputpProcess"
-                                                              onChange={(e) => {
-                                                                  this.setState({searchName: e.target.value})
-                                                              }}/>
-                                            </Form.Group>
-                                        </Col>
+                                        </Col>                                       
                                         <Col md="5">
                                             <Form.Group controlId="formBasickeyword">
                                                 <Form.Control type="text" placeholder="Search by keyword"
@@ -313,7 +304,7 @@ class ProfessionalLsting extends Component {
                                                     </div>
 
                                                     
-                                                        <Button variant="primary" disabled={getLocalStorage('customerInfo').u_verified !== "0" ?true:false}
+                                                        <Button variant="primary" disabled={getLocalStorage('customerInfo').u_verified === "0" ?true:false}
                                                                 onClick={() => this.bookSessionOpen(obj)}
                                                                 className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                                 </div>

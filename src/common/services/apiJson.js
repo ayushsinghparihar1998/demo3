@@ -2141,4 +2141,20 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+
+  readAllNotifications: {
+    url: "elp/read_notification",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: false,
+  },
+
+  pressBlogDetail: {
+    url: "elp/getpressblogdetails",
+    method: "POST",
+    data: {"pbl_id":""},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };

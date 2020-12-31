@@ -60,7 +60,8 @@ import Media from "../components/admin/blogs";
 import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 // import Createblogs from "../components/admin/createblog";
-// import BlogDetail from "../components/admin/blogDetail";
+import BlogDetail from "../components/core/blogDetail";
+import PressBlogDetail from "../components/core/PressBlogDetail";
 import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
 import Faq from "../components/core/faq";
@@ -224,6 +225,8 @@ class ELPRoute extends Component {
           <Route path="/campaign" render={(props) => <Compaign {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
           <Route path='/professional/:id/detail' render={(props) => <ProfessionalDetails {...props} />} />
+          <Route path='/blogsDetail/:id' render={(props) => <BlogDetail {...props} />} />
+          <Route path='/press/blogsDetail/:id' render={(props) => <PressBlogDetail {...props} />} />
           {/* <Route path='/blogs' render={(props) => <Media {...props} />} /> */}
           
 

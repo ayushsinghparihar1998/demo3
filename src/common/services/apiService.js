@@ -96,14 +96,18 @@ const ELPViewApiService = (apiKeyName, data) => {
         }
       } else {
         // alert("ASd")
+        if (requestObject.showErrorMessage === true){
         handleErrorByStatus(result.data);
+        }
       }
       return result;
     })
     .catch(function (error) {
       if (error && error.response) {
-        if (requestObject.showErrorMessage === true){}
+        if (requestObject.showErrorMessage === true){
           handleErrorByStatus(error.response);
+        }
+         
       }
 
       // if (

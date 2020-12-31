@@ -376,13 +376,11 @@ class Myprofile extends Component {
                                     >
                                       Call
                                     </Button>
-                                    {getLocalStorage("customerInfo")
-                                      .u_verified === "0" ? (
-                                      <Button
+                                    <Button
                                         variant="primary"
                                         type="submit"
                                         className="btnTyp5"
-                                        disabled
+                                        disabled={getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_verified === "0"?true:false}
                                         onClick={() => {
                                           this.bookSessionOpen(
                                             this.state.proffDetail
@@ -391,20 +389,7 @@ class Myprofile extends Component {
                                       >
                                         BOOK A SESSION
                                       </Button>
-                                    ) : (
-                                      <Button
-                                        variant="primary"
-                                        type="submit"
-                                        className="btnTyp5"
-                                        onClick={() => {
-                                          this.bookSessionOpen(
-                                            this.state.proffDetail
-                                          );
-                                        }}
-                                      >
-                                        BOOK A SESSION
-                                      </Button>
-                                    )}
+                                    
                                   </>
                                 )}
                               </div>
@@ -466,7 +451,7 @@ class Myprofile extends Component {
                   <div className="layout_box mt-3 mb-4">
                     <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                     <Form>
-                      <Form.Group controlId="formBasicEmail">
+                      {/* <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
                           Professional Email:
                         </Form.Label>
@@ -482,7 +467,7 @@ class Myprofile extends Component {
                         <div className="error alignLeft d-none">
                           Enter Professional Email
                         </div>
-                      </Form.Group>
+                      </Form.Group> */}
                       {this.state.validationErrorEmail ? (
                         <div>{this.state.validationErrorEmail}</div>
                       ) : null}

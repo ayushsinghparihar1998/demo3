@@ -155,8 +155,9 @@ class NavBar extends Component {
                 .then((res) => {
                     console.log("res ============>", res);
                     this.setState({
-                        email_varified:
-                            res.data.data.dashboard_list.u_verified === "1" ? false : true,
+                        email_varified: res.data.data.dashboard_list.u_verified === "1" ? false : true,
+                        notification_count: res.data.data.dashboard_list.u_badge_count
+
                     });
                 })
                 .catch((err) => {
@@ -176,12 +177,12 @@ class NavBar extends Component {
                     ] = `url(${res.data.data.profile_list.u_image})`;
                     setTimeout(() => {
                         elem = document.getElementsByClassName("profile_icon")[0];
-                        if(elem){
+                        if (elem) {
                             elem.children[0].style[
                                 "background-image"
                             ] = `url(${res.data.data.profile_list.u_image})`;
                         }
-                        
+
                     }, 1000);
                     console.log(elem);
                     this.setState({
@@ -385,15 +386,25 @@ class NavBar extends Component {
                 break;
         }
     };
-
+    _readAllNotificationHandler = async () => {
+        try {
+            const response = await ELPRxApiService("readAllNotifications");
+            this.setState({
+                notification_count: 0
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
     render() {
+       
         return (
 
             <div className="mj_nav">
                 {this.state.email_varified ? (
                     <div className="verifystwo">
                         <span className="fs18 fw500 col26">Please verify your email to start using our services.
-          <span
+                            <span
                                 className="email_link pl-1"
                                 onClick={() => {
                                     this._resendVerificationMail();
@@ -561,7 +572,7 @@ class NavBar extends Component {
                                                 Volunteer
                                             <br />
                                                 <span className="comings">coming soon</span>
-                                            </NavLink>,                                         
+                                            </NavLink>,
                                             <NavLink
                                                 disabled
                                                 to="/becomeListener"
@@ -576,13 +587,13 @@ class NavBar extends Component {
                                         </NavLink>,
                                             // <Nav.Link > Media</Nav.Link>,
                                             <NavDropdown title="Media" id="basic-nav-dropdown">
-                                            <NavDropdown.Item href={'/blogs'}>
-                                                BLOGS
+                                                <NavDropdown.Item href={'/blogs'}>
+                                                    BLOGS
                                         </NavDropdown.Item>
-                                            <NavDropdown.Item href={'/press'}>
-                                                PRESS
+                                                <NavDropdown.Item href={'/press'}>
+                                                    PRESS
                                         </NavDropdown.Item>
-                                        </NavDropdown>,
+                                            </NavDropdown>,
 
                                             <NavLink to="/about" className="nav-link text-c">
                                                 About Us
@@ -604,14 +615,11 @@ class NavBar extends Component {
 
                                             <span className="userprofiles menus">
 
-                                                <Nav.Link>
+                                                <Nav.Link onClick={() => this._readAllNotificationHandler()}  >
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />
-
-                                                            <span className="counttwo">{this.state.notificationData.length}</span>
-
-
+                                                            <span className="counttwo">{this.state.notification_count}</span>
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
                                                             <Dropdown.Item>
