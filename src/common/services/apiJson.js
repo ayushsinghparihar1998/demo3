@@ -2009,20 +2009,20 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  superadminprofessionallisting: {
-    url: "elp/superadminprofessionallisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+  // superadminprofessionallisting: {
+  //   url: "elp/superadminprofessionallisting",
+  //   method: "POST",
+  //   data: {
+  //     count: "",
+  //     offset: "",
+  //     name: "",
+  //     status: "",
+  //     keyword: "",
+  //     category: "",
+  //   },
+  //   showResultMessage: true,
+  //   showErrorMessage: true,
+  // },
 
  
   getnotificationlisting: {
