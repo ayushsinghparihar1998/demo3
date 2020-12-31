@@ -1169,7 +1169,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
   getListenerCategoryList: {
     url: "elp/getcategories",
     method: "GET",
@@ -1508,7 +1507,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
- 
+
   corporateLogin: {
     url: "elp/corporatecustomer_register",
     method: "POST",
@@ -1898,8 +1897,6 @@ export default {
     showErrorMessage: true,
   },
 
-
-
   superadmindeletecorporatedomain: {
     url: "elp/superadmindeletecorporatedomain",
     method: "POST",
@@ -1918,8 +1915,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
- 
- 
 
   createBlog: {
     url: "elp/superadmin_addblog",
@@ -1978,7 +1973,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
   submitRatings: {
     url: "elp/addrating",
     method: "POST",
@@ -2020,11 +2014,10 @@ export default {
       keyword: "",
       category: "",
     },
-    showResultMessage: true,
-    showErrorMessage: true,
+    showResultMessage: false,
+    showErrorMessage: false,
   },
 
- 
   getnotificationlisting: {
     url: "elp/getnotificationlisting",
     method: "POST",
@@ -2032,7 +2025,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
- 
+
   corporategetprofessionallist: {
     url: "elp/corporategetprofessionallist",
     method: "POST",
