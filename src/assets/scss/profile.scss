@@ -708,6 +708,8 @@
             display: block;
             min-width: 100px;
             font-size: 15px;
+            font-weight: 400;
+            font-style: normal;        
         }
         span {
             display: block;
@@ -1108,6 +1110,13 @@
 }
 
 @media (max-width: 767px) {    
+    .bookSession {
+        .modal-dialog {
+            .modal-body {
+                padding: 15px; 
+            }
+        }
+    }
     .p_detailone {
         div.pr-1 {
             padding-right: 15px !important;

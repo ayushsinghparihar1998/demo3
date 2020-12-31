@@ -43,6 +43,11 @@ function RecentChat({ onRedirect }) {
       <div className="chat-bg fs600 fs17 col18 pl-3 ">
         Chat
         </div>
+        {
+        !recentChats||recentChats.length == 0?<div className="fs18 fw600 m-auto" style={{textAlign:'center'}}>
+        No users found
+      </div>:null
+        }
       {recentChats &&
         recentChats.map((item) => {
           return (

@@ -2058,7 +2058,7 @@ export default {
     url: "elp/read_notification",
     method: "POST",
     data: {},
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: false,
   },
 

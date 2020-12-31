@@ -397,7 +397,7 @@ class NavBar extends Component {
         }
     }
     render() {
-       
+
         return (
 
             <div className="mj_nav">
@@ -516,6 +516,14 @@ class NavBar extends Component {
                                                     PRESS
                                             </NavDropdown.Item>
                                             </NavDropdown>,
+                                            <NavDropdown title="Learn more" id="basic-nav-dropdown-lm">
+                                                <NavDropdown.Item href={'/about'}>
+                                                    About Us
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item href={'/faq'}>
+                                                    FAQ
+                                                </NavDropdown.Item>
+                                            </NavDropdown>,
                                             //     <NavDropdown title="Media" id="basic-nav-dropdown">
                                             // {this.state.mediaLinks.map((data) => {
                                             //     return (
@@ -525,20 +533,20 @@ class NavBar extends Component {
                                             //     );
                                             // })}
                                             //     </NavDropdown>,
-                                            <a
-                                                onClick={() => this.verifyInCallNavigation("/about")}
-                                                className="nav-link text-c"
-                                            >
-                                                About Us
-                                            {/* <br /> */}
-                                                {/* <span className="comings">coming soon</span>   */}
-                                            </a>,
-                                            <a
-                                                onClick={() => this.verifyInCallNavigation("/faq")}
-                                                className="nav-link"
-                                            >
-                                                FAQ
-                                        </a>,
+                                            //     <a
+                                            //         onClick={() => this.verifyInCallNavigation("/about")}
+                                            //         className="nav-link text-c"
+                                            //     >
+                                            //         About Us
+                                            //     {/* <br /> */}
+                                            //         {/* <span className="comings">coming soon</span>   */}
+                                            //     </a>,
+                                            //     <a
+                                            //         onClick={() => this.verifyInCallNavigation("/faq")}
+                                            //         className="nav-link"
+                                            //     >
+                                            //         FAQ
+                                            // </a>,
                                             ,
                                             getLocalStorage("userInfoProff") ||
                                                 getLocalStorage("userInfo")
@@ -595,19 +603,14 @@ class NavBar extends Component {
                                         </NavDropdown.Item>
                                             </NavDropdown>,
 
-                                            <NavLink to="/about" className="nav-link text-c">
-                                                About Us
-                                            {/* <br /> */}
-                                                {/* <span className="comings">coming soon</span>   */}
-                                            </NavLink>,
-                                            // <NavLink to="/adminLogin" className="nav-link text-c">
-                                            //     Admin
-                                            // {/* <br /> */}
-                                            //     {/* <span className="comings">coming soon</span>   */}
-                                            // </NavLink>,
-                                            <NavLink to="/faq" className="nav-link">
-                                                FAQ
-                                        </NavLink>,
+                                            <NavDropdown title="Learn more" id="basic-nav-dropdown-lm">
+                                                <NavDropdown.Item href={'/about'}>
+                                                    About Us
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item href={'/faq'}>
+                                                    FAQ
+                                                </NavDropdown.Item>
+                                            </NavDropdown>,
                                         ]}
                                     {getLocalStorage("userInfo") ||
                                         getLocalStorage("userInfoProff") ||
@@ -646,15 +649,12 @@ class NavBar extends Component {
 
                                                                 (<ul className="notes">
 
-                                                                    <li>
-                                                                        <Col md={9}>
+                                                                    <li style={{backgroundColor:data.no_status == '2'?'#dbfefc':'white'}}>
+                                                                        <Col md={12}>
                                                                             {/* {console.log(data)} */}
                                                                             <div className="col10 fs17 fw400">{data.u_name}</div>
                                                                             <div className="fs15 col94 fw400">{data.no_text}</div>
-                                                                        </Col>
-                                                                        <Col md={3}>
-                                                                            <div className="fs15 col94 fw400">{data.no_datetime}</div>
-                                                                        </Col>
+                                                                        </Col>                                                                       
                                                                     </li>
 
                                                                 </ul>)
