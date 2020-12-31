@@ -371,7 +371,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Subject</div>
                                     </Form.Group>
                                     {this.state.validationErrorSubject ?
-                                        <div>{this.state.validationErrorSubject}</div> : null}
+                                        <div className="error">{this.state.validationErrorSubject}</div> : null}
 
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -383,7 +383,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Description</div>
                                     </Form.Group>
                                     {this.state.validationErrorDescription ?
-                                        <div>{this.state.validationErrorDescription}</div> : null}
+                                        <div className="error">{this.state.validationErrorDescription}</div> : null}
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
@@ -398,7 +398,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Date</div>
                                     </Form.Group>
                                     {this.state.validationErrorDate ?
-                                        <div>{this.state.validationErrorDate}</div> : null}
+                                        <div className="error">{this.state.validationErrorDate}</div> : null}
 
 
                                     <Form.Group controlId="formBasicEmail">
@@ -411,7 +411,7 @@ class ProfessionalLsting extends Component {
                                         <div className="error alignLeft d-none">Enter Appointment Time</div>
                                     </Form.Group>
                                     {this.state.validationErrorTime ?
-                                        <div>{this.state.validationErrorTime}</div> : null}
+                                        <div className="error">{this.state.validationErrorTime}</div> : null}
 
 
                                     <Button onClick={() => this.postBookingData()} variant="primary"

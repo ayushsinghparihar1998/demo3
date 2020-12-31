@@ -248,8 +248,8 @@
                 ul.notes {
                     text-align: left;
                     padding: 0;
-                    padding-top: 10px;
-                    max-width: 440px;
+                    padding-top: 0px;     
+                    margin-bottom: 0px; 
 
                     li {
                         position: relative; 
@@ -259,6 +259,7 @@
                         margin: 0px 18px 0 20px; 
                         margin-bottom: -1px;
                         padding: 12px 0;
+                        white-space: normal; 
 
                         & .col-md-9 {
                             padding-left: 0px; 
@@ -308,7 +309,10 @@
     align-items: center;
     justify-content: center; 
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
-    border: solid 1px $col23
+    border: solid 1px $col23;
+    & a {
+        text-decoration: underline; 
+    }
 }
 
 .email_verified { 
