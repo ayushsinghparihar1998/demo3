@@ -229,7 +229,7 @@ class Myprofile extends Component {
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>
-            <div className="profile_layout p_detailone pt-4 pb-5">
+            <div className="profile_layout p_detailone pt-4 pb-5"> 
               <Container>
                 <Row>
                   <Col md={4} lg={3} className="pr-1">
@@ -435,7 +435,7 @@ class Myprofile extends Component {
                 </Row>
               </Container>
             </div>
-            <Footer />
+            
             <Modal
               show={this.state.show3}
               className="CreateAccount bookSession"
@@ -573,10 +573,12 @@ class Myprofile extends Component {
                 </Container>
               </Modal.Body>
             </Modal>
-          </Container>
+          </Container> 
         </div>
+        <Footer /> 
       </div>
+      
     );
   }
 }
-export default Myprofile;
+export default Myprofile; 
