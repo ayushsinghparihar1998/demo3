@@ -60,7 +60,7 @@ class ProfessinalBlogCreate extends Component {
     let data = {
       bl_id: this.props.match.params.id,
     };
-    ELPViewApiService("getBlogdetails", data).then((result) => {
+    ELPViewApiService("getBlogDetail", data).then((result) => {
       console.log("result", result);
       let blobj = {};
       if (result && result.status === 200) {
@@ -307,7 +307,11 @@ class ProfessinalBlogCreate extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember layout_box">
-                  <div className="fs28 col10 fw600">Create Press</div>
+                  <div className="fs28 col10 fw600">
+                    {this.props.match.params.id > 0
+                      ? "Modify Blog"
+                      : "Create Blog"}
+                  </div>
                   <div className="col14 fs16 fw300 mt-1 mb-4">
                     Lorem Ipsum is simply dummy and typesetting industry.
                   </div>

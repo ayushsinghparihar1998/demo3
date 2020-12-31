@@ -600,11 +600,11 @@ class NavBar extends Component {
                                             {/* <br /> */}
                                                 {/* <span className="comings">coming soon</span>   */}
                                             </NavLink>,
-                                            <NavLink to="/adminLogin" className="nav-link text-c">
-                                                Admin
-                                            {/* <br /> */}
-                                                {/* <span className="comings">coming soon</span>   */}
-                                            </NavLink>,
+                                            // <NavLink to="/adminLogin" className="nav-link text-c">
+                                            //     Admin
+                                            // {/* <br /> */}
+                                            //     {/* <span className="comings">coming soon</span>   */}
+                                            // </NavLink>,
                                             <NavLink to="/faq" className="nav-link">
                                                 FAQ
                                         </NavLink>,

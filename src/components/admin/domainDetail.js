@@ -15,7 +15,7 @@ import {
   Table,
   Modal,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import { Link } from "react-router-dom";
