@@ -265,8 +265,8 @@ class ProfessionalLsting extends Component {
 
                             <div className="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div>
                             <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s
+                                {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard dummy text ever since the 1500s */}
                             </div>
                             <div className="search-listing">
                                 <div className="listing2">
