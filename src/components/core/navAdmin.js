@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Nav,
   NavDropdown,
@@ -12,21 +12,21 @@ import {
   Modal,
   Row,
   Col,
-} from 'react-bootstrap';
-import { Link, NavLink, Router } from 'react-router-dom';
-import logo from '../../assets/images/logos.png';
-import insta from '../../assets/images/insta.svg';
-import { ToastContainer, toast } from 'react-toastify';
-import { actionLogout } from '../../common/redux/actions';
-import fb from '../../assets/images/fb.svg';
-import twit from '../../assets/images/twit.svg';
-import linkedin from '../../assets/images/linkedin.svg';
-import Crossbtn from '../../assets/images/blue_cross.svg';
-import Signup from '../jsx/listenersignup/signup';
-import ProfessionalSignup from '../signup/professionalSignup';
-import UserSignup from '../signup/userSignup';
-import { getLocalStorage, setLocalStorage } from '../../common/helpers/Utils';
-import CONSTANTS from '../../common/helpers/Constants';
+} from "react-bootstrap";
+import { Link, NavLink, Router } from "react-router-dom";
+import logo from "../../assets/images/logos.png";
+import insta from "../../assets/images/insta.svg";
+import { ToastContainer, toast } from "react-toastify";
+import { actionLogout } from "../../common/redux/actions";
+import fb from "../../assets/images/fb.svg";
+import twit from "../../assets/images/twit.svg";
+import linkedin from "../../assets/images/linkedin.svg";
+import Crossbtn from "../../assets/images/blue_cross.svg";
+import Signup from "../jsx/listenersignup/signup";
+import ProfessionalSignup from "../signup/professionalSignup";
+import UserSignup from "../signup/userSignup";
+import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
+import CONSTANTS from "../../common/helpers/Constants";
 class NavBar extends Component {
   constructor() {
     super();
@@ -59,36 +59,31 @@ class NavBar extends Component {
   };
 
   handleLogoutAdmin = () => {
-
     let data = {};
     this.props
       .actionLogout(data)
       .then((result) => {
         localStorage.clear();
         this.props.history.push({
-          pathname: '/',
+          pathname: "/",
           // state: { roleType: 4 },
         });
-
-      
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-
   handleLogout = () => {
-
-    // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1 
+    // let roleType = getLocalStorage('customerInfo') ? 3 : getLocalStorage('userInfo') ? 1
     // : getLocalStorage('userInfoProff') ? 2 : CONSTANTS.ROLES.LISTNER;
 
-    let roleType = '';
-    if (getLocalStorage('customerInfo')) {
+    let roleType = "";
+    if (getLocalStorage("customerInfo")) {
       roleType = 3;
-    } else if (getLocalStorage('userInfo')) {
+    } else if (getLocalStorage("userInfo")) {
       roleType = 1;
-    } else if (getLocalStorage('userInfoProff')) {
+    } else if (getLocalStorage("userInfoProff")) {
       roleType = 2;
     }
 
@@ -96,9 +91,9 @@ class NavBar extends Component {
     this.props
       .actionLogout(data)
       .then((result) => {
-        console.log('rnv roleType', roleType);
+        console.log("rnv roleType", roleType);
         this.props.history.push({
-          pathname: 'login',
+          pathname: "login",
           state: { roleType: roleType },
         });
 
@@ -111,14 +106,14 @@ class NavBar extends Component {
 
   goToLoginPage = () => {
     this.props.history.push({
-      pathname: 'login',
+      pathname: "login",
       state: { roleType: this.state.roleType },
     });
     //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
   };
   handleLogin(roleType) {
     this.props.history.push({
-      pathname: 'login',
+      pathname: "login",
       state: { roleType: roleType },
     });
   }
@@ -131,14 +126,14 @@ class NavBar extends Component {
 
   goToLoginPage = () => {
     this.props.history.push({
-      pathname: 'login',
+      pathname: "login",
       state: { roleType: this.state.roleType },
     });
     //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
   };
   handleLogin(roleType) {
     this.props.history.push({
-      pathname: 'login',
+      pathname: "login",
       state: { roleType: roleType },
     });
   }
@@ -166,26 +161,29 @@ class NavBar extends Component {
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {getLocalStorage('userInfoAdmin') ?
+            {getLocalStorage("userInfoAdmin") ? (
               <Nav className="ml-auto">
-                <NavLink to={"/Categoryadmin"} className="nav-link">
-                  CATEGORY
-                </NavLink>
                 <NavLink to={"/adminlistener"} className="nav-link">
                   DASHBOARD
                 </NavLink>
+                <NavLink to={"/Categoryadmin"} className="nav-link">
+                  CATEGORY
+                </NavLink>
+
                 {/* <NavLink to={"blogs"} className="nav-link">
                   BLOGS
                 </NavLink> */}
                 <Form inline>
-                  <span >
+                  <span>
                     <div onClick={this.handleLogoutAdmin} className="btnType1">
                       Logout
                     </div>
                   </span>
-                </Form></Nav>
-              :
-              ('')}
+                </Form>
+              </Nav>
+            ) : (
+              ""
+            )}
           </Navbar.Collapse>
         </Navbar>
       </div>
