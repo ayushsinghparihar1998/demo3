@@ -76,7 +76,7 @@ export default {
       search_keyword: "",
       order_by: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
 
@@ -1169,14 +1169,6 @@ export default {
     showErrorMessage: true,
   },
 
- 
-  getListenerCategoryList: {
-    url: "elp/getcategories",
-    method: "GET",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
   addCategory: {
     url: "elp/addcategories",
     method: "POST",
@@ -1746,20 +1738,7 @@ export default {
     showErrorMessage: true,
   },
 
-  // getListenerCategoryList: {
-  //   url: "elp/getcategories",
-  //   method: "GET",
-  //   data: {},
-  //   showResultMessage: false,
-  //   showErrorMessage: true,
-  // },
-  getListenerCategoryList: {
-    url: "elp/getcategories",
-    method: "GET",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+  
   adminUserDelete: {
     url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
     method: "POST",

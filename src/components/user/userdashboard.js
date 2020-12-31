@@ -216,7 +216,7 @@ class Userdashboard extends Component {
    };
    handleRedirectRecentChat = (data) => () => {
       const { user_id } = this.state;
-      console.log('___data___',data,user_id)
+      console.log('___data___', data, user_id)
       const id = data.from_user_id == user_id ? data.to_user_id : data.from_user_id;
       this.props.history.push({
          pathname: '/chatuser/' + id,
@@ -295,69 +295,29 @@ class Userdashboard extends Component {
                            <Col md={4} className="pl-0">
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                                 {/* <ActiveUsers onRedirect={this.handleRedirectActiveUsers} /> */}
-                                 {/* <div className="inner_side">
-                                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                       Chat
-                                    </div>
-                                    {this.state.recentChatUsers &&
-                                    this.state.recentChatUsers.map((item) => {
-                                    return (
-                                    <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
-                                       <div className="position-relative">
-                                          <Image
-                                             src={item.from_image ? item.from_image : UserChat}
-                                             alt=""
-                                             className="r50 pt-1"
-                                             />
-                                          <span className={(item.from_user_id ==
-                                          getLocalStorage("customerInfo").u_id
-                                          ? item.to_user_online
-                                          : item.from_user_online) == "1" ? 'online' : ''}></span>
-                                       </div>
-                                       <div className="position-relative pl-3">
-                                          <div className="fs15 col23 fw500 pr-2">
-                                             {item.from_user_id ==
-                                             getLocalStorage("customerInfo").u_id
-                                             ? item.to_user_name
-                                             : item.from_user_name}
-                                          </div>
-                                          <div className="col27 fs13 fw500">
-                                             {item.message}
-                                          </div>
-                                          <Image
-                                             src={ChatCross}
-                                             alt=""
-                                             className="pointer cross_btn"
-                                             />
-                                       </div>
-                                    </div>
-                                       );
-                                       })}
-                                    </div>
-                                    */}
 
-                                 { getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
-                                       <>
-                                          <div className="inner_side">
-                                             <div className="upgrade">
-                                                <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType17">Upgrade to Premium Account</Button>
-                                             </div>
+
+                                 {getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
+                                    <>
+                                       <div className="inner_side">
+                                          <div className="upgrade">
+                                             <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType17">Upgrade to Premium Account</Button>
                                           </div>
-                                          <div className="inner_side">
-                                             <div className="benefits">
-                                                <div className="pb-2 col14 fw500 fs15">Benefits of becoming a Listener</div>
-                                                <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType18">Learn More</Button>
-                                             </div>
+                                       </div>
+                                       <div className="inner_side">
+                                          <div className="benefits">
+                                             <div className="pb-2 col14 fw500 fs15">Benefits of becoming a Listener</div>
+                                             <Button onClick={() => this.props.history.push('/coming-soon')} className="btnType18">Learn More</Button>
                                           </div>
-                                          <div className="inner_side">
-                                             <div className="share_user">
-                                                <span className="col1 fs18 fw500 mr-3">Share us on:</span>
-                                                <span className="mr-2"><FacebookShareButton url={'https://eatluvnpray.org/'}><FacebookIcon size={22} round={true} /></FacebookShareButton></span>
-                                                {/* <span><Image src={Instagramnew} alt="Facebook" /></span> */}
-                                             </div>
+                                       </div>
+                                       <div className="inner_side">
+                                          <div className="share_user">
+                                             <span className="col1 fs18 fw500 mr-3">Share us on:</span>
+                                             <span className="mr-2"><FacebookShareButton url={'https://eatluvnpray.org/'}><FacebookIcon size={22} round={true} /></FacebookShareButton></span>
+                                             {/* <span><Image src={Instagramnew} alt="Facebook" /></span> */}
                                           </div>
-                                       </> : null
+                                       </div>
+                                    </> : null
                                  }
 
                               </div>
@@ -408,11 +368,7 @@ class Userdashboard extends Component {
                               </div>
                            </Col>
 
-                           {/*{getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_role_id === constant.roles.CORPORATE_CUSTOMER ?*/}
-                           {/*    null*/}
-                           {/*    :*/}
-                           {/*    <BlogList/>*/}
-                           {/*}*/}
+
 
                         </Row>
                      </Col>
@@ -425,15 +381,22 @@ class Userdashboard extends Component {
                                  <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
-                              <div  className="m-3 pb-3 bg-grays">
-                                 <div className="d-flex mb-2">
-                                    <Image src={Creditcard} alt="" className="pointer" />
-                                    <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
-                                       {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
+                              {
+                                 getLocalStorage("customerInfo").u_role_id === constant.roles.CORPORATE_CUSTOMER ?
+                                    <>
+                                       <div className="m-3 pb-3 bg-grays">
+                                          <div className="d-flex mb-2">
+                                             <Image src={Creditcard} alt="" className="pointer" />
+                                             <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
+                                                {/* <strong className="fs18">{dashboardData.u_cheers ? dashboardData.u_cheers : '0'} </strong> */}
                                        Remaining Credits : {dashboardData.u_premium_referal_credit}
-                                   </span>
-                                 </div>
-                              </div>
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </> : null
+                              }
+
+
                               <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
@@ -453,68 +416,68 @@ class Userdashboard extends Component {
                                  </div>
                               </div>
                            </div>
-                           { getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
-                                 <>
-                                    <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
-                                       <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">
-                                          <Image src={Rflag} alt="" className="mr-2" />
-                                          <span className="d_text"> Discover Subcommunities </span>
-                                       </div>
+                           {getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
+                              <>
+                                 <div onClick={() => this.props.history.push('/coming-soon')} className="right_inner_side">
+                                    <div className="chat-pink fs600 fs17 fs_set col18 pl-3 pointer">
+                                       <Image src={Rflag} alt="" className="mr-2" />
+                                       <span className="d_text"> Discover Subcommunities </span>
                                     </div>
-                                    <div className="right_inner_side">
-                                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                          My Personal Link
-                              </div>
-                                       <div className="p-3">
-                                          <div className="fs14 col14 fw400">
-                                             Share your link to earn rewards & help us to support
-                                             more people
                                  </div>
-                                          <Form.Group className="d-flex mt-4">
-                                             <Form.Control
-                                                id="referURL"
-                                                type="text"
-                                                readOnly
-                                                className="inputTyp4"
-                                                value={constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')}
-                                             />
-                                             <Button className="btnTyp8" onClick={this.copyReferUrl}>
-                                                <Image src={Copys} alt="" className="" />
-                                             </Button>
-                                          </Form.Group>
-                                          <div className="text-center sharethis">
-                                             <span className="col1 fs12 fw500 mr-1">Share this code on Social Media:</span>
-                                             <Image style={{ cursor: 'pointer' }} onClick={() => {
-                                                let msgbody = constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')
-                                                let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=My+Profile&body=' + msgbody + '&ui=2&tf=1&pli=1';
-                                                window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
-                                             }} src={Gmail} alt="" className="mr-2" />
-                                             <a href={"whatsapp://send?text=" + (constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : ''))}> <Image src={Whatsapp} alt="" className="" /></a>
-                                          </div>
+                                 <div className="right_inner_side">
+                                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                                       My Personal Link
+                              </div>
+                                    <div className="p-3">
+                                       <div className="fs14 col14 fw400">
+                                          Share your link to earn rewards & help us to support
+                                          more people
+                                 </div>
+                                       <Form.Group className="d-flex mt-4">
+                                          <Form.Control
+                                             id="referURL"
+                                             type="text"
+                                             readOnly
+                                             className="inputTyp4"
+                                             value={constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')}
+                                          />
+                                          <Button className="btnTyp8" onClick={this.copyReferUrl}>
+                                             <Image src={Copys} alt="" className="" />
+                                          </Button>
+                                       </Form.Group>
+                                       <div className="text-center sharethis">
+                                          <span className="col1 fs12 fw500 mr-1">Share this code on Social Media:</span>
+                                          <Image style={{ cursor: 'pointer' }} onClick={() => {
+                                             let msgbody = constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : '')
+                                             let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=My+Profile&body=' + msgbody + '&ui=2&tf=1&pli=1';
+                                             window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
+                                          }} src={Gmail} alt="" className="mr-2" />
+                                          <a href={"whatsapp://send?text=" + (constant.WEB_BASE_URL + 'share-profile?' + (dashboardData.refer_url ? dashboardData.refer_url.split('?').reverse()[0] : ''))}> <Image src={Whatsapp} alt="" className="" /></a>
                                        </div>
                                     </div>
-                                    <div className="right_inner_side">
-                                       <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                                          Recent join
+                                 </div>
+                                 <div className="right_inner_side">
+                                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                                       Recent join
                                        </div>
-                                       {recentJoin &&
-                                          recentJoin.map(
-                                             (data, index) => {
-                                                return (
-                                                   <div className="d-flex m-3 border-bottom">
-                                                      <div className="position-relative">
-                                                         <Image src={data.u_image ? data.u_image : ''} alt="" className="r50 pt-1" />
-                                                      </div>
-                                                      <div className="mt-auto mb-auto pl-3">
-                                                         <div className="fs15 col14 fw500">{data.u_username ? data.u_username : ''}</div>
-                                                         <div className="col27 fs13 fw500">{data.u_role_txt ? data.u_role_txt : ''}</div>
-                                                      </div>
+                                    {recentJoin &&
+                                       recentJoin.map(
+                                          (data, index) => {
+                                             return (
+                                                <div className="d-flex m-3 border-bottom">
+                                                   <div className="position-relative">
+                                                      <Image src={data.u_image ? data.u_image : ''} alt="" className="r50 pt-1" />
                                                    </div>
-                                                )
-                                             })
-                                       }
-                                    </div>
-                                 </> : null
+                                                   <div className="mt-auto mb-auto pl-3">
+                                                      <div className="fs15 col14 fw500">{data.u_username ? data.u_username : ''}</div>
+                                                      <div className="col27 fs13 fw500">{data.u_role_txt ? data.u_role_txt : ''}</div>
+                                                   </div>
+                                                </div>
+                                             )
+                                          })
+                                    }
+                                 </div>
+                              </> : null
                            }
 
 
