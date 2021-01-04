@@ -2118,7 +2118,7 @@ cs_time: "00:00:02" */}
                           </Form.Group>
                         </Col>
 
-                        <Col md="6">
+                        <Col md="6"> 
                           <Form.Group
                             controlId="formBasicCheckbox4"
                             className="row mb-4 statusCat"
@@ -2288,12 +2288,12 @@ cs_time: "00:00:02" */}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Age:</strong> {item.u_birthdate}
+                                    <strong>Age:</strong> {item.u_birthdate} Years 
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Work Experience:</strong>{" "}
-                                    {item.u_work_experience}
+                                    <strong>Work Experience:</strong>{" "} 
+                                    {item.u_work_experience} Years 
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">

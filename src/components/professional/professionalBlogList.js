@@ -204,7 +204,7 @@ class ProfessionalBlogList extends Component {
                                     <Tab eventKey="EAT" title="EAT">
                                         <div className="featuredTab" >
                                             <Row>
-                                                <Col md={7}> 
+                                                <Col md={7}>  
                                                     <Row>
                                                         {this.state.blogEat && this.state.blogEat.map((data, i) =>
                                                             this.state.offset > i ? (<Col md={6} className="mb-4">

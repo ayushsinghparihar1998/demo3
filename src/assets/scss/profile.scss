@@ -1043,8 +1043,12 @@
                 div.fw600.fs20.col64 { 
                     text-transform: capitalize;
                     padding-top: 10px; 
+                    transition: 0.5s; 
                     &::first-letter { 
                         font-size: 100%;  
+                    }
+                    &:hover {
+                        opacity: 0.5;
                     }
                 }  
                 .col64.fs16 {
