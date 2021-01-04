@@ -663,7 +663,7 @@
 }
 
 .adminProfessinal {
-    .adminlistener {
+    .adminlistener { 
         padding-bottom: 30px !important; 
         span.mx-100w {
             min-width: 100px;
@@ -673,6 +673,14 @@
                 & + span {
                     padding-right: 7px;
                 }
+            }
+        }
+    }
+    .corporateMember {
+        .form-group {
+            .selectTyp1 { 
+                background: url('../images/arrow.svg') no-repeat 97% 50% $col22 !important;
+                padding: 0 2rem 0 1rem !important;  
             }
         }
     }
@@ -955,16 +963,30 @@
     }
 }
 
+.ngo_listing {
+    .col1.fw600.fs22.text-center {  
+        text-transform: capitalize; 
+    }
+    .ngo_details {
+        .col1.fs18.fw600.mt-2 { 
+            text-transform: capitalize; 
+        }
+    }
+}
+
 .processBlog {  
     position: relative; 
     background: $col18; 
     border-top: solid 10px $col23; 
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
     padding: 30px; 
-
+    .text-center.fs28.fw500.col64 {
+        margin-bottom: 20px !important; 
+    }
     .mxw-50 {
         max-width: 50%; 
         opacity: 0;
+        display: none; 
     }
     .blogMain {
         &.ListsUI {
@@ -982,9 +1004,10 @@
                     }
                 }
             } 
-            .wSet-50 {
+            .wSet-50 { 
                 max-width: 50px; 
                 width: 50px;
+                height: 50px; 
                 object-fit: cover; 
             }
             .wSet-20 {
@@ -995,16 +1018,35 @@
                 display: flex;
                 align-items: center; 
             }
-            .tab-content {
+            .tab-content { 
                 .featuredTab {
-                    .mb-4.col-md-6 {
-                        & > img {
-                            width: 100%; 
-                            height: 200px;
-                            object-fit: cover;  
-                        }
-                    }
+                    
                 }
+                .mb-4.col-md-6 {
+                    & > img {
+                        width: 100%; 
+                        height: 200px;
+                        object-fit: cover;  
+                    }
+                }     
+                .professionalBlogs {   
+                    border-bottom: solid 1px $col85; 
+                    margin-top: 5px; 
+                    margin-bottom: 15px; 
+                    padding-top: 10px; 
+                }
+                .blogrightSide { 
+                    border-bottom: solid 1px $col85; 
+                    margin-top: 5px; 
+                    margin-bottom: 15px; 
+                }
+                div.fw600.fs20.col64 { 
+                    text-transform: capitalize;
+                    padding-top: 10px; 
+                    &::first-letter { 
+                        font-size: 100%;  
+                    }
+                }  
                 .col64.fs16 {
                     p {
                         strong {
@@ -1054,7 +1096,8 @@
         }
         .tab-content {
             .col64.fs17.fw500 {
-                cursor: pointer; 
+                cursor: pointer;
+                text-transform: capitalize;  
             }
 
             .featuredTab {
@@ -1120,6 +1163,7 @@
 }
 
 @media (max-width: 767px) {    
+
     .bookSession {
         .modal-dialog {
             .modal-body {
@@ -1268,6 +1312,7 @@
         .mxw-50 {
             max-width: 100%;
             padding-bottom: 10px !important; 
+            display: none; 
         }  
     }
 
