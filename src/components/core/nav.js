@@ -628,8 +628,10 @@ class NavBar extends Component {
                                                             <Dropdown.Item>
                                                                 <span className="polyicons">
                                                                     <Image src={Polygonimg} alt="" className="pointer" />
-                                                                </span>
+                                                                </span> 
+                                                                <div className="dropdownnotifications">   
                                                                 {this.state.notificationData.length === 0 && <>
+
                                                                     <ul className="notes">
 
                                                                         <li>
@@ -659,7 +661,7 @@ class NavBar extends Component {
 
                                                                 </ul>)
                                                                 )}
-
+                                                                </div> 
                                                             </Dropdown.Item>
 
 
@@ -944,4 +946,4 @@ class NavBar extends Component {
     }
 }
 
-export default connect(null, { actionLogout, actionLogoutSuccess })(NavBar);
+export default connect(null, { actionLogout, actionLogoutSuccess })(NavBar);  

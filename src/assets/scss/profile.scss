@@ -481,6 +481,7 @@
                         object-fit: cover; 
                     }
                 }
+                
                 .col3.fs18 {
                     // height: 46px;
                     // overflow: hidden;  
@@ -521,6 +522,15 @@
 
     }
 } 
+
+.layout_box  {
+    .col10.fs30.fw600.mb-4 {
+        text-transform: capitalize; 
+    }
+    .fs300.fs20.col14.mb-5.pb-2 { 
+        text-transform: capitalize; 
+    }
+}
 
 .subscribe_here2 { 
     &.eatBlog {

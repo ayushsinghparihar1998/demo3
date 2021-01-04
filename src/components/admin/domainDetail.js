@@ -187,13 +187,13 @@ class DomainDetail extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={9} className="pl-1"> 
                 <div className="corporateMember d_detail">
                   <div className="fs22 col10 mb-1">
                     {this.props.match.params.name}
                   </div>
                   <div className="fs15 fw400 col14 mb-4">
-                    Lorem Ipsum is simply dummy and typesetting industry.
+                    {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                   </div>
                   <Table bordered>
                     <thead>
