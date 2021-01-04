@@ -1953,6 +1953,10 @@ cs_time: "00:00:02" */}
                                             {item.cs_corporate_name}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
                                             {/* {console.log(item)} */}
                                             {/* {moment(item.cs_date).format(
                                               "dddd MMM Do YYYY"
@@ -1988,6 +1992,10 @@ cs_time: "00:00:02" */}
                                         <div>
                                           <div className="col3 fw500 fs18 pb-1">
                                             {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
                                           </div>
                                           <div className="fs14 fw400 col54 pb-1">
                                             {/* {console.log(item)} */}
@@ -2139,7 +2147,7 @@ cs_time: "00:00:02" */}
                           </Form.Group>
                         </Col>
 
-                        <Col md="6"> 
+                        <Col md="6">
                           <Form.Group
                             controlId="formBasicCheckbox4"
                             className="row mb-4 statusCat"
@@ -2309,12 +2317,13 @@ cs_time: "00:00:02" */}
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Age:</strong> {item.u_birthdate} Years 
+                                    <strong>Age:</strong> {item.u_birthdate}{" "}
+                                    Years
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
-                                    <strong>Work Experience:</strong>{" "} 
-                                    {item.u_work_experience} Years 
+                                    <strong>Work Experience:</strong>{" "}
+                                    {item.u_work_experience} Years
                                   </div>
 
                                   <div className="fs14 fw400 col14 pb-1">

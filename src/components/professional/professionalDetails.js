@@ -242,7 +242,7 @@ class Myprofile extends Component {
                           <div>
                             <div className="fs14 col28 fw500">
                               {this.props.match.params.type == "admin" ? (
-                                <Link to={{ pathname: `/adminlistener` }}>
+                                <Link to={{ pathname: `/admin` }}>
                                   Back
                                 </Link>
                               ) : (

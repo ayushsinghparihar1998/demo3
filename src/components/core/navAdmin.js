@@ -156,14 +156,14 @@ class NavBar extends Component {
         {/* Same as */}
         <ToastContainer />
         <Navbar bg="" expand="lg">
-          <NavLink to="/adminlistener" className="nav-link navbar-brand">
+          <NavLink to="/admin" className="nav-link navbar-brand">
             <Image src={logo} alt="" /> Eat Luv N Pray
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {getLocalStorage("userInfoAdmin") ? (
               <Nav className="ml-auto">
-                <NavLink to={"/adminlistener"} className="nav-link">
+                <NavLink to={"/admin"} className="nav-link">
                   DASHBOARD
                 </NavLink>
                 <NavLink to={"/Categoryadmin"} className="nav-link">

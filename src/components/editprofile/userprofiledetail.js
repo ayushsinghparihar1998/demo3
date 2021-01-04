@@ -62,7 +62,7 @@ class Userprofiledetail extends Component {
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div>
                                                 <div className="fs14 col28 fw500"><Image src={Menuicon} alt="" className="mr-1" />
-                                                    <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                                                    <Link to={{ pathname: `/admin` }}>Back</Link>
                                                     
                                                 </div>
                                             </div>

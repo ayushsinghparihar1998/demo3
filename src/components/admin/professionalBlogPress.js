@@ -219,7 +219,7 @@ class ProfessinalBlogPress extends Component {
           data
         );
         setTimeout(() => {
-          this.props.history.push("/adminlistener");
+          this.props.history.push("/admin");
         }, 1000);
       } catch (err) {
         console.log(err);
@@ -274,7 +274,7 @@ class ProfessinalBlogPress extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                          <Link to={{ pathname: `/admin` }}>Back</Link>
                         </div>
                       </div>
                     </div>

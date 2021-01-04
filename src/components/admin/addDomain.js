@@ -105,9 +105,9 @@ class CorporateMember extends Component {
       )
         .then((result) => {
           if (result && result.data && result.data.status === "success") {
-            // this.props.history.push("/adminlistener");
+            // this.props.history.push("/admin");
             setTimeout(() => {
-              this.props.history.push("/adminlistener");
+              this.props.history.push("/admin");
             }, 1000);
             this.clear();
           } else {
@@ -175,7 +175,7 @@ class CorporateMember extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/adminlistener` }}>Back</Link>
+                          <Link to={{ pathname: `/admin` }}>Back</Link>
                         </div>
                       </div>
                     </div>

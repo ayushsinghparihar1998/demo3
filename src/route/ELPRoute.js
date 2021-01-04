@@ -139,8 +139,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/userotp" component={Userotp} />
           <PublicRoute path="/menu" component={Menubar} />
           {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
-          {/* <PublicRoute path="/adminlistener" component={Adminlistener} />  */}
-          <PublicRoute path="/adminlistener" component={Adminlistener} />
+          {/* <PublicRoute path="/admin" component={Adminlistener} />  */}
+          <PublicRoute path="/admin" component={Adminlistener} />
           <PrivateRoutes path="/userprofile" component={Userprofiledetail} />
           {/* LIst */}
           <PrivateRouteList path="/userDashboard" component={Userdashboard} />
@@ -270,7 +270,7 @@ class ELPRoute extends Component {
             path="/adminselectcategory"
             component={Adminselectcategory}
           />
-          <PublicRoute path="/adminlistener" component={Adminlistener} />
+          <PublicRoute path="/admin" component={Adminlistener} />
           {/* <PublicRoute path="/adminlisting" component={Reviewrequest} /> */}
           <PublicRoute path="/blogs" component={Media} />
          

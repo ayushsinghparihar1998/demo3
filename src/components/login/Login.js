@@ -324,7 +324,7 @@ class Login extends Component {
             setLocalStorage("loggedIn", true);
             setLocalStorage("isAdmin", true);
 
-            this.props.history.push({ pathname: "/adminlistener" });
+            this.props.history.push({ pathname: "/admin" });
           }
         })
         .catch((error) => {
