@@ -2285,7 +2285,7 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                     </div>*/}
-                                  </div>
+                                  </div> 
 
                                   <div className="fs14 fw400 col14 pb-1">
                                     <strong>Age:</strong> {item.u_birthdate} Years 
@@ -2735,7 +2735,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb-4">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">Blog listing</div>
+                        <div className="fs22 fw600 col10">Blog listing</div> 
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -2821,7 +2821,7 @@ cs_time: "00:00:02" */}
                                 alt=""
                               />
                             </div>
-                            <div className="pl-2 w-100">
+                            <div className="pl-2 w-100"> 
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
@@ -2886,19 +2886,19 @@ cs_time: "00:00:02" */}
                                     ></span>
                                   </div>
 
-                                  <div className="eat_category">
+                                  <div className="eat_category">   
                                     {item.blog_category.map((val) => {
                                       return (
-                                        <span
-                                          className={
+                                        <span 
+                                          className={  
                                             val.buc_cat_name == "Eat"
                                               ? "eatcat"
                                               : val == "Luv"
                                               ? "luvcat"
-                                              : "praycat"
+                                              : "praycat" 
                                           }
                                         >
-                                          {val.buc_cat_name}
+                                          {val.buc_cat_name} 
                                         </span>
                                       );
                                     })}
@@ -2912,7 +2912,7 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : (
-                <Col md={8} lg={9} className="pl-1">
+                <Col md={8} lg={9} className="pl-1"> 
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
