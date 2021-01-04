@@ -159,6 +159,13 @@
             border: 1px solid $col50;
             margin-bottom: 30px;
             min-height: 385px;  
+            .text-center {
+                & > img.r50 { 
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover; 
+                }
+            }
             span.onlines {
                 background-color: $col32;
                 width: 14px;

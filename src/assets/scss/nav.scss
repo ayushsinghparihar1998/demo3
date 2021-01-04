@@ -244,7 +244,12 @@
                 &:hover {
                     background: transparent; 
                 }    
-                padding: 0;     
+                padding: 0; 
+                .dropdownnotifications {
+                    position: relative;
+                    max-height: 420px;
+                    overflow: auto;
+                }  
                 ul.notes {
                     text-align: left;
                     padding: 0;
@@ -252,6 +257,7 @@
                     margin-bottom: 0px; 
 
                     li {
+                        background-color: transparent !important; 
                         position: relative; 
                         display: flex;
                         flex-wrap: wrap;
