@@ -142,20 +142,21 @@ class ProfessionalBlogList extends Component {
                                                     <Row>
                                                         {this.state.blogAll && this.state.blogAll.map((data, i) =>
                                                             this.state.offset > i ? (
-                                                                <Col md={12}>
-                                                                    <div className="fw600 fs20 col64 mb-4" >
-                                                                        {data.bl_title}
-                                                                    </div>
-                                                                    <Image onClick={() => this.getBlogdetails(data.bl_id)} src={data.bl_image} className="w-100" />
-                                                                    <div className="blogClocks mb-3 mt-3">
-                                                                        <Image src={BlogProcessSix} className="wSet-50 mr-3" />
-                                                                        <div>
-                                                                            <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
-                                                                            <span className="ml-3">
-                                                                                <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span>
+                                                                <Col md={12}>    
+                                                                    <div className="professionalBlogs">  
+                                                                        <div className="fw600 fs20 col64 mb-4" >
+                                                                            {data.bl_title}
+                                                                        </div>
+                                                                        <Image onClick={() => this.getBlogdetails(data.bl_id)} src={data.bl_image} className="w-100" />     
+                                                                        <div className="blogClocks mb-3 mt-3">
+                                                                            <Image src={BlogProcessSix} className="wSet-50 mr-3" />
+                                                                            <div>
+                                                                                <span className="fs18 fw400 col14">Written by <span className="col8">{data.bl_written_by}</span> </span>
+                                                                                <span className="ml-3">
+                                                                                    <Image src={blogclock} className="wSet-20 mr-2" />11 Minute read</span> 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-
 
                                                                 </Col>
                                                             ) : null
@@ -172,9 +173,11 @@ class ProfessionalBlogList extends Component {
                                                 </Col>
 
                                                 <Col md={5}>
+                                                    
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
                                                     <div className="mb-4 pb-2">
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
+                                                            <div className="blogrightSide"> 
                                                             <Row>
                                                                 <Col md={9}>
                                                                     <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
@@ -184,13 +187,13 @@ class ProfessionalBlogList extends Component {
                                                                         <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
                                                                     </div>
                                                                 </Col>
-                                                                <Col md={3}>
+                                                                <Col md={3}>  
                                                                     <Image src={data.bl_image} className="w-100" />
                                                                 </Col>
                                                             </Row>
-                                                        )}
-
-                                                    </div>
+                                                        </div> 
+                                                        )} 
+                                                        </div> 
                                                 </Col>
                                             </Row>
                                         </div>
@@ -198,10 +201,10 @@ class ProfessionalBlogList extends Component {
 
 
 
-                                    <Tab eventKey="EAT" title="EAT" >
+                                    <Tab eventKey="EAT" title="EAT">
                                         <div className="featuredTab" >
                                             <Row>
-                                                <Col md={7}>
+                                                <Col md={7}>  
                                                     <Row>
                                                         {this.state.blogEat && this.state.blogEat.map((data, i) =>
                                                             this.state.offset > i ? (<Col md={6} className="mb-4">
@@ -231,19 +234,21 @@ class ProfessionalBlogList extends Component {
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
                                                     <div className="mb-4 pb-2">
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
-                                                            <Row>
-                                                                <Col md={9}>
-                                                                    <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
-                                                                        <div className="col64 fs17 fw500">
-                                                                            {data.bl_title}
+                                                            <div className="blogrightSide">    
+                                                                <Row>
+                                                                    <Col md={9}>
+                                                                        <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
+                                                                            <div className="col64 fs17 fw500">
+                                                                                {data.bl_title}
+                                                                            </div>
+                                                                            <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
                                                                         </div>
-                                                                        <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
-                                                                    </div>
-                                                                </Col>
-                                                                <Col md={3}>
-                                                                    <Image src={data.bl_image} className="w-100" />
-                                                                </Col>
-                                                            </Row>
+                                                                    </Col>
+                                                                    <Col md={3}>
+                                                                        <Image src={data.bl_image} className="w-100" />
+                                                                    </Col>
+                                                                </Row>
+                                                            </div>
                                                         )}
 
                                                     </div>
@@ -291,19 +296,21 @@ class ProfessionalBlogList extends Component {
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
                                                     <div className="mb-4 pb-2">
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
-                                                            <Row>
-                                                                <Col md={9}>
-                                                                    <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
-                                                                        <div className="col64 fs17 fw500">
-                                                                            {data.bl_title}
+                                                            <div className="blogrightSide">  
+                                                                <Row>
+                                                                    <Col md={9}>
+                                                                        <div className="" onClick={() => this.getBlogdetails(data.bl_id)} >
+                                                                            <div className="col64 fs17 fw500">
+                                                                                {data.bl_title}
+                                                                            </div>
+                                                                            <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
                                                                         </div>
-                                                                        <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
-                                                                    </div>
-                                                                </Col>
-                                                                <Col md={3}>
-                                                                    <Image src={data.bl_image} className="w-100" />
-                                                                </Col>
-                                                            </Row>
+                                                                    </Col>
+                                                                    <Col md={3}>
+                                                                        <Image src={data.bl_image} className="w-100" />
+                                                                    </Col>
+                                                                </Row>
+                                                            </div>
                                                         )}
 
                                                     </div>
@@ -316,7 +323,7 @@ class ProfessionalBlogList extends Component {
                                             
                                         </div>
                                     </Tab>
-                                    <Tab eventKey="PRAY" title="PRAY">
+                                    <Tab eventKey="PRAY" title="PRAY"> 
                                         <div className="coverageTab">
                                             <Row>
 
@@ -356,19 +363,21 @@ class ProfessionalBlogList extends Component {
                                                     <div className="fs20 fw600 col64 mb-4 pb-3">LATEST</div>
                                                     <div className="mb-4 pb-2">
                                                         {this.state.latestBlogs && this.state.latestBlogs.map(data =>
-                                                            <Row>
-                                                                <Col md={9}>
-                                                                    <div className="" onClick={() => { this.getBlogdetails(data.bl_id) }} >
-                                                                        <div className="col64 fs17 fw500">
-                                                                            {data.bl_title}
+                                                            <div className="blogrightSide">  
+                                                                <Row>
+                                                                    <Col md={9}>
+                                                                        <div className="" onClick={() => { this.getBlogdetails(data.bl_id) }} >
+                                                                            <div className="col64 fs17 fw500">
+                                                                                {data.bl_title}
+                                                                            </div>
+                                                                            <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
                                                                         </div>
-                                                                        <div className="col14 fs16 fw300 mt-3">{data.bl_time}</div>
-                                                                    </div>
-                                                                </Col>
-                                                                <Col md={3}>
-                                                                    <Image src={data.bl_image} className="w-100" />
-                                                                </Col>
-                                                            </Row>
+                                                                    </Col>
+                                                                    <Col md={3}>
+                                                                        <Image src={data.bl_image} className="w-100" />
+                                                                    </Col>
+                                                                </Row>
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </Col>

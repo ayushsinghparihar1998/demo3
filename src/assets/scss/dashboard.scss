@@ -93,6 +93,10 @@
             position: sticky;
             top: 0;
             z-index: 99; 
+
+            & + .fs18.fw600.m-auto { 
+                padding: 10px 0; 
+            }
         }
         .chat-bgyellow {
             background-color: $col67;
@@ -217,10 +221,10 @@
         .inner_body  { 
             background: linear-gradient(180deg, $col37 0%, $col18 100%); 
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
-            .funfact.lightpink {
-
+            .funfact.lightpink { 
                 .col11.fw400 { 
-                    height: 36px; 
+                    // height: 36px; 
+                    height: auto; 
                     overflow: hidden;  
                     display: flex;
                     align-items: center;   
@@ -234,7 +238,7 @@
                 justify-content: center; 
                 width: 100%; 
             }
-
+            
             .test_carousel {
                 height: 161px; 
                 background-color: $col18; 
@@ -464,7 +468,7 @@
 
         }
 
-        .border_yellow {   
+        .border_yellow {    
             border-top: solid 10px $col38; 
             padding: 10px;
             position: relative;
@@ -1648,6 +1652,22 @@
                 font-size: 15px !important; 
             }
             .inner_body {
+                .justify-content-between.border_yellow {
+                    justify-content: center !important;
+                    text-align: center;
+                    .w-100 {
+                        .pr-0 {
+                            padding-left: 1rem !important; 
+                        }
+                        .pl-0 {
+                            padding-left: 1rem !important; 
+                        }
+                        .form-group {
+                            margin-top: 15px; 
+                            margin-bottom: 15px;
+                        }
+                    }
+                }
                 .p-4 {
                     padding: 1rem!important;
                 }

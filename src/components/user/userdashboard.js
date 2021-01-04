@@ -326,12 +326,12 @@ class Userdashboard extends Component {
                            <Col md={8} className="pl-0">
                               <div className="user_body">
                                  <div className="inner_body mb-3">
-                                    <div className="d-flex justify-content-between border_yellow">
+                                    <div className="d-flex justify-content-between border_yellow"> 
                                        <Row className="w-100">
-                                          <Col lg={4} md={4} xs={12} className="pl-3 pr-0">  
-                                             <div className="col1 fw400 fs13 mt-2">Need someone to talk to ?</div>
+                                          <Col lg={5} md={5} xs={12} className="pr-0">  
+                                             <div className="col1 fw400 fs14 mt-2">Need someone to talk to ?</div>
                                           </Col>
-                                          <Col lg={6} md={6} xs={10} className="pl-0">
+                                          <Col lg={5} md={5} xs={10} className="pl-0"> 
                                              <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Control as="select"
                                                    className="selectTyp1 select3"
