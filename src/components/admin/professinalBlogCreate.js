@@ -312,9 +312,9 @@ class ProfessinalBlogCreate extends Component {
                       ? "Modify Blog"
                       : "Create Blog"}
                   </div>
-                  <div className="col14 fs16 fw300 mt-1 mb-4">
-                    Lorem Ipsum is simply dummy and typesetting industry.
-                  </div>
+                  
+                  {/* <div className="col14 fs16 fw300 mt-1 mb-4">
+                   </div> */}
                   <Form>
                     <Form.Group>
                       <Form.Label className="col14 fw600 fs18">

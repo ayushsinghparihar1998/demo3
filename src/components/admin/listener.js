@@ -1412,6 +1412,14 @@ class Adminlistener extends Component {
 
               {this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">
+                      List of{" "}
+                      {this.state.activeProfile == "listner"
+                        ? "Listeners"
+                        : "Users"}
+                    </div>
+                  </div>
                   {profileListing &&
                     profileListing.length > 0 &&
                     profileListing.map((item, index) => {
@@ -1503,6 +1511,9 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "blockList" ? (
                 <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">Report Requests</div>
+                  </div>
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
@@ -1661,6 +1672,9 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">Review Requests</div>
+                  </div>
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
@@ -1826,6 +1840,9 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "sessionList" ? (
                 <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">Session Requests</div>
+                  </div>
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
@@ -1866,7 +1883,8 @@ cs_time: "00:00:02" */}
                                             {item.cs_corporate_name}
                                           </div>
                                           <div className="col28 fs14 fw400 pb-1">
-                                            {item.cs_subject} {'-'} {item.cs_description}
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
                                           </div>
                                           {/* <div className="col28 fs14 fw400 pt-1">
                                             
@@ -1995,6 +2013,9 @@ cs_time: "00:00:02" */}
                 </Col>
               ) : this.state.pageType == "paymentList" ? (
                 <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">List of Payments</div>
+                  </div>
                   <div className="table_paymentlayout">
                     <Table bordered>
                       <thead>
@@ -2028,7 +2049,7 @@ cs_time: "00:00:02" */}
                     <Row className="mb-5">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
-                          Professional listing
+                          List of Professionals
                         </div>
                       </Col>
                       <Col md={4}>
@@ -2371,7 +2392,7 @@ cs_time: "00:00:02" */}
                   <div className="corporateMember adminlistener d_detail">
                     <div className="domainSave mb-4 pb-2">
                       <div>
-                        <div className="fs22 col10 mb-1">Domain listing</div>
+                        <div className="fs22 col10 mb-1">List of Domains</div>
                         {/* <div className="fs15 fw400 col14 mb-4">  
                           Lorem Ipsum is simply dummy and typesetting industry.
                         </div> */}
@@ -2569,7 +2590,7 @@ cs_time: "00:00:02" */}
                     <Row className="mb-4">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
-                          Press BLog listing
+                          List of Press Blogs
                         </div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
@@ -2735,7 +2756,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb-4">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">Blog listing</div> 
+                        <div className="fs22 fw600 col10">List of Blogs</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -2912,7 +2933,10 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : (
-                <Col md={8} lg={9} className="pl-1"> 
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-5">
+                    <div className="fs22 fw600 col10">Rating Requests</div>
+                  </div>
                   <div className="myprofile reviewrequest">
                     <div className="text-center user_tab">
                       <Tabs
