@@ -2314,7 +2314,7 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                     </div>*/}
-                                  </div>
+                                  </div> 
 
                                   <div className="fs14 fw400 col14 pb-1">
                                     <strong>Age:</strong> {item.u_birthdate}{" "}
@@ -2851,7 +2851,7 @@ cs_time: "00:00:02" */}
                                 alt=""
                               />
                             </div>
-                            <div className="pl-2 w-100">
+                            <div className="pl-2 w-100"> 
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
@@ -2916,19 +2916,19 @@ cs_time: "00:00:02" */}
                                     ></span>
                                   </div>
 
-                                  <div className="eat_category">
+                                  <div className="eat_category">   
                                     {item.blog_category.map((val) => {
                                       return (
-                                        <span
-                                          className={
+                                        <span 
+                                          className={  
                                             val.buc_cat_name == "Eat"
                                               ? "eatcat"
                                               : val == "Luv"
                                               ? "luvcat"
-                                              : "praycat"
+                                              : "praycat" 
                                           }
                                         >
-                                          {val.buc_cat_name}
+                                          {val.buc_cat_name} 
                                         </span>
                                       );
                                     })}
