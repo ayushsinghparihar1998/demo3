@@ -46,11 +46,11 @@ class Myprofile extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-        {getLocalStorage('isAdmin') ? <NavBarAdmin {...this.props} /> : <NavBar {...this.props} />}
+          {getLocalStorage('isAdmin') ? <NavBarAdmin {...this.props} /> : <NavBar {...this.props} />}
         </div>
-        {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> : 
+        {getLocalStorage('isAdmin') ? <UserProfile {...this.props} /> :
           <div className="profile_layout pt-4 pb-5">
-            <Container> 
+            <Container>
               <Row>
                 <div className="myprofile">
                   <Image src={userData.u_cover_image} alt="" className="w-100" />
@@ -102,10 +102,10 @@ class Myprofile extends Component {
                       </div>
                     </div>
                     <div className="layout">
-                      <div className="d-flex m-auto w35 border2">
+                      {/* <div className="d-flex m-auto w35 border2">
                         <div className="fs16 col23 fw400 text-left w60">BIO:</div>
                         <div className="fs16 col14 fw400 text-left w40">{userData.u_bio}</div>
-                      </div>
+                      </div> */}
                     </div>
                     {/* <div className="layout">
                           <div className="d-flex m-auto w35 border2">

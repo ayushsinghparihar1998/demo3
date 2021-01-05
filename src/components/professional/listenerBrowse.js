@@ -29,8 +29,8 @@ class ListenerBrowse extends Component {
         offset: 6,
         show3: false,
         currentData: {},
-        categoriesList:[],
-        selectedCategory:null
+        categoriesList: [],
+        selectedCategory: null
     }
 
     componentDidMount() {
@@ -67,11 +67,11 @@ class ListenerBrowse extends Component {
 
     _getFilteredListenerData = async () => {
         try {
-         
-            
+
+
             console.log(this.state.selectedCategory)
 
-            let response = await ELPRxApiService("filteredsearchlistener", {            
+            let response = await ELPRxApiService("filteredsearchlistener", {
                 search_keyword: this.state.search_keyword,
             })
             this.setState({
@@ -122,20 +122,20 @@ class ListenerBrowse extends Component {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    <Col lg={3} md={3}>
+                                    {/* <Col lg={3} md={3}>
                                         <Form.Group controlId="exampleForm.ControlSelect1" className="setSelectbtn">
                                             <Form.Control as="select" className="selectTyp1"
                                                 onChange={(e) => this.setState({ selectedCategory: e.target.value })}>
                                                 <option disable >Select Category</option>
                                                 {
-                                                    this.state.categoriesList.map(elem=>{
-                                                       return <option value={elem.cat_id}>{elem.cat_name}</option>
+                                                    this.state.categoriesList.map(elem => {
+                                                        return <option value={elem.cat_id}>{elem.cat_name}</option>
                                                     })
-                                                }                                                
+                                                }
 
                                             </Form.Control>
                                         </Form.Group>
-                                    </Col>
+                                    </Col> */}
                                     <Col lg={3} md={3}>
                                         <div className="searchByOrder">
                                             <Button className="btnTyp5 bTyp5" onClick={this._getFilteredListenerData}>
