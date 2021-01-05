@@ -187,7 +187,7 @@ class DomainDetail extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1"> 
+              <Col md={9} className="pl-1">  
                 <div className="corporateMember d_detail">
                   <div className="fs22 col10 mb-1">
                     {this.props.match.params.name}
@@ -313,7 +313,7 @@ class DomainDetail extends Component {
                     onClick={this.handleCloseConformation}
                   />
                   <div className="text-center fs24 mt-4 col64 mb-4">
-                    Are you sure want to delete 
+                    Are you sure want to delete <br />{" "} 
                     {this.state.deleteUser.u_username}
                   </div>
 

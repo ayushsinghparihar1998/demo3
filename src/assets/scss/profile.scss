@@ -664,7 +664,6 @@
         }
     }
 }
-
 .imgSetProfile {
     position: relative;
 
@@ -672,10 +671,31 @@
         max-width: 100px; 
     }
 }
-
 .faqone {
     .myprofile.reviewrequest {
         // padding-top: 20px;
+    }
+}
+.myprofile.reviewrequest {
+    .requests {
+        .justify-content-between {
+            .col28.fs14.fw400 { 
+                max-height: 75px;
+                overflow: auto; 
+            }
+        }
+    }
+}
+.mw35s {
+    width: 35px;
+    height: 35px;
+    object-fit: cover; 
+}
+.min-190s {
+    min-width: 190px;
+    .just_aligns {
+        align-items: center;
+        justify-content: flex-end; 
     }
 }
 

@@ -20,7 +20,8 @@ import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
-import "react-datepicker/dist/react-datepicker.css";
+import Suser from "../../assets/images/s_images.png"; 
+import "react-datepicker/dist/react-datepicker.css"; 
 // import moment from "moment";
 import {
   Button,
@@ -1898,10 +1899,14 @@ cs_time: "00:00:02" */}
                                             {item.cs_time}
                                           </div>
                                         </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Session with - {item.cs_pro_name}
+                                        <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
+                                          <div className="text-right">Session with</div>  
+                                          <div className="pt-2 just_aligns text-right">  
+                                              <Image src={item.cs_pro_image ? item.cs_pro_image : Suser} className="mw35s r50"/>     
+                                              <span className="pl-2 col1 fw500 fs13">{item.cs_pro_name}</span> 
+                                          </div>
                                         </div>
-                                      </div>
+                                      </div> 
 
                                       <div className="mt-3">
                                         <Button
