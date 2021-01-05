@@ -618,7 +618,7 @@ class NavBar extends Component {
 
                                             <span className="userprofiles menus">
 
-                                                <Nav.Link onClick={() => this._readAllNotificationHandler()}  >
+                                                <Nav.Link onClick={() => this._readAllNotificationHandler()} > 
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />

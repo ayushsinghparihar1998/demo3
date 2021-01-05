@@ -244,7 +244,7 @@
                 }
             }
 
-            .mx-wcustom { 
+            .mx-wcustom {  
                 max-width: 670px; 
             }
             .mx-wcustomtwo { 
@@ -382,8 +382,11 @@
         padding-left: 15px; 
     }
     .motivate_pwd {
-        display: flex; 
+        display: flex;
         position: relative; 
+        .inputTyp2.form-control {
+            max-width: 191px; 
+        }
 
         .btnTyp11 {
             margin-left: 0rem !important;
@@ -410,16 +413,16 @@
     &.proListTwo {
         .chatsearch  {
             background: $col18;
-            border-top: solid 10px $col38;  
+            border-top: solid 10px $col23; 
             padding: 30px 0;
             .search-listing {
                 padding: 40px 40px; 
             }
         }    
         .professor_search {
-            border-bottom: solid 5px $col23;
-            padding: 10px 40px 30px;
-            margin-bottom: 10px; 
+            // border-bottom: solid 5px $col23;
+            padding: 10px 40px 0;
+            margin-bottom: 0; 
         }
     }
     .chatsearch  {
@@ -581,7 +584,7 @@
     position: relative; 
     padding: 40px; 
 
-    .detailone {
+    .detailone { 
         background: $col62; 
         padding: 40px; 
         margin-bottom: 40px; 
@@ -595,6 +598,14 @@
         }
         .rightprofile {
             word-break: break-all; 
+            .btnTyp5 {
+                border-color: $col40 !important; 
+                background-color: $col40 !important; 
+                &:hover {
+                    border-color: $col1 !important; 
+                    background-color: $col1 !important;   
+                }
+            }
         }
     }
     .detailtwo {
@@ -662,9 +673,19 @@
     }
 }
 
+.faqone {
+    .myprofile.reviewrequest {
+        // padding-top: 20px;
+    }
+}
+
 .adminProfessinal {
     .adminlistener { 
         padding-bottom: 30px !important; 
+        .fs28.col10.mb-4 {
+            font-size: 22px !important;
+            font-weight: 600 !important; 
+        }
         span.mx-100w {
             min-width: 100px;
         }    
@@ -677,6 +698,10 @@
         }
     }
     .corporateMember {
+        .fs28.col10.mb-4 {
+            font-size: 22px !important;
+            font-weight: 600 !important;
+        }
         .form-group {
             .selectTyp1 { 
                 background: url('../images/arrow.svg') no-repeat 97% 50% $col22 !important;
@@ -813,6 +838,17 @@
             margin: auto;
             justify-content: center;
             display: flex;
+
+            &.checkcattwo {
+                .form-check {
+                    .form-check-input {
+                        width: 95px; 
+                        margin: auto; 
+                        left: 0;
+                        top: 0;    
+                    }
+                }
+            }
             
                 .form-check { 
                     position: relative;
@@ -824,6 +860,13 @@
                     &.checkone, &.checktwo, &.checkthree {  
                         background: transparent; 
                         border: solid 1px $col1; 
+                        position: relative;
+                        .form-check-input {
+                            width: 100px;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                        }
                         &.active {
                             background: $col40; 
                             border: solid 1px $col40;
@@ -869,6 +912,9 @@
         .btnTyp5 {
             height: 3rem;
         } 
+        .fs22.col10.mb-1 {
+            font-weight: 600 !important; 
+        }
     }
     .form-group {
         input[type="file"] {      
@@ -981,7 +1027,7 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
     padding: 30px; 
     .text-center.fs28.fw500.col64 {
-        margin-bottom: 20px !important; 
+        // margin-bottom: 20px !important; 
     }
     .mxw-50 {
         max-width: 50%; 
@@ -998,8 +1044,9 @@
                     &.active {
                         &::after {
                             content: ""; 
-                            width: 140px; 
-                            left: calc(50% - 70px); 
+                            width: 100%; 
+                            // left: calc(50% - 70px); 
+                            left: 0; 
                         }
                     }
                 }
@@ -1040,11 +1087,13 @@
                     margin-top: 5px; 
                     margin-bottom: 15px; 
                 }
-                div.fw600.fs20.col64 { 
+                div.fw600.fs20.col64 {  
                     text-transform: capitalize;
                     padding-top: 10px; 
                     transition: 0.5s; 
-                    &::first-letter { 
+                    cursor: pointer;
+                    
+                    &::first-letter {   
                         font-size: 100%;  
                     }
                     &:hover {
@@ -1072,10 +1121,10 @@
                 }
             }
         }    
-        .nav-tabs {
-            border-bottom: solid 1px $col23;
+        .nav-tabs {  
+            border-bottom: solid 1px $col23; 
             .nav-item {
-                width: 33%;
+                width: 33.33%;
                 text-align: center;
                 font-size: 1rem;
                 color: $col64;  
@@ -1088,39 +1137,57 @@
                 &.active {
                     &::after {
                         content: "";
-                        width: 240px;
+                        width: 100%; 
                         background: $col23;
                         height: 6px;
                         position: absolute;
                         bottom: 0;
-                        left: calc(50% - 125px); 
+                        // left: calc(50% - 125px); 
+                        left: 0; 
                     }
                 }
             }
         }
         .tab-content {
-            .col64.fs17.fw500 {
+            .col64.fs17.fw500 { 
                 cursor: pointer;
-                text-transform: capitalize;  
+                text-transform: capitalize;
+                transition: 0.5s all;  
+                &:hover {
+                    opacity: 0.5; 
+                }
             }
 
             .featuredTab {
-                .fs18.col64.fw600 {
+                .fs18.col64.fw600 { 
                     cursor: pointer;
+                    transition: 0.5s all;
+
+                    &:hover {
+                        opacity: 0.5;
+                    }
                 }
             }
-            padding-top: 30px; 
-            .coverageTab {
+            padding-top: 15px; 
+            .coverageTab {  
                 .coverageList {
                     position: relative; 
                     border-bottom: 0.5px solid #ccc; 
                     padding: 24px 0; 
+                    .fw600.fs16.col64 {
+                        cursor: pointer;
+                        transition: 0.5s all;
+
+                        &:hover {
+                            opacity: 0.5;
+                        }
+                    }
                 } 
             }
             .featuredTab {
                 .col-md-12 {
                     .w-100 {
-                        height: 300px;  
+                        // height: 300px;  
                         object-fit: cover;     
                     }
                 }
@@ -1132,6 +1199,15 @@
             }
             .featuredTab {
                 
+            }
+        }
+
+        .tab-content {
+            .professionalBlogs {   
+                border-bottom: solid 1px $col85; 
+                margin-top: 5px; 
+                margin-bottom: 15px; 
+                padding-top: 10px; 
             }
         }
     }

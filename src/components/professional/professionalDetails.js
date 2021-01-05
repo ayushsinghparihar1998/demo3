@@ -273,7 +273,7 @@ class Myprofile extends Component {
                               <div className="col3 fw500 mt-1 mb-2">
                                 Work Experience:
                                 <span className="col14 fw400 ml-2">
-                                  {proffDetail.u_work_experience}
+                                  {proffDetail.u_work_experience} Years
                                 </span>
                               </div>
                               <div className="col3 fw500 mt-1 mb-2">
@@ -293,7 +293,7 @@ class Myprofile extends Component {
                                             {item.pk_keyword}
                                             {proffDetail.professional_cat_name && (index + 1) == proffDetail.professional_cat_name.length
                                               ? ""
-                                              : ","}{" "}
+                                              : ""}{" "} 
                                           </>
                                         );
                                       }
@@ -316,7 +316,7 @@ class Myprofile extends Component {
                                             </>
                                           );
                                         }
-                                      )
+                                      ) 
                                     : this.state.cat_child_array.map(
                                         (obj, i) => {
                                           return i ===
@@ -354,7 +354,7 @@ class Myprofile extends Component {
                               <div className="col3 fw500 mt-1 mb-2">
                                 Age: 
                                 <span className="col14 fw400 ml-2">
-                                  {proffDetail.u_birthdate}
+                                  {proffDetail.u_birthdate} Years 
                                 </span>
                               </div>
                               <div className="mb-2">
@@ -365,7 +365,7 @@ class Myprofile extends Component {
                                     >
                                       {proffDetail.email}
                                     </a>
-                                </div>
+                                </div> 
                                 {this.props.match.params.type === "admin" ? (
                                   ""
                                 ) : (
@@ -376,7 +376,7 @@ class Myprofile extends Component {
                                       className="btnTyp5 mr-3"
                                     >
                                       Call
-                                    </Button> */} 
+                                    </Button> */}  
                                     <Button
                                         variant="primary"
                                         type="submit"

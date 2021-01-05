@@ -80,7 +80,7 @@
             }
             .loginnav  {
                 .dropdown-menu {
-                    left: -100px; 
+                    left: -100px !important; 
                 }
             }
             a.nav-link { 
@@ -90,6 +90,15 @@
                 font-size: $fs14;
                 &:hover {
                     color: $col1; 
+                }
+                &.dropdown-toggle {
+                    &::after {
+                        position: relative;
+                        top: 2px; 
+                        border-top: .45em solid;
+                        border-right: .45em solid transparent;
+                        border-left: .45em solid transparent;
+                    }
                 }
             } 
 
@@ -144,7 +153,9 @@
                 .dropdown {
                     position: relative; 
                     .dropdown-menu {
-                        left: -90px; 
+                        // left: -90px; 
+                        left: 0; 
+                        top: 35px;
                     }
                 }
             }

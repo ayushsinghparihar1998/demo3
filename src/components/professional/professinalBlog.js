@@ -117,10 +117,12 @@ class ProfessinalBlog extends Component {
                                                        <Row>
                                                             {this.state.featured && this.state.featured.map(data =>
                                                                  <>
-                                                                      <Col md={7} className="mb-4">
-                                                                           <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
-                                                                           <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
-                                                                           {/* {this.state.showDetails ? <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div> : null} */}
+                                                                      <Col md={7} className="mb-1"> 
+                                                                           <div className="professionalBlogs"> 
+                                                                                <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                                                                                <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
+                                                                                {/* {this.state.showDetails ? <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div> : null} */}
+                                                                           </div>
                                                                       </Col>
 
                                                                  </>
@@ -167,21 +169,24 @@ class ProfessinalBlog extends Component {
                                                   }
                                              </Tab>
 
-                                             <Tab eventKey="PressReleases" title="Press Releases">
+                                             <Tab eventKey="PressReleases" title="Press Releases">      
                                                   <div className="coverageTab">
-                                                       <div className="coverageList">
-                                                            <Row>
+                                                       <div className="coverageListwo">
                                                                  {this.state.pressReleases && this.state.pressReleases.map((data, i) => {
                                                                       return this.state.offset > i ?
                                                                            <>
-                                                                                <Col md={8}>
-                                                                                     <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)} >
-                                                                                          {data.pbl_title}
-                                                                                     </div>
-                                                                                </Col>
-                                                                                <Col md={4}>
-                                                                                     <div className="fw400 fs15 col14">{data.pbl_time}</div>
-                                                                                </Col>
+                                                                           <div className="coverageList">  
+                                                                                <Row>  
+                                                                                     <Col md={8}> 
+                                                                                          <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)} >
+                                                                                               {data.pbl_title}
+                                                                                          </div>
+                                                                                     </Col>
+                                                                                     <Col md={4}>
+                                                                                          <div className="fw400 fs15 col14">{data.pbl_time}</div>
+                                                                                     </Col>
+                                                                                </Row>
+                                                                           </div>
                                                                            </>
                                                                            :
                                                                            null
@@ -189,10 +194,8 @@ class ProfessinalBlog extends Component {
 
                                                                  )}
 
-                                                            </Row>
+                                                            </div>
                                                        </div>
-
-                                                  </div>
                                                   {this.state.pressReleases && this.state.offset < this.state.pressReleases.length
 
                                                        ?

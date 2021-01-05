@@ -338,7 +338,7 @@ class Userdashboard extends Component {
                                                    name="date"
                                                    onChange={(e) => this.setState({ selectedCategory: e.target.value })}
                                                 >
-                                                   <option>Select Category</option>
+                                                   <option>Select Category</option> 
 
                                                    {
                                                       this.state.categories_list.map(data => {

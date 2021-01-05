@@ -238,7 +238,7 @@ class ProfessionalLsting extends Component {
                                         </Col>
                                     </Row>
 
-                                    <div className="checkCategory">
+                                    <div className="checkCategory checkcattwo">  
                                         <Form.Group controlId="formBasicCheckbox1" className="row">
                                             <Form.Check type="checkbox"
                                                 className={this.state.eat ? "checkone checkfirst active" : "checkone checkfirst"}
@@ -264,16 +264,13 @@ class ProfessionalLsting extends Component {
                             </div> 
 
                             <div className="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div>
-                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">
+                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4"> 
                                 {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has been the industry's standard dummy text ever since the 1500s */}
                             </div>
                             <div className="search-listing">
                                 <div className="listing2">
-
-
-                                    <Row>
-
+                                    <Row> 
                                         {this.state.professional_list.map((obj, index) => {
 
                                             return <Col lg={4} md={6}>

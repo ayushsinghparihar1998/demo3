@@ -18,7 +18,7 @@ import Footer from "../core/footer";
 
 class Faq extends Component {
   render() {
-    return (
+    return ( 
       <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
@@ -31,7 +31,7 @@ class Faq extends Component {
                   <div className="text-center user_tab">
                     {/* <Tabs defaultActiveKey="request">  
                       <Tab eventKey="request" title="General FAQ">  */}
-                        <div className="fw400 col29 fs28 text-center mt-4 mb-2">  
+                        <div className="fw400 col29 fs28 text-center mb-2">  
                             General FAQ
                         </div>
                         <div className="fs20 fw400 col27 mb-5">   

@@ -45,7 +45,7 @@ function RecentChat({ onRedirect }) {
         </div>
         {
         !recentChats||recentChats.length == 0?<div className="fs18 fw600 m-auto" style={{textAlign:'center'}}>
-        No users found
+        No chat found 
       </div>:null
         }
       {recentChats &&

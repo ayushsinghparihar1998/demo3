@@ -1,5 +1,5 @@
-.myprofile.reviewrequest {
-    border-top: none; 
+.myprofile.reviewrequest { 
+    // border-top: none; 
     padding-top: 30px; 
     position: relative; 
     min-height: 100vh; 
@@ -577,7 +577,14 @@
 }
 
 .profile_layout {
-
+    .myprofile {
+        .text-center {
+            .col27.fw400.fs14 { 
+                max-width: 70%; 
+                margin: auto; 
+            }
+        }
+    }
     .aboutpage {   
         font-family: Calibri;  
         .detail_listing  { 
@@ -760,7 +767,17 @@
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) { 
+    .profile_layout {
+        .myprofile {
+            .text-center {
+                .col27.fw400.fs14 { 
+                    max-width: 90%; 
+                    margin: auto; 
+                }
+            }
+        }
+    }
     .aboutpage {
         // text-align: center;
         .detail_listing {
