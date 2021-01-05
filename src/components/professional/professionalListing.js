@@ -28,7 +28,7 @@ class ProfessionalLsting extends Component {
             count: 9,
             offset: 1,
             isShowMore: true,
-
+            currentRequestCount :0,
             // Search Professional
             searchName: null,
             searchKeyword: null,
@@ -104,7 +104,8 @@ class ProfessionalLsting extends Component {
                 "offset": this.state.offset,
             })
             this.setState({
-                professional_list: [...this.state.professional_list, ...response.data.data.listing]
+                professional_list: [...this.state.professional_list, ...response.data.data.listing],
+                currentRequestCount :response.data.data.listing.length
             })
         } catch (err) {
             console.log(err)
@@ -150,13 +151,16 @@ class ProfessionalLsting extends Component {
                 })
             } else {
                 if (this.state.offset === 1) {
+                   
                     this.setState({
-                        professional_list: [...response.data.data.listing]
+                        professional_list: [...response.data.data.listing],
+                        currentRequestCount :response.data.data.listing.length
                     })
 
                 } else {
                     this.setState({
-                        professional_list: [...this.state.professional_list, ...response.data.data.listing]
+                        professional_list: [...this.state.professional_list, ...response.data.data.listing],
+                        currentRequestCount :response.data.data.listing.length
                     })
 
                 }
@@ -313,14 +317,14 @@ class ProfessionalLsting extends Component {
 
 
                                                     <Button variant="primary"
-                                                        disabled={getLocalStorage('customerInfo').u_verified !== "0" ? true : false}
+                                                        disabled={getLocalStorage('customerInfo').u_verified == "0" ? true : false}
                                                         onClick={() => this.bookSessionOpen(obj)}
                                                         className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                                 </div>
                                             </Col>
 
                                         })}
-                                        {this.state.offset <= this.state.professional_list.length ?
+                                      {this.state.currentRequestCount=== 9 ?
                                             <div className="text-center w-100 m-auto pt-4">
                                                 <Button className="btnTyp12"
                                                     onClick={() => this.setState({ offset: this.state.offset + 1 }, () => {
