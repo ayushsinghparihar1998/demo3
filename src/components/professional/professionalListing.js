@@ -221,8 +221,8 @@ class ProfessionalLsting extends Component {
                 <div className="profile_layout professinal_list proListTwo adminProfessinal pt-4 pb-5">
                     <Container>
 
-                        <div className="chatsearch w-100">
-                            <div className="professor_search">
+                        <div className="chatsearch w-100 pt-0">
+                            <div className="professor_search p_serachtwos"> 
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>

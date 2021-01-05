@@ -52,9 +52,6 @@ class Myprofile extends Component {
 
       // validation Error
       validationError: false,
-
-      currentDate: moment().format('YYYY-MM-DD')
-
     };
   }
 
@@ -227,15 +224,15 @@ class Myprofile extends Component {
           {this.props.match.params.type == "admin" ? (
             <NavBarAdmin {...this.props} />
           ) : (
-              <NavBar {...this.props} />
-            )}
+            <NavBar {...this.props} />
+          )}
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>
-            <div className="profile_layout p_detailone pt-4 pb-5">
+            <div className="profile_layout p_detailone pt-4 pb-5"> 
               <Container>
                 <Row>
-                  {/* <Col md={4} lg={3} className="pr-1">
+                  <Col md={4} lg={3} className="pr-1">
                     <div className="adminsidebar">
                       <div className="inner_area">
                         <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -249,16 +246,16 @@ class Myprofile extends Component {
                                   Back
                                 </Link>
                               ) : (
-                                  <Link to={{ pathname: `/professionalListing` }}>
-                                    Back
-                                  </Link>
-                                )}
+                                <Link to={{ pathname: `/professionalListing` }}>
+                                  Back
+                                </Link>
+                              )}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </Col> */}
+                  </Col>
                   <Col md={8} lg={9} className="pl-1">
                     <div className="myprofile profiledetails">
                       <div className="detailone">
@@ -276,7 +273,7 @@ class Myprofile extends Component {
                               <div className="col3 fw500 mt-1 mb-2">
                                 Work Experience:
                                 <span className="col14 fw400 ml-2">
-                                  {proffDetail.u_work_experience} Years
+                                  {proffDetail.u_work_experience}
                                 </span>
                               </div>
                               <div className="col3 fw500 mt-1 mb-2">
@@ -296,7 +293,7 @@ class Myprofile extends Component {
                                             {item.pk_keyword}
                                             {proffDetail.professional_cat_name && (index + 1) == proffDetail.professional_cat_name.length
                                               ? ""
-                                              : ""}{" "} 
+                                              : ","}{" "}
                                           </>
                                         );
                                       }
@@ -319,20 +316,20 @@ class Myprofile extends Component {
                                             </>
                                           );
                                         }
-                                      ) 
+                                      )
                                     : this.state.cat_child_array.map(
-                                      (obj, i) => {
-                                        return i ===
-                                          this.state.cat_child_array.length -
-                                          1 ? (
+                                        (obj, i) => {
+                                          return i ===
+                                            this.state.cat_child_array.length -
+                                              1 ? (
                                             <span>{obj}</span>
                                           ) : (
                                             <span>{obj},</span>
                                           );
-                                      }
-                                    )}
+                                        }
+                                      )}
                                 </span>
-                              </div>
+                              </div> 
                               <div className="col3 fw500 mt-1 mb-2">
                                 Services:
                                 <span className="col14 fw400 ml-2">
@@ -344,9 +341,9 @@ class Myprofile extends Component {
                                           <>
                                             {item}{" "}
                                             {index + 1 ==
-                                              proffDetail.u_area_service.split(
-                                                ","
-                                              ).length
+                                            proffDetail.u_area_service.split(
+                                              ","
+                                            ).length
                                               ? ""
                                               : ","}{" "}
                                           </>
@@ -355,36 +352,36 @@ class Myprofile extends Component {
                                 </span>
                               </div>{" "}
                               <div className="col3 fw500 mt-1 mb-2">
-                                Age:
+                                Age: 
                                 <span className="col14 fw400 ml-2">
-                                  {proffDetail.u_birthdate} Years 
+                                  {proffDetail.u_birthdate}
                                 </span>
                               </div>
                               <div className="mb-2">
                                 <div className="mb-4">
-                                  Email:
+                                Email: 
                                       <a
                                       className="ml-2 fw400"
                                     >
                                       {proffDetail.email}
                                     </a>
-                                </div> 
+                                </div>
                                 {this.props.match.params.type === "admin" ? (
                                   ""
                                 ) : (
-                                    <>
-                                      {/* <Button
+                                  <>
+                                    {/* <Button
                                       variant="primary"
                                       type="submit"
                                       className="btnTyp5 mr-3"
                                     >
                                       Call
-                                    </Button> */}  
+                                    </Button> */} 
                                     <Button
                                         variant="primary"
                                         type="submit"
                                         className="btnTyp5"
-                                        disabled={getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_verified === "0" ? true : false}
+                                        disabled={getLocalStorage("customerInfo") && getLocalStorage("customerInfo").u_verified === "0"?true:false}
                                         onClick={() => {
                                           this.bookSessionOpen(
                                             this.state.proffDetail
@@ -393,9 +390,9 @@ class Myprofile extends Component {
                                       >
                                         BOOK A SESSION
                                       </Button>
-
-                                    </>
-                                  )}
+                                    
+                                  </>
+                                )}
                               </div>
                             </div>
                           </Col>
@@ -439,7 +436,7 @@ class Myprofile extends Component {
                 </Row>
               </Container>
             </div>
-
+            
             <Modal
               show={this.state.show3}
               className="CreateAccount bookSession"
@@ -493,10 +490,10 @@ class Myprofile extends Component {
                           Enter Appointment Subject
                         </div>
                         {this.state.validationErrorSubject ? (
-                          <div className="error">{this.state.validationErrorSubject}</div>
-                        ) : null}
+                        <div className="error">{this.state.validationErrorSubject}</div>
+                      ) : null}
                       </Form.Group>
-
+                      
 
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">
@@ -514,10 +511,10 @@ class Myprofile extends Component {
                           Enter Description
                         </div>
                         {this.state.validationErrorDescription ? (
-                          <div className="error">{this.state.validationErrorDescription}</div>
-                        ) : null}
+                        <div className="error">{this.state.validationErrorDescription}</div>
+                      ) : null}
                       </Form.Group>
-
+                      
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
@@ -533,17 +530,16 @@ class Myprofile extends Component {
                           onChange={(e) => {
                             this.setState({ appointmentDate: e.target.value });
                           }}
-                          min={this.state.currentDate}
                         />
 
                         <div className="error alignLeft d-none">
                           Enter Appointment Date
                         </div>
                         {this.state.validationErrorDate ? (
-                          <div className="error">{this.state.validationErrorDate}</div>
-                        ) : null}
+                        <div className="error">{this.state.validationErrorDate}</div>
+                      ) : null}
                       </Form.Group>
-
+                      
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
@@ -561,10 +557,10 @@ class Myprofile extends Component {
                           Enter Appointment Time
                         </div>
                         {this.state.validationErrorTime ? (
-                          <div className="error">{this.state.validationErrorTime}</div>
-                        ) : null}
+                        <div className="error">{this.state.validationErrorTime}</div>
+                      ) : null}
                       </Form.Group>
-
+                      
 
                       <Button
                         onClick={() => this.postBookingData()}
@@ -578,11 +574,11 @@ class Myprofile extends Component {
                 </Container>
               </Modal.Body>
             </Modal>
-          </Container>
+          </Container> 
         </div>
-        <Footer />
+        <Footer /> 
       </div>
-
+      
     );
   }
 }

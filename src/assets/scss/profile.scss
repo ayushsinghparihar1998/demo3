@@ -419,10 +419,18 @@
                 padding: 40px 40px; 
             }
         }    
-        .professor_search {
+        .professor_search {  
             // border-bottom: solid 5px $col23;
             padding: 10px 40px 0;
             margin-bottom: 0; 
+
+            &.p_serachtwos {      
+                padding: 15px 40px 15px;
+                background: $col22; 
+                .checkCategory {
+                    padding-top: 20px; 
+                }
+            }
         }
     }
     .chatsearch  {
