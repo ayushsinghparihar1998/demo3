@@ -228,7 +228,7 @@ class ProfessionalLsting extends Component {
                                     <Row>
                                         <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search by name"
+                                                <Form.Control type="text" placeholder="Search by name, keyword"
                                                     className="inputTyp2 inputpProcess"
                                                     onChange={(e) => {
                                                         this.setState({ searchName: e.target.value })

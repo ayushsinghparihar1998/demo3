@@ -141,28 +141,28 @@ class ProfessinalBlog extends Component {
 
                                              <Tab eventKey="Coverage" title="Coverage" >
                                                   <div className="coverageTab">
-                                                       <div className="coverageList">
-                                                            <Row>
+                                                       <div className="coverageListnew"> 
                                                                  {console.log("ASDASD==>", this.state.coverage)}
                                                                  {this.state.coverage && this.state.coverage.map((data, i) =>
                                                                       this.state.offset > i ? (
                                                                            <>
-                                                                                <Col md={6} >
+                                                                           <div className="coverageList">
+                                                                                <Row>
+                                                                                     <Col md={6}> 
+                                                                                          <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
 
-                                                                                     <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
-
-                                                                                </Col>
-                                                                                <Col md={3}>
-                                                                                     <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div>
-                                                                                </Col>
-                                                                                <Col md={3}>
-                                                                                     <div className="fw400 fs15 col14" onClick={() => this.setState({ showDetails: true })}>{data.pbl_title}</div>
-                                                                                </Col>
+                                                                                     </Col>
+                                                                                     <Col md={3}>
+                                                                                          <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div>
+                                                                                     </Col>
+                                                                                     <Col md={3}>
+                                                                                          <div className="fw400 fs15 col14" onClick={() => this.setState({ showDetails: true })}>{data.pbl_title}</div>
+                                                                                     </Col>
+                                                                                </Row>
+                                                                           </div>
                                                                            </>
                                                                       ) : null
                                                                  )}
-
-                                                            </Row>
                                                        </div>
 
                                                   </div>
