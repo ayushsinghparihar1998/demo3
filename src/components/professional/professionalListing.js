@@ -46,6 +46,8 @@ class ProfessionalLsting extends Component {
             // validation Error
             validationError: false,
 
+            currentDate: moment().format('YYYY-MM-DD')
+
         }
     }
 
@@ -60,13 +62,22 @@ class ProfessionalLsting extends Component {
         if (!this.state.appointmentSubject) {
             this.setState({ validationErrorSubject: 'Please Enter Appointment Subject.' })
             isValid = false
-        } else {
+        } else if (this.state.appointmentSubject.length > 50) {
+            this.setState({ validationErrorSubject: 'Appointment Subject should not be more than 50 chars.' })
+            isValid = false
+        }
+        else {
             this.setState({ validationErrorSubject: null })
         }
         if (!this.state.description) {
             this.setState({ validationErrorDescription: 'Please Enter Appointment Description.' })
             isValid = false
-        } else {
+        }
+        else if (this.state.description.length > 250) {
+            this.setState({ validationErrorDescription: 'Appointment Description should not be more than 250 chars.' })
+            isValid = false
+        }
+        else {
             this.setState({ validationErrorDescription: null })
         }
         if (!this.state.appointmentDate) {
@@ -243,25 +254,25 @@ class ProfessionalLsting extends Component {
                                             <Form.Check type="checkbox"
                                                 className={this.state.eat ? "checkone checkfirst active" : "checkone checkfirst"}
                                                 onChange={(e) => {
-                                                    this.setState({ eat: e.target.checked })
+                                                    this.setState({ eat: e.target.checked }, () => this._getFilterProfessionalListHandler())
                                                 }}
 
                                                 label="Eat" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.luv ? "checktwo active" : "checktwo"}
                                                 onChange={(e) => {
-                                                    this.setState({ luv: e.target.checked })
+                                                    this.setState({ luv: e.target.checked }, () => this._getFilterProfessionalListHandler())
                                                 }}
                                                 label="Luv" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.pray ? "checkthree active" : "checkthree"}
                                                 onChange={(e) => {
-                                                    this.setState({ pray: e.target.checked })
+                                                    this.setState({ pray: e.target.checked }, () => this._getFilterProfessionalListHandler())
                                                 }} label="Pray" />
                                         </Form.Group>
                                     </div>
                                 </Form>
-                            </div> 
+                            </div>
 
                             <div className="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div>
                             <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4"> 
@@ -301,7 +312,8 @@ class ProfessionalLsting extends Component {
                                                     </div>
 
 
-                                                    <Button variant="primary" disabled={getLocalStorage('customerInfo').u_verified === "0" ? true : false}
+                                                    <Button variant="primary"
+                                                        disabled={getLocalStorage('customerInfo').u_verified !== "0" ? true : false}
                                                         onClick={() => this.bookSessionOpen(obj)}
                                                         className="btnTyp9 report mt-4 mb-4">Book A Session</Button>
                                                 </div>
@@ -336,7 +348,7 @@ class ProfessionalLsting extends Component {
 
                     <Modal.Body>
                         <Container>
-                            <div className="layout_box mt-3 mb-4"> 
+                            <div className="layout_box mt-3 mb-4">
                                 <div class="col10 fs30 fw600 mb-4 pb-1">Book a Session</div>
                                 <Form>
 
@@ -347,9 +359,9 @@ class ProfessionalLsting extends Component {
                                         }} />
                                         <div className="error alignLeft d-none">Enter Appointment Subject</div>
                                         {this.state.validationErrorSubject ?
-                                        <div className="error">{this.state.validationErrorSubject}</div> : null}
+                                            <div className="error">{this.state.validationErrorSubject}</div> : null}
                                     </Form.Group>
-                                    
+
 
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -360,9 +372,9 @@ class ProfessionalLsting extends Component {
                                             }} />
                                         <div className="error alignLeft d-none">Enter Description</div>
                                         {this.state.validationErrorDescription ?
-                                        <div className="error">{this.state.validationErrorDescription}</div> : null}
+                                            <div className="error">{this.state.validationErrorDescription}</div> : null}
                                     </Form.Group>
-                                    
+
 
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
@@ -370,13 +382,14 @@ class ProfessionalLsting extends Component {
 
                                         <Form.Control type="date" className="inputTyp2" onChange={(e) => {
                                             this.setState({ appointmentDate: e.target.value })
-                                        }} />
+
+                                        }} min={this.state.currentDate} />
 
                                         <div className="error alignLeft d-none">Enter Appointment Date</div>
                                         {this.state.validationErrorDate ?
-                                        <div className="error">{this.state.validationErrorDate}</div> : null}
+                                            <div className="error">{this.state.validationErrorDate}</div> : null}
                                     </Form.Group>
-                                    
+
 
 
                                     <Form.Group controlId="formBasicEmail">
@@ -388,9 +401,9 @@ class ProfessionalLsting extends Component {
                                         </Form.Control>
                                         <div className="error alignLeft d-none">Enter Appointment Time</div>
                                         {this.state.validationErrorTime ?
-                                        <div className="error">{this.state.validationErrorTime}</div> : null} 
+                                            <div className="error">{this.state.validationErrorTime}</div> : null}
                                     </Form.Group>
-                                    
+
 
 
                                     <Button onClick={() => this.postBookingData()} variant="primary"

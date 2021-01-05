@@ -628,40 +628,40 @@ class NavBar extends Component {
                                                             <Dropdown.Item>
                                                                 <span className="polyicons">
                                                                     <Image src={Polygonimg} alt="" className="pointer" />
-                                                                </span> 
-                                                                <div className="dropdownnotifications">   
-                                                                {this.state.notificationData.length === 0 && <>
+                                                                </span>
+                                                                <div className="dropdownnotifications">
+                                                                    {this.state.notificationData.length === 0 && <>
 
-                                                                    <ul className="notes">
+                                                                        <ul className="notes">
 
-                                                                        <li>
-                                                                            <Col md={9}>
+                                                                            <li>
+                                                                                <Col md={9}>
+                                                                                    {/* {console.log(data)} */}
+                                                                                    <div className="col10 fs17 fw400"></div>
+                                                                                    <div className="fs15 col94 fw400">No Data Found</div>
+                                                                                </Col>
+                                                                                <Col md={3}>
+                                                                                    <div className="fs15 col94 fw400"></div>
+                                                                                </Col>
+                                                                            </li>
+
+                                                                        </ul>
+                                                                    </>}
+                                                                    {this.state.notificationData.map(data =>
+
+                                                                    (<ul className="notes" style={{ backgroundColor: data.no_status == '2' ? '#dbfefc' : 'white' }}>
+
+                                                                        <li >
+                                                                            <Col md={12}>
                                                                                 {/* {console.log(data)} */}
-                                                                                <div className="col10 fs17 fw400"></div>
-                                                                                <div className="fs15 col94 fw400">No Data Found</div>
-                                                                            </Col>
-                                                                            <Col md={3}>
-                                                                                <div className="fs15 col94 fw400"></div>
+                                                                                <div className="col10 fs17 fw400">{data.u_name}</div>
+                                                                                <div className="fs15 col94 fw400">{data.no_text}</div>
                                                                             </Col>
                                                                         </li>
 
-                                                                    </ul>
-                                                                </>}
-                                                                {this.state.notificationData.map(data =>
-
-                                                                (<ul className="notes">
-
-                                                                    <li style={{backgroundColor:data.no_status == '2'?'#dbfefc':'white'}}>
-                                                                        <Col md={12}>
-                                                                            {/* {console.log(data)} */}
-                                                                            <div className="col10 fs17 fw400">{data.u_name}</div>
-                                                                            <div className="fs15 col94 fw400">{data.no_text}</div>
-                                                                        </Col>                                                                       
-                                                                    </li>
-
-                                                                </ul>)
-                                                                )}
-                                                                </div> 
+                                                                    </ul>)
+                                                                    )}
+                                                                </div>
                                                             </Dropdown.Item>
 
 
