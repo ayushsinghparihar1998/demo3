@@ -49,6 +49,8 @@ const Mediadetails = (props) => {
                                         <div className="col14 fs14 fw400 pt-1">
                                             {blogDetail.pbl_datetime}
                                         </div>
+                                        <div className="fs16 col28 fw300 pt-3 line_txt">Written By - {blogDetail.pbl_written_by}</div>
+
                                         <div className="fs14 col28 fw300 pt-3 line_txt" dangerouslySetInnerHTML={{ __html: blogDetail.pbl_desc }}></div>
 
 
