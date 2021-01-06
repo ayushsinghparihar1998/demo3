@@ -358,7 +358,7 @@ export default {
       cd_video_status: "",
     },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadminaddcorporatedomain: {
     url: "elp/superadminaddcorporatedomain",
@@ -371,7 +371,7 @@ export default {
       cd_video_status: "",
     },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadmingetcorporatedomaindetailsbyid: {
     url: "elp/superadmingetcorporatedomaindetailsbyid",
@@ -1385,7 +1385,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
- 
 
   corporategetprofessionallistfilter: {
     url: "elp/corporategetprofessionallist",
@@ -1715,7 +1714,6 @@ export default {
     showErrorMessage: true,
   },
 
-  
   adminUserDelete: {
     url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
     method: "POST",
@@ -1983,9 +1981,6 @@ export default {
     showErrorMessage: false,
   },
 
-
- 
-
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
@@ -2065,7 +2060,7 @@ export default {
   pressBlogDetail: {
     url: "elp/getpressblogdetails",
     method: "POST",
-    data: {"pbl_id":""},
+    data: { pbl_id: "" },
     showResultMessage: false,
     showErrorMessage: false,
   },
