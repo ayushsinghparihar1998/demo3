@@ -192,7 +192,7 @@ class CorporateMember extends Component {
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Domain address
+                        Domain address *
                       </Form.Label>
 
                       <Form.Control
@@ -213,7 +213,7 @@ class CorporateMember extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Total Audio (minutes)
+                        Total Audio (minutes) *
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -232,7 +232,7 @@ class CorporateMember extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Total Video (minutes)
+                        Total Video (minutes) *
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -251,7 +251,7 @@ class CorporateMember extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Audio Status
+                        Audio Status *
                       </Form.Label>
                       <Form.Control
                         as="select"
@@ -273,7 +273,7 @@ class CorporateMember extends Component {
 
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Video Status
+                        Video Status *
                       </Form.Label>
                       <Form.Control
                         as="select"
