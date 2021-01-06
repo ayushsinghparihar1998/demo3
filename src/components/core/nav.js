@@ -622,7 +622,8 @@ class NavBar extends Component {
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />
-                                                            <span className="counttwo">{this.state.notification_count}</span>
+                                                            {this.state.notification_count != 0?<span className="counttwo">{this.state.notification_count}</span>:null}
+                                                            
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
                                                             <Dropdown.Item>
