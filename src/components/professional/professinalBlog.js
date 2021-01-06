@@ -185,7 +185,7 @@ class ProfessinalBlog extends Component {
                                    <div className="blogMain">
                                         <Tabs defaultActiveKey="Featured" id="uncontrolled-tab-example" onSelect={(k) => k === 'Featured' ? this.getPressFeatured() : k === 'Coverage' ? this.getPressCoverage() : k === 'PressReleases' ? this.getPressReleases() : null}>
 
-                                             <Tab eventKey="Featured" title="Featured" >
+                                             <Tab eventKey="Featured" title="Featured" className="pressBlog">  
                                                   <div className="featuredTab">
                                                        <Row>
                                                             {this.state.featured && this.state.featured.map((data, i) => {

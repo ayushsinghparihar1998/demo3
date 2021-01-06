@@ -588,6 +588,16 @@
     }
 }
 
+.pressBlog {
+    .col-md-6 {
+        img.w-100 {
+            min-height: 120px;
+            max-height: 120px; 
+            object-fit: cover; 
+        }
+    }
+}
+
 .profiledetails {
     position: relative; 
     padding: 40px; 
