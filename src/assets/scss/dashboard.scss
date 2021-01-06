@@ -648,7 +648,10 @@
             & > div {
                 word-break: break-all; 
                 padding-right: 15px;
-                cursor: pointer;
+                
+                &:first-child {
+                    cursor: pointer; 
+                }
             }
         }
         
@@ -1654,8 +1657,8 @@
                 font-size: 15px !important; 
             }
             .inner_body {
-                .justify-content-between.border_yellow {
-                    justify-content: center !important;
+                .justify-content-between.border_yellow {  
+                    justify-content: center !important; 
                     text-align: center;
                     .w-100 {
                         .pr-0 {

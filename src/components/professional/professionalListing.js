@@ -357,7 +357,7 @@ class ProfessionalLsting extends Component {
                                 <Form>
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Appointment Subject</Form.Label>
+                                        <Form.Label className="fs20 fw600 col14">Appointment Subject *</Form.Label>
                                         <Form.Control type="text" className="inputTyp2" onChange={(e) => {
                                             this.setState({ appointmentSubject: e.target.value })
                                         }} />
@@ -369,7 +369,7 @@ class ProfessionalLsting extends Component {
 
 
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className="fs20 fw600 col14">Description</Form.Label>
+                                        <Form.Label className="fs20 fw600 col14">Description *</Form.Label>
                                         <Form.Control as="textarea" rows={3} className="inputTyp2 cate2"
                                             onChange={(e) => {
                                                 this.setState({ description: e.target.value })
@@ -381,7 +381,7 @@ class ProfessionalLsting extends Component {
 
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Appointment Date</Form.Label>
+                                        <Form.Label className="fs20 fw600 col14">Appointment Date *</Form.Label>
 
 
                                         <Form.Control type="date" className="inputTyp2" onChange={(e) => {
@@ -389,7 +389,7 @@ class ProfessionalLsting extends Component {
 
                                         }} min={this.state.currentDate} />
 
-                                        <div className="error alignLeft d-none">Enter Appointment Date</div>
+                                        <div className="error alignLeft d-none">Enter Appointment Date *</div>
                                         {this.state.validationErrorDate ?
                                             <div className="error">{this.state.validationErrorDate}</div> : null}
                                     </Form.Group>
@@ -397,13 +397,13 @@ class ProfessionalLsting extends Component {
 
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label className="fs20 fw600 col14">Appointment Time </Form.Label>
+                                        <Form.Label className="fs20 fw600 col14">Appointment Time *</Form.Label>
                                         {/*<Form.Control as="select" className="selectTyp1" onChange={(e) => {*/}
                                         <Form.Control type="time" className="selectTyp1" onChange={(e) => {
                                             (this.setState({ appointmentTime: e.target.value }))
                                         }}>
                                         </Form.Control>
-                                        <div className="error alignLeft d-none">Enter Appointment Time</div>
+                                        <div className="error alignLeft d-none">Enter Appointment Time *</div>
                                         {this.state.validationErrorTime ?
                                             <div className="error">{this.state.validationErrorTime}</div> : null}
                                     </Form.Group>
@@ -413,7 +413,7 @@ class ProfessionalLsting extends Component {
                                     <Button onClick={() => this.postBookingData()} variant="primary"
                                         className="btnTyp5 mt-4">
                                         Submit
-                                    </Button>
+                                    </Button> 
                                 </Form>
                             </div>
                         </Container>

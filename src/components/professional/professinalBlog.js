@@ -132,7 +132,7 @@ class ProfessinalBlog extends Component {
 
                                                                       <Col md={5}>
                                                                            <div className="mt-3"> 
-                                                                                <Image src={BlogProcessTwo}  className="w-100" /> 
+                                                                                <Image src={BlogProcessTwo}  className="w-100" />   
                                                                                 <div className="fs18 fw600 col64 mt-3 mb-1">  
                                                                                 Child and Social Welfar Society
                                                                                 </div>
@@ -144,10 +144,8 @@ class ProfessinalBlog extends Component {
 
                                                                  </>
                                                             )}
-
                                                             
-
-                                                       </Row>
+                                                       </Row> 
                                                        <div className="mt-4 mb-4 border_blog"></div>
                                                        <div className="">  
                                                             <Row> 

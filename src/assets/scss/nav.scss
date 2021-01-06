@@ -12,6 +12,7 @@
                 .navbar-nav {
                      a.nav-link {  
                         color: $col18;
+                        text-transform: capitalize; 
                     }
                     a > span.comings {  
                         color: #333; 

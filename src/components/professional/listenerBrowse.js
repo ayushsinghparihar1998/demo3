@@ -113,7 +113,7 @@ class ListenerBrowse extends Component {
                                         <Form.Group>
                                             <Form.Control
                                                 type="text"
-                                                placeholder="Search by keyword"  
+                                                placeholder="Search by name, keyword"    
                                                 className="inputTyp2 input3"
                                                 id="outlined-email"
                                                 variant="outlined"
