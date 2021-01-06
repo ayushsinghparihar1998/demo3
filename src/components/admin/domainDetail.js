@@ -185,7 +185,7 @@ class DomainDetail extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={9} className="pl-1">  
                 <div className="corporateMember d_detail">
                   <div className="fs22 col10 mb-1">
                     {this.props.match.params.name}

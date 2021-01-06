@@ -164,10 +164,10 @@ class NavBar extends Component {
             {getLocalStorage("userInfoAdmin") ? (
               <Nav className="ml-auto">
                 <NavLink to={"/admin"} className="nav-link">
-                  DASHBOARD
+                  Dashboard
                 </NavLink>
                 <NavLink to={"/Categoryadmin"} className="nav-link">
-                  CATEGORY
+                  Category 
                 </NavLink>
 
                 {/* <NavLink to={"blogs"} className="nav-link">

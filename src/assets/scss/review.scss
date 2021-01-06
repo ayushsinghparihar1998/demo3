@@ -1,5 +1,13 @@
-.myprofile.reviewrequest {
-    border-top: none; 
+.myprofile {
+    .justify-content-between {
+        div.col28.fs14.fw400 {
+            word-break: break-all;
+            padding-right: 10px;
+        }
+    }
+}
+.myprofile.reviewrequest { 
+    // border-top: none; 
     padding-top: 30px; 
     position: relative; 
     min-height: 100vh; 
@@ -18,6 +26,7 @@
             width: 100%; 
         }
     }
+    
 
     .user_tab {
         .nav-tabs {
@@ -577,7 +586,14 @@
 }
 
 .profile_layout {
-
+    .myprofile {
+        .text-center {
+            .col27.fw400.fs14 { 
+                max-width: 70%; 
+                margin: auto; 
+            }
+        }
+    }
     .aboutpage {   
         font-family: Calibri;  
         .detail_listing  { 
@@ -760,7 +776,17 @@
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) { 
+    .profile_layout {
+        .myprofile {
+            .text-center {
+                .col27.fw400.fs14 { 
+                    max-width: 90%; 
+                    margin: auto; 
+                }
+            }
+        }
+    }
     .aboutpage {
         // text-align: center;
         .detail_listing {

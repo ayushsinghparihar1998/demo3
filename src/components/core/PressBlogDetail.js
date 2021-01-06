@@ -17,8 +17,8 @@ const Mediadetails = (props) => {
 
     const _getBlogDetailHandler = async () => {
         try {
-            
-            let response = await ELPRxApiService("pressBlogDetail", { 
+
+            let response = await ELPRxApiService("pressBlogDetail", {
                 pbl_id: props.match.params.id
             })
             console.log(' detail response', response)
@@ -44,14 +44,16 @@ const Mediadetails = (props) => {
                                 <div className="ngo_details mt-2">
                                     <Image src={blogDetail.pbl_image} alt="" className="w-100" />
                                     <div className="pt-3 pb-3">
-                                        <div className="col1 fs18 fw600 mt-2">{blogDetail.pbl_title}
-                                        </div>
+                                        {/* <div className="col1 fs18 fw600 mt-2">{blogDetail.pbl_title}
+                                        </div> */}
                                         <div className="col14 fs14 fw400 pt-1">
                                             {blogDetail.pbl_datetime}
                                         </div>
+                                        <div className="fs16 col28 fw300 pt-3 line_txt">Written By - {blogDetail.pbl_written_by}</div>
+
                                         <div className="fs14 col28 fw300 pt-3 line_txt" dangerouslySetInnerHTML={{ __html: blogDetail.pbl_desc }}></div>
 
-                                     
+
 
                                     </div>
                                 </div>
