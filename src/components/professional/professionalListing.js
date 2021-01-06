@@ -28,7 +28,7 @@ class ProfessionalLsting extends Component {
             count: 9,
             offset: 1,
             isShowMore: true,
-            currentRequestCount :0,
+            currentRequestCount: 0,
             // Search Professional
             searchName: null,
             searchKeyword: null,
@@ -105,7 +105,7 @@ class ProfessionalLsting extends Component {
             })
             this.setState({
                 professional_list: [...this.state.professional_list, ...response.data.data.listing],
-                currentRequestCount :response.data.data.listing.length
+                currentRequestCount: response.data.data.listing.length
             })
         } catch (err) {
             console.log(err)
@@ -113,7 +113,7 @@ class ProfessionalLsting extends Component {
     }
 
 
-    _getFilterProfessionalListHandler = async () => {
+    _getFilterProfessionalListHandler = async (isFilter) => {
         try {
             let categoryData = ""
             if (this.state.eat) {
@@ -137,7 +137,7 @@ class ProfessionalLsting extends Component {
             }
             let response = await ELPRxApiService("corporategetprofessionallistfilter", {
                 "count": this.state.count,
-                "offset": this.state.offset,
+                "offset": isFilter ? 1 : this.state.offset,
                 "name": this.state.searchName,
                 "status": "1",
                 "keyword": this.state.searchKeyword,
@@ -151,16 +151,16 @@ class ProfessionalLsting extends Component {
                 })
             } else {
                 if (this.state.offset === 1) {
-                   
+
                     this.setState({
                         professional_list: [...response.data.data.listing],
-                        currentRequestCount :response.data.data.listing.length
+                        currentRequestCount: response.data.data.listing.length
                     })
 
                 } else {
                     this.setState({
                         professional_list: [...this.state.professional_list, ...response.data.data.listing],
-                        currentRequestCount :response.data.data.listing.length
+                        currentRequestCount: response.data.data.listing.length
                     })
 
                 }
@@ -222,13 +222,13 @@ class ProfessionalLsting extends Component {
                     <Container>
 
                         <div className="chatsearch w-100 pt-0">
-                            <div className="professor_search p_serachtwos"> 
+                            <div className="professor_search p_serachtwos">
                                 <div className="fs20 col1 fw500 mb-4">Search Professional</div>
                                 <Form className="p_form">
                                     <Row>
                                         <Col md="5">
                                             <Form.Group controlId="formBasicTexts">
-                                                <Form.Control type="text" placeholder="Search by name, keyword"
+                                                <Form.Control type="text" placeholder="Search by name"
                                                     className="inputTyp2 inputpProcess"
                                                     onChange={(e) => {
                                                         this.setState({ searchName: e.target.value })
@@ -253,25 +253,25 @@ class ProfessionalLsting extends Component {
                                         </Col>
                                     </Row>
 
-                                    <div className="checkCategory checkcattwo">  
+                                    <div className="checkCategory checkcattwo">
                                         <Form.Group controlId="formBasicCheckbox1" className="row">
                                             <Form.Check type="checkbox"
                                                 className={this.state.eat ? "checkone checkfirst active" : "checkone checkfirst"}
                                                 onChange={(e) => {
-                                                    this.setState({ eat: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ eat: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }}
 
                                                 label="Eat" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.luv ? "checktwo active" : "checktwo"}
                                                 onChange={(e) => {
-                                                    this.setState({ luv: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ luv: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }}
                                                 label="Luv" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.pray ? "checkthree active" : "checkthree"}
                                                 onChange={(e) => {
-                                                    this.setState({ pray: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ pray: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }} label="Pray" />
                                         </Form.Group>
                                     </div>
@@ -279,13 +279,13 @@ class ProfessionalLsting extends Component {
                             </div>
 
                             <div className="fs36 col14 pt-4 fw600 w-100 bg-white text-center">Professional</div>
-                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4"> 
+                            <div className="fs15 col14 fw400 mt-3 text-center mx-w70 mb-4">
                                 {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has been the industry's standard dummy text ever since the 1500s */}
                             </div>
                             <div className="search-listing">
                                 <div className="listing2">
-                                    <Row> 
+                                    <Row>
                                         {this.state.professional_list.map((obj, index) => {
 
                                             return <Col lg={4} md={6}>
@@ -324,7 +324,7 @@ class ProfessionalLsting extends Component {
                                             </Col>
 
                                         })}
-                                      {this.state.currentRequestCount=== 9 ?
+                                        {this.state.currentRequestCount === 9 ?
                                             <div className="text-center w-100 m-auto pt-4">
                                                 <Button className="btnTyp12"
                                                     onClick={() => this.setState({ offset: this.state.offset + 1 }, () => {

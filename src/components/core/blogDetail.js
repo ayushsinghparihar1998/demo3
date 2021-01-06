@@ -43,8 +43,8 @@ const Mediadetails = (props) => {
                                 <div className="ngo_details mt-2">
                                     <Image src={blogDetail.bl_image} alt="" className="w-100" />
                                     <div className="pt-3 pb-3">
-                                        <div className="col1 fs18 fw600 mt-2">{blogDetail.bl_title}
-                                        </div>
+                                        {/* <div className="col1 fs18 fw600 mt-2">{blogDetail.bl_title}
+                                        </div> */}
                                         <div className="col14 fs14 fw400 pt-1">
                                             {blogDetail.bl_datetime}
                                         </div>
