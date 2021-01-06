@@ -635,10 +635,11 @@ class NavBar extends Component {
                                                                         <ul className="notes">
 
                                                                             <li>
-                                                                                <Col md={9}>
+                                                                                <Col md={9}> 
                                                                                     {/* {console.log(data)} */}
                                                                                     <div className="col10 fs17 fw400"></div>
-                                                                                    <div className="fs15 col94 fw400">No Data Found</div>
+                                                                                    <div className="fs15 col94 fw400">No new notification
+                                                                                    </div>
                                                                                 </Col>
                                                                                 <Col md={3}>
                                                                                     <div className="fs15 col94 fw400"></div>

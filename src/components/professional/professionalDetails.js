@@ -293,7 +293,7 @@ class Myprofile extends Component {
                                             {item.pk_keyword}
                                             {proffDetail.professional_cat_name && (index + 1) == proffDetail.professional_cat_name.length
                                               ? ""
-                                              : ","}{" "}
+                                              : " "}{" "}
                                           </>
                                         );
                                       }
@@ -475,7 +475,7 @@ class Myprofile extends Component {
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
-                          Appointment Subject
+                          Appointment Subject *
                         </Form.Label>
                         <Form.Control
                           type="text"
@@ -487,7 +487,7 @@ class Myprofile extends Component {
                           }}
                         />
                         <div className="error alignLeft d-none">
-                          Enter Appointment Subject
+                          Enter Appointment Subject *
                         </div>
                         {this.state.validationErrorSubject ? (
                         <div className="error">{this.state.validationErrorSubject}</div>
@@ -497,7 +497,7 @@ class Myprofile extends Component {
 
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="fs20 fw600 col14">
-                          Description
+                          Description *
                         </Form.Label>
                         <Form.Control
                           as="textarea"
@@ -508,7 +508,7 @@ class Myprofile extends Component {
                           }}
                         />
                         <div className="error alignLeft d-none">
-                          Enter Description
+                          Enter Description *
                         </div>
                         {this.state.validationErrorDescription ? (
                         <div className="error">{this.state.validationErrorDescription}</div>
@@ -518,7 +518,7 @@ class Myprofile extends Component {
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
-                          Appointment Date
+                          Appointment Date *
                         </Form.Label>
 
                         {/* <DatePicker selected={selectedDate} onChange="date => setSelectedDate(date)" /> */}
@@ -533,7 +533,7 @@ class Myprofile extends Component {
                         />
 
                         <div className="error alignLeft d-none">
-                          Enter Appointment Date
+                          Enter Appointment Date *
                         </div>
                         {this.state.validationErrorDate ? (
                         <div className="error">{this.state.validationErrorDate}</div>
@@ -543,7 +543,7 @@ class Myprofile extends Component {
 
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label className="fs20 fw600 col14">
-                          Appointment Time{" "}
+                          Appointment Time{" "} *
                         </Form.Label>
                         {/*<Form.Control as="select" className="selectTyp1" onChange={(e) => {*/}
                         <Form.Control
@@ -554,7 +554,7 @@ class Myprofile extends Component {
                           }}
                         ></Form.Control>
                         <div className="error alignLeft d-none">
-                          Enter Appointment Time
+                          Enter Appointment Time *
                         </div>
                         {this.state.validationErrorTime ? (
                         <div className="error">{this.state.validationErrorTime}</div>

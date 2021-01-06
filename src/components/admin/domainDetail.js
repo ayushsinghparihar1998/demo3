@@ -303,7 +303,7 @@ class DomainDetail extends Component {
             >
               <Modal.Body>
                 <div className="delete_user mt-4">
-                  <Image src={Deleteusers} alt="" />
+                  <Image src={Deleteusers} alt="" /> 
                   <Image
                     src={Blueicons}
                     alt=""
@@ -312,7 +312,7 @@ class DomainDetail extends Component {
                   />
                   <div className="text-center fs24 mt-4 col64 mb-4">
                     Are you sure want to delete <br />{" "}
-                    {this.state.deleteUser.u_username}
+                    {this.state.deleteUser.u_username} ? 
                   </div>
 
                   <div className="text-center mb-5">
