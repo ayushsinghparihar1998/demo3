@@ -102,6 +102,74 @@ class ProfessinalBlog extends Component {
           if (newWindow) newWindow.opener = null
      }
 
+     renderFeatured1 = (data) => {
+          return (
+               <Col md={7} className="mb-1">
+                    <div className="professionalBlogs">
+                         <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                         <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
+                         <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div>
+                    </div>
+               </Col>
+          )
+     }
+
+     renderFeatured2 = (data) => {
+          return (
+               <Col md={5}>
+                    <div className="mt-3">
+                         <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                         <div className="fs18 fw600 col64 mt-3 mb-1" onClick={() => this.getBlogdetails(data.pbl_id)}>
+                              {data.pbl_title}
+                         </div>
+                         <div className="fs16 fw300 col14" dangerouslySetInnerHTML={{ __html: data.pbl_desc }}></div>
+                    </div>
+               </Col>
+          )
+     }
+
+     renderFeatured3 = (data) => {
+          return (
+               <Col md={6}>
+                    <Row>
+                         <Col md={6}>
+                              <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                              <div className="fs16 fw300 col14 mt-2 mb-1">
+                                   {data.pbl_written_by}
+                              </div>
+                              <div className="fs16 fw500 col14" onClick={() => this.getBlogdetails(data.pbl_id)}>
+                                   {data.pbl_title}
+                              </div>
+                         </Col>
+                         <Col md={6}>
+                              <div className="fs18 " dangerouslySetInnerHTML={{ __html: data.pbl_desc }}></div>
+                         </Col>
+                    </Row>
+               </Col>
+          )
+     }
+
+     renderFeatured4 = (data) => {
+          return (
+               <Col md={6}>
+                    <Row>
+                         <Col md={6}>
+                              <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
+                              <div className="fs16 fw300 col14 mt-2 mb-1">
+                                   {data.pbl_written_by}
+                              </div>
+                              <div className="fs16 fw500 col14" onClick={() => this.getBlogdetails(data.pbl_id)}>
+                                   {data.pbl_title}
+                              </div>
+                         </Col>
+                         <Col md={6}>
+                              <div className="fs18 " dangerouslySetInnerHTML={{ __html: data.pbl_desc }}></div>
+                         </Col>
+                    </Row>
+               </Col>
+          )
+     }
+
      render() {
           return (
                <div className="page__wrapper innerpage">
@@ -120,18 +188,36 @@ class ProfessinalBlog extends Component {
                                              <Tab eventKey="Featured" title="Featured" >
                                                   <div className="featuredTab">
                                                        <Row>
-                                                            {this.state.featured && this.state.featured.map(data =>
-                                                                 <>
-                                                                      <Col md={7} className="mb-1">
-                                                                           <div className="professionalBlogs">
-                                                                                <Image onClick={() => this.getBlogdetails(data.pbl_id)} src={data.pbl_image} className="w-100" />
-                                                                                <div className="fs18 col64 fw600 mt-3 mb-2" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
-                                                                                {/* {this.state.showDetails ? <div className="col14 fs16 fw300" dangerouslySetInnerHTML={{ __html: data.pbl_desc }} ></div> : null} */}
-                                                                           </div>
-                                                                      </Col>
+                                                            {this.state.featured && this.state.featured.map((data, i) => {
+                                                                 if (i % 4 === 0) {
+                                                                      return (
+                                                                           this.renderFeatured1(data)
+                                                                      )
+                                                                 }
 
-                                                                 </>
+                                                                 else if ((i + 4) % 4 === 1) {
+                                                                      return (
+                                                                           this.renderFeatured2(data)
+                                                                      )
+                                                                 }
+
+                                                                 else if ((i + 4) % 4 === 2) {
+                                                                      return (
+                                                                           this.renderFeatured3(data)
+                                                                      )
+                                                                 }
+
+                                                                 else {
+                                                                      return (
+                                                                           this.renderFeatured4(data)
+                                                                      )
+                                                                 }
+
+                                                            }
+
                                                             )}
+
+
 
                                                        </Row>
                                                        <div className="mt-4 mb-4 border_blog"></div>
@@ -139,7 +225,7 @@ class ProfessinalBlog extends Component {
                                                   </div>
                                              </Tab>
 
-                                             <Tab eventKey="Coverage" title="Coverage" >
+                                             <Tab eventKey="Coverage" title="Coverage">
                                                   <div className="coverageTab">
                                                        <div className="coverageListnew">
                                                             {console.log("ASDASD==>", this.state.coverage)}

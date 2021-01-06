@@ -113,7 +113,7 @@ class ProfessionalLsting extends Component {
     }
 
 
-    _getFilterProfessionalListHandler = async () => {
+    _getFilterProfessionalListHandler = async (isFilter) => {
         try {
             let categoryData = ""
             if (this.state.eat) {
@@ -137,7 +137,7 @@ class ProfessionalLsting extends Component {
             }
             let response = await ELPRxApiService("corporategetprofessionallistfilter", {
                 "count": this.state.count,
-                "offset": this.state.offset,
+                "offset": isFilter ? 1 : this.state.offset,
                 "name": this.state.searchName,
                 "status": "1",
                 "keyword": this.state.searchKeyword,
@@ -258,20 +258,20 @@ class ProfessionalLsting extends Component {
                                             <Form.Check type="checkbox"
                                                 className={this.state.eat ? "checkone checkfirst active" : "checkone checkfirst"}
                                                 onChange={(e) => {
-                                                    this.setState({ eat: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ eat: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }}
 
                                                 label="Eat" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.luv ? "checktwo active" : "checktwo"}
                                                 onChange={(e) => {
-                                                    this.setState({ luv: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ luv: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }}
                                                 label="Luv" />
                                             <Form.Check type="checkbox"
                                                 className={this.state.pray ? "checkthree active" : "checkthree"}
                                                 onChange={(e) => {
-                                                    this.setState({ pray: e.target.checked }, () => this._getFilterProfessionalListHandler())
+                                                    this.setState({ pray: e.target.checked }, () => this._getFilterProfessionalListHandler(true))
                                                 }} label="Pray" />
                                         </Form.Group>
                                     </div>
