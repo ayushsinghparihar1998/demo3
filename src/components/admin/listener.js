@@ -2961,7 +2961,7 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : (
-                <Col md={8} lg={9} className="pl-1">
+                <Col md={8} lg={9} className="pl-1"> 
                   <div className="professor_search mb-5">
                     <div className="fs22 fw600 col10">Rating Requests</div>
                   </div>
