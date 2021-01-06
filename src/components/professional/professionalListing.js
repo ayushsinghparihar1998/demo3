@@ -104,7 +104,7 @@ class ProfessionalLsting extends Component {
                 "offset": this.state.offset,
             })
             this.setState({
-                professional_list: [...this.state.professional_list, ...response.data.data.listing],
+                professional_list: this.state.offset == 1? response.data.data.listing :[...this.state.professional_list, ...response.data.data.listing],
                 currentRequestCount: response.data.data.listing.length
             })
         } catch (err) {
@@ -150,17 +150,19 @@ class ProfessionalLsting extends Component {
                     professional_list: []
                 })
             } else {
-                if (this.state.offset === 1) {
+                if (this.state.offset === 1 || isFilter) {
 
                     this.setState({
                         professional_list: [...response.data.data.listing],
-                        currentRequestCount: response.data.data.listing.length
+                        currentRequestCount: response.data.data.listing.length,
+                        offset:isFilter ? 1 : this.state.offset
                     })
 
                 } else {
                     this.setState({
                         professional_list: [...this.state.professional_list, ...response.data.data.listing],
-                        currentRequestCount: response.data.data.listing.length
+                        currentRequestCount: response.data.data.listing.length,
+                        offset:isFilter ? 1 : this.state.offset
                     })
 
                 }
