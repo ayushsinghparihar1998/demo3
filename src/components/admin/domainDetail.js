@@ -37,7 +37,7 @@ class DomainDetail extends Component {
       totalCount: "",
       totalRecordCount: 0,
       deleteConformationModal: false,
-      deleteUser : {}
+      deleteUser: {},
     };
   }
   componentDidMount() {
@@ -140,15 +140,13 @@ class DomainDetail extends Component {
   };
   adminUserDelete = (deleteUser) => {
     let data = { userid: deleteUser.id, u_status: 2 };
-    ELPViewApiService("adminUserDelete", data).then(
-      (result) => {
-        this.getDetails(this.props.match.params.id);
-        console.log(result.data);
-        this.handleCloseConformation();
-      }
-    );
+    ELPViewApiService("adminUserDelete", data).then((result) => {
+      this.getDetails(this.props.match.params.id);
+      console.log(result.data);
+      this.handleCloseConformation();
+    });
   };
- 
+
   handleCloseConformation = () => {
     this.setState({
       deleteConformationModal: false,
@@ -313,7 +311,7 @@ class DomainDetail extends Component {
                     onClick={this.handleCloseConformation}
                   />
                   <div className="text-center fs24 mt-4 col64 mb-4">
-                    Are you sure want to delete <br />{" "} 
+                    Are you sure want to delete <br />{" "}
                     {this.state.deleteUser.u_username}
                   </div>
 
