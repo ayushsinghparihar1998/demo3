@@ -114,7 +114,14 @@ class NavBar extends Component {
     }
 
     componentDidMount() {
-        console.log("ASASDASD ROLE", getLocalStorage("customerInfo"))
+        console.log("ASASDASD ROLE", getLocalStorage("customerInfo"));
+        if (getLocalStorage("customerInfo")) {
+            console.log("EMITE +>>>>>",getLocalStorage("customerInfo").u_id)
+            socket.emit("getBadgeCount", { user_id: getLocalStorage("customerInfo").u_id }, (data) => {
+                console.log("EMITE +>>>>>", data)
+            })
+        }
+
         if (getLocalStorage("userInfo")) {
             socket.on("changeUserOnlineStatus", (data) => {
                 // console.log('----------------------- >> changeUserOnlineStatus << -----------------', data)
@@ -618,11 +625,12 @@ class NavBar extends Component {
 
                                             <span className="userprofiles menus">
 
-                                                <Nav.Link onClick={() => this._readAllNotificationHandler()} > 
+                                                <Nav.Link onClick={() => this._readAllNotificationHandler()} >
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />
-                                                            <span className="counttwo">{this.state.notification_count}</span>
+                                                            {this.state.notification_count != 0 ? <span className="counttwo">{this.state.notification_count}</span> : null}
+
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
                                                             <Dropdown.Item>
@@ -635,7 +643,7 @@ class NavBar extends Component {
                                                                         <ul className="notes">
 
                                                                             <li>
-                                                                                <Col md={9}> 
+                                                                                <Col md={9}>
                                                                                     {/* {console.log(data)} */}
                                                                                     <div className="col10 fs17 fw400"></div>
                                                                                     <div className="fs15 col94 fw400">No new notification
