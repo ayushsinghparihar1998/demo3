@@ -130,18 +130,68 @@ class ProfessinalBlog extends Component {
                                                                            </div>
                                                                       </Col>
 
+                                                                      <Col md={5}>
+                                                                           <div className="mt-3"> 
+                                                                                <Image src={BlogProcessTwo}  className="w-100" /> 
+                                                                                <div className="fs18 fw600 col64 mt-3 mb-1">  
+                                                                                Child and Social Welfar Society
+                                                                                </div>
+                                                                                <div className="fs16 fw300 col14"> 
+                                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. 
+                                                                                </div> 
+                                                                           </div>
+                                                                      </Col>
+
                                                                  </>
                                                             )}
 
+                                                            
+
                                                        </Row>
                                                        <div className="mt-4 mb-4 border_blog"></div>
+                                                       <div className="">  
+                                                            <Row> 
+                                                                 <Col md={6}> 
+                                                                      <Row>
+                                                                           <Col md={6}>
+                                                                                <Image src={BlogProcessThree}  className="w-100" /> 
+                                                                                <div className="fs16 fw300 col14 mt-2 mb-1"> 
+                                                                                     Feather Hashmi 
+                                                                                </div>
+                                                                                <div className="fs16 fw500 col14"> 
+                                                                                     Lorem dummy content
+                                                                                </div>
+                                                                           </Col>
+                                                                           <Col md={6}>
+                                                                                <div className="fs18 ">Child and Social Welfar Society lorem dummy content</div>
+                                                                           </Col>
+                                                                      </Row>
+                                                                 </Col>
+                                                                 <Col md={6}>
+                                                                      <Row>
+                                                                           <Col md={6}>
+                                                                                <Image src={BlogProcessFour}  className="w-100" /> 
+                                                                                <div className="fs16 fw300 col14 mt-2 mb-1"> 
+                                                                                     Feather Hashmi 
+                                                                                </div>
+                                                                                <div className="fs16 fw500 col14"> 
+                                                                                     Lorem dummy content
+                                                                                </div>
+                                                                           </Col>
+                                                                           <Col md={6}>
+                                                                                <div className="fs18 ">Child and Social Welfar Society lorem dummy content</div>
+                                                                           </Col>
+                                                                      </Row>
+                                                                 </Col>
+                                                            </Row>
+                                                       </div>
 
                                                   </div>
                                              </Tab>
 
-                                             <Tab eventKey="Coverage" title="Coverage" >
+                                             <Tab eventKey="Coverage" title="Coverage">
                                                   <div className="coverageTab">
-                                                       <div className="coverageListnew"> 
+                                                       <div className="coverageListnew">  
                                                                  {console.log("ASDASD==>", this.state.coverage)}
                                                                  {this.state.coverage && this.state.coverage.map((data, i) =>
                                                                       this.state.offset > i ? (
