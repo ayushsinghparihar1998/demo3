@@ -1019,14 +1019,14 @@ export default {
     method: "POST",
     data: { offset: "", count: "", category: "" },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadmin_getblog: {
     url: "elp/superadmin_getblog",
     method: "POST",
     data: { offset: "", count: "", category: "" },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
 
   getpressblogdetails: {
