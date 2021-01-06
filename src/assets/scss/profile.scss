@@ -689,7 +689,7 @@
     }
 }
 
-.listenerprofile {
+.listenerprofile { 
 
     .myprofile {
         width: 100%; 
@@ -1321,7 +1321,7 @@
 }
 
 @media (max-width: 767px) {    
-
+    
     .bookSession {
         .modal-dialog {
             .modal-body {
@@ -1506,6 +1506,55 @@
             }
         }
     } 
+    
+    .chatsearch  {
+        .search-box {
+            text-align: center; 
+            .fw500.fs18 {
+                font-size: 16px !important;
+                margin-bottom: 10px; 
+            }
+        }
+    }
+
+    .professor_search {
+        &.p_serachtwos {
+            &>div {
+                text-align: center; 
+            }  
+        }
+    }
+
+    .profiledetails {
+        .detailone {
+            .rightprofile {
+                .fs24.col3.fw600 {
+                    font-size: 20px !important; 
+                    margin-bottom: 10px !important; 
+                }
+                .mb-2 {
+                    a {
+                        font-size: 13px !important; 
+                    }
+                }
+            }
+        }
+    } 
+
+    .profile_layout {
+        .adminsidebar {
+            margin-bottom: 15px; 
+        }
+    }
+    .p_detailone {
+        .profiledetails {
+            .detailtwo, .detailthree {
+                div.fs32.col3 {
+                    font-size: 24px !important;  
+                }
+            }
+        }
+    }
 
 }
 

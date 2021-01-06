@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
+import { 
    Button,
    NavDropdown,
    Carousel,
@@ -328,10 +328,10 @@ class Userdashboard extends Component {
                                  <div className="inner_body mb-3">
                                     <div className="d-flex justify-content-between border_yellow"> 
                                        <Row className="w-100">
-                                          <Col lg={5} md={5} xs={12} className="pr-0">  
+                                          <Col lg={5} md={5} className="pr-0">  
                                              <div className="col1 fw400 fs14 mt-2">Need someone to talk to ?</div>
                                           </Col>
-                                          <Col lg={5} md={5} xs={10} className="pl-0"> 
+                                          <Col lg={5} md={5} className="pl-0"> 
                                              <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Control as="select"
                                                    className="selectTyp1 select3"
@@ -351,8 +351,8 @@ class Userdashboard extends Component {
                                                 </Form.Control>
                                              </Form.Group>
                                           </Col>
-                                          <Col lg={2} md={2} xs={2} className="text-right">
-                                             <Button onClick={this._getRandomChatHandler} className="btnTyp5 smallbtn">chat</Button>
+                                          <Col lg={2} md={2} className="text-right">
+                                             <Button onClick={this._getRandomChatHandler} className="btnTyp5 smallbtn">chat</Button>  
                                           </Col>
                                        </Row>
                                     </div>
