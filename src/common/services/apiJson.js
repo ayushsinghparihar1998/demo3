@@ -1340,7 +1340,7 @@ export default {
       cd_video_status: "",
     },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadminaddcorporatedomain: {
     url: "elp/superadminaddcorporatedomain",
@@ -1353,7 +1353,7 @@ export default {
       cd_video_status: "",
     },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadmingetcorporatedomaindetailsbyid: {
     url: "elp/superadmingetcorporatedomaindetailsbyid",
