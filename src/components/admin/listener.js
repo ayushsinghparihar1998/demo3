@@ -2942,7 +2942,7 @@ cs_time: "00:00:02" */}
                                           className={  
                                             val.buc_cat_name == "Eat"
                                               ? "eatcat"
-                                              : val == "Luv"
+                                              : val.buc_cat_name == "Luv"
                                               ? "luvcat"
                                               : "praycat" 
                                           }
