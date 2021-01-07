@@ -7,7 +7,7 @@ export default {
     required: "Please enter your user name.",
   },
   u_birthdate: {
-    required: "Please enter a valid birth date.",
+    required: "Please enter a valid age.",
   },
   screen_name: {
     required: "Please enter  name.",
@@ -27,7 +27,7 @@ export default {
     required: "Please write in brief about the professional.",
   },
   u_lang: {
-    required: "Please fill the language field.",
+    required: "Please enter a language.",
     validtext: "Please enter some valid text.",
   },
   u_education: {
@@ -37,7 +37,7 @@ export default {
     required: "Please enter a valid experience in years.",
   },
   u_area_service: {
-    required: "Please fill the area for service.",
+    required: "Please enter a area for service.",
     validtext: "Please enter some valid text.",
   },
   u_mobile: {
@@ -104,7 +104,7 @@ export default {
     required: "Please enter the name by whom the blog is written by.",
   },
   cat: {
-    required: "Please selet atleast one category.",
+    required: "Please select atleast one category.",
   },
   image: {
     required: "Please upload a blog image.",
