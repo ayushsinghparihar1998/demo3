@@ -662,6 +662,14 @@
             margin: auto;
             margin-bottom: 20px;
             padding: 8px 0px;
+
+            & ul {
+                padding-left: 0;
+                margin-bottom: 0; 
+                li {
+                    list-style: none;
+                }
+            }
         }
     }
     .detailthree {  
@@ -952,6 +960,23 @@
                     }
                 }
           
+        }
+
+        &.listBlogs {
+            position: relative;
+            .checkCategory {
+                .checkthree {
+                    &.form-check {
+                        width: 170px; 
+                        height: 36px;
+                        line-height: 36px;
+                        padding: 0 0;
+                        .form-check-input {
+                            width: 170px; 
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1330,6 +1355,9 @@
         }
     }
     .p_detailone {
+        &.pb-5 {
+            padding-bottom: 0px !important; 
+        }
         div.pr-1 {
             padding-right: 15px !important;
         }
@@ -1343,18 +1371,26 @@
                 padding: 20px;
             }
             .detailtwo {
-                padding: 20px; 
+                padding: 10px; 
                 .boxexone {
                     max-width: 100%;
                 }
             }
             .detailthree {
-                padding: 20px;
+                padding: 10px;
                 text-align: center; 
             }
             .leftprofile {
                 margin-bottom: 15px; 
+                &>img {
+                    width: 100%; 
+                }
             }
+        }
+    }
+    .chatsearch {
+        .search-listing { 
+            padding: 20px 20px; 
         }
     }
     .processBlog {
@@ -1478,14 +1514,15 @@
         padding: 20px;
         .blogMain {
             .tab-content {
-                padding-top: 0; 
-
-                
+                padding-top: 0;
             }
-            .pt-5.pb-5.mt-5.mb-5.d-flex.justify-content-end {
+            .pt-5.pb-5.mt-5.mb-5.d-flex.justify-content-end { 
                 padding-top: 0px !important;
-                margin-top: 0px !important; 
+                margin-top: 30px !important; 
                 margin-bottom: 0px !important; 
+                .fs40.fw500 {
+                    font-size: 2rem !important;  
+                }
             }
             .socialWelfar {
                 position: relative;
@@ -1552,6 +1589,13 @@
                 div.fs32.col3 {
                     font-size: 24px !important;  
                 }
+            }
+        }
+    }
+    .blogMain {
+        .featuredTab {
+            .mt-3 {
+                margin-bottom: 1rem;
             }
         }
     }

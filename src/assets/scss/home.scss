@@ -884,6 +884,26 @@ img {
 @media (max-width: 991px) {
     .main_baner {
         .mj_nav {
+            .dropdown {
+                &.droptwo.notifications {
+                    .dropdown-menu {
+                        width: 100%;
+                        left: -70px !important;
+                        top: 55px;
+                        min-width: 275px;
+                        position: absolute;
+                        
+                        .dropdown-item {
+                            span.polyicons {
+                                position: absolute;
+                                top: -21px;
+                                right: inherit;
+                                left: 72px;  
+                            }
+                        }
+                    }
+                }
+            }
             div.navbar-collapse {
                 padding-top: 5px;
                 padding-bottom: 0; 
@@ -1245,7 +1265,7 @@ img {
 
 }
 
-@media (max-width: 420px) {
+@media (max-width: 420px) {  
     .main_baner {
         .header2banner {
             & > img { 
@@ -1257,7 +1277,29 @@ img {
     }
 }
 
+@media (max-width: 375px) { 
+    .main_baner {
+        .header2banner {
+            & > img { 
+                bottom: -14px;
+                max-width: 300px;
+                position: relative; 
+            }
+        } 
+    }
+}
 
+@media (max-width: 350px) { 
+    .main_baner {
+        .header2banner {
+            & > img { 
+                bottom: -11px;
+                max-width: 255px;
+                position: relative; 
+            }
+        } 
+    }
+}
  
 
 @media (min-width: 1500px) { 
