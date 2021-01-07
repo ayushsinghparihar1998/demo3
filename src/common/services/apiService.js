@@ -91,8 +91,12 @@ const ELPViewApiService = (apiKeyName, data) => {
       if (result.data && result.data && result.data.status === "success") {
         if (result.data.message) {
           const message = result.data.message;
-          if (requestObject.showResultMessage === true)
+          console.log("requestObject",requestObject)
+          if (requestObject.showResultMessage === true){
+            console.log("TTTTTTTT")
             showSuccessToast(message);
+          }
+            
         }
       } else {
         // alert("ASd")

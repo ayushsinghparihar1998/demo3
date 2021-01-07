@@ -750,27 +750,6 @@ export default {
     showErrorMessage: true,
   },
 
-  editUserDetails: {
-    url: "elp/editprofile",
-    method: "POST",
-    data: {
-      email: "",
-      // password: '',
-      u_birthdate: "",
-      u_name: "",
-      u_gender: "",
-      id: "",
-      u_bio: "",
-      u_city: "",
-      u_country: "",
-      u_mobile: "",
-      u_state: "",
-      u_image: "",
-      u_cover_image: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
 
   getCountry: {
     url: "elp/getcountry",

@@ -629,7 +629,7 @@ class NavBar extends Component {
                                                     <Dropdown className="droptwo notifications">
                                                         <Dropdown.Toggle id="dropdown-basic" className="profilesbtn">
                                                             <Image src={Bellicon} alt="" className="pointer" />
-                                                            {this.state.notification_count != 0 ? <span className="counttwo">{this.state.notification_count}</span> : null}
+                                                            {parseInt(this.state.notification_count) > 0 ? <span className="counttwo">{this.state.notification_count}</span> : null}
 
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
@@ -749,7 +749,7 @@ class NavBar extends Component {
                                                     Listener Login
                                         </NavDropdown.Item>
                                                 <NavDropdown.Item
-                                                    // disabled
+                                                    disabled
                                                     onClick={(e) => {
                                                         this.handleLogin(2);
                                                     }}
