@@ -634,8 +634,16 @@
     background: $col18; 
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
 
-    div & img { 
-        max-width: 67px; 
+    div {
+        &.mr-2.pt-1 {
+            min-width: 60px;
+            & > img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover; 
+                border-radius: 50%; 
+            }
+        }
         &.r50 {
             width: 60px;
             height: 60px;
@@ -648,6 +656,7 @@
             & > div {
                 word-break: break-all; 
                 padding-right: 15px;
+                padding-right: 0; 
                 
                 &:first-child {
                     cursor: pointer; 
@@ -1649,11 +1658,11 @@
                 .text-right {
                     text-align: center !important;
                 } 
-                .text-right.col-lg-2 {
-                    padding-left: 0px !important;
+                .text-right.col-lg-2 { 
+                    // padding-left: 0px !important;
                 }
             }
-            .test_eat {
+            .test_eat { 
                 font-size: 15px !important; 
             }
             .inner_body {

@@ -71,6 +71,7 @@ export const showErrorMessage = (errorMessage) => {
 // toastr messages for success
 export const showSuccessToast = (message) => {
   if (!toast.isActive(toastId)) {
+    // alert("s")
     toast.dismiss()
     toastId = toast.success(message, {
       position: toast.POSITION.TOP_RIGHT,

@@ -238,7 +238,16 @@ class Editprofile extends Component {
     }
 
     this.props.actionUpdateUserDetails(data).then((result) => {
-      this.props.history.push("/myprofile")
+      // 
+      if(result.data.status !== 'error'){
+        setTimeout(()=>{
+          this.props.history.push("/myprofile");
+        },2000)
+      }
+      
+    }).catch(err=>{
+      console.log(err);
+      
     });
   };
 

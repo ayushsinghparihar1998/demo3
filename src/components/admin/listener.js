@@ -2073,7 +2073,7 @@ cs_time: "00:00:02" */}
               ) : this.state.pageType == "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
-                    <Row className="mb-5">
+                    <Row className="mb-3">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           List of Professionals
@@ -2614,8 +2614,8 @@ cs_time: "00:00:02" */}
                 </Col>
               ) : this.state.pageType == "pressblogList" ? (
                 <Col md={9} className="pl-1">
-                  <div className="professor_search">
-                    <Row className="mb-4">
+                  <div className="professor_search listBlogs"> 
+                    <Row className="mb-1">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           List of Press Blogs
@@ -2782,7 +2782,7 @@ cs_time: "00:00:02" */}
               ) : this.state.pageType == "blogList" ? (
                 <Col md={9} className="pl-1">
                   <div className="professor_search">
-                    <Row className="mb-4">
+                    <Row className="mb">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">List of Blogs</div>
                         <div className="fw300 fs16 col14">

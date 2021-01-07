@@ -377,7 +377,8 @@ class Userdashboard extends Component {
                         <div className="right_sidebar">
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
-                                 Hi {getLocalStorage("customerInfo").u_username}
+                                 {console.log('getLocalStorage("customerInfo") ===>',getLocalStorage("customerInfo"))}
+                                 Hi {getLocalStorage("customerInfo").u_name || getLocalStorage("customerInfo").u_username}
                                  <Button onClick={() => this.props.history.push('/myprofile')} className="btnType18 d-block twos">My Account</Button>
                               </div>
 
