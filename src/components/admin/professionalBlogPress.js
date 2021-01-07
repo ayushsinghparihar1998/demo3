@@ -355,6 +355,7 @@ class ProfessinalBlogPress extends Component {
                       <CKEditor
                         config={{
                           height: 500,
+                          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
                         }}
                         editor={ClassicEditor}
                         data={pblobj.pbl_desc}

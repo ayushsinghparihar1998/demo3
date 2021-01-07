@@ -143,7 +143,8 @@ class BlogDetail extends Component {
                           this.state.isShowCKEditor ?
                             <CKEditor
                               config={{
-                                height: 500
+                                height: 500,
+                                toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
                               }}
                               editor={ClassicEditor}
                               data={this.state.bl_desc}
