@@ -648,6 +648,7 @@
             & > div {
                 word-break: break-all; 
                 padding-right: 15px;
+                padding-right: 0; 
                 
                 &:first-child {
                     cursor: pointer; 

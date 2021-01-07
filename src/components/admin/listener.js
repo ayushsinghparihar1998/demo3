@@ -2073,7 +2073,7 @@ cs_time: "00:00:02" */}
               ) : this.state.pageType == "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
-                    <Row className="mb-5">
+                    <Row className="mb-3">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           List of Professionals
