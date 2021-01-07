@@ -803,6 +803,7 @@ class ProfessionalSignup extends Component {
                       <CKEditor
                         config={{
                           height: 500,
+                          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
                         }}
                         editor={ClassicEditor}
                         // data="<p>Hello from CKEditor 5!</p>"
@@ -847,6 +848,7 @@ class ProfessionalSignup extends Component {
                       <CKEditor
                         config={{
                           height: 500,
+                          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
                         }}
                         editor={ClassicEditor}
                         data={proffDetail.u_bio}
