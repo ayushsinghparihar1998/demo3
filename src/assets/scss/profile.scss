@@ -685,6 +685,14 @@
 
         .modal-body {
             padding: 30px;
+            .layout_box {
+                .fs300.fs20.col14 {
+                    font-size: 1rem !important;
+                    text-align: center;
+                    line-height: 24px;
+                    font-weight: 400;
+                }
+            }
 
             .selectTyp1 {
                 -webkit-appearance: none !important;
@@ -1351,6 +1359,12 @@
         .modal-dialog {
             .modal-body {
                 padding: 15px; 
+                .layout_box {
+                    .col10.fs30.fw600 {
+                        font-size: 24px !important;
+                        margin-bottom: 20px !important;
+                    } 
+                }
             }
         }
     }
