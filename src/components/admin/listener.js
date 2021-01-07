@@ -2615,7 +2615,7 @@ cs_time: "00:00:02" */}
               ) : this.state.pageType == "pressblogList" ? (
                 <Col md={9} className="pl-1">
                   <div className="professor_search listBlogs"> 
-                    <Row className="mb-4">
+                    <Row className="mb-1">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
                           List of Press Blogs

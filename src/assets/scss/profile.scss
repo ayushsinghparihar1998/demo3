@@ -834,7 +834,7 @@
         }
         span {
             display: block;
-            height: 78px; 
+            max-height: 78px;  
             overflow: hidden;
             p {
                 margin-bottom: 18px; 
