@@ -858,15 +858,15 @@ class Adminlistener extends Component {
     // var test = reg.test(value.trim());
     errors.email =
       memberObj.email.length == 0
-        ? "Please Enter email id"
+        ? "Please enter email id."
         : !Validator.isEmail(memberObj.email)
-        ? "Please enter a valid email"
+        ? "Please enter a valid email id."
         : "";
     errors.password =
       memberObj.password.length == 0
-        ? "Please Enter password"
+        ? "Please enter password."
         : !reg.test(memberObj.password.trim())
-        ? "Please enter a valid password"
+        ? "Please enter a valid password."
         : "";
 
     this.setState({
