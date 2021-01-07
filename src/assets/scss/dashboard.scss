@@ -634,8 +634,16 @@
     background: $col18; 
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
 
-    div & img { 
-        max-width: 67px; 
+    div {
+        &.mr-2.pt-1 {
+            min-width: 60px;
+            & > img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover; 
+                border-radius: 50%; 
+            }
+        }
         &.r50 {
             width: 60px;
             height: 60px;
