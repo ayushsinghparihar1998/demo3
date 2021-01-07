@@ -338,9 +338,9 @@ class ProfessionalSignup extends Component {
                 </div>
               </Col>
               <Col md={8} lg={9} className="pl-1">
-                <div className="layout_box mb-4">
-                  <div className="col3 fs40 fw600 mb-4">
-                    Professional Signup
+                <div className="layout_box layouttwo mb-4">  
+                  <div className="col10 fs24 fw600 mb-4"> 
+                    Professional Signup 
                   </div>
                   <Form>
                     <Row>

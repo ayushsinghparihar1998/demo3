@@ -426,10 +426,10 @@ class ProfessionalSignup extends Component {
                         </div>
                       </div>
                   </Col> 
-            <Col md={8} lg={9} className="pl-1">
-            <div className="layout_box mb-4"> 
-              <div className="col3 fs40 fw600 mb-4">
-                Modify Professional Details
+            <Col md={8} lg={9} className="pl-1"> 
+            <div className="layout_box layouttwo mb-4"> 
+              <div className="col10 fs24 fw600 mb-4">
+                Modify Professional Details 
               </div>
               <Form>
                 <Row>

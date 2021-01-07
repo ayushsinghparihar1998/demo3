@@ -1411,9 +1411,9 @@ class Adminlistener extends Component {
                 </div>
               </Col>
 
-              {this.state.pageType == "userlist" ? (
+              {this.state.pageType == "userlist" ? ( 
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">
                       List of{" "}
                       {this.state.activeProfile == "listner"
@@ -1512,7 +1512,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "blockList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Report Requests</div>
                   </div>
                   <div className="myprofile reviewrequest">
@@ -1673,7 +1673,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Review Requests</div>
                   </div>
                   <div className="myprofile reviewrequest">
@@ -1841,7 +1841,7 @@ class Adminlistener extends Component {
                 </Col>
               ) : this.state.pageType == "sessionList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Session Requests</div>
                   </div>
                   <div className="myprofile reviewrequest">
@@ -2040,7 +2040,7 @@ cs_time: "00:00:02" */}
                 </Col>
               ) : this.state.pageType == "paymentList" ? (
                 <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">List of Payments</div>
                   </div>
                   <div className="table_paymentlayout">
@@ -2962,7 +2962,7 @@ cs_time: "00:00:02" */}
                 </Col>
               ) : (
                 <Col md={8} lg={9} className="pl-1"> 
-                  <div className="professor_search mb-5">
+                  <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Rating Requests</div>
                   </div>
                   <div className="myprofile reviewrequest">

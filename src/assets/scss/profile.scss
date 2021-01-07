@@ -528,6 +528,14 @@
     }
 }
 
+.RegistrationLayout {  
+    .layout_box {  
+        &.layouttwo {
+            padding: 15px 60px 50px; 
+        }
+    }
+}
+
 .chatsearch {
     .search-box {
 
@@ -911,7 +919,7 @@
         .checkCategory {     
             margin-top: 50px; 
             padding: 0 30px;
-            padding-top: 30px; 
+            padding-top: 20px;  
             text-align: center;
             margin: auto;
             justify-content: center;
