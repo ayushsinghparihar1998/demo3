@@ -147,7 +147,8 @@ class ProfessionalLsting extends Component {
             console.log('===>Response Filtered Professional ==>.', response)
             if (response.data.message === "No user found.") {
                 this.setState({
-                    professional_list: []
+                    professional_list: [],
+                    currentRequestCount:0
                 })
             } else {
                 if (this.state.offset === 1 || isFilter) {
@@ -326,13 +327,13 @@ class ProfessionalLsting extends Component {
                                             </Col>
 
                                         })}
+                                        {/* {alert(this.state.currentRequestCount)} */}
                                         {this.state.currentRequestCount === 9 ?
                                             <div className="text-center w-100 m-auto pt-4">
                                                 <Button className="btnTyp12"
                                                     onClick={() => this.setState({ offset: this.state.offset + 1 }, () => {
                                                         this._getProfessionalListHandler()
-                                                    })}> show
-                                                    more </Button>
+                                                    })}> show more </Button>
                                             </div> : null
                                         }
 

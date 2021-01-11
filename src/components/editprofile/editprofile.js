@@ -526,7 +526,7 @@ class Editprofile extends Component {
                           Mobile Number:
                             </Form.Label>
                         <Form.Control
-                          type="text"
+                          type="number"
                           name="mobileNumber"
                           placeholder="Mobile Number"
                           onChange={this.handleMobileChange}

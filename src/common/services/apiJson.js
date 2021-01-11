@@ -901,7 +901,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-
   addReview: {
     url: "elp/addreview",
     method: "POST",
@@ -1220,7 +1219,7 @@ export default {
     method: "POST",
     data: { user_id: "", password: "" },
     showResultMessage: true,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadmingetprofessioanalcategory: {
     url: "elp/superadmingetprofessioanalcategory",
@@ -1438,7 +1437,7 @@ export default {
       offset: "",
     },
     showResultMessage: false,
-    showErrorMessage: true,
+    showErrorMessage: false,
   },
   createBlog: {
     url: "elp/superadmin_addblog",
@@ -1515,7 +1514,7 @@ export default {
       category: "",
     },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadmin_get_press_blog: {
     url: "elp/superadmin_get_press_blog",
@@ -1536,14 +1535,14 @@ export default {
     method: "POST",
     data: { count: "", offset: "", cs_status: "" },
     showResultMessage: false,
-    showErrorMessage: false,
+    showErrorMessage: true,
   },
   superadminCorporateappointmentchangestatus: {
     url: "elp/superadminCorporateappointmentchangestatus",
     method: "POST",
     data: { cs_id: "", cs_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
+    showResultMessage: true,
+    showErrorMessage: true,
   },
   superadmin_changeblogstatus: {
     url: "elp/superadmin_changeblogstatus",
@@ -1571,6 +1570,5 @@ export default {
     },
     showResultMessage: true,
     showErrorMessage: true,
-  },
-  
+  },  
 };
