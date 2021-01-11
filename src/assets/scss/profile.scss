@@ -528,7 +528,7 @@
     }
 }
 
-.RegistrationLayout {  
+.RegistrationLayout {   
     .layout_box {  
         &.layouttwo {
             padding: 15px 60px 50px; 
@@ -1182,9 +1182,11 @@
                 }     
                 .professionalBlogs {   
                     border-bottom: solid 1px $col85; 
-                    margin-top: 5px; 
+                    // margin-top: 5px;
+                    margin-top: 0;  
                     margin-bottom: 15px; 
-                    padding-top: 10px; 
+                    // padding-top: 10px; 
+                    padding-top: 0; 
                 }
                 .blogrightSide { 
                     border-bottom: solid 1px $col85; 

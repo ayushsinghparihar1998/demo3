@@ -15,14 +15,14 @@
     .requests {
         padding: 0 30px;
     }
-    .border-grays {    
+    .border-grays {      
         border-bottom: 0.5px solid $col50; 
 
         &:last-child {
             // border-bottom: none;  
         }
 
-        .pl-2 {
+        &>.pl-2 { 
             width: 100%; 
         }
     }
