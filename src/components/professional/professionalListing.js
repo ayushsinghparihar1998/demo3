@@ -145,7 +145,7 @@ class ProfessionalLsting extends Component {
             }
             )
             console.log('===>Response Filtered Professional ==>.', response)
-            if (response.data.message === "No user found.") {
+            if (response.data.message === "No user found." && (this.state.offset <= 1 ||isFilter)) {
                 this.setState({
                     professional_list: [],
                     currentRequestCount:0
@@ -160,9 +160,15 @@ class ProfessionalLsting extends Component {
                     })
 
                 } else {
+                    let tempArray =  [];
+                    if(response.data.data){
+                        tempArray = [...this.state.professional_list, ...response.data.data.listing]
+                    }else{
+                        tempArray = [...this.state.professional_list]
+                    }
                     this.setState({
-                        professional_list: [...this.state.professional_list, ...response.data.data.listing],
-                        currentRequestCount: response.data.data.listing.length,
+                        professional_list: tempArray,
+                        currentRequestCount: response.data.data?response.data.data.listing.length:0,
                         offset:isFilter ? 1 : this.state.offset
                     })
 
@@ -250,7 +256,7 @@ class ProfessionalLsting extends Component {
                                         </Col>
                                         <Col md="2" className="text-center">
                                             <Button variant="primary process_btn"
-                                                onClick={this._getFilterProfessionalListHandler}>
+                                                onClick={()=>this._getFilterProfessionalListHandler(true)}>
                                                 search
                                             </Button>
                                         </Col>
@@ -332,7 +338,7 @@ class ProfessionalLsting extends Component {
                                             <div className="text-center w-100 m-auto pt-4">
                                                 <Button className="btnTyp12"
                                                     onClick={() => this.setState({ offset: this.state.offset + 1 }, () => {
-                                                        this._getProfessionalListHandler()
+                                                        this._getFilterProfessionalListHandler()
                                                     })}> show more </Button>
                                             </div> : null
                                         }
