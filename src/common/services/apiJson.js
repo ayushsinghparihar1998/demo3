@@ -158,13 +158,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  blogListing: {
-    url: "elp/superadmin_getblog",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
 
   getListenerCategoryList: {
     url: "elp/getcategories",
@@ -178,32 +171,6 @@ export default {
     method: "POST",
     data: {
       uc_cat_name: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  getSuperAdminCategories: {
-    url: "elp/superadmin_getcategory",
-    method: "GET",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  addCategorySuperAdmin: {
-    url: "elp/superadmin_addcategory",
-    method: "POST",
-    data: {
-      uc_cat_name: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  blockUserStatusSuperAdmin: {
-    url: "elp/superadmin_blockreasonchangestatus",
-    method: "POST",
-    data: {
-      br_id: "",
-      br_status: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -238,15 +205,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminprofessionaluserdetail: {
-    url: "elp/superadminprofessionaluserdetail",
-    method: "POST",
-    data: {
-      userid: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
   corporateprofessionaluserdetail: {
     url: "elp/corporateprofessionaluserdetail",
     method: "POST",
@@ -256,153 +214,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  superadminchangepassword: {
-    url: "elp/superadminchangepassword",
-    method: "POST",
-    data: { user_id: "", password: "" },
-    showResultMessage: true,
-    showErrorMessage: false,
-  },
-  superadmingetprofessioanalcategory: {
-    url: "elp/superadmingetprofessioanalcategory",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminregisterprofessional: {
-    url: "elp/superadminregisterprofessional",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-      u_birthdate: "",
-      u_school_code: "",
-      screen_name: "",
-      u_lang: "",
-      u_mobile: "",
-      u_location: "",
 
-      device_token: "",
-      device_type: "",
-      type: "",
-      u_therapy_style: "",
-
-      u_hourly_fee: "",
-      u_work_experience: "",
-      u_education: "",
-      u_image: "",
-      u_bio: "",
-      u_area_service: "",
-
-      professional_keyword: "",
-      professional_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmineditprofessional: {
-    url: "elp/superadmineditprofessional",
-    method: "POST",
-    data: {
-      pro_u_id: "",
-      email: "",
-      u_birthdate: "",
-      u_school_code: "",
-      screen_name: "",
-      u_lang: "",
-      u_mobile: "",
-      u_location: "",
-
-      device_token: "",
-      device_type: "",
-      type: "",
-      u_therapy_style: "",
-
-      u_hourly_fee: "",
-      u_work_experience: "",
-      u_education: "",
-      u_image: "",
-      u_bio: "",
-      u_area_service: "",
-
-      professional_keyword: "",
-      professional_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomain: {
-    url: "elp/superadmingetcorporatedomain",
-    method: "GET",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminchangestatusCorporatedomain: {
-    url: "elp/superadminchangestatusCorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmineditcorporatedomain: {
-    url: "elp/superadmineditcorporatedomain",
-    method: "POST",
-    data: {
-      cd_id: "",
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadminaddcorporatedomain: {
-    url: "elp/superadminaddcorporatedomain",
-    method: "POST",
-    data: {
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmingetcorporatedomaindetailsbyid: {
-    url: "elp/superadmingetcorporatedomaindetailsbyid",
-    method: "POST",
-    data: {
-      cd_id: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomaindetailuserlist: {
-    url: "elp/superadmingetcorporatedomaindetailuserlist",
-    method: "POST",
-    data: { count: "", offset: "", cd_id: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmincorporatecustomerregister: {
-    url: "elp/superadmincorporatecustomerregister",
-    method: "POST",
-    data: { email: "", password: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  superadmindeletecorporatedomain: {
-    url: "elp/superadmindeletecorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
   corporategetprofessionallist: {
     url: "elp/corporategetprofessionallist",
     method: "POST",
@@ -585,93 +397,6 @@ export default {
     showErrorMessage: true,
   },
 
-  getListnerListing: {
-    url: "elp/superadmin_getlistenerlist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  adminLogin: {
-    url: "elp/superadmin_login",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  // new
-  getBlockuserListing: {
-    url: "elp/superadmin_getblockuserlisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      block_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  getReviewListing: {
-    url: "elp/superadmin_getreviewlisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      review_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  getRatingdetails: {
-    url: "elp/superadmin_getratingdetails",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      rating_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  changeStatusReview: {
-    url: "elp/superadmin_changestatusreview",
-    method: "POST",
-    data: {
-      rv_id: "",
-      rv_status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  changestatusrating: {
-    url: "elp/superadmin_changestatusrating",
-    method: "POST",
-    data: {
-      ur_id: "",
-      ur_status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  blockUserStatus: {
-    url: "elp/superadmin_Blockuserstatus",
-    method: "POST",
-    data: {
-      userid: "",
-      status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-
   blockReasonUser: {
     url: "elp/add_blockreasonuser",
     method: "POST",
@@ -696,7 +421,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-
   getReview: {
     url: "elp/getreview",
     method: "POST",
@@ -704,53 +428,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-
-  // end new
-
-  getProfessionalListing: {
-    url: "elp/superadmin_getprofessionalist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  getCustomerListing: {
-    url: "elp/superadmin_getcustomerlist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  adminChangeUserStatus: {
-    url: "elp/superadmin_changeuserstatus?userid=:userid&u_status=:u_status",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  adminUserDelete: {
-    url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-
-  getProfileById: {
-    url: "elp/superadmin_userdetail?userid=:userid",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-
   getCountry: {
     url: "elp/getcountry",
     method: "GET",
@@ -794,24 +471,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  adminUserDeleteReason: {
-    url:
-      "elp//superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  adminGetCategory: {
-    url: "elp/superadmin_getcategory",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+
   searchProfessionals: {
     url: "/elp/searchprofessionals",
     method: "POST",
@@ -864,14 +524,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
-  getAdminPaymentDetail: {
-    url: "elp/superadmin_getpaymentdetails",
-    method: "POST",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
   submitReview: {
     url: "elp/addreview",
     method: "POST",
@@ -883,64 +535,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-
-  createBlog: {
-    url: "elp/superadmin_addblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-      // bl_id: "",
-      bl_written_by: "",
-      blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  updateBlog: {
-    url: "elp/superadmin_editblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-      bl_id: "",
-      bl_written_by: "",
-      blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  createPressBlog: {
-    url: "elp/superadmin_add_press_blog",
-    method: "POST",
-    data: {
-      pbl_title: "",
-      pbl_image: "",
-      pbl_desc: "",
-      // pbl_id: "",
-      pbl_written_by: "",
-      press_blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  updatePressBlog: {
-    url: "elp/superadmin_press_editblog",
-    method: "POST",
-    data: {
-      pbl_title: "",
-      pbl_image: "",
-      pbl_desc: "",
-      pbl_id: "",
-      pbl_written_by: "",
-      press_blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
   submitRatings: {
     url: "elp/addrating",
     method: "POST",
@@ -971,21 +565,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  superadminprofessionallisting: {
-    url: "elp/superadminprofessionallisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      name: "",
-      status: "",
-      keyword: "",
-      category: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-
   getblogcategory: {
     url: "elp/getblogcategory",
     method: "POST",
@@ -993,62 +572,12 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  superadmin_get_press_blog: {
-    url: "elp/superadmin_get_press_blog",
-    method: "POST",
-    data: { offset: "", count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmin_getblog: {
-    url: "elp/superadmin_getblog",
-    method: "POST",
-    data: { offset: "", count: "", category: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
 
   getpressblogdetails: {
     url: "elp/getpressblogdetails",
     method: "POST",
     data: { pbl_id: "" },
     showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmingetcorporateappointmentlist: {
-    url: "elp/superadmingetcorporateappointmentlist",
-    method: "POST",
-    data: { count: "", offset: "", cs_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminCorporateappointmentchangestatus: {
-    url: "elp/superadminCorporateappointmentchangestatus",
-    method: "POST",
-    data: { cs_id: "", cs_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-
-  superadmin_changeblogstatus: {
-    url: "elp/superadmin_changeblogstatus",
-    method: "POST",
-    data: {
-      bl_id: "",
-      bl_status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-
-  superadmin_change_press_blogstatus: {
-    url: "elp/superadmin_change_press_blogstatus",
-    method: "POST",
-    data: {
-      pbl_id: "",
-      pbl_status: "",
-    },
-    showResultMessage: true,
     showErrorMessage: true,
   },
 
@@ -1119,14 +648,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  blogListing: {
-    url: "elp/superadmin_getblog",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
   getListenerCategoryList: {
     url: "elp/getcategories",
     method: "GET",
@@ -1139,32 +660,6 @@ export default {
     method: "POST",
     data: {
       uc_cat_name: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  getSuperAdminCategories: {
-    url: "elp/superadmin_getcategory",
-    method: "GET",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  addCategorySuperAdmin: {
-    url: "elp/superadmin_addcategory",
-    method: "POST",
-    data: {
-      uc_cat_name: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  blockUserStatusSuperAdmin: {
-    url: "elp/superadmin_blockreasonchangestatus",
-    method: "POST",
-    data: {
-      br_id: "",
-      br_status: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -1184,6 +679,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+
   professionalDashboardDetail: {
     url: "elp/professional_dashboard",
     method: "GET",
@@ -1199,15 +695,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminprofessionaluserdetail: {
-    url: "elp/superadminprofessionaluserdetail",
-    method: "POST",
-    data: {
-      userid: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
   corporateprofessionaluserdetail: {
     url: "elp/corporateprofessionaluserdetail",
     method: "POST",
@@ -1216,153 +703,6 @@ export default {
     },
     showResultMessage: false,
     showErrorMessage: false,
-  },
-  superadminchangepassword: {
-    url: "elp/superadminchangepassword",
-    method: "POST",
-    data: { user_id: "", password: "" },
-    showResultMessage: true,
-    showErrorMessage: false,
-  },
-  superadmingetprofessioanalcategory: {
-    url: "elp/superadmingetprofessioanalcategory",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminregisterprofessional: {
-    url: "elp/superadminregisterprofessional",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-      u_birthdate: "",
-      u_school_code: "",
-      screen_name: "",
-      u_lang: "",
-      u_mobile: "",
-      u_location: "",
-
-      device_token: "",
-      device_type: "",
-      type: "",
-      u_therapy_style: "",
-
-      u_hourly_fee: "",
-      u_work_experience: "",
-      u_education: "",
-      u_image: "",
-      u_bio: "",
-      u_area_service: "",
-
-      professional_keyword: "",
-      professional_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmineditprofessional: {
-    url: "elp/superadmineditprofessional",
-    method: "POST",
-    data: {
-      pro_u_id: "",
-      email: "",
-      u_birthdate: "",
-      u_school_code: "",
-      screen_name: "",
-      u_lang: "",
-      u_mobile: "",
-      u_location: "",
-
-      device_token: "",
-      device_type: "",
-      type: "",
-      u_therapy_style: "",
-
-      u_hourly_fee: "",
-      u_work_experience: "",
-      u_education: "",
-      u_image: "",
-      u_bio: "",
-      u_area_service: "",
-
-      professional_keyword: "",
-      professional_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomain: {
-    url: "elp/superadmingetcorporatedomain",
-    method: "GET",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadminchangestatusCorporatedomain: {
-    url: "elp/superadminchangestatusCorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmineditcorporatedomain: {
-    url: "elp/superadmineditcorporatedomain",
-    method: "POST",
-    data: {
-      cd_id: "",
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadminaddcorporatedomain: {
-    url: "elp/superadminaddcorporatedomain",
-    method: "POST",
-    data: {
-      cd_domain_name: "",
-      cd_audio_min: "",
-      cd_video_min: "",
-      cd_audio_status: "",
-      cd_video_status: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmingetcorporatedomaindetailsbyid: {
-    url: "elp/superadmingetcorporatedomaindetailsbyid",
-    method: "POST",
-    data: {
-      cd_id: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-  superadmingetcorporatedomaindetailuserlist: {
-    url: "elp/superadmingetcorporatedomaindetailuserlist",
-    method: "POST",
-    data: { count: "", offset: "", cd_id: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  superadmincorporatecustomerregister: {
-    url: "elp/superadmincorporatecustomerregister",
-    method: "POST",
-    data: { email: "", password: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  superadmindeletecorporatedomain: {
-    url: "elp/superadmindeletecorporatedomain",
-    method: "POST",
-    data: { cd_id: "", cd_status: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
   },
 
   corporategetprofessionallistfilter: {
@@ -1549,94 +889,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-
-  getListnerListing: {
-    url: "elp/superadmin_getlistenerlist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  adminLogin: {
-    url: "elp/superadmin_login",
-    method: "POST",
-    data: {
-      email: "",
-      password: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  // new
-  getBlockuserListing: {
-    url: "elp/superadmin_getblockuserlisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      block_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  getReviewListing: {
-    url: "elp/superadmin_getreviewlisting",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      review_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  getRatingdetails: {
-    url: "elp/superadmin_getratingdetails",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-      rating_type: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  changeStatusReview: {
-    url: "elp/superadmin_changestatusreview",
-    method: "POST",
-    data: {
-      rv_id: "",
-      rv_status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  changestatusrating: {
-    url: "elp/superadmin_changestatusrating",
-    method: "POST",
-    data: {
-      ur_id: "",
-      ur_status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  blockUserStatus: {
-    url: "elp/superadmin_Blockuserstatus",
-    method: "POST",
-    data: {
-      userid: "",
-      status: "",
-    },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-
   blockReasonUser: {
     url: "elp/add_blockreasonuser",
     method: "POST",
@@ -1666,45 +918,6 @@ export default {
     url: "elp/getreview",
     method: "POST",
     data: { count: "", offset: "", to_id: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  // end new
-
-  getProfessionalListing: {
-    url: "elp/superadmin_getprofessionalist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  getCustomerListing: {
-    url: "elp/superadmin_getcustomerlist",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  adminUserDelete: {
-    url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-
-  getProfileById: {
-    url: "elp/superadmin_userdetail?userid=:userid",
-    method: "POST",
-    data: {},
     showResultMessage: false,
     showErrorMessage: true,
   },
@@ -1781,24 +994,7 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  adminUserDeleteReason: {
-    url:
-      "elp//superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment",
-    method: "POST",
-    data: {},
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
-  adminGetCategory: {
-    url: "elp/superadmin_getcategory",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
+
   searchProfessionals: {
     url: "/elp/searchprofessionals",
     method: "POST",
@@ -1823,21 +1019,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  superadmingetcorporatedomain: {
-    url: "elp/superadmingetcorporatedomain",
-    method: "POST",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  superadmindeletecorporatedomain: {
-    url: "elp/superadmindeletecorporatedomain",
-    method: "POST",
-    data: { count: "", offset: "" },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
   submitReview: {
     url: "elp/addreview",
     method: "POST",
@@ -1845,63 +1026,6 @@ export default {
       rv_text: "",
       rv_from_id: "",
       rv_to_id: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-
-  createBlog: {
-    url: "elp/superadmin_addblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-      // bl_id: "",
-      bl_written_by: "",
-      blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  updateBlog: {
-    url: "elp/superadmin_editblog",
-    method: "POST",
-    data: {
-      bl_title: "",
-      bl_image: "",
-      bl_desc: "",
-      bl_id: "",
-      bl_written_by: "",
-      blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  createPressBlog: {
-    url: "elp/superadmin_add_press_blog",
-    method: "POST",
-    data: {
-      pbl_title: "",
-      pbl_image: "",
-      pbl_desc: "",
-      // pbl_id: "",
-      pbl_written_by: "",
-      press_blog_cat_name: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: true,
-  },
-  updatePressBlog: {
-    url: "elp/superadmin_press_editblog",
-    method: "POST",
-    data: {
-      pbl_title: "",
-      pbl_image: "",
-      pbl_desc: "",
-      pbl_id: "",
-      pbl_written_by: "",
-      press_blog_cat_name: "",
     },
     showResultMessage: false,
     showErrorMessage: true,
@@ -1937,21 +1061,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  // superadminprofessionallisting: {
-  //   url: "elp/superadminprofessionallisting",
-  //   method: "POST",
-  //   data: {
-  //     count: "",
-  //     offset: "",
-  //     name: "",
-  //     status: "",
-  //     keyword: "",
-  //     category: "",
-  //   },
-  //   showResultMessage: true,
-  //   showErrorMessage: true,
-  // },
-
   getnotificationlisting: {
     url: "elp/getnotificationlisting",
     method: "POST",
@@ -1991,6 +1100,437 @@ export default {
     showErrorMessage: false,
   },
 
+  readAllNotifications: {
+    url: "elp/read_notification",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  pressBlogDetail: {
+    url: "elp/getpressblogdetails",
+    method: "POST",
+    data: { pbl_id: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  // superadmin
+
+  superadmineditcorporatedomain: {
+    url: "elp/superadmineditcorporatedomain",
+    method: "POST",
+    data: {
+      cd_id: "",
+      cd_domain_name: "",
+      cd_audio_min: "",
+      cd_video_min: "",
+      cd_audio_status: "",
+      cd_video_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminaddcorporatedomain: {
+    url: "elp/superadminaddcorporatedomain",
+    method: "POST",
+    data: {
+      cd_domain_name: "",
+      cd_audio_min: "",
+      cd_video_min: "",
+      cd_audio_status: "",
+      cd_video_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmingetcorporatedomaindetailsbyid: {
+    url: "elp/superadmingetcorporatedomaindetailsbyid",
+    method: "POST",
+    data: {
+      cd_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadmingetcorporatedomaindetailuserlist: {
+    url: "elp/superadmingetcorporatedomaindetailuserlist",
+    method: "POST",
+    data: { count: "", offset: "", cd_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadmincorporatecustomerregister: {
+    url: "elp/superadmincorporatecustomerregister",
+    method: "POST",
+    data: { email: "", password: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmindeletecorporatedomain: {
+    url: "elp/superadmindeletecorporatedomain",
+    method: "POST",
+    data: { cd_id: "", cd_status: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getSuperAdminCategories: {
+    url: "elp/superadmin_getcategory",
+    method: "GET",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  addCategorySuperAdmin: {
+    url: "elp/superadmin_addcategory",
+    method: "POST",
+    data: {
+      uc_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  blockUserStatusSuperAdmin: {
+    url: "elp/superadmin_blockreasonchangestatus",
+    method: "POST",
+    data: {
+      br_id: "",
+      br_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  blogListing: {
+    url: "elp/superadmin_getblog",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminprofessionaluserdetail: {
+    url: "elp/superadminprofessionaluserdetail",
+    method: "POST",
+    data: {
+      userid: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadminchangepassword: {
+    url: "elp/superadminchangepassword",
+    method: "POST",
+    data: { user_id: "", password: "" },
+    showResultMessage: true,
+    showErrorMessage: false,
+  },
+  superadmingetprofessioanalcategory: {
+    url: "elp/superadmingetprofessioanalcategory",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadminregisterprofessional: {
+    url: "elp/superadminregisterprofessional",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+      u_birthdate: "",
+      u_school_code: "",
+      screen_name: "",
+      u_lang: "",
+      u_mobile: "",
+      u_location: "",
+
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+
+      u_hourly_fee: "",
+      u_work_experience: "",
+      u_education: "",
+      u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
+      professional_keyword: "",
+      professional_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmineditprofessional: {
+    url: "elp/superadmineditprofessional",
+    method: "POST",
+    data: {
+      pro_u_id: "",
+      email: "",
+      u_birthdate: "",
+      u_school_code: "",
+      screen_name: "",
+      u_lang: "",
+      u_mobile: "",
+      u_location: "",
+
+      device_token: "",
+      device_type: "",
+      type: "",
+      u_therapy_style: "",
+
+      u_hourly_fee: "",
+      u_work_experience: "",
+      u_education: "",
+      u_image: "",
+      u_bio: "",
+      u_area_service: "",
+
+      professional_keyword: "",
+      professional_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmingetcorporatedomain: {
+    url: "elp/superadmingetcorporatedomain",
+    method: "GET",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  getListnerListing: {
+    url: "elp/superadmin_getlistenerlist",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  adminLogin: {
+    url: "elp/superadmin_login",
+    method: "POST",
+    data: {
+      email: "",
+      password: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getBlockuserListing: {
+    url: "elp/superadmin_getblockuserlisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      block_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getReviewListing: {
+    url: "elp/superadmin_getreviewlisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      review_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getRatingdetails: {
+    url: "elp/superadmin_getratingdetails",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      rating_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  changeStatusReview: {
+    url: "elp/superadmin_changestatusreview",
+    method: "POST",
+    data: {
+      rv_id: "",
+      rv_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  changestatusrating: {
+    url: "elp/superadmin_changestatusrating",
+    method: "POST",
+    data: {
+      ur_id: "",
+      ur_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  blockUserStatus: {
+    url: "elp/superadmin_Blockuserstatus",
+    method: "POST",
+    data: {
+      userid: "",
+      status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getProfessionalListing: {
+    url: "elp/superadmin_getprofessionalist",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getCustomerListing: {
+    url: "elp/superadmin_getcustomerlist",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  adminChangeUserStatus: {
+    url: "elp/superadmin_changeuserstatus?userid=:userid&u_status=:u_status",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  adminUserDelete: {
+    url: "elp/superadmin_deleteuser?userid=:userid&u_status=:u_status",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getProfileById: {
+    url: "elp/superadmin_userdetail?userid=:userid",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  adminUserDeleteReason: {
+    url:
+      "elp/superadmin_addreasonuser?userid=:userid&ui_status=:ui_status&ui_comment=:ui_comment",
+    method: "POST",
+    data: {},
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  adminGetCategory: {
+    url: "elp/superadmin_getcategory",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  createBlog: {
+    url: "elp/superadmin_addblog",
+    method: "POST",
+    data: {
+      bl_title: "",
+      bl_image: "",
+      bl_desc: "",
+      // bl_id: "",
+      bl_written_by: "",
+      blog_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  updateBlog: {
+    url: "elp/superadmin_editblog",
+    method: "POST",
+    data: {
+      bl_title: "",
+      bl_image: "",
+      bl_desc: "",
+      bl_id: "",
+      bl_written_by: "",
+      blog_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  createPressBlog: {
+    url: "elp/superadmin_add_press_blog",
+    method: "POST",
+    data: {
+      pbl_title: "",
+      pbl_image: "",
+      pbl_desc: "",
+      // pbl_id: "",
+      pbl_written_by: "",
+      press_blog_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  updatePressBlog: {
+    url: "elp/superadmin_press_editblog",
+    method: "POST",
+    data: {
+      pbl_title: "",
+      pbl_image: "",
+      pbl_desc: "",
+      pbl_id: "",
+      pbl_written_by: "",
+      press_blog_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getAdminPaymentDetail: {
+    url: "elp/superadmin_getpaymentdetails",
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminprofessionallisting: {
+    url: "elp/superadminprofessionallisting",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      name: "",
+      status: "",
+      keyword: "",
+      category: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+  superadmin_get_press_blog: {
+    url: "elp/superadmin_get_press_blog",
+    method: "POST",
+    data: { offset: "", count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadmin_getblog: {
+    url: "elp/superadmin_getblog",
+    method: "POST",
+    data: { offset: "", count: "", category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   superadmingetcorporateappointmentlist: {
     url: "elp/superadmingetcorporateappointmentlist",
     method: "POST",
@@ -2005,7 +1545,6 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-
   superadmin_changeblogstatus: {
     url: "elp/superadmin_changeblogstatus",
     method: "POST",
@@ -2016,7 +1555,13 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
+  superadminchangestatusCorporatedomain: {
+    url: "elp/superadminchangestatusCorporatedomain",
+    method: "POST",
+    data: { cd_id: "", cd_status: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
   superadmin_change_press_blogstatus: {
     url: "elp/superadmin_change_press_blogstatus",
     method: "POST",
@@ -2027,20 +1572,5 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-
-  readAllNotifications: {
-    url: "elp/read_notification",
-    method: "POST",
-    data: {},
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
-
-  pressBlogDetail: {
-    url: "elp/getpressblogdetails",
-    method: "POST",
-    data: { pbl_id: "" },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
+  
 };

@@ -21,6 +21,7 @@ import Footer from "../core/footer";
 import validateInput from "../../common/validations/validationResetPassword";
 
 import { actionResetPassword } from "../../common/redux/actions";
+import constant from "../../constant";
 
 class Resetpassword extends Component {
 
@@ -86,13 +87,15 @@ class Resetpassword extends Component {
         .actionResetPassword(data)
         .then(result => {
           // alert( this.state.roleType)
+            
+          let roleType = this.state.roleType
+          // alert(roleType)
           if (result && result.data && result.data.status === "success") {
-          
-            let roleType = this.state.roleType
+        
             setTimeout(() => {
               this.props.history.push({
                 pathname: 'login',
-                state: { roleType: parseInt(roleType) }
+                state: { roleType: parseInt(roleType) == constant.roles.CORPORATE_CUSTOMER ?parseInt( constant.roles.CUSTOMERS):parseInt(roleType) }
               });
             }, 2000);
 
