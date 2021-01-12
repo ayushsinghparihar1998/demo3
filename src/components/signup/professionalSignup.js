@@ -177,8 +177,8 @@ class ProfessionalSignup extends Component {
         }
         this.setState({ listOfCategory: listOfCategory })
     }
-    render() { 
-        const { errors } = this.state;
+    render() {  
+        const { errors } = this.state; 
         return (
             <div>
                 <div className="layout_box mt-3 mb-4">

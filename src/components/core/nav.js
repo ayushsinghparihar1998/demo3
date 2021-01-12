@@ -15,7 +15,9 @@ import {
     Col,
 } from "react-bootstrap";
 import { Link, NavLink, Router } from "react-router-dom";
-import logo from "../../assets/images/logos.png";
+// import logo from "../../assets/images/logos.png";
+import logo from "../../assets/images/elplogos.png";
+import logopink from "../../assets/images/elplogopink.png"; 
 import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
 import { actionLogout, actionLogoutSuccess } from "../../common/redux/actions";
@@ -450,7 +452,9 @@ class NavBar extends Component {
                         }}
                         className="nav-link navbar-brand"
                     >
-                        <Image src={logo} alt="" /> Eat Luv N Pray
+                        {/* <Image src={logo} alt="" /> Eat Luv N Pray */}
+                        <Image src={logopink} alt="" className="elplogopink" /> 
+                        <Image src={logo} alt="" className="elplogo" />
                     </a>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

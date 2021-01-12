@@ -27,10 +27,32 @@
                     color: $col10 !important; 
                 }
             }
+            img.elplogo {
+                // max-width: 40%;
+                max-width: 200px;
+                display: block;
+            } 
+            img.elplogopink {
+                // max-width: 40%;
+                max-width: 200px;
+                display: none
+            } 
         }
     }
 }
 
+.main_baner {
+    .mj_nav {
+            img.elplogo { 
+                max-width: 200px; 
+                display: none;
+            }
+            img.elplogopink { 
+                max-width: 200px;
+                display: block;
+            }
+    }
+}
 
 .mj_nav { 
     span.comings { 
