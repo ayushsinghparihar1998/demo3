@@ -16,6 +16,7 @@ import {
 import { Link, NavLink, Router } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
 import insta from "../../assets/images/insta.svg";
+import logopink from "../../assets/images/elplogopink.png";
 import { ToastContainer, toast } from "react-toastify";
 import { actionLogout } from "../../common/redux/actions";
 import fb from "../../assets/images/fb.svg";
@@ -156,8 +157,9 @@ class NavBar extends Component {
         {/* Same as */}
         <ToastContainer />
         <Navbar bg="" expand="lg">
-          <NavLink to="/admin" className="nav-link navbar-brand">
-            <Image src={logo} alt="" /> Eat Luv N Pray
+          <NavLink to="/admin" className="nav-link navbar-brand"> 
+            {/* <Image src={logo} alt="" /> Eat Luv N Pray */}
+            <Image src={logopink} alt="" className="elplogopink" />   
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
