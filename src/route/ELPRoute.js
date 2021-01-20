@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Landing from "../components/core/landing";
+import Landing from "../components/core/landing";  
 import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
 import ProfessionalLogin from "../components/login/professionalLogin";
@@ -94,6 +94,9 @@ import ProfessinalBlogPress from "../components/admin/professionalBlogPress";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";
+import addSubscriptions from "../components/admin/addSubscription"; 
+import SubscriptionDocument from "../components/admin/subscriptionDocument"
+import SubscriptionPlan from "../components/admin/subscriptionPlan"; 
 
 const user =
   getLocalStorage("userInfo") ||
@@ -191,6 +194,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/blogUser" component={BlogUser} />
           {/* <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
           <PublicRoute path="/adminPressListing" component={AdminPressListing} />     */}
+          <PublicRoute path="/addSubscription" component={addSubscriptions} />  
+          <PublicRoute path="/subscriptionDocument" component={SubscriptionDocument} />   
+          <PublicRoute path="/subscriptionPlan" component={SubscriptionPlan} />    
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute path="/professinalBlogCreate/:id" component={ProfessinalBlogCreate} />
@@ -289,3 +295,6 @@ class ELPRoute extends Component {
   }
 }
 export default ELPRoute;
+
+
+

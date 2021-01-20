@@ -15,16 +15,44 @@ class Banner extends Component {
             <Container>
                 <Row>
                     <Col md={6}> 
-                    <Carousel className="baner_carousel">  
+                    <Carousel className="baner_carousel">     
                         <Carousel.Item>
-                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div>
-                                    <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
-                    Our trained Listeners are ready to extend their helping hand</div>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div>
-                                    <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
-                    Our trained Listeners are ready to extend their helping hand</div>
+                        {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
+                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Eat Well</div>
+                                    {/* <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
+                    Our trained Listeners are ready to extend their helping hand</div> */}
+                              <div className="fw300 col18 fs20 mb-5">
+                                    Eat - If you don't make time for your wellness, you will be forced to make time for your Illness. 
+                              </div>
+                              <div className="mt-4"> 
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
+                                    <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
+                                    </Button> 
+                              </div>
+                        </Carousel.Item>  
+                        <Carousel.Item>            
+                        {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
+                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Luv Often</div>
+                               <div className="fw300 col18 fs20 mb-5">  
+                                    Luv - I am stronger than Depression and I am braver than Loneliness and nothing will ever exhaust me
+                              </div>
+                              <div className="mt-4"> 
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
+                                    <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
+                                    </Button> 
+                              </div>
+                        </Carousel.Item> 
+                        <Carousel.Item>            
+                       
+                        <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Pray Always</div>    
+                             <div className="fw300 col18 fs20 mb-5">
+                                  Pray - Let's take a few minutes to day our prayer for the world to heal and come together in these difficult times. Please be safe.
+                             </div>  
+                                <div className="mt-4">  
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button>  
+                                    <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
+                                    </Button>  
+                                </div> 
                         </Carousel.Item> 
                     </Carousel>
                     </Col>
@@ -36,7 +64,7 @@ class Banner extends Component {
                     <Col md={3} col={12} className="mb-5">      
                         <div className="baner2 bannerset">
                             <Image src={freechat} alt="" className="pt-2" />
-                            <div className="fs18 fw600 col6 pt-2">Free Chat</div>
+                            <div className="fs18 fw600 col6 pt-2">Free Chat</div> 
                             <div className="col14 fs12 fw300 pt-1 pl-4 pr-4">Need someone to talk to you? Build your self-confidence by venting to non-judgemental and supportive Listeners.</div>
                             <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>

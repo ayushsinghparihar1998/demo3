@@ -56,7 +56,7 @@ import {
   getLocalStorage,
   range,
   setLocalStorage,
-} from "../../common/helpers/Utils";
+} from "../../common/helpers/Utils"; 
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -2131,7 +2131,7 @@ cs_time: "00:00:02" */}
                         </Col>
                       </Row>
                       <Row>
-                        <Col md="6">
+                        <Col md="12" lg="6">
                           <Form.Group
                             controlId="formBasicCheckbox2"
                             className="row mb-4 statusCat"
@@ -2166,7 +2166,7 @@ cs_time: "00:00:02" */}
                           </Form.Group>
                         </Col>
 
-                        <Col md="6">
+                        <Col md="12" lg="6">
                           <Form.Group
                             controlId="formBasicCheckbox4"
                             className="row mb-4 statusCat"
@@ -2198,7 +2198,7 @@ cs_time: "00:00:02" */}
                           </Form.Group>
                         </Col>
 
-                        <Col md="4">
+                        <Col md="12" lg="6"> 
                           <Button
                             variant="primary process_btn"
                             type="button"
@@ -2527,7 +2527,7 @@ cs_time: "00:00:02" */}
                   </div>
                 </Col>
               ) : this.state.pageType == "addMember" ? (
-                <Col md={9} className="pl-1">
+                <Col md={8} className="pl-1">
                   <div className="corporateMember adminlistener">
                     <div className="fs28 col10 mb-4">
                       Become a Corporate Member
@@ -2613,7 +2613,7 @@ cs_time: "00:00:02" */}
                   </div>
                 </Col>
               ) : this.state.pageType == "pressblogList" ? (
-                <Col md={9} className="pl-1">
+                <Col md={8} lg={9} className="pl-1"> 
                   <div className="professor_search listBlogs"> 
                     <Row className="mb-1">
                       <Col md={8}>
@@ -2780,7 +2780,7 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : this.state.pageType == "blogList" ? (
-                <Col md={9} className="pl-1">
+                <Col md={8} lg={9} className="pl-1">           
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>

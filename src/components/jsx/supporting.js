@@ -9,7 +9,7 @@ import Organisetwo from '../../assets/images/organise2.svg';
 import Organisethree from '../../assets/images/organise3.svg';
 import Organisefour from '../../assets/images/organise4.svg';
 
-class Supporting extends Component {         
+class Supporting extends Component {          
   render() {
     const settings = {
       dots: true,
@@ -20,8 +20,8 @@ class Supporting extends Component {
       slidesToScroll: 4
     }; 
     return (   
-        <div className="Supporting">       
-            <Container> 
+          <div className="Supporting">        
+                <Container>
                     <div className="fw700 fs44 col10 col1 w-100">Supporting Organizations</div>
                     <div className="col14 fs20 fw500 w-100 pt-3 mb-5 pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
 
@@ -45,7 +45,7 @@ class Supporting extends Component {
                         <Image src={Organisetwo} alt="Organisetwo" />
                     </div> 
                   </Slider> 
-            </Container> 
+              </Container> 
         </div>
     )
   }

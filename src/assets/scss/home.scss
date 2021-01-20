@@ -61,11 +61,58 @@
     }
 }
 
-.conversations { 
+.conversations {   
     padding-bottom: 50px;
     text-align: center;
 }
+.elpVideo {
+    margin-top: 80px; 
+}
 
+.plans {
+    position: relative; 
+    .planList {
+        box-shadow: 4px 10px 21px rgba(0, 0, 0, 0.1);   
+        border: solid 1px #eeeeee;  
+        .planone {
+            padding: 20px;
+            background: $col22; 
+            .btnSave {
+                background: #e35c3c;
+                border: solid 1px red;
+                padding: 2px 10px;
+                border-radius: 0px;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 14px; 
+            }
+        }
+        .plantwo {
+            padding: 20px;
+            border-bottom: 1px solid $col23; 
+            padding-bottom: 60px; 
+        }
+        .planpricing {
+            position: relative;
+            padding: 20px; 
+        }
+    }
+}
+
+.aboutpage {
+    .bg-pinks {
+        ul {
+            padding-left: 20px; 
+            li {
+                font-size: 24px;
+                line-height: 18px; 
+                span {
+                    font-size: 17px;  
+                }
+            }
+        }
+    }
+}        
 .happyPatient {
     background-image: url('../images/Hpatient.svg'); 
     background-repeat: no-repeat;
@@ -198,8 +245,8 @@
     background-color: #fff;
     padding: 60px 0;
     position: relative; 
-    background-image: url('../images/sideimg.jpg'); 
-    background-position: right;
+    background-image: url('../images/sideimg.png'); 
+    background-position: left;
     background-repeat: no-repeat;
     padding-bottom: 70px;
     background-size: contain; 

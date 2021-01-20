@@ -47,16 +47,22 @@ class Abouteat extends Component {
             <div className="aboutEats" id="about_us_container">
                 <Container>
                     <Row>
-                        <Col md={12} lg={12}>         
-                            <div className="fs40 col14 fw600 w-100">About Eat Luv N Pray</div>
+                        <Col md={12} lg={10} className="m-auto">          
+                            <div className="fs40 col14 fw600 w-100">About Eat Luv N Pray</div> 
                             <div className="col14 fs16 fw300 w-100 pt-3">
-                                <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
+                                {/* <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
 
                                 <div className="pb-4">Today, Eat Luv N Pray remedies that problem by giving virtual leasing space to many NGO’s who would help connecting you with trained listeners as well as resolve various life matters with empathy and compassion. We will also provide database of highly capable consultants from walks of Eat, Love and Pray respectively. </div>
 
-                                <div classNam="pb-4">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a listener on this platform specially, who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend.</div> 
+                                <div classNam="pb-4">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a listener on this platform specially, who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend.</div>  */}
                                 {/* <div className="pb-2">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a CoCo who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend. </div> */}
-                                <div className="pb-2">Please remember, you’re NEVER ALONE !</div>
+                                {/* <div className="pb-2">Please remember, you’re NEVER ALONE !</div>  */}
+                                <div className="pb-4">Aiming to create a ”Happy Planet” through Eating right, Loving always and Praying often, we are a lifestyle management organisation that runs solely on the concept of Eat, Love and Pray.</div> 
+                                <div className="pb-4">From clean healthy food that the human body needs to repair, detox and function well to the right amount of exercise and movement, to enabling deeper sleep and alleviating chronic stress - the lifestyle medicines we use are many. We believe in the powerful intelligence of the human body and its ability to repair itself
+                                </div>
+                                <div className="pb-4">
+                                    We simply hear, analyze, & guide to fix the problem in order to enable a Happier and Healthier Lifestyle
+                                </div> 
                             </div>
                         </Col>
                         {/* <Col md={5}>   

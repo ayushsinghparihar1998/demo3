@@ -38,22 +38,40 @@ class About extends Component {
               <Col md={12} lg={12}> 
                 <div className="myprofile terms aboutpage">  
                   <div className="text-center mb-5"> 
-                      <Image src={Aboutlogo} alt="" className="mx-w" /> 
+                      <Image src={Aboutlogo} alt="" className="mx-w" />  
                   </div>     
                   {/* <div className="fs36 fw600 col29">Terms of Service</div> */}
-                  {/* <div className="fs20 fw600 col29 mt-2 mb-2">Welcome to Eat Luv N Pray Foundation!</div> */}
-                  <p>Eat Luv N Pray Pvt. Ltd. is an EPO (Emotion Process Outsourcing) platform promising anonymity at all times. It is by far the largest virtual ‘free listening platform’ in the country making mental health a core to cure any ailment and issues by providing research-based emotional support over the phone, video discussions, forums, and social media. </p>
+                  {/* <div className="fs20 fw600 col29 mt-2 mb-2">Welcome to Eat Luv N Pray Foundation!</div> */} 
+                  {/* <p>Eat Luv N Pray Pvt. Ltd. is an EPO (Emotion Process Outsourcing) platform promising anonymity at all times. It is by far the largest virtual ‘free listening platform’ in the country making mental health a core to cure any ailment and issues by providing research-based emotional support over the phone, video discussions, forums, and social media. </p>
 
-                  <p>It aims to touch and elevate overall wellbeing of at least 10 million lives and help generate livelihood for the inclusive section. It also supports NGO’s in likes of ELNP Foundation by providing virtual leased space on its platform and help them function with ease. It provides preventive care to its members by listening and simply enabling users to vent out their innermost voice with the sure promise of anonymity in order to eradicate evils of society and avoid acute mental illnesses. </p> 
+                  <p>It aims to touch and elevate overall wellbeing of at least 10 million lives and help generate livelihood for the inclusive section. It also supports NGO’s in likes of ELNP Foundation by providing virtual leased space on its platform and help them function with ease. It provides preventive care to its members by listening and simply enabling users to vent out their innermost voice with the sure promise of anonymity in order to eradicate evils of society and avoid acute mental illnesses. </p>  */}  
 
-                  <div className="bg-pinks">   
-                      <div className="fs32 fw500 calibri col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
+                  <div className="fs18 fw400 col14 mt-2 mb-2">    
+                        Aiming to create a ”Happy Planet” through Eating right, Loving always and Praying often, we
+                        are a lifestyle management organisation that runs solely on the concept of Eat, Love and Pray
+                  </div>
+                  <div className="fs18 fw400 col14 mt-2 mb-2">      
+                      From clean healthy food that the human body needs to repair, detox and function well to the
+                      right amount of exercise and movement, to enabling deeper sleep and alleviating chronic
+                      stress - the lifestyle medicines we use are many. We believe in the powerful intelligence of the
+                      human body and its ability to repair itself. We simply hear, analyze, & guide to fix the problem
+                      in order to enable a Happier and Healthier Lifestyle.
+                  </div>
+                  <div className="fs18 fw400 col14 mt-2 mb-4">         
+                      Our platform promises anonymity at all times, it is by far the largest virtual ‘Happiness
+                      Platform’ in the country making listening & understanding of problem a core to cure any
+                      ailment by providing research-based emotional support and specifically curated holistic
+                      wellness programs. We provide preventive care to its members by listening and simply enabling
+                      users to vent out their innermost voice/problems/ailments and feel better in all aspects of their
+                      life.
+                  </div>  
+                  <div className="bg-pinks">         
+                      {/* <div className="fs32 fw500 calibri col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
                       <p>
                         <span className="leftone"> 
                             <Image src={Tickicons} alt="icon" />     
                          </span>
                       <span className="righttwo">Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span></p> 
-                      
                       <p>
                         <span className="leftone"> 
                             <Image src={Tickicons} alt="icon" />     
@@ -74,7 +92,29 @@ class About extends Component {
                             <Image src={Tickicons} alt="icon" />     
                          </span>
                       <span className="righttwo">Will offer services globally in Eat Luv n Pray areas to provide holistic wellbeing in daily lives of people.
-                      </span></p> 
+                      </span></p>  */}  
+
+                      <div className="fs32 fw500 calibri col29 mt-2 mb-2">Vision – Eat Luv N Pray Pvt. Ltd.</div>
+                      <ul>
+                           <li>
+                                <span>Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span>
+                           </li>
+                           <li>
+                                <span>Will take care of various NGO’s, it’s employees, stakeholders and customers by picking services which in some manner contribute to a bigger social cause.</span>
+                           </li>
+                      </ul>
+
+                      <div className="fs32 fw500 calibri col29 mt-2 mb-2">Mission – Eat Luv N Pray Pvt. Ltd.</div>
+
+                      <ul> 
+                           <li> 
+                                <span>Eat Luv N Pray will become the best aggregator platform offering a well crafted range of services  in core areas of Eat Luv N Pray offering alternate medicine solutions. It will help masses understand 7 dimensions of wellness and cover entire cycle through their Eat Luv N Pray journey.</span>
+                           </li> 
+                           <li> 
+                                <span>Will take care of various NGO’s, it’s employees, stakeholders and customers by picking services which in some manner contribute to a bigger social cause.</span> 
+                           </li>
+                      </ul>
+
                   </div>
 
                   <div className="fs32 fw600 col92 mt-4 mb-5 text-center">Founders</div> 

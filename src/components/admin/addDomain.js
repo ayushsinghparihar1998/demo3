@@ -313,4 +313,4 @@ class CorporateMember extends Component {
   }
 }
 
-export default CorporateMember;
+export default CorporateMember; 

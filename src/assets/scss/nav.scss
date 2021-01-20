@@ -39,11 +39,36 @@
             } 
         }
     }
+
+    .btnTyp5.talkBtn {
+        position: relative;
+        background: transparent !important;
+        border: solid 1px $col18 !important;
+        height: 3rem;
+
+        &:hover, &:focus {
+            background: transparent !important;
+            border: solid 1px $col18 !important;
+        }
+    }
+    .btnTyp5.talkBtntwo {
+        background: $col18 !important; 
+        border: solid 1px $col18 !important;  
+        color: $col10 !important; 
+        padding: 0 1rem;
+        height: 3rem;
+
+        &:hover, &:focus {
+            background: $col18 !important; 
+            border: solid 1px $col18 !important;  
+            color: $col10 !important;  
+        }
+    }
 }
 
 .main_baner {
     .mj_nav {
-            img.elplogo { 
+            img.elplogo {  
                 max-width: 200px; 
                 display: none;
             }
@@ -66,6 +91,16 @@
             font-size: $fs23;
             font-weight: 600;
             color: $col8; 
+            display: flex; 
+            & > img {
+                margin-right: 10px; 
+            }
+            .elplogopink {
+                margin-top: 10px;
+            }
+            .elplogo {
+                margin-top: 10px; 
+            }
         }
         .navbar-nav {
             .userprofiles {
@@ -581,16 +616,21 @@
                     }
                     justify-content: center;
                     .profiletwo {
-                        .dropdown-menu {
+                        .dropdown-menu { 
                             position: absolute;
                             left: -80px;
-                            right: 0;
-                            
+                            right: 0; 
                         }
                     }
                 }
-                
-    
+            }
+            .navbar-brand { 
+                & > img {
+                    max-width: 45px !important;
+                }
+                & img {
+                    max-width: 90px !important; 
+                }
             }
         }
     }

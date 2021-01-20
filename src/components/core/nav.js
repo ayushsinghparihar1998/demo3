@@ -15,7 +15,7 @@ import {
     Col,
 } from "react-bootstrap";
 import { Link, NavLink, Router } from "react-router-dom";
-// import logo from "../../assets/images/logos.png";
+import logosmain from "../../assets/images/logos.png"; 
 import logo from "../../assets/images/elplogos.png";
 import logopink from "../../assets/images/elplogopink.png"; 
 import insta from "../../assets/images/insta.svg";
@@ -453,6 +453,7 @@ class NavBar extends Component {
                         className="nav-link navbar-brand"
                     >
                         {/* <Image src={logo} alt="" /> Eat Luv N Pray */}
+                        <Image src={logosmain} alt="" /> 
                         <Image src={logopink} alt="" className="elplogopink" /> 
                         <Image src={logo} alt="" className="elplogo" />
                     </a>
@@ -463,8 +464,8 @@ class NavBar extends Component {
                                 <Form inline>
                                     <span>
                                         <div onClick={this.handleLogoutAdmin} className="btnType1">
-                                            Logout
-                    </div>
+                                            Logout 
+                                        </div> 
                                     </span>
                                 </Form>
                             </Nav>
@@ -822,12 +823,12 @@ class NavBar extends Component {
 
                 {/* Create a member account start */}
 
-                <Modal show={this.state.show3} className="CreateAccount">
+                <Modal show={this.state.show3} className="CreateAccount"> 
                     <Modal.Header>
                         <Button onClick={this.handleClose3}>
                             <Image src={Crossbtn} alt="" />
                         </Button>
-                    </Modal.Header>
+                    </Modal.Header> 
 
                     <Modal.Body>
                         <Container>

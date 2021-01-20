@@ -4,6 +4,7 @@ import Banner from "../landing/banner";
 import Conversations from "../landing/conversation";
 import Happypatient from "../landing/happyPatient";
 import Abouteat from "../landing/aboutEat";
+import Plans from "../landing/plans"; 
 import Supporting from "../landing/supporting";
 import Discussanything from "../landing/discussAnything";
 import SubscribeHere from "../landing/subscribes";
@@ -37,7 +38,7 @@ class Home extends Component {
           show5: true,
         });
       }
-      console.log(RESPMSG, STATUS);
+      console.log(RESPMSG, STATUS);  
     }
   }
   handlePaymentModal = () => {
@@ -46,15 +47,16 @@ class Home extends Component {
   handlePaymentClose = () => {
     this.setState({ show5: false });
   };
-  render() {
+  render() { 
     return (
       <div className="page__wrapper">
-        <div className="main_baner home_banner">
+        <div className="main_baner home_banner"> 
           <NavBar {...this.props} />
           <Banner />
         </div>
         <Conversations />
-        <Happypatient />
+        <Plans /> 
+        {/* <Happypatient /> */} 
         <Abouteat {...this.props} />
         <Supporting />
         <Discussanything {...this.props} /> 
@@ -74,7 +76,7 @@ class Home extends Component {
           </Button>
         </div> */}
 
-        <Modal show={this.state.show5} className="CreateAccount Payment">
+        <Modal show={this.state.show5} className="CreateAccount Payment"> 
           <Modal.Header>
             <Button onClick={this.handlePaymentClose}>
               <Image src={Crossbtn} alt="" />

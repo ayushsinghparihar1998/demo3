@@ -56,7 +56,7 @@
         .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
             line-height: 3.5rem; 
             font-size: 1rem;          
-            color: $col25 !important;
+            color: $col25 !important; 
         }
 
         .layout {
@@ -795,6 +795,9 @@
             }
         }
     }
+    .subscriptionplan {
+        border-top: solid 10px $col23; 
+    }
     .eat_category {
         margin-top: 20px;  
         span.eatcat {
@@ -1359,8 +1362,54 @@
             .ant-select {
                 max-width: 130px; 
             } 
+            .user_tab {
+                .nav-tabs {
+                    a {
+                        width: 130px;
+                        padding: 0.5rem 0;
+                        margin-right: 0.5rem;
+                        font-size: 15px;
+                    }
+                }
+            }
+            &.reviewrequest {
+                .requests {
+                    padding: 0 10px; 
+                }
+            }
+        }
+        .d-flex.text-left.border-grays {
+            div.mr-4 {
+                min-width: 50px; 
+            }    
         }
     }
+
+    .adminProfessinal {
+        .professor_search {
+            .pro_cbtn {
+                button.btnTyp5 {
+                    font-size: 14px; 
+                }
+            }
+            .checkCategory {
+                .form-check {
+                    margin-right: 15px; 
+                }
+            }
+            &.listBlogs {
+                .checkCategory {
+                    .checkthree.form-check {
+                        width: 110px;
+                        font-size: 13px;
+                        margin-right: 10px; 
+                    }
+                }
+            }
+        } 
+    } 
+
+
 }
 
 @media (max-width: 767px) {    
