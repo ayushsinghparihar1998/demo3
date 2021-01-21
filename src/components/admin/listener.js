@@ -1837,8 +1837,8 @@ class Adminlistener extends Component {
                                       <span className="pr-3 disabled">
                                         <Form.Check
                                           type="switch"
-                                          id="custom-switch"
-                                          name="custom-one"
+                                          id="custom-switchtwo"
+                                          name="custom-two"
                                           label="" 
                                         />
                                       </span>
@@ -1890,8 +1890,8 @@ class Adminlistener extends Component {
                                       <span className="pr-3 disabled">
                                         <Form.Check
                                           type="switch"
-                                          id="custom-switch"
-                                          name="custom-one"
+                                          id="custom-switchthree"
+                                          name="custom-three"
                                           label="" 
                                         />
                                       </span>
