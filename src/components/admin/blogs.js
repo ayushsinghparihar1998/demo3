@@ -39,7 +39,7 @@ class Blogs extends Component {
                 <div className="ngo_services media_details">
                     <Container>
                         <div>
-                            <span >
+                            <span> 
                                 <div style={{ width: '160px', marginTop: '20px', cursor: 'pointer' }} onClick={() => this.props.history.push('/createblog')} className="btnType1">
                                     CREATE BLOG
                                 </div>

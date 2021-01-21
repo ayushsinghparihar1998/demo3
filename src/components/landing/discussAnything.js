@@ -32,9 +32,9 @@ class Discussanything extends Component {
                                 </div>
 
 
-                                <Button variant="primary" className="btnTyp3 discussBtn mt-5" onClick={()=>this.setState({ show: true })}>
+                                {/* <Button variant="primary" className="btnTyp3 discussBtn mt-5" onClick={()=>this.setState({ show: true })}>
                                     Get Started
-                            </Button>
+                            </Button> */} 
                             </div>
                         </Col>
                     </Row>

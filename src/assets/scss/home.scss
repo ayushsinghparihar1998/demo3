@@ -5,11 +5,16 @@
     background-image: url('../images/banner_bg.png');  
     background-repeat: no-repeat;    
     background-size: cover;
-    position: relative;
+    position: relative; 
 
     &.home_banner { 
         min-height: 100vh;   
+
+        nav.navbar-light {
+            background: linear-gradient(180deg, $col18 0%, #CA5ACD 86.59%);  
+        }
     }
+    
     
     .baner1, .baner2, .baner3 { 
         background-repeat: no-repeat;
@@ -72,29 +77,54 @@
 .plans {
     position: relative; 
     .planList {
-        box-shadow: 4px 10px 21px rgba(0, 0, 0, 0.1);   
+        // box-shadow: 4px 10px 21px rgba(0, 0, 0, 0.1);  
+        box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
         border: solid 1px #eeeeee;  
         .planone {
             padding: 20px;
-            background: $col22; 
+            background: $col62; 
+        }
+        .plantwo {
+            padding: 20px;
+            border-bottom: 1px dashed $col14; 
+            padding-bottom: 30px; 
+            background-color: $col63; 
+
             .btnSave {
-                background: #e35c3c;
-                border: solid 1px red;
+                background: $col103;
+                border: solid 1px $col103; 
                 padding: 2px 10px;
                 border-radius: 0px;
                 font-weight: 600;
                 text-transform: uppercase;
                 font-size: 14px; 
+                color: $col29; 
             }
-        }
-        .plantwo {
-            padding: 20px;
-            border-bottom: 1px solid $col23; 
-            padding-bottom: 60px; 
         }
         .planpricing {
             position: relative;
-            padding: 20px; 
+            padding: 20px 30px 30px; 
+            background-color: $col63;
+            ul {
+                position: relative;
+                margin: 0; 
+                padding-left: 18px; 
+                li {
+                    list-style: square;
+                    font-weight: 300;
+                    margin-bottom: 10px;   
+                    color: $col29;               
+                }
+            }
+            .btnType1 {
+                background: $col10 !important;
+                border-color: $col10 !important; 
+                color: $col18 !important; 
+                text-transform: uppercase; 
+                height: 3.2rem !important; 
+                font-size: 18px !important;
+                font-weight: 500; 
+            }
         }
     }
 }
@@ -306,10 +336,10 @@
     .organise_carousel { 
         background-color: $col21; 
         border-radius: 50%;
-        max-width: 270px;
+        max-width: 230px;
         text-align: center;
         margin: auto;
-        height: 270px;
+        height: 230px;
         line-height: 221px;
         display: flex !important;
         img {
