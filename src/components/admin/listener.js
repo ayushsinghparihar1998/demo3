@@ -20,8 +20,8 @@ import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
-import Suser from "../../assets/images/s_images.png"; 
-import "react-datepicker/dist/react-datepicker.css"; 
+import Suser from "../../assets/images/s_images.png";
+import "react-datepicker/dist/react-datepicker.css";
 // import moment from "moment";
 import {
   Button,
@@ -56,7 +56,7 @@ import {
   getLocalStorage,
   range,
   setLocalStorage,
-} from "../../common/helpers/Utils"; 
+} from "../../common/helpers/Utils";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -101,6 +101,7 @@ class Adminlistener extends Component {
       },
       blogCategory: [],
       pressBlogCategory: [],
+      planList: [],
     };
   }
   componentDidMount() {
@@ -136,6 +137,11 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") == "getpressblogListHandler"
     )
       this.getpressblogListHandler(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminget_planlist"
+    )
+      this.superadminget_planlist(1, 10);
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -602,6 +608,41 @@ class Adminlistener extends Component {
         {
           pageType: "pressblogList",
           pressblogList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  superadminget_planlist = async (offset, count) => {
+    try {
+      let planList = [];
+      let result = await ELPViewApiService("superadminget_planlist", {
+        count: count,
+        offset: offset,
+      });
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        planList =
+          result && result.data && result.data.data
+            ? result.data.data.plan_listing
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "planList",
+          planList,
           totalRecordCount,
           count: count,
           offset: offset,
@@ -1219,6 +1260,10 @@ class Adminlistener extends Component {
       this.state.pageType == "blogList"
         ? "position-relative active"
         : "position-relative";
+    let planActveClass =
+      this.state.pageType == "planList"
+        ? "position-relative active"
+        : "position-relative";
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
     return (
@@ -1385,6 +1430,19 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={planActveClass}
+                        onClick={(e) => {
+                          this.superadminget_planlist(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> PLAN
+                          LIST
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
@@ -1411,7 +1469,7 @@ class Adminlistener extends Component {
                 </div>
               </Col>
 
-              {this.state.pageType == "userlist" ? ( 
+              {this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">
@@ -1671,6 +1729,167 @@ class Adminlistener extends Component {
                     </div>
                   </div>
                 </Col>
+              ) : this.state.pageType == "planList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">List of plans</div>
+                  </div>
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        defaultActiveKey="request"
+                        activeKey={this.state.key}
+                        onSelect={(key) => this.onChangeTab(key, "block")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.planList &&
+                              this.state.planList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 1)
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 2)
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        {/* <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                        {/* </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab> */}
+                        {/* <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                        {/* </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab> */}
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
               ) : this.state.pageType == "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -1900,13 +2119,24 @@ cs_time: "00:00:02" */}
                                           </div>
                                         </div>
                                         <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
-                                          <div className="text-right">Session with</div>  
-                                          <div className="pt-2 just_aligns text-right">  
-                                              <Image src={item.cs_pro_image ? item.cs_pro_image : Suser} className="mw35s r50"/>     
-                                              <span className="pl-2 col1 fw500 fs13">{item.cs_pro_name}</span> 
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
                                           </div>
                                         </div>
-                                      </div> 
+                                      </div>
 
                                       <div className="mt-3">
                                         <Button
@@ -1973,10 +2203,21 @@ cs_time: "00:00:02" */}
                                           Session with - {item.cs_pro_name}
                                         </div> */}
                                         <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
-                                          <div className="text-right">Session with</div>  
-                                          <div className="pt-2 just_aligns text-right">  
-                                              <Image src={item.cs_pro_image ? item.cs_pro_image : Suser} className="mw35s r50"/>     
-                                              <span className="pl-2 col1 fw500 fs13">{item.cs_pro_name}</span> 
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
                                           </div>
                                         </div>
                                       </div>
@@ -2021,10 +2262,21 @@ cs_time: "00:00:02" */}
                                           Session with - {item.cs_pro_name}
                                         </div> */}
                                         <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
-                                          <div className="text-right">Session with</div>  
-                                          <div className="pt-2 just_aligns text-right">  
-                                              <Image src={item.cs_pro_image ? item.cs_pro_image : Suser} className="mw35s r50"/>     
-                                              <span className="pl-2 col1 fw500 fs13">{item.cs_pro_name}</span> 
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
                                           </div>
                                         </div>
                                       </div>
@@ -2198,7 +2450,7 @@ cs_time: "00:00:02" */}
                           </Form.Group>
                         </Col>
 
-                        <Col md="12" lg="6"> 
+                        <Col md="12" lg="6">
                           <Button
                             variant="primary process_btn"
                             type="button"
@@ -2333,7 +2585,7 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                     </div>*/}
-                                  </div> 
+                                  </div>
 
                                   <div className="fs14 fw400 col14 pb-1">
                                     <strong>Age:</strong> {item.u_birthdate}{" "}
@@ -2434,7 +2686,7 @@ cs_time: "00:00:02" */}
                             this.changepath(`/adddomain/0`, "getDomainListing")
                           }
                         >
-                          Add Domain 
+                          Add Domain
                         </Button>
                       </div>
                     </div>
@@ -2613,8 +2865,8 @@ cs_time: "00:00:02" */}
                   </div>
                 </Col>
               ) : this.state.pageType == "pressblogList" ? (
-                <Col md={8} lg={9} className="pl-1"> 
-                  <div className="professor_search listBlogs"> 
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search listBlogs">
                     <Row className="mb-1">
                       <Col md={8}>
                         <div className="fs22 fw600 col10">
@@ -2780,7 +3032,7 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : this.state.pageType == "blogList" ? (
-                <Col md={8} lg={9} className="pl-1">           
+                <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
@@ -2870,7 +3122,7 @@ cs_time: "00:00:02" */}
                                 alt=""
                               />
                             </div>
-                            <div className="pl-2 w-100"> 
+                            <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
@@ -2935,19 +3187,19 @@ cs_time: "00:00:02" */}
                                     ></span>
                                   </div>
 
-                                  <div className="eat_category">   
+                                  <div className="eat_category">
                                     {item.blog_category.map((val) => {
                                       return (
-                                        <span 
-                                          className={  
+                                        <span
+                                          className={
                                             val.buc_cat_name == "Eat"
                                               ? "eatcat"
                                               : val.buc_cat_name == "Luv"
                                               ? "luvcat"
-                                              : "praycat" 
+                                              : "praycat"
                                           }
                                         >
-                                          {val.buc_cat_name} 
+                                          {val.buc_cat_name}
                                         </span>
                                       );
                                     })}
@@ -2961,7 +3213,7 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : (
-                <Col md={8} lg={9} className="pl-1"> 
+                <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Rating Requests</div>
                   </div>
