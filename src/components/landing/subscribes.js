@@ -11,9 +11,9 @@ class SubscribeHere extends Component {
                         <Col md={6} lg={6}>
                             <div className="subscribe_left"> 
                                 <div>                
-                                    <div className="fs36 col64 fw600 w-100">Subscribe Here</div> 
+                                    <div className="fs30 col64 fw600 w-100">Download our FREE guide now!</div> 
                                     <div className="col14 fs20 fw300 w-100">  
-                                        Get updates about Eat Luv N Pray
+                                    Looking  to implement corporate wellness in your organization?
                                     </div> 
                                 </div>
                             </div> 

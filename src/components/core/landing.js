@@ -58,8 +58,8 @@ class Home extends Component {
         <Plans /> 
         {/* <Happypatient /> */} 
         <Abouteat {...this.props} />
-        <Supporting />
-        <Discussanything {...this.props} /> 
+        <Discussanything {...this.props} />
+        <Supporting /> 
         <SubscribeHere />
 
         {/* <div className="subscribe_here">

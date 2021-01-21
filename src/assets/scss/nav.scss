@@ -11,8 +11,8 @@
     
                 .navbar-nav {
                      a.nav-link {  
-                        color: $col18;
-                        text-transform: capitalize; 
+                        color: $col3;
+                        text-transform: capitalize;  
                     }
                     a > span.comings {  
                         color: #333; 
@@ -40,7 +40,7 @@
         }
     }
 
-    .btnTyp5.talkBtn {
+    .btnTyp5.talkBtn {  
         position: relative;
         background: transparent !important;
         border: solid 1px $col18 !important;
@@ -51,11 +51,11 @@
             border: solid 1px $col18 !important;
         }
     }
-    .btnTyp5.talkBtntwo {
+    .btnTyp5.talkBtntwo { 
         background: $col18 !important; 
         border: solid 1px $col18 !important;  
         color: $col10 !important; 
-        padding: 0 1rem;
+        padding: 0 1.5rem; 
         height: 3rem;
 
         &:hover, &:focus {

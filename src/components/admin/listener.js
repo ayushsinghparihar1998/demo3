@@ -1730,166 +1730,193 @@ class Adminlistener extends Component {
                   </div>
                 </Col>
               ) : this.state.pageType == "planList" ? (
-                <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-3">
-                    <div className="fs22 fw600 col10">List of plans</div>
-                  </div>
-                  <div className="myprofile reviewrequest">
-                    <div className="text-center user_tab">
-                      <Tabs
-                        defaultActiveKey="request"
-                        activeKey={this.state.key}
-                        onSelect={(key) => this.onChangeTab(key, "block")}
-                      >
-                        <Tab eventKey="request" title="Requested">
-                          <div className="requests">
-                            {this.state.planList &&
-                              this.state.planList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
 
-                                      <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
-                                        {/* <span className="col40 fw500 pointer">
-                                          Read more...
-                                        </span> */}
-                                      </div>
+                <Col md={8} lg={9} className="pl-1"> 
+                <div className="professor_search">
+                  <Row className="mb-3">
+                    <Col md={8}>
+                      <div className="fs22 fw600 col10">
+                      Subscription Plan
+                      </div>
+                    </Col>
+                    <Col md={4}>
+                      <div className="text-right pro_cbtn">
+                        <Button
+                          type="button"
+                          className="btnTyp5"
+                        >
+                          ADD plan
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row> 
 
-                                      <div className="mt-3">
-                                        <Button
-                                          className="btnTyp9 approve mr-4"
-                                          onClick={() =>
-                                            this.blockUserStatus(item.br_id, 1)
-                                          }
-                                        >
-                                          APPROVE
-                                        </Button>
-                                        <Button
-                                          className="btnTyp9 reject"
-                                          onClick={() =>
-                                            this.blockUserStatus(item.br_id, 2)
-                                          }
-                                        >
-                                          REJECT
-                                        </Button>
-                                      </div>
-                                    </div>
+                </div>
+
+                
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div
+                                    className="col1 fw600 fs18 pb-1"
+                                  >
+                                    Basic
                                   </div>
-                                );
-                              })}
-                          </div>
-                        </Tab>
-                        {/* <Tab eventKey="completed" title="COMPLETED">
-                          <div className="requests">
-                            {this.state.blockList &&
-                              this.state.blockList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
 
-                                      <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
-                                        {/* <span className="col40 fw500 pointer">
-                                          Read more...
-                                        </span> */}
-                        {/* </div>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                          </div>
-                        </Tab> */}
-                        {/* <Tab eventKey="reject" title="REJECTED">
-                          <div className="requests">
-                            {this.state.blockList &&
-                              this.state.blockList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
+                                </div> 
 
-                                      <div className="col28 fs14 fw400 pt-1">
-                                        {item.br_comment}{" "}
-                                        {/* <span className="col40 fw500 pointer">
-                                          Read more...
-                                        </span> */}
-                        {/* </div>
+                                <div className="fs15 fw500 col14 pb-1">
+                                    Rs. 5,900
+                                </div>
+                                <div className="fs15 col14 fw400"> 
+                                   Lorem dummy content Lorem Ipsum is simply dummy text
+                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
+                                </div>
+                              </div>
+
+                              <div className="min-wi250"> 
+                                  <div className="d-flex ml-auto justify-content-end">  
+                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id="custom-switch"
+                                          name="custom-one"
+                                          label="" 
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""  
+                                        />
+                                      </span>
+                                      <span>  
+                                        <Image src={Deleteicon} alt="" /> 
+                                      </span> 
                                     </div>
-                                  </div>
-                                );
-                              })}
+                              </div>
+
+                            </div>
                           </div>
-                        </Tab> */}
-                      </Tabs>
-                    </div>
-                  </div>
-                </Col>
+                        </div>
+
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div
+                                    className="col1 fw600 fs18 pb-1"
+                                  >
+                                    Standard
+                                  </div>
+
+                                </div> 
+
+                                <div className="fs15 fw500 col14 pb-1">
+                                    Rs. 5,900
+                                </div>
+                                <div className="fs15 col14 fw400"> 
+                                   Lorem dummy content Lorem Ipsum is simply dummy text
+                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
+                                </div>
+                              </div>
+
+                              <div className="min-wi250"> 
+                                  <div className="d-flex ml-auto justify-content-end">  
+                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id="custom-switchtwo"
+                                          name="custom-two"
+                                          label="" 
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""  
+                                        />
+                                      </span>
+                                      <span>  
+                                        <Image src={Deleteicon} alt="" /> 
+                                      </span> 
+                                    </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3"> 
+                        <div className="d-flex text-left">
+                          
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div
+                                    className="col1 fw600 fs18 pb-1"
+                                  >
+                                    Premium
+                                  </div>
+
+                                </div> 
+
+                                <div className="fs15 fw500 col14 pb-1">
+                                    Rs. 5,900
+                                </div>
+                                <div className="fs15 col14 fw400"> 
+                                   Lorem dummy content Lorem Ipsum is simply dummy text
+                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
+                                </div>
+                              </div>
+
+                              <div className="min-wi250"> 
+                                  <div className="d-flex ml-auto justify-content-end">  
+                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id="custom-switchthree"
+                                          name="custom-three"
+                                          label="" 
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""  
+                                        />
+                                      </span>
+                                      <span>  
+                                        <Image src={Deleteicon} alt="" /> 
+                                      </span> 
+                                    </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    
+              </Col>
+
+
+              
               ) : this.state.pageType == "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">

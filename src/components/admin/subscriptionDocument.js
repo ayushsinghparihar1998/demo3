@@ -65,11 +65,10 @@ class SubscriptionDocument extends Component {
                         {/* {errors.cd_domain_name} */}
                       </div>
                     </Form.Group> 
-                    
+
                     <Button
                       variant="primary btnTyp5 mt-4"
-                      type="button"
-                      onClick={() => this.handleSubmit()}> 
+                      type="button">  
                       UPLOAD 
                     </Button> 
 
