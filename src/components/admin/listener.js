@@ -65,6 +65,7 @@ class Adminlistener extends Component {
       activeProfile: "listner",
       profileListing: [],
       deleteConformationModal: false,
+      deletePlanConformationModal: false,
       profileId: "",
       pageNumber: customPagination.paginationPageNumber,
       totalRecord: 0,
@@ -744,6 +745,8 @@ class Adminlistener extends Component {
         this.getpressblogListHandler(page, this.state.count);
       } else if (this.state.pageType == "domainList") {
         this.getDomainListing(page, this.state.count);
+      } else if (this.state.pageType == "planList") {
+        this.superadminget_planlist(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
           page,
@@ -864,6 +867,17 @@ class Adminlistener extends Component {
     this.setState({
       deleteConformationModal: false,
       profileId: "",
+    });
+  };
+  handleClosePlanConformation = () => {
+    this.setState({
+      deletePlanConformationModal: false,
+    });
+  };
+  handleOpenPlanConformation = (obj) => {
+    this.setState({
+      deletePlanConformationModal: true,
+      deletePlan: obj ? obj.pl_title : "",
     });
   };
 
@@ -1058,6 +1072,15 @@ class Adminlistener extends Component {
       this.setState({ deleteConformationModal: false });
       if (result && result.status === 200) {
         this.getDomainListing(this.state.pageno, this.state.count);
+      }
+    });
+  };
+  modifyPlanContent = (item, api, status) => {
+    let data = { pl_id: item.pl_id, pl_status: status };
+    ELPViewApiService(api, data).then((result) => {
+      this.setState({ deletePlanConformationModal: false });
+      if (result && result.status === 200) {
+        this.superadminget_planlist(this.state.pageno, this.state.count);
       }
     });
   };
@@ -1529,7 +1552,7 @@ class Adminlistener extends Component {
                                 </div>
                                 <div className="mt-auto mb-auto d-flex">
                                   <span className="pr-3 fs14 col47 fw400">
-                                    {item.u_status ? "Active" : "Inactive"}
+                                    {item.u_status == '1' ? "Deactivate" : "Activate"}
                                   </span>
                                   <span className="pr-3 disabled">
                                     <Form.Check
@@ -1730,193 +1753,116 @@ class Adminlistener extends Component {
                   </div>
                 </Col>
               ) : this.state.pageType == "planList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-3">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Subscription Plan
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath(
+                                "/addSubscription/0",
+                                "superadminget_planlist"
+                              )
+                            }
+                          >
+                            ADD plan
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
 
-                <Col md={8} lg={9} className="pl-1"> 
-                <div className="professor_search">
-                  <Row className="mb-3">
-                    <Col md={8}>
-                      <div className="fs22 fw600 col10">
-                      Subscription Plan
-                      </div>
-                    </Col>
-                    <Col md={4}>
-                      <div className="text-right pro_cbtn">
-                        <Button
-                          type="button"
-                          className="btnTyp5"
-                        >
-                          ADD plan
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row> 
-
-                </div>
-
-                
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div
-                                    className="col1 fw600 fs18 pb-1"
-                                  >
-                                    Basic
+                  {/* pl_datetime: "2021-01-20 15:29:03"
+pl_desc_details: "Silver plan to buy"
+pl_discount_price: "2400"
+pl_id: "4"
+pl_price: "3000"
+pl_save: "20"
+pl_status: "1"
+pl_title: "Platinum Plan new" */}
+                  {this.state.planList &&
+                    this.state.planList.map((item, index) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1">
+                                      {item.pl_title}
+                                    </div>
                                   </div>
 
-                                </div> 
-
-                                <div className="fs15 fw500 col14 pb-1">
-                                    Rs. 5,900
+                                  <div className="fs15 fw500 col14 pb-1">
+                                    Rs. {item.pl_price}
+                                    {/* Rs. {item.pl_discount_price} */}
+                                  </div>
+                                  <div className="fs15 col14 fw400">
+                                    {item.pl_desc_details}{" "}
+                                    {/* <a className="col40">Read more...</a> */}
+                                  </div>
                                 </div>
-                                <div className="fs15 col14 fw400"> 
-                                   Lorem dummy content Lorem Ipsum is simply dummy text
-                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
+
+                                <div className="min-wi250">
+                                  <div className="d-flex ml-auto justify-content-end">
+                                    <span className="pr-3 fs14 col47 fw400">
+                                      {item.pl_status == "2" ? "Enable" : "Disable"}
+                                    </span>
+                                    <span className="pr-3 disabled">
+                                      <Form.Check
+                                        type="switch"
+                                        id={"custom-switch" + index}
+                                        name={"status" + index}
+                                        label=""
+                                        onClick={(e) => {
+                                          this.modifyPlanContent(
+                                            item,
+                                            "superadminchange_planstatus",
+                                            item.pl_status == "1" ? "2" : "1"
+                                          );
+                                        }}
+                                        checked={item.pl_status == "1"}
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        onClick={() =>
+                                          this.changepath(
+                                            "/addSubscription/" + item.pl_id,
+                                            "superadminget_planlist"
+                                          )
+                                        }
+                                        src={Editicon}
+                                        alt=""
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        onClick={(e) => {
+                                          this.handleOpenPlanConformation(item);
+                                        }}
+                                        src={Deleteicon}
+                                        alt=""
+                                      />
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-
-                              <div className="min-wi250"> 
-                                  <div className="d-flex ml-auto justify-content-end">  
-                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
-                                      <span className="pr-3 disabled">
-                                        <Form.Check
-                                          type="switch"
-                                          id="custom-switch"
-                                          name="custom-one"
-                                          label="" 
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Editicon}
-                                          alt=""  
-                                        />
-                                      </span>
-                                      <span>  
-                                        <Image src={Deleteicon} alt="" /> 
-                                      </span> 
-                                    </div>
-                              </div>
-
                             </div>
                           </div>
                         </div>
-
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div
-                                    className="col1 fw600 fs18 pb-1"
-                                  >
-                                    Standard
-                                  </div>
-
-                                </div> 
-
-                                <div className="fs15 fw500 col14 pb-1">
-                                    Rs. 5,900
-                                </div>
-                                <div className="fs15 col14 fw400"> 
-                                   Lorem dummy content Lorem Ipsum is simply dummy text
-                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
-                                </div>
-                              </div>
-
-                              <div className="min-wi250"> 
-                                  <div className="d-flex ml-auto justify-content-end">  
-                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
-                                      <span className="pr-3 disabled">
-                                        <Form.Check
-                                          type="switch"
-                                          id="custom-switchtwo"
-                                          name="custom-two"
-                                          label="" 
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Editicon}
-                                          alt=""  
-                                        />
-                                      </span>
-                                      <span>  
-                                        <Image src={Deleteicon} alt="" /> 
-                                      </span> 
-                                    </div>
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3"> 
-                        <div className="d-flex text-left">
-                          
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div
-                                    className="col1 fw600 fs18 pb-1"
-                                  >
-                                    Premium
-                                  </div>
-
-                                </div> 
-
-                                <div className="fs15 fw500 col14 pb-1">
-                                    Rs. 5,900
-                                </div>
-                                <div className="fs15 col14 fw400"> 
-                                   Lorem dummy content Lorem Ipsum is simply dummy text
-                                   of the printing and typesetting industry. <a className="col40">Read more...</a>
-                                </div>
-                              </div>
-
-                              <div className="min-wi250"> 
-                                  <div className="d-flex ml-auto justify-content-end">  
-                                      <span className="pr-3 fs14 col47 fw400">Enable</span>
-                                      <span className="pr-3 disabled">
-                                        <Form.Check
-                                          type="switch"
-                                          id="custom-switchthree"
-                                          name="custom-three"
-                                          label="" 
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Editicon}
-                                          alt=""  
-                                        />
-                                      </span>
-                                      <span>  
-                                        <Image src={Deleteicon} alt="" /> 
-                                      </span> 
-                                    </div>
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    
-              </Col>
-
-
-              
+                      );
+                    })}
+                </Col>
               ) : this.state.pageType == "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -2529,8 +2475,8 @@ cs_time: "00:00:02" */}
                                     <div className="d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
                                         {item.u_status == "1"
-                                          ? "Active"
-                                          : "Inactive"}
+                                          ? "Deactivate"
+                                          : "Activate"}
                                       </span>
                                       <span className="pr-3 disabled">
                                         <Form.Check
@@ -2766,8 +2712,8 @@ cs_time: "00:00:02" */}
                                     </span>
                                     <span className="pr-2 fs13 col47 fw500">
                                       {item.cd_status == 1
-                                        ? "Active"
-                                        : "Inactive"}
+                                        ? "Deactivate"
+                                        : "Activate"}
                                     </span>
                                   </div>
 
@@ -3552,6 +3498,50 @@ cs_time: "00:00:02" */}
               </div>
             </Modal.Body>
           </Modal>
+
+          <Modal
+            show={this.state.deletePlanConformationModal}
+            onHide={this.handleClosePlanConformation}
+            className="custom-popUp confirmation-box delete_modal"
+            bsSize="small"
+          >
+            <Modal.Body>
+              <div className="delete_user mt-4">
+                <Image src={Deleteusers} alt="" />
+                <Image
+                  src={Blueicons}
+                  alt=""
+                  className="close pointer"
+                  onClick={this.handleClosePlanConformation}
+                />
+                <div className="text-center fs24 mt-4 col64 mb-4">
+                  Are you sure want to delete <br /> {this.state.deletePlan}?{" "}
+                </div>
+
+                <div className="text-center mb-5">
+                  <button
+                    className="btn btn-success text-uppercase"
+                    onClick={(event) =>
+                      this.modifyPlanContent(
+                        "",
+                        "superadmindelete_planstatus",
+                        2
+                      )
+                    }
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn btn-default text-uppercase sm-btn"
+                    onClick={this.handleClosePlanConformation}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+
           {this.state.pageType == "userlist" &&
           totalRecord &&
           totalRecord > customPagination.paginationPageSize ? (

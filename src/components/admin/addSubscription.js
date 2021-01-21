@@ -50,17 +50,17 @@ class addSubscription extends Component {
   };
   getPlanDetails = () => {
     let data = {
-      cd_id: this.props.match.params.id,
+      pl_id: this.props.match.params.id,
     };
 
-    ELPViewApiService("superadmingetcorporatedomaindetailsbyid", data).then(
+    ELPViewApiService("superadmin_getplandetails", data).then(
       (result) => {
         console.log("result", result);
         let planObj = {};
         if (result && result.status === 200) {
           planObj =
             result && result.data && result.data.data
-              ? result.data.data.plan_details_list[0]
+              ? result.data.data[0]
               : [];
         }
 
@@ -123,13 +123,13 @@ class addSubscription extends Component {
     console.log(name, value);
     let planObj = this.state.planObj;
     planObj[name] =
-      name == "cd_audio_min" || name == "cd_video_min"
+      name == "pl_price" || name == "pl_save"
         ? value.replace(/[^0-9]/g, "")
-        : // : name == "cd_audio_status" || name == "cd_video_status"
+        : // : name == "pl_audio_status" || name == "pl_video_status"
           // ? value == "Active"
           //   ? "1"
           //   : "0"
-          value.trim();
+          value;
     this.setState(
       {
         planObj,
