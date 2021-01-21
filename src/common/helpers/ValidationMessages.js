@@ -109,4 +109,16 @@ export default {
   image: {
     required: "Please upload a blog image.",
   },
+  pl_title: {
+    required: "Please enter a plan title.",
+  },
+  pl_price: {
+    required: "Please enter price.",
+  },
+  pl_desc_details: {
+    required: "Please enter plan description.",
+  },
+  pl_save: {
+    required: "Please enter plan offer.",
+  },
 };
