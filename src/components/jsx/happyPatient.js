@@ -4,7 +4,7 @@ import Testimonials from '../../assets/images/testimonial.svg';
 import Inverted from '../../assets/images/inverted-commas1.svg';
 import Invertedtwo from '../../assets/images/inverted-commas2.svg';
 
-class Happypatient extends Component { 
+class Happypatient extends Component {  
   render() {
     return (
         <div className="happyPatient">    
