@@ -26,12 +26,14 @@ class Banner extends Component {
                                     Eat - If you don't make time for your wellness, you will be forced to make time for your Illness. 
                               </div>
                                <div className="mt-4">   
-                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us
+                                    </Button> 
                                     <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                     </Button> 
+                                    <span className="fs13 col13 coming_m">Coming soon</span>
                               </div>
                         </Carousel.Item>  
-                        <Carousel.Item>            
+                        <Carousel.Item>                  
                         {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
                             <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Luv Often</div>
                                <div className="fw300 col64 fs20 mb-5">  
@@ -41,11 +43,12 @@ class Banner extends Component {
                                 <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
                                 <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                 </Button> 
+                                <span className="fs13 col13 coming_m">Coming soon</span>
                             </div>
                         </Carousel.Item> 
-                        <Carousel.Item>            
+                        <Carousel.Item>              
                        
-                        <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Pray Always</div>    
+                        <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Pray Always</div>      
                              <div className="fw300 col64 fs20 mb-5">
                                   Pray - Let's take a few minutes to day our prayer for the world to heal and come together in these difficult times. Please be safe.
                              </div>  
@@ -53,6 +56,7 @@ class Banner extends Component {
                                     <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button>  
                                     <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                     </Button>  
+                                    <span className="fs13 col13 coming_m">Coming soon</span> 
                                 </div> 
                         </Carousel.Item> 
                     </Carousel>
@@ -72,7 +76,7 @@ class Banner extends Component {
                             <Image src={usercomment} alt="" className="pt-3 user_set" />
                         </div>
                     </Col>
-                    <Col md={3} col={12} className="mb-5">    
+                    <Col md={3} col={12} className="mb-5">     
                         <div className="baner3 bannerset">
                             <Image src={therapy} alt="" className="pt-2" />
                             <div className="fs18 fw600 col7 pt-2">Professional Help</div> 
@@ -90,7 +94,7 @@ class Banner extends Component {
                         </div>
                     </Col>
                     <Col md={3} col={12}>     
-                        <Image src={women} alt="" className="w-100" />  
+                        <Image src={women} alt="" className="w-100" />   
                     </Col>
                 </Row>
 
@@ -99,4 +103,4 @@ class Banner extends Component {
     }
 }
 
-export default Banner;
+export default Banner; 
