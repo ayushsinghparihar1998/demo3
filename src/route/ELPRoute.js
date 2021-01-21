@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Landing from "../components/core/landing";  
+import Landing from "../components/core/landing";
 import Login from "../components/login/Login";
 // import Login from '../components/login/Login';
 import ProfessionalLogin from "../components/login/professionalLogin";
@@ -76,7 +76,7 @@ import ProfessionalSignup from "../components/professional/professionalSignup";
 import ProfessionalModify from "../components/professional/professionalModify.js";
 
 // import ProfessionalList from "../components/admin/professionalList";
-import listenerBrowse from "../components/professional/listenerBrowse"
+import listenerBrowse from "../components/professional/listenerBrowse";
 // import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain";
 import DomainDetail from "../components/admin/domainDetail";
@@ -88,15 +88,15 @@ import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser";
 // ProfessionalBlog
 import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
-import ProfessinalBlogPress from "../components/admin/professionalBlogPress";   
-// import AdminBlogListing from "../components/admin/adminBlogListing";  
-// import AdminPressListing from "../components/admin/adminPressListing";                                           
+import ProfessinalBlogPress from "../components/admin/professionalBlogPress";
+// import AdminBlogListing from "../components/admin/adminBlogListing";
+// import AdminPressListing from "../components/admin/adminPressListing";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";
-import addSubscriptions from "../components/admin/addSubscription"; 
-import SubscriptionDocument from "../components/admin/subscriptionDocument"
-import SubscriptionPlan from "../components/admin/subscriptionPlan"; 
+import addSubscriptions from "../components/admin/addSubscription";
+import SubscriptionDocument from "../components/admin/subscriptionDocument";
+import SubscriptionPlan from "../components/admin/subscriptionPlan";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -132,17 +132,12 @@ class ELPRoute extends Component {
             path="/professionalLogin"
             component={ProfessionalLogin}
           />
-          {/* <PublicRoute
-            path="/professionalSignup"
-            component={professionalSignup}
-          /> */}
+        
           <PublicRoute path="/logout" component={Chat} />
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
           <PublicRoute path="/userotp" component={Userotp} />
           <PublicRoute path="/menu" component={Menubar} />
-          {/* <PublicRoute path="/adminlogin" component={Adminlogin} />  */}
-          {/* <PublicRoute path="/admin" component={Adminlistener} />  */}
           <PublicRoute path="/admin" component={Adminlistener} />
           <PrivateRoutes path="/userprofile" component={Userprofiledetail} />
           {/* LIst */}
@@ -155,31 +150,29 @@ class ELPRoute extends Component {
           <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} /> */}
-          {/* LIst */}
-          {/* <PublicRoute path="/reviewrequest" component={Reviewrequest} />   */}
-          {/* <PublicRoute path="/ratingrequest" component={Ratingrequest} /> */}
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
             component={ProfessionalDetails}
           />
-          <PublicRoute 
+          <PublicRoute
             path="/professionalSignup"
             component={ProfessionalSignup}
           />
-          <PublicRoute 
+          <PublicRoute
             path="/professionalModify/:id"
             component={ProfessionalModify}
           />
-          {/* <PublicRoute path="/professionalList" component={ProfessionalList} /> */}
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
           {/* <PublicRoute path="/paymentdetail" component={Paymentdetail} /> */}
           {/* <PublicRoute path="/corporateMember" component={CorporateMember} /> */}
           <PublicRoute path="/addDomain/:id" component={AddDomain} />
-          <PublicRoute path="/domainDetails/:name/:id" component={DomainDetail} />
+          <PublicRoute
+            path="/domainDetails/:name/:id"
+            component={DomainDetail}
+          />
           {/* <PublicRoute path="/domainListing" component={DomainListing} /> */}
           {/* <PublicRoute path="/sessionRequest" component={SessionRequest} /> */}
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
@@ -190,24 +183,36 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
-          <PublicRoute path="/professionalBlogList" component={ProfessionalBlogList} />
+          <PublicRoute
+            path="/professionalBlogList"
+            component={ProfessionalBlogList}
+          />
           <PublicRoute path="/blogUser" component={BlogUser} />
           {/* <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
           <PublicRoute path="/adminPressListing" component={AdminPressListing} />     */}
-          <PublicRoute path="/addSubscription" component={addSubscriptions} />  
-          <PublicRoute path="/subscriptionDocument" component={SubscriptionDocument} />   
-          <PublicRoute path="/subscriptionPlan" component={SubscriptionPlan} />    
+          <PublicRoute path="/addSubscription/:id" component={addSubscriptions} />
+          <PublicRoute
+            path="/subscriptionDocument"
+            component={SubscriptionDocument}
+          />
+          <PublicRoute path="/subscriptionPlan/:id" component={SubscriptionPlan} />
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
-          <PublicRoute path="/professinalBlogCreate/:id" component={ProfessinalBlogCreate} />
-          <PublicRoute path="/professinalBlogPress/:id" component={ProfessinalBlogPress} />               
+          <PublicRoute
+            path="/professinalBlogCreate/:id"
+            component={ProfessinalBlogCreate}
+          />
+          <PublicRoute
+            path="/professinalBlogPress/:id"
+            component={ProfessinalBlogPress}
+          />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
 
           {/* List */}
-          <PrivateRouteList path="/userDashboard" component={Userdashboard} /> 
-          <PrivateRouteList path="/chat/:id" component={Chat} />  
+          <PrivateRouteList path="/userDashboard" component={Userdashboard} />
+          <PrivateRouteList path="/chat/:id" component={Chat} />
 
           {/* <PrivateRouteList path="/calendarListener" component={CalendarDemo} /> */}
           <Route
@@ -219,7 +224,7 @@ class ELPRoute extends Component {
             render={(props) => <Privacypolicy {...props} />}
           />
           <Route
-             path="/professionalListing"
+            path="/professionalListing"
             render={(props) => <ProfessionalLsting {...props} />}
           />
           <Route
@@ -230,17 +235,31 @@ class ELPRoute extends Component {
           <Route path="/faq" render={(props) => <Faq {...props} />} />
           <Route path="/campaign" render={(props) => <Compaign {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
-          <Route path='/professional/:id/detail' render={(props) => <ProfessionalDetails {...props} />} />
-          <Route path='/blogsDetail/:id' render={(props) => <BlogDetail {...props} />} />
-          <Route path='/press/blogsDetail/:id' render={(props) => <PressBlogDetail {...props} />} />
+          <Route
+            path="/professional/:id/detail"
+            render={(props) => <ProfessionalDetails {...props} />}
+          />
+          <Route
+            path="/blogsDetail/:id"
+            render={(props) => <BlogDetail {...props} />}
+          />
+          <Route
+            path="/press/blogsDetail/:id"
+            render={(props) => <PressBlogDetail {...props} />}
+          />
           {/* <Route path='/blogs' render={(props) => <Media {...props} />} /> */}
-          
 
           {/* <PrivateRouteList path="/termcondition" component={Termcondition} /> */}
           {/* <PrivateRouteList path="/" component={} /> */}
           {/* Proff */}
-          <Route path='/press' render={(props) => <ProfessionalBlog {...props} />} />
-          <Route path='/blogs' render={(props) => <ProfessionalBlogList {...props} />} />
+          <Route
+            path="/press"
+            render={(props) => <ProfessionalBlog {...props} />}
+          />
+          <Route
+            path="/blogs"
+            render={(props) => <ProfessionalBlogList {...props} />}
+          />
           <PrivateRouteProff
             path="/userDashboardproff"
             component={UserdashboardProff}
@@ -254,8 +273,11 @@ class ELPRoute extends Component {
           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
           <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRoutes path="/listener-browse" component={listenerBrowse} />
-          
-          <Route path="/chatuser/:id" render={(props) => <ChatUser {...props}/>}  />
+
+          <Route
+            path="/chatuser/:id"
+            render={(props) => <ChatUser {...props} />}
+          />
 
           <PrivateRouteProff path="/chatproff/:id" component={ChatProff} />
           <PrivateRoutes path="/mysetting" component={MySetting} />
@@ -279,7 +301,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/admin" component={Adminlistener} />
           {/* <PublicRoute path="/adminlisting" component={Reviewrequest} /> */}
           <PublicRoute path="/blogs" component={Media} />
-         
+
           {/* <PublicRoute path="/createblog" component={Createblogs} />
           <PublicRoute path="/blogsDetail" component={BlogDetail} /> */}
           <PublicRoute path="/categoryadmin" component={Categoryadmin} />
@@ -295,6 +317,3 @@ class ELPRoute extends Component {
   }
 }
 export default ELPRoute;
-
-
-

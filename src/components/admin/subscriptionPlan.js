@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationPlanAdd";
 
-class subscriptionPlan extends Component {  
+class subscriptionPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,17 +29,16 @@ class subscriptionPlan extends Component {
       records: 10,
       totalCount: "",
 
-      domainObj: {
-        cd_domain_name: "",
-        cd_audio_min: "",
-        cd_video_min: "",
-        cd_audio_status: "",
-        cd_video_status: "",
+      planObj: {
+        pl_title: "",
+        pl_price: "",
+        pl_desc_details: "",
+        pl_save: "",
       },
 
       count: 10,
       offset: 1,
-      errors: {},
+      errors: { pl_title: "", pl_price: "", pl_desc_details: "", pl_save: "" },
     };
   }
   componentDidMount = () => {
@@ -57,21 +56,20 @@ class subscriptionPlan extends Component {
     ELPViewApiService("superadmingetcorporatedomaindetailsbyid", data).then(
       (result) => {
         console.log("result", result);
-        let domainObj = {};
+        let planObj = {};
         if (result && result.status === 200) {
-          domainObj =
+          planObj =
             result && result.data && result.data.data
-              ? result.data.data.domain_details_list[0]
+              ? result.data.data.plan_details_list[0]
               : [];
         }
-        domainObj.cd_audio_min = "" + domainObj.cd_audio_min / 60;
-        domainObj.cd_video_min = "" + domainObj.cd_video_min / 60;
+
         this.setState(
           {
-            domainObj,
+            planObj,
           },
           () => {
-            console.log("domainObj", this.state.domainObj);
+            console.log("planObj", this.state.planObj);
           }
         );
       }
@@ -83,24 +81,16 @@ class subscriptionPlan extends Component {
         showLoader: true,
       });
 
-      let domainObj = this.state.domainObj;
-      let data = {
-        cd_domain_name: domainObj.cd_domain_name,
-        cd_audio_min: domainObj.cd_audio_min * 60,
-        cd_video_min: domainObj.cd_video_min * 60,
-        cd_audio_status: domainObj.cd_audio_status,
-        cd_video_status: domainObj.cd_video_status,
-      };
+      let data = this.state.planObj;
       console.log(data);
 
       if (this.props.match.params.id > 0) {
-        data.cd_id = this.props.match.params.id;
-        data.cd_domain_name = "";
+        data.pl_id = this.props.match.params.id;
       }
       ELPViewApiService(
         this.props.match.params.id == 0
-          ? "superadminaddcorporatedomain"
-          : "superadmineditcorporatedomain",
+          ? "superadminadd_plan"
+          : "superadminedit_plan",
         data
       )
         .then((result) => {
@@ -131,8 +121,8 @@ class subscriptionPlan extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
-    let domainObj = this.state.domainObj;
-    domainObj[name] =
+    let planObj = this.state.planObj;
+    planObj[name] =
       name == "cd_audio_min" || name == "cd_video_min"
         ? value.replace(/[^0-9]/g, "")
         : // : name == "cd_audio_status" || name == "cd_video_status"
@@ -142,23 +132,24 @@ class subscriptionPlan extends Component {
           value.trim();
     this.setState(
       {
-        domainObj,
+        planObj,
       },
       () => {
-        console.log(this.state.domainObj);
+        console.log(this.state.planObj);
       }
     );
   };
   isValid() {
-    const { errors, isValid } = validateInput(this.state.domainObj);
+    const { errors, isValid } = validateInput(this.state.planObj);
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
     return isValid;
   }
-  render() { 
-    return ( 
-      <div className="page__wrapper innerpage"> 
+  render() {
+    const { planObj, errors } = this.state;
+    return (
+      <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -181,72 +172,91 @@ class subscriptionPlan extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1"> 
-                <div className="corporateMember subscriptionplan">  
+              <Col md={9} className="pl-1">
+                <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                        Subscription Plan
+                    {this.props.match.params.id == 0 ? "Add " : "Update "}
+                    Subscription Plan
                   </div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                          Plan Name
+                        Plan Name
                       </Form.Label>
 
-                      <Form.Control 
-                        type="email"
+                      <Form.Control
+                        type="text"
                         placeholder=""
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="cd_domain_name"
-                        
+                        name="pl_title"
+                        value={planObj.pl_title}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={50}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {/* {errors.cd_domain_name} */}
+                        {errors.pl_title}
                       </div>
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                         Plan Amount
+                        Plan Amount
                       </Form.Label>
                       <Form.Control
                         type="text"
                         className="inputTyp2"
                         placeholder=""
                         id="outlined-email"
-                        variant="outlined" 
+                        variant="outlined"
+                        name="pl_price"
+                        value={planObj.pl_price}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={5}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {/* {errors.cd_audio_min} */}
-                      </div>
-                    </Form.Group> 
-
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14"> 
-                           Plan Description
-                      </Form.Label>
-                      <Form.Control as="textarea" rows={3} className="inputTyp2 cate2" /> 
-                      <div className="col27 fs14 fw400 mt-2 error">  
-                        {/* {errors.cd_audio_min} */}
+                        {errors.pl_price}
                       </div>
                     </Form.Group>
 
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14"> 
-                           Plan Offer(%)
+                      <Form.Label className="fs20 fw600 col14">
+                        Plan Description
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        className="inputTyp2 cate2"
+                        name="pl_desc_details"
+                        value={planObj.pl_desc_details}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={500}
+                      />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.pl_desc_details}
+                      </div>
+                    </Form.Group>
+
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Plan Offer(%)
                       </Form.Label>
                       <Form.Control
                         type="text"
                         className="inputTyp2"
                         placeholder=""
                         id="outlined-email"
-                        variant="outlined" 
+                        variant="outlined"
+                        name="pl_save"
+                        value={planObj.pl_save}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={2}
                       />
-                      <div className="col27 fs14 fw400 mt-2 error">  
-                        {/* {errors.cd_audio_min} */}
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.pl_save}
                       </div>
-                    </Form.Group> 
-                     
+                    </Form.Group>
+
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
@@ -266,4 +276,4 @@ class subscriptionPlan extends Component {
   }
 }
 
-export default subscriptionPlan;  
+export default subscriptionPlan;
