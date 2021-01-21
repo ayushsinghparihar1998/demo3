@@ -1596,11 +1596,18 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  superadmin_getplandetails: {
+    url: "elp/superadmin_getplandetails",
+    method: "POST",
+    data: { pl_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   superadminget_planlist: {
     url: "elp/superadminget_planlist",
     method: "POST",
     data: { count: "", offset: "" },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   superadminchange_planstatus: {

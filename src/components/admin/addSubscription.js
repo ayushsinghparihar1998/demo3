@@ -17,13 +17,139 @@ import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
+import validateInput from "../../common/validations/validationPlanAdd";
 
-class addSubscriptions extends Component {
+class addSubscription extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageType: "",
+      paymentList: [],
+      pageno: 1,
+      records: 10,
+      totalCount: "",
+
+      planObj: {
+        pl_title: "",
+        pl_price: "",
+        pl_desc_details: "",
+        pl_save: "",
+      },
+
+      count: 10,
+      offset: 1,
+      errors: { pl_title: "", pl_price: "", pl_desc_details: "", pl_save: "" },
+    };
+  }
+  componentDidMount = () => {
+    console.log(this.props.match.params.id);
+    console.log(this.props);
+    if (this.props.match.params.id > 0) {
+      this.getPlanDetails();
+    }
+  };
+  getPlanDetails = () => {
+    let data = {
+      pl_id: this.props.match.params.id,
+    };
+
+    ELPViewApiService("superadmin_getplandetails", data).then(
+      (result) => {
+        console.log("result", result);
+        let planObj = {};
+        if (result && result.status === 200) {
+          planObj =
+            result && result.data && result.data.data
+              ? result.data.data[0]
+              : [];
+        }
+
+        this.setState(
+          {
+            planObj,
+          },
+          () => {
+            console.log("planObj", this.state.planObj);
+          }
+        );
+      }
+    );
+  };
+  handleSubmit = () => {
+    if (this.isValid()) {
+      this.setState({
+        showLoader: true,
+      });
+
+      let data = this.state.planObj;
+      console.log(data);
+
+      if (this.props.match.params.id > 0) {
+        data.pl_id = this.props.match.params.id;
+      }
+      ELPViewApiService(
+        this.props.match.params.id == 0
+          ? "superadminadd_plan"
+          : "superadminedit_plan",
+        data
+      )
+        .then((result) => {
+          if (result && result.data && result.data.status === "success") {
+            // this.props.history.push("/admin");
+            setTimeout(() => {
+              this.props.history.push("/admin");
+            }, 1000);
+            this.clear();
+          } else {
+            this.setState({
+              showLoader: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            showLoader: false,
+          });
+        });
+    } else {
+      this.setState({
+        showLoader: false,
+      });
+    }
+  };
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    let planObj = this.state.planObj;
+    planObj[name] =
+      name == "pl_price" || name == "pl_save"
+        ? value.replace(/[^0-9]/g, "")
+        : // : name == "pl_audio_status" || name == "pl_video_status"
+          // ? value == "Active"
+          //   ? "1"
+          //   : "0"
+          value;
+    this.setState(
+      {
+        planObj,
+      },
+      () => {
+        console.log(this.state.planObj);
+      }
+    );
+  };
+  isValid() {
+    const { errors, isValid } = validateInput(this.state.planObj);
+    if (!isValid) {
+      this.setState({ errors }, () => console.log(this.state.errors));
+    }
+    return isValid;
+  }
   render() {
-    
+    const { planObj, errors } = this.state;
     return (
-      <div className="page__wrapper innerpage"> 
+      <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -46,72 +172,91 @@ class addSubscriptions extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1"> 
-                <div className="corporateMember subscriptionplan">  
+              <Col md={9} className="pl-1">
+                <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                        Subscription Plan
+                    {this.props.match.params.id == 0 ? "Add " : "Update "}
+                    Subscription Plan
                   </div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                          Plan Name
+                        Plan Name
                       </Form.Label>
 
-                      <Form.Control 
-                        type="email"
+                      <Form.Control
+                        type="text"
                         placeholder=""
                         className="inputTyp2"
                         id="outlined-email"
                         variant="outlined"
-                        name="cd_domain_name"
-                        
+                        name="pl_title"
+                        value={planObj.pl_title}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={50}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {/* {errors.cd_domain_name} */}
+                        {errors.pl_title}
                       </div>
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                         Plan Amount
+                        Plan Amount
                       </Form.Label>
                       <Form.Control
                         type="text"
                         className="inputTyp2"
                         placeholder=""
                         id="outlined-email"
-                        variant="outlined" 
+                        variant="outlined"
+                        name="pl_price"
+                        value={planObj.pl_price}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={5}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {/* {errors.cd_audio_min} */}
-                      </div>
-                    </Form.Group> 
-
-                    <Form.Group>
-                      <Form.Label className="fs20 fw600 col14"> 
-                           Plan Description
-                      </Form.Label>
-                      <Form.Control as="textarea" rows={3} className="inputTyp2 cate2" /> 
-                      <div className="col27 fs14 fw400 mt-2 error">  
-                        {/* {errors.cd_audio_min} */}
+                        {errors.pl_price}
                       </div>
                     </Form.Group>
 
                     <Form.Group>
-                      <Form.Label className="fs20 fw600 col14"> 
-                           Plan Offer(%)
+                      <Form.Label className="fs20 fw600 col14">
+                        Plan Description
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        className="inputTyp2 cate2"
+                        name="pl_desc_details"
+                        value={planObj.pl_desc_details}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={500}
+                      />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.pl_desc_details}
+                      </div>
+                    </Form.Group>
+
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Plan Offer(%)
                       </Form.Label>
                       <Form.Control
                         type="text"
                         className="inputTyp2"
                         placeholder=""
                         id="outlined-email"
-                        variant="outlined" 
+                        variant="outlined"
+                        name="pl_save"
+                        value={planObj.pl_save}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={2}
                       />
-                      <div className="col27 fs14 fw400 mt-2 error">  
-                        {/* {errors.cd_audio_min} */}
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.pl_save}
                       </div>
-                    </Form.Group> 
-                     
+                    </Form.Group>
+
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
@@ -131,4 +276,4 @@ class addSubscriptions extends Component {
   }
 }
 
-export default addSubscriptions; 
+export default addSubscription;

@@ -39,7 +39,13 @@ class CorporateMember extends Component {
 
       count: 10,
       offset: 1,
-      errors: {},
+      errors: {
+        cd_domain_name: "",
+        cd_audio_min: "",
+        cd_video_min: "",
+        cd_audio_status: "",
+        cd_video_status: "",
+      },
     };
   }
   componentDidMount = () => {
@@ -313,4 +319,4 @@ class CorporateMember extends Component {
   }
 }
 
-export default CorporateMember; 
+export default CorporateMember;

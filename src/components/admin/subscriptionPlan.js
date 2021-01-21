@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationPlanAdd";
 
-class subscriptionPlan extends Component {  
+class subscriptionPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,17 +29,16 @@ class subscriptionPlan extends Component {
       records: 10,
       totalCount: "",
 
-      domainObj: {
-        cd_domain_name: "",
-        cd_audio_min: "",
-        cd_video_min: "",
-        cd_audio_status: "",
-        cd_video_status: "",
+      planObj: {
+        pl_title: "",
+        pl_price: "",
+        pl_desc_details: "",
+        pl_save: "",
       },
 
       count: 10,
       offset: 1,
-      errors: {},
+      errors: { pl_title: "", pl_price: "", pl_desc_details: "", pl_save: "" },
     };
   }
   componentDidMount = () => {
@@ -57,21 +56,20 @@ class subscriptionPlan extends Component {
     ELPViewApiService("superadmingetcorporatedomaindetailsbyid", data).then(
       (result) => {
         console.log("result", result);
-        let domainObj = {};
+        let planObj = {};
         if (result && result.status === 200) {
-          domainObj =
+          planObj =
             result && result.data && result.data.data
-              ? result.data.data.domain_details_list[0]
+              ? result.data.data.plan_details_list[0]
               : [];
         }
-        domainObj.cd_audio_min = "" + domainObj.cd_audio_min / 60;
-        domainObj.cd_video_min = "" + domainObj.cd_video_min / 60;
+
         this.setState(
           {
-            domainObj,
+            planObj,
           },
           () => {
-            console.log("domainObj", this.state.domainObj);
+            console.log("planObj", this.state.planObj);
           }
         );
       }
@@ -83,24 +81,16 @@ class subscriptionPlan extends Component {
         showLoader: true,
       });
 
-      let domainObj = this.state.domainObj;
-      let data = {
-        cd_domain_name: domainObj.cd_domain_name,
-        cd_audio_min: domainObj.cd_audio_min * 60,
-        cd_video_min: domainObj.cd_video_min * 60,
-        cd_audio_status: domainObj.cd_audio_status,
-        cd_video_status: domainObj.cd_video_status,
-      };
+      let data = this.state.planObj;
       console.log(data);
 
       if (this.props.match.params.id > 0) {
-        data.cd_id = this.props.match.params.id;
-        data.cd_domain_name = "";
+        data.pl_id = this.props.match.params.id;
       }
       ELPViewApiService(
         this.props.match.params.id == 0
-          ? "superadminaddcorporatedomain"
-          : "superadmineditcorporatedomain",
+          ? "superadminadd_plan"
+          : "superadminedit_plan",
         data
       )
         .then((result) => {
@@ -131,8 +121,8 @@ class subscriptionPlan extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
-    let domainObj = this.state.domainObj;
-    domainObj[name] =
+    let planObj = this.state.planObj;
+    planObj[name] =
       name == "cd_audio_min" || name == "cd_video_min"
         ? value.replace(/[^0-9]/g, "")
         : // : name == "cd_audio_status" || name == "cd_video_status"
@@ -142,23 +132,24 @@ class subscriptionPlan extends Component {
           value.trim();
     this.setState(
       {
-        domainObj,
+        planObj,
       },
       () => {
-        console.log(this.state.domainObj);
+        console.log(this.state.planObj);
       }
     );
   };
   isValid() {
-    const { errors, isValid } = validateInput(this.state.domainObj);
+    const { errors, isValid } = validateInput(this.state.planObj);
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
     return isValid;
   }
-  render() { 
-    return ( 
-      <div className="page__wrapper innerpage"> 
+  render() {
+    const { planObj, errors } = this.state;
+    return (
+      <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -313,4 +304,4 @@ class subscriptionPlan extends Component {
   }
 }
 
-export default subscriptionPlan;  
+export default subscriptionPlan;
