@@ -30,12 +30,12 @@ class Banner extends Component {
                                     </Button> 
                                     <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                     </Button> 
-                                    <span className="fs13 col13 coming_m">Coming soon</span>
+                                    {/* <span className="fs13 col13 coming_m">Coming soon</span> */}
                               </div>
                         </Carousel.Item>  
                         <Carousel.Item>                  
                         {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
-                            <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Luv Often</div>
+                            <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Luv Often</div> 
                                <div className="fw300 col64 fs20 mb-5">  
                                     Luv - I am stronger than Depression and I am braver than Loneliness and nothing will ever exhaust me
                               </div>
@@ -43,7 +43,7 @@ class Banner extends Component {
                                 <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
                                 <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                 </Button> 
-                                <span className="fs13 col13 coming_m">Coming soon</span>
+                                {/* <span className="fs13 col13 coming_m">Coming soon</span> */}
                             </div>
                         </Carousel.Item> 
                         <Carousel.Item>              
@@ -56,7 +56,7 @@ class Banner extends Component {
                                     <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button>  
                                     <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
                                     </Button>  
-                                    <span className="fs13 col13 coming_m">Coming soon</span> 
+                                    {/* <span className="fs13 col13 coming_m">Coming soon</span>  */}
                                 </div> 
                         </Carousel.Item> 
                     </Carousel>
