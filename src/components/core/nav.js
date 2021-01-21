@@ -516,7 +516,7 @@ class NavBar extends Component {
                                         </a>,
                                             <a
                                                 onClick={() => this.verifyInCallNavigation("/campaign")}
-                                                className="nav-link"
+                                                className="nav-link donatebtns"
                                             >
                                                 Donate
                                         </a>,
@@ -602,7 +602,7 @@ class NavBar extends Component {
                                             <br />
                                                 <span className="comings">coming soon</span>
                                             </NavLink>,
-                                            <NavLink to="/campaign" className="nav-link">
+                                            <NavLink to="/campaign" className="nav-link donatebtns">
                                                 Donate
                                         </NavLink>,
                                             // <Nav.Link > Media</Nav.Link>,

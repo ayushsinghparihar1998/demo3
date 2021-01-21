@@ -13,6 +13,11 @@
                      a.nav-link {  
                         color: $col3;
                         text-transform: capitalize;  
+                        &.donatebtns {
+                            border: solid 1px $col64;  
+                            max-height: 40px;
+                            border-radius: 30px;  
+                        } 
                     }
                     a > span.comings {  
                         color: #333; 
@@ -20,11 +25,11 @@
                 }
             }     
             .btnTypeone {   
-                background: $col18 !important;
-                border-color: $col18 !important;
-                color: $col10 !important; 
+                background: $col10 !important;
+                border-color: $col10 !important;
+                color: $col10 !important;
                 & > a {
-                    color: $col10 !important; 
+                    color: $col18 !important; 
                 }
             }
             img.elplogo {
@@ -43,25 +48,29 @@
     .btnTyp5.talkBtn {  
         position: relative;
         background: transparent !important;
-        border: solid 1px $col18 !important;
+        border: solid 1px $col64 !important;
         height: 3rem;
+        color: $col64 !important;
+        font-weight: 500 !important;
 
         &:hover, &:focus {
             background: transparent !important;
-            border: solid 1px $col18 !important;
+            border: solid 1px $col64 !important; 
         }
     }
-    .btnTyp5.talkBtntwo { 
-        background: $col18 !important; 
-        border: solid 1px $col18 !important;  
-        color: $col10 !important; 
-        padding: 0 1.5rem; 
+    .btnTyp5.talkBtntwo {  
+        background: $col10 !important; 
+        border: solid 1px $col10 !important;   
+        color: $col18 !important; 
+        padding: 0 1.5rem;  
         height: 3rem;
+        color: $col18;
+        font-weight: 500 !important;
 
-        &:hover, &:focus {
-            background: $col18 !important; 
-            border: solid 1px $col18 !important;  
-            color: $col10 !important;  
+        &:hover, &:focus { 
+            background: $col10 !important; 
+            border: solid 1px $col10 !important;  
+            color: $col18 !important;  
         }
     }
 }

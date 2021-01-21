@@ -1,17 +1,18 @@
 @import 'color.scss';
 @import 'fonts.scss'; 
 
-.main_baner {
+.main_baner { 
     background-image: url('../images/banner_bg.png');  
     background-repeat: no-repeat;    
     background-size: cover;
     position: relative; 
 
-    &.home_banner { 
-        min-height: 100vh;   
+    &.home_banner {   
+        min-height: 100vh; 
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 10.21%, rgba(235, 35, 233, 0.65) 98.2%); 
 
         nav.navbar-light {
-            background: linear-gradient(180deg, $col18 0%, #CA5ACD 86.59%);  
+            // background: linear-gradient(180deg, $col18 0%, #CA5ACD 86.59%); 
         }
     }
     
@@ -35,15 +36,15 @@
     .baner3 {
         background-image: url('../images/community4.svg'); 
     }
-    .header2banner {      
+    .header2banner {       
         & > img {      
             position: absolute;
-            bottom: -35px;
+            bottom: 0; 
             right: 0;
             max-width: 750px;        
         }
     }
-    .ptn-170 {    
+    .ptn-170 {     
         padding-top: 170px !important; 
     }
 }
@@ -109,6 +110,8 @@
                 position: relative;
                 margin: 0; 
                 padding-left: 18px; 
+                max-height: 95px;
+                overflow: auto;
                 li {
                     list-style: square;
                     font-weight: 300;
@@ -149,7 +152,8 @@
     background-size: cover;   
     text-align: center; 
     padding: 3rem 0 5rem;  
-    background: $col96;  
+    // background: $col96;
+    background: #EFEFEF; 
 
     .carousel-inner {   
         max-width: 70%;
@@ -186,6 +190,12 @@
         }
     }
 
+    .main_caro {
+        padding: 0 50px;
+        position: relative; 
+        text-align: left;
+    }
+
     .italic_style {
         font-style: normal; 
         width: 100%;
@@ -195,15 +205,19 @@
         .txt_testi {
             font-size: 16px;
         }
+        .italic_item {
+            font-style: italic; 
+        }
         .invertedone { 
             // position: absolute;
             // left: -56px;
             // top: 8px;
             // max-width: 50px;
             position: absolute;
-            left: -38px;
-            top: 26px;
-            max-width: 40px;         
+            left: -55px;
+            top: 40px;
+            max-width: 40px; 
+            top: 50px;       
         }
 
         .invertedtwo {
@@ -211,10 +225,12 @@
             // right: 8%; 
             // top: 114px; 
             // max-width: 50px;
-            position: relative;       
-            right: -15px;
-            top: 0;
-            max-width: 40px;
+            position: absolute;
+            right: -40px; 
+            left: auto;
+            top: auto;
+            bottom: -17px;
+            max-width: 40px; 
         }
     }
 
@@ -335,13 +351,15 @@
 
     .organise_carousel { 
         background-color: $col21; 
-        border-radius: 50%;
+        border-radius: 0;
         max-width: 230px;
         text-align: center;
         margin: auto;
         height: 230px;
         line-height: 221px;
         display: flex !important;
+        border: solid 1px #eee; 
+        padding: 30px; 
         img {
             text-align: center;
             margin: auto;
@@ -412,7 +430,7 @@ img {
     .main_baner {
         .header2banner {
             & > img {
-                bottom: -26px;
+                bottom: 0;
                 max-width: 620px;
             }
         } 
@@ -896,7 +914,7 @@ img {
         }
         .header2banner {
             & > img {
-                bottom: -26px;
+                bottom: 0;
                 max-width: 560px;
             }
         } 
@@ -1115,7 +1133,7 @@ img {
 
         .header2banner {
             & > img {
-                    bottom: -19px;
+                    bottom: 0;
                     max-width: 400px; 
                     position: relative; 
             }
@@ -1347,7 +1365,7 @@ img {
     .main_baner {
         .header2banner {
             & > img { 
-                bottom: -14px;
+                bottom: 0;
                 max-width: 300px;
                 position: relative;
             }
@@ -1359,7 +1377,7 @@ img {
     .main_baner {
         .header2banner {
             & > img { 
-                bottom: -14px;
+                bottom: 0;
                 max-width: 300px;
                 position: relative; 
             }
@@ -1371,7 +1389,7 @@ img {
     .main_baner {
         .header2banner {
             & > img { 
-                bottom: -11px;
+                bottom: 0;
                 max-width: 255px;
                 position: relative; 
             }

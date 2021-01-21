@@ -55,10 +55,11 @@ class Home extends Component {
           <Banner />
         </div>
         <Conversations />
-        <Plans /> 
-        {/* <Happypatient /> */} 
+        <Plans />  
+        
         <Abouteat {...this.props} />
         <Discussanything {...this.props} />
+        <Happypatient />  
         <Supporting /> 
         <SubscribeHere />
 

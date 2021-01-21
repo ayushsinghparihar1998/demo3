@@ -47,7 +47,7 @@ class Abouteat extends Component {
             <div className="aboutEats" id="about_us_container">
                 <Container>
                     <Row>
-                        <Col md={12} lg={10} className="m-auto">          
+                        <Col md={12} lg={12} className="m-auto">            
                             <div className="fs40 col14 fw600 w-100">About Eat Luv N Pray</div> 
                             <div className="col14 fs16 fw300 w-100 pt-3">
                                 {/* <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>

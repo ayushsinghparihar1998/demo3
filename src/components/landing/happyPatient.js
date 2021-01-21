@@ -3,17 +3,59 @@ import { Nav, NavDropdown, Carousel, Navbar, Form, FormControl, Button, Image, C
 import Testimonials1 from '../../assets/images/user_1.JPG';
 import Testimonials2 from '../../assets/images/user_2.JPG';
 import Inverted from '../../assets/images/inverted-commas1.svg';
-import Invertedtwo from '../../assets/images/inverted-commas2.svg';
+import Invertedtwo from '../../assets/images/inverted-commas2.svg'; 
 
-class Happypatient extends Component {      
-    render() {
+class Happypatient extends Component {         
+    render() { 
         return (
             <div className="happyPatient">    
                 <Container>
-                    <div className="fs40 col14 fw600 w-100">Happy Users</div> 
-                    <div className="col14 fs20 fw400 w-100 pt-3 mb-5">What people say about us. Here are comments from individuals who have visited Counselor.</div> 
+                    <div className="fs40 col14 fw600 w-100">Happy Patient</div> 
+                    <div className="col14 fs20 fw400 w-100 pt-3 mb-5 pb-2">             
+                        What people say about us. Here are comments from individuals who have visited Counselor.    
+                    </div> 
                     
-                    <Carousel>
+                    <Row> 
+                         <Col md={6}> 
+                             <div className="main_caro">
+                                <div className="fs17 italic_style col11 fw400 mb-5"> 
+                                    {/* <div className="profileImage">
+                                        <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
+                                    </div>  */}
+                                    <div className="fs17 col12 fw500 mb-1 italic_item">Abraham Jhone | IT Manager</div>
+                                    <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
+                                    <Image src={Inverted} alt="" className="invertedone" />
+                                    <div className="txt_testi italic_item fs15 mt-2"> 
+                                    After my parents both suffered from some tragic events recently. Iwas all cloaked in depression. Thank god such a good therapists as these exist, helping people in severely anxious conditions to spring back to a normal way of life!
+                                    </div>
+                                    <Image src={Invertedtwo} alt="" className="invertedtwo" />
+                                </div> 
+                                
+                            </div>
+                         </Col> 
+                         <Col md={6}>
+                             <div className="main_caro">
+                                <div className="fs17 italic_style col11 fw400 mb-5"> 
+                                    {/* <div className="profileImage">  
+                                        <Image src={Testimonials1} alt="" className="mb-2" />
+                                    </div>  */}
+                                    <div className="fs16 col12 fw500 mb-1 italic_item"> 
+                                        Jihaan Advani | Events & Membership Head
+                                    </div>   
+                                    <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>   
+                                    <Image src={Inverted} alt="" className="invertedone" />
+                                    <div className="txt_testi italic_item fs15 mt-2"> 
+                                    After my parents both suffered from some tragic events recently. Iwas all cloaked in depression. Thank god such a good therapists as these exist, helping people in severely anxious conditions to spring back to a normal way of life!
+                                    </div> 
+                                    <Image src={Invertedtwo} alt="" className="invertedtwo" />                         
+                                </div>
+                            
+                                
+                             </div>
+                         </Col>  
+                    </Row>
+
+                    <Carousel className="d-none">   
                         <Carousel.Item> 
                             <div className="fs17 italic_style col11 fw400 mb-5">
                                 <div className="profileImage">
@@ -45,6 +87,10 @@ such a wonderful experience.</div>
                         </Carousel.Item> 
 
                     </Carousel>
+
+                   
+
+                    
                 </Container>
             </div>
         )

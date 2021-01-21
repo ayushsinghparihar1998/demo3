@@ -1803,10 +1803,15 @@ pl_title: "Platinum Plan new" */}
                                   </div>
 
                                   <div className="fs15 fw500 col14 pb-1">
-                                    Rs. {item.pl_price}
-                                    {/* Rs. {item.pl_discount_price} */}
+                                      <span className="priceone pr-1">Amount: Rs. 
+                                          <strong className="fw700">{item.pl_price}</strong>
+                                      </span> | 
+                                      {/* Rs. {item.pl_discount_price} */}
+                                      <span className="pricetwo pl-2">Offer: 
+                                          <strong className="fw700 pl-1">{item.pl_save}%</strong> 
+                                      </span> 
                                   </div>
-                                  <div className="fs15 col14 fw400">
+                                  <div className="fs15 col14 fw400"> 
                                     {item.pl_desc_details}{" "}
                                     {/* <a className="col40">Read more...</a> */}
                                   </div>

@@ -4,16 +4,52 @@ import { getLocalStorage } from "../../common/helpers/Utils";
 import { connect } from 'react-redux';
 import validationSubscribe from '../../common/validations/validationSubscribe'; 
 import { actionSubscribe } from '../../common/redux/actions'; 
+import Slider from "react-slick";
 
-class Plans extends Component {     
+class Plans extends Component {        
     render() {   
-        return (
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          };
+        return ( 
             <div className="plans mt-4 mb-4">   
                 <Container>  
                     <div className="fs40 col64 fw600 w-100 mb-2 text-center">Subscription Plans</div> 
                     <div className="text-center fw300 fs22 col14 mb-4 pb-2">What people say about us. Here are comments from individuals who have visited Counselor.
                     </div> 
-                    <Row>
+                    {/* start end */}
+                    
+
+
+                    {/* <div>
+        <h2> Single Item</h2>
+        <Slider {...settings}>
+          <div>
+            <h3>1</h3>
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+          <div>
+            <h3>5</h3>
+          </div>
+          <div>
+            <h3>6</h3>
+          </div>
+        </Slider>
+      </div> */}
+
+                    <Row className="d-nones"> 
                         <Col md={4} lg={4}>          
                             <div className="planList">
                                 <div className="planone">
