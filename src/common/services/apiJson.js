@@ -1660,7 +1660,7 @@ export default {
     url: "elp/get_planlist",
     method: "POST",
     data: { count: 10, offset: 1 },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
 };
