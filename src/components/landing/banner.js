@@ -25,12 +25,16 @@ class Banner extends Component {
                               <div className="fw300 col64 fs20 mb-5">
                                     Eat - If you don't make time for your wellness, you will be forced to make time for your Illness. 
                               </div>
-                               <div className="mt-4">   
-                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us
+                               <div className="mt-4 d-flex">    
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">
+                                        Talk to us 
                                     </Button> 
-                                    <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
-                                    </Button> 
-                                    {/* <span className="fs13 col13 coming_m">Coming soon</span> */}
+                                    <div>
+                                        <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">
+                                            Wellness assessment tests
+                                        </Button> 
+                                        <div className="fs14 col14 coming_m text-center mt-2">Coming soon</div> 
+                                    </div> 
                               </div>
                         </Carousel.Item>  
                         <Carousel.Item>                  
@@ -39,12 +43,17 @@ class Banner extends Component {
                                <div className="fw300 col64 fs20 mb-5">  
                                     Luv - I am stronger than Depression and I am braver than Loneliness and nothing will ever exhaust me
                               </div>
-                            <div className="mt-4"> 
-                                <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button> 
-                                <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
-                                </Button> 
-                                {/* <span className="fs13 col13 coming_m">Coming soon</span> */}
-                            </div>
+                              <div className="mt-4 d-flex">    
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">
+                                        Talk to us 
+                                    </Button> 
+                                    <div>
+                                        <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">
+                                            Wellness assessment tests
+                                        </Button> 
+                                        <div className="fs14 col14 coming_m text-center mt-2">Coming soon</div>
+                                    </div> 
+                              </div>
                         </Carousel.Item> 
                         <Carousel.Item>              
                        
@@ -52,12 +61,17 @@ class Banner extends Component {
                              <div className="fw300 col64 fs20 mb-5">
                                   Pray - Let's take a few minutes to day our prayer for the world to heal and come together in these difficult times. Please be safe.
                              </div>  
-                                <div className="mt-4">  
-                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">Talk to us</Button>  
-                                    <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">Wellness assessment tests
-                                    </Button>  
-                                    {/* <span className="fs13 col13 coming_m">Coming soon</span>  */}
-                                </div> 
+                                <div className="mt-4 d-flex">    
+                                    <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">
+                                        Talk to us 
+                                    </Button> 
+                                    <div>
+                                        <Button type="submit" className="btnTyp5 talkBtntwo fs18 fw400">
+                                            Wellness assessment tests
+                                        </Button> 
+                                        <div className="fs14 col14 coming_m text-center mt-2">Coming soon</div>
+                                    </div> 
+                               </div> 
                         </Carousel.Item> 
                     </Carousel>
                     </Col>

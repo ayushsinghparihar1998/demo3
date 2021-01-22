@@ -17,12 +17,14 @@ import validationSubscribe from "../../common/validations/validationSubscribe";
 import { actionSubscribe } from "../../common/redux/actions";
 import Slider from "react-slick";
 import ELPViewApiService from "../../common/services/apiService";
+import { Link } from "react-router-dom";
 
 class Plans extends Component {
   constructor(props) {
     super(props);
     this.state = {
       workData: "",
+      email: "",
     };
   }
   componentDidMount = () => {
@@ -32,7 +34,7 @@ class Plans extends Component {
     let _this = this;
     // usersubscriber,
 
-    ELPViewApiService("get_planlist")
+    ELPViewApiService("get_planlist", {})
       .then((response) => {
         if (response && response.data && response.data.status === "success") {
           let data = response.data.data;
@@ -46,6 +48,11 @@ class Plans extends Component {
       });
   };
 
+  handlePath() {
+    this.props.history.push({
+      pathname: "coming-soon",
+    });
+  }
   render() {
     const settingstwo = {
       dots: true,
@@ -101,7 +108,9 @@ class Plans extends Component {
                             </div>
                           </div>
                           <Button className="btnType1 d-block w-100 mt-4">
-                            Buy Now
+                            <Link to={{ pathname: `/coming-soon` }}>
+                              Buy Now
+                            </Link>
                           </Button>
                           {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -136,101 +145,10 @@ class Plans extends Component {
                                          </ul>
                                     </div>
                                     <Button className="btnType1 d-block w-100 mt-4">Buy Now</Button> 
-                                    <div className="fs14 col29 fw400 text-center mt-2">COMING SOON</div> 
-                                </div>
+                                    {/* <div className="fs14 col29 fw400 text-center mt-2">COMING SOON</div>  */}
+              {/* </div>
                             </div>
-                        </div>
-
-                        <div className="items"> 
-                            <div className="planList">
-                                <div className="planone">
-                                    <div className="fs24 fw600 col29 text-center">PREMIUM</div> 
-                                </div>
-                                <div className="plantwo text-center"> 
-                                    <div className="d-flex justify-content-center mb-3">
-                                        <Button className="btnSave">Save 4%</Button>  
-                                    </div> 
-                                    <div className="mt-4 pt-2">     
-                                        <div className="col14 fs17 fw400"><del>Rs. 6,299</del></div>    
-                                        <div className="col29 fs32 fw600">Rs. 5,999</div> 
-                                        <div className="col14 fs17 fw400">Per year</div> 
-                                    </div>
-                                </div>
-                                <div className="planpricing"> 
-                                    <div className="w-100 justify-content-between"> 
-                                         <div className="fs14 fw500 col29 mt-2 mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry..</div> 
-                                         <ul>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                         </ul>
-                                    </div>
-                                    <Button className="btnType1 d-block w-100 mt-4">Buy Now</Button> 
-                                    <div className="fs14 col29 fw400 text-center mt-2">COMING SOON</div> 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="items"> 
-                            <div className="planList">
-                                <div className="planone">
-                                    <div className="fs24 fw600 col29 text-center">BASIC</div> 
-                                </div>
-                                <div className="plantwo text-center"> 
-                                    <div className="d-flex justify-content-center mb-3">
-                                        <Button className="btnSave">Save 4%</Button>  
-                                    </div> 
-                                    <div className="mt-4 pt-2">     
-                                        <div className="col14 fs17 fw400"><del>Rs. 6,299</del></div>    
-                                        <div className="col29 fs32 fw600">Rs. 5,999</div> 
-                                        <div className="col14 fs17 fw400">Per year</div> 
-                                    </div>
-                                </div>
-                                <div className="planpricing"> 
-                                    <div className="w-100 justify-content-between"> 
-                                         <div className="fs14 fw500 col29 mt-2 mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry..</div> 
-                                         <ul>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                         </ul>
-                                    </div>
-                                    <Button className="btnType1 d-block w-100 mt-4">Buy Now</Button> 
-                                    <div className="fs14 col29 fw400 text-center mt-2">COMING SOON</div> 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="items"> 
-                            <div className="planList"> 
-                                <div className="planone">
-                                    <div className="fs24 fw600 col29 text-center">STANDARD</div>  
-                                </div>
-                                <div className="plantwo text-center"> 
-                                    <div className="d-flex justify-content-center mb-3">
-                                        <Button className="btnSave">Save 4%</Button>  
-                                    </div> 
-                                    <div className="mt-4 pt-2">     
-                                        <div className="col14 fs17 fw400"><del>Rs. 6,299</del></div>    
-                                        <div className="col29 fs32 fw600">Rs. 5,999</div> 
-                                        <div className="col14 fs17 fw400">Per year</div> 
-                                    </div>
-                                </div>
-                                <div className="planpricing"> 
-                                    <div className="w-100 justify-content-between"> 
-                                         <div className="fs14 fw500 col29 mt-2 mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry..</div> 
-                                         <ul>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                             <li>It is a long established fact </li>
-                                         </ul>
-                                    </div>
-                                    <Button className="btnType1 d-block w-100 mt-4">Buy Now</Button> 
-                                    <div className="fs14 col29 fw400 text-center mt-2">COMING SOON</div> 
-                                </div>
-                            </div>
-                        </div>
-                         */}
+                        </div> */}
             </Slider>
           </div>
         </Container>
