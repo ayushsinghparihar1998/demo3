@@ -67,10 +67,10 @@ class Plans extends Component {
           <div className="fs40 col64 fw600 w-100 mb-2 text-center">
             Subscription Plans
           </div>
-          <div className="text-center fw300 fs22 col14 mb-4 pb-4">
+          {/* <div className="text-center fw300 fs22 col14 mb-4 pb-4">
             What people say about us. Here are comments from individuals who
             have visited Counselor.
-          </div>
+          </div> */}
           {/* start end */}
 
           <div>
@@ -91,14 +91,14 @@ class Plans extends Component {
                               Save {item.pl_save}%
                             </Button>
                           </div>
-                          <div className="pt-1"> 
-                            <div className="col14 fs17 fw400">
-                              <del>Rs. {item.pl_price}</del>
+                          <div className="pt-1">   
+                            <div className="col14 fs16 fw400"> 
+                              <del>Rs. {item.pl_price}</del> 
                             </div>
                             <div className="col29 fs26 fw600"> 
                               Rs. {parseFloat(item.pl_discount_price).toFixed(2)}  
                             </div>
-                            <div className="col14 fs17 fw400">Per year</div>
+                            <div className="col14 fs17 fw400 peryears">Per year</div>
                           </div>
                         </div>
                         <div className="planpricing">
