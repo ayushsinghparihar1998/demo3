@@ -88,14 +88,17 @@ class Plans extends Component {
                             <div className="col14 fs17 fw400">
                               <del>Rs. {item.pl_price}</del>
                             </div>
-                            <div className="col29 fs32 fw600">Rs. {item.pl_discount_price}</div>
+                            <div className="col29 fs32 fw600">
+                              Rs. {item.pl_discount_price}
+                            </div>
                             <div className="col14 fs17 fw400">Per year</div>
                           </div>
                         </div>
                         <div className="planpricing">
                           <div className="w-100 justify-content-between">
                             <div className="fs14 fw500 col29 mt-2 mb-3">
-                                {item.pl_desc_details}
+                              {item.pl_desc_details}
+                            </div>
                           </div>
                           <Button className="btnType1 d-block w-100 mt-4">
                             Buy Now
