@@ -90,7 +90,7 @@ class SubscribeHere extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={6} lg={6}>
+            <Col md={6} lg={6}> 
               <div className="subscribe_form">
                 <Form>
                   <Form.Group className="fgroups" controlId="formBasicEmail">
@@ -113,7 +113,7 @@ class SubscribeHere extends Component {
                       className="btnTyp2 mt-1"
                       //   disabled={this.state.errors.length == 0}
                     >
-                      SUBSCRIBE
+                      DOWNLOAD NOW 
                     </Button>
                   </Form.Group>
                 </Form>

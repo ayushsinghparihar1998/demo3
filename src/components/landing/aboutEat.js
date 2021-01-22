@@ -58,10 +58,10 @@ class Abouteat extends Component {
                                 {/* <div className="pb-2">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a CoCo who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend. </div> */}
                                 {/* <div className="pb-2">Please remember, you’re NEVER ALONE !</div>  */}
                                 <div className="pb-4">Aiming to create a ”Happy Planet” through Eating right, Loving always and Praying often, we are a lifestyle management organisation that runs solely on the concept of Eat, Love and Pray.</div> 
-                                <div className="pb-4">From clean healthy food that the human body needs to repair, detox and function well to the right amount of exercise and movement, to enabling deeper sleep and alleviating chronic stress - the lifestyle medicines we use are many. We believe in the powerful intelligence of the human body and its ability to repair itself
+                                <div className="pb-4">From clean healthy food that the human body needs to repair, detox and function well to the right amount of exercise and movement, to enabling deeper sleep and alleviating chronic stress - the lifestyle medicines we use are many. We believe in the powerful intelligence of the human body and its ability to repair itself.
                                 </div>
                                 <div className="pb-4">
-                                    We simply hear, analyze, & guide to fix the problem in order to enable a Happier and Healthier Lifestyle
+                                    We simply hear, analyze, & guide to fix the problem in order to enable a Happier and Healthier Lifestyle.
                                 </div> 
                             </div>
                         </Col>

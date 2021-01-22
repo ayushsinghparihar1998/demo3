@@ -59,7 +59,7 @@
             border: solid 1px $col64 !important; 
         }
     }
-    .btnTyp5.talkBtntwo {  
+    .btnTyp5.talkBtntwo {   
         background: $col10 !important; 
         border: solid 1px $col10 !important;   
         color: $col18 !important; 
@@ -67,6 +67,7 @@
         height: 3rem;
         color: $col18;
         font-weight: 500 !important;
+        pointer-events: none; 
 
         &:hover, &:focus { 
             background: $col10 !important; 

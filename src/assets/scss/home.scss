@@ -118,6 +118,11 @@
             position: relative;
             padding: 20px 30px 30px; 
             background-color: $col63;
+            .fs14.fw500.col29 {
+                min-height: 74px;
+                max-height: 74px;
+                overflow: auto; 
+            }
             ul {
                 position: relative;
                 margin: 0; 
@@ -139,6 +144,10 @@
                 height: 3.2rem !important; 
                 font-size: 18px !important;
                 font-weight: 500; 
+
+                & > a {
+                    color: $col18 !important;
+                }
             }
         }
     }
