@@ -114,11 +114,14 @@ export default {
   },
   pl_price: {
     required: "Please enter price.",
+    correct : "Please enter a valid price"
   },
   pl_desc_details: {
     required: "Please enter plan description.",
   },
   pl_save: {
     required: "Please enter plan offer.",
+    // correct : "Please enter a valid offer"
+
   },
 };

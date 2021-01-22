@@ -4,7 +4,7 @@ import Banner from "../landing/banner";
 import Conversations from "../landing/conversation";
 import Happypatient from "../landing/happyPatient";
 import Abouteat from "../landing/aboutEat";
-import Plans from "../landing/plans"; 
+import Plans from "../landing/plans";
 import Supporting from "../landing/supporting";
 import Discussanything from "../landing/discussAnything";
 import SubscribeHere from "../landing/subscribes";
@@ -13,11 +13,11 @@ import Crossbtn from "../../assets/images/blue_cross.svg";
 import Payments from "../../assets/images/payment_chk.svg";
 import { Button, Modal, Image, Container, Form } from "react-bootstrap";
 import * as qs from "query-string";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show5: false,
     };
@@ -38,7 +38,7 @@ class Home extends Component {
           show5: true,
         });
       }
-      console.log(RESPMSG, STATUS);  
+      console.log(RESPMSG, STATUS);
     }
   }
   handlePaymentModal = () => {
@@ -47,20 +47,20 @@ class Home extends Component {
   handlePaymentClose = () => {
     this.setState({ show5: false });
   };
-  render() { 
+  render() {
     return (
       <div className="page__wrapper">
-        <div className="main_baner home_banner"> 
+        <div className="main_baner home_banner">
           <NavBar {...this.props} />
           <Banner />
         </div>
         <Conversations />
-        <Plans />  
-        
+        <Plans />
+
         <Abouteat {...this.props} />
         <Discussanything {...this.props} />
-        <Happypatient />  
-        <Supporting /> 
+        <Happypatient />
+        <Supporting />
         <SubscribeHere />
 
         {/* <div className="subscribe_here">
@@ -77,7 +77,7 @@ class Home extends Component {
           </Button>
         </div> */}
 
-        <Modal show={this.state.show5} className="CreateAccount Payment"> 
+        <Modal show={this.state.show5} className="CreateAccount Payment">
           <Modal.Header>
             <Button onClick={this.handlePaymentClose}>
               <Image src={Crossbtn} alt="" />
@@ -97,7 +97,7 @@ class Home extends Component {
             </Container>
           </Modal.Body>
         </Modal>
-        <Footer /> 
+        <Footer />
       </div>
     );
   }

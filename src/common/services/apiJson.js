@@ -1641,13 +1641,13 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminadd_doc: {
-    url: "elp/superadminadd_doc",
-    method: "POST",
-    data: { u_image: "" },
-    showResultMessage: true,
-    showErrorMessage: true,
-  },
+  // superadminadd_doc: {
+  //   url: "elp/superadminadd_doc",
+  //   method: "POST",
+  //   data: { u_image: "" },
+  //   showResultMessage: true,
+  //   showErrorMessage: true,
+  // },
   usersubscriber: {
     url: "elp/usersubscriber",
     method: "POST",
@@ -1659,7 +1659,7 @@ export default {
   get_planlist: {
     url: "elp/get_planlist",
     method: "POST",
-    data: { count: 10, offset: 1 },
+    data: { count: '', offset: '' },
     showResultMessage: false,
     showErrorMessage: true,
   },
