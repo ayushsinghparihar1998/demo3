@@ -3559,7 +3559,7 @@ cs_time: "00:00:02" */}
                       this.modifyPlanContent(
                         '',
                         "superadmindelete_planstatus",
-                        2
+                        3
                       )
                     }
                   >
