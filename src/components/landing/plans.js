@@ -64,14 +64,14 @@ class Plans extends Component {
     return (
       <div className="plans mt-4 mb-4">
         <Container>
-          <div className="fs40 col64 fw600 w-100 mb-2 text-center">
+          <div className="fs40 col64 fw600 w-100 mb-5 text-center">
             Subscription Plans
           </div>
           {/* <div className="text-center fw300 fs22 col14 mb-4 pb-4">
             What people say about us. Here are comments from individuals who
             have visited Counselor.
           </div> */}
-          {/* start end */}
+          {/* start end */} 
 
           <div>
             <Slider {...settingstwo}>
