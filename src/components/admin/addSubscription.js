@@ -178,7 +178,7 @@ class addSubscription extends Component {
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Plan Name
+                        Plan Name *
                       </Form.Label>
 
                       <Form.Control
@@ -198,7 +198,7 @@ class addSubscription extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Plan Amount
+                        Plan Amount *
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -218,7 +218,7 @@ class addSubscription extends Component {
 
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Plan Description
+                        Plan Description *
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -236,7 +236,7 @@ class addSubscription extends Component {
 
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Plan Offer(%)
+                        Plan Offer(%) *
                       </Form.Label>
                       <Form.Control
                         type="text"

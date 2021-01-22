@@ -86,16 +86,16 @@ class Plans extends Component {
                           </div>
                         </div>
                         <div className="plantwo text-center">
-                          <div className="d-flex justify-content-center mb-3">
+                          <div className="d-flex justify-content-center mb-2">
                             <Button className="btnSave">
                               Save {item.pl_save}%
                             </Button>
                           </div>
-                          <div className="mt-4 pt-2">
+                          <div className="pt-1"> 
                             <div className="col14 fs17 fw400">
                               <del>Rs. {item.pl_price}</del>
                             </div>
-                            <div className="col29 fs32 fw600">
+                            <div className="col29 fs22 fw600"> 
                               Rs. {parseFloat(item.pl_discount_price)}
                             </div>
                             <div className="col14 fs17 fw400">Per year</div>

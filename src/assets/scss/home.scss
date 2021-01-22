@@ -100,8 +100,11 @@
         .plantwo {
             padding: 20px;
             border-bottom: 1px dashed $col14; 
-            padding-bottom: 30px; 
+            padding-bottom: 15px;  
             background-color: $col63; 
+            .col14.fs17.fw400 { 
+                display: none;  
+            }
 
             .btnSave {
                 background: $col103;
@@ -116,12 +119,14 @@
         }
         .planpricing {
             position: relative;
-            padding: 20px 30px 30px; 
+            padding: 20px 30px 20px; 
             background-color: $col63;
             .fs14.fw500.col29 {
                 min-height: 74px;
                 max-height: 74px;
-                overflow: auto; 
+                overflow: auto;
+                white-space: normal;
+                word-break: break-all;
             }
             ul {
                 position: relative;
@@ -153,15 +158,26 @@
     }
 }
 
+.delete_user {
+    .text-center.fs24.mt-4.col64 {
+        white-space: normal; 
+        word-break: break-all;
+    }
+}
+
 .aboutpage {
+    .fs18.fw400.col14 {
+        text-align: justify;  
+    }
     .bg-pinks {
         ul {
             padding-left: 20px; 
             li {
                 font-size: 24px;
                 line-height: 18px; 
+                text-align: justify; 
                 span {
-                    font-size: 17px;  
+                    font-size: 17px;
                 }
             }
         }
@@ -342,7 +358,7 @@
 }
 
 .Supporting {  
-    padding: 3rem 0 7rem; 
+    padding: 3rem 0 2rem;   
     text-align: center;  
 
     .supportives {
