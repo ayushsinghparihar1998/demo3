@@ -14,6 +14,10 @@
         nav.navbar-light {
             // background: linear-gradient(180deg, $col18 0%, #CA5ACD 86.59%); 
         }
+
+        .coming_m {
+            pointer-events: none; 
+        }
     }
     
     
@@ -449,14 +453,17 @@ img {
 }
 
 /* media screen start */ 
-@media (max-width: 1200px) { 
-    .happyPatient .italic_style .invertedtwo {  
-        right: -8%;
-        max-width: 60px;
-    }
+@media (max-width: 1200px) {  
     .happyPatient .italic_style .invertedone {              
-        left: -60px;
-        max-width: 60px;
+        // left: -46px;
+        // max-width: 21px;
+        left: -27px; 
+        max-width: 21px;
+        top: 82px;
+    }
+    .happyPatient .italic_style .invertedtwo {  
+        right: 0; 
+        max-width: 21px; 
     }
 }
 
@@ -1028,6 +1035,17 @@ img {
                                 border-bottom: none; 
                             }
                         }
+                        &.donatebtns { 
+                            border: none !important; 
+                            max-height: inherit !important; 
+                            border-bottom: solid 1px #ddd !important; 
+                        }
+                    }
+
+                    .loginnav { 
+                        & > .dropdown-menu {
+                            left: -0 !important;
+                        }
                     }
 
                     .dropdown-menu {
@@ -1049,9 +1067,35 @@ img {
 }
 
 @media (max-width: 767px) { 
-
+    .plans {
+        overflow: hidden; 
+    }
     .main_baner { 
         min-height: auto; 
+
+        &.home_banner {
+            font-size: 14px !important; 
+            .btnTyp5 {
+                &.talkBtn {
+                    font-size: 14px !important;
+                    margin-right: 0 !important;  
+                    margin-bottom: 15px;
+                }
+                &.talkBtntwo {
+                    font-size: 14px !important; 
+                }
+            }
+            .carousel-item {
+                div.mt-4 {           
+                    text-align: center;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+            .coming_m {
+                margin-bottom: 10px; 
+            }
+        }
         .mb-5 {
             // margin-bottom: 2.5rem!important; 
             margin-bottom: 0 !important;
@@ -1070,7 +1114,7 @@ img {
         }
         .container { 
             .pt-120.ptn-170 { 
-                padding-top: 50px !important;
+                padding-top: 30px !important; 
                 font-size: 30px !important;
                 line-height: 34px;
                 text-align: center;
@@ -1151,6 +1195,7 @@ img {
     } 
     
     .conversations {
+        padding-bottom: 15px;
         .col-md-6 {
             & > img {
                 position: relative;
@@ -1167,7 +1212,7 @@ img {
                 } 
             }
             div:nth-child(2) { 
-                font-size: 36px !important;
+                font-size: 24px !important;
             }
             div:nth-child(3) {
                 font-size: 24px !important;
@@ -1183,8 +1228,20 @@ img {
         }
     }
 
+    .plans {
+        .fs40.col64 {
+            font-size: 2rem !important;
+        }
+        .fs22 {
+            font-size: 1.2rem !important;
+        }
+    }
+
     .happyPatient  {
         .container  {
+            .main_caro {
+                padding: 0 30px; 
+            }
             .carousel-inner {
                 max-width: 100%; 
                 padding: 50px 10px 10px;
@@ -1199,6 +1256,15 @@ img {
                         }
                     }
                 }
+            }
+            .slick-prev {
+                left: 0px; 
+            }
+            .slick-next {
+                right: 0px;
+            }
+            .slick-prev, .slick-next {
+                display: none !important; 
             }
             .fs20 {
                 font-size: 16px !important;

@@ -10,10 +10,28 @@ class Happypatient extends Component {
     render() { 
         const settings = {
             dots: true,
+            autoplay: true,
             infinite: true,
-            speed: 500,
+            speed: 1000,
             slidesToShow: 2,
-            slidesToScroll: 2 
+            slidesToScroll: 2,
+            responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    adaptiveHeight: true,
+                  },
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                  },
+                },
+              ],
           };
         return (
             <div className="happyPatient">    
@@ -48,7 +66,7 @@ class Happypatient extends Component {
                                     {/* <div className="profileImage">
                                         <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
                                     </div>  */}
-                                    <div className="fs17 col12 fw500 mb-1 italic_item">Abraham Jhone | IT Manager</div>
+                                    <div className="fs17 col12 fw500 mb-1 italic_item">Jihaan Advani | Events & Membership Head</div>
                                     <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
                                     <Image src={Inverted} alt="" className="invertedone" />
                                     <div className="txt_testi italic_item fs15 mt-2"> 
@@ -82,7 +100,7 @@ class Happypatient extends Component {
                                     {/* <div className="profileImage">
                                         <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
                                     </div>  */}
-                                    <div className="fs17 col12 fw500 mb-1 italic_item">Abraham Jhone | IT Manager</div>
+                                    <div className="fs17 col12 fw500 mb-1 italic_item">Jihaan Advani | Events & Membership Head</div>
                                     <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
                                     <Image src={Inverted} alt="" className="invertedone" />
                                     <div className="txt_testi italic_item fs15 mt-2"> 

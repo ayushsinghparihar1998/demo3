@@ -13,7 +13,7 @@
                      a.nav-link {  
                         color: $col3;
                         text-transform: capitalize;  
-                        &.donatebtns {
+                        &.donatebtns { 
                             border: solid 1px $col64;  
                             max-height: 40px;
                             border-radius: 30px;  
@@ -638,10 +638,14 @@
                     max-width: 45px !important;
                 }
                 & img {
-                    max-width: 90px !important; 
+                    max-width: 110px !important; 
                 }
             }
         }
+    }
+
+    .elpVideo {
+        margin-top: 40px;
     }
 
     .professinal_list { 
