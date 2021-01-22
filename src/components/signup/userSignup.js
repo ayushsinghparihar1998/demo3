@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { Button, Container, Row, Col, Form, Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
-import moment from 'moment';
-import { actionUserSignup } from '../../common/redux/actions';
-import CONSTANTS from '../../common/helpers/Constants';
-import validateInput from '../../common/validations/validationSignup';
-import { setLocalStorage } from '../../common/helpers/Utils';
-import { Link, NavLink } from 'react-router-dom';
+import React, { Component } from "react";
+import { Button, Container, Row, Col, Form, Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
+import moment from "moment";
+import { actionUserSignup } from "../../common/redux/actions";
+import CONSTANTS from "../../common/helpers/Constants";
+import validateInput from "../../common/validations/validationSignup";
+import { setLocalStorage } from "../../common/helpers/Utils";
+import { Link, NavLink } from "react-router-dom";
 class ProfessionalSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      action: 'user_signup',
+      action: "user_signup",
       roleType: CONSTANTS.ROLES.USER,
-      email: '',
-      password: '',
-      day: '',
-      year: '',
-      month: '',
-      username: '',
+      email: "",
+      password: "",
+      day: "",
+      year: "",
+      month: "",
+      username: "",
       errors: {},
       u_school_code: true,
-      organisationName: '',
+      organisationName: "",
       showLoader: false,
       fristSignUp: true,
       listOfCategory: [],
@@ -30,7 +30,9 @@ class ProfessionalSignup extends Component {
     };
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    console.log(this.props.location);
+  }
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -60,22 +62,22 @@ class ProfessionalSignup extends Component {
         showLoader: true,
       });
 
-      let day = this.state.day !== '' ? this.state.day : '';
-      let month = this.state.month !== '' ? Number(this.state.month) + 1 : '';
-      let year = this.state.year !== '' ? this.state.year : '';
-      let dob = '';
+      let day = this.state.day !== "" ? this.state.day : "";
+      let month = this.state.month !== "" ? Number(this.state.month) + 1 : "";
+      let year = this.state.year !== "" ? this.state.year : "";
+      let dob = "";
       if (day && month && year) {
         //dob = month + '-' + day + '-' + year;
-        dob = day + '/' + month + '/' + year;
+        dob = day + "/" + month + "/" + year;
         // dob = moment(dob).valueOf();
       }
       let data = {
-        email: this.state.email ? this.state.email.toLowerCase().trim() : '',
-        password: this.state.password ? this.state.password.trim() : '',
+        email: this.state.email ? this.state.email.toLowerCase().trim() : "",
+        password: this.state.password ? this.state.password.trim() : "",
         u_school_code: this.state.u_school_code,
         u_birthdate: dob,
-        device_type: '',
-        device_token: '',
+        device_type: "",
+        device_token: "",
         uc_cat_name: this.state.listOfCategory,
         u_username: this.state.username,
         // question: this.state.question,
@@ -84,15 +86,16 @@ class ProfessionalSignup extends Component {
       this.props
         .actionUserSignup(data)
         .then((result) => {
-
-          if (result && result.data && result.data.status === 'success') {
-            this.props.handleSet()
-            setTimeout(() => {
-              this.props.history.push({
-                pathname: '/login',
-                state: { roleType: this.state.roleType },
-              });
-            }, 1000);
+          if (result && result.data && result.data.status === "success") {
+            this.props.handleSet();
+            if (this.props.location) {
+              setTimeout(() => {
+                this.props.history.push({
+                  pathname: "/login",
+                  state: { roleType: this.state.roleType },
+                });
+              }, 1000);
+            }
           } else {
             this.setState({
               showLoader: false,
@@ -114,8 +117,8 @@ class ProfessionalSignup extends Component {
 
   clear() {
     this.setState({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       showLoader: false,
       errors: {},
     });
@@ -133,7 +136,7 @@ class ProfessionalSignup extends Component {
     let cat = this.state.category;
     let listOfCategory = this.state.listOfCategory;
     listOfCategory.push({ uc_cat_name: cat });
-    this.setState({ listOfCategory: listOfCategory, category: '' });
+    this.setState({ listOfCategory: listOfCategory, category: "" });
   };
 
   handleChangeQuestion = (event, index, subIndex) => {
@@ -150,7 +153,7 @@ class ProfessionalSignup extends Component {
   };
 
   handleEnter = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
       this.addCategory();
     }
@@ -159,8 +162,8 @@ class ProfessionalSignup extends Component {
   handleClose = () => {
     this.setState({
       secondSignUp: true,
-    })
-  }
+    });
+  };
 
   handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -171,17 +174,16 @@ class ProfessionalSignup extends Component {
 
   goToLoginPage = () => {
     this.props.history.push({
-      pathname: 'login',
-      state: { roleType: this.state.roleType }
+      pathname: "login",
+      state: { roleType: this.state.roleType },
     });
-  }
+  };
   handleLogin(roleType) {
-    this.props.handleSet()
+    this.props.handleSet();
     this.props.history.push({
       pathname: "login",
       state: { roleType: roleType },
     });
-  
   }
   render() {
     const { errors } = this.state;
@@ -193,8 +195,11 @@ class ProfessionalSignup extends Component {
           <Row>
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">Email address *</Form.Label>
-                <Form.Control type="email"
+                <Form.Label className="fs20 fw600 col14">
+                  Email address *
+                </Form.Label>
+                <Form.Control
+                  type="email"
                   placeholder="Enter email"
                   className="inputTyp2"
                   error={errors.email ? true : false}
@@ -215,11 +220,11 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">
-                  Password *</Form.Label>
+                <Form.Label className="fs20 fw600 col14">Password *</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Password" className="inputTyp2"
+                  placeholder="Password"
+                  className="inputTyp2"
                   error={errors.password ? true : false}
                   id="outlined-pwd"
                   label="Password"
@@ -239,7 +244,9 @@ class ProfessionalSignup extends Component {
 
             <Col md={12} lg={6}>
               <Form.Group>
-                <Form.Label className="fs20 fw600 col14">Screen name *</Form.Label>
+                <Form.Label className="fs20 fw600 col14">
+                  Screen name *
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter User name"
@@ -264,7 +271,6 @@ class ProfessionalSignup extends Component {
                 Date of birth *
               </Form.Label>
               <Row>
-
                 <Col md={4}>
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <DayPicker
@@ -274,7 +280,7 @@ class ProfessionalSignup extends Component {
                       classes="form-control selectTyp1"
                       year={this.state.year}
                       month={this.state.month}
-                      minDate={moment().startOf('year')}
+                      minDate={moment().startOf("year")}
                       endYearGiven
                       value={this.state.day}
                       onChange={(day) => {
@@ -282,7 +288,7 @@ class ProfessionalSignup extends Component {
                       }}
                     />
                     <div className="error alignLeft">{errors.day}</div>
-                  </Form.Group> 
+                  </Form.Group>
                 </Col>
 
                 <Col md={4}>
@@ -291,7 +297,7 @@ class ProfessionalSignup extends Component {
                       id="month"
                       name="month"
                       classes="form-control selectTyp1"
-                      defaultValue={'Month'}
+                      defaultValue={"Month"}
                       short
                       endYearGiven
                       year={this.state.year}
@@ -320,7 +326,6 @@ class ProfessionalSignup extends Component {
                     <div className="error alignLeft">{errors.year}</div>
                   </Form.Group>
                 </Col>
-
               </Row>
 
               <div className="fs13 fw300 col27">
@@ -354,10 +359,17 @@ class ProfessionalSignup extends Component {
 
             <Col md={12}>
               <div className="fs18 col14 mt-3 mb-3 fw300">
-                I am not in crisis, homicidal, sucidal or abusing anyone, by continuing i
-                agree to the Eat Luv N Pray{' '}
+                I am not in crisis, homicidal, sucidal or abusing anyone, by
+                continuing i agree to the Eat Luv N Pray{" "}
                 <span className="fw500 pointer">
-                  <NavLink target="_blank" to="/termcondition">Terms of service</NavLink>  & <NavLink target="_blank" to="/privacypolicy"> Privacy Policy.</NavLink>
+                  <NavLink target="_blank" to="/termcondition">
+                    Terms of service
+                  </NavLink>{" "}
+                  &{" "}
+                  <NavLink target="_blank" to="/privacypolicy">
+                    {" "}
+                    Privacy Policy.
+                  </NavLink>
                 </span>
               </div>
             </Col>
@@ -373,14 +385,19 @@ class ProfessionalSignup extends Component {
             {/* Already have an account? */}
             <span className="fw500 pointer pl-1">
               Already have an account
-              <Button className="btnTyp5 ml-3" onClick={(e) => {
-                this.handleLogin(3);
-              }}>Login here</Button>
+              <Button
+                className="btnTyp5 ml-3"
+                onClick={(e) => {
+                  this.handleLogin(3);
+                }}
+              >
+                Login here
+              </Button>
             </span>
           </div>
-        </div>{' '}
+        </div>{" "}
       </div>
     );
   }
 }
-export default connect(null, { actionUserSignup })(ProfessionalSignup); 
+export default connect(null, { actionUserSignup })(ProfessionalSignup);

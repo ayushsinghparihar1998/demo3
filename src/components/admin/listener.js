@@ -878,6 +878,7 @@ class Adminlistener extends Component {
     this.setState({
       deletePlanConformationModal: true,
       deletePlan: obj ? obj.pl_title : "",
+      deletePlanId: obj ? obj.pl_id : "",
     });
   };
 
@@ -1076,11 +1077,13 @@ class Adminlistener extends Component {
     });
   };
   modifyPlanContent = (item, api, status) => {
-    let data = { pl_id: item.pl_id, pl_status: status };
+    let data = { pl_id: item ? +item.pl_id : +this.state.deletePlanId, pl_status: status };
     ELPViewApiService(api, data).then((result) => {
       this.setState({ deletePlanConformationModal: false });
       if (result && result.status === 200) {
-        this.superadminget_planlist(this.state.pageno, this.state.count);
+        setTimeout(() => {
+          this.superadminget_planlist(this.state.pageno, this.state.count);
+        }, 500);
       }
     });
   };
@@ -1480,6 +1483,22 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div className="position-relative">
+                        <div
+                          onClick={() =>
+                            this.changepath(
+                              "/subscriptionDocument",
+                              ""
+                            )
+                          }
+                          className="fs14 col28 fw500"
+                        >
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          UPLOAD ELP DOCUMENT
+                        </div>
+                      </div>
+                    </div>
                     {/* <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="position-relative">
                         <div className="fs14 col28 fw500">
@@ -1552,7 +1571,9 @@ class Adminlistener extends Component {
                                 </div>
                                 <div className="mt-auto mb-auto d-flex">
                                   <span className="pr-3 fs14 col47 fw400">
-                                    {item.u_status == '1' ? "Deactivate" : "Activate"}
+                                    {item.u_status == "1"
+                                      ? "Deactivate"
+                                      : "Activate"}
                                   </span>
                                   <span className="pr-3 disabled">
                                     <Form.Check
@@ -1803,15 +1824,21 @@ pl_title: "Platinum Plan new" */}
                                   </div>
 
                                   <div className="fs15 fw500 col14 pb-1">
-                                      <span className="priceone pr-1">Amount: Rs. 
-                                          <strong className="fw700">{item.pl_price}</strong>
-                                      </span> | 
-                                      {/* Rs. {item.pl_discount_price} */}
-                                      <span className="pricetwo pl-2">Offer: 
-                                          <strong className="fw700 pl-1">{item.pl_save}%</strong> 
-                                      </span> 
+                                    <span className="priceone pr-1">
+                                      Amount: Rs.
+                                      <strong className="fw700">
+                                        {item.pl_price}
+                                      </strong>
+                                    </span>{" "}
+                                    |{/* Rs. {item.pl_discount_price} */}
+                                    <span className="pricetwo pl-2">
+                                      Offer:
+                                      <strong className="fw700 pl-1">
+                                        {item.pl_save}%
+                                      </strong>
+                                    </span>
                                   </div>
-                                  <div className="fs15 col14 fw400"> 
+                                  <div className="fs15 col14 fw400">
                                     {item.pl_desc_details}{" "}
                                     {/* <a className="col40">Read more...</a> */}
                                   </div>
@@ -1820,7 +1847,9 @@ pl_title: "Platinum Plan new" */}
                                 <div className="min-wi250">
                                   <div className="d-flex ml-auto justify-content-end">
                                     <span className="pr-3 fs14 col47 fw400">
-                                      {item.pl_status == "2" ? "Deactivate" : "Activate"}    
+                                      {item.pl_status == "2"
+                                        ? "Deactivate"
+                                        : "Activate"}
                                     </span>
                                     <span className="pr-3 disabled">
                                       <Form.Check
@@ -3528,7 +3557,7 @@ cs_time: "00:00:02" */}
                     className="btn btn-success text-uppercase"
                     onClick={(event) =>
                       this.modifyPlanContent(
-                        "",
+                        '',
                         "superadmindelete_planstatus",
                         2
                       )

@@ -53,27 +53,23 @@ class addSubscription extends Component {
       pl_id: this.props.match.params.id,
     };
 
-    ELPViewApiService("superadmin_getplandetails", data).then(
-      (result) => {
-        console.log("result", result);
-        let planObj = {};
-        if (result && result.status === 200) {
-          planObj =
-            result && result.data && result.data.data
-              ? result.data.data[0]
-              : [];
-        }
-
-        this.setState(
-          {
-            planObj,
-          },
-          () => {
-            console.log("planObj", this.state.planObj);
-          }
-        );
+    ELPViewApiService("superadmin_getplandetails", data).then((result) => {
+      console.log("result", result);
+      let planObj = {};
+      if (result && result.status === 200) {
+        planObj =
+          result && result.data && result.data.data ? result.data.data[0] : [];
       }
-    );
+
+      this.setState(
+        {
+          planObj,
+        },
+        () => {
+          console.log("planObj", this.state.planObj);
+        }
+      );
+    });
   };
   handleSubmit = () => {
     if (this.isValid()) {
@@ -123,13 +119,13 @@ class addSubscription extends Component {
     console.log(name, value);
     let planObj = this.state.planObj;
     planObj[name] =
-      name == "pl_price" || name == "pl_save"
+      name == "pl_price"
+        ? !value || !value.length || value[value.length - 1] === "."
+          ? value || 0
+          : parseFloat(value)
+        : name == "pl_save"
         ? value.replace(/[^0-9]/g, "")
-        : // : name == "pl_audio_status" || name == "pl_video_status"
-          // ? value == "Active"
-          //   ? "1"
-          //   : "0"
-          value;
+        : value;
     this.setState(
       {
         planObj,
@@ -146,6 +142,7 @@ class addSubscription extends Component {
     }
     return isValid;
   }
+
   render() {
     const { planObj, errors } = this.state;
     return (
@@ -212,7 +209,7 @@ class addSubscription extends Component {
                         name="pl_price"
                         value={planObj.pl_price}
                         onChange={(e) => this.handleChange(e)}
-                        maxLength={5}
+                        maxLength={10}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.pl_price}
