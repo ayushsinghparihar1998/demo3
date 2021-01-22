@@ -609,7 +609,7 @@ class NavBar extends Component {
                                             <NavDropdown title="Media" id="basic-nav-dropdown">
                                                 <NavDropdown.Item href={'/blogs'}>
                                                     BLOGS
-                                        </NavDropdown.Item>
+                                        </NavDropdown.Item> 
                                                 <NavDropdown.Item href={'/press'}>
                                                     PRESS
                                         </NavDropdown.Item>
