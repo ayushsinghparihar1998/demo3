@@ -21,4 +21,4 @@ const ComingSoon = (props) => {
         </div>
     )
 }
-export default ComingSoon
+export default ComingSoon;

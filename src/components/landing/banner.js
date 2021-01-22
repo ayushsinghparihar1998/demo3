@@ -41,7 +41,7 @@ class Banner extends Component {
                         {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
                             <div className="fs40 pt-120 ptn-170 col64 fw600 mb-4">Luv Often</div> 
                                <div className="fw300 col64 fs20 mb-5">  
-                                    Luv - I am stronger than Depression and I am braver than Loneliness and nothing will ever exhaust me
+                                    Luv - I am stronger than Depression and I am braver than Loneliness and nothing will ever exhaust me.
                               </div>
                               <div className="mt-4 d-flex">    
                                     <Button type="submit" className="btnTyp5 talkBtn fs18 fw400 mr-3">

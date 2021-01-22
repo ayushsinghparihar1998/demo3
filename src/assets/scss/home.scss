@@ -363,13 +363,13 @@
             
     }        
 
-    .organise_carousel { 
+    .organise_carousel {   
         background-color: $col21; 
         border-radius: 0;
-        max-width: 230px;
+        max-width: 250px;
         text-align: center;
         margin: auto;
-        height: 230px;
+        height: 250px; 
         line-height: 221px;
         display: flex !important;
         border: solid 1px #eee; 
@@ -1036,9 +1036,9 @@ img {
                             }
                         }
                         &.donatebtns { 
-                            border: none !important; 
-                            max-height: inherit !important; 
-                            border-bottom: solid 1px #ddd !important; 
+                            // border: none !important; 
+                            // max-height: inherit !important; 
+                            // border-bottom: solid 1px #ddd !important; 
                         }
                     }
 

@@ -1797,7 +1797,7 @@ pl_title: "Platinum Plan new" */}
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
+                                    <div className="col1 fw600 fs18 pb-1 cursor_d">
                                       {item.pl_title}
                                     </div>
                                   </div>
@@ -1820,7 +1820,7 @@ pl_title: "Platinum Plan new" */}
                                 <div className="min-wi250">
                                   <div className="d-flex ml-auto justify-content-end">
                                     <span className="pr-3 fs14 col47 fw400">
-                                      {item.pl_status == "2" ? "Enable" : "Disable"}
+                                      {item.pl_status == "2" ? "Deactivate" : "Activate"}    
                                     </span>
                                     <span className="pr-3 disabled">
                                       <Form.Check

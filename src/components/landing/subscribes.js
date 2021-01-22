@@ -31,7 +31,7 @@ class SubscribeHere extends Component {
                                         <Button variant="primary"
                                             onClick={this.getSubscribe} 
                                             type="submit" className="btnTyp2 mt-1">   
-                                            SUBSCRIBE
+                                            DOWNLOAD NOW
                                         </Button> 
                                     </Form.Group> 
                                     
