@@ -95,8 +95,8 @@ class Plans extends Component {
                             <div className="col14 fs17 fw400">
                               <del>Rs. {item.pl_price}</del>
                             </div>
-                            <div className="col29 fs22 fw600"> 
-                              Rs. {parseFloat(item.pl_discount_price)}
+                            <div className="col29 fs26 fw600"> 
+                              Rs. {parseFloat(item.pl_discount_price).toFixed(2)}  
                             </div>
                             <div className="col14 fs17 fw400">Per year</div>
                           </div>
@@ -108,10 +108,10 @@ class Plans extends Component {
                             </div>
                           </div>
                           <Button className="btnType1 d-block w-100 mt-4">
-                            <Link to={{ pathname: `/coming-soon` }}>
+                            <Link to={{ pathname: `/coming-soon` }}> 
                               Buy Now
                             </Link>
-                          </Button>
+                          </Button> 
                           {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
                           </div> */}
