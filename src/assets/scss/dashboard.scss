@@ -651,7 +651,7 @@
         }
     }
 
-    .d-flex.justify-content-between { 
+    .d-flex.justify-content-between {  
         & div {
             & > div {
                 word-break: break-all; 
@@ -660,6 +660,9 @@
                 
                 &:first-child {
                     cursor: pointer; 
+                }
+                &.col1.fw600.cursor_d { 
+                    cursor: default; 
                 }
             }
         }
