@@ -206,6 +206,7 @@ class ELPRoute extends Component {
             path="/professinalBlogPress/:id"
             component={ProfessinalBlogPress}
           />
+          <PublicRoute path="/coming-soon" component={ComingSoon} />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
@@ -271,7 +272,6 @@ class ELPRoute extends Component {
             component={UserdashboardCust}
           />
           <PrivateRoutes path="/coco/learn-more" component={CocoLearnMore} />
-          <PrivateRoutes path="/coming-soon" component={ComingSoon} />
           <PrivateRoutes path="/listener-browse" component={listenerBrowse} />
 
           <Route

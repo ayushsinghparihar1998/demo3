@@ -1641,4 +1641,26 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  superadminadd_doc: {
+    url: "elp/superadminadd_doc",
+    method: "POST",
+    data: { u_image: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  usersubscriber: {
+    url: "elp/usersubscriber",
+    method: "POST",
+    data: { email: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  
+  get_planlist: {
+    url: "elp/get_planlist",
+    method: "POST",
+    data: { count: 10, offset: 1 },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };

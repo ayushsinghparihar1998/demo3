@@ -18,12 +18,142 @@ import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain";
+import { post } from "axios";
+import ELPRxApiService from "../../common/services/apiService";
 
+import constant from "../../constant";
 class SubscriptionDocument extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageType: "",
+      paymentList: [],
+      pageno: 1,
+      records: 10,
+      totalCount: "",
+      isUploading : true,
+      planObj: {
+        pu_title: "",
+        pu_doc_url: "",
+      },
+
+      count: 10,
+      offset: 1,
+      errors: { pu_title: "", pu_doc_url: "" },
+    };
+  }
+
+  handleSubmit = () => {
+    let planObj = this.state.planObj;
+
+    if (planObj.pu_doc_url.length > 0) {
+      this.setState({
+        showLoader: true,
+      });
+
+      let data = this.state.planObj;
+      console.log(data);
+
+      ELPViewApiService("superadminadd_doc", data)
+        .then((result) => {
+          if (result && result.data && result.data.status === "success") {
+            setTimeout(() => {
+              this.props.history.push("/admin");
+            }, 1000);
+            this.clear();
+          } else {
+            this.setState({
+              showLoader: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            showLoader: false,
+          });
+        });
+    } else {
+      this.setState({
+        showLoader: false,
+      });
+    }
+  };
+  handleUploadPicture = async (event, name) => {
+    const fileObject = event.target.files[0];
+    console.log();
+    if (fileObject) {
+      this.setState({
+        isUploading: true,
+      });
+      const formData = new FormData();
+      formData.set("u_image", fileObject);
+      console.log("formDataformData", formData);
+
+      const url = constant.SERVER_URL + "elp/superadmin_uploaddocument";
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const response = await post(url, formData, config);
+      console.log(name, "resultresultresult", response);
+      let planObj = this.state.planObj;
+
+      planObj.pu_doc_url = response.data.data.filepath;
+      this.setState({
+        isUploading: false,
+        planObj,
+        filename: fileObject.name,
+      });
+    }
+  };
+
+  _updateBlogHandler = async () => {
+    try {
+      let response = await ELPRxApiService("updateBlog", {
+        bl_title: this.state.bl_title,
+        bl_image: this.state.filepath,
+        bl_desc: this.state.bl_desc,
+        bl_id: this.state.bl_id,
+      });
+      this.props.history.push("/blogs");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    let planObj = this.state.planObj;
+    planObj[name] =
+      name == "pu_doc_url" || name == "pu_save"
+        ? value.replace(/[^0-9]/g, "")
+        : // : name == "pu_audio_status" || name == "pu_video_status"
+          // ? value == "Active"
+          //   ? "1"
+          //   : "0"
+          value;
+    this.setState(
+      {
+        planObj,
+      },
+      () => {
+        console.log(this.state.planObj);
+      }
+    );
+  };
+  isValid() {
+    const { errors, isValid } = validateInput(this.state.planObj);
+    if (!isValid) {
+      this.setState({ errors }, () => console.log(this.state.errors));
+    }
+    return isValid;
+  }
+
   render() {
-    
     return (
-      <div className="page__wrapper innerpage"> 
+      <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -46,32 +176,41 @@ class SubscriptionDocument extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1"> 
-                <div className="corporateMember subscriptionplan">  
-                  <div className="fs28 col10 mb-4">
-                       Upload ELP Document
-                  </div>
+              <Col md={9} className="pl-1">
+                <div className="corporateMember subscriptionplan">
+                  <div className="fs28 col10 mb-4">Upload ELP Document</div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                          Upload Press Image 
+                        Upload document
                       </Form.Label>
 
-                      <Form.Group> 
-                        <Form.File id="exampleFormControlFile1" label="Example file input" className="inputTyp2" />
-                        <div className="fs12 fw300 col27 mt-1">You can upload multiple files </div>
-                      </Form.Group> 
+                      <Form.Group>
+                        <Form.File
+                          id="exampleFormControlFile1"
+                          label="Example file input"
+                          className="inputTyp2"
+                          onChange={(e) =>
+                            this.handleUploadPicture(e, "backgroud_img")
+                          }
+                        />
+                        <div className="fs12 fw300 col27 mt-1">
+                          You can upload multiple files{" "}
+                        </div>
+                      </Form.Group>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {/* {errors.cd_domain_name} */}
                       </div>
-                    </Form.Group> 
+                    </Form.Group>
 
                     <Button
+                      disabled={this.state.isUploading}
                       variant="primary btnTyp5 mt-4"
-                      type="button">  
-                      UPLOAD 
-                    </Button> 
-
+                      type="button"
+                      onClick={this.handleSubmit}
+                    >
+                      UPLOAD
+                    </Button>
                   </Form>
                 </div>
               </Col>
@@ -84,4 +223,4 @@ class SubscriptionDocument extends Component {
   }
 }
 
-export default SubscriptionDocument;  
+export default SubscriptionDocument;
