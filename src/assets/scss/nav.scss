@@ -639,11 +639,15 @@
                 }
             }
             .navbar-brand { 
+                img {
+                    height: auto !important; 
+                    max-height: 60px; 
+                }
                 & > img {
-                    max-width: 45px !important;
+                    max-width: 50px !important;  
                 }
                 & img {
-                    max-width: 110px !important; 
+                    max-width: 110px !important;  
                 }
             }
         }

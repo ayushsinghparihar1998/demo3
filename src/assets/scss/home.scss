@@ -305,14 +305,14 @@
         padding-top: 10px; 
         .fgroups {
             position: relative;
-            max-width: 75%; 
+            max-width: 90%; 
 
             .inputTyp1 {
                 max-width: 100%; 
                 font-size: 1rem !important; 
                 border: 1px solid $col10 !important;
                 padding-left: 20px; 
-                padding-right: 150px;          
+                padding-right: 210px;         
             }
             .btnTyp2 {
                 position: absolute;
@@ -950,7 +950,8 @@ img {
     }
 
     .main_baner {
-        min-height: auto;
+        min-height: auto; 
+
         .ptn-170 {
             padding-top: 100px !important; 
         }
@@ -1096,7 +1097,7 @@ img {
         overflow: hidden; 
     }
     .main_baner { 
-        min-height: auto; 
+        min-height: auto !important; 
 
         &.home_banner {
             font-size: 14px !important; 
