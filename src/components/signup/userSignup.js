@@ -8,6 +8,8 @@ import CONSTANTS from "../../common/helpers/Constants";
 import validateInput from "../../common/validations/validationSignup";
 import { setLocalStorage } from "../../common/helpers/Utils";
 import { Link, NavLink } from "react-router-dom";
+import { withRouter } from 'react-router'
+
 class ProfessionalSignup extends Component {
   constructor(props) {
     super(props);
@@ -400,4 +402,4 @@ class ProfessionalSignup extends Component {
     );
   }
 }
-export default connect(null, { actionUserSignup })(ProfessionalSignup);
+export default withRouter(connect(null, { actionUserSignup })(ProfessionalSignup));
