@@ -97,14 +97,16 @@ class Banner extends Component {
                 </div>
                 <div className="mt-4 d-flex">
                   <Button
-                    type="submit"
+                    type="button"
                     className="btnTyp5 talkBtn fs18 fw400 mr-3"
+                    onClick={this.handleModal}
+
                   >
                     Talk to us
                   </Button>
                   <div>
                     <Button
-                      type="submit"
+                      type="button"
                       className="btnTyp5 talkBtntwo fs18 fw400"
                     >
                       Wellness assessment tests
