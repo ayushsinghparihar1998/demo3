@@ -60,11 +60,28 @@ class Plans extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            adaptiveHeight: true, 
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
     return (
       <div className="plans mt-4 mb-4">
         <Container>
-          <div className="fs40 col64 fw600 w-100 mb-5 text-center">
+          <div className="fs40 col64 fw600 w-100 mb-5 text-center"> 
             Subscription Plans
           </div>
           {/* <div className="text-center fw300 fs22 col14 mb-4 pb-4">
