@@ -238,7 +238,7 @@ class ProfessinalBlog extends Component {
 
                                                                                 </Col>
                                                                                 <Col md={3}>
-                                                                                     <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div>
+                                                                                     {/* <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div> */}
                                                                                 </Col>
                                                                                 <Col md={3}>
                                                                                      <div className="fw400 fs15 col14" onClick={() => this.setState({ showDetails: true })}>{data.pbl_written_by}</div>
@@ -272,7 +272,7 @@ class ProfessinalBlog extends Component {
                                                                                           </div>
                                                                                      </Col>
                                                                                      <Col md={4}>
-                                                                                          <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div>
+                                                                                          {/* <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div> */}
                                                                                      </Col>
                                                                                 </Row>
                                                                            </div>

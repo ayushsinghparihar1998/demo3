@@ -391,11 +391,11 @@
     .organise_carousel {   
         background-color: $col21; 
         border-radius: 0;
-        max-width: 250px;
+        max-width: 200px;
         text-align: center;
         margin: auto;
-        height: 250px; 
-        line-height: 221px;
+        height: 200px; 
+        line-height: 200px; 
         display: flex !important;
         border: solid 1px #eee; 
         padding: 30px; 
@@ -971,6 +971,29 @@ img {
         }
     }
     
+
+.home_banner {
+    .btnTyp5 {
+        &.talkBtn {
+            font-size: 15px !important; 
+            margin-bottom: 10px;
+        }
+        &.talkBtntwo {
+            font-size: 15px !important; 
+        }
+    }
+    .coming_m {
+        margin-bottom: 20px; 
+    }
+    .baner_carousel {
+        .fs20.mb-5 {
+            margin-bottom: 20px !important;
+        }
+        .mt-4.d-flex {
+            flex-wrap: wrap; 
+        }
+    }
+}
     
 
 }
@@ -1366,9 +1389,10 @@ img {
         padding: 3rem 0 1.5rem; 
         .container {
             .organise_carousel {
-                max-width: 250px;
-                height: 250px;
-                margin-bottom: 30px; 
+                max-width: 150px;
+                height: 150px;
+                margin-bottom: 30px;
+                padding: 15px;
             }
             div.fs40 {
                 font-size: 2rem !important; 
