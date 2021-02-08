@@ -864,6 +864,19 @@
             }
         }
     }
+
+    .kitListing {
+        .adminlistener {
+            .e_detai {
+                max-width: 88%; 
+                div.mr-2.pt-1 {
+                    &>img {
+                        border-radius: 0px; 
+                    }
+                }
+            }
+        }
+    }
     .professor_search { 
         padding: 10px 30px 0;  
         .checkone.form-check {  

@@ -53,7 +53,7 @@ class KitsListing extends Component {
                 </div>
               </Col> 
                 
-              <Col md={8} lg={9} className="pl-1 kitListing">
+              <Col md={8} lg={9} className="pl-1 kitListing"> 
                   <div className="professor_search">    
                     <Row className="mb">
                       <Col md={8}>
