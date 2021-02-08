@@ -42,7 +42,7 @@ import Pagination from "react-js-pagination";
 import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg"; 
+import Requestuser from "../../assets/images/pro_img.svg";
 import Deleteusers from "../../assets/images/delete_users.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
@@ -143,6 +143,11 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") == "superadminget_planlist"
     )
       this.superadminget_planlist(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminkits_list"
+    )
+      this.superadminkits_list(1, 10);
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -656,6 +661,40 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
+  superadminkits_list = async (offset, count) => {
+    try {
+      let kitList = [];
+      let result = await ELPViewApiService("superadminkits_list", {
+        count: count,
+        offset: offset,
+      });
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        kitList =
+          result && result.data && result.data.data
+            ? result.data.data.kits_listing
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "kitList",
+          kitList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   getBlogCat = (name, api) => {
     let objBlog = [];
     console.log(name, api);
@@ -747,6 +786,8 @@ class Adminlistener extends Component {
         this.getDomainListing(page, this.state.count);
       } else if (this.state.pageType == "planList") {
         this.superadminget_planlist(page, this.state.count);
+      }else if (this.state.pageType == "kitList") {
+        this.superadminkits_list(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
           page,
@@ -1077,7 +1118,10 @@ class Adminlistener extends Component {
     });
   };
   modifyPlanContent = (item, api, status) => {
-    let data = { pl_id: item ? +item.pl_id : +this.state.deletePlanId, pl_status: status };
+    let data = {
+      pl_id: item ? +item.pl_id : +this.state.deletePlanId,
+      pl_status: status,
+    };
     ELPViewApiService(api, data).then((result) => {
       this.setState({ deletePlanConformationModal: false });
       if (result && result.status === 200) {
@@ -1290,6 +1334,10 @@ class Adminlistener extends Component {
       this.state.pageType == "planList"
         ? "position-relative active"
         : "position-relative";
+    let kitActveClass =
+      this.state.pageType == "kitList"
+        ? "position-relative active"
+        : "position-relative";
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
     return (
@@ -1469,6 +1517,19 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={kitActveClass}
+                        onClick={(e) => {
+                          this.superadminkits_list(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> KITS
+                          LIST
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
@@ -1487,10 +1548,7 @@ class Adminlistener extends Component {
                       <div className="position-relative">
                         <div
                           onClick={() =>
-                            this.changepath(
-                              "/subscriptionDocument",
-                              ""
-                            )
+                            this.changepath("/subscriptionDocument", "")
                           }
                           className="fs14 col28 fw500"
                         >
@@ -3219,8 +3277,8 @@ cs_time: "00:00:02" */}
                       );
                     })}
                 </Col>
-
-                
+              ) : this.state.pageType == "kitList" ? (
+                <div>kits</div>
               ) : (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -3559,7 +3617,7 @@ cs_time: "00:00:02" */}
                     className="btn btn-success text-uppercase"
                     onClick={(event) =>
                       this.modifyPlanContent(
-                        '',
+                        "",
                         "superadmindelete_planstatus",
                         3
                       )

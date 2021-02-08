@@ -1719,8 +1719,8 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminvlogs_list: {
-    url: "/superadminvlogs_list",
+  superadminkits_list: {
+    url: "/superadminkits_list",
     method: "POST",
     data: {
       count: "",
