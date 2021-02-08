@@ -48,7 +48,7 @@ class CreateVlog extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">   
+              <Col md={9} className="pl-1">    
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">Create Vlog</div>
                   <Form>
@@ -76,22 +76,23 @@ class CreateVlog extends Component {
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Youtube Link</Form.Label>
                         <Form.Control type="email" className="inputTyp2" />  
-                    </Form.Group> 
+                    </Form.Group>
 
-                    <div className="position-relative mb-2"> 
-                        <Button
-                            variant="btnTypAdd"  
-                            type="button"  
-                            >
-                            <span><i className="fa fa-plus"></i></span> Add Services 
-                         </Button>
-                    </div>
+                    <Form.Group controlId="formBasicCheckbox"> 
+                    <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 
+                                  <Form.Check
+                                    type="checkbox"
+                                    label="Featured"
+                                    className="checkboxTyp1"
+                                    name="Featured" 
+                                  />
+                                </Form.Group>
 
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button" 
                     >
-                      SUBMIT 
+                      CREATE  
                     </Button>
                   </Form>
                 </div>

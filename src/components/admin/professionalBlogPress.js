@@ -427,7 +427,7 @@ class ProfessinalBlogPress extends Component {
                               // pbc_name: "Press Release"
                               // pbc_status: "1"
                               <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox">
+                                <Form.Group controlId="formBasicCheckbox"> 
                                   <Form.Check
                                     type="checkbox"
                                     label={cat.pbc_name}
