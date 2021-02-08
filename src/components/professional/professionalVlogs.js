@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import ReactStars from "react-rating-stars-component";
 import { Popover } from 'antd';
 import ELPRxApiService from "../../common/services/apiService";
-import { th } from "date-fns/locale";
+import { th } from "date-fns/locale"; 
 import moment from 'moment'
 
 
@@ -178,123 +178,88 @@ class ProfessinalBlog extends Component {
                     </div>
                     <div className="profile_layout pt-4 pb-5">
                          <Container>
-                              <div className="processBlog w-100">
-                                   <div className="text-center fs28 fw500 col64 mb-2">Press</div>
+                              <div className="processBlog vbolgs w-100">
+                                   <div className="text-center fs28 fw500 col64 mb-2">ProfessionalVlogs</div>
                                    <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
 
                                    <div className="blogMain"> 
-                                        <Tabs defaultActiveKey="Featured" id="uncontrolled-tab-example" onSelect={(k) => k === 'Featured' ? this.getPressFeatured() : k === 'Coverage' ? this.getPressCoverage() : k === 'PressReleases' ? this.getPressReleases() : null}>
-
-                                             <Tab eventKey="Featured" title="Featured" className="pressBlog">  
-                                                  <div className="featuredTab">
-                                                       <Row>
-                                                            {this.state.featured && this.state.featured.map((data, i) => {
-                                                                 if (i % 4 === 0) {
-                                                                      return (
-                                                                           this.renderFeatured1(data)
-                                                                      )
-                                                                 }
-
-                                                                 else if ((i + 4) % 4 === 1) {
-                                                                      return (
-                                                                           this.renderFeatured2(data)
-                                                                      )
-                                                                 }
-
-                                                                 else if ((i + 4) % 4 === 2) {
-                                                                      return (
-                                                                           this.renderFeatured3(data)
-                                                                      )
-                                                                 }
-
-                                                                 else {
-                                                                      return (
-                                                                           this.renderFeatured4(data)
-                                                                      )
-                                                                 }
-
-                                                            }
-
-                                                            )}
-
-
-
-                                                       </Row>
-                                                       <div className="mt-4 mb-4 border_blog"></div>
-
+                                        <Tabs defaultActiveKey="All" id="uncontrolled-tab-example"> 
+                                             <Tab eventKey="All" title="All" className="pressBlog">   
+                                                  <div className="vlogListing">
+                                                        <div className="ngo_listing">
+                                                            <Row>
+                                                            <Col lg={4} md={6} sm={6}> 
+                                                            <div className="ngo_social"> 
+                                                                <div className="p-3">
+                                                                    <div className="media_list mb-3">
+                                                                    <div className="elpVideo"> 
+                                                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/XMst5HoOS6c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                    </div> 
+                                                                        <div className="col14 fs14 fw400 pt-1">2 Feb 21 
+                                                                            <span className="pl-2">10:00 am</span>
+                                                                        </div>
+                                                                        <div className="col14 fs14 fw400 pt-1">220 views</div>
+                                                                    </div>
+                                                                    <div className="col3 fs18 fw600 mb-3">Vblog</div>
+                                                                    <hr className="social_hr" />
+                                                                    <div className="fs14 col29 fw300"></div>
+                                                                
+                                                                </div>
+                                                            </div>
+                                                            </Col>
+                                                            <Col lg={4} md={6} sm={6}> 
+                                                            <div className="ngo_social"> 
+                                                                <div className="p-3">
+                                                                    <div className="media_list mb-3">
+                                                                    <div className="elpVideo">
+                                                                          <iframe width="100%" height="250" src="https://www.youtube.com/embed/B8G846WVA2I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                    </div> 
+                                                                        <div className="col14 fs14 fw400 pt-1">2 Feb 21 
+                                                                            <span className="pl-2">10:00 am</span>
+                                                                        </div>
+                                                                        <div className="col14 fs14 fw400 pt-1">220 views</div>
+                                                                    </div>
+                                                                    <div className="col3 fs18 fw600 mb-3">Vblog</div>
+                                                                    <hr className="social_hr" />
+                                                                    <div className="fs14 col29 fw300"></div>
+                                                                
+                                                                </div>
+                                                            </div>
+                                                            </Col>
+                                                            <Col lg={4} md={6} sm={6}> 
+                                                            <div className="ngo_social"> 
+                                                                <div className="p-3">
+                                                                    <div className="media_list mb-3">
+                                                                    <div className="elpVideo">
+                                                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/XMst5HoOS6c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                    </div> 
+                                                                        <div className="col14 fs14 fw400 pt-1">2 Feb 21 
+                                                                            <span className="pl-2">10:00 am</span>
+                                                                        </div>
+                                                                        <div className="col14 fs14 fw400 pt-1">220 views</div>
+                                                                    </div>
+                                                                    <div className="col3 fs18 fw600 mb-3">Vblog</div>
+                                                                    <hr className="social_hr" />
+                                                                    <div className="fs14 col29 fw300"></div>
+                                                                
+                                                                </div>
+                                                            </div>
+                                                            </Col>
+                                                            </Row>
+                                                        </div>    
                                                   </div>
                                              </Tab>
 
-                                             <Tab eventKey="Coverage" title="Coverage">
-                                                  <div className="coverageTab">
-                                                       <div className="coverageListnew">
-                                                            {console.log("ASDASD==>", this.state.coverage)}
-                                                            {this.state.coverage && this.state.coverage.map((data, i) =>
-                                                                 <>
-                                                                      <div className="coverageList">
-                                                                           <Row>
-                                                                                <Col md={6}>
-                                                                                     <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)}>{data.pbl_title}</div>
-
-                                                                                </Col>
-                                                                                <Col md={3}>
-                                                                                     {/* <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div> */}
-                                                                                </Col>
-                                                                                <Col md={3}>
-                                                                                     <div className="fw400 fs15 col14" onClick={() => this.setState({ showDetails: true })}>{data.pbl_written_by}</div>
-                                                                                </Col>
-                                                                           </Row>
-                                                                      </div>
-                                                                 </>
-                                                            )}
-                                                       </div>
-
+                                             <Tab eventKey="Featured" title="Featured">
+                                                  <div className="vlogListing">
+                                                       Vlog2
                                                   </div>
-
-                                                  {this.state.coverage && this.state.offset < this.state.coverage.length ?
-                                                       <div className="text-center mt-5 mb-5">
-                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                       </div> : null
-                                                  }
                                              </Tab>
 
                                              <Tab eventKey="PressReleases" title="Press Releases">
-                                                  <div className="coverageTab">
-                                                       <div className="coverageListwo">
-                                                            {this.state.pressReleases && this.state.pressReleases.map((data, i) => {
-                                                                 return this.state.offset > i ?
-                                                                      <>
-                                                                           <div className="coverageList">
-                                                                                <Row>
-                                                                                     <Col md={8}>
-                                                                                          <div className="fw600 fs16 col64" onClick={() => this.getBlogdetails(data.pbl_id)} >
-                                                                                               {data.pbl_title}
-                                                                                          </div>
-                                                                                     </Col>
-                                                                                     <Col md={4}>
-                                                                                          {/* <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div> */}
-                                                                                     </Col>
-                                                                                </Row>
-                                                                           </div>
-                                                                      </>
-                                                                      :
-                                                                      null
-                                                            }
-
-                                                            )}
-
-                                                       </div>
-                                                  </div>
-                                                  {this.state.pressReleases && this.state.offset < this.state.pressReleases.length
-
-                                                       ?
-                                                       <div className="text-center mt-5 mb-5">
-                                                            <Button className="btnTyp12" onClick={() => { this.setState({ offset: this.state.offset + 6 }) }}> show more </Button>
-                                                       </div> :
-                                                       null
-
-                                                  }
-
+                                                   <div className="vlogListing">
+                                                        Vlog3
+                                                   </div>
                                              </Tab>
                                         </Tabs>
 

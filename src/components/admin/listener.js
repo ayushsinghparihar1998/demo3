@@ -42,7 +42,7 @@ import Pagination from "react-js-pagination";
 import customPagination from "../../common/helpers/paginationConstants";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
+import Requestuser from "../../assets/images/pro_img.svg"; 
 import Deleteusers from "../../assets/images/delete_users.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
@@ -3219,6 +3219,8 @@ cs_time: "00:00:02" */}
                       );
                     })}
                 </Col>
+
+                
               ) : (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">

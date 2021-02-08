@@ -581,48 +581,106 @@ class NavBar extends Component {
                                             // </NavLink>,
                                         ]
                                         : [
-                                            <Nav.Link onClick={this.handleModal}>
-                                                Talk/Connect
-                                        </Nav.Link>,
-                                            <NavLink
-                                                disabled
-                                                to="/becomeListener"
-                                                className="nav-link text-c"
-                                            >
-                                                Volunteer
-                                            <br />
-                                                <span className="comings">coming soon</span>
-                                            </NavLink>,
-                                            <NavLink
-                                                disabled
-                                                to="/becomeListener"
-                                                className="nav-link text-c"
-                                            >
-                                                Professional Help
-                                            <br />
-                                                <span className="comings">coming soon</span>
-                                            </NavLink>,
-                                            <NavLink to="/campaign" className="nav-link donatebtns">
-                                                Donate
-                                        </NavLink>,
-                                            // <Nav.Link > Media</Nav.Link>,
-                                            <NavDropdown title="Media" id="basic-nav-dropdown">
-                                                <NavDropdown.Item href={'/blogs'}>
+                                            // <Nav.Link onClick={this.handleModal}>
+                                            //     Talk/Connect
+                                            // </Nav.Link>,
+                                            <NavDropdown title="EAT" id="basic-nav-dropdown">
+                                                <NavDropdown.Item>
+                                                    TALK NOW 
+                                                </NavDropdown.Item> 
+                                                <NavDropdown.Item> 
+                                                    SUBSCRIPTION PLANS
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
                                                     BLOGS
-                                        </NavDropdown.Item> 
-                                                <NavDropdown.Item href={'/press'}>
-                                                    PRESS
-                                        </NavDropdown.Item>
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
+                                                    ASSESSMENT TESTS 
+                                                </NavDropdown.Item>
                                             </NavDropdown>,
+                                            <NavDropdown title="LUV" id="basic-nav-dropdown2">
+                                                <NavDropdown.Item>
+                                                    TALK NOW 
+                                                </NavDropdown.Item> 
+                                            </NavDropdown>,
+                                            <NavDropdown title="PRAY" id="basic-nav-dropdown3">
+                                                <NavDropdown.Item>
+                                                    TALK NOW 
+                                                </NavDropdown.Item> 
+                                                <NavDropdown.Item> 
+                                                    SUBSCRIPTION PLANS
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
+                                                    TESTS
+                                                </NavDropdown.Item>  
+                                            </NavDropdown>,
+                                            <NavDropdown title="ELPN" id="basic-nav-dropdown4">
+                                                <NavDropdown.Item>
+                                                TALK NOW 
+                                                </NavDropdown.Item> 
+                                                <NavDropdown.Item> 
+                                                    SUBSCRIPTION PLANS
+                                                </NavDropdown.Item>  
+                                            </NavDropdown>,
+                                            <NavDropdown title="HELP SOMEOME" id="basic-nav-dropdown5"> 
+                                                <NavDropdown.Item>
+                                                    DONATE TIME
+                                                </NavDropdown.Item> 
+                                                <NavDropdown.Item> 
+                                                    DONATE MONEY  
+                                                </NavDropdown.Item>  
+                                            </NavDropdown>,
+                                            // <Nav.Link>  
+                                            //     ELPN
+                                            // </Nav.Link>,
+                                            // <NavLink
+                                            //     disabled
+                                            //     to="/becomeListener"
+                                            //     className="nav-link text-c"
+                                            // >
+                                            //     Volunteer
+                                            // <br />
+                                            //     <span className="comings">coming soon</span>
+                                            // </NavLink>,
+                                            // <NavLink
+                                            //     disabled
+                                            //     to="/becomeListener"
+                                            //     className="nav-link text-c"
+                                            // >
+                                            //     Professional Help
+                                            // <br />
+                                            //     <span className="comings">coming soon</span>
+                                            // </NavLink>,
+                                            // <NavLink to="/campaign" className="nav-link donatebtns">
+                                            //     Donate
+                                            // </NavLink>, 
+                                            // <Nav.Link > Media</Nav.Link>,
+                                            // <NavDropdown title="Media" id="basic-nav-dropdown">
+                                            //     <NavDropdown.Item href={'/blogs'}>
+                                            //         BLOGS
+                                            //     </NavDropdown.Item> 
+                                            //     <NavDropdown.Item href={'/press'}>
+                                            //         PRESS
+                                            //     </NavDropdown.Item>
+                                            // </NavDropdown>, 
 
                                             <NavDropdown title="Learn more" id="basic-nav-dropdown-lm">
                                                 <NavDropdown.Item href={'/about'}>
                                                     About Us
                                                 </NavDropdown.Item>
+                                                <NavDropdown.Item href={'/press'}>
+                                                    PRESS
+                                                </NavDropdown.Item>
                                                 <NavDropdown.Item href={'/faq'}>
                                                     FAQ
                                                 </NavDropdown.Item>
+                                                <NavDropdown.Item href={'/blogs'}>
+                                                    BLOGS
+                                                </NavDropdown.Item> 
                                             </NavDropdown>,
+                                                <Nav.Link>
+                                                    Donate 
+                                                </Nav.Link>,  
                                         ]}
                                     {getLocalStorage("userInfo") ||
                                         getLocalStorage("userInfoProff") ||
@@ -676,14 +734,10 @@ class NavBar extends Component {
                                                                     </ul>)
                                                                     )}
                                                                 </div>
-                                                            </Dropdown.Item>
-
-
+                                                            </Dropdown.Item> 
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </Nav.Link>
-
-
 
                                                 <NavDropdown
                                                     title=""

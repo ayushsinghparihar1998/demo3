@@ -4,7 +4,8 @@ import Banner from "../landing/banner";
 import Conversations from "../landing/conversation";
 import Happypatient from "../landing/happyPatient";
 import Abouteat from "../landing/aboutEat";
-import Plans from "../landing/plans";
+import Plans from "../landing/plans"; 
+import Kits from "../landing/Kits"; 
 import Supporting from "../landing/supporting";
 import Discussanything from "../landing/discussAnything";
 import SubscribeHere from "../landing/subscribes";
@@ -15,7 +16,7 @@ import { Button, Modal, Image, Container, Form } from "react-bootstrap";
 import * as qs from "query-string";
 import ReactGA from "react-ga";
 
-class Home extends Component {
+class Home extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -54,9 +55,9 @@ class Home extends Component {
           <NavBar {...this.props} />
           <Banner />
         </div>
-        <Conversations />
+        <Conversations /> 
         <Plans />
-
+        <Kits />  
         <Abouteat {...this.props} />
         <Discussanything {...this.props} />
         <Happypatient />
@@ -102,4 +103,4 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+export default Home; 
