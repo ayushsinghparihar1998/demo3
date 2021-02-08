@@ -12,6 +12,7 @@ class Discussanything extends Component {
         
         return (
             <div className="Discussanything"> 
+                    <div className="fs40 col8 fw600 text-center w-100 mb-5">How It Works</div>   
                     <Row>
                         <Col md={12}>
                             <div className="discussTwo"> 

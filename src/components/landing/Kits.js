@@ -87,7 +87,7 @@ class Kits extends Component {
       <div className="plans kits mt-4 mb-4"> 
         <Container>
           <div className="fs40 col8 fw600 w-100 mb-5 text-center"> 
-              Kits
+               ELNP Kits 
           </div>
           <div>
           <Slider {...settings}>

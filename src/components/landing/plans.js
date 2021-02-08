@@ -101,7 +101,7 @@ class Plans extends Component {
                         <div className="planone">
                            <Image src={Saves} className="planeImg" />
                           <div className="fs24 fw600 col29 text-center">
-                            {item.pl_title} 
+                            {item.pl_title}  
                           </div>
                         </div>
                         <div className="plantwo text-center"> 
