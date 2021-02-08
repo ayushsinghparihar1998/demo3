@@ -25,7 +25,7 @@ import constant from "../../constant";
 class CreateVlog extends Component { 
   render() {
     return (
-      <div className="page__wrapper innerpage">
+      <div className="page__wrapper innerpage">  
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
@@ -79,21 +79,21 @@ class CreateVlog extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox"> 
-                    <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 
-                                  <Form.Check
-                                    type="checkbox"
-                                    label="Featured"
-                                    className="checkboxTyp1"
-                                    name="Featured" 
-                                  />
-                                </Form.Group>
+                        <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 
+                        <Form.Check
+                          type="checkbox"
+                          label="Featured"
+                          className="checkboxTyp1"
+                          name="Featured" 
+                        />
+                     </Form.Group> 
 
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button" 
                     >
                       CREATE  
-                    </Button>
+                    </Button> 
                   </Form>
                 </div>
               </Col>

@@ -3450,7 +3450,7 @@ of the printing and typesetting industry.  <a>Read more...</a></span>
                                     </div>
                                   </div>
 
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <div className="fs16 fw400 col14 pb-1 e_detai"> 
                                     <strong className="fw600 fs17"> 
                                       Biography:
                                     </strong> <span>lorem dummy content Lorem Ipsum is simply dummy text

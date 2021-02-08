@@ -868,13 +868,24 @@
     .kitListing {
         .adminlistener {
             .e_detai {
-                max-width: 88%; 
-                div.mr-2.pt-1 {
-                    &>img {
-                        border-radius: 0px; 
-                    }
+                max-width: 88%;
+            }
+            div.mr-2.pt-1 {
+                &>img {
+                    border-radius: 0px; 
                 }
             }
+        }
+    }
+    .radioboxTyp1  {
+        .form-check-input {
+            height: 2rem;
+            width: 2rem; 
+        }
+        label {
+            padding-left: 1.8rem;
+            position: relative;
+            top: 10px;  
         }
     }
     .professor_search { 

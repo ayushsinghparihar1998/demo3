@@ -580,6 +580,13 @@
 .Discussanything { 
     background-color: $col18; 
     padding: 0 0 60px; 
+    .discussTwo {
+        position: relative;
+        max-width: 90%; 
+        img {
+            
+        }
+    }
     .discuss {
         padding-left: 10%;
     }

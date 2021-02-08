@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Image, Container, Row, Col, Modal } from "react-bootstrap";
 // import Getsupport from '../../assets/images/get_support.svg';
-import Getsupport from '../../assets/images/get_support.png';
+import Getsupport from '../../assets/images/get_support.png'; 
 import UserSignup from '../signup/userSignup';
 import Crossbtn from '../../assets/images/blue_cross.svg';
-class Discussanything extends Component {
-    state = {
+class Discussanything extends Component { 
+    state = { 
         show: false
     }
     render() {
         
         return (
-            <div className="Discussanything">
-                <Container>
+            <div className="Discussanything"> 
                     <Row>
                         <Col md={12}>
-                            <div>
-                                <Image src={Getsupport} alt="" className="w-100" />  
+                            <div className="discussTwo"> 
+                                <Image src={Getsupport} alt="" className="w-100" />    
                             </div>
                         </Col>
 
@@ -35,11 +34,10 @@ class Discussanything extends Component {
 
                                 {/* <Button variant="primary" className="btnTyp3 discussBtn mt-5" onClick={()=>this.setState({ show: true })}>
                                     Get Started
-                            </Button> */} 
+                            </Button> */}  
                             </div>
                         </Col>
                     </Row>
-                </Container>
                 <Modal show={this.state.show} className="CreateAccount modaltwo">
                     <Modal.Header>
                         <Button onClick={this.handleClose}>
@@ -52,7 +50,7 @@ class Discussanything extends Component {
                             <UserSignup {...this.props} handleSet={()=>this.setState({show:false})}/>
                         </Container>
                     </Modal.Body>
-                </Modal>
+                </Modal> 
             </div>
         )
     }
