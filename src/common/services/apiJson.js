@@ -1655,12 +1655,108 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  
+
   get_planlist: {
     url: "elp/get_planlist",
     method: "POST",
-    data: { count: '', offset: '' },
+    data: { count: "", offset: "" },
     showResultMessage: false,
+    showErrorMessage: true,
+  },
+  uploadkits_image: {
+    url: "/uploadkits_image",
+    method: "POST",
+    data: { u_image: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminadd_kits: {
+    url: "/superadminadd_kits",
+    method: "POST",
+    data: {
+      kt_name: "",
+      kt_desc: "",
+      kt_image_url: "",
+      kt_price: "",
+      kits_service_name: [
+        {
+          ks_services: "",
+          ks_actual_price: "",
+          ks_discounted_price: "",
+        },
+      ],
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminget_kitsdetails: {
+    url: "/superadminget_kitsdetails",
+    method: "POST",
+    data: {
+      kt_id: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminedit_kits: {
+    url: "/superadminedit_kits",
+    method: "POST",
+    data: {
+      kt_id: "",
+      kt_name: "",
+      kt_desc: "",
+      kt_services: "",
+      kt_image_url: "",
+      kt_price: "",
+      kits_service_name: [
+        {
+          ks_services: "",
+          ks_actual_price: "",
+          ks_discounted_price: "",
+        },
+      ],
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminvlogs_list: {
+    url: "/superadminvlogs_list",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminchange_kitsstatus: {
+    url: "/superadminchange_kitsstatus",
+    method: "POST",
+    data: {
+      kt_id: "",
+      kt_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getkits_list: {
+    url: "/getkits_list",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmindelete_kitsstatus: {
+    url: "/superadmindelete_kitsstatus",
+    method: "POST",
+    data: {
+      kt_id: "",
+      kt_status: "",
+    },
+    showResultMessage: true,
     showErrorMessage: true,
   },
 };
