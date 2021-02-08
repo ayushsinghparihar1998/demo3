@@ -82,6 +82,28 @@
 .plans {
     position: relative; 
 
+    ul.slick-dots {
+        bottom: -20px; 
+        li {
+            button {
+                width: 16px;
+                height: 16px;
+                background: $col54; 
+                border-radius: 50%; 
+                overflow: hidden;  
+                &:before {
+                   font-size: 0px;
+                }
+            }
+            &.slick-active {
+                button {
+                    background: $col10; 
+                }
+            }
+            
+        }
+    }
+
     .items {
         position: relative;
         padding-left: 15px;
@@ -93,28 +115,43 @@
         // box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
         box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.15);
         border: solid 1px #eeeeee;  
+        
         .planone {
-            padding: 20px;
-            background: $col62; 
+            padding: 15px;
+            background: $col106;
+            position: relative;
+            img.planeImg {
+                position: absolute;
+                top: 0;
+                left: -5px; 
+            }
         }
         .plantwo {
             padding: 20px;
-            border-bottom: 1px dashed $col14; 
+            height: 190px;
+            // border-bottom: 1px dashed $col14; 
             padding-bottom: 15px;  
-            background-color: $col63; 
+            // background-color: $col63; 
+            background-image: url(../images/rectals.png);
             .peryears {  
-                display: none;  
+                // display: none;  
             }
 
             .btnSave {
-                background: $col103;
-                border: solid 1px $col103; 
-                padding: 2px 10px;
+                background: transparent;
+                border: solid 1px $col14;
+                padding: 5px 28px;
                 border-radius: 0px;
-                font-weight: 600;
+                font-weight: 500;
                 text-transform: uppercase;
-                font-size: 14px; 
-                color: $col29; 
+                font-size: 18px;
+                color:$col14; 
+                box-shadow: none; 
+                outline: 0;
+                &:focus {
+                    box-shadow: none; 
+                    outline: 0; 
+                }
             }
         }
         .planpricing {
@@ -152,6 +189,116 @@
 
                 & > a {
                     color: $col18 !important;
+                }
+            }
+        }
+    }
+    &.kits {
+        position: relative; 
+        background: $col107; 
+        margin-top: 55px !important;
+        padding-top: 40px;
+        padding-bottom: 80px;    
+
+        ul.slick-dots {
+            bottom: -42px; 
+        }
+
+        .items-Kits {
+            padding: 0 15px;
+        }
+
+        .planList {
+            background: #E6FFE0; 
+            .planBorder { 
+                border: solid 5px $col18; 
+            }
+            &.one-bg {
+                background: #FFE0E0; 
+                button.btnType1.reds { 
+                    background: #FF6969 !important;
+                    border: solid 1px #FF6969 !important; 
+                }
+                .profile_set {
+                    &::after {
+                        border-left: 326px solid #FF6969; 
+                    }
+                }
+            }
+            
+            &.two-bg {
+                background: #FFE0E0;  
+                button.btnType1.blues {  
+                    background: #AC6BFC !important;
+                    border: solid 1px #AC6BFC !important; 
+                }
+                .profile_set { 
+                    &::after {
+                        border-left: 326px solid #AC6BFC;  
+                    }
+                }
+            }
+        }
+        .profile_set {
+            position: relative;
+            img {
+                width: 100%;
+                z-index: 99;
+                position: relative; 
+            }
+            &::after { 
+                content: "";
+                width: 100%;
+                height: 0;
+                border-top: 18px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-left: 326px solid #72C55E;
+                position: absolute;
+                bottom: -4px;
+                transform: rotate(176deg);
+                right: 0px;
+                opacity: 0.4;
+            }
+        }
+        .planpricing {
+            position: relative;
+            padding: 10px 0 20px; 
+            background-color: transparent;   
+            .borderSs {
+                border-bottom: 1px dashed #72C55E;
+                padding: 0 30px 10px;
+            }
+            .emotion_ul {
+                padding: 10px 30px;
+                ul { 
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    max-height: inherit; 
+                    li { 
+                        list-style: square;
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                        padding-top: 15px; 
+                        margin-bottom: 0;  
+                        span.sleft {
+
+                        }
+                        span.sright {
+                            del {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            .btnType1 {
+                &.greens {
+                    background:#72C55E !important;
+                    border: solid 1px #72C55E !important;
+                    margin-top: 5px;  
                 }
             }
         }
@@ -305,14 +452,14 @@
         padding-top: 10px; 
         .fgroups {
             position: relative;
-            max-width: 75%; 
+            max-width: 90%; 
 
             .inputTyp1 {
                 max-width: 100%; 
                 font-size: 1rem !important; 
                 border: 1px solid $col10 !important;
                 padding-left: 20px; 
-                padding-right: 150px;          
+                padding-right: 210px;         
             }
             .btnTyp2 {
                 position: absolute;
@@ -330,7 +477,7 @@
     background-color: #fff;
     padding: 60px 0;
     position: relative; 
-    background-image: url('../images/sideimg.png'); 
+    // background-image: url('../images/sideimg.png');  
     background-position: left;
     background-repeat: no-repeat;
     padding-bottom: 70px;
@@ -354,6 +501,30 @@
         & img {
             max-width: 300px;
         }
+    }
+    .pillars {
+        position: relative;
+        padding: 0 20px; 
+        .pillarImg { 
+            position: relative;
+            max-width: 250px; 
+            margin: auto;
+            display: block;
+            // &.ones {
+            //     max-width: 265px;
+            // }
+            // &.twos {
+            //     max-width: 156px;
+            // }
+            // &.threes {
+            //     max-width: 230px; 
+            // }
+        }
+    }
+    .PillarsThree {
+        background: $col105;   
+        padding: 10px 0 50px; 
+        margin-top: 40px; 
     }
 }
 
@@ -389,16 +560,16 @@
     }        
 
     .organise_carousel {   
-        background-color: $col21; 
+        background-color: #F3F3F3; 
         border-radius: 0;
-        max-width: 250px;
+        max-width: 300px;
         text-align: center;
         margin: auto;
-        height: 250px; 
-        line-height: 221px;
+        height: 140px; 
+        line-height: 200px;  
         display: flex !important;
         border: solid 1px #eee; 
-        padding: 30px; 
+        padding: 0; 
         img {
             text-align: center;
             margin: auto;
@@ -407,8 +578,8 @@
 }
 
 .Discussanything { 
-    background-color: $col17; 
-    padding: 60px 0;
+    background-color: $col18; 
+    padding: 0 0 60px; 
     .discuss {
         padding-left: 10%;
     }
@@ -478,6 +649,13 @@ img {
 }
 
 /* media screen start */ 
+@media (min-width: 1200px) { 
+    .Discussanything {
+        .container {
+            // max-width: 1280px;  
+        }
+    }
+}
 @media (max-width: 1200px) {  
     .happyPatient .italic_style .invertedone {              
         // left: -46px;
@@ -950,7 +1128,8 @@ img {
     }
 
     .main_baner {
-        min-height: auto;
+        min-height: auto; 
+
         .ptn-170 {
             padding-top: 100px !important; 
         }
@@ -970,6 +1149,29 @@ img {
         }
     }
     
+
+.home_banner {
+    .btnTyp5 {
+        &.talkBtn {
+            font-size: 15px !important; 
+            margin-bottom: 10px;
+        }
+        &.talkBtntwo {
+            font-size: 15px !important; 
+        }
+    }
+    .coming_m {
+        margin-bottom: 20px; 
+    }
+    .baner_carousel {
+        .fs20.mb-5 {
+            margin-bottom: 20px !important;
+        }
+        .mt-4.d-flex {
+            flex-wrap: wrap; 
+        }
+    }
+}
     
 
 }
@@ -1096,7 +1298,7 @@ img {
         overflow: hidden; 
     }
     .main_baner { 
-        min-height: auto; 
+        min-height: auto !important; 
 
         &.home_banner {
             font-size: 14px !important; 
@@ -1358,6 +1560,8 @@ img {
                     font-size: 16px !important; 
                 }
             }
+
+            
         }
     }
 
@@ -1365,9 +1569,10 @@ img {
         padding: 3rem 0 1.5rem; 
         .container {
             .organise_carousel {
-                max-width: 250px;
-                height: 250px;
-                margin-bottom: 30px; 
+                max-width: 210px;
+                height: 110px;
+                margin-bottom: 30px;
+                padding: 0; 
             }
             div.fs40 {
                 font-size: 2rem !important; 
@@ -1377,6 +1582,11 @@ img {
                 margin-bottom: 20px !important;  
             }
         }
+    }
+
+    .subscribe_here2 { 
+        padding: 0 0 20px;
+        background: #ffffff;
     }
     
     .Discussanything {
@@ -1410,7 +1620,7 @@ img {
         }
     }
 
-    .subscribe_here2 {
+    .subscribe_here2 { 
         .subscribe_left {
             padding-right: 0;
             text-align: center; 
@@ -1424,8 +1634,8 @@ img {
                     padding-right: 130px; 
                 }
                 .btnTyp2 {
-                    padding: 0 1rem; 
-                    font-size: 15px !important;      
+                    padding: 0 0.9rem; 
+                    font-size: 12px !important;      
                 }
             }
         }

@@ -6,7 +6,7 @@ import Inverted from '../../assets/images/inverted-commas1.svg';
 import Invertedtwo from '../../assets/images/inverted-commas2.svg';
 import Slider from "react-slick"; 
 
-class Happypatient extends Component {              
+class Happypatient extends Component {               
     render() { 
         const settings = {
             dots: true,
@@ -36,7 +36,7 @@ class Happypatient extends Component {
         return (
             <div className="happyPatient">    
                 <Container>
-                    <div className="fs40 col14 fw600 w-100">Happy Patient</div> 
+                    <div className="fs40 col104 fw600 w-100">Happy Patient</div> 
                     <div className="col14 fs20 fw400 w-100 pt-3 mb-5 pb-2">             
                         What people say about us. Here are comments from individuals who have visited Counselor.    
                     </div>

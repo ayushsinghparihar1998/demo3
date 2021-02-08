@@ -18,6 +18,7 @@ import { actionSubscribe } from "../../common/redux/actions";
 import Slider from "react-slick";
 import ELPViewApiService from "../../common/services/apiService";
 import { Link } from "react-router-dom";
+import Saves from '../../assets/images/saves.png'; 
 
 class Plans extends Component {
   constructor(props) {
@@ -60,48 +61,66 @@ class Plans extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            adaptiveHeight: true, 
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
     return (
       <div className="plans mt-4 mb-4">
         <Container>
-          <div className="fs40 col64 fw600 w-100 mb-2 text-center">
+          <div className="fs40 col8 fw600 w-100 mb-5 text-center"> 
             Subscription Plans
           </div>
           {/* <div className="text-center fw300 fs22 col14 mb-4 pb-4">
             What people say about us. Here are comments from individuals who
             have visited Counselor.
           </div> */}
-          {/* start end */}
+          {/* start end */} 
 
           <div>
-            <Slider {...settingstwo}>
+            <Slider {...settingstwo}> 
               {this.state.workData &&
                 this.state.workData.map((item) => {
                   return (
                     <div className="items">
-                      <div className="planList">
+                      <div className="planList">  
                         <div className="planone">
+                           <Image src={Saves} className="planeImg" />
                           <div className="fs24 fw600 col29 text-center">
-                            {item.pl_title}
+                            {item.pl_title} 
                           </div>
                         </div>
-                        <div className="plantwo text-center">
+                        <div className="plantwo text-center"> 
                           <div className="d-flex justify-content-center mb-2">
                             <Button className="btnSave">
-                              Save {item.pl_save}%
+                              {/* Save {item.pl_save}% */}BASIC
                             </Button>
                           </div>
                           <div className="pt-1">   
-                            <div className="col14 fs16 fw400"> 
+                            <div className="col14 fs16 fw400 pb-1"> 
                               <del>Rs. {item.pl_price}</del> 
                             </div>
-                            <div className="col29 fs26 fw600"> 
+                            <div className="col14 fs30 fw600 pb-1"> 
                               Rs. {parseFloat(item.pl_discount_price).toFixed(2)}  
                             </div>
                             <div className="col14 fs17 fw400 peryears">Per year</div>
                           </div>
                         </div>
-                        <div className="planpricing">
+                        <div className="planpricing"> 
                           <div className="w-100 justify-content-between">
                             <div className="fs14 fw500 col29 mt-2 mb-3">
                               {item.pl_desc_details}

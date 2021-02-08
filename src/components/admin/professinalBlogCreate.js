@@ -497,4 +497,4 @@ class ProfessinalBlogCreate extends Component {
   }
 }
 
-export default ProfessinalBlogCreate;
+export default ProfessinalBlogCreate; 

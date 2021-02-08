@@ -744,7 +744,7 @@
 }
 .myprofile.reviewrequest {
     .requests {
-        .justify-content-between {
+        .justify-content-between {  
             .col28.fs14.fw400 { 
                 max-height: 75px;
                 overflow: auto; 
@@ -1001,7 +1001,50 @@
             }
         }
     }
+}
 
+.kitListing {
+     button.btnTyp5 {
+         width: 150px; 
+     }
+    .e_detai {
+        a {
+            color: $col40;  
+        }
+    }
+}
+
+
+.addKits {
+    textarea.inputTyp2 {
+        height: 120px; 
+    }
+
+    button.btn-btnTypAdd {
+        color: $col10;
+        padding: 0 0;  
+        font-size: 18px;
+        font-weight: 500; 
+        &:focus {
+            background: transparent;
+            box-shadow: none !important; 
+        }
+        span {
+            width: 22px;
+            height: 22px;
+            line-height: 18px;
+            border: solid 1px $col10; 
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 5px;
+            text-align: center;
+            position: relative;
+            top: -2px;
+            i {
+                font-size: 13px; 
+            }
+        }
+    }
 }
 
 .align-items-center {       
@@ -1134,7 +1177,22 @@
     background: $col18; 
     border-top: solid 10px $col23; 
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); 
-    padding: 30px; 
+    padding: 30px;
+
+    &.vbolgs { 
+        .blogMain {
+            .vlogListing {
+                position: relative;
+                .ngo_social {
+                    margin-bottom: 30px; 
+                }
+                .elpVideo {
+                    margin-top: 20px; 
+                }
+            }
+        }
+    }
+
     .text-center.fs28.fw500.col64 {
         // margin-bottom: 20px !important; 
     }

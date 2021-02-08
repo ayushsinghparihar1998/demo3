@@ -16,7 +16,7 @@ import {
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { NavLink } from 'react-router-dom';
-import Aboutlogo from '../../assets/images/about_logo.jpg';
+import Aboutlogo from '../../assets/images/about_logo.png'; 
 import Aboutprofileone from '../../assets/images/Priyanka-Wadhera.jpg'; 
 import Aboutprofiletwo from '../../assets/images/Manoj-Agrawal.jpg';
 import Aboutprofilethree from '../../assets/images/Sonia-Arora-Sood.jpg';

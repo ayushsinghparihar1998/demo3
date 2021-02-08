@@ -36,12 +36,12 @@
             img.elplogo {
                 // max-width: 40%;
                 max-width: 200px;
-                display: block;
+                display: none;
             } 
             img.elplogopink {
                 // max-width: 40%;
                 max-width: 200px;
-                display: none
+                display: block; 
             } 
         }
     }
@@ -104,7 +104,8 @@
             color: $col8; 
             display: flex; 
             & > img {
-                margin-right: 10px; 
+                margin-right: 10px;
+                max-height: 60px; 
             }
             .elplogopink {
                 margin-top: 10px;
@@ -639,11 +640,15 @@
                 }
             }
             .navbar-brand { 
+                img {
+                    height: auto !important; 
+                    max-height: 60px; 
+                }
                 & > img {
-                    max-width: 45px !important;
+                    max-width: 50px !important;  
                 }
                 & img {
-                    max-width: 110px !important; 
+                    max-width: 110px !important;  
                 }
             }
         }

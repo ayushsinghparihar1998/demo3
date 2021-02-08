@@ -80,7 +80,7 @@ class SubscribeHere extends Component {
             <Col md={6} lg={6}>
               <div className="subscribe_left">
                 <div>
-                  <div className="fs30 col64 fw600 w-100">
+                  <div className="fs30 col104 fw600 w-100">
                     Download our FREE guide now!
                   </div>
                   <div className="col14 fs20 fw300 w-100">

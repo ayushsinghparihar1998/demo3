@@ -94,9 +94,14 @@ import ProfessinalBlogPress from "../components/admin/professionalBlogPress";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";
+import ProfessionalVlogs from "../components/professional/professionalVlogs"; 
 import addSubscriptions from "../components/admin/addSubscription";
 import SubscriptionDocument from "../components/admin/subscriptionDocument";
 import SubscriptionPlan from "../components/admin/subscriptionPlan";
+import AddKits from "../components/admin/addKits";
+import KitsListing from "../components/admin/kitsListing";
+import CreateVlog from "../components/admin/createVlog"; 
+
 
 const user =
   getLocalStorage("userInfo") ||
@@ -149,7 +154,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/ngo" component={Ngo} />
           <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          <PublicRoute path="/listenerprofile" component={ListenerProfile} />
+          <PublicRoute path="/listenerprofile" component={ListenerProfile} /> 
+          <PublicRoute path="/createVlog" component={CreateVlog} /> 
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
@@ -183,6 +189,10 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
+          <PublicRoute path="/professionalVlogs" component={ProfessionalVlogs} /> 
+          <PublicRoute path="/addKits" component={AddKits} /> 
+          <PublicRoute path="/kitsListing" component={KitsListing} />  
+
           <PublicRoute
             path="/professionalBlogList"
             component={ProfessionalBlogList}

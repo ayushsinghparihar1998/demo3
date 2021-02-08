@@ -12,7 +12,7 @@ import {
   Col,
   Carousel,
   Modal,
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import community from "../../assets/images/community.svg";
@@ -61,7 +61,7 @@ class Banner extends Component {
                 {/* <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
                     Our trained Listeners are ready to extend their helping hand</div> */}
                 <div className="fw300 col64 fs20 mb-5">
-                  Eat - If you don't make time for your wellness, you will be
+                  If you don't make time for your wellness, you will be
                   forced to make time for your Illness.
                 </div>
                 <div className="mt-4 d-flex">
@@ -92,7 +92,7 @@ class Banner extends Component {
                   Luv Often
                 </div>
                 <div className="fw300 col64 fs20 mb-5">
-                  Luv - I am stronger than Depression and I am braver than
+                  I am stronger than Depression and I am braver than
                   Loneliness and nothing will ever exhaust me.
                 </div>
                 <div className="mt-4 d-flex">
@@ -122,7 +122,7 @@ class Banner extends Component {
                   Pray Always
                 </div>
                 <div className="fw300 col64 fs20 mb-5">
-                  Pray - Let's take a few minutes to day our prayer for the
+                  Let's take a few minutes to day our prayer for the
                   world to heal and come together in these difficult times.
                   Please be safe.
                 </div>

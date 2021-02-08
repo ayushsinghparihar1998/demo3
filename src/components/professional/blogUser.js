@@ -32,7 +32,7 @@ class BlogUser extends Component {
 
     render() {
         return (
-            <div className="page__wrapper innerpage">
+            <div className="page__wrapper innerpage"> 
                 <div className="main_baner">
                     <NavBar {...this.props} />
                 </div>

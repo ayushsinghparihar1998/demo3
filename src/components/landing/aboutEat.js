@@ -4,6 +4,9 @@ import { getLocalStorage } from "../../common/helpers/Utils";
 import { connect } from 'react-redux';
 import validationSubscribe from '../../common/validations/validationSubscribe';
 import { actionSubscribe } from '../../common/redux/actions';
+import AboutEat from '../../assets/images/AboutEat.png';
+import AboutLove from '../../assets/images/AboutLove.png';
+import AboutPray from '../../assets/images/AboutPray.png';
 
 
 class Abouteat extends Component {
@@ -40,66 +43,55 @@ class Abouteat extends Component {
         }
         return isValid;
     }
-    render() {
-        const { email, password } = this.state;
-        const { errors } = this.state;
+    render() { 
+        const { email, password } = this.state; const { errors } = this.state;  
         return (
-            <div className="aboutEats" id="about_us_container">
-                <Container>
-                    <Row>
-                        <Col md={12} lg={12} className="m-auto">            
-                            <div className="fs40 col14 fw600 w-100">About Eat Luv N Pray</div> 
-                            <div className="col14 fs16 fw300 w-100 pt-3">
-                                {/* <div className="pb-4">Eat Luv N Pray Pvt. Ltd. Is a brainchild of a few serial entrepreneurs from different walks of life. We too have had moments just like you - where we needed that empathetic someone to listen to our chain of thoughts.</div>
-
-                                <div className="pb-4">Today, Eat Luv N Pray remedies that problem by giving virtual leasing space to many NGO’s who would help connecting you with trained listeners as well as resolve various life matters with empathy and compassion. We will also provide database of highly capable consultants from walks of Eat, Love and Pray respectively. </div>
-
-                                <div classNam="pb-4">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a listener on this platform specially, who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend.</div>  */}
-                                {/* <div className="pb-2">As a community, we've found that talking through our emotional, psychological, or mental issues is one of the best methods of managing our overwhelming emotions. Sharing and connecting with a CoCo who has gone through struggles just like you provides great consolation to anyone in need of healing or a friend. </div> */}
-                                {/* <div className="pb-2">Please remember, you’re NEVER ALONE !</div>  */}
-                                <div className="pb-4">Aiming to create a ”Happy Planet” through Eating right, Loving always and Praying often, we are a lifestyle management organisation that runs solely on the concept of Eat, Love and Pray.</div> 
-                                <div className="pb-4">From clean healthy food that the human body needs to repair, detox and function well to the right amount of exercise and movement, to enabling deeper sleep and alleviating chronic stress - the lifestyle medicines we use are many. We believe in the powerful intelligence of the human body and its ability to repair itself.
-                                </div>
-                                <div className="pb-4">
-                                    We simply hear, analyze, & guide to fix the problem in order to enable a Happier and Healthier Lifestyle.
-                                </div> 
-                            </div>
-                        </Col>
-                        {/* <Col md={5}>   
-                            <div className="subscribe_here">
-                                <div className="fs30 fw700 col1">Subscribe to Newsletter</div>
-                                <div className="fs18 fw300 col10 mb-3">Are you ready to excel in your life? Get a free newsletter about holistic wellness delivered to your email.</div>
-                                <div className="fs30 fw700 col1">Coming Soon</div>
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Email address"
-                                        error={errors.email ? true : false}
-                                        className="inputTyp1 fs20"
-                                        name="email"
-                                        value={email}
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                    />
-                                    <div className="error alignLeft">{errors.email}</div>
-                                </Form.Group>
-                                <Button variant="primary"
-                                    onClick={this.getSubscribe} 
-                                    type="submit" className="btnTyp2 mt-1">   
-                                    SUBSCRIBE
-                                </Button>
-
-                            </div>
-                        </Col> */}
-
+        <div className="aboutEats" id="about_us_container">
+            <Container>
+                <Row>
+                    <Col md={12} lg={12} className="m-auto">
+                        <div className="fs40 col8 fw600 w-100">About Eat Luv N Pray</div>  
+                        <div className="col14 fw300 w-100"> 
+                            <div className="fw500 fs26 col64 pb-4">Eat Luv N Pray Pvt Ltd.</div>
+                            <div className="fw500 fs18 col14 pb-2">Who are we – A Lifestyle Management Company</div>
+                            <div className="fw400 col14 pb-2">How we do it – By Listening and properly understanding the help or problem areas of our client. Understanding the root cause and not just treating the symptoms: Our primary objective is to diagnose the root cause so that the client is aware of what triggered the illness and we can plan the disease management protocol accordingly. Many diseases just don’t happen immediately, they happen over prolonged period of time. Only when we spend time diagnosing and looking back at their lifestyle, can we find the possible source of the disease. It could either be a constantly low level of immunity or an emotional scar or poor nutrition. We need to start addressing the root causes of a disease to repair our body at all levels – Physical, mental, emotional and spiritual. We treat the symptoms but also identify, address and work on the root cause to effectively manage and control the condition.</div>
+                            <div className="fw500 fs18 col14 pt-4 pb-2">A holistic approach:</div>
+                            <div className="col14 fw400 pb-2">Beyond medicine is something that every human has access to and it’s usually inexpensive and free. People just need to believe in it and start using it. Our approach isn’t a replacement for medicine. But over and above medicine, we also need genuine care, patience, motivation, positivity, compassion, human touch, and an attitude of real care along with advice to eat well, sleep well, manage stress, and move more. For this primary reason, we have a fullfledged integrative ecosystem consisting of dieticians, nutritionists, doctors, emotional counsellors, yoga experts, alternate medicine doctors and healers. It is our constant endeavour to strive towards bettering what we can offer through our programs, which is beyond nutritional plans and alternate medical intervention.</div>
+                        </div>
+                        
+                    </Col>
                     </Row>
+            </Container>
+
+            <div className="PillarsThree">
+                <Container>
+                        <div className="position-relative">
+                            <div className="fs24 fw500 col14 mt-4 mb-5 text-center">Three main pillars of holistic health</div>
+                            <Row>
+                                <Col md="4" xs="12">
+                                    <div className="pillars">
+                                        <Image src={AboutEat} className="pillarImg" />
+                                        <div className="fs26 fw500 col10 text-center mt-3 mb-3">Eat</div>
+                                        <div className="fs14 fw400 col29 text-center">Food is information to our genes and nourishes every single cell. The right quality, quantity and balance of food can promote good health, while the wrong kind of food can deteriorate our health. Additionally, effective digestion, absorption, assimilation and elimination are also our primary areas of focus. Foods are directly related to our body, mental and social health because each food or liquid contains particular nutrition such as carbohydrates, protein, vitamins, minerals, fats, which are very necessary for our physical and mental growth.</div>
+                                    </div>
+                                </Col>
+                                <Col md="4" xs="12">
+                                    <div className="pillars">
+                                        <Image src={AboutLove} className="pillarImg" />
+                                        <div className="fs26 fw500 col10 text-center mt-3 mb-3">Luv</div>
+                                        <div className="fs14 fw400 col29 text-center">What we feed our mind and soul is as important as what we feed our body. Every cell in our body responds to every thought that crosses our mind. A happy emotion can take healing a step forward, a negative emotion can move you a few steps backward. Emotions can play an important role in how we think and behave. The emotions we feel each day can compel us to take action and influence the decisions we make about our lives, both large and small. Self love & care is imperative and can help us attain anything in our lives.</div>
+                                    </div>
+                                </Col>
+                                <Col md="4" xs="12">
+                                    <div className="pillars">
+                                        <Image src={AboutPray} className="pillarImg threes" />
+                                        <div className="fs26 fw500 col10 text-center mt-3 mb-3">Pray</div> 
+                                        <div className="fs14 fw400 col29 text-center">Our bodies have been designed to move. While being sedentary is unnatural, movement is medicine for us. With movement, we enable better circulation of oxygen, nutrients and effective detoxification. Also, its not just about exercising the body, but also the mind with tools like meditation. Sleep is the inbuilt intelligence of our body that allows true healing to take place – like hormonal balance, weight loss, growth, repair, recovery, recharging, immunity and detoxification. Also, its not just sleeping long enough, but also well enough that makes a huge difference in our well being.</div>
+                                    </div>
+                                </Col>
+                            </Row> 
+                        </div>
                 </Container>
-               
             </div>
-        )
-    }
-}
-export default connect(
-    null,
-    { actionSubscribe }
-)(Abouteat); 
+
+        </div>) } } export default connect( null, { actionSubscribe } )(Abouteat);

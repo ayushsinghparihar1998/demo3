@@ -177,7 +177,7 @@ class subscriptionPlan extends Component {
                   <div className="professor_search">
                     <Row className="mb-3">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">
+                        <div className="fs22 fw600 col10"> 
                         Subscription Plan
                         </div>
                       </Col>
@@ -211,7 +211,7 @@ class subscriptionPlan extends Component {
 
                                   </div> 
 
-                                  <div className="fs15 fw500 col14 pb-1">
+                                  <div className="fs15 fw500 col14 pb-1"> 
                                       Rs. 5,900
                                   </div>
                                   <div className="fs15 col14 fw400"> 
