@@ -261,7 +261,7 @@ class addSubscription extends Component {
                                 <Form.Group controlId="formBasicCheckbox"> 
                                 <Form.Check
                                     type="radio"
-                                    label="first radio"
+                                    label="Daily"
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios1"
                                     className="radioboxTyp1"
@@ -272,7 +272,7 @@ class addSubscription extends Component {
                                 <Form.Group controlId="formBasicCheckbox">   
                                   <Form.Check
                                     type="radio"
-                                    label="second radio"
+                                    label="By condition" 
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios2"
                                     className="radioboxTyp1"  
