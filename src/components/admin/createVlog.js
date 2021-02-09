@@ -21,7 +21,7 @@ import validateInput from "../../common/validations/validationAddDomain";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 
-import constant from "../../constant";
+import constant from "../../constant"; 
 class CreateVlog extends Component { 
   render() {
     return (
@@ -38,10 +38,10 @@ class CreateVlog extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Quick Links
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
+                    <div className="d-flex m-3 pb-3 border-bottom"> 
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link to={{ pathname: `/admin` }}>Back</Link> 
                         </div>
                       </div>
                     </div>
@@ -49,8 +49,8 @@ class CreateVlog extends Component {
                 </div>
               </Col>
               <Col md={9} className="pl-1">    
-                <div className="corporateMember subscriptionplan">
-                  <div className="fs28 col10 mb-4">Create Vlog</div>
+                <div className="corporateMember subscriptionplan"> 
+                  <div className="fs28 col10 mb-4">Create Vlog</div> 
                   <Form>
                     <Form.Group className="mb-4"> 
                       <Form.Group>   

@@ -101,7 +101,8 @@ import SubscriptionPlan from "../components/admin/subscriptionPlan";
 import AddKits from "../components/admin/addKits";
 import KitsListing from "../components/admin/kitsListing";
 import CreateVlog from "../components/admin/createVlog"; 
-
+import VlogList from "../components/admin/vlogList";
+import AssessmentTestList from "../components/admin/assessmentTestList";  
 
 const user =
   getLocalStorage("userInfo") ||
@@ -192,6 +193,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/professionalVlogs" component={ProfessionalVlogs} /> 
           <PublicRoute path="/addKits" component={AddKits} /> 
           <PublicRoute path="/kitsListing" component={KitsListing} />  
+          <PublicRoute path="/vlogList" component={VlogList} />
+          <PublicRoute path="/assessmentTestList" component={AssessmentTestList} />  
 
           <PublicRoute
             path="/professionalBlogList"

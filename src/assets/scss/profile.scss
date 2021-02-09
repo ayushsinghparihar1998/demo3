@@ -865,8 +865,8 @@
         }
     }
 
-    .kitListing {
-        .adminlistener {
+    .kitListing {   
+        .adminlistener {  
             .e_detai {
                 max-width: 88%;
             }
@@ -1038,7 +1038,33 @@
     }
 }
 
-
+.elpCategory {
+    margin-top: 10px;
+    @mixin elpAll { 
+        position: relative; 
+        width: 57px;
+        height: 30px;
+        line-height: 30px; 
+        color: $col29; 
+        font-size: 13px;
+        border-radius: 30px; 
+        cursor: pointer; 
+        text-align: center;
+        margin-right: 10px; 
+    }
+    .eat {
+        background: #A3F57D;
+        @include elpAll; 
+    }
+    .luv {
+        background: #FD7C7C;
+        @include elpAll; 
+    }
+    .pray {
+        background: #FA7CFD; 
+        @include elpAll; 
+    } 
+}
 .addKits {
     textarea.inputTyp2 {
         height: 120px; 
