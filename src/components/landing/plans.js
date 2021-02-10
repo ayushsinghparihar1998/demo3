@@ -125,7 +125,7 @@ class Plans extends Component {
                             <div className="fs14 fw500 col29 mt-2 mb-3">
                               {item.pl_desc_details}
                             </div>
-                          </div>
+                          </div> 
                           <Button className="btnType1 d-block w-100 mt-4">
                             <Link to={{ pathname: `/coming-soon` }}> 
                               Buy Now
