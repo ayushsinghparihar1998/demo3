@@ -101,7 +101,7 @@ class CreateVlog extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox"> 
-                        <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 
+                        <Form.Label className="fs20 fw600 col14">Select Category</Form.Label>  
                         <Form.Check
                           type="checkbox"
                           label="Featured"

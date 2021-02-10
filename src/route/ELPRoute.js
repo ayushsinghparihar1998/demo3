@@ -105,7 +105,8 @@ import VlogList from "../components/admin/vlogList";
 import AssessmentTestList from "../components/admin/assessmentTestList"; 
 import ViewQA from "../components/admin/viewQA";
 import CreateAssessmentTest from "../components/admin/createAssessmentTest";  
-import EditQa from "../components/admin/editQa";  
+import EditQa from "../components/admin/editQa";
+import ViewAssessmentTest from "../components/professional/viewAssessmentTest";    
 
 const user =
   getLocalStorage("userInfo") ||
@@ -160,6 +161,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} /> 
           <PublicRoute path="/createVlog" component={CreateVlog} /> 
+          <PublicRoute path="/viewAssessmentTest" component={ViewAssessmentTest} />    
 
           <PublicRoute
             path="/professionalDetails/:type/:id"

@@ -1099,6 +1099,50 @@
 .corporateMember.CreateAssessment {  
     padding: 30px 30px; 
 }
+.scoreDetails {
+    background: #E3F7FF;
+    border: 1px solid #60B2D2; 
+    padding-bottom: 50px;
+    margin-top: 75px; 
+    .disorders {
+        position: relative; 
+        &:before {
+            content: "";
+            width: 40px;
+            height: 5px;
+            background:$col64;     
+            position: absolute;
+            top: 100%;
+            left: 48%;  
+        }
+    }
+    .scoreImg {
+        & > img {
+            margin-top: -95px; 
+            width: auto;
+        }
+    }
+    .scoreBorders {
+        position: relative; 
+        padding: 30px; 
+        border-top: solid 1px rgba(60, 60, 60, 0.40); 
+        border-bottom: solid 1px rgba(60, 60, 60, 0.40); 
+        width: 80%;
+        margin: auto;
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around; 
+    }
+    .scoreSuggetion {
+        position: relative;
+        background: $col18; 
+        box-shadow: inset 0px 4px 30px rgba(0, 0, 0, 0.10); 
+        max-width: 90%;
+        margin: auto;
+        padding: 15px 26px 30px;
+        margin-top: 40px;
+    }
+}
 .addKits {
     .ck-editor .ck-editor__main .ck-content {
         min-height: 150px;
