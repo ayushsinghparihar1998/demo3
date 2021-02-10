@@ -1664,14 +1664,14 @@ export default {
     showErrorMessage: true,
   },
   uploadkits_image: {
-    url: "/uploadkits_image",
+    url: "elp/uploadkits_image",
     method: "POST",
     data: { u_image: "" },
     showResultMessage: true,
     showErrorMessage: true,
   },
   superadminadd_kits: {
-    url: "/superadminadd_kits",
+    url: "elp/superadminadd_kits",
     method: "POST",
     data: {
       kt_name: "",
@@ -1686,20 +1686,20 @@ export default {
         },
       ],
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   superadminget_kitsdetails: {
-    url: "/superadminget_kitsdetails",
+    url: "elp/superadminget_kitsdetails",
     method: "POST",
     data: {
       kt_id: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   superadminedit_kits: {
-    url: "/superadminedit_kits",
+    url: "elp/superadminedit_kits",
     method: "POST",
     data: {
       kt_id: "",
@@ -1720,17 +1720,17 @@ export default {
     showErrorMessage: true,
   },
   superadminkits_list: {
-    url: "/superadminkits_list",
+    url: "elp/superadminkits_list",
     method: "POST",
     data: {
       count: "",
       offset: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
   superadminchange_kitsstatus: {
-    url: "/superadminchange_kitsstatus",
+    url: "elp/superadminchange_kitsstatus",
     method: "POST",
     data: {
       kt_id: "",
@@ -1740,17 +1740,17 @@ export default {
     showErrorMessage: true,
   },
   getkits_list: {
-    url: "/getkits_list",
+    url: "elp/getkits_list",
     method: "POST",
     data: {
       count: "",
       offset: "",
     },
     showResultMessage: true,
-    showErrorMessage: true,
+    showErrorMessage: false,
   },
   superadmindelete_kitsstatus: {
-    url: "/superadmindelete_kitsstatus",
+    url: "elp/superadmindelete_kitsstatus",
     method: "POST",
     data: {
       kt_id: "",

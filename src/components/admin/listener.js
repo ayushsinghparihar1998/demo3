@@ -66,6 +66,7 @@ class Adminlistener extends Component {
       profileListing: [],
       deleteConformationModal: false,
       deletePlanConformationModal: false,
+      deleteKitConformationModal: false,
       profileId: "",
       pageNumber: customPagination.paginationPageNumber,
       totalRecord: 0,
@@ -786,7 +787,7 @@ class Adminlistener extends Component {
         this.getDomainListing(page, this.state.count);
       } else if (this.state.pageType == "planList") {
         this.superadminget_planlist(page, this.state.count);
-      }else if (this.state.pageType == "kitList") {
+      } else if (this.state.pageType == "kitList") {
         this.superadminkits_list(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
         this.getRatinguserListing(
@@ -920,6 +921,19 @@ class Adminlistener extends Component {
       deletePlanConformationModal: true,
       deletePlan: obj ? obj.pl_title : "",
       deletePlanId: obj ? obj.pl_id : "",
+    });
+  };
+
+  handleCloseKitConformation = () => {
+    this.setState({
+      deleteKitConformationModal: false,
+    });
+  };
+  handleOpenKitConformation = (obj) => {
+    this.setState({
+      deleteKitConformationModal: true,
+      deleteKit: obj ? obj.kt_name : "",
+      deleteKitId: obj ? obj.kt_id : "",
     });
   };
 
@@ -1117,6 +1131,7 @@ class Adminlistener extends Component {
       }
     });
   };
+
   modifyPlanContent = (item, api, status) => {
     let data = {
       pl_id: item ? +item.pl_id : +this.state.deletePlanId,
@@ -1127,6 +1142,21 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         setTimeout(() => {
           this.superadminget_planlist(this.state.pageno, this.state.count);
+        }, 500);
+      }
+    });
+  };
+
+  modifyKitContent = (item, api, status) => {
+    let data = {
+      kt_id: item ? +item.kt_id : +this.state.deleteKitId,
+      kt_status: status,
+    };
+    ELPViewApiService(api, data).then((result) => {
+      this.setState({ deleteKitConformationModal: false });
+      if (result && result.status === 200) {
+        setTimeout(() => {
+          this.superadminkits_list(this.state.pageno, this.state.count);
         }, 500);
       }
     });
@@ -1362,8 +1392,8 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> USER
-                          LISTING
+                          <Image src={Menuicon} alt="" className="mr-1" /> USERS
+                         
                         </div>
                       </div>
                     </div>
@@ -1383,7 +1413,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
-                          PROFESSIONAL LISTING
+                          PROFESSIONALS
                         </div>
                       </div>
                     </div>
@@ -1396,7 +1426,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col23 fw500">
                           <Image src={Menuiconblue} alt="" className="mr-1" />{" "}
-                          LISTENER LISTING
+                          LISTENERS
                         </div>
                       </div>
                     </div>
@@ -1487,7 +1517,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />
-                          PRESS BLOG LIST
+                          PRESS BLOGS
                         </div>
                       </div>
                     </div>
@@ -1499,8 +1529,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> BLOG
-                          LIST
+                          <Image src={Menuicon} alt="" className="mr-1" /> BLOGS
                         </div>
                       </div>
                     </div>
@@ -1512,8 +1541,8 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> PLAN
-                          LIST
+                          <Image src={Menuicon} alt="" className="mr-1" /> PLANs
+                          
                         </div>
                       </div>
                     </div>
@@ -1526,7 +1555,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" /> KITS
-                          LIST
+                          
                         </div>
                       </div>
                     </div>
@@ -3278,11 +3307,11 @@ cs_time: "00:00:02" */}
                     })}
                 </Col>
               ) : this.state.pageType == "kitList" ? (
-                <Col md={8} lg={9} className="pl-1 kitListing"> 
-                  <div className="professor_search">    
+                <Col md={8} lg={9} className="pl-1 kitListing">
+                  <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">Kits</div> 
+                        <div className="fs22 fw600 col10">Kits</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3290,11 +3319,16 @@ cs_time: "00:00:02" */}
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
                           <Button
+                            onClick={() =>
+                              this.changepath(
+                                "/addKits/" + 0,
+                                "superadminkits_list"
+                              )
+                            }
                             type="button"
                             className="btnTyp5"
-                           
                           >
-                            ADD KIT  
+                            ADD KIT
                           </Button>
                         </div>
                       </Col>
@@ -3304,177 +3338,114 @@ cs_time: "00:00:02" */}
                         <Form.Group
                           controlId="formBasicCheckbox1"
                           className="row"
-                        >
-                         
-                        </Form.Group>
+                        ></Form.Group>
                       </div>
                     </Form>
                   </div>
-     
+                  {this.state.kitList &&
+                    this.state.kitList.map((item, index) => {
+                      return (
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
                             <div className="mr-2 pt-1">
-                              <Image
-                                src={Requestuser} 
-                                alt=""
-                              /> 
+                              <Image src={item.kt_image_url} alt="" />
                             </div>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
                                     <div className="col1 fw600 fs18 pb-1">
-                                        Emotional Welness Kit 
+                                      {item.kt_name}
                                     </div>
                                     <div className="d-flex ml-auto">
+                                      <span className="pr-3 fs14 col47 fw400">
+                                        {item.kt_status == "2"
+                                          ? "Deactivate"
+                                          : "Activate"}
+                                      </span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id={"custom-switch" + index}
+                                          name={"status" + index}
+                                          label=""
+                                          onClick={(e) => {
+                                            this.modifyKitContent(
+                                              item,
+                                              "superadminchange_kitsstatus",
+                                              item.kt_status == "1" ? "2" : "1"
+                                            );
+                                          }}
+                                          checked={item.kt_status == "1"}
+                                        />
+                                      </span>
                                       <span className="mr-3">
                                         <Image
+                                          onClick={() =>
+                                            this.changepath(
+                                              "/addKits/" + item.kt_id,
+                                              "superadminkits_list"
+                                            )
+                                          }
                                           src={Editicon}
-                                          alt="" 
+                                          alt=""
                                         />
                                       </span>
                                       <span>
                                         <Image
-                                          src={Deleteicon} 
-                                          alt="" 
+                                          onClick={(e) => {
+                                            this.handleOpenKitConformation(
+                                              item
+                                            );
+                                          }}
+                                          src={Deleteicon}
+                                          alt=""
                                         />
                                       </span>
                                     </div>
                                   </div>
+
+                                  {/* kt_datetime: "2021-02-05 16:13:51"
+kt_desc: "latest new"
+kt_id: "4"
+kt_image_url: "https://www.youtube.com/watch?v=WD6cccpzGLk"
+kt_name: "latest new"
+kt_price: "2000"
+kt_status: "1" */}
 
                                   <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600 fs17"> 
-                                      Biography:
-                                    </strong> <span>lorem dummy content Lorem Ipsum is simply dummy text
-of the printing and typesetting industry.  <a>Read more...</a></span> 
-
+                                    <strong className="fw600 fs17">
+                                      Description:
+                                    </strong>{" "}
+                                    <span>
+                                      {item.kt_desc}
+                                      {/* <a>Read more...</a> */}
+                                    </span>
                                   </div>
 
-                                  <div className="fs16 fw400 col14 pb-1"> 
-                                      <span className="fw400 col14">1) Shelter </span>
-                                      <strong className="fw500 col29 ml-3">Rs.550 </strong>
-                                      <span className="fw400 col14 ml-3">2) Funding home </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 520 </strong>
-                                      <span className="fw400 col14 ml-3">3) Orphanhood </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 560 </strong>
+                                  <div className="fs16 fw400 col14 pb-1">
+                                    {item.kits_services.map((val, ind) => {
+                                      return (
+                                        <>
+                                          <span className="fw400 col14">
+                                            {ind + 1}) {val.ks_services}{" "}
+                                          </span>{" "}
+                                          <strong className="fw500 col29 ml-3">
+                                            Rs.{val.ks_discounted_price}{" "}
+                                          </strong>
+                                        </>
+                                      );
+                                    })}
                                   </div>
-
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-
-                        <div className="adminlistener p-4 mb-3">
-                          <div className="d-flex text-left">
-                            <div className="mr-2 pt-1">
-                              <Image
-                                src={Requestuser} 
-                                alt=""
-                              /> 
-                            </div>
-                            <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">
-                                <div className="w-100">
-                                  <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
-                                        Emotional Welness Kit 
-                                    </div>
-                                    <div className="d-flex ml-auto">
-                                      <span className="mr-3">
-                                        <Image
-                                          src={Editicon}
-                                          alt="" 
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Deleteicon} 
-                                          alt="" 
-                                        />
-                                      </span>
-                                    </div>
-                                  </div>
-
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600 fs17"> 
-                                      Biography:
-                                    </strong> <span>lorem dummy content Lorem Ipsum is simply dummy text
-of the printing and typesetting industry.  <a>Read more...</a></span> 
-
-                                  </div>
-
-                                  <div className="fs16 fw400 col14 pb-1"> 
-                                      <span className="fw400 col14">1) Shelter </span>
-                                      <strong className="fw500 col29 ml-3">Rs.550 </strong>
-                                      <span className="fw400 col14 ml-3">2) Funding home </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 520 </strong>
-                                      <span className="fw400 col14 ml-3">3) Orphanhood </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 560 </strong>
-                                  </div>
-
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                        <div className="adminlistener p-4 mb-3">
-                          <div className="d-flex text-left">
-                            <div className="mr-2 pt-1">
-                              <Image
-                                src={Requestuser} 
-                                alt=""
-                              /> 
-                            </div>
-                            <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">
-                                <div className="w-100">
-                                  <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
-                                        Emotional Welness Kit 
-                                    </div>
-                                    <div className="d-flex ml-auto">
-                                      <span className="mr-3">
-                                        <Image
-                                          src={Editicon}
-                                          alt="" 
-                                        />
-                                      </span>
-                                      <span>
-                                        <Image
-                                          src={Deleteicon} 
-                                          alt="" 
-                                        />
-                                      </span>
-                                    </div>
-                                  </div>
-
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600 fs17"> 
-                                      Biography:
-                                    </strong> <span>lorem dummy content Lorem Ipsum is simply dummy text
-of the printing and typesetting industry.  <a>Read more...</a></span> 
-
-                                  </div>
-
-                                  <div className="fs16 fw400 col14 pb-1"> 
-                                      <span className="fw400 col14">1) Shelter </span>
-                                      <strong className="fw500 col29 ml-3">Rs.550 </strong>
-                                      <span className="fw400 col14 ml-3">2) Funding home </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 520 </strong>
-                                      <span className="fw400 col14 ml-3">3) Orphanhood </span>
-                                      <strong className="fw500 col29 ml-3">Rs. 560 </strong>
-                                  </div>
-
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                </Col> 
+                      );
+                    })}
+                </Col>
               ) : (
-
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Rating Requests</div>
@@ -3694,7 +3665,6 @@ of the printing and typesetting industry.  <a>Read more...</a></span>
                     </div>
                   </div>
                 </Col>
-                
               )}
             </Row>
           </Container>
@@ -3785,6 +3755,49 @@ of the printing and typesetting industry.  <a>Read more...</a></span>
                 ) : (
                   ""
                 )}
+              </div>
+            </Modal.Body>
+          </Modal>
+
+          <Modal
+            show={this.state.deleteKitConformationModal}
+            onHide={this.handleCloseKitConformation}
+            className="custom-popUp confirmation-box delete_modal"
+            bsSize="small"
+          >
+            <Modal.Body>
+              <div className="delete_user mt-4">
+                <Image src={Deleteusers} alt="" />
+                <Image
+                  src={Blueicons}
+                  alt=""
+                  className="close pointer"
+                  onClick={this.handleCloseKitConformation}
+                />
+                <div className="text-center fs24 mt-4 col64 mb-4">
+                  Are you sure want to delete <br /> {this.state.deleteKit}?{" "}
+                </div>
+
+                <div className="text-center mb-5">
+                  <button
+                    className="btn btn-success text-uppercase"
+                    onClick={(event) =>
+                      this.modifyKitContent(
+                        "",
+                        "superadmindelete_kitsstatus",
+                        3
+                      )
+                    }
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn btn-default text-uppercase sm-btn"
+                    onClick={this.handleCloseKitConformation}
+                  >
+                    No
+                  </button>
+                </div>
               </div>
             </Modal.Body>
           </Modal>
