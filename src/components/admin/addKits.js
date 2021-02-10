@@ -23,8 +23,8 @@ import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import Womanvideo from "../../assets/images/womanvideo.jpg"; 
 
-import constant from "../../constant";
-class AddKits extends Component {
+import constant from "../../constant";  
+class AddKits extends Component {   
   constructor(props) {
     super(props);
     this.state = {

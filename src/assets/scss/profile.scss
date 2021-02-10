@@ -1100,6 +1100,16 @@
     padding: 30px 30px; 
 }
 .addKits {
+    .ck-editor .ck-editor__main .ck-content {
+        min-height: 150px;
+        background: #f3fdff;
+        border: solid 1px #8AD1E7 !important;
+    }
+    .ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
+        background: #f3fdff;
+        border: solid 1px #8AD1E7 !important; 
+        border-bottom: none !important; 
+    }
     textarea.inputTyp2 {
         height: 120px; 
     }
