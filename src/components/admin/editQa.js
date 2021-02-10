@@ -20,7 +20,9 @@ import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain"; 
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";   
-import constant from "../../constant";   
+import constant from "../../constant";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"; 
 
 // import React, { useState } from 'react'; 
 // import RangeSlider from 'react-bootstrap-range-slider';    
@@ -58,7 +60,14 @@ class EditQa extends Component {
                     <div className="QuestionListings"> 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Question.1</Form.Label> 
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox">   
@@ -89,7 +98,14 @@ class EditQa extends Component {
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Answer</Form.Label> 
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                        />
                     </Form.Group>
 
                      <Form.Group className="mb-4"> 
@@ -112,7 +128,14 @@ class EditQa extends Component {
                     <div className="QuestionListings"> 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Question.2</Form.Label> 
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox">   
@@ -143,7 +166,14 @@ class EditQa extends Component {
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Answer</Form.Label> 
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                        />
                     </Form.Group>
 
                      <Form.Group className="mb-4"> 

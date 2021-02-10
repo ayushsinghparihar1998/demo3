@@ -21,7 +21,6 @@ import { Popover } from 'antd';
 import ELPRxApiService from "../../common/services/apiService";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 
-
 class ViewAssessmentTest extends Component {    
     render() {
         return (
@@ -33,7 +32,7 @@ class ViewAssessmentTest extends Component {
                     <Container>
                         <div className="chatsearch w-100">
                             
-                            <div className="search-listing">
+                            <div className="search-listing">  
                                 <Row> 
                                      <Col lg={9} md={10} className="m-auto">     
                                          <div className="scoreDetails">

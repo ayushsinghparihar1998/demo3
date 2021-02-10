@@ -21,7 +21,7 @@ import validateInput from "../../common/validations/validationAddDomain";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"; 
 
 import constant from "../../constant"; 
 
@@ -87,7 +87,7 @@ class CreateVlog extends Component {
                         }}
                         className="inputTyp2"
                       />
-                      <div className="col27 fs14 fw400 mt-2 error">
+                        <div className="col27 fs14 fw400 mt-2 error">
                            {/* {errors.kt_name} */}   
                         </div>
                     </Form.Group>

@@ -1143,6 +1143,36 @@
         margin-top: 40px;
     }
 }
+.CreateAssessment {
+    .slider {
+        .value {
+            position: relative;
+            top: 7px;
+            font-size: 20px;
+            font-weight: 500; 
+        }
+        .rangeslider {
+            background: #CDEDF5;
+            box-shadow: none; 
+        }
+        .rangeslider-horizontal {
+            .rangeslider__fill { 
+                background-color: #3EB2DD;
+                box-shadow: none;
+            }
+            .rangeslider__handle {
+                background: #3eb2dd;
+                box-shadow: none;
+                border: solid 1px #3eb2dd;
+                outline: 0; 
+                &:after { 
+                    background-color: #fff;
+                    box-shadow: none; 
+                }
+            }   
+        }    
+    }
+}
 .addKits {
     .ck-editor .ck-editor__main .ck-content {
         min-height: 150px;

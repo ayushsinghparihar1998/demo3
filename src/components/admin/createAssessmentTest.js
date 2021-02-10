@@ -20,13 +20,35 @@ import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
-import constant from "../../constant"; 
+import constant from "../../constant";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";  
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css'   
 
-// import React, { useState } from 'react'; 
-// import RangeSlider from 'react-bootstrap-range-slider';   
+class CreateAssessmentTest extends Component { 
+  constructor (props, context) {
+    super(props, context)
+    this.state = {
+      value: 50 
+    }
+  }
 
-class CreateAssessmentTest extends Component {    
+  handleChangeStart = () => {
+    console.log('Change event started')  
+  };
+
+  handleChange = value => {
+    this.setState({
+      value: value
+    })
+  };
+
+  handleChangeComplete = () => {
+    console.log('Change event completed')
+  };   
   render() {
+    const { value } = this.state 
     return (
       <div className="page__wrapper innerpage">  
         <div className="main_baner">
@@ -57,7 +79,10 @@ class CreateAssessmentTest extends Component {
                   <Form method="post">  
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Title of the Test</Form.Label> 
-                        <Form.Control type="text" className="inputTyp2" />
+                        <Form.Control type="text" className="inputTyp2" /> 
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox">   
@@ -89,6 +114,9 @@ class CreateAssessmentTest extends Component {
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Test Price (If Paid)</Form.Label> 
                         <Form.Control type="text" className="inputTyp2" />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox">   
@@ -130,31 +158,83 @@ class CreateAssessmentTest extends Component {
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Total Marks</Form.Label> 
                         <Form.Control type="text" className="inputTyp2" /> 
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group> 
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Select range</Form.Label>
-                        <Form.Control type="range" className="inputTyp2" /> 
+                        {/* <Form.Control type="range" className="inputTyp2" />  */}
+                          <div className='slider'> 
+                            <div className='value'>{value}</div>
+                            <Slider
+                                min={0}
+                                max={100}
+                                value={value}
+                                onChangeStart={this.handleChangeStart}
+                                onChange={this.handleChange}
+                                onChangeComplete={this.handleChangeComplete}
+                             />  
+                          </div>  
+                          <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Suggestions</Form.Label> 
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                      />
+                      
+                      <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Select range</Form.Label>
-                        <Form.Control type="range" className="inputTyp2" /> 
+                        <div className='slider'> 
+                            <div className='value'>{value}</div>
+                            <Slider
+                                min={0}
+                                max={100}
+                                value={value}
+                                onChangeStart={this.handleChangeStart}
+                                onChange={this.handleChange}
+                                onChangeComplete={this.handleChangeComplete}
+                             />  
+                          </div>  
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Suggestions</Form.Label>  
-                        <Form.Control as="textarea" rows={3} className="inputTyp2" />   
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                      />   
+                      <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
                     
                     <Form.Group className="mb-4">    
                         <Form.Label className="fs20 fw600 col14">Youtube Link</Form.Label>
                         <Form.Control type="email" className="inputTyp2" />  
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <div className="position-relative mb-2"> 
@@ -166,7 +246,7 @@ class CreateAssessmentTest extends Component {
                          </Button>
                     </div>
 
-                    <Button 
+                    <Button  
                       variant="primary btnTyp5 mt-4"
                       type="button" 
                     >

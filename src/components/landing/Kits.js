@@ -57,7 +57,7 @@ class Kits extends Component {
       pathname: "coming-soon",
     });
   }
-  render() {
+  render() { 
     const settings = {
       dots: true,
       infinite: true,
