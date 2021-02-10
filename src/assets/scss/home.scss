@@ -226,7 +226,8 @@
         }
 
         .planList {
-            background: #E6FFE0; 
+            background: #E6FFE0;
+            margin-bottom: 30px; 
             .planBorder { 
                 border: solid 5px $col18; 
             }
@@ -261,7 +262,9 @@
             img {
                 width: 100%;
                 z-index: 99;
-                position: relative; 
+                position: relative;
+                height: 190px;
+                object-fit: cover;
             }
             &::after { 
                 content: "";
@@ -287,12 +290,17 @@
             }
             .emotion_ul {
                 padding: 10px 30px;
+                .fs13.col11.fw400 {
+                    height: 90px;
+                    overflow: hidden;
+                }
                 ul { 
                     width: 100%;
                     margin: 0;
                     padding: 0;
                     overflow: hidden;
-                    max-height: inherit; 
+                    max-height: inherit;
+                    min-height: 72px; 
                     li { 
                         list-style: square;
                         display: flex;
