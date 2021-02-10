@@ -8,7 +8,7 @@ import {
   actionadminUserDelete,
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
-} from "../../common/redux/actions";
+} from "../../common/redux/actions"; 
 import Checkgreen from "../../assets/images/checkgreen.svg";
 import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
@@ -1896,7 +1896,7 @@ pl_price: "3000"
 pl_save: "20"
 pl_status: "1"
 pl_title: "Platinum Plan new" */}
-                  {this.state.planList &&
+                  {this.state.planList && 
                     this.state.planList.map((item, index) => {
                       return (
                         <div className="adminlistener p-4 mb-3">
@@ -2955,7 +2955,7 @@ cs_time: "00:00:02" */}
                       >
                         Submit
                       </Button>
-                    </Form>
+                    </Form> 
                   </div>
                 </Col>
               ) : this.state.pageType == "pressblogList" ? (

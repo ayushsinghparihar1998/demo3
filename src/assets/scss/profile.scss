@@ -865,16 +865,27 @@
         }
     }
 
-    .kitListing {
-        .adminlistener {
+    .kitListing {   
+        .adminlistener {  
             .e_detai {
-                max-width: 88%; 
-                div.mr-2.pt-1 {
-                    &>img {
-                        border-radius: 0px; 
-                    }
+                max-width: 88%;
+            }
+            div.mr-2.pt-1 {
+                &>img {
+                    border-radius: 0px; 
                 }
             }
+        }
+    }
+    .radioboxTyp1  {
+        .form-check-input {
+            height: 2rem;
+            width: 2rem; 
+        }
+        label { 
+            padding-left: 1.5rem;
+            position: relative;
+            top: 10px;  
         }
     }
     .professor_search { 
@@ -1027,7 +1038,33 @@
     }
 }
 
-
+.elpCategory {
+    margin-top: 10px;
+    @mixin elpAll { 
+        position: relative; 
+        width: 57px;
+        height: 30px;
+        line-height: 30px; 
+        color: $col29; 
+        font-size: 13px;
+        border-radius: 30px; 
+        cursor: pointer; 
+        text-align: center;
+        margin-right: 10px; 
+    }
+    .eat {
+        background: #A3F57D;
+        @include elpAll; 
+    }
+    .luv {
+        background: #FD7C7C;
+        @include elpAll; 
+    }
+    .pray {
+        background: #FA7CFD; 
+        @include elpAll; 
+    } 
+}
 .addKits {
     textarea.inputTyp2 {
         height: 120px; 

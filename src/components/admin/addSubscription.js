@@ -254,6 +254,70 @@ class addSubscription extends Component {
                       </div>
                     </Form.Group>
 
+                    <Form.Group>  
+                        <Form.Label className="fs20 fw600 col14">Plans Select by</Form.Label> 
+                        <Row>
+                            <Col md={4}>
+                                <Form.Group controlId="formBasicCheckbox"> 
+                                <Form.Check
+                                    type="radio"
+                                    label="Daily"
+                                    name="formHorizontalRadios"
+                                    id="formHorizontalRadios1"
+                                    className="radioboxTyp1"
+                                  /> 
+                                </Form.Group>  
+                            </Col> 
+                            <Col md={4}>
+                                <Form.Group controlId="formBasicCheckbox">   
+                                  <Form.Check
+                                    type="radio"
+                                    label="By condition" 
+                                    name="formHorizontalRadios"
+                                    id="formHorizontalRadios2"
+                                    className="radioboxTyp1"  
+                                  />
+                                </Form.Group>
+                            </Col> 
+                        </Row>
+                     </Form.Group>
+
+                      <Form.Group controlId="formBasicCheckbox">   
+                        <Form.Label className="fs20 fw600 col14 mt-3">Select Category</Form.Label> 
+                        <Row>
+                            <Col md={4}>
+                                <Form.Group controlId="formBasicCheckbox"> 
+                                  <Form.Check
+                                    type="checkbox"
+                                    label="EAT"
+                                    className="checkboxTyp1"
+                                    name="eat" 
+                                  />
+                                </Form.Group>
+                            </Col> 
+                            <Col md={4}>
+                                <Form.Group controlId="formBasicCheckboxTwo"> 
+                                  <Form.Check
+                                    type="checkbox"
+                                    label="LUV"
+                                    className="checkboxTyp1"
+                                    name="eat" 
+                                  />
+                                </Form.Group>
+                            </Col> 
+                            <Col md={4}>
+                                <Form.Group controlId="formBasicCheckboxThree"> 
+                                  <Form.Check
+                                    type="checkbox" 
+                                    label="PRAY"
+                                    className="checkboxTyp1"
+                                    name="eat" 
+                                  />
+                                </Form.Group>
+                            </Col>  
+                        </Row>
+                     </Form.Group> 
+
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
