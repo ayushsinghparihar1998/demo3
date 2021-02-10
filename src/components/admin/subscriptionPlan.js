@@ -283,9 +283,9 @@ class subscriptionPlan extends Component {
                                      of the printing and typesetting industry. <a className="col40">Read more...</a>
                                   </div>
                                 </div>
-
+                                
                                 <div className="min-wi250"></div>
-
+                                
                               </div>
                             </div>
                           </div>

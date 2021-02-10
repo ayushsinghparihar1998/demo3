@@ -41,7 +41,7 @@ class AddKits extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link to={{ pathname: `/admin` }}>Back</Link> 
                         </div>
                       </div>
                     </div>
@@ -96,7 +96,7 @@ class AddKits extends Component {
                             </Form.Group> 
                         </Col>
                     </Row>
-
+ 
                     <div className="position-relative mb-2"> 
                         <Button
                             variant="btnTypAdd"  

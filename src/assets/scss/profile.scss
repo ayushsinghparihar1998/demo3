@@ -1065,6 +1065,40 @@
         @include elpAll; 
     } 
 }
+.ViewQa {
+    position: relative; 
+    background: $col18;
+    border-top: solid 10px $col23;
+    padding: 30px 30px 50px !important;  
+    .QaListings {
+        margin-top: 20px;
+        .answerDetail {
+            ul {
+                padding: 0;
+                margin: 0;
+                li {                            
+                    list-style: none;
+                    font-size: 16px;
+                    color: #595454;
+                    font-weight: 300;
+                    margin-bottom: 12px; 
+                    strong {
+                        color: $col14; 
+                        font-weight: 500; 
+                    }
+                }
+            }
+        }
+    }
+
+    .minw-90 {
+        min-width: 90px; 
+        justify-content: flex-end;
+    }
+}
+.corporateMember.CreateAssessment {  
+    padding: 30px 30px; 
+}
 .addKits {
     textarea.inputTyp2 {
         height: 120px; 
