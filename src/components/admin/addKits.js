@@ -17,7 +17,7 @@ import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
+import validateInput from "../../common/validations/validationAddKit";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
@@ -37,7 +37,7 @@ class AddKits extends Component {
         kt_name: "",
         kt_desc: "",
         kt_image_url: "",
-        kt_price: "",
+        // kt_price: "",
         kits_services: "",
       },
       serviceData: [
@@ -56,7 +56,7 @@ class AddKits extends Component {
         kits_services: "",
         kt_desc: "",
         kt_image_url: "",
-        kt_price: "",
+        // kt_price: "",
       },
       serviceShow: false,
     };
@@ -114,60 +114,55 @@ class AddKits extends Component {
     });
   };
 
-  handleSubmit = () => {
-    if (this.isValid()) {
-      this.setState({
-        showLoader: true,
-      });
+  // handleSubmit = () => {
+  //   if (this.isValid()) {
+  //     this.setState({
+  //       showLoader: true,
+  //     });
 
-      let data = this.state.kitObj;
-      console.log(data);
+  //     let data = this.state.kitObj;
+  //     console.log(data);
 
-      if (this.props.match.params.id > 0) {
-        data.kt_id = this.props.match.params.id;
-      }
-      ELPViewApiService(
-        this.props.match.params.id == 0
-          ? "superadminadd_kits"
-          : "superadminedit_kits",
-        data
-      )
-        .then((result) => {
-          if (result && result.data && result.data.status === "success") {
-            // this.props.history.push("/admin");
-            setTimeout(() => {
-              this.props.history.push("/admin");
-            }, 1000);
-            this.clear();
-          } else {
-            this.setState({
-              showLoader: false,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.setState({
-            showLoader: false,
-          });
-        });
-    } else {
-      this.setState({
-        showLoader: false,
-      });
-    }
-  };
+  //     if (this.props.match.params.id > 0) {
+  //       data.kt_id = this.props.match.params.id;
+  //     }
+  //     ELPViewApiService(
+  //       this.props.match.params.id == 0
+  //         ? "superadminadd_kits"
+  //         : "superadminedit_kits",
+  //       data
+  //     )
+  //       .then((result) => {
+  //         if (result && result.data && result.data.status === "success") {
+  //           // this.props.history.push("/admin");
+  //           setTimeout(() => {
+  //             this.props.history.push("/admin");
+  //           }, 1000);
+  //           this.clear();
+  //         } else {
+  //           this.setState({
+  //             showLoader: false,
+  //           });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //         this.setState({
+  //           showLoader: false,
+  //         });
+  //       });
+  //   } else {
+  //     this.setState({
+  //       showLoader: false,
+  //     });
+  //   }
+  // };
 
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
     let kitObj = this.state.kitObj;
-    kitObj[name] =
-      name == "kt_price"
-        ? !value || !value.length || value[value.length - 1] === "."
-          ? value || 0
-          : parseFloat(value).toFixed(4)
-        : value;
+    kitObj[name] = value;
     this.setState(
       {
         kitObj,
@@ -233,6 +228,7 @@ class AddKits extends Component {
 
   isValid() {
     const { errors, isValid } = validateInput(this.state.kitObj);
+    console.log(errors, isValid);
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
@@ -311,13 +307,20 @@ class AddKits extends Component {
     let serviceData = this.state.serviceData;
     let arr = [];
     serviceData.map((item) => {
-      arr.push(Object.values(item).every((o) => o.length > 0));
+      arr.push(!Object.values(item).some((o) => o == ""));
     });
+    console.log("arr", arr);
     let val = arr.every((o) => o === true);
     this.setState({
       serviceShow: val,
     });
     console.log(val);
+  };
+
+  handleSubmit = () => {
+    this.checkServiceError();
+    console.log(this.state.errors);
+    this.isValid();
   };
 
   render() {
@@ -494,7 +497,7 @@ class AddKits extends Component {
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
-                      onClick={() => this.checkServiceError()}
+                      onClick={() => this.handleSubmit()}
                     >
                       SUBMIT
                     </Button>
