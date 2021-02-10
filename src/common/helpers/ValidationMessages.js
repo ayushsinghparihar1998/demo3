@@ -9,6 +9,25 @@ export default {
   u_birthdate: {
     required: "Please enter a valid age.",
   },
+  kt_price: {
+    required: "Please enter a price.",
+  },
+  kt_image_url: {
+    required: "Please upload a image.",
+  },
+  kt_desc: {
+    required: "Please enter kit description.",
+  },
+  kt_name: {
+    required: "Please enter a valid name.",
+    // alphaOnly: "Please enter a valid screen name.",
+
+  },
+  // : "",
+  // : "",
+  // kt_image_url: "",
+  // kt_price: "",
+  // kits_services: "",
   screen_name: {
     required: "Please enter  name.",
     alphaOnly: "Please enter a valid screen name.",

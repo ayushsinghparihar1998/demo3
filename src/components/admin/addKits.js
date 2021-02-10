@@ -17,7 +17,7 @@ import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
+import validateInput from "../../common/validations/validationAddKit";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
@@ -38,8 +38,14 @@ class AddKits extends Component {
         kt_name: "",
         kt_desc: "",
         kt_image_url: "",
-        kt_price: "",
-        kits_services: "",
+        // kt_price: "",
+        kits_service_name: [
+          {
+            ks_services: "",
+            ks_actual_price: "",
+            ks_discounted_price: "",
+          },
+        ],
       },
       serviceData: [
         {
@@ -48,16 +54,21 @@ class AddKits extends Component {
           ks_discounted_price: "",
         },
       ],
-      errorServiceData: [],
-
+      errorServiceData: [
+        {
+          ks_services: "",
+          ks_actual_price: "",
+          ks_discounted_price: "",
+        },
+      ],
       count: 10,
       offset: 1,
       errors: {
         kt_name: "",
-        kits_services: "",
+        kits_service_name: "",
         kt_desc: "",
         kt_image_url: "",
-        kt_price: "",
+        // kt_price: "",
       },
       serviceShow: false,
     };
@@ -81,17 +92,19 @@ class AddKits extends Component {
       console.log("result", result.data.data.kits_details_listing[0]);
       let kitObj = {};
       let serviceData = {};
-      let errorServiceData = this.state.errorServiceData;
+      let errorServiceData = [];
 
       if (result && result.status === 200) {
         kitObj =
           result && result.data && result.data.data
             ? result.data.data.kits_details_listing[0]
             : [];
+
         serviceData =
           result && result.data && result.data.data
             ? result.data.data.kits_details_listing[0].kits_services
             : [];
+
         result.data.data.kits_details_listing[0].kits_services.map((item) => {
           errorServiceData.push({
             ks_actual_price: "",
@@ -99,12 +112,15 @@ class AddKits extends Component {
             ks_services: "",
           });
         });
+        kitObj.kits_service_name = serviceData;
+        delete kitObj.kits_services;
       }
 
       this.setState(
         {
           kitObj,
           serviceData,
+          errorServiceData,
         },
         () => {
           console.log("kitObj", this.state.kitObj);
@@ -116,9 +132,44 @@ class AddKits extends Component {
   };
 
   handleSubmit = () => {
-    if (this.isValid()) {
+    let kitObj = this.state.kitObj;
+    let serviceData = this.state.serviceData;
+    let errorServiceData = this.state.errorServiceData;
+
+    kitObj.kits_service_name = serviceData;
+    delete kitObj.kits_services;
+    delete kitObj.kt_datetime;
+    delete kitObj.kt_price;
+    delete kitObj.kt_status;
+
+    serviceData.map((item, ind) => {
+      console.log("item", item);
+      console.log("item.ks_services.length", item.ks_services.length);
+
+      errorServiceData[ind].ks_services =
+        item.ks_services.length == 0 ? "Please service name" : "";
+      errorServiceData[ind].ks_actual_price =
+        +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
+          ? "Please enter actual price"
+          : "";
+      errorServiceData[ind].ks_discounted_price =
+        +item.ks_discounted_price == 0 || item.ks_discounted_price.length == 0
+          ? "Please enter discounted price"
+          : "";
+    });
+    this.setState(
+      {
+        errorServiceData,
+      },
+      () => {
+        console.log(this.state.errorServiceData);
+      }
+    );
+    console.log(this.isValid(), this.state.serviceShow);
+    if (this.isValid() && this.state.serviceShow) {
       this.setState({
         showLoader: true,
+        kitObj,
       });
 
       let data = this.state.kitObj;
@@ -139,7 +190,7 @@ class AddKits extends Component {
             setTimeout(() => {
               this.props.history.push("/admin");
             }, 1000);
-            this.clear();
+            // this.clear();
           } else {
             this.setState({
               showLoader: false,
@@ -163,12 +214,7 @@ class AddKits extends Component {
     const { name, value } = event.target;
     console.log(name, value);
     let kitObj = this.state.kitObj;
-    kitObj[name] =
-      name == "kt_price"
-        ? !value || !value.length || value[value.length - 1] === "."
-          ? value || 0
-          : parseFloat(value).toFixed(4)
-        : value;
+    kitObj[name] = value;
     this.setState(
       {
         kitObj,
@@ -180,7 +226,9 @@ class AddKits extends Component {
   };
   handleChangeLoop = (event, ind) => {
     let kitObj = this.state.kitObj;
+    let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
+    console.log();
     let validName =
       event.currentTarget.name == "ks_services"
         ? "service name"
@@ -188,7 +236,7 @@ class AddKits extends Component {
         ? "discounted price"
         : "actual price";
 
-    kitObj.kits_services.map((item, index) => {
+    serviceData.map((item, index) => {
       if (ind == index) {
         // item.item_category_id = foodId;
         item[event.currentTarget.name] =
@@ -210,7 +258,7 @@ class AddKits extends Component {
     });
     this.setState(
       {
-        kitObj,
+        serviceData,
         errorServiceData,
       },
       () => {
@@ -218,18 +266,6 @@ class AddKits extends Component {
         this.checkServiceError();
       }
     );
-    // kitObj.kits_services.map((item, ind) => {
-    //   if (ind == index) {
-    //     // item.item_category_id = foodId;
-    //     // item.item_category_title = event.currentTarget.value;
-    //     console.log("item.item_category_title", item.item_category_title);
-
-    //     errorcategorySetupData[ind].item_category =
-    //       item.item_category_title.length == 0
-    //         ? "Please add item category"
-    //         : "";
-    //   }
-    // });
   };
 
   isValid() {
@@ -237,28 +273,10 @@ class AddKits extends Component {
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
+    
     return isValid;
   }
 
-  isValidSetup() {
-    let count = 0;
-    let errorServiceData = this.state.errorServiceData;
-    errorServiceData.map((item) => {
-      if (
-        item.ks_services.length > 0 ||
-        item.ks_actual_price.length > 0 ||
-        item.ks_discounted_price.length > 0
-      ) {
-        count++;
-      }
-    });
-    console.log(count);
-    if (count == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   addCategorySetup() {
     let obj = {
       ks_services: "",
@@ -268,18 +286,6 @@ class AddKits extends Component {
     let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
 
-    serviceData.map((item, ind) => {
-      console.log(item);
-
-      errorServiceData[ind].ks_services =
-        item.ks_services.length == 0 ? "Please service name" : "";
-      errorServiceData[ind].ks_actual_price =
-        item.ks_actual_price.length == 0 ? "Please enter actual price" : "";
-      errorServiceData[ind].ks_discounted_price =
-        item.ks_discounted_price.length == 0
-          ? "Please enter discounted price"
-          : "";
-    });
     serviceData.push(obj);
     errorServiceData.push({
       ks_actual_price: "",
@@ -310,15 +316,46 @@ class AddKits extends Component {
   }
   checkServiceError = () => {
     let serviceData = this.state.serviceData;
+
     let arr = [];
     serviceData.map((item) => {
-      arr.push(Object.values(item).every((o) => o.length > 0));
+      arr.push(!Object.values(item).some((o) => o == ""));
     });
+    console.log("arr", arr);
     let val = arr.every((o) => o === true);
     this.setState({
       serviceShow: val,
     });
     console.log(val);
+  };
+
+  handleUploadPicture = async (event, name) => {
+    const fileObject = event.target.files[0];
+    console.log();
+    if (fileObject) {
+      this.setState({
+        isUploading: true,
+      });
+      const formData = new FormData();
+      formData.set("u_image", fileObject);
+      console.log("formDataformData", formData);
+
+      const url = constant.SERVER_URL + "elp/uploadkits_image";
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const response = await post(url, formData, config);
+      console.log(name, "resultresultresult", response);
+      let kitObj = this.state.kitObj;
+      kitObj.kt_image_url = response.data.data.filepath;
+      this.setState({
+        isUploading: false,
+        kitObj,
+        filename: fileObject.name,
+      });
+    }
   };
 
   render() {
@@ -356,17 +393,19 @@ class AddKits extends Component {
                           Add Picture*  
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
-                          <Image src={Womanvideo} className="" />   
+                        <Image src={kitObj.kt_image_url} className="" />{" "}
                       </div>
-                      {/* <Form.Label className="fs20 fw600 col14">
-                          Upload  
-                      </Form.Label>                       */} 
-
                       <Form.Group>
                         <Form.File
                           id="exampleFormControlFile1"
                           className="inputTyp2"
+                          onChange={(e) =>
+                            this.handleUploadPicture(e, "backgroud_img")
+                          }
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                          {errors.kt_image_url}
+                        </div>
                       </Form.Group>
                     </Form.Group>
 
@@ -398,7 +437,7 @@ class AddKits extends Component {
                         name="kt_desc"
                         value={kitObj.kt_desc}
                         onChange={(e) => this.handleChange(e)}
-                        maxLength={50}
+                        maxLength={200}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.kt_desc}
@@ -423,10 +462,10 @@ class AddKits extends Component {
                                 onChange={(e) =>
                                   this.handleChangeLoop(e, index)
                                 }
-                                maxLength={50}
+                                maxLength={30}
                               />
                               <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData.ks_services}
+                                {errorServiceData[index].ks_services}
                               </div>
                             </Form.Group>
                           </Col>
@@ -443,10 +482,10 @@ class AddKits extends Component {
                                 onChange={(e) =>
                                   this.handleChangeLoop(e, index)
                                 }
-                                maxLength={50}
+                                maxLength={7}
                               />
                               <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData.ks_actual_price}
+                                {errorServiceData[index].ks_actual_price}
                               </div>
                             </Form.Group>
                           </Col>
@@ -463,10 +502,10 @@ class AddKits extends Component {
                                 onChange={(e) =>
                                   this.handleChangeLoop(e, index)
                                 }
-                                maxLength={50}
+                                maxLength={7}
                               />
                               <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData.ks_discounted_price}
+                                {errorServiceData[index].ks_discounted_price}
                               </div>
                             </Form.Group>
                           </Col>
@@ -501,7 +540,7 @@ class AddKits extends Component {
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
-                      onClick={() => this.checkServiceError()}
+                      onClick={() => this.handleSubmit()}
                     >
                       SUBMIT
                     </Button>

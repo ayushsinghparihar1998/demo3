@@ -1705,9 +1705,9 @@ export default {
       kt_id: "",
       kt_name: "",
       kt_desc: "",
-      kt_services: "",
+      // kt_services: "",
       kt_image_url: "",
-      kt_price: "",
+      // kt_price: "",
       kits_service_name: [
         {
           ks_services: "",
