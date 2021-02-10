@@ -27,14 +27,13 @@ import ELPViewApiService from "../../common/services/apiService";
 import constant from "../../constant";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import validateInput from "../../common/validations/validationSAblog";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"; 
+import validateInput from "../../common/validations/validationSAblog"; 
 
 class ProfessinalBlogCreate extends Component {
   state = {
-    cat_name: [],
-
-    isUploading: false,
+    cat_name: [], 
+    isUploading: false, 
     filepath: null,
     title: null,
     description: null,
@@ -370,7 +369,7 @@ class ProfessinalBlogCreate extends Component {
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.title}
-                      </div>
+                      </div> 
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
@@ -407,7 +406,7 @@ class ProfessinalBlogCreate extends Component {
                         }}
                       />
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
-                      <div className="col27 fs14 fw400 mt-2 error">
+                      <div className="col27 fs14 fw400 mt-2 error">    
                         {errors.desc}
                       </div>
                     </Form.Group>

@@ -6,11 +6,12 @@ import reduxThunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
 import ELPRoute from './route/ELPRoute';
 import reducers from './common/redux/reducers';
-import './assets/scss/style.scss';
+import './assets/scss/style.scss';  
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
@@ -19,7 +20,7 @@ ReactDOM.render(
       <ELPRoute />
     </Provider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById('root') 
 );
 
 // If you want your app to work offline and load faster, you can change

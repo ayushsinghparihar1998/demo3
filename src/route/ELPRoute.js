@@ -87,8 +87,8 @@ import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser";
 // ProfessionalBlog
-import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
-import ProfessinalBlogPress from "../components/admin/professionalBlogPress";
+import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate"; 
+import ProfessinalBlogPress from "../components/admin/professionalBlogPress"; 
 // import AdminBlogListing from "../components/admin/adminBlogListing";
 // import AdminPressListing from "../components/admin/adminPressListing";
 import ProfessinalBlog from "../components/professional/professinalBlog";
@@ -102,7 +102,11 @@ import AddKits from "../components/admin/addKits";
 // import KitsListing from "../components/admin/kitsListing";
 import CreateVlog from "../components/admin/createVlog"; 
 import VlogList from "../components/admin/vlogList";
-import AssessmentTestList from "../components/admin/assessmentTestList";  
+import AssessmentTestList from "../components/admin/assessmentTestList"; 
+import ViewQA from "../components/admin/viewQA";
+import CreateAssessmentTest from "../components/admin/createAssessmentTest";  
+import EditQa from "../components/admin/editQa";
+import ViewAssessmentTest from "../components/professional/viewAssessmentTest";    
 
 const user =
   getLocalStorage("userInfo") ||
@@ -157,6 +161,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} /> 
           <PublicRoute path="/createVlog" component={CreateVlog} /> 
+          <PublicRoute path="/viewAssessmentTest" component={ViewAssessmentTest} />    
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
@@ -194,7 +199,10 @@ class ELPRoute extends Component {
           <PublicRoute path="/addKits/:id" component={AddKits} /> 
           <PublicRoute path="/vlogList" component={VlogList} />
           <PublicRoute path="/assessmentTestList" component={AssessmentTestList} />  
-
+          <PublicRoute path="/viewQA" component={ViewQA} /> 
+          <PublicRoute path="/createAssessmentTest" component={CreateAssessmentTest} />
+          <PublicRoute path="/editQa" component={EditQa} />         
+          
           <PublicRoute
             path="/professionalBlogList"
             component={ProfessionalBlogList}

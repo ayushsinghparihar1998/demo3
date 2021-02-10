@@ -18,7 +18,7 @@ import DatePicker from "react-datepicker";
 import Validator from "validator";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png";
-import BlogProcessFive from "../../assets/images/blog4.png";
+import BlogProcessFive from "../../assets/images/blog4.png"; 
 import Editicon from "../../assets/images/edit_icon.svg";
 import Suser from "../../assets/images/s_images.png";
 import "react-datepicker/dist/react-datepicker.css";

@@ -5,7 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css"; 
 import moment from "moment"; 
 
 import {
@@ -28,9 +28,9 @@ import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Crossbtn from "../../assets/images/blue_cross.svg";
+import Crossbtn from "../../assets/images/blue_cross.svg"; 
 
-export default class CalendarDemo extends Component {
+export default class CalendarDemo extends Component { 
   constructor(props) {
     super(props);
 
@@ -498,7 +498,7 @@ export default class CalendarDemo extends Component {
                         selected={this.state.starting_at}
                         onChange={(date) =>
                           this.setStartDate(date, "starting_at")
-                        }
+                        } 
                         showTimeSelect
                         showTimeSelectOnly
                         timeIntervals={60}

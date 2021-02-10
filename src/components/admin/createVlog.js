@@ -20,8 +20,11 @@ import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import constant from "../../constant"; 
+
 class CreateVlog extends Component { 
   render() {
     return (
@@ -58,7 +61,10 @@ class CreateVlog extends Component {
                         <Form.File
                           id="exampleFormControlFile1" 
                           className="inputTyp2"
-                        />      
+                        />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>      
                       </Form.Group> 
                       
                     </Form.Group>  
@@ -66,26 +72,45 @@ class CreateVlog extends Component {
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Title of the Blog</Form.Label>
                         <Form.Control type="email" className="inputTyp2" />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                            {/* {errors.kt_name} */}
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Description</Form.Label> 
-                        <Form.Control as="textarea" className="inputTyp2" /> 
+                        {/* <Form.Control as="textarea" className="inputTyp2" />  */}
+                        <CKEditor 
+                        editor={ClassicEditor}
+                        onReady={(editor) => { 
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        className="inputTyp2"
+                      />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Youtube Link</Form.Label>
                         <Form.Control type="email" className="inputTyp2" />  
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox"> 
-                        <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 
+                        <Form.Label className="fs20 fw600 col14">Select Category</Form.Label>  
                         <Form.Check
                           type="checkbox"
                           label="Featured"
                           className="checkboxTyp1"
                           name="Featured" 
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                      </Form.Group> 
 
                     <Button

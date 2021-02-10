@@ -21,9 +21,10 @@ import validateInput from "../../common/validations/validationAddKit";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
+import Womanvideo from "../../assets/images/womanvideo.jpg"; 
 
-import constant from "../../constant";
-class AddKits extends Component {
+import constant from "../../constant";  
+class AddKits extends Component {   
   constructor(props) {
     super(props);
     this.state = {
@@ -376,7 +377,7 @@ class AddKits extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link to={{ pathname: `/admin` }}>Back</Link> 
                         </div>
                       </div>
                     </div>
@@ -388,8 +389,8 @@ class AddKits extends Component {
                   <div className="fs28 col10 mb-4">Kits</div>
                   <Form>
                     <Form.Group className="mb-4">
-                      <Form.Label className="fs20 fw600 col14">
-                        Upload
+                      <Form.Label className="fs20 fw600 col14"> 
+                          Add Picture*  
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
                         <Image src={kitObj.kt_image_url} className="" />{" "}

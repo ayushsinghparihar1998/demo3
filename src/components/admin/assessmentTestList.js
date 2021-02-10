@@ -164,7 +164,7 @@ class AssessmentTestLists extends Component {
                                         
                                       />
                                     </span>
-                                    <span>
+                                    <span> 
                                       <Image
                                         src={Deleteicon}
                                         alt=""
@@ -176,7 +176,7 @@ class AssessmentTestLists extends Component {
 
                                 <div className="mb-1"> 
                                   <span className="fs18 fw400 col14"> 
-                                     120 Questions | 30 Marks
+                                     120 Questions | 30 Marks  
                                   </span>
                                 </div>
 
