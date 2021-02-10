@@ -20,6 +20,8 @@ export default {
   },
   kt_name: {
     required: "Please enter a valid name.",
+    // alphaOnly: "Please enter a valid screen name.",
+
   },
   // : "",
   // : "",

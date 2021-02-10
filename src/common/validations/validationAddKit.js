@@ -8,12 +8,13 @@ function validateInput(data) {
   let errors = {};
 
   if (Validator.isEmpty(data.kt_name) || data.kt_name.trim() === "") {
-    errors.kt_name = ValidationMessages.firstName.required;
-  } else if (!Validator.matches(data.kt_name, ValidateRegex.alphaOnly)) {
-    errors.kt_name = ValidationMessages.firstName.alphaOnly;
-  }
+    errors.kt_name = ValidationMessages.kt_name.required;
+  } 
+  // else if (!Validator.matches(data.kt_name, ValidateRegex.alphaOnly)) {
+  //   errors.kt_name = ValidationMessages.kt_name.alphaOnly;
+  // }
   if (Validator.isEmpty(data.kt_desc) || data.kt_desc.trim() === "") {
-    errors.kt_desc = ValidationMessages.lastName.required;
+    errors.kt_desc = ValidationMessages.kt_desc.required;
   }
   if (Validator.isEmpty(data.kt_image_url)) {
     errors.kt_image_url = ValidationMessages.kt_image_url.required;
