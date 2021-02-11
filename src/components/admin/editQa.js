@@ -68,7 +68,10 @@ class EditQa extends Component {
                         }}
                         className="inputTyp2"
                         />
-                    </Form.Group>
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
+                    </Form.Group>  
 
                     <Form.Group controlId="formBasicCheckbox">   
                         <Form.Label className="fs20 fw600 col14">Question Type</Form.Label> 
@@ -106,11 +109,17 @@ class EditQa extends Component {
                         }}
                         className="inputTyp2"
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Weightage</Form.Label> 
                         <Form.Control type="text" className="inputTyp2" />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
@@ -136,6 +145,9 @@ class EditQa extends Component {
                         }}
                         className="inputTyp2"
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox">   
@@ -174,6 +186,9 @@ class EditQa extends Component {
                         }}
                         className="inputTyp2"
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
+                        </div>
                     </Form.Group>
 
                      <Form.Group className="mb-4"> 
@@ -189,6 +204,9 @@ class EditQa extends Component {
                                 >
                                 <span><i className="fa fa-plus"></i></span> Add Services 
                             </Button>
+                        </div>
+                        <div className="col27 fs14 fw400 mt-2 error">
+                           {/* {errors.kt_name} */}   
                         </div>
                     </Form.Group> 
                     </div>

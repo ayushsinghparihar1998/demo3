@@ -192,9 +192,9 @@ class CreateAssessmentTest extends Component {
                         className="inputTyp2"
                       />
                       
-                      <div className="col27 fs14 fw400 mt-2 error">
+                        <div className="col27 fs14 fw400 mt-2 error">
                            {/* {errors.kt_name} */}   
-                        </div>
+                        </div> 
                     </Form.Group>
 
                     <Form.Group className="mb-4"> 
