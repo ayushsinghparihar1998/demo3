@@ -21,10 +21,10 @@ import validateInput from "../../common/validations/validationAddKit";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
-import Womanvideo from "../../assets/images/womanvideo.jpg"; 
+import Womanvideo from "../../assets/images/womanvideo.jpg";
 
-import constant from "../../constant";  
-class AddKits extends Component {   
+import constant from "../../constant";
+class AddKits extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -143,11 +143,8 @@ class AddKits extends Component {
     delete kitObj.kt_status;
 
     serviceData.map((item, ind) => {
-      console.log("item", item);
-      console.log("item.ks_services.length", item.ks_services.length);
-
       errorServiceData[ind].ks_services =
-        item.ks_services.length == 0 ? "Please service name" : "";
+        item.ks_services.length == 0 ? "Please enter service name" : "";
       errorServiceData[ind].ks_actual_price =
         +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
           ? "Please enter actual price"
@@ -155,6 +152,8 @@ class AddKits extends Component {
       errorServiceData[ind].ks_discounted_price =
         +item.ks_discounted_price == 0 || item.ks_discounted_price.length == 0
           ? "Please enter discounted price"
+          : +item.ks_discounted_price >= +item.ks_actual_price
+          ? "Please enter amount less then actual price"
           : "";
     });
     this.setState(
@@ -228,7 +227,7 @@ class AddKits extends Component {
     let kitObj = this.state.kitObj;
     let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
-    console.log();
+
     let validName =
       event.currentTarget.name == "ks_services"
         ? "service name"
@@ -238,22 +237,81 @@ class AddKits extends Component {
 
     serviceData.map((item, index) => {
       if (ind == index) {
+        if (event.currentTarget.name == "ks_services") {
+          item[event.currentTarget.name] = event.currentTarget.value;
+          errorServiceData[ind][event.currentTarget.name] =
+            item[event.currentTarget.name].length == 0
+              ? "Please enter " + validName
+              : "";
+        }
+        // if (!event.currentTarget.value === NaN) {
+        else
+          item[event.currentTarget.name] =
+            !event.currentTarget.value ||
+            !event.currentTarget.value.length ||
+            event.currentTarget.value[event.currentTarget.value.length - 1] ===
+              "."
+              ? event.currentTarget.value || 0
+              : parseFloat(event.currentTarget.value) || 0;
+
+        // errorServiceData[ind][event.currentTarget.name] =
+        //   +item[event.currentTarget.name] == 0
+        //     ? "Please enter a valid amount"
+        //     : "";
+        // errorServiceData[ind].ks_discounted_price =
+        //   +item.ks_discounted_price > +item.ks_actual_price
+        //     ? "Please enter amount less then actual price"
+        //     : "";
+        var countDot = 0;
+        var stringArray = event.currentTarget.value.split("");
+        stringArray.forEach(function (character) {
+          if (character == ".") {
+            console.log("yesyes");
+            countDot++;
+          }
+        });
+        console.log(countDot);
+        if (countDot > 1) {
+          item[event.currentTarget.name] = item[event.currentTarget.name].slice(
+            0,
+            -1
+          );
+        }
+        if (event.currentTarget.name == "ks_actual_price") {
+          errorServiceData[ind].ks_actual_price =
+            +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
+              ? "Please enter a valid amount"
+              : "";
+          errorServiceData[ind].ks_discounted_price =
+            +item.ks_discounted_price >= +item.ks_actual_price
+              ? "Please enter amount less then actual price"
+              : "";
+        } else if (event.currentTarget.name == "ks_discounted_price") {
+          errorServiceData[ind].ks_discounted_price =
+            +item.ks_discounted_price == 0 ||
+            item.ks_discounted_price.length == 0
+              ? "Please enter a valid amount"
+              : +item.ks_discounted_price >= +item.ks_actual_price
+              ? "Please enter amount less then actual price"
+              : "";
+        }
+
+        // }
         // item.item_category_id = foodId;
-        item[event.currentTarget.name] =
-          event.currentTarget.name == "ks_services"
-            ? event.currentTarget.value
-            : !event.currentTarget.value ||
-              !event.currentTarget.value.length ||
-              event.currentTarget.value[
-                event.currentTarget.value.length - 1
-              ] === "."
-            ? event.currentTarget.value || 0
-            : parseFloat(event.currentTarget.value);
-        // event.currentTarget.value.replace(/[^0-9]/g, "");
-        errorServiceData[ind][event.currentTarget.name] =
-          item[event.currentTarget.name].length == 0
-            ? "Please add " + validName
-            : "";
+
+        // errorServiceData[ind][event.currentTarget.name] =
+        // item[event.currentTarget.name].length == 0
+        //   ? "Please enter " + validName
+        //   : event.currentTarget.name == "ks_actual_price" &&
+        //     !re.test(event.currentTarget.value)
+        //   ? "Please enter a valid " + validName
+        //   : event.currentTarget.name == "ks_discounted_price"
+        //   ? !re.test(event.currentTarget.value)
+        //     ? "Please enter a valid " + validName
+        //     : +event.currentTarget.value > +item.ks_actual_price
+        //     ? "Please enter amount less then actual price"
+        //     : ""
+        //   : "";
       }
     });
     this.setState(
@@ -263,6 +321,7 @@ class AddKits extends Component {
       },
       () => {
         console.log(this.state.errorServiceData);
+        console.log(this.state.serviceData);
         this.checkServiceError();
       }
     );
@@ -273,7 +332,7 @@ class AddKits extends Component {
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
-    
+
     return isValid;
   }
 
@@ -316,17 +375,26 @@ class AddKits extends Component {
   }
   checkServiceError = () => {
     let serviceData = this.state.serviceData;
+    let errorServiceData = this.state.errorServiceData;
 
     let arr = [];
+    let err = [];
     serviceData.map((item) => {
       arr.push(!Object.values(item).some((o) => o == ""));
     });
-    console.log("arr", arr);
     let val = arr.every((o) => o === true);
-    this.setState({
-      serviceShow: val,
-    });
-    console.log(val);
+    if (val == true) {
+      errorServiceData.map((item) => {
+        err.push(!Object.values(item).some((o) => o !== ""));
+      });
+      this.setState({
+        serviceShow: err.every((o) => o === true),
+      });
+    } else {
+      this.setState({
+        serviceShow: val,
+      });
+    }
   };
 
   handleUploadPicture = async (event, name) => {
@@ -377,7 +445,7 @@ class AddKits extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link> 
+                          <Link to={{ pathname: `/admin` }}>Back</Link>
                         </div>
                       </div>
                     </div>
@@ -386,11 +454,13 @@ class AddKits extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
-                  <div className="fs28 col10 mb-4">Kits</div>
+                  <div className="fs28 col10 mb-4">
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}KITS
+                  </div>
                   <Form>
                     <Form.Group className="mb-4">
-                      <Form.Label className="fs20 fw600 col14"> 
-                          Add Picture*  
+                      <Form.Label className="fs20 fw600 col14">
+                        Add Picture*
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
                         <Image src={kitObj.kt_image_url} className="" />{" "}
@@ -542,6 +612,7 @@ class AddKits extends Component {
                       type="button"
                       onClick={() => this.handleSubmit()}
                     >
+                      {this.props.match.params.id > 0 ? "UPDATE" : "SUBMIT"}
                       SUBMIT
                     </Button>
                   </Form>
