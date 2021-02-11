@@ -533,7 +533,7 @@ class AddKits extends Component {
                         <span>
                           <i className="fa fa-plus"></i>
                         </span>{" "}
-                        Add Services
+                        Add Services 
                       </Button>
                     </div>
 
