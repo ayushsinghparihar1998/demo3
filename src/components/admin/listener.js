@@ -3401,7 +3401,7 @@ cs_time: "00:00:02" */}
                                           src={Deleteicon}
                                           alt=""
                                         />
-                                      </span>
+                                      </span> 
                                     </div>
                                   </div>
 
@@ -3414,7 +3414,7 @@ kt_price: "2000"
 kt_status: "1" */}
 
                                   <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600 fs17">
+                                    <strong className="fw600 fs15">
                                       Description:
                                     </strong>{" "}
                                     <span>
