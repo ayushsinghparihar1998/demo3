@@ -142,7 +142,7 @@ class AddKits extends Component {
     delete kitObj.kt_price;
     delete kitObj.kt_status;
 
-    serviceData.map((item, ind) => {
+    kitObj.kits_service_name.map((item, ind) => {
       errorServiceData[ind].ks_services =
         item.ks_services.length == 0 ? "Please enter service name" : "";
       errorServiceData[ind].ks_actual_price =
@@ -155,10 +155,26 @@ class AddKits extends Component {
           : +item.ks_discounted_price >= +item.ks_actual_price
           ? "Please enter amount less then actual price"
           : "";
+
+      if (
+        item.ks_actual_price
+          .toString()
+          .charAt(item.ks_actual_price.length - 1) == "."
+      ) {
+        item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
+      }
+      if (
+        item.ks_discounted_price
+          .toString()
+          .charAt(item.ks_discounted_price.length - 1) == "."
+      ) {
+        item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
+      }
     });
     this.setState(
       {
         errorServiceData,
+        // kitObj
       },
       () => {
         console.log(this.state.errorServiceData);
@@ -254,14 +270,6 @@ class AddKits extends Component {
               ? event.currentTarget.value || 0
               : parseFloat(event.currentTarget.value) || 0;
 
-        // errorServiceData[ind][event.currentTarget.name] =
-        //   +item[event.currentTarget.name] == 0
-        //     ? "Please enter a valid amount"
-        //     : "";
-        // errorServiceData[ind].ks_discounted_price =
-        //   +item.ks_discounted_price > +item.ks_actual_price
-        //     ? "Please enter amount less then actual price"
-        //     : "";
         var countDot = 0;
         var stringArray = event.currentTarget.value.split("");
         stringArray.forEach(function (character) {
@@ -345,6 +353,24 @@ class AddKits extends Component {
     let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
 
+    serviceData.map((item) => {
+      if (
+        item.ks_actual_price
+          .toString()
+          .charAt(item.ks_actual_price.length - 1) == "."
+      ) {
+        item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
+      }
+      if (
+        item.ks_discounted_price
+          .toString()
+          .charAt(item.ks_discounted_price.length - 1) == "."
+      ) {
+        item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
+      }
+
+      return item;
+    });
     serviceData.push(obj);
     errorServiceData.push({
       ks_actual_price: "",
@@ -455,7 +481,7 @@ class AddKits extends Component {
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}KITS
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}KIT
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
@@ -613,7 +639,6 @@ class AddKits extends Component {
                       onClick={() => this.handleSubmit()}
                     >
                       {this.props.match.params.id > 0 ? "UPDATE" : "SUBMIT"}
-                      SUBMIT
                     </Button>
                   </Form>
                 </div>
