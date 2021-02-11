@@ -925,6 +925,23 @@ img {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important; 
             }
+        } 
+        .carousel-inner {
+            button.btnTyp5 {
+                width: 130px;
+                height: 40px;  
+            }
+            .carousel-item {
+                .d-flex.mt-4 {
+                    margin-top: 0px !important; 
+                    &:last-child {
+                        padding-bottom: 20px;
+                    }
+                    .fs15.col18.fw300.text-center { 
+                        margin-bottom: 10px !important; 
+                    }
+                }
+            }
         }
         .mj_nav {
             
@@ -1131,7 +1148,7 @@ img {
             }
             .organise_carousel {
                 max-width: 280px;
-                height: 280px;
+                height: 150px; 
                 & > img {
                     max-width: 190px; 
                     width: 100%;
@@ -1195,7 +1212,7 @@ img {
         min-height: auto; 
 
         .ptn-170 {
-            padding-top: 100px !important; 
+            padding-top: 40px !important; 
         }
         .header2banner {
             & > img {

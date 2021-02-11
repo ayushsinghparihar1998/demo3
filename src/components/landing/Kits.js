@@ -68,7 +68,7 @@ class Kits extends Component {
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 1,
+            slidesToShow: 2,            
             slidesToScroll: 2, 
             adaptiveHeight: true,
           },

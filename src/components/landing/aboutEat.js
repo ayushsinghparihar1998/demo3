@@ -70,7 +70,7 @@ emotional scar or poor nutrition. We need to start addressing the root causes of
 body at all levels – Physical, mental, emotional and spiritual. We treat the symptoms but also identify,
 address and work on the root cause to effectively manage and control the condition.
                             </div>
-                            <div className="fw500 fs18 col14 pt-4 pb-2">A holistic approach:</div>
+                            <div className="fw500 fs18 col14 pt-4 pb-2">A holistic approach:</div>  
                             <div className="col14 fw400 pb-2">Beyond medicine is something that every human has access to and it’s usually inexpensive and free.
 People just need to believe in it and start using it <br /> 
 Our approach isn’t a replacement for medicine. But over and above medicine, we also need genuine
@@ -116,4 +116,14 @@ intervention.</div>
                 </Container>
             </div>
 
-        </div>) } } export default connect( null, { actionSubscribe } )(Abouteat);
+        </div>) } } export default connect( null, { actionSubscribe } )(Abouteat); 
+
+
+
+
+
+
+
+
+
+
