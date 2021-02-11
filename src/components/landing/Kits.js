@@ -115,7 +115,7 @@ class Kits extends Component {
                                       return (
                                         <li>
                                           <span className="sleft col11 fw400">
-                                            {val.ks_service}
+                                            {val.ks_services}
                                           </span>
                                           <span className="sright col11 fs16 fw500">
                                             <del className="fs14 fw400 mr-2">

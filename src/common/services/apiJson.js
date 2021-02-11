@@ -1746,7 +1746,7 @@ export default {
       count: "",
       offset: "",
     },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: false,
   },
   superadmindelete_kitsstatus: {
