@@ -102,8 +102,8 @@ class Kits extends Component {
                               <Image src={item.kt_image_url} alt="" />
                             </div>
                             <div className="planpricing">
-                              <div className="text-center fw500 fs22 col64 text-uppercase borderSs">
-                                {item.kt_name}
+                              <div className="text-center fw500 fs20 col64 text-uppercase borderSs">
+                                {item.kt_name}  
                               </div>
                               <div className="emotion_ul">
                                 <div className="fs13 col11 fw400">
@@ -119,9 +119,9 @@ class Kits extends Component {
                                           </span>
                                           <span className="sright col11 fs16 fw500">
                                             <del className="fs14 fw400 mr-2">
-                                              {val.ks_actual_price}
+                                            Rs. {val.ks_actual_price}
                                             </del>{" "}
-                                            {val.ks_discounted_price}
+                                            Rs. {val.ks_discounted_price}
                                           </span>
                                         </li>
                                       );

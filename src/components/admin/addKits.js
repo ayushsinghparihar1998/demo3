@@ -455,7 +455,7 @@ class AddKits extends Component {
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}KITS
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELPN KIT
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
@@ -516,7 +516,7 @@ class AddKits extends Component {
                     {this.state.serviceData.map((cat, index) => {
                       return (
                         <Row>
-                          <Col md={5}>
+                          <Col md={5}> 
                             <Form.Group className="mt-1 mb-4">
                               <Form.Label className="fs20 fw600 col14">
                                 Service Name
@@ -613,7 +613,6 @@ class AddKits extends Component {
                       onClick={() => this.handleSubmit()}
                     >
                       {this.props.match.params.id > 0 ? "UPDATE" : "SUBMIT"}
-                      SUBMIT
                     </Button>
                   </Form>
                 </div>

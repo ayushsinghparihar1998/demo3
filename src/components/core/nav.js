@@ -514,12 +514,12 @@ class NavBar extends Component {
                                             >
                                                 Dashboard
                                         </a>,
-                                            <a
-                                                onClick={() => this.verifyInCallNavigation("/campaign")}
-                                                className="nav-link donatebtns"
-                                            >
-                                                Donate
-                                        </a>,
+                                        //     <a
+                                        //         onClick={() => this.verifyInCallNavigation("/campaign")}
+                                        //         className="nav-link donatebtns"
+                                        //     >
+                                        //         Donate
+                                        // </a>,
                                             <NavDropdown title="Media" id="basic-nav-dropdown">
                                                 <NavDropdown.Item href={'/blogs'}>
                                                     BLOGS
@@ -534,7 +534,7 @@ class NavBar extends Component {
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Item href={'/faq'}>
                                                     FAQ
-                                                </NavDropdown.Item>
+                                                </NavDropdown.Item> 
                                             </NavDropdown>,
                                             //     <NavDropdown title="Media" id="basic-nav-dropdown">
                                             // {this.state.mediaLinks.map((data) => {
@@ -569,7 +569,7 @@ class NavBar extends Component {
                                                         }
                                                         className="nav-link"
                                                     >
-                                                        My Schedule
+                                                        My Schedule  
                                                 </a>,
                                                 ]
                                                 : "",
@@ -584,7 +584,7 @@ class NavBar extends Component {
                                             // <Nav.Link onClick={this.handleModal}>
                                             //     Talk/Connect
                                             // </Nav.Link>,
-                                            <NavDropdown title="EAT" id="basic-nav-dropdown">
+                                            <NavDropdown title="EAT" id="basic-nav-dropdown" className="eatDrop">
                                                 <NavDropdown.Item>
                                                     TALK NOW 
                                                 </NavDropdown.Item> 
@@ -598,12 +598,7 @@ class NavBar extends Component {
                                                     ASSESSMENT TESTS 
                                                 </NavDropdown.Item>
                                             </NavDropdown>,
-                                            <NavDropdown title="LUV" id="basic-nav-dropdown2">
-                                                <NavDropdown.Item>
-                                                    TALK NOW 
-                                                </NavDropdown.Item> 
-                                            </NavDropdown>,
-                                            <NavDropdown title="PRAY" id="basic-nav-dropdown3">
+                                            <NavDropdown title="LUV" id="basic-nav-dropdown2" className="eatDrop">
                                                 <NavDropdown.Item>
                                                     TALK NOW 
                                                 </NavDropdown.Item> 
@@ -611,10 +606,27 @@ class NavBar extends Component {
                                                     SUBSCRIPTION PLANS
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Item> 
-                                                    TESTS
+                                                    BLOGS
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
+                                                    ASSESSMENT TESTS 
+                                                </NavDropdown.Item>
+                                            </NavDropdown>,
+                                            <NavDropdown title="PRAY" id="basic-nav-dropdown3" className="eatDrop"> 
+                                                <NavDropdown.Item>
+                                                    TALK NOW 
+                                                </NavDropdown.Item> 
+                                                <NavDropdown.Item> 
+                                                    SUBSCRIPTION PLANS
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
+                                                    BLOGS
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item> 
+                                                    ASSESSMENT TESTS 
                                                 </NavDropdown.Item>  
                                             </NavDropdown>,
-                                            <NavDropdown title="ELPN" id="basic-nav-dropdown4">
+                                            <NavDropdown title="elnp(Holistic)" id="basic-nav-dropdown4" className="Holistics">   
                                                 <NavDropdown.Item>
                                                 TALK NOW 
                                                 </NavDropdown.Item> 
@@ -622,8 +634,8 @@ class NavBar extends Component {
                                                     SUBSCRIPTION PLANS
                                                 </NavDropdown.Item>  
                                             </NavDropdown>,
-                                            <NavDropdown title="HELP SOMEOME" id="basic-nav-dropdown5"> 
-                                                <NavDropdown.Item>
+                                            <NavDropdown title="HELP SOMEONE" id="basic-nav-dropdown5">  
+                                                <NavDropdown.Item> 
                                                     DONATE TIME
                                                 </NavDropdown.Item> 
                                                 <NavDropdown.Item> 
@@ -678,9 +690,9 @@ class NavBar extends Component {
                                                     BLOGS
                                                 </NavDropdown.Item> 
                                             </NavDropdown>,
-                                                <Nav.Link>
-                                                    Donate 
-                                                </Nav.Link>,  
+                                                // <Nav.Link>
+                                                //     Donate 
+                                                // </Nav.Link>,   
                                         ]}
                                     {getLocalStorage("userInfo") ||
                                         getLocalStorage("userInfoProff") ||

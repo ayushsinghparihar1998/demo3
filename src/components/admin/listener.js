@@ -1541,7 +1541,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> PLANs
+                          <Image src={Menuicon} alt="" className="mr-1" /> PLAN
                           
                         </div>
                       </div>
@@ -1554,7 +1554,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> KITS
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELPN KITS
                           
                         </div>
                       </div>
@@ -3333,7 +3333,7 @@ cs_time: "00:00:02" */}
                         </div>
                       </Col>
                     </Row>
-                    <Form className="p_form mb-4">
+                    <Form className="p_form"> 
                       <div className="checkCategory">
                         <Form.Group
                           controlId="formBasicCheckbox1"

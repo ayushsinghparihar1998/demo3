@@ -867,6 +867,11 @@
 
     .kitListing {   
         .adminlistener {  
+            .d-flex {
+                .col1.fw600.fs18.pb-1 { 
+                    cursor: default; 
+                }
+            }
             .e_detai {
                 max-width: 88%;
             }
@@ -1027,15 +1032,20 @@
     }
 }
 
-.kitListing { 
-     button.btnTyp5 { 
-         width: 150px; 
-     }
-    .e_detai {
-        a {
-            color: $col40;  
+.adminProfessinal { 
+    .kitListing { 
+        button.btnTyp5 { 
+            width: 150px; 
         }
-    }
+       .e_detai {
+           a {
+               color: $col40;  
+           }
+       }
+       .checkCategory {
+           padding-top: 10px; 
+       }
+   }
 }
 
 .elpCategory {

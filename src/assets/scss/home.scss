@@ -138,6 +138,7 @@
                 position: absolute;
                 top: 0;
                 left: -5px; 
+                max-width: 28%; 
             }
             .fw600.col29.text-center {
                 color: #08A318 !important; 
@@ -215,7 +216,18 @@
         background: $col107; 
         margin-top: 55px !important;
         padding-top: 40px;
-        padding-bottom: 80px;    
+        padding-bottom: 80px;      
+        .slick-prev:before, .slick-next:before {
+            color: $col64;
+            font-size: 30px; 
+        }
+        .slick-prev {
+            left: -30px;
+        }
+        .slick-next {
+            right: -20px; 
+            top: 49%; 
+        }
 
         ul.slick-dots {
             bottom: -42px; 
@@ -287,12 +299,14 @@
             .borderSs {
                 border-bottom: 1px dashed #72C55E;
                 padding: 0 30px 10px;
+                word-break: break-all;
             }
             .emotion_ul {
                 padding: 10px 30px;
                 .fs13.col11.fw400 {
-                    height: 90px;
+                    height: 87px;
                     overflow: hidden;
+                    word-break: break-all;   
                 }
                 ul { 
                     width: 100%;
@@ -530,11 +544,15 @@
     .pillars {
         position: relative;
         padding: 0 20px; 
+
+        .col29.text-center {
+            text-align: justify !important; 
+        }
         .pillarImg { 
             position: relative;
             max-width: 250px; 
             margin: auto;
-            display: block;
+            display: block; 
             // &.ones {
             //     max-width: 265px;
             // }
@@ -689,6 +707,20 @@ img {
     }
 }
 @media (max-width: 1200px) {  
+    .main_baner { 
+        .carousel-item {
+            .fs40.pt-120 {
+                font-size: 30px !important;
+            }
+            .fw400.col64.fs22 {
+                font-size: 18px !important;
+                margin-bottom: 20px !important; 
+            }
+        }
+        .ptn-170 {
+            padding-top: 130px !important;
+        }
+    }
     .happyPatient .italic_style .invertedone {              
         // left: -46px;
         // max-width: 21px;
@@ -1232,7 +1264,8 @@ img {
 @media (min-width: 992px) {
     .main_baner {
         .mj_nav {
-            .navbar-light {
+            .navbar-light { 
+                padding: 0rem 1rem; 
                 .navbar-nav {
                     a.text-c { 
                         text-align: center;
@@ -1240,8 +1273,18 @@ img {
                     .dropdown {
                         .dropdown-menu {  
                             position: absolute;
-                            left: 0; 
-                            top: 40px;  
+                            left: -40px;   
+                            top: 40px;   
+                        }
+                        &.eatDrop {
+                            .dropdown-menu {    
+                                left: -140px; 
+                            }
+                        }
+                        &.Holistics { 
+                            .dropdown-menu {    
+                                left: -72px;    
+                            }
                         }
                     }
                     
