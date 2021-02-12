@@ -53,63 +53,80 @@ class ProfessionalBlogList extends Component {
       subscribeMail: null,
       email: "",
       errors: "",
+      tabVal: "ALL",
     };
   }
 
   componentDidMount() {
-    this.getBlogAll();
+    this.setState({
+      tabVal: this.props.match.params.name,
+    });
+    console.log(this.props.match.params.name);
+    if (this.props.match.params.name == "ALL") {
+      console.log("ALLLLLLLLLLLLLLLL");
+      this.getBlogAll();
+    } else if (this.props.match.params.name == "EAT") {
+      this.getBlogEat();
+    } else if (this.props.match.params.name == "LUV") {
+      this.getBlogLuv();
+    } else if (this.props.match.params.name == "PRAY") {
+      this.getBlogPray();
+    } else {
+      this.getBlogAll();
+    }
     this.getLatestBlogs();
   }
-//   handleSubmit = () => {
-//     let errors = this.state.errors;
-//     let email = this.state.email;
-//     errors =
-//       email.length == 0
-//         ? "Please Enter email id"
-//         : !Validator.isEmail(email)
-//         ? "Please enter a valid email"
-//         : "";
-//     console.log("errors", errors.length);
-//     console.log("errors", errors);
-//     this.setState(
-//       {
-//         errors,
-//       },
-//       () => {
-//         if (this.state.errors.length == 0) {
-//           let data = {
-//             email: this.state.email,
-//           };
-//           console.log(data);
 
-//           ELPViewApiService("usersubscriber", data)
-//             .then((result) => {
-//               this.setState({
-//                 errors: "",
-//                 email: "",
-//               });
-//             })
-//             .catch((errors) => {
-//               console.log(errors);
-//             });
-//         } else {
-//         }
-//       }
-//     );
-//   };
-//   handleChange = (event) => {
-//     const { name, value } = event.target;
-//     console.log(name, value);
-//     // let email = this.state.email;
-//     this.setState(
-//       {
-//         [name]: value,
-//       },
-//       () => {
-//         console.log(this.state.email);
-//       }
-//     );
-//   };
+  //   handleSubmit = () => {
+  //     let errors = this.state.errors;
+  //     let email = this.state.email;
+  //     errors =
+  //       email.length == 0
+  //         ? "Please Enter email id"
+  //         : !Validator.isEmail(email)
+  //         ? "Please enter a valid email"
+  //         : "";
+  //     console.log("errors", errors.length);
+  //     console.log("errors", errors);
+  //     this.setState(
+  //       {
+  //         errors,
+  //       },
+  //       () => {
+  //         if (this.state.errors.length == 0) {
+  //           let data = {
+  //             email: this.state.email,
+  //           };
+  //           console.log(data);
+
+  //           ELPViewApiService("usersubscriber", data)
+  //             .then((result) => {
+  //               this.setState({
+  //                 errors: "",
+  //                 email: "",
+  //               });
+  //             })
+  //             .catch((errors) => {
+  //               console.log(errors);
+  //             });
+  //         } else {
+  //         }
+  //       }
+  //     );
+  //   };
+  //   handleChange = (event) => {
+  //     const { name, value } = event.target;
+  //     console.log(name, value);
+  //     // let email = this.state.email;
+  //     this.setState(
+  //       {
+  //         [name]: value,
+  //       },
+  //       () => {
+  //         console.log(this.state.email);
+  //       }
+  //     );
+  //   };
 
   getLatestBlogs = () => {
     ELPRxApiService("getlatestblog", {})
@@ -123,6 +140,9 @@ class ProfessionalBlogList extends Component {
   };
 
   getBlogEat = () => {
+    this.setState({
+      tabVal: "EAT",
+    });
     ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Eat'" })
       .then((res) => {
         this.setState({ blogEat: res.data.data.blog_list, showDetails: false });
@@ -134,6 +154,9 @@ class ProfessionalBlogList extends Component {
   };
 
   getBlogLuv = () => {
+    this.setState({
+      tabVal: "LUV",
+    });
     ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Luv'" })
       .then((res) => {
         this.setState({ blogLuv: res.data.data.blog_list, showDetails: false });
@@ -145,6 +168,9 @@ class ProfessionalBlogList extends Component {
   };
 
   getBlogPray = () => {
+    this.setState({
+      tabVal: "PRAY",
+    });
     ELPRxApiService("getblog", { offset: 1, count: 10, category: "'Pray'" })
       .then((res) => {
         this.setState({
@@ -158,6 +184,9 @@ class ProfessionalBlogList extends Component {
       });
   };
   getBlogAll = () => {
+    this.setState({
+      tabVal: "ALL",
+    });
     ELPRxApiService("getblog", {
       offset: 1,
       count: 10,
@@ -215,10 +244,11 @@ class ProfessionalBlogList extends Component {
                       ? this.getBlogPray()
                       : this.getBlogAll()
                   }
-                  defaultActiveKey="All"
+                  // defaultActiveKey=''
+                  activeKey={this.state.tabVal}
                   id="uncontrolled-tab-example"
                 >
-                  <Tab value="EAT" eventKey="All" title="All">
+                  <Tab value="ALL" eventKey="ALL" title="All">
                     <div className="featuredTab">
                       <Row>
                         <Col md={7}>

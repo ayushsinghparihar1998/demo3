@@ -57,7 +57,7 @@ class Kits extends Component {
       pathname: "coming-soon",
     });
   }
-  render() { 
+  render() {
     const settings = {
       dots: true,
       infinite: true,
@@ -68,8 +68,8 @@ class Kits extends Component {
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 2,            
-            slidesToScroll: 2, 
+            slidesToShow: 2,
+            slidesToScroll: 2,
             adaptiveHeight: true,
           },
         },
@@ -77,7 +77,7 @@ class Kits extends Component {
           breakpoint: 600,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1, 
+            slidesToScroll: 1,
           },
         },
       ],
@@ -92,18 +92,26 @@ class Kits extends Component {
           <div>
             <Slider {...settings}>
               {this.state.workData &&
-                this.state.workData.map((item) => {
+                this.state.workData.map((item, index) => {
                   return (
                     <div>
-                      <div className="items-Kits"> 
-                        <div className="planList red-bg"> 
+                      <div className="items-Kits">
+                        <div
+                          className={`planList  ${
+                            (index + 2) % 2 == 0
+                              ? "red-bg "
+                              : (index + 2) % 3 == 0
+                              ? "blue-bg "
+                              : ""
+                          }`}
+                        >
                           <div className="planBorder">
                             <div className="profile_set">
                               <Image src={item.kt_image_url} alt="" />
                             </div>
                             <div className="planpricing">
                               <div className="text-center fw500 fs20 col64 text-uppercase borderSs">
-                                {item.kt_name}  
+                                {item.kt_name}
                               </div>
                               <div className="emotion_ul">
                                 <div className="fs13 col11 fw400">
@@ -119,7 +127,7 @@ class Kits extends Component {
                                           </span>
                                           <span className="sright col11 fs16 fw500">
                                             <del className="fs14 fw400 mr-2">
-                                            Rs. {val.ks_actual_price}
+                                              Rs. {val.ks_actual_price}
                                             </del>{" "}
                                             Rs. {val.ks_discounted_price}
                                           </span>

@@ -407,6 +407,20 @@ class NavBar extends Component {
       console.log(err);
     }
   };
+
+  handleModal = () => {
+    this.setState({ show: true });
+    console.log("hello");
+  };
+  handleClose = () => {
+    this.setState({ show: !this.state.show });
+  };
+  handleGet = () => {
+    this.setState({
+      show: false,
+      show3: false,
+    });
+  };
   render() {
     return (
       <div className="mj_nav">
@@ -523,7 +537,7 @@ class NavBar extends Component {
                         Donate
                       </a>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
-                        <NavDropdown.Item href={"/blogs"}>
+                        <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/press"}>
@@ -588,28 +602,44 @@ class NavBar extends Component {
                       //     Talk/Connect
                       // </Nav.Link>,
                       <NavDropdown title="EAT" id="basic-nav-dropdown">
-                        <NavDropdown.Item>TALK NOW</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.handleModal}>
+                          TALK NOW
+                        </NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/blogs/EAT"}>
+                          BLOGS
+                        </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown title="LUV" id="basic-nav-dropdown2">
-                        <NavDropdown.Item>TALK NOW</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.handleModal}>
+                          TALK NOW
+                        </NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
-                        <NavDropdown.Item>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "} 
+                        <NavDropdown.Item href={"/blogs/LUV"}>
+                          BLOGS
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
                       </NavDropdown>,
                       <NavDropdown title="PRAY" id="basic-nav-dropdown3">
-                        <NavDropdown.Item>TALK NOW</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.handleModal}>
+                          TALK NOW
+                        </NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/blogs/PRAY"}>
+                          BLOGS
+                        </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="ELPN" id="basic-nav-dropdown4">
-                        <NavDropdown.Item>TALK NOW</NavDropdown.Item>
+                      <NavDropdown title="ELNP" id="basic-nav-dropdown4">
+                        <NavDropdown.Item onClick={this.handleModal}>
+                          TALK NOW
+                        </NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/blogs/ALL"}>
+                          BLOGS
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
                         title="HELP SOMEOME"
@@ -667,11 +697,11 @@ class NavBar extends Component {
                           PRESS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs"}>
+                        <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                       </NavDropdown>,
-                      <Nav.Link>Donate</Nav.Link>,
+                      //   <Nav.Link>Donate</Nav.Link>,
                     ]}
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||
@@ -903,6 +933,20 @@ class NavBar extends Component {
         </Modal>
 
         {/* Create a member account end */}
+
+        <Modal show={this.state.show} className="CreateAccount">
+          <Modal.Header>
+            <Button onClick={this.handleClose}>
+              <Image src={Crossbtn} alt="" />
+            </Button>
+          </Modal.Header>
+
+          <Modal.Body>
+            <Container>
+              <UserSignup handleSet={this.handleGet} {...this.props} />
+            </Container>
+          </Modal.Body>
+        </Modal>
 
         {/* Question answer start */}
 
