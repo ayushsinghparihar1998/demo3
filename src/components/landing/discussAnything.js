@@ -11,12 +11,12 @@ class Discussanything extends Component {
     render() {
         
         return (
-            <div className="Discussanything"> 
+            <div className="Discussanything">    
                     <div className="fs40 col8 fw600 text-center w-100 mb-5">How It Works</div>   
                     <Row>
                         <Col md={12}>
                             <div className="discussTwo"> 
-                                <Image src={Getsupport} alt="" className="w-100" />    
+                                <Image src={Getsupport} alt="" className="w-100 supportImg" />     
                             </div>
                         </Col>
 

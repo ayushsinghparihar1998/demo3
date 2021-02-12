@@ -541,6 +541,13 @@
         .fgroups {
             position: relative;
             max-width: 90%; 
+            .error {
+                text-transform: lowercase; 
+                position: relative;
+                &:first-letter {
+                    text-transform: uppercase;  
+                }
+            }
 
             .inputTyp1 {
                 max-width: 100%; 
@@ -570,6 +577,9 @@
     background-repeat: no-repeat;
     padding-bottom: 70px;
     background-size: contain; 
+    .fw400.col14.pb-2 {
+        text-align: justify;
+    }
     
     .col-md-5 {
         display: flex;
@@ -669,14 +679,18 @@
     }
 }
 
-.Discussanything { 
+.Discussanything {  
     background-color: $col18; 
     padding: 0 0 60px; 
     .discussTwo {
         position: relative;
         max-width: 90%; 
-        img {
-            
+        img.supportImg {
+            text-align: center;
+            max-width: 80%;
+            margin: auto;
+            display: block;
+            padding-left: 5%; 
         }
     }
     .discuss {
@@ -1276,6 +1290,7 @@ img {
             .fgroups {            
                 max-width: 100%;      
             }
+            
         }
     }
     

@@ -1046,6 +1046,10 @@
            padding-top: 10px; 
        }
    }
+   .min-w200s {
+        min-width: 210px;
+        justify-content: flex-end;    
+   }
 }
 
 .elpCategory {
@@ -1197,8 +1201,11 @@
     textarea.inputTyp2 {
         height: 120px; 
     }
-
-    button.btn-btnTypAdd {
+    .deleteUserset {
+        position: absolute;
+        top: 52px; 
+    }
+    button.btn-btnTypAdd { 
         color: $col10;
         padding: 0 0;  
         font-size: 18px;

@@ -88,7 +88,7 @@ class Banner extends Component {
                   If you don't make time for your wellness, you will be forced
                   to make time for your Illness.
                 </div>
-                <div className="mt-4 d-flex">
+                <div className="mt-4 d-flex"> 
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
@@ -120,7 +120,7 @@ class Banner extends Component {
                   </Button>
                 </div>
                 <div className="d-flex mt-4">
-                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                  <div className="fs15 col18 fw300 text-center mt-3 mr-3">
                     Need a Constant Companion
                   </div>
                   <Button
@@ -159,16 +159,24 @@ class Banner extends Component {
                   >
                     <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
-                  <a
+                  <Button
+                    type="button"
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
+                    // onClick={this.handleModal}
+                    // onClick={this.handleModal}
+                  >
+                    {/* pdf */}
+                    <a
                       href={this.state.workData}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      corporate
+                      corporate  
                     </a>
+                  </Button>
                 </div>
                 <div className="d-flex mt-4">
-                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                  <div className="fs15 col18 fw300 text-center mt-3 mr-3">
                     Need a Constant Companion
                   </div>
                   <Button
@@ -207,16 +215,24 @@ class Banner extends Component {
                   >
                     <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
-                  <a
+                  <Button
+                    type="button"
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
+                    // onClick={this.handleModal}
+                    // onClick={this.handleModal}
+                  >
+                    {/* pdf */}
+                    <a
                       href={this.state.workData}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      corporate
+                      corporate  
                     </a>
+                  </Button>
                 </div>
                 <div className="d-flex mt-4">
-                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                  <div className="fs15 col18 fw300 text-center mt-3 mr-3">
                     Need a Constant Companion
                   </div>
                   <Button

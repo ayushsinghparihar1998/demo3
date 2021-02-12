@@ -610,6 +610,7 @@ class AddKits extends Component {
                               <Image
                                 src={Deleteicon}
                                 alt=""
+                                className="deleteUserset"
                                 onClick={() => this.removeCategorySetup(index)}
                               />
                             </Col>

@@ -642,7 +642,7 @@ class NavBar extends Component {
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
-                        title="HELP SOMEOME"
+                        title="HELP SOMEONE" 
                         id="basic-nav-dropdown5"
                       >
                         <NavDropdown.Item href={"/becomeListener"}>

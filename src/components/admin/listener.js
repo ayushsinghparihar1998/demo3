@@ -1554,7 +1554,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> ELPN KITS
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP KITS
                           
                         </div>
                       </div>
@@ -3311,7 +3311,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">Kits</div>
+                        <div className="fs22 fw600 col10">ELNP Kits</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3357,7 +3357,7 @@ cs_time: "00:00:02" */}
                                     <div className="col1 fw600 fs18 pb-1">
                                       {item.kt_name}
                                     </div>
-                                    <div className="d-flex ml-auto">
+                                    <div className="min-w200s d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
                                         {item.kt_status == "2"
                                           ? "Deactivate"
