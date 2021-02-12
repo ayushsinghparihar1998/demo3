@@ -95,8 +95,8 @@ class Kits extends Component {
                 this.state.workData.map((item) => {
                   return (
                     <div>
-                      <div className="items-Kits">
-                        <div className="planList blue-bg">
+                      <div className="items-Kits"> 
+                        <div className="planList red-bg"> 
                           <div className="planBorder">
                             <div className="profile_set">
                               <Image src={item.kt_image_url} alt="" />

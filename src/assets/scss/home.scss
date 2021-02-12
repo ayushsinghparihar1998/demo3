@@ -142,7 +142,26 @@
                 position: absolute;
                 top: 0;
                 left: -5px; 
-                max-width: 28%; 
+                max-width: 28%;  
+            }
+            .offer_bg {
+                position: absolute;
+                top: 0;
+                left: -6px; 
+                background-image: url(../images/saves.png);
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 94px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                & .savedata {   
+                    text-transform: uppercase;
+                    position: relative;
+                    left: -4px;
+                    top: -2px;
+                }
             }
             .fw600.col29.text-center {
                 color: #08A318 !important; 
