@@ -1759,4 +1759,11 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  getsubscription_pdf: {
+    url: "elp/getsubscription_pdf",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
 };
