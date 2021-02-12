@@ -356,12 +356,10 @@
                     }
                 }
             }
-            .btnType1 {
-                &.greens {
-                    background:#72C55E !important;
-                    border: solid 1px #72C55E !important;
-                    margin-top: 5px;  
-                }
+            .btnType1 { 
+                background:#72C55E !important;
+                border: solid 1px #72C55E !important;
+                margin-top: 5px;  
             }
         }
     }
