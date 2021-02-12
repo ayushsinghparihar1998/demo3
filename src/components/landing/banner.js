@@ -25,6 +25,7 @@ import usercomment from "../../assets/images/user-comment.svg";
 import usersend from "../../assets/images/user-send.svg";
 import UserSignup from "../signup/userSignup";
 import { Link, NavLink, Router } from "react-router-dom";
+import ELPViewApiService from "../../common/services/apiService";
 
 class Banner extends Component {
   constructor(props) {
@@ -32,8 +33,31 @@ class Banner extends Component {
     this.state = {
       show: false,
       show3: false,
+      workData : ''
     };
   }
+  componentDidMount = () => {
+    this.getsubscription_pdf();
+  };
+  getsubscription_pdf = () => {
+    let _this = this;
+    // usersubscriber,
+
+    ELPViewApiService("getsubscription_pdf", {})
+      .then((response) => {
+        if (response && response.data && response.data.status === "success") {
+          let data = response.data.data;
+          this.setState({
+            workData: data[0].pu_doc_url,
+          });
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   handleModal = () => {
     this.setState({ show: true });
     console.log("hello");
@@ -86,7 +110,13 @@ class Banner extends Component {
                     // onClick={this.handleModal}
                   >
                     {/* pdf */}
-                    corporate
+                    <a
+                      href={this.state.workData}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      corporate
+                    </a>
                   </Button>
                 </div>
                 <div className="d-flex mt-4">
@@ -144,7 +174,6 @@ class Banner extends Component {
                     type="button"
                     className="btnTyp5 talkBtntwo fs18 fw400"
                     onClick={this.handleModal}
-
                   >
                     talk to coco
                   </Button>
