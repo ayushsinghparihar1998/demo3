@@ -599,7 +599,7 @@ class NavBar extends Component {
                         <NavDropdown.Item>BLOGS</NavDropdown.Item>
                         <NavDropdown.Item>
                           ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "}
+                        </NavDropdown.Item>{" "} 
                       </NavDropdown>,
                       <NavDropdown title="PRAY" id="basic-nav-dropdown3">
                         <NavDropdown.Item>TALK NOW</NavDropdown.Item>

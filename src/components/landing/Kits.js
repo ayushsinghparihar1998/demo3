@@ -96,7 +96,7 @@ class Kits extends Component {
                   return (
                     <div>
                       <div className="items-Kits">
-                        <div className="planList">
+                        <div className="planList red-bg">
                           <div className="planBorder">
                             <div className="profile_set">
                               <Image src={item.kt_image_url} alt="" />
