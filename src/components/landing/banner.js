@@ -94,14 +94,14 @@ class Banner extends Component {
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     // onClick={this.handleModal}
                   >
-                    <Link to={{ pathname: `/coming-soon` }}>individual</Link>
+                    <Link to={{ pathname: `/coming-soon` }}>individual</Link> 
                   </Button>
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     // onClick={this.handleModal}
                   >
-                    <Link to={{ pathname: `/coming-soon` }}>family</Link>
+                    <Link to={{ pathname: `/coming-soon` }}>family</Link> 
                   </Button>
                   <Button
                     type="button"
@@ -150,7 +150,7 @@ class Banner extends Component {
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     // onClick={this.handleModal}
                   >
-                    <Link to={{ pathname: `/coming-soon` }}>individual</Link>
+                    <Link to={{ pathname: `/coming-soon` }}>individual</Link> 
                   </Button>
                   <Button
                     type="button"
