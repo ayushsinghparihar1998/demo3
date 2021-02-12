@@ -96,7 +96,7 @@ class Kits extends Component {
                   return (
                     <div>
                       <div className="items-Kits">
-                        <div className="planList">
+                        <div className="planList red-bg">
                           <div className="planBorder">
                             <div className="profile_set">
                               <Image src={item.kt_image_url} alt="" />
@@ -127,7 +127,7 @@ class Kits extends Component {
                                       );
                                     })}
                                 </ul>
-                                <Button className="btnType1 greens d-block w-100 mt-4">
+                                <Button className="btnType1 d-block w-100 mt-4">
                                   Buy Now
                                 </Button>
                               </div>

@@ -68,6 +68,9 @@
             width: 140px;   
             padding: 0 1.5rem;
             color: $col14 !important;  
+            & > a {
+                color: $col14 !important; 
+            }
             &.talkBtntwo {
                 width: auto;
                 min-width: 220px; 
@@ -243,7 +246,7 @@
             .planBorder { 
                 border: solid 5px $col18; 
             }
-            &.one-bg {
+            &.red-bg {
                 background: #FFE0E0; 
                 button.btnType1.reds { 
                     background: #FF6969 !important;
@@ -254,9 +257,14 @@
                         border-left: 326px solid #FF6969; 
                     }
                 }
+                .btnType1 {
+                    background: #FF6969 !important;
+                    border: solid 1px #FF6969 !important;
+                    margin-top: 5px;
+                }
             }
             
-            &.two-bg {
+            &.blue-bg {  
                 background: #FFE0E0;   
                 button.btnType1.blues {  
                     background: #AC6BFC !important;
@@ -267,10 +275,16 @@
                         border-left: 326px solid #AC6BFC;  
                     }
                 }
+                .btnType1 {
+                    background: #AC6BFC !important;
+                    border: solid 1px #AC6BFC !important;
+                    margin-top: 5px;
+                }
             }
         }
         .profile_set {
             position: relative;
+            overflow: hidden; 
             img {
                 width: 100%;
                 z-index: 99;
@@ -282,14 +296,15 @@
                 content: "";
                 width: 100%;
                 height: 0;
-                border-top: 18px solid transparent;
-                border-bottom: 12px solid transparent;
-                border-left: 326px solid #72C55E;
+                border-top: 27px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 332px solid #72C55E;
                 position: absolute;
-                bottom: -4px;
-                transform: rotate(176deg);
-                right: 0px;
-                opacity: 0.4;
+                bottom: -21px;
+                transform: rotate(178deg);
+                right: -5px;
+                opacity: 1;
+                z-index: 99;  
             }
         }
         .planpricing {
