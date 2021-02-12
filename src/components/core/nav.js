@@ -523,7 +523,7 @@ class NavBar extends Component {
                         Donate
                       </a>,
                       <NavDropdown title="Media" id="basic-nav-dropdown">
-                        <NavDropdown.Item href={"/blogs"}>
+                        <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/press"}>
@@ -590,21 +590,25 @@ class NavBar extends Component {
                       <NavDropdown title="EAT" id="basic-nav-dropdown">
                         <NavDropdown.Item>TALK NOW</NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/blogs/EAT"}>
+                          BLOGS
+                        </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown title="LUV" id="basic-nav-dropdown2">
                         <NavDropdown.Item>TALK NOW</NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
-                        <NavDropdown.Item>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "}
+                        <NavDropdown.Item href={"/blogs/LUV"}>
+                          BLOGS
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
                       </NavDropdown>,
                       <NavDropdown title="PRAY" id="basic-nav-dropdown3">
                         <NavDropdown.Item>TALK NOW</NavDropdown.Item>
                         <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
-                        <NavDropdown.Item>BLOGS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/blogs/PRAY"}>
+                          BLOGS
+                        </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown title="ELPN" id="basic-nav-dropdown4">
@@ -667,11 +671,11 @@ class NavBar extends Component {
                           PRESS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs"}>
+                        <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                       </NavDropdown>,
-                      <Nav.Link>Donate</Nav.Link>,
+                      //   <Nav.Link>Donate</Nav.Link>,
                     ]}
                 {getLocalStorage("userInfo") ||
                 getLocalStorage("userInfoProff") ||

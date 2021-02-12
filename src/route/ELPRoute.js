@@ -278,7 +278,7 @@ class ELPRoute extends Component {
             render={(props) => <ProfessionalBlog {...props} />}
           />
           <Route
-            path="/blogs"
+            path="/blogs/:name"
             render={(props) => <ProfessionalBlogList {...props} />}
           />
           <PrivateRouteProff
