@@ -631,7 +631,7 @@ class NavBar extends Component {
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item> 
                       </NavDropdown>,
-                      <NavDropdown title="ELPN(HOLISTIC)" id="basic-nav-dropdown4" className="Holistics">
+                      <NavDropdown title="ELNP(HOLISTIC)" id="basic-nav-dropdown4" className="Holistics">
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>

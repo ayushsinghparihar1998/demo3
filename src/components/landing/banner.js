@@ -12,7 +12,7 @@ import {
   Col,
   Carousel,
   Modal,
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import community from "../../assets/images/community.svg";
@@ -115,7 +115,7 @@ class Banner extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      corporate
+                      corporate  
                     </a>
                   </Button>
                 </div>
