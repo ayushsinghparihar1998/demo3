@@ -132,7 +132,7 @@ class Plans extends Component {
                             </div>
                           </div>  
                           <Button className="btnType1 d-block w-100 mt-4">
-                            <Link to={{ pathname: `/coming-soon` }}> 
+                            <Link to={{ pathname: "/coming-soon" }}> 
                               Buy Now
                             </Link>
                           </Button> 
