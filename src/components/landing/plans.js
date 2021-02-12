@@ -102,7 +102,7 @@ class Plans extends Component {
                         <div className="planone">
                            <div className="offer_bg"> 
                                 {/* <Image src={Saves} className="planeImg" /> */}
-                                <div className="fs14 fw500 col64 savedata">Save 50%</div> 
+                                <div className="fs14 fw500 col64 savedata">Save {item.pl_save}%</div> 
                            </div>
 
                           <div className="fs24 fw600 col29 text-center">
