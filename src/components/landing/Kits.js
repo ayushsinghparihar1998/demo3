@@ -127,7 +127,7 @@ class Kits extends Component {
                                       );
                                     })}
                                 </ul>
-                                <Button className="btnType1 greens d-block w-100 mt-4">
+                                <Button className="btnType1 d-block w-100 mt-4">
                                   Buy Now
                                 </Button>
                               </div>
