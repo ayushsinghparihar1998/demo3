@@ -98,9 +98,9 @@ class Kits extends Component {
                       <div className="items-Kits">
                         <div
                           className={`planList  ${
-                            (index + 2) % 2 == 0
+                            Math.round(index % 3) == 0
                               ? "red-bg "
-                              : (index + 2) % 3 == 0
+                              : Math.round(index % 3) == 1
                               ? "blue-bg "
                               : ""
                           }`}
