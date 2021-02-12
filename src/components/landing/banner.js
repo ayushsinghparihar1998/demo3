@@ -12,7 +12,7 @@ import {
   Col,
   Carousel,
   Modal,
-} from "react-bootstrap"; 
+} from "react-bootstrap";
 
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import community from "../../assets/images/community.svg";
@@ -24,6 +24,7 @@ import user from "../../assets/images/user.svg";
 import usercomment from "../../assets/images/user-comment.svg";
 import usersend from "../../assets/images/user-send.svg";
 import UserSignup from "../signup/userSignup";
+import { Link, NavLink, Router } from "react-router-dom";
 
 class Banner extends Component {
   constructor(props) {
@@ -31,22 +32,21 @@ class Banner extends Component {
     this.state = {
       show: false,
       show3: false,
-
     };
   }
   handleModal = () => {
     this.setState({ show: true });
-    console.log('hello');
+    console.log("hello");
   };
   handleClose = () => {
     this.setState({ show: !this.state.show });
   };
   handleGet = () => {
     this.setState({
-        show: false,
-        show3: false,
+      show: false,
+      show3: false,
     });
-};
+  };
   render() {
     return (
       <Container>
@@ -61,49 +61,49 @@ class Banner extends Component {
                 {/* <div className="fw300 col18 fs20 mb-5">Time to get out of that imaginary confined space<br />
                     Our trained Listeners are ready to extend their helping hand</div> */}
                 <div className="fw400 col64 fs22 mb-5">
-                    If you don't make time for your wellness, you will be
-                    forced to make time for your Illness.   
+                  If you don't make time for your wellness, you will be forced
+                  to make time for your Illness.
                 </div>
-                <div className="mt-4 d-flex"> 
+                <div className="mt-4 d-flex">
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
-                    onClick={this.handleModal}
-
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
+                    // onClick={this.handleModal}
                   >
-                    individual
+                    <Link to={{ pathname: `/coming-soon` }}>individual</Link>
                   </Button>
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
-                    onClick={this.handleModal}
-
+                    // onClick={this.handleModal}
                   >
-                    family
+                    <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
-                    onClick={this.handleModal}
-
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
+                    // onClick={this.handleModal}
+                    // onClick={this.handleModal}
                   >
+                    {/* pdf */}
                     corporate
                   </Button>
                 </div>
-                <div className="d-flex mt-4">  
-                    <div className="fs15 col18 fw300 text-center mt-2 mr-3"> 
-                      Need a Constant Companion
-                    </div>  
-                    <Button
-                      type="button"
-                      className="btnTyp5 talkBtntwo fs18 fw400"
-                    >
-                      talk to coco
-                    </Button>
-                    {/* <div className="fs14 col14 coming_m text-center mt-2">
+                <div className="d-flex mt-4">
+                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                    Need a Constant Companion
+                  </div>
+                  <Button
+                    type="button"
+                    className="btnTyp5 talkBtntwo fs18 fw400"
+                    onClick={this.handleModal}
+                  >
+                    talk to coco
+                  </Button>
+                  {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon
                     </div> */}
-                 </div>
+                </div>
               </Carousel.Item>
               <Carousel.Item>
                 {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
@@ -111,99 +111,94 @@ class Banner extends Component {
                   Luv Often
                 </div>
                 <div className="fw400 col64 fs22 mb-5">
-                  I am stronger than Depression and I am braver than
-                  Loneliness and nothing will ever exhaust me.
+                  I am stronger than Depression and I am braver than Loneliness
+                  and nothing will ever exhaust me.
                 </div>
                 <div className="mt-4 d-flex">
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
-                    onClick={this.handleModal}
-
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
+                    // onClick={this.handleModal}
                   >
-                    individual
+                    <Link to={{ pathname: `/coming-soon` }}>individual</Link>
                   </Button>
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     onClick={this.handleModal}
-
                   >
-                    family
+                    <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
-                    onClick={this.handleModal}
-
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
                   >
                     corporate
                   </Button>
                 </div>
-                <div className="d-flex mt-4"> 
-                    <div className="fs15 col18 fw300 text-center mt-2 mr-3"> 
-                      Need a Constant Companion
-                    </div>  
-                    <Button
-                      type="button"
-                      className="btnTyp5 talkBtntwo fs18 fw400"
-                    >
-                      talk to coco
-                    </Button>
-                    {/* <div className="fs14 col14 coming_m text-center mt-2">
+                <div className="d-flex mt-4">
+                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                    Need a Constant Companion
+                  </div>
+                  <Button
+                    type="button"
+                    className="btnTyp5 talkBtntwo fs18 fw400"
+                    onClick={this.handleModal}
+
+                  >
+                    talk to coco
+                  </Button>
+                  {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon
                     </div> */}
-                 </div>
-              </Carousel.Item> 
-              <Carousel.Item> 
+                </div>
+              </Carousel.Item>
+              <Carousel.Item>
                 <div className="fs40 pt-120 ptn-170 col64 fw700 mb-4">
                   Pray Always
                 </div>
                 <div className="fw400 col64 fs22 mb-5">
-                  Let's take a few minutes to day our prayer for the
-                  world to heal and come together in these difficult times.
-                  Please be safe.
+                  Let's take a few minutes to day our prayer for the world to
+                  heal and come together in these difficult times. Please be
+                  safe.
                 </div>
                 <div className="mt-4 d-flex">
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     onClick={this.handleModal}
-
                   >
-                    individual
+                    <Link to={{ pathname: `/coming-soon` }}>individual</Link>
                   </Button>
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
                     onClick={this.handleModal}
-
                   >
-                    family
+                    <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
                   <Button
                     type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3" 
-                    onClick={this.handleModal}
-
+                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
                   >
                     corporate
                   </Button>
                 </div>
-                <div className="d-flex mt-4"> 
-                    <div className="fs15 col18 fw300 text-center mt-2 mr-3"> 
-                      Need a Constant Companion
-                    </div>  
-                    <Button
-                      type="button"
-                      className="btnTyp5 talkBtntwo fs18 fw400"
-                    >
-                      talk to coco
-                    </Button>
-                    {/* <div className="fs14 col14 coming_m text-center mt-2">
+                <div className="d-flex mt-4">
+                  <div className="fs15 col18 fw300 text-center mt-2 mr-3">
+                    Need a Constant Companion
+                  </div>
+                  <Button
+                    type="button"
+                    className="btnTyp5 talkBtntwo fs18 fw400"
+                    onClick={this.handleModal}
+                  >
+                    talk to coco
+                  </Button>
+                  {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon
                     </div> */}
-                 </div>
+                </div>
               </Carousel.Item>
             </Carousel>
           </Col>
