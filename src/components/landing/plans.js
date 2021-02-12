@@ -20,6 +20,7 @@ import ELPViewApiService from "../../common/services/apiService";
 import { Link } from "react-router-dom";
 import Saves from '../../assets/images/saves.png'; 
 
+
 class Plans extends Component {
   constructor(props) {
     super(props);
@@ -99,7 +100,11 @@ class Plans extends Component {
                     <div className="items">
                       <div className="planList">  
                         <div className="planone">
-                           <Image src={Saves} className="planeImg" />
+                           <div className="offer_bg"> 
+                                {/* <Image src={Saves} className="planeImg" /> */}
+                                <div className="fs14 fw500 col64 savedata">Save 50%</div> 
+                           </div>
+
                           <div className="fs24 fw600 col29 text-center">
                             {item.pl_title}  
                           </div>
