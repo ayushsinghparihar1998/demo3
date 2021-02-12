@@ -159,12 +159,13 @@ class Banner extends Component {
                   >
                     <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
-                  <Button
-                    type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
-                  >
-                    corporate
-                  </Button>
+                  <a
+                      href={this.state.workData}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      corporate
+                    </a>
                 </div>
                 <div className="d-flex mt-4">
                   <div className="fs15 col18 fw300 text-center mt-2 mr-3">
@@ -206,12 +207,13 @@ class Banner extends Component {
                   >
                     <Link to={{ pathname: `/coming-soon` }}>family</Link>
                   </Button>
-                  <Button
-                    type="button"
-                    className="btnTyp5 talkBtn fs16 fw400 mr-3"
-                  >
-                    corporate
-                  </Button>
+                  <a
+                      href={this.state.workData}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      corporate
+                    </a>
                 </div>
                 <div className="d-flex mt-4">
                   <div className="fs15 col18 fw300 text-center mt-2 mr-3">
