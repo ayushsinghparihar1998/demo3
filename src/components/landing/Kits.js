@@ -22,6 +22,7 @@ import Saves from "../../assets/images/saves.png";
 import Emotionals from "../../assets/images/emotionals.png";
 import loveFill from "../../assets/images/loveFill.png";
 import feelHappy from "../../assets/images/feelHappy.png";
+import Squares from '../../assets/images/squares.png'; 
 
 class Kits extends Component {
   constructor(props) {
@@ -123,6 +124,7 @@ class Kits extends Component {
                                       return (
                                         <li>
                                           <span className="sleft col11 fw400">
+                                              <Image src={Squares} alt="sqaress" /> 
                                             {val.ks_services}
                                           </span>
                                           <span className="sright col11 fs16 fw500">

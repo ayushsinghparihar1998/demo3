@@ -367,14 +367,19 @@
                     max-height: inherit;
                     min-height: 72px; 
                     li { 
-                        list-style: square;
+                        list-style: none; 
                         display: flex;
                         width: 100%;
                         justify-content: space-between;
                         padding-top: 15px; 
                         margin-bottom: 0;  
                         span.sleft {
-
+                            & > img {
+                                position: relative;
+                                display: inline-block;
+                                margin-right: 7px;
+                                width: 10px;
+                            }
                         }
                         span.sright {
                             del {
