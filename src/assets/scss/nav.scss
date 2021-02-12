@@ -185,7 +185,7 @@
                             background-size: cover;
                             width: 36px; 
                             height: 36px;   
-                            background-repeat: no-repeat;
+                            background-repeat: no-repeat; 
                             position: relative;
                             top: 5px;
                             background-position: center; 
@@ -574,7 +574,7 @@
     }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991px) { 
 
     .mj_nav {
         .navbar-light {

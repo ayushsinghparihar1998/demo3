@@ -601,7 +601,7 @@ class NavBar extends Component {
                       // <Nav.Link onClick={this.handleModal}>
                       //     Talk/Connect
                       // </Nav.Link>,
-                      <NavDropdown title="EAT" id="basic-nav-dropdown">
+                      <NavDropdown title="EAT" id="basic-nav-dropdown" className="eatDrop">
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
@@ -611,7 +611,7 @@ class NavBar extends Component {
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="LUV" id="basic-nav-dropdown2">
+                      <NavDropdown title="LUV" id="basic-nav-dropdown2" className="eatDrop">
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
@@ -621,7 +621,7 @@ class NavBar extends Component {
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
                       </NavDropdown>,
-                      <NavDropdown title="PRAY" id="basic-nav-dropdown3">
+                      <NavDropdown title="PRAY" id="basic-nav-dropdown3" className="eatDrop">
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
@@ -629,9 +629,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/PRAY"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item> 
                       </NavDropdown>,
-                      <NavDropdown title="ELNP" id="basic-nav-dropdown4">
+                      <NavDropdown title="ELPN(HOLISTIC)" id="basic-nav-dropdown4" className="Holistics">
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
