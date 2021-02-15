@@ -19,42 +19,71 @@ class MyAssessmentTest extends Component {
                     <Container>
                         <div className="chatsearch w-100">
                             <div className="myAssesstest"> 
-                                <div className="col8 fw600 fs28 mt-3 mb-5 text-center">MY ASSESSMENT TEST</div> 
+                                <div className="col8 fw600 fs28 mt-4 mb-5 text-center">MY ASSESSMENT TEST</div> 
                                 <Row>
                                     <Col lg={12}>
                                         <div className="mainTables">
                                         <Table bordered size="lg">
                                             <thead>
                                                 <tr>
-                                                <th>Date</th>
-                                                <th>Test Name</th>
-                                                <th>Category</th>
-                                                <th>Scores</th>
-                                                <th>Actions</th>
+                                                    <th>Date</th>
+                                                    <th>Test Name</th>
+                                                    <th>Category</th>
+                                                    <th>Scores</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                <td>28 Jan, 2021</td>
-                                                <td>Mental Health</td>
-                                                <td><span>Eat</span></td>
-                                                <td>45</td>
-                                                <td>
-                                                    <span><Image src={Visibilitys} className="pointer" /></span>
-                                                    <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span> 
-                                                </td>
+                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mental Health</td>
+                                                    <td><span className="eat">Eat</span></td>
+                                                    <td>45</td>
+                                                    <td>
+                                                        <span><Image src={Visibilitys} className="pointer" /></span>
+                                                        <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span>  
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
+                                                    <td>22 Jan, 2021</td> 
+                                                    <td>Emotional Health</td>
+                                                    <td><span className="luv">Luv</span></td>
+                                                    <td>35</td>
+                                                    <td>
+                                                        <span><Image src={Visibilitys} className="pointer" /></span>
+                                                        <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span>  
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                <td>3</td>
-                                                <td colSpan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
+                                                    <td>23 Jan, 2021</td> 
+                                                    <td>Health Disorder</td>
+                                                    <td><span className="pray">Pray</span></td>
+                                                    <td>25</td>
+                                                    <td>
+                                                        <span><Image src={Visibilitys} className="pointer" /></span>
+                                                        <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span>  
+                                                    </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>24 Jan, 2021</td> 
+                                                    <td>Mental Health</td>
+                                                    <td><span className="eat">Eat</span></td>
+                                                    <td>35</td>
+                                                    <td>
+                                                        <span><Image src={Visibilitys} className="pointer" /></span>
+                                                        <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span>  
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>27 Jan, 2021</td> 
+                                                    <td>Emotional Health</td> 
+                                                    <td><span className="luv">Luv</span></td> 
+                                                    <td>10</td>
+                                                    <td>
+                                                        <span><Image src={Visibilitys} className="pointer" /></span>
+                                                        <span className="pl-3"><Image src={ArrowDownload} className="pointer" /></span>  
+                                                    </td>
+                                                </tr> 
                                             </tbody>
                                             </Table>
                                         </div>
