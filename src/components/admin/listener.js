@@ -3311,10 +3311,10 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">ELNP Kits</div>
+                        <div className="fs22 fw600 col10">ELNP Kits</div> 
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
-                        </div>
+                        </div>  
                       </Col>
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
@@ -3351,7 +3351,7 @@ cs_time: "00:00:02" */}
                               <Image src={item.kt_image_url} alt="" />
                             </div>
                             <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">
+                              <div className="d-flex justify-content-between">  
                                 <div className="w-100">
                                   <div className="d-flex">
                                     <div className="col1 fw600 fs18 pb-1">
@@ -3417,25 +3417,39 @@ kt_status: "1" */}
                                     <strong className="fw600 fs15">
                                       Description:
                                     </strong>{" "}
-                                    <span>
+                                    <span className="fs15"> 
                                       {item.kt_desc}
                                       {/* <a>Read more...</a> */}
                                     </span>
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
+                                  <Row>
                                     {item.kits_services.map((val, ind) => {
                                       return (
                                         <>
-                                          <span className="fw400 col14">
-                                            {ind + 1}) {val.ks_services}{" "}
-                                          </span>{" "}
-                                          <strong className="fw500 col29 ml-3">
-                                            Rs.{val.ks_discounted_price}{" "}
-                                          </strong>
+                                              <Col md="4" className="borderRight pr-2"> 
+                                                  <div className="d-flex justify-content-between"> 
+                                                      <div> 
+                                                        <span className="fw400 fs14 col29 col14">
+                                                          {ind + 1}) {val.ks_services}{" "}
+                                                        </span>{" "}  
+                                                      </div>
+                                                      <div>
+                                                          <span className="fs13">Shelter</span> <br />  
+                                                          <span className="fs13">
+                                                          Price: <del>Rs.650</del>    
+                                                          <strong className="fw500 col29 pl-1">
+                                                            Rs.{val.ks_discounted_price}{" "}
+                                                          </strong> 
+                                                          </span>
+                                                      </div>
+                                                  </div>
+                                              </Col> 
                                         </>
                                       );
                                     })}
+                                    </Row>
                                   </div>
                                 </div>
                               </div>
