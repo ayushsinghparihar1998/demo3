@@ -1739,16 +1739,6 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  getkits_list: {
-    url: "elp/getkits_list",
-    method: "POST",
-    data: {
-      count: "",
-      offset: "",
-    },
-    showResultMessage: false,
-    showErrorMessage: false,
-  },
   superadmindelete_kitsstatus: {
     url: "elp/superadmindelete_kitsstatus",
     method: "POST",
@@ -1759,11 +1749,78 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  getkits_list: {
+    url: "elp/getkits_list",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+
   getsubscription_pdf: {
     url: "elp/getsubscription_pdf",
     method: "POST",
     data: {},
     showResultMessage: false,
     showErrorMessage: false,
+  },
+  superadminvlogs_list: {
+    url: "elp/superadminvlogs_list",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+      vl_type: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminchange_vlogsstatus: {
+    url: "elp/superadminchange_vlogsstatus",
+    method: "POST",
+    data: {
+      vl_id: "",
+      vl_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmindelete_vlogsstatus: {
+    url: "elp/superadmindelete_vlogsstatus",
+    method: "POST",
+    data: {
+      vl_id: "",
+      vl_status: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminedit_vlogs: {
+    url: "elp/superadminedit_vlogs",
+    method: "POST",
+    data: {
+      vl_title: "",
+      vl_video_url: "",
+      vl_thumbnail_url: "",
+      vl_is_featured: "",
+      vl_id: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminadd_vlogs: {
+    url: "elp/superadminadd_vlogs",
+    method: "POST",
+    data: {
+      vl_title: "",
+      vl_video_url: "",
+      vl_thumbnail_url: "",
+      vl_is_featured: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
   },
 };

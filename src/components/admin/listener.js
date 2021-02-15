@@ -8,7 +8,7 @@ import {
   actionadminUserDelete,
   actionAdminChangeUserStatus,
   actionAdminUserDeleteReason,
-} from "../../common/redux/actions"; 
+} from "../../common/redux/actions";
 import Checkgreen from "../../assets/images/checkgreen.svg";
 import Yellowstar from "../../assets/images/stars.png";
 import Ritikaimg from "../../assets/images/Ritika.png";
@@ -18,7 +18,7 @@ import DatePicker from "react-datepicker";
 import Validator from "validator";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png";
-import BlogProcessFive from "../../assets/images/blog4.png"; 
+import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Suser from "../../assets/images/s_images.png";
 import "react-datepicker/dist/react-datepicker.css";
@@ -65,8 +65,8 @@ class Adminlistener extends Component {
       activeProfile: "listner",
       profileListing: [],
       deleteConformationModal: false,
-      deletePlanConformationModal: false,
-      deleteKitConformationModal: false,
+      deleteObjConformationModal: false,
+      deleteAllConformationModal: false,
       profileId: "",
       pageNumber: customPagination.paginationPageNumber,
       totalRecord: 0,
@@ -653,6 +653,7 @@ class Adminlistener extends Component {
           totalRecordCount,
           count: count,
           offset: offset,
+          deleteObjType: "",
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -687,6 +688,42 @@ class Adminlistener extends Component {
           totalRecordCount,
           count: count,
           offset: offset,
+          deleteObjType: "",
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  superadminvlogs_list = async (offset, count) => {
+    try {
+      let vlogsList = [];
+      let result = await ELPViewApiService("superadminvlogs_list", {
+        count: count,
+        offset: offset,
+      });
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        vlogsList =
+          result && result.data && result.data.data
+            ? result.data.data.vlogs_listing
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "vlogsList",
+          vlogsList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+          deleteObjType: "",
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -911,29 +948,17 @@ class Adminlistener extends Component {
       profileId: "",
     });
   };
-  handleClosePlanConformation = () => {
+  handleCloseAllConformation = () => {
     this.setState({
-      deletePlanConformationModal: false,
+      deleteObjConformationModal: false,
     });
   };
-  handleOpenPlanConformation = (obj) => {
+  handleOpenAllConformation = (title, id, type) => {
     this.setState({
-      deletePlanConformationModal: true,
-      deletePlan: obj ? obj.pl_title : "",
-      deletePlanId: obj ? obj.pl_id : "",
-    });
-  };
-
-  handleCloseKitConformation = () => {
-    this.setState({
-      deleteKitConformationModal: false,
-    });
-  };
-  handleOpenKitConformation = (obj) => {
-    this.setState({
-      deleteKitConformationModal: true,
-      deleteKit: obj ? obj.kt_name : "",
-      deleteKitId: obj ? obj.kt_id : "",
+      deleteObjConformationModal: true,
+      deleteObj: title,
+      deleteObjId: id,
+      deleteObjType: type,
     });
   };
 
@@ -1132,32 +1157,47 @@ class Adminlistener extends Component {
     });
   };
 
-  modifyPlanContent = (item, api, status) => {
-    let data = {
-      pl_id: item ? +item.pl_id : +this.state.deletePlanId,
-      pl_status: status,
-    };
-    ELPViewApiService(api, data).then((result) => {
-      this.setState({ deletePlanConformationModal: false });
-      if (result && result.status === 200) {
-        setTimeout(() => {
-          this.superadminget_planlist(this.state.pageno, this.state.count);
-        }, 500);
-      }
-    });
-  };
+  modifyAllContent = (type, id, api, status) => {
+    let data =
+      type == "PLAN" || this.state.deleteObjType == "PLAN"
+        ? {
+            pl_id: id ? id : +this.state.deleteObjId,
+            pl_status: status,
+          }
+        : type == "KIT" || this.state.deleteObjType == "KIT"
+        ? {
+            kt_id: id ? id : +this.state.deleteObjId,
+            kt_status: status,
+          }
+        : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
+        ? {
+            vl_id: id ? id : +this.state.deleteObjId,
+            vl_status: status,
+          }
+        : "";
 
-  modifyKitContent = (item, api, status) => {
-    let data = {
-      kt_id: item ? +item.kt_id : +this.state.deleteKitId,
-      kt_status: status,
-    };
-    ELPViewApiService(api, data).then((result) => {
-      this.setState({ deleteKitConformationModal: false });
+    let apiData =
+      type == ""
+        ? this.state.deleteObjType == "PLAN"
+          ? "superadmindelete_planstatus"
+          : this.state.deleteObjType == "KIT"
+          ? "superadmindelete_kitsstatus"
+          : this.state.deleteObjType == "VLOGS"
+          ? "superadmindelete_vlogsstatus"
+          : ""
+        : api;
+    ELPViewApiService(apiData, data).then((result) => {
+      this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
-          this.superadminkits_list(this.state.pageno, this.state.count);
-        }, 500);
+          if (type == "PLAN" || this.state.deleteObjType == "PLAN") {
+            this.superadminget_planlist(this.state.pageno, this.state.count);
+          } else if (type == "KIT" || this.state.deleteObjType == "KITS") {
+            this.superadminkits_list(this.state.pageno, this.state.count);
+          } else if (type == "VLOGS" || this.state.deleteObjType == "VLOGS") {
+            this.superadminvlogs_list(this.state.pageno, this.state.count);
+          }
+        }, 100);
       }
     });
   };
@@ -1368,6 +1408,14 @@ class Adminlistener extends Component {
       this.state.pageType == "kitList"
         ? "position-relative active"
         : "position-relative";
+    let qaActveClass =
+      this.state.pageType == "qaList"
+        ? "position-relative active"
+        : "position-relative";
+    let vlogsActveClass =
+      this.state.pageType == "vlogsList"
+        ? "position-relative active"
+        : "position-relative";
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
     return (
@@ -1393,7 +1441,6 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" /> USERS
-                         
                         </div>
                       </div>
                     </div>
@@ -1542,7 +1589,6 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" /> PLAN
-                          
                         </div>
                       </div>
                     </div>
@@ -1554,8 +1600,34 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP KITS
-                          
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
+                          KITS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={vlogsActveClass}
+                        onClick={(e) => {
+                          this.superadminvlogs_list(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
+                          VLOGS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={qaActveClass}
+                        onClick={(e) => {
+                          this.superadminkits_list(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
+                          QA
                         </div>
                       </div>
                     </div>
@@ -1896,7 +1968,7 @@ pl_price: "3000"
 pl_save: "20"
 pl_status: "1"
 pl_title: "Platinum Plan new" */}
-                  {this.state.planList && 
+                  {this.state.planList &&
                     this.state.planList.map((item, index) => {
                       return (
                         <div className="adminlistener p-4 mb-3">
@@ -1945,8 +2017,9 @@ pl_title: "Platinum Plan new" */}
                                         name={"status" + index}
                                         label=""
                                         onClick={(e) => {
-                                          this.modifyPlanContent(
-                                            item,
+                                          this.modifyAllContent(
+                                            "PLAN",
+                                            item.pl_id,
                                             "superadminchange_planstatus",
                                             item.pl_status == "1" ? "2" : "1"
                                           );
@@ -1969,7 +2042,11 @@ pl_title: "Platinum Plan new" */}
                                     <span>
                                       <Image
                                         onClick={(e) => {
-                                          this.handleOpenPlanConformation(item);
+                                          this.handleOpenAllConformation(
+                                            item.pl_title,
+                                            item.pl_id,
+                                            "PLAN"
+                                          );
                                         }}
                                         src={Deleteicon}
                                         alt=""
@@ -2955,7 +3032,7 @@ cs_time: "00:00:02" */}
                       >
                         Submit
                       </Button>
-                    </Form> 
+                    </Form>
                   </div>
                 </Col>
               ) : this.state.pageType == "pressblogList" ? (
@@ -3311,10 +3388,10 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">ELNP Kits</div> 
+                        <div className="fs22 fw600 col10">ELNP Kits</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
-                        </div>  
+                        </div>
                       </Col>
                       <Col md={4}>
                         <div className="text-right pro_cbtn">
@@ -3333,7 +3410,7 @@ cs_time: "00:00:02" */}
                         </div>
                       </Col>
                     </Row>
-                    <Form className="p_form"> 
+                    <Form className="p_form">
                       <div className="checkCategory">
                         <Form.Group
                           controlId="formBasicCheckbox1"
@@ -3351,7 +3428,7 @@ cs_time: "00:00:02" */}
                               <Image src={item.kt_image_url} alt="" />
                             </div>
                             <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">  
+                              <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
                                     <div className="col1 fw600 fs18 pb-1">
@@ -3370,8 +3447,9 @@ cs_time: "00:00:02" */}
                                           name={"status" + index}
                                           label=""
                                           onClick={(e) => {
-                                            this.modifyKitContent(
-                                              item,
+                                            this.modifyAllContent(
+                                              "KIT",
+                                              item.kt_id,
                                               "superadminchange_kitsstatus",
                                               item.kt_status == "1" ? "2" : "1"
                                             );
@@ -3394,14 +3472,16 @@ cs_time: "00:00:02" */}
                                       <span>
                                         <Image
                                           onClick={(e) => {
-                                            this.handleOpenKitConformation(
-                                              item
+                                            this.handleOpenAllConformation(
+                                              item.kt_name,
+                                              item.kt_id,
+                                              "KIT"
                                             );
                                           }}
                                           src={Deleteicon}
                                           alt=""
                                         />
-                                      </span> 
+                                      </span>
                                     </div>
                                   </div>
 
@@ -3417,38 +3497,47 @@ kt_status: "1" */}
                                     <strong className="fw600 fs15">
                                       Description:
                                     </strong>{" "}
-                                    <span className="fs15"> 
+                                    <span className="fs15">
                                       {item.kt_desc}
                                       {/* <a>Read more...</a> */}
                                     </span>
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                  <Row>
-                                    {item.kits_services.map((val, ind) => {
-                                      return (
-                                        <>
-                                              <Col md="4" className="borderRight pr-2"> 
-                                                  <div className="d-flex justify-content-between"> 
-                                                      <div> 
-                                                        <span className="fw400 fs14 col29 col14">
-                                                          {ind + 1}) {val.ks_services}{" "}
-                                                        </span>{" "}  
-                                                      </div>
-                                                      <div>
-                                                          <span className="fs13">Shelter</span> <br />  
-                                                          <span className="fs13">
-                                                          Price: <del>Rs.650</del>    
-                                                          <strong className="fw500 col29 pl-1">
-                                                            Rs.{val.ks_discounted_price}{" "}
-                                                          </strong> 
-                                                          </span>
-                                                      </div>
-                                                  </div>
-                                              </Col> 
-                                        </>
-                                      );
-                                    })}
+                                    <Row>
+                                      {item.kits_services.map((val, ind) => {
+                                        return (
+                                          <>
+                                            <Col
+                                              md="4"
+                                              className="borderRight pr-2"
+                                            >
+                                              <div className="d-flex justify-content-between">
+                                                <div>
+                                                  <span className="fw400 fs14 col29 col14">
+                                                    {ind + 1}) {val.ks_services}{" "}
+                                                  </span>{" "}
+                                                </div>
+                                                <div>
+                                                  <span className="fs13">
+                                                    Shelter
+                                                  </span>{" "}
+                                                  <br />
+                                                  <span className="fs13">
+                                                    Price: <del>Rs.650</del>
+                                                    <strong className="fw500 col29 pl-1">
+                                                      Rs.
+                                                      {
+                                                        val.ks_discounted_price
+                                                      }{" "}
+                                                    </strong>
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                          </>
+                                        );
+                                      })}
                                     </Row>
                                   </div>
                                 </div>
@@ -3459,6 +3548,10 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
+              ) : this.state.pageType == "qaList" ? (
+                <> </>
+              ) : this.state.pageType == "vlogsList" ? (
+                <> </>
               ) : (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -3773,9 +3866,9 @@ kt_status: "1" */}
             </Modal.Body>
           </Modal>
 
-          <Modal
-            show={this.state.deleteKitConformationModal}
-            onHide={this.handleCloseKitConformation}
+          {/* <Modal
+            show={this.state.deleteAllConformationModal}
+            onHide={this.handleOpenKitConformation}
             className="custom-popUp confirmation-box delete_modal"
             bsSize="small"
           >
@@ -3796,7 +3889,8 @@ kt_status: "1" */}
                   <button
                     className="btn btn-success text-uppercase"
                     onClick={(event) =>
-                      this.modifyKitContent(
+                      this.modifyAllContent(
+                        "KIT",
                         "",
                         "superadmindelete_kitsstatus",
                         3
@@ -3816,9 +3910,10 @@ kt_status: "1" */}
             </Modal.Body>
           </Modal>
 
+          */}
           <Modal
-            show={this.state.deletePlanConformationModal}
-            onHide={this.handleClosePlanConformation}
+            show={this.state.deleteObjConformationModal}
+            onHide={this.handleCloseAllConformation}
             className="custom-popUp confirmation-box delete_modal"
             bsSize="small"
           >
@@ -3829,28 +3924,22 @@ kt_status: "1" */}
                   src={Blueicons}
                   alt=""
                   className="close pointer"
-                  onClick={this.handleClosePlanConformation}
+                  onClick={this.handleCloseAllConformation}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
-                  Are you sure want to delete <br /> {this.state.deletePlan}?{" "}
+                  Are you sure want to delete <br /> {this.state.deleteObj}?{" "}
                 </div>
 
                 <div className="text-center mb-5">
                   <button
                     className="btn btn-success text-uppercase"
-                    onClick={(event) =>
-                      this.modifyPlanContent(
-                        "",
-                        "superadmindelete_planstatus",
-                        3
-                      )
-                    }
+                    onClick={(event) => this.modifyAllContent("", "", "", 3)}
                   >
                     Yes
                   </button>
                   <button
                     className="btn btn-default text-uppercase sm-btn"
-                    onClick={this.handleClosePlanConformation}
+                    onClick={this.handleCloseAllConformation}
                   >
                     No
                   </button>
