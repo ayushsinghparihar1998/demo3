@@ -73,7 +73,7 @@ class EditQa extends Component {
                         </div>
                     </Form.Group>  
 
-                    <Form.Group controlId="formBasicCheckbox">   
+                    <Form.Group controlId="formBasicCheckbox">    
                         <Form.Label className="fs20 fw600 col14">Question Type</Form.Label> 
                         <Row>
                             <Col md={4}>
@@ -100,7 +100,7 @@ class EditQa extends Component {
                      </Form.Group>
 
                      <Form.Group className="mb-4"> 
-                        <Form.Label className="fs20 fw600 col14">Answer</Form.Label> 
+                        <Form.Label className="fs20 fw600 col14">Answer</Form.Label>  
                         {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
                         <CKEditor 
                         editor={ClassicEditor}
@@ -182,7 +182,7 @@ class EditQa extends Component {
                         <CKEditor 
                         editor={ClassicEditor}
                         onReady={(editor) => { 
-                          console.log("Editor is ready to use!", editor);
+                          console.log("Editor is ready to use!", editor); 
                         }}
                         className="inputTyp2"
                         />
@@ -201,7 +201,7 @@ class EditQa extends Component {
                             <Button
                                 variant="btnTypAdd"  
                                 type="button"  
-                                >
+                                > 
                                 <span><i className="fa fa-plus"></i></span> Add Services 
                             </Button>
                         </div>

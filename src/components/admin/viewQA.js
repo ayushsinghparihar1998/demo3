@@ -94,7 +94,7 @@ class ViewQA extends Component {
                         </div>
                     </div>
 
-                    <div className="QaListings">
+                    <div className="QaListings"> 
                         <div className="d-flex">
                             <div className="position-relative">    
                                 <div className="col29 fw500 fs17 pb-1">
