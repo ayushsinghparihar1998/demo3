@@ -6,7 +6,7 @@ import {
   actionProfessionalLogin,
   actionUserLogin,
   actionAdminLogin,
-  actionCorporatorLogin
+  actionCorporatorLogin,
 } from "../../common/redux/actions";
 import {
   encrypt,
@@ -16,7 +16,7 @@ import {
 } from "../../common/helpers/Utils";
 import * as qs from "query-string";
 import ELPRxApiService from "../../common/services/apiService";
-import UserSignup from '../signup/userSignup';
+import UserSignup from "../signup/userSignup";
 
 import {
   Button,
@@ -40,7 +40,6 @@ import ProfessionalSignup from "../signup/professionalSignup";
 import socketClass from "../../common/utility/socketClass";
 
 class Login extends Component {
-
   constructor(props) {
     super(props);
     const parsed = qs.parse(this.props.location.search);
@@ -55,11 +54,14 @@ class Login extends Component {
         : this.props.location &&
           this.props.location.state &&
           this.props.location.state.roleType
-          ? this.props.location.state.roleType
-          : this.props.roleType
-            ? this.props.roleType
-            : CONSTANTS.ROLES.LISTNER,
-
+        ? this.props.location.state.roleType
+        : this.props.roleType
+        ? this.props.roleType
+        : CONSTANTS.ROLES.LISTNER,
+      emailmember:
+        this.props.location.state && this.props.location.state.emailmember
+          ? this.props.location.state.emailmember
+          : "",
     };
 
     this.validator = new SimpleReactValidator({
@@ -79,14 +81,13 @@ class Login extends Component {
       roleType: parsed.u_role_id
         ? this.state.roleType
         : next.location && next.location.state && next.location.state.roleType
-          ? next.location.state.roleType
-          : this.props.roleType
-            ? this.props.roleType
-            : CONSTANTS.ROLES.LISTNER,
+        ? next.location.state.roleType
+        : this.props.roleType
+        ? this.props.roleType
+        : CONSTANTS.ROLES.LISTNER,
     });
   }
   componentDidMount() {
-
     const { location } = this.props;
     if (location.search) {
       const parsed = qs.parse(location.search);
@@ -106,25 +107,28 @@ class Login extends Component {
         this.props.history.push({ pathname: "/userDashboardcust" });
       }
     }
-    window.addEventListener('keypress', this.handleEnterKeyPress)
-
-  }
-  handleEnterKeyPress = (e) => {
-
-    if (e.key === 'Enter') {
-      if (this.state.roleType === CONSTANTS.ROLES.LISTNER) {
-        this.handleSubmitListener()
-      } else if (this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL) {
-        this.handleSubmitProfessional()
-      } else if (this.state.roleType === CONSTANTS.ROLES.USER) {
-        this.handleSubmitUser()
-      } else if (this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN) {
-        this.handleSubmitAdmin()
-      }
+    window.addEventListener("keypress", this.handleEnterKeyPress);
+    if (this.props.location.state && this.props.location.state.emailmember) {
+      this.setState({
+        email: this.props.location.state.emailmember,
+      });
     }
   }
+  handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      if (this.state.roleType === CONSTANTS.ROLES.LISTNER) {
+        this.handleSubmitListener();
+      } else if (this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL) {
+        this.handleSubmitProfessional();
+      } else if (this.state.roleType === CONSTANTS.ROLES.USER) {
+        this.handleSubmitUser();
+      } else if (this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN) {
+        this.handleSubmitAdmin();
+      }
+    }
+  };
   componentWillUnmount() {
-    window.removeEventListener('keypress', this.handleEnterKeyPress)
+    window.removeEventListener("keypress", this.handleEnterKeyPress);
   }
   verifyEmail = (email, type, authcode) => {
     if (email && type) {
@@ -175,7 +179,7 @@ class Login extends Component {
               setLocalStorage("customerInfo", data);
               _this.props.history.push({ pathname: "/userDashboardcust" });
             } else {
-              console.log('verification email =======>>', data)
+              console.log("verification email =======>>", data);
               this.props.history.push({
                 pathname: "login",
                 state: { roleType: this.state.roleType },
@@ -305,7 +309,6 @@ class Login extends Component {
             console.log(error);
           });
       }
-
     }
   };
 
@@ -381,31 +384,39 @@ class Login extends Component {
               {this.state.roleType === CONSTANTS.ROLES.LISTNER
                 ? "Listener Login"
                 : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                  ? "Professional Login"
-                  : this.state.roleType === CONSTANTS.ROLES.USER
-                    ? "Member Login"
-                    : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                      ? "Admin Login"
-                      : ""}
+                ? "Professional Login"
+                : this.state.roleType === CONSTANTS.ROLES.USER
+                ? "Member Login"
+                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                ? "Admin Login"
+                : ""}
             </div>
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
                 Don’t have an account?
                 <strong className="fw500">
-                  {this.state.roleType === CONSTANTS.ROLES.LISTNER
-                    ? " Become a Listener"
-                    : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                      ? " Become a Professional"
-                      : this.state.roleType === CONSTANTS.ROLES.USER
-                        ? <span style={{ cursor: 'pointer' }} onClick={() => this.setState({ userSignUp: true })}> Become a Member</span>
-                        : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                          ? " Become a Admin"
-                          : ""}
+                  {this.state.roleType === CONSTANTS.ROLES.LISTNER ? (
+                    " Become a Listener"
+                  ) : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL ? (
+                    " Become a Professional"
+                  ) : this.state.roleType === CONSTANTS.ROLES.USER ? (
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.setState({ userSignUp: true })}
+                    >
+                      {" "}
+                      Become a Member
+                    </span>
+                  ) : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
+                    " Become a Admin"
+                  ) : (
+                    ""
+                  )}
                 </strong>
               </div>
             ) : (
-                ""
-              )}
+              ""
+            )}
 
             <div className="layout_box mb-4">
               <Form.Group className="mb-4 pb-2">
@@ -443,16 +454,17 @@ class Login extends Component {
                 />
                 <div className="error alignLeft">{errors.password}</div>
               </Form.Group>
-              {
-                this.state.roleType === CONSTANTS.ROLES.USER ?
-                  <Form.Check
-                    type="checkbox"
-                    label="Corporate Member"
-                    className="checkboxTyp1 mb-4"
-                    id="isCorporate"
-                    onChange={(e) => { this.setState({ isCorporateLogin: e.target.checked }) }}
-                  /> : null
-              }
+              {this.state.roleType === CONSTANTS.ROLES.USER ? (
+                <Form.Check
+                  type="checkbox"
+                  label="Corporate Member"
+                  className="checkboxTyp1 mb-4"
+                  id="isCorporate"
+                  onChange={(e) => {
+                    this.setState({ isCorporateLogin: e.target.checked });
+                  }}
+                />
+              ) : null}
               {this.state.roleType === CONSTANTS.ROLES.LISTNER ? (
                 <Button
                   className="btnTyp4 mb-4"
@@ -482,8 +494,8 @@ class Login extends Component {
                   LOGIN
                 </Button>
               ) : (
-                        ""
-                      )}
+                ""
+              )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
                 <span
@@ -562,7 +574,10 @@ class Login extends Component {
 
           <Modal.Body>
             <Container>
-              <UserSignup {...this.props} handleSet={() => this.setState({ userSignUp: false })} />
+              <UserSignup
+                {...this.props}
+                handleSet={() => this.setState({ userSignUp: false })}
+              />
             </Container>
           </Modal.Body>
         </Modal>
@@ -577,5 +592,5 @@ export default connect(null, {
   actionProfessionalLogin,
   actionUserLogin,
   actionAdminLogin,
-  actionCorporatorLogin
+  actionCorporatorLogin,
 })(Login);
