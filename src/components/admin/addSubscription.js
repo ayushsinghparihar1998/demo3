@@ -34,24 +34,34 @@ class addSubscription extends Component {
         pl_price: "",
         pl_desc_details: "",
         pl_save: "",
+        plan_type: "",
+        plan_cat_name: "",
       },
 
       count: 10,
       offset: 1,
-      errors: { pl_title: "", pl_price: "", pl_desc_details: "", pl_save: "" },
+
+      errors: {
+        pl_title: "",
+        pl_price: "",
+        pl_desc_details: "",
+        pl_save: "",
+        plan_type: "",
+        plan_cat_name: "",
+      },
     };
   }
   componentDidMount = () => {
     console.log(this.props.match.params.id);
     console.log(this.props);
-    if (this.props.match.params.id > 0) {
-      this.getPlanDetails();
-    }
+    this.getProffCat();
   };
   getPlanDetails = () => {
     let data = {
       pl_id: this.props.match.params.id,
     };
+    let proffCat = this.state.proffCat;
+    let cats = [];
 
     ELPViewApiService("superadmin_getplandetails", data).then((result) => {
       console.log("result", result);
@@ -59,11 +69,24 @@ class addSubscription extends Component {
       if (result && result.status === 200) {
         planObj =
           result && result.data && result.data.data ? result.data.data[0] : [];
+        planObj.plan_cat_name &&
+          planObj.plan_cat_name.map((item) => {
+            cats.push(item.puc_cat_id);
+          });
       }
+      proffCat.map((item) => {
+        if (cats.includes(item.pc_id)) {
+          item.flag = true;
+        } else {
+          item.flag = false;
+        }
+        return item;
+      });
 
       this.setState(
         {
           planObj,
+          proffCat,
         },
         () => {
           console.log("planObj", this.state.planObj);
@@ -72,17 +95,28 @@ class addSubscription extends Component {
     });
   };
   handleSubmit = () => {
-    if (this.isValid()) {
-      this.setState({
-        showLoader: true,
-      });
+    this.setState({
+      showLoader: true,
+    });
+    let data = this.state.planObj;
+    let catar = [];
 
-      let data = this.state.planObj;
-      console.log(data);
-
-      if (this.props.match.params.id > 0) {
-        data.pl_id = this.props.match.params.id;
+    console.log(data);
+    this.state.proffCat.map((item) => {
+      if (item.flag == true) {
+        let a = {};
+        a.puc_cat_id = item.pc_id;
+        a.puc_cat_name = item.pc_name;
+        catar.push(a);
       }
+    });
+    if (data.plan_type == 1) {
+      data.plan_cat_name = catar;
+    }
+    if (this.props.match.params.id > 0) {
+      data.pl_id = this.props.match.params.id;
+    }
+    if (this.isValid(data)) {
       ELPViewApiService(
         this.props.match.params.id == 0
           ? "superadminadd_plan"
@@ -94,7 +128,7 @@ class addSubscription extends Component {
             // this.props.history.push("/admin");
             setTimeout(() => {
               this.props.history.push("/admin");
-            }, 1000);
+            }, 100);
             this.clear();
           } else {
             this.setState({
@@ -135,8 +169,54 @@ class addSubscription extends Component {
       }
     );
   };
-  isValid() {
-    const { errors, isValid } = validateInput(this.state.planObj);
+  getProffCat = () => {
+    let proffCat = this.state.proffCat;
+    ELPViewApiService("superadmingetprofessioanalcategory", {}).then(
+      (result) => {
+        if (result && result.status === 200) {
+          console.log("PROFFCAT", result.data.data.domain_list);
+          proffCat =
+            result && result.data && result.data.data
+              ? result.data.data.domain_list
+              : [];
+        }
+        this.setState(
+          {
+            proffCat,
+          },
+          () => {
+            if (this.props.match.params.id > 0) {
+              this.getPlanDetails();
+            }
+          }
+        );
+      }
+    );
+  };
+  handleCheck = (event) => {
+    const { name, checked, value, id } = event.target;
+
+    console.log("value , checked", value, checked);
+    let proffCat = this.state.proffCat;
+    var index = proffCat.findIndex((el) => el.pc_id == id);
+    proffCat[index].flag = checked;
+
+    this.setState(
+      {
+        proffCat,
+      },
+      () => {
+        console.log(this.state.proffCat);
+      }
+    );
+  };
+
+  // handleRadio = (e) => {
+  //   console.log(e);
+  //   console.log(e.target.value);
+  // };
+  isValid(data) {
+    const { errors, isValid } = validateInput(data);
     if (!isValid) {
       this.setState({ errors }, () => console.log(this.state.errors));
     }
@@ -144,7 +224,7 @@ class addSubscription extends Component {
   }
 
   render() {
-    const { planObj, errors } = this.state;
+    const { planObj, errors, proffCat } = this.state;
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -254,69 +334,80 @@ class addSubscription extends Component {
                       </div>
                     </Form.Group>
 
-                    <Form.Group>  
-                        <Form.Label className="fs20 fw600 col14">Plans Select by</Form.Label> 
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox"> 
-                                <Form.Check
-                                    type="radio"
-                                    label="Daily"
-                                    name="formHorizontalRadios"
-                                    id="formHorizontalRadios1"
-                                    className="radioboxTyp1"
-                                  /> 
-                                </Form.Group>  
-                            </Col> 
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox">   
-                                  <Form.Check
-                                    type="radio"
-                                    label="By condition" 
-                                    name="formHorizontalRadios"
-                                    id="formHorizontalRadios2"
-                                    className="radioboxTyp1"  
-                                  />
-                                </Form.Group>
-                            </Col> 
-                        </Row>
-                     </Form.Group>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                        Plans Select by
+                      </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type1"
+                              value={1}
+                              name="plan_type"
+                              onChange={(e) => this.handleChange(e)}
+                              label="Daily"
+                              className="radioboxTyp1"
+                              checked={+planObj.plan_type == 1}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type2"
+                              value={2}
+                              name="plan_type"
+                              onChange={(e) => this.handleChange(e)}
+                              label="By condition"
+                              className="radioboxTyp1"
+                              checked={+planObj.plan_type == 2}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.plan_type}
+                      </div>
+                    </Form.Group>
 
-                      <Form.Group controlId="formBasicCheckbox">   
-                        <Form.Label className="fs20 fw600 col14 mt-3">Select Category</Form.Label> 
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox"> 
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Label className="fs20 fw600 col14 mt-3">
+                        Select Category
+                      </Form.Label>
+                      <Row>
+                        {proffCat &&
+                          proffCat.map((cat) => {
+                            return (
+                              <Col md={4}>
+                                <Form.Group controlId="formBasicCheckbox">
                                   <Form.Check
                                     type="checkbox"
-                                    label="EAT"
+                                    label={cat.pc_name}
                                     className="checkboxTyp1"
-                                    name="eat" 
+                                    name={cat.pc_name}
+                                    id={cat.pc_id}
+                                    value={cat.flag}
+                                    onChange={(e) => this.handleCheck(e)}
+                                    checked={cat.flag == true}
+                                    handleCheck={cat.flag}
+                                    disabled={planObj.plan_type == 2}
                                   />
                                 </Form.Group>
-                            </Col> 
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckboxTwo"> 
-                                  <Form.Check
-                                    type="checkbox"
-                                    label="LUV"
-                                    className="checkboxTyp1"
-                                    name="eat" 
-                                  />
-                                </Form.Group>
-                            </Col> 
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckboxThree"> 
-                                  <Form.Check
-                                    type="checkbox" 
-                                    label="PRAY"
-                                    className="checkboxTyp1"
-                                    name="eat" 
-                                  />
-                                </Form.Group>
-                            </Col>  
-                        </Row>
-                     </Form.Group> 
+                              </Col>
+                            );
+                          })}{" "}
+                      </Row>
+                      {planObj.plan_type == 1 ? (
+                        <div className="col27 fs14 fw400 mt-2 error">
+                          {errors.plan_cat_name}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </Form.Group>
 
                     <Button
                       variant="primary btnTyp5 mt-4"

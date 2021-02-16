@@ -21,7 +21,6 @@ export default {
   kt_name: {
     required: "Please enter a valid name.",
     // alphaOnly: "Please enter a valid screen name.",
-
   },
   // : "",
   // : "",
@@ -71,8 +70,8 @@ export default {
     confirmNewPassword: "Please enter confirm new password.",
     passwordPattern:
       "Password should be min 6 characters long and keep your password strong",
-      // "Password should be min 8 characters long with one special character, number, lower and upper case letter.",
-      // 
+    // "Password should be min 8 characters long with one special character, number, lower and upper case letter.",
+    //
     spaceAvoid: "Mismatch new password and confirm new password.",
     confirmed: "Password and Confirm password do not match.",
     spacialChar: "Password and Confirm password do not match.",
@@ -133,7 +132,13 @@ export default {
   },
   pl_price: {
     required: "Please enter price.",
-    correct : "Please enter a valid price"
+    correct: "Please enter a valid price",
+  },
+  plan_type: {
+    required: "Please select plan type.",
+  },
+  plan_cat_name: {
+    required: "Please select atleast one catagory.",
   },
   pl_desc_details: {
     required: "Please enter plan description.",
@@ -141,6 +146,5 @@ export default {
   pl_save: {
     required: "Please enter plan offer.",
     // correct : "Please enter a valid offer"
-
   },
 };

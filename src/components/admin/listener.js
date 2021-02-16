@@ -143,7 +143,7 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminget_planlist"
     )
-      this.superadminget_planlist(1, 10);
+      this.superadminget_planlist(1, 10, 1);
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminkits_list"
@@ -628,12 +628,13 @@ class Adminlistener extends Component {
     }
   };
 
-  superadminget_planlist = async (offset, count) => {
+  superadminget_planlist = async (offset, count, type) => {
     try {
       let planList = [];
       let result = await ELPViewApiService("superadminget_planlist", {
         count: count,
         offset: offset,
+        plan_type: type,
       });
       let totalRecordCount = 0;
       if (result && result.status === 200) {
@@ -654,6 +655,7 @@ class Adminlistener extends Component {
           count: count,
           offset: offset,
           deleteObjType: "",
+          planType: type,
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -823,7 +825,11 @@ class Adminlistener extends Component {
       } else if (this.state.pageType == "domainList") {
         this.getDomainListing(page, this.state.count);
       } else if (this.state.pageType == "planList") {
-        this.superadminget_planlist(page, this.state.count);
+        this.superadminget_planlist(
+          page,
+          this.state.count,
+          this.state.planType
+        );
       } else if (this.state.pageType == "kitList") {
         this.superadminkits_list(page, this.state.count);
       } else if (this.state.pageType == "ratingList") {
@@ -1191,7 +1197,11 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         setTimeout(() => {
           if (type == "PLAN" || this.state.deleteObjType == "PLAN") {
-            this.superadminget_planlist(this.state.pageno, this.state.count);
+            this.superadminget_planlist(
+              this.state.pageno,
+              this.state.count,
+              this.state.planType
+            );
           } else if (type == "KIT" || this.state.deleteObjType == "KITS") {
             this.superadminkits_list(this.state.pageno, this.state.count);
           } else if (type == "VLOGS" || this.state.deleteObjType == "VLOGS") {
@@ -1584,7 +1594,7 @@ class Adminlistener extends Component {
                       <div
                         className={planActveClass}
                         onClick={(e) => {
-                          this.superadminget_planlist(1, 10);
+                          this.superadminget_planlist(1, 10, 1);
                         }}
                       >
                         <div className="fs14 col28 fw500">
