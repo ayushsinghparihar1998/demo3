@@ -1667,6 +1667,27 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getplanlist_holisticbycondition: {
+    url: "elp/getplanlist_holisticbycondition",
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getplanlist_holisticdaily: {
+    url: "elp/getplanlist_holisticdaily",
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getplanlist_bycategory: {
+    url: "elp/getplanlist_bycategory",
+    method: "POST",
+    data: { count: "", offset: "", plan_type: 1, plan_category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   uploadkits_image: {
     url: "elp/uploadkits_image",
     method: "POST",
