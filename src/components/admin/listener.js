@@ -1600,7 +1600,7 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> PLAN
+                          <Image src={Menuicon} alt="" className="mr-1" /> SUBSCRIPTION PLAN 
                         </div>
                       </div>
                     </div>
@@ -3601,7 +3601,7 @@ kt_status: "1" */}
                 </Col>
               ) : this.state.pageType == "qaList" ? (
                 <> 
-                    <Col md={8} lg={9} className="pl-1"> 
+                    <Col md={8} lg={9} className="pl-1">   
                 <div className="professor_search ViewQa"> 
                       <div className="fs22 fw600 col10"> 
                            Question Answer 
