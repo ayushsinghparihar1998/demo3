@@ -1983,13 +1983,13 @@ class Adminlistener extends Component {
                             />
                         </Form.Group>
                       </div> */}
-                      <Form.Group as={Row} className="justify-content-center"> 
+                      <Form.Group as={Row} className="justify-content-center customsRadio"> 
                           <Form.Check
                               type="radio"
                               label="Daily"
                               name="formHorizontalRadios"
                               id="formHorizontalRadios1"
-                              className="mr-3"
+                              className="mr-5 active"
                             />
 
                            <Form.Check
