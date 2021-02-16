@@ -848,6 +848,37 @@
             border-right: solid 1px #ddd; 
         }
     }
+    .customsRadio {
+        .form-check {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 0;
+            border-radius: 30px;
+            text-align: center;
+            background: $col18;
+            border: solid 1px $col1;
+
+            &.active {
+                background: $col40;
+                border: solid 1px $col40;
+                label {
+                    color: $col18; 
+                }
+            }
+            label {
+                color: $col1; 
+            }
+            .form-check-input {
+                width: 130px; 
+                height: 36px; 
+                top: -6px;
+                border-radius: 30px;
+                left: 18px;
+                opacity: 0;
+            }
+        }
+    }
     .corporateMember {
         .fs28.col10.mb-4 {
             font-size: 22px !important;

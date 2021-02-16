@@ -1984,7 +1984,7 @@ class Adminlistener extends Component {
                             />
                         </Form.Group>
                       </div> */}
-                      <Form.Group as={Row} className="justify-content-center">
+                      <Form.Group as={Row} className="justify-content-center customsRadio">
                         <Form.Check
                           type="radio"
                           id="plan_type1"
@@ -1992,7 +1992,7 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 1)}
                           label="Daily"
-                          className="radioboxTyp1"
+                          className=" mr-5 active"
                           checked={+this.state.plan_type == 1}
                         />
 
@@ -2003,7 +2003,7 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 2)}
                           label="By Condition"
-                          className="radioboxTyp1"
+                          className=" mr-5 active"
                           checked={+this.state.plan_type == 2}
                         />
                       </Form.Group>
