@@ -104,6 +104,7 @@ class Adminlistener extends Component {
       blogCategory: [],
       pressBlogCategory: [],
       planList: [],
+      plan_type: 1,
     };
   }
   componentDidMount() {
@@ -655,7 +656,7 @@ class Adminlistener extends Component {
           count: count,
           offset: offset,
           deleteObjType: "",
-          planType: type,
+          plan_type: type,
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -828,7 +829,7 @@ class Adminlistener extends Component {
         this.superadminget_planlist(
           page,
           this.state.count,
-          this.state.planType
+          this.state.plan_type
         );
       } else if (this.state.pageType == "kitList") {
         this.superadminkits_list(page, this.state.count);
@@ -981,7 +982,7 @@ class Adminlistener extends Component {
     let value = e.target.value;
 
     this.setState({
-      reasonForDelete: value,
+      [name]: value,
     });
   }
   handleChangeCorpMember(e) {
@@ -1200,7 +1201,7 @@ class Adminlistener extends Component {
             this.superadminget_planlist(
               this.state.pageno,
               this.state.count,
-              this.state.planType
+              this.state.plan_type
             );
           } else if (type == "KIT" || this.state.deleteObjType == "KITS") {
             this.superadminkits_list(this.state.pageno, this.state.count);
@@ -1983,25 +1984,30 @@ class Adminlistener extends Component {
                             />
                         </Form.Group>
                       </div> */}
-                      <Form.Group as={Row} className="justify-content-center"> 
-                          <Form.Check
-                              type="radio"
-                              label="Daily"
-                              name="formHorizontalRadios"
-                              id="formHorizontalRadios1"
-                              className="mr-3"
-                            />
+                      <Form.Group as={Row} className="justify-content-center">
+                        <Form.Check
+                          type="radio"
+                          id="plan_type1"
+                          value={1}
+                          name="plan_type"
+                          onChange={() => this.superadminget_planlist(1, 10, 1)}
+                          label="Daily"
+                          className="radioboxTyp1"
+                          checked={+this.state.plan_type == 1}
+                        />
 
-                           <Form.Check
-                                type="radio"
-                                label="ByCondition"
-                                name="formHorizontalRadios"
-                                id="formHorizontalRadios2"
-                              />   
+                        <Form.Check
+                          type="radio"
+                          id="plan_type2"
+                          value={2}
+                          name="plan_type"
+                          onChange={() => this.superadminget_planlist(1, 10, 2)}
+                          label="By Condition"
+                          className="radioboxTyp1"
+                          checked={+this.state.plan_type == 2}
+                        />
                       </Form.Group>
-
                     </Form>
-
                   </div>
 
                   {/* pl_datetime: "2021-01-20 15:29:03"
@@ -3882,7 +3888,7 @@ kt_status: "1" */}
                         <Form.Control
                           as="textarea"
                           className="textTypes1"
-                          name="reason"
+                          name="reasonForDelete"
                           onChange={(event) => {
                             this.handleChange(event);
                           }}

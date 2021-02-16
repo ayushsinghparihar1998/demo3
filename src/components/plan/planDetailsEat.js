@@ -34,29 +34,38 @@ class PlanDetailsEat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      workData: "",
+      dailyData: "",
       email: "",
     };
   }
   componentDidMount = () => {
     this.getplanlist_bycategory(1, this.props.match.params.name);
-    this.getplanlist_bycategory(2, this.props.match.params.name);
+    setTimeout(() => {
+      this.getplanlist_bycategory(2, this.props.match.params.name);
+    }, 1000);
     console.log(" this.props.match", this.props.match.params.name);
   };
   getplanlist_bycategory = (plan_type, plan_category) => {
     let _this = this;
+    console.log(plan_type);
     ELPViewApiService("getplanlist_bycategory", {
       count: 100,
       offset: 1,
       plan_type,
-      plan_category: "'" + plan_category + "'",
+      plan_category: plan_type == 1 ? "'" + plan_category + "'" : "",
     })
       .then((response) => {
         if (response && response.data && response.data.status === "success") {
           let data = response.data.data;
-          this.setState({
-            workData: data.plan_listing,
-          });
+          if (plan_type == 1) {
+            this.setState({
+              dailyData: data.plan_listing,
+            });
+          } else {
+            this.setState({
+              conditionData: data.plan_listing,
+            });
+          }
         }
       })
       .catch((err) => {
@@ -111,8 +120,8 @@ class PlanDetailsEat extends Component {
                   DAILY SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
-                  {this.state.workData &&
-                    this.state.workData.map((item) => {
+                  {this.state.dailyData &&
+                    this.state.dailyData.map((item) => {
                       return (
                         <div className="items">
                           <div className="planList">
@@ -176,8 +185,8 @@ class PlanDetailsEat extends Component {
                   BYCONDITIONS SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
-                  {this.state.workData &&
-                    this.state.workData.map((item) => {
+                  {this.state.conditionData &&
+                    this.state.conditionData.map((item) => {
                       return (
                         <div className="items">
                           <div className="planList">

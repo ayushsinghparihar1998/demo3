@@ -30,6 +30,7 @@ import {
   actionAddrating,
 } from "../../common/redux/actions";
 import validator from "validator";
+import { setLocalStorage } from "../../common/helpers/Utils";
 
 class PlanDetails extends Component {
   constructor(props) {
@@ -98,18 +99,18 @@ class PlanDetails extends Component {
       },
       () => {
         if (this.state.errors.length == 0) {
-          let data = {
-            email: this.state.email,
-          };
-          console.log(data);
-          this.props.history.push({
-            pathname: "coming-soon",
-          });
+          this.handleLogin(3);
         } else {
         }
       }
     );
   };
+  handleLogin(roleType) {
+    this.props.history.push({
+      pathname: "login",
+      state: { roleType: roleType, emailmember: this.state.email },
+    });
+  }
   handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
@@ -186,11 +187,15 @@ class PlanDetails extends Component {
                           value={this.state.email}
                           maxLength={100}
                         />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                          {this.state.errors}
+                        </div>
                       </Form.Group>
                       <Button
                         variant="primary"
                         className="btnTyp5 mt-3"
-                        type="submit"
+                        type="button"
+                        onClick={() => this.handleSubmit()}
                       >
                         CONTINUE
                       </Button>
