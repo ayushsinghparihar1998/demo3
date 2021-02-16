@@ -21,6 +21,7 @@ import blogclock from "../../assets/images/blogclock.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Suser from "../../assets/images/s_images.png";
+import UserChats from "../../assets/images/user_chat5.svg"; 
 import "react-datepicker/dist/react-datepicker.css";
 // import moment from "moment";
 import {
@@ -1983,7 +1984,7 @@ class Adminlistener extends Component {
                               
                             />
                         </Form.Group>
-                      </div> */}
+                      </div> */} 
                       <Form.Group as={Row} className="justify-content-center customsRadio">
                         <Form.Check
                           type="radio"
@@ -3600,9 +3601,503 @@ kt_status: "1" */}
                 </Col>
                 
               ) : this.state.pageType == "qaList" ? (
-                <> </>
+                <> 
+                    <Col md={8} lg={9} className="pl-1"> 
+                <div className="professor_search ViewQa"> 
+                      <div className="fs22 fw600 col10"> 
+                           Question Answer 
+                      </div>
+                    <div className="QaListings">
+                        <div className="d-flex">
+                            <div className="position-relative">    
+                                <div className="col29 fw500 fs17 pb-1">
+                                    <strong>Question 1.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+                                </div>
+                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
+                                <div className="answerDetail">
+                                    <ul>  
+                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
+                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
+                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="d-flex ml-auto minw-90"> 
+                            <span className="mr-3"> 
+                                <Image
+                                src={Editicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            <span>
+                                <Image
+                                src={Deleteicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="QaListings"> 
+                        <div className="d-flex">
+                            <div className="position-relative">    
+                                <div className="col29 fw500 fs17 pb-1">
+                                    <strong>Question 2.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+                                </div>
+                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
+                                <div className="answerDetail">
+                                    <ul>  
+                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
+                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
+                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="d-flex ml-auto minw-90"> 
+                            <span className="mr-3"> 
+                                <Image
+                                src={Editicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            <span>
+                                <Image
+                                src={Deleteicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="QaListings">
+                        <div className="d-flex">
+                            <div className="position-relative">    
+                                <div className="col29 fw500 fs17 pb-1">
+                                    <strong>Question 3.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+                                </div>
+                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
+                                <div className="answerDetail">
+                                    <ul>  
+                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
+                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
+                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="d-flex ml-auto minw-90"> 
+                            <span className="mr-3"> 
+                                <Image
+                                src={Editicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            <span>
+                                <Image
+                                src={Deleteicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="QaListings">
+                        <div className="d-flex">
+                            <div className="position-relative">    
+                                <div className="col29 fw500 fs17 pb-1">
+                                    <strong>Question 4.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+                                </div>
+                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
+                                <div className="answerDetail">
+                                    <ul>  
+                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
+                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
+                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="d-flex ml-auto minw-90"> 
+                            <span className="mr-3"> 
+                                <Image
+                                src={Editicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            <span>
+                                <Image
+                                src={Deleteicon}
+                                alt=""
+                                
+                                />
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+              </Col>
+                </>
               ) : this.state.pageType == "vlogsList" ? (
-                <> </>
+                <> 
+                    <Col md={8} lg={9} className="pl-1"> 
+                <div className="professor_search listBlogs VlogLists"> 
+                  <Row className="mb-1">
+                    <Col md={8}>
+                      <div className="fs22 fw600 col10"> 
+                          Vlog Listing
+                      </div>
+                      <div className="fw300 fs16 col14">
+                        {/* Lorem Ipsum is simply dummy and typesetting industry. */}
+                      </div>
+                    </Col>
+                    <Col md={4}>
+                      <div className="text-right pro_cbtn">
+                        <Button
+                          type="button"
+                          className="btnTyp5" 
+                        >
+                          create VLOG
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                        <Form className="p_form mb-4">
+                            <div className="checkCategory"> 
+                                <Form.Group
+                                    controlId="formBasicCheckbox1"
+                                    className="row"
+                                    >
+                                <Form.Check 
+                                    type="checkbox"
+                                    className="checkthree active" 
+                                    label="All"
+                                    name="all"
+                                    checked=""  
+                                    />
+                                <Form.Check 
+                                    type="checkbox"
+                                    className="checkthree"  
+                                    label="Featured" 
+                                    name="all"
+                                    checked=""  
+                                />             
+                              </Form.Group>
+                            </div>
+                        </Form>
+                </div>
+                
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="mr-2 pt-1">
+                            <Image
+                              src={UserChats}  
+                              alt=""
+                            />
+                          </div>
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                      Child Welfare
+                                  </div>
+                                  <div className="d-flex ml-auto">
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-1"> 
+                                  <span className="fs16 fw400 col14"> 
+                                    <Image
+                                      src={blogclock} 
+                                      className="wSet-20 mr-2"
+                                    />
+                                     11 Minute read
+                                  </span>
+                                </div>
+
+                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <strong className="fw600">
+                                      Biography:
+                                  </strong>
+                                  <span className="fs15">
+                                       lorem dummy content Lorem Ipsum is simply dummy text
+                                        of the printing and typesetting industry. 
+                                        <a className="col40 fw15 fw500">Read more...</a>
+                                  </span>  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="mr-2 pt-1">
+                            <Image
+                              src={UserChats}  
+                              alt=""
+                            />
+                          </div>
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                      Child Welfare
+                                  </div>
+                                  <div className="d-flex ml-auto">
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-1"> 
+                                  <span className="fs16 fw400 col14"> 
+                                    <Image
+                                      src={blogclock} 
+                                      className="wSet-20 mr-2"
+                                    />
+                                     11 Minute read
+                                  </span>
+                                </div>
+
+                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <strong className="fw600">
+                                      Biography:
+                                  </strong>
+                                  <span className="fs15">
+                                       lorem dummy content Lorem Ipsum is simply dummy text
+                                        of the printing and typesetting industry. 
+                                        <a className="col40 fw15 fw500">Read more...</a>
+                                  </span>  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="mr-2 pt-1">
+                            <Image
+                              src={UserChats}  
+                              alt=""
+                            />
+                          </div>
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                      Child Welfare
+                                  </div>
+                                  <div className="d-flex ml-auto">
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-1"> 
+                                  <span className="fs16 fw400 col14"> 
+                                    <Image
+                                      src={blogclock} 
+                                      className="wSet-20 mr-2"
+                                    />
+                                     11 Minute read
+                                  </span>
+                                </div>
+
+                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <strong className="fw600">
+                                      Biography:
+                                  </strong>
+                                  <span className="fs15">
+                                       lorem dummy content Lorem Ipsum is simply dummy text
+                                        of the printing and typesetting industry. 
+                                        <a className="col40 fw15 fw500">Read more...</a>
+                                  </span>  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="mr-2 pt-1">
+                            <Image
+                              src={UserChats}  
+                              alt=""
+                            />
+                          </div>
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                      Child Welfare
+                                  </div>
+                                  <div className="d-flex ml-auto">
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-1"> 
+                                  <span className="fs16 fw400 col14"> 
+                                    <Image
+                                      src={blogclock} 
+                                      className="wSet-20 mr-2"
+                                    />
+                                     11 Minute read
+                                  </span>
+                                </div>
+
+                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <strong className="fw600">
+                                      Biography:
+                                  </strong>
+                                  <span className="fs15">
+                                       lorem dummy content Lorem Ipsum is simply dummy text
+                                        of the printing and typesetting industry. 
+                                        <a className="col40 fw15 fw500">Read more...</a>
+                                  </span>  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="mr-2 pt-1">
+                            <Image
+                              src={UserChats}  
+                              alt=""
+                            />
+                          </div>
+                          <div className="pl-2 w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                      Child Welfare
+                                  </div>
+                                  <div className="d-flex ml-auto">
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-1"> 
+                                  <span className="fs16 fw400 col14"> 
+                                    <Image
+                                      src={blogclock} 
+                                      className="wSet-20 mr-2"
+                                    />
+                                     11 Minute read
+                                  </span>
+                                </div>
+
+                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                  <strong className="fw600">
+                                      Biography:
+                                  </strong>
+                                  <span className="fs15">
+                                       lorem dummy content Lorem Ipsum is simply dummy text
+                                        of the printing and typesetting industry. 
+                                        <a className="col40 fw15 fw500">Read more...</a>
+                                  </span>  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   
+              </Col>
+                </>
               ) : (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">

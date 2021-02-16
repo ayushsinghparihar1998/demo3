@@ -849,6 +849,7 @@
         }
     }
     .customsRadio {
+        position: relative; 
         .form-check {
             width: 140px;
             height: 36px;
@@ -876,6 +877,7 @@
                 border-radius: 30px;
                 left: 18px;
                 opacity: 0;
+                cursor: pointer; 
             }
         }
     }
