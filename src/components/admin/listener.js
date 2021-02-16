@@ -1968,6 +1968,40 @@ class Adminlistener extends Component {
                         </div>
                       </Col>
                     </Row>
+
+                    <Form className="p_form mb-4">
+                      {/* <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        >
+                            <Form.Check
+                              type="checkbox"
+                              className="checkthree" 
+                              label="Daily"
+                              
+                            />
+                        </Form.Group>
+                      </div> */}
+                      <Form.Group as={Row} className="justify-content-center"> 
+                          <Form.Check
+                              type="radio"
+                              label="Daily"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios1"
+                              className="mr-3"
+                            />
+
+                           <Form.Check
+                                type="radio"
+                                label="ByCondition"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                              />   
+                      </Form.Group>
+
+                    </Form>
+
                   </div>
 
                   {/* pl_datetime: "2021-01-20 15:29:03"
