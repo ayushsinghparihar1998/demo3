@@ -3598,6 +3598,7 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
+                
               ) : this.state.pageType == "qaList" ? (
                 <> </>
               ) : this.state.pageType == "vlogsList" ? (
