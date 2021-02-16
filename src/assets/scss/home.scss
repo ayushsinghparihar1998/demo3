@@ -98,7 +98,9 @@
 
 .plans {
     position: relative; 
-
+    .slick-list {
+        max-height: 480px; 
+    }
     ul.slick-dots {
         bottom: -20px; 
         li {
@@ -241,6 +243,9 @@
         padding-top: 40px;
         padding-bottom: 80px;  
         
+        .slick-list {
+            max-height: 530px; 
+        }
         ul.slick-dots {
             bottom: -20px; 
             li {
