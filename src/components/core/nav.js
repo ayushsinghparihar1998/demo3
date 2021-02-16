@@ -601,48 +601,72 @@ class NavBar extends Component {
                       // <Nav.Link onClick={this.handleModal}>
                       //     Talk/Connect
                       // </Nav.Link>,
-                      <NavDropdown title="EAT" id="basic-nav-dropdown" className="eatDrop">
+                      <NavDropdown
+                        title="EAT"
+                        id="basic-nav-dropdown"
+                        className="eatDrop"
+                      >
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
-                        <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/planlist/Eat"}>
+                          SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
                         <NavDropdown.Item href={"/blogs/EAT"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="LUV" id="basic-nav-dropdown2" className="eatDrop">
+                      <NavDropdown
+                        title="LUV"
+                        id="basic-nav-dropdown2"
+                        className="eatDrop"
+                      >
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
-                        <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/planlist/Luv"}>
+                          SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
                         <NavDropdown.Item href={"/blogs/LUV"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
                       </NavDropdown>,
-                      <NavDropdown title="PRAY" id="basic-nav-dropdown3" className="eatDrop">
+                      <NavDropdown
+                        title="PRAY"
+                        id="basic-nav-dropdown3"
+                        className="eatDrop"
+                      >
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
-                        <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/planlist/Pray"}>
+                          SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
                         <NavDropdown.Item href={"/blogs/PRAY"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item> 
+                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
-                      <NavDropdown title="ELNP(HOLISTIC)" id="basic-nav-dropdown4" className="Holistics">
+                      <NavDropdown
+                        title="ELNP(HOLISTIC)"
+                        id="basic-nav-dropdown4"
+                        className="Holistics"
+                      >
                         <NavDropdown.Item onClick={this.handleModal}>
                           TALK NOW
                         </NavDropdown.Item>
-                        <NavDropdown.Item>SUBSCRIPTION PLANS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/planlistholistic"}>
+                          SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
                         <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
-                        title="HELP SOMEONE" 
+                        title="HELP SOMEONE"
                         id="basic-nav-dropdown5"
                       >
                         <NavDropdown.Item href={"/becomeListener"}>

@@ -110,8 +110,10 @@ class addSubscription extends Component {
         catar.push(a);
       }
     });
-    if (data.plan_type == 1) {
+    if (+data.plan_type == 1) {
       data.plan_cat_name = catar;
+    } else {
+      data.plan_cat_name = "";
     }
     if (this.props.match.params.id > 0) {
       data.pl_id = this.props.match.params.id;
