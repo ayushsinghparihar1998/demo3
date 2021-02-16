@@ -126,7 +126,7 @@ class QuestionAndAnswer extends Component {
             <div>
                 <Form>
                     <Row>
-                        <div className="layout_box mt-3 mb-4">
+                        <div className="layout_box mt-3 mb-4">     
 
                             {this.state.question &&
                                 this.state.question.map((item, index) => {
