@@ -21,7 +21,7 @@ import blogclock from "../../assets/images/blogclock.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Suser from "../../assets/images/s_images.png";
-import UserChats from "../../assets/images/user_chat5.svg"; 
+import UserChats from "../../assets/images/user_chat5.svg";
 import "react-datepicker/dist/react-datepicker.css";
 // import moment from "moment";
 import {
@@ -151,6 +151,11 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") == "superadminkits_list"
     )
       this.superadminkits_list(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminvlogs_list"
+    )
+      this.superadminvlogs_list(1, 10, 1);
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -702,12 +707,13 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
-  superadminvlogs_list = async (offset, count) => {
+  superadminvlogs_list = async (offset, count, vl_type) => {
     try {
       let vlogsList = [];
       let result = await ELPViewApiService("superadminvlogs_list", {
         count: count,
         offset: offset,
+        vl_type,
       });
       let totalRecordCount = 0;
       if (result && result.status === 200) {
@@ -728,6 +734,7 @@ class Adminlistener extends Component {
           count: count,
           offset: offset,
           deleteObjType: "",
+          vl_type,
         },
         () => {
           this.getPager(this.state.totalRecordCount);
@@ -1155,6 +1162,7 @@ class Adminlistener extends Component {
     });
     console.log(this.state.date);
   };
+
   modifyDomainContent = (item, id, api, status) => {
     let data = { cd_id: id ? id : item.cd_id, cd_status: status };
     ELPViewApiService(api, data).then((result) => {
@@ -1198,16 +1206,20 @@ class Adminlistener extends Component {
       this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
-          if (type == "PLAN" || this.state.deleteObjType == "PLAN") {
+          if (this.state.deleteObjType == "PLAN" || this.state.deleteObjType == "PLAN") {
             this.superadminget_planlist(
               this.state.pageno,
               this.state.count,
               this.state.plan_type
             );
-          } else if (type == "KIT" || this.state.deleteObjType == "KITS") {
+          } else if (this.state.deleteObjType == "KIT" || this.state.deleteObjType == "KITS") {
             this.superadminkits_list(this.state.pageno, this.state.count);
-          } else if (type == "VLOGS" || this.state.deleteObjType == "VLOGS") {
-            this.superadminvlogs_list(this.state.pageno, this.state.count);
+          } else if (this.state.deleteObjType == "VLOGS" || this.state.deleteObjType == "VLOGS") {
+            this.superadminvlogs_list(
+              this.state.pageno,
+              this.state.count,
+              this.state.vl_type
+            );
           }
         }, 100);
       }
@@ -1621,7 +1633,7 @@ class Adminlistener extends Component {
                       <div
                         className={vlogsActveClass}
                         onClick={(e) => {
-                          this.superadminvlogs_list(1, 10);
+                          this.superadminvlogs_list(1, 10, 1);
                         }}
                       >
                         <div className="fs14 col28 fw500">
@@ -1666,7 +1678,7 @@ class Adminlistener extends Component {
                           className="fs14 col28 fw500"
                         >
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
-                          UPLOAD ELP DOCUMENT
+                          UPLOAD ELNP DOCUMENT
                         </div>
                       </div>
                     </div>
@@ -1972,20 +1984,10 @@ class Adminlistener extends Component {
                     </Row>
 
                     <Form className="p_form mb-4">
-                      {/* <div className="checkCategory">
-                        <Form.Group
-                          controlId="formBasicCheckbox1"
-                          className="row"
-                        >
-                            <Form.Check
-                              type="checkbox"
-                              className="checkthree" 
-                              label="Daily"
-                              
-                            />
-                        </Form.Group>
-                      </div> */} 
-                      <Form.Group as={Row} className="justify-content-center customsRadio">
+                      <Form.Group
+                        as={Row}
+                        className="justify-content-center customsRadio"
+                      >
                         <Form.Check
                           type="radio"
                           id="plan_type1"
@@ -1993,7 +1995,9 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 1)}
                           label="Daily"
-                          className=" mr-5 active"
+                          className={`mr-5  ${
+                            this.state.plan_type == 2 ? "" : "active"
+                          }`}
                           checked={+this.state.plan_type == 1}
                         />
 
@@ -2004,7 +2008,9 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 2)}
                           label="By Condition"
-                          className=" mr-5 active"
+                          className={`mr-5  ${
+                            this.state.plan_type == 1 ? "" : "active"
+                          }`}
                           checked={+this.state.plan_type == 2}
                         />
                       </Form.Group>
@@ -2103,6 +2109,23 @@ pl_title: "Platinum Plan new" */}
                                         alt=""
                                       />
                                     </span>
+                                  </div>
+                                  <div className="eat_category">
+                                    {item.plan_category.map((val) => {
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luvcat"
+                                              : "praycat"
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                        </span>
+                                      );
+                                    })}
                                   </div>
                                 </div>
                               </div>
@@ -3571,11 +3594,14 @@ kt_status: "1" */}
                                                 </div>
                                                 <div>
                                                   <span className="fs13">
-                                                    Shelter
+                                                    {val.ks_services}
                                                   </span>{" "}
                                                   <br />
                                                   <span className="fs13">
-                                                    Price: <del>Rs.650</del>
+                                                    Price:{" "}
+                                                    <del>
+                                                      Rs.{val.ks_actual_price}
+                                                    </del>
                                                     <strong className="fw500 col29 pl-1">
                                                       Rs.
                                                       {
@@ -3599,504 +3625,315 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
-                
               ) : this.state.pageType == "qaList" ? (
-                <> 
-                    <Col md={8} lg={9} className="pl-1"> 
-                <div className="professor_search ViewQa"> 
-                      <div className="fs22 fw600 col10"> 
-                           Question Answer 
+                <>
+                  <Col md={8} lg={9} className="pl-1">
+                    <div className="professor_search ViewQa">
+                      <div className="fs22 fw600 col10">Question Answer</div>
+                      <div className="QaListings">
+                        <div className="d-flex">
+                          <div className="position-relative">
+                            <div className="col29 fw500 fs17 pb-1">
+                              <strong>Question 1.</strong> Lorem ipsum dolor sit
+                              amet, consectetur adipiscing elit?
+                            </div>
+                            <div className="col10 fs17 fw500 mt-2 mb-3">
+                              Answer:
+                            </div>
+                            <div className="answerDetail">
+                              <ul>
+                                <li>
+                                  <strong>1.</strong> iste natus error sit
+                                  voluptatem accusantium.
+                                </li>
+                                <li>
+                                  <strong>2.</strong> Excepteur sint occaecat
+                                  cupidatat non proident.
+                                </li>
+                                <li>
+                                  <strong>3.</strong> Duis aute irure dolor in
+                                  reprehenderit
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="d-flex ml-auto minw-90">
+                            <span className="mr-3">
+                              <Image src={Editicon} alt="" />
+                            </span>
+                            <span>
+                              <Image src={Deleteicon} alt="" />
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                    <div className="QaListings">
+
+                      <div className="QaListings">
                         <div className="d-flex">
-                            <div className="position-relative">    
-                                <div className="col29 fw500 fs17 pb-1">
-                                    <strong>Question 1.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
-                                </div>
-                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
-                                <div className="answerDetail">
-                                    <ul>  
-                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
-                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
-                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
-                                    </ul>
-                                </div>
+                          <div className="position-relative">
+                            <div className="col29 fw500 fs17 pb-1">
+                              <strong>Question 2.</strong> Lorem ipsum dolor sit
+                              amet, consectetur adipiscing elit?
                             </div>
-                            <div className="d-flex ml-auto minw-90"> 
-                            <span className="mr-3"> 
-                                <Image
-                                src={Editicon}
-                                alt=""
-                                
-                                />
+                            <div className="col10 fs17 fw500 mt-2 mb-3">
+                              Answer:
+                            </div>
+                            <div className="answerDetail">
+                              <ul>
+                                <li>
+                                  <strong>1.</strong> iste natus error sit
+                                  voluptatem accusantium.
+                                </li>
+                                <li>
+                                  <strong>2.</strong> Excepteur sint occaecat
+                                  cupidatat non proident.
+                                </li>
+                                <li>
+                                  <strong>3.</strong> Duis aute irure dolor in
+                                  reprehenderit
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="d-flex ml-auto minw-90">
+                            <span className="mr-3">
+                              <Image src={Editicon} alt="" />
                             </span>
                             <span>
-                                <Image
-                                src={Deleteicon}
-                                alt=""
-                                
-                                />
+                              <Image src={Deleteicon} alt="" />
                             </span>
-                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
 
-                    <div className="QaListings"> 
+                      <div className="QaListings">
                         <div className="d-flex">
-                            <div className="position-relative">    
-                                <div className="col29 fw500 fs17 pb-1">
-                                    <strong>Question 2.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
-                                </div>
-                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
-                                <div className="answerDetail">
-                                    <ul>  
-                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
-                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
-                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
-                                    </ul>
-                                </div>
+                          <div className="position-relative">
+                            <div className="col29 fw500 fs17 pb-1">
+                              <strong>Question 3.</strong> Lorem ipsum dolor sit
+                              amet, consectetur adipiscing elit?
                             </div>
-                            <div className="d-flex ml-auto minw-90"> 
-                            <span className="mr-3"> 
-                                <Image
-                                src={Editicon}
-                                alt=""
-                                
-                                />
+                            <div className="col10 fs17 fw500 mt-2 mb-3">
+                              Answer:
+                            </div>
+                            <div className="answerDetail">
+                              <ul>
+                                <li>
+                                  <strong>1.</strong> iste natus error sit
+                                  voluptatem accusantium.
+                                </li>
+                                <li>
+                                  <strong>2.</strong> Excepteur sint occaecat
+                                  cupidatat non proident.
+                                </li>
+                                <li>
+                                  <strong>3.</strong> Duis aute irure dolor in
+                                  reprehenderit
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="d-flex ml-auto minw-90">
+                            <span className="mr-3">
+                              <Image src={Editicon} alt="" />
                             </span>
                             <span>
-                                <Image
-                                src={Deleteicon}
-                                alt=""
-                                
-                                />
+                              <Image src={Deleteicon} alt="" />
                             </span>
-                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
 
-                    <div className="QaListings">
+                      <div className="QaListings">
                         <div className="d-flex">
-                            <div className="position-relative">    
-                                <div className="col29 fw500 fs17 pb-1">
-                                    <strong>Question 3.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
-                                </div>
-                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
-                                <div className="answerDetail">
-                                    <ul>  
-                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
-                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
-                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
-                                    </ul>
-                                </div>
+                          <div className="position-relative">
+                            <div className="col29 fw500 fs17 pb-1">
+                              <strong>Question 4.</strong> Lorem ipsum dolor sit
+                              amet, consectetur adipiscing elit?
                             </div>
-                            <div className="d-flex ml-auto minw-90"> 
-                            <span className="mr-3"> 
-                                <Image
-                                src={Editicon}
-                                alt=""
-                                
-                                />
+                            <div className="col10 fs17 fw500 mt-2 mb-3">
+                              Answer:
+                            </div>
+                            <div className="answerDetail">
+                              <ul>
+                                <li>
+                                  <strong>1.</strong> iste natus error sit
+                                  voluptatem accusantium.
+                                </li>
+                                <li>
+                                  <strong>2.</strong> Excepteur sint occaecat
+                                  cupidatat non proident.
+                                </li>
+                                <li>
+                                  <strong>3.</strong> Duis aute irure dolor in
+                                  reprehenderit
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="d-flex ml-auto minw-90">
+                            <span className="mr-3">
+                              <Image src={Editicon} alt="" />
                             </span>
                             <span>
-                                <Image
-                                src={Deleteicon}
-                                alt=""
-                                
-                                />
+                              <Image src={Deleteicon} alt="" />
                             </span>
-                            </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
-
-                    <div className="QaListings">
-                        <div className="d-flex">
-                            <div className="position-relative">    
-                                <div className="col29 fw500 fs17 pb-1">
-                                    <strong>Question 4.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
-                                </div>
-                                <div className="col10 fs17 fw500 mt-2 mb-3">Answer:</div>  
-                                <div className="answerDetail">
-                                    <ul>  
-                                        <li><strong>1.</strong> iste natus error sit voluptatem accusantium.</li>
-                                        <li><strong>2.</strong> Excepteur sint occaecat cupidatat non proident.</li>
-                                        <li><strong>3.</strong> Duis aute irure dolor in reprehenderit</li> 
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="d-flex ml-auto minw-90"> 
-                            <span className="mr-3"> 
-                                <Image
-                                src={Editicon}
-                                alt=""
-                                
-                                />
-                            </span>
-                            <span>
-                                <Image
-                                src={Deleteicon}
-                                alt=""
-                                
-                                />
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                
-              </Col>
+                  </Col>
                 </>
               ) : this.state.pageType == "vlogsList" ? (
-                <> 
-                    <Col md={8} lg={9} className="pl-1"> 
-                <div className="professor_search listBlogs VlogLists"> 
-                  <Row className="mb-1">
-                    <Col md={8}>
-                      <div className="fs22 fw600 col10"> 
-                          Vlog Listing
-                      </div>
-                      <div className="fw300 fs16 col14">
-                        {/* Lorem Ipsum is simply dummy and typesetting industry. */}
-                      </div>
-                    </Col>
-                    <Col md={4}>
-                      <div className="text-right pro_cbtn">
-                        <Button
-                          type="button"
-                          className="btnTyp5" 
+                <>
+                  <Col md={8} lg={9} className="pl-1">
+                    <div className="professor_search listBlogs VlogLists">
+                      <Row className="mb-1">
+                        <Col md={8}>
+                          <div className="fs22 fw600 col10">Vlog Listing</div>
+                          <div className="fw300 fs16 col14">
+                            {/* Lorem Ipsum is simply dummy and typesetting industry. */}
+                          </div>
+                        </Col>
+                        <Col md={4}>
+                          <div className="text-right pro_cbtn">
+                            <Button
+                              type="button"
+                              className="btnTyp5"
+                              onClick={() =>
+                                this.changepath(
+                                  "/createVlog/0",
+                                  "superadminget_planlist"
+                                )
+                              }
+                            >
+                              create VLOG
+                            </Button>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Form className="p_form mb-4">
+                        <Form.Group
+                          as={Row}
+                          className="justify-content-center customsRadio"
                         >
-                          create VLOG
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                        <Form className="p_form mb-4">
-                            <div className="checkCategory"> 
-                                <Form.Group
-                                    controlId="formBasicCheckbox1"
-                                    className="row"
-                                    >
-                                <Form.Check 
-                                    type="checkbox"
-                                    className="checkthree active" 
-                                    label="All"
-                                    name="all"
-                                    checked=""  
-                                    />
-                                <Form.Check 
-                                    type="checkbox"
-                                    className="checkthree"  
-                                    label="Featured" 
-                                    name="all"
-                                    checked=""  
-                                />             
-                              </Form.Group>
-                            </div>
-                        </Form>
-                </div>
-                
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
+                          <Form.Check
+                            type="radio"
+                            id="vl_type1"
+                            value={1}
+                            name="vl_type"
+                            onChange={() => this.superadminvlogs_list(1, 10, 1)}
+                            label="All"
+                            className={`mr-5  ${
+                              this.state.vl_type == 2 ? "" : "active"
+                            }`}
+                            checked={+this.state.vl_type == 1}
+                          />
+
+                          <Form.Check
+                            type="radio"
+                            id="vl_type2"
+                            value={2}
+                            name="vl_type"
+                            onChange={() => this.superadminvlogs_list(1, 10, 2)}
+                            label="Featured"
+                            className={`mr-5  ${
+                              this.state.vl_type == 1 ? "" : "active"
+                            }`}
+                            checked={+this.state.vl_type == 2}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </div>
+
+                    {this.state.vlogsList &&
+                      this.state.vlogsList.map((item, index) => {
+                        return (
+                          <div className="adminlistener p-4 mb-3">
+                            <div className="d-flex text-left">
+                              <div className="mr-2 pt-1">
+                                <Image src={item.vl_thumbnail_url} alt="" />
+                              </div>
+                              <div className="pl-2 w-100">
+                                <div className="d-flex justify-content-between">
+                                  <div className="w-100">
+                                    <div className="d-flex">
+                                      <div className="col1 fw600 fs18 pb-1">
+                                        {item.vl_title}
+                                      </div>
+                                      <div className="d-flex ml-auto">
+                                        <span className="pr-3 fs14 col47 fw400">
+                                          {item.vl_status == "2"
+                                            ? "Deactivate"
+                                            : "Activate"}
+                                        </span>
+                                        <span className="pr-3 disabled">
+                                          <Form.Check
+                                            type="switch"
+                                            id={"custom-switch" + index}
+                                            name={"status" + index}
+                                            label=""
+                                            onClick={(e) => {
+                                              this.modifyAllContent(
+                                                "VLOGS",
+                                                item.vl_id,
+                                                "superadminchange_vlogsstatus",
+                                                item.vl_status == "1"
+                                                  ? "2"
+                                                  : "1"
+                                              );
+                                            }}
+                                            checked={item.vl_status == "1"}
+                                          />
+                                        </span>
+                                        <span className="mr-3">
+                                          <Image
+                                            onClick={() =>
+                                              this.changepath(
+                                                "/createVlog/" + item.vl_id,
+                                                "superadminvlogs_list"
+                                              )
+                                            }
+                                            src={Editicon}
+                                            alt=""
+                                          />
+                                        </span>
+                                        <span>
+                                          <Image
+                                            onClick={(e) => {
+                                              this.handleOpenAllConformation(
+                                                item.vl_title,
+                                                item.vl_id,
+                                                "VLOGS"
+                                              );
+                                            }}
+                                            src={Deleteicon}
+                                            alt=""
+                                          />
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="fs16 fw400 col14 pb-1 e_detai">
+                                      <strong className="fw600">
+                                        Description:
+                                      </strong>
+                                      <span
+                                        className="fs15"
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.vl_desc,
+                                        }}
+                                      >
+                                        {/* {item.vl_desc} */}
+                                      </span>
+                                    </div>
                                   </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
                                 </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                   
-              </Col>
+                        );
+                      })}
+                  </Col>
                 </>
               ) : (
                 <Col md={8} lg={9} className="pl-1">

@@ -87,29 +87,29 @@ import CorporateDashboard from "../components/professional/corporateDashboard";
 import ListenerBrowse from "../components/professional/listenerBrowse";
 import BlogUser from "../components/professional/blogUser";
 // ProfessionalBlog
-import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate"; 
-import ProfessinalBlogPress from "../components/admin/professionalBlogPress"; 
+import ProfessinalBlogCreate from "../components/admin/professinalBlogCreate";
+import ProfessinalBlogPress from "../components/admin/professionalBlogPress";
 // import AdminBlogListing from "../components/admin/adminBlogListing";
 // import AdminPressListing from "../components/admin/adminPressListing";
 import ProfessinalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlog from "../components/professional/professinalBlog";
 import ProfessionalBlogList from "../components/professional/professionalBlogList";
-import ProfessionalVlogs from "../components/professional/professionalVlogs"; 
+import ProfessionalVlogs from "../components/professional/professionalVlogs";
 import addSubscriptions from "../components/admin/addSubscription";
 import SubscriptionDocument from "../components/admin/subscriptionDocument";
-import SubscriptionPlan from "../components/admin/subscriptionPlan";
+// import SubscriptionPlan from "../components/admin/subscriptionPlan";
 import AddKits from "../components/admin/addKits";
 // import KitsListing from "../components/admin/kitsListing";
-import CreateVlog from "../components/admin/createVlog"; 
+import CreateVlog from "../components/admin/createVlog";
 import VlogList from "../components/admin/vlogList";
-import AssessmentTestList from "../components/admin/assessmentTestList"; 
+import AssessmentTestList from "../components/admin/assessmentTestList";
 import ViewQA from "../components/admin/viewQA";
-import CreateAssessmentTest from "../components/admin/createAssessmentTest";  
+import CreateAssessmentTest from "../components/admin/createAssessmentTest";
 import EditQa from "../components/admin/editQa";
-import ViewAssessmentTest from "../components/assessmentTest/viewAssessmentTest";  
+import ViewAssessmentTest from "../components/assessmentTest/viewAssessmentTest";
 import PlanDetails from "../components/plan/planDetails";
 import PlanDetailsEat from "../components/plan/planDetailsEat";
-import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";       
+import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -145,7 +145,7 @@ class ELPRoute extends Component {
             path="/professionalLogin"
             component={ProfessionalLogin}
           />
-        
+
           <PublicRoute path="/logout" component={Chat} />
           <PublicRoute path="/reset" component={Resetpassword} />
           <PublicRoute path="/forgotpassword" component={Forgotpassword} />
@@ -162,11 +162,14 @@ class ELPRoute extends Component {
           <PublicRoute path="/ngo" component={Ngo} />
           <PublicRoute path="/ngodetail" component={Ngodetail} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
-          <PublicRoute path="/listenerprofile" component={ListenerProfile} /> 
-          <PublicRoute path="/createVlog" component={CreateVlog} /> 
-          <PublicRoute path="/viewAssessmentTest" component={ViewAssessmentTest} />
-          <PublicRoute path="/planlist/:name" component={PlanDetailsEat} />                   
-          <PublicRoute path="/myAssessmentTest" component={MyAssessmentTest} />           
+          <PublicRoute path="/listenerprofile" component={ListenerProfile} />
+          <PublicRoute path="/createVlog/:id" component={CreateVlog} />
+          <PublicRoute
+            path="/viewAssessmentTest"
+            component={ViewAssessmentTest}
+          />
+          <PublicRoute path="/planlist/:name" component={PlanDetailsEat} />
+          <PublicRoute path="/myAssessmentTest" component={MyAssessmentTest} />
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
@@ -200,15 +203,24 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerBrowse" component={ListenerBrowse} />
           <PublicRoute path="/blogUser" component={BlogUser} />
           <PublicRoute path="/professinalBlog" component={ProfessinalBlog} />
-          <PublicRoute path="/professionalVlogs" component={ProfessionalVlogs} /> 
-          <PublicRoute path="/addKits/:id" component={AddKits} /> 
+          <PublicRoute
+            path="/professionalVlogs"
+            component={ProfessionalVlogs}
+          />
+          <PublicRoute path="/addKits/:id" component={AddKits} />
           <PublicRoute path="/vlogList" component={VlogList} />
-          <PublicRoute path="/assessmentTestList" component={AssessmentTestList} />  
-          <PublicRoute path="/viewQA" component={ViewQA} /> 
-          <PublicRoute path="/createAssessmentTest" component={CreateAssessmentTest} />
+          <PublicRoute
+            path="/assessmentTestList"
+            component={AssessmentTestList}
+          />
+          <PublicRoute path="/viewQA" component={ViewQA} />
+          <PublicRoute
+            path="/createAssessmentTest"
+            component={CreateAssessmentTest}
+          />
           <PublicRoute path="/editQa" component={EditQa} />
-          <PublicRoute path="/planlistholistic" component={PlanDetails} />           
-          
+          <PublicRoute path="/planlistholistic" component={PlanDetails} />
+
           <PublicRoute
             path="/professionalBlogList"
             component={ProfessionalBlogList}
@@ -216,12 +228,18 @@ class ELPRoute extends Component {
           <PublicRoute path="/blogUser" component={BlogUser} />
           {/* <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
           <PublicRoute path="/adminPressListing" component={AdminPressListing} />     */}
-          <PublicRoute path="/addSubscription/:id" component={addSubscriptions} />
+          <PublicRoute
+            path="/addSubscription/:id"
+            component={addSubscriptions}
+          />
           <PublicRoute
             path="/subscriptionDocument"
             component={SubscriptionDocument}
           />
-          <PublicRoute path="/subscriptionPlan/:id" component={SubscriptionPlan} />
+          {/* <PublicRoute
+            path="/subscriptionPlan/:id"
+            component={SubscriptionPlan}
+          /> */}
 
           <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute

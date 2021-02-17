@@ -158,13 +158,20 @@ class addSubscription extends Component {
       name == "pl_price"
         ? !value || !value.length || value[value.length - 1] === "."
           ? value || 0
-          : parseFloat(value)
+          : parseFloat(value) || 0
         : name == "pl_save"
         ? value.replace(/[^0-9]/g, "")
         : value;
+    let proffCat = this.state.proffCat;
+    if (name == "plan_type" && +value == 2)
+      proffCat.map((item) => {
+        item.flag = false;
+        return item;
+      });
     this.setState(
       {
         planObj,
+        proffCat,
       },
       () => {
         console.log(this.state.planObj);
@@ -416,7 +423,7 @@ class addSubscription extends Component {
                       type="button"
                       onClick={() => this.handleSubmit()}
                     >
-                      submit
+                      {this.props.match.params.id > 0 ? "UPDATE" : "CREATE"}
                     </Button>
                   </Form>
                 </div>

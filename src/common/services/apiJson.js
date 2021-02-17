@@ -1831,6 +1831,7 @@ export default {
       vl_video_url: "",
       vl_thumbnail_url: "",
       vl_is_featured: "",
+      vl_desc: "",
       vl_id: "",
     },
     showResultMessage: true,
@@ -1844,8 +1845,18 @@ export default {
       vl_video_url: "",
       vl_thumbnail_url: "",
       vl_is_featured: "",
+      vl_desc: "",
     },
     showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminget_vlogsdetails: {
+    url: "elp/superadminget_vlogsdetails",
+    method: "POST",
+    data: {
+      vl_id: "",
+    },
+    showResultMessage: false,
     showErrorMessage: true,
   },
 };

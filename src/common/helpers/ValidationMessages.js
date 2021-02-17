@@ -134,6 +134,23 @@ export default {
     required: "Please enter price.",
     correct: "Please enter a valid price",
   },
+  vl_title: {
+    required: "Please enter title.",
+  },
+  vl_video_url: {
+    required: "Please enter video url.",
+    correct_url: "Please enter a proper url",
+    correct_you_url: "Please enter a youtube url",
+  },
+  vl_thumbnail_url: {
+    required: "Please upload image.",
+  },
+  // vl_is_featured: {
+  //   required: "Please enter price.",
+  // },
+  vl_desc: {
+    required: "Please enter description.",
+  },
   plan_type: {
     required: "Please select plan type.",
   },
