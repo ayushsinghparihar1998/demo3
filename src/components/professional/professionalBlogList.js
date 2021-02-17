@@ -72,9 +72,7 @@ class ProfessionalBlogList extends Component {
     } else if (this.props.match.params.name == "PRAY") {
       this.getBlogPray();
     } else if (this.props.match.params.name == "VLOGS") {
-      this.getlatest_vlogslist();
       this.getvlogs_list();
-      this.getfeaturedvlogs_list();
     } else {
       this.getBlogAll();
     }
@@ -230,6 +228,8 @@ class ProfessionalBlogList extends Component {
           showDetails: false,
         });
         console.log("blog getvlogs_list===>", res.data.data);
+        this.getlatest_vlogslist();
+        this.getfeaturedvlogs_list();
       })
       .catch((err) => {
         console.log(err);
@@ -295,6 +295,8 @@ class ProfessionalBlogList extends Component {
                       ? this.getBlogLuv()
                       : k === "PRAY"
                       ? this.getBlogPray()
+                      : k === "VLOGS"
+                      ? this.getvlogs_list()
                       : this.getBlogAll()
                   }
                   // defaultActiveKey=''
