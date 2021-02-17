@@ -846,11 +846,44 @@
             tbody {
                 tr { 
                     td {
-                        font-size: 13px; 
+                        font-size: 13px;  
                     }
                 }
             }
         }
+    }
+}
+
+.mentalViewDetail {
+    background: $col18; 
+    position: relative; 
+    border-top: solid 10px $col23; 
+    min-height: 100vh; 
+    padding-top: 24px !important;
+    button.br40 {
+        border-radius: 40px;
+    }     
+    .mentalLayout {   
+        position: relative;
+        border-bottom: 1px solid #EAEAEA;
+        padding-bottom: 20px;
+        margin-bottom: 24px;
+    }
+    .col-md-3 {
+        &:last-child {
+            .mentalList {
+                border-right: none; 
+            }
+        }
+    }
+    .mentalList {
+        position: relative;
+        max-width: 82%;
+        border-right: 1px solid #EAEAEA; 
+        margin-top: 30px; 
+    }
+    .mentalListingTwo {
+        margin-bottom: 30px; 
     }
 }
 

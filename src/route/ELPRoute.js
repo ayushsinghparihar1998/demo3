@@ -111,6 +111,7 @@ import PlanDetails from "../components/plan/planDetails";
 import PlanDetailsEat from "../components/plan/planDetailsEat";
 import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";
 import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";        
+import MentalViewDetails from "../components/admin/mentalViewDetails"; 
 
 const user =
   getLocalStorage("userInfo") ||
