@@ -257,8 +257,12 @@ class ProfessionalBlogList extends Component {
         console.log(err);
       });
   };
-  getBlogdetails = (blog_id) => {
-    this.props.history.push("/blogsDetail/" + blog_id);
+  getBlogdetails = (name, blog_id) => {
+    // this.props.history.push("/blogsDetail/" + blog_id);
+    this.props.history.push({
+      pathname: "/blogsDetail/" + blog_id,
+      state: { type: name },
+    });
   };
 
   subscribeNewsLatterHandler = async () => {
@@ -290,7 +294,7 @@ class ProfessionalBlogList extends Component {
               <div className="blogMain ListsUI">
                 <Tabs
                   onSelect={(k) =>
-                      k === "EAT"
+                    k === "EAT"
                       ? this.getBlogEat()
                       : k === "LUV"
                       ? this.getBlogLuv()
@@ -301,7 +305,7 @@ class ProfessionalBlogList extends Component {
                       : this.getBlogAll()
                   }
                   // defaultActiveKey=''
-                  activeKey={this.state.tabVal}    
+                  activeKey={this.state.tabVal}
                   id="uncontrolled-tab-example"
                 >
                   <Tab value="ALL" eventKey="ALL" title="All">
@@ -314,6 +318,7 @@ class ProfessionalBlogList extends Component {
                                 <div
                                   onClick={() =>
                                     this.getBlogdetails(
+                                      "blog",
                                       this.state.blogAll.bl_id
                                     )
                                   }
@@ -324,6 +329,7 @@ class ProfessionalBlogList extends Component {
                                 <Image
                                   onClick={() =>
                                     this.getBlogdetails(
+                                      "blog",
                                       this.state.blogAll.bl_id
                                     )
                                   }
@@ -368,7 +374,10 @@ class ProfessionalBlogList extends Component {
                                         <div
                                           className=""
                                           onClick={() =>
-                                            this.getBlogdetails(data.bl_id)
+                                            this.getBlogdetails(
+                                              "blog",
+                                              data.bl_id
+                                            )
                                           }
                                         >
                                           <div className="col64 fs17 fw500">
@@ -406,7 +415,7 @@ class ProfessionalBlogList extends Component {
                                 <Col md={6} className="mb-4">
                                   <div
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                     className="fw600 fs20 col64 mb-3"
                                   >
@@ -416,7 +425,7 @@ class ProfessionalBlogList extends Component {
                                     src={data.bl_image}
                                     className="w-100"
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                   />
                                   <div className="blogClocks mb-3 mt-3">
@@ -469,7 +478,7 @@ class ProfessionalBlogList extends Component {
                                 <Col md={6} className="mb-4">
                                   <div
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                     className="fw600 fs20 col64 mb-3"
                                   >
@@ -479,7 +488,7 @@ class ProfessionalBlogList extends Component {
                                     src={data.bl_image}
                                     className="w-100"
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                   />
                                   <div className="blogClocks mb-3 mt-3">
@@ -531,7 +540,7 @@ class ProfessionalBlogList extends Component {
                                 <Col md={6} className="mb-4">
                                   <div
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                     className="fw600 fs20 col64 mb-3"
                                   >
@@ -541,7 +550,7 @@ class ProfessionalBlogList extends Component {
                                     src={data.bl_image}
                                     className="w-100"
                                     onClick={() =>
-                                      this.getBlogdetails(data.bl_id)
+                                      this.getBlogdetails("blog", data.bl_id)
                                     }
                                   />
                                   <div className="blogClocks mb-3 mt-3">
@@ -584,59 +593,47 @@ class ProfessionalBlogList extends Component {
                       </Row>
                     </div>
                   </Tab>
-                 
+
                   <Tab eventKey="VLOGS" title="VLOGS">
-                  <div className="featuredTab vlogTabs"> 
+                    <div className="featuredTab vlogTabs">
                       <Row>
                         <Col md={7}>
-                          {/* <div className="fs20 fw600 col8 mb-4 pb-3">
-                              FEATURED
-                          </div> */}
                           <Row>
                             <Col md={12}>
-                              <div className="professionalBlogs"> 
-                                <div
-                                  className="fw600 fs20 col8 mb-4"
-                                >
-                                   FEATURED
+                              <div className="professionalBlogs">
+                                <div className="fw600 fs20 col8 mb-4">
+                                  FEATURED
                                 </div>
-                                {/* <Image
-                                  onClick={() =>
-                                    this.getBlogdetails(
-                                      this.state.blogAll.bl_id
-                                    )
-                                  }
-                                  src={this.state.blogAll.bl_image}
-                                  className="w-100"
-                                />  */}
+                                <div className="elpVideoblog">
+                                  <iframe
+                                    width="100%"
+                                    height="400"
+                                    src="https://www.youtube.com/embed/GXS3c4ANQP8"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                  ></iframe>
+                                </div>
 
-                        <div className="elpVideoblog">     
-                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/GXS3c4ANQP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-
-                                <div className="blogClocks mb-3 mt-3"> 
+                                <div className="blogClocks mb-3 mt-3">
                                   <div>
-                                    {/* <span className="fs18 fw400 col14">
-                                      Written by{" "}
-                                      <span className="col8">
-                                        {this.state.blogAll.bl_written_by}
-                                      </span>{" "} 
-                                    </span> */}
-                                       <div className="position-relative">  
-                                          <div className="col64 fs18 fw500">  
-                                          Child Welfare
-                                          </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
-                                          <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
-                                          </div>
-                                        </div> 
-                                       
+                                    <div className="position-relative">
+                                      <div className="col64 fs18 fw500">
+                                        Child Welfare
+                                      </div>
+                                      <div className="col14 fs15 fw400 mt-1">
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing ?
+                                      </div>
+                                      <div className="col14 fs16 fw400 mt-2">
+                                        Wednesday, Dec 16
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </Col>
-                          </Row> 
+                          </Row>
                         </Col>
 
                         <Col md={5}>
@@ -644,138 +641,164 @@ class ProfessionalBlogList extends Component {
                             LATEST
                           </div>
                           <div className="mb-4 pb-2">
-                            {this.state.latestBlogs &&
-                              this.state.latestBlogs.map((data, i) =>
-                                i !== 0 ? (
+                            {this.state.blogLatest &&
+                              this.state.blogLatest.map(
+                                (item, i) => (
+                                  // i !== 0 ? (
                                   <div className="blogrightSide">
                                     <Row>
                                       <Col md={9}>
                                         <div
                                           className=""
                                           onClick={() =>
-                                            this.getBlogdetails(data.bl_id)
+                                            this.getBlogdetails(
+                                              "vlog",
+                                              item.vl_id
+                                            )
                                           }
                                         >
-                                          <div className="col64 fs17 fw500">  
-                                          United Nation
+                                          {/* vl_created_by: "59"
+vl_datetime: "2021-02-17 18:32:41"
+vl_desc: "<p>hii info about elnp</p>"
+vl_id: "7"
+vl_is_featured: "2"
+vl_status: "1"
+vl_thumbnail_url: "https://staging.eatluvnpray.org/elp/vlogimage/59/c23810ace0bdd8ec7bdad99f7c4bcb6a7048d6f3.jpg"
+vl_title: "about elnp"
+vl_video_url:  */}
+                                          <div className="col64 fs17 fw500">
+                                            {item.vl_title}
                                           </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
+                                          <div
+                                            className="col14 fs15 fw400 mt-1"
+                                            dangerouslySetInnerHTML={{
+                                              __html: item.vl_desc,
+                                            }}
+                                          >
+                                            {/* {item.vl_desc} */}
+                                          </div>
                                           <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
+                                            {/* {item.vl_datetime} */}
+                                            {moment(item.vl_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
                                           </div>
                                         </div>
                                       </Col>
                                       <Col md={3}>
                                         <Image
-                                          src={data.bl_image}
+                                          src={item.vl_image}
                                           className="w-100"
                                         />
                                       </Col>
                                     </Row>
                                   </div>
-                                ) : null
+                                )
+                                //   ) : null
                               )}
                           </div>
                         </Col>
-                        <Col md={12}> 
-                            <div className="fs20 fw600 col8 mt-4 mb-4 pb-3">All</div>
-                        </Col> 
+                        <Col md={12}>
+                          <div className="fs20 fw600 col8 mt-4 mb-4 pb-3">
+                            All
+                          </div>
+                        </Col>
 
                         <Col md={6} className="mb-4">
-                            <Row>
-                                 <Col md={7}>
-                                      <div className=""> 
-                                          <div className="col64 fs17 fw500">  
-                                          United Nation
-                                          </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
-                                          <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
-                                          </div>
-                                        </div>
-                                 </Col>
-                                 <Col md={5}>     
-                                        <Image
-                                          src={BlogProcessNine}  
-                                          className="w-100"  
-                                        />
-                                 </Col>
-                            </Row>
+                          <Row>
+                            <Col md={7}>
+                              <div className="">
+                                <div className="col64 fs17 fw500">
+                                  United Nation
+                                </div>
+                                <div className="col14 fs15 fw400 mt-1">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing ?
+                                </div>
+                                <div className="col14 fs16 fw400 mt-2">
+                                  Wednesday, Dec 16
+                                </div>
+                              </div>
+                            </Col>
+                            <Col md={5}>
+                              <Image src={BlogProcessNine} className="w-100" />
+                            </Col>
+                          </Row>
                         </Col>
 
-                        <Col md={6} className="mb-4"> 
-                            <Row>
-                                <Col md={7}> 
-                                      <div className=""> 
-                                          <div className="col64 fs17 fw500">  
-                                          United Nation
-                                          </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
-                                          <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
-                                          </div>
-                                        </div>
-                                 </Col>
-                                 <Col md={5}>     
-                                        <Image
-                                          src={BlogProcessNine}  
-                                          className="w-100"  
-                                        />
-                                 </Col>
-                            </Row>
+                        <Col md={6} className="mb-4">
+                          <Row>
+                            <Col md={7}>
+                              <div className="">
+                                <div className="col64 fs17 fw500">
+                                  United Nation
+                                </div>
+                                <div className="col14 fs15 fw400 mt-1">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing ?
+                                </div>
+                                <div className="col14 fs16 fw400 mt-2">
+                                  Wednesday, Dec 16
+                                </div>
+                              </div>
+                            </Col>
+                            <Col md={5}>
+                              <Image src={BlogProcessNine} className="w-100" />
+                            </Col>
+                          </Row>
                         </Col>
 
-                        <Col md={6} className="mb-4"> 
-                            <Row>
-                                <Col md={7}> 
-                                      <div className=""> 
-                                          <div className="col64 fs17 fw500">  
-                                          United Nation
-                                          </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
-                                          <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
-                                          </div>
-                                        </div>
-                                 </Col>
-                                 <Col md={5}>     
-                                        <Image
-                                          src={BlogProcessNine}  
-                                          className="w-100"  
-                                        />
-                                 </Col>
-                            </Row>
+                        <Col md={6} className="mb-4">
+                          <Row>
+                            <Col md={7}>
+                              <div className="">
+                                <div className="col64 fs17 fw500">
+                                  United Nation
+                                </div>
+                                <div className="col14 fs15 fw400 mt-1">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing ?
+                                </div>
+                                <div className="col14 fs16 fw400 mt-2">
+                                  Wednesday, Dec 16
+                                </div>
+                              </div>
+                            </Col>
+                            <Col md={5}>
+                              <Image src={BlogProcessNine} className="w-100" />
+                            </Col>
+                          </Row>
                         </Col>
 
-                        <Col md={6} className="mb-4"> 
-                            <Row>
-                                <Col md={7}> 
-                                      <div className=""> 
-                                          <div className="col64 fs17 fw500">  
-                                          United Nation
-                                          </div>
-                                          <div className="col14 fs15 fw400 mt-1">Lorem Ipsum is simply dummy text of the printing ?</div>
-                                          <div className="col14 fs16 fw400 mt-2">
-                                            Wednesday, Dec 16
-                                          </div>
-                                        </div>
-                                 </Col>
-                                 <Col md={5}>     
-                                        <Image
-                                          src={BlogProcessNine}  
-                                          className="w-100"  
-                                        />
-                                 </Col>
-                            </Row>
-                        </Col> 
-
+                        <Col md={6} className="mb-4">
+                          <Row>
+                            <Col md={7}>
+                              <div className="">
+                                <div className="col64 fs17 fw500">
+                                  United Nation
+                                </div>
+                                <div className="col14 fs15 fw400 mt-1">
+                                  Lorem Ipsum is simply dummy text of the
+                                  printing ?
+                                </div>
+                                <div className="col14 fs16 fw400 mt-2">
+                                  Wednesday, Dec 16
+                                </div>
+                              </div>
+                            </Col>
+                            <Col md={5}>
+                              <Image src={BlogProcessNine} className="w-100" />
+                            </Col>
+                          </Row>
+                        </Col>
                       </Row>
-                      <div className="text-center mt-5 mb-3">  
-                           <Button type="submit" className="btnType22 fw500">SHOW MORE</Button> 
+                      <div className="text-center mt-5 mb-3">
+                        <Button type="submit" className="btnType22 fw500">
+                          SHOW MORE
+                        </Button>
                       </div>
                     </div>
                   </Tab>
-
                 </Tabs>
                 <div className="subscribe_here2 eatBlog mt-5 mb-5">
                   <Container>
