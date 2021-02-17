@@ -1859,6 +1859,15 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getvlogs_details: {
+    url: "elp/getvlogs_details",
+    method: "POST",
+    data: {
+      vl_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   getvlogs_list: {
     url: "elp/getvlogs_list",
     method: "POST",
