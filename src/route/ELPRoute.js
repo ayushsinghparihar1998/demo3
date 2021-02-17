@@ -222,7 +222,8 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/editQa" component={EditQa} />
           <PublicRoute path="/planlistholistic" component={PlanDetails} />           
-          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} />
+          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} /> 
+          <PublicRoute path="/mentalViewDetails" component={MentalViewDetails} />  
 
           <PublicRoute
             path="/professionalBlogList"

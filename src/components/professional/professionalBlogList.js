@@ -289,7 +289,7 @@ class ProfessionalBlogList extends Component {
               <div className="blogMain ListsUI">
                 <Tabs
                   onSelect={(k) =>
-                    k === "EAT"
+                      k === "EAT"
                       ? this.getBlogEat()
                       : k === "LUV"
                       ? this.getBlogLuv()
@@ -581,6 +581,7 @@ class ProfessionalBlogList extends Component {
                       </Row>
                     </div>
                   </Tab>
+                 
                   <Tab eventKey="VLOGS" title="VLOGS">
                     <div className="coverageTab">
                       <Row>
@@ -589,7 +590,7 @@ class ProfessionalBlogList extends Component {
                           {this.state.blogPray &&
                             this.state.blogPray.map((data, i) =>
                               this.state.offset > i ? (
-                                <Col md={6} className="mb-4">
+                                <Col md={6} className="mb-4">  
                                   <div
                                     onClick={() =>
                                       this.getBlogdetails(data.bl_id)
