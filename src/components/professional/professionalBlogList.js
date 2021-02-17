@@ -71,6 +71,10 @@ class ProfessionalBlogList extends Component {
       this.getBlogLuv();
     } else if (this.props.match.params.name == "PRAY") {
       this.getBlogPray();
+    } else if (this.props.match.params.name == "VLOGS") {
+      this.getlatest_vlogslist();
+      this.getvlogs_list();
+      this.getfeaturedvlogs_list();
     } else {
       this.getBlogAll();
     }
@@ -166,7 +170,6 @@ class ProfessionalBlogList extends Component {
         console.log(err);
       });
   };
-
   getBlogPray = () => {
     this.setState({
       tabVal: "PRAY",
@@ -183,6 +186,56 @@ class ProfessionalBlogList extends Component {
         console.log(err);
       });
   };
+
+  getfeaturedvlogs_list = () => {
+    this.setState({
+      tabVal: "VLOGS",
+    });
+    ELPRxApiService("getfeaturedvlogs_list", {})
+      .then((res) => {
+        this.setState({
+          blogFeatured: res.data.data.vlogs_featured_listing,
+          showDetails: false,
+        });
+        console.log("blog getfeaturedvlogs_list===>", res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  getlatest_vlogslist = () => {
+    this.setState({
+      tabVal: "VLOGS",
+    });
+    ELPRxApiService("getlatest_vlogslist", {})
+      .then((res) => {
+        this.setState({
+          blogLatest: res.data.data,
+          showDetails: false,
+        });
+        console.log("blog getlatest_vlogslist===>", res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  getvlogs_list = (offset) => {
+    this.setState({
+      tabVal: "VLOGS",
+    });
+    ELPRxApiService("getvlogs_list", { offset, count: 10 })
+      .then((res) => {
+        this.setState({
+          blogAll: res.data.data.vlogs_listing,
+          showDetails: false,
+        });
+        console.log("blog getvlogs_list===>", res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   getBlogAll = () => {
     this.setState({
       tabVal: "ALL",
@@ -465,6 +518,70 @@ class ProfessionalBlogList extends Component {
                     </div>
                   </Tab>
                   <Tab eventKey="PRAY" title="PRAY">
+                    <div className="coverageTab">
+                      <Row>
+                        {/* <Col md={7}> */}
+                        <Row>
+                          {this.state.blogPray &&
+                            this.state.blogPray.map((data, i) =>
+                              this.state.offset > i ? (
+                                <Col md={6} className="mb-4">
+                                  <div
+                                    onClick={() =>
+                                      this.getBlogdetails(data.bl_id)
+                                    }
+                                    className="fw600 fs20 col64 mb-3"
+                                  >
+                                    {data.bl_title}
+                                  </div>
+                                  <Image
+                                    src={data.bl_image}
+                                    className="w-100"
+                                    onClick={() =>
+                                      this.getBlogdetails(data.bl_id)
+                                    }
+                                  />
+                                  <div className="blogClocks mb-3 mt-3">
+                                    {/* <Image src={BlogProcessSix} className="wSet-50 mr-3" /> */}
+                                    <div>
+                                      <span className="fs14 fw400 col14">
+                                        Written by{" "}
+                                        <span className="col8">
+                                          {data.bl_written_by}
+                                        </span>{" "}
+                                      </span>{" "}
+                                      <br />
+                                      {/* <span>
+                                                                                    <Image src={blogclock} className="wSet-20 mr-2" />
+                                                                                    {moment(data.bl_time).calendar()}
+                                                                                </span> */}
+                                    </div>
+                                  </div>
+                                </Col>
+                              ) : null
+                            )}
+                        </Row>
+                        {this.state.blogPray &&
+                        this.state.offset < this.state.blogPray.length ? (
+                          <div className="text-center mt-5 mb-5">
+                            <Button
+                              className="btnTyp12"
+                              onClick={() => {
+                                this.setState({
+                                  offset: this.state.offset + 6,
+                                });
+                              }}
+                            >
+                              {" "}
+                              show more{" "}
+                            </Button>
+                          </div>
+                        ) : null}
+                        {/* </Col> */}
+                      </Row>
+                    </div>
+                  </Tab>
+                  <Tab eventKey="VLOGS" title="VLOGS">
                     <div className="coverageTab">
                       <Row>
                         {/* <Col md={7}> */}

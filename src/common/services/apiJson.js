@@ -1859,4 +1859,28 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getvlogs_list: {
+    url: "elp/getvlogs_list",
+    method: "POST",
+    data: {
+      count: "",
+      offset: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getfeaturedvlogs_list: {
+    url: "elp/getfeaturedvlogs_list",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getlatest_vlogslist: {
+    url: "elp/getlatest_vlogslist",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };
