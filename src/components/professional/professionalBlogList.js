@@ -606,7 +606,7 @@ class ProfessionalBlogList extends Component {
                                 <div className="fw600 fs20 col8 mb-4">
                                   FEATURED
                                 </div>
-                                <div className="elpVideoblog">
+                                {/* <div className="elpVideoblog">
                                   <iframe
                                     width="100%"
                                     height="400"
@@ -615,7 +615,7 @@ class ProfessionalBlogList extends Component {
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen
                                   ></iframe>
-                                </div>
+                                </div> */}
                                 {/* <Image
                                   onClick={() =>
                                     this.getBlogdetails(
