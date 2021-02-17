@@ -32,6 +32,8 @@ import BlogProcessFive from "../../assets/images/blog4.png";
 import BlogProcessSix from "../../assets/images/blog5.svg";
 import BlogProcessSeven from "../../assets/images/blog6.png";
 import BlogProcessNine from "../../assets/images/blogs9.png";
+import VideoIcon from "../../assets/images/videoIcon.png";
+
 import blogclock from "../../assets/images/blogclock.png";
 import { connect } from "react-redux";
 import ReactStars from "react-rating-stars-component";
@@ -613,6 +615,36 @@ class ProfessionalBlogList extends Component {
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen
                                   ></iframe>
+                                </div>
+                                {/* <Image
+                                  onClick={() =>
+                                    this.getBlogdetails(
+                                      this.state.blogAll.bl_id
+                                    )
+                                  }
+                                  src={this.state.blogAll.bl_image}
+                                  className="w-100"
+                                />  */}
+
+                                <div className="elpVideoblog">
+                                  <Image
+                                    src={BlogProcessFive}
+                                    className="iconVideomain"
+                                  />
+                                  <div>
+                                    <Image
+                                      src={VideoIcon}
+                                      className="iconVideo"
+                                    />
+                                    <iframe
+                                      width="100%"
+                                      height="400"
+                                      src="https://www.youtube.com/embed/GXS3c4ANQP8"
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+                                  </div>
                                 </div>
 
                                 <div className="blogClocks mb-3 mt-3">
