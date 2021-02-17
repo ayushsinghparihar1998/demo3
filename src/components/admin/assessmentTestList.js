@@ -24,6 +24,7 @@ import Editicon from "../../assets/images/edit_icon.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png"; 
 import UserChats from "../../assets/images/user_chat5.svg"; 
+import Visibilitys from "../../assets/images/visibilitys.png"
 
 
 import constant from "../../constant"; 
@@ -111,10 +112,20 @@ class AssessmentTestLists extends Component {
                                   <div className="col1 fw600 fs18 pb-1">
                                         Mental Health
                                   </div>
-                                  <div className="d-flex ml-auto"> 
+                                  <div className="d-flex ml-auto buttonTypes">
+                                      <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span>
                                     <span className="mr-3"> 
                                       <Image
-                                        src={Editicon}
+                                        src={Editicon}  
                                         alt=""
                                         
                                       />
@@ -129,6 +140,9 @@ class AssessmentTestLists extends Component {
                                   </div>
                                 </div>
 
+                                 <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
                                 <div className="mb-1"> 
                                   <span className="fs18 fw400 col14"> 
                                      120 Questions | 30 Marks
@@ -156,7 +170,17 @@ class AssessmentTestLists extends Component {
                                   <div className="col1 fw600 fs18 pb-1">
                                         Mental Health
                                   </div>
-                                  <div className="d-flex ml-auto"> 
+                                  <div className="d-flex ml-auto buttonTypes">
+                                  <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                  <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span>
                                     <span className="mr-3"> 
                                       <Image
                                         src={Editicon}
@@ -174,6 +198,9 @@ class AssessmentTestLists extends Component {
                                   </div>
                                 </div>
 
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
                                 <div className="mb-1"> 
                                   <span className="fs18 fw400 col14"> 
                                      120 Questions | 30 Marks  
@@ -199,7 +226,17 @@ class AssessmentTestLists extends Component {
                                   <div className="col1 fw600 fs18 pb-1">
                                         Mental Health
                                   </div>
-                                  <div className="d-flex ml-auto"> 
+                                  <div className="d-flex ml-auto buttonTypes">
+                                      <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button>  
+                                      <span className="mr-3"> 
+                                        <Image
+                                            src={Visibilitys}
+                                            alt=""
+                                            
+                                          />
+                                      </span> 
                                     <span className="mr-3"> 
                                       <Image
                                         src={Editicon}
@@ -217,6 +254,9 @@ class AssessmentTestLists extends Component {
                                   </div>
                                 </div>
 
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
                                 <div className="mb-1"> 
                                   <span className="fs18 fw400 col14"> 
                                      120 Questions | 30 Marks
@@ -226,6 +266,7 @@ class AssessmentTestLists extends Component {
                                 <div className="d-flex elpCategory"> 
                                     <span className="luv">Luv</span>
                                     <span className="pray">Pray</span> 
+                                    <span className="holistic">Holistic</span> 
                                 </div>
 
                               </div>
@@ -243,7 +284,17 @@ class AssessmentTestLists extends Component {
                                   <div className="col1 fw600 fs18 pb-1">
                                         Mental Health
                                   </div>
-                                  <div className="d-flex ml-auto"> 
+                                  <div className="d-flex ml-auto buttonTypes">
+                                  <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span> 
                                     <span className="mr-3"> 
                                       <Image
                                         src={Editicon}
@@ -261,6 +312,9 @@ class AssessmentTestLists extends Component {
                                   </div>
                                 </div>
 
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                </div> 
                                 <div className="mb-1"> 
                                   <span className="fs18 fw400 col14"> 
                                      120 Questions | 30 Marks
@@ -276,9 +330,7 @@ class AssessmentTestLists extends Component {
                             </div>
                           </div>
                         </div>
-                      </div>
-
-                      
+                      </div> 
               
               </Col>
             

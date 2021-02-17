@@ -59,7 +59,7 @@ class MentalViewDetails extends Component {
                           MentalViewDetails
                       </div>
                       <div className="fw300 fs16 col14">
-                        {/* Lorem Ipsum is simply dummy and typesetting industry. */}
+                        {/* Lorem Ipsum is simply dummy and typesetting industry. */} 
                       </div>
                     </Col>
                     <Col md={4}> 
@@ -74,32 +74,40 @@ class MentalViewDetails extends Component {
                     </Col>
                   </Row> 
 
-                  <div className="mentalLayout">  
-                      <Row>
-                          <Col md={3}> 
+                  <div className="mentalLayout">   
+                      <Row> 
+
+                          <Col md={2}> 
                               <div className="mentalList"> 
-                                  <div className="col11 fw400 fs15 mb-2">Plan Type</div>  
-                                  <div className="col11 fw500 fs16">FREE</div>  
+                                  <div className="col11 fw400 fs13 mb-2">Plan Type</div>  
+                                  <div className="col11 fw500 fs14">FREE</div>  
                               </div> 
                           </Col>
-                          <Col md={3}> 
+                          <Col md={2}> 
                               <div className="mentalList"> 
-                                  <div className="col11 fw400 fs15 mb-2">Category</div>  
-                                  <div className="col11 fw500 fs16">EAT, LUV</div>  
+                                  <div className="col11 fw400 fs13 mb-2">Category</div>  
+                                  <div className="col11 fw500 fs14">EAT, HOLISTIC</div>  
                               </div> 
                           </Col>
-                          <Col md={3}> 
+                          <Col md={2}> 
                               <div className="mentalList"> 
-                                  <div className="col11 fw400 fs15 mb-2">No. of Questions</div>  
-                                  <div className="col11 fw500 fs16">120</div>  
+                                  <div className="col11 fw400 fs12 mb-2">No. of Questions</div>  
+                                  <div className="col11 fw500 fs14">120</div>  
                               </div> 
                           </Col>
-                          <Col md={3}> 
+                          <Col md={2}> 
                               <div className="mentalList"> 
-                                  <div className="col11 fw400 fs15 mb-2">Total Marks</div>  
-                                  <div className="col11 fw500 fs16">30</div>  
+                                  <div className="col11 fw400 fs13 mb-2">Total Price</div>  
+                                  <div className="col11 fw500 fs14">520/-</div>  
                               </div> 
                           </Col>
+                          <Col md={2}> 
+                              <div className="mentalList"> 
+                                  <div className="col11 fw400 fs13 mb-2">Total Marks</div> 
+                                  <div className="col11 fw500 fs14">30</div>  
+                              </div> 
+                          </Col>
+
                       </Row> 
                   </div>
 

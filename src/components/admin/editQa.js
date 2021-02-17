@@ -54,7 +54,7 @@ class EditQa extends Component {
                 </div>
               </Col> 
               <Col md={9} className="pl-1">     
-                <div className="corporateMember CreateAssessment">  
+                <div className="corporateMember CreateAssessment">    
                   <div className="fs28 col10 mb-4">Assessment Test</div> 
                   <Form method="post"> 
                     <div className="QuestionListings"> 
