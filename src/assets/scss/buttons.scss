@@ -594,7 +594,7 @@
 
   .btnType20:hover,
   .btnType20:focus,
-  .btnType20:active:focus {               
+  .btnType20:active:focus {                
     border: solid 1px $col18 !important; 
     background-color: $col18 !important;
     color           : $col29 !important; 
@@ -636,5 +636,17 @@
     background-color: $col1 !important;
     color           : $col18 !important; 
     box-shadow      : none !important;          
+  } 
+  
+  .btnType22, 
+  .btnType22:hover,
+  .btnType22:focus,
+  .btnType22:active:focus {
+    color: $col1;                      
+    border: 1px solid $col1 !important; 
+    background: transparent !important; 
+    box-sizing: border-box !important; 
+    border-radius: 40px !important; 
+    padding: 0.5rem 1.5rem !important; 
   } 
   
