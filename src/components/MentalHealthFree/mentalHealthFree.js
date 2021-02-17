@@ -30,7 +30,7 @@ import {
   actionAddrating,
 } from "../../common/redux/actions";
 
-class PlanDetailsEat extends Component {
+class PlanDetailsEat extends Component {   
   constructor(props) {
     super(props);
     this.state = {
@@ -103,7 +103,7 @@ class PlanDetailsEat extends Component {
         },
       ],
     };
-    return (
+    return ( 
       <div className="page__wrapper innerpage">
         <div className="main_baner">
           <NavBar {...this.props} />
@@ -118,7 +118,7 @@ class PlanDetailsEat extends Component {
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
                   DAILY SUBSCRIPTION PLANS
-                </div>
+                </div> 
                 <Slider {...settingstwo}>
                   {this.state.dailyData &&
                     this.state.dailyData.map((item) => {
@@ -177,12 +177,12 @@ class PlanDetailsEat extends Component {
                         </div>
                       );
                     })}
-                </Slider>  
+                </Slider>
               </div>
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                  BYCONDITIONS SUBSCRIPTION PLANS  
+                  BYCONDITIONS SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.conditionData &&

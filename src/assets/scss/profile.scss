@@ -827,6 +827,33 @@
      }
 }
 
+.bg_lightBlue {
+    background-color: $col22; 
+    min-height: calc(100vh - 146px); 
+}
+
+.ListenerTests.myAssesstestMain  {
+    .mainTables {
+        padding: 0 20px 60px; 
+        table {
+            thead {
+                tr {
+                    th {
+                        font-size: 14px; 
+                    }
+                }
+            }
+            tbody {
+                tr { 
+                    td {
+                        font-size: 13px; 
+                    }
+                }
+            }
+        }
+    }
+}
+
 .adminProfessinal {
     .adminlistener { 
         padding-bottom: 30px !important; 
@@ -849,7 +876,7 @@
         }
     }
     .customsRadio {
-        position: relative; 
+        // position: relative; 
         .form-check {
             width: 140px;
             height: 36px;
