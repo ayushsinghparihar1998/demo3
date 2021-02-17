@@ -615,7 +615,7 @@ class ProfessionalBlogList extends Component {
                         <div className="elpVideoblog">
                             <Image src={BlogProcessFive} className="iconVideomain" /> 
                             <div>
-                                <Image src={VideoIcon} className="iconVideo" />      
+                                <Image src={VideoIcon} className="iconVideo" />       
                                 <iframe width="100%" height="400" src="https://www.youtube.com/embed/GXS3c4ANQP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
