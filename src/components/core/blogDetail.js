@@ -16,6 +16,7 @@ import Footer from "../core/footer";
 import Mediadetailone from "../../assets/images/mediadetail.svg";
 import Sharebtn from "../../assets/images/sharebtn.png";
 import ELPRxApiService from "../../common/services/apiService";
+import moment from "moment";
 
 const Mediadetails = (props) => {
   const [blogDetail, setBlogDetail] = useState({});
@@ -74,21 +75,14 @@ const Mediadetails = (props) => {
                     />
                   )}
                   <div className="pt-3 pb-3">
-                    {/* vl_created_by: "59"
-vl_datetime: "2021-01-29 15:20:41"
-vl_desc: "desc1"
-vl_id: "1"
-vl_is_featured: "1"
-vl_status: "1"
-vl_thumbnail_url: "https://staging.eatluvnpray.org/elp/vlogimage/59/0a90170006c0164da2278df77826ccac0df64c39.jpg"
-vl_title: "vlogs1"
-vl_video_url: "https://www.youtube.com/watch?v=WD6cccpzGLk" */}
-                    {/* <div className="col1 fs18 fw600 mt-2">{blogDetail.bl_title}
-                                        </div> */}
                     <div className="col14 fs14 fw400 pt-1">
                       {props.history.location.state.type == "blog"
-                        ? blogDetail.bl_datetime
-                        : blogDetail.vl_datetime}
+                        ? moment(blogDetail.bl_datetime).format(
+                            "dddd MMM Do YYYY"
+                          )
+                        : moment(blogDetail.vl_datetime).format(
+                            "dddd MMM Do YYYY"
+                          )}
                     </div>
                     <div
                       className="fs14 col28 fw300 pt-3 line_txt"
@@ -98,21 +92,7 @@ vl_video_url: "https://www.youtube.com/watch?v=WD6cccpzGLk" */}
                             ? blogDetail.bl_desc
                             : blogDetail.vl_desc,
                       }}
-                    ></div>
-
-                    {/* <div className="mdetalinput">
-                                            <Form.Group>
-                                                <Form.Control
-                                                    type="text"
-                                                    className="inputTyp2 mdetail"
-                                                    id="outlined-pwd"
-                                                    label="Password"
-                                                    variant="outlined"
-                                                    name="password"
-                                                />
-                                                <Button className=""><Image src={Sharebtn} alt="Sharebtn" /></Button>
-                                            </Form.Group>
-                                        </div> */}
+                    ></div>                   
                   </div>
                 </div>
               </Col>

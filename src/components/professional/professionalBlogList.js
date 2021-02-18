@@ -57,6 +57,10 @@ class ProfessionalBlogList extends Component {
       email: "",
       errors: "",
       tabVal: "ALL",
+      url: "",
+      play: false,
+      vlogsAll: [],
+      hideFlag: false,
     };
   }
 
@@ -81,57 +85,6 @@ class ProfessionalBlogList extends Component {
     }
     this.getLatestBlogs();
   }
-
-  //   handleSubmit = () => {
-  //     let errors = this.state.errors;
-  //     let email = this.state.email;
-  //     errors =
-  //       email.length == 0
-  //         ? "Please Enter email id"
-  //         : !Validator.isEmail(email)
-  //         ? "Please enter a valid email"
-  //         : "";
-  //     console.log("errors", errors.length);
-  //     console.log("errors", errors);
-  //     this.setState(
-  //       {
-  //         errors,
-  //       },
-  //       () => {
-  //         if (this.state.errors.length == 0) {
-  //           let data = {
-  //             email: this.state.email,
-  //           };
-  //           console.log(data);
-
-  //           ELPViewApiService("usersubscriber", data)
-  //             .then((result) => {
-  //               this.setState({
-  //                 errors: "",
-  //                 email: "",
-  //               });
-  //             })
-  //             .catch((errors) => {
-  //               console.log(errors);
-  //             });
-  //         } else {
-  //         }
-  //       }
-  //     );
-  //   };
-  //   handleChange = (event) => {
-  //     const { name, value } = event.target;
-  //     console.log(name, value);
-  //     // let email = this.state.email;
-  //     this.setState(
-  //       {
-  //         [name]: value,
-  //       },
-  //       () => {
-  //         console.log(this.state.email);
-  //       }
-  //     );
-  //   };
 
   getLatestBlogs = () => {
     ELPRxApiService("getlatestblog", {})
@@ -195,7 +148,7 @@ class ProfessionalBlogList extends Component {
     ELPRxApiService("getfeaturedvlogs_list", {})
       .then((res) => {
         this.setState({
-          blogFeatured: res.data.data.vlogs_featured_listing,
+          blogFeatured: res.data.data.vlogs_featured_listing[0],
           showDetails: false,
         });
         console.log("blog getfeaturedvlogs_list===>", res.data.data);
@@ -226,11 +179,39 @@ class ProfessionalBlogList extends Component {
     });
     ELPRxApiService("getvlogs_list", { offset, count: 10 })
       .then((res) => {
-        this.setState({
-          blogAll: res.data.data.vlogs_listing,
-          showDetails: false,
-        });
-        console.log("blog getvlogs_list===>", res.data.data);
+        if (res.data && res.data.data) {
+          let vlogsAll = this.state.vlogsAll.concat(
+            res.data.data.vlogs_listing
+          );
+          this.setState(
+            {
+              vlogsAll,
+              showDetails: false,
+              offset,
+              hideFlag: false,
+            },
+            () => {
+              console.log(
+                "vlogsAllvlogsAllvlogsAllvlogsAll",
+                this.state.vlogsAll
+              );
+              console.log(
+                "vlogsAll + res.data.data.vlogs_listing",
+                this.state.vlogsAll.concat(res.data.data.vlogs_listing)
+              );
+            }
+          );
+          console.log(
+            "blog blog getvlogs_list===>",
+            res.data.data.vlogs_listing
+          );
+        } else {
+          if (res.data.status == "error") {
+            this.setState({
+              hideFlag: true,
+            });
+          }
+        }
         this.getlatest_vlogslist();
         this.getfeaturedvlogs_list();
       })
@@ -278,6 +259,14 @@ class ProfessionalBlogList extends Component {
       });
   };
 
+  setPlay = (flag) => {
+    this.setState({
+      url: flag
+        ? "https://www.youtube.com/embed/GXS3c4ANQP8?autoplay=1"
+        : "https://www.youtube.com/embed/GXS3c4ANQP8?",
+      play: flag,
+    });
+  };
   render() {
     return (
       <div className="page__wrapper innerpage">
@@ -303,7 +292,7 @@ class ProfessionalBlogList extends Component {
                       : k === "PRAY"
                       ? this.getBlogPray()
                       : k === "VLOGS"
-                      ? this.getvlogs_list()
+                      ? this.getvlogs_list(1)
                       : this.getBlogAll()
                   }
                   // defaultActiveKey=''
@@ -606,40 +595,33 @@ class ProfessionalBlogList extends Component {
                                 <div className="fw600 fs20 col8 mb-4">
                                   FEATURED
                                 </div>
-                                {/* <div className="elpVideoblog">
-                                  <iframe
-                                    width="100%"
-                                    height="400"
-                                    src="https://www.youtube.com/embed/GXS3c4ANQP8"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                  ></iframe>
-                                </div> */}
-                                {/* <Image
-                                  onClick={() =>
-                                    this.getBlogdetails(
-                                      this.state.blogAll.bl_id
-                                    )
-                                  }
-                                  src={this.state.blogAll.bl_image}
-                                  className="w-100"
-                                />  */}
 
                                 <div className="elpVideoblog">
-                                  <Image
-                                    src={BlogProcessFive}
-                                    className="iconVideomain"
-                                  />
-                                  <div> 
+                                  {this.state.play ? (
+                                    ""
+                                  ) : (
                                     <Image
-                                      src={VideoIcon}
-                                      className="iconVideo"
+                                      src={
+                                        this.state.blogFeatured &&
+                                        this.state.blogFeatured.vl_thumbnail_url
+                                      }
+                                      className="iconVideomain"
                                     />
+                                  )}
+                                  <div>
+                                    {this.state.play ? (
+                                      ""
+                                    ) : (
+                                      <Image
+                                        src={VideoIcon}
+                                        className="iconVideo"
+                                        onClick={() => this.setPlay(true)}
+                                      />
+                                    )}
                                     <iframe
                                       width="100%"
                                       height="400"
-                                      src="https://www.youtube.com/embed/GXS3c4ANQP8"
+                                      src={this.state.url}
                                       frameborder="0"
                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                       allowfullscreen
@@ -651,14 +633,22 @@ class ProfessionalBlogList extends Component {
                                   <div>
                                     <div className="position-relative">
                                       <div className="col64 fs18 fw500">
-                                        Child Welfare
+                                        {this.state.blogFeatured &&
+                                          this.state.blogFeatured.vl_title}
                                       </div>
-                                      <div className="col14 fs15 fw400 mt-1">
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing ?
-                                      </div>
+                                      <div
+                                        className="col14 fs15 fw400 mt-1"
+                                        dangerouslySetInnerHTML={{
+                                          __html:
+                                            this.state.blogFeatured &&
+                                            this.state.blogFeatured.vl_desc,
+                                        }}
+                                      ></div>
                                       <div className="col14 fs16 fw400 mt-2">
-                                        Wednesday, Dec 16
+                                        {moment(
+                                          this.state.blogFeatured &&
+                                            this.state.blogFeatured.vl_datetime
+                                        ).format("dddd MMM Do YYYY")}
                                       </div>
                                     </div>
                                   </div>
@@ -712,15 +702,21 @@ vl_video_url:  */}
                                           <div className="col14 fs16 fw400 mt-2">
                                             {/* {item.vl_datetime} */}
                                             {moment(item.vl_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
+                                              "dddd MMM Do YYYY"
                                             )}
                                           </div>
                                         </div>
                                       </Col>
                                       <Col md={3}>
                                         <Image
-                                          src={item.vl_image}
+                                          src={item.vl_thumbnail_url}
                                           className="w-100"
+                                          onClick={() =>
+                                            this.getBlogdetails(
+                                              "vlog",
+                                              item.vl_id
+                                            )
+                                          }
                                         />
                                       </Col>
                                     </Row>
@@ -736,96 +732,60 @@ vl_video_url:  */}
                           </div>
                         </Col>
 
-                        <Col md={6} className="mb-4">
-                          <Row>
-                            <Col md={7}>
-                              <div className="">
-                                <div className="col64 fs17 fw500">
-                                  United Nation
-                                </div>
-                                <div className="col14 fs15 fw400 mt-1">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing ?
-                                </div>
-                                <div className="col14 fs16 fw400 mt-2">
-                                  Wednesday, Dec 16
-                                </div>
-                              </div>
-                            </Col>
-                            <Col md={5}>
-                              <Image src={BlogProcessNine} className="w-100" />
-                            </Col>
-                          </Row>
-                        </Col>
-
-                        <Col md={6} className="mb-4">
-                          <Row>
-                            <Col md={7}>
-                              <div className="">
-                                <div className="col64 fs17 fw500">
-                                  United Nation
-                                </div>
-                                <div className="col14 fs15 fw400 mt-1">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing ?
-                                </div>
-                                <div className="col14 fs16 fw400 mt-2">
-                                  Wednesday, Dec 16
-                                </div>
-                              </div>
-                            </Col>
-                            <Col md={5}>
-                              <Image src={BlogProcessNine} className="w-100" />
-                            </Col>
-                          </Row>
-                        </Col>
-
-                        <Col md={6} className="mb-4">
-                          <Row>
-                            <Col md={7}>
-                              <div className="">
-                                <div className="col64 fs17 fw500">
-                                  United Nation
-                                </div>
-                                <div className="col14 fs15 fw400 mt-1">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing ?
-                                </div>
-                                <div className="col14 fs16 fw400 mt-2">
-                                  Wednesday, Dec 16
-                                </div>
-                              </div>
-                            </Col>
-                            <Col md={5}>
-                              <Image src={BlogProcessNine} className="w-100" />
-                            </Col>
-                          </Row>
-                        </Col>
-
-                        <Col md={6} className="mb-4">
-                          <Row>
-                            <Col md={7}>
-                              <div className="">
-                                <div className="col64 fs17 fw500">
-                                  United Nation
-                                </div>
-                                <div className="col14 fs15 fw400 mt-1">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing ?
-                                </div>
-                                <div className="col14 fs16 fw400 mt-2">
-                                  Wednesday, Dec 16
-                                </div>
-                              </div>
-                            </Col>
-                            <Col md={5}>
-                              <Image src={BlogProcessNine} className="w-100" />
-                            </Col>
-                          </Row>
-                        </Col>
+                        {this.state.vlogsAll &&
+                          this.state.vlogsAll.map((item) => {
+                            return (
+                              <Col md={6} className="mb-4">
+                                <Row>
+                                  <Col md={7}>
+                                    <div className="">
+                                      <div
+                                        className="col64 fs17 fw500"
+                                        onClick={() =>
+                                          this.getBlogdetails(
+                                            "vlog",
+                                            item.vl_id
+                                          )
+                                        }
+                                      >
+                                        {item.vl_title}
+                                      </div>
+                                      <div
+                                        className="col14 fs15 fw400 mt-1"
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.vl_desc,
+                                        }}
+                                      ></div>
+                                      <div className="col14 fs16 fw400 mt-2">
+                                        {moment(item.vl_datetime).format(
+                                          "dddd MMM Do YYYY"
+                                        )}
+                                      </div>
+                                    </div>
+                                  </Col>
+                                  <Col md={5}>
+                                    <Image
+                                      src={item.vl_thumbnail_url}
+                                      className="w-100"
+                                      onClick={() =>
+                                        this.getBlogdetails("vlog", item.vl_id)
+                                      }
+                                    />
+                                  </Col>
+                                </Row>
+                              </Col>
+                            );
+                          })}
                       </Row>
                       <div className="text-center mt-5 mb-3">
-                        <Button type="submit" className="btnType22 fw500">
+                        <Button
+                          type="button"
+                          className="btnType22 fw500"
+                          onClick={() =>
+                            this.getvlogs_list(this.state.offset + 1)
+                          }
+                          disabled={this.state.hideFlag}
+                        >
                           SHOW MORE
                         </Button>
                       </div>
