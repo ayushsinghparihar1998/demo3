@@ -189,7 +189,7 @@ class EditQa extends Component {
                      <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
                       Question Type
-                      </Form.Label>
+                      </Form.Label>  
                       <Row>
                         <Col md={4}>
                           <Form.Group controlId="formBasicCheckbox">

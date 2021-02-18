@@ -594,7 +594,7 @@ class ProfessionalBlogList extends Component {
                               <div className="professionalBlogs">
                                 <div className="fw600 fs20 col8 mb-4">
                                   FEATURED
-                                </div>
+                                </div> 
 
                                 <div className="elpVideoblog">
                                   {this.state.play ? (

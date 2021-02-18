@@ -34,11 +34,11 @@ class CreateAssessmentTest extends Component {
     }
   }
 
-  handleChangeStart = () => {
+  handleChangeStart = () => { 
     console.log('Change event started')  
   };
 
-  handleChange = value => {
+  handleChange = value => {  
     this.setState({
       value: value
     })
@@ -85,7 +85,7 @@ class CreateAssessmentTest extends Component {
                         </div>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicCheckbox">   
+                    {/* <Form.Group controlId="formBasicCheckbox">   
                         <Form.Label className="fs20 fw600 col14">Plans Select by</Form.Label> 
                         <Row>
                             <Col md={4}>
@@ -109,7 +109,41 @@ class CreateAssessmentTest extends Component {
                                 </Form.Group>
                             </Col> 
                         </Row>
-                     </Form.Group>
+                     </Form.Group> */}
+
+                  <Form.Group> 
+                      <Form.Label className="fs20 fw600 col14">
+                        Plans Select by
+                      </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type1"
+                              name="plan_type"
+                              label="Free"
+                              className="radioboxTyp1" 
+                            />
+                          </Form.Group> 
+                        </Col>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type2"
+                              value={2}
+                              name="plan_type"
+                              label="Paid" 
+                              className="radioboxTyp1"
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {/* {errors.plan_type} */}
+                      </div>
+                    </Form.Group>
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Test Price (If Paid)</Form.Label> 
@@ -117,7 +151,7 @@ class CreateAssessmentTest extends Component {
                         <div className="col27 fs14 fw400 mt-2 error">
                            {/* {errors.kt_name} */}   
                         </div>
-                    </Form.Group>
+                    </Form.Group> 
 
                     <Form.Group controlId="formBasicCheckbox">   
                         <Form.Label className="fs20 fw600 col14">Select Category</Form.Label> 

@@ -12,6 +12,9 @@ import {
   Form,
   Tabs,
   Tab,
+  Modal, 
+  handleShow, 
+  handleClose
 } from "react-bootstrap"; 
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
@@ -24,17 +27,47 @@ import Editicon from "../../assets/images/edit_icon.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png"; 
 import UserChats from "../../assets/images/user_chat5.svg"; 
-
+import VideoIcon from "../../assets/images/videoIcon.png";
+import BlogProcessFour from "../../assets/images/p_blogs4.svg";
+import BlogProcessFive from "../../assets/images/blog4.png"; 
+// import Bootstrap from "react-bootstrap"; 
+// import React, { Component } from "react";
 
 import constant from "../../constant"; 
-class VlogList extends Component { 
-  render() {
+
+// const [show, setShow] = useState(false);
+
+// const handleClose = () => setShow(false);
+// const handleShow = () => setShow(true); 
+
+class VlogList extends Component {     
+  constructor() {
+    super();
+    this.state = {
+      setShow: false,
+      show: false,
+      show3: false,
+      
+    };
+    this.handleClose = this.handleClose.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+  }
+  
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => { 
+    this.setState({ show: false });
+  };
+  render() {  
+    // const {​show}​ = this.state
     return (
       <div className="page__wrapper innerpage">  
         <div className="main_baner">
           <NavBar {...this.props} />
         </div>
-        <div className="profile_layout adminProfessinal addKits pt-4 pb-5">    
+        <div className="profile_layout adminProfessinal VlogMain pt-4 pb-5">     
           <Container>
             <Row>
               <Col md={3} className="pr-1">
@@ -56,7 +89,7 @@ class VlogList extends Component {
 
               
               <Col md={8} lg={9} className="pl-1">
-                <div className="professor_search listBlogs VlogLists"> 
+                <div className="professor_search listBlogs">  
                   <Row className="mb-1">
                     <Col md={8}>
                       <div className="fs22 fw600 col10"> 
@@ -104,13 +137,33 @@ class VlogList extends Component {
                 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
+                          <Col md={2}>
+                              <div className="elpVideoblog"> 
+                                <Image
+                                  src={BlogProcessFive} 
+                                  className="iconVideomain"
+                                /> 
+                              <div>  
+                                  <Image
+                                    src={VideoIcon} 
+                                    className="iconVideo" 
+                                    onClick={this.handleShow}  
+                                  /> 
+                                <iframe  
+                                  width="100%"
+                                  height="100"
+                                  // src={this.state.url}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                ></iframe>
+
+                              </div>
+                            </div>
+                          </Col> 
+
+                          <Col md={10}> 
+                          <div className="w-100">
                             <div className="d-flex justify-content-between">
                               <div className="w-100">
                                 <div className="d-flex">
@@ -159,18 +212,39 @@ class VlogList extends Component {
                               </div>
                             </div>
                           </div>
+                          </Col>
                         </div>
                       </div>
 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
+                          <Col md={2}>
+                              <div className="elpVideoblog"> 
+                                    <Image
+                                      src={BlogProcessFive} 
+                                      className="iconVideomain"
+                                    /> 
+                                  <div>  
+                                      <Image
+                                        src={VideoIcon} 
+                                        className="iconVideo" 
+                                        onClick={this.handleShow}  
+                                      /> 
+                                    <iframe  
+                                      width="100%"
+                                      height="100"
+                                      // src={this.state.url}
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+
+                                  </div>
+                                </div>
+                          </Col> 
+
+                          <Col md={10}> 
+                          <div className="w-100">
                             <div className="d-flex justify-content-between">
                               <div className="w-100">
                                 <div className="d-flex">
@@ -219,18 +293,39 @@ class VlogList extends Component {
                               </div>
                             </div>
                           </div>
+                          </Col>
                         </div>
                       </div>
 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
+                          <Col md={2}>
+                              <div className="elpVideoblog"> 
+                                    <Image
+                                      src={BlogProcessFive} 
+                                      className="iconVideomain"
+                                    /> 
+                                  <div>  
+                                      <Image
+                                        src={VideoIcon} 
+                                        className="iconVideo" 
+                                        onClick={this.handleShow}  
+                                      /> 
+                                    <iframe  
+                                      width="100%"
+                                      height="100"
+                                      // src={this.state.url}
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+
+                                  </div>
+                                </div>
+                          </Col> 
+
+                          <Col md={10}> 
+                          <div className="w-100">
                             <div className="d-flex justify-content-between">
                               <div className="w-100">
                                 <div className="d-flex">
@@ -279,18 +374,39 @@ class VlogList extends Component {
                               </div>
                             </div>
                           </div>
+                          </Col>
                         </div>
                       </div>
 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
+                          <Col md={2}>
+                              <div className="elpVideoblog"> 
+                                    <Image
+                                      src={BlogProcessFive} 
+                                      className="iconVideomain"
+                                    /> 
+                                  <div>  
+                                      <Image
+                                        src={VideoIcon} 
+                                        className="iconVideo" 
+                                        onClick={this.handleShow}  
+                                      /> 
+                                    <iframe  
+                                      width="100%"
+                                      height="100"
+                                      // src={this.state.url}
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+
+                                  </div>
+                                </div>
+                          </Col> 
+
+                          <Col md={10}> 
+                          <div className="w-100">
                             <div className="d-flex justify-content-between">
                               <div className="w-100">
                                 <div className="d-flex">
@@ -339,18 +455,39 @@ class VlogList extends Component {
                               </div>
                             </div>
                           </div>
+                          </Col>
                         </div>
                       </div>
 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">
-                          <div className="mr-2 pt-1">
-                            <Image
-                              src={UserChats}  
-                              alt=""
-                            />
-                          </div>
-                          <div className="pl-2 w-100">
+                          <Col md={2}>
+                              <div className="elpVideoblog"> 
+                                    <Image
+                                      src={BlogProcessFive} 
+                                      className="iconVideomain"
+                                    /> 
+                                  <div>  
+                                      <Image
+                                        src={VideoIcon} 
+                                        className="iconVideo" 
+                                        onClick={this.handleShow}  
+                                      /> 
+                                    <iframe  
+                                      width="100%"
+                                      height="100"
+                                      // src={this.state.url}
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+
+                                  </div>
+                                </div>
+                          </Col> 
+
+                          <Col md={10}> 
+                          <div className="w-100">
                             <div className="d-flex justify-content-between">
                               <div className="w-100">
                                 <div className="d-flex">
@@ -399,6 +536,7 @@ class VlogList extends Component {
                               </div>
                             </div>
                           </div>
+                          </Col>
                         </div>
                       </div>
                    
@@ -409,6 +547,42 @@ class VlogList extends Component {
           </Container>
         </div>
         <Footer />
+
+      {/* modal start */}
+      {/* <Button variant="primary" onClick={this.handleShow}>
+        Launch demo modal
+      </Button> */} 
+
+      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                  
+        <Modal.Header closeButton>    
+        </Modal.Header>
+        <Modal.Body>
+        <div className="elpVideoblog">      
+            <Image
+              src={BlogProcessFive} 
+              className="iconVideomain"
+            /> 
+          <div>  
+              <Image
+                src={VideoIcon} 
+                className="iconVideo" 
+                onClick={this.handleShow}  
+              /> 
+            <iframe  
+              width="100%"
+              height="400"
+              // src={this.state.url}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+
+          </div>
+        </div>
+         </Modal.Body> 
+      </Modal>
+      {/* modal end */}
+
       </div>
     );
   }

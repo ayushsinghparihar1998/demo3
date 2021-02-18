@@ -61,6 +61,7 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 // import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/core/blogDetail";
+import BlogVideoDetails from "../components/core/blogVideoDetails";
 import PressBlogDetail from "../components/core/PressBlogDetail";
 import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
@@ -210,6 +211,7 @@ class ELPRoute extends Component {
             path="/professionalVlogs"
             component={ProfessionalVlogs}
           />
+          <PublicRoute path="/blogVideoDetails" component={BlogVideoDetails} />
           <PublicRoute path="/addKits/:id" component={AddKits} />
           <PublicRoute path="/vlogList" component={VlogList} />
           <PublicRoute

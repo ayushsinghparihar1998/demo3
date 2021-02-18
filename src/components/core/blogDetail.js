@@ -15,7 +15,7 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Mediadetailone from "../../assets/images/mediadetail.svg";
 import Sharebtn from "../../assets/images/sharebtn.png";
-import ELPRxApiService from "../../common/services/apiService";
+import ELPRxApiService from "../../common/services/apiService";    
 import moment from "moment";
 
 const Mediadetails = (props) => {

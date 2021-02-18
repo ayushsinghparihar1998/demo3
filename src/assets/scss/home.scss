@@ -99,7 +99,7 @@
 .plans {
     position: relative; 
     .slick-list {
-        max-height: 480px; 
+        max-height: 550px; 
     }
     ul.slick-dots {
         bottom: -20px; 
@@ -141,6 +141,7 @@
             padding: 15px;
             background: #EAF9FF; 
             position: relative;
+            height: 61px;
             img.planeImg {
                 position: absolute;
                 top: 0;
@@ -203,9 +204,9 @@
             padding: 20px 30px 20px; 
             background-color: $col63;
             .fs14.fw500.col29 {
-                min-height: 74px;
-                max-height: 74px;
-                overflow: auto;
+                min-height: 38px;
+                max-height: 38px;
+                overflow: hidden; 
                 white-space: normal;
                 word-break: break-all;
             }
@@ -245,7 +246,7 @@
         padding-bottom: 80px;  
         
         .slick-list {
-            max-height: 530px; 
+            max-height: 580px;  
         }
         ul.slick-dots {
             bottom: -20px; 
@@ -369,9 +370,9 @@
                     width: 100%;
                     margin: 0;
                     padding: 0;
-                    overflow: hidden;
-                    max-height: inherit;
-                    min-height: 72px; 
+                    overflow: auto;
+                    max-height: 114px;
+                    min-height: 114px;   
                     li { 
                         list-style: none; 
                         display: flex;
