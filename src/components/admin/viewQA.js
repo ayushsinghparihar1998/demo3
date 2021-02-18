@@ -55,8 +55,8 @@ class ViewQA extends Component {
               </Col>
 
               
-              <Col md={8} lg={9} className="pl-1"> 
-                <div className="professor_search ViewQa"> 
+              <Col md={8} lg={9} className="pl-1">       
+                <div className="professor_search ViewQa">   
                       <div className="fs22 fw600 col10"> 
                            Question Answer 
                       </div>

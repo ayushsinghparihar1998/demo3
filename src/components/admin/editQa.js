@@ -73,31 +73,40 @@ class EditQa extends Component {
                         </div>
                     </Form.Group>  
 
-                    <Form.Group controlId="formBasicCheckbox">    
-                        <Form.Label className="fs20 fw600 col14">Question Type</Form.Label> 
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox"> 
-                                  <Form.Check
-                                    type="checkbox"
-                                    label="Relevant"
-                                    className="checkboxTyp1"
-                                    name="relevant" 
-                                  />
-                                </Form.Group>
-                            </Col> 
-                            <Col md={4}>
-                                <Form.Group controlId="formBasicCheckboxTwo"> 
-                                  <Form.Check
-                                    type="checkbox"
-                                    label="Irrelevant" 
-                                    className="checkboxTyp1"
-                                    name="irrelevant" 
-                                  />
-                                </Form.Group> 
-                            </Col> 
-                        </Row>
-                     </Form.Group>
+                    <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                      Question Type
+                      </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type1"
+                              value={1}
+                              name="plan_type"
+                              label="Relevant"
+                              className="radioboxTyp1"
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type2"
+                              value={2}
+                              name="plan_type"
+                              label="Irrelevant"
+                              className="radioboxTyp1" 
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {/* {errors.plan_type} */}
+                      </div>
+                    </Form.Group>
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Answer</Form.Label>  
@@ -128,7 +137,7 @@ class EditQa extends Component {
                                 variant="btnTypAdd"  
                                 type="button"  
                                 >
-                                <span><i className="fa fa-plus"></i></span> Add Services 
+                                <span><i className="fa fa-plus"></i></span> Add Answer  
                             </Button>
                         </div>
                     </Form.Group> 
@@ -150,7 +159,7 @@ class EditQa extends Component {
                         </div>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicCheckbox">   
+                    {/* <Form.Group controlId="formBasicCheckbox">   
                         <Form.Label className="fs20 fw600 col14">Question Type</Form.Label> 
                         <Row>
                             <Col md={4}>
@@ -174,7 +183,43 @@ class EditQa extends Component {
                                 </Form.Group> 
                             </Col> 
                         </Row>
-                     </Form.Group>
+                     </Form.Group> */}
+
+
+                     <Form.Group>
+                      <Form.Label className="fs20 fw600 col14">
+                      Question Type
+                      </Form.Label>
+                      <Row>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type1"
+                              value={1}
+                              name="plan_type"
+                              label="Relevant"
+                              className="radioboxTyp1"
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={4}>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check
+                              type="radio"
+                              id="plan_type2"
+                              value={2}
+                              name="plan_type"
+                              label="Irrelevant"
+                              className="radioboxTyp1" 
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {/* {errors.plan_type} */}
+                      </div>
+                    </Form.Group>
 
                      <Form.Group className="mb-4"> 
                         <Form.Label className="fs20 fw600 col14">Answer</Form.Label> 
@@ -202,7 +247,7 @@ class EditQa extends Component {
                                 variant="btnTypAdd"  
                                 type="button"  
                                 > 
-                                <span><i className="fa fa-plus"></i></span> Add Services 
+                                <span><i className="fa fa-plus"></i></span> Add Answer 
                             </Button>
                         </div>
                         <div className="col27 fs14 fw400 mt-2 error">
