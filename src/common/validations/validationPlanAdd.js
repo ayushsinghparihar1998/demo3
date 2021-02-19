@@ -9,8 +9,8 @@ function validateInput(data) {
   console.log("datadatadatadata", data);
   if (Validator.isEmpty(data.pl_save)) {
     errors.pl_save = ValidationMessages.pl_save.required;
-    // }else if (+data.pl_save == 0) {
-    //   errors.pl_save = ValidationMessages.pl_save.correct;
+    }else if (+data.pl_save === 0) {
+      errors.pl_save = ValidationMessages.pl_save.correct;
   }
   if (Validator.isEmpty(data.pl_desc_details)) {
     errors.pl_desc_details = ValidationMessages.pl_desc_details.required;

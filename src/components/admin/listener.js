@@ -827,6 +827,8 @@ class Adminlistener extends Component {
         this.getBlockuserListing(page, this.state.count, this.state.block_type);
       } else if (this.state.pageType == "reviewList") {
         this.getReviewListing(page, this.state.count, this.state.review_type);
+      } else if (this.state.pageType == "vlogsList") {
+        this.getReviewListing(page, this.state.count, this.state.review_type);
       } else if (this.state.pageType == "blogList") {
         this.getBlockuserListing(page, this.state.count);
       } else if (this.state.pageType == "pressblogList") {
@@ -1206,15 +1208,24 @@ class Adminlistener extends Component {
       this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
-          if (this.state.deleteObjType == "PLAN" || this.state.deleteObjType == "PLAN") {
+          if (
+            this.state.deleteObjType == "PLAN" ||
+            this.state.deleteObjType == "PLAN"
+          ) {
             this.superadminget_planlist(
               this.state.pageno,
               this.state.count,
               this.state.plan_type
             );
-          } else if (this.state.deleteObjType == "KIT" || this.state.deleteObjType == "KITS") {
+          } else if (
+            this.state.deleteObjType == "KIT" ||
+            this.state.deleteObjType == "KITS"
+          ) {
             this.superadminkits_list(this.state.pageno, this.state.count);
-          } else if (this.state.deleteObjType == "VLOGS" || this.state.deleteObjType == "VLOGS") {
+          } else if (
+            this.state.deleteObjType == "VLOGS" ||
+            this.state.deleteObjType == "VLOGS"
+          ) {
             this.superadminvlogs_list(
               this.state.pageno,
               this.state.count,
@@ -1612,7 +1623,8 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> SUBSCRIPTION PLAN 
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          SUBSCRIPTION PLAN
                         </div>
                       </div>
                     </div>
@@ -3803,7 +3815,7 @@ kt_status: "1" */}
                               onClick={() =>
                                 this.changepath(
                                   "/createVlog/0",
-                                  "superadminget_planlist"
+                                  "superadminvlogs_list"
                                 )
                               }
                             >

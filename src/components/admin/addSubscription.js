@@ -98,57 +98,67 @@ class addSubscription extends Component {
     this.setState({
       showLoader: true,
     });
-    let data = this.state.planObj;
-    let catar = [];
+    let planObj = this.state.planObj;
+    let data;
 
-    console.log(data);
-    this.state.proffCat.map((item) => {
-      if (item.flag == true) {
-        let a = {};
-        a.puc_cat_id = item.pc_id;
-        a.puc_cat_name = item.pc_name;
-        catar.push(a);
-      }
-    });
-    if (+data.plan_type == 1) {
-      data.plan_cat_name = catar;
+    console.log(planObj);
+    if (+planObj.plan_type === 1) {
+      let catar = [];
+      this.state.proffCat.map((item) => {
+        if (item.flag == true) {
+          let a = {};
+          a.puc_cat_id = item.pc_id;
+          a.puc_cat_name = item.pc_name;
+          catar.push(a);
+        }
+      });
+      planObj.plan_cat_name = catar;
     } else {
-      data.plan_cat_name = "";
+      // planObj.plan_cat_name = "";
+      delete planObj.plan_cat_name;
+      console.log("YESYSESYSYSYYSY", planObj.plan_type);
     }
     if (this.props.match.params.id > 0) {
-      data.pl_id = this.props.match.params.id;
+      planObj.pl_id = this.props.match.params.id;
     }
-    if (this.isValid(data)) {
-      ELPViewApiService(
-        this.props.match.params.id == 0
-          ? "superadminadd_plan"
-          : "superadminedit_plan",
-        data
-      )
-        .then((result) => {
-          if (result && result.data && result.data.status === "success") {
-            // this.props.history.push("/admin");
-            setTimeout(() => {
-              this.props.history.push("/admin");
-            }, 100);
-            this.clear();
-          } else {
+    delete planObj.pl_datetime;
+    this.setState({
+      planObj,
+    });
+    setTimeout(() => {
+      if (this.isValid(this.state.planObj)) {
+        console.log("FINAL planObj", planObj);
+        ELPViewApiService(
+          this.props.match.params.id == 0
+            ? "superadminadd_plan"
+            : "superadminedit_plan",
+          this.state.planObj
+        )
+          .then((result) => {
+            if (result && result.data && result.data.status === "success") {
+              // this.props.history.push("/admin");
+              setTimeout(() => {
+                this.props.history.push("/admin");
+              }, 100);
+              this.clear();
+            } else {
+              this.setState({
+                showLoader: false,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
             this.setState({
               showLoader: false,
             });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.setState({
-            showLoader: false,
           });
+      } else {
+        this.setState({
+          showLoader: false,
         });
-    } else {
-      this.setState({
-        showLoader: false,
-      });
-    }
+      }
+    }, 200);
   };
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -163,11 +173,13 @@ class addSubscription extends Component {
         ? value.replace(/[^0-9]/g, "")
         : value;
     let proffCat = this.state.proffCat;
-    if (name == "plan_type" && +value == 2)
+    if (name == "plan_type" && +value == 2) {
       proffCat.map((item) => {
         item.flag = false;
         return item;
       });
+      planObj.plan_cat_name = "";
+    }
     this.setState(
       {
         planObj,
@@ -355,9 +367,9 @@ class addSubscription extends Component {
                               id="plan_type1"
                               value={1}
                               name="plan_type"
-                              onChange={(e) => this.handleChange(e)}
                               label="Daily"
                               className="radioboxTyp1"
+                              onChange={(e) => this.handleChange(e)}
                               checked={+planObj.plan_type == 1}
                             />
                           </Form.Group>

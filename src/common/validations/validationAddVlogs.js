@@ -24,7 +24,12 @@ function validateInput(data) {
     errors.vl_video_url = ValidationMessages.vl_video_url.required;
   } else if (!Validator.isURL(data.vl_video_url)) {
     errors.vl_video_url = ValidationMessages.vl_video_url.correct_url;
-  } else if (!data.vl_video_url.includes("youtube")) {
+  } else if (
+    !(
+      data.vl_video_url.includes("youtube") ||
+      data.vl_video_url.includes("youtu.be")
+    )
+  ) {
     errors.vl_video_url = ValidationMessages.vl_video_url.correct_you_url;
   }
 

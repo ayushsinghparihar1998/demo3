@@ -356,7 +356,10 @@ class PlanDetails extends Component {
                           Get A Quote
                         </Button>
                         <a className="ml-3">
-                          LEARN MORE <Image src={Arrowright} />
+                          <Link to={{ pathname: `/coming-soon` }}>
+                            LEARN MORE
+                          </Link>
+                          <Image src={Arrowright} />
                         </a>
                       </Form>
                     </div>
