@@ -481,7 +481,7 @@ class AddKits extends Component {
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELPN KIT 
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP KIT 
                   </div>
                   <Form>
                     <Form.Group className="mb-4">

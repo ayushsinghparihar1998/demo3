@@ -1246,10 +1246,47 @@
     position: relative; 
     background: $col18;
     border-top: solid 10px $col23;
-    padding: 30px 30px 50px !important;  
+    padding: 30px 30px 50px !important; 
+    .mentalOne {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        button.btn-btnTypAdd {
+            font-size: 16px;
+            span {
+                width: 20px;
+                height: 20px;
+                line-height: 15px;
+                i {
+                    font-size: 11px; 
+                }
+                &.b-none {
+                    border: none; 
+                }
+            }
+        }
+    }
     .QaListings {
-        margin-top: 20px;
+        margin-top: 10px;
+        border: solid 1px $col23; 
+        margin-bottom: 30px;
+        .QaHeader {
+            display: flex;
+            height: 60px;
+            align-items: center;
+            padding: 0 20px;
+            background: #EAFAFF;
+        }
+        .QaBody {
+            position: relative;
+            width: 100%;
+            padding: 20px 20px 20px 20px; 
+        }
         .answerDetail {
+            display: flex;
+            justify-content: space-between; 
+            width: 100%;
             ul {
                 padding: 0;
                 margin: 0;
@@ -1263,6 +1300,15 @@
                         color: $col14; 
                         font-weight: 500; 
                     }
+                }
+            } 
+            .numberQa {
+                position: relative;
+                .counts {
+                    font-size: 16px;
+                    color: $col14;
+                    font-weight: 600;
+                    margin-bottom: 12px; 
                 }
             }
         }

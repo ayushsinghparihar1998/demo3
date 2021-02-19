@@ -105,7 +105,7 @@ class VlogList extends Component {
                           type="button"
                           className="btnTyp5" 
                         >
-                          create VLOG
+                          create VLOG 
                         </Button>
                       </div>
                     </Col>
@@ -188,7 +188,7 @@ class VlogList extends Component {
                                   </div>
                                 </div>
 
-                                <div className="mb-1"> 
+                                {/* <div className="mb-1"> 
                                   <span className="fs16 fw400 col14"> 
                                     <Image
                                       src={blogclock} 
@@ -196,11 +196,11 @@ class VlogList extends Component {
                                     />
                                      11 Minute read
                                   </span>
-                                </div>
+                                </div> */}
 
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                <div className="fs16 fw400 col14 pb-1 e_detai mt-1">
                                   <strong className="fw600">
-                                      Biography:
+                                      Description: 
                                   </strong>
                                   <span className="fs15">
                                        lorem dummy content Lorem Ipsum is simply dummy text
@@ -220,27 +220,27 @@ class VlogList extends Component {
                         <div className="d-flex text-left">
                           <Col md={2}>
                               <div className="elpVideoblog"> 
-                                    <Image
-                                      src={BlogProcessFive} 
-                                      className="iconVideomain"
-                                    /> 
-                                  <div>  
-                                      <Image
-                                        src={VideoIcon} 
-                                        className="iconVideo" 
-                                        onClick={this.handleShow}  
-                                      /> 
-                                    <iframe  
-                                      width="100%"
-                                      height="100"
-                                      // src={this.state.url}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    ></iframe>
+                                <Image
+                                  src={BlogProcessFive} 
+                                  className="iconVideomain"
+                                /> 
+                              <div>  
+                                  <Image
+                                    src={VideoIcon} 
+                                    className="iconVideo" 
+                                    onClick={this.handleShow}  
+                                  /> 
+                                <iframe  
+                                  width="100%"
+                                  height="100"
+                                  // src={this.state.url}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                ></iframe>
 
-                                  </div>
-                                </div>
+                              </div>
+                            </div>
                           </Col> 
 
                           <Col md={10}> 
@@ -269,7 +269,7 @@ class VlogList extends Component {
                                   </div>
                                 </div>
 
-                                <div className="mb-1"> 
+                                {/* <div className="mb-1"> 
                                   <span className="fs16 fw400 col14"> 
                                     <Image
                                       src={blogclock} 
@@ -277,11 +277,11 @@ class VlogList extends Component {
                                     />
                                      11 Minute read
                                   </span>
-                                </div>
+                                </div> */}
 
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
+                                <div className="fs16 fw400 col14 pb-1 e_detai mt-1">
                                   <strong className="fw600">
-                                      Biography:
+                                      Description: 
                                   </strong>
                                   <span className="fs15">
                                        lorem dummy content Lorem Ipsum is simply dummy text
@@ -295,251 +295,7 @@ class VlogList extends Component {
                           </div>
                           </Col>
                         </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <Col md={2}>
-                              <div className="elpVideoblog"> 
-                                    <Image
-                                      src={BlogProcessFive} 
-                                      className="iconVideomain"
-                                    /> 
-                                  <div>  
-                                      <Image
-                                        src={VideoIcon} 
-                                        className="iconVideo" 
-                                        onClick={this.handleShow}  
-                                      /> 
-                                    <iframe  
-                                      width="100%"
-                                      height="100"
-                                      // src={this.state.url}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    ></iframe>
-
-                                  </div>
-                                </div>
-                          </Col> 
-
-                          <Col md={10}> 
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          </Col>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <Col md={2}>
-                              <div className="elpVideoblog"> 
-                                    <Image
-                                      src={BlogProcessFive} 
-                                      className="iconVideomain"
-                                    /> 
-                                  <div>  
-                                      <Image
-                                        src={VideoIcon} 
-                                        className="iconVideo" 
-                                        onClick={this.handleShow}  
-                                      /> 
-                                    <iframe  
-                                      width="100%"
-                                      height="100"
-                                      // src={this.state.url}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    ></iframe>
-
-                                  </div>
-                                </div>
-                          </Col> 
-
-                          <Col md={10}> 
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          </Col>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <Col md={2}>
-                              <div className="elpVideoblog"> 
-                                    <Image
-                                      src={BlogProcessFive} 
-                                      className="iconVideomain"
-                                    /> 
-                                  <div>  
-                                      <Image
-                                        src={VideoIcon} 
-                                        className="iconVideo" 
-                                        onClick={this.handleShow}  
-                                      /> 
-                                    <iframe  
-                                      width="100%"
-                                      height="100"
-                                      // src={this.state.url}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    ></iframe>
-
-                                  </div>
-                                </div>
-                          </Col> 
-
-                          <Col md={10}> 
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                      Child Welfare
-                                  </div>
-                                  <div className="d-flex ml-auto">
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="mb-1"> 
-                                  <span className="fs16 fw400 col14"> 
-                                    <Image
-                                      src={blogclock} 
-                                      className="wSet-20 mr-2"
-                                    />
-                                     11 Minute read
-                                  </span>
-                                </div>
-
-                                <div className="fs16 fw400 col14 pb-1 e_detai">
-                                  <strong className="fw600">
-                                      Biography:
-                                  </strong>
-                                  <span className="fs15">
-                                       lorem dummy content Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. 
-                                        <a className="col40 fw15 fw500">Read more...</a>
-                                  </span>  
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          </Col>
-                        </div>
-                      </div>
-                   
+                      </div>  
               </Col>
             
 
