@@ -1390,8 +1390,11 @@ img {
                             }
                         }
                         &.Holistics { 
+                            & > .nav-link {
+                                text-transform: capitalize; 
+                            }
                             .dropdown-menu {    
-                                left: -72px;    
+                                left: -72px; 
                             }
                         }
                     }

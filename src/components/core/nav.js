@@ -650,7 +650,7 @@ class NavBar extends Component {
                         <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
-                        title="ELNP(HOLISTIC)"
+                        title="ELNP(Holistic)"  
                         id="basic-nav-dropdown4"
                         className="Holistics"
                       >

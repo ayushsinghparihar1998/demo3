@@ -50,13 +50,8 @@ class AssessmentTestListTwo extends Component {
         </div>
         <div className="profile_layout pt-4">
           <Container>
-            <div className="processBlog pb-5 w-100">
-              <div className="text-center fs28 fw500 col64 mb-2">Blog</div>
-              <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt
-              </div>
-
+            <div className="processBlog assessBlog pb-5 w-100">
+              <div className="text-center fs28 fw500 col64 mb-2">ASSESSMENT TESTS</div>
               <div className="blogMain ListsUI"> 
                 <Tabs
                   defaultActiveKey='EAT'
@@ -65,19 +60,90 @@ class AssessmentTestListTwo extends Component {
                   <Tab value="EAT" eventKey="EAT" title="EAT">
                     <div className="featuredTab">
                       <Row>
-                        <Col md={7}>
-                          <Row>
-                            <Col md={12}>  
-                                EAT
+                        
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color1">
+                                     <Button type="submit" className="blogBtns btnColor1"> 
+                                         FREE
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">Mental health</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor1">  
+                                        start now
+                                     </Button>
+                                 </div>
+                            </Col> 
+                        
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color2">
+                                     <Button type="submit" className="blogBtns btnColor2"> 
+                                         PAID
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">EMOTIONAL PROBLEM</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor2">  
+                                        start now
+                                     </Button>
+                                 </div>
+                            </Col> 
+
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color3">
+                                     <Button type="submit" className="blogBtns btnColor3"> 
+                                         FREE
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">Mental health</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor3">  
+                                        start now
+                                     </Button>
+                                 </div>
+                            </Col> 
+
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color1">
+                                     <Button type="submit" className="blogBtns btnColor1"> 
+                                         FREE
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">Mental health</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor1">  
+                                        start now
+                                     </Button>
+                                 </div>
+                            </Col> 
+                        
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color2">
+                                     <Button type="submit" className="blogBtns btnColor2"> 
+                                         PAID
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">EMOTIONAL PROBLEM</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor2">  
+                                        start now
+                                     </Button>
+                                 </div>
+                            </Col> 
+
+                            <Col md={4} sm={6}>  
+                                 <div className="blogOneMain bg-Color3">
+                                     <Button type="submit" className="blogBtns btnColor3"> 
+                                         FREE
+                                     </Button>
+                                     <div className="fs20 fw500 col64 text-uppercase mt-2">Mental health</div>
+                                     <div className="fw400 fs16 mb-2">120 Questions</div>
+                                     <div className="fs16 col64 mb-2"><small>RS.</small>520/-</div> 
+                                     <Button type="submit" className="PlanBtns PlanColor3">  
+                                        start now
+                                     </Button>
+                                 </div>
                             </Col>
-                          </Row>
-
-                        </Col>
-
-                        <Col md={5}>
-                         
-                          
-                        </Col>
                       </Row>
                     </div>
                   </Tab>

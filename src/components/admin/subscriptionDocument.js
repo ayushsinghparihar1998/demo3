@@ -178,7 +178,7 @@ class SubscriptionDocument extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
-                  <div className="fs28 col10 mb-4">Upload ELP Document</div>
+                  <div className="fs28 col10 mb-4">Upload ELNP Document</div>
                   <Form>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -194,9 +194,9 @@ class SubscriptionDocument extends Component {
                             this.handleUploadPicture(e, "backgroud_img")
                           }
                         />
-                        <div className="fs12 fw300 col27 mt-1">
+                        {/* <div className="fs12 fw300 col27 mt-1">
                           You can upload multiple files{" "}
-                        </div>
+                        </div> */}
                       </Form.Group>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {/* {errors.cd_domain_name} */}

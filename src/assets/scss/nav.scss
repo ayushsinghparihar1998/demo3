@@ -115,6 +115,14 @@
             }
         }
         .navbar-nav {
+            .nav-item {
+                .dropdown-menu {
+                    a.dropdown-item {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+            
             .userprofiles {
                 .profile_icon.profiletwo {
                     .dropdown-menu  {
@@ -227,6 +235,8 @@
                         // left: -90px; 
                         left: 0; 
                         top: 35px;
+
+                        
                     }
                 }
             }
@@ -587,6 +597,7 @@
                         position: absolute;
                         width: 100%;
                         left: 0;
+                        
                     }
                 }
                 .userprofiles.menus {
