@@ -1892,4 +1892,52 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  superadminadd_assessmenttest: {
+    url: "elp/superadminadd_assessmenttest",
+    method: "POST",
+    data: {
+      as_title: "",
+      as_type: "",
+      as_total_marks: "",
+      as_test_price: "",
+      as_cat_name: [],
+      as_suggestion: [],
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminedit_assessmenttest: {
+    url: "elp/superadminedit_assessmenttest",
+    method: "POST",
+    data: {
+      as_id: "",
+      as_title: "",
+      as_type: "",
+      as_total_marks: "",
+      as_test_price: "",
+      as_cat_name: [],
+      as_suggestion: [],
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminassessmenttest_listdetail: {
+    url: "elp/superadminassessmenttest_listdetail",
+    method: "POST",
+    data: {
+      as_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminadd_assessmentqueans: {
+    url: "elp/superadminadd_assessmentqueans",
+    method: "POST",
+    data: {
+      assessment_id: "",
+      as_que_ans: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };

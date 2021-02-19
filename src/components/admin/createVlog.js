@@ -240,6 +240,9 @@ class CreateVlog extends Component {
                       </Form.Label>
                       <CKEditor
                         config={{
+                          maxCharCount: 25,
+                          showCharCount: true,
+
                           height: 500,
                           toolbar: [
                             "bold",
@@ -292,7 +295,7 @@ class CreateVlog extends Component {
                           this.setState({
                             vlobj: {
                               ...this.state.vlobj,
-                              vl_video_url: event.target.value,
+                              vl_video_url: event.target.value.replace('watch?=' , 'embed/'),
                             },
                           });
                         }}

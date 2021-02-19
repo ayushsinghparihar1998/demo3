@@ -259,11 +259,9 @@ class ProfessionalBlogList extends Component {
       });
   };
 
-  setPlay = (flag) => {
+  setPlay = (flag, vl_video_url) => {
     this.setState({
-      url: flag
-        ? "https://www.youtube.com/embed/GXS3c4ANQP8?autoplay=1"
-        : "https://www.youtube.com/embed/GXS3c4ANQP8?",
+      url: flag ? vl_video_url + "?autoplay=1" : vl_video_url,
       play: flag,
     });
   };
@@ -615,13 +613,23 @@ class ProfessionalBlogList extends Component {
                                       <Image
                                         src={VideoIcon}
                                         className="iconVideo"
-                                        onClick={() => this.setPlay(true)}
+                                        onClick={() =>
+                                          this.setPlay(
+                                            true,
+                                            this.state.blogFeatured &&
+                                              this.state.blogFeatured
+                                                .vl_video_url
+                                          )
+                                        }
                                       />
                                     )}
                                     <iframe
                                       width="100%"
                                       height="400"
-                                      src={this.state.url}
+                                      src={
+                                        this.state.blogFeatured &&
+                                        this.state.blogFeatured.vl_video_url
+                                      }
                                       frameborder="0"
                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                       allowfullscreen

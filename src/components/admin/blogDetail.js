@@ -144,6 +144,7 @@ class BlogDetail extends Component {
                             <CKEditor
                               config={{
                                 height: 500,
+                                maxCharCount: 250,
                                 toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
                               }}
                               editor={ClassicEditor}

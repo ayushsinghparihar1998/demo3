@@ -145,9 +145,23 @@ export default {
   vl_thumbnail_url: {
     required: "Please upload image.",
   },
-  // vl_is_featured: {
-  //   required: "Please enter price.",
-  // },
+
+  as_title: {
+    required: "Please enter a title.",
+  },
+  as_test_price: {
+    required: "Please enter a valid test price.",
+  },
+  as_total_marks: {
+    required: "Please enter total test mark.",
+  },
+
+  as_type: {
+    required: "Please select a test type.",
+  },
+  as_cat_name: {
+    required: "Please select a catagory.",
+  },
   vl_desc: {
     required: "Please enter description.",
   },
@@ -162,6 +176,6 @@ export default {
   },
   pl_save: {
     required: "Please enter plan offer.",
-    // correct : "Please enter a valid offer"
+    correct : "Please enter a valid offer"
   },
 };
