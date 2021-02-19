@@ -61,6 +61,7 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 // import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/core/blogDetail";
+import BlogVideoDetails from "../components/core/blogVideoDetails";
 import PressBlogDetail from "../components/core/PressBlogDetail";
 import Categoryadmin from "../components/admin/admincategory";
 import Helprequest from "../components/core/helprequest";
@@ -113,6 +114,7 @@ import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";
 import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";        
 import MentalViewDetails from "../components/admin/mentalViewDetails"; 
 import AssessmentTestLists from "../components/admin/assessmentTestList"; 
+import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestList";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -210,6 +212,7 @@ class ELPRoute extends Component {
             path="/professionalVlogs"
             component={ProfessionalVlogs}
           />
+          <PublicRoute path="/blogVideoDetails" component={BlogVideoDetails} />
           <PublicRoute path="/addKits/:id" component={AddKits} />
           <PublicRoute path="/vlogList" component={VlogList} />
           <PublicRoute
@@ -225,7 +228,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/planlistholistic" component={PlanDetails} />           
           <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} /> 
           <PublicRoute path="/mentalViewDetails" component={MentalViewDetails} />  
-          <PublicRoute path="/assessmentTestLists" component={AssessmentTestLists} />
+          <PublicRoute path="/assessmentTestLists" component={AssessmentTestLists} /> 
+          <PublicRoute path="/assessmentTestListtwo" component={AssessmentTestListTwo} />       
 
           <PublicRoute
             path="/professionalBlogList"

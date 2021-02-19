@@ -2122,7 +2122,10 @@ pl_title: "Platinum Plan new" */}
                                       />
                                     </span>
                                   </div>
-                                  <div className="eat_category">
+                                </div>
+                              </div>
+                              
+                              <div className="eat_category">  
                                     {item.plan_category.map((val) => {
                                       return (
                                         <span
@@ -2139,8 +2142,7 @@ pl_title: "Platinum Plan new" */}
                                       );
                                     })}
                                   </div>
-                                </div>
-                              </div>
+
                             </div>
                           </div>
                         </div>
@@ -3474,7 +3476,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">ELNP Kits</div>
+                        <div className="fs22 fw600 col10">ELNP Kits</div> 
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3602,7 +3604,7 @@ kt_status: "1" */}
                                                 <div>
                                                   <span className="fw400 fs14 col29 col14">
                                                     {ind + 1}) {val.ks_services}{" "}
-                                                  </span>{" "}
+                                                  </span>:{" "} 
                                                 </div>
                                                 <div>
                                                   <span className="fs13">

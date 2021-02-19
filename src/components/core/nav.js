@@ -46,7 +46,7 @@ import CONSTANTS from "../../common/helpers/Constants";
 import constant from "../../constant";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
-const socket = socketClass.getSocket();
+const socket = socketClass.getSocket(); 
 
 class NavBar extends Component {
   constructor() {
