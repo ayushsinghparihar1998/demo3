@@ -11,6 +11,7 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
+
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
@@ -40,6 +41,8 @@ import ReactStars from "react-rating-stars-component";
 import { Popover } from "antd";
 import ELPRxApiService from "../../common/services/apiService";
 import moment from "moment";
+
+import YouTube from "react-youtube";
 
 class ProfessionalBlogList extends Component {
   constructor() {
@@ -147,11 +150,26 @@ class ProfessionalBlogList extends Component {
     });
     ELPRxApiService("getfeaturedvlogs_list", {})
       .then((res) => {
-        this.setState({
-          blogFeatured: res.data.data.vlogs_featured_listing[0],
-          showDetails: false,
-        });
         console.log("blog getfeaturedvlogs_list===>", res.data.data);
+        let url: "";
+        var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = res.data.data.vlogs_featured_listing[0].vl_video_url.match(
+          regExp
+        );
+        if (match && match[2].length == 11) {
+          console.log("match[2]", match[2]);
+          url = match[2];
+        } else {
+          //error
+        }
+        this.setState(
+          {
+            blogFeatured: res.data.data.vlogs_featured_listing[0],
+            showDetails: false,
+            url,
+          },
+          () => {}
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -261,11 +279,23 @@ class ProfessionalBlogList extends Component {
 
   setPlay = (flag, vl_video_url) => {
     this.setState({
-      url: flag ? vl_video_url + "?autoplay=1" : vl_video_url,
+      // url: flag ? vl_video_url + "?autoplay=1" : vl_video_url,
       play: flag,
     });
   };
+  _onReady(event) {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  }
   render() {
+    const opts = {
+      height: "390",
+      width: "640",
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: this.state.play ? 1 : "",
+      },
+    };
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -592,7 +622,7 @@ class ProfessionalBlogList extends Component {
                               <div className="professionalBlogs">
                                 <div className="fw600 fs20 col8 mb-4">
                                   FEATURED
-                                </div> 
+                                </div>
 
                                 <div className="elpVideoblog">
                                   {this.state.play ? (
@@ -623,7 +653,12 @@ class ProfessionalBlogList extends Component {
                                         }
                                       />
                                     )}
-                                    <iframe
+                                    <YouTube
+                                      videoId={this.state.url}
+                                      opts={opts}
+                                      // onReady={(e) => this._onReady(e)}
+                                    />
+                                    {/* <iframe
                                       width="100%"
                                       height="400"
                                       src={
@@ -633,7 +668,7 @@ class ProfessionalBlogList extends Component {
                                       frameborder="0"
                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                       allowfullscreen
-                                    ></iframe>
+                                    ></iframe> */}
                                   </div>
                                 </div>
 
