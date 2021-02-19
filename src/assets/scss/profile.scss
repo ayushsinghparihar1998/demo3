@@ -1698,7 +1698,11 @@
         display: none; 
     }
     .elpVideoblog {  
-        position: relative; 
+        position: relative;
+        overflow: hidden; 
+        iframe {
+            width: 100%; 
+        }
         .iconVideomain {
             position: absolute;
             width: 100%;
