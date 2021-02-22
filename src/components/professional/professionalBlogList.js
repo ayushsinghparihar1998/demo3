@@ -656,7 +656,7 @@ class ProfessionalBlogList extends Component {
                                     <YouTube
                                       videoId={this.state.url}
                                       opts={opts}
-                                    />
+                                    /> 
                                     {/* <iframe
                                       width="100%"
                                       height="400"

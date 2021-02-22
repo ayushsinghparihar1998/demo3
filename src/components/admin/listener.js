@@ -3714,7 +3714,7 @@ kt_status: "1" */}
                         <div className="checkCategory">
                           <Form.Group
                             controlId="formBasicCheckbox1"
-                            className="row"
+                            className="row assessmentGroup"
                           >
                             <Form.Check
                               type="radio"
@@ -3765,7 +3765,7 @@ kt_status: "1" */}
                                       <div className="d-flex ml-auto buttonTypes">
                                         <Button
                                           type="button"
-                                          className="btn-btnTypAdd"
+                                          className="btn-btnTypAdd btnQa"
                                         >
                                           <span>
                                             <i class="fa fa-plus"></i>
@@ -3825,14 +3825,14 @@ as_type: "2" */}
                                         return (
                                           <span
                                             className={
-                                              val.puc_cat_name == "Eat"
+                                              val.as_test_cat_name == "Eat"
                                                 ? "eat"
-                                                : val.puc_cat_name == "Luv"
+                                                : val.as_test_cat_name == "Luv"
                                                 ? "luv"
                                                 : "pray"
                                             }
                                           >
-                                            {val.puc_cat_name}
+                                            {val.as_test_cat_name}
                                           </span>
                                         );
                                       })}

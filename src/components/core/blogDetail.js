@@ -88,25 +88,30 @@ const Mediadetails = (props) => {
             <hr className="ngohr" />
             <Row className="mt-4">
               <Col lg={12}>
-                <div className="ngo_details mt-2">
+                <div className="ngo_details mt-2">  
                   {props.history.location.state.type == "blog" ? (
                     <Image src={blogDetail.bl_image} alt="" className="w-100" />
                   ) : (
                     <>
-                      <Image
-                        src={blogDetail.vl_thumbnail_url}
-                        alt=""
-                        className="w-100"
-                      />
+                    <div className="elpVideoblog">
+                      
                       {play == false ? (
+                        <>
+                        <Image
+                          src={blogDetail.vl_thumbnail_url}
+                          alt=""
+                          className="w-100 iconVideomain"
+                        />  
                         <Image
                           src={VideoIcon}
                           className="iconVideo"
                           onClick={() => setplay(true)}
                         />
+                        </> 
                       ) : (
                         <YouTube videoId={url} opts={opts} />
                       )}
+                      </div> 
                     </>
                   )}
                   <div className="pt-3 pb-3">
