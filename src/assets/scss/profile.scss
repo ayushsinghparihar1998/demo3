@@ -752,6 +752,10 @@
         }
     }
 }
+.border_t {
+    border-top: solid 1px #BBE8F5;
+    padding-top: 15px;
+}
 .mw35s {
     width: 35px;
     height: 35px;
@@ -818,6 +822,11 @@
                         }
                         span.pray { 
                             background: #FFA9FB;  
+                            @include eatLuvPrays;
+                        }
+                        span.holistic { 
+                            background: #FFBB00;  
+                            width: 120px; 
                             @include eatLuvPrays;
                         }
                     }
@@ -1006,7 +1015,7 @@
         }
         span {
             display: block;
-            max-height: 78px;  
+            max-height: 66px;  
             overflow: hidden;
             p {
                 margin-bottom: 18px; 
@@ -1450,7 +1459,13 @@
         }
     }
 }
-
+.VlogLists {
+    &+.adminlistener {
+        .col1.fw600.fs18.pb-1 { 
+            cursor: default; 
+        }
+    }
+}
 .addKits {
     .ck-editor .ck-editor__main .ck-content {
         min-height: 150px;
@@ -1765,7 +1780,7 @@
                     }
                 }
             } 
-            .wSet-50 { 
+            .wSet-50 {  
                 max-width: 50px; 
                 width: 50px;
                 height: 50px; 
@@ -1778,6 +1793,9 @@
                 position: relative; 
                 display: flex;
                 align-items: center; 
+                .col64.fs18.fw500 {
+                    cursor: pointer; 
+                }
             }
             .tab-content { 
                 .vlogTabs {

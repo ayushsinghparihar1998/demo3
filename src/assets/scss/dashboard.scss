@@ -658,8 +658,9 @@
                 padding-right: 15px;
                 padding-right: 0; 
                 
-                &:first-child {
-                    cursor: pointer; 
+                &:first-child { 
+                    // cursor: pointer; 
+                    cursor: default; 
                 }
                 &.col1.fw600.cursor_d { 
                     cursor: default; 

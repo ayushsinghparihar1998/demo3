@@ -3687,7 +3687,7 @@ kt_status: "1" */}
                       <Row className="mb-1">
                         <Col md={8}>
                           <div className="fs22 fw600 col10">
-                            Assessment Test
+                            Assessment Test 
                           </div>
                           <div className="fw300 fs16 col14">
                             {/* Lorem Ipsum is simply dummy and typesetting industry. */}
