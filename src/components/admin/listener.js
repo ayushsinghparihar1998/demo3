@@ -3678,7 +3678,7 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "qaList" ? (
+              ) : this.state.pageType == "qaList" ? ( 
                 <>
                   <Col md={8} lg={9} className="pl-1">
                     <div className="professor_search ViewQa">
