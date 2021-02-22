@@ -754,7 +754,7 @@ class Adminlistener extends Component {
       if (result && result.status === 200) {
         qaList =
           result && result.data && result.data.data
-            ? result.data.data.vlogs_listing
+            ? result.data.data.assess_queans_listing
             : [];
         totalRecordCount =
           result && result.data && result.data.data
@@ -929,7 +929,6 @@ class Adminlistener extends Component {
     });
   };
   /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
-
   adminChangeUserStatus = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
     let userStatus = status == "1" ? 0 : 1;
@@ -1016,7 +1015,6 @@ class Adminlistener extends Component {
       deleteObjType: type,
     });
   };
-
   handleOpenConformation = (type, obj) => {
     this.setState({
       deleteModalType: type ? type : "admin",
@@ -1112,7 +1110,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   handleSearch = (e) => {
     let { name, value } = e.target;
     console.log(name, value);
@@ -1194,7 +1191,6 @@ class Adminlistener extends Component {
       catval.join(",")
     );
   };
-
   handleDate = (date) => {
     console.log("date", date);
     this.setState({
@@ -1202,7 +1198,6 @@ class Adminlistener extends Component {
     });
     console.log(this.state.date);
   };
-
   modifyDomainContent = (item, id, api, status) => {
     let data = { cd_id: id ? id : item.cd_id, cd_status: status };
     ELPViewApiService(api, data).then((result) => {
@@ -1212,7 +1207,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   modifyAllContent = (type, id, api, status) => {
     let data =
       type == "PLAN" || this.state.deleteObjType == "PLAN"
@@ -1274,7 +1268,6 @@ class Adminlistener extends Component {
       }
     });
   };
-
   changeStatusBlog = (id, type) => {
     let databl = {
       bl_id: id,
@@ -1401,7 +1394,6 @@ class Adminlistener extends Component {
         : this.getReviewListing(1, 10, 1);
     }
   }
-
   getRatingName = (ratingCount) => {
     let text = null;
     if (ratingCount == 1) {
@@ -1697,7 +1689,7 @@ class Adminlistener extends Component {
                       <div
                         className={qaActveClass}
                         onClick={(e) => {
-                          this.superadminkits_list(1, 10);
+                          this.superadminget_assessmenttestlist(1, 10, 1);
                         }}
                       >
                         <div className="fs14 col28 fw500">
