@@ -28,7 +28,7 @@ import Infos from "../../assets/images/infos.png";
 
 
 import constant from "../../constant"; 
-class ViewQA extends Component {  
+class ViewQA extends Component { 
   render() {
     return (
       <div className="page__wrapper innerpage">  

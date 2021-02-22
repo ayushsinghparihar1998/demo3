@@ -115,6 +115,7 @@ import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAss
 import MentalViewDetails from "../components/admin/mentalViewDetails"; 
 import AssessmentTestLists from "../components/admin/assessmentTestList"; 
 import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestList";
+import MentalQa from "../components/assessmentTest/mentalQa";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -226,10 +227,11 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/editQa/:id" component={EditQa} />
           <PublicRoute path="/planlistholistic" component={PlanDetails} />           
-          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} /> 
+          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} />  
           <PublicRoute path="/mentalViewDetails" component={MentalViewDetails} />  
           <PublicRoute path="/assessmentTestLists" component={AssessmentTestLists} /> 
           <PublicRoute path="/assessmentTestListtwo" component={AssessmentTestListTwo} />       
+          <PublicRoute path="/mentalQa" component={MentalQa} /> 
 
           <PublicRoute
             path="/professionalBlogList"
@@ -251,7 +253,7 @@ class ELPRoute extends Component {
             component={SubscriptionPlan}
           /> */}
 
-          <PublicRoute path="/helpcenter" component={Helpcenter} />
+          <PublicRoute path="/helpcenter" component={Helpcenter} />  
           <PublicRoute
             path="/professinalBlogCreate/:id"
             component={ProfessinalBlogCreate}
