@@ -3719,31 +3719,37 @@ kt_status: "1" */}
                             <Form.Check
                               type="radio"
                               id="as_type1"
-                              value={2}
+                              value={1}
                               name="as_type"
                               label="Free"
-                              onChange={() =>
-                                this.superadminget_assessmenttestlist(1, 10, 2)
-                              }
+                              // onChange={() =>
+                              //   this.superadminget_assessmenttestlist(1, 10, 2)
+                              // }
+                              onClick={(e) => {
+                                this.superadminget_assessmenttestlist(1, 10, 1);
+                              }}
                               className={`mr-5  ${
-                                this.state.as_type == 2 ? "" : "active"
+                                this.state.as_type == 1 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 2}
+                              checked={+this.state.as_type == 1}
                             />
 
                             <Form.Check
                               type="radio"
                               id="as_type1"
-                              value={1}
+                              value={2}
                               name="as_type"
                               label="Paid"
-                              onChange={() =>
-                                this.superadminget_assessmenttestlist(1, 10, 1)
-                              }
+                              // onChange={() =>
+                              //   this.superadminget_assessmenttestlist(1, 10, 1)
+                              // }
+                              onClick={(e) => { 
+                                this.superadminget_assessmenttestlist(1, 10, 2); 
+                              }}
                               className={`mr-5  ${
-                                this.state.as_type == 1 ? "" : "active"
+                                this.state.as_type == 2 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 1}
+                              checked={+this.state.as_type == 2} 
                             />
                           </Form.Group>
                         </div>

@@ -1425,10 +1425,12 @@
         }
         &.btnQa {
             color: $col14 !important; 
-            &span {
+            & > span {
                 margin-right: 5px; 
                 color: #3EB2DD;
-                font-size: 11px; 
+                i {
+                    font-size: 11px; 
+                }
             }
         }
         span { 
