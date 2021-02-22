@@ -22,7 +22,7 @@ import BlogProcessFive from "../../assets/images/blog4.png";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Suser from "../../assets/images/s_images.png";
 import UserChats from "../../assets/images/user_chat5.svg";
-import Infos from "../../assets/images/infos.png"; 
+import Infos from "../../assets/images/infos.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Visibilitys from "../../assets/images/visibilitys.png"; 
 // import moment from "moment";
@@ -108,6 +108,8 @@ class Adminlistener extends Component {
       pressBlogCategory: [],
       planList: [],
       plan_type: 1,
+      as_type: 1,
+      vl_type: 1,
     };
   }
   componentDidMount() {
@@ -3672,7 +3674,7 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "qaList" ? ( 
+              ) : this.state.pageType == "qaList" ? (
                 <>
                   
               <Col md={8} lg={9} className="pl-1">     

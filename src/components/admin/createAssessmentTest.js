@@ -136,46 +136,48 @@ class CreateAssessmentTest extends Component {
       as_id: this.props.match.params.id,
     };
 
-    ELPViewApiService("superadminassessmenttest_listdetail", data).then((result) => {
-      console.log("result", result.data.data.kits_details_listing[0]);
-      let asstObj = {};
-      let as_suggestion = {};
-      let erroras_suggestion = [];
+    ELPViewApiService("superadminassessmenttest_listdetail", data).then(
+      (result) => {
+        console.log("result", result.data.data.kits_details_listing[0]);
+        let asstObj = {};
+        let as_suggestion = {};
+        let erroras_suggestion = [];
 
-      if (result && result.status === 200) {
-        asstObj =
-          result && result.data && result.data.data
-            ? result.data.data.kits_details_listing[0]
-            : [];
+        if (result && result.status === 200) {
+          asstObj =
+            result && result.data && result.data.data
+              ? result.data.data.kits_details_listing[0]
+              : [];
 
-        as_suggestion =
-          result && result.data && result.data.data
-            ? result.data.data.kits_details_listing[0].kits_services
-            : [];
+          as_suggestion =
+            result && result.data && result.data.data
+              ? result.data.data.kits_details_listing[0].kits_services
+              : [];
 
-        result.data.data.kits_details_listing[0].kits_services.map((item) => {
-          erroras_suggestion.push({
-            as_max_range: 0,
-            as_suggestion_txt: "",
+          result.data.data.kits_details_listing[0].kits_services.map((item) => {
+            erroras_suggestion.push({
+              as_max_range: 0,
+              as_suggestion_txt: "",
+            });
           });
-        });
-        asstObj.as_suggestion = as_suggestion;
-        // delete asstObj.kits_services;
-      }
-
-      this.setState(
-        {
-          asstObj,
-          as_suggestion,
-          erroras_suggestion,
-        },
-        () => {
-          console.log("asstObj", this.state.asstObj);
-          console.log("as_suggestion", this.state.as_suggestion);
-          this.checkServiceError();
+          asstObj.as_suggestion = as_suggestion;
+          // delete asstObj.kits_services;
         }
-      );
-    });
+
+        this.setState(
+          {
+            asstObj,
+            as_suggestion,
+            erroras_suggestion,
+          },
+          () => {
+            console.log("asstObj", this.state.asstObj);
+            console.log("as_suggestion", this.state.as_suggestion);
+            this.checkServiceError();
+          }
+        );
+      }
+    );
   };
   handleChangeLoop = (name, value, ind) => {
     let asstObj = this.state.asstObj;
@@ -253,7 +255,6 @@ class CreateAssessmentTest extends Component {
     return isValid;
   }
 
- 
   addCategorySetup() {
     let as_suggestion = this.state.as_suggestion;
     let val = as_suggestion[as_suggestion.length - 1].as_max_range + 1;
@@ -334,7 +335,7 @@ class CreateAssessmentTest extends Component {
         ? value.replace(/[^0-9]/g, "")
         : value;
 
-    if (name == "as_type" && value == 1) {
+    if (name == "as_type" && value == 2) {
       asstObj.as_test_price = 0;
     }
     if (name == "as_total_marks") {
@@ -370,7 +371,7 @@ class CreateAssessmentTest extends Component {
       }
     );
   };
- 
+
   handleSubmit = () => {
     let asstObj = this.state.asstObj;
     let as_suggestion = this.state.as_suggestion;
@@ -433,9 +434,12 @@ class CreateAssessmentTest extends Component {
         .then((result) => {
           if (result && result.data && result.data.status === "success") {
             // this.props.history.push("/admin");
+            let val =
+              this.props.match.params.id > 0 ? this.props.match.params.id : "0";
+
             setTimeout(() => {
               this.props.history.push(
-                "/editQa/" + result.data.data.assessment_id
+                "/editQa/" + result.data.data.assessment_id + "/" + val
               );
             }, 1000);
             // this.clear();
@@ -458,7 +462,6 @@ class CreateAssessmentTest extends Component {
     }
   };
 
-  
   handleChangeVal = (value) => {
     console.log(value);
 
@@ -551,12 +554,12 @@ class CreateAssessmentTest extends Component {
                             <Form.Check
                               type="radio"
                               id="as_type1"
-                              value={1}
+                              value={2}
                               name="as_type"
                               label="Free"
                               className="radioboxTyp1"
                               onChange={(e) => this.handleChange(e)}
-                              checked={+asstObj.as_type == 1}
+                              checked={+asstObj.as_type == 2}
                             />
                           </Form.Group>
                         </Col>
@@ -565,11 +568,11 @@ class CreateAssessmentTest extends Component {
                             <Form.Check
                               type="radio"
                               id="plan_type2"
-                              value={2}
+                              value={1}
                               name="as_type"
                               label="Paid"
                               className="radioboxTyp1"
-                              checked={+asstObj.as_type == 2}
+                              checked={+asstObj.as_type == 1}
                               onChange={(e) => this.handleChange(e)}
                             />
                           </Form.Group>
@@ -594,7 +597,7 @@ class CreateAssessmentTest extends Component {
                         onChange={(e) => this.handleChange(e)}
                         maxLength={10}
                         className="inputTyp2"
-                        disabled={asstObj.as_type == 1}
+                        disabled={asstObj.as_type == 2}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.as_test_price}
@@ -745,10 +748,17 @@ class CreateAssessmentTest extends Component {
                               Suggestions
                             </Form.Label>
                             <CKEditor
-                            config={{
-                              height: 500,
-                              toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
-                            }}
+                              config={{
+                                height: 500,
+                                toolbar: [
+                                  "bold",
+                                  "italic",
+                                  "bulletedList",
+                                  "numberedList",
+                                  "blockQuote",
+                                  "Link",
+                                ],
+                              }}
                               editor={ClassicEditor}
                               onReady={(editor) => {
                                 console.log("Editor is ready to use!", editor);
@@ -791,7 +801,7 @@ class CreateAssessmentTest extends Component {
                       type="button"
                       onClick={() => this.handleSubmit()}
                     >
-                      SAVEs
+                      SAVE
                     </Button>
                   </Form>
                 </div>

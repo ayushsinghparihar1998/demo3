@@ -25,7 +25,7 @@ function validateInput(data) {
     Validator.isEmpty(data.as_test_price.toString()) ||
     +data.as_test_price == 0
   ) {
-    if (+data.as_type == 2) {
+    if (+data.as_type == 1) {
       errors.as_test_price = ValidationMessages.as_test_price.required;
     }
   }

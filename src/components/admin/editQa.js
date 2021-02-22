@@ -323,9 +323,7 @@ class EditQa extends Component {
         if (result && result.data && result.data.status === "success") {
           // this.props.history.push("/admin");
           setTimeout(() => {
-            this.props.history.push(
-              "/editQa/" + result.data.data.assessment_id
-            );
+            this.props.history.push("/admin");
           }, 1000);
           // this.clear();
         } else {
