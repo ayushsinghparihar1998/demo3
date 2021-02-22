@@ -2005,7 +2005,7 @@
         .iconVideomain {
             position: absolute;
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
             top: 0;
             left: 0;
@@ -2017,6 +2017,10 @@
             transform: translate(-50%, -50%); 
             cursor: pointer; 
             z-index: 9;  
+        }
+        iframe {
+            width: 100%; 
+            height: 450px !important; 
         }
     }
 }
