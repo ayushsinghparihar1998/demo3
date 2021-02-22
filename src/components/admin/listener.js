@@ -3792,8 +3792,9 @@ kt_status: "1" */}
                                               this.changepath(
                                                 "/qaViewDetails/" + item.as_id,
                                                 "superadminget_assessmenttestlist"
-                                              )
+                                              )  
                                             }
+                                            className="pointer"
                                           />
                                         </span>
                                         <span className="mr-3">
@@ -3807,10 +3808,11 @@ kt_status: "1" */}
                                                 "superadminget_assessmenttestlist"
                                               )
                                             }
+                                            className="pointer"
                                           />
                                         </span>
                                         <span>
-                                          <Image src={Deleteicon} alt="" />
+                                          <Image src={Deleteicon} alt="" className="pointer" />
                                         </span>
                                       </div>
                                     </div>
@@ -3841,8 +3843,11 @@ as_type: "2" */}
                                                 ? "eat"
                                                 : val.as_test_cat_name == "Luv"
                                                 ? "luv"
-                                                : "pray"
-                                            }
+                                                : val.as_test_cat_name == "Pray"
+                                                ? "pray"
+                                                : "holistic" 
+                                                
+                                            } 
                                           >
                                             {val.as_test_cat_name}
                                           </span>

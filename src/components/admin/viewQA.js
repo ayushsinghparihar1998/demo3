@@ -149,7 +149,8 @@ class ViewQA extends Component {
                               <span
                                 dangerouslySetInnerHTML={{
                                   __html: item.as_que_name,
-                                }}
+                                }} 
+                                className="d-inline-block ml-1" 
                               ></span>
                             </div>
                             <div className="col10 fs17 fw500 mt-2 mb-3">
@@ -164,7 +165,8 @@ class ViewQA extends Component {
                                       <span
                                         dangerouslySetInnerHTML={{
                                           __html: val.as_answer,
-                                        }}
+                                        }} 
+                                        className="d-inline-block ml-1" 
                                       ></span>
                                     </li>
                                   );
