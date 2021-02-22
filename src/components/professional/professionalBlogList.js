@@ -614,7 +614,7 @@ class ProfessionalBlogList extends Component {
                   </Tab>
 
                   <Tab eventKey="VLOGS" title="VLOGS">
-                    <div className="featuredTab vlogTabs">
+                    <div className="featuredTab vlogTabs">  
                       <Row>
                         <Col md={7}>
                           <Row>
@@ -707,7 +707,7 @@ class ProfessionalBlogList extends Component {
                         </Col>
 
                         <Col md={5}>
-                          <div className="fs20 fw600 col8 mb-4 pb-3">
+                          <div className="fs20 fw600 col8 mb-4">
                             LATEST
                           </div>
                           <div className="mb-4 pb-2">
@@ -756,16 +756,22 @@ vl_video_url:  */}
                                         </div>
                                       </Col>
                                       <Col md={3}>
-                                        <Image
-                                          src={item.vl_thumbnail_url}
-                                          className="w-100"
-                                          onClick={() =>
-                                            this.getBlogdetails(
-                                              "vlog",
-                                              item.vl_id
-                                            )
-                                          }
-                                        />
+                                        <div className="blogVideoIcon"> 
+                                              <Image
+                                              src={VideoIcon}
+                                              className="iconVideo"  
+                                            />
+                                            <Image
+                                              src={item.vl_thumbnail_url}
+                                              className="w-100"
+                                              onClick={() =>
+                                                this.getBlogdetails(
+                                                  "vlog",
+                                                  item.vl_id
+                                                )
+                                              }
+                                            />
+                                        </div>
                                       </Col>
                                     </Row>
                                   </div>
@@ -775,7 +781,7 @@ vl_video_url:  */}
                           </div>
                         </Col>
                         <Col md={12}>
-                          <div className="fs20 fw600 col8 mt-4 mb-4 pb-3">
+                          <div className="fs20 fw600 col8 mb-4 pb-3">
                             All
                           </div>
                         </Col>
@@ -784,7 +790,7 @@ vl_video_url:  */}
                           this.state.vlogsAll.map((item) => {
                             return (
                               <Col md={6} className="mb-4">
-                                <Row>
+                                <Row className="innerVlog"> 
                                   <Col md={7}>
                                     <div className="">
                                       <div
@@ -803,7 +809,7 @@ vl_video_url:  */}
                                         dangerouslySetInnerHTML={{
                                           __html: item.vl_desc,
                                         }}
-                                      ></div>
+                                      ></div> 
                                       <div className="col14 fs16 fw400 mt-2">
                                         {moment(item.vl_datetime).format(
                                           "dddd MMM Do YYYY"
@@ -812,20 +818,26 @@ vl_video_url:  */}
                                     </div>
                                   </Col>
                                   <Col md={5}>
-                                    <Image
-                                      src={item.vl_thumbnail_url}
-                                      className="w-100"
-                                      onClick={() =>
-                                        this.getBlogdetails("vlog", item.vl_id)
-                                      }
-                                    />
+                                      <div className="blogVideoIcon"> 
+                                          <Image
+                                          src={VideoIcon}
+                                          className="iconVideo"  
+                                        />
+                                        <Image
+                                          src={item.vl_thumbnail_url}
+                                          className="w-100"
+                                          onClick={() =>
+                                            this.getBlogdetails("vlog", item.vl_id)
+                                          }
+                                        />
+                                        </div>
                                   </Col>
                                 </Row>
                               </Col>
                             );
                           })}
                       </Row>
-                      <div className="text-center mt-5 mb-3">
+                      <div className="text-center mt-5 mb-3"> 
                         <Button
                           type="button"
                           className="btnType22 fw500"

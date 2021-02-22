@@ -197,7 +197,7 @@ class SubscriptionDocument extends Component {
                           className="inputTyp2"
                           // accept=".pdf"
                           onChange={(e) =>
-                            this.handleUploadPicture(e, "backgroud_img")
+                            this.handleUploadPicture(e, "backgroud_img") 
                           }
                         />
                         {/* <div className="fs12 fw300 col27 mt-1">
@@ -216,7 +216,7 @@ class SubscriptionDocument extends Component {
                       onClick={this.handleSubmit}
                     >
                       UPLOAD
-                    </Button>
+                    </Button>  
                   </Form>
                 </div>
               </Col>
@@ -229,4 +229,7 @@ class SubscriptionDocument extends Component {
   }
 }
 
-export default SubscriptionDocument;
+export default SubscriptionDocument; 
+
+
+
