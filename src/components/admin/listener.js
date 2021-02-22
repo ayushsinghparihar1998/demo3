@@ -3743,13 +3743,13 @@ kt_status: "1" */}
                               // onChange={() =>
                               //   this.superadminget_assessmenttestlist(1, 10, 1)
                               // }
-                              onClick={(e) => { 
-                                this.superadminget_assessmenttestlist(1, 10, 2); 
+                              onClick={(e) => {
+                                this.superadminget_assessmenttestlist(1, 10, 2);
                               }}
                               className={`mr-5  ${
                                 this.state.as_type == 2 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 2} 
+                              checked={+this.state.as_type == 2}
                             />
                           </Form.Group>
                         </div>
@@ -3772,6 +3772,12 @@ kt_status: "1" */}
                                         <Button
                                           type="button"
                                           className="btn-btnTypAdd btnQa"
+                                          onClick={() =>
+                                            this.changepath(
+                                              "/editQa/" + item.as_id,
+                                              "superadminget_assessmenttestlist"
+                                            )
+                                          }
                                         >
                                           <span>
                                             <i class="fa fa-plus"></i>
