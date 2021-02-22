@@ -94,7 +94,7 @@ class ViewQA extends Component {
                                 </span>
                               </div>
                         </div>
-                            <div className="QaBody">      
+                            <div className="QaBody">       
                                 <div className="col29 fw500 fs17 pb-1">
                                     <strong>Question 1.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit?
                                 </div>
