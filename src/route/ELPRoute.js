@@ -111,9 +111,9 @@ import ViewAssessmentTest from "../components/assessmentTest/viewAssessmentTest"
 import PlanDetails from "../components/plan/planDetails";
 import PlanDetailsEat from "../components/plan/planDetailsEat";
 import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";
-import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";        
-import MentalViewDetails from "../components/admin/mentalViewDetails"; 
-import AssessmentTestLists from "../components/admin/assessmentTestList"; 
+import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";
+import QaViewDetails from "../components/admin/QaViewDetails";
+import AssessmentTestLists from "../components/admin/assessmentTestList";
 import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestList";
 import MentalQa from "../components/assessmentTest/mentalQa";
 
@@ -220,18 +220,27 @@ class ELPRoute extends Component {
             path="/assessmentTestList"
             component={AssessmentTestList}
           />
-          <PublicRoute path="/viewQA" component={ViewQA} />
+          <PublicRoute path="/viewQA/:id" component={ViewQA} />
           <PublicRoute
             path="/createAssessmentTest/:id"
             component={CreateAssessmentTest}
           />
           <PublicRoute path="/editQa/:id/:type" component={EditQa} />
-          <PublicRoute path="/planlistholistic" component={PlanDetails} />           
-          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} />  
-          <PublicRoute path="/mentalViewDetails" component={MentalViewDetails} />  
-          <PublicRoute path="/assessmentTestLists" component={AssessmentTestLists} /> 
-          <PublicRoute path="/assessmentTestListtwo" component={AssessmentTestListTwo} />       
-          <PublicRoute path="/mentalQa" component={MentalQa} /> 
+          <PublicRoute path="/planlistholistic" component={PlanDetails} />
+          <PublicRoute
+            path="/listenerAssessmentTest"
+            component={ListenerAssessmentTest}
+          />
+          <PublicRoute path="/QaViewDetails/:id" component={QaViewDetails} />
+          <PublicRoute
+            path="/assessmentTestLists"
+            component={AssessmentTestLists}
+          />
+          <PublicRoute
+            path="/assessmentTestListtwo"
+            component={AssessmentTestListTwo}
+          />
+          <PublicRoute path="/mentalQa" component={MentalQa} />
 
           <PublicRoute
             path="/professionalBlogList"
@@ -253,7 +262,7 @@ class ELPRoute extends Component {
             component={SubscriptionPlan}
           /> */}
 
-          <PublicRoute path="/helpcenter" component={Helpcenter} />  
+          <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute
             path="/professinalBlogCreate/:id"
             component={ProfessinalBlogCreate}
