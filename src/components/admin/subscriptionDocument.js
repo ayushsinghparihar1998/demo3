@@ -20,7 +20,7 @@ import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain";
 import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
-
+import { showErrorToast } from "../../common/helpers/Utils";
 import constant from "../../constant";
 class SubscriptionDocument extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class SubscriptionDocument extends Component {
       pageno: 1,
       records: 10,
       totalCount: "",
-      isUploading : true,
+      isUploading: true,
       planObj: {
         pu_title: "",
         pu_doc_url: "",
@@ -100,12 +100,17 @@ class SubscriptionDocument extends Component {
       console.log(name, "resultresultresult", response);
       let planObj = this.state.planObj;
 
-      planObj.pu_doc_url = response.data.data.filepath;
-      this.setState({
-        isUploading: false,
-        planObj,
-        filename: fileObject.name,
-      });
+      if (response.data.status == "error") {
+        const message = response.data.message;
+        showErrorToast(message);
+      } else {
+        planObj.pu_doc_url = response.data.data.filepath;
+        this.setState({
+          isUploading: false,
+          planObj,
+          filename: fileObject.name,
+        });
+      }
     }
   };
 
@@ -190,6 +195,7 @@ class SubscriptionDocument extends Component {
                           id="exampleFormControlFile1"
                           label="Example file input"
                           className="inputTyp2"
+                          // accept=".pdf"
                           onChange={(e) =>
                             this.handleUploadPicture(e, "backgroud_img")
                           }

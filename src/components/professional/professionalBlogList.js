@@ -151,7 +151,7 @@ class ProfessionalBlogList extends Component {
     ELPRxApiService("getfeaturedvlogs_list", {})
       .then((res) => {
         console.log("blog getfeaturedvlogs_list===>", res.data.data);
-        let url: "";
+        let url = "";
         var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var match = res.data.data.vlogs_featured_listing[0].vl_video_url.match(
           regExp
@@ -656,7 +656,6 @@ class ProfessionalBlogList extends Component {
                                     <YouTube
                                       videoId={this.state.url}
                                       opts={opts}
-                                      // onReady={(e) => this._onReady(e)}
                                     />
                                     {/* <iframe
                                       width="100%"
@@ -675,7 +674,13 @@ class ProfessionalBlogList extends Component {
                                 <div className="blogClocks mb-3 mt-3">
                                   <div>
                                     <div className="position-relative">
-                                      <div className="col64 fs18 fw500">
+                                      <div className="col64 fs18 fw500"
+                                      onClick={() =>
+                                        this.getBlogdetails(
+                                          "vlog",
+                                          this.state.blogFeatured.vl_id
+                                        )
+                                      }>
                                         {this.state.blogFeatured &&
                                           this.state.blogFeatured.vl_title}
                                       </div>

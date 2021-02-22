@@ -418,7 +418,6 @@ class Adminlistener extends Component {
       }
     );
   };
-
   getReviewListing = (offset, count, review_type) => {
     let data = {
       count: count,
@@ -634,7 +633,6 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
-
   superadminget_planlist = async (offset, count, type) => {
     try {
       let planList = [];
@@ -744,6 +742,43 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
+  superadminget_assessmenttestlist = async (offset, count, as_type) => {
+    try {
+      let qaList = [];
+      let result = await ELPViewApiService("superadminget_assessmenttestlist", {
+        count: count,
+        offset: offset,
+        as_type,
+      });
+      let totalRecordCount = 0;
+      if (result && result.status === 200) {
+        qaList =
+          result && result.data && result.data.data
+            ? result.data.data.vlogs_listing
+            : [];
+        totalRecordCount =
+          result && result.data && result.data.data
+            ? result.data.data.totalRecordCount
+            : 0;
+      }
+      this.setState(
+        {
+          pageType: "qaList",
+          qaList,
+          totalRecordCount,
+          count: count,
+          offset: offset,
+          deleteObjType: "",
+          as_type,
+        },
+        () => {
+          this.getPager(this.state.totalRecordCount);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   getBlogCat = (name, api) => {
     let objBlog = [];
     console.log(name, api);
@@ -828,7 +863,13 @@ class Adminlistener extends Component {
       } else if (this.state.pageType == "reviewList") {
         this.getReviewListing(page, this.state.count, this.state.review_type);
       } else if (this.state.pageType == "vlogsList") {
-        this.getReviewListing(page, this.state.count, this.state.review_type);
+        this.superadminvlogs_list(page, this.state.count, this.state.vl_type);
+      } else if (this.state.pageType == "qaList") {
+        this.superadminget_assessmenttestlist(
+          page,
+          this.state.count,
+          this.state.as_type
+        );
       } else if (this.state.pageType == "blogList") {
         this.getBlockuserListing(page, this.state.count);
       } else if (this.state.pageType == "pressblogList") {
@@ -1451,6 +1492,7 @@ class Adminlistener extends Component {
       this.state.pageType == "vlogsList"
         ? "position-relative active"
         : "position-relative";
+
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
     return (
@@ -2124,25 +2166,24 @@ pl_title: "Platinum Plan new" */}
                                   </div>
                                 </div>
                               </div>
-                              
-                              <div className="eat_category">  
-                                    {item.plan_category.map((val) => {
-                                      return (
-                                        <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.puc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
-                                        >
-                                          {val.puc_cat_name}
-                                        </span>
-                                      );
-                                    })}
-                                  </div>
 
+                              <div className="eat_category">
+                                {item.plan_category.map((val) => {
+                                  return (
+                                    <span
+                                      className={
+                                        val.puc_cat_name == "Eat"
+                                          ? "eatcat"
+                                          : val.puc_cat_name == "Luv"
+                                          ? "luvcat"
+                                          : "praycat"
+                                      }
+                                    >
+                                      {val.puc_cat_name}
+                                    </span>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -3476,7 +3517,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">ELNP Kits</div> 
+                        <div className="fs22 fw600 col10">ELNP Kits</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3604,7 +3645,8 @@ kt_status: "1" */}
                                                 <div>
                                                   <span className="fw400 fs14 col29 col14">
                                                     {ind + 1}) {val.ks_services}{" "}
-                                                  </span>:{" "} 
+                                                  </span>
+                                                  :{" "}
                                                 </div>
                                                 <div>
                                                   <span className="fs13">
