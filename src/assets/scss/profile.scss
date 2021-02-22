@@ -1252,13 +1252,14 @@
         display: flex;
         justify-content: space-between;
         margin-top: 15px;
-        button.btn-btnTypAdd {
+        button.btn-btnTypAdd { 
             font-size: 16px;
             color: $col23;
             font-weight: 500; 
             &:focus {
-                box-shadow: none;
+                box-shadow: none !important; 
             }
+            
             span {
                 width: 20px;
                 height: 20px;
@@ -1419,6 +1420,17 @@
         background: transparent !important;
         border: none !important; 
         margin-right: 15px;
+        &:focus {
+            box-shadow: none !important; 
+        }
+        &.btnQa {
+            color: $col14 !important; 
+            &span {
+                margin-right: 5px; 
+                color: #3EB2DD;
+                font-size: 11px; 
+            }
+        }
         span { 
             width: 22px;
             height: 22px;
@@ -1462,7 +1474,7 @@
         font-weight: 500; 
         &:focus {
             background: transparent;
-            box-shadow: none !important; 
+            box-shadow: none !important;  
         }
         span {
             width: 22px;
