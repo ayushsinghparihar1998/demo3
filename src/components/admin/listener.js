@@ -24,7 +24,7 @@ import Suser from "../../assets/images/s_images.png";
 import UserChats from "../../assets/images/user_chat5.svg";
 import Infos from "../../assets/images/infos.png";
 import "react-datepicker/dist/react-datepicker.css";
-import Visibilitys from "../../assets/images/visibilitys.png"; 
+import Visibilitys from "../../assets/images/visibilitys.png";
 // import moment from "moment";
 import {
   Button,
@@ -160,6 +160,11 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") == "superadminvlogs_list"
     )
       this.superadminvlogs_list(1, 10, 1);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminget_assessmenttestlist"
+    )
+      this.superadminget_assessmenttestlist(1, 10, 2);
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -756,9 +761,10 @@ class Adminlistener extends Component {
       });
       let totalRecordCount = 0;
       if (result && result.status === 200) {
+        console.log(result.data);
         qaList =
           result && result.data && result.data.data
-            ? result.data.data.assess_queans_listing
+            ? result.data.data.assessement_listing
             : [];
         totalRecordCount =
           result && result.data && result.data.data
@@ -1693,7 +1699,7 @@ class Adminlistener extends Component {
                       <div
                         className={qaActveClass}
                         onClick={(e) => {
-                          this.superadminget_assessmenttestlist(1, 10, 1);
+                          this.superadminget_assessmenttestlist(1, 10, 2);
                         }}
                       >
                         <div className="fs14 col28 fw500">
@@ -3676,285 +3682,160 @@ kt_status: "1" */}
                 </Col>
               ) : this.state.pageType == "qaList" ? (
                 <>
-                  
-              <Col md={8} lg={9} className="pl-1">     
-                <div className="professor_search listBlogs VlogLists"> 
-                  <Row className="mb-1">
-                    <Col md={8}>
-                      <div className="fs22 fw600 col10"> 
-                           Assessment Test 
-                      </div>
-                      <div className="fw300 fs16 col14">
-                        {/* Lorem Ipsum is simply dummy and typesetting industry. */}
-                      </div>
-                    </Col>
-                    <Col md={4}>
-                      <div className="text-right pro_cbtn">
-                        <Button
-                          type="button"
-                          className="btnTyp5" 
-                        >
-                          create test 
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                        <Form className="p_form mb-4"> 
-                            <div className="checkCategory"> 
-                                <Form.Group
-                                    controlId="formBasicCheckbox1"
-                                    className="row"
-                                    >
-                                <Form.Check 
-                                    type="checkbox"
-                                    className="checkthree active" 
-                                    label="Free"
-                                    name="free"
-                                    checked=""  
-                                    />
-                                <Form.Check 
-                                    type="checkbox"
-                                    className="checkthree"  
-                                    label="Paid" 
-                                    name="paid" 
-                                    checked=""  
-                                />             
-                              </Form.Group> 
-                            </div>
-                        </Form>
-                </div>
-                
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                        Mental Health
-                                  </div>
-                                  <div className="d-flex ml-auto buttonTypes">
-                                      <Button type="button" className="btn-btnTypAdd"> 
-                                          <span><i class="fa fa-plus"></i></span>Add Question
-                                      </Button> 
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Visibilitys}
-                                        alt=""
-                                        
-                                      /> 
-                                    </span>
-                                    <span className="mr-3"> 
-                                      <Image
-                                        src={Editicon}  
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                 <div className="fs17 fw500 col14 mb-1"> 
-                                    Price: 520/-
-                                 </div> 
-                                <div className="mb-1"> 
-                                  <span className="fs18 fw400 col14"> 
-                                     120 Questions | 30 Marks
-                                  </span>
-                                </div>
-
-                                <div className="d-flex elpCategory"> 
-                                    <span className="eat">Eat</span> 
-                                    <span className="luv">Luv</span>
-                                    <span className="pray">Pray</span> 
-                                </div>
-
-                              </div>
-                            </div>
+                  <Col md={8} lg={9} className="pl-1">
+                    <div className="professor_search listBlogs VlogLists">
+                      <Row className="mb-1">
+                        <Col md={8}>
+                          <div className="fs22 fw600 col10">
+                            Assessment Test
                           </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                        Mental Health
-                                  </div>
-                                  <div className="d-flex ml-auto buttonTypes">
-                                  <Button type="button" className="btn-btnTypAdd"> 
-                                          <span><i class="fa fa-plus"></i></span>Add Question
-                                      </Button> 
-                                  <span className="mr-3">
-                                      <Image
-                                        src={Visibilitys}
-                                        alt=""
-                                        
-                                      /> 
-                                    </span>
-                                    <span className="mr-3"> 
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span> 
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="fs17 fw500 col14 mb-1"> 
-                                    Price: 520/-
-                                 </div> 
-                                <div className="mb-1"> 
-                                  <span className="fs18 fw400 col14"> 
-                                     120 Questions | 30 Marks  
-                                  </span>
-                                </div>
-
-                                <div className="d-flex elpCategory"> 
-                                    <span className="eat">Eat</span> 
-                                </div>
-
-                              </div>
-                            </div>
+                          <div className="fw300 fs16 col14">
+                            {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                           </div>
-                        </div>
-                      </div>
+                        </Col>
+                        <Col md={4}>
+                          <div className="text-right pro_cbtn">
+                            <Button
+                              type="button"
+                              className="btnTyp5"
+                              onClick={() =>
+                                this.changepath(
+                                  "/createAssessmentTest/0",
+                                  "superadminget_assessmenttestlist"
+                                )
+                              }
+                            >
+                              create test
+                            </Button>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Form className="p_form mb-4">
+                        <div className="checkCategory">
+                          <Form.Group
+                            controlId="formBasicCheckbox1"
+                            className="row"
+                          >
+                            <Form.Check
+                              type="radio"
+                              id="as_type1"
+                              value={2}
+                              name="as_type"
+                              label="Free"
+                              onChange={() =>
+                                this.superadminget_assessmenttestlist(1, 10, 2)
+                              }
+                              className={`mr-5  ${
+                                this.state.as_type == 2 ? "" : "active"
+                              }`}
+                              checked={+this.state.as_type == 2}
+                            />
 
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
+                            <Form.Check
+                              type="radio"
+                              id="as_type1"
+                              value={1}
+                              name="as_type"
+                              label="Paid"
+                              onChange={() =>
+                                this.superadminget_assessmenttestlist(1, 10, 1)
+                              }
+                              className={`mr-5  ${
+                                this.state.as_type == 1 ? "" : "active"
+                              }`}
+                              checked={+this.state.as_type == 1}
+                            />
+                          </Form.Group>
+                        </div>
+                      </Form>
+                    </div>
+
+                    {this.state.qaList &&
+                      this.state.qaList.map((item) => {
+                        return (
+                          <div className="adminlistener p-4 mb-3">
+                            <div className="d-flex text-left">
                               <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                        Mental Health
-                                  </div>
-                                  <div className="d-flex ml-auto buttonTypes">
-                                      <Button type="button" className="btn-btnTypAdd"> 
-                                          <span><i class="fa fa-plus"></i></span>Add Question
-                                      </Button>  
-                                      <span className="mr-3"> 
-                                        <Image
-                                            src={Visibilitys}
+                                <div className="d-flex justify-content-between">
+                                  <div className="w-100">
+                                    <div className="d-flex">
+                                      <div className="col1 fw600 fs18 pb-1">
+                                        {item.as_title}
+                                      </div>
+                                      <div className="d-flex ml-auto buttonTypes">
+                                        <Button
+                                          type="button"
+                                          className="btn-btnTypAdd"
+                                        >
+                                          <span>
+                                            <i class="fa fa-plus"></i>
+                                          </span>
+                                          Add Question
+                                        </Button>
+                                        <span className="mr-3">
+                                          <Image src={Visibilitys} alt="" />
+                                        </span>
+                                        <span className="mr-3">
+                                          <Image
+                                            src={Editicon}
                                             alt=""
-                                            
+                                            onClick={() =>
+                                              this.changepath(
+                                                "/createAssessmentTest/" +
+                                                  item.as_id,
+                                                "superadminget_assessmenttestlist"
+                                              )
+                                            }
                                           />
-                                      </span> 
-                                    <span className="mr-3"> 
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
+                                        </span>
+                                        <span>
+                                          <Image src={Deleteicon} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <div className="fs17 fw500 col14 mb-1">
+                                      Price: {item.as_test_price}/-
+                                    </div>
+                                    <div className="mb-1">
+                                      <span className="fs18 fw400 col14">
+                                        {item.total_que_count} Questions |{" "}
+                                        {item.as_total_marks} Marks
+                                      </span>
+                                    </div>
+                                    {/* as_datetime: "2021-02-22 14:12:12"
+as_id: "22"
+as_status: "1"
+as_test_price: ""
+as_title: "my test1"
+as_total_marks: "30"
+as_type: "2" */}
+
+                                    <div className="d-flex elpCategory">
+                                      {item.assessment_category.map((val) => {
+                                        return (
+                                          <span
+                                            className={
+                                              val.puc_cat_name == "Eat"
+                                                ? "eat"
+                                                : val.puc_cat_name == "Luv"
+                                                ? "luv"
+                                                : "pray"
+                                            }
+                                          >
+                                            {val.puc_cat_name}
+                                          </span>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
                                 </div>
-
-                                <div className="fs17 fw500 col14 mb-1"> 
-                                    Price: 520/-
-                                 </div> 
-                                <div className="mb-1"> 
-                                  <span className="fs18 fw400 col14"> 
-                                     120 Questions | 30 Marks
-                                  </span>
-                                </div>
-
-                                <div className="d-flex elpCategory"> 
-                                    <span className="luv">Luv</span>
-                                    <span className="pray">Pray</span> 
-                                    <span className="holistic">Holistic</span> 
-                                </div>
-
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-
-                      <div className="adminlistener p-4 mb-3">
-                        <div className="d-flex text-left">
-                          <div className="w-100">
-                            <div className="d-flex justify-content-between">
-                              <div className="w-100">
-                                <div className="d-flex">
-                                  <div className="col1 fw600 fs18 pb-1">
-                                        Mental Health
-                                  </div>
-                                  <div className="d-flex ml-auto buttonTypes">
-                                  <Button type="button" className="btn-btnTypAdd"> 
-                                          <span><i class="fa fa-plus"></i></span>Add Question
-                                      </Button> 
-                                    <span className="mr-3">
-                                      <Image
-                                        src={Visibilitys}
-                                        alt=""
-                                        
-                                      /> 
-                                    </span> 
-                                    <span className="mr-3"> 
-                                      <Image
-                                        src={Editicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                    <span>
-                                      <Image
-                                        src={Deleteicon}
-                                        alt=""
-                                        
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <div className="fs17 fw500 col14 mb-1"> 
-                                    Price: 520/-
-                                </div> 
-                                <div className="mb-1"> 
-                                  <span className="fs18 fw400 col14"> 
-                                     120 Questions | 30 Marks
-                                  </span>
-                                </div>
-
-                                <div className="d-flex elpCategory"> 
-                                    <span className="eat">Eat</span> 
-                                    <span className="luv">Luv</span>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> 
-              
-              </Col>
-            
+                        );
+                      })}
+                  </Col>
                 </>
               ) : this.state.pageType == "vlogsList" ? (
                 <>
