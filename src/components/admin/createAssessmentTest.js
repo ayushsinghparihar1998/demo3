@@ -129,26 +129,40 @@ class CreateAssessmentTest extends Component {
         });
 
         let as_suggestion = [];
-        console.log("asstObj", asstObj.assessment_suggestion);
-        let arr = [];
+        let erroras_suggestion = [];
+
+        console.log(
+          "asstObj assessment_suggestion",
+          asstObj.assessment_suggestion
+        );
         asstObj.assessment_suggestion.map((item) => {
           console.log(item);
-          let obj = {
-            as_min_range: +item.as_min_range,
-            as_max_range: +item.as_max_range,
-            as_suggestion_txt: item.as_suggestion,
+
+          item.as_min_range = +item.as_min_range;
+          item.as_max_range = +item.as_max_range;
+          item.as_suggestion_txt = item.as_suggestion;
+
+          let objer = {
+            as_min_range: "",
+            as_max_range: "",
+            as_suggestion_txt: "",
           };
-          as_suggestion.push(obj);
+          as_suggestion.push(item);
+          console.log('as_suggestion', as_suggestion);
+          erroras_suggestion.push(objer);
         });
         console.log("arr", as_suggestion);
+        console.log("err", erroras_suggestion);
+
         this.setState(
           {
             asstObj,
             catArray,
-            as_suggestion,
+            as_suggestion: as_suggestion.reverse(),
+            erroras_suggestion,
           },
           () => {
-            console.log("asstObj", this.state.catArray);
+            console.log("as_suggestion", this.state.as_suggestion);
           }
         );
       }
@@ -714,7 +728,8 @@ class CreateAssessmentTest extends Component {
                               />
                             </div>
                             <div className="col27 fs14 fw400 mt-2 error">
-                              {erroras_suggestion[index].as_max_range}
+                              {erroras_suggestion &&
+                                erroras_suggestion[index].as_max_range}
                             </div>
                           </Form.Group>
 
@@ -751,7 +766,8 @@ class CreateAssessmentTest extends Component {
                             />
 
                             <div className="col27 fs14 fw400 mt-2 error">
-                              {erroras_suggestion[index].as_suggestion_txt}
+                              {erroras_suggestion &&
+                                erroras_suggestion[index].as_suggestion_txt}
                             </div>
                           </Form.Group>
                         </>

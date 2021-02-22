@@ -43,7 +43,7 @@ class ViewQA extends Component {
     let data = {
       as_test_id: this.props.match.params.id,
       count: 100,
-      offset: 10,
+      offset: 1,
     };
 
     ELPViewApiService("superadminget_assessqueanstlist", data).then(
@@ -54,7 +54,7 @@ class ViewQA extends Component {
         if (result && result.status === 200) {
           asstDetail =
             result && result.data && result.data.data
-              ? result.data.data.assess_queans_listing[0]
+              ? result.data.data.assess_queans_listing
               : [];
         }
         this.setState(
@@ -146,7 +146,11 @@ class ViewQA extends Component {
                           <div className="QaBody">
                             <div className="col29 fw500 fs17 pb-1">
                               <strong>Question 1.</strong>
-                              {item.as_que_name}
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: item.as_que_name,
+                                }}
+                              ></span>
                             </div>
                             <div className="col10 fs17 fw500 mt-2 mb-3">
                               Answer:
@@ -156,7 +160,12 @@ class ViewQA extends Component {
                                 {item.assessment_answer.map((val) => {
                                   return (
                                     <li>
-                                      <strong>1.</strong> {val.as_answer}
+                                      <strong>1.</strong>
+                                      <span
+                                        dangerouslySetInnerHTML={{
+                                          __html: val.as_answer,
+                                        }}
+                                      ></span>
                                     </li>
                                   );
                                 })}
