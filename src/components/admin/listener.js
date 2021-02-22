@@ -905,9 +905,7 @@ class Adminlistener extends Component {
       }
     }
   }
-
   // change page
-
   onSearch() {
     this.getProffListing(
       this.state.pageno,
@@ -918,7 +916,6 @@ class Adminlistener extends Component {
       this.state.category
     );
   }
-
   handlePageChange = (newPageNumber) => {
     let chkUserProfile = this.state.activeProfile;
     this.setState({ pageNumber: newPageNumber }, () => {
