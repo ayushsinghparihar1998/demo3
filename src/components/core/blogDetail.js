@@ -55,11 +55,11 @@ const Mediadetails = (props) => {
       <div className="ngo_services media_details">
         <Container>
           <div className="ngo_listing mt-4 mb-4">
-            <div className="col1 fw600 fs22 text-center w-100 mt-4 pt-3">
+            <div className="col1 fw600 fs22 text-center w-100 mt-4 pt-3">  
               {props.history.location.state.type == "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
-            </div>
+            </div> 
             <hr className="ngohr" />
             <Row className="mt-4">
               <Col lg={12}>
