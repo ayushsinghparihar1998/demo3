@@ -3773,7 +3773,16 @@ kt_status: "1" */}
                                           Add Question
                                         </Button>
                                         <span className="mr-3">
-                                          <Image src={Visibilitys} alt="" />
+                                          <Image
+                                            src={Visibilitys}
+                                            alt=""
+                                            onClick={() =>
+                                              this.changepath(
+                                                "/qaViewDetails/" + item.as_id,
+                                                "superadminget_assessmenttestlist"
+                                              )
+                                            }
+                                          />
                                         </span>
                                         <span className="mr-3">
                                           <Image

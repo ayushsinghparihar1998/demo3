@@ -1951,10 +1951,26 @@ export default {
     url: "elp/superadminedit_assessmentqueans",
     method: "POST",
     data: {
-      assessment_id: "",
+      as_que_id: "",
       as_id: "",
       as_que_ans: "",
     },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminget_assessqueanstdetails: {
+    url: "elp/superadminget_assessqueanstdetails",
+    method: "POST",
+    data: {
+      as_que_id: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminget_assessqueanstlist: {
+    url: "elp/superadminget_assessqueanstlist",
+    method: "POST",
+    data: { count: "", offset: "", as_test_id: "" },
     showResultMessage: false,
     showErrorMessage: true,
   },

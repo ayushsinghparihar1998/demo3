@@ -65,11 +65,66 @@ class EditQa extends Component {
   componentDidMount = () => {
     console.log(this.props.match.params.id);
     console.log(this.props);
-    if (this.props.match.params.id > 0) {
-      // this.getasstDetails();
+    if (this.props.match.params.type > 0) {
+      this.getasstDetails();
     }
   };
 
+  getasstDetails = () => {
+    let data = {
+      as_que_id: this.props.match.params.id,
+    };
+    ELPViewApiService("superadminget_assessqueanstdetails", data).then(
+      (result) => {
+        console.log("result", result);
+        let asstObj = {};
+        //   if (result && result.status === 200) {
+        //     asstObj =
+        //       result && result.data && result.data.data
+        //         ? result.data.data[0]
+        //         : [];
+        //   }
+        //   let cats = [];
+        //   let catArray = this.state.catArray;
+        //   asstObj.assessment_category.map((item) => {
+        //     cats.push(item.as_test_cat_name);
+        //   });
+        //   console.log("cats", cats);
+        //   catArray.map((item) => {
+        //     if (cats.includes(item.as_test_cat_name)) {
+        //       item.flag = true;
+        //     } else {
+        //       item.flag = false;
+        //     }
+        //     return item;
+        //   });
+
+        //   let as_suggestion = [];
+        //   console.log("asstObj", asstObj.assessment_suggestion);
+        //   let arr = [];
+        //   asstObj.assessment_suggestion.map((item) => {
+        //     console.log(item);
+        //     let obj = {
+        //       as_min_range: +item.as_min_range,
+        //       as_max_range: +item.as_max_range,
+        //       as_suggestion_txt: item.as_suggestion,
+        //     };
+        //     as_suggestion.push(obj);
+        //   });
+        //   console.log("arr", as_suggestion);
+        //   this.setState(
+        //     {
+        //       asstObj,
+        //       catArray,
+        //       as_suggestion,
+        //     },
+        //     () => {
+        //       console.log("asstObj", this.state.catArray);
+        //     }
+        //   );
+      }
+    );
+  };
   handleChangeLoop1 = (name, value, ind, ansInd) => {
     let as_que_ans = this.state.as_que_ans;
     let erroras_que_ans = this.state.erroras_que_ans;
@@ -309,9 +364,11 @@ class EditQa extends Component {
     let data = this.state.asstObj;
     console.log("datadatadatadata", data);
 
-    data.assessment_id = this.props.match.params.id;
     if (this.props.match.params.type > 0) {
       data.as_id = this.props.match.params.type;
+      data.as_que_id = this.props.match.params.id;
+    } else {
+      data.assessment_id = this.props.match.params.id;
     }
     ELPViewApiService(
       this.props.match.params.type == 0
