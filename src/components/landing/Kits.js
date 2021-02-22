@@ -150,7 +150,7 @@ class Kits extends Component {
                     </div>
                   );
                 })}
-            </Slider>
+            </Slider> 
           </div>
         </Container>
       </div>

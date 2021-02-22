@@ -56,8 +56,9 @@ class Plans extends Component {
     });
   }
   render() {
-    const settingstwo = {
+    const settingstwo = { 
       dots: true,
+      nav: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
@@ -93,7 +94,7 @@ class Plans extends Component {
           {/* start end */}
 
           <div>
-            <Slider {...settingstwo}>
+            <Slider {...settingstwo}> 
               {this.state.workData &&
                 this.state.workData.map((item) => {
                   return (
