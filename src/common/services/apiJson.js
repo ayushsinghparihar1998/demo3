@@ -1895,7 +1895,7 @@ export default {
   superadminget_assessmenttestlist: {
     url: "elp/superadminget_assessmenttestlist",
     method: "POST",
-    data: {},
+    data: { count: "", offset: "", as_type: "" },
     showResultMessage: false,
     showErrorMessage: true,
   },

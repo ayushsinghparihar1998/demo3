@@ -99,81 +99,56 @@ class CreateAssessmentTest extends Component {
       }
     );
   };
-  // searchSubmit = () => {
-  //   console.log("this.state.name", this.state.name);
-  //   console.log("this.state.keyword", this.state.keyword);
-  //   console.log("this.state.status", this.state.status);
-  //   console.log("this.state.category", this.state.category);
-  //   let catval = [];
-  //   this.state.catArray.map((cat) => {
-  //     if (cat.flag == true) {
-  //       catval.push("'" + cat.name + "'");
-  //     }
-  //   });
-  //   let statusval = 0;
-  //   this.state.keywordArray.map((cat) => {
-  //     if (cat.flag == true) {
-  //       statusval = statusval + cat.value;
-  //     }
-  //   });
-  //   console.log("this.state.category", catval.join(","));
-  //   console.log("this.state.category", statusval);
-  //   this.setState({
-  //     status: statusval > 4 ? "" : statusval,
-  //     category: catval.join(","),
-  //   });
-  //   this.getProffListing(
-  //     this.state.offset,
-  //     this.state.count,
-  //     this.state.name,
-  //     statusval > 4 ? "" : statusval,
-  //     this.state.keyword,
-  //     catval.join(",")
-  //   );
-  // };
   getasstDetails = () => {
     let data = {
       as_id: this.props.match.params.id,
     };
-
     ELPViewApiService("superadminassessmenttest_listdetail", data).then(
       (result) => {
-        console.log("result", result.data.data.kits_details_listing[0]);
+        console.log("result", result);
         let asstObj = {};
-        let as_suggestion = {};
-        let erroras_suggestion = [];
-
         if (result && result.status === 200) {
           asstObj =
             result && result.data && result.data.data
-              ? result.data.data.kits_details_listing[0]
+              ? result.data.data[0]
               : [];
-
-          as_suggestion =
-            result && result.data && result.data.data
-              ? result.data.data.kits_details_listing[0].kits_services
-              : [];
-
-          result.data.data.kits_details_listing[0].kits_services.map((item) => {
-            erroras_suggestion.push({
-              as_max_range: 0,
-              as_suggestion_txt: "",
-            });
-          });
-          asstObj.as_suggestion = as_suggestion;
-          // delete asstObj.kits_services;
         }
+        let cats = [];
+        let catArray = this.state.catArray;
+        asstObj.assessment_category.map((item) => {
+          cats.push(item.as_test_cat_name);
+        });
+        console.log("cats", cats);
+        catArray.map((item) => {
+          if (cats.includes(item.as_test_cat_name)) {
+            item.flag = true;
+          } else {
+            item.flag = false;
+          }
+          return item;
+        });
 
+        let as_suggestion = [];
+        console.log("asstObj", asstObj.assessment_suggestion);
+        let arr = [];
+        asstObj.assessment_suggestion.map((item) => {
+          console.log(item);
+          let obj = {
+            as_min_range: +item.as_min_range,
+            as_max_range: +item.as_max_range,
+            as_suggestion_txt: item.as_suggestion,
+          };
+          as_suggestion.push(obj);
+        });
+        console.log("arr", as_suggestion);
         this.setState(
           {
             asstObj,
+            catArray,
             as_suggestion,
-            erroras_suggestion,
           },
           () => {
-            console.log("asstObj", this.state.asstObj);
-            console.log("as_suggestion", this.state.as_suggestion);
-            this.checkServiceError();
+            console.log("asstObj", this.state.catArray);
           }
         );
       }
@@ -354,9 +329,9 @@ class CreateAssessmentTest extends Component {
       ];
     }
 
-    // let proffCat = this.state.proffCat;
+    // let catArray = this.state.catArray;
     // if (name == "as_type" && +value == 2)
-    //   proffCat.map((item) => {
+    //   catArray.map((item) => {
     //     item.flag = false;
     //     return item;
     //   });

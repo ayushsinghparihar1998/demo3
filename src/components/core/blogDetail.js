@@ -24,13 +24,7 @@ const Mediadetails = (props) => {
   const [blogDetail, setBlogDetail] = useState({});
   const [url, seturl] = useState("");
   const [play, setplay] = useState(false);
-  const [opts, setopts] = useState({
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: play ? 1 : "",
-    },
-  });
+  const [opts, setopts] = useState({});
   useEffect(() => {
     _getBlogDetailHandler();
   }, []);
@@ -53,9 +47,7 @@ const Mediadetails = (props) => {
       } else {
         let url = "";
         var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var match = response.data.data[0].vl_video_url.match(
-          regExp
-        );
+        var match = response.data.data[0].vl_video_url.match(regExp);
         if (match && match[2].length == 11) {
           console.log("match[2]", match[2]);
           url = match[2];
@@ -65,9 +57,17 @@ const Mediadetails = (props) => {
         }
         setBlogDetail({ ...response.data.data[0] });
         seturl({ url });
+        setopts({
+          height: "390",
+          width: "640",
+          playerVars: {
+            autoplay: play == true ? 1 : "",
+          },
+        });
+        setplay(false)
       }
     } catch (err) {
-      console.log('err', );
+      console.log("err");
       console.log(err);
     }
   };
@@ -93,26 +93,20 @@ const Mediadetails = (props) => {
                     <Image src={blogDetail.bl_image} alt="" className="w-100" />
                   ) : (
                     <>
-                       {/* Dharmpal */} 
-                       <div className="elpVideoblog">  
-                          <Image
-                            src={blogDetail.vl_thumbnail_url}
-                            alt=""
-                            className="w-100 iconVideomain"
-                          />
-                          {play == false ? (
-                            <Image 
-                              src={VideoIcon}
-                              className="iconVideo"
-                              onClick={() => setplay(true)}
-                            /> 
-                          ) : (
-                            <> 
-                            <YouTube videoId={url} opts={opts} />  
-                            </>
-                          )}
-                          
-                      </div>  
+                      <Image
+                        src={blogDetail.vl_thumbnail_url}
+                        alt=""
+                        className="w-100"
+                      />
+                      {play == false ? (
+                        <Image
+                          src={VideoIcon}
+                          className="iconVideo"
+                          onClick={() => setplay(true)}
+                        />
+                      ) : (
+                        <YouTube videoId={url} opts={opts} /> 
+                      )}
                     </>
                   )}
                   <div className="pt-3 pb-3">
