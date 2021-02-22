@@ -21,10 +21,13 @@ import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
 import validator from "validator";
 // E:\workspace\ELP\newElp\ELNP\src\common\validations\validationAddVlogs.js
 import constant from "../../constant";
 import validateInput from "../../common/validations/validationAddVlogs";
+// import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 
 class CreateVlog extends Component {
   state = {
@@ -142,7 +145,6 @@ class CreateVlog extends Component {
     }
   };
 
-
   render() {
     const { vlobj, errors } = this.state;
     return (
@@ -242,7 +244,8 @@ class CreateVlog extends Component {
                         config={{
                           maxCharCount: 25,
                           showCharCount: true,
-
+                          // plugins : [WordCount],
+                          // extraPlugins: ['WordCount'],
                           height: 500,
                           toolbar: [
                             "bold",
@@ -254,19 +257,22 @@ class CreateVlog extends Component {
                           ],
                         }}
                         editor={ClassicEditor}
-                        data={vlobj.vl_desc}
                         onReady={(editor) => {
-                          // You can store the "editor" and use when it is needed.
                           console.log("Editor is ready to use!", editor);
                         }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          this.setState({
-                            vlobj: {
-                              ...this.state.vlobj,
-                              vl_desc: data,
-                            },
-                          });
+                          console.log(editor.isReadOnly);
+                          console.log(editor.getData().length);
+                          // editor.execCommand("undo");
+                          // if (editor.getData().length < 50) {
+                            this.setState({
+                              vlobj: {
+                                ...this.state.vlobj,
+                                vl_desc: data,
+                              },
+                            });
+                          // }
                         }}
                         onBlur={(event, editor) => {
                           console.log("Blur.", editor);
@@ -295,7 +301,7 @@ class CreateVlog extends Component {
                           this.setState({
                             vlobj: {
                               ...this.state.vlobj,
-                              vl_video_url: event.target.value.replace('watch?=' , 'embed/'),
+                              vl_video_url: event.target.value,
                             },
                           });
                         }}

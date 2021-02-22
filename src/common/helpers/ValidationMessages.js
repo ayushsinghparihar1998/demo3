@@ -139,7 +139,7 @@ export default {
   },
   vl_video_url: {
     required: "Please enter video url.",
-    correct_url: "Please enter a proper url",
+    correct_url: "Please enter a valid youtube video url",
     correct_you_url: "Please enter a youtube url",
   },
   vl_thumbnail_url: {

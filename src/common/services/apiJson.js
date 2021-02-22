@@ -1892,6 +1892,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  superadminget_assessmenttestlist: {
+    url: "elp/superadminget_assessmenttestlist",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   superadminadd_assessmenttest: {
     url: "elp/superadminadd_assessmenttest",
     method: "POST",
@@ -1935,6 +1942,17 @@ export default {
     method: "POST",
     data: {
       assessment_id: "",
+      as_que_ans: "",
+    },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadminedit_assessmentqueans: {
+    url: "elp/superadminedit_assessmentqueans",
+    method: "POST",
+    data: {
+      assessment_id: "",
+      as_id: "",
       as_que_ans: "",
     },
     showResultMessage: false,

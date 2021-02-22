@@ -19,7 +19,7 @@ import Slider from "react-slick";
 import ELPViewApiService from "../../common/services/apiService";
 import { Link } from "react-router-dom";
 import Saves from "../../assets/images/saves.png";
-import Squares from '../../assets/images/squares.png';
+import Squares from "../../assets/images/squares.png";
 
 class Plans extends Component {
   constructor(props) {
@@ -107,23 +107,27 @@ class Plans extends Component {
                             </div>
                           </div>
 
-                          <div className="fs24 fw600 col29 text-center text-uppercase">  
-                            {item.plan_category.map((val) => {
-                              // return
-                              return (
-                                <span
-                                  className={ 
-                                    val == "Eat"
-                                      ? "eatcat"
-                                      : val == "Luv"
-                                      ? "luvcat"
-                                      : "praycat"
-                                  }
-                                >
-                                  {val.puc_cat_name}{" "}
-                                </span>
-                              );
-                            })}
+                          <div className="fs24 fw600 col29 text-center text-uppercase">
+                            {item.plan_category.length == 3 ? (
+                              <span className="">HOLISTIC </span>
+                            ) : (
+                              item.plan_category.map((val) => {
+                                // return
+                                return (
+                                  <span
+                                    className={
+                                      val == "Eat"
+                                        ? "eatcat"
+                                        : val == "Luv"
+                                        ? "luvcat"
+                                        : "praycat"
+                                    }
+                                  >
+                                    {val.puc_cat_name}{" "}
+                                  </span>
+                                );
+                              })
+                            )}
                           </div>
                         </div>
                         <div className="plantwo text-center">
@@ -151,31 +155,31 @@ class Plans extends Component {
                               {item.pl_desc_details}
                             </div>
                           </div>
-                          <ul className="PlanAbouts">   
-                              <li>
-                                  <span className="sleft col11 fw400">
-                                      <Image src={Squares} alt="sqaress" /> 
-                                      It is a long established fact 
-                                  </span>
-                              </li>
-                              <li>
-                                  <span className="sleft col11 fw400">
-                                      <Image src={Squares} alt="sqaress" /> 
-                                      It is a long established fact 
-                                  </span>
-                              </li>
-                              <li>
-                                  <span className="sleft col11 fw400">
-                                      <Image src={Squares} alt="sqaress" /> 
-                                      It is a long established fact 
-                                  </span>
-                              </li>
-                              <li>
-                                  <span className="sleft col11 fw400">
-                                      <Image src={Squares} alt="sqaress" /> 
-                                      It is a long established fact 
-                                  </span>
-                              </li>
+                          <ul className="PlanAbouts">
+                            <li>
+                              <span className="sleft col11 fw400">
+                                <Image src={Squares} alt="sqaress" />
+                                It is a long established fact
+                              </span>
+                            </li>
+                            <li>
+                              <span className="sleft col11 fw400">
+                                <Image src={Squares} alt="sqaress" />
+                                It is a long established fact
+                              </span>
+                            </li>
+                            <li>
+                              <span className="sleft col11 fw400">
+                                <Image src={Squares} alt="sqaress" />
+                                It is a long established fact
+                              </span>
+                            </li>
+                            <li>
+                              <span className="sleft col11 fw400">
+                                <Image src={Squares} alt="sqaress" />
+                                It is a long established fact
+                              </span>
+                            </li>
                           </ul>
                           <Button className="btnType1 d-block w-100 mt-4">
                             <Link to={{ pathname: "/coming-soon" }}>
