@@ -24,6 +24,7 @@ import Suser from "../../assets/images/s_images.png";
 import UserChats from "../../assets/images/user_chat5.svg";
 import Infos from "../../assets/images/infos.png";
 import "react-datepicker/dist/react-datepicker.css";
+import Visibilitys from "../../assets/images/visibilitys.png"; 
 // import moment from "moment";
 import {
   Button,
@@ -3675,162 +3676,285 @@ kt_status: "1" */}
                 </Col>
               ) : this.state.pageType == "qaList" ? (
                 <>
-                  <Col md={8} lg={9} className="pl-1">
-                    <div className="professor_search ViewQa">
-                      <div className="fs22 fw600 col10">Question Answer</div>
-                      <div className="mentalOne">
-                        <div className="col14 fs18 fw600">Mental Health</div>
-                        <div className="position-relative">
-                          <Button variant="btnTypAdd" type="button">
-                            <span>
-                              <i className="fa fa-plus"></i>
-                            </span>{" "}
-                            Add More Question
-                            <span className="ml-2 b-none">
-                              <Image src={Infos} className="infos" />
-                            </span>
-                          </Button>
-                        </div>
+                  
+              <Col md={8} lg={9} className="pl-1">     
+                <div className="professor_search listBlogs VlogLists"> 
+                  <Row className="mb-1">
+                    <Col md={8}>
+                      <div className="fs22 fw600 col10"> 
+                           Assessment Test 
                       </div>
-                      <div className="QaListings">
-                        <div className="QaHeader">
-                          <div className="fs18 col14 fw300">
-                            Type: <span className="fw500">Relevant</span>
-                          </div>
-                          <div className="d-flex ml-auto minw-90">
-                            <span className="mr-3">
-                              <Image src={Editicon} alt="" />
-                            </span>
-                            <span>
-                              <Image src={Deleteicon} alt="" />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="QaBody">
-                          <div className="col29 fw500 fs17 pb-1">
-                            <strong>Question 1.</strong> Lorem ipsum dolor sit
-                            amet, consectetur adipiscing elit?
-                          </div>
-                          <div className="col10 fs17 fw500 mt-2 mb-3">
-                            Answer:
-                          </div>
-                          <div className="answerDetail">
-                            <ul>
-                              <li>
-                                <strong>1.</strong> iste natus error sit
-                                voluptatem accusantium.
-                              </li>
-                              <li>
-                                <strong>2.</strong> Excepteur sint occaecat
-                                cupidatat non proident.
-                              </li>
-                              <li>
-                                <strong>3.</strong> Duis aute irure dolor in
-                                reprehenderit
-                              </li>
-                            </ul>
-                            <div className="numberQa">
-                              <div className="counts">05</div>
-                              <div className="counts">04</div>
-                              <div className="counts">03</div>
+                      <div className="fw300 fs16 col14">
+                        {/* Lorem Ipsum is simply dummy and typesetting industry. */}
+                      </div>
+                    </Col>
+                    <Col md={4}>
+                      <div className="text-right pro_cbtn">
+                        <Button
+                          type="button"
+                          className="btnTyp5" 
+                        >
+                          create test 
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                        <Form className="p_form mb-4"> 
+                            <div className="checkCategory"> 
+                                <Form.Group
+                                    controlId="formBasicCheckbox1"
+                                    className="row"
+                                    >
+                                <Form.Check 
+                                    type="checkbox"
+                                    className="checkthree active" 
+                                    label="Free"
+                                    name="free"
+                                    checked=""  
+                                    />
+                                <Form.Check 
+                                    type="checkbox"
+                                    className="checkthree"  
+                                    label="Paid" 
+                                    name="paid" 
+                                    checked=""  
+                                />             
+                              </Form.Group> 
+                            </div>
+                        </Form>
+                </div>
+                
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                        Mental Health
+                                  </div>
+                                  <div className="d-flex ml-auto buttonTypes">
+                                      <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span>
+                                    <span className="mr-3"> 
+                                      <Image
+                                        src={Editicon}  
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                 <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
+                                <div className="mb-1"> 
+                                  <span className="fs18 fw400 col14"> 
+                                     120 Questions | 30 Marks
+                                  </span>
+                                </div>
+
+                                <div className="d-flex elpCategory"> 
+                                    <span className="eat">Eat</span> 
+                                    <span className="luv">Luv</span>
+                                    <span className="pray">Pray</span> 
+                                </div>
+
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="QaListings">
-                        <div className="QaHeader">
-                          <div className="fs18 col14 fw300">
-                            Type: <span className="fw500">Relevant</span>
-                          </div>
-                          <div className="d-flex ml-auto minw-90">
-                            <span className="mr-3">
-                              <Image src={Editicon} alt="" />
-                            </span>
-                            <span>
-                              <Image src={Deleteicon} alt="" />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="QaBody">
-                          <div className="col29 fw500 fs17 pb-1">
-                            <strong>Question 2.</strong> Lorem ipsum dolor sit
-                            amet, consectetur adipiscing elit?
-                          </div>
-                          <div className="col10 fs17 fw500 mt-2 mb-3">
-                            Answer:
-                          </div>
-                          <div className="answerDetail">
-                            <ul>
-                              <li>
-                                <strong>1.</strong> iste natus error sit
-                                voluptatem accusantium.
-                              </li>
-                              <li>
-                                <strong>2.</strong> Excepteur sint occaecat
-                                cupidatat non proident.
-                              </li>
-                              <li>
-                                <strong>3.</strong> Duis aute irure dolor in
-                                reprehenderit
-                              </li>
-                            </ul>
-                            <div className="numberQa">
-                              <div className="counts">05</div>
-                              <div className="counts">04</div>
-                              <div className="counts">03</div>
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                        Mental Health
+                                  </div>
+                                  <div className="d-flex ml-auto buttonTypes">
+                                  <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                  <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span>
+                                    <span className="mr-3"> 
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span> 
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
+                                <div className="mb-1"> 
+                                  <span className="fs18 fw400 col14"> 
+                                     120 Questions | 30 Marks  
+                                  </span>
+                                </div>
+
+                                <div className="d-flex elpCategory"> 
+                                    <span className="eat">Eat</span> 
+                                </div>
+
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="QaListings">
-                        <div className="QaHeader">
-                          <div className="fs18 col14 fw300">
-                            Type: <span className="fw500">Relevant</span>
-                          </div>
-                          <div className="d-flex ml-auto minw-90">
-                            <span className="mr-3">
-                              <Image src={Editicon} alt="" />
-                            </span>
-                            <span>
-                              <Image src={Deleteicon} alt="" />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="QaBody">
-                          <div className="col29 fw500 fs17 pb-1">
-                            <strong>Question 3.</strong> Lorem ipsum dolor sit
-                            amet, consectetur adipiscing elit?
-                          </div>
-                          <div className="col10 fs17 fw500 mt-2 mb-3">
-                            Answer:
-                          </div>
-                          <div className="answerDetail">
-                            <ul>
-                              <li>
-                                <strong>1.</strong> iste natus error sit
-                                voluptatem accusantium.
-                              </li>
-                              <li>
-                                <strong>2.</strong> Excepteur sint occaecat
-                                cupidatat non proident.
-                              </li>
-                              <li>
-                                <strong>3.</strong> Duis aute irure dolor in
-                                reprehenderit
-                              </li>
-                            </ul>
-                            <div className="numberQa">
-                              <div className="counts">05</div>
-                              <div className="counts">04</div>
-                              <div className="counts">03</div>
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                        Mental Health
+                                  </div>
+                                  <div className="d-flex ml-auto buttonTypes">
+                                      <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button>  
+                                      <span className="mr-3"> 
+                                        <Image
+                                            src={Visibilitys}
+                                            alt=""
+                                            
+                                          />
+                                      </span> 
+                                    <span className="mr-3"> 
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                 </div> 
+                                <div className="mb-1"> 
+                                  <span className="fs18 fw400 col14"> 
+                                     120 Questions | 30 Marks
+                                  </span>
+                                </div>
+
+                                <div className="d-flex elpCategory"> 
+                                    <span className="luv">Luv</span>
+                                    <span className="pray">Pray</span> 
+                                    <span className="holistic">Holistic</span> 
+                                </div>
+
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Col>
+
+                      <div className="adminlistener p-4 mb-3">
+                        <div className="d-flex text-left">
+                          <div className="w-100">
+                            <div className="d-flex justify-content-between">
+                              <div className="w-100">
+                                <div className="d-flex">
+                                  <div className="col1 fw600 fs18 pb-1">
+                                        Mental Health
+                                  </div>
+                                  <div className="d-flex ml-auto buttonTypes">
+                                  <Button type="button" className="btn-btnTypAdd"> 
+                                          <span><i class="fa fa-plus"></i></span>Add Question
+                                      </Button> 
+                                    <span className="mr-3">
+                                      <Image
+                                        src={Visibilitys}
+                                        alt=""
+                                        
+                                      /> 
+                                    </span> 
+                                    <span className="mr-3"> 
+                                      <Image
+                                        src={Editicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        src={Deleteicon}
+                                        alt=""
+                                        
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="fs17 fw500 col14 mb-1"> 
+                                    Price: 520/-
+                                </div> 
+                                <div className="mb-1"> 
+                                  <span className="fs18 fw400 col14"> 
+                                     120 Questions | 30 Marks
+                                  </span>
+                                </div>
+
+                                <div className="d-flex elpCategory"> 
+                                    <span className="eat">Eat</span> 
+                                    <span className="luv">Luv</span>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+              
+              </Col>
+            
                 </>
               ) : this.state.pageType == "vlogsList" ? (
                 <>
