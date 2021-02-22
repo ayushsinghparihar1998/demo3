@@ -487,9 +487,9 @@ class ProfessionalBlogList extends Component {
                     </div>
                   </Tab>
                   <Tab eventKey="LUV" title="LUV">
-                    <div className="coverageTab">
+                    <div className="coverageTab"> 
                       <Row>
-                        {/* <Col md={7}> */}
+                        {/* <Col md={7}> */} 
                         <Row>
                           {this.state.blogLuv &&
                             this.state.blogLuv.map((data, i) =>
@@ -621,7 +621,7 @@ class ProfessionalBlogList extends Component {
                             <Col md={12}>
                               <div className="professionalBlogs">
                                 <div className="fw600 fs20 col8 mb-4">
-                                  FEATURED
+                                  FEATURED 
                                 </div>
 
                                 <div className="elpVideoblog">
@@ -781,8 +781,8 @@ vl_video_url:  */}
                           </div>
                         </Col>
                         <Col md={12}>
-                          <div className="fs20 fw600 col8 mb-4 pb-3">
-                            All
+                          <div className="fs20 fw600 border_t col8 mb-4 pb-3">
+                            All 
                           </div>
                         </Col>
 
@@ -850,7 +850,7 @@ vl_video_url:  */}
                         </Button>
                       </div>
                     </div>
-                  </Tab>
+                  </Tab> 
                 </Tabs>
                 <div className="subscribe_here2 eatBlog mt-5 mb-5">
                   <Container>
