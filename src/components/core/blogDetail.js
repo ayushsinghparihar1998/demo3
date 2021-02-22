@@ -68,6 +68,7 @@ const Mediadetails = (props) => {
                     <Image src={blogDetail.bl_image} alt="" className="w-100" />
                   ) : (
                     //   Dharmpal
+                    
                     <Image
                       src={blogDetail.vl_thumbnail_url}
                       alt=""
