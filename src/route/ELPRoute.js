@@ -116,6 +116,7 @@ import QaViewDetails from "../components/admin/QaViewDetails";
 import AssessmentTestLists from "../components/admin/assessmentTestList";
 import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestList";
 import MentalQa from "../components/assessmentTest/mentalQa";
+import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -256,6 +257,10 @@ class ELPRoute extends Component {
           <PublicRoute
             path="/subscriptionDocument"
             component={SubscriptionDocument}
+          />
+          <PublicRoute
+            path="/mentalhealthQa"
+            component={MentalhealthQa} 
           />
           {/* <PublicRoute
             path="/subscriptionPlan/:id"

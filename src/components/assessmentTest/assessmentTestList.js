@@ -10,9 +10,9 @@ import {
   Form,
   Tabs,
   Tab,
-} from "react-bootstrap";
-import NavBar from "../core/nav";
-import Footer from "../core/footer";
+} from "react-bootstrap"; 
+import NavBar from "../core/nav"; 
+import Footer from "../core/footer"; 
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import Requestuserthree from "../../assets/images/pro_img3.svg";
