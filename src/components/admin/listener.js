@@ -47,9 +47,9 @@ import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Deleteusers from "../../assets/images/delete_users.svg";
+import Blueicons from "../../assets/images/blue_cross.svg";
 import Menuicon from "../../assets/images/menu_icon.svg";
 import Menuiconblue from "../../assets/images/menu_icon_blue.svg";
-import Blueicons from "../../assets/images/blue_cross.svg";
 // import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import ELPViewApiService from "../../common/services/apiService";
@@ -1234,6 +1234,11 @@ class Adminlistener extends Component {
             vl_id: id ? id : +this.state.deleteObjId,
             vl_status: status,
           }
+        : type == "QA" || this.state.deleteObjType == "QA"
+        ? {
+            as_id: id ? id : +this.state.deleteObjId,
+            as_status: status,
+          }
         : "";
 
     let apiData =
@@ -1244,6 +1249,8 @@ class Adminlistener extends Component {
           ? "superadmindelete_kitsstatus"
           : this.state.deleteObjType == "VLOGS"
           ? "superadmindelete_vlogsstatus"
+          : this.state.deleteObjType == "QA"
+          ? "superadmindelete_assessteststatus"
           : ""
         : api;
     ELPViewApiService(apiData, data).then((result) => {
@@ -1272,6 +1279,12 @@ class Adminlistener extends Component {
               this.state.pageno,
               this.state.count,
               this.state.vl_type
+            );
+          } else {
+            this.superadminget_assessmenttestlist(
+              this.state.pageno,
+              this.state.count,
+              this.state.as_type
             );
           }
         }, 100);
@@ -3687,7 +3700,7 @@ kt_status: "1" */}
                       <Row className="mb-1">
                         <Col md={8}>
                           <div className="fs22 fw600 col10">
-                            Assessment Test 
+                            Assessment Test
                           </div>
                           <div className="fw300 fs16 col14">
                             {/* Lorem Ipsum is simply dummy and typesetting industry. */}
@@ -3719,37 +3732,37 @@ kt_status: "1" */}
                             <Form.Check
                               type="radio"
                               id="as_type1"
-                              value={1}
+                              value={2}
                               name="as_type"
                               label="Free"
                               // onChange={() =>
                               //   this.superadminget_assessmenttestlist(1, 10, 2)
                               // }
                               onClick={(e) => {
-                                this.superadminget_assessmenttestlist(1, 10, 1);
+                                this.superadminget_assessmenttestlist(1, 10, 2);
                               }}
                               className={`mr-5  ${
                                 this.state.as_type == 1 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 1}
+                              checked={+this.state.as_type == 2}
                             />
 
                             <Form.Check
                               type="radio"
                               id="as_type1"
-                              value={2}
+                              value={1}
                               name="as_type"
                               label="Paid"
                               // onChange={() =>
                               //   this.superadminget_assessmenttestlist(1, 10, 1)
                               // }
                               onClick={(e) => {
-                                this.superadminget_assessmenttestlist(1, 10, 2);
+                                this.superadminget_assessmenttestlist(1, 10, 1);
                               }}
                               className={`mr-5  ${
                                 this.state.as_type == 2 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 2}
+                              checked={+this.state.as_type == 1}
                             />
                           </Form.Group>
                         </div>
@@ -3774,7 +3787,7 @@ kt_status: "1" */}
                                           className="btn-btnTypAdd btnQa"
                                           onClick={() =>
                                             this.changepath(
-                                              "/editQa/" + item.as_id,
+                                              "/editQa/" + item.as_id + "/" + 0,
                                               "superadminget_assessmenttestlist"
                                             )
                                           }
@@ -3792,7 +3805,7 @@ kt_status: "1" */}
                                               this.changepath(
                                                 "/qaViewDetails/" + item.as_id,
                                                 "superadminget_assessmenttestlist"
-                                              )  
+                                              )
                                             }
                                             className="pointer"
                                           />
@@ -3812,7 +3825,18 @@ kt_status: "1" */}
                                           />
                                         </span>
                                         <span>
-                                          <Image src={Deleteicon} alt="" className="pointer" />
+                                          <Image
+                                            src={Deleteicon}
+                                            alt=""
+                                            className="pointer"
+                                            onClick={(e) => {
+                                              this.handleOpenAllConformation(
+                                                item.as_title,
+                                                item.as_id,
+                                                "QA"
+                                              );
+                                            }}
+                                          />
                                         </span>
                                       </div>
                                     </div>
@@ -3845,9 +3869,8 @@ as_type: "2" */}
                                                 ? "luv"
                                                 : val.as_test_cat_name == "Pray"
                                                 ? "pray"
-                                                : "holistic" 
-                                                
-                                            } 
+                                                : "holistic"
+                                            }
                                           >
                                             {val.as_test_cat_name}
                                           </span>

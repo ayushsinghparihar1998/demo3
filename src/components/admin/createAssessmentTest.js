@@ -41,19 +41,8 @@ class CreateAssessmentTest extends Component {
         as_suggestion: [],
       },
 
-      as_suggestion: [
-        {
-          as_min_range: 0,
-          as_max_range: 0,
-          as_suggestion_txt: "",
-        },
-      ],
-      erroras_suggestion: [
-        {
-          as_max_range: "",
-          as_suggestion_txt: "",
-        },
-      ],
+      as_suggestion: [],
+      erroras_suggestion: [],
       errors: {
         as_title: "",
         as_type: "",
@@ -79,6 +68,24 @@ class CreateAssessmentTest extends Component {
     console.log(this.props);
     if (this.props.match.params.id > 0) {
       this.getasstDetails();
+    } else {
+      let as_suggestion = [
+        {
+          as_min_range: 0,
+          as_max_range: 0,
+          as_suggestion_txt: "",
+        },
+      ];
+      let erroras_suggestion = [
+        {
+          as_max_range: "",
+          as_suggestion_txt: "",
+        },
+      ];
+      this.setState({
+        as_suggestion,
+        erroras_suggestion,
+      });
     }
   };
 
@@ -107,14 +114,19 @@ class CreateAssessmentTest extends Component {
       (result) => {
         console.log("result", result);
         let asstObj = {};
+
         if (result && result.status === 200) {
           asstObj =
             result && result.data && result.data.data
               ? result.data.data[0]
               : [];
         }
+
         let cats = [];
         let catArray = this.state.catArray;
+        let as_suggestion = this.state.as_suggestion;
+        let erroras_suggestion = this.state.erroras_suggestion;
+
         asstObj.assessment_category.map((item) => {
           cats.push(item.as_test_cat_name);
         });
@@ -128,43 +140,43 @@ class CreateAssessmentTest extends Component {
           return item;
         });
 
-        let as_suggestion = [];
-        let erroras_suggestion = [];
+        let sugg = [];
 
-        console.log(
-          "asstObj assessment_suggestion",
-          asstObj.assessment_suggestion
-        );
         asstObj.assessment_suggestion.map((item) => {
-          console.log(item);
-
           item.as_min_range = +item.as_min_range;
           item.as_max_range = +item.as_max_range;
           item.as_suggestion_txt = item.as_suggestion;
+          as_suggestion.push(item);
+        });
 
+        asstObj.assessment_suggestion.map((item) => {
+          console.log(item);
           let objer = {
             as_min_range: "",
             as_max_range: "",
             as_suggestion_txt: "",
           };
-          as_suggestion.push(item);
-          console.log('as_suggestion', as_suggestion);
           erroras_suggestion.push(objer);
         });
-        console.log("arr", as_suggestion);
-        console.log("err", erroras_suggestion);
-
-        this.setState(
-          {
-            asstObj,
-            catArray,
-            as_suggestion: as_suggestion.reverse(),
-            erroras_suggestion,
-          },
-          () => {
-            console.log("as_suggestion", this.state.as_suggestion);
-          }
-        );
+        setTimeout(() => {
+          this.setState(
+            {
+              asstObj,
+              catArray,
+              // as_suggestion: as_suggestion.reverse(),
+              as_suggestion,
+              erroras_suggestion,
+            },
+            () => {
+              console.log(
+                "as_suggestionas_suggestion",
+                this.state.as_suggestion
+              );
+              console.log("asstObj", this.state.asstObj);
+              this.checkServiceError();
+            }
+          );
+        }, 200);
       }
     );
   };
@@ -365,7 +377,7 @@ class CreateAssessmentTest extends Component {
     let asstObj = this.state.asstObj;
     let as_suggestion = this.state.as_suggestion;
     let erroras_suggestion = this.state.erroras_suggestion;
-
+    console.log("submit");
     let catval = [];
     this.state.catArray.map((cat) => {
       console.log(cat, cat.flag == true);
@@ -431,6 +443,17 @@ class CreateAssessmentTest extends Component {
                 "/editQa/" + result.data.data.assessment_id + "/" + val
               );
             }, 1000);
+            if (this.props.match.params.id == 0) {
+              setTimeout(() => {
+                this.props.history.push(
+                  "/editQa/" + result.data.data.assessment_id + "/" + val
+                );
+              }, 1000);
+            } else {
+              setTimeout(() => {
+                this.props.history.push("/admin");
+              }, 1000);
+            }
             // this.clear();
           } else {
             this.setState({
@@ -685,20 +708,6 @@ class CreateAssessmentTest extends Component {
                           <Form.Group className="mb-4">
                             <Form.Label className="fs20 fw600 col14">
                               Select range
-                              {this.state.as_suggestion.length > 1 ? (
-                                <Col md={1}>
-                                  <Image
-                                    src={Deleteicon}
-                                    alt=""
-                                    className="deleteUserset"
-                                    onClick={() =>
-                                      this.removeCategorySetup(index)
-                                    }
-                                  />
-                                </Col>
-                              ) : (
-                                ""
-                              )}
                             </Form.Label>
                             {/* <Form.Control type="range" className="inputTyp2" />  */}
                             <div className="slider">
