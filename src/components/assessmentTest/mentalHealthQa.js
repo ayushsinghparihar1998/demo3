@@ -257,7 +257,7 @@ class MentalhealthQa extends Component {
 
       <Modal show={this.state.show} onHide={this.handleClose} className="CreateAccount alertShow">                  
         <Modal.Header>   
-            <Button type="close" class="close">  
+            <Button type="button" onClick={this.handleClose} class="close">   
                 <Image src={CrossTwo} alt="alert" className="alertCross" />     
             </Button> 
         </Modal.Header> 
