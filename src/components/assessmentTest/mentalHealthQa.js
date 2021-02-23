@@ -99,36 +99,39 @@ class MentalhealthQa extends Component {
                                         <li>
                                             <span className="ansOne">
                                             <Form.Group controlId="formBasicCheckbox">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
-                                            </Form.Group>   
+                                              <Form.Check
+                                                type="radio"
+                                                id="seven" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
+                                            </Form.Group>    
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxtwo">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
-                                            </Form.Group>   
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="eight" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
+                                            </Form.Group>  
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxthree"> 
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="nine"  
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
                                             </Form.Group>   
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
@@ -145,36 +148,39 @@ class MentalhealthQa extends Component {
                                         <li>
                                             <span className="ansOne">
                                             <Form.Group controlId="formBasicCheckbox">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
-                                            </Form.Group>   
+                                              <Form.Check
+                                                type="radio"
+                                                id="four" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
+                                            </Form.Group> 
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxtwo">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
-                                            </Form.Group>   
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="five" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
+                                            </Form.Group> 
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxthree"> 
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="six" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
                                             </Form.Group>   
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
@@ -191,36 +197,39 @@ class MentalhealthQa extends Component {
                                         <li>
                                             <span className="ansOne">
                                             <Form.Group controlId="formBasicCheckbox">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
+                                              <Form.Check
+                                                type="radio"
+                                                id="one" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
                                             </Form.Group>   
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxtwo">
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="two" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
                                             </Form.Group>   
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 
                                             <li>
                                             <span className="ansOne">
-                                            <Form.Group controlId="formBasicCheckboxthree"> 
-                                                <Form.Check
-                                                label=""
-                                                className="checkboxTyp1"
-                                                name="Featured"
-                                                type="checkbox" 
-                                               />
+                                            <Form.Group controlId="formBasicCheckbox">
+                                              <Form.Check
+                                                type="radio"
+                                                id="three" 
+                                                name="as_que_type"
+                                                label="" 
+                                                className="radioboxTyp1"
+                                              />
                                             </Form.Group>   
                                             </span> 
                                             <span>Is It a long established fact that a reader will be distracted by the readable.</span></li> 

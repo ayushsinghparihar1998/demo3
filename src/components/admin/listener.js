@@ -4160,7 +4160,7 @@ as_type: "2" */}
                                           }
                                         >
                                           APPROVE
-                                        </Button>
+                                        </Button> 
                                         <Button
                                           className="btnTyp9 reject"
                                           onClick={() =>
@@ -4171,14 +4171,14 @@ as_type: "2" */}
                                           }
                                         >
                                           REJECT
-                                        </Button>
+                                        </Button> 
                                       </div>
                                     </div>
                                   </div>
                                 );
                               })}{" "}
                           </div>
-                        </Tab>
+                        </Tab>     
                         <Tab eventKey="completed" title="COMPLETED">
                           <div className="requests">
                             {this.state.ratingList &&
