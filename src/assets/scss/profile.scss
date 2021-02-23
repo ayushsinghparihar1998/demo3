@@ -1345,7 +1345,9 @@
         strong {
             min-width: 36px;  
         }
-        
+    }
+    .QuestionList {
+        margin-bottom: 30px;
     }
     .answerDetail {
         ul {
@@ -1357,8 +1359,17 @@
                     min-width: 40px;
                     position: relative;
                     .form-group {
-                        position: absolute; 
-                        top: -19px; 
+                        position: absolute;
+                        top: -8px;                     
+
+                        .radioboxTyp1 {
+                            cursor: pointer;
+                            input {
+                                width: 1.8rem;
+                                height: 1.8rem; 
+                                cursor: pointer;  
+                            }
+                        }
 
                         .checkboxTyp1 label:after, .checkboxTyp2 label:after {
                             width: 1.8rem;
