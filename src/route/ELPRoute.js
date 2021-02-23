@@ -237,7 +237,7 @@ class ELPRoute extends Component {
             path="/assessmentTestLists"
             component={AssessmentTestLists}
           />
-          <PublicRoute
+          <Route
             path="/assessmentTests/:name"
             component={AssessmentTestListTwo}
           />
@@ -258,8 +258,8 @@ class ELPRoute extends Component {
             path="/subscriptionDocument"
             component={SubscriptionDocument}
           />
-          <PublicRoute
-            path="/mentalhealthQa"
+          <Route
+            path="/starttest"
             component={MentalhealthQa} 
           />
           {/* <PublicRoute

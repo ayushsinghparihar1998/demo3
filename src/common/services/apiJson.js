@@ -1992,7 +1992,7 @@ export default {
     url: "elp/getassessmentlist_bycategory",
     method: "POST",
     data: { count: '', offset: '', assess_category: "" },
-    showResultMessage: true,
+    showResultMessage: false,
     showErrorMessage: true,
   },
 };

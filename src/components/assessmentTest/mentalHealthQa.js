@@ -14,6 +14,8 @@ import {
   Tab,
   Modal, 
 } from "react-bootstrap"; 
+import Alerts from "../../assets/images/alerts.png"; 
+import CrossTwo from "../../assets/images/crosstwo.png";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
@@ -28,8 +30,6 @@ import UserChats from "../../assets/images/user_chat5.svg";
 import Infos from "../../assets/images/infos.png"; 
 import BlogProcessFive from "../../assets/images/blog4.png"; 
 import VideoIcon from "../../assets/images/videoIcon.png";
-import Alerts from "../../assets/images/alerts.png"; 
-import CrossTwo from "../../assets/images/crosstwo.png";
 import Slider from "react-rangeslider";
 
 import constant from "../../constant"; 
