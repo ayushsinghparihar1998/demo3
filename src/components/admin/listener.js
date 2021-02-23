@@ -25,6 +25,7 @@ import UserChats from "../../assets/images/user_chat5.svg";
 import Infos from "../../assets/images/infos.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Visibilitys from "../../assets/images/visibilitys.png";
+import VideoIcon from "../../assets/images/videoIcon.png";
 // import moment from "moment";
 import {
   Button,
@@ -61,7 +62,7 @@ import {
   setLocalStorage,
 } from "../../common/helpers/Utils";
 
-class Adminlistener extends Component {
+class Adminlistener extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -89,6 +90,9 @@ class Adminlistener extends Component {
       name: "",
       status: "",
       keyword: "",
+      setShow: false,
+      show: false,
+      show3: false,
       keywordArray: [
         { name: "Active", value: 1, flag: true },
         { name: "Inactive", value: 4, flag: true },
@@ -111,7 +115,16 @@ class Adminlistener extends Component {
       as_type: 1,
       vl_type: 1,
     };
+    this.handleClose = this.handleClose.bind(this)
+    this.handleShow = this.handleShow.bind(this)
   }
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => { 
+    this.setState({ show: false });
+  };
   componentDidMount() {
     this.getBlogCat("blogCategory", "getblogcategory");
     this.getBlogCat("pressBlogCategory", "getpressblogcategory");
@@ -3888,8 +3901,8 @@ as_type: "2" */}
                 </>
               ) : this.state.pageType == "vlogsList" ? (
                 <>
-                  <Col md={8} lg={9} className="pl-1">
-                    <div className="professor_search listBlogs VlogLists">
+                  <Col md={8} lg={9} className="pl-1 VlogMain">
+                    <div className="professor_search listBlogs">
                       <Row className="mb-1">
                         <Col md={8}>
                           <div className="fs22 fw600 col10">Vlog Listing</div>
@@ -3909,7 +3922,7 @@ as_type: "2" */}
                                 )
                               }
                             >
-                              create VLOG
+                              CREATE VLOG 
                             </Button>
                           </div>
                         </Col>
@@ -3953,18 +3966,43 @@ as_type: "2" */}
                         return (
                           <div className="adminlistener p-4 mb-3">
                             <div className="d-flex text-left">
-                              <div className="mr-2 pt-1">
+                              {/* <div className="mr-2 pt-1">
                                 <Image src={item.vl_thumbnail_url} alt="" />
+                              </div> */}
+                              <Col md={2}> 
+                              <div className="elpVideoblog"> 
+                                <Image 
+                                  src={item.vl_thumbnail_url}   
+                                  className="iconVideomain"
+                                /> 
+                              <div>   
+                                  <Image
+                                    src={VideoIcon} 
+                                    className="iconVideo" 
+                                    onClick={this.handleShow}  
+                                  /> 
+                                <iframe  
+                                  width="100%"
+                                  height="100"
+                                  // src={this.state.url}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                ></iframe>
+
                               </div>
+                            </div>
+                          </Col>
+                          <Col md={10}> 
                               <div className="pl-2 w-100">
                                 <div className="d-flex justify-content-between">
                                   <div className="w-100">
                                     <div className="d-flex">
-                                      <div className="col1 fw600 fs18 pb-1">
+                                      <div className="col1 fw600 fs18 pb-1"> 
                                         {item.vl_title}
                                       </div>
                                       <div className="d-flex ml-auto">
-                                        <span className="pr-3 fs14 col47 fw400">
+                                        {/* <span className="pr-3 fs14 col47 fw400">
                                           {item.vl_status == "2"
                                             ? "Deactivate"
                                             : "Activate"}
@@ -3987,7 +4025,7 @@ as_type: "2" */}
                                             }}
                                             checked={item.vl_status == "1"}
                                           />
-                                        </span>
+                                        </span> */}
                                         <span className="mr-3">
                                           <Image
                                             onClick={() =>
@@ -4026,11 +4064,14 @@ as_type: "2" */}
                                         }}
                                       >
                                         {/* {item.vl_desc} */}
-                                      </span>
+                                      </span> 
+                                      
                                     </div>
+                                    <a className="d-block col40 fw15 fw500">Read more...</a>
                                   </div>
                                 </div>
                               </div>
+                              </Col> 
                             </div>
                           </div>
                         );
@@ -4528,6 +4569,39 @@ as_type: "2" */}
           )} */}
         </div>
         <Footer />
+
+          {/* modal start */}
+
+      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                   
+        <Modal.Header closeButton>    
+        </Modal.Header>
+        <Modal.Body>
+        <div className="elpVideoblog">      
+            <Image
+              src={BlogProcessFive} 
+              className="iconVideomain"
+            /> 
+          <div>  
+              <Image
+                src={VideoIcon} 
+                className="iconVideo" 
+                onClick={this.handleShow}  
+              /> 
+            <iframe  
+              width="100%"
+              height="400"
+              // src={this.state.url}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+
+          </div>
+        </div>
+         </Modal.Body> 
+      </Modal>
+      {/* modal end */}
+
       </div>
     );
   }

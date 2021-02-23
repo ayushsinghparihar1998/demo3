@@ -309,7 +309,7 @@ class VlogList extends Component {
         Launch demo modal
       </Button> */} 
 
-      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                  
+      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                   
         <Modal.Header closeButton>    
         </Modal.Header>
         <Modal.Body>
