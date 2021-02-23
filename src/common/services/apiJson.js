@@ -1977,14 +1977,21 @@ export default {
   superadmindelete_assessqueansstatus: {
     url: "elp/superadmindelete_assessqueansstatus",
     method: "POST",
-    data: { as_que_id: "", as_status:'' },
+    data: { as_que_id: "", as_status: "" },
     showResultMessage: true,
     showErrorMessage: true,
   },
   superadmindelete_assessteststatus: {
     url: "elp/superadmindelete_assessteststatus",
     method: "POST",
-    data: { as_id: "", as_status:'' },
+    data: { as_id: "", as_status: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getassessmentlist_bycategory: {
+    url: "elp/getassessmentlist_bycategory",
+    method: "POST",
+    data: { count: '', offset: '', assess_category: "" },
     showResultMessage: true,
     showErrorMessage: true,
   },
