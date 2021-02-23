@@ -259,7 +259,7 @@ class ELPRoute extends Component {
             component={SubscriptionDocument}
           />
           <Route
-            path="/starttest"
+            path="/starttest/:id"
             component={MentalhealthQa} 
           />
           {/* <PublicRoute

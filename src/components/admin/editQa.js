@@ -166,7 +166,7 @@ class EditQa extends Component {
           });
         } else {
           console.log(name, value);
-          item[name] = value;
+          as_que_ans[ind][name] = value;
           erroras_que_ans[ind][name] =
             item[name].length == 0 ? "Please " + validName : "";
         }
@@ -427,7 +427,7 @@ class EditQa extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Quick Links
                     </div>
-                    <div className="d-flex m-3 pb-3 border-bottom"> 
+                    <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
                           <Link to={{ pathname: `/admin` }}>Back</Link>
@@ -498,15 +498,15 @@ class EditQa extends Component {
                                   <Form.Group controlId="formBasicCheckbox">
                                     <Form.Check
                                       type="radio"
-                                      id="as_que_type1"
+                                      id={index + item.as_id}
                                       value={1}
-                                      name="as_que_type"
-                                      label="Rrelevant"
+                                      // name="as_que_type"
+                                      label="Relevant"
                                       className="radioboxTyp1"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
-                                          e.target.name,
-                                          e.target.value,
+                                          "as_que_type",
+                                          1,
                                           index,
                                           ""
                                         )
@@ -519,15 +519,15 @@ class EditQa extends Component {
                                   <Form.Group controlId="formBasicCheckbox">
                                     <Form.Check
                                       type="radio"
-                                      id="as_que_type2"
+                                      id={item.as_id + index}
                                       value={2}
-                                      name="as_que_type"
+                                      // name="as_que_type"
                                       label="Irrelevant"
                                       className="radioboxTyp1"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
-                                          e.target.name,
-                                          e.target.value,
+                                          "as_que_type",
+                                          2,
                                           index,
                                           ""
                                         )

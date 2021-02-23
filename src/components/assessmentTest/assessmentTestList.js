@@ -67,7 +67,6 @@ class AssessmentTestListTwo extends Component {
     this.setState({ show: false });
   };
   componentDidMount = () => {
-    console.log('getLocalStorage("customerInfo")',getLocalStorage("customerInfo").u_accesstoken);
     this.setState({
       tabVal: this.props.match.params.name,
     });
@@ -157,13 +156,28 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item) => {
+                          asstList.map((item, index) => {
                             return (
                               <Col md={4} sm={6}>
-                                <div className="blogOneMain bg-Color1">
+                                <div
+                                  className="blogOneMain"
+                                  className={`blogOneMain  ${
+                                    Math.round(index % 3) == 0
+                                      ? "bg-Color2 "
+                                      : Math.round(index % 3) == 1
+                                      ? "bg-Color1 "
+                                      : "bg-Color3"
+                                  }`}
+                                >
                                   <Button
                                     type="button"
-                                    className="blogBtns btnColor1"
+                                    className={`blogBtns  ${
+                                      Math.round(index % 3) == 0
+                                        ? "btnColor2 "
+                                        : Math.round(index % 3) == 1
+                                        ? "btnColor1 "
+                                        : "btnColor3"
+                                    }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}
                                   </Button>
@@ -182,7 +196,9 @@ class AssessmentTestListTwo extends Component {
                                       type="button"
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
-                                        this.props.history.push("/starttest")
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
                                       }
                                     >
                                       start now
@@ -233,7 +249,9 @@ class AssessmentTestListTwo extends Component {
                                       type="button"
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
-                                        this.props.history.push("/starttest")
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
                                       }
                                     >
                                       start now
@@ -284,7 +302,9 @@ class AssessmentTestListTwo extends Component {
                                       type="button"
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
-                                        this.props.history.push("/starttest")
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
                                       }
                                     >
                                       start now
@@ -335,7 +355,9 @@ class AssessmentTestListTwo extends Component {
                                       type="button"
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
-                                        this.props.history.push("/starttest")
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
                                       }
                                     >
                                       start now
