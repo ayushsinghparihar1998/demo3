@@ -10,9 +10,9 @@ import {
   Form,
   Tabs,
   Tab,
-} from "react-bootstrap"; 
-import NavBar from "../core/nav"; 
-import Footer from "../core/footer"; 
+} from "react-bootstrap";
+import NavBar from "../core/nav";
+import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
 import Requestuserthree from "../../assets/images/pro_img3.svg";
@@ -40,6 +40,10 @@ import ReactStars from "react-rating-stars-component";
 import { Popover } from "antd";
 import ELPRxApiService from "../../common/services/apiService";
 import moment from "moment";
+import { Modal } from "react-bootstrap";
+import Alerts from "../../assets/images/alerts.png";
+import CrossTwo from "../../assets/images/crosstwo.png";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 class AssessmentTestListTwo extends Component {
   constructor(props, context) {
@@ -47,9 +51,21 @@ class AssessmentTestListTwo extends Component {
     this.state = {
       asstList: [],
       tabVal: "",
+      setShow: false,
+      show: false,
+      show3: false,
     };
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
   componentDidMount = () => {
     this.setState({
       tabVal: this.props.match.params.name,
@@ -140,13 +156,36 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item) => {
+                          asstList.map((item, index) => {
                             return (
                               <Col md={4} sm={6}>
-                                <div className="blogOneMain bg-Color1">
+                                <div
+                                  className="blogOneMain"
+                                  className={`blogOneMain  ${
+                                    Math.round(index % 5) == 0
+                                      ? "bg-Color1"
+                                      : Math.round(index % 5) == 1
+                                      ? "bg-Color2"
+                                      : Math.round(index % 5) == 2
+                                      ? "bg-Color3"
+                                      : Math.round(index % 5) == 3
+                                      ? "bg-Color4"
+                                      : "bg-Color5"
+                                  }`}
+                                >
                                   <Button
                                     type="button"
-                                    className="blogBtns btnColor1"
+                                    className={`blogBtns  ${
+                                      Math.round(index % 5) == 0
+                                        ? "btnColor1"
+                                        : Math.round(index % 5) == 1
+                                        ? "btnColor2 "
+                                        : Math.round(index % 5) == 2
+                                        ? "btnColor3"
+                                        : Math.round(index % 5) == 3
+                                        ? "btnColor4"
+                                        : "btnColor5"
+                                    }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}
                                   </Button>
@@ -160,12 +199,27 @@ class AssessmentTestListTwo extends Component {
                                     <small>RS.</small>
                                     {item.as_test_price}/-
                                   </div>
-                                  <Button
-                                    type="button"
-                                    className="PlanBtns PlanColor1"
-                                  >
-                                    start now
-                                  </Button>
+                                  {getLocalStorage("customerInfo") ? (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() =>
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
+                                      }
+                                    >
+                                      start now
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() => this.handleShow()}
+                                    >
+                                      start now
+                                    </Button>
+                                  )}
                                 </div>
                               </Col>
                             );
@@ -198,12 +252,27 @@ class AssessmentTestListTwo extends Component {
                                     <small>RS.</small>
                                     {item.as_test_price}/-
                                   </div>
-                                  <Button
-                                    type="button"
-                                    className="PlanBtns PlanColor1"
-                                  >
-                                    start now
-                                  </Button>
+                                  {getLocalStorage("customerInfo") ? (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() =>
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
+                                      }
+                                    >
+                                      start now
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() => this.handleShow()}
+                                    >
+                                      start now
+                                    </Button>
+                                  )}
                                 </div>
                               </Col>
                             );
@@ -236,12 +305,27 @@ class AssessmentTestListTwo extends Component {
                                     <small>RS.</small>
                                     {item.as_test_price}/-
                                   </div>
-                                  <Button
-                                    type="button"
-                                    className="PlanBtns PlanColor1"
-                                  >
-                                    start now
-                                  </Button>
+                                  {getLocalStorage("customerInfo") ? (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() =>
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
+                                      }
+                                    >
+                                      start now
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() => this.handleShow()}
+                                    >
+                                      start now
+                                    </Button>
+                                  )}
                                 </div>
                               </Col>
                             );
@@ -274,12 +358,27 @@ class AssessmentTestListTwo extends Component {
                                     <small>RS.</small>
                                     {item.as_test_price}/-
                                   </div>
-                                  <Button
-                                    type="button"
-                                    className="PlanBtns PlanColor1"
-                                  >
-                                    start now
-                                  </Button>
+                                  {getLocalStorage("customerInfo") ? (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() =>
+                                        this.props.history.push(
+                                          "/starttest/" + item.as_id
+                                        )
+                                      }
+                                    >
+                                      start now
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      type="button"
+                                      className="PlanBtns PlanColor1"
+                                      onClick={() => this.handleShow()}
+                                    >
+                                      start now
+                                    </Button>
+                                  )}
                                 </div>
                               </Col>
                             );
@@ -291,6 +390,33 @@ class AssessmentTestListTwo extends Component {
               </div>
             </div>
           </Container>
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            className="CreateAccount alertShow"
+          >
+            <Modal.Header>
+              <Button type="button" onClick={this.handleClose} class="close">
+                <Image src={CrossTwo} alt="alert" className="alertCross" />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-4">
+                <Image src={Alerts} alt="alert" className="" />
+              </div>
+              <div className="fw600 fs28 mb-3">Alert!</div>
+              <div className="col14 fs20 fw500 mb-4">
+                Please Login to start the test
+              </div>
+              <Button
+                type="button"
+                className="btnTyp5"
+                onClick={this.handleClose}
+              >
+                OKAY
+              </Button>
+            </Modal.Body>
+          </Modal>
         </div>
         <Footer />
       </div>

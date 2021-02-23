@@ -1991,8 +1991,27 @@ export default {
   getassessmentlist_bycategory: {
     url: "elp/getassessmentlist_bycategory",
     method: "POST",
-    data: { count: '', offset: '', assess_category: "" },
-    showResultMessage: true,
+    data: { count: "", offset: "", assess_category: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getassessqueans_list: {
+    url: "elp/getassessqueans_list",
+    method: "POST",
+    data: { count: "", offset: "", as_test_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  submitassess_test: {
+    url: "elp/submitassess_test",
+    method: "POST",
+    data: {
+      as_test_id: "",
+      ar_no_attend_que: "",
+      ar_skip_que: "",
+      assess_submit: "",
+    },
+    showResultMessage: false,
     showErrorMessage: true,
   },
 };
