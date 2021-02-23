@@ -7,7 +7,7 @@ import Requestusertwo from "../../assets/images/pro_img2.svg";
 import Visibilitys from "../../assets/images/visibilitys.png";      
 import ArrowDownload from "../../assets/images/arrow_download.png";        
 
-class MyAssessmentTest extends Component {
+class MyAssessmentTest extends Component {  
 
     render() {
         return (

@@ -217,7 +217,7 @@ class ViewQA extends Component {
                             <div className="answerDetail">
                               <ul>
                                 {item.assessment_answer.map((val) => {
-                                  return (
+                                  return (  
                                     <li>
                                       <strong>1.</strong>
                                       <span

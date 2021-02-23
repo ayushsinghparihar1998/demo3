@@ -1337,6 +1337,68 @@
         justify-content: flex-end;
     }
 }
+
+.mentalHealths {
+    .qaList {
+        display: flex;
+        margin-bottom: 10px;
+        strong {
+            min-width: 36px;  
+        }
+        
+    }
+    .answerDetail {
+        ul {
+            li {
+                display: flex;
+                font-size: 17px !important; 
+                margin-bottom: 20px !important; 
+                span.ansOne {
+                    min-width: 40px;
+                    position: relative;
+                    .form-group {
+                        position: absolute; 
+                        top: -19px; 
+
+                        .checkboxTyp1 label:after, .checkboxTyp2 label:after {
+                            width: 1.8rem;
+                            height: 1.8rem;  
+                        }
+                        .checkboxTyp1 [type='checkbox']:checked + label:before {
+                            top: 0px; 
+                            left: 5px;
+                        }
+                    } 
+                }
+            }
+        }
+        .QuestionList {
+            margin-bottom: 40px;
+        }
+    }
+    .btnTyp5.talkBtntwo {
+        background: #3EB2DD !important;
+        border: solid 1px #3EB2DD !important; 
+    }
+}
+
+.CreateAccount { 
+    &.alertShow {
+        .modal-dialog {
+            max-width: 550px;
+        }
+        .modal-body {
+            padding: 40px;
+            text-align: center;
+        }
+        .alertCross {
+            // position: absolute;
+            // top: 15px; 
+            // right: 15px;
+        }
+    }
+}
+
 .corporateMember.CreateAssessment {  
     padding: 30px 30px; 
 }

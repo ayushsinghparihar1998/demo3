@@ -60,7 +60,7 @@ class VlogList extends Component {
   handleClose = () => { 
     this.setState({ show: false });
   };
-  render() {  
+  render() {   
     // const {​show}​ = this.state
     return (
       <div className="page__wrapper innerpage">  
