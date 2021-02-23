@@ -46,7 +46,7 @@ import CONSTANTS from "../../common/helpers/Constants";
 import constant from "../../constant";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
-const socket = socketClass.getSocket(); 
+const socket = socketClass.getSocket();
 
 class NavBar extends Component {
   constructor() {
@@ -615,7 +615,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/EAT"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/EAT"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
                         title="LUV"
@@ -631,7 +633,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/LUV"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
+                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>{" "}
                       </NavDropdown>,
                       <NavDropdown
                         title="PRAY"
@@ -647,10 +651,12 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/PRAY"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/PRAY"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
-                        title="ELNP(Holistic)"  
+                        title="ELNP(Holistic)"
                         id="basic-nav-dropdown4"
                         className="Holistics"
                       >
@@ -663,7 +669,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/LUV"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
                         title="HELP SOMEONE"
