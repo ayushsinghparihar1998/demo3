@@ -235,7 +235,7 @@ class MentalhealthQa extends Component {
                     </div>
 
                     <div className="mt-4 text-right">   
-                        <Button type="button" className="btnTyp5" onClick={this.handleShow}>
+                        <Button type="button" className="btnTyp5 talkBtntwo" onClick={this.handleShow}>
                             SAVE & NEXT
                         </Button>
                     </div>
