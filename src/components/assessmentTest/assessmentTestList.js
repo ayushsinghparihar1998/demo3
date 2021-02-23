@@ -162,21 +162,29 @@ class AssessmentTestListTwo extends Component {
                                 <div
                                   className="blogOneMain"
                                   className={`blogOneMain  ${
-                                    Math.round(index % 3) == 0
-                                      ? "bg-Color2 "
-                                      : Math.round(index % 3) == 1
-                                      ? "bg-Color1 "
-                                      : "bg-Color3"
+                                    Math.round(index % 5) == 0
+                                      ? "bg-Color1"
+                                      : Math.round(index % 5) == 1
+                                      ? "bg-Color2"
+                                      : Math.round(index % 5) == 2
+                                      ? "bg-Color3"
+                                      : Math.round(index % 5) == 3
+                                      ? "bg-Color4"
+                                      : "bg-Color5"
                                   }`}
                                 >
                                   <Button
                                     type="button"
                                     className={`blogBtns  ${
-                                      Math.round(index % 3) == 0
+                                      Math.round(index % 5) == 0
+                                        ? "btnColor1"
+                                        : Math.round(index % 5) == 1
                                         ? "btnColor2 "
-                                        : Math.round(index % 3) == 1
-                                        ? "btnColor1 "
-                                        : "btnColor3"
+                                        : Math.round(index % 5) == 2
+                                        ? "btnColor3"
+                                        : Math.round(index % 5) == 3
+                                        ? "btnColor4"
+                                        : "btnColor5"
                                     }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}

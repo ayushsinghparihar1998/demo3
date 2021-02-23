@@ -175,8 +175,8 @@ class MentalhealthQa extends Component {
     ELPViewApiService("submitassess_test", data).then((result) => {
       console.log("result", result);
 
-      if (result && result.status === 200) {
-        this.props.history.push("/assessmentTests/EAT");
+      if (result && result.data.status === 'success') {
+        this.props.history.push("/viewAssessmentTest/"+result.data.data.ar_id);
       }
     });
   };
