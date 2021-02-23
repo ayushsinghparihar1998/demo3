@@ -501,7 +501,7 @@ class EditQa extends Component {
                                       id="as_que_type1"
                                       value={1}
                                       name="as_que_type"
-                                      label="Rrelevant"
+                                      label="Relevant" 
                                       className="radioboxTyp1"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
@@ -667,7 +667,7 @@ class EditQa extends Component {
                       onClick={() => this.checkError()}
                     >
                       create
-                    </Button>
+                    </Button> 
                   </Form>
                 </div>
               </Col>

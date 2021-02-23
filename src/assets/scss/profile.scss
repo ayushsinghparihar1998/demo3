@@ -910,6 +910,9 @@
         }
         .borderRight {
             border-right: solid 1px #ddd; 
+            &:last-child {
+                border-right: none; 
+            }
         }
     }
     .customsRadio {
@@ -1418,6 +1421,33 @@
     border: 1px solid #60B2D2; 
     padding-bottom: 50px;
     margin-top: 75px; 
+    text-align: center;
+    .scoreCounts {
+        width: 140px;
+        height: 140px;
+        margin: auto;
+        background: $col18;
+        border-radius: 50%;
+        border: solid 12px $col18; 
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); 
+        margin-top: -80px;
+        margin-bottom: 20px;
+        .CircularProgressbar .CircularProgressbar-trail {
+            stroke: #e8f6fa;
+            stroke-width: 10px;
+        }
+        .CircularProgressbar .CircularProgressbar-path {
+            stroke: #8ad1e7;
+            stroke-width: 10px; 
+        }
+        .CircularProgressbar .CircularProgressbar-text {
+            fill: #333;
+            font-size: 26px;
+            dominant-baseline: middle;
+            text-anchor: middle;
+            font-weight: 700;
+        }
+    }
     .disorders {
         position: relative; 
         &:before {
@@ -1704,6 +1734,30 @@
     }
 }
 
+.elpVideoblog {  
+    position: relative;
+    overflow: hidden; 
+    iframe {
+        width: 100%;  
+    } 
+    .iconVideomain {
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+    }
+    .iconVideo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        cursor: pointer; 
+        z-index: 9;  
+    }
+}
+
 .processBlog {  
     position: relative; 
     background: $col18; 
@@ -1763,8 +1817,20 @@
                 background: linear-gradient(180deg, #D7FCFF 0%, #FFFFFF 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
             }
+            .bg-Color4 {
+                background: linear-gradient(180deg, #DBDAFF 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
+            }
+            .bg-Color5 {    
+                background: linear-gradient(180deg, #FFF8D6 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
+            }
+            .bg-Color6 {     
+                background: linear-gradient(180deg, #FED8C3 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
+            }
             .blogBtns {
-                @include blogBtnColor; 
+                @include blogBtnColor;  
             }
             .btnColor2 {
                 background: #7AD052;
@@ -1773,6 +1839,18 @@
             .btnColor3 {
                 background: #1FC7D5;
                 border: solid 1px #1FC7D5; 
+            }
+            .btnColor4 {
+                background: #6763EA;
+                border: solid 1px #6763EA; 
+            }
+            .btnColor5 {
+                background: #D9BD3D;
+                border: solid 1px #D9BD3D; 
+            }
+            .btnColor6 {
+                background: #DA6A2A;
+                border: solid 1px #DA6A2A; 
             }
             .PlanBtns {
                 @include PlanBtnColor; 
@@ -1811,8 +1889,8 @@
         position: relative;
         overflow: hidden; 
         iframe {
-            width: 100%; 
-        }
+            width: 100%;  
+        } 
         .iconVideomain {
             position: absolute;
             width: 100%;

@@ -7,13 +7,13 @@ import Requestusertwo from "../../assets/images/pro_img2.svg";
 import Visibilitys from "../../assets/images/visibilitys.png";      
 import ArrowDownload from "../../assets/images/arrow_download.png";        
 
-class MyAssessmentTest extends Component {  
+class MyAssessmentTest extends Component {    
 
     render() {
         return (
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
-                    <NavBar {...this.props} />
+                    <NavBar {...this.props} />  
                 </div>
                 <div className="profile_layout myAssesstestMain pt-4 pb-5">
                     <Container>
@@ -30,7 +30,7 @@ class MyAssessmentTest extends Component {
                                                     <th>Test Name</th>
                                                     <th>Category</th>
                                                     <th>Scores</th>
-                                                    <th>Actions</th>
+                                                    <th>Actions</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>

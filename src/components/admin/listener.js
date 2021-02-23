@@ -3658,21 +3658,27 @@ kt_status: "1" */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                    <Row>
+                                    <Row>     <Col md={3}> 
+                                                <div className="text-right"> 
+                                                  <span className="fw400 fs14 col29 col14">
+                                                      Services:  
+                                                  </span>
+                                                </div> 
+                                              </Col>
                                       {item.kits_services.map((val, ind) => {
                                         return (
                                           <>
                                             <Col
-                                              md="4"
+                                              md="3"
                                               className="borderRight pr-2"
                                             >
                                               <div className="d-flex justify-content-between">
-                                                <div>
+                                                {/* <div>
                                                   <span className="fw400 fs14 col29 col14">
                                                     {ind + 1}) {val.ks_services}{" "}
                                                   </span>
-                                                  :{" "}
-                                                </div>
+                                                  :{" "} 
+                                                </div> */} 
                                                 <div>
                                                   <span className="fs13">
                                                     {val.ks_services}
