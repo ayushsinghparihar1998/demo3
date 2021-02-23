@@ -163,7 +163,8 @@ class CreateAssessmentTest extends Component {
             {
               asstObj,
               catArray,
-              as_suggestion: as_suggestion.reverse(),
+              // as_suggestion: as_suggestion.reverse(),
+              as_suggestion,
               erroras_suggestion,
             },
             () => {

@@ -72,56 +72,70 @@ class EditQa extends Component {
 
   getasstDetails = () => {
     let data = {
-      as_que_id: this.props.match.params.id,
+      as_que_id: this.props.match.params.type,
     };
     ELPViewApiService("superadminget_assessqueanstdetails", data).then(
       (result) => {
         console.log("result", result);
         let asstObj = {};
-        //   if (result && result.status === 200) {
-        //     asstObj =
-        //       result && result.data && result.data.data
-        //         ? result.data.data[0]
-        //         : [];
-        //   }
-        //   let cats = [];
-        //   let catArray = this.state.catArray;
-        //   asstObj.assessment_category.map((item) => {
-        //     cats.push(item.as_test_cat_name);
-        //   });
-        //   console.log("cats", cats);
-        //   catArray.map((item) => {
-        //     if (cats.includes(item.as_test_cat_name)) {
-        //       item.flag = true;
-        //     } else {
-        //       item.flag = false;
-        //     }
-        //     return item;
-        //   });
+        let as_que_ans = [];
+        let erroras_que_ans = [
+          {
+            as_que_name: "",
+            as_que_type: "",
+            as_ans: [],
+          },
+        ];
 
-        //   let as_suggestion = [];
-        //   console.log("asstObj", asstObj.assessment_suggestion);
-        //   let arr = [];
-        //   asstObj.assessment_suggestion.map((item) => {
-        //     console.log(item);
-        //     let obj = {
-        //       as_min_range: +item.as_min_range,
-        //       as_max_range: +item.as_max_range,
-        //       as_suggestion_txt: item.as_suggestion,
-        //     };
-        //     as_suggestion.push(obj);
-        //   });
-        //   console.log("arr", as_suggestion);
-        //   this.setState(
-        //     {
-        //       asstObj,
-        //       catArray,
-        //       as_suggestion,
-        //     },
-        //     () => {
-        //       console.log("asstObj", this.state.catArray);
-        //     }
-        //   );
+        let obj = { option: "", weightage: "" };
+
+        console.log(
+          "result.data.data.assess_queans_listing[0]",
+          result.data.data.assess_queans_listing[0]
+        );
+        if (result && result.status === 200) {
+          as_que_ans.push(
+            result &&
+              result.data &&
+              result.data.data &&
+              result.data.data.assess_queans_listing[0]
+          );
+
+          console.log("as_que_ans", as_que_ans);
+
+          as_que_ans[0].assessment_answer.map((item) => {
+            erroras_que_ans[0].as_ans.push(obj);
+          });
+
+          console.log("assessment_answer", as_que_ans[0].assessment_answer);
+          as_que_ans[0].assessment_answer.map((item) => {
+            item.option = item.as_answer;
+            item.weightage = item.as_weightage;
+
+            delete item.as_weightage;
+            delete item.as_answer;
+
+            return item;
+          });
+
+          as_que_ans[0].as_ans = as_que_ans[0].assessment_answer;
+          asstObj.as_id = as_que_ans.as_test_id;
+          asstObj.as_que_id = as_que_ans.as_que_id;
+          asstObj.as_que_ans = as_que_ans;
+          // delete as_que_ans[0].assessment_answer;
+          this.setState(
+            {
+              asstObj,
+              as_que_ans,
+              erroras_que_ans,
+            },
+            () => {
+              console.log("asstObj", this.state.asstObj);
+              console.log("as_que_ans", this.state.as_que_ans);
+              console.log("erroras_que_ans", this.state.erroras_que_ans);
+            }
+          );
+        }
       }
     );
   };
@@ -365,8 +379,8 @@ class EditQa extends Component {
     console.log("datadatadatadata", data);
 
     if (this.props.match.params.type > 0) {
-      data.as_id = this.props.match.params.type;
-      data.as_que_id = this.props.match.params.id;
+      data.as_id = this.props.match.params.id;
+      data.as_que_id = this.props.match.params.type;
     } else {
       data.assessment_id = this.props.match.params.id;
     }
@@ -454,6 +468,7 @@ class EditQa extends Component {
                                     editor
                                   );
                                 }}
+                                data={item.as_que_name}
                                 onChange={(event, editor) => {
                                   const data = editor.getData();
                                   console.log(editor.getData().length);
@@ -548,6 +563,7 @@ class EditQa extends Component {
                                           ],
                                         }}
                                         editor={ClassicEditor}
+                                        data={val.option}
                                         onReady={(editor) => {
                                           console.log(
                                             "Editor is ready to use!",
@@ -627,18 +643,22 @@ class EditQa extends Component {
                         );
                       })}
                     <div className="position-relative mb-2">
-                      <Button
-                        variant="btnTypAdd"
-                        type="button"
-                        className="inputTyp2 form-control"
-                        onClick={() => this.addQuesion()}
-                        disabled={!this.state.queShow}
-                      >
-                        <span className="col40">
-                          <i className="fa fa-plus"></i>
-                        </span>
-                        <b className="col40 fw500">Add Question</b>
-                      </Button>
+                      {this.props.match.params.type > 0 ? (
+                        ""
+                      ) : (
+                        <Button
+                          variant="btnTypAdd"
+                          type="button"
+                          className="inputTyp2 form-control"
+                          onClick={() => this.addQuesion()}
+                          disabled={!this.state.queShow}
+                        >
+                          <span className="col40">
+                            <i className="fa fa-plus"></i>
+                          </span>
+                          <b className="col40 fw500">Add Question</b>
+                        </Button>
+                      )}
                     </div>
 
                     <Button

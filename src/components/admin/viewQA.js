@@ -25,12 +25,18 @@ import Deleteicon from "../../assets/images/delete_icon.svg";
 import blogclock from "../../assets/images/blogclock.png";
 import UserChats from "../../assets/images/user_chat5.svg";
 import Infos from "../../assets/images/infos.png";
-
+import { Modal } from "react-bootstrap";
+import Deleteusers from "../../assets/images/delete_users.svg";
+import Blueicons from "../../assets/images/blue_cross.svg";
 import constant from "../../constant";
 class ViewQA extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {};
+    this.state = {
+      deleteObjConformationModal: false,
+      deletename: "",
+      as_que_id: "",
+    };
   }
 
   componentDidMount = () => {
@@ -69,6 +75,31 @@ class ViewQA extends Component {
     );
   };
 
+  deleteQue = () => {
+    let data = {
+      as_que_id: this.state.as_que_id,
+      as_status: 3,
+    };
+    let apiData = "superadmindelete_assessqueansstatus";
+
+    ELPViewApiService(apiData, data).then((result) => {
+      this.setState({ deleteObjConformationModal: false });
+      if (result && result.status === 200) {
+        setTimeout(() => {
+          this.superadminget_assessqueanstlist();
+        }, 100);
+      }
+    });
+  };
+
+  handleConformation = (flag, ind, id) => {
+    this.setState({
+      deleteObjConformationModal: flag,
+      deletename: "Question " + ind,
+      as_que_id: id,
+    });
+  };
+
   render() {
     const { asstDetail } = this.state;
 
@@ -103,7 +134,15 @@ class ViewQA extends Component {
                   <div className="mentalOne">
                     <div className="col14 fs18 fw600">Mental Health</div>
                     <div className="position-relative">
-                      <Button variant="btnTypAdd" type="button">
+                      <Button
+                        variant="btnTypAdd"
+                        type="button"
+                        onClick={() =>
+                          this.props.history.push(
+                            "/editQa/" + this.props.match.params.id + "/" + 0
+                          )
+                        }
+                      >
                         <span>
                           <i className="fa fa-plus"></i>
                         </span>{" "}
@@ -115,7 +154,7 @@ class ViewQA extends Component {
                     </div>
                   </div>
                   {this.state.asstDetail &&
-                    this.state.asstDetail.map((item) => {
+                    this.state.asstDetail.map((item, index) => {
                       return (
                         <div className="QaListings">
                           <div className="QaHeader">
@@ -128,10 +167,29 @@ class ViewQA extends Component {
                               </span>
                             </div>
                             <div className="d-flex ml-auto minw-90">
-                              <span className="mr-3">
+                              <span
+                                className="mr-3 pointer"
+                                onClick={() =>
+                                  this.props.history.push(
+                                    "/editQa/" +
+                                      this.props.match.params.id +
+                                      "/" +
+                                      item.as_que_id
+                                  )
+                                }
+                              >
                                 <Image src={Editicon} alt="" />
                               </span>
-                              <span>
+                              <span
+                                className="pointer"
+                                onClick={() =>
+                                  this.handleConformation(
+                                    true,
+                                    index + 1,
+                                    item.as_que_id
+                                  )
+                                }
+                              >
                                 <Image src={Deleteicon} alt="" />
                               </span>
                             </div>
@@ -145,12 +203,12 @@ class ViewQA extends Component {
                         "as_datetime":"2021-02-08 19:23:08"}, */}
                           <div className="QaBody">
                             <div className="col29 fw500 fs17 pb-1">
-                              <strong>Question 1.</strong>
+                              <strong>Question {index + 1}.</strong>
                               <span
                                 dangerouslySetInnerHTML={{
                                   __html: item.as_que_name,
-                                }} 
-                                className="d-inline-block ml-1" 
+                                }}
+                                className="d-inline-block ml-1"
                               ></span>
                             </div>
                             <div className="col10 fs17 fw500 mt-2 mb-3">
@@ -165,8 +223,8 @@ class ViewQA extends Component {
                                       <span
                                         dangerouslySetInnerHTML={{
                                           __html: val.as_answer,
-                                        }} 
-                                        className="d-inline-block ml-1" 
+                                        }}
+                                        className="d-inline-block ml-1"
                                       ></span>
                                     </li>
                                   );
@@ -190,6 +248,42 @@ class ViewQA extends Component {
               </Col>
             </Row>
           </Container>
+          <Modal
+            show={this.state.deleteObjConformationModal}
+            onHide={() => this.handleConformation(false)}
+            className="custom-popUp confirmation-box delete_modal"
+            bsSize="small"
+          >
+            <Modal.Body>
+              <div className="delete_user mt-4">
+                <Image src={Deleteusers} alt="" />
+                <Image
+                  src={Blueicons}
+                  alt=""
+                  className="close pointer"
+                  onClick={() => this.handleConformation(false)}
+                />
+                <div className="text-center fs24 mt-4 col64 mb-4">
+                  Are you sure want to delete <br /> {this.state.deletename}?{" "}
+                </div>
+
+                <div className="text-center mb-5">
+                  <button
+                    className="btn btn-success text-uppercase"
+                    onClick={() => this.deleteQue()}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn btn-default text-uppercase sm-btn"
+                    onClick={() => this.handleConformation(false)}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
         </div>
         <Footer />
       </div>

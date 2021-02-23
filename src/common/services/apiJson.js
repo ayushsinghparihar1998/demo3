@@ -1974,4 +1974,18 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  superadmindelete_assessqueansstatus: {
+    url: "elp/superadmindelete_assessqueansstatus",
+    method: "POST",
+    data: { as_que_id: "", as_status:'' },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadmindelete_assessteststatus: {
+    url: "elp/superadmindelete_assessteststatus",
+    method: "POST",
+    data: { as_id: "", as_status:'' },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
 };
