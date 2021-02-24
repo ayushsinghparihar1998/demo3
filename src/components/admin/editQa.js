@@ -482,13 +482,13 @@ class EditQa extends Component {
                               </Form.Label>
                               <Row>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox">
+                                  <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
                                     <Form.Check
                                       type="radio"
                                       id={index + item.as_id}
                                       value={1}
                                       // name="as_que_type"
-                                      label="Relevant"
+                                      label=""
                                       className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
@@ -500,16 +500,17 @@ class EditQa extends Component {
                                       }
                                       checked={+item.as_que_type == 1}
                                     />
+                                    <div className="custom_label">Relevant</div>
                                   </Form.Group>
                                 </Col>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox">
+                                  <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
                                     <Form.Check
                                       type="radio"
                                       id={item.as_id + index}
                                       value={2}
                                       // name="as_que_type"
-                                      label="Irrelevant"
+                                      label=""
                                       className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
@@ -520,7 +521,8 @@ class EditQa extends Component {
                                         )
                                       }
                                       checked={+item.as_que_type == 2}
-                                    />
+                                    /> 
+                                    <div className="custom_label">Irrelevant</div> 
                                   </Form.Group>
                                 </Col>
                               </Row>

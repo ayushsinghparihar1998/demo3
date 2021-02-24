@@ -558,35 +558,37 @@ class CreateAssessmentTest extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Question Type
+                        Question Type 
                       </Form.Label>
                       <Row>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox">
+                          <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
                             <Form.Check
                               type="radio"
                               id="as_type1"
                               value={2}
                               name="as_type"
-                              label="Free"
+                              label=""
                               className="radioboxTyp1"
                               onChange={(e) => this.handleChange(e)}
                               checked={+asstObj.as_type == 2}
                             />
+                            <div className="custom_label">Free</div>  
                           </Form.Group>
                         </Col>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox">
+                          <Form.Group controlId="formBasicCheckbox" className="formRadioCustom"> 
                             <Form.Check
                               type="radio"
                               id="plan_type2"
                               value={1}
                               name="as_type"
-                              label="Paid"
+                              label=""
                               className="radioboxTyp1"
                               checked={+asstObj.as_type == 1}
                               onChange={(e) => this.handleChange(e)}
                             />
+                            <div className="custom_label">Paid</div>
                           </Form.Group>
                         </Col>
                       </Row>

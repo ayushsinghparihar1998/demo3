@@ -1247,8 +1247,22 @@
         background: #FFBB00;
         @include elpAll;
         width: 120px; 
+        padding: 0 0;  
     } 
 }
+.holistic {   
+    background: #FFBB00;
+    width: 120px; 
+    height: 30px;
+    line-height: 30px; 
+    color: $col29; 
+    font-size: 13px;
+    padding: 5px 15px; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    text-align: center;
+    margin-right: 10px; 
+} 
 .ViewQa {
     position: relative; 
     background: $col18;
@@ -2149,6 +2163,20 @@
                 }
             }
         }
+    }
+}
+
+.formRadioCustom {
+    position: relative;
+    display: flex; 
+    .form-check {
+        cursor: default;
+        .form-check-input {
+            cursor: pointer;
+        }
+    }
+    .custom_label {
+        padding-top: 10px;  
     }
 }
 
