@@ -2021,6 +2021,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  superadminget_assessusertestlistbyid: {
+    url: "elp/superadminget_assessusertestlistbyid",
+    method: "POST",
+    data: { ar_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
   getuserassessment_resultlist: {
     url: "elp/getuserassessment_resultlist",
     method: "POST",

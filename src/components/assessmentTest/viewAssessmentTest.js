@@ -47,16 +47,21 @@ class ViewAssessmentTest extends Component {
 
   componentDidMount = () => {
     console.log(this.props.match.params.id);
+    console.log(this.props.match.params.type);
     console.log(this.props);
     this.getAssessuser_testListbyid();
   };
 
   getAssessuser_testListbyid = () => {
     let data = {
-      ar_id: this.props.match.params.id,
+      ar_id: +this.props.match.params.id,
     };
 
-    ELPViewApiService("getAssessuser_testListbyid", data).then((result) => {
+    let api =
+      this.props.match.params.type == "member"
+        ? "getAssessuser_testListbyid"
+        : "superadminget_assessusertestlistbyid";
+    ELPViewApiService(api, data).then((result) => {
       console.log("result", result);
       let asstDetail = [];
 
@@ -92,8 +97,8 @@ class ViewAssessmentTest extends Component {
                       <div className="scoreImg">
                         <div className="scoreCounts">
                           <CircularProgressbar
-                            value={percentage}
-                            text={`${percentage}%`}
+                            value={asstDetail ? asstDetail.ar_score : 0}
+                            text={`${asstDetail ? asstDetail.ar_score : 0}%`}
                           />
                         </div>{" "}
                       </div>
@@ -120,13 +125,13 @@ ar_suggesstion: "There is no suggesstion for this test marks"
 ar_test_id: "33"
 ar_u_id: "549" */}
                           <div className="fs18 fw500 col14">
-                            {asstDetail.ar_no_que}
+                            {asstDetail && asstDetail.ar_no_que}
                           </div>
                         </div>
                         <div>
                           <div className="fs16 fw400 col14 mb-3">Answered</div>
                           <div className="fs18 fw500 col14">
-                            {asstDetail.ar_no_attend_que}
+                            {asstDetail && asstDetail.ar_no_attend_que}
                           </div>
                         </div>
                         <div>
@@ -134,14 +139,19 @@ ar_u_id: "549" */}
                             Not Answered
                           </div>
                           <div className="fs18 fw500 col14">
-                            {asstDetail.ar_skip_que}
+                            {asstDetail && asstDetail.ar_skip_que}
                           </div>
                         </div>
                       </div>
                       <div className="scoreSuggetion">
                         <div className="fs18 col8 fw500 mb-2">SUGGESTION</div>
-                        <div className="col8 fs15 fw300">
-                          {asstDetail.ar_suggesstion}
+                        <div
+                          className="col8 fs15 fw300"
+                          dangerouslySetInnerHTML={{
+                            __html: asstDetail && asstDetail.ar_suggesstion,
+                          }}
+                        >
+                          {/* {asstDetail && asstDetail.ar_suggesstion} */}
                         </div>
                       </div>
                     </div>

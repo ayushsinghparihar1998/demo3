@@ -176,7 +176,7 @@ class MentalhealthQa extends Component {
       console.log("result", result);
 
       if (result && result.data.status === 'success') {
-        this.props.history.push("/viewAssessmentTest/"+result.data.data.ar_id);
+        this.props.history.push("/viewAssessmentTest/"+result.data.data.ar_id+'/member');
       }
     });
   };
