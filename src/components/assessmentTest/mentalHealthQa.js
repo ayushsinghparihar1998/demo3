@@ -175,8 +175,10 @@ class MentalhealthQa extends Component {
     ELPViewApiService("submitassess_test", data).then((result) => {
       console.log("result", result);
 
-      if (result && result.data.status === 'success') {
-        this.props.history.push("/viewAssessmentTest/"+result.data.data.ar_id+'/member');
+      if (result && result.data.status === "success") {
+        this.props.history.push(
+          "/viewAssessmentTest/" + result.data.data.ar_id + "/member"
+        );
       }
     });
   };
@@ -287,17 +289,16 @@ as_weightage: "1" */}
                     </div>
                   </div>
                   <div className="mt-4">
-                    {this.state.start == 0 ? (
-                      ""
-                    ) : (
-                      <Button
-                        type="button"
-                        className="btnTyp5 talkBtntwo"
-                        onClick={() => this.pageHandle("prev")}
-                      >
-                        PREVIOUS
-                      </Button>
-                    )}
+                    <Button
+                      type="button"
+                      // className="btnTyp5 talkBtntwo"
+                      className={`btnTyp5 talkBtntwo  ${
+                        this.state.start == 0 ? "disable" : ""
+                      }`}
+                      onClick={() => this.pageHandle("prev")}
+                    >
+                      PREVIOUS
+                    </Button>
                   </div>
 
                   <div className="mt-4 text-right">

@@ -23,7 +23,7 @@ import VideoIcon from "../../assets/images/videoIcon.png";
 const Mediadetails = (props) => {
   const [blogDetail, setBlogDetail] = useState({});
   const [url, seturl] = useState("");
-  const [play, setplay] = useState(false);
+  const [play, setplay] = useState(Boolean);
   const [opts, setopts] = useState({});
   useEffect(() => {
     _getBlogDetailHandler();
@@ -65,6 +65,9 @@ const Mediadetails = (props) => {
           },
         });
         setplay(false)
+        console.log('play');
+        console.log(play);
+        console.log(url);
       }
     } catch (err) {
       console.log("err");
@@ -90,15 +93,15 @@ const Mediadetails = (props) => {
               <Col lg={12}>
                 <div className="ngo_details mt-2">  
                   {props.history.location.state.type == "blog" ? (
-                    <Image src={blogDetail.bl_image} alt="" className="w-100" />
+                    <Image src={blogDetail && blogDetail.bl_image} alt="" className="w-100" />
                   ) : (
                     <>
                     <div className="elpVideoblog">
                       
-                      {play == false ? (
+                      {!play ? (
                         <>
                         <Image    
-                          src={blogDetail.vl_thumbnail_url}
+                          src={blogDetail && blogDetail.vl_thumbnail_url}
                           alt=""
                           className="w-100 iconVideomain"
                         />  

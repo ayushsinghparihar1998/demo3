@@ -145,14 +145,28 @@ class EditQa extends Component {
 
     console.log(name, value, ind, ansInd);
     console.log(ind, ansInd);
-    let validName =
-      name == "as_que_name"
-        ? "enter a valid question"
-        : name == "as_que_type"
-        ? "select a question type"
-        : name == "weightage"
-        ? "enter a weightage value for the answer"
-        : "enter a valid answer"; // as_que_type
+    let validName = "";
+    if (as_que_ans[ind].as_que_type == 2) {
+      validName =
+        name == "as_que_name"
+          ? "Please enter a valid question"
+          : name == "as_que_type"
+          ? "Please select a question type"
+          : name == "option"
+          ? "Please enter a valid answer"
+          : "";
+    } else {
+      validName =
+        name == "as_que_name"
+          ? "Please enter a valid question"
+          : name == "as_que_type"
+          ? "Please select a question type"
+          : name == "weightage"
+          ? "Please enter a weightage value for the answer"
+          : name == "option"
+          ? "Please enter a valid answer"
+          : "";
+    }
     as_que_ans.map((item, index) => {
       if (ind == index) {
         if (ansInd !== "") {
@@ -161,16 +175,27 @@ class EditQa extends Component {
             if (i == ansInd) {
               val[name] =
                 name == "weightage" ? value.replace(/[^0-9]/g, "") : value;
-              erroras_que_ans[ind].as_ans[i][name] =
-                val[name].length == 0 ? "Please " + validName : "";
+              if (item.as_que_type == 2 && name == "weightage") {
+                erroras_que_ans[ind].as_ans[i][name] = "";
+              } else {
+                erroras_que_ans[ind].as_ans[i][name] =
+                  val[name].length == 0 ? validName : "";
+              }
             }
           });
         } else {
           console.log(name, value);
           as_que_ans[ind][name] = value;
           console.log(as_que_ans[ind][name]);
-          erroras_que_ans[ind][name] =
-            item[name].length == 0 ? "Please " + validName : "";
+          erroras_que_ans[ind][name] = item[name].length == 0 ? validName : "";
+
+          // Changes
+          if (name == "as_que_type" && value == 2) {
+            item.as_ans.map((val, i) => {
+              val.weightage = "";
+              erroras_que_ans[ind].as_ans[i].weightage = "";
+            });
+          }
         }
       }
     });
@@ -189,16 +214,6 @@ class EditQa extends Component {
       }
     );
   };
-
-  // isValid(data) {
-  //   const { errors, isValid } = validateInput(data);
-  //   if (!isValid) {
-  //     this.setState({ errors }, () => console.log(this.state.errors));
-  //   }
-
-  //   return isValid;
-  // }
-
   addQuesion() {
     let as_que_ans = this.state.as_que_ans;
     let val = as_que_ans[as_que_ans.length - 1].as_max_range + 1;
@@ -232,18 +247,7 @@ class EditQa extends Component {
       }
     );
   }
-  removeQuestion(index) {
-    let as_que_ans = this.state.as_que_ans;
-    as_que_ans.splice(index, 1);
-    this.setState(
-      {
-        as_que_ans,
-      },
-      () => {
-        this.checkServiceError();
-      }
-    );
-  }
+
   addAnswer(i) {
     let as_que_ans = this.state.as_que_ans;
     let obj = {
@@ -268,20 +272,7 @@ class EditQa extends Component {
       }
     );
   }
-  removeAnswer(index, i) {
-    let as_que_ans = this.state.as_que_ans;
-    let as_ans = as_que_ans[index].as_ans;
-    as_ans.splice(i, 1);
-    this.setState(
-      {
-        as_que_ans,
-      },
-      () => {
-        console.log("as_que_ans", this.state.as_que_ans);
-        this.checkServiceError();
-      }
-    );
-  }
+
   checkServiceError = () => {
     let as_que_ans = this.state.as_que_ans;
     let arr = [];
@@ -296,7 +287,20 @@ class EditQa extends Component {
     if (val == true) {
       as_que_ans.map((item) => {
         item.as_ans.map((ans, i) => {
-          arr1.push(!Object.values(ans).some((o) => o === ""));
+          if (item.as_que_type == 2) {
+            arr1.push(!ans.option.length == 0);
+            console.log(
+              'ans.option != ""',
+              ans.option !== "",
+              ans.option.length == 0
+            );
+          } else {
+            arr1.push(!Object.values(ans).some((o) => o === ""));
+            console.log(
+              '!Object.values(ans).some((o) => o === "")',
+              !Object.values(ans).some((o) => o === "")
+            );
+          }
         });
       });
       val1 = arr1.every((o) => o === true);
@@ -310,6 +314,7 @@ class EditQa extends Component {
       });
     }
   };
+
   checkError = () => {
     let asstObj = this.state.asstObj;
     let as_que_ans = this.state.as_que_ans;
@@ -327,10 +332,14 @@ class EditQa extends Component {
           val.option.length == 0 || val.option == ""
             ? "Please enter a valid answer."
             : "";
-        erroras_que_ans[ind].as_ans[i].weightage =
-          val.weightage.length == 0 || val.weightage == ""
-            ? "Please enter a weightage value for the answer"
-            : "";
+        if (item.as_que_type == 2) {
+          erroras_que_ans[ind].as_ans[i].weightage = "";
+        } else {
+          erroras_que_ans[ind].as_ans[i].weightage =
+            val.weightage.length == 0 || val.weightage == ""
+              ? "Please enter a weightage value for the answer"
+              : "";
+        }
       });
     });
     let arr = [];
@@ -417,7 +426,14 @@ class EditQa extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link
+                            to={{
+                              pathname:
+                                "/qaViewDetails/" + this.props.match.params.id,
+                            }}
+                          >
+                            Back
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -482,7 +498,10 @@ class EditQa extends Component {
                               </Form.Label>
                               <Row>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
+                                  <Form.Group
+                                    controlId="formBasicCheckbox"
+                                    className="formRadioCustom"
+                                  >
                                     <Form.Check
                                       type="radio"
                                       id={index + item.as_id}
@@ -504,7 +523,10 @@ class EditQa extends Component {
                                   </Form.Group>
                                 </Col>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
+                                  <Form.Group
+                                    controlId="formBasicCheckbox"
+                                    className="formRadioCustom"
+                                  >
                                     <Form.Check
                                       type="radio"
                                       id={item.as_id + index}
@@ -521,8 +543,10 @@ class EditQa extends Component {
                                         )
                                       }
                                       checked={+item.as_que_type == 2}
-                                    /> 
-                                    <div className="custom_label">Irrelevant</div> 
+                                    />
+                                    <div className="custom_label">
+                                      Irrelevant
+                                    </div>
                                   </Form.Group>
                                 </Col>
                               </Row>
@@ -601,6 +625,7 @@ class EditQa extends Component {
                                         }
                                         maxLength={2}
                                         className="inputTyp2"
+                                        disabled={item.as_que_type == 2}
                                       />
                                       <div className="col27 fs14 fw400 mt-2 error">
                                         {
@@ -655,8 +680,8 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      create
-                    </Button> 
+                      {this.props.match.params.id > 0 ? "Update" : "Create"}
+                    </Button>
                   </Form>
                 </div>
               </Col>

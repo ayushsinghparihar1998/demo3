@@ -205,7 +205,7 @@ class ProfessionalBlogList extends Component {
             {
               vlogsAll,
               showDetails: false,
-              offset,
+              // offset,
               hideFlag: false,
             },
             () => {
