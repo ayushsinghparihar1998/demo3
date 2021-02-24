@@ -214,9 +214,9 @@
                 }
             }
         }
-        .planpricing {
+        .planpricing {   
             position: relative;
-            padding: 20px 30px 20px; 
+            padding: 20px 20px 20px;  
             background-color: $col63;
             .fs14.fw500.col29 {
                 min-height: 107px;
@@ -1863,6 +1863,56 @@ img {
         }
     }
 
+    .plans {
+        .fs40.col8.fw600 { 
+            font-size: 2rem !important; 
+        }
+        &.kits {
+            .profile_set {
+                img {
+                    height: 140px; 
+                }
+            }
+            .slick-next {
+                right: 2px;  
+            }
+            .slick-prev {
+                left: -10px; 
+                z-index: 99; 
+            }
+            .planpricing {
+                div.fw500.fs20.col64 {
+                    font-size: 18px !important; 
+                }
+                .emotion_ul {
+                    padding: 10px 15px;
+                    ul {
+                        li {
+                            span.sleft {
+                                font-size: 13px !important;
+                                &>img {
+                                    top: 4px; 
+                                }
+                            }
+                            span.sright {
+                                font-size: 13px !important;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    .conversations {       
+        .elpVideo {
+            margin-top: 40px;
+            iframe {
+                height: auto; 
+            }
+        }
+    }
+
 
 }
 
@@ -1876,6 +1926,21 @@ img {
             }
         } 
     }
+    .subscribe_here2 {
+        .subscribe_form {
+            .fgroups {
+                text-align: center;
+                .inputTyp1 {
+                    font-size: 16px !important; 
+                }
+                .btnTyp2 {
+                    position: relative;   
+                    font-size: 16px !important;
+                }
+            }
+        }
+    }
+
 }
 
 @media (max-width: 375px) { 

@@ -1750,7 +1750,7 @@
 
 .elpVideoblog {  
     position: relative;
-    overflow: hidden; 
+    // overflow: hidden;      
     iframe {
         width: 100%;  
     } 
@@ -1956,6 +1956,13 @@
                 .col64.fs18.fw500 {
                     cursor: pointer; 
                 }
+                .col14.fs15.fw400 {
+                    &>p {
+                        max-height: 125px;
+                        overflow: hidden; 
+                        text-align: justify;
+                    }
+                }
             }
             .tab-content { 
                 .vlogTabs {
@@ -1967,7 +1974,8 @@
                         .col14.fs15.fw400 {
                             & > p {
                                 max-height: 44px;
-                                overflow: hidden;       
+                                overflow: hidden;      
+                                text-align: justify;  
                             }
                         }
                     }
@@ -1995,7 +2003,8 @@
                         .col14.fw400.mt-1 {
                             & > p {
                                 max-height: 110px;
-                                overflow: hidden;   
+                                overflow: hidden; 
+                                text-align: justify;   
                             }
                         }
                     }
