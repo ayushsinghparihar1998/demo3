@@ -252,4 +252,4 @@ class PlanDetailsEat extends Component {
     );
   }
 }
-export default PlanDetailsEat;
+export default PlanDetailsEat; 

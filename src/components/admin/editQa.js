@@ -654,7 +654,7 @@ class EditQa extends Component {
                       onClick={() => this.checkError()}
                     >
                       create
-                    </Button>
+                    </Button> 
                   </Form>
                 </div>
               </Col>

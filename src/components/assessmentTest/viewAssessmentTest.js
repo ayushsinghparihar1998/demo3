@@ -32,6 +32,10 @@ import ReactStars from "react-rating-stars-component";
 import { Popover } from "antd";
 import ELPViewApiService from "../../common/services/apiService";
 import Crossbtn from "../../assets/images/blue_cross.svg";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
+const percentage = 45;
 
 class ViewAssessmentTest extends Component {
   constructor(props, context) {
@@ -86,7 +90,12 @@ class ViewAssessmentTest extends Component {
                   <Col lg={9} md={10} className="m-auto">
                     <div className="scoreDetails">
                       <div className="scoreImg">
-                        <Image src={Scores} alt="" />
+                        <div className="scoreCounts">
+                          <CircularProgressbar
+                            value={percentage}
+                            text={`${percentage}%`}
+                          />
+                        </div>{" "}
                       </div>
                       <div className="fs22 fw400 col14">Scores</div>
                       <div className="fw400 col14 fs28 mt-3">

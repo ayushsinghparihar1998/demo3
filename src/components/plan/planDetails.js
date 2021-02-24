@@ -23,7 +23,10 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
+import VideoIcon from "../../assets/images/videoIcon.png";
+import BlogProcessFive from "../../assets/images/blog4.png";
 import ReactStars from "react-rating-stars-component";
+import YouTube from "react-youtube";
 import { Popover } from "antd";
 import {
   actionSearchListner,
@@ -31,6 +34,7 @@ import {
 } from "../../common/redux/actions";
 import validator from "validator";
 import { setLocalStorage } from "../../common/helpers/Utils";
+
 
 class PlanDetails extends Component {
   constructor(props) {
@@ -202,8 +206,20 @@ class PlanDetails extends Component {
                     </Form>
                   </div>
                 </Col>
-                <Col md={7}>
-                  <Image src={Splan} alt="Plan" className="w-100" />
+                <Col md={7}> 
+                  <div class="elpVideoblog">   
+                     {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
+                     <Image src={Splan} alt="Plan" className="w-100 iconVideomain" />  
+                      <div>
+                        <Image src={VideoIcon} className="iconVideo" />
+                          <div class="">
+                            <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="400" src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1" id="widget2">
+                            </iframe> 
+                            {/* <YouTube videoId={url} opts={opts} /> */}
+                            
+                            </div>
+                        </div>
+                    </div> 
                 </Col>
               </Row>
 
@@ -366,8 +382,20 @@ class PlanDetails extends Component {
                   </Col>
                   <Col md={7}>
                     <div className="pr-3">
-                      <Image src={Splan} alt="Plan" className="w-100" />
-                    </div>
+                    <div class="elpVideoblog">   
+                     {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
+                     <Image src={Splan} alt="Plan" className="w-100 iconVideomain" />  
+                      <div>
+                        <Image src={VideoIcon} className="iconVideo" />
+                          <div class="">
+                            <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="400" src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1" id="widget2">
+                            </iframe> 
+                            {/* <YouTube videoId={url} opts={opts} /> */}
+                            
+                            </div>
+                        </div>
+                    </div> 
+                    </div> 
                   </Col>
                 </Row>
               </div>
