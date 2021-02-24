@@ -176,7 +176,7 @@ class ELPRoute extends Component {
             component={ViewAssessmentTest}
           />
           <PublicRoute path="/planlist/:name" component={PlanDetailsEat} />
-          <PublicRoute path="/myAssessmentTest" component={MyAssessmentTest} />
+          <Route path="/myAssessmentTest" component={MyAssessmentTest} />
 
           <PublicRoute
             path="/professionalDetails/:type/:id"

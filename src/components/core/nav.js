@@ -798,7 +798,7 @@ class NavBar extends Component {
                         <NavDropdown.Item
                           href="#"
                           onClick={() =>
-                            this.verifyInCallNavigation("/editprofile")
+                            this.verifyInCallNavigation("/myAssessmentTest")
                           }
                         >
                           <Image src={Userenables} alt="" />

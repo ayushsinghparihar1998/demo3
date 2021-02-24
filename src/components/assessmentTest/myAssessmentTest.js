@@ -136,7 +136,7 @@ u_name: "Super Admin" */}
                                       );
                                     })}
                                   </td>
-                                  <td>{item.ar_no_que}</td>
+                                  <td>{item.ar_score}</td>
                                   <td>
                                     <span>
                                       <Image
