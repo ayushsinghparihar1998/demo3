@@ -172,7 +172,7 @@ u_name: "Super Admin" */}
                                             onClick={() =>
                                               this.props.history.push(
                                                 "/viewAssessmentTest/" +
-                                                  item.as_id +
+                                                  item.ar_id +
                                                   "/SA"
                                               )
                                             }

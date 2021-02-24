@@ -103,18 +103,26 @@ class ViewAssessmentTest extends Component {
                       <div className="scoreImg">
                         <div className="scoreCounts">
                           <CircularProgressbar
-                            value={asstDetail ? asstDetail.ar_score : 0}
-                            text={`${asstDetail ? asstDetail.ar_score : 0}%`}
+                            value={
+                              asstDetail && asstDetail.ar_score
+                                ? asstDetail && asstDetail.ar_score
+                                : 100
+                            }
+                            text={`${
+                              asstDetail && asstDetail.ar_score
+                                ? asstDetail && asstDetail.ar_score
+                                : 100
+                            }%`}
                           />
                         </div>{" "}
                       </div>
                       <div className="fs22 fw400 col14">Scores</div>
                       <div className="fw400 col14 fs28 mt-3">
-                        PSYCHOLOGICAL PROBLEM
+                        {asstDetail && asstDetail.as_title}
                       </div>
-                      <div className="fw400 col14 fs28 mt-3 disorders">
-                        MENTAL DISORDER
-                      </div>
+                      {/* <div className="fw400 col14 fs28 mt-3 disorders">
+                        {asstDetail && asstDetail.as_title}
+                      </div> */}
                       <div className="scoreBorders">
                         <div>
                           <div className="fs16 fw400 col14 mb-3">
