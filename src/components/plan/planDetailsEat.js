@@ -141,13 +141,14 @@ class PlanDetailsEat extends Component {
                                       // return
                                       return (
                                         <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.puc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
+                                        className={
+                                          val.puc_cat_name == "Eat"
+                                            ? "eatcat"
+                                            : val.puc_cat_name == "Luv"
+                                            ? "luvcat"
+                                            : val.puc_cat_name == "Pray"
+                                            ? "luvcat"
+                                            : "holisticcat"  }
                                         >
                                           {val.puc_cat_name}{" "}
                                         </span>
