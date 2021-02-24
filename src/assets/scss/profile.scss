@@ -805,6 +805,13 @@
                         line-height: 40px;  
                         text-align: center;  
                         border: 1px solid #BBE8F5;
+                        min-width: 160px;
+                        span {
+                            margin-right: 5px !important;
+                            &:last-child {
+                                margin-right: 0px !important; 
+                            }
+                        }
                         @mixin eatLuvPrays {
                             border-radius: 30px;
                             padding: 5px 20px;
@@ -1317,6 +1324,19 @@
             position: relative;
             width: 100%;
             padding: 20px 20px 20px 20px; 
+            div.col29.fw500.fs17 {
+                display: flex; 
+                strong {
+                    min-width: 102px; 
+                }
+                span {
+                    h2 {
+                        color: $col29;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                }
+            }
         }
         .answerDetail {
             display: flex;
@@ -1331,9 +1351,11 @@
                     color: #595454;
                     font-weight: 300;
                     margin-bottom: 12px; 
+                    display: flex;
                     strong {
                         color: $col14; 
                         font-weight: 500; 
+                        min-width: 30px; 
                     }
                 }
             } 
@@ -1426,7 +1448,7 @@
     }
 }
 
-.next_prevs {
+.next_prevs {  
     display: flex;
     justify-content: space-between; 
     .mt-4:first-child {
@@ -1442,7 +1464,7 @@
     } 
 }
 
-.CreateAccount { 
+.CreateAccount {  
     &.alertShow {
         .modal-dialog {
             max-width: 550px;
