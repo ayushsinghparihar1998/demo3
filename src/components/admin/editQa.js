@@ -680,10 +680,7 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      {
-                        this.props.match.params.id > 0 'Update' : 'Create'
-                      }
-                      
+                      {this.props.match.params.id > 0 ? "Update" : "Create"}
                     </Button>
                   </Form>
                 </div>
