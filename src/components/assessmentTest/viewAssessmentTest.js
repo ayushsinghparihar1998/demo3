@@ -13,6 +13,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
+// import NavBar from "../core/nav";
+import Nav from "../core/navAdmin";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
@@ -85,7 +87,11 @@ class ViewAssessmentTest extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+          {this.props.match.params.type == "member" ? (
+            <NavBar {...this.props} />
+          ) : (
+            <Nav {...this.props} />
+          )}
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>
@@ -97,18 +103,26 @@ class ViewAssessmentTest extends Component {
                       <div className="scoreImg">
                         <div className="scoreCounts">
                           <CircularProgressbar
-                            value={asstDetail ? asstDetail.ar_score : 0}
-                            text={`${asstDetail ? asstDetail.ar_score : 0}%`}
+                            value={
+                              asstDetail && asstDetail.ar_score
+                                ? asstDetail && asstDetail.ar_score
+                                : 100
+                            }
+                            text={`${
+                              asstDetail && asstDetail.ar_score
+                                ? asstDetail && asstDetail.ar_score
+                                : 100
+                            }%`}
                           />
                         </div>{" "}
                       </div>
                       <div className="fs22 fw400 col14">Scores</div>
                       <div className="fw400 col14 fs28 mt-3">
-                        PSYCHOLOGICAL PROBLEM
+                        {asstDetail && asstDetail.as_title}
                       </div>
-                      <div className="fw400 col14 fs28 mt-3 disorders">
-                        MENTAL DISORDER
-                      </div>
+                      {/* <div className="fw400 col14 fs28 mt-3 disorders">
+                        {asstDetail && asstDetail.as_title}
+                      </div> */}
                       <div className="scoreBorders">
                         <div>
                           <div className="fs16 fw400 col14 mb-3">

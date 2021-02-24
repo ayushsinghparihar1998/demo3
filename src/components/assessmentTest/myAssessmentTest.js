@@ -142,7 +142,7 @@ u_name: "Super Admin" */}
                                       <Image
                                         src={Visibilitys}
                                         className="pointer"
-                                          onClick = {() => this.props.history.push("/viewAssessmentTest/"+item.as_id+'/member')}
+                                          onClick = {() => this.props.history.push("/viewAssessmentTest/"+item.ar_id+'/member')}
                                       />
                                     </span>
                                     <span className="pl-3">

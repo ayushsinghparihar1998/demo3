@@ -13,7 +13,9 @@ import {
   Modal,
   Table,
 } from "react-bootstrap";
-import NavBar from "../core/nav";
+// import NavBar from "../core/nav";
+import NavBar from "../core/navAdmin";
+
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
@@ -72,7 +74,7 @@ class MyAssessmentTestSA extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+        <NavBar {...this.props} />
         </div>
         <div className="profile_layout myAssesstestMain pt-4 pb-5">
           <Container>
@@ -97,7 +99,7 @@ class MyAssessmentTestSA extends Component {
                 <div className="chatsearch w-100">
                   <div className="myAssesstest">
                     <div className="col8 fw600 fs28 mt-4 mb-5 text-center">
-                      MY ASSESSMENT TEST
+                      Member's Assessment Test
                     </div>
                     <Row>
                       <Col lg={12}>
@@ -167,7 +169,13 @@ u_name: "Super Admin" */}
                                           <Image
                                             src={Visibilitys}
                                             className="pointer"
-                                              onClick = {() => this.props.history.push("/viewAssessmentTest/"+item.as_id+'/SA')}
+                                            onClick={() =>
+                                              this.props.history.push(
+                                                "/viewAssessmentTest/" +
+                                                  item.ar_id +
+                                                  "/SA"
+                                              )
+                                            }
                                           />
                                         </span>
                                         <span className="pl-3">

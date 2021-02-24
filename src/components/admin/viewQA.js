@@ -13,6 +13,8 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
+
+// import NavBar from "../core/nav";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
@@ -139,7 +141,9 @@ class ViewQA extends Component {
                 <div className="professor_search ViewQa">
                   <div className="fs22 fw600 col10">Question Answer</div>
                   <div className="mentalOne">
-                    <div className="col14 fs18 fw600">Mental Health</div>
+                    <div className="col14 fs18 fw600">
+                      {asstDetail && asstDetail[0].as_title}
+                    </div>
                     <div className="position-relative">
                       <Button
                         variant="btnTypAdd"
