@@ -108,7 +108,7 @@ class Plans extends Component {
                             </div>
                           </div>
 
-                          <div className="fs24 fw600 col29 text-center text-uppercase">
+                          <div className="fs22 fw600 col29 text-center text-uppercase">
                             {item.pl_type == 1 ? (
                               item.plan_category.length == 3 ? (
                                 <span className="">HOLISTIC </span>
