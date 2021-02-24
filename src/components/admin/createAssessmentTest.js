@@ -537,11 +537,11 @@ class CreateAssessmentTest extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={9} className="pl-1">  
                 <div className="corporateMember CreateAssessment">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "Update" : "Create"}
-                    Assessment Test
+                    {this.props.match.params.id > 0 ? "Update" : "Create"} 
+                     <span className="pl-1">Assessment Test</span>
                   </div>
                   <Form method="post">
                     <Form.Group className="mb-4">

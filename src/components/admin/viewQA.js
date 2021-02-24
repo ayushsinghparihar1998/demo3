@@ -159,7 +159,7 @@ class ViewQA extends Component {
                         </span>{" "}
                         Add More Question
                         <span className="ml-2 b-none">
-                          {/* <Image src={Infos} className="infos" /> */}
+                          {/* <Image src={Infos} className="infos" /> */}  
                         </span>
                       </Button>
                     </div>
