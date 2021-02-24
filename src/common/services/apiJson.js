@@ -2014,4 +2014,25 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  getAssessuser_testListbyid: {
+    url: "elp/getAssessuser_testListbyid",
+    method: "POST",
+    data: { ar_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  getuserassessment_resultlist: {
+    url: "elp/getuserassessment_resultlist",
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
+  superadmingetuser_assessresultlist: {
+    url: "elp/superadmingetuser_assessresultlist",
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };

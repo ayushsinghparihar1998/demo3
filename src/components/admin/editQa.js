@@ -143,6 +143,7 @@ class EditQa extends Component {
     let as_que_ans = this.state.as_que_ans;
     let erroras_que_ans = this.state.erroras_que_ans;
 
+    console.log(name, value, ind, ansInd);
     console.log(ind, ansInd);
     let validName =
       name == "as_que_name"
@@ -167,6 +168,7 @@ class EditQa extends Component {
         } else {
           console.log(name, value);
           as_que_ans[ind][name] = value;
+          console.log(as_que_ans[ind][name]);
           erroras_que_ans[ind][name] =
             item[name].length == 0 ? "Please " + validName : "";
         }
@@ -282,35 +284,22 @@ class EditQa extends Component {
   }
   checkServiceError = () => {
     let as_que_ans = this.state.as_que_ans;
-    let erroras_que_ans = this.state.erroras_que_ans;
-
     let arr = [];
     let arr1 = [];
-    let err = [];
     let val;
     let val1;
-    // console.log("this.state.as_que_ans", this.state.as_que_ans);
-    // if no question typed
-    // 1.no add que
-    // 2.no add ans
+
     as_que_ans.map((item) => {
-      console.log("item", item);
       arr.push(!Object.values(item).some((o) => o === ""));
     });
     val = arr.every((o) => o === true);
-    console.log("val", val);
     if (val == true) {
       as_que_ans.map((item) => {
         item.as_ans.map((ans, i) => {
-          console.log("ans", ans);
-          console.log(ans.weightage === "");
-          console.log(ans.option.length == 0);
           arr1.push(!Object.values(ans).some((o) => o === ""));
         });
       });
       val1 = arr1.every((o) => o === true);
-      console.log("val1", val1);
-
       this.setState({
         ansShow: val1 == true ? true : false,
         queShow: val && val1 ? true : false,
@@ -320,8 +309,6 @@ class EditQa extends Component {
         queShow: val,
       });
     }
-    console.log("arr", arr);
-    console.log("arr1", arr1);
   };
   checkError = () => {
     let asstObj = this.state.asstObj;
@@ -502,7 +489,7 @@ class EditQa extends Component {
                                       value={1}
                                       // name="as_que_type"
                                       label="Relevant"
-                                      className="radioboxTyp1"
+                                      className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
                                           "as_que_type",
@@ -523,7 +510,7 @@ class EditQa extends Component {
                                       value={2}
                                       // name="as_que_type"
                                       label="Irrelevant"
-                                      className="radioboxTyp1"
+                                      className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
                                           "as_que_type",

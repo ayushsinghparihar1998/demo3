@@ -62,7 +62,7 @@ import {
   setLocalStorage,
 } from "../../common/helpers/Utils";
 
-class Adminlistener extends Component { 
+class Adminlistener extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,14 +115,14 @@ class Adminlistener extends Component {
       as_type: 1,
       vl_type: 1,
     };
-    this.handleClose = this.handleClose.bind(this)
-    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
   handleShow = () => {
     this.setState({ show: true });
   };
 
-  handleClose = () => { 
+  handleClose = () => {
     this.setState({ show: false });
   };
   componentDidMount() {
@@ -1761,14 +1761,19 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="d-flex m-3 pb-3 border-bottom">
+                    <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="position-relative">
-                        <div className="fs14 col28 fw500">
+                        <div
+                          className="fs14 col28 fw500"
+                          onClick={() =>
+                            this.changepath("/assessmentTestList", "superadminget_assessmenttestlist")
+                          }
+                        >
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
-                          LISTENER Q&A
+                          MEMBERS' ASSESSMENT TEST
                         </div>
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -3922,7 +3927,7 @@ as_type: "2" */}
                                 )
                               }
                             >
-                              CREATE VLOG 
+                              CREATE VLOG
                             </Button>
                           </div>
                         </Col>
@@ -3969,40 +3974,39 @@ as_type: "2" */}
                               {/* <div className="mr-2 pt-1">
                                 <Image src={item.vl_thumbnail_url} alt="" />
                               </div> */}
-                              <Col md={2}> 
-                              <div className="elpVideoblog"> 
-                                <Image 
-                                  src={item.vl_thumbnail_url}   
-                                  className="iconVideomain"
-                                /> 
-                              <div>   
+                              <Col md={2}>
+                                <div className="elpVideoblog">
                                   <Image
-                                    src={VideoIcon} 
-                                    className="iconVideo" 
-                                    onClick={this.handleShow}  
-                                  /> 
-                                <iframe  
-                                  width="100%"
-                                  height="100"
-                                  // src={this.state.url}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                ></iframe>
-
-                              </div>
-                            </div>
-                          </Col>
-                          <Col md={10}> 
-                              <div className="pl-2 w-100">
-                                <div className="d-flex justify-content-between">
-                                  <div className="w-100">
-                                    <div className="d-flex">
-                                      <div className="col1 fw600 fs18 pb-1"> 
-                                        {item.vl_title}
-                                      </div>
-                                      <div className="d-flex ml-auto">
-                                        {/* <span className="pr-3 fs14 col47 fw400">
+                                    src={item.vl_thumbnail_url}
+                                    className="iconVideomain"
+                                  />
+                                  <div>
+                                    <Image
+                                      src={VideoIcon}
+                                      className="iconVideo"
+                                      onClick={this.handleShow}
+                                    />
+                                    <iframe
+                                      width="100%"
+                                      height="100"
+                                      // src={this.state.url}
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowfullscreen
+                                    ></iframe>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col md={10}>
+                                <div className="pl-2 w-100">
+                                  <div className="d-flex justify-content-between">
+                                    <div className="w-100">
+                                      <div className="d-flex">
+                                        <div className="col1 fw600 fs18 pb-1">
+                                          {item.vl_title}
+                                        </div>
+                                        <div className="d-flex ml-auto">
+                                          {/* <span className="pr-3 fs14 col47 fw400">
                                           {item.vl_status == "2"
                                             ? "Deactivate"
                                             : "Activate"}
@@ -4026,52 +4030,53 @@ as_type: "2" */}
                                             checked={item.vl_status == "1"}
                                           />
                                         </span> */}
-                                        <span className="mr-3">
-                                          <Image
-                                            onClick={() =>
-                                              this.changepath(
-                                                "/createVlog/" + item.vl_id,
-                                                "superadminvlogs_list"
-                                              )
-                                            }
-                                            src={Editicon}
-                                            alt=""
-                                          />
-                                        </span>
-                                        <span>
-                                          <Image
-                                            onClick={(e) => {
-                                              this.handleOpenAllConformation(
-                                                item.vl_title,
-                                                item.vl_id,
-                                                "VLOGS"
-                                              );
-                                            }}
-                                            src={Deleteicon}
-                                            alt=""
-                                          />
+                                          <span className="mr-3">
+                                            <Image
+                                              onClick={() =>
+                                                this.changepath(
+                                                  "/createVlog/" + item.vl_id,
+                                                  "superadminvlogs_list"
+                                                )
+                                              }
+                                              src={Editicon}
+                                              alt=""
+                                            />
+                                          </span>
+                                          <span>
+                                            <Image
+                                              onClick={(e) => {
+                                                this.handleOpenAllConformation(
+                                                  item.vl_title,
+                                                  item.vl_id,
+                                                  "VLOGS"
+                                                );
+                                              }}
+                                              src={Deleteicon}
+                                              alt=""
+                                            />
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <div className="fs16 fw400 col14 pb-1 e_detai">
+                                        <strong className="fw600">
+                                          Description:
+                                        </strong>
+                                        <span
+                                          className="fs15"
+                                          dangerouslySetInnerHTML={{
+                                            __html: item.vl_desc,
+                                          }}
+                                        >
+                                          {/* {item.vl_desc} */}
                                         </span>
                                       </div>
+                                      <a className="d-block col40 fw15 fw500">
+                                        Read more...
+                                      </a>
                                     </div>
-                                    <div className="fs16 fw400 col14 pb-1 e_detai">
-                                      <strong className="fw600">
-                                        Description:
-                                      </strong>
-                                      <span
-                                        className="fs15"
-                                        dangerouslySetInnerHTML={{
-                                          __html: item.vl_desc,
-                                        }}
-                                      >
-                                        {/* {item.vl_desc} */}
-                                      </span> 
-                                      
-                                    </div>
-                                    <a className="d-block col40 fw15 fw500">Read more...</a>
                                   </div>
                                 </div>
-                              </div>
-                              </Col> 
+                              </Col>
                             </div>
                           </div>
                         );
@@ -4160,7 +4165,7 @@ as_type: "2" */}
                                           }
                                         >
                                           APPROVE
-                                        </Button> 
+                                        </Button>
                                         <Button
                                           className="btnTyp9 reject"
                                           onClick={() =>
@@ -4171,14 +4176,14 @@ as_type: "2" */}
                                           }
                                         >
                                           REJECT
-                                        </Button> 
+                                        </Button>
                                       </div>
                                     </div>
                                   </div>
                                 );
                               })}{" "}
                           </div>
-                        </Tab>     
+                        </Tab>
                         <Tab eventKey="completed" title="COMPLETED">
                           <div className="requests">
                             {this.state.ratingList &&
@@ -4570,38 +4575,36 @@ as_type: "2" */}
         </div>
         <Footer />
 
-          {/* modal start */}
+        {/* modal start */}
 
-      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                   
-        <Modal.Header closeButton>    
-        </Modal.Header>
-        <Modal.Body>
-        <div className="elpVideoblog">      
-            <Image
-              src={BlogProcessFive} 
-              className="iconVideomain"
-            /> 
-          <div>  
-              <Image
-                src={VideoIcon} 
-                className="iconVideo" 
-                onClick={this.handleShow}  
-              /> 
-            <iframe  
-              width="100%"
-              height="400"
-              // src={this.state.url}
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-
-          </div>
-        </div>
-         </Modal.Body> 
-      </Modal>
-      {/* modal end */}
-
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          className="VlogBlogModal"
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body>
+            <div className="elpVideoblog">
+              <Image src={BlogProcessFive} className="iconVideomain" />
+              <div>
+                <Image
+                  src={VideoIcon}
+                  className="iconVideo"
+                  onClick={this.handleShow}
+                />
+                <iframe
+                  width="100%"
+                  height="400"
+                  // src={this.state.url}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+        {/* modal end */}
       </div>
     );
   }

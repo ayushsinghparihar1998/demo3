@@ -76,7 +76,7 @@ import ProfessionalDetails from "../components/professional/professionalDetails"
 import ProfessionalSignup from "../components/professional/professionalSignup";
 import ProfessionalModify from "../components/professional/professionalModify.js";
 
-// import ProfessionalList from "../components/admin/professionalList";
+import MyAssessmentTestSA from "../components/admin/myAssessmentTestSA";
 import listenerBrowse from "../components/professional/listenerBrowse";
 // import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain";
@@ -171,7 +171,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/createVlog/:id" component={CreateVlog} />
-          <PublicRoute
+          <Route
             path="/viewAssessmentTest/:id"
             component={ViewAssessmentTest}
           />
@@ -201,7 +201,7 @@ class ELPRoute extends Component {
             component={DomainDetail}
           />
           {/* <PublicRoute path="/domainListing" component={DomainListing} /> */}
-          {/* <PublicRoute path="/sessionRequest" component={SessionRequest} /> */}
+          <Route path="/assessmentTestList" component={MyAssessmentTestSA} />
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
           <PublicRoute
             path="/corporateDashboard"
