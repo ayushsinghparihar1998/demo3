@@ -120,7 +120,14 @@ class ViewQA extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link
+                            to={{
+                              pathname:
+                                "/qaViewDetails" + this.props.match.params.id,
+                            }}
+                          >
+                            Back
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -148,7 +155,7 @@ class ViewQA extends Component {
                         </span>{" "}
                         Add More Question
                         <span className="ml-2 b-none">
-                          <Image src={Infos} className="infos" />
+                          {/* <Image src={Infos} className="infos" /> */}
                         </span>
                       </Button>
                     </div>

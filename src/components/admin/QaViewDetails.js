@@ -94,7 +94,7 @@ class QaViewDetails extends Component {
                 <div className="professor_search mentalViewDetail">
                   <Row className="mb-1">
                     <Col md={8}>
-                      <div className="fs22 fw600 col10">QaViewDetails</div>
+                      <div className="fs22 fw600 col10">{asstDetail && asstDetail.as_title}</div>
                       <div className="fw300 fs16 col14">
                         {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                       </div>

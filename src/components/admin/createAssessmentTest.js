@@ -56,7 +56,7 @@ class CreateAssessmentTest extends Component {
         { as_test_cat_name: "Eat", as_cat_id: 5, flag: false },
         { as_test_cat_name: "Luv", as_cat_id: 2, flag: false },
         { as_test_cat_name: "Pray", as_cat_id: 3, flag: false },
-        { as_test_cat_name: "ELNP(Holistic)", as_cat_id: 4, flag: false },
+        { as_test_cat_name: "Holistic", as_cat_id: 4, flag: false },
       ],
       category: "'Pray','luv','eat'",
       finalRange: 0,
@@ -539,7 +539,10 @@ class CreateAssessmentTest extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember CreateAssessment">
-                  <div className="fs28 col10 mb-4">Assessment Test</div>
+                  <div className="fs28 col10 mb-4">
+                    {this.props.match.params.id > 0 ? "Update" : "Create"}
+                    Assessment Test
+                  </div>
                   <Form method="post">
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">

@@ -289,7 +289,11 @@ class EditQa extends Component {
         item.as_ans.map((ans, i) => {
           if (item.as_que_type == 2) {
             arr1.push(!ans.option.length == 0);
-            console.log('ans.option != ""', ans.option !== "" ,ans.option.length == 0);
+            console.log(
+              'ans.option != ""',
+              ans.option !== "",
+              ans.option.length == 0
+            );
           } else {
             arr1.push(!Object.values(ans).some((o) => o === ""));
             console.log(
@@ -422,7 +426,14 @@ class EditQa extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link
+                            to={{
+                              pathname:
+                                "/qaViewDetails" + this.props.match.params.id,
+                            }}
+                          >
+                            Back
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -669,7 +680,10 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      create
+                      {
+                        this.props.match.params.id > 0 'Update' : 'Create'
+                      }
+                      
                     </Button>
                   </Form>
                 </div>
