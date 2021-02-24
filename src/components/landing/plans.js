@@ -114,14 +114,14 @@ class Plans extends Component {
                             ) : (
                               item.plan_category.map((val) => {
                                 // return
-                                return (
+                                return ( 
                                   <span
                                     className={
-                                      val == "Eat"
+                                      val == "EAT"
                                         ? "eatcat"
-                                        : val == "Luv"
+                                        : val == "LUV"
                                         ? "luvcat"
-                                        : "praycat"
+                                        : "praycat" 
                                     }
                                   >
                                     {val.puc_cat_name}{" "}
