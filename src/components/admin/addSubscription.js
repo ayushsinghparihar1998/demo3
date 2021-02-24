@@ -35,7 +35,7 @@ class addSubscription extends Component {
         pl_desc_details: "",
         pl_save: "",
         plan_type: "",
-        plan_cat_name: "",
+        // plan_cat_name: "",
       },
 
       count: 10,
@@ -52,6 +52,13 @@ class addSubscription extends Component {
     };
   }
   componentDidMount = () => {
+    console.log(window.location.hash);
+    // window.onload = function () {
+      if (!window.location.hash) {
+        window.location = window.location + "#loaded";
+        window.location.reload();
+      }
+    // };
     console.log(this.props.match.params.id);
     console.log(this.props);
     this.getProffCat();
@@ -83,6 +90,7 @@ class addSubscription extends Component {
         return item;
       });
 
+      delete planObj.plan_cat_name;
       this.setState(
         {
           planObj,
@@ -90,49 +98,72 @@ class addSubscription extends Component {
         },
         () => {
           console.log("planObj", this.state.planObj);
+          console.log("proffCat", this.state.proffCat);
         }
       );
     });
   };
   handleSubmit = () => {
-    this.setState({
-      showLoader: true,
-    });
     let planObj = this.state.planObj;
-    let data;
+    delete planObj.plan_cat_name;
+    let data = {};
 
-    console.log(planObj);
-    if (+planObj.plan_type === 1) {
-      let catar = [];
-      this.state.proffCat.map((item) => {
-        if (item.flag == true) {
-          let a = {};
-          a.puc_cat_id = item.pc_id;
-          a.puc_cat_name = item.pc_name;
-          catar.push(a);
-        }
-      });
-      planObj.plan_cat_name = catar;
-    } else {
-      // planObj.plan_cat_name = "";
-      delete planObj.plan_cat_name;
-      console.log("YESYSESYSYSYYSY", planObj.plan_type);
-    }
+    let catar = [];
+    this.state.proffCat.map((item) => {
+      if (item.flag == true) {
+        let a = {};
+        console.log("item".item);
+        a.puc_cat_id = item.pc_id;
+        a.puc_cat_name = item.pc_name;
+        catar.push(a);
+      }
+    });
+
+    console.log(catar);
     if (this.props.match.params.id > 0) {
-      planObj.pl_id = this.props.match.params.id;
+      data.pl_id = this.props.match.params.id;
     }
     delete planObj.pl_datetime;
-    this.setState({
-      planObj,
-    });
+    this.setState(
+      {
+        planObj,
+        proffCat: [],
+      },
+      () => {
+        data = {
+          pl_desc_details: this.state.planObj.pl_desc_details,
+          pl_discount_price: this.state.planObj.pl_discount_price,
+          pl_id: this.state.planObj.pl_id,
+          pl_price: this.state.planObj.pl_price,
+          pl_save: this.state.planObj.pl_save,
+          pl_status: this.state.planObj.pl_status,
+          pl_title: this.state.planObj.pl_title,
+          // plan_cat_name: "",
+          plan_type: this.state.planObj.plan_type,
+        };
+        if (
+          +data.plan_type == 1 ||
+          data.plan_type == "1" ||
+          data.plan_type == 1
+        ) {
+          data.plan_cat_name = catar;
+        }
+      }
+    );
+
     setTimeout(() => {
-      if (this.isValid(this.state.planObj)) {
-        console.log("FINAL planObj", planObj);
+      if (this.isValid(data)) {
+        console.log("FINAL planObj", data);
+
         ELPViewApiService(
           this.props.match.params.id == 0
             ? "superadminadd_plan"
-            : "superadminedit_plan",
-          this.state.planObj
+            : +data.plan_type == 1 ||
+              data.plan_type == "1" ||
+              data.plan_type == 1
+            ? "superadminedit_plan1"
+            : "superadminedit_plan1",
+          data
         )
           .then((result) => {
             if (result && result.data && result.data.status === "success") {
@@ -178,7 +209,7 @@ class addSubscription extends Component {
         item.flag = false;
         return item;
       });
-      planObj.plan_cat_name = "";
+      delete planObj.plan_cat_name;
     }
     this.setState(
       {
