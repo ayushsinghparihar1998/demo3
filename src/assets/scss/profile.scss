@@ -1334,7 +1334,11 @@
                         color: $col29;
                         font-size: 15px;
                         font-weight: 600;
+                        & + p {
+                            display: none; 
+                        }
                     }
+                    
                 }
             }
         }
@@ -1356,6 +1360,12 @@
                         color: $col14; 
                         font-weight: 500; 
                         min-width: 30px; 
+                    }
+                    span {
+                        & > p {
+                            font-weight: 400; 
+                            font-size: 13px; 
+                        }
                     }
                 }
             } 
