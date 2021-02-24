@@ -13,6 +13,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
+// import NavBar from "../core/nav";
+import Nav from "../core/navAdmin";
 import Footer from "../core/footer";
 import Requestuser from "../../assets/images/pro_img.svg";
 import Requestusertwo from "../../assets/images/pro_img2.svg";
@@ -85,7 +87,11 @@ class ViewAssessmentTest extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-          <NavBar {...this.props} />
+          {this.props.match.params.type == "member" ? (
+            <NavBar {...this.props} />
+          ) : (
+            <Nav {...this.props} />
+          )}
         </div>
         <div className="profile_layout pt-4 pb-5">
           <Container>

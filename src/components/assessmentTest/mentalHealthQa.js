@@ -124,10 +124,9 @@ class MentalhealthQa extends Component {
     this.setState({ show: false });
   };
 
-  handleChange = (ind, i, checked, value) => {
+  handleChange = (ind, i, checked, ans, que) => {
     console.log("checked", checked);
-    console.log("checked", value);
-    console.log(ind, i);
+    console.log(ind, i, ans, que);
     let asstQaList = this.state.asstQaList;
     console.log(asstQaList[ind]);
     asstQaList[ind].assessment_answer.map((item, index) => {
@@ -143,8 +142,18 @@ class MentalhealthQa extends Component {
       que_id: asstQaList[ind].as_que_id,
       ans_id: asstQaList[ind].assessment_answer[i].as_ans_id,
     };
+    let arindx;
     let assess_submit = this.state.assess_submit;
-    assess_submit.push(obj);
+    arindx = assess_submit.findIndex(
+      (obj) => obj.que_id == asstQaList[ind].as_que_id
+    );
+    console.log("arindx", arindx);
+    if (arindx < 0) {
+      assess_submit.push(obj);
+    } else {
+      console.log(assess_submit[arindx]);
+      assess_submit[arindx].ans_id = ans;
+    }
     let ar_no_attend_que = 0;
     asstQaList.map((item) => {
       item.assessment_answer.map((val) => {
@@ -155,11 +164,16 @@ class MentalhealthQa extends Component {
     });
     console.log(ar_no_attend_que);
 
-    this.setState({
-      asstQaList,
-      ar_no_attend_que,
-      assess_submit,
-    });
+    this.setState(
+      {
+        asstQaList,
+        ar_no_attend_que,
+        assess_submit,
+      },
+      () => {
+        console.log("assess_submit", this.state.assess_submit);
+      }
+    );
   };
   handleSubmit = () => {
     let data = {
@@ -266,7 +280,8 @@ as_weightage: "1" */}
                                                     index,
                                                     i,
                                                     e.target.checked,
-                                                    e.target.value
+                                                    val.as_ans_id,
+                                                    item.as_que_id
                                                   )
                                                 }
                                               />
@@ -290,7 +305,6 @@ as_weightage: "1" */}
                   </div>
                   <div className="mt-4">
                     <Button
-                    
                       type="button"
                       // className="btnTyp5 talkBtntwo"
                       className={`btnTyp5 talkBtntwo  ${
