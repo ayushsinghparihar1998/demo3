@@ -291,6 +291,7 @@ as_weightage: "1" */}
                   <div className="next_prevs"> 
                   <div className="mt-4">
                     <Button
+                    
                       type="button"
                       // className="btnTyp5 talkBtntwo"
                       className={`btnTyp5 talkBtntwo  ${
