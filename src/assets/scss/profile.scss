@@ -1364,14 +1364,30 @@
         }
     }
     .QuestionList {
-        margin-bottom: 30px;
+        margin-bottom: 30px; 
+        .qaList {
+            h2 {
+                color: $col8;
+                font-size: 18px;
+                font-weight: 600;
+                & + p {
+                    display: none; 
+                }  
+            }
+        }
     }
     .answerDetail {
         ul {
             li {
                 display: flex;
                 font-size: 17px !important; 
-                margin-bottom: 20px !important; 
+                margin-bottom: 20px !important;
+                span {
+                    & > p {
+                        font-weight: 500;
+                        color: $col64; 
+                    }
+                }
                 span.ansOne {
                     min-width: 40px;
                     position: relative;
