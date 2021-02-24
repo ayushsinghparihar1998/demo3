@@ -1426,6 +1426,22 @@
     }
 }
 
+.next_prevs {
+    display: flex;
+    justify-content: space-between; 
+    .mt-4:first-child {
+        .btnTyp5.talkBtntwo {
+            background: transparent !important;
+            border: solid 1px $col1 !important; 
+            color: $col1 !important; 
+            &.disable {
+                pointer-events: none;
+                opacity: 0.5; 
+            }
+        }
+    } 
+}
+
 .CreateAccount { 
     &.alertShow {
         .modal-dialog {

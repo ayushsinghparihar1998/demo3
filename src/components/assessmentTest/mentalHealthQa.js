@@ -303,6 +303,7 @@ as_weightage: "1" */}
                         })}
                     </div>
                   </div>
+                  <div className="next_prevs"> 
                   <div className="mt-4">
                     <Button
                       type="button"
@@ -334,6 +335,7 @@ as_weightage: "1" */}
                         Submit
                       </Button>
                     )}
+                  </div>
                   </div>
                 </div>
               </Col>
