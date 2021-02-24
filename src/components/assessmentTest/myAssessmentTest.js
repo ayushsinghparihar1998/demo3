@@ -128,7 +128,7 @@ u_name: "Super Admin" */}
                                               ? "luv"
                                               : val.as_test_cat_name == "Pray"
                                               ? "pray"
-                                              : "holistic"
+                                              : "holistic" 
                                           }
                                         >
                                           {val.as_test_cat_name}
