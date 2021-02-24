@@ -59,6 +59,7 @@ class CreateAssessmentTest extends Component {
         { as_test_cat_name: "ELNP(Holistic)", as_cat_id: 4, flag: false },
       ],
       category: "'Pray','luv','eat'",
+      finalRange: 0,
     };
     this.checkServiceError = this.checkServiceError.bind(this);
   }
@@ -141,11 +142,14 @@ class CreateAssessmentTest extends Component {
         });
 
         let sugg = [];
-
-        asstObj.assessment_suggestion.map((item) => {
+        let finalRange = this.state.finalRange;
+        asstObj.assessment_suggestion.map((item, i) => {
           item.as_min_range = +item.as_min_range;
           item.as_max_range = +item.as_max_range;
           item.as_suggestion_txt = item.as_suggestion;
+          if (i == asstObj.assessment_suggestion.length - 1) {
+            finalRange = +item.as_max_range;
+          }
           as_suggestion.push(item);
         });
 
@@ -166,13 +170,11 @@ class CreateAssessmentTest extends Component {
               // as_suggestion: as_suggestion.reverse(),
               as_suggestion,
               erroras_suggestion,
+              finalRange,
             },
             () => {
-              console.log(
-                "as_suggestionas_suggestion",
-                this.state.as_suggestion
-              );
-              console.log("asstObj", this.state.asstObj);
+              console.log("finalRange", this.state.finalRange);
+
               this.checkServiceError();
             }
           );
@@ -187,6 +189,7 @@ class CreateAssessmentTest extends Component {
 
     let validName =
       name == "as_suggestion_txt" ? "suggestion text" : "max range";
+    let finalRange = this.state.finalRange;
 
     as_suggestion.map((item, index) => {
       if (ind == index) {
@@ -214,10 +217,18 @@ class CreateAssessmentTest extends Component {
         // }
 
         // DELETE ALL CHANGES
+        if (name == "as_max_range") {
+          finalRange = value;
+        }
 
         if (index < as_suggestion.length - 1) {
           console.log("YESYEYSYEYSSY");
           as_suggestion.splice(index + 1, as_suggestion.length - (index + 1));
+          as_suggestion.map((item, i) => {
+            if (i == as_suggestion.length - 1) {
+              finalRange = item.as_max_range;
+            }
+          });
         }
         console.log(
           "as_suggestionas_suggestionas_suggestionas_suggestion",
@@ -238,10 +249,10 @@ class CreateAssessmentTest extends Component {
       {
         as_suggestion,
         erroras_suggestion,
+        finalRange,
       },
       () => {
-        console.log(this.state.erroras_suggestion);
-        console.log("this.state.as_suggestion", this.state.as_suggestion);
+        console.log("finalRange", this.state.finalRange);
         this.checkServiceError();
       }
     );
@@ -300,10 +311,12 @@ class CreateAssessmentTest extends Component {
     let arr = [];
     let err = [];
     console.log("this.state.as_suggestion", this.state.as_suggestion);
+
     as_suggestion.map((item) => {
       console.log("item", item);
       arr.push(!Object.values(item).some((o) => o === ""));
     });
+
     console.log("arr", arr);
     let val = arr.every((o) => o === true);
     if (val == true) {
@@ -558,11 +571,14 @@ class CreateAssessmentTest extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Question Type 
+                        Question Type
                       </Form.Label>
                       <Row>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox" className="formRadioCustom">
+                          <Form.Group
+                            controlId="formBasicCheckbox"
+                            className="formRadioCustom"
+                          >
                             <Form.Check
                               type="radio"
                               id="as_type1"
@@ -573,11 +589,14 @@ class CreateAssessmentTest extends Component {
                               onChange={(e) => this.handleChange(e)}
                               checked={+asstObj.as_type == 2}
                             />
-                            <div className="custom_label">Free</div>  
+                            <div className="custom_label">Free</div>
                           </Form.Group>
                         </Col>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox" className="formRadioCustom"> 
+                          <Form.Group
+                            controlId="formBasicCheckbox"
+                            className="formRadioCustom"
+                          >
                             <Form.Check
                               type="radio"
                               id="plan_type2"
@@ -788,7 +807,9 @@ class CreateAssessmentTest extends Component {
                       <Button
                         variant="btnTypAdd"
                         type="button"
-                        disabled={!this.state.suggShow}
+                        disabled={
+                          this.state.finalRange == asstObj.as_total_marks
+                        }
                         onClick={() => this.addCategorySetup()}
                       >
                         <span>
@@ -802,6 +823,7 @@ class CreateAssessmentTest extends Component {
                       className="primary btnTyp5 mt-4"
                       type="button"
                       onClick={() => this.handleSubmit()}
+                      disabled={this.state.finalRange < asstObj.as_total_marks}
                     >
                       SAVE
                     </Button>

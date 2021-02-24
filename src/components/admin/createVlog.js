@@ -174,7 +174,7 @@ class CreateVlog extends Component {
               <Col md={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE" : "CREATE"} Vlog  
+                    {this.props.match.params.id > 0 ? "UPDATE" : "CREATE"} Vlog
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
@@ -260,18 +260,19 @@ class CreateVlog extends Component {
                         onReady={(editor) => {
                           console.log("Editor is ready to use!", editor);
                         }}
+                        data={vlobj.vl_desc}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log(editor.isReadOnly);
                           console.log(editor.getData().length);
                           // editor.execCommand("undo");
                           // if (editor.getData().length < 50) {
-                            this.setState({
-                              vlobj: {
-                                ...this.state.vlobj,
-                                vl_desc: data,
-                              },
-                            });
+                          this.setState({
+                            vlobj: {
+                              ...this.state.vlobj,
+                              vl_desc: data,
+                            },
+                          });
                           // }
                         }}
                         onBlur={(event, editor) => {

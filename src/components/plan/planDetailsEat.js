@@ -222,14 +222,14 @@ class PlanDetailsEat extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center">
-                                {item.pl_title}
+                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                                BY CONDITION
                               </div>
                             </div>
                             <div className="plantwo text-center">
                               <div className="d-flex justify-content-center mb-2">
                                 <Button className="btnSave">
-                                  {/* Save {item.pl_save}% */}BASIC
+                                  {item.pl_title}
                                 </Button>
                               </div>
                               <div className="pt-1">
@@ -242,9 +242,9 @@ class PlanDetailsEat extends Component {
                                     2
                                   )}
                                 </div>
-                                <div className="col14 fs17 fw400 peryears">
+                                {/* <div className="col14 fs17 fw400 peryears">
                                   Per year
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                             <div className="planpricing">

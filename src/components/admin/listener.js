@@ -162,7 +162,13 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminget_planlist"
     )
-      this.superadminget_planlist(1, 10, 1);
+      this.superadminget_planlist(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 1
+      );
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminkits_list"
@@ -172,12 +178,24 @@ class Adminlistener extends Component {
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminvlogs_list"
     )
-      this.superadminvlogs_list(1, 10, 1);
+      this.superadminvlogs_list(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 1
+      );
     else if (
       getLocalStorage("tabToOpen") &&
       getLocalStorage("tabToOpen") == "superadminget_assessmenttestlist"
     )
-      this.superadminget_assessmenttestlist(1, 10, 2);
+      this.superadminget_assessmenttestlist(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 2
+      );
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -822,9 +840,12 @@ class Adminlistener extends Component {
       );
     });
   };
-  changepath = (path, backresult) => {
+  changepath = (path, backresult, backValue) => {
     console.log(path);
     setLocalStorage("tabToOpen", backresult);
+    if (backValue) {
+      setLocalStorage("internaltabToOpen", backValue);
+    }
     this.props.history.push(path);
   };
   getPager(total) {
@@ -1270,24 +1291,16 @@ class Adminlistener extends Component {
       this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
-          if (
-            this.state.deleteObjType == "PLAN" ||
-            this.state.deleteObjType == "PLAN"
-          ) {
+          if (this.state.deleteObjType == "PLAN" || type == "PLAN") {
             this.superadminget_planlist(
               this.state.pageno,
               this.state.count,
               this.state.plan_type
             );
-          } else if (
-            this.state.deleteObjType == "KIT" ||
-            this.state.deleteObjType == "KITS"
-          ) {
+          } else if (this.state.deleteObjType == "KIT" || type == "KIT") {
+            console.log("kitkitkit");
             this.superadminkits_list(this.state.pageno, this.state.count);
-          } else if (
-            this.state.deleteObjType == "VLOGS" ||
-            this.state.deleteObjType == "VLOGS"
-          ) {
+          } else if (this.state.deleteObjType == "VLOGS" || type == "VLOGS") {
             this.superadminvlogs_list(
               this.state.pageno,
               this.state.count,
@@ -1729,8 +1742,8 @@ class Adminlistener extends Component {
                         }}
                       >
                         <div className="fs14 col28 fw500">
-                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
-                          QA
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          ASSESSMENT TEST
                         </div>
                       </div>
                     </div>
@@ -1766,7 +1779,10 @@ class Adminlistener extends Component {
                         <div
                           className="fs14 col28 fw500"
                           onClick={() =>
-                            this.changepath("/assessmentTestList", "superadminget_assessmenttestlist")
+                            this.changepath(
+                              "/assessmentTestList",
+                              "superadminget_assessmenttestlist"
+                            )
                           }
                         >
                           <Image src={Menuicon} alt="" className="mr-1" />{" "}
@@ -2057,7 +2073,8 @@ class Adminlistener extends Component {
                             onClick={() =>
                               this.changepath(
                                 "/addSubscription/0",
-                                "superadminget_planlist"
+                                "superadminget_planlist",
+                                this.state.plan_type
                               )
                             }
                           >
@@ -2173,7 +2190,8 @@ pl_title: "Platinum Plan new" */}
                                         onClick={() =>
                                           this.changepath(
                                             "/addSubscription/" + item.pl_id,
-                                            "superadminget_planlist"
+                                            "superadminget_planlist",
+                                            this.state.plan_type
                                           )
                                         }
                                         src={Editicon}
@@ -3663,13 +3681,15 @@ kt_status: "1" */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                    <Row>     <Col md={3}> 
-                                                <div className="text-right"> 
-                                                  <span className="fw400 fs14 col29 col14">
-                                                      Services:  
-                                                  </span>
-                                                </div> 
-                                              </Col>
+                                    <Row>
+                                      {" "}
+                                      <Col md={3}>
+                                        <div className="text-right">
+                                          <span className="fw400 fs14 col29 col14">
+                                            Services:
+                                          </span>
+                                        </div>
+                                      </Col>
                                       {item.kits_services.map((val, ind) => {
                                         return (
                                           <>
@@ -3683,7 +3703,7 @@ kt_status: "1" */}
                                                     {ind + 1}) {val.ks_services}{" "}
                                                   </span>
                                                   :{" "} 
-                                                </div> */} 
+                                                </div> */}
                                                 <div>
                                                   <span className="fs13">
                                                     {val.ks_services}
@@ -3738,7 +3758,8 @@ kt_status: "1" */}
                               onClick={() =>
                                 this.changepath(
                                   "/createAssessmentTest/0",
-                                  "superadminget_assessmenttestlist"
+                                  "superadminget_assessmenttestlist",
+                                  this.state.as_type
                                 )
                               }
                             >
@@ -3812,7 +3833,8 @@ kt_status: "1" */}
                                           onClick={() =>
                                             this.changepath(
                                               "/editQa/" + item.as_id + "/" + 0,
-                                              "superadminget_assessmenttestlist"
+                                              "superadminget_assessmenttestlist",
+                                              this.state.as_type
                                             )
                                           }
                                         >
@@ -3828,7 +3850,8 @@ kt_status: "1" */}
                                             onClick={() =>
                                               this.changepath(
                                                 "/qaViewDetails/" + item.as_id,
-                                                "superadminget_assessmenttestlist"
+                                                "superadminget_assessmenttestlist",
+                                                this.state.as_type
                                               )
                                             }
                                             className="pointer"
@@ -3842,7 +3865,8 @@ kt_status: "1" */}
                                               this.changepath(
                                                 "/createAssessmentTest/" +
                                                   item.as_id,
-                                                "superadminget_assessmenttestlist"
+                                                "superadminget_assessmenttestlist",
+                                                this.state.as_type
                                               )
                                             }
                                             className="pointer"
@@ -3864,10 +3888,14 @@ kt_status: "1" */}
                                         </span>
                                       </div>
                                     </div>
+                                    {item.as_type == 1 ? (
+                                      <div className="fs17 fw500 col14 mb-1">
+                                        Price: {item.as_test_price}/-
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )}
 
-                                    <div className="fs17 fw500 col14 mb-1">
-                                      Price: {item.as_test_price}/-
-                                    </div>
                                     <div className="mb-1">
                                       <span className="fs18 fw400 col14">
                                         {item.total_que_count} Questions |{" "}
@@ -3929,7 +3957,8 @@ as_type: "2" */}
                               onClick={() =>
                                 this.changepath(
                                   "/createVlog/0",
-                                  "superadminvlogs_list"
+                                  "superadminvlogs_list",
+                                  this.state.vl_type
                                 )
                               }
                             >
@@ -4012,36 +4041,37 @@ as_type: "2" */}
                                           {item.vl_title}
                                         </div>
                                         <div className="d-flex ml-auto">
-                                          {/* <span className="pr-3 fs14 col47 fw400">
-                                          {item.vl_status == "2"
-                                            ? "Deactivate"
-                                            : "Activate"}
-                                        </span>
-                                        <span className="pr-3 disabled">
-                                          <Form.Check
-                                            type="switch"
-                                            id={"custom-switch" + index}
-                                            name={"status" + index}
-                                            label=""
-                                            onClick={(e) => {
-                                              this.modifyAllContent(
-                                                "VLOGS",
-                                                item.vl_id,
-                                                "superadminchange_vlogsstatus",
-                                                item.vl_status == "1"
-                                                  ? "2"
-                                                  : "1"
-                                              );
-                                            }}
-                                            checked={item.vl_status == "1"}
-                                          />
-                                        </span> */}
+                                          <span className="pr-3 fs14 col47 fw400">
+                                            {item.vl_status == "2"
+                                              ? "Deactivate"
+                                              : "Activate"}
+                                          </span>
+                                          <span className="pr-3 disabled">
+                                            <Form.Check
+                                              type="switch"
+                                              id={"custom-switch" + index}
+                                              name={"status" + index}
+                                              label=""
+                                              onClick={(e) => {
+                                                this.modifyAllContent(
+                                                  "VLOGS",
+                                                  item.vl_id,
+                                                  "superadminchange_vlogsstatus",
+                                                  item.vl_status == "1"
+                                                    ? "2"
+                                                    : "1"
+                                                );
+                                              }}
+                                              checked={item.vl_status == "1"}
+                                            />
+                                          </span>
                                           <span className="mr-3">
                                             <Image
                                               onClick={() =>
                                                 this.changepath(
                                                   "/createVlog/" + item.vl_id,
-                                                  "superadminvlogs_list"
+                                                  "superadminvlogs_list",
+                                                  this.state.vl_type
                                                 )
                                               }
                                               src={Editicon}
@@ -4076,9 +4106,6 @@ as_type: "2" */}
                                           {/* {item.vl_desc} */}
                                         </span>
                                       </div>
-                                      <a className="d-block col40 fw15 fw500">
-                                        Read more...
-                                      </a>
                                     </div>
                                   </div>
                                 </div>

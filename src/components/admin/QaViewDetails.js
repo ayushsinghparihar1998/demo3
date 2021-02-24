@@ -101,7 +101,15 @@ class QaViewDetails extends Component {
                     </Col>
                     <Col md={4}>
                       <div className="text-right pro_cbtn">
-                        <Button type="button" className="btnType22">
+                        <Button
+                          type="button"
+                          className="btnType22"
+                          onClick={() =>
+                            this.props.history.push(
+                              "/createAssessmentTest/" + asstDetail.as_id
+                            )
+                          }
+                        >
                           <Image src={EditNew} className="mr-2" /> Edit Details
                         </Button>
                       </div>
@@ -126,10 +134,10 @@ class QaViewDetails extends Component {
                           <div className="col11 fw500 fs14">
                             {asstDetail &&
                               asstDetail.assessment_category.map((item, i) => {
-                                return item.as_test_cat_name + i <
+                                return i <
                                   asstDetail.assessment_category.length - 1
-                                  ? ","
-                                  : "";
+                                  ? item.as_test_cat_name + ","
+                                  : item.as_test_cat_name + "";
                               })}
                           </div>
                         </div>

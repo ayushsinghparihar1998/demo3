@@ -216,10 +216,10 @@ class ViewQA extends Component {
                             </div>
                             <div className="answerDetail">
                               <ul>
-                                {item.assessment_answer.map((val) => {
-                                  return (  
+                                {item.assessment_answer.map((val, ii) => {
+                                  return (
                                     <li>
-                                      <strong>1.</strong>
+                                      <strong>{ii + 1} .</strong>
                                       <span
                                         dangerouslySetInnerHTML={{
                                           __html: val.as_answer,
