@@ -109,7 +109,7 @@ const Mediadetails = (props) => {
                         />
                         </> 
                       ) : (
-                        <YouTube videoId={url} opts={opts} />
+                        <YouTube videoId={url} opts={opts} /> 
                       )}
                       </div> 
                     </>
