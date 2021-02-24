@@ -429,7 +429,7 @@ class EditQa extends Component {
                           <Link
                             to={{
                               pathname:
-                                "/qaViewDetails" + this.props.match.params.id,
+                                "/qaViewDetails/" + this.props.match.params.id,
                             }}
                           >
                             Back
