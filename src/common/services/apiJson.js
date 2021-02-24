@@ -1585,7 +1585,22 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminedit_plan: {
+  superadminedit_plan1: {
+    url: "elp/superadminedit_plan",
+    method: "POST",
+    data: {
+      pl_id: "",
+      pl_title: "",
+      pl_price: "",
+      pl_desc_details: "",
+      pl_save: "",
+      plan_type: "",
+      plan_cat_name: "",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  superadminedit_plan2: {
     url: "elp/superadminedit_plan",
     method: "POST",
     data: {

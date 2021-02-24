@@ -132,15 +132,39 @@ class PlanDetailsEat extends Component {
                                   Save {item.pl_save}%
                                 </div>
                               </div>
-
-                              <div className="fs24 fw600 col29 text-center">
-                                {item.pl_title}
+                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                                {item.pl_type == 1 ? (
+                                  item.plan_category.length == 3 ? (
+                                    <span className="">HOLISTIC </span>
+                                  ) : (
+                                    item.plan_category.map((val) => {
+                                      // return
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luvcat"
+                                              : "praycat"
+                                          }
+                                        >
+                                          {val.puc_cat_name}{" "}
+                                        </span>
+                                      );
+                                    })
+                                  )
+                                ) : (
+                                  "BY CONDITION"
+                                )}
                               </div>
                             </div>
+
                             <div className="plantwo text-center">
                               <div className="d-flex justify-content-center mb-2">
                                 <Button className="btnSave">
-                                  {/* Save {item.pl_save}% */}BASIC
+                                  {/* Save {item.pl_save}% */}
+                                  {item.pl_title}
                                 </Button>
                               </div>
                               <div className="pt-1">
@@ -154,7 +178,7 @@ class PlanDetailsEat extends Component {
                                   )}
                                 </div>
                                 <div className="col14 fs17 fw400 peryears">
-                                  Per year
+                                  {item.pl_type == 1 ? "Per Day" : ""}
                                 </div>
                               </div>
                             </div>
@@ -177,12 +201,12 @@ class PlanDetailsEat extends Component {
                         </div>
                       );
                     })}
-                </Slider>  
+                </Slider>
               </div>
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                  BYCONDITIONS SUBSCRIPTION PLANS  
+                  BYCONDITIONS SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.conditionData &&
@@ -252,4 +276,4 @@ class PlanDetailsEat extends Component {
     );
   }
 }
-export default PlanDetailsEat; 
+export default PlanDetailsEat;
