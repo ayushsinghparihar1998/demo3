@@ -414,6 +414,13 @@ class NavBar extends Component {
       show3: false,
     });
   };
+  changepath = (path, backValue) => {
+    console.log(path);
+    if (backValue) {
+      setLocalStorage("blog_category", backValue);
+    }
+    this.props.history.push(path);
+  };
   render() {
     return (
       <div className="mj_nav">
@@ -580,7 +587,9 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Eat"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/EAT"}>
+                        <NavDropdown.Item
+                          onClick={() => this.changepath("/blogs/EAT", "EAT")}
+                        >
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/assessmentTests/EAT"}>
@@ -598,7 +607,7 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Luv"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/LUV"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
@@ -616,7 +625,7 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Pray"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/PRAY"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/assessmentTests/PRAY"}>
@@ -634,7 +643,7 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlistholistic"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/ALL"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
@@ -657,16 +666,16 @@ class NavBar extends Component {
                         title="Learn more"
                         id="basic-nav-dropdown-lm"
                       >
-                        <NavDropdown.Item href={"/about"}>
-                          About Us
+                        <NavDropdown.Item href={"/blogs/ALL"}>
+                          BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/press"}>
                           PRESS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/ALL"}>
-                          BLOGS
+                        <NavDropdown.Item href={"/about"}>
+                          About Us
                         </NavDropdown.Item>
+                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
                       </NavDropdown>,
                       //   <Nav.Link>Donate</Nav.Link>,
                     ]}

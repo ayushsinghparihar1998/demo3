@@ -36,7 +36,7 @@ class EditQa extends Component {
         assessment_id: "",
         as_que_ans: [],
       },
-
+      // weightageSum:[],
       // repeat 1
       as_que_ans: [
         {
@@ -279,6 +279,16 @@ class EditQa extends Component {
     let arr1 = [];
     let val;
     let val1;
+    // let weightageSum = this.state.weightageSum;
+
+    as_que_ans.map((item) => {
+      arr.push(!Object.values(item).some((o) => o === ""));
+    });
+    // as_que_ans.map((item , i) => {
+    //   const sum = item.as_ans.reduce((a, {weightage}) => +a + +weightage, 0);
+    //   weightageSum[i] = sum;
+    // });
+    // console.log('weightageSum' , weightageSum);
 
     as_que_ans.map((item) => {
       arr.push(!Object.values(item).some((o) => o === ""));
@@ -304,6 +314,7 @@ class EditQa extends Component {
         });
       });
       val1 = arr1.every((o) => o === true);
+
       this.setState({
         ansShow: val1 == true ? true : false,
         queShow: val && val1 ? true : false,

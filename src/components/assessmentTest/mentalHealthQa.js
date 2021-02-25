@@ -209,12 +209,12 @@ class MentalhealthQa extends Component {
               <Col md={12}>
                 <div className="professor_search mentalHealths ViewQa">
                   <div className="fs22 fw600 col8 mb-4 text-center text-uppercase">
-                    mental health
+                    {asstQaList && asstQaList[0] && asstQaList[0].as_title}
                   </div>
                   <div className="QaListings">
                     <div className="QaHeader justify-content-center">
                       <div className="fs18 col14 fw500 text-center">
-                        Maximum Marks: 30
+                        Maximum Marks: {asstQaList && asstQaList[0] && asstQaList[0].as_total_marks}
                       </div>
                     </div>
                     <div className="QaBody">
@@ -303,39 +303,39 @@ as_weightage: "1" */}
                         })}
                     </div>
                   </div>
-                  <div className="next_prevs"> 
-                  <div className="mt-4">
-                    <Button
-                      type="button"
-                      // className="btnTyp5 talkBtntwo"
-                      className={`btnTyp5 talkBtntwo  ${
-                        this.state.start == 0 ? "disable" : ""
-                      }`}
-                      onClick={() => this.pageHandle("prev")}
-                    >
-                      PREVIOUS
-                    </Button>
-                  </div>
+                  <div className="next_prevs">
+                    <div className="mt-4">
+                      <Button
+                        type="button"
+                        // className="btnTyp5 talkBtntwo"
+                        className={`btnTyp5 talkBtntwo  ${
+                          this.state.start == 0 ? "disable" : ""
+                        }`}
+                        onClick={() => this.pageHandle("prev")}
+                      >
+                        PREVIOUS
+                      </Button>
+                    </div>
 
-                  <div className="mt-4 text-right">
-                    {this.state.end <= asstQaList.length ? (
-                      <Button
-                        type="button"
-                        className="btnTyp5 talkBtntwo"
-                        onClick={() => this.pageHandle("next")}
-                      >
-                        SAVE & NEXT
-                      </Button>
-                    ) : (
-                      <Button
-                        type="button"
-                        className="btnTyp5 talkBtntwo"
-                        onClick={this.handleShow}
-                      >
-                        Submit
-                      </Button>
-                    )}
-                  </div>
+                    <div className="mt-4 text-right">
+                      {this.state.end <= asstQaList.length ? (
+                        <Button
+                          type="button"
+                          className="btnTyp5 talkBtntwo"
+                          onClick={() => this.pageHandle("next")}
+                        >
+                          SAVE & NEXT
+                        </Button>
+                      ) : (
+                        <Button
+                          type="button"
+                          className="btnTyp5 talkBtntwo"
+                          onClick={this.handleShow}
+                        >
+                          Submit
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Col>

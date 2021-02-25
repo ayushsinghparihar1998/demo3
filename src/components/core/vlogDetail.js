@@ -13,7 +13,7 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
-import NavBar from "../core/navAdmin";
+import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
@@ -54,18 +54,23 @@ class VlogDetail extends Component {
       let response = await ELPRxApiService("getvlogs_details", data);
       let url = "";
       let blogDetail = {};
-
-      console.log(" detail response", response);
-      blogDetail = response.data.data[0];
-
-      var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      var match = response.data.data[0].vl_video_url.match(regExp);
-      if (match && match[2].length == 11) {
-        console.log("match[2]", match[2]);
-        url = match[2];
-        console.log(url);
+      if (response.data.status == "error") {
+        this.props.history.push({
+          pathname: "/blogs/ALL/",
+        });
       } else {
-        //error
+        console.log(" detail response", response);
+        blogDetail = response.data.data[0];
+
+        var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = response.data.data[0].vl_video_url.match(regExp);
+        if (match && match[2].length == 11) {
+          console.log("match[2]", match[2]);
+          url = match[2];
+          console.log(url);
+        } else {
+          //error
+        }
       }
 
       this.setState({
