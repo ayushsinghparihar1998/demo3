@@ -215,7 +215,7 @@ class PlanDetails extends Component {
                     />
                     <div>
                       <Image src={VideoIcon} className="iconVideo" />
-                      <div class="">
+                      <div class=""> 
                         <iframe
                           frameborder="0"
                           allowfullscreen="1"

@@ -338,7 +338,7 @@ class ProfessionalBlogList extends Component {
         <div className="profile_layout pt-4">
           <Container>
             <div className="processBlog pb-5 w-100">
-              <div className="text-center fs28 fw500 col64 mb-2">Blog</div>
+              <div className="text-center fs28 fw500 col64 mb-2">Blogs</div> 
               <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt

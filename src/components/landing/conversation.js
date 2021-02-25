@@ -16,7 +16,7 @@ class Conversations extends Component {
                         <div className="fs22 fw300 col14 pt-2">The India's Largest Emotional Support System</div>  */}
                         <div className="elpVideo">
                         <iframe width="100%" height="350" src="https://www.youtube.com/embed/GXS3c4ANQP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div> 
+                        </div>   
                     </Col>
 
                     <Col md={6}> 

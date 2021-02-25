@@ -10,7 +10,7 @@ class Conversations extends Component {
             <Container>
                 <Row>
                     <Col md={6}> 
-                        <Image src={conversations} alt="" /> 
+                        <Image src={conversations} alt="" />  
                         <div className="fs48 fw700 col9">40,997,916</div> 
                         <div className="col3 fs40 fw600">Conversations</div>
                         <div className="fs25 fw300 col14 pt-2">The World's Largest Emotional Support System</div> 

@@ -72,10 +72,10 @@ address and work on the root cause to effectively manage and control the conditi
                             </div>
                             <div className="fw500 fs18 col14 pt-4 pb-2">A holistic approach:</div>  
                             <div className="col14 fw400 pb-2">Beyond medicine is something that every human has access to and it’s usually inexpensive and free.
-People just need to believe in it and start using it <br /> 
+People just need to believe in it and start using it. <br /> 
 Our approach isn’t a replacement for medicine. But over and above medicine, we also need genuine
 care, patience, motivation, positivity, compassion, human touch, and an attitude of real care along with
-advice to eat well, sleep well, manage stress, and move more. For this primary reason, we have a fullfledged integrative ecosystem consisting of dieticians, nutritionists, doctors, emotional counsellors, yoga
+advice to eat well, sleep well, manage stress, and move more. For this primary reason, we have a full-fledged integrative ecosystem consisting of dieticians, nutritionists, doctors, emotional counsellors, yoga
 experts, alternate medicine doctors and healers. It is our constant endeavour to strive towards bettering
 what we can offer through our programs, which is beyond nutritional plans and alternate medical
 intervention.</div>
@@ -85,7 +85,7 @@ intervention.</div>
                     </Row>
             </Container>
 
-            <div className="PillarsThree">
+            <div className="PillarsThree">    
                 <Container>
                         <div className="position-relative">
                             <div className="fs24 fw500 col14 mt-4 mb-5 text-center">Three main pillars of holistic health</div>
@@ -117,13 +117,3 @@ intervention.</div>
             </div>
 
         </div>) } } export default connect( null, { actionSubscribe } )(Abouteat); 
-
-
-
-
-
-
-
-
-
-
