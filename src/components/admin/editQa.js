@@ -357,9 +357,14 @@ class EditQa extends Component {
     let arr1 = [];
     as_que_ans.map((item, ind) => {
       console.log(item);
+      // fix here
       arr.push(Object.values(item).some((o) => o === ""));
       item.as_ans.map((val, i) => {
-        arr1.push(Object.values(val).some((o) => o === ""));
+        if (item.as_que_type == 2) {
+          arr1.push(val.option.length == 0);
+        } else {
+          arr1.push(Object.values(val).some((o) => o === ""));
+        }
       });
     });
     console.log("ARRARRA", arr);
@@ -691,7 +696,7 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      {this.props.match.params.id > 0 ? "Update" : "Create"}
+                      {this.props.match.params.type > 0 ? "Update" : "Create"}
                     </Button>
                   </Form>
                 </div>

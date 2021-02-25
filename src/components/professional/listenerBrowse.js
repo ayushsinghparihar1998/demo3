@@ -166,7 +166,7 @@ class ListenerBrowse extends Component {
                                                     <Image width={35} src={obj.u_flag} alt="" className="flagset" />
                                                 </div>
                                                 <div className="col1 fs18 fw600 mt-4">{obj.u_name}</div>
-                                                <div className="fs14 fs14 fw100 mt-2">{obj.uc_cat_name}</div>
+                                                <div className="fs14 fs14 fw100 mt-2">{obj.uc_cat_name.join(', ')}</div>
                                                 {/* <div className="fs14 col14 fw400">{obj.u_bio}</div> */}
                                                 {/* <div className="fs14 col14 fw400">{obj.u_listen_to} */}
                                                 {/*<div className="fs14 col14 fw400">Listens to  Over in last week*/}
