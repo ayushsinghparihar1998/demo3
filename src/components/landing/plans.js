@@ -122,9 +122,7 @@ class Plans extends Component {
                                           ? "eatcat"
                                           : val.puc_cat_name == "Luv"
                                           ? "luvcat"
-                                          : val.puc_cat_name == "Pray"
-                                          ? "praycat"
-                                          : "holisticcat"
+                                          : "praycat"
                                       }
                                     >
                                       {val.puc_cat_name}
