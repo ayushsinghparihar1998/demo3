@@ -36,7 +36,7 @@ class EditQa extends Component {
         assessment_id: "",
         as_que_ans: [],
       },
-
+      // weightageSum:[],
       // repeat 1
       as_que_ans: [
         {
@@ -65,24 +65,108 @@ class EditQa extends Component {
   componentDidMount = () => {
     console.log(this.props.match.params.id);
     console.log(this.props);
-    if (this.props.match.params.id > 0) {
-      // this.getasstDetails();
+    if (this.props.match.params.type > 0) {
+      this.getasstDetails();
     }
   };
 
+  getasstDetails = () => {
+    let data = {
+      as_que_id: this.props.match.params.type,
+    };
+    ELPViewApiService("superadminget_assessqueanstdetails", data).then(
+      (result) => {
+        console.log("result", result);
+        let asstObj = {};
+        let as_que_ans = [];
+        let erroras_que_ans = [
+          {
+            as_que_name: "",
+            as_que_type: "",
+            as_ans: [],
+          },
+        ];
+
+        let obj = { option: "", weightage: "" };
+
+        console.log(
+          "result.data.data.assess_queans_listing[0]",
+          result.data.data.assess_queans_listing[0]
+        );
+        if (result && result.status === 200) {
+          as_que_ans.push(
+            result &&
+              result.data &&
+              result.data.data &&
+              result.data.data.assess_queans_listing[0]
+          );
+
+          console.log("as_que_ans", as_que_ans);
+
+          as_que_ans[0].assessment_answer.map((item) => {
+            erroras_que_ans[0].as_ans.push(obj);
+          });
+
+          console.log("assessment_answer", as_que_ans[0].assessment_answer);
+          as_que_ans[0].assessment_answer.map((item) => {
+            item.option = item.as_answer;
+            item.weightage = item.as_weightage;
+
+            delete item.as_weightage;
+            delete item.as_answer;
+
+            return item;
+          });
+
+          as_que_ans[0].as_ans = as_que_ans[0].assessment_answer;
+          asstObj.as_id = as_que_ans.as_test_id;
+          asstObj.as_que_id = as_que_ans.as_que_id;
+          asstObj.as_que_ans = as_que_ans;
+          // delete as_que_ans[0].assessment_answer;
+          this.setState(
+            {
+              asstObj,
+              as_que_ans,
+              erroras_que_ans,
+            },
+            () => {
+              console.log("asstObj", this.state.asstObj);
+              console.log("as_que_ans", this.state.as_que_ans);
+              console.log("erroras_que_ans", this.state.erroras_que_ans);
+            }
+          );
+        }
+      }
+    );
+  };
   handleChangeLoop1 = (name, value, ind, ansInd) => {
     let as_que_ans = this.state.as_que_ans;
     let erroras_que_ans = this.state.erroras_que_ans;
 
+    console.log(name, value, ind, ansInd);
     console.log(ind, ansInd);
-    let validName =
-      name == "as_que_name"
-        ? "enter a valid question"
-        : name == "as_que_type"
-          ? "select a question type"
+    let validName = "";
+    if (as_que_ans[ind].as_que_type == 2) {
+      validName =
+        name == "as_que_name"
+          ? "Please enter a valid question"
+          : name == "as_que_type"
+          ? "Please select a question type"
+          : name == "option"
+          ? "Please enter a valid answer"
+          : "";
+    } else {
+      validName =
+        name == "as_que_name"
+          ? "Please enter a valid question"
+          : name == "as_que_type"
+          ? "Please select a question type"
           : name == "weightage"
-            ? "enter a weightage value for the answer"
-            : "enter a valid answer"; // as_que_type
+          ? "Please enter a weightage value for the answer"
+          : name == "option"
+          ? "Please enter a valid answer"
+          : "";
+    }
     as_que_ans.map((item, index) => {
       if (ind == index) {
         if (ansInd !== "") {
@@ -91,15 +175,27 @@ class EditQa extends Component {
             if (i == ansInd) {
               val[name] =
                 name == "weightage" ? value.replace(/[^0-9]/g, "") : value;
-              erroras_que_ans[ind].as_ans[i][name] =
-                val[name].length == 0 ? "Please " + validName : "";
+              if (item.as_que_type == 2 && name == "weightage") {
+                erroras_que_ans[ind].as_ans[i][name] = "";
+              } else {
+                erroras_que_ans[ind].as_ans[i][name] =
+                  val[name].length == 0 ? validName : "";
+              }
             }
           });
         } else {
           console.log(name, value);
-          item[name] = value;
-          erroras_que_ans[ind][name] =
-            item[name].length == 0 ? "Please " + validName : "";
+          as_que_ans[ind][name] = value;
+          console.log(as_que_ans[ind][name]);
+          erroras_que_ans[ind][name] = item[name].length == 0 ? validName : "";
+
+          // Changes
+          if (name == "as_que_type" && value == 2) {
+            item.as_ans.map((val, i) => {
+              val.weightage = "";
+              erroras_que_ans[ind].as_ans[i].weightage = "";
+            });
+          }
         }
       }
     });
@@ -118,16 +214,6 @@ class EditQa extends Component {
       }
     );
   };
-
-  // isValid(data) {
-  //   const { errors, isValid } = validateInput(data);
-  //   if (!isValid) {
-  //     this.setState({ errors }, () => console.log(this.state.errors));
-  //   }
-
-  //   return isValid;
-  // }
-
   addQuesion() {
     let as_que_ans = this.state.as_que_ans;
     let val = as_que_ans[as_que_ans.length - 1].as_max_range + 1;
@@ -161,18 +247,7 @@ class EditQa extends Component {
       }
     );
   }
-  removeQuestion(index) {
-    let as_que_ans = this.state.as_que_ans;
-    as_que_ans.splice(index, 1);
-    this.setState(
-      {
-        as_que_ans,
-      },
-      () => {
-        this.checkServiceError();
-      }
-    );
-  }
+
   addAnswer(i) {
     let as_que_ans = this.state.as_que_ans;
     let obj = {
@@ -197,50 +272,48 @@ class EditQa extends Component {
       }
     );
   }
-  removeAnswer(index, i) {
-    let as_que_ans = this.state.as_que_ans;
-    let as_ans = as_que_ans[index].as_ans;
-    as_ans.splice(i, 1);
-    this.setState(
-      {
-        as_que_ans,
-      },
-      () => {
-        console.log("as_que_ans", this.state.as_que_ans);
-        this.checkServiceError();
-      }
-    );
-  }
+
   checkServiceError = () => {
     let as_que_ans = this.state.as_que_ans;
-    let erroras_que_ans = this.state.erroras_que_ans;
-
     let arr = [];
     let arr1 = [];
-    let err = [];
     let val;
     let val1;
-    // console.log("this.state.as_que_ans", this.state.as_que_ans);
-    // if no question typed
-    // 1.no add que
-    // 2.no add ans
+    // let weightageSum = this.state.weightageSum;
+
     as_que_ans.map((item) => {
-      console.log("item", item);
+      arr.push(!Object.values(item).some((o) => o === ""));
+    });
+    // as_que_ans.map((item , i) => {
+    //   const sum = item.as_ans.reduce((a, {weightage}) => +a + +weightage, 0);
+    //   weightageSum[i] = sum;
+    // });
+    // console.log('weightageSum' , weightageSum);
+
+    as_que_ans.map((item) => {
       arr.push(!Object.values(item).some((o) => o === ""));
     });
     val = arr.every((o) => o === true);
-    console.log("val", val);
     if (val == true) {
       as_que_ans.map((item) => {
         item.as_ans.map((ans, i) => {
-          console.log("ans", ans);
-          console.log(ans.weightage === "");
-          console.log(ans.option.length == 0);
-          arr1.push(!Object.values(ans).some((o) => o === ""));
+          if (item.as_que_type == 2) {
+            arr1.push(!ans.option.length == 0);
+            console.log(
+              'ans.option != ""',
+              ans.option !== "",
+              ans.option.length == 0
+            );
+          } else {
+            arr1.push(!Object.values(ans).some((o) => o === ""));
+            console.log(
+              '!Object.values(ans).some((o) => o === "")',
+              !Object.values(ans).some((o) => o === "")
+            );
+          }
         });
       });
       val1 = arr1.every((o) => o === true);
-      console.log("val1", val1);
 
       this.setState({
         ansShow: val1 == true ? true : false,
@@ -251,9 +324,8 @@ class EditQa extends Component {
         queShow: val,
       });
     }
-    console.log("arr", arr);
-    console.log("arr1", arr1);
   };
+
   checkError = () => {
     let asstObj = this.state.asstObj;
     let as_que_ans = this.state.as_que_ans;
@@ -271,10 +343,14 @@ class EditQa extends Component {
           val.option.length == 0 || val.option == ""
             ? "Please enter a valid answer."
             : "";
-        erroras_que_ans[ind].as_ans[i].weightage =
-          val.weightage.length == 0 || val.weightage == ""
-            ? "Please enter a weightage value for the answer"
-            : "";
+        if (item.as_que_type == 2) {
+          erroras_que_ans[ind].as_ans[i].weightage = "";
+        } else {
+          erroras_que_ans[ind].as_ans[i].weightage =
+            val.weightage.length == 0 || val.weightage == ""
+              ? "Please enter a weightage value for the answer"
+              : "";
+        }
       });
     });
     let arr = [];
@@ -309,9 +385,11 @@ class EditQa extends Component {
     let data = this.state.asstObj;
     console.log("datadatadatadata", data);
 
-    data.assessment_id = this.props.match.params.id;
     if (this.props.match.params.type > 0) {
-      data.as_id = this.props.match.params.type;
+      data.as_id = this.props.match.params.id;
+      data.as_que_id = this.props.match.params.type;
+    } else {
+      data.assessment_id = this.props.match.params.id;
     }
     ELPViewApiService(
       this.props.match.params.type == 0
@@ -388,7 +466,14 @@ class EditQa extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div>
                         <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link>
+                          <Link
+                            to={{
+                              pathname:
+                                "/qaViewDetails/" + this.props.match.params.id,
+                            }}
+                          >
+                            Back
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -461,45 +546,55 @@ class EditQa extends Component {
                               </Form.Label>
                               <Row>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox">
+                                  <Form.Group
+                                    controlId="formBasicCheckbox"
+                                    className="formRadioCustom"
+                                  >
                                     <Form.Check
                                       type="radio"
-                                      id="as_que_type1"
+                                      id={index + item.as_id}
                                       value={1}
-                                      name="as_que_type"
-                                      label="Rrelevant"
-                                      className="radioboxTyp1"
+                                      // name="as_que_type"
+                                      label=""
+                                      className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
-                                          e.target.name,
-                                          e.target.value,
+                                          "as_que_type",
+                                          1,
                                           index,
                                           ""
                                         )
                                       }
                                       checked={+item.as_que_type == 1}
                                     />
+                                    <div className="custom_label">Relevant</div>
                                   </Form.Group>
                                 </Col>
                                 <Col md={4}>
-                                  <Form.Group controlId="formBasicCheckbox">
+                                  <Form.Group
+                                    controlId="formBasicCheckbox"
+                                    className="formRadioCustom"
+                                  >
                                     <Form.Check
                                       type="radio"
-                                      id="as_que_type2"
+                                      id={item.as_id + index}
                                       value={2}
-                                      name="as_que_type"
-                                      label="Irrelevant"
-                                      className="radioboxTyp1"
+                                      // name="as_que_type"
+                                      label=""
+                                      className="radioboxTyp1 pointer"
                                       onChange={(e) =>
                                         this.handleChangeLoop1(
-                                          e.target.name,
-                                          e.target.value,
+                                          "as_que_type",
+                                          2,
                                           index,
                                           ""
                                         )
                                       }
                                       checked={+item.as_que_type == 2}
                                     />
+                                    <div className="custom_label">
+                                      Irrelevant
+                                    </div>
                                   </Form.Group>
                                 </Col>
                               </Row>
@@ -585,6 +680,7 @@ class EditQa extends Component {
                                         }
                                         maxLength={2}
                                         className="inputTyp2"
+                                        disabled={item.as_que_type == 2}
                                       />
                                       <div className="col27 fs14 fw400 mt-2 error">
                                         {
@@ -616,18 +712,22 @@ class EditQa extends Component {
                         );
                       })}
                     <div className="position-relative mb-2">
-                      <Button
-                        variant="btnTypAdd"
-                        type="button"
-                        className="inputTyp2 form-control"
-                        onClick={() => this.addQuesion()}
-                        disabled={!this.state.queShow}
-                      >
-                        <span className="col40">
-                          <i className="fa fa-plus"></i>
-                        </span>
-                        <b className="col40 fw500">Add Question</b>
-                      </Button>
+                      {this.props.match.params.type > 0 ? (
+                        ""
+                      ) : (
+                        <Button
+                          variant="btnTypAdd"
+                          type="button"
+                          className="inputTyp2 form-control"
+                          onClick={() => this.addQuesion()}
+                          disabled={!this.state.queShow}
+                        >
+                          <span className="col40">
+                            <i className="fa fa-plus"></i>
+                          </span>
+                          <b className="col40 fw500">Add Question</b>
+                        </Button>
+                      )}
                     </div>
 
                     <Button
@@ -635,7 +735,7 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      create
+                      {this.props.match.params.id > 0 ? "Update" : "Create"}
                     </Button>
                   </Form>
                 </div>

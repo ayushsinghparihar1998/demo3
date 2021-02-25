@@ -11,34 +11,36 @@ class Discussanything extends Component {
     render() {
         
         return (
-            <div className="Discussanything">    
+            <div className="Discussanything">     
                     <div className="fs40 col8 fw600 text-center w-100 mb-5">How It Works</div>   
-                    <Row>
-                        <Col md={12}>
-                            <div className="discussTwo"> 
-                                <Image src={Getsupport} alt="" className="w-100 supportImg" />     
-                            </div>
-                        </Col>
-
-                        <Col md={6} className="d-none"> 
-                            <div className="discuss">
-                                <div className="fs44 col104 fw600 w-100">Discuss anytime
-                            <span className="d-block">anywhere about anything.</span>
+                    <Container>
+                        <Row>
+                            <Col md={12}>
+                                <div className="discussTwo"> 
+                                    <Image src={Getsupport} alt="" className="w-100 supportImg" />     
                                 </div>
+                            </Col>
 
-                                <div className="fs28 col14 fw300 pt-4">Get guidance from an ELNP Coach.</div>
+                            <Col md={6} className="d-none"> 
+                                <div className="discuss">
+                                    <div className="fs44 col104 fw600 w-100">Discuss anytime
+                                <span className="d-block">anywhere about anything.</span>
+                                    </div>
 
-                                <div className="col16 fs18 fw300 w-100 pt-4">
-                                    Want to bring about a positive change in your life? Get confidential guidance and counselling from our ELNP Coach.
+                                    <div className="fs28 col14 fw300 pt-4">Get guidance from an ELNP Coach.</div>
+
+                                    <div className="col16 fs18 fw300 w-100 pt-4">
+                                        Want to bring about a positive change in your life? Get confidential guidance and counselling from our ELNP Coach.
+                                    </div>
+
+
+                                    {/* <Button variant="primary" className="btnTyp3 discussBtn mt-5" onClick={()=>this.setState({ show: true })}>
+                                        Get Started
+                                </Button> */}  
                                 </div>
-
-
-                                {/* <Button variant="primary" className="btnTyp3 discussBtn mt-5" onClick={()=>this.setState({ show: true })}>
-                                    Get Started
-                            </Button> */}  
-                            </div>
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </Container>
                 <Modal show={this.state.show} className="CreateAccount modaltwo">
                     <Modal.Header>
                         <Button onClick={this.handleClose}>

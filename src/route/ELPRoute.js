@@ -61,6 +61,7 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 // import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/core/blogDetail";
+import VlogDetail from "../components/core/vlogDetail";
 import BlogVideoDetails from "../components/core/blogVideoDetails";
 import PressBlogDetail from "../components/core/PressBlogDetail";
 import Categoryadmin from "../components/admin/admincategory";
@@ -76,7 +77,7 @@ import ProfessionalDetails from "../components/professional/professionalDetails"
 import ProfessionalSignup from "../components/professional/professionalSignup";
 import ProfessionalModify from "../components/professional/professionalModify.js";
 
-// import ProfessionalList from "../components/admin/professionalList";
+import MyAssessmentTestSA from "../components/admin/myAssessmentTestSA";
 import listenerBrowse from "../components/professional/listenerBrowse";
 // import CorporateMember from "../components/admin/corporateMember";
 import AddDomain from "../components/admin/addDomain";
@@ -111,11 +112,12 @@ import ViewAssessmentTest from "../components/assessmentTest/viewAssessmentTest"
 import PlanDetails from "../components/plan/planDetails";
 import PlanDetailsEat from "../components/plan/planDetailsEat";
 import MyAssessmentTest from "../components/assessmentTest/myAssessmentTest";
-import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";        
-import MentalViewDetails from "../components/admin/mentalViewDetails"; 
-import AssessmentTestLists from "../components/admin/assessmentTestList"; 
+import ListenerAssessmentTest from "../components/ListenerAssessment/listenerAssessmentTest";
+import QaViewDetails from "../components/admin/QaViewDetails";
+import AssessmentTestLists from "../components/admin/assessmentTestList";
 import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestList";
 import MentalQa from "../components/assessmentTest/mentalQa";
+import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 
 const user =
   getLocalStorage("userInfo") ||
@@ -170,12 +172,12 @@ class ELPRoute extends Component {
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/listenerprofile" component={ListenerProfile} />
           <PublicRoute path="/createVlog/:id" component={CreateVlog} />
-          <PublicRoute
-            path="/viewAssessmentTest"
+          <Route
+            path="/viewAssessmentTest/:id/:type"
             component={ViewAssessmentTest}
           />
           <PublicRoute path="/planlist/:name" component={PlanDetailsEat} />
-          <PublicRoute path="/myAssessmentTest" component={MyAssessmentTest} />
+          <Route path="/myAssessmentTest" component={MyAssessmentTest} />
 
           <PublicRoute
             path="/professionalDetails/:type/:id"
@@ -200,7 +202,7 @@ class ELPRoute extends Component {
             component={DomainDetail}
           />
           {/* <PublicRoute path="/domainListing" component={DomainListing} /> */}
-          {/* <PublicRoute path="/sessionRequest" component={SessionRequest} /> */}
+          <Route path="/assessmentTestList" component={MyAssessmentTestSA} />
           <PublicRoute path="/corporateLogin" component={CorporateLogin} />
           <PublicRoute
             path="/corporateDashboard"
@@ -220,18 +222,27 @@ class ELPRoute extends Component {
             path="/assessmentTestList"
             component={AssessmentTestList}
           />
-          <PublicRoute path="/viewQA" component={ViewQA} />
+          <PublicRoute path="/viewQA/:id" component={ViewQA} />
           <PublicRoute
             path="/createAssessmentTest/:id"
             component={CreateAssessmentTest}
           />
           <PublicRoute path="/editQa/:id/:type" component={EditQa} />
-          <PublicRoute path="/planlistholistic" component={PlanDetails} />           
-          <PublicRoute path="/listenerAssessmentTest" component={ListenerAssessmentTest} />  
-          <PublicRoute path="/mentalViewDetails" component={MentalViewDetails} />  
-          <PublicRoute path="/assessmentTestLists" component={AssessmentTestLists} /> 
-          <PublicRoute path="/assessmentTestListtwo" component={AssessmentTestListTwo} />       
-          <PublicRoute path="/mentalQa" component={MentalQa} /> 
+          <PublicRoute path="/planlistholistic" component={PlanDetails} />
+          <PublicRoute
+            path="/listenerAssessmentTest"
+            component={ListenerAssessmentTest}
+          />
+          <PublicRoute path="/QaViewDetails/:id" component={QaViewDetails} />
+          <PublicRoute
+            path="/assessmentTestLists"
+            component={AssessmentTestLists}
+          />
+          <Route
+            path="/assessmentTests/:name"
+            component={AssessmentTestListTwo}
+          />
+          <PublicRoute path="/mentalQa" component={MentalQa} />
 
           <PublicRoute
             path="/professionalBlogList"
@@ -248,12 +259,16 @@ class ELPRoute extends Component {
             path="/subscriptionDocument"
             component={SubscriptionDocument}
           />
+          <Route
+            path="/starttest/:id"
+            component={MentalhealthQa} 
+          />
           {/* <PublicRoute
             path="/subscriptionPlan/:id"
             component={SubscriptionPlan}
           /> */}
 
-          <PublicRoute path="/helpcenter" component={Helpcenter} />  
+          <PublicRoute path="/helpcenter" component={Helpcenter} />
           <PublicRoute
             path="/professinalBlogCreate/:id"
             component={ProfessinalBlogCreate}
@@ -299,6 +314,10 @@ class ELPRoute extends Component {
           <Route
             path="/blogsDetail/:id"
             render={(props) => <BlogDetail {...props} />}
+          />
+           <Route
+            path="/vlogsDetail/:id"
+            render={(props) => <VlogDetail {...props} />}
           />
           <Route
             path="/press/blogsDetail/:id"

@@ -41,19 +41,8 @@ class CreateAssessmentTest extends Component {
         as_suggestion: [],
       },
 
-      as_suggestion: [
-        {
-          as_min_range: 0,
-          as_max_range: 0,
-          as_suggestion_txt: "",
-        },
-      ],
-      erroras_suggestion: [
-        {
-          as_max_range: "",
-          as_suggestion_txt: "",
-        },
-      ],
+      as_suggestion: [],
+      erroras_suggestion: [],
       errors: {
         as_title: "",
         as_type: "",
@@ -67,9 +56,10 @@ class CreateAssessmentTest extends Component {
         { as_test_cat_name: "Eat", as_cat_id: 5, flag: false },
         { as_test_cat_name: "Luv", as_cat_id: 2, flag: false },
         { as_test_cat_name: "Pray", as_cat_id: 3, flag: false },
-        { as_test_cat_name: "ELNP(Holistic)", as_cat_id: 4, flag: false },
+        { as_test_cat_name: "Holistic", as_cat_id: 4, flag: false },
       ],
       category: "'Pray','luv','eat'",
+      finalRange: 0,
     };
     this.checkServiceError = this.checkServiceError.bind(this);
   }
@@ -79,6 +69,24 @@ class CreateAssessmentTest extends Component {
     console.log(this.props);
     if (this.props.match.params.id > 0) {
       this.getasstDetails();
+    } else {
+      let as_suggestion = [
+        {
+          as_min_range: 0,
+          as_max_range: 0,
+          as_suggestion_txt: "",
+        },
+      ];
+      let erroras_suggestion = [
+        {
+          as_max_range: "",
+          as_suggestion_txt: "",
+        },
+      ];
+      this.setState({
+        as_suggestion,
+        erroras_suggestion,
+      });
     }
   };
 
@@ -107,14 +115,19 @@ class CreateAssessmentTest extends Component {
       (result) => {
         console.log("result", result);
         let asstObj = {};
+
         if (result && result.status === 200) {
           asstObj =
             result && result.data && result.data.data
               ? result.data.data[0]
               : [];
         }
+
         let cats = [];
         let catArray = this.state.catArray;
+        let as_suggestion = this.state.as_suggestion;
+        let erroras_suggestion = this.state.erroras_suggestion;
+
         asstObj.assessment_category.map((item) => {
           cats.push(item.as_test_cat_name);
         });
@@ -128,29 +141,44 @@ class CreateAssessmentTest extends Component {
           return item;
         });
 
-        let as_suggestion = [];
-        console.log("asstObj", asstObj.assessment_suggestion);
-        let arr = [];
+        let sugg = [];
+        let finalRange = this.state.finalRange;
+        asstObj.assessment_suggestion.map((item, i) => {
+          item.as_min_range = +item.as_min_range;
+          item.as_max_range = +item.as_max_range;
+          item.as_suggestion_txt = item.as_suggestion;
+          if (i == asstObj.assessment_suggestion.length - 1) {
+            finalRange = +item.as_max_range;
+          }
+          as_suggestion.push(item);
+        });
+
         asstObj.assessment_suggestion.map((item) => {
           console.log(item);
-          let obj = {
-            as_min_range: +item.as_min_range,
-            as_max_range: +item.as_max_range,
-            as_suggestion_txt: item.as_suggestion,
+          let objer = {
+            as_min_range: "",
+            as_max_range: "",
+            as_suggestion_txt: "",
           };
-          as_suggestion.push(obj);
+          erroras_suggestion.push(objer);
         });
-        console.log("arr", as_suggestion);
-        this.setState(
-          {
-            asstObj,
-            catArray,
-            as_suggestion,
-          },
-          () => {
-            console.log("asstObj", this.state.catArray);
-          }
-        );
+        setTimeout(() => {
+          this.setState(
+            {
+              asstObj,
+              catArray,
+              // as_suggestion: as_suggestion.reverse(),
+              as_suggestion,
+              erroras_suggestion,
+              finalRange,
+            },
+            () => {
+              console.log("finalRange", this.state.finalRange);
+
+              this.checkServiceError();
+            }
+          );
+        }, 200);
       }
     );
   };
@@ -161,6 +189,7 @@ class CreateAssessmentTest extends Component {
 
     let validName =
       name == "as_suggestion_txt" ? "suggestion text" : "max range";
+    let finalRange = this.state.finalRange;
 
     as_suggestion.map((item, index) => {
       if (ind == index) {
@@ -188,10 +217,18 @@ class CreateAssessmentTest extends Component {
         // }
 
         // DELETE ALL CHANGES
+        if (name == "as_max_range") {
+          finalRange = value;
+        }
 
         if (index < as_suggestion.length - 1) {
           console.log("YESYEYSYEYSSY");
           as_suggestion.splice(index + 1, as_suggestion.length - (index + 1));
+          as_suggestion.map((item, i) => {
+            if (i == as_suggestion.length - 1) {
+              finalRange = item.as_max_range;
+            }
+          });
         }
         console.log(
           "as_suggestionas_suggestionas_suggestionas_suggestion",
@@ -212,10 +249,10 @@ class CreateAssessmentTest extends Component {
       {
         as_suggestion,
         erroras_suggestion,
+        finalRange,
       },
       () => {
-        console.log(this.state.erroras_suggestion);
-        console.log("this.state.as_suggestion", this.state.as_suggestion);
+        console.log("finalRange", this.state.finalRange);
         this.checkServiceError();
       }
     );
@@ -274,10 +311,12 @@ class CreateAssessmentTest extends Component {
     let arr = [];
     let err = [];
     console.log("this.state.as_suggestion", this.state.as_suggestion);
+
     as_suggestion.map((item) => {
       console.log("item", item);
       arr.push(!Object.values(item).some((o) => o === ""));
     });
+
     console.log("arr", arr);
     let val = arr.every((o) => o === true);
     if (val == true) {
@@ -351,7 +390,7 @@ class CreateAssessmentTest extends Component {
     let asstObj = this.state.asstObj;
     let as_suggestion = this.state.as_suggestion;
     let erroras_suggestion = this.state.erroras_suggestion;
-
+    console.log("submit");
     let catval = [];
     this.state.catArray.map((cat) => {
       console.log(cat, cat.flag == true);
@@ -412,11 +451,17 @@ class CreateAssessmentTest extends Component {
             let val =
               this.props.match.params.id > 0 ? this.props.match.params.id : "0";
 
-            setTimeout(() => {
-              this.props.history.push(
-                "/editQa/" + result.data.data.assessment_id + "/" + val
-              );
-            }, 1000);
+            if (this.props.match.params.id == 0) {
+              setTimeout(() => {
+                this.props.history.push(
+                  "/editQa/" + result.data.data.assessment_id + "/" + val
+                );
+              }, 1000);
+            } else {
+              setTimeout(() => {
+                this.props.history.push("/admin");
+              }, 1000);
+            }
             // this.clear();
           } else {
             this.setState({
@@ -489,7 +534,10 @@ class CreateAssessmentTest extends Component {
               </Col>
               <Col md={9} className="pl-1">
                 <div className="corporateMember CreateAssessment">
-                  <div className="fs28 col10 mb-4">Assessment Test</div>
+                  <div className="fs28 col10 mb-4">
+                    {this.props.match.params.id > 0 ? "Update" : "Create"}
+                    <span className="pl-1">Assessment Test</span>
+                  </div>
                   <Form method="post">
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">
@@ -525,31 +573,39 @@ class CreateAssessmentTest extends Component {
                       </Form.Label>
                       <Row>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox">
+                          <Form.Group
+                            controlId="formBasicCheckbox"
+                            className="formRadioCustom"
+                          >
                             <Form.Check
                               type="radio"
                               id="as_type1"
                               value={2}
                               name="as_type"
-                              label="Free"
+                              label=""
                               className="radioboxTyp1"
                               onChange={(e) => this.handleChange(e)}
                               checked={+asstObj.as_type == 2}
                             />
+                            <div className="custom_label">Free</div>
                           </Form.Group>
                         </Col>
                         <Col md={4}>
-                          <Form.Group controlId="formBasicCheckbox">
+                          <Form.Group
+                            controlId="formBasicCheckbox"
+                            className="formRadioCustom"
+                          >
                             <Form.Check
                               type="radio"
                               id="plan_type2"
                               value={1}
                               name="as_type"
-                              label="Paid"
+                              label=""
                               className="radioboxTyp1"
                               checked={+asstObj.as_type == 1}
                               onChange={(e) => this.handleChange(e)}
                             />
+                            <div className="custom_label">Paid</div>
                           </Form.Group>
                         </Col>
                       </Row>
@@ -671,20 +727,6 @@ class CreateAssessmentTest extends Component {
                           <Form.Group className="mb-4">
                             <Form.Label className="fs20 fw600 col14">
                               Select range
-                              {this.state.as_suggestion.length > 1 ? (
-                                <Col md={1}>
-                                  <Image
-                                    src={Deleteicon}
-                                    alt=""
-                                    className="deleteUserset"
-                                    onClick={() =>
-                                      this.removeCategorySetup(index)
-                                    }
-                                  />
-                                </Col>
-                              ) : (
-                                ""
-                              )}
                             </Form.Label>
                             {/* <Form.Control type="range" className="inputTyp2" />  */}
                             <div className="slider">
@@ -714,7 +756,8 @@ class CreateAssessmentTest extends Component {
                               />
                             </div>
                             <div className="col27 fs14 fw400 mt-2 error">
-                              {erroras_suggestion[index].as_max_range}
+                              {erroras_suggestion &&
+                                erroras_suggestion[index].as_max_range}
                             </div>
                           </Form.Group>
 
@@ -751,7 +794,8 @@ class CreateAssessmentTest extends Component {
                             />
 
                             <div className="col27 fs14 fw400 mt-2 error">
-                              {erroras_suggestion[index].as_suggestion_txt}
+                              {erroras_suggestion &&
+                                erroras_suggestion[index].as_suggestion_txt}
                             </div>
                           </Form.Group>
                         </>
@@ -761,7 +805,9 @@ class CreateAssessmentTest extends Component {
                       <Button
                         variant="btnTypAdd"
                         type="button"
-                        disabled={!this.state.suggShow}
+                        disabled={
+                          this.state.finalRange == asstObj.as_total_marks
+                        }
                         onClick={() => this.addCategorySetup()}
                       >
                         <span>
@@ -775,6 +821,7 @@ class CreateAssessmentTest extends Component {
                       className="primary btnTyp5 mt-4"
                       type="button"
                       onClick={() => this.handleSubmit()}
+                      disabled={this.state.finalRange < asstObj.as_total_marks}
                     >
                       SAVE
                     </Button>

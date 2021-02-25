@@ -23,7 +23,7 @@ import VideoIcon from "../../assets/images/videoIcon.png";
 const Mediadetails = (props) => {
   const [blogDetail, setBlogDetail] = useState({});
   const [url, seturl] = useState("");
-  const [play, setplay] = useState(false);
+  const [play, setplay] = useState(Boolean);
   const [opts, setopts] = useState({});
   useEffect(() => {
     _getBlogDetailHandler();
@@ -65,6 +65,9 @@ const Mediadetails = (props) => {
           },
         });
         setplay(false)
+        console.log('play');
+        console.log(play);
+        console.log(url);
       }
     } catch (err) {
       console.log("err");
@@ -80,7 +83,7 @@ const Mediadetails = (props) => {
       <div className="ngo_services media_details">
         <Container>
           <div className="ngo_listing mt-4 mb-4">
-            <div className="col1 fw600 fs22 text-center w-100 mt-4 pt-3">
+            <div className="col1 fw600 fs22 text-center w-100"> 
               {props.history.location.state.type == "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
@@ -90,23 +93,28 @@ const Mediadetails = (props) => {
               <Col lg={12}>
                 <div className="ngo_details mt-2">  
                   {props.history.location.state.type == "blog" ? (
-                    <Image src={blogDetail.bl_image} alt="" className="w-100" />
+                    <Image src={blogDetail && blogDetail.bl_image} alt="" className="w-100" />
                   ) : (
                     <>
-                      <Image
-                        src={blogDetail.vl_thumbnail_url}
-                        alt=""
-                        className="w-100"
-                      />
-                      {play == false ? (
-                        <Image
+                    <div className="elpVideoblog">
+                      
+                      {!play ? (
+                        <>
+                        <Image    
+                          src={blogDetail && blogDetail.vl_thumbnail_url}
+                          alt=""
+                          className="w-100 iconVideomain"
+                        />  
+                        <Image  
                           src={VideoIcon}
                           className="iconVideo"
                           onClick={() => setplay(true)}
                         />
+                        </> 
                       ) : (
                         <YouTube videoId={url} opts={opts} /> 
                       )}
+                      </div> 
                     </>
                   )}
                   <div className="pt-3 pb-3">

@@ -58,6 +58,7 @@ class Plans extends Component {
   render() {
     const settingstwo = {
       dots: true,
+      nav: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
@@ -107,26 +108,36 @@ class Plans extends Component {
                             </div>
                           </div>
 
-                          <div className="fs24 fw600 col29 text-center text-uppercase">
-                            {item.plan_category.length == 3 ? (
-                              <span className="">HOLISTIC </span>
+                          <div className="fs22 fw600 col29 text-center text-uppercase">
+                            {item.pl_type == 1 ? (
+                              item.plan_category.length == 3 ? (
+                                <span className="holisticcat">HOLISTIC </span>
+                              ) : (
+                                item.plan_category.map((val, index) => {
+                                  // return
+                                  return (
+                                    <span
+                                      className={
+                                        val.puc_cat_name == "Eat"
+                                          ? "eatcat"
+                                          : val.puc_cat_name == "Luv"
+                                          ? "luvcat"
+                                          : "praycat"
+                                      }
+                                    >
+                                      {val.puc_cat_name}
+                                      <span className="andClass">
+                                        {item.plan_category.length == 2 &&
+                                        index == 0
+                                          ? " & "
+                                          : ""}{" "}
+                                      </span>
+                                    </span>
+                                  );
+                                })
+                              )
                             ) : (
-                              item.plan_category.map((val) => {
-                                // return
-                                return (
-                                  <span
-                                    className={
-                                      val == "Eat"
-                                        ? "eatcat"
-                                        : val == "Luv"
-                                        ? "luvcat"
-                                        : "praycat"
-                                    }
-                                  >
-                                    {val.puc_cat_name}{" "}
-                                  </span>
-                                );
-                              })
+                              "BY CONDITION"
                             )}
                           </div>
                         </div>
@@ -145,7 +156,7 @@ class Plans extends Component {
                               {parseFloat(item.pl_discount_price).toFixed(2)}
                             </div>
                             <div className="col14 fs17 fw400 peryears">
-                              Per {item.pl_type == 1 ? "Day" : "Year"}
+                              {item.pl_type == 1 ? "Per Day" : ""}
                             </div>
                           </div>
                         </div>

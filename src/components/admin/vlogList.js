@@ -60,7 +60,7 @@ class VlogList extends Component {
   handleClose = () => { 
     this.setState({ show: false });
   };
-  render() {  
+  render() {   
     // const {​show}​ = this.state
     return (
       <div className="page__wrapper innerpage">  
@@ -309,7 +309,7 @@ class VlogList extends Component {
         Launch demo modal
       </Button> */} 
 
-      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                  
+      <Modal show={this.state.show} onHide={this.handleClose} className="VlogBlogModal">                   
         <Modal.Header closeButton>    
         </Modal.Header>
         <Modal.Body>

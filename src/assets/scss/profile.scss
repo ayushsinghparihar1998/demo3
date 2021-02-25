@@ -752,6 +752,10 @@
         }
     }
 }
+.border_t {
+    border-top: solid 1px #BBE8F5;
+    padding-top: 15px;
+}
 .mw35s {
     width: 35px;
     height: 35px;
@@ -794,13 +798,20 @@
             tbody {
                 tr { 
                     td {
-                        position: relative; 
+                        position: relative;
                         font-size: 15px;
                         font-weight: 500; 
                         height: 70px; 
                         line-height: 40px;  
                         text-align: center;  
                         border: 1px solid #BBE8F5;
+                        min-width: 160px;
+                        span {
+                            margin-right: 5px !important;
+                            &:last-child {
+                                margin-right: 0px !important; 
+                            }
+                        }
                         @mixin eatLuvPrays {
                             border-radius: 30px;
                             padding: 5px 20px;
@@ -819,7 +830,7 @@
                         span.pray { 
                             background: #FFA9FB;  
                             @include eatLuvPrays;
-                        }
+                        } 
                     }
                 }
             }
@@ -906,6 +917,9 @@
         }
         .borderRight {
             border-right: solid 1px #ddd; 
+            &:last-child {
+                border-right: none; 
+            }
         }
     }
     .customsRadio {
@@ -1006,7 +1020,7 @@
         }
         span {
             display: block;
-            max-height: 78px;  
+            max-height: 66px;  
             overflow: hidden;
             p {
                 margin-bottom: 18px; 
@@ -1239,9 +1253,23 @@
     .holistic {
         background: #FFBB00;
         @include elpAll;
-        width: 80px; 
+        width: 120px; 
+        padding: 0 0;  
     } 
 }
+.holistic {   
+    background: #FFBB00;
+    width: 120px; 
+    height: 30px;
+    line-height: 30px; 
+    color: $col29; 
+    font-size: 13px;
+    padding: 5px 15px; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    text-align: center;
+    margin-right: 10px; 
+} 
 .ViewQa {
     position: relative; 
     background: $col18;
@@ -1252,13 +1280,14 @@
         display: flex;
         justify-content: space-between;
         margin-top: 15px;
-        button.btn-btnTypAdd {
+        button.btn-btnTypAdd { 
             font-size: 16px;
             color: $col23;
             font-weight: 500; 
             &:focus {
-                box-shadow: none;
+                box-shadow: none !important; 
             }
+            
             span {
                 width: 20px;
                 height: 20px;
@@ -1295,6 +1324,23 @@
             position: relative;
             width: 100%;
             padding: 20px 20px 20px 20px; 
+            div.col29.fw500.fs17 {
+                display: flex; 
+                strong {
+                    min-width: 102px; 
+                }
+                span {
+                    h2 {
+                        color: $col29;
+                        font-size: 15px;
+                        font-weight: 600;
+                        & + p {
+                            display: none; 
+                        }
+                    }
+                    
+                }
+            }
         }
         .answerDetail {
             display: flex;
@@ -1309,9 +1355,17 @@
                     color: #595454;
                     font-weight: 300;
                     margin-bottom: 12px; 
+                    display: flex;
                     strong {
                         color: $col14; 
                         font-weight: 500; 
+                        min-width: 30px; 
+                    }
+                    span {
+                        & > p {
+                            font-weight: 400; 
+                            font-size: 13px; 
+                        }
                     }
                 }
             } 
@@ -1332,6 +1386,111 @@
         justify-content: flex-end;
     }
 }
+
+.mentalHealths {
+    .qaList {
+        display: flex;
+        margin-bottom: 10px;
+        strong {
+            min-width: 36px;  
+        }
+    }
+    .QuestionList {
+        margin-bottom: 30px; 
+        .qaList {
+            h2 {
+                color: $col8;
+                font-size: 18px;
+                font-weight: 600;
+                & + p {
+                    display: none; 
+                }  
+            }
+        }
+    }
+    .answerDetail {
+        ul {
+            li {
+                display: flex;
+                font-size: 17px !important; 
+                margin-bottom: 20px !important;
+                span {
+                    & > p {
+                        font-weight: 500;
+                        color: $col64; 
+                    }
+                }
+                span.ansOne {
+                    min-width: 40px;
+                    position: relative;
+                    .form-group {
+                        position: absolute;
+                        top: -8px;                     
+
+                        .radioboxTyp1 {
+                            cursor: pointer;
+                            input {
+                                width: 1.8rem;
+                                height: 1.8rem; 
+                                cursor: pointer;  
+                            }
+                        }
+
+                        .checkboxTyp1 label:after, .checkboxTyp2 label:after {
+                            width: 1.8rem;
+                            height: 1.8rem;  
+                        }
+                        .checkboxTyp1 [type='checkbox']:checked + label:before {
+                            top: 0px; 
+                            left: 5px;
+                        }
+                    } 
+                }
+            }
+        }
+        .QuestionList {
+            margin-bottom: 40px;
+        }
+    }
+    .btnTyp5.talkBtntwo {
+        background: #3EB2DD !important;
+        border: solid 1px #3EB2DD !important; 
+    }
+}
+
+.next_prevs {  
+    display: flex;
+    justify-content: space-between; 
+    .mt-4:first-child {
+        .btnTyp5.talkBtntwo {
+            background: transparent !important;
+            border: solid 1px $col1 !important; 
+            color: $col1 !important; 
+            &.disable {
+                pointer-events: none;
+                opacity: 0.5; 
+            }
+        }
+    } 
+}
+
+.CreateAccount {  
+    &.alertShow {
+        .modal-dialog {
+            max-width: 550px;
+        }
+        .modal-body {
+            padding: 40px;
+            text-align: center;
+        }
+        .alertCross {
+            // position: absolute;
+            // top: 15px; 
+            // right: 15px;
+        }
+    }
+}
+
 .corporateMember.CreateAssessment {  
     padding: 30px 30px; 
 }
@@ -1340,6 +1499,33 @@
     border: 1px solid #60B2D2; 
     padding-bottom: 50px;
     margin-top: 75px; 
+    text-align: center;
+    .scoreCounts {
+        width: 140px;
+        height: 140px;
+        margin: auto;
+        background: $col18;
+        border-radius: 50%;
+        border: solid 12px $col18; 
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); 
+        margin-top: -80px;
+        margin-bottom: 20px;
+        .CircularProgressbar .CircularProgressbar-trail {
+            stroke: #e8f6fa;
+            stroke-width: 10px;
+        }
+        .CircularProgressbar .CircularProgressbar-path {
+            stroke: #8ad1e7;
+            stroke-width: 10px; 
+        }
+        .CircularProgressbar .CircularProgressbar-text {
+            fill: #333;
+            font-size: 26px;
+            dominant-baseline: middle;
+            text-anchor: middle;
+            font-weight: 700;
+        }
+    }
     .disorders {
         position: relative; 
         &:before {
@@ -1419,6 +1605,19 @@
         background: transparent !important;
         border: none !important; 
         margin-right: 15px;
+        &:focus {
+            box-shadow: none !important; 
+        }
+        &.btnQa {
+            color: $col14 !important; 
+            & > span {
+                margin-right: 5px; 
+                color: #3EB2DD;
+                i {
+                    font-size: 11px; 
+                }
+            }
+        }
         span { 
             width: 22px;
             height: 22px;
@@ -1436,7 +1635,13 @@
         }
     }
 }
-
+.VlogLists {
+    &+.adminlistener {
+        .col1.fw600.fs18.pb-1 { 
+            cursor: default; 
+        }
+    }
+}
 .addKits {
     .ck-editor .ck-editor__main .ck-content {
         min-height: 150px;
@@ -1462,7 +1667,7 @@
         font-weight: 500; 
         &:focus {
             background: transparent;
-            box-shadow: none !important; 
+            box-shadow: none !important;  
         }
         span {
             width: 22px;
@@ -1607,6 +1812,30 @@
     }
 }
 
+.elpVideoblog {  
+    position: relative;
+    // overflow: hidden;      
+    iframe {
+        width: 100%;  
+    } 
+    .iconVideomain {
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+    }
+    .iconVideo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        cursor: pointer; 
+        z-index: 9;  
+    }
+}
+
 .processBlog {  
     position: relative; 
     background: $col18; 
@@ -1666,8 +1895,20 @@
                 background: linear-gradient(180deg, #D7FCFF 0%, #FFFFFF 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
             }
+            .bg-Color4 {
+                background: linear-gradient(180deg, #DBDAFF 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
+            }
+            .bg-Color5 {    
+                background: linear-gradient(180deg, #FFF8D6 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
+            }
+            .bg-Color6 {     
+                background: linear-gradient(180deg, #FED8C3 0%, #FFFFFF 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
+            }
             .blogBtns {
-                @include blogBtnColor; 
+                @include blogBtnColor;  
             }
             .btnColor2 {
                 background: #7AD052;
@@ -1676,6 +1917,18 @@
             .btnColor3 {
                 background: #1FC7D5;
                 border: solid 1px #1FC7D5; 
+            }
+            .btnColor4 {
+                background: #6763EA;
+                border: solid 1px #6763EA; 
+            }
+            .btnColor5 {
+                background: #D9BD3D;
+                border: solid 1px #D9BD3D; 
+            }
+            .btnColor6 {
+                background: #DA6A2A;
+                border: solid 1px #DA6A2A; 
             }
             .PlanBtns {
                 @include PlanBtnColor; 
@@ -1714,8 +1967,8 @@
         position: relative;
         overflow: hidden; 
         iframe {
-            width: 100%; 
-        }
+            width: 100%;  
+        } 
         .iconVideomain {
             position: absolute;
             width: 100%;
@@ -1751,7 +2004,7 @@
                     }
                 }
             } 
-            .wSet-50 { 
+            .wSet-50 {  
                 max-width: 50px; 
                 width: 50px;
                 height: 50px; 
@@ -1764,6 +2017,16 @@
                 position: relative; 
                 display: flex;
                 align-items: center; 
+                .col64.fs18.fw500 {
+                    cursor: pointer; 
+                }
+                .col14.fs15.fw400 {
+                    &>p {
+                        max-height: 125px;
+                        overflow: hidden; 
+                        text-align: justify;
+                    }
+                }
             }
             .tab-content { 
                 .vlogTabs {
@@ -1775,7 +2038,8 @@
                         .col14.fs15.fw400 {
                             & > p {
                                 max-height: 44px;
-                                overflow: hidden;       
+                                overflow: hidden;      
+                                text-align: justify;  
                             }
                         }
                     }
@@ -1803,7 +2067,8 @@
                         .col14.fw400.mt-1 {
                             & > p {
                                 max-height: 110px;
-                                overflow: hidden;   
+                                overflow: hidden; 
+                                text-align: justify;   
                             }
                         }
                     }
@@ -1974,6 +2239,20 @@
     }
 }
 
+.formRadioCustom {
+    position: relative;
+    display: flex; 
+    .form-check {
+        cursor: default;
+        .form-check-input {
+            cursor: pointer;
+        }
+    }
+    .custom_label {
+        padding-top: 10px;  
+    }
+}
+
 .VlogMain { 
     position: relative; 
 
@@ -1999,6 +2278,28 @@
     }
 }
 
+.assessmentGroup {
+    .form-check {
+        width: 170px;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 0 !important; 
+        background: transparent;
+        border: solid 1px #284486;
+        position: relative; 
+        & > input {
+            width: 170px; 
+        }
+        &.active {
+            background: $col40;
+            border: solid 1px $col40; 
+            label {
+                color: $col18 !important; 
+            }
+        }
+    }
+}
+
 .ngo_details { 
     .elpVideoblog {  
         position: relative; 
@@ -2014,7 +2315,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, 150%);  
             cursor: pointer; 
             z-index: 9;  
         }

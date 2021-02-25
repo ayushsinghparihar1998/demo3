@@ -46,7 +46,7 @@ import CONSTANTS from "../../common/helpers/Constants";
 import constant from "../../constant";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
 
-const socket = socketClass.getSocket(); 
+const socket = socketClass.getSocket();
 
 class NavBar extends Component {
   constructor() {
@@ -337,8 +337,8 @@ class NavBar extends Component {
   };
 
   handleLogin(roleType) {
-    this.props.history.push({
-      pathname: "login",
+    this.props.history.replace({
+      pathname: `/login`,
       state: { roleType: roleType },
     });
   }
@@ -357,13 +357,6 @@ class NavBar extends Component {
     });
     //  this.props.history.push({ pathname: '/login', state: { roleType: this.state.roleType } });
   };
-
-  handleLogin(roleType) {
-    this.props.history.push({
-      pathname: "login",
-      state: { roleType: roleType },
-    });
-  }
 
   handleGet = () => {
     this.setState({
@@ -420,6 +413,13 @@ class NavBar extends Component {
       show: false,
       show3: false,
     });
+  };
+  changepath = (path, backValue) => {
+    console.log(path);
+    if (backValue) {
+      setLocalStorage("blog_category", backValue);
+    }
+    this.props.history.push(path);
   };
   render() {
     return (
@@ -536,47 +536,31 @@ class NavBar extends Component {
                       >
                         Donate
                       </a>,
-                      <NavDropdown title="Media" id="basic-nav-dropdown">
+                      <a
+                        onClick={() =>
+                          this.verifyInCallNavigation("/assessmentTests/EAT")
+                        }
+                        className="nav-link donatebtns"
+                      >
+                        Assessment Tests
+                      </a>,
+
+                      <NavDropdown
+                        title="Learn more"
+                        id="basic-nav-dropdown-lm"
+                      >
                         <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/press"}>
                           PRESS
                         </NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown
-                        title="Learn more"
-                        id="basic-nav-dropdown-lm"
-                      >
                         <NavDropdown.Item href={"/about"}>
                           About Us
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
                       </NavDropdown>,
                       ,
-                      //     <NavDropdown title="Media" id="basic-nav-dropdown">
-                      // {this.state.mediaLinks.map((data) => {
-                      //     return (
-                      //     <NavDropdown.Item href={data.href} target="_blank">
-                      // {data.label}
-                      //     </NavDropdown.Item>
-                      //     );
-                      // })}
-                      //     </NavDropdown>,
-                      //     <a
-                      //         onClick={() => this.verifyInCallNavigation("/about")}
-                      //         className="nav-link text-c"
-                      //     >
-                      //         About Us
-                      //     {/* <br /> */}
-                      //         {/* <span className="comings">coming soon</span>   */}
-                      //     </a>,
-                      //     <a
-                      //         onClick={() => this.verifyInCallNavigation("/faq")}
-                      //         className="nav-link"
-                      //     >
-                      //         FAQ
-                      // </a>,
                       getLocalStorage("userInfoProff") ||
                       getLocalStorage("userInfo")
                         ? [
@@ -590,17 +574,8 @@ class NavBar extends Component {
                             </a>,
                           ]
                         : "",
-                      // <NavLink to="/myprofile" className="nav-link">
-                      //   My Profile
-                      // </NavLink>,
-                      // <NavLink to="/editprofile" className="nav-link">
-                      //   Edit Profile
-                      // </NavLink>,
                     ]
                   : [
-                      // <Nav.Link onClick={this.handleModal}>
-                      //     Talk/Connect
-                      // </Nav.Link>,
                       <NavDropdown
                         title="EAT"
                         id="basic-nav-dropdown"
@@ -612,10 +587,14 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Eat"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/EAT"}>
+                        <NavDropdown.Item
+                          onClick={() => this.changepath("/blogs/EAT", "EAT")}
+                        >
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/EAT"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
                         title="LUV"
@@ -628,10 +607,12 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Luv"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/LUV"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>{" "}
+                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>{" "}
                       </NavDropdown>,
                       <NavDropdown
                         title="PRAY"
@@ -644,13 +625,15 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlist/Pray"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/PRAY"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/PRAY"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
-                        title="ELNP(Holistic)"  
+                        title="ELNP(Holistic)"
                         id="basic-nav-dropdown4"
                         className="Holistics"
                       >
@@ -660,10 +643,12 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/planlistholistic"}>
                           SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/ALL"}>
+                        <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item>ASSESSMENT TESTS</NavDropdown.Item>
+                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                          ASSESSMENT TESTS
+                        </NavDropdown.Item>
                       </NavDropdown>,
                       <NavDropdown
                         title="HELP SOMEONE"
@@ -676,54 +661,21 @@ class NavBar extends Component {
                           DONATE MONEY
                         </NavDropdown.Item>
                       </NavDropdown>,
-                      // <Nav.Link>
-                      //     ELPN
-                      // </Nav.Link>,
-                      // <NavLink
-                      //     disabled
-                      //     to="/becomeListener"
-                      //     className="nav-link text-c"
-                      // >
-                      //     Volunteer
-                      // <br />
-                      //     <span className="comings">coming soon</span>
-                      // </NavLink>,
-                      // <NavLink
-                      //     disabled
-                      //     to="/becomeListener"
-                      //     className="nav-link text-c"
-                      // >
-                      //     Professional Help
-                      // <br />
-                      //     <span className="comings">coming soon</span>
-                      // </NavLink>,
-                      // <NavLink to="/campaign" className="nav-link donatebtns">
-                      //     Donate
-                      // </NavLink>,
-                      // <Nav.Link > Media</Nav.Link>,
-                      // <NavDropdown title="Media" id="basic-nav-dropdown">
-                      //     <NavDropdown.Item href={'/blogs'}>
-                      //         BLOGS
-                      //     </NavDropdown.Item>
-                      //     <NavDropdown.Item href={'/press'}>
-                      //         PRESS
-                      //     </NavDropdown.Item>
-                      // </NavDropdown>,
 
                       <NavDropdown
                         title="Learn more"
                         id="basic-nav-dropdown-lm"
                       >
-                        <NavDropdown.Item href={"/about"}>
-                          About Us
+                        <NavDropdown.Item href={"/blogs/ALL"}>
+                          BLOGS
                         </NavDropdown.Item>
                         <NavDropdown.Item href={"/press"}>
                           PRESS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                        <NavDropdown.Item href={"/blogs/ALL"}>
-                          BLOGS
+                        <NavDropdown.Item href={"/about"}>
+                          About Us
                         </NavDropdown.Item>
+                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
                       </NavDropdown>,
                       //   <Nav.Link>Donate</Nav.Link>,
                     ]}
@@ -817,6 +769,7 @@ class NavBar extends Component {
                         <Image src={Userprofiles} alt="" />
                         <span>MY PROFILE</span>
                       </NavDropdown.Item>
+
                       <NavDropdown.Item
                         href="#"
                         onClick={() =>
@@ -826,6 +779,7 @@ class NavBar extends Component {
                         <Image src={Usersettings} alt="" />{" "}
                         <span>MY SETTINGS</span>
                       </NavDropdown.Item>
+
                       <NavDropdown.Item
                         href="#"
                         onClick={() =>
@@ -835,6 +789,7 @@ class NavBar extends Component {
                         <Image src={Userenables} alt="" />
                         <span>Edit Profile</span>
                       </NavDropdown.Item>
+
                       {getLocalStorage("customerInfo") &&
                       getLocalStorage("customerInfo").u_role_id ===
                         constant.roles.CUSTOMERS ? (
@@ -848,7 +803,17 @@ class NavBar extends Component {
                           <span>SWITCH TO CORPORATE</span>
                         </NavDropdown.Item>
                       ) : null}
-
+                      {getLocalStorage("customerInfo") ? (
+                        <NavDropdown.Item
+                          href="#"
+                          onClick={() =>
+                            this.verifyInCallNavigation("/myAssessmentTest")
+                          }
+                        >
+                          <Image src={Userenables} alt="" />
+                          <span>My Tests</span>
+                        </NavDropdown.Item>
+                      ) : null}
                       <NavDropdown.Item href="#" onClick={this.handleLogout}>
                         <Image src={Userlogouts} alt="" /> <span>LOGOUT</span>
                       </NavDropdown.Item>

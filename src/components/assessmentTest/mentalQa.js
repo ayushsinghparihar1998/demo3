@@ -28,7 +28,7 @@ import Infos from "../../assets/images/infos.png";
 
 
 import constant from "../../constant"; 
-class ViewQA extends Component { 
+class mentalQA extends Component { 
   render() {
     return (
       <div className="page__wrapper innerpage">  
@@ -55,7 +55,7 @@ class ViewQA extends Component {
                 </div>
               </Col>
 
-              <Col md={8} lg={9} className="pl-1">        
+              <Col md={8} lg={9} className="pl-1">         
                 <div className="professor_search ViewQa">   
                       <div className="fs22 fw600 col10"> 
                            Question Answer 
@@ -212,7 +212,7 @@ class ViewQA extends Component {
   }
 }
 
-export default ViewQA; 
+export default mentalQA; 
 
 
 

@@ -158,8 +158,8 @@ class NavBar extends Component {
         <ToastContainer />
         <Navbar bg="" expand="lg">
           <NavLink to="/admin" className="nav-link navbar-brand"> 
-            {/* <Image src={logo} alt="" /> Eat Luv N Pray */}
-            <Image src={logopink} alt="" className="elplogopink" />   
+            <Image src={logo} alt="" />
+            <Image src={logopink} alt="" className="elplogopink" />    
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

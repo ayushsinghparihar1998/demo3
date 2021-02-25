@@ -540,8 +540,31 @@
     
     }
     
+@media (max-width: 1370px) {
+    .mj_nav {
+        .navbar-light {
+            .navbar-nav {
+                a.nav-link {
+                    padding-right: $fs16;
+                    padding: 10px 10px !important; 
+                    font-size: $fs13 !important; 
+                    &:hover {
+                        color: $col1; 
+                    }
+                } 
+    
+                .form-inline {
+                    span {
+                        padding-right: 18px;  
+                    }
+                }
+                
+            }
+        }
+    }
+}
 
-@media (min-width: 1280px) { 
+@media (min-width: 1280px) {    
     .mj_nav {
         .navbar-light {
             .navbar-nav {
@@ -567,7 +590,7 @@
     }
 }
 
-@media (min-width: 1350px) {  
+@media (min-width: 1371px) {  
     .mj_nav {
         .navbar-light {
             .navbar-nav {
