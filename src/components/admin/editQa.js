@@ -57,7 +57,7 @@ class EditQa extends Component {
           as_ans: [{ option: "", weightage: "" }],
         },
       ],
-
+      textLength: 0,
       queShow: false,
     };
     this.checkServiceError = this.checkServiceError.bind(this);
@@ -357,9 +357,14 @@ class EditQa extends Component {
     let arr1 = [];
     as_que_ans.map((item, ind) => {
       console.log(item);
+      // fix here
       arr.push(Object.values(item).some((o) => o === ""));
       item.as_ans.map((val, i) => {
-        arr1.push(Object.values(val).some((o) => o === ""));
+        if (item.as_que_type == 2) {
+          arr1.push(val.option.length == 0);
+        } else {
+          arr1.push(Object.values(val).some((o) => o === ""));
+        }
       });
     });
     console.log("ARRARRA", arr);
@@ -418,6 +423,33 @@ class EditQa extends Component {
       });
   };
 
+  validateCKEditorData(data, callback) {
+    function stripHtml(html) {
+      let tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+    let stringData = stripHtml(data);
+    console.log("ASd")
+    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+      this.setState({
+        textLength: stringData.length,
+      });
+      callback(true)
+
+    } else {
+      callback(false)
+      this.setState({
+        isReloadEditor: true
+      }, () => {
+        this.setState({
+          isReloadEditor: false
+        })
+      })
+
+    }
+
+  }
   render() {
     const { erroras_que_ans } = this.state;
     return (
@@ -463,41 +495,49 @@ class EditQa extends Component {
                               <Form.Label className="fs20 fw600 col14">
                                 Question.{index + 1}
                               </Form.Label>
-                              <CKEditor
-                                config={{
-                                  height: 500,
-                                  toolbar: [
-                                    "bold",
-                                    "italic",
-                                    "bulletedList",
-                                    "numberedList",
-                                    "blockQuote",
-                                    "Link",
-                                  ],
-                                }}
-                                editor={ClassicEditor}
-                                onReady={(editor) => {
-                                  console.log(
-                                    "Editor is ready to use!",
-                                    editor
-                                  );
-                                }}
-                                data={item.as_que_name}
-                                onChange={(event, editor) => {
-                                  const data = editor.getData();
-                                  console.log(editor.getData().length);
-                                  // editor.execCommand("undo");
-                                  // if (editor.getData().length < 50) {
-                                  this.handleChangeLoop1(
-                                    "as_que_name",
-                                    editor.getData(),
-                                    index,
-                                    ""
-                                  );
-                                  // }
-                                }}
-                                className="inputTyp2"
-                              />
+                              
+                              {!this.state.isReloadEditor ?
+                                <CKEditor
+                                  data={item.as_que_name}
+                                  config={{
+                                    height: 500,
+                                    toolbar: [
+                                      "bold",
+                                      "italic",
+                                      "bulletedList",
+                                      "numberedList",
+                                      "blockQuote",
+                                      "Link",
+                                    ],
+                                  }}
+                                  editor={ClassicEditor}
+                                  onReady={(editor) => {
+                                    console.log(
+                                      "Editor is ready to use!",
+                                      editor
+                                    );
+                                  }}
+
+                                  onChange={(event, editor) => {
+                                    console.log("ASd")
+                                    let data = editor.getData();
+
+                                    this.validateCKEditorData(data, (valid) => {
+                                      if (valid) {
+                                        this.handleChangeLoop1(
+                                          "as_que_name",
+                                          editor.getData(),
+                                          index,
+                                          ""
+                                        );
+                                      }
+
+                                    })
+                                  }}
+                                  className="inputTyp2"
+                                /> : null}
+                              {/* <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
+
                               <div className="col27 fs14 fw400 mt-2 error">
                                 {erroras_que_ans[index].as_que_name}
                               </div>
@@ -573,42 +613,49 @@ class EditQa extends Component {
                                       <Form.Label className="fs20 fw600 col14">
                                         Answer.{i + 1}
                                       </Form.Label>
+
                                       {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
-                                      <CKEditor
-                                        config={{
-                                          height: 500,
-                                          toolbar: [
-                                            "bold",
-                                            "italic",
-                                            "bulletedList",
-                                            "numberedList",
-                                            "blockQuote",
-                                            "Link",
-                                          ],
-                                        }}
-                                        editor={ClassicEditor}
-                                        data={val.option}
-                                        onReady={(editor) => {
-                                          console.log(
-                                            "Editor is ready to use!",
-                                            editor
-                                          );
-                                        }}
-                                        onChange={(event, editor) => {
-                                          const data = editor.getData();
-                                          console.log(editor.getData().length);
-                                          // editor.execCommand("undo");
-                                          // if (editor.getData().length < 50) {
-                                          this.handleChangeLoop1(
-                                            "option",
-                                            editor.getData(),
-                                            index,
-                                            i
-                                          );
-                                          // }
-                                        }}
-                                        className="inputTyp2"
-                                      />
+                                      {!this.state.isReloadEditor ?
+                                        <CKEditor
+                                          data={val.option}
+                                          config={{
+                                            height: 500,
+                                            toolbar: [
+                                              "bold",
+                                              "italic",
+                                              "bulletedList",
+                                              "numberedList",
+                                              "blockQuote",
+                                              "Link",
+                                            ],
+                                          }}
+                                          editor={ClassicEditor}
+                                          onReady={(editor) => {
+                                            console.log(
+                                              "Editor is ready to use!",
+                                              editor
+                                            );
+                                          }}
+                                          onChange={(event, editor) => {
+                                            console.log("ASd")
+                                            let data = editor.getData();
+
+                                            this.validateCKEditorData(data, (valid) => {
+                                              if (valid) {
+                                                this.handleChangeLoop1(
+                                                  "option",
+                                                  data,
+                                                  index,
+                                                  i
+                                                );
+                                              }
+
+                                            })
+                                          }}
+                                          className="inputTyp2"
+                                        /> : null}
+                                      {/* <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
+
                                       <div className="col27 fs14 fw400 mt-2 error">
                                         {
                                           erroras_que_ans[index].as_ans[i]
@@ -691,7 +738,7 @@ class EditQa extends Component {
                       type="button"
                       onClick={() => this.checkError()}
                     >
-                      {this.props.match.params.id > 0 ? "Update" : "Create"}
+                      {this.props.match.params.type > 0 ? "Update" : "Create"}
                     </Button>
                   </Form>
                 </div>

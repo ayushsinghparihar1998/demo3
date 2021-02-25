@@ -28,6 +28,9 @@ import validateInput from "../../common/validations/validationSAblog";
 
 import UploadDetail from "../../assets/images/upload_detail.svg";
 
+let prevCkEditorText = ''
+
+
 class ProfessinalBlogPress extends Component {
   state = {
     cat_name: [],
@@ -56,6 +59,7 @@ class ProfessinalBlogPress extends Component {
       pbl_written_by: "",
       press_blog_category: "",
     },
+    textLength:0
   };
   componentDidMount() {
     console.log(" this.props.match", this.props.match);
@@ -255,6 +259,39 @@ class ProfessinalBlogPress extends Component {
     );
   };
 
+  validateCKEditorData(data) {
+    function stripHtml(html) {
+      let tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+    let stringData = stripHtml(data);
+ 
+    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+     
+      prevCkEditorText = data
+      this.setState({
+        textLength:stringData.length,
+        pblobj: {
+          ...this.state.blobj,
+          bl_desc: data
+        },
+      });
+
+    } else {
+       
+      this.setState({
+        isReloadEditor: true
+      }, () => {
+        this.setState({
+          isReloadEditor: false
+        })
+      })
+
+    }
+
+  }
+
   render() {
     const { proffCat, pblobj, errors } = this.state;
     return (
@@ -352,36 +389,26 @@ class ProfessinalBlogPress extends Component {
                       <Form.Label className="col14 fw600 fs18">
                         Description
                       </Form.Label>
-                      <CKEditor
-                        config={{
-                          height: 500,
-                          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
-                        }}
-                        editor={ClassicEditor}
-                        data={pblobj.pbl_desc}
-                        onReady={(editor) => {
-                          // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor);
-                        }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          this.setState({
-                            pblobj: {
-                              ...this.state.pblobj,
-                              pbl_desc: data,
-                            },
-                          });
-                          // this.setState({ description: data }, () =>
-                          //   console.log(this.state.description, event)
-                          // );
-                        }}
-                        onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
-                        }}
-                        onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
-                        }}
-                      />
+
+                      {!this.state.isReloadEditor ?
+                        <CKEditor
+                          config={{
+                            height: 500,
+                            toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link']
+                          }}
+                          id={this.state.refreshText}
+                          editor={ClassicEditor}
+                          data={pblobj.bl_desc}
+                          onChange={(event, editor) => {
+                            let data = editor.getData();
+                            this.validateCKEditorData(data)
+                          }}
+                        /> : null
+                      }
+                      {/* <p style={{textAlign:'right', marginTop:'10px'}}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
+
+
+                      
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.desc}

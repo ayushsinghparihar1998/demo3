@@ -196,8 +196,15 @@ class AssessmentTestListTwo extends Component {
                                     {item.total_que_count} Questions
                                   </div>
                                   <div className="fs16 col64 mb-2">
-                                    <small>RS.</small>
-                                    {item.as_test_price}/-
+                                    {item.as_test_price ? (
+                                      <>
+                                        {" "}
+                                        <small>RS.</small>
+                                        {item.as_test_price}/-{" "}
+                                      </>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
                                   {getLocalStorage("customerInfo") ? (
                                     <Button
