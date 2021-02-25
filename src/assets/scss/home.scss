@@ -170,22 +170,28 @@
                     left: -4px;
                     top: -2px;
                 }
+                & + div.fs22 {
+                    font-size: 20px !important; 
+                }
             }
             .fw600.col29.text-center {
                 // color: #08A318 !important;  
                 word-break: break-all;
                 white-space: normal;
                 .eatcat {
-                    color: #C62CC4 !important; 
+                    color: #08A318 !important; 
                 }
                 .luvcat {
-                    color: red !important; 
+                    color: #FF0000 !important; 
                 }
                 .praycat {
-                    color: #08A318 !important; 
+                    color: #C62CC4 !important; 
                 }
                 .holisticcat { 
                     color: #FFBB00 !important; 
+                }
+                .andClass {
+                    color: #3c3c3c !important; 
                 }
             }
         }
