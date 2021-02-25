@@ -351,7 +351,7 @@ class PlanDetails extends Component {
                               <div className="fs24 fw600 col29 text-center text-uppercase">
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
-                                    <span className="">HOLISTIC </span>
+                                    <span className="holisticcat">HOLISTIC </span>
                                   ) : (
                                     item.plan_category.map((val, index) => {
                                       // return
