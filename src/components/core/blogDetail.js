@@ -25,6 +25,9 @@ const Mediadetails = (props) => {
   const [url, seturl] = useState("");
   const [play, setplay] = useState(Boolean);
   const [opts, setopts] = useState({});
+  const [catAr, setcatAr] = useState([]);
+  const [catClass, setcatClass] = useState({});
+
   useEffect(() => {
     _getBlogDetailHandler();
   }, []);
@@ -44,6 +47,11 @@ const Mediadetails = (props) => {
       console.log(" detail response", response);
       if (props.history.location.state.type == "blog") {
         setBlogDetail({ ...response.data.data.blog_list[0] });
+        console.log(response.data.data.blog_list[0].blog_category);
+        let catAr = [];
+        let catClass = "";
+       
+        setcatAr(response.data.data.blog_list[0].blog_category);
       } else {
         let url = "";
         var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -56,7 +64,7 @@ const Mediadetails = (props) => {
           //error
         }
         setBlogDetail({ ...response.data.data[0] });
-        seturl({ url });
+        seturl(url);
         setopts({
           height: "390",
           width: "640",
@@ -64,8 +72,8 @@ const Mediadetails = (props) => {
             autoplay: play == true ? 1 : "",
           },
         });
-        setplay(false)
-        console.log('play');
+        setplay(false);
+        console.log("play");
         console.log(play);
         console.log(url);
       }
@@ -83,7 +91,31 @@ const Mediadetails = (props) => {
       <div className="ngo_services media_details">
         <Container>
           <div className="ngo_listing mt-4 mb-4">
-            <div className="col1 fw600 fs22 text-center w-100"> 
+            {/* blog_category */}
+
+            <div className="col1 fw600 fs22 text-center w-100">
+              {catAr.map((val, index) => {
+                return (
+                  <span
+                    className={
+                      val.buc_cat_name == "Eat"
+                        ? "eatcat"
+                        : val.buc_cat_name == "Luv"
+                        ? "luvcat"
+                        : "praycat"
+                    }
+                  >
+                    {val.buc_cat_name}
+                    <span className="andClass">
+                      {catAr.length == 2 && index == 0
+                        ? " & "
+                        : ""}{" "}
+                    </span>
+                  </span>
+                );
+              })}
+            </div>
+            <div className="col1 fw600 fs22 text-center w-100">
               {props.history.location.state.type == "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
@@ -91,30 +123,33 @@ const Mediadetails = (props) => {
             <hr className="ngohr" />
             <Row className="mt-4">
               <Col lg={12}>
-                <div className="ngo_details mt-2">  
+                <div className="ngo_details mt-2">
                   {props.history.location.state.type == "blog" ? (
-                    <Image src={blogDetail && blogDetail.bl_image} alt="" className="w-100" />
+                    <Image
+                      src={blogDetail && blogDetail.bl_image}
+                      alt=""
+                      className="w-100"
+                    />
                   ) : (
                     <>
-                    <div className="elpVideoblog">
-                      
-                      {!play ? (
-                        <>
-                        <Image    
-                          src={blogDetail && blogDetail.vl_thumbnail_url}
-                          alt=""
-                          className="w-100 iconVideomain"
-                        />  
-                        <Image  
-                          src={VideoIcon}
-                          className="iconVideo"
-                          onClick={() => setplay(true)}
-                        />
-                        </> 
-                      ) : (
-                        <YouTube videoId={url} opts={opts} /> 
-                      )}
-                      </div> 
+                      <div className="elpVideoblog">
+                        {!play ? (
+                          <>
+                            <Image
+                              src={blogDetail && blogDetail.vl_thumbnail_url}
+                              alt=""
+                              className="w-100 iconVideomain"
+                            />
+                            <Image
+                              src={VideoIcon}
+                              className="iconVideo"
+                              onClick={() => setplay(true)}
+                            />
+                          </>
+                        ) : (
+                          <YouTube videoId={url} opts={opts} />
+                        )}
+                      </div>
                     </>
                   )}
                   <div className="pt-3 pb-3">
