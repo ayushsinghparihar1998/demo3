@@ -61,6 +61,7 @@ import Mediadetails from "../components/core/mediadetails";
 import Helpcenter from "../components/core/helpcenter";
 // import Createblogs from "../components/admin/createblog";
 import BlogDetail from "../components/core/blogDetail";
+import VlogDetail from "../components/core/vlogDetail";
 import BlogVideoDetails from "../components/core/blogVideoDetails";
 import PressBlogDetail from "../components/core/PressBlogDetail";
 import Categoryadmin from "../components/admin/admincategory";
@@ -313,6 +314,10 @@ class ELPRoute extends Component {
           <Route
             path="/blogsDetail/:id"
             render={(props) => <BlogDetail {...props} />}
+          />
+           <Route
+            path="/vlogsDetail/:id"
+            render={(props) => <VlogDetail {...props} />}
           />
           <Route
             path="/press/blogsDetail/:id"

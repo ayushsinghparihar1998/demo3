@@ -46,6 +46,7 @@ class PlanDetailsEat extends Component {
     console.log(" this.props.match", this.props.match.params.name);
   };
   getplanlist_bycategory = (plan_type, plan_category) => {
+    
     let _this = this;
     console.log(plan_type);
     ELPViewApiService("getplanlist_bycategory", {
@@ -137,20 +138,27 @@ class PlanDetailsEat extends Component {
                                   item.plan_category.length == 3 ? (
                                     <span className="">HOLISTIC </span>
                                   ) : (
-                                    item.plan_category.map((val) => {
+                                    item.plan_category.map((val, index) => {
                                       // return
                                       return (
                                         <span
-                                        className={
-                                          val.puc_cat_name == "Eat"
-                                            ? "eatcat"
-                                            : val.puc_cat_name == "Luv"
-                                            ? "luvcat"
-                                            : val.puc_cat_name == "Pray"
-                                            ? "luvcat"
-                                            : "holisticcat"  }
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luvcat"
+                                              : val.puc_cat_name == "Pray"
+                                              ? "luvcat"
+                                              : "holisticcat"
+                                          }
                                         >
-                                          {val.puc_cat_name}{" "}
+                                          {val.puc_cat_name}
+                                          <span className = 'andClass'>
+                                            {item.plan_category.length == 2 &&
+                                            index == 0
+                                              ? " & "
+                                              : ""}{" "}
+                                          </span>
                                         </span>
                                       );
                                     })

@@ -637,7 +637,7 @@ class NavBar extends Component {
                         <NavDropdown.Item href={"/blogs/ALL"}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/LUV"}>
+                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
                           ASSESSMENT TESTS
                         </NavDropdown.Item>
                       </NavDropdown>,
