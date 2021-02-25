@@ -1814,7 +1814,8 @@
 
 .elpVideoblog {  
     position: relative;
-    // overflow: hidden;      
+    // overflow: hidden;     
+    min-height: 400px;  
     iframe {
         width: 100%;  
     } 
@@ -2076,6 +2077,9 @@
                                 text-align: justify;   
                             }
                         }
+                    }
+                    .btnType22:disabled {
+                        color: $col1 !important; 
                     }
                 }
                 .featuredTab {
