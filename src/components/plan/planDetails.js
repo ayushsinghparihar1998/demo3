@@ -41,11 +41,25 @@ class PlanDetails extends Component {
     this.state = {
       dataByCondition: "",
       email: "",
+      play: false,
+      play1: false,
+      url: "",
     };
   }
   componentDidMount = () => {
     this.getplanlist_holisticbycondition();
     this.getplanlist_holisticdaily();
+
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = "https://www.youtube.com/embed/GXS3c4ANQP8".match(regExp);
+    if (match && match[2].length == 11) {
+      console.log("match[2]", match[2]);
+      this.setState({
+        url: match[2],
+      });
+    } else {
+      //error
+    }
   };
   getplanlist_holisticbycondition = () => {
     let _this = this;
@@ -132,6 +146,17 @@ class PlanDetails extends Component {
       pathname: "coming-soon",
     });
   }
+  setplay = (flag) => {
+    this.setState({
+      play: flag,
+    });
+  };
+  setplay1 = (flag) => {
+    this.setState({
+      play1: flag,
+    });
+  };
+
   render() {
     const settingstwo = {
       dots: true,
@@ -156,6 +181,20 @@ class PlanDetails extends Component {
           },
         },
       ],
+    };
+    const opts = {
+      height: "390",
+      width: "640",
+      playerVars: {
+        autoplay: this.state.play ? 1 : "",
+      },
+    };
+    const opts1 = {
+      height: "390",
+      width: "640",
+      playerVars: {
+        autoplay: this.state.play1 ? 1 : "",
+      },
     };
     return (
       <div className="page__wrapper innerpage">
@@ -208,27 +247,24 @@ class PlanDetails extends Component {
                 <Col md={7}>
                   <div class="elpVideoblog">
                     {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
-                    <Image
-                      src={Splan}
-                      alt="Plan"
-                      className="w-100 iconVideomain"
-                    />
-                    <div>
-                      <Image src={VideoIcon} className="iconVideo" />
-                      <div class=""> 
-                        <iframe
-                          frameborder="0"
-                          allowfullscreen="1"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          title="YouTube video player"
-                          width="100%"
-                          height="400"
-                          src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
-                          id="widget2"
-                        ></iframe>
-                        {/* <YouTube videoId={url} opts={opts} /> */}
+                    {!this.state.play ? (
+                      <>
+                        <Image
+                          src={Splan}
+                          alt="Plan"
+                          className="w-100 iconVideomain"
+                        />
+                        <Image
+                          src={VideoIcon}
+                          className="iconVideo"
+                          onClick={() => this.setplay(true)}
+                        />
+                      </>
+                    ) : (
+                      <div class="">
+                        <YouTube videoId={this.state.url} opts={opts} />
                       </div>
-                    </div>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -458,28 +494,26 @@ class PlanDetails extends Component {
                     <div className="pr-3">
                       <div class="elpVideoblog">
                         {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
-                        <Image
-                          src={Splan}
-                          alt="Plan"
-                          className="w-100 iconVideomain"
-                        />
-                        <div>
-                          <Image src={VideoIcon} className="iconVideo" />
+                        {!this.state.play1 ? (
+                          <>
+                            <Image
+                              src={Splan}
+                              alt="Plan"
+                              className="w-100 iconVideomain"
+                            />
+
+                            <Image
+                              src={VideoIcon}
+                              className="iconVideo"
+                              onClick={() => this.setplay1(true)}
+                            />
+                          </>
+                        ) : (
                           <div class="">
-                            <iframe
-                              frameborder="0"
-                              allowfullscreen="1"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              title="YouTube video player"
-                              width="100%"
-                              height="400"
-                              src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
-                              id="widget2"
-                            ></iframe>
-                            {/* <YouTube videoId={url} opts={opts} /> */}
+                            <YouTube videoId={this.state.url} opts={opts1} />
                           </div>
-                        </div>
-                      </div>
+                        )}
+                      </div>{" "}
                     </div>
                   </Col>
                 </Row>

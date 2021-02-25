@@ -212,11 +212,15 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
                                         this.props.history.push(
-                                          "/starttest/" + item.as_id
+                                          item.as_type == 2
+                                            ? "/starttest/" + item.as_id
+                                            : "/coming-soon"
                                         )
                                       }
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}
                                     </Button>
                                   ) : (
                                     <Button
@@ -224,7 +228,9 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() => this.handleShow()}
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}{" "}
                                     </Button>
                                   )}
                                 </div>
@@ -241,13 +247,36 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item) => {
+                          asstList.map((item , index) => {
                             return (
                               <Col md={4} sm={6}>
-                                <div className="blogOneMain bg-Color1">
+                                <div
+                                  className="blogOneMain"
+                                  className={`blogOneMain  ${
+                                    Math.round(index % 5) == 0
+                                      ? "bg-Color1"
+                                      : Math.round(index % 5) == 1
+                                      ? "bg-Color2"
+                                      : Math.round(index % 5) == 2
+                                      ? "bg-Color3"
+                                      : Math.round(index % 5) == 3
+                                      ? "bg-Color4"
+                                      : "bg-Color5"
+                                  }`}
+                                >
                                   <Button
                                     type="button"
-                                    className="blogBtns btnColor1"
+                                    className={`blogBtns  ${
+                                      Math.round(index % 5) == 0
+                                        ? "btnColor1"
+                                        : Math.round(index % 5) == 1
+                                        ? "btnColor2 "
+                                        : Math.round(index % 5) == 2
+                                        ? "btnColor3"
+                                        : Math.round(index % 5) == 3
+                                        ? "btnColor4"
+                                        : "btnColor5"
+                                    }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}
                                   </Button>
@@ -267,11 +296,15 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
                                         this.props.history.push(
-                                          "/starttest/" + item.as_id
+                                          item.as_type == 2
+                                            ? "/starttest/" + item.as_id
+                                            : "/coming-soon"
                                         )
                                       }
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}
                                     </Button>
                                   ) : (
                                     <Button
@@ -279,7 +312,9 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() => this.handleShow()}
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}{" "}
                                     </Button>
                                   )}
                                 </div>
@@ -294,13 +329,36 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item) => {
+                          asstList.map((item , index) => {
                             return (
                               <Col md={4} sm={6}>
-                                <div className="blogOneMain bg-Color1">
+                                <div
+                                  className="blogOneMain"
+                                  className={`blogOneMain  ${
+                                    Math.round(index % 5) == 0
+                                      ? "bg-Color1"
+                                      : Math.round(index % 5) == 1
+                                      ? "bg-Color2"
+                                      : Math.round(index % 5) == 2
+                                      ? "bg-Color3"
+                                      : Math.round(index % 5) == 3
+                                      ? "bg-Color4"
+                                      : "bg-Color5"
+                                  }`}
+                                >
                                   <Button
                                     type="button"
-                                    className="blogBtns btnColor1"
+                                    className={`blogBtns  ${
+                                      Math.round(index % 5) == 0
+                                        ? "btnColor1"
+                                        : Math.round(index % 5) == 1
+                                        ? "btnColor2 "
+                                        : Math.round(index % 5) == 2
+                                        ? "btnColor3"
+                                        : Math.round(index % 5) == 3
+                                        ? "btnColor4"
+                                        : "btnColor5"
+                                    }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}
                                   </Button>
@@ -320,11 +378,15 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
                                         this.props.history.push(
-                                          "/starttest/" + item.as_id
+                                          item.as_type == 2
+                                            ? "/starttest/" + item.as_id
+                                            : "/coming-soon"
                                         )
                                       }
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}
                                     </Button>
                                   ) : (
                                     <Button
@@ -332,7 +394,9 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() => this.handleShow()}
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}{" "}
                                     </Button>
                                   )}
                                 </div>
@@ -347,13 +411,36 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item) => {
+                          asstList.map((item , index) => {
                             return (
                               <Col md={4} sm={6}>
-                                <div className="blogOneMain bg-Color1">
+                                <div
+                                  className="blogOneMain"
+                                  className={`blogOneMain  ${
+                                    Math.round(index % 5) == 0
+                                      ? "bg-Color1"
+                                      : Math.round(index % 5) == 1
+                                      ? "bg-Color2"
+                                      : Math.round(index % 5) == 2
+                                      ? "bg-Color3"
+                                      : Math.round(index % 5) == 3
+                                      ? "bg-Color4"
+                                      : "bg-Color5"
+                                  }`}
+                                >
                                   <Button
                                     type="button"
-                                    className="blogBtns btnColor1"
+                                    className={`blogBtns  ${
+                                      Math.round(index % 5) == 0
+                                        ? "btnColor1"
+                                        : Math.round(index % 5) == 1
+                                        ? "btnColor2 "
+                                        : Math.round(index % 5) == 2
+                                        ? "btnColor3"
+                                        : Math.round(index % 5) == 3
+                                        ? "btnColor4"
+                                        : "btnColor5"
+                                    }`}
                                   >
                                     {item.as_type == 2 ? "FREE" : "PAID"}
                                   </Button>
@@ -373,11 +460,15 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() =>
                                         this.props.history.push(
-                                          "/starttest/" + item.as_id
+                                          item.as_type == 2
+                                            ? "/starttest/" + item.as_id
+                                            : "/coming-soon"
                                         )
                                       }
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}
                                     </Button>
                                   ) : (
                                     <Button
@@ -385,7 +476,9 @@ class AssessmentTestListTwo extends Component {
                                       className="PlanBtns PlanColor1"
                                       onClick={() => this.handleShow()}
                                     >
-                                      start now
+                                      {item.as_type == 2
+                                        ? "start now"
+                                        : "buy now"}{" "}
                                     </Button>
                                   )}
                                 </div>

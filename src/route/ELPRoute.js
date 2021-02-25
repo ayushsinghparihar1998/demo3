@@ -277,7 +277,7 @@ class ELPRoute extends Component {
             path="/professinalBlogPress/:id"
             component={ProfessinalBlogPress}
           />
-          <PublicRoute path="/coming-soon" component={ComingSoon} />
+          <Route path="/coming-soon" component={ComingSoon} />
 
           {/* <PublicRoute path="/termcondition" component={Termcondition} /> 
           <PublicRoute path="/privacypolicy" component={Privacypolicy} />     */}
