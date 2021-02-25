@@ -76,11 +76,11 @@ class MyAssessmentTest extends Component {
             <div className="chatsearch w-100">
               <div className="myAssesstest">
                 <div className="col8 fw600 fs28 mt-4 mb-5 text-center">
-                  MY ASSESSMENT TESTs
+                  MY ASSESSMENT TESTS
                 </div>
                 <Row>
                   <Col lg={12}>
-                    <div className="mainTables">
+                    <div className="mainTables table-responsive">   
                       <Table bordered size="lg">
                         <thead>
                           {/* ar_datetime: "2021-02-19 12:41:38"
@@ -171,4 +171,9 @@ u_name: "Super Admin" */}
   }
 }
 
-export default MyAssessmentTest;
+export default MyAssessmentTest; 
+
+
+
+
+

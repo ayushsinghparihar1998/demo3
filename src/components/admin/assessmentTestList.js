@@ -55,7 +55,6 @@ class AssessmentTestLists extends Component {
                 </div>
               </Col>
 
-              
               <Col md={8} lg={9} className="pl-1">
                 <div className="professor_search listBlogs VlogLists"> 
                   <Row className="mb-1">
@@ -159,7 +158,7 @@ class AssessmentTestLists extends Component {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> 
 
                       <div className="adminlistener p-4 mb-3">
                         <div className="d-flex text-left">

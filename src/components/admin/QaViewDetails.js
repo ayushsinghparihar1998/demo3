@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {
+import { 
   Button,
   NavDropdown,
   Carousel,
@@ -130,7 +130,7 @@ class QaViewDetails extends Component {
                           </div>
                         </div>
                       </Col>
-                      <Col md={2}>
+                      <Col md={3}>
                         <div className="mentalList">
                           <div className="col11 fw400 fs13 mb-2">Category</div>
                           <div className="col11 fw500 fs14">

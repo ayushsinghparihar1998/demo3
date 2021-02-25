@@ -1490,9 +1490,21 @@ img {
 
 }
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {  
     .plans {
         overflow: hidden; 
+        .planList {
+            .planone {
+                .offer_bg {
+                    width: 69px;
+                    height: 35px;
+                    background-size: contain; 
+                    .savedata {
+                        font-size: 11px !important; 
+                    }
+                }
+            }
+        }
     }
     .main_baner { 
         min-height: auto !important; 
@@ -1501,19 +1513,21 @@ img {
             font-size: 14px !important; 
             .btnTyp5 {
                 &.talkBtn {
-                    font-size: 14px !important;
-                    margin-right: 0 !important;  
+                    font-size: 13px !important;
+                    margin-right: 10px !important;  
                     margin-bottom: 15px;
-                }
-                &.talkBtntwo {
-                    font-size: 14px !important; 
+                    width: 122px; 
                 }
             }
-            .carousel-item {
+            .carousel-item { 
                 div.mt-4 {           
                     text-align: center;
                     flex-wrap: wrap;
                     justify-content: center;
+                    margin-top: 0px !important;
+                    .fs15.col18.fw300 { 
+                        margin-bottom: 10px;  
+                    }
                 }
             }
             .coming_m {
@@ -1723,7 +1737,10 @@ img {
     .aboutEats {
         padding: 40px 0;
         padding-bottom: 0;
-        text-align: center; 
+        text-align: center;
+        .pillars {
+            margin-bottom: 30px; 
+        }
         .container {
             div.fs40  {
                 font-size: 2rem !important; 
@@ -1814,6 +1831,23 @@ img {
             & + button.btnTyp3 {
                 margin-top: 30px !important;  
             }
+        }
+        div.fs40.col8.fw600 {
+            font-size: 2rem !important;
+            padding-top: 30px;
+            margin-bottom: 30px !important; 
+        }
+        .discussTwo {
+            img.supportImg {
+                max-width: 100%;
+                padding-left: 20px;    
+            }
+        }
+    }
+
+    .plans{
+        &.kits {
+            padding-bottom: 20px;  
         }
     }
 
@@ -1921,6 +1955,22 @@ img {
 
 @media (max-width: 420px) {  
     .main_baner {
+        &.home_banner {
+            .btnTyp5 {
+                &.talkBtn {
+                    font-size: 13px !important; 
+                    margin-bottom: 15px;
+                    width: 122px; 
+                    &:first-child {
+                        margin-right: 10px !important;
+                    }
+                }
+                &.talkBtntwo {
+                    font-size: 14px !important; 
+                }
+            }
+        }
+        
         .header2banner {
             & > img { 
                 bottom: 0;

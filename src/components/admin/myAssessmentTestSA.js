@@ -103,7 +103,7 @@ class MyAssessmentTestSA extends Component {
                     </div>
                     <Row>
                       <Col lg={12}>
-                        <div className="mainTables">
+                        <div className="mainTables table-responsive"> 
                           <Table bordered size="lg">
                             <thead>
                               {/* ar_datetime: "2021-02-19 12:41:38"
