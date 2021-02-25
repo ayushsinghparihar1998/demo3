@@ -27,13 +27,15 @@ import ELPViewApiService from "../../common/services/apiService";
 import constant from "../../constant";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic"; 
-import validateInput from "../../common/validations/validationSAblog"; 
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import validateInput from "../../common/validations/validationSAblog";
+
+let prevCkEditorText = ''
 
 class ProfessinalBlogCreate extends Component {
   state = {
-    cat_name: [], 
-    isUploading: false, 
+    cat_name: [],
+    isUploading: false,
     filepath: null,
     title: null,
     description: null,
@@ -49,6 +51,7 @@ class ProfessinalBlogCreate extends Component {
       bl_written_by: "",
       press_blog_category: [],
     },
+    textLength:0
   };
   componentDidMount() {
     this.getProffCat();
@@ -278,6 +281,39 @@ class ProfessinalBlogCreate extends Component {
     return isValid;
   }
 
+  validateCKEditorData(data) {
+    function stripHtml(html) {
+      let tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+    let stringData = stripHtml(data);
+ 
+    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+     
+      prevCkEditorText = data
+      this.setState({
+        textLength:stringData.length,
+        blobj: {
+          ...this.state.blobj,
+          bl_desc: data
+        },
+      });
+
+    } else {
+       
+      this.setState({
+        isReloadEditor: true
+      }, () => {
+        this.setState({
+          isReloadEditor: false
+        })
+      })
+
+    }
+
+  }
+
   render() {
     const { proffCat, blobj, errors } = this.state;
     return (
@@ -311,7 +347,7 @@ class ProfessinalBlogCreate extends Component {
                       ? "Modify Blog"
                       : "Create Blog"}
                   </div>
-                  
+
                   {/* <div className="col14 fs16 fw300 mt-1 mb-4">
                    </div> */}
                   <Form>
@@ -337,8 +373,8 @@ class ProfessinalBlogCreate extends Component {
                             {this.state.filename}
                           </strong>
                         ) : (
-                          ""
-                        )}
+                            ""
+                          )}
                       </div>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.image}
@@ -369,44 +405,31 @@ class ProfessinalBlogCreate extends Component {
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.title}
-                      </div> 
+                      </div>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label className="col14 fw600 fs18">
                         Description
                       </Form.Label>
-                      <CKEditor
-                        config={{
-                          height: 500,
-                          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
-                        }}
-                        editor={ClassicEditor}
-                        data={blobj.bl_desc}
-                        onReady={(editor) => {
-                          // You can store the "editor" and use when it is needed.
-                          console.log("Editor is ready to use!", editor);
-                        }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          this.setState({
-                            blobj: {
-                              ...this.state.blobj,
-                              bl_desc: data,
-                            },
-                          });
-                          // this.setState({ description: data }, () =>
-                          //   console.log(this.state.description, event)
-                          // );
-                        }}
-                        onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
-                        }}
-                        onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
-                        }}
-                      />
+
+                      {!this.state.isReloadEditor ?
+                        <CKEditor
+                          config={{
+                            height: 500,
+                            toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link']
+                          }}
+                          id={this.state.refreshText}
+                          editor={ClassicEditor}
+                          data={blobj.bl_desc}
+                          onChange={(event, editor) => {
+                            let data = editor.getData();
+                            this.validateCKEditorData(data)
+                          }}
+                        /> : null}
+                      <p style={{textAlign:'right', marginTop:'10px'}}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p>
+
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
-                      <div className="col27 fs14 fw400 mt-2 error">    
+                      <div className="col27 fs14 fw400 mt-2 error">
                         {errors.desc}
                       </div>
                     </Form.Group>

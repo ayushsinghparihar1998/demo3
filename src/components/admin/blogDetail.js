@@ -142,7 +142,7 @@ class BlogDetail extends Component {
                         {
                           this.state.isShowCKEditor ?
                             <CKEditor
-                              config={{
+                              config={{ 
                                 height: 500,
                                 maxCharCount: 250,
                                 toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ,'Link']
