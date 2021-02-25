@@ -112,51 +112,37 @@ class VlogDetail extends Component {
               <Row className="mt-4">
                 <Col lg={12}>
                   <div className="ngo_details mt-2">
-                    {this.props.history.location.state.type == "blog" ? (
-                      <Image
-                        src={blogDetail && blogDetail.bl_image}
-                        alt=""
-                        className="w-100"
-                      />
-                    ) : (
-                      <>
-                        <div className="elpVideoblog">
-                          {!play ? (
-                            <>
-                              <Image
-                                src={blogDetail && blogDetail.vl_thumbnail_url}
-                                alt=""
-                                className="w-100 iconVideomain"
-                              />
-                              <Image
-                                src={VideoIcon}
-                                className="iconVideo"
-                                onClick={() => this.setplay(true)}
-                              />
-                            </>
-                          ) : (
-                            <YouTube videoId={this.state.url} opts={opts} />
-                          )}
-                        </div>
-                      </>
-                    )}
+                    <>
+                      <div className="elpVideoblog">
+                        {!play ? (
+                          <>
+                            <Image
+                              src={blogDetail && blogDetail.vl_thumbnail_url}
+                              alt=""
+                              className="w-100 iconVideomain"
+                            />
+                            <Image
+                              src={VideoIcon}
+                              className="iconVideo"
+                              onClick={() => this.setplay(true)}
+                            />
+                          </>
+                        ) : (
+                          <YouTube videoId={this.state.url} opts={opts} />
+                        )}
+                      </div>
+                    </>
+
                     <div className="pt-3 pb-3">
                       <div className="col14 fs14 fw400 pt-1">
-                        {this.props.history.location.state.type == "blog"
-                          ? moment(blogDetail.bl_datetime).format(
-                              "dddd MMM Do YYYY"
-                            )
-                          : moment(blogDetail.vl_datetime).format(
-                              "dddd MMM Do YYYY"
-                            )}
+                        {moment(blogDetail.vl_datetime).format(
+                          "dddd MMM Do YYYY"
+                        )}
                       </div>
                       <div
                         className="fs14 col28 fw300 pt-3 line_txt"
                         dangerouslySetInnerHTML={{
-                          __html:
-                            this.props.history.location.state.type == "blog"
-                              ? blogDetail.bl_desc
-                              : blogDetail.vl_desc,
+                          __html: blogDetail.vl_desc,
                         }}
                       ></div>
                     </div>
