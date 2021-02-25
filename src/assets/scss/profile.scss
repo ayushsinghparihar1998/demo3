@@ -2303,6 +2303,7 @@
 .ngo_details { 
     .elpVideoblog {  
         position: relative; 
+        min-height: 470px; 
         .iconVideomain {
             position: absolute;
             width: 100%;
@@ -2315,7 +2316,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, 150%);  
+            transform: translate(-50%, -50%); 
             cursor: pointer; 
             z-index: 9;  
         }
