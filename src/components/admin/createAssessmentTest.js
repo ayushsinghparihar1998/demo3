@@ -500,6 +500,33 @@ class CreateAssessmentTest extends Component {
   handleChangeComplete = () => {
     console.log("Change event completed");
   };
+  validateCKEditorData(data, callback) {
+    function stripHtml(html) {
+      let tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+    let stringData = stripHtml(data);
+    console.log("ASd");
+    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+      this.setState({
+        textLength: stringData.length,
+      });
+      callback(true);
+    } else {
+      callback(false);
+      this.setState(
+        {
+          isReloadEditor: true,
+        },
+        () => {
+          this.setState({
+            isReloadEditor: false,
+          });
+        }
+      );
+    }
+  }
   render() {
     const {
       asstObj,
@@ -765,33 +792,43 @@ class CreateAssessmentTest extends Component {
                             <Form.Label className="fs20 fw600 col14">
                               Suggestions
                             </Form.Label>
-                            <CKEditor
-                              config={{
-                                height: 500,
-                                toolbar: [
-                                  "bold",
-                                  "italic",
-                                  "bulletedList",
-                                  "numberedList",
-                                  "blockQuote",
-                                  "Link",
-                                ],
-                              }}
-                              editor={ClassicEditor}
-                              onReady={(editor) => {
-                                console.log("Editor is ready to use!", editor);
-                              }}
-                              className="inputTyp2"
-                              data={val.as_suggestion_txt}
-                              onChange={(event, editor) => {
-                                const data = editor.getData();
-                                this.handleChangeLoop(
-                                  "as_suggestion_txt",
-                                  data,
-                                  index
-                                );
-                              }}
-                            />
+                            {!this.state.isReloadEditor ? (
+                              <CKEditor
+                                config={{
+                                  height: 500,
+                                  toolbar: [
+                                    "bold",
+                                    "italic",
+                                    "bulletedList",
+                                    "numberedList",
+                                    "blockQuote",
+                                    "Link",
+                                  ],
+                                }}
+                                editor={ClassicEditor}
+                                onReady={(editor) => {
+                                  console.log(
+                                    "Editor is ready to use!",
+                                    editor
+                                  );
+                                }}
+                                className="inputTyp2"
+                                data={val.as_suggestion_txt}
+                                onChange={(event, editor) => {
+                                  const data = editor.getData();
+
+                                  this.validateCKEditorData(data, (valid) => {
+                                    if (valid) {
+                                      this.handleChangeLoop(
+                                        "as_suggestion_txt",
+                                        data,
+                                        index
+                                      );
+                                    }
+                                  });
+                                }}
+                              />
+                            ) : null}
 
                             <div className="col27 fs14 fw400 mt-2 error">
                               {erroras_suggestion &&

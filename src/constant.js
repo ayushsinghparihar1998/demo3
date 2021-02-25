@@ -20,7 +20,7 @@ export default {
     },
 
     CK_EDITOR_CONFIG:{
-        MAX_CHARACTER:10
+        MAX_CHARACTER:500
     }
 
 }

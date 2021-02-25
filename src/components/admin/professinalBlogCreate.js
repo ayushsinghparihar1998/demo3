@@ -426,7 +426,7 @@ class ProfessinalBlogCreate extends Component {
                             this.validateCKEditorData(data)
                           }}
                         /> : null}
-                      <p style={{textAlign:'right', marginTop:'10px'}}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p>
+                      {/* <p style={{textAlign:'right', marginTop:'10px'}}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
 
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       <div className="col27 fs14 fw400 mt-2 error">

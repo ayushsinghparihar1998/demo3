@@ -28,6 +28,7 @@ import validator from "validator";
 import constant from "../../constant";
 import validateInput from "../../common/validations/validationAddVlogs";
 // import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
+let prevCkEditorText = "";
 
 class CreateVlog extends Component {
   state = {
@@ -144,6 +145,35 @@ class CreateVlog extends Component {
       }, 1000);
     }
   };
+  validateCKEditorData(data) {
+    function stripHtml(html) {
+      let tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+    let stringData = stripHtml(data);
+
+    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+      prevCkEditorText = data;
+      this.setState({
+        vlobj: {
+          ...this.state.vlobj,
+          vl_desc: data,
+        },
+      });
+    } else {
+      this.setState(
+        {
+          isReloadEditor: true,
+        },
+        () => {
+          this.setState({
+            isReloadEditor: false,
+          });
+        }
+      );
+    }
+  }
 
   render() {
     const { vlobj, errors } = this.state;
@@ -240,48 +270,40 @@ class CreateVlog extends Component {
                       <Form.Label className="col14 fw600 fs18">
                         Description
                       </Form.Label>
-                      <CKEditor
-                        config={{
-                          maxCharCount: 25,
-                          showCharCount: true,
-                          // plugins : [WordCount],
-                          // extraPlugins: ['WordCount'],
-                          height: 500,
-                          toolbar: [
-                            "bold",
-                            "italic",
-                            "bulletedList",
-                            "numberedList",
-                            "blockQuote",
-                            "Link",
-                          ],
-                        }}
-                        editor={ClassicEditor}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
-                        data={vlobj.vl_desc}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          console.log(editor.isReadOnly);
-                          console.log(editor.getData().length);
-                          // editor.execCommand("undo");
-                          // if (editor.getData().length < 50) {
-                          this.setState({
-                            vlobj: {
-                              ...this.state.vlobj,
-                              vl_desc: data,
-                            },
-                          });
-                          // }
-                        }}
-                        onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
-                        }}
-                        onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
-                        }}
-                      />
+                      {!this.state.isReloadEditor ? (
+                        <CKEditor
+                          config={{
+                            maxCharCount: 25,
+                            showCharCount: true,
+                            // plugins : [WordCount],
+                            // extraPlugins: ['WordCount'],
+                            height: 500,
+                            toolbar: [
+                              "bold",
+                              "italic",
+                              "bulletedList",
+                              "numberedList",
+                              "blockQuote",
+                              "Link",
+                            ],
+                          }}
+                          editor={ClassicEditor}
+                          onReady={(editor) => {
+                            console.log("Editor is ready to use!", editor);
+                          }}
+                          data={vlobj.vl_desc}
+                          onChange={(event, editor) => {
+                            let data = editor.getData();
+                            this.validateCKEditorData(data);
+                          }}
+                          onBlur={(event, editor) => {
+                            console.log("Blur.", editor);
+                          }}
+                          onFocus={(event, editor) => {
+                            console.log("Focus.", editor);
+                          }}
+                        />
+                      ) : null}
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.vl_desc}

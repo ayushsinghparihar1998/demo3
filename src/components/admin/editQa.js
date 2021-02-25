@@ -432,8 +432,6 @@ class EditQa extends Component {
     let stringData = stripHtml(data);
     console.log("ASd")
     if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
-
-
       this.setState({
         textLength: stringData.length,
       });
@@ -538,7 +536,7 @@ class EditQa extends Component {
                                   }}
                                   className="inputTyp2"
                                 /> : null}
-                              <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p>
+                              {/* <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
 
                               <div className="col27 fs14 fw400 mt-2 error">
                                 {erroras_que_ans[index].as_que_name}
@@ -656,7 +654,7 @@ class EditQa extends Component {
                                           }}
                                           className="inputTyp2"
                                         /> : null}
-                                      <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p>
+                                      {/* <p style={{ textAlign: 'right', marginTop: '10px' }}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
 
                                       <div className="col27 fs14 fw400 mt-2 error">
                                         {
