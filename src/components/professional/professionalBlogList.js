@@ -33,7 +33,6 @@ import BlogProcessFive from "../../assets/images/blog4.png";
 import BlogProcessSix from "../../assets/images/blog5.svg";
 import BlogProcessSeven from "../../assets/images/blog6.png";
 import BlogProcessNine from "../../assets/images/blogs9.png";
-import VideoIcon from "../../assets/images/videoIcon.png";
 
 import blogclock from "../../assets/images/blogclock.png";
 import { connect } from "react-redux";
@@ -42,7 +41,9 @@ import { Popover } from "antd";
 import ELPRxApiService from "../../common/services/apiService";
 import moment from "moment";
 
+import VideoIcon from "../../assets/images/videoIcon.png";
 import YouTube from "react-youtube";
+import { setLocalStorage } from "../../common/helpers/Utils";
 
 class ProfessionalBlogList extends Component {
   constructor() {
@@ -71,6 +72,7 @@ class ProfessionalBlogList extends Component {
     this.setState({
       tabVal: this.props.match.params.name,
     });
+
     console.log(this.props.match.params.name);
     if (this.props.match.params.name == "ALL") {
       console.log("ALLLLLLLLLLLLLLLL");
@@ -108,6 +110,7 @@ class ProfessionalBlogList extends Component {
       .then((res) => {
         this.setState({ blogEat: res.data.data.blog_list, showDetails: false });
         console.log("blog data===>", res);
+        setLocalStorage("blog_category", "EAT");
       })
       .catch((err) => {
         console.log(err);
@@ -122,6 +125,7 @@ class ProfessionalBlogList extends Component {
       .then((res) => {
         this.setState({ blogLuv: res.data.data.blog_list, showDetails: false });
         console.log("blog data===>", res);
+        setLocalStorage("blog_category", "LUV");
       })
       .catch((err) => {
         console.log(err);
@@ -138,6 +142,7 @@ class ProfessionalBlogList extends Component {
           showDetails: false,
         });
         console.log("blog data===>", res);
+        setLocalStorage("blog_category", "PRAY");
       })
       .catch((err) => {
         console.log(err);
@@ -253,6 +258,7 @@ class ProfessionalBlogList extends Component {
           showDetails: false,
         });
         console.log("blog data===>", res);
+        setLocalStorage("blog_category", "ALL");
       })
       .catch((err) => {
         console.log(err);
@@ -260,10 +266,17 @@ class ProfessionalBlogList extends Component {
   };
   getBlogdetails = (name, blog_id) => {
     // this.props.history.push("/blogsDetail/" + blog_id);
-    this.props.history.push({
-      pathname: "/blogsDetail/" + blog_id,
-      state: { type: name },
-    });
+    if (name == "blog") {
+      this.props.history.push({
+        pathname: "/blogsDetail/" + blog_id,
+        state: { type: name },
+      });
+    } else {
+      this.props.history.push({
+        pathname: "/vlogsDetail/" + blog_id,
+        state: { type: name },
+      });
+    }
   };
 
   subscribeNewsLatterHandler = async () => {
@@ -487,9 +500,9 @@ class ProfessionalBlogList extends Component {
                     </div>
                   </Tab>
                   <Tab eventKey="LUV" title="LUV">
-                    <div className="coverageTab"> 
+                    <div className="coverageTab">
                       <Row>
-                        {/* <Col md={7}> */} 
+                        {/* <Col md={7}> */}
                         <Row>
                           {this.state.blogLuv &&
                             this.state.blogLuv.map((data, i) =>
@@ -614,14 +627,14 @@ class ProfessionalBlogList extends Component {
                   </Tab>
 
                   <Tab eventKey="VLOGS" title="VLOGS">
-                    <div className="featuredTab vlogTabs">  
+                    <div className="featuredTab vlogTabs">
                       <Row>
                         <Col md={7}>
                           <Row>
                             <Col md={12}>
                               <div className="professionalBlogs">
                                 <div className="fw600 fs20 col8 mb-4">
-                                  FEATURED 
+                                  FEATURED
                                 </div>
 
                                 <div className="elpVideoblog">
@@ -656,7 +669,7 @@ class ProfessionalBlogList extends Component {
                                     <YouTube
                                       videoId={this.state.url}
                                       opts={opts}
-                                    /> 
+                                    />
                                     {/* <iframe
                                       width="100%"
                                       height="400"
@@ -674,13 +687,15 @@ class ProfessionalBlogList extends Component {
                                 <div className="blogClocks mb-3 mt-3">
                                   <div>
                                     <div className="position-relative">
-                                      <div className="col64 fs18 fw500"
-                                      onClick={() =>
-                                        this.getBlogdetails(
-                                          "vlog",
-                                          this.state.blogFeatured.vl_id
-                                        )
-                                      }>
+                                      <div
+                                        className="col64 fs18 fw500"
+                                        onClick={() =>
+                                          this.getBlogdetails(
+                                            "vlog",
+                                            this.state.blogFeatured.vl_id
+                                          )
+                                        }
+                                      >
                                         {this.state.blogFeatured &&
                                           this.state.blogFeatured.vl_title}
                                       </div>
@@ -707,9 +722,7 @@ class ProfessionalBlogList extends Component {
                         </Col>
 
                         <Col md={5}>
-                          <div className="fs20 fw600 col8 mb-4">
-                            LATEST
-                          </div>
+                          <div className="fs20 fw600 col8 mb-4">LATEST</div>
                           <div className="mb-4 pb-2">
                             {this.state.blogLatest &&
                               this.state.blogLatest.map(
@@ -756,21 +769,21 @@ vl_video_url:  */}
                                         </div>
                                       </Col>
                                       <Col md={3}>
-                                        <div className="blogVideoIcon"> 
-                                              <Image
-                                              src={VideoIcon}
-                                              className="iconVideo"  
-                                            />
-                                            <Image
-                                              src={item.vl_thumbnail_url}
-                                              className="w-100"
-                                              onClick={() =>
-                                                this.getBlogdetails(
-                                                  "vlog",
-                                                  item.vl_id
-                                                )
-                                              }
-                                            />
+                                        <div className="blogVideoIcon">
+                                          <Image
+                                            src={VideoIcon}
+                                            className="iconVideo"
+                                          />
+                                          <Image
+                                            src={item.vl_thumbnail_url}
+                                            className="w-100"
+                                            onClick={() =>
+                                              this.getBlogdetails(
+                                                "vlog",
+                                                item.vl_id
+                                              )
+                                            }
+                                          />
                                         </div>
                                       </Col>
                                     </Row>
@@ -782,7 +795,7 @@ vl_video_url:  */}
                         </Col>
                         <Col md={12}>
                           <div className="fs20 fw600 border_t col8 mb-4 pb-3">
-                            All 
+                            All
                           </div>
                         </Col>
 
@@ -790,7 +803,7 @@ vl_video_url:  */}
                           this.state.vlogsAll.map((item) => {
                             return (
                               <Col md={6} className="mb-4">
-                                <Row className="innerVlog"> 
+                                <Row className="innerVlog">
                                   <Col md={7}>
                                     <div className="">
                                       <div
@@ -809,7 +822,7 @@ vl_video_url:  */}
                                         dangerouslySetInnerHTML={{
                                           __html: item.vl_desc,
                                         }}
-                                      ></div> 
+                                      ></div>
                                       <div className="col14 fs16 fw400 mt-2">
                                         {moment(item.vl_datetime).format(
                                           "dddd MMM Do YYYY"
@@ -818,26 +831,29 @@ vl_video_url:  */}
                                     </div>
                                   </Col>
                                   <Col md={5}>
-                                      <div className="blogVideoIcon"> 
-                                          <Image
-                                          src={VideoIcon}
-                                          className="iconVideo"  
-                                        />
-                                        <Image
-                                          src={item.vl_thumbnail_url}
-                                          className="w-100"
-                                          onClick={() =>
-                                            this.getBlogdetails("vlog", item.vl_id)
-                                          }
-                                        />
-                                        </div>
+                                    <div className="blogVideoIcon">
+                                      <Image
+                                        src={VideoIcon}
+                                        className="iconVideo"
+                                      />
+                                      <Image
+                                        src={item.vl_thumbnail_url}
+                                        className="w-100"
+                                        onClick={() =>
+                                          this.getBlogdetails(
+                                            "vlog",
+                                            item.vl_id
+                                          )
+                                        }
+                                      />
+                                    </div>
                                   </Col>
                                 </Row>
                               </Col>
                             );
                           })}
                       </Row>
-                      <div className="text-center mt-5 mb-3"> 
+                      <div className="text-center mt-5 mb-3">
                         <Button
                           type="button"
                           className="btnType22 fw500"
@@ -850,7 +866,7 @@ vl_video_url:  */}
                         </Button>
                       </div>
                     </div>
-                  </Tab> 
+                  </Tab>
                 </Tabs>
                 <div className="subscribe_here2 eatBlog mt-5 mb-5">
                   <Container>

@@ -94,7 +94,9 @@ class QaViewDetails extends Component {
                 <div className="professor_search mentalViewDetail">
                   <Row className="mb-1">
                     <Col md={8}>
-                      <div className="fs22 fw600 col10">{asstDetail && asstDetail.as_title}</div>
+                      <div className="fs22 fw600 col10">
+                        {asstDetail && asstDetail.as_title}
+                      </div>
                       <div className="fw300 fs16 col14">
                         {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                       </div>
@@ -153,17 +155,19 @@ class QaViewDetails extends Component {
                         </div>
                       </Col>
                       <Col md={2}>
-                        <div className="mentalList">
-                          <div className="col11 fw400 fs13 mb-2">
-                            Total Price
+                        {asstDetail && asstDetail.as_test_price ? (
+                          <div className="mentalList">
+                            <div className="col11 fw400 fs13 mb-2">
+                              Total Price
+                            </div>
+                            <div className="col11 fw500 fs14">
+                              {asstDetail && asstDetail.as_test_price}
+                            </div>
                           </div>
-                          <div className="col11 fw500 fs14">
-                            {asstDetail && asstDetail.as_test_price === ""
-                              ? "-"
-                              : asstDetail && asstDetail.as_test_price}
-                            /-
-                          </div>
-                        </div>
+                        ) : (
+                          ""
+                        )}
+                        /-
                       </Col>
                       <Col md={2}>
                         <div className="mentalList">

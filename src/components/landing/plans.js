@@ -113,7 +113,7 @@ class Plans extends Component {
                               item.plan_category.length == 3 ? (
                                 <span className="">HOLISTIC </span>
                               ) : (
-                                item.plan_category.map((val) => {
+                                item.plan_category.map((val, index) => {
                                   // return
                                   return (
                                     <span
@@ -124,9 +124,16 @@ class Plans extends Component {
                                           ? "luvcat"
                                           : val.puc_cat_name == "Pray"
                                           ? "luvcat"
-                                          : "holisticcat"                                      }
+                                          : "holisticcat"
+                                      }
                                     >
-                                      {val.puc_cat_name}{" "}
+                                      {val.puc_cat_name}
+                                      <span className="andClass">
+                                        {item.plan_category.length == 2 &&
+                                        index == 0
+                                          ? " & "
+                                          : ""}{" "}
+                                      </span>
                                     </span>
                                   );
                                 })

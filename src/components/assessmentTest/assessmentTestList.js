@@ -157,7 +157,7 @@ class AssessmentTestListTwo extends Component {
                       <Row>
                         {asstList &&
                           asstList.map((item, index) => {
-                            return (
+                            return item.total_que_count > 0 ? (
                               <Col md={4} sm={6}>
                                 <div
                                   className="blogOneMain"
@@ -222,6 +222,8 @@ class AssessmentTestListTwo extends Component {
                                   )}
                                 </div>
                               </Col>
+                            ) : (
+                              ""
                             );
                           })}
                       </Row>

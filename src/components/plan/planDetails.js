@@ -35,7 +35,6 @@ import {
 import validator from "validator";
 import { setLocalStorage } from "../../common/helpers/Utils";
 
-
 class PlanDetails extends Component {
   constructor(props) {
     super(props);
@@ -206,20 +205,31 @@ class PlanDetails extends Component {
                     </Form>
                   </div>
                 </Col>
-                <Col md={7}> 
-                  <div class="elpVideoblog">   
-                     {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
-                     <Image src={Splan} alt="Plan" className="w-100 iconVideomain" />  
-                      <div>
-                        <Image src={VideoIcon} className="iconVideo" />
-                          <div class="">
-                            <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="400" src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1" id="widget2">
-                            </iframe> 
-                            {/* <YouTube videoId={url} opts={opts} /> */}
-                            
-                            </div>
-                        </div>
-                    </div> 
+                <Col md={7}>
+                  <div class="elpVideoblog">
+                    {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
+                    <Image
+                      src={Splan}
+                      alt="Plan"
+                      className="w-100 iconVideomain"
+                    />
+                    <div>
+                      <Image src={VideoIcon} className="iconVideo" />
+                      <div class="">
+                        <iframe
+                          frameborder="0"
+                          allowfullscreen="1"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          title="YouTube video player"
+                          width="100%"
+                          height="400"
+                          src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
+                          id="widget2"
+                        ></iframe>
+                        {/* <YouTube videoId={url} opts={opts} /> */}
+                      </div>
+                    </div>
+                  </div>
                 </Col>
               </Row>
 
@@ -241,14 +251,46 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center">
-                                {item.pl_title}
+                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                                {item.pl_type == 1 ? (
+                                  item.plan_category.length == 3 ? (
+                                    <span className="">HOLISTIC </span>
+                                  ) : (
+                                    item.plan_category.map((val, index) => {
+                                      // return
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luvcat"
+                                              : val.puc_cat_name == "Pray"
+                                              ? "luvcat"
+                                              : "holisticcat"
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                          <span className="andClass">
+                                            {item.plan_category.length == 2 &&
+                                            index == 0
+                                              ? " & "
+                                              : ""}{" "}
+                                          </span>
+                                        </span>
+                                      );
+                                    })
+                                  )
+                                ) : (
+                                  "BY CONDITION"
+                                )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
                               <div className="d-flex justify-content-center mb-2">
                                 <Button className="btnSave">
-                                  {/* Save {item.pl_save}% */}BASIC
+                                  {/* Save {item.pl_save}% */}
+                                  {item.pl_title}
                                 </Button>
                               </div>
                               <div className="pt-1">
@@ -262,7 +304,7 @@ class PlanDetails extends Component {
                                   )}
                                 </div>
                                 <div className="col14 fs17 fw400 peryears">
-                                  Per year
+                                  {item.pl_type == 1 ? "Per Day" : ""}
                                 </div>
                               </div>
                             </div>
@@ -306,14 +348,46 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center">
-                                {item.pl_title}
+                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                                {item.pl_type == 1 ? (
+                                  item.plan_category.length == 3 ? (
+                                    <span className="">HOLISTIC </span>
+                                  ) : (
+                                    item.plan_category.map((val, index) => {
+                                      // return
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luvcat"
+                                              : val.puc_cat_name == "Pray"
+                                              ? "luvcat"
+                                              : "holisticcat"
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                          <span className="andClass">
+                                            {item.plan_category.length == 2 &&
+                                            index == 0
+                                              ? " & "
+                                              : ""}{" "}
+                                          </span>
+                                        </span>
+                                      );
+                                    })
+                                  )
+                                ) : (
+                                  "BY CONDITION"
+                                )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
                               <div className="d-flex justify-content-center mb-2">
                                 <Button className="btnSave">
-                                  {/* Save {item.pl_save}% */}BASIC
+                                  {/* Save {item.pl_save}% */}
+                                  {item.pl_title}
                                 </Button>
                               </div>
                               <div className="pt-1">
@@ -327,7 +401,7 @@ class PlanDetails extends Component {
                                   )}
                                 </div>
                                 <div className="col14 fs17 fw400 peryears">
-                                  Per year
+                                  {item.pl_type == 1 ? "Per Day" : ""}
                                 </div>
                               </div>
                             </div>
@@ -382,20 +456,31 @@ class PlanDetails extends Component {
                   </Col>
                   <Col md={7}>
                     <div className="pr-3">
-                    <div class="elpVideoblog">   
-                     {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
-                     <Image src={Splan} alt="Plan" className="w-100 iconVideomain" />  
-                      <div>
-                        <Image src={VideoIcon} className="iconVideo" />
+                      <div class="elpVideoblog">
+                        {/* <Image src={BlogProcess} className="iconVideomain" src="" />  */}
+                        <Image
+                          src={Splan}
+                          alt="Plan"
+                          className="w-100 iconVideomain"
+                        />
+                        <div>
+                          <Image src={VideoIcon} className="iconVideo" />
                           <div class="">
-                            <iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="100%" height="400" src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1" id="widget2">
-                            </iframe> 
+                            <iframe
+                              frameborder="0"
+                              allowfullscreen="1"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              title="YouTube video player"
+                              width="100%"
+                              height="400"
+                              src="https://www.youtube.com/embed/?autoplay&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
+                              id="widget2"
+                            ></iframe>
                             {/* <YouTube videoId={url} opts={opts} /> */}
-                            
-                            </div>
+                          </div>
                         </div>
-                    </div> 
-                    </div> 
+                      </div>
+                    </div>
                   </Col>
                 </Row>
               </div>
