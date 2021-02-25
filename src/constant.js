@@ -17,6 +17,10 @@ export default {
         CUSTOMERS: '3',
         SUPER_ADMIN: '4',
         CORPORATE_CUSTOMER: '5',
+    },
+
+    CK_EDITOR_CONFIG:{
+        MAX_CHARACTER:10
     }
 
 }

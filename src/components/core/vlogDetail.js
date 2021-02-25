@@ -90,7 +90,7 @@ class VlogDetail extends Component {
     });
   };
 
-  render() {
+  render() { 
     const opts = {
       height: "390",
       width: "640",
