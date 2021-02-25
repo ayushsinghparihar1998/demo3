@@ -52,8 +52,10 @@ class Home extends Component {
     return (
       <div className="page__wrapper">
         <div className="main_baner home_banner">
-          <NavBar {...this.props} />
-          <Banner />
+           <div className="mainLanding">
+              <NavBar {...this.props} />
+              <Banner />
+          </div>
         </div>
         <Conversations /> 
         <Plans />

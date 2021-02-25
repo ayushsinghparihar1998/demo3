@@ -211,7 +211,7 @@
                 }
             }
         }
-        .plantwo {
+        .plantwo { 
             padding: 20px;
             height: 190px;
             // border-bottom: 1px dashed $col14; 
@@ -219,8 +219,9 @@
             // background-color: $col63; 
             background-image: url(../images/rectals.png);
             .peryears {  
-                // display: none;  
-            }
+                // display: none; 
+            background-position: center; 
+        }
 
             .btnSave {
                 background: transparent;
@@ -311,7 +312,7 @@
         }
         .slick-next {
             right: -20px; 
-            top: 49%; 
+            top: 50%; 
         }
 
         ul.slick-dots {
@@ -620,10 +621,10 @@
                 padding-left: 20px; 
                 padding-right: 210px;         
             }
-            .btnTyp2 {
+            .btnTyp2 { 
                 position: absolute;
                 right: 7px;
-                top: 0;
+                top: -12px; 
                 padding: 0 1.5rem; 
                 border-color: $col10 !important;          
                 background-color: $col10 !important;
@@ -825,6 +826,14 @@ img {
 
 }
 
+@media (max-width: 1370px) {  
+    .main_baner {
+        .ptn-170 {
+            padding-top: 100px !important; 
+        }
+    }
+}
+
 /* media screen start */ 
 @media (min-width: 1200px) { 
     .Discussanything {
@@ -833,8 +842,18 @@ img {
         }
     }
 }
-@media (max-width: 1200px) {  
+@media (max-width: 1200px) {   
     .main_baner { 
+        .ptn-170 {
+            padding-top: 60px !important; 
+        }
+        .mainLanding {
+            .carousel-item {
+                .d-flex.mt-4 {
+
+                }
+            }
+        }
         .carousel-item {
             .fs40.pt-120 {
                 font-size: 30px !important;
@@ -845,7 +864,34 @@ img {
             }
         }
         .ptn-170 {
-            padding-top: 130px !important;
+            padding-top: 30px !important; 
+        }
+        &.home_banner {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            width: 100%;
+            .mj_nav {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                left: 0;
+            }
+        }
+
+    }
+    .plans {
+        &.kits {
+            .planList {
+                .planpricing {
+                    .fw500.fs20.col64.text-uppercase {
+                        font-size: 1rem !important;
+                    }
+                    .emotion_ul {
+                        padding: 10px 10px;  
+                    }
+                }
+            }
         }
     }
     .happyPatient .italic_style .invertedone {              
@@ -859,6 +905,21 @@ img {
         right: 0; 
         max-width: 21px; 
     }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+    .subscribe_here2 {
+        .subscribe_form {
+            .fgroups {
+                max-width: 100%; 
+                .btnTyp2 {
+                    top: -12px; 
+                }
+            }
+        }
+    }
+
 }
 
 @media (min-width: 1025px) and (max-width: 1199px) {  
@@ -1040,6 +1101,19 @@ img {
 
 @media (min-width: 768px) and (max-width: 991px) {  
     .main_baner {
+        // .mainLanding {
+        //     width: 100%;
+        //     .mj_nav {
+        //         position: relative;
+        //     } 
+        // }
+        &.home_banner {
+            .mj_nav {
+                // max-width: 97%; 
+                // right: 0;
+                // left: 20px;
+            }
+        }
         .container {
             max-width: 750px; 
         }
@@ -1166,6 +1240,7 @@ img {
     }
 
     .conversations {   
+        padding-bottom: 20px; 
         .col-md-6 {
             & > img {
                 width: 100%; 
@@ -1224,11 +1299,13 @@ img {
     }
 
     .aboutEats {
+        padding: 15px 0;
+        padding-bottom: 40px;
         .container {
             div.fs40  {
                 // font-size: 2.5rem !important; 
             }
-            .col-md-5 {
+            .col-md-5 {  
                 .subscribe_here { 
                     position: relative;
                     top: -6px; 
@@ -1246,7 +1323,7 @@ img {
                     padding-bottom: 10px !important; 
                 }
             }
-            .subscribe_here {
+            .subscribe_here { 
                 div.fs40 {
                     font-size: 30px !important;
                 }
@@ -1261,10 +1338,39 @@ img {
                     font-size: 16px !important; 
                 }
             }
+            .pillars {
+                padding: 0 10px;
+                .pillarImg {
+                    width: 100%; 
+                }
+            }
         }
     }
 
-    .Supporting { 
+    .subscribe_here2 {
+        padding: 0 0 40px; 
+        .subscribe_form {
+            .fgroups {
+                max-width: 100%; 
+                text-align: center; 
+                .inputTyp1 {
+                    max-width: 100%;
+                    padding-right: 20px; 
+                }
+                .btnTyp2 {
+                    position: relative;
+                    right: 0; 
+                }
+                .error {
+                    margin-top: 4px !important;
+                    margin-bottom: 4px !important; 
+                    text-align: center; 
+                }
+            }
+        } 
+    } 
+
+    .Supporting {  
         padding: 3rem 0 4rem; 
         .container {
             div.fs44  {
@@ -1277,7 +1383,7 @@ img {
                 max-width: 280px;
                 height: 150px; 
                 & > img {
-                    max-width: 190px; 
+                    max-width: 150px;
                     width: 100%;
                 }
             }
@@ -1319,8 +1425,44 @@ img {
                 padding-left: 5%; 
             }
         }
+        .discussTwo {
+            img.supportImg {
+                max-width: 100%; 
+                padding-left: 10%;
+            }
+        }
     }
     
+    .plans {
+        &.kits {
+            .planList {
+                .planpricing {
+                    .emotion_ul {
+                        padding: 10px 12px; 
+                    }
+                    .fw500.fs20.col64.text-uppercase {
+                        font-size: 1rem !important; 
+                    }
+                }
+                .red-bg {
+                    .borderSs { 
+                        
+                    }
+                }
+            }
+        }
+    } 
+
+    .main_baner {
+        .carousel-item  {
+            .fw400.col64.fs22 {
+                font-size: 15px !important; 
+            }
+            .fs40.pt-120 {
+                margin-bottom: 10px !important;
+            }
+        }
+    } 
 
     .footer {
         .container-fluid { 
@@ -1352,7 +1494,8 @@ img {
     .subscribe_here2 {
         .subscribe_form  {
             .fgroups {            
-                max-width: 100%;      
+                max-width: 100%; 
+                
             }
             
         }
@@ -1513,6 +1656,14 @@ img {
         }
     }
 
+    .plans {
+        .planList {
+            .plantwo {
+                background-position: center;
+                // background-size: cover; 
+            }
+        }
+    }
 
 }
 
@@ -1534,7 +1685,12 @@ img {
     }
     .main_baner { 
         min-height: auto !important; 
-
+        .mainLanding {
+            width: 100%;
+            .mj_nav {
+                position: relative;
+            } 
+        }
         &.home_banner {
             font-size: 14px !important; 
             .btnTyp5 {
@@ -1888,7 +2044,7 @@ img {
                 max-width: 100%;
                 .inputTyp1 {
                     font-size: 14px !important;
-                    padding-right: 130px; 
+                    padding-right: 20px;  
                 }
                 .btnTyp2 {
                     padding: 0 0.9rem; 
@@ -1976,7 +2132,26 @@ img {
         }
     }
 
+    .plans {
+        .planList {
+            .plantwo {
+                background-position: center;
+                // background-size: cover; 
+            }
+        }
+    }
 
+}
+
+@media (max-width: 575px) {
+    .plans {
+        .planList {
+            .plantwo {
+                background-position: center;
+                // background-size: cover; 
+            }
+        }
+    }
 }
 
 @media (max-width: 420px) {  

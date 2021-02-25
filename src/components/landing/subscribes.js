@@ -103,18 +103,19 @@ class SubscribeHere extends Component {
                       value={this.state.email}
                       maxLength={100}
                     />
-                    <div className="col27 fs14 fw400 mt-2 error">
-                      {this.state.errors}
-                    </div>
+                    
                     <Button
                       //   variant="primary"
                       onClick={this.handleSubmit}
                       type="button"
-                      className="btnTyp2 mt-1"
+                      className="btnTyp2 mt-3"
                       //   disabled={this.state.errors.length == 0}
                     >
                       DOWNLOAD NOW 
                     </Button>
+                    <div className="col27 fs14 fw400 mt-2 error">
+                      {this.state.errors}
+                    </div>
                   </Form.Group>
                 </Form>
               </div>
