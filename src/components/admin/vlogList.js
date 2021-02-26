@@ -135,7 +135,7 @@ class VlogList extends Component {
                         </Form>
                 </div>
                 
-                      <div className="adminlistener p-4 mb-3">
+                      <div className="adminlistener vlogListadmin p-4 mb-3">
                         <div className="d-flex text-left">
                           <Col md={2}>
                               <div className="elpVideoblog"> 
@@ -216,7 +216,7 @@ class VlogList extends Component {
                         </div>
                       </div>
 
-                      <div className="adminlistener p-4 mb-3">
+                      <div className="adminlistener vlogListadmin p-4 mb-3">
                         <div className="d-flex text-left">
                           <Col md={2}>
                               <div className="elpVideoblog"> 
