@@ -129,7 +129,7 @@ class ViewAssessmentTest extends Component {
                               asstDetail && asstDetail.ar_score
                                 ? asstDetail && asstDetail.ar_score
                                 : 100
-                            }%`}
+                            }`}
                           />
                         </div>{" "}
                       </div>
