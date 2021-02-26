@@ -4046,7 +4046,7 @@ as_type: "2" */}
                     {this.state.vlogsList &&
                       this.state.vlogsList.map((item, index) => {
                         return (
-                          <div className="adminlistener p-4 mb-3">
+                          <div className="adminlistener vlogListadmin p-4 mb-3">
                             <div className="d-flex text-left">
                               {/* <div className="mr-2 pt-1">
                                 <Image src={item.vl_thumbnail_url} alt="" />
@@ -4660,7 +4660,7 @@ as_type: "2" */}
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
             <div className="elpVideoblog">
-              <Image src={BlogProcessFive} className="iconVideomain" />
+              {/* <Image src={BlogProcessFive} className="iconVideomain" /> */}
               <div>
                 <YouTube
                   videoId={this.state.url}
