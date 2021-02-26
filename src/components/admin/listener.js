@@ -61,6 +61,7 @@ import {
   range,
   setLocalStorage,
 } from "../../common/helpers/Utils";
+import YouTube from "react-youtube";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -114,6 +115,8 @@ class Adminlistener extends Component {
       plan_type: 1,
       as_type: 1,
       vl_type: 1,
+      play: false,
+      url: "",
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -123,7 +126,11 @@ class Adminlistener extends Component {
   };
 
   handleClose = () => {
-    this.setState({ show: false });
+    let vlogsList = this.state.vlogsList;
+    vlogsList.map((item, ind) => {
+      item.play = false;
+    });
+    this.setState({ show: false, vlogsList });
   };
   componentDidMount() {
     this.getBlogCat("blogCategory", "getblogcategory");
@@ -763,6 +770,17 @@ class Adminlistener extends Component {
           result && result.data && result.data.data
             ? result.data.data.totalRecordCount
             : 0;
+        vlogsList.map((item) => {
+          var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+          var match = item.vl_video_url.match(regExp);
+          if (match && match[2].length == 11) {
+            console.log("match[2]", match[2]);
+            item.url = match[2];
+            item.play = false;
+          } else {
+            //error
+          }
+        });
       }
       this.setState(
         {
@@ -1459,8 +1477,32 @@ class Adminlistener extends Component {
     return text;
   };
 
+  setplay = (flag, i) => {
+    let vlogsList = this.state.vlogsList;
+    let url = this.state.url;
+    let play = this.state.play;
+    vlogsList.map((item, index) => {
+      item.play = i == index ? flag : false;
+      play = i == index ? item.play : false;
+      url = i == index ? item.url : "";
+    });
+    this.setState({
+      vlogsList,
+      show: true,
+      url,
+      play,
+    });
+  };
   render() {
-    const { errors, totalRecord, memberObj } = this.state;
+    const opts = {
+      height: "390",
+      width: "640",
+      playerVars: {
+        autoplay: this.state.play ? 1 : "",
+      },
+    };
+
+    const { errors, totalRecord, memberObj, play } = this.state;
     let userActveClass =
       this.state.pageType == "userlist" && this.state.activeProfile == "user"
         ? "position-relative active"
@@ -4019,16 +4061,16 @@ as_type: "2" */}
                                     <Image
                                       src={VideoIcon}
                                       className="iconVideo"
-                                      onClick={this.handleShow}
+                                      onClick={() => this.setplay(true, index)}
                                     />
-                                    <iframe
+                                    {/* <iframe
                                       width="100%"
                                       height="100"
                                       // src={this.state.url}
                                       frameborder="0"
                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                       allowfullscreen
-                                    ></iframe>
+                                    ></iframe> */}
                                   </div>
                                 </div>
                               </Col>
@@ -4620,19 +4662,16 @@ as_type: "2" */}
             <div className="elpVideoblog">
               <Image src={BlogProcessFive} className="iconVideomain" />
               <div>
-                <Image
-                  src={VideoIcon}
-                  className="iconVideo"
-                  onClick={this.handleShow}
+                <YouTube
+                  videoId={this.state.url}
+                  opts={{
+                    height: "390",
+                    width: "640",
+                    playerVars: {
+                      autoplay: this.state.play ? 1 : "",
+                    },
+                  }}
                 />
-                <iframe
-                  width="100%"
-                  height="400"
-                  // src={this.state.url}
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
               </div>
             </div>
           </Modal.Body>
