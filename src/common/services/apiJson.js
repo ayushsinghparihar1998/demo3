@@ -2057,4 +2057,11 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
+  exportassessmentresult_pdf: {
+    url: "elp/exportassessmentresult_pdf",
+    method: "POST",
+    data: { ar_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true,
+  },
 };
