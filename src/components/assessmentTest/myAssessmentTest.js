@@ -146,10 +146,12 @@ u_name: "Super Admin" */}
                                       />
                                     </span>
                                     <span className="pl-3">
-                                      <Image
-                                        src={ArrowDownload}
-                                        className="pointer"
-                                      />
+                                    <Button className="btnDownloads">
+                                        <Image
+                                          src={ArrowDownload} 
+                                          className="pointer"
+                                        />
+                                      </Button>
                                     </span>
                                   </td>
                                 </tr>

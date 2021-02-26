@@ -902,6 +902,13 @@
     }
 }
 
+button.btnDownloads {
+    background: transparent;
+    padding: 0;
+    border: none;
+    outline: 0;
+}
+
 .mentalViewDetail {
     background: $col18; 
     position: relative; 
@@ -954,6 +961,7 @@
         }
         .borderRight {
             border-right: solid 1px #ddd; 
+            margin-bottom: 10px;  
             &:last-child {
                 border-right: none; 
             }

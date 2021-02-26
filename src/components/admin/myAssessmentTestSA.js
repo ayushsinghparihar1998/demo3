@@ -119,7 +119,7 @@ __proto__: Object
 length: 2
 __proto__: Array(0)
 u_name: "Super Admin" */}
-                              <tr>
+                              <tr> 
                                 <th>Date</th>
                                 <th>Member's Name</th>
                                 <th>Test Name</th>
@@ -179,10 +179,12 @@ u_name: "Super Admin" */}
                                           />
                                         </span>
                                         <span className="pl-3">
-                                          <Image
-                                            src={ArrowDownload}
-                                            className="pointer"
-                                          />
+                                          <Button className="btnDownloads">  
+                                              <Image
+                                                src={ArrowDownload}
+                                                className="pointer"
+                                              />
+                                          </Button> 
                                         </span>
                                       </td>
                                     </tr>
