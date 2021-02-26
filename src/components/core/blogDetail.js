@@ -115,7 +115,7 @@ const Mediadetails = (props) => {
                 );
               })}
             </div> */}
-            <div className="col8 fw600 fs22 text-center w-100">
+            <div className="col8 fw600 fs22 text-center text-uppercase w-100">
               {props.history.location.state.type == "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
