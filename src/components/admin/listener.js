@@ -794,6 +794,7 @@ class Adminlistener extends Component {
         },
         () => {
           this.getPager(this.state.totalRecordCount);
+          console.log(this.state.vlogsList);
         }
       );
     } catch (err) {
@@ -1482,16 +1483,25 @@ class Adminlistener extends Component {
     let url = this.state.url;
     let play = this.state.play;
     vlogsList.map((item, index) => {
+      if (i == index) {
+        console.log(item.url);
+        play = true;
+        url = item.url;
+      }
       item.play = i == index ? flag : false;
-      play = i == index ? item.play : false;
-      url = i == index ? item.url : "";
     });
-    this.setState({
-      vlogsList,
-      show: true,
-      url,
-      play,
-    });
+    this.setState(
+      {
+        vlogsList,
+        show: true,
+        url,
+        play,
+      },
+      () => {
+        console.log("play", play);
+        console.log("url", url);
+      }
+    );
   };
   render() {
     const opts = {
