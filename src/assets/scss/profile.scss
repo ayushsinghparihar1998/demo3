@@ -823,18 +823,20 @@
                         }
                         @mixin eatLuvPrays {
                             border-radius: 30px;
-                            padding: 2px 15px;
+                            padding: 2px 10px;
                             width: auto;
                             height: auto; 
-                            font-size: 12px;
+                            font-size: 11px;
                             cursor: pointer;
                         }
                         span.eat {
                             background: #A3F57D;
+                            padding: 2px 14px !important;
                             @include eatLuvPrays; 
                         }
                         span.luv {
                             background: #FD7C7C; 
+                            padding: 2px 14px !important;
                             @include eatLuvPrays;
                         }
                         span.pray { 
