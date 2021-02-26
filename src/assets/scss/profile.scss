@@ -2408,6 +2408,15 @@ ul.PlanAbouts {
     }
 }
 
+.vlogListadmin {
+    .elpVideoblog {
+        min-height: auto; 
+        .iconVideo {
+            transform: translate(-50%, 50%); 
+        }
+    }
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {       
     .profile_layout { 
         .myprofile {
@@ -2774,6 +2783,7 @@ ul.PlanAbouts {
     }
 
 }
+
 
 @media (max-width: 450px) {  
     .profile_layout {
