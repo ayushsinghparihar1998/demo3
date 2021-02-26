@@ -74,7 +74,7 @@ class MyAssessmentTestSA extends Component {
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
-        <NavBar {...this.props} />
+          <NavBar {...this.props} />
         </div>
         <div className="profile_layout myAssesstestMain pt-4 pb-5">
           <Container>
@@ -103,7 +103,7 @@ class MyAssessmentTestSA extends Component {
                     </div>
                     <Row>
                       <Col lg={12}>
-                        <div className="mainTables table-responsive"> 
+                        <div className="mainTables table-responsive">
                           <Table bordered size="lg">
                             <thead>
                               {/* ar_datetime: "2021-02-19 12:41:38"
@@ -184,6 +184,14 @@ u_name: "Super Admin" */}
                                             className="pointer"
                                           />
                                         </span>
+                                        <Button
+                                          color="transparent"
+                                          href={item.ar_result_pdf_url}
+                                          target="_blank"
+                                          download
+                                        >
+                                          Download
+                                        </Button>
                                       </td>
                                     </tr>
                                   );

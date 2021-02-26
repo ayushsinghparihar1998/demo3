@@ -80,7 +80,7 @@ class MyAssessmentTest extends Component {
                 </div>
                 <Row>
                   <Col lg={12}>
-                    <div className="mainTables table-responsive">   
+                    <div className="mainTables table-responsive">
                       <Table bordered size="lg">
                         <thead>
                           {/* ar_datetime: "2021-02-19 12:41:38"
@@ -128,7 +128,7 @@ u_name: "Super Admin" */}
                                               ? "luv"
                                               : val.as_test_cat_name == "Pray"
                                               ? "pray"
-                                              : "holistic" 
+                                              : "holistic"
                                           }
                                         >
                                           {val.as_test_cat_name}
@@ -142,7 +142,13 @@ u_name: "Super Admin" */}
                                       <Image
                                         src={Visibilitys}
                                         className="pointer"
-                                          onClick = {() => this.props.history.push("/viewAssessmentTest/"+item.ar_id+'/member')}
+                                        onClick={() =>
+                                          this.props.history.push(
+                                            "/viewAssessmentTest/" +
+                                              item.ar_id +
+                                              "/member"
+                                          )
+                                        }
                                       />
                                     </span>
                                     <span className="pl-3">
@@ -150,6 +156,14 @@ u_name: "Super Admin" */}
                                         src={ArrowDownload}
                                         className="pointer"
                                       />
+                                      <Button
+                                        color="transparent"
+                                        href={item.ar_result_pdf_url}
+                                        target="_blank"
+                                        download
+                                      >
+                                        Download
+                                      </Button>
                                     </span>
                                   </td>
                                 </tr>
@@ -171,9 +185,4 @@ u_name: "Super Admin" */}
   }
 }
 
-export default MyAssessmentTest; 
-
-
-
-
-
+export default MyAssessmentTest;
