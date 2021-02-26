@@ -739,7 +739,13 @@
 }
 .faqone {
     .myprofile.reviewrequest { 
-        // padding-top: 20px;
+        &.memberfaq {
+            .fw400.col29.fs28 {  
+                color: $col8 !important;
+                font-weight: 600 !important;
+                text-transform: uppercase;
+            }
+        }
     }
 }
 .myprofile.reviewrequest {
