@@ -426,7 +426,7 @@ class ProfessionalBlogList extends Component {
                                 i !== 0 ? (
                                   <div className="blogrightSide">
                                     <Row>
-                                      <Col md={9}>
+                                      <Col md={7} lg={9}>
                                         <div
                                           className=""
                                           onClick={() =>
@@ -444,7 +444,7 @@ class ProfessionalBlogList extends Component {
                                           </div>
                                         </div>
                                       </Col>
-                                      <Col md={3}>
+                                      <Col md={5} lg={3}>
                                         <Image
                                           src={data.bl_image}
                                           className="w-100"
@@ -462,7 +462,7 @@ class ProfessionalBlogList extends Component {
 
                   <Tab eventKey="EAT" title="EAT">
                     <div className="featuredTab">
-                      <Row>
+                      <div>
                         {/* <Col md={7}> */}
                         <Row>
                           {this.state.blogEat &&
@@ -519,7 +519,7 @@ class ProfessionalBlogList extends Component {
                           </div>
                         ) : null}
                         {/* </Col> */}
-                      </Row>
+                      </div>
                       {/* <div className="mt-4 mb-4 border_blog"></div> */}
                     </div>
                   </Tab>
@@ -761,7 +761,7 @@ class ProfessionalBlogList extends Component {
                                   // i !== 0 ? (
                                   <div className="blogrightSide">
                                     <Row>
-                                      <Col md={9}>
+                                        <Col md={7} lg={9}>
                                         <div
                                           className=""
                                           onClick={() =>
@@ -799,7 +799,7 @@ vl_video_url:  */}
                                           </div>
                                         </div>
                                       </Col>
-                                      <Col md={3}>
+                                      <Col md={5} lg={3}>
                                         <div
                                           className="blogVideoIcon"
                                           onClick={() =>
@@ -904,7 +904,7 @@ vl_video_url:  */}
                 <div className="subscribe_here2 eatBlog mt-5 mb-5">
                   <Container>
                     <Row>
-                      <Col md={5} lg={5}>
+                      <Col md={12} lg={5}>
                         <div className="subscribe_left">
                           <div>
                             <div className="fs36 col64 fw600 w-100">
@@ -916,7 +916,7 @@ vl_video_url:  */}
                           </div>
                         </div>
                       </Col>
-                      <Col md={5} lg={5}>
+                      <Col md={8} lg={5}>
                         <div className="subscribe_form">
                           <Form>
                             <Form.Group
@@ -939,7 +939,7 @@ vl_video_url:  */}
                           </Form>
                         </div>
                       </Col>
-                      <Col md={2} lg={2}>
+                      <Col md={4} lg={2}> 
                         <div className="mt-2">
                           <Button
                             variant="primary"
