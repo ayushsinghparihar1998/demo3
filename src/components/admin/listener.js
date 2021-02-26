@@ -3733,15 +3733,15 @@ kt_status: "1" */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                    <Row>
-                                      {" "}
-                                      <Col md={3}>
-                                        <div className="text-right">
-                                          <span className="fw400 fs14 col29 col14">
+                                     <div className=""> 
+                                        <div className="text-left">
+                                          <span className="fw500 fs15 col29 col14"> 
                                             Services:
                                           </span>
                                         </div>
-                                      </Col>
+                                      </div>
+                                    <Row>
+                                      {" "}
                                       {item.kits_services.map((val, ind) => {
                                         return (
                                           <>

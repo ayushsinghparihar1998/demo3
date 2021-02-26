@@ -152,17 +152,13 @@ u_name: "Super Admin" */}
                                       />
                                     </span>
                                     <span className="pl-3">
-                                      <Image
-                                        src={ArrowDownload}
-                                        className="pointer"
-                                      />
-                                      <Button
-                                        color="transparent"
-                                        href={item.ar_result_pdf_url}
-                                        target="_blank"
-                                        download
-                                      >
-                                        Download
+                                      <Button className="btnDownloads">
+                                        <Image
+                                          src={ArrowDownload}
+                                          className="pointer"
+                                          href={item.ar_result_pdf_url}
+                                          target="_blank"
+                                        />
                                       </Button>
                                     </span>
                                   </td>

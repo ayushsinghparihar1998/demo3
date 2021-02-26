@@ -165,7 +165,14 @@ class QaViewDetails extends Component {
                             </div>
                           </div>
                         ) : (
-                          ""
+                          <div className="mentalList">
+                            <div className="col11 fw400 fs13 mb-2">
+                              Total Price
+                            </div>
+                            <div className="col11 fw500 fs14">
+                              NA
+                            </div>
+                          </div>
                         )}
                       </Col>
                       <Col md={2}>
