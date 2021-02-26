@@ -902,11 +902,49 @@
     }
 }
 
-button.btnDownloads {
-    background: transparent;
+.btnDownloads { 
+    background: transparent !important;
     padding: 0;
     border: none;
     outline: 0;
+    &:hover {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    &:focus {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+}
+
+a.btnDownloads {  
+    background: transparent !important;
+    padding: 0;
+    border: none;
+    outline: 0;
+    &:hover {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    &:focus {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+}
+
+button.btnDownloads { 
+    background: transparent !important;
+    padding: 0;
+    border: none;
+    outline: 0;
+    &:hover {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    &:focus {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
 }
 
 .mentalViewDetail {

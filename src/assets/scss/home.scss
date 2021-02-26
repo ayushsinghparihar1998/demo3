@@ -138,6 +138,18 @@
         }
     }
 
+    .slick-prev:before, .slick-next:before {  
+        color: $col64;
+        font-size: 30px; 
+    }
+    .slick-prev {
+        left: -30px;
+    }
+    .slick-next {
+        right: -20px; 
+        top: 50%; 
+    }
+
     .items {
         position: relative;
         padding-left: 15px;
@@ -303,7 +315,7 @@
                 }
             }
         }
-        .slick-prev:before, .slick-next:before {
+        .slick-prev:before, .slick-next:before {  
             color: $col64;
             font-size: 30px; 
         }
@@ -2100,6 +2112,13 @@ img {
     .plans {
         .fs40.col8.fw600 { 
             font-size: 2rem !important; 
+        }
+        .slick-next {
+            right: 2px;  
+        }
+        .slick-prev {
+            left: -10px; 
+            z-index: 99; 
         }
         &.kits {
             .profile_set {
