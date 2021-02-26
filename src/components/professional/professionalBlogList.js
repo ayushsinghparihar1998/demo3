@@ -170,7 +170,10 @@ class ProfessionalBlogList extends Component {
     });
     ELPRxApiService("getfeaturedvlogs_list", {})
       .then((res) => {
-        console.log("blog getfeaturedvlogs_list===>", res.data.data);
+        console.log(
+          "blog getfeaturedvlogs_list===>",
+          res.data.data.vlogs_featured_listing[0]
+        );
         let url = "";
         var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var match = res.data.data.vlogs_featured_listing[0].vl_video_url.match(
@@ -338,7 +341,7 @@ class ProfessionalBlogList extends Component {
         <div className="profile_layout pt-4">
           <Container>
             <div className="processBlog pb-5 w-100">
-              <div className="text-center fs28 fw500 col64 mb-2">Blogs</div> 
+              <div className="text-center fs28 fw500 col64 mb-2">Blogs</div>
               <div className="mxw-50 text-center col14 fs16 fw300 m-auto pb-5">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt
@@ -657,8 +660,7 @@ class ProfessionalBlogList extends Component {
                                 <div className="fw600 fs20 col8 mb-4">
                                   FEATURED
                                 </div>
-                                {this.state.blogFeatured &&
-                                this.state.blogFeatured.length > 0 ? (
+                                {this.state.blogFeatured ? (
                                   <>
                                     <div className="elpVideoblog">
                                       {this.state.play ? (

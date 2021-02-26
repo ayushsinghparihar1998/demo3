@@ -28,8 +28,7 @@ import validateInput from "../../common/validations/validationSAblog";
 
 import UploadDetail from "../../assets/images/upload_detail.svg";
 
-let prevCkEditorText = ''
-
+let prevCkEditorText = "";
 
 class ProfessinalBlogPress extends Component {
   state = {
@@ -59,7 +58,7 @@ class ProfessinalBlogPress extends Component {
       pbl_written_by: "",
       press_blog_category: "",
     },
-    textLength:0
+    textLength: 0,
   };
   componentDidMount() {
     console.log(" this.props.match", this.props.match);
@@ -76,7 +75,7 @@ class ProfessinalBlogPress extends Component {
 
     ELPViewApiService("getpressblogdetails", data).then((result) => {
       console.log("result", result);
-      let pblobj = {};
+      let pblobj = this.state.pbl_desc;
       if (result && result.status === 200) {
         pblobj =
           result && result.data && result.data.data ? result.data.data[0] : [];
@@ -184,6 +183,7 @@ class ProfessinalBlogPress extends Component {
         catar.push(item);
       }
     });
+    console.log("pblobj final", pblobj);
 
     if (
       this.isValid({
@@ -266,30 +266,28 @@ class ProfessinalBlogPress extends Component {
       return tmp.textContent || tmp.innerText || "";
     }
     let stringData = stripHtml(data);
- 
+
     if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
-     
-      prevCkEditorText = data
+      prevCkEditorText = data;
+
+      let pblobj = this.state.pblobj;
+      pblobj.pbl_desc = data;
       this.setState({
-        textLength:stringData.length,
-        pblobj: {
-          ...this.state.blobj,
-          bl_desc: data
-        },
+        textLength: stringData.length,
+        pblobj,
       });
-
     } else {
-       
-      this.setState({
-        isReloadEditor: true
-      }, () => {
-        this.setState({
-          isReloadEditor: false
-        })
-      })
-
+      this.setState(
+        {
+          isReloadEditor: true,
+        },
+        () => {
+          this.setState({
+            isReloadEditor: false,
+          });
+        }
+      );
     }
-
   }
 
   render() {
@@ -302,7 +300,7 @@ class ProfessinalBlogPress extends Component {
         <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={4} lg={3} className="pr-1"> 
+              <Col md={4} lg={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -390,25 +388,30 @@ class ProfessinalBlogPress extends Component {
                         Description
                       </Form.Label>
 
-                      {!this.state.isReloadEditor ?
+                      {!this.state.isReloadEditor ? (
                         <CKEditor
                           config={{
                             height: 500,
-                            toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link']
+                            toolbar: [
+                              "bold",
+                              "italic",
+                              "bulletedList",
+                              "numberedList",
+                              "blockQuote",
+                              "Link",
+                            ],
                           }}
                           id={this.state.refreshText}
                           editor={ClassicEditor}
-                          data={pblobj.bl_desc}
+                          data={pblobj.pbl_desc}
                           onChange={(event, editor) => {
                             let data = editor.getData();
-                            this.validateCKEditorData(data)
+                            this.validateCKEditorData(data);
                           }}
-                        /> : null
-                      }
+                        />
+                      ) : null}
                       {/* <p style={{textAlign:'right', marginTop:'10px'}}>{this.state.textLength}/{constant.CK_EDITOR_CONFIG.MAX_CHARACTER}</p> */}
 
-
-                      
                       {/* <Form.Control onChange={(e) => this.setState({ description: e.target.value })} as="textarea" className="inputTyp2 cate2" rows="3" /> */}
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.desc}
@@ -454,7 +457,7 @@ class ProfessinalBlogPress extends Component {
                               // pbc_name: "Press Release"
                               // pbc_status: "1"
                               <Col md={4}>
-                                <Form.Group controlId="formBasicCheckbox"> 
+                                <Form.Group controlId="formBasicCheckbox">
                                   <Form.Check
                                     type="checkbox"
                                     label={cat.pbc_name}
