@@ -610,7 +610,7 @@ class NavBar extends Component {
                         <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
                           BLOGS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                        <NavDropdown.Item href={"/assessmentTests/LUV"}>
                           ASSESSMENT TESTS
                         </NavDropdown.Item>{" "}
                       </NavDropdown>,
