@@ -596,7 +596,7 @@ class CreateAssessmentTest extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Question Type
+                        Test Type
                       </Form.Label>
                       <Row>
                         <Col md={4}>
@@ -663,7 +663,7 @@ class CreateAssessmentTest extends Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Label className="fs20 fw600 col14">
-                        Question Type
+                        Test Category
                       </Form.Label>
                       <Row>
                         {this.state.catArray &&
