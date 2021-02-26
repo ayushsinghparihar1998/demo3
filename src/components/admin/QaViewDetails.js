@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { 
+import {
   Button,
   NavDropdown,
   Carousel,
@@ -161,13 +161,12 @@ class QaViewDetails extends Component {
                               Total Price
                             </div>
                             <div className="col11 fw500 fs14">
-                              {asstDetail && asstDetail.as_test_price}
+                              {asstDetail && asstDetail.as_test_price}/-
                             </div>
                           </div>
                         ) : (
                           ""
                         )}
-                        /-
                       </Col>
                       <Col md={2}>
                         <div className="mentalList">
