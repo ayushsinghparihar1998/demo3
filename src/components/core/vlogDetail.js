@@ -108,7 +108,7 @@ class VlogDetail extends Component {
         <div className="ngo_services media_details">
           <Container>
             <div className="ngo_listing mt-4 mb-4">
-              <div className="col1 fw600 fs22 text-center w-100">
+              <div className="col8 fw600 fs22 text-center text-uppercase w-100">
                 {this.props.history.location.state.type == "blog"
                   ? blogDetail.bl_title
                   : blogDetail.vl_title}

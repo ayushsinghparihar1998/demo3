@@ -24,7 +24,7 @@ class Chatsearch extends Component {
                 <div className="ngo_services media_details pt-4 pb-5">
                     <Container>
                         <div className="ngo_listing mt-4 mb-4">
-                            <div className="col1 fw600 fs22 text-center w-100 mt-4 pt-3">blog2</div>
+                            <div className="col8 fw600 fs22 text-center w-100 text-uppercase mt-4 pt-3">blog2</div>
                             <hr className="ngohr"></hr> 
                             <Row className="mt-4">
                                 <Col md={12}> 

@@ -2075,7 +2075,8 @@ button.btnDownloads {
                     &>p {
                         max-height: 125px;
                         overflow: hidden; 
-                        text-align: justify;
+                        // text-align: justify;
+                        text-align: left; 
                     }
                 }
             }
