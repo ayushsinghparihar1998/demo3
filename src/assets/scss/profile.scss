@@ -2572,6 +2572,59 @@ ul.PlanAbouts {
         } 
     } 
 
+    .processBlog {
+        .blogMain.ListsUI {
+            .tab-content {
+                .vlogTabs {
+                    .innerVlog {
+                        img.w-100 {
+                            height: 120px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .blogrightSide {
+        .col64.fs17.fw500 {
+            font-size: 15 !important; 
+        }
+        .col14.fs15.fw400 {
+            font-size: 13px !important; 
+        }
+        .col14.fs16.fw400 {
+            font-size: 14px !important; 
+        }
+    }
+
+    .innerVlog { 
+        .col64.fs17.fw500 {
+            font-size: 15 !important; 
+        }
+        .col14.fs15.fw400 {
+            font-size: 13px !important; 
+        }
+        .col14.fs16.fw400 {
+            font-size: 14px !important; 
+        }
+    }
+
+    .subscribe_here2.eatBlog  {
+        .subscribe_left {
+            justify-content: center;
+            padding-right: 0;
+            padding-top: 14px;
+            text-align: center;
+            .fs36.col64.fw600 {
+                font-size: 26px !important; 
+            }
+        }
+        .subscribe_form {
+            padding-top: 10px;
+            padding-left: 25px;
+        }
+    }
+
 }
 
 @media (max-width: 767px) {    
