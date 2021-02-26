@@ -247,7 +247,7 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item , index) => {
+                          asstList.map((item, index) => {
                             return (
                               <Col md={4} sm={6}>
                                 <div
@@ -287,9 +287,17 @@ class AssessmentTestListTwo extends Component {
                                     {item.total_que_count} Questions
                                   </div>
                                   <div className="fs16 col64 mb-2">
-                                    <small>RS.</small>
-                                    {item.as_test_price}/-
+                                    {item.as_test_price ? (
+                                      <>
+                                        {" "}
+                                        <small>RS.</small>
+                                        {item.as_test_price}/-{" "}
+                                      </>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
+
                                   {getLocalStorage("customerInfo") ? (
                                     <Button
                                       type="button"
@@ -329,7 +337,7 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item , index) => {
+                          asstList.map((item, index) => {
                             return (
                               <Col md={4} sm={6}>
                                 <div
@@ -369,9 +377,17 @@ class AssessmentTestListTwo extends Component {
                                     {item.total_que_count} Questions
                                   </div>
                                   <div className="fs16 col64 mb-2">
-                                    <small>RS.</small>
-                                    {item.as_test_price}/-
+                                    {item.as_test_price ? (
+                                      <>
+                                        {" "}
+                                        <small>RS.</small>
+                                        {item.as_test_price}/-{" "}
+                                      </>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
+
                                   {getLocalStorage("customerInfo") ? (
                                     <Button
                                       type="button"
@@ -411,7 +427,7 @@ class AssessmentTestListTwo extends Component {
                     <div className="featuredTab">
                       <Row>
                         {asstList &&
-                          asstList.map((item , index) => {
+                          asstList.map((item, index) => {
                             return (
                               <Col md={4} sm={6}>
                                 <div
@@ -451,9 +467,17 @@ class AssessmentTestListTwo extends Component {
                                     {item.total_que_count} Questions
                                   </div>
                                   <div className="fs16 col64 mb-2">
-                                    <small>RS.</small>
-                                    {item.as_test_price}/-
+                                    {item.as_test_price ? (
+                                      <>
+                                        {" "}
+                                        <small>RS.</small>
+                                        {item.as_test_price}/-{" "}
+                                      </>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
+
                                   {getLocalStorage("customerInfo") ? (
                                     <Button
                                       type="button"
