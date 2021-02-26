@@ -93,7 +93,7 @@ const Mediadetails = (props) => {
           <div className="ngo_listing mt-4 mb-4">
             {/* blog_category */}
 
-            <div className="col1 fw600 fs22 text-center w-100">
+            {/* <div className="col1 fw600 fs22 text-center w-100">
               {catAr.map((val, index) => {
                 return (
                   <span
@@ -114,8 +114,8 @@ const Mediadetails = (props) => {
                   </span>
                 );
               })}
-            </div>
-            <div className="col1 fw600 fs22 text-center w-100">
+            </div> */}
+            <div className="col8 fw600 fs22 text-center w-100">
               {props.history.location.state.type == "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
