@@ -2815,7 +2815,7 @@ cs_time: "00:00:02" */}
                             {/* 4 : inactive
 1 : active
 "" : all */}
-                          </Form.Group>
+                          </Form.Group>   
                         </Col>
 
                         <Col md="12" lg="6">
@@ -3795,8 +3795,8 @@ kt_status: "1" */}
                     <div className="professor_search listBlogs VlogLists">
                       <Row className="mb-1">
                         <Col md={8}>
-                          <div className="fs22 fw600 col10">
-                            Assessment Test
+                          <div className="fs22 fw600 col10">  
+                            Assessment Test      
                           </div>
                           <div className="fw300 fs16 col14">
                             {/* Lorem Ipsum is simply dummy and typesetting industry. */}
@@ -3874,11 +3874,11 @@ kt_status: "1" */}
                               <div className="w-100">
                                 <div className="d-flex justify-content-between">
                                   <div className="w-100">
-                                    <div className="d-flex">
-                                      <div className="col1 fw600 fs18 pb-1">
+                                    <div className="d-flex w-100">
+                                      <div className="col1 fw600 fs18 pb-1 w-40">
                                         {item.as_title}
                                       </div>
-                                      <div className="d-flex ml-auto buttonTypes">
+                                      <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">  
                                         <Button
                                           type="button"
                                           className="btn-btnTypAdd btnQa"
@@ -3895,6 +3895,14 @@ kt_status: "1" */}
                                           </span>
                                           Add Question
                                         </Button>
+                                        <span className="pr-3 disabled">
+                                            <Form.Check
+                                                type="switch"
+                                                id="custom-switch" 
+                                                name="status"
+                                                label="Enable" 
+                                            />
+                                        </span>
                                         <span className="mr-3">
                                           <Image
                                             src={Visibilitys}

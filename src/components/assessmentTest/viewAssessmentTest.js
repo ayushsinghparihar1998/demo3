@@ -78,7 +78,7 @@ class ViewAssessmentTest extends Component {
           asstDetail,
         },
         () => {
-          console.log("asstDetail", this.state.asstDetail);
+          console.log("asstDetail", this.state.asstDetail); 
         }
       );
     });
@@ -102,7 +102,7 @@ class ViewAssessmentTest extends Component {
   render() {
     const { asstDetail } = this.state;
     return (
-      <div className="page__wrapper innerpage">
+      <div className="page__wrapper innerpage"> 
         <div className="main_baner">
           {this.props.match.params.type == "member" ? (
             <NavBar {...this.props} />
@@ -118,7 +118,7 @@ class ViewAssessmentTest extends Component {
                   <Col lg={9} md={10} className="m-auto">
                     <div className="scoreDetails">
                       <div className="scoreImg">
-                        <div className="scoreCounts">
+                        <div className="scoreCounts"> 
                           <CircularProgressbar
                             value={
                               asstDetail && asstDetail.ar_score
@@ -129,7 +129,8 @@ class ViewAssessmentTest extends Component {
                               asstDetail && asstDetail.ar_score
                                 ? asstDetail && asstDetail.ar_score
                                 : 100
-                            }%`}
+                            // }%`}
+                            }`} 
                           />
                         </div>{" "}
                       </div>

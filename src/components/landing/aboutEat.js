@@ -50,10 +50,10 @@ class Abouteat extends Component {
             <Container>
                 <Row>
                     <Col md={12} lg={12} className="m-auto">
-                        <div className="fs40 col8 fw600 w-100">About Eat Luv N Pray</div>  
+                        <div className="fs40 col8 fw600 w-100 mb-4">About Eat Luv N Pray</div>  
                         <div className="col14 fw300 w-100"> 
-                            <div className="fw500 fs26 col64 pb-3">Eat Luv N Pray Pvt Ltd.</div>
-                            <div className="fw300 fs22 col14 pb-2">Who are we ?</div>
+                            {/* <div className="fw500 fs26 col64 pb-3">Eat Luv N Pray Pvt Ltd.</div> */}
+                            {/* <div className="fw300 fs22 col14 pb-2">Who are we ?</div> */}
                             <div className="fw500 fs18 col14 pb-2">A Lifestyle Management Company</div>
 
                             <div className="fw400 col14 pb-2">
@@ -70,7 +70,7 @@ emotional scar or poor nutrition. We need to start addressing the root causes of
 body at all levels – Physical, mental, emotional and spiritual. We treat the symptoms but also identify,
 address and work on the root cause to effectively manage and control the condition.
                             </div>
-                            <div className="fw500 fs18 col14 pt-4 pb-2">A holistic approach:</div>  
+                            <div className="fw500 fs18 col14 pt-4 pb-2">A Holistic Approach:</div>  
                             <div className="col14 fw400 pb-2">Beyond medicine is something that every human has access to and it’s usually inexpensive and free.
 People just need to believe in it and start using it. <br /> 
 Our approach isn’t a replacement for medicine. But over and above medicine, we also need genuine

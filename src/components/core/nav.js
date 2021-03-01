@@ -17,7 +17,7 @@ import {
 import { Link, NavLink, Router } from "react-router-dom";
 import logosmain from "../../assets/images/logos.png";
 import logo from "../../assets/images/elplogos.png";
-import logopink from "../../assets/images/elplogopink.png";
+import logopink from "../../assets/images/elplogopink.png"; 
 import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
 import { actionLogout, actionLogoutSuccess } from "../../common/redux/actions";

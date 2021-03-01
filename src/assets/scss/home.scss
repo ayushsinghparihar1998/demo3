@@ -306,7 +306,7 @@
         padding-bottom: 80px;  
         
         .slick-list {
-            max-height: 580px;  
+            max-height: 620px;   
         }
         ul.slick-dots {
             bottom: -20px; 
@@ -1528,7 +1528,6 @@ img {
             
         }
     }
-    
 
 .home_banner {
     .btnTyp5 {
@@ -1575,6 +1574,40 @@ img {
     background-color: $col86; 
     display: inline-block;
     padding: 10px 24px 14px;
+}
+
+.CreateAccount {
+    &.planUidetails { 
+        .modal-dialog {
+            max-width: 550px;
+        }
+        .modal-body {
+            text-align: center;
+            padding: 40px; 
+            img.logofirst {
+                max-width: 100px;
+                height: auto;
+                position: relative;
+                top: -10px; 
+            }
+            img.elplogopink {
+                max-width: 141px;
+                height: auto;
+            }
+        }
+        .btnTyp5 {
+            width: 140px;
+            padding: 0 0rem !important; 
+            &.transbtn {
+                background: transparent !important;
+                border: 1px solid #284486 !important;
+                color: #284486 !important;
+                font-weight: 600;
+                opacity: 0.5;
+                padding: 0 0rem !important;
+            }
+        }
+    }
 }
 
 @media (min-width: 992px) {
@@ -1696,6 +1729,40 @@ img {
 }
 
 @media (max-width: 767px) {  
+
+    .CreateAccount {
+        &.planUidetails { 
+            .modal-body {
+                text-align: center;
+                padding: 15px; 
+                // img.logofirst {
+                //     max-width: 100px;
+                //     height: auto;
+                //     position: relative;
+                //     top: -10px; 
+                // }
+                // img.elplogopink {
+                //     max-width: 141px;
+                //     height: auto;
+                // }
+            }
+            .btnTyp5 {
+                width: 100px;
+                padding: 0 0rem !important; 
+                font-size: 15px !important; 
+                &.transbtn {
+                    background: transparent !important;
+                    border: 1px solid #284486 !important;
+                    color: #284486 !important;
+                    font-weight: 600;
+                    opacity: 0.5;
+                    padding: 0 0rem !important;
+                    margin-right: 20px !important; 
+                }
+            }
+        }
+    }
+
     .plans {
         overflow: hidden; 
         .planList {

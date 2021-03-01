@@ -10,6 +10,7 @@ import {
   Container,
   Row,
   Col,
+  Modal
 } from "react-bootstrap";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import { connect } from "react-redux";
@@ -20,15 +21,31 @@ import ELPViewApiService from "../../common/services/apiService";
 import { Link } from "react-router-dom";
 import Saves from "../../assets/images/saves.png";
 import Squares from "../../assets/images/squares.png";
+import Alerts from "../../assets/images/alerts.png";
+import CrossTwo from "../../assets/images/crosstwo.png";
+import logosmain from "../../assets/images/logos.png";
+import logo from "../../assets/images/elplogos.png";
+import logopink from "../../assets/images/elplogopink.png";
 
-class Plans extends Component {
+class Plans extends Component {  
   constructor(props) {
     super(props);
     this.state = {
       workData: "",
       email: "",
+      show: false,
+      show3: false,
     };
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
   componentDidMount = () => {
     this.get_planlist();
   };
@@ -85,7 +102,7 @@ class Plans extends Component {
       <div className="plans mt-4 mb-4">
         <Container>
           <div className="fs40 col8 fw600 w-100 mb-5 text-center">
-            Subscription Plans
+          Lifestyle Subscription Plans
           </div>
           {/* <div className="text-center fw300 fs22 col14 mb-4 pb-4">
             What people say about us. Here are comments from individuals who
@@ -192,10 +209,13 @@ class Plans extends Component {
                               </span>
                             </li>
                           </ul>
-                          <Button className="btnType1 d-block w-100 mt-4">
-                            <Link to={{ pathname: "/coming-soon" }}>
+                          <Button className="btnType1 d-block w-100 mt-4" onClick={() => this.handleShow()}>
+                            {/* <Link to={{ pathname: "/coming-soon" }}>
                               Buy Now
-                            </Link>
+                            </Link> */}
+                            <Link> 
+                              Buy Now
+                            </Link> 
                           </Button>
                           {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -237,6 +257,49 @@ class Plans extends Component {
             </Slider>
           </div>
         </Container>
+
+
+        <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            className="CreateAccount planUidetails"
+          >
+            <Modal.Header>
+              <Button type="button" onClick={this.handleClose} class="close">
+                <Image src={CrossTwo} alt="alert" className="alertCross" />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-4 mt-3 d-flex justify-content-center">  
+                {/* <Image src={Alerts} alt="alert" className="" /> */} 
+                <Image src={logosmain} alt="" className="logofirst" />  
+                <Image src={logopink} alt="" className="elplogopink" />        
+              </div>
+              {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
+              <div className="col14 fs20 fw500 mb-4">
+              Please login first to buy our Lifestyle <br />   
+              subscription plans 
+              </div>
+              <div className="planmodalBtn mt-5 mb-4">  
+                  <Button
+                    type="button"
+                    className="btnTyp5 mr-5 transbtn" 
+                    onClick={this.handleClose}  
+                  >
+                    CANCEL
+                  </Button>
+                  <Button
+                    type="button"
+                    className="btnTyp5"
+                    onClick={this.handleClose}
+                  >
+                    OKAY
+                  </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+
+
       </div>
     );
   }

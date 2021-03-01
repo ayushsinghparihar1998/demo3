@@ -980,12 +980,20 @@ button.btnDownloads {
     }
 }
 
-.adminProfessinal {
+.adminProfessinal {     
     .adminlistener { 
         padding-bottom: 30px !important; 
         .fs28.col10.mb-4 {
             font-size: 22px !important;
             font-weight: 600 !important; 
+        }
+        .w-60 {
+            flex: 0 0 60%;
+            max-width: 60%;
+        }
+        .w-40 {
+            flex: 0 0 40%;
+            max-width: 40%;  
         }
         span.mx-100w {
             min-width: 100px;
@@ -1885,6 +1893,12 @@ button.btnDownloads {
 }
 
 .ngo_listing {
+    .col1.fw600.fs22.text-center.w-100.mt-4 {
+        margin-top: 0 !important;
+        padding-top: 0px !important; 
+        color: $col8 !important;
+        text-transform: uppercase; 
+    }
     .col1.fw600.fs22.text-center {  
         text-transform: capitalize; 
     }
@@ -2625,10 +2639,122 @@ ul.PlanAbouts {
         }
     }
 
+    .processBlog {
+        &.assessBlog {
+            .blogMain {
+                &.ListsUI {
+                    .blogOneMain {
+                        padding: 20px;
+                        .fs20.fw500.col64 {
+                            font-size: 1rem !important;
+                            margin-top: 15px !important;
+                            margin-bottom: 15px;
+                        }
+                        .PlanBtns {
+                            margin-top: 10px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mentalHealths {
+        .QuestionList {  
+            .qaList {
+                h2 {
+                    font-size: 15px; 
+                }
+            }
+        }
+        .answerDetail {
+            ul {
+                li {
+                    span.ansOne {
+                        .form-group {
+                            .radioboxTyp1 {
+                                input {
+                                    width: 1.4rem;
+                                    height: 1.4rem;
+                                    position: relative !important;
+                                    top: 2px;  
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 767px) {    
     
+    .processBlog {
+        &.assessBlog {
+            .blogMain {
+                &.ListsUI {
+                    .blogOneMain {
+                        padding: 20px;
+                        .fs20.fw500.col64 {
+                            font-size: 1rem !important;
+                            margin-top: 15px !important;
+                            margin-bottom: 15px;
+                        }
+                        .PlanBtns {
+                            margin-top: 10px; 
+                        }
+                    }
+                    .nav-tabs {
+                        .nav-item {
+                            width: 100%; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .next_prevs {
+        .talkBtntwo {
+            height: 3rem;
+            padding: 0px 1.5rem;
+            font-size: 13px; 
+        }
+    }
+
+    .mentalHealths {
+        &.ViewQa {
+            padding: 30px 15px 30px !important; 
+        }
+        .QuestionList { 
+            margin-bottom: 10px; 
+            .qaList {
+                h2 {
+                    font-size: 15px; 
+                }
+            }
+        }
+        .answerDetail {
+            ul {
+                li {
+                    span.ansOne {
+                        .form-group {
+                            .radioboxTyp1 {
+                                input {
+                                    width: 1.4rem;
+                                    height: 1.4rem;
+                                    position: relative !important;
+                                    top: 2px;  
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } 
+
     .bookSession {
         .modal-dialog {
             .modal-body {

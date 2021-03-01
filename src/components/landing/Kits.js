@@ -11,7 +11,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { getLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage } from "../../common/helpers/Utils"; 
 import { connect } from "react-redux";
 import validationSubscribe from "../../common/validations/validationSubscribe";
 import { actionSubscribe } from "../../common/redux/actions";
@@ -108,12 +108,16 @@ class Kits extends Component {
                         >
                           <div className="planBorder">
                             <div className="profile_set">
-                              <Image src={item.kt_image_url} alt="" />
+                              <Image src={item.kt_image_url} alt="" />  
                             </div>
                             <div className="planpricing">
-                              <div className="text-center fw500 fs20 col64 text-uppercase borderSs">
+                              <div className="text-center fw500 fs16 col64 text-uppercase borderSs">
                                 {item.kt_name}
+                                <div className="fw600 fs28 col11 mt-1">    
+                                    Rs. 1630  
+                                 </div>
                               </div>
+                              
                               <div className="emotion_ul">
                                 <div className="fs13 col11 fw400">
                                   {item.kt_desc}

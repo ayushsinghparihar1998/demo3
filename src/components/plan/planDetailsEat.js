@@ -113,7 +113,7 @@ class PlanDetailsEat extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-                SUBSCRIPTION PLANS
+              LIFESTYLE SUBSCRIPTION PLANS 
               </div>
 
               <div className="PlanListOne">
