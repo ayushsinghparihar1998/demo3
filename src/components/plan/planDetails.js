@@ -276,7 +276,7 @@ class PlanDetails extends Component {
                 <Slider {...settingstwo}>
                   {this.state.dataDaily &&
                     this.state.dataDaily.map((item) => {
-                      return (
+                      return item.plan_category.length == 3 ? (
                         <div className="items">
                           <div className="planList">
                             <div className="planone">
@@ -361,7 +361,7 @@ class PlanDetails extends Component {
                             </div>
                           </div>
                         </div>
-                      );
+                      ) : null;
                     })}
                 </Slider>
               </div>

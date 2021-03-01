@@ -46,7 +46,6 @@ class PlanDetailsEat extends Component {
     console.log(" this.props.match", this.props.match.params.name);
   };
   getplanlist_bycategory = (plan_type, plan_category) => {
-    
     let _this = this;
     console.log(plan_type);
     ELPViewApiService("getplanlist_bycategory", {
@@ -123,7 +122,7 @@ class PlanDetailsEat extends Component {
                 <Slider {...settingstwo}>
                   {this.state.dailyData &&
                     this.state.dailyData.map((item) => {
-                      return (
+                      return item.plan_category.length < 3 ? (
                         <div className="items">
                           <div className="planList">
                             <div className="planone">
@@ -134,36 +133,32 @@ class PlanDetailsEat extends Component {
                                 </div>
                               </div>
                               <div className="fs24 fw600 col29 text-center text-uppercase">
-                                {item.pl_type == 1 ? (
-                                  item.plan_category.length == 3 ? (
-                                    <span className="holisticcat">HOLISTIC </span>
-                                  ) : (
-                                    item.plan_category.map((val, index) => {
-                                      // return
-                                      return (
-                                        <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.puc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
-                                        >
-                                          {val.puc_cat_name}
-                                          <span className = 'andClass'>
-                                            {item.plan_category.length == 2 &&
-                                            index == 0
-                                              ? " & "
-                                              : ""}{" "}
+                                {item.pl_type == 1
+                                  ? item.plan_category.length == 3
+                                    ? null
+                                    : item.plan_category.map((val, index) => {
+                                        // return
+                                        return (
+                                          <span
+                                            className={
+                                              val.puc_cat_name == "Eat"
+                                                ? "eatcat"
+                                                : val.puc_cat_name == "Luv"
+                                                ? "luvcat"
+                                                : "praycat"
+                                            }
+                                          >
+                                            {val.puc_cat_name}
+                                            <span className="andClass">
+                                              {item.plan_category.length == 2 &&
+                                              index == 0
+                                                ? " & "
+                                                : ""}{" "}
+                                            </span>
                                           </span>
-                                        </span>
-                                      );
-                                    })
-                                  )
-                                ) : (
-                                  "BY CONDITION"
-                                )}
+                                        );
+                                      })
+                                  : "BY CONDITION"}
                               </div>
                             </div>
 
@@ -206,7 +201,7 @@ class PlanDetailsEat extends Component {
                             </div>
                           </div>
                         </div>
-                      );
+                      ) : null;
                     })}
                 </Slider>
               </div>

@@ -2267,22 +2267,27 @@ pl_title: "Platinum Plan new" */}
                                 </div>
                               </div>
 
-                              <div className="eat_category">
-                                {item.plan_category.map((val) => {
-                                  return (
-                                    <span
-                                      className={
-                                        val.puc_cat_name == "Eat"
-                                          ? "eatcat"
-                                          : val.puc_cat_name == "Luv"
-                                          ? "luvcat"
-                                          : "praycat"
-                                      }
-                                    >
-                                      {val.puc_cat_name}
-                                    </span>
-                                  );
-                                })}
+                              <div className="d-flex elpCategory">
+                                {item.plan_category.length < 3
+                                  ? item.plan_category.map((val) => {
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luv"
+                                              : "pray"
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                        </span>
+                                      );
+                                    })
+                                  : ""}
+                                {item.plan_category.length == 3 ? (
+                                  <span className="holistic">Holistic</span>
+                                ) : null}
                               </div>
                             </div>
                           </div>
@@ -3733,13 +3738,13 @@ kt_status: "1" */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                     <div className=""> 
-                                        <div className="text-left">
-                                          <span className="fw500 fs15 col29 col14"> 
-                                            Services:
-                                          </span>
-                                        </div>
+                                    <div className="">
+                                      <div className="text-left">
+                                        <span className="fw500 fs15 col29 col14">
+                                          Services:
+                                        </span>
                                       </div>
+                                    </div>
                                     <Row>
                                       {" "}
                                       {item.kits_services.map((val, ind) => {
@@ -3971,23 +3976,37 @@ as_total_marks: "30"
 as_type: "2" */}
 
                                     <div className="d-flex elpCategory">
-                                      {item.assessment_category.map((val) => {
-                                        return (
-                                          <span
-                                            className={
-                                              val.as_test_cat_name == "Eat"
-                                                ? "eat"
-                                                : val.as_test_cat_name == "Luv"
-                                                ? "luv"
-                                                : val.as_test_cat_name == "Pray"
-                                                ? "pray"
-                                                : "holistic"
+                                      {item.assessment_category.length < 3
+                                        ? item.assessment_category.map(
+                                            (val) => {
+                                              return (
+                                                <span
+                                                  className={
+                                                    val.as_test_cat_name ==
+                                                    "Eat"
+                                                      ? "eat"
+                                                      : val.as_test_cat_name ==
+                                                        "Luv"
+                                                      ? "luv"
+                                                      : val.as_test_cat_name ==
+                                                        "Pray"
+                                                      ? "pray"
+                                                      : "holistic"
+                                                  }
+                                                >
+                                                  {val.as_test_cat_name}
+                                                </span>
+                                              );
                                             }
-                                          >
-                                            {val.as_test_cat_name}
-                                          </span>
-                                        );
-                                      })}
+                                          )
+                                        : ""}
+                                      {item.assessment_category.length == 3 ? (
+                                        <span className="holistic">
+                                          Holistic
+                                        </span>
+                                      ) : (
+                                        ""
+                                      )}
                                     </div>
                                   </div>
                                 </div>

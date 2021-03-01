@@ -56,7 +56,7 @@ class CreateAssessmentTest extends Component {
         { as_test_cat_name: "Eat", as_cat_id: 5, flag: false },
         { as_test_cat_name: "Luv", as_cat_id: 2, flag: false },
         { as_test_cat_name: "Pray", as_cat_id: 3, flag: false },
-        { as_test_cat_name: "Holistic", as_cat_id: 4, flag: false },
+        // { as_test_cat_name: "Holistic", as_cat_id: 4, flag: false },
       ],
       category: "'Pray','luv','eat'",
       finalRange: 0,
@@ -673,7 +673,7 @@ class CreateAssessmentTest extends Component {
                                 <Form.Group controlId="formBasicCheckbox">
                                   <Form.Check
                                     type="checkbox"
-                                    label="Eat"
+                                    // label="Eat"
                                     label={item.as_test_cat_name}
                                     id={item.as_cat_id}
                                     className="checkboxTyp1"
