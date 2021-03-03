@@ -132,7 +132,7 @@ class PlanDetailsEat extends Component {
                                   Save {item.pl_save}%
                                 </div>
                               </div>
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
                                 {item.pl_type == 1
                                   ? item.plan_category.length == 3
                                     ? null
@@ -158,7 +158,7 @@ class PlanDetailsEat extends Component {
                                           </span>
                                         );
                                       })
-                                  : "BY CONDITION"}
+                                  : "By Condition"}
                               </div>
                             </div>
 
@@ -224,8 +224,8 @@ class PlanDetailsEat extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
-                                BY CONDITION
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
+                                   By Condition
                               </div>
                             </div>
                             <div className="plantwo text-center">

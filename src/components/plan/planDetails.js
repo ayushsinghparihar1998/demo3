@@ -287,7 +287,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                              <div className="fs24 fw600 col29 text-center text-capitalize">
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
@@ -318,7 +318,7 @@ class PlanDetails extends Component {
                                     })
                                   )
                                 ) : (
-                                  "BY CONDITION"
+                                  "By Condition"
                                 )}
                               </div>
                             </div>
@@ -384,7 +384,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
@@ -415,7 +415,7 @@ class PlanDetails extends Component {
                                     })
                                   )
                                 ) : (
-                                  "BY CONDITION"
+                                  "By Condition"
                                 )}
                               </div>
                             </div>

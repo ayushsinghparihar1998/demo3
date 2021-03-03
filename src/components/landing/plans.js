@@ -125,7 +125,7 @@ class Plans extends Component {
                             </div>
                           </div>
 
-                          <div className="fs22 fw600 col29 text-center text-uppercase">
+                          <div className="fs22 fw600 col29 text-center text-capitalize">
                             {item.pl_type == 1 ? (
                               item.plan_category.length == 3 ? (
                                 <span className="holisticcat">HOLISTIC </span>
@@ -154,7 +154,7 @@ class Plans extends Component {
                                 })
                               )
                             ) : (
-                              "BY CONDITION"
+                              "By Condition"
                             )}
                           </div>
                         </div>
