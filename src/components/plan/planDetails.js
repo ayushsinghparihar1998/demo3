@@ -557,7 +557,7 @@ class PlanDetails extends Component {
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
               <div className="col14 fs20 fw500 mb-4">
-                  <strong>Please contact to</strong> <br /> support@eatluvnpray.org for more info 
+                  Please contact to <br /> support@eatluvnpray.org for more info  
               </div>
               <div className="planmodalBtn mt-5 mb-4">  
                   <Button
