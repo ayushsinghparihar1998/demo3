@@ -10,6 +10,7 @@ import {
   Form,
   Tabs,
   Tab,
+  Modal
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -26,6 +27,12 @@ import ELPViewApiService from "../../common/services/apiService";
 import VideoIcon from "../../assets/images/videoIcon.png";
 import BlogProcessFive from "../../assets/images/blog4.png";
 import ReactStars from "react-rating-stars-component";
+
+import CrossTwo from "../../assets/images/crosstwo.png";
+import logosmain from "../../assets/images/logos.png";
+import logo from "../../assets/images/elplogos.png";
+import logopink from "../../assets/images/elplogopink.png";
+
 import YouTube from "react-youtube";
 import { Popover } from "antd";
 import {
@@ -43,9 +50,19 @@ class PlanDetails extends Component {
       email: "",
       play: false,
       play1: false,
-      url: "",
+      url: "", 
+      show4: false,
     };
+    this.handleClose2 = this.handleClose2.bind(this);
+    this.handleShow2 = this.handleShow2.bind(this);
   }
+  handleShow2 = () => {
+    this.setState({ show4: true });
+  };
+
+  handleClose2 = () => {
+    this.setState({ show4: false });
+  }; 
   componentDidMount = () => {
     this.getplanlist_holisticbycondition();
     this.getplanlist_holisticdaily();
@@ -296,7 +313,7 @@ class PlanDetails extends Component {
                                   ) : (
                                     item.plan_category.map((val, index) => {
                                       // return
-                                      return (
+                                      return ( 
                                         <span
                                           className={
                                             val.puc_cat_name == "Eat"
@@ -477,7 +494,8 @@ class PlanDetails extends Component {
                         <Button
                           variant="primary"
                           className="btnTyp5 mt-3"
-                          type="submit"
+                          type="button" 
+                          onClick={() => this.handleShow2()}  
                         >
                           Get A Quote
                         </Button>
@@ -520,6 +538,44 @@ class PlanDetails extends Component {
               </div>
             </div>
           </Container>
+
+          <Modal
+            show={this.state.show4}
+            onHide={this.handleClose2}
+            className="CreateAccount planUidetails"
+          >
+            <Modal.Header>
+              <Button type="button" onClick={this.handleClose2} class="close">
+                <Image src={CrossTwo} alt="alert" className="alertCross" />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-4 mt-3 d-flex justify-content-center">  
+                {/* <Image src={Alerts} alt="alert" className="" /> */} 
+                <Image src={logosmain} alt="" className="logofirst" />  
+                <Image src={logopink} alt="" className="elplogopink" />        
+              </div>
+              {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
+              <div className="col14 fs20 fw500 mb-4">
+                  <strong>Please contact to</strong> <br /> support@eatluvnpray.org for more info 
+              </div>
+              <div className="planmodalBtn mt-5 mb-4">  
+                  <Button
+                    type="button"
+                    className="btnTyp5 mr-5 transbtn" 
+                  >
+                    CANCEL
+                  </Button>
+                  <Button
+                    type="button"
+                    className="btnTyp5" 
+                  >
+                    OKAY
+                  </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+
         </div>
         <Footer />
       </div>
