@@ -4012,6 +4012,7 @@ as_type: "2" */}
                                 </div>
                               </div>
                             </div>
+                          <div className="w-100 text-right col108 pointer">Saved as Draft</div>
                           </div>
                         );
                       })}
