@@ -2689,7 +2689,11 @@ ul.PlanAbouts {
 }
 
 @media (max-width: 767px) {    
-    
+    .scoreDetails {
+        .scoreBorders {
+            flex-wrap: wrap; 
+        }
+    }
     .processBlog {
         &.assessBlog {
             .blogMain {
