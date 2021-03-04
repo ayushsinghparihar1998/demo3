@@ -1,39 +1,13 @@
 import React, { Component } from "react";
 import {
-  Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
-  Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
-  Modal,
+  Col
 } from "react-bootstrap";
 import NavBar from "../core/nav";
-// import NavBar from "../core/nav";
 import Nav from "../core/navAdmin";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
-import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Scores from "../../assets/images/scores.png";
-import Subscribes from "../../assets/images/subscribes.svg";
-import Searchbtn from "../../assets/images/search_btn.png";
-import { connect } from "react-redux";
-import ReactStars from "react-rating-stars-component";
-import { Popover } from "antd";
 import ELPViewApiService from "../../common/services/apiService";
-import Crossbtn from "../../assets/images/blue_cross.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -101,6 +75,7 @@ class ViewAssessmentTest extends Component {
 
   render() {
     const { asstDetail } = this.state;
+    // console.log("Asset Score ",asstDetail , asstDetail.ar_test_tot_marks , (asstDetail.ar_score * 100)/asstDetail.ar_test_tot_marks)
     return (
       <div className="page__wrapper innerpage"> 
         <div className="main_baner">
@@ -121,13 +96,13 @@ class ViewAssessmentTest extends Component {
                         <div className="scoreCounts"> 
                           <CircularProgressbar
                             value={
-                              asstDetail && asstDetail.ar_score
-                                ? asstDetail && asstDetail.ar_score
+                              asstDetail?.ar_score
+                                ? (asstDetail.ar_score * 100)/asstDetail.ar_test_tot_marks
                                 : 100
                             }
                             text={`${
-                              asstDetail && asstDetail.ar_score
-                                ? asstDetail && asstDetail.ar_score
+                              asstDetail?.ar_score
+                                ? asstDetail.ar_score
                                 : 100
                             }`}
                           />

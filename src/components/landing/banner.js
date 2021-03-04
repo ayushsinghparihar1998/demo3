@@ -33,11 +33,13 @@ class Banner extends Component {
     this.state = {
       show: false,
       show3: false,
-      workData : ''
+      workData : '',
+      corporateData:"",
     };
   }
   componentDidMount = () => {
     this.getsubscription_pdf();
+    this.getcorporate_pdf();
   };
   getsubscription_pdf = () => {
     let _this = this;
@@ -49,6 +51,24 @@ class Banner extends Component {
           let data = response.data.data;
           this.setState({
             workData: data[0].pu_doc_url,
+          });
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  getcorporate_pdf = () => {
+    // usersubscriber,
+
+    ELPViewApiService("getcorporate_pdf", {})
+      .then((response) => {
+        if (response && response.data && response.data.status === "success") {
+          let data = response.data.data;
+          this.setState({
+            corporateData : data[0].pu_doc_url_corporate,
           });
           console.log(data);
         }
@@ -111,7 +131,7 @@ class Banner extends Component {
                   >
                     {/* pdf */}
                     <a
-                      href={this.state.workData}
+                      href={this.state.corporateData}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -167,7 +187,7 @@ class Banner extends Component {
                   >
                     {/* pdf */}
                     <a
-                      href={this.state.workData}
+                      href={this.state.corporateData}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -223,7 +243,7 @@ class Banner extends Component {
                   >
                     {/* pdf */}
                     <a
-                      href={this.state.workData}
+                      href={this.state.corporateData}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

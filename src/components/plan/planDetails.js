@@ -1,39 +1,26 @@
 import React, { Component } from "react";
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
   Form,
-  Tabs,
-  Tab,
+   Modal
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Ngoone from "../../assets/images/ngo1.svg";
-import Ngotwo from "../../assets/images/ngo2.svg";
-import Ngothree from "../../assets/images/ngo3.svg";
 import Splan from "../../assets/images/blog5.png";
 import Arrowright from "../../assets/images/Arrowright.png";
-import { connect } from "react-redux";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import VideoIcon from "../../assets/images/videoIcon.png";
-import BlogProcessFive from "../../assets/images/blog4.png";
-import ReactStars from "react-rating-stars-component";
 import YouTube from "react-youtube";
-import { Popover } from "antd";
-import {
-  actionSearchListner,
-  actionAddrating,
-} from "../../common/redux/actions";
 import validator from "validator";
-import { setLocalStorage } from "../../common/helpers/Utils";
+import CrossTwo from "../../assets/images/crosstwo.png";
+import logosmain from "../../assets/images/logos.png";
+import logopink from "../../assets/images/elplogopink.png";
 
 class PlanDetails extends Component {
   constructor(props) {
@@ -44,13 +31,15 @@ class PlanDetails extends Component {
       play: false,
       play1: false,
       url: "",
+      show: false,
+      redirectLogin: false,
     };
   }
   componentDidMount = () => {
     this.getplanlist_holisticbycondition();
     this.getplanlist_holisticdaily();
 
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     var match = "https://www.youtube.com/embed/GXS3c4ANQP8".match(regExp);
     if (match && match[2].length == 11) {
       console.log("match[2]", match[2]);
@@ -61,8 +50,16 @@ class PlanDetails extends Component {
       //error
     }
   };
+
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+
   getplanlist_holisticbycondition = () => {
-    let _this = this;
     // usersubscriber,
 
     ELPViewApiService("getplanlist_holisticbycondition", {
@@ -82,7 +79,6 @@ class PlanDetails extends Component {
       });
   };
   getplanlist_holisticdaily = () => {
-    let _this = this;
     // usersubscriber,
 
     ELPViewApiService("getplanlist_holisticdaily", { count: 100, offset: "" })
@@ -106,8 +102,8 @@ class PlanDetails extends Component {
       email.length == 0
         ? "Please Enter email id"
         : !validator.isEmail(email)
-        ? "Please enter a valid email"
-        : "";
+          ? "Please enter a valid email"
+          : "";
     console.log("errors", errors.length);
     console.log("errors", errors);
     this.setState(
@@ -196,6 +192,12 @@ class PlanDetails extends Component {
         autoplay: this.state.play1 ? 1 : "",
       },
     };
+    if (this.state.redirectLogin) {
+      return <Redirect to={{
+        pathname: '/login',
+        state: { roleType: 3 }
+      }} />;
+    }
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -205,7 +207,7 @@ class PlanDetails extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-              LIFESTYLE SUBSCRIPTION PLANS 
+                LIFESTYLE SUBSCRIPTION PLANS
               </div>
               <Row>
                 <Col md={5}>
@@ -223,7 +225,6 @@ class PlanDetails extends Component {
                           className="inputTyp2"
                           placeholder="Enter Email Address"
                           type="email"
-                          placeholder="Email address"
                           name="email"
                           onChange={(e) => this.handleChange(e)}
                           value={this.state.email}
@@ -261,10 +262,10 @@ class PlanDetails extends Component {
                         />
                       </>
                     ) : (
-                      <div class="">
-                        <YouTube videoId={this.state.url} opts={opts} />
-                      </div>
-                    )}
+                        <div class="">
+                          <YouTube videoId={this.state.url} opts={opts} />
+                        </div>
+                      )}
                   </div>
                 </Col>
               </Row>
@@ -294,32 +295,32 @@ class PlanDetails extends Component {
                                       HOLISTIC{" "}
                                     </span>
                                   ) : (
-                                    item.plan_category.map((val, index) => {
-                                      // return
-                                      return (
-                                        <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.puc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
-                                        >
-                                          {val.puc_cat_name}
-                                          <span className="andClass">
-                                            {item.plan_category.length == 2 &&
-                                            index == 0
-                                              ? " & "
-                                              : ""}{" "}
+                                      item.plan_category.map((val, index) => {
+                                        // return
+                                        return (
+                                          <span
+                                            className={
+                                              val.puc_cat_name == "Eat"
+                                                ? "eatcat"
+                                                : val.puc_cat_name == "Luv"
+                                                  ? "luvcat"
+                                                  : "praycat"
+                                            }
+                                          >
+                                            {val.puc_cat_name}
+                                            <span className="andClass">
+                                              {item.plan_category.length == 2 &&
+                                                index == 0
+                                                ? " & "
+                                                : ""}{" "}
+                                            </span>
                                           </span>
-                                        </span>
-                                      );
-                                    })
-                                  )
+                                        );
+                                      })
+                                    )
                                 ) : (
-                                  "BY CONDITION"
-                                )}
+                                    "BY CONDITION"
+                                  )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
@@ -350,10 +351,8 @@ class PlanDetails extends Component {
                                   {item.pl_desc_details}
                                 </div>
                               </div>
-                              <Button className="btnType1 d-block w-100 mt-4">
-                                <Link to={{ pathname: "/coming-soon" }}>
+                              <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
                                   Buy Now
-                                </Link>
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -368,7 +367,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                  BYCONDITIONS SUBSCRIPTION PLANS
+                BYCONDITIONS SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataByCondition &&
@@ -391,32 +390,32 @@ class PlanDetails extends Component {
                                       HOLISTIC{" "}
                                     </span>
                                   ) : (
-                                    item.plan_category.map((val, index) => {
-                                      // return
-                                      return (
-                                        <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.puc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
-                                        >
-                                          {val.puc_cat_name}
-                                          <span className="andClass">
-                                            {item.plan_category.length == 2 &&
-                                            index == 0
-                                              ? " & "
-                                              : ""}{" "}
+                                      item.plan_category.map((val, index) => {
+                                        // return
+                                        return (
+                                          <span
+                                            className={
+                                              val.puc_cat_name == "Eat"
+                                                ? "eatcat"
+                                                : val.puc_cat_name == "Luv"
+                                                  ? "luvcat"
+                                                  : "praycat"
+                                            }
+                                          >
+                                            {val.puc_cat_name}
+                                            <span className="andClass">
+                                              {item.plan_category.length == 2 &&
+                                                index == 0
+                                                ? " & "
+                                                : ""}{" "}
+                                            </span>
                                           </span>
-                                        </span>
-                                      );
-                                    })
-                                  )
+                                        );
+                                      })
+                                    )
                                 ) : (
-                                  "BY CONDITION"
-                                )}
+                                    "BY CONDITION"
+                                  )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
@@ -447,10 +446,8 @@ class PlanDetails extends Component {
                                   {item.pl_desc_details}
                                 </div>
                               </div>
-                              <Button className="btnType1 d-block w-100 mt-4">
-                                <Link to={{ pathname: "/coming-soon" }}>
+                              <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
                                   Buy Now
-                                </Link>
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -509,10 +506,10 @@ class PlanDetails extends Component {
                             />
                           </>
                         ) : (
-                          <div class="">
-                            <YouTube videoId={this.state.url} opts={opts1} />
-                          </div>
-                        )}
+                            <div class="">
+                              <YouTube videoId={this.state.url} opts={opts1} />
+                            </div>
+                          )}
                       </div>{" "}
                     </div>
                   </Col>
@@ -520,6 +517,46 @@ class PlanDetails extends Component {
               </div>
             </div>
           </Container>
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            className="CreateAccount planUidetails"
+          >
+            <Modal.Header>
+              <Button type="button" onClick={this.handleClose} class="close">
+                <Image src={CrossTwo} alt="alert" className="alertCross" />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-4 mt-3 d-flex justify-content-center">
+                {/* <Image src={Alerts} alt="alert" className="" /> */}
+                <Image src={logosmain} alt="" className="logofirst" />
+                <Image src={logopink} alt="" className="elplogopink" />
+              </div>
+              {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
+              <div className="col14 fs20 fw500 mb-4">
+                Please login first to buy our <br />
+              subscription plans
+              </div>
+              <div className="planmodalBtn mt-5 mb-4">
+                <Button
+                  type="button"
+                  className="btnTyp5 mr-5 transbtn"
+                  onClick={this.handleClose}
+                >
+                  CANCEL
+                  </Button>
+                <Button
+                  type="button"
+                  className="btnTyp5"
+                  onClick={() => { this.setState({ redirectLogin: true }) }}
+                >
+                  LOGIN
+                  </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+
         </div>
         <Footer />
       </div>

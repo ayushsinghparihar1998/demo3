@@ -1,28 +1,17 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import {
   Nav,
   NavDropdown,
   Navbar,
-  Container,
   Form,
-  FormControl,
   Button,
   Image,
-  Modal,
-  Row,
   Col,
   Dropdown,
 } from "react-bootstrap"; 
-import { Link, NavLink, Router } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logos.png";
-import insta from "../../assets/images/insta.svg";
-import { ToastContainer, toast } from "react-toastify";
-import { actionLogout,actionLogoutSuccess } from "../../common/redux/actions";
-import fb from "../../assets/images/fb.svg";
-import twit from "../../assets/images/twit.svg";
-import linkedin from "../../assets/images/linkedin.svg";
-import Crossbtn from "../../assets/images/blue_cross.svg";
+import { ToastContainer } from "react-toastify";
 import Mailicon from "../../assets/images/mail_icon.svg";
 import Bellicon from "../../assets/images/bell.png";  
 import Userprofiles from "../../assets/images/user_profiles.svg";
@@ -31,8 +20,7 @@ import Userenables from "../../assets/images/user_enables.svg";
 import Userlogouts from "../../assets/images/user_logouts.svg";  
 import Polygonimg from "../../assets/images/Polygon.png"; 
 
-import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
-import CONSTANTS from "../../common/helpers/Constants";
+import { getLocalStorage } from "../../common/helpers/Utils";
 import socketClass from "../../common/utility/socketClass";
 class Menubar extends Component {
   constructor() {

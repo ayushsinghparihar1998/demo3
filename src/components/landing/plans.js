@@ -18,7 +18,7 @@ import validationSubscribe from "../../common/validations/validationSubscribe";
 import { actionSubscribe } from "../../common/redux/actions";
 import Slider from "react-slick";
 import ELPViewApiService from "../../common/services/apiService";
-import { Link } from "react-router-dom";
+import { Link , Redirect} from "react-router-dom";
 import Saves from "../../assets/images/saves.png";
 import Squares from "../../assets/images/squares.png";
 import Alerts from "../../assets/images/alerts.png";
@@ -35,6 +35,7 @@ class Plans extends Component {
       email: "",
       show: false,
       show3: false,
+      redirectLogin:false,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -46,6 +47,7 @@ class Plans extends Component {
   handleClose = () => {
     this.setState({ show: false });
   };
+  
   componentDidMount = () => {
     this.get_planlist();
   };
@@ -98,6 +100,12 @@ class Plans extends Component {
         },
       ],
     };
+    if (this.state.redirectLogin) {
+       return <Redirect to={{
+         pathname:'/login',
+         state:{roleType:3}
+       }}/>;
+    }
     return (
       <div className="plans mt-4 mb-4">
         <Container>
@@ -291,9 +299,9 @@ class Plans extends Component {
                   <Button
                     type="button"
                     className="btnTyp5"
-                    onClick={this.handleClose}
+                    onClick={()=>{this.setState({ redirectLogin: true })}}
                   >
-                    OKAY
+                    LOGIN
                   </Button>
               </div>
             </Modal.Body>

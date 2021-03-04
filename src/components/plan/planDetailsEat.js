@@ -1,34 +1,18 @@
 import React, { Component } from "react";
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
-  Row,
-  Col,
   Image,
-  Form,
-  Tabs,
-  Tab,
+  Modal
 } from "react-bootstrap";
+import CrossTwo from "../../assets/images/crosstwo.png";
+import logosmain from "../../assets/images/logos.png";
+import logopink from "../../assets/images/elplogopink.png";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Ngoone from "../../assets/images/ngo1.svg";
-import Ngotwo from "../../assets/images/ngo2.svg";
-import Ngothree from "../../assets/images/ngo3.svg";
-import Splan from "../../assets/images/blog5.png";
-import Arrowright from "../../assets/images/Arrowright.png";
-import { connect } from "react-redux";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import ReactStars from "react-rating-stars-component";
-import { Popover } from "antd";
-import {
-  actionSearchListner,
-  actionAddrating,
-} from "../../common/redux/actions";
 
 class PlanDetailsEat extends Component {
   constructor(props) {
@@ -36,6 +20,8 @@ class PlanDetailsEat extends Component {
     this.state = {
       dailyData: "",
       email: "",
+      show: false,
+      redirectLogin: false,
     };
   }
   componentDidMount = () => {
@@ -45,6 +31,15 @@ class PlanDetailsEat extends Component {
     }, 1000);
     console.log(" this.props.match", this.props.match.params.name);
   };
+
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+
   getplanlist_bycategory = (plan_type, plan_category) => {
     let _this = this;
     console.log(plan_type);
@@ -103,6 +98,12 @@ class PlanDetailsEat extends Component {
         },
       ],
     };
+    if (this.state.redirectLogin) {
+      return <Redirect to={{
+        pathname: '/login',
+        state: { roleType: 3 }
+      }} />;
+    }
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -112,7 +113,7 @@ class PlanDetailsEat extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-              LIFESTYLE SUBSCRIPTION PLANS 
+                LIFESTYLE SUBSCRIPTION PLANS
               </div>
 
               <div className="PlanListOne">
@@ -137,27 +138,27 @@ class PlanDetailsEat extends Component {
                                   ? item.plan_category.length == 3
                                     ? null
                                     : item.plan_category.map((val, index) => {
-                                        // return
-                                        return (
-                                          <span
-                                            className={
-                                              val.puc_cat_name == "Eat"
-                                                ? "eatcat"
-                                                : val.puc_cat_name == "Luv"
+                                      // return
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eatcat"
+                                              : val.puc_cat_name == "Luv"
                                                 ? "luvcat"
                                                 : "praycat"
-                                            }
-                                          >
-                                            {val.puc_cat_name}
-                                            <span className="andClass">
-                                              {item.plan_category.length == 2 &&
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                          <span className="andClass">
+                                            {item.plan_category.length == 2 &&
                                               index == 0
-                                                ? " & "
-                                                : ""}{" "}
-                                            </span>
+                                              ? " & "
+                                              : ""}{" "}
                                           </span>
-                                        );
-                                      })
+                                        </span>
+                                      );
+                                    })
                                   : "BY CONDITION"}
                               </div>
                             </div>
@@ -190,10 +191,10 @@ class PlanDetailsEat extends Component {
                                   {item.pl_desc_details}
                                 </div>
                               </div>
-                              <Button className="btnType1 d-block w-100 mt-4">
-                                <Link to={{ pathname: "/coming-soon" }}>
+                              <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
+                                {/* <Link to={{ pathname: "/coming-soon" }}> */}
                                   Buy Now
-                                </Link>
+                                {/* </Link> */}
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -208,7 +209,7 @@ class PlanDetailsEat extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                  BYCONDITIONS SUBSCRIPTION PLANS
+                BYCONDITIONS SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.conditionData &&
@@ -255,10 +256,10 @@ class PlanDetailsEat extends Component {
                                   {item.pl_desc_details}
                                 </div>
                               </div>
-                              <Button className="btnType1 d-block w-100 mt-4">
-                                <Link to={{ pathname: "/coming-soon" }}>
+                              <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
+                                {/* <Link to={{ pathname: "/coming-soon" }}> */}
                                   Buy Now
-                                </Link>
+                                {/* </Link> */}
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -272,6 +273,47 @@ class PlanDetailsEat extends Component {
               </div>
             </div>
           </Container>
+
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            className="CreateAccount planUidetails"
+          >
+            <Modal.Header>
+              <Button type="button" onClick={this.handleClose} class="close">
+                <Image src={CrossTwo} alt="alert" className="alertCross" />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-4 mt-3 d-flex justify-content-center">
+                {/* <Image src={Alerts} alt="alert" className="" /> */}
+                <Image src={logosmain} alt="" className="logofirst" />
+                <Image src={logopink} alt="" className="elplogopink" />
+              </div>
+              {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
+              <div className="col14 fs20 fw500 mb-4">
+                Please login first to buy our <br />
+              subscription plans
+              </div>
+              <div className="planmodalBtn mt-5 mb-4">
+                <Button
+                  type="button"
+                  className="btnTyp5 mr-5 transbtn"
+                  onClick={this.handleClose}
+                >
+                  CANCEL
+                  </Button>
+                <Button
+                  type="button"
+                  className="btnTyp5"
+                  onClick={() => { this.setState({ redirectLogin: true }) }}
+                >
+                  LOGIN
+                  </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+
         </div>
         <Footer />
       </div>

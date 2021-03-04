@@ -3,27 +3,110 @@ import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
+import { post } from "axios";
+import { showErrorToast } from "../../common/helpers/Utils";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddDomain";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
-import { showErrorToast } from "../../common/helpers/Utils";
 import constant from "../../constant";
-
 class CorporateDocument extends Component {  
+  constructor(props) {
+    super(props);
+    this.state = {
+      filename:'',
+      isUploading: true,
+      planObj: {
+        pu_title_corporate: "",
+        pu_doc_url_corporate: "",
+      },
+      errors: { pu_title_corporate: "", pu_doc_url_corporate: "" },
+    };
+  }
+  handleSubmit = () => {
+    let planObj = this.state.planObj;
+
+    if (planObj.pu_doc_url_corporate.length > 0) {
+      this.setState({
+        showLoader: true,
+      });
+
+      let data = this.state.planObj;
+      console.log(data);
+
+      ELPViewApiService("exportSuperAdminCor_Docs", data)
+        .then((result) => {
+          if (result && result.data && result.data.status === "success") {
+            setTimeout(() => {
+              this.props.history.push("/admin");
+            }, 1000);
+            this.clear();
+          } else {
+            this.setState({
+              showLoader: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            showLoader: false,
+          });
+        });
+    } else {
+      this.setState({
+        showLoader: false,
+      });
+    }
+  };
+  handleUploadPicture = async (event, name) => {
+    const fileObject = event.target.files[0];
+    console.log();
+    if (fileObject) {
+      this.setState({
+        isUploading: true,
+      });
+      const formData = new FormData();
+      formData.set("u_image", fileObject);
+      console.log("formDataformData", formData);
+
+      const url = constant.SERVER_URL + "elp/superadmin_uploaddocument_corporate";
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const response = await post(url, formData, config);
+      console.log(name, "resultresultresult", response);
+      let planObj = this.state.planObj;
+
+      if (response.data.status == "error") {
+        const message = response.data.message;
+        showErrorToast(message);
+      } else {
+        planObj.pu_doc_url_corporate = response.data.data.filepath;
+        this.setState({
+          isUploading: false,
+          planObj,
+          filename: fileObject.name,
+        });
+      }
+    }
+  };
+  
+  isValid() {
+    const { errors, isValid } = validateInput(this.state.planObj);
+    if (!isValid) {
+      this.setState({ errors }, () => console.log(this.state.errors));
+    }
+    return isValid;
+  }
   render() {
     return (
       <div className="page__wrapper innerpage">
@@ -61,7 +144,11 @@ class CorporateDocument extends Component {
                       <Form.Group>
                         <Form.File
                           id="exampleFormControlFile1" 
+                          label="Example file input"
                           className="inputTyp2" 
+                          onChange={(e) =>
+                            this.handleUploadPicture(e, "backgroud_img") 
+                          }
                         />
                        
                       </Form.Group>
@@ -71,8 +158,10 @@ class CorporateDocument extends Component {
                     </Form.Group>
 
                     <Button 
+                      disabled={this.state.isUploading}
                       variant="primary btnTyp5 mt-4"
                       type="button" 
+                      onClick={this.handleSubmit}
                     >
                       UPLOAD
                     </Button> 

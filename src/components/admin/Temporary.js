@@ -125,37 +125,37 @@ class Adminlistener extends Component {
     this.getBlogCat("pressBlogCategory", "getpressblogcategory");
     console.log("get", getLocalStorage("tabToOpen"));
 
-    if (getLocalStorage("tabToOpen") && getLocalStorage("tabToOpen") == "user")
+    if (getLocalStorage("tabToOpen") && getLocalStorage("tabToOpen") === "user")
       this.getCustomerListing("", "user", 1);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "listner"
+      getLocalStorage("tabToOpen") === "listner"
     )
       // this.getCustomerListing("", "listner", 1);
       this.getListnerListing("", "listner", 1);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "getProffListing"
+      getLocalStorage("tabToOpen") === "getProffListing"
     )
       this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "getDomainListing"
+      getLocalStorage("tabToOpen") === "getDomainListing"
     )
       this.getDomainListing(1, 10);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "getblogListHandler"
+      getLocalStorage("tabToOpen") === "getblogListHandler"
     )
       this.getblogListHandler(1, 10);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "getpressblogListHandler"
+      getLocalStorage("tabToOpen") === "getpressblogListHandler"
     )
       this.getpressblogListHandler(1, 10);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "superadminget_planlist"
+      getLocalStorage("tabToOpen") === "superadminget_planlist"
     )
       this.superadminget_planlist(
         1,
@@ -166,12 +166,12 @@ class Adminlistener extends Component {
       );
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "superadminkits_list"
+      getLocalStorage("tabToOpen") === "superadminkits_list"
     )
       this.superadminkits_list(1, 10);
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "superadminvlogs_list"
+      getLocalStorage("tabToOpen") === "superadminvlogs_list"
     )
       this.superadminvlogs_list(
         1,
@@ -182,7 +182,7 @@ class Adminlistener extends Component {
       );
     else if (
       getLocalStorage("tabToOpen") &&
-      getLocalStorage("tabToOpen") == "superadminget_assessmenttestlist"
+      getLocalStorage("tabToOpen") === "superadminget_assessmenttestlist"
     )
       this.superadminget_assessmenttestlist(
         1,
@@ -191,17 +191,6 @@ class Adminlistener extends Component {
           ? getLocalStorage("internaltabToOpen")
           : 2
       );
-      // else if (
-      //   getLocalStorage("tabToOpen") &&
-      //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
-      // )
-      //   this.superadminget_assessmenttestlist(
-      //     1,
-      //     10,
-      //     getLocalStorage("internaltabToOpen")
-      //       ? getLocalStorage("internaltabToOpen")
-      //       : 2
-      //   );
     else {
       this.getCustomerListing("", "user", 1);
     }
@@ -273,7 +262,7 @@ class Adminlistener extends Component {
       keyword,
       category
     );
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
@@ -324,7 +313,7 @@ class Adminlistener extends Component {
   };
   getDomainListing = (offset, count) => {
     console.log("count, offset", count, offset);
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
@@ -369,7 +358,7 @@ class Adminlistener extends Component {
     // offset - page no
     // count - perpage item
     console.log(count, offset, block_type);
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
@@ -381,7 +370,7 @@ class Adminlistener extends Component {
       block_type: block_type,
     };
     console.log(data);
-    if (block_type == 0) {
+    if (block_type === 0) {
       this.setState({
         key: "request",
       });
@@ -422,12 +411,12 @@ class Adminlistener extends Component {
       offset: offset,
       cs_status: cs_status,
     };
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (cs_status == 0) {
+    if (cs_status === 0) {
       this.setState({
         key: "request",
       });
@@ -470,12 +459,12 @@ class Adminlistener extends Component {
       offset: offset,
       review_type: review_type,
     };
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (review_type == 0) {
+    if (review_type === 0) {
       this.setState({
         key: "request",
       });
@@ -520,12 +509,12 @@ class Adminlistener extends Component {
       rating_type: review_type,
     };
     console.log(data);
-    if (offset == 1) {
+    if (offset === 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (review_type == 0) {
+    if (review_type === 0) {
       this.setState({
         key: "request",
       });
@@ -598,7 +587,7 @@ class Adminlistener extends Component {
     try {
       let catval = [];
       this.state.blogCategory.map((cat) => {
-        if (cat.bc_status == "1") {
+        if (cat.bc_status === "1") {
           catval.push("'" + cat.bc_name + "'");
         }
       });
@@ -641,7 +630,7 @@ class Adminlistener extends Component {
     try {
       let catval = [];
       this.state.pressBlogCategory.forEach((cat) => {
-        if (cat.pbc_status == "1") {
+        if (cat.pbc_status === "1") {
           catval.push("'" + cat.pbc_name + "'");
         }
       });
@@ -772,7 +761,7 @@ class Adminlistener extends Component {
         vlogsList.map((item) => {
           var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
           var match = item.vl_video_url.match(regExp);
-          if (match && match[2].length == 11) {
+          if (match && match[2].length === 11) {
             console.log("match[2]", match[2]);
             item.url = match[2];
             item.play = false;
@@ -910,7 +899,7 @@ class Adminlistener extends Component {
 
     // create an array of pages to ng-repeat in the pager control
     let pageArray;
-    if (startPage == endPage) {
+    if (startPage === endPage) {
       console.log("startPage, endPage", startPage, endPage);
 
       pageArray = [1];
@@ -934,44 +923,44 @@ class Adminlistener extends Component {
     this.setState({
       pageno: page,
     });
-    if (page == this.state.pageno) {
+    if (page === this.state.pageno) {
     } else {
-      if (this.state.pageType == "blockList") {
+      if (this.state.pageType === "blockList") {
         console.log(page, "page");
         this.getBlockuserListing(page, this.state.count, this.state.block_type);
-      } else if (this.state.pageType == "reviewList") {
+      } else if (this.state.pageType === "reviewList") {
         this.getReviewListing(page, this.state.count, this.state.review_type);
-      } else if (this.state.pageType == "vlogsList") {
+      } else if (this.state.pageType === "vlogsList") {
         this.superadminvlogs_list(page, this.state.count, this.state.vl_type);
-      } else if (this.state.pageType == "qaList") {
+      } else if (this.state.pageType === "qaList") {
         this.superadminget_assessmenttestlist(
           page,
           this.state.count,
           this.state.as_type
         );
-      } else if (this.state.pageType == "blogList") {
+      } else if (this.state.pageType === "blogList") {
         this.getBlockuserListing(page, this.state.count);
-      } else if (this.state.pageType == "pressblogList") {
+      } else if (this.state.pageType === "pressblogList") {
         this.getpressblogListHandler(page, this.state.count);
-      } else if (this.state.pageType == "domainList") {
+      } else if (this.state.pageType === "domainList") {
         this.getDomainListing(page, this.state.count);
-      } else if (this.state.pageType == "planList") {
+      } else if (this.state.pageType === "planList") {
         this.superadminget_planlist(
           page,
           this.state.count,
           this.state.plan_type
         );
-      } else if (this.state.pageType == "kitList") {
+      } else if (this.state.pageType === "kitList") {
         this.superadminkits_list(page, this.state.count);
-      } else if (this.state.pageType == "ratingList") {
+      } else if (this.state.pageType === "ratingList") {
         this.getRatinguserListing(
           page,
           this.state.count,
           this.state.review_type
         );
-      } else if (this.state.pageType == "paymentList") {
+      } else if (this.state.pageType === "paymentList") {
         this.getPaymentListHandler(page, this.state.count);
-      } else if (this.state.pageType == "proffList") {
+      } else if (this.state.pageType === "proffList") {
         this.getProffListing(
           page,
           this.state.count,
@@ -1010,7 +999,7 @@ class Adminlistener extends Component {
   /** I am calling seprate API for all user bcz of will be change some feature in future according to server side */
   adminChangeUserStatus = (e, uid, status) => {
     let pageNumber = this.state.pageNumber;
-    let userStatus = status == "1" ? 0 : 1;
+    let userStatus = status === "1" ? 0 : 1;
     let chkUserProfile = this.state.activeProfile;
     let data = { userid: uid, u_status: userStatus };
     this.props.actionAdminChangeUserStatus(data).then((result) => {
@@ -1125,13 +1114,13 @@ class Adminlistener extends Component {
     var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
     // var test = reg.test(value.trim());
     errors.email =
-      memberObj.email.length == 0
+      memberObj.email.length === 0
         ? "Please enter email id."
         : !Validator.isEmail(memberObj.email)
         ? "Please enter a valid email id."
         : "";
     errors.password =
-      memberObj.password.length == 0
+      memberObj.password.length === 0
         ? "Please enter password."
         : !reg.test(memberObj.password.trim())
         ? "Please enter a valid password."
@@ -1140,7 +1129,7 @@ class Adminlistener extends Component {
     this.setState({
       errors,
     });
-    if (errors.email.length == 0 && errors.password.length == 0) {
+    if (errors.email.length === 0 && errors.password.length === 0) {
       console.log("submit");
       ELPViewApiService("superadmincorporatecustomerregister", memberObj)
         .then((result) => {
@@ -1203,17 +1192,17 @@ class Adminlistener extends Component {
     let blogCategory = this.state.blogCategory;
     let pressBlogCategory = this.state.pressBlogCategory;
     let catArray = this.state.catArray;
-    if (type == "cat") {
-      var index = catArray.findIndex((el) => el.value == value);
+    if (type === "cat") {
+      var index = catArray.findIndex((el) => el.value === value);
       catArray[index].flag = checked;
-    } else if (type == "keyword") {
-      let index = keywordArray.findIndex((el) => el.value == value);
+    } else if (type === "keyword") {
+      let index = keywordArray.findIndex((el) => el.value === value);
       keywordArray[index].flag = checked;
-    } else if (type == "blogCategory") {
-      let index = blogCategory.findIndex((el) => el.bc_id == value);
+    } else if (type === "blogCategory") {
+      let index = blogCategory.findIndex((el) => el.bc_id === value);
       blogCategory[index].bc_status = status;
     } else {
-      let index = pressBlogCategory.findIndex((el) => el.pbc_id == value);
+      let index = pressBlogCategory.findIndex((el) => el.pbc_id === value);
       console.log("index", index);
       console.log("value", value);
       pressBlogCategory[index].pbc_status = status;
@@ -1230,9 +1219,9 @@ class Adminlistener extends Component {
         console.log(this.state.catArray);
         console.log(this.state.pressBlogCategory);
         console.log(this.state.blogCategory);
-        if (type == "blogCategory") {
+        if (type === "blogCategory") {
           this.getblogListHandler(1, 10);
-        } else if (type == "pressBlogCategory") {
+        } else if (type === "pressBlogCategory") {
           this.getpressblogListHandler(1, 10);
         }
       }
@@ -1245,13 +1234,13 @@ class Adminlistener extends Component {
     console.log("this.state.category", this.state.category);
     let catval = [];
     this.state.catArray.forEach((cat) => {
-      if (cat.flag == true) {
+      if (cat.flag === true) {
         catval.push("'" + cat.name + "'");
       }
     });
     let statusval = 0;
     this.state.keywordArray.forEach((cat) => {
-      if (cat.flag == true) {
+      if (cat.flag === true) {
         statusval = statusval + cat.value;
       }
     });
@@ -1288,22 +1277,22 @@ class Adminlistener extends Component {
   };
   modifyAllContent = (type, id, api, status) => {
     let data =
-      type == "PLAN" || this.state.deleteObjType == "PLAN"
+      type === "PLAN" || this.state.deleteObjType === "PLAN"
         ? {
             pl_id: id ? id : +this.state.deleteObjId,
             pl_status: status,
           }
-        : type == "KIT" || this.state.deleteObjType == "KIT"
+        : type === "KIT" || this.state.deleteObjType === "KIT"
         ? {
             kt_id: id ? id : +this.state.deleteObjId,
             kt_status: status,
           }
-        : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
+        : type === "VLOGS" || this.state.deleteObjType === "VLOGS"
         ? {
             vl_id: id ? id : +this.state.deleteObjId,
             vl_status: status,
           }
-        : type == "QA" || this.state.deleteObjType == "QA"
+        : type === "QA" || this.state.deleteObjType === "QA"
         ? {
             as_id: id ? id : +this.state.deleteObjId,
             as_status: status,
@@ -1311,14 +1300,14 @@ class Adminlistener extends Component {
         : "";
 
     let apiData =
-      type == ""
-        ? this.state.deleteObjType == "PLAN"
+      type === ""
+        ? this.state.deleteObjType === "PLAN"
           ? "superadmindelete_planstatus"
-          : this.state.deleteObjType == "KIT"
+          : this.state.deleteObjType === "KIT"
           ? "superadmindelete_kitsstatus"
-          : this.state.deleteObjType == "VLOGS"
+          : this.state.deleteObjType === "VLOGS"
           ? "superadmindelete_vlogsstatus"
-          : this.state.deleteObjType == "QA"
+          : this.state.deleteObjType === "QA"
           ? "superadmindelete_assessteststatus"
           : ""
         : api;
@@ -1326,16 +1315,16 @@ class Adminlistener extends Component {
       this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
-          if (this.state.deleteObjType == "PLAN" || type == "PLAN") {
+          if (this.state.deleteObjType === "PLAN" || type === "PLAN") {
             this.superadminget_planlist(
               this.state.pageno,
               this.state.count,
               this.state.plan_type
             );
-          } else if (this.state.deleteObjType == "KIT" || type == "KIT") {
+          } else if (this.state.deleteObjType === "KIT" || type === "KIT") {
             console.log("kitkitkit");
             this.superadminkits_list(this.state.pageno, this.state.count);
-          } else if (this.state.deleteObjType == "VLOGS" || type == "VLOGS") {
+          } else if (this.state.deleteObjType === "VLOGS" || type === "VLOGS") {
             this.superadminvlogs_list(
               this.state.pageno,
               this.state.count,
@@ -1363,12 +1352,12 @@ class Adminlistener extends Component {
     };
     ELPViewApiService(
       type,
-      type == "superadmin_change_press_blogstatus" ? datapbl : databl
+      type === "superadmin_change_press_blogstatus" ? datapbl : databl
     ).then((result) => {
       console.log("result", result);
 
       if (result && result.status === 200) {
-        type == "superadmin_change_press_blogstatus"
+        type === "superadmin_change_press_blogstatus"
           ? this.getpressblogListHandler(this.state.offset, this.state.count)
           : this.getblogListHandler(this.state.offset, this.state.count);
       }
@@ -1444,22 +1433,22 @@ class Adminlistener extends Component {
   };
   onChangeTab(key, type) {
     if (key === "request") {
-      type == "block"
+      type === "block"
         ? this.getBlockuserListing(1, 10, 0)
-        : type == "rating"
+        : type === "rating"
         ? this.getRatinguserListing(1, 10, 0)
-        : type == "session"
+        : type === "session"
         ? this.getSessionListing(1, 10, 1)
         : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
       });
     } else if (key === "reject") {
-      type == "block"
+      type === "block"
         ? this.getBlockuserListing(1, 10, 2)
-        : type == "rating"
+        : type === "rating"
         ? this.getRatinguserListing(1, 10, 2)
-        : type == "session"
+        : type === "session"
         ? this.getSessionListing(1, 10, 3)
         : this.getReviewListing(1, 10, 2);
       this.setState({
@@ -1469,26 +1458,26 @@ class Adminlistener extends Component {
       this.setState({
         key: "completed",
       });
-      type == "block"
+      type === "block"
         ? this.getBlockuserListing(1, 10, 1)
-        : type == "rating"
+        : type === "rating"
         ? this.getRatinguserListing(1, 10, 1)
-        : type == "session"
+        : type === "session"
         ? this.getSessionListing(1, 10, 2)
         : this.getReviewListing(1, 10, 1);
     }
   }
   getRatingName = (ratingCount) => {
     let text = null;
-    if (ratingCount == 1) {
+    if (ratingCount === 1) {
       text = "Very Bad!";
-    } else if (ratingCount == 2) {
+    } else if (ratingCount === 2) {
       text = "Bad!";
-    } else if (ratingCount == 3) {
+    } else if (ratingCount === 3) {
       text = "Good!";
-    } else if (ratingCount == 4) {
+    } else if (ratingCount === 4) {
       text = "Very Good!";
-    } else if (ratingCount == 5) {
+    } else if (ratingCount === 5) {
       text = "Excellent!";
     }
     return text;
@@ -1499,12 +1488,12 @@ class Adminlistener extends Component {
     let url = this.state.url;
     let play = this.state.play;
     vlogsList.forEach((item, index) => {
-      if (i == index) {
+      if (i === index) {
         console.log(item.url);
         play = true;
         url = item.url;
       }
-      item.play = i == index ? flag : false;
+      item.play = i === index ? flag : false;
     });
     this.setState(
       {
@@ -1522,72 +1511,72 @@ class Adminlistener extends Component {
   render() {
     const { errors, totalRecord, memberObj } = this.state;
     let userActveClass =
-      this.state.pageType == "userlist" && this.state.activeProfile == "user"
+      this.state.pageType === "userlist" && this.state.activeProfile === "user"
         ? "position-relative active"
         : "position-relative";
     let professnalActveClass =
-      this.state.pageType == "userlist" &&
-      this.state.activeProfile == "professional"
+      this.state.pageType === "userlist" &&
+      this.state.activeProfile === "professional"
         ? "position-relative active"
         : "position-relative";
     let listnerActveClass =
-      this.state.pageType == "userlist" && this.state.activeProfile == "listner"
+      this.state.pageType === "userlist" && this.state.activeProfile === "listner"
         ? "position-relative active"
         : "position-relative";
     let blockActveClass =
-      this.state.pageType == "blockList"
+      this.state.pageType === "blockList"
         ? "position-relative active"
         : "position-relative";
     let reviewActveClass =
-      this.state.pageType == "reviewList"
+      this.state.pageType === "reviewList"
         ? "position-relative active"
         : "position-relative";
     let sessionActveClass =
-      this.state.pageType == "sessionList"
+      this.state.pageType === "sessionList"
         ? "position-relative active"
         : "position-relative";
     let ratingActveClass =
-      this.state.pageType == "ratingList"
+      this.state.pageType === "ratingList"
         ? "position-relative active"
         : "position-relative";
     let paymentActveClass =
-      this.state.pageType == "paymentList"
+      this.state.pageType === "paymentList"
         ? "position-relative active"
         : "position-relative";
     let proffActveClass =
-      this.state.pageType == "proffList"
+      this.state.pageType === "proffList"
         ? "position-relative active"
         : "position-relative";
     let domainActveClass =
-      this.state.pageType == "domainList"
+      this.state.pageType === "domainList"
         ? "position-relative active"
         : "position-relative";
     let addMemberActveClass =
-      this.state.pageType == "addMember"
+      this.state.pageType === "addMember"
         ? "position-relative active"
         : "position-relative";
     let pressBlogActveClass =
-      this.state.pageType == "pressblogList"
+      this.state.pageType === "pressblogList"
         ? "position-relative active"
         : "position-relative";
     let blogActveClass =
-      this.state.pageType == "blogList"
+      this.state.pageType === "blogList"
         ? "position-relative active"
         : "position-relative";
     let planActveClass =
-      this.state.pageType == "planList"
+      this.state.pageType === "planList"
         ? "position-relative active"
         : "position-relative";
     let kitActveClass =
-      this.state.pageType == "kitList"
+      this.state.pageType === "kitList"
         ? "position-relative active"
         : "position-relative";
     let qaActveClass =
-      this.state.pageType == "qaList"
+      this.state.pageType === "qaList"
         ? "position-relative active"
         : "position-relative";
     let vlogsActveClass =
-      this.state.pageType == "vlogsList"
+      this.state.pageType === "vlogsList"
         ? "position-relative active"
         : "position-relative";
 
@@ -1837,19 +1826,6 @@ class Adminlistener extends Component {
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div className="position-relative">
                         <div
-                          onClick={() =>
-                            this.changepath("/corporateDocument", "")
-                          }
-                          className="fs14 col28 fw500"
-                        >
-                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
-                          UPLOAD CORPORATE DOCUMENT
-                        </div>
-                      </div>
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom">
-                      <div className="position-relative">
-                        <div
                           className="fs14 col28 fw500"
                           onClick={() =>
                             this.changepath(
@@ -1867,12 +1843,12 @@ class Adminlistener extends Component {
                 </div>
               </Col>
 
-              {this.state.pageType == "userlist" ? (
+              {this.state.pageType === "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">
                       List of{" "}
-                      {this.state.activeProfile == "listner"
+                      {this.state.activeProfile === "listner"
                         ? "Listeners"
                         : "Users"}
                     </div>
@@ -1927,7 +1903,7 @@ class Adminlistener extends Component {
                                 </div>
                                 <div className="mt-auto mb-auto d-flex">
                                   <span className="pr-3 fs14 col47 fw400">
-                                    {item.u_status == "1"
+                                    {item.u_status === "1"
                                       ? "Deactivate"
                                       : "Activate"}
                                   </span>
@@ -1945,7 +1921,7 @@ class Adminlistener extends Component {
                                         );
                                       }}
                                       checked={
-                                        item.u_status == "1" ? true : false
+                                        item.u_status === "1" ? true : false
                                       }
                                     />
                                   </span>
@@ -1968,7 +1944,7 @@ class Adminlistener extends Component {
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "blockList" ? (
+              ) : this.state.pageType === "blockList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Report Requests</div>
@@ -2129,7 +2105,7 @@ class Adminlistener extends Component {
                     </div>
                   </div>
                 </Col>
-              ) : this.state.pageType == "planList" ? (
+              ) : this.state.pageType === "planList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
                     <Row className="mb-3">
@@ -2170,9 +2146,9 @@ class Adminlistener extends Component {
                           onChange={() => this.superadminget_planlist(1, 10, 1)}
                           label="Daily"
                           className={`mr-5  ${
-                            this.state.plan_type == 2 ? "" : "active"
+                            this.state.plan_type === 2 ? "" : "active"
                           }`}
-                          checked={+this.state.plan_type == 1}
+                          checked={+this.state.plan_type === 1}
                         />
 
                         <Form.Check
@@ -2183,9 +2159,9 @@ class Adminlistener extends Component {
                           onChange={() => this.superadminget_planlist(1, 10, 2)}
                           label="By Condition"
                           className={`mr-5  ${
-                            this.state.plan_type == 1 ? "" : "active"
+                            this.state.plan_type === 1 ? "" : "active"
                           }`}
-                          checked={+this.state.plan_type == 2}
+                          checked={+this.state.plan_type === 2}
                         />
                       </Form.Group>
                     </Form>
@@ -2237,7 +2213,7 @@ pl_title: "Platinum Plan new" */}
                                 <div className="min-wi250">
                                   <div className="d-flex ml-auto justify-content-end">
                                     <span className="pr-3 fs14 col47 fw400">
-                                      {item.pl_status == "2"
+                                      {item.pl_status === "2"
                                         ? "Deactivate"
                                         : "Activate"}
                                     </span>
@@ -2252,10 +2228,10 @@ pl_title: "Platinum Plan new" */}
                                             "PLAN",
                                             item.pl_id,
                                             "superadminchange_planstatus",
-                                            item.pl_status == "1" ? "2" : "1"
+                                            item.pl_status === "1" ? "2" : "1"
                                           );
                                         }}
-                                        checked={item.pl_status == "1"}
+                                        checked={item.pl_status === "1"}
                                       />
                                     </span>
                                     <span>
@@ -2294,9 +2270,9 @@ pl_title: "Platinum Plan new" */}
                                       return (
                                         <span
                                           className={
-                                            val.puc_cat_name == "Eat"
+                                            val.puc_cat_name === "Eat"
                                               ? "eat"
-                                              : val.puc_cat_name == "Luv"
+                                              : val.puc_cat_name === "Luv"
                                               ? "luv"
                                               : "pray"
                                           }
@@ -2306,7 +2282,7 @@ pl_title: "Platinum Plan new" */}
                                       );
                                     })
                                   : ""}
-                                {item.plan_category.length == 3 ? (
+                                {item.plan_category.length === 3 ? (
                                   <span className="holistic">Holistic</span>
                                 ) : null}
                               </div>
@@ -2316,7 +2292,7 @@ pl_title: "Platinum Plan new" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "reviewList" ? (
+              ) : this.state.pageType === "reviewList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Review Requests</div>
@@ -2484,7 +2460,7 @@ pl_title: "Platinum Plan new" */}
                     </div>
                   </div>
                 </Col>
-              ) : this.state.pageType == "sessionList" ? (
+              ) : this.state.pageType === "sessionList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">Session Requests</div>
@@ -2716,7 +2692,7 @@ cs_time: "00:00:02" */}
                     </div>
                   </div>
                 </Col>
-              ) : this.state.pageType == "paymentList" ? (
+              ) : this.state.pageType === "paymentList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">List of Payments</div>
@@ -2748,7 +2724,7 @@ cs_time: "00:00:02" */}
                     </Table>
                   </div>
                 </Col>
-              ) : this.state.pageType == "proffList" ? (
+              ) : this.state.pageType === "proffList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
                     <Row className="mb-3">
@@ -2832,7 +2808,7 @@ cs_time: "00:00:02" */}
                                   }
                                   // handleCheck={item.flag}
                                   value={item.value}
-                                  checked={item.flag == true}
+                                  checked={item.flag === true}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
@@ -2868,7 +2844,7 @@ cs_time: "00:00:02" */}
                                     }
                                     // handleCheck={item.flag}
                                     value={item.value}
-                                    checked={item.flag == true}
+                                    checked={item.flag === true}
                                     // onChange={(e) => this.handleCheck(e)}
                                   />
                                 );
@@ -2927,7 +2903,7 @@ cs_time: "00:00:02" */}
 
                                     <div className="d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
-                                        {item.u_status == "1"
+                                        {item.u_status === "1"
                                           ? "Deactivate"
                                           : "Activate"}
                                       </span>
@@ -2945,7 +2921,7 @@ cs_time: "00:00:02" */}
                                             );
                                           }}
                                           checked={
-                                            item.u_status == "1" ? true : false
+                                            item.u_status === "1" ? true : false
                                           }
                                         />
                                       </span>
@@ -2976,7 +2952,7 @@ cs_time: "00:00:02" */}
 
                                     {/* <div className="d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
-                                        {item.u_status == 1
+                                        {item.u_status === 1
                                           ? "Active"
                                           : "Inactive"}
                                       </span>
@@ -2986,7 +2962,7 @@ cs_time: "00:00:02" */}
                                           id="custom-switch5"
                                           label=""
                                           checked={
-                                            item.u_status == 0 ? false : true
+                                            item.u_status === 0 ? false : true
                                           }
                                         />
                                       </span>
@@ -3071,9 +3047,9 @@ cs_time: "00:00:02" */}
                                         return (
                                           <span
                                             className={
-                                              val == "Eat"
+                                              val === "Eat"
                                                 ? "eatcat"
-                                                : val == "Luv"
+                                                : val === "Luv"
                                                 ? "luvcat"
                                                 : "praycat"
                                             }
@@ -3093,7 +3069,7 @@ cs_time: "00:00:02" */}
                       // );
                     })}
                 </Col>
-              ) : this.state.pageType == "domainList" ? (
+              ) : this.state.pageType === "domainList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="corporateMember adminlistener d_detail">
                     <div className="domainSave mb-4 pb-2">
@@ -3157,14 +3133,14 @@ cs_time: "00:00:02" */}
                                             item,
                                             this.state.deleteId,
                                             "superadminchangestatusCorporatedomain",
-                                            item.cd_status == "1" ? "0" : "1"
+                                            item.cd_status === "1" ? "0" : "1"
                                           );
                                         }}
-                                        checked={item.cd_status == "1"}
+                                        checked={item.cd_status === "1"}
                                       />
                                     </span>
                                     <span className="pr-2 fs13 col47 fw500">
-                                      {item.cd_status == 1
+                                      {item.cd_status === 1
                                         ? "Deactivate"
                                         : "Activate"}
                                     </span>
@@ -3204,7 +3180,7 @@ cs_time: "00:00:02" */}
                     </Table>
                   </div>
                 </Col>
-              ) : this.state.pageType == "addMember" ? (
+              ) : this.state.pageType === "addMember" ? (
                 <Col md={8} className="pl-1">
                   <div className="corporateMember adminlistener">
                     <div className="fs28 col10 mb-4">
@@ -3290,7 +3266,7 @@ cs_time: "00:00:02" */}
                     </Form>
                   </div>
                 </Col>
-              ) : this.state.pageType == "pressblogList" ? (
+              ) : this.state.pageType === "pressblogList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search listBlogs">
                     <Row className="mb-1">
@@ -3331,7 +3307,7 @@ cs_time: "00:00:02" */}
                                 <Form.Check
                                   type="checkbox"
                                   className={`checkthree ${
-                                    item.pbc_status == "1" ? "active" : ""
+                                    item.pbc_status === "1" ? "active" : ""
                                   }`}
                                   label={item.pbc_name}
                                   id={item.pbc_id}
@@ -3342,12 +3318,12 @@ cs_time: "00:00:02" */}
                                     this.handleCheckSearch(
                                       e,
                                       "pressBlogCategory",
-                                      item.pbc_status == "1" ? "0" : "1"
+                                      item.pbc_status === "1" ? "0" : "1"
                                     )
                                   }
                                   // handleCheck={item.flag}
                                   value={item.pbc_id}
-                                  checked={item.pbc_status == "1"}
+                                  checked={item.pbc_status === "1"}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
@@ -3457,7 +3433,7 @@ cs_time: "00:00:02" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "blogList" ? (
+              ) : this.state.pageType === "blogList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search">
                     <Row className="mb">
@@ -3512,7 +3488,7 @@ cs_time: "00:00:02" */}
                                   type="checkbox"
                                   // className="checkthree active"
                                   className={`checkthree ${
-                                    item.bc_status == "1" ? "active" : ""
+                                    item.bc_status === "1" ? "active" : ""
                                   }`}
                                   label={item.bc_name}
                                   id={item.bc_id}
@@ -3523,12 +3499,12 @@ cs_time: "00:00:02" */}
                                     this.handleCheckSearch(
                                       e,
                                       "blogCategory",
-                                      item.bc_status == "1" ? "0" : "1"
+                                      item.bc_status === "1" ? "0" : "1"
                                     )
                                   }
                                   // handleCheck={item.flag}
                                   value={item.bc_id}
-                                  checked={item.bc_status == "1"}
+                                  checked={item.bc_status === "1"}
                                   // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
@@ -3618,9 +3594,9 @@ cs_time: "00:00:02" */}
                                       return (
                                         <span
                                           className={
-                                            val.buc_cat_name == "Eat"
+                                            val.buc_cat_name === "Eat"
                                               ? "eatcat"
-                                              : val.buc_cat_name == "Luv"
+                                              : val.buc_cat_name === "Luv"
                                               ? "luvcat"
                                               : "praycat"
                                           }
@@ -3638,7 +3614,7 @@ cs_time: "00:00:02" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "kitList" ? (
+              ) : this.state.pageType === "kitList" ? (
                 <Col md={8} lg={9} className="pl-1 kitListing">
                   <div className="professor_search">
                     <Row className="mb">
@@ -3691,7 +3667,7 @@ cs_time: "00:00:02" */}
                                     </div>
                                     <div className="min-w200s d-flex ml-auto">
                                       <span className="pr-3 fs14 col47 fw400">
-                                        {item.kt_status == "2"
+                                        {item.kt_status === "2"
                                           ? "Deactivate"
                                           : "Activate"}
                                       </span>
@@ -3706,10 +3682,10 @@ cs_time: "00:00:02" */}
                                               "KIT",
                                               item.kt_id,
                                               "superadminchange_kitsstatus",
-                                              item.kt_status == "1" ? "2" : "1"
+                                              item.kt_status === "1" ? "2" : "1"
                                             );
                                           }}
-                                          checked={item.kt_status == "1"}
+                                          checked={item.kt_status === "1"}
                                         />
                                       </span>
                                       <span className="mr-3">
@@ -3815,7 +3791,7 @@ kt_status: "1" */}
                       );
                     })}
                 </Col>
-              ) : this.state.pageType == "qaList" ? (
+              ) : this.state.pageType === "qaList" ? (
                 // ---------------------------------------------------------------------------------------------
       // --------------------------------------------------------This is Assesment List ----------------------------
                 // --------------------------------------------------------------------------------
@@ -3868,9 +3844,9 @@ kt_status: "1" */}
                                 this.superadminget_assessmenttestlist(1, 10, 2);
                               }}
                               className={`mr-5  ${
-                                this.state.as_type == 1 ? "" : "active"
+                                this.state.as_type === 1 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 2}
+                              checked={+this.state.as_type === 2}
                             />
 
                             <Form.Check
@@ -3886,9 +3862,9 @@ kt_status: "1" */}
                                 this.superadminget_assessmenttestlist(1, 10, 1);
                               }}
                               className={`mr-5  ${
-                                this.state.as_type == 2 ? "" : "active"
+                                this.state.as_type === 2 ? "" : "active"
                               }`}
-                              checked={+this.state.as_type == 1}
+                              checked={+this.state.as_type === 1}
                             />
                           </Form.Group>
                         </div>
@@ -3934,9 +3910,9 @@ kt_status: "1" */}
                                                 type="switch"
                                                 // id= 
                                                 name="status"
-                                                checked={item.as_status == "1"}
-                                                label={item.as_status == "1" ? "Enable" : "Disabled"} 
-                                                onChange={(val)=>{this.superAdminChange_AssesStatus(item.as_id , item.as_status == "1" ? "2" : "1" ); console.log("Onchange",item.as_status,item.as_status == "1" ? "Enable" : "Disabled")}}
+                                                checked={item.as_status === "1"}
+                                                label={item.as_status === "1" ? "Enable" : "Disabled"} 
+                                                onChange={(val)=>{this.superAdminChange_AssesStatus(item.as_id , item.as_status === "1" ? "2" : "1" ); console.log("Onchange",item.as_status,item.as_status === "1" ? "Enable" : "Disabled")}}
                                             />
                                         </span>
                                         <span className="mr-3">
@@ -3984,7 +3960,7 @@ kt_status: "1" */}
                                         </span>
                                       </div>
                                     </div>
-                                    {item.as_type == 1 ? (
+                                    {item.as_type === 1 ? (
                                       <div className="fs17 fw500 col14 mb-1">
                                         Price: {item.as_test_price}/-
                                       </div>
@@ -4013,13 +3989,13 @@ as_type: "2" */}
                                               return (
                                                 <span
                                                   className={
-                                                    val.as_test_cat_name ==
+                                                    val.as_test_cat_name ===
                                                     "Eat"
                                                       ? "eat"
-                                                      : val.as_test_cat_name ==
+                                                      : val.as_test_cat_name ===
                                                         "Luv"
                                                       ? "luv"
-                                                      : val.as_test_cat_name ==
+                                                      : val.as_test_cat_name ===
                                                         "Pray"
                                                       ? "pray"
                                                       : "holistic"
@@ -4031,7 +4007,7 @@ as_type: "2" */}
                                             }
                                           )
                                         : ""}
-                                      {item.assessment_category.length == 3 ? (
+                                      {item.assessment_category.length === 3 ? (
                                         <span className="holistic">
                                           Holistic
                                         </span>
@@ -4048,7 +4024,7 @@ as_type: "2" */}
                       })}
                   </Col>
                 </>
-              ) : this.state.pageType == "vlogsList" ? (
+              ) : this.state.pageType === "vlogsList" ? (
                 <>
                   <Col md={8} lg={9} className="pl-1 VlogMain">
                     <div className="professor_search listBlogs">
@@ -4090,9 +4066,9 @@ as_type: "2" */}
                             onChange={() => this.superadminvlogs_list(1, 10, 1)}
                             label="All"
                             className={`mr-5  ${
-                              this.state.vl_type == 2 ? "" : "active"
+                              this.state.vl_type === 2 ? "" : "active"
                             }`}
-                            checked={+this.state.vl_type == 1}
+                            checked={+this.state.vl_type === 1}
                           />
 
                           <Form.Check
@@ -4103,9 +4079,9 @@ as_type: "2" */}
                             onChange={() => this.superadminvlogs_list(1, 10, 2)}
                             label="Featured"
                             className={`mr-5  ${
-                              this.state.vl_type == 1 ? "" : "active"
+                              this.state.vl_type === 1 ? "" : "active"
                             }`}
-                            checked={+this.state.vl_type == 2}
+                            checked={+this.state.vl_type === 2}
                           />
                         </Form.Group>
                       </Form>
@@ -4152,7 +4128,7 @@ as_type: "2" */}
                                         </div>
                                         <div className="d-flex ml-auto">
                                           <span className="pr-3 fs14 col47 fw400">
-                                            {item.vl_status == "2"
+                                            {item.vl_status === "2"
                                               ? "Deactivate"
                                               : "Activate"}
                                           </span>
@@ -4167,12 +4143,12 @@ as_type: "2" */}
                                                   "VLOGS",
                                                   item.vl_id,
                                                   "superadminchange_vlogsstatus",
-                                                  item.vl_status == "1"
+                                                  item.vl_status === "1"
                                                     ? "2"
                                                     : "1"
                                                 );
                                               }}
-                                              checked={item.vl_status == "1"}
+                                              checked={item.vl_status === "1"}
                                             />
                                           </span>
                                           <span className="mr-3">
@@ -4467,7 +4443,7 @@ as_type: "2" */}
                 />
                 <div className="text-center fs24 mt-4 col64 mb-4">
                   Are you sure want to delete <br />{" "}
-                  {this.state.deleteModalType == "admin"
+                  {this.state.deleteModalType === "admin"
                     ? profileName
                     : this.state.deleteUser}
                   ?{" "}
@@ -4477,7 +4453,7 @@ as_type: "2" */}
                   <button
                     className="btn btn-success text-uppercase"
                     onClick={(event) =>
-                      this.state.deleteModalType == "admin"
+                      this.state.deleteModalType === "admin"
                         ? this.adminUserDelete(event, this.state.profileId, 2)
                         : this.modifyDomainContent(
                             "",
@@ -4496,8 +4472,8 @@ as_type: "2" */}
                     No
                   </button>
                 </div>
-                {this.state.deleteModalType == "admin" ? (
-                  this.state.activeProfile == "professional" ? (
+                {this.state.deleteModalType === "admin" ? (
+                  this.state.activeProfile === "professional" ? (
                     ""
                   ) : (
                     <>
@@ -4577,7 +4553,7 @@ as_type: "2" */}
             </Modal.Body>
           </Modal>
 
-          {this.state.pageType == "userlist" &&
+          {this.state.pageType === "userlist" &&
           totalRecord &&
           totalRecord > customPagination.paginationPageSize ? (
             <div className="paginationWrapper">
@@ -4603,14 +4579,14 @@ as_type: "2" */}
                       aria-label="Previous"
                       onClick={() => this.onChangePage(this.state.pageno - 1)}
                       disabled={
-                        this.state.pageno == 1 || this.state.totalPage == 0
+                        this.state.pageno === 1 || this.state.totalPage === 0
                       }
                     >
                       <span className="icon-prev"></span>
                       <span
                         //className="prevNext"
                         className={`sr-only ${
-                          this.state.pageno == 1 || this.state.totalPage == 0
+                          this.state.pageno === 1 || this.state.totalPage === 0
                             ? ""
                             : "active"
                         }`}
@@ -4624,9 +4600,9 @@ as_type: "2" */}
                     this.state.pageArray.map((page, ind) => {
                       return (
                         <li class="page-item">
-                          <a 
+                          <a href={"_"}
                             className={`page-link ${
-                              this.state.pageno == page ? "active" : ""
+                              this.state.pageno === page ? "active" : ""
                             }`}
                             onClick={() => this.onChangePage(page)}
                           >
@@ -4642,15 +4618,15 @@ as_type: "2" */}
                       aria-label="Next"
                       onClick={() => this.onChangePage(this.state.pageno + 1)}
                       disabled={
-                        this.state.pageno == this.state.totalPage ||
-                        this.state.totalPage == 0
+                        this.state.pageno === this.state.totalPage ||
+                        this.state.totalPage === 0
                       }
                     >
                       <span className="icon-next"></span>
                       <span
                         className={`sr-only ${
-                          this.state.pageno == this.state.totalPage ||
-                          this.state.totalPage == 0
+                          this.state.pageno === this.state.totalPage ||
+                          this.state.totalPage === 0
                             ? ""
                             : "active"
                         }`}
@@ -4666,7 +4642,7 @@ as_type: "2" */}
             <span></span>
             // <div className="recordfound">No Record Found</div>
           )}
-          {/* {this.state.totalRecordCount == 0 ? (
+          {/* {this.state.totalRecordCount === 0 ? (
           ) : (
             ""
           )} */}

@@ -17,7 +17,7 @@ import {
 import { Link, NavLink, Router } from "react-router-dom";
 import logosmain from "../../assets/images/logos.png";
 import logo from "../../assets/images/elplogos.png";
-import logopink from "../../assets/images/elplogopink.png"; 
+import logopink from "../../assets/images/elplogopink.png";
 import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
 import { actionLogout, actionLogoutSuccess } from "../../common/redux/actions";
@@ -440,8 +440,8 @@ class NavBar extends Component {
             </span>
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
         <CallDisconnectConfirmation
           ref={this.callDisconnectConfirmation}
           history={this.props.history}
@@ -481,16 +481,25 @@ class NavBar extends Component {
                 </Form>
               </Nav>
             ) : (
-              <Nav className="ml-auto">
-                {getLocalStorage("userInfo") ||
-                getLocalStorage("userInfoProff") ||
-                getLocalStorage("customerInfo")
-                  ? [
-                      getLocalStorage("customerInfo")
-                        ? [
-                            getLocalStorage("customerInfo") &&
-                            getLocalStorage("customerInfo").u_role_id ===
-                              constant.roles.CORPORATE_CUSTOMER ? (
+                <Nav className="ml-auto">
+                  {
+                    getLocalStorage("userInfo") || getLocalStorage("userInfoProff") || getLocalStorage("customerInfo")
+                      ?
+                      [
+                        getLocalStorage("customerInfo") &&
+                          getLocalStorage("customerInfo").u_role_id ===
+                          constant.roles.CORPORATE_CUSTOMER ? (
+                            <>
+                              <a
+                                onClick={() =>
+                                  this.verifyInCallNavigation(
+                                    "/professionalListing"
+                                  )
+                                }
+                                className="nav-link"
+                              >
+                                Professional Help
+                          </a>
                               <a
                                 onClick={() =>
                                   this.verifyInCallNavigation(
@@ -501,384 +510,558 @@ class NavBar extends Component {
                               >
                                 Browse Listener
                               </a>
-                            ) : null,
-
-                            getLocalStorage("customerInfo") &&
-                            getLocalStorage("customerInfo").u_role_id ===
-                              constant.roles.CORPORATE_CUSTOMER ? (
-                              <a
-                                onClick={() =>
-                                  this.verifyInCallNavigation(
-                                    "/professionalListing"
-                                  )
-                                }
-                                className="nav-link"
+                              <NavDropdown
+                                title="EAT"
+                                id="basic-nav-dropdown"
+                                className="eatDrop"
                               >
-                                Professional Help
-                              </a>
-                            ) : null,
-
-                            // <NavLink to="/listenerSearch" className="nav-link">
-                            //   Listener Search
-                            //   </NavLink>,
-                          ]
-                        : "",
-
-                      <a
-                        onClick={() => this.verifyInCallNavigation("/")}
-                        className="nav-link"
-                      >
-                        Dashboard
-                      </a>,
-                      <a
-                        onClick={() => this.verifyInCallNavigation("/campaign")}
-                        className="nav-link donatebtns"
-                      >
-                        Donate
-                      </a>,
-                      <a
-                        onClick={() =>
-                          this.verifyInCallNavigation("/assessmentTests/EAT")
-                        }
-                        className="nav-link donatebtns"
-                      >
-                        Assessment Tests
-                      </a>,
-
-                      <NavDropdown
-                        title="Learn more"
-                        id="basic-nav-dropdown-lm"
-                      >
-                        <NavDropdown.Item href={"/blogs/ALL"}>
-                          BLOGS
+                                
+                                <NavDropdown.Item href={"/planlist/Eat"}>
+                                  SUBSCRIPTION PLANS
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={"/press"}>
-                          PRESS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/about"}>
-                          About Us
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                      </NavDropdown>,
-                      ,
-                      getLocalStorage("userInfoProff") ||
-                      getLocalStorage("userInfo")
-                        ? [
-                            <a
-                              onClick={() =>
-                                this.verifyInCallNavigation("/calendar")
-                              }
-                              className="nav-link"
-                            >
-                              My Schedule
-                            </a>,
-                          ]
-                        : "",
-                    ]
-                  : [
-                      <NavDropdown
-                        title="EAT"
-                        id="basic-nav-dropdown"
-                        className="eatDrop"
-                      >
-                        <NavDropdown.Item onClick={this.handleModal}>
-                          TALK NOW
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/planlist/Eat"}>
-                          SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          onClick={() => this.changepath("/blogs/EAT", "EAT")}
-                        >
-                          BLOGS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/EAT"}>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown
-                        title="LUV"
-                        id="basic-nav-dropdown2"
-                        className="eatDrop"
-                      >
-                        <NavDropdown.Item onClick={this.handleModal}>
-                          TALK NOW
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/planlist/Luv"}>
-                          SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
-                          BLOGS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/LUV"}>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "}
-                      </NavDropdown>,
-                      <NavDropdown
-                        title="PRAY"
-                        id="basic-nav-dropdown3"
-                        className="eatDrop"
-                      >
-                        <NavDropdown.Item onClick={this.handleModal}>
-                          TALK NOW
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/planlist/Pray"}>
-                          SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
-                          BLOGS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/PRAY"}>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown
-                        title="ELNP(Holistic)"
-                        id="basic-nav-dropdown4"
-                        className="Holistics"
-                      >
-                        <NavDropdown.Item onClick={this.handleModal}>
-                          TALK NOW
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/planlistholistic"}>
-                          SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
-                          BLOGS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
-                          ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                      </NavDropdown>,
-                      <NavDropdown
-                        title="HELP SOMEONE"
-                        id="basic-nav-dropdown5"
-                      >
-                        <NavDropdown.Item href={"/becomeListener"}>
-                          DONATE TIME
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/campaign"}>
-                          DONATE MONEY
-                        </NavDropdown.Item>
-                      </NavDropdown>,
-
-                      <NavDropdown
-                        title="Learn more"
-                        id="basic-nav-dropdown-lm"
-                      >
-                        <NavDropdown.Item href={"/blogs/ALL"}>
-                          BLOGS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/press"}>
-                          PRESS
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/about"}>
-                          About Us
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                      </NavDropdown>,
-                      //   <Nav.Link>Donate</Nav.Link>,
-                    ]}
-                {getLocalStorage("userInfo") ||
-                getLocalStorage("userInfoProff") ||
-                getLocalStorage("customerInfo") ? (
-                  <span className="userprofiles menus">
-                    <Nav.Link
-                      onClick={() => this._readAllNotificationHandler()}
-                    >
-                      <Dropdown className="droptwo notifications">
-                        <Dropdown.Toggle
-                          id="dropdown-basic"
-                          className="profilesbtn"
-                        >
-                          <Image src={Bellicon} alt="" className="pointer" />
-                          {parseInt(this.state.notification_count) > 0 ? (
-                            <span className="counttwo">
-                              {this.state.notification_count}
-                            </span>
-                          ) : null}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item>
-                            <span className="polyicons">
-                              <Image
-                                src={Polygonimg}
-                                alt=""
-                                className="pointer"
-                              />
-                            </span>
-                            <div className="dropdownnotifications">
-                              {this.state.notificationData.length === 0 && (
-                                <>
-                                  <ul className="notes">
-                                    <li>
-                                      <Col md={9}>
-                                        {/* {console.log(data)} */}
-                                        <div className="col10 fs17 fw400"></div>
-                                        <div className="fs15 col94 fw400">
-                                          No new notification
-                                        </div>
-                                      </Col>
-                                      <Col md={3}>
-                                        <div className="fs15 col94 fw400"></div>
-                                      </Col>
-                                    </li>
-                                  </ul>
-                                </>
-                              )}
-                              {this.state.notificationData.map((data) => (
-                                <ul
-                                  className="notes"
-                                  style={{
-                                    backgroundColor:
-                                      data.no_status == "2"
-                                        ? "#dbfefc"
-                                        : "white",
-                                  }}
+                                <NavDropdown.Item
+                                  onClick={() => this.changepath("/blogs/EAT", "EAT")}
                                 >
-                                  <li>
-                                    <Col md={12}>
-                                      {/* {console.log(data)} */}
-                                      <div className="col10 fs17 fw400">
-                                        {data.u_name}
-                                      </div>
-                                      <div className="fs15 col94 fw400">
-                                        {data.no_text}
-                                      </div>
-                                    </Col>
-                                  </li>
-                                </ul>
-                              ))}
-                            </div>
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Nav.Link>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/assessmentTests/EAT"}>
+                                  ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                              </NavDropdown>
+                              <NavDropdown
+                                title="LUV"
+                                id="basic-nav-dropdown2"
+                                className="eatDrop"
+                              >
+                                
+                                
+                                <NavDropdown.Item href={"/planlist/Luv"}>
+                                  SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/assessmentTests/LUV"}>
+                                  ASSESSMENT TESTS
+                        </NavDropdown.Item>{" "}
+                              </NavDropdown>
+                              <NavDropdown
+                                title="PRAY"
+                                id="basic-nav-dropdown3"
+                                className="eatDrop"
+                              >
+                                
+                                <NavDropdown.Item href={"/planlist/Pray"}>
+                                  SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/assessmentTests/PRAY"}>
+                                  ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                              </NavDropdown>
+                              <NavDropdown
+                                title="ELNP(Holistic)"
+                                id="basic-nav-dropdown4"
+                                className="Holistics"
+                              >
+                                
+                                <NavDropdown.Item href={"/planlistholistic"}>
+                                  SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                                  ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                              </NavDropdown>
+                              <NavDropdown
+                                title="HELP SOMEONE"
+                                id="basic-nav-dropdown5"
+                              >
+                                <NavDropdown.Item href={"/becomeListener"}>
+                                  DONATE TIME
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/campaign"}>
+                                  DONATE MONEY
+                        </NavDropdown.Item>
+                              </NavDropdown>
 
-                    <NavDropdown
-                      title=""
-                      id="basic-nav-dropdown"
-                      className="profile_icon profiletwo ml-3 mr-5"
-                    >
-                      <NavDropdown.Item
-                        href="#"
-                        onClick={() =>
-                          this.verifyInCallNavigation("/myprofile")
-                        }
-                      >
-                        <Image src={Userprofiles} alt="" />
-                        <span>MY PROFILE</span>
+                              <NavDropdown
+                                title="Learn more"
+                                id="basic-nav-dropdown-lm"
+                              >
+                                <NavDropdown.Item href={"/blogs/ALL"}>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/press"}>
+                                  PRESS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/about"}>
+                                  About Us
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
+                              </NavDropdown>
+                              {/* <Nav.Link>Donate</Nav.Link>, */}
+                              <NavDropdown
+                                title="Learn more"
+                                id="basic-nav-dropdown-lm"
+                              >
+                                <NavDropdown.Item href={"/blogs/ALL"}>
+                                  BLOGS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/press"}>
+                                  PRESS
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/about"}>
+                                  About Us
+                        </NavDropdown.Item>
+                                <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
+                              </NavDropdown>
+                            </>
+                          ) : null,
+
+                      ]
+                      : "",
+
+                    getLocalStorage("userInfoProff") ||
+                      getLocalStorage("userInfo") || getLocalStorage("customerInfo")
+                      ? [
+                        (
+                          <>
+
+                            <NavDropdown
+                              title="EAT"
+                              id="basic-nav-dropdown"
+                              className="eatDrop"
+                            >
+                              
+                              <NavDropdown.Item href={"/planlist/Eat"}>
+                                SUBSCRIPTION PLANS
                       </NavDropdown.Item>
-
-                      <NavDropdown.Item
-                        href="#"
-                        onClick={() =>
-                          this.verifyInCallNavigation("/mysetting")
-                        }
-                      >
-                        <Image src={Usersettings} alt="" />{" "}
-                        <span>MY SETTINGS</span>
+                              <NavDropdown.Item
+                                onClick={() => this.changepath("/blogs/EAT", "EAT")}
+                              >
+                                BLOGS
                       </NavDropdown.Item>
-
-                      <NavDropdown.Item
-                        href="#"
-                        onClick={() =>
-                          this.verifyInCallNavigation("/editprofile")
-                        }
-                      >
-                        <Image src={Userenables} alt="" />
-                        <span>Edit Profile</span>
+                              <NavDropdown.Item href={"/assessmentTests/EAT"}>
+                                ASSESSMENT TESTS
                       </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                              title="LUV"
+                              id="basic-nav-dropdown2"
+                              className="eatDrop"
+                            >
+                              
+                              <NavDropdown.Item href={"/planlist/Luv"}>
+                                SUBSCRIPTION PLANS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
+                                BLOGS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/assessmentTests/LUV"}>
+                                ASSESSMENT TESTS
+                      </NavDropdown.Item>{" "}
+                            </NavDropdown>
+                            <NavDropdown
+                              title="PRAY"
+                              id="basic-nav-dropdown3"
+                              className="eatDrop"
+                            >
+                              
+                              <NavDropdown.Item href={"/planlist/Pray"}>
+                                SUBSCRIPTION PLANS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
+                                BLOGS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/assessmentTests/PRAY"}>
+                                ASSESSMENT TESTS
+                      </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                              title="ELNP(Holistic)"
+                              id="basic-nav-dropdown4"
+                              className="Holistics"
+                            >
+                              
+                              <NavDropdown.Item href={"/planlistholistic"}>
+                                SUBSCRIPTION PLANS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
+                                BLOGS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                                ASSESSMENT TESTS
+                      </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                              title="HELP SOMEONE"
+                              id="basic-nav-dropdown5"
+                            >
+                              <NavDropdown.Item href={"/becomeListener"}>
+                                DONATE TIME
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/campaign"}>
+                                DONATE MONEY
+                      </NavDropdown.Item>
+                            </NavDropdown>
 
-                      {getLocalStorage("customerInfo") &&
-                      getLocalStorage("customerInfo").u_role_id ===
-                        constant.roles.CUSTOMERS ? (
+                            <NavDropdown
+                              title="Learn more"
+                              id="basic-nav-dropdown-lm"
+                            >
+                              <NavDropdown.Item href={"/blogs/ALL"}>
+                                BLOGS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/press"}>
+                                PRESS
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/about"}>
+                                About Us
+                      </NavDropdown.Item>
+                              <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
+                            </NavDropdown>
+                            {/* <Nav.Link>Donate</Nav.Link>, */}
+
+                          </>
+                        )
+                        // <a
+                        //   onClick={() =>
+                        //     this.verifyInCallNavigation("/calendar")
+                        //   }
+                        //   className="nav-link"
+                        // >
+                        //   My Schedule
+                        //     </a>,
+                        // <a
+                        //   onClick={() => this.verifyInCallNavigation("/")}
+                        //   className="nav-link"
+                        // >
+                        //   Dashboard
+                        //   </a>,
+                        // <a
+                        //   onClick={() => this.verifyInCallNavigation("/campaign")}
+                        //   className="nav-link donatebtns"
+                        // >
+                        //   Donate
+                        //   </a>,
+                        // <a
+                        //   onClick={() =>
+                        //     this.verifyInCallNavigation("/assessmentTests/EAT")
+                        //   }
+                        //   className="nav-link donatebtns"
+                        // >
+                        //   Assessment Tests
+                        //   </a>,
+                      ]
+                      : [
+                        <NavDropdown
+                          title="EAT"
+                          id="basic-nav-dropdown"
+                          className="eatDrop"
+                        >
+                          <NavDropdown.Item onClick={this.handleModal}>
+                            TALK NOW
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/planlist/Eat"}>
+                            SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item
+                            onClick={() => this.changepath("/blogs/EAT", "EAT")}
+                          >
+                            BLOGS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/assessmentTests/EAT"}>
+                            ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                        </NavDropdown>,
+                        <NavDropdown
+                          title="LUV"
+                          id="basic-nav-dropdown2"
+                          className="eatDrop"
+                        >
+                          <NavDropdown.Item onClick={this.handleModal}>
+                            TALK NOW
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/planlist/Luv"}>
+                            SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
+                            BLOGS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/assessmentTests/LUV"}>
+                            ASSESSMENT TESTS
+                        </NavDropdown.Item>{" "}
+                        </NavDropdown>,
+                        <NavDropdown
+                          title="PRAY"
+                          id="basic-nav-dropdown3"
+                          className="eatDrop"
+                        >
+                          <NavDropdown.Item onClick={this.handleModal}>
+                            TALK NOW
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/planlist/Pray"}>
+                            SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
+                            BLOGS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/assessmentTests/PRAY"}>
+                            ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                        </NavDropdown>,
+                        <NavDropdown
+                          title="ELNP(Holistic)"
+                          id="basic-nav-dropdown4"
+                          className="Holistics"
+                        >
+                          <NavDropdown.Item onClick={this.handleModal}>
+                            TALK NOW
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/planlistholistic"}>
+                            SUBSCRIPTION PLANS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
+                            BLOGS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
+                            ASSESSMENT TESTS
+                        </NavDropdown.Item>
+                        </NavDropdown>,
+                        <NavDropdown
+                          title="HELP SOMEONE"
+                          id="basic-nav-dropdown5"
+                        >
+                          <NavDropdown.Item href={"/becomeListener"}>
+                            DONATE TIME
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/campaign"}>
+                            DONATE MONEY
+                        </NavDropdown.Item>
+                        </NavDropdown>,
+
+                        <NavDropdown
+                          title="Learn more"
+                          id="basic-nav-dropdown-lm"
+                        >
+                          <NavDropdown.Item href={"/blogs/ALL"}>
+                            BLOGS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/press"}>
+                            PRESS
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/about"}>
+                            About Us
+                        </NavDropdown.Item>
+                          <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
+                        </NavDropdown>
+                        //   <Nav.Link>Donate</Nav.Link>,
+                      ]}
+                  {getLocalStorage("userInfo") ||
+                    getLocalStorage("userInfoProff") ||
+                    getLocalStorage("customerInfo") ? (
+                      <span className="userprofiles menus">
+                        <Nav.Link
+                          onClick={() => this._readAllNotificationHandler()}
+                        >
+                          <Dropdown className="droptwo notifications">
+                            <Dropdown.Toggle
+                              id="dropdown-basic"
+                              className="profilesbtn"
+                            >
+                              <Image src={Bellicon} alt="" className="pointer" />
+                              {parseInt(this.state.notification_count) > 0 ? (
+                                <span className="counttwo">
+                                  {this.state.notification_count}
+                                </span>
+                              ) : null}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                              <Dropdown.Item>
+                                <span className="polyicons">
+                                  <Image
+                                    src={Polygonimg}
+                                    alt=""
+                                    className="pointer"
+                                  />
+                                </span>
+                                <div className="dropdownnotifications">
+                                  {this.state.notificationData.length === 0 && (
+                                    <>
+                                      <ul className="notes">
+                                        <li>
+                                          <Col md={9}>
+                                            {/* {console.log(data)} */}
+                                            <div className="col10 fs17 fw400"></div>
+                                            <div className="fs15 col94 fw400">
+                                              No new notification
+                                        </div>
+                                          </Col>
+                                          <Col md={3}>
+                                            <div className="fs15 col94 fw400"></div>
+                                          </Col>
+                                        </li>
+                                      </ul>
+                                    </>
+                                  )}
+                                  {this.state.notificationData.map((data) => (
+                                    <ul
+                                      className="notes"
+                                      style={{
+                                        backgroundColor:
+                                          data.no_status == "2"
+                                            ? "#dbfefc"
+                                            : "white",
+                                      }}
+                                    >
+                                      <li>
+                                        <Col md={12}>
+                                          {/* {console.log(data)} */}
+                                          <div className="col10 fs17 fw400">
+                                            {data.u_name}
+                                          </div>
+                                          <div className="fs15 col94 fw400">
+                                            {data.no_text}
+                                          </div>
+                                        </Col>
+                                      </li>
+                                    </ul>
+                                  ))}
+                                </div>
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </Nav.Link>
+
+                        <NavDropdown
+                          title=""
+                          id="basic-nav-dropdown"
+                          className="profile_icon profiletwo ml-3 mr-5"
+                        >
+                          <NavDropdown.Item
+                            href="#"
+                            onClick={() =>
+                              this.verifyInCallNavigation("/myprofile")
+                            }
+                          >
+                            <Image src={Userprofiles} alt="" />
+                            <span>MY PROFILE</span>
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item
+                            href="#"
+                            onClick={() =>
+                              this.verifyInCallNavigation("/mysetting")
+                            }
+                          >
+                            <Image src={Usersettings} alt="" />{" "}
+                            <span>MY SETTINGS</span>
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item
+                            href="#"
+                            onClick={() =>
+                              this.verifyInCallNavigation("/editprofile")
+                            }
+                          >
+                            <Image src={Userenables} alt="" />
+                            <span>Edit Profile</span>
+                          </NavDropdown.Item>
+
+                          {getLocalStorage("customerInfo") &&
+                            getLocalStorage("customerInfo").u_role_id ===
+                            constant.roles.CUSTOMERS ? (
+                              <NavDropdown.Item
+                                href="#"
+                                onClick={() => {
+                                  this._SwitchToCorporate();
+                                }}
+                              >
+                                <Image src={Userenables} alt="" />
+                                <span>SWITCH TO CORPORATE</span>
+                              </NavDropdown.Item>
+                            ) : null}
+                          {getLocalStorage("customerInfo") ? (
+                            <NavDropdown.Item
+                              href="#"
+                              onClick={() =>
+                                this.verifyInCallNavigation("/myAssessmentTest")
+                              }
+                            >
+                              <Image src={Userenables} alt="" />
+                              <span>My Tests</span>
+                            </NavDropdown.Item>
+                          ) : null}
+                          <NavDropdown.Item href="#" onClick={this.handleLogout}>
+                            <Image src={Userlogouts} alt="" /> <span>LOGOUT</span>
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                      </span>
+                    ) : (
+                      // <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                      <NavDropdown
+                        title="Login"
+                        id="login-nav-dropdown"
+                        className="btnTypeone loginnav"
+                        style={{ height: "38px" }}
+                      >
                         <NavDropdown.Item
-                          href="#"
-                          onClick={() => {
-                            this._SwitchToCorporate();
+                          onClick={(e) => {
+                            this.handleLogin(1);
                           }}
                         >
-                          <Image src={Userenables} alt="" />
-                          <span>SWITCH TO CORPORATE</span>
-                        </NavDropdown.Item>
-                      ) : null}
-                      {getLocalStorage("customerInfo") ? (
+                          Listener Login
+                    </NavDropdown.Item>
                         <NavDropdown.Item
-                          href="#"
-                          onClick={() =>
-                            this.verifyInCallNavigation("/myAssessmentTest")
-                          }
+                          disabled
+                          onClick={(e) => {
+                            this.handleLogin(2);
+                          }}
                         >
-                          <Image src={Userenables} alt="" />
-                          <span>My Tests</span>
+                          Professional Login <br />
+                          <span className="comings">coming soon</span>
                         </NavDropdown.Item>
-                      ) : null}
-                      <NavDropdown.Item href="#" onClick={this.handleLogout}>
-                        <Image src={Userlogouts} alt="" /> <span>LOGOUT</span>
-                      </NavDropdown.Item>
+                        <NavDropdown.Item
+                          onClick={(e) => {
+                            this.handleLogin(3);
+                          }}
+                        >
+                          Member Login
+                    </NavDropdown.Item>
+                      </NavDropdown>
+                    )}
+
+                  <Form inline>
+                    <span className="d-none">
+                      {getLocalStorage("loggedIn") ? (
+                        <div onClick={this.handleLogout} className="btnType1">
+                          Logout
+                        </div>
+                      ) : (
+                          <NavLink to="/login" className="btnType1">
+                            Login
+                          </NavLink>
+                        )}
+                    </span>
+                  </Form>
+                  <span className="userprofiles d-flex">
+                    <Nav.Link>
+                      <Image src={Mailicon} alt="" className="pointer" />
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Image src={Bellicon} alt="" className="pointer" />
+                    </Nav.Link>
+                    <NavDropdown title="Profile" id="basic-nav-dropdown">
+                      <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                     </NavDropdown>
                   </span>
-                ) : (
-                  // <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-                  <NavDropdown
-                    title="Login"
-                    id="login-nav-dropdown"
-                    className="btnTypeone loginnav"
-                    style={{ height: "38px" }}
-                  >
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(1);
-                      }}
-                    >
-                      Listener Login
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      disabled
-                      onClick={(e) => {
-                        this.handleLogin(2);
-                      }}
-                    >
-                      Professional Login <br />
-                      <span className="comings">coming soon</span>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      onClick={(e) => {
-                        this.handleLogin(3);
-                      }}
-                    >
-                      Member Login
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                )}
-
-                <Form inline>
-                  <span className="d-none">
-                    {getLocalStorage("loggedIn") ? (
-                      <div onClick={this.handleLogout} className="btnType1">
-                        Logout
-                      </div>
-                    ) : (
-                      <NavLink to="/login" className="btnType1">
-                        Login
-                      </NavLink>
-                    )}
-                  </span>
-                </Form>
-                <span className="userprofiles d-flex">
-                  <Nav.Link>
-                    <Image src={Mailicon} alt="" className="pointer" />
-                  </Nav.Link>
-                  <Nav.Link>
-                    <Image src={Bellicon} alt="" className="pointer" />
-                  </Nav.Link>
-                  <NavDropdown title="Profile" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  </NavDropdown>
-                </span>
-              </Nav>
-            )}
+                </Nav>
+              )}
           </Navbar.Collapse>
         </Navbar>
 

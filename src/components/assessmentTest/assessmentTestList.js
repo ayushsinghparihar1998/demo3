@@ -1,45 +1,18 @@
 import React, { Component } from "react";
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
-  Form,
   Tabs,
   Tab,
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
-import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Subscribes from "../../assets/images/subscribes.svg";
-import BlogProcessOne from "../../assets/images/p_blogs.svg";
-import BlogProcessTwo from "../../assets/images/p_blogs2.svg";
-import BlogProcessThree from "../../assets/images/p_blogs3.svg";
-import BlogProcessFour from "../../assets/images/p_blogs4.svg";
-import BlogProcessFive from "../../assets/images/blog4.png";
-import BlogProcessSix from "../../assets/images/blog5.svg";
-import BlogProcessSeven from "../../assets/images/blog6.png";
-import BlogProcessNine from "../../assets/images/blogs9.png";
-import VideoIcon from "../../assets/images/videoIcon.png";
 
-import blogclock from "../../assets/images/blogclock.png";
-import { connect } from "react-redux";
-import ReactStars from "react-rating-stars-component";
-import { Popover } from "antd";
 import ELPRxApiService from "../../common/services/apiService";
-import moment from "moment";
+
 import { Modal } from "react-bootstrap";
 import Alerts from "../../assets/images/alerts.png";
 import CrossTwo from "../../assets/images/crosstwo.png";
@@ -66,6 +39,13 @@ class AssessmentTestListTwo extends Component {
   handleClose = () => {
     this.setState({ show: false });
   };
+
+  redirectToLogin = () => {
+    this.props.history.replace({
+      pathname: `/login`,
+      state: { roleType: 3 },
+    });
+  }
   componentDidMount = () => {
     this.setState({
       tabVal: this.props.match.params.name,
@@ -534,13 +514,15 @@ class AssessmentTestListTwo extends Component {
               <div className="col14 fs20 fw500 mb-4">
                 Please Login to start the test
               </div>
-              <Button
-                type="button"
-                className="btnTyp5"
-                onClick={this.handleClose}
-              >
-                OKAY
-              </Button>
+              <div className="planmodalBtn mt-5 mb-4">  
+                  <Button
+                    type="button"
+                    className="btnTyp5"
+                    onClick={this.redirectToLogin}
+                  >
+                    LOGIN
+                  </Button>
+              </div>
             </Modal.Body>
           </Modal>
         </div>

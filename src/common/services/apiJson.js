@@ -1996,6 +1996,13 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  superadminchange_assessqueansstatus:{
+    url:"elp/superadmin_assesstestchangestatus",
+    method: "POST",
+    data: { as_id: "", as_status: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
   superadmindelete_assessteststatus: {
     url: "elp/superadmindelete_assessteststatus",
     method: "POST",
@@ -2063,5 +2070,22 @@ export default {
     data: { ar_id: "" },
     showResultMessage: false,
     showErrorMessage: true,
+  },
+  exportSuperAdminCor_Docs :{
+    url: "elp/superadminadd_doc_corporate",
+    method: "POST",
+    data: {
+      pu_title_corporate: "", 
+      pu_doc_url_corporate:"",
+    },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
+  getcorporate_pdf: {
+    url: "elp/getcorporate_pdf",
+    method: "POST",
+    data: {},
+    showResultMessage: false,
+    showErrorMessage: false,
   },
 };
