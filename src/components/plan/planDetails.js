@@ -308,7 +308,7 @@ class PlanDetails extends Component {
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
-                                      HOLISTIC{" "}
+                                      Holistic{" "}
                                     </span>
                                   ) : (
                                       item.plan_category.map((val, index) => {
@@ -403,7 +403,7 @@ class PlanDetails extends Component {
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
-                                      HOLISTIC{" "}
+                                      Holistic{" "}
                                     </span>
                                   ) : (
                                       item.plan_category.map((val, index) => {

@@ -136,7 +136,7 @@ class Plans extends Component {
                           <div className="fs22 fw600 col29 text-center text-capitalize">
                             {item.pl_type == 1 ? (
                               item.plan_category.length == 3 ? (
-                                <span className="holisticcat">HOLISTIC </span>
+                                <span className="holisticcat">Holistic</span>  
                               ) : (
                                 item.plan_category.map((val, index) => {
                                   // return
@@ -302,7 +302,7 @@ class Plans extends Component {
                   >
                     LOGIN
                   </Button>
-              </div>
+              </div>  
             </Modal.Body>
           </Modal>
 
