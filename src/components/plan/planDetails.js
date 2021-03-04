@@ -6,7 +6,8 @@ import {
   Col,
   Image,
   Form,
-   Modal
+  Tab,
+  Modal
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -16,11 +17,16 @@ import Slider from "react-slick";
 import { Link, Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import VideoIcon from "../../assets/images/videoIcon.png";
-import YouTube from "react-youtube";
-import validator from "validator";
+import BlogProcessFive from "../../assets/images/blog4.png";
+import ReactStars from "react-rating-stars-component";
+
 import CrossTwo from "../../assets/images/crosstwo.png";
 import logosmain from "../../assets/images/logos.png";
+import logo from "../../assets/images/elplogos.png";
 import logopink from "../../assets/images/elplogopink.png";
+
+import YouTube from "react-youtube";
+import validator from "validator";
 
 class PlanDetails extends Component {
   constructor(props) {
@@ -33,8 +39,18 @@ class PlanDetails extends Component {
       url: "",
       show: false,
       redirectLogin: false,
+      show4: false,
     };
+    this.handleClose2 = this.handleClose2.bind(this);
+    this.handleShow2 = this.handleShow2.bind(this);
   }
+  handleShow2 = () => {
+    this.setState({ show4: true });
+  };
+
+  handleClose2 = () => {
+    this.setState({ show4: false });
+  }; 
   componentDidMount = () => {
     this.getplanlist_holisticbycondition();
     this.getplanlist_holisticdaily();
@@ -288,7 +304,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                              <div className="fs24 fw600 col29 text-center text-capitalize">
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
@@ -383,7 +399,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
@@ -414,8 +430,8 @@ class PlanDetails extends Component {
                                       })
                                     )
                                 ) : (
-                                    "BY CONDITION"
-                                  )}
+                                  "By Condition"
+                                )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
@@ -474,7 +490,8 @@ class PlanDetails extends Component {
                         <Button
                           variant="primary"
                           className="btnTyp5 mt-3"
-                          type="submit"
+                          type="button" 
+                          onClick={() => this.handleShow2()}  
                         >
                           Get A Quote
                         </Button>
@@ -517,41 +534,41 @@ class PlanDetails extends Component {
               </div>
             </div>
           </Container>
+
           <Modal
-            show={this.state.show}
-            onHide={this.handleClose}
+            show={this.state.show4}
+            onHide={this.handleClose2}
             className="CreateAccount planUidetails"
           >
             <Modal.Header>
-              <Button type="button" onClick={this.handleClose} class="close">
+              <Button type="button" onClick={this.handleClose2} class="close">
                 <Image src={CrossTwo} alt="alert" className="alertCross" />
               </Button>
             </Modal.Header>
             <Modal.Body>
-              <div className="mb-4 mt-3 d-flex justify-content-center">
-                {/* <Image src={Alerts} alt="alert" className="" /> */}
-                <Image src={logosmain} alt="" className="logofirst" />
-                <Image src={logopink} alt="" className="elplogopink" />
+              <div className="mb-4 mt-3 d-flex justify-content-center">  
+                {/* <Image src={Alerts} alt="alert" className="" /> */} 
+                <Image src={logosmain} alt="" className="logofirst" />  
+                <Image src={logopink} alt="" className="elplogopink" />        
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
               <div className="col14 fs20 fw500 mb-4">
-                Please login first to buy our <br />
-              subscription plans
+                  Please contact to <br /> support@eatluvnpray.org for more info  
               </div>
-              <div className="planmodalBtn mt-5 mb-4">
-                <Button
-                  type="button"
-                  className="btnTyp5 mr-5 transbtn"
-                  onClick={this.handleClose}
-                >
-                  CANCEL
+              <div className="planmodalBtn mt-5 mb-4">  
+                  <Button
+                    type="button"
+                    className="btnTyp5 mr-5 transbtn" 
+                    onClick={this.handleClose2}
+                  >
+                    CANCEL
                   </Button>
-                <Button
-                  type="button"
-                  className="btnTyp5"
-                  onClick={() => { this.setState({ redirectLogin: true }) }}
-                >
-                  LOGIN
+                  <Button
+                    type="button"
+                    className="btnTyp5" 
+                    onClick={() => { this.setState({ redirectLogin: true }) }}
+                  >
+                    LOGIN
                   </Button>
               </div>
             </Modal.Body>

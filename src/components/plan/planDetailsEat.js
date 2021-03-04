@@ -133,13 +133,12 @@ class PlanDetailsEat extends Component {
                                   Save {item.pl_save}%
                                 </div>
                               </div>
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
-                                {item.pl_type == 1
-                                  ? item.plan_category.length == 3
-                                    ? null
-                                    : item.plan_category.map((val, index) => {
-                                      // return
-                                      return (
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
+                                {
+                                  item.pl_type == 1
+                                  ? 
+                                    item.plan_category.length == 3 ? null
+                                    : item.plan_category.map((val, index) => 
                                         <span
                                           className={
                                             val.puc_cat_name == "Eat"
@@ -157,9 +156,9 @@ class PlanDetailsEat extends Component {
                                               : ""}{" "}
                                           </span>
                                         </span>
-                                      );
-                                    })
-                                  : "BY CONDITION"}
+                                      )
+                                  : "By Condition"
+                                }
                               </div>
                             </div>
 
@@ -225,8 +224,8 @@ class PlanDetailsEat extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-uppercase">
-                                BY CONDITION
+                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
+                                   By Condition
                               </div>
                             </div>
                             <div className="plantwo text-center">
