@@ -398,7 +398,7 @@ class ProfessionalSignup extends Component {
                       <Col md={6}>
                         <Form.Group>
                           <Form.Label className="fs20 fw600 col14">
-                            Email Address*
+                            Email Address
                           </Form.Label>
                           <Form.Control
                             type="email"
@@ -424,7 +424,7 @@ class ProfessionalSignup extends Component {
                       <Col md={6}>
                         <Form.Group>
                           <Form.Label className="fs20 fw600 col14">
-                            Password*
+                            Password
                           </Form.Label>
                           <Form.Control
                             type="text"

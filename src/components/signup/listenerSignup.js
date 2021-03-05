@@ -190,6 +190,10 @@ class Listenersignup extends Component {
     }
     this.setState({ listOfCategory: listOfCategory });
   };
+  
+  countOccurrences = (arr, val) => arr.reduce(function (n, search) {
+    return n + (search.uc_cat_name === val);
+}, 0);
 
   render() {
     const { errors } = this.state;
@@ -335,7 +339,17 @@ class Listenersignup extends Component {
                     </Form.Group>
 
                     {this.state.listOfCategory &&
-                      this.state.listOfCategory.map((item, index) => {
+                      this.state.listOfCategory
+                      .filter((item,index)=>{
+                        if(this.countOccurrences(this.state.listOfCategory , item.uc_cat_name) < 2){
+                          return true
+                        }
+                        else{
+                          this.handleRemoveCategory("e", index);
+                          return false
+                        }
+                      })
+                      .map((item, index) => {
                         return (
                           <p className="c_manages">
                             {item.uc_cat_name}

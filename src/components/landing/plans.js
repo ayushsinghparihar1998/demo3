@@ -292,6 +292,7 @@ class Plans extends Component {
                   <Button
                     type="button"
                     className="btnTyp5 mr-5 transbtn" 
+                    onClick={this.handleClose}
                   >
                     CANCEL
                   </Button>

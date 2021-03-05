@@ -186,7 +186,7 @@ class AssessmentTestListTwo extends Component {
                                       ""
                                     )}
                                   </div>
-                                  {getLocalStorage("customerInfo") ? (
+                                  {getLocalStorage("customerInfo") || getLocalStorage("userInfo")  ? (
                                     <Button
                                       type="button"
                                       className="PlanBtns PlanColor1"
@@ -278,7 +278,7 @@ class AssessmentTestListTwo extends Component {
                                     )}
                                   </div>
 
-                                  {getLocalStorage("customerInfo") ? (
+                                  {getLocalStorage("customerInfo") || getLocalStorage("userInfo") ? (
                                     <Button
                                       type="button"
                                       className="PlanBtns PlanColor1"
@@ -368,7 +368,7 @@ class AssessmentTestListTwo extends Component {
                                     )}
                                   </div>
 
-                                  {getLocalStorage("customerInfo") ? (
+                                  {getLocalStorage("customerInfo") || getLocalStorage("userInfo") ? (
                                     <Button
                                       type="button"
                                       className="PlanBtns PlanColor1"
@@ -458,7 +458,7 @@ class AssessmentTestListTwo extends Component {
                                     )}
                                   </div>
 
-                                  {getLocalStorage("customerInfo") ? (
+                                  {getLocalStorage("customerInfo") || getLocalStorage("userInfo") ? (
                                     <Button
                                       type="button"
                                       className="PlanBtns PlanColor1"

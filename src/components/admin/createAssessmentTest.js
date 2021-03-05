@@ -133,7 +133,10 @@ class CreateAssessmentTest extends Component {
         });
         console.log("cats", cats);
         catArray.map((item) => {
-          if (cats.includes(item.as_test_cat_name)) {
+          if(cats.includes("Holistic")){
+            item.flag = true;
+          }
+          else if (cats.includes(item.as_test_cat_name)) {
             item.flag = true;
           } else {
             item.flag = false;

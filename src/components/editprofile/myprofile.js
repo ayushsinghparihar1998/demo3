@@ -40,6 +40,17 @@ class Myprofile extends Component {
       pathname: "editprofile",
     });
   }
+  renderUserRole = () =>{
+    let userData = this.state.userData ? this.state.userData : {};
+    switch(parseInt( userData.u_role_id)){
+      case CONSTANTS.ROLES.LISTNER : return 'Listner'
+      case CONSTANTS.ROLES.USER : return "Member"
+      case CONSTANTS.ROLES.PROFESSIONAL : return "Professional"
+      case CONSTANTS.ROLES.SUPER_ADMIN : return "Admin"
+      case 5 : return "Corporate Member"
+      default : break; 
+    }
+  }
   render() {
     let userData = this.state.userData ? this.state.userData : {};
     console.log("qweqweqweqwe", this.state.userData)
@@ -62,7 +73,7 @@ class Myprofile extends Component {
                   </div>
                   <div className="text-center mt-4 mb-4 pb-2">
                     <div className="fs18 fw600 col1 pb-1">{userData.u_name}</div>
-                    <div className="col23 fs16 fw500 pb-1">{userData.u_role_id == CONSTANTS.ROLES.LISTNER ? 'Listener' : 'Member'}
+                    <div className="col23 fs16 fw500 pb-1">{this.renderUserRole()}
                       {/* <Image src={warningS} alt="" className="ml-2" /> */}
                     </div>
                     <div className="col27 fw400 fs14">{userData.u_bio}</div>

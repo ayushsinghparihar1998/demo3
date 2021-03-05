@@ -127,7 +127,7 @@ class addSubscription extends Component {
     this.setState(
       {
         planObj,
-        proffCat: [],
+        proffCat: this.state.proffCat,
       },
       () => {
         data = {

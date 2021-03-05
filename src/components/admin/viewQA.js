@@ -3,15 +3,10 @@ import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
+  Image
 } from "react-bootstrap";
 
 // import NavBar from "../core/nav";
@@ -19,18 +14,11 @@ import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
-import blogclock from "../../assets/images/blogclock.png";
-import UserChats from "../../assets/images/user_chat5.svg";
-import Infos from "../../assets/images/infos.png";
 import { Modal } from "react-bootstrap";
 import Deleteusers from "../../assets/images/delete_users.svg";
 import Blueicons from "../../assets/images/blue_cross.svg";
-import constant from "../../constant";
 class ViewQA extends Component {
   constructor(props, context) {
     super(props, context);
@@ -83,11 +71,12 @@ class ViewQA extends Component {
       as_status: 3,
     };
     let apiData = "superadmindelete_assessqueansstatus";
-
+    console.log("DELETE QUESTION ",data);
     ELPViewApiService(apiData, data).then((result) => {
       this.setState({ deleteObjConformationModal: false });
       if (result && result.status === 200) {
         setTimeout(() => {
+          console.log("RESULT AFTER DELETE ",result)
           this.superadminget_assessqueanstlist();
         }, 100);
       }
@@ -104,7 +93,6 @@ class ViewQA extends Component {
 
   render() {
     const { asstDetail } = this.state;
-
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -142,7 +130,7 @@ class ViewQA extends Component {
                   <div className="fs22 fw600 col10">Question Answer</div>
                   <div className="mentalOne">
                     <div className="col14 fs18 fw600">
-                      {asstDetail && asstDetail[0].as_title}
+                      { asstDetail &&asstDetail.length && asstDetail[0].as_title}
                     </div>
                     <div className="position-relative">
                       <Button
