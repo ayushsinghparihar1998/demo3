@@ -153,7 +153,7 @@ ar_u_id: "549" */}
                             Total Marks
                           </div>
                           <div className="fs18 fw500 col14">
-                            65
+                            {asstDetail.ar_test_tot_marks}
                           </div>
                         </div>
                       </div>
