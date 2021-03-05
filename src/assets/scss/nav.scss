@@ -546,7 +546,7 @@
             .navbar-nav {
                 a.nav-link {
                     padding-right: $fs16;
-                    padding: 10px 10px !important; 
+                    padding: 10px 6px !important; 
                     font-size: $fs13 !important; 
                     &:hover {
                         color: $col1; 
@@ -595,7 +595,7 @@
         .navbar-light {
             .navbar-nav {
                 a.nav-link {
-                    padding: 10px 18px;
+                    padding: 10px 10px;
                     font-size: $fs14;
                     &:hover {
                         color: $col3; 
