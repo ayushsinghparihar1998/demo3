@@ -420,6 +420,10 @@ class NavBar extends Component {
    * @param {String} strategy - For Home page 
    */
   dropDownRender = (strategy) => {
+    //SOME CHECKS 
+    const customerInfo = (getLocalStorage("customerInfo")?.u_role_id && getLocalStorage("customerInfo")?.u_role_id !== constant.roles.CORPORATE_CUSTOMER)
+    const userInfo = ( getLocalStorage("userInfo") && getLocalStorage("userInfo")?.u_role_id !== constant.roles.LISTENER)
+    const sumedUpCheck = strategy || customerInfo || userInfo;
     /**
      * Adds to Header Section AND Items Refer to Drop Down 
      */
@@ -428,48 +432,48 @@ class NavBar extends Component {
         title: "EAT",
         id: "basic-nav-dropdown",
         className: "eatDrop",
-        items:[{option:"Eat"}]
+        items: [{ option: "Eat" }]
       },
       {
         title: "LUV",
         id: "basic-nav-dropdown2",
         className: "eatDrop",
-        items:[{option:"Luv"}]
+        items: [{ option: "Luv" }]
       },
       {
         title: "PRAY",
         id: "basic-nav-dropdown3",
         className: "eatDrop",
-        items:[{option:"Pray"}]
+        items: [{ option: "Pray" }]
       },
       {
         title: "ELNP(Holistic)",
         id: "basic-nav-dropdown4",
         className: "Holistics",
         talkNow: true,
-        items:[
-          {content:"SUBSCRIPTION PLANS", option:"/planlistholistic"},
-          {content:"BLOGS", option:"/blogs/ALL"},
-          {content:"ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC"}
+        items: [
+          { content: "SUBSCRIPTION PLANS", option: "/planlistholistic" },
+          { content: "BLOGS", option: "/blogs/ALL" },
+          { content: "ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC" }
         ]
       },
       {
-        title:"HELP SOMEONE",
-        id:"basic-nav-dropdown5",
-        items:[
-          strategy || getLocalStorage("customerInfo")?.u_role_id !== constant.roles.CORPORATE_CUSTOMER 
-          ? {content:"DONATE TIME",option:"/becomeListener"} : {},
-          {content:"DONATE MONEY" , option : "/campaign"}
+        title: "HELP SOMEONE",
+        id: "basic-nav-dropdown5",
+        items: [
+          sumedUpCheck
+          ? { content: "DONATE TIME", option: "/becomeListener" } : {},
+          { content: "DONATE MONEY", option: "/campaign" }
         ]
       },
       {
         title: "Learn more",
         id: "basic-nav-dropdown-lm",
-        items:[
-          {content:"BLOGS", option:"/blogs/ALL"},
-          {content:"PRESS",option: "/press"},
-          {content:"About Us",option: "/about"},
-          {content:"FAQ", option:'/faq'}
+        items: [
+          { content: "BLOGS", option: "/blogs/ALL" },
+          { content: "PRESS", option: "/press" },
+          { content: "About Us", option: "/about" },
+          { content: "FAQ", option: '/faq' }
         ]
       }
     ]
@@ -513,29 +517,25 @@ class NavBar extends Component {
     return (
       <>
         {
-          dropDownData.map((data)=>{
-            console.log("DATA ",data)
-            return(
+          dropDownData.map((data) => {
+            return (
               <NavDropdown
-              title={data.title}
-              id={data.id}
-              className={data.className || ''}
+                title={data.title}
+                id={data.id}
+                className={data.className || ''}
               >
                 {
                   data.talkNow && TalkNow
                 }
                 {
-                  data.items.filter((item)=> item?.option).map((item)=>{
-                    console.log("ITEMS ",item)
-                    return dropDownOption(item.option ,item?.content)
+                  data.items.filter((item) => item?.option).map((item) => {
+                    return dropDownOption(item.option, item?.content)
                   })
                 }
               </NavDropdown>
             )
           })
         }
-        
-        {/* <Nav.Link>Donate</Nav.Link>, */}
       </>
     )
   }
@@ -775,7 +775,7 @@ class NavBar extends Component {
                                 <span>SWITCH TO CORPORATE</span>
                               </NavDropdown.Item>
                             ) : null}
-                          {getLocalStorage("customerInfo") ? (
+                          {getLocalStorage("customerInfo") || getLocalStorage("userInfo") ? (
                             <NavDropdown.Item
                               href="#"
                               onClick={() =>

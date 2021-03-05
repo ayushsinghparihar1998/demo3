@@ -13,6 +13,7 @@ import Footer from "../core/footer";
 import Slider from "react-slick";
 import { Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 class PlanDetailsEat extends Component {
   constructor(props) {
@@ -34,6 +35,10 @@ class PlanDetailsEat extends Component {
   };
 
   handleShow = () => {
+    const checkLoginStatus = (getLocalStorage("customerInfo") || getLocalStorage("userInfo"))
+    if(checkLoginStatus)
+    this.handlePath()
+    else
     this.setState({ show: true });
   };
 
@@ -70,9 +75,7 @@ class PlanDetailsEat extends Component {
   };
 
   handlePath() {
-    this.props.history.push({
-      pathname: "coming-soon",
-    });
+    this.props.history.push("/coming-soon");
   }
   render() {
     const settingstwo = {
@@ -302,7 +305,7 @@ class PlanDetailsEat extends Component {
                   onClick={this.handleClose}
                 >
                   CANCEL
-                  </Button>
+                </Button>
                 <Button
                   type="button"
                   className="btnTyp5"

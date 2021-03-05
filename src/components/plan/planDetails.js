@@ -27,6 +27,7 @@ import logopink from "../../assets/images/elplogopink.png";
 
 import YouTube from "react-youtube";
 import validator from "validator";
+import { getLocalStorage } from "../../common/helpers/Utils";
 
 class PlanDetails extends Component {
   constructor(props) {
@@ -45,6 +46,10 @@ class PlanDetails extends Component {
     this.handleShow2 = this.handleShow2.bind(this);
   }
   handleShow2 = () => {
+    const checkLoginStatus = (getLocalStorage("customerInfo") || getLocalStorage("userInfo"))
+    if(checkLoginStatus)
+    this.handlePath()
+    else
     this.setState({ show4: true });
   };
 
@@ -154,9 +159,7 @@ class PlanDetails extends Component {
     );
   };
   handlePath() {
-    this.props.history.push({
-      pathname: "coming-soon",
-    });
+    this.props.history.push("/coming-soon");
   }
   setplay = (flag) => {
     this.setState({

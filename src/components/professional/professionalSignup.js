@@ -5,14 +5,10 @@ import {
   Row,
   Col,
   Form,
-  Modal,
   Image,
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
-import { connect } from "react-redux";
-import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
-import moment from "moment";
 import { Link } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -20,7 +16,6 @@ import validateInput from "../../common/validations/validationProfessionalSignup
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
 import constant from "../../constant";
-import UploadDetail from "../../assets/images/upload_detail.svg";
 
 class ProfessionalSignup extends Component {
   constructor(props) {
@@ -411,13 +406,13 @@ class ProfessionalSignup extends Component {
                             onChange={(e) => this.handleChange(e)}
                             maxLength={100}
                           />
-                          <div
+                          {/* <div
                             className={`alignLeft  ${
                               errors.email ? "error " : "d-none "
                             }`}
                           >
                             {errors.email}
-                          </div>
+                          </div> */}
                         </Form.Group>
                       </Col>
 
@@ -437,13 +432,13 @@ class ProfessionalSignup extends Component {
                             onChange={(e) => this.handleChange(e)}
                             maxLength={40}
                           />
-                          <div
+                          {/* <div
                             className={`alignLeft  ${
                               errors.password ? "error " : "d-none "
                             }`}
                           >
                             {errors.password}
-                          </div>
+                          </div> */}
                         </Form.Group>
                       </Col>
                       <Col md={6}>

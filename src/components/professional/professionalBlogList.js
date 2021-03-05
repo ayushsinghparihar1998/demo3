@@ -20,6 +20,7 @@ import YouTube from "react-youtube";
 import {
   getLocalStorage,
   setLocalStorage,
+  showErrorMessage,
 } from "../../common/helpers/Utils";
 
 class ProfessionalBlogList extends Component {
@@ -276,6 +277,12 @@ class ProfessionalBlogList extends Component {
   };
 
   subscribeNewsLatterHandler = async () => {
+    console.log("STATTEE  " ,this.state.subscribeMail)
+    if(!this.state.subscribeMail)
+    {
+      showErrorMessage("Please enter a valid email id")
+    }
+    else
     ELPRxApiService("subscribe", { email: this.state.subscribeMail })
       .then((res) => {
         this.setState({ subscribeMail: "" });

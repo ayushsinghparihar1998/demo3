@@ -43,7 +43,7 @@ class Myprofile extends Component {
   renderUserRole = () =>{
     let userData = this.state.userData ? this.state.userData : {};
     switch(parseInt( userData.u_role_id)){
-      case CONSTANTS.ROLES.LISTNER : return 'Listner'
+      case CONSTANTS.ROLES.LISTNER : return 'Listener'
       case CONSTANTS.ROLES.USER : return "Member"
       case CONSTANTS.ROLES.PROFESSIONAL : return "Professional"
       case CONSTANTS.ROLES.SUPER_ADMIN : return "Admin"
