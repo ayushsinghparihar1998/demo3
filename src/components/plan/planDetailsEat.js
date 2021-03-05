@@ -25,6 +25,7 @@ class PlanDetailsEat extends Component {
     };
   }
   componentDidMount = () => {
+    console.log(" this.props.match", this.props.match.params.name);
     this.getplanlist_bycategory(1, this.props.match.params.name);
     setTimeout(() => {
       this.getplanlist_bycategory(2, this.props.match.params.name);

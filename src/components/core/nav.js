@@ -18,18 +18,11 @@ import { Link, NavLink, Router } from "react-router-dom";
 import logosmain from "../../assets/images/logos.png";
 import logo from "../../assets/images/elplogos.png";
 import logopink from "../../assets/images/elplogopink.png";
-import insta from "../../assets/images/insta.svg";
 import { ToastContainer, toast } from "react-toastify";
 import { actionLogout, actionLogoutSuccess } from "../../common/redux/actions";
-import fb from "../../assets/images/fb.svg";
-import twit from "../../assets/images/twit.svg";
-import linkedin from "../../assets/images/linkedin.svg";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 import Mailicon from "../../assets/images/mail_icon.svg";
 import Bellicon from "../../assets/images/bell_icons.svg";
-import Msgbox from "../../assets/images/msg_box.svg";
-import Masklayer from "../../assets/images/mask_layer.png";
-import Signup from "../jsx/listenersignup/signup";
 import ProfessionalSignup from "../signup/professionalSignup";
 import UserSignup from "../signup/userSignup";
 import { getLocalStorage, setLocalStorage } from "../../common/helpers/Utils";
@@ -415,12 +408,137 @@ class NavBar extends Component {
     });
   };
   changepath = (path, backValue) => {
-    console.log(path);
+    console.log(path, backValue, this.props.history);
     if (backValue) {
       setLocalStorage("blog_category", backValue);
     }
+    console.log(getLocalStorage("blog_category"));
     this.props.history.push(path);
   };
+  /**
+   * Render's Drop Down
+   * @param {String} strategy - For Home page 
+   */
+  dropDownRender = (strategy) => {
+    /**
+     * Adds to Header Section AND Items Refer to Drop Down 
+     */
+    const dropDownData = [
+      {
+        title: "EAT",
+        id: "basic-nav-dropdown",
+        className: "eatDrop",
+        items:[{option:"Eat"}]
+      },
+      {
+        title: "LUV",
+        id: "basic-nav-dropdown2",
+        className: "eatDrop",
+        items:[{option:"Luv"}]
+      },
+      {
+        title: "PRAY",
+        id: "basic-nav-dropdown3",
+        className: "eatDrop",
+        items:[{option:"Pray"}]
+      },
+      {
+        title: "ELNP(Holistic)",
+        id: "basic-nav-dropdown4",
+        className: "Holistics",
+        talkNow: true,
+        items:[
+          {content:"SUBSCRIPTION PLANS", option:"/planlistholistic"},
+          {content:"BLOGS", option:"/blogs/ALL"},
+          {content:"ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC"}
+        ]
+      },
+      {
+        title:"HELP SOMEONE",
+        id:"basic-nav-dropdown5",
+        items:[
+          strategy || getLocalStorage("customerInfo")?.u_role_id !== constant.roles.CORPORATE_CUSTOMER 
+          ? {content:"DONATE TIME",option:"/becomeListener"} : {},
+          {content:"DONATE MONEY" , option : "/campaign"}
+        ]
+      },
+      {
+        title: "Learn more",
+        id: "basic-nav-dropdown-lm",
+        items:[
+          {content:"BLOGS", option:"/blogs/ALL"},
+          {content:"PRESS",option: "/press"},
+          {content:"About Us",option: "/about"},
+          {content:"FAQ", option:'/faq'}
+        ]
+      }
+    ]
+    const TalkNow = strategy && (
+      <NavDropdown.Item onClick={this.handleModal}>
+        TALK NOW
+      </NavDropdown.Item>
+    )
+    const dropDownOption = (option, content) => {
+      //add Single Item
+      if (content) {
+        return (
+          <NavDropdown.Item href={option}>
+            {content}
+          </NavDropdown.Item>
+        )
+      }
+      //Add Predefine Item
+      return (
+        <>
+          {TalkNow}
+          <NavDropdown.Item href={"/planlist/".concat(option)} //{"/planlist/Eat"}
+          >
+            SUBSCRIPTION PLANS
+            </NavDropdown.Item>
+          <NavDropdown.Item
+            href={"/blogs/".concat(option.toUpperCase())} //"/blogs/EAT"
+          // onClick={() => this.changepath("/blogs/EAT", "EAT")}
+          >
+            BLOGS
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            href={"/assessmentTests/".concat(option.toUpperCase())}
+          // href={"/assessmentTests/EAT"}
+          >
+            ASSESSMENT TESTS
+          </NavDropdown.Item>
+        </>
+      )
+    }
+    return (
+      <>
+        {
+          dropDownData.map((data)=>{
+            console.log("DATA ",data)
+            return(
+              <NavDropdown
+              title={data.title}
+              id={data.id}
+              className={data.className || ''}
+              >
+                {
+                  data.talkNow && TalkNow
+                }
+                {
+                  data.items.filter((item)=> item?.option).map((item)=>{
+                    console.log("ITEMS ",item)
+                    return dropDownOption(item.option ,item?.content)
+                  })
+                }
+              </NavDropdown>
+            )
+          })
+        }
+        
+        {/* <Nav.Link>Donate</Nav.Link>, */}
+      </>
+    )
+  }
   render() {
     return (
       <div className="mj_nav">
@@ -482,386 +600,57 @@ class NavBar extends Component {
               </Nav>
             ) : (
                 <Nav className="ml-auto">
+                  {/* 
+                  roles: {
+        LISTENER: '1',
+        PROFESSIONALS: '2',
+        CUSTOMERS: '3',
+        SUPER_ADMIN: '4',
+        CORPORATE_CUSTOMER: '5',
+    } */}
                   {
-                    getLocalStorage("userInfo") || getLocalStorage("userInfoProff") || getLocalStorage("customerInfo")
-                      ?
-                      [
-                        getLocalStorage("customerInfo") &&
-                          getLocalStorage("customerInfo").u_role_id ===
-                          constant.roles.CORPORATE_CUSTOMER ? (
-                            <>
-                              <a
-                                onClick={() =>
-                                  this.verifyInCallNavigation(
-                                    "/professionalListing"
-                                  )
-                                }
-                                className="nav-link"
-                              >
-                                Professional Help
-                          </a>
-                              <a
-                                onClick={() =>
-                                  this.verifyInCallNavigation(
-                                    "/listener-browse"
-                                  )
-                                }
-                                className="nav-link"
-                              >
-                                Browse Listener
-                              </a>
-                              <NavDropdown
-                                title="EAT"
-                                id="basic-nav-dropdown"
-                                className="eatDrop"
-                              >
-                                
-                                <NavDropdown.Item href={"/planlist/Eat"}>
-                                  SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item
-                                  onClick={() => this.changepath("/blogs/EAT", "EAT")}
-                                >
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/assessmentTests/EAT"}>
-                                  ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                              </NavDropdown>
-                              <NavDropdown
-                                title="LUV"
-                                id="basic-nav-dropdown2"
-                                className="eatDrop"
-                              >
-                                
-                                
-                                <NavDropdown.Item href={"/planlist/Luv"}>
-                                  SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/assessmentTests/LUV"}>
-                                  ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "}
-                              </NavDropdown>
-                              <NavDropdown
-                                title="PRAY"
-                                id="basic-nav-dropdown3"
-                                className="eatDrop"
-                              >
-                                
-                                <NavDropdown.Item href={"/planlist/Pray"}>
-                                  SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/assessmentTests/PRAY"}>
-                                  ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                              </NavDropdown>
-                              <NavDropdown
-                                title="ELNP(Holistic)"
-                                id="basic-nav-dropdown4"
-                                className="Holistics"
-                              >
-                                
-                                <NavDropdown.Item href={"/planlistholistic"}>
-                                  SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
-                                  ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                              </NavDropdown>
-                              <NavDropdown
-                                title="HELP SOMEONE"
-                                id="basic-nav-dropdown5"
-                              >
-                                <NavDropdown.Item href={"/becomeListener"}>
-                                  DONATE TIME
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/campaign"}>
-                                  DONATE MONEY
-                        </NavDropdown.Item>
-                              </NavDropdown>
-
-                              <NavDropdown
-                                title="Learn more"
-                                id="basic-nav-dropdown-lm"
-                              >
-                                <NavDropdown.Item href={"/blogs/ALL"}>
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/press"}>
-                                  PRESS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/about"}>
-                                  About Us
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                              </NavDropdown>
-                              {/* <Nav.Link>Donate</Nav.Link>, */}
-                              <NavDropdown
-                                title="Learn more"
-                                id="basic-nav-dropdown-lm"
-                              >
-                                <NavDropdown.Item href={"/blogs/ALL"}>
-                                  BLOGS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/press"}>
-                                  PRESS
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/about"}>
-                                  About Us
-                        </NavDropdown.Item>
-                                <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                              </NavDropdown>
-                            </>
-                          ) : null,
-
-                      ]
-                      : "",
-
+                    // console.log("customerInfo", getLocalStorage("customerInfo"), getLocalStorage("customerInfo")?.u_role_id ===
+                    //   constant.roles.CORPORATE_CUSTOMER)//u_role_id: "5"
+                  }
+                  {
+                    // console.log("userInfo", getLocalStorage("userInfo")) //u_role_id: "1"
+                  }
+                  {
+                    // console.log("userInfoProff", getLocalStorage("userInfoProff"))
+                  }
+                  {
+                    getLocalStorage("customerInfo")?.u_role_id ===
+                      constant.roles.CORPORATE_CUSTOMER ? (
+                        <>
+                          <a
+                            onClick={() =>
+                              this.verifyInCallNavigation(
+                                "/professionalListing"
+                              )
+                            }
+                            className="nav-link"
+                          >
+                            Professional Help
+                    </a>
+                          <a
+                            onClick={() =>
+                              this.verifyInCallNavigation(
+                                "/listener-browse"
+                              )
+                            }
+                            className="nav-link"
+                          >
+                            Browse Listener
+                        </a>
+                        </>
+                      ) : null
+                  }
+                  {
                     getLocalStorage("userInfoProff") ||
                       getLocalStorage("userInfo") || getLocalStorage("customerInfo")
-                      ? [
-                        (
-                          <>
-
-                            <NavDropdown
-                              title="EAT"
-                              id="basic-nav-dropdown"
-                              className="eatDrop"
-                            >
-                              
-                              <NavDropdown.Item href={"/planlist/Eat"}>
-                                SUBSCRIPTION PLANS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item
-                                onClick={() => this.changepath("/blogs/EAT", "EAT")}
-                              >
-                                BLOGS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/assessmentTests/EAT"}>
-                                ASSESSMENT TESTS
-                      </NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown
-                              title="LUV"
-                              id="basic-nav-dropdown2"
-                              className="eatDrop"
-                            >
-                              
-                              <NavDropdown.Item href={"/planlist/Luv"}>
-                                SUBSCRIPTION PLANS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
-                                BLOGS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/assessmentTests/LUV"}>
-                                ASSESSMENT TESTS
-                      </NavDropdown.Item>{" "}
-                            </NavDropdown>
-                            <NavDropdown
-                              title="PRAY"
-                              id="basic-nav-dropdown3"
-                              className="eatDrop"
-                            >
-                              
-                              <NavDropdown.Item href={"/planlist/Pray"}>
-                                SUBSCRIPTION PLANS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
-                                BLOGS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/assessmentTests/PRAY"}>
-                                ASSESSMENT TESTS
-                      </NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown
-                              title="ELNP(Holistic)"
-                              id="basic-nav-dropdown4"
-                              className="Holistics"
-                            >
-                              
-                              <NavDropdown.Item href={"/planlistholistic"}>
-                                SUBSCRIPTION PLANS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
-                                BLOGS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
-                                ASSESSMENT TESTS
-                      </NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown
-                              title="HELP SOMEONE"
-                              id="basic-nav-dropdown5"
-                            >
-                              <NavDropdown.Item href={"/becomeListener"}>
-                                DONATE TIME
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/campaign"}>
-                                DONATE MONEY
-                      </NavDropdown.Item>
-                            </NavDropdown>
-
-                            <NavDropdown
-                              title="Learn more"
-                              id="basic-nav-dropdown-lm"
-                            >
-                              <NavDropdown.Item href={"/blogs/ALL"}>
-                                BLOGS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/press"}>
-                                PRESS
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/about"}>
-                                About Us
-                      </NavDropdown.Item>
-                              <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                            </NavDropdown>
-                            {/* <Nav.Link>Donate</Nav.Link>, */}
-
-                          </>
-                        )
-                        // <a
-                        //   onClick={() =>
-                        //     this.verifyInCallNavigation("/calendar")
-                        //   }
-                        //   className="nav-link"
-                        // >
-                        //   My Schedule
-                        //     </a>,
-                        // <a
-                        //   onClick={() => this.verifyInCallNavigation("/")}
-                        //   className="nav-link"
-                        // >
-                        //   Dashboard
-                        //   </a>,
-                        // <a
-                        //   onClick={() => this.verifyInCallNavigation("/campaign")}
-                        //   className="nav-link donatebtns"
-                        // >
-                        //   Donate
-                        //   </a>,
-                        // <a
-                        //   onClick={() =>
-                        //     this.verifyInCallNavigation("/assessmentTests/EAT")
-                        //   }
-                        //   className="nav-link donatebtns"
-                        // >
-                        //   Assessment Tests
-                        //   </a>,
-                      ]
-                      : [
-                        <NavDropdown
-                          title="EAT"
-                          id="basic-nav-dropdown"
-                          className="eatDrop"
-                        >
-                          <NavDropdown.Item onClick={this.handleModal}>
-                            TALK NOW
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/planlist/Eat"}>
-                            SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item
-                            onClick={() => this.changepath("/blogs/EAT", "EAT")}
-                          >
-                            BLOGS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/assessmentTests/EAT"}>
-                            ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                        </NavDropdown>,
-                        <NavDropdown
-                          title="LUV"
-                          id="basic-nav-dropdown2"
-                          className="eatDrop"
-                        >
-                          <NavDropdown.Item onClick={this.handleModal}>
-                            TALK NOW
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/planlist/Luv"}>
-                            SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item onClick={() => this.changepath("/blogs/LUV", "LUV")}>
-                            BLOGS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/assessmentTests/LUV"}>
-                            ASSESSMENT TESTS
-                        </NavDropdown.Item>{" "}
-                        </NavDropdown>,
-                        <NavDropdown
-                          title="PRAY"
-                          id="basic-nav-dropdown3"
-                          className="eatDrop"
-                        >
-                          <NavDropdown.Item onClick={this.handleModal}>
-                            TALK NOW
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/planlist/Pray"}>
-                            SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item onClick={() => this.changepath("/blogs/PRAY", "PRAY")}>
-                            BLOGS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/assessmentTests/PRAY"}>
-                            ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                        </NavDropdown>,
-                        <NavDropdown
-                          title="ELNP(Holistic)"
-                          id="basic-nav-dropdown4"
-                          className="Holistics"
-                        >
-                          <NavDropdown.Item onClick={this.handleModal}>
-                            TALK NOW
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/planlistholistic"}>
-                            SUBSCRIPTION PLANS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item onClick={() => this.changepath("/blogs/ALL", "ALL")}>
-                            BLOGS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/assessmentTests/HOLISTIC"}>
-                            ASSESSMENT TESTS
-                        </NavDropdown.Item>
-                        </NavDropdown>,
-                        <NavDropdown
-                          title="HELP SOMEONE"
-                          id="basic-nav-dropdown5"
-                        >
-                          <NavDropdown.Item href={"/becomeListener"}>
-                            DONATE TIME
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/campaign"}>
-                            DONATE MONEY
-                        </NavDropdown.Item>
-                        </NavDropdown>,
-
-                        <NavDropdown
-                          title="Learn more"
-                          id="basic-nav-dropdown-lm"
-                        >
-                          <NavDropdown.Item href={"/blogs/ALL"}>
-                            BLOGS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/press"}>
-                            PRESS
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/about"}>
-                            About Us
-                        </NavDropdown.Item>
-                          <NavDropdown.Item href={"/faq"}>FAQ</NavDropdown.Item>
-                        </NavDropdown>
-                        //   <Nav.Link>Donate</Nav.Link>,
-                      ]}
+                      ? this.dropDownRender()
+                      : this.dropDownRender("HomePage")
+                  }
                   {getLocalStorage("userInfo") ||
                     getLocalStorage("userInfoProff") ||
                     getLocalStorage("customerInfo") ? (

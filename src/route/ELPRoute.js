@@ -177,7 +177,11 @@ class ELPRoute extends Component {
             path="/viewAssessmentTest/:id/:type"
             component={ViewAssessmentTest}
           />
-          <PublicRoute path="/planlist/:name" component={PlanDetailsEat} />
+          <Route 
+            path="/planlist/:name"
+            component={PlanDetailsEat}
+          />
+          {/* <PublicRoute path="/planlist/:name" component={PlanDetailsEat} /> */}
           <Route path="/myAssessmentTest" component={MyAssessmentTest} />
 
           <PublicRoute
@@ -336,7 +340,7 @@ class ELPRoute extends Component {
           />
           <Route
             path="/blogs/:name"
-            render={(props) => <ProfessionalBlogList {...props} />}
+            render={(props) =>{console.log("TO RENDER " ,props); return (<ProfessionalBlogList {...props} />)}}
           />
           <PrivateRouteProff
             path="/userDashboardproff"

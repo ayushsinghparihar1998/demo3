@@ -811,7 +811,7 @@ class Adminlistener extends Component {
         
       }
       //Render This after updation Whatso ever is result
-      this.superadminget_assessmenttestlist(1, 10, 2);
+      this.superadminget_assessmenttestlist(1, 10, this.state.as_type);
     }
     catch (err) {
       console.log(err);

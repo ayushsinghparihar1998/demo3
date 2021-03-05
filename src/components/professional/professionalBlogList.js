@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
@@ -14,30 +12,6 @@ import {
 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
-import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Subscribes from "../../assets/images/subscribes.svg";
-import BlogProcessOne from "../../assets/images/p_blogs.svg";
-import BlogProcessTwo from "../../assets/images/p_blogs2.svg";
-import BlogProcessThree from "../../assets/images/p_blogs3.svg";
-import BlogProcessFour from "../../assets/images/p_blogs4.svg";
-import BlogProcessFive from "../../assets/images/blog4.png";
-import BlogProcessSix from "../../assets/images/blog5.svg";
-import BlogProcessSeven from "../../assets/images/blog6.png";
-import BlogProcessNine from "../../assets/images/blogs9.png";
-
-import blogclock from "../../assets/images/blogclock.png";
-import { connect } from "react-redux";
-import ReactStars from "react-rating-stars-component";
-import { Popover } from "antd";
 import ELPRxApiService from "../../common/services/apiService";
 import moment from "moment";
 
@@ -46,12 +20,11 @@ import YouTube from "react-youtube";
 import {
   getLocalStorage,
   setLocalStorage,
-  removeLocalStorage,
 } from "../../common/helpers/Utils";
 
 class ProfessionalBlogList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       blogEat: null,
       blogLuv: null,
@@ -75,17 +48,16 @@ class ProfessionalBlogList extends Component {
   componentDidMount() {
     console.log(
       'getLocalStorage("blog_category")',
-      getLocalStorage("blog_category")
+      getLocalStorage("blog_category"),
+      this.props
     );
     this.setState(
       {
-        tabVal: getLocalStorage("blog_category")
-          ? getLocalStorage("blog_category")
-          : this.props.match.params.name,
+        tabVal: this.props.match.params.name || getLocalStorage("blog_category") ,
       },
       () => {
         // removeLocalStorage("blog_category");
-        console.log(this.props.match.params.name);
+        console.log(this.props.match.params.name , getLocalStorage("blog_category") , this.props.history.location.pathname);
         if (this.state.tabVal == "ALL") {
           console.log("ALLLLLLLLLLLLLLLL");
           this.getBlogAll();

@@ -14,20 +14,21 @@ function validateInput(data) {
   var rg = /^.*[^,]$/i;
   var rg2 = /^(?!.*([.,-])\1)[a-zA-Z0-9\s.,-]+$/;
   // var test = reg.test(value.trim());
-  if (Validator.isEmpty(data.email)) {
-    errors.email = ValidationMessages.email.required;
-  } else if (!Validator.isEmail(data.email)) {
-    errors.email = ValidationMessages.email.invalid;
-  }
+  // if (Validator.isEmpty(data.email)) {
+  //   errors.email = ValidationMessages.email.required;
+  // } 
+  // if (!Validator.isEmail(data.email)) {
+  //   errors.email = ValidationMessages.email.invalid;
+  // }
 
-  if (Validator.isEmpty(data.password)) {
-    errors.password = ValidationMessages.password.required;
-  // } else if (!reg.test(data.password.trim())) {
+  // if (Validator.isEmpty(data.password)) {
+  //   errors.password = ValidationMessages.password.required;
+  // // } else if (!reg.test(data.password.trim())) {
+  // //   errors.password = ValidationMessages.password.passwordPattern;
+  // } 
+  // if (data.password.trim().length < 6) {
   //   errors.password = ValidationMessages.password.passwordPattern;
-  } 
-  else if (data.password.trim().length < 6) {
-    errors.password = ValidationMessages.password.passwordPattern;
-  }
+  // }
 
   if (Validator.isEmpty(data.u_image)) {
     errors.u_image = ValidationMessages.u_image.required;
