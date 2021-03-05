@@ -230,7 +230,7 @@ class PlanDetails extends Component {
                   <div className="subscriptionDetails pr-3">
                     <div className="fs28 fw600 col8">DISCOVER A HEALTHIER YOU</div>
                     <div className="fs15 fw400 col14 mt-3 mb-4 pb-1">
-                    Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our our offerings and features for each subscription plan.{" "} 
+                    Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our offerings and features for each subscription plan.{" "} 
                     </div>
 
                     <Form>
@@ -479,9 +479,7 @@ class PlanDetails extends Component {
                     <div className="subscriptionDetails p-3">
                       <div className="fs36 fw600 col8">ELNP FOR BUSINESS</div>
                       <div className="fs15 fw400 col14 mt-3 mb-2 pb-1">
-                        It is a long established fact that a reader will be
-                        distracted by the readable content of a page when
-                        looking at its layout.{" "}
+                        A Holistic approach to enhance employee wellbeing and productivity. {" "}
                       </div>
 
                       <Form>
