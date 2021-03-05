@@ -827,6 +827,14 @@ img {
     position: relative; 
 }
 
+.custom-popUp.confirmation-box {
+    .modal-body {
+        .fs25.nt-4.fw500.col14.mb-4 {
+            
+        }
+    }
+}
+
 @media (max-width: 1400px) { 
     .main_baner {
         .header2banner {

@@ -512,7 +512,7 @@ class AssessmentTestListTwo extends Component {
               </div>
               <div className="fw600 fs28 mb-3">Alert!</div>
               <div className="col14 fs20 fw500 mb-4">
-                  Please login to buy our Lifestyle subscription plans
+                  Please Login to take the test 
               </div>
               <div className="planmodalBtn mt-5 mb-4">  
                   <Button

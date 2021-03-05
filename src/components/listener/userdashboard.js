@@ -779,8 +779,8 @@ class Userdashboard extends Component {
                            <div className="layout_box text-center mt-3 mb-4 p-4">
                               <Image src={Educationtwo} alt="" className="mb-4" />
                               <div className="col9 fs44 fw600 mb-2">Sorry</div>
-                              <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
-                                 please take the survey again or contact Admin
+                              <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">  
+                                 Please take the survey again or contact Admin   
                                </div>
 
                               <CircularProgressbar minValue={0} maxValue={100} styles={{
