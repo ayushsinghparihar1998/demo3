@@ -296,7 +296,7 @@ class PlanDetailsEat extends Component {
               subscription plans
               </div>
               <div className="planmodalBtn mt-5 mb-4">
-                <Button
+                <Button 
                   type="button"
                   className="btnTyp5 mr-5 transbtn"
                   onClick={this.handleClose}

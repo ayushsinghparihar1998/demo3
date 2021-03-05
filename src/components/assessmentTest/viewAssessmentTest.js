@@ -148,6 +148,14 @@ ar_u_id: "549" */}
                             {asstDetail && asstDetail.ar_skip_que}
                           </div>
                         </div>
+                        <div>
+                          <div className="fs16 fw400 col14 mb-3">
+                            Total Marks
+                          </div>
+                          <div className="fs18 fw500 col14">
+                            65
+                          </div>
+                        </div>
                       </div>
                       <div className="scoreSuggetion">
                         <div className="fs18 col8 fw500 mb-2">SUGGESTION</div>
