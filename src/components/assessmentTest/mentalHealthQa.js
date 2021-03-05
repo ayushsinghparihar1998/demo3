@@ -365,8 +365,7 @@ as_weightage: "1" */}
             </div>
             <div className="fw600 fs28 mb-3">Alert!</div>
             <div className="col14 fs20 fw500 mb-4">
-              Your entries are final and if you submit the test, your report
-              will be generated and you can’t change them.
+                Your entries are final and if you submit the test, your report will be generated.
             </div>
             <Button
               type="button"

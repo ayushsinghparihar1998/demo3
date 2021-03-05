@@ -1111,7 +1111,7 @@ button.btnDownloads {
         }
         span {
             display: block;
-            max-height: 66px;  
+            max-height: 76px;  
             overflow: hidden;
             p {
                 margin-bottom: 18px; 
@@ -1158,6 +1158,18 @@ button.btnDownloads {
     }
     .professor_search { 
         padding: 10px 30px 0;  
+        form.p_form { 
+            .checkCategory {
+                .form-group { 
+                    .checkthree:nth-child(1) { 
+                        order: 2;
+                    }
+                    .checkthree:nth-child(2) { 
+                        order: 1; 
+                    }
+                }
+            }
+        }
         .checkone.form-check {  
             &.checkSet {
                 label {
@@ -2564,6 +2576,7 @@ ul.PlanAbouts {
 
     .adminProfessinal {
         .professor_search {
+            
             .pro_cbtn {
                 button.btnTyp5 {
                     font-size: 14px; 

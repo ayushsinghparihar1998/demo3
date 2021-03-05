@@ -228,11 +228,9 @@ class PlanDetails extends Component {
               <Row>
                 <Col md={5}>
                   <div className="subscriptionDetails pr-3">
-                    <div className="fs36 fw600 col8">TODAY’S THE DAY.</div>
+                    <div className="fs28 fw600 col8">DISCOVER A HEALTHIER YOU</div>
                     <div className="fs15 fw400 col14 mt-3 mb-4 pb-1">
-                      It is a long established fact that a reader will be
-                      distracted by the readable content of a page when looking
-                      at its layout.{" "}
+                    Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our our offerings and features for each subscription plan.{" "} 
                     </div>
 
                     <Form>
