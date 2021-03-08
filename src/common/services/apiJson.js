@@ -1221,6 +1221,13 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
+  superadminchangeprofessionalpassword: {
+    url: "elp/superadminchangeprofessionalpassword",
+    method: "POST",
+    data: { user_id: "", password: "" },
+    showResultMessage: true,
+    showErrorMessage: true,
+  },
   superadmingetprofessioanalcategory: {
     url: "elp/superadmingetprofessioanalcategory",
     method: "POST",

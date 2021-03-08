@@ -393,7 +393,7 @@ class ProfessionalSignup extends Component {
                       <Col md={6}>
                         <Form.Group>
                           <Form.Label className="fs20 fw600 col14">
-                            Email Address
+                            Email Address*
                           </Form.Label>
                           <Form.Control
                             type="email"
@@ -406,20 +406,20 @@ class ProfessionalSignup extends Component {
                             onChange={(e) => this.handleChange(e)}
                             maxLength={100}
                           />
-                          {/* <div
+                          <div
                             className={`alignLeft  ${
                               errors.email ? "error " : "d-none "
                             }`}
                           >
                             {errors.email}
-                          </div> */}
+                          </div>
                         </Form.Group>
                       </Col>
 
                       <Col md={6}>
                         <Form.Group>
                           <Form.Label className="fs20 fw600 col14">
-                            Password
+                            Password*
                           </Form.Label>
                           <Form.Control
                             type="text"
@@ -432,13 +432,13 @@ class ProfessionalSignup extends Component {
                             onChange={(e) => this.handleChange(e)}
                             maxLength={40}
                           />
-                          {/* <div
+                          <div
                             className={`alignLeft  ${
                               errors.password ? "error " : "d-none "
                             }`}
                           >
                             {errors.password}
-                          </div> */}
+                          </div>
                         </Form.Group>
                       </Col>
                       <Col md={6}>

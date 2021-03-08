@@ -48,6 +48,7 @@ class ProfessionalSignup extends Component {
       u_image: "",
       u_bio: "",
       u_area_service: "",
+      u_text_password:"",
 
       professional_keyword: [],
       professional_cat_name: [],
@@ -129,6 +130,7 @@ class ProfessionalSignup extends Component {
           proffDetail,
           // professional_keyword: keyw,
           proffCat,
+          userPassword:proffDetail.u_text_password
         },
         () => {
           console.log("ProffDetail", this.state.proffDetail);
@@ -387,7 +389,7 @@ class ProfessionalSignup extends Component {
       password: this.state.userPassword,
       user_id: proffDetail.id ? proffDetail.id : "",
     };
-    ELPViewApiService("superadminchangepassword", data).then((result) => {
+    ELPViewApiService("superadminchangeprofessionalpassword", data).then((result) => {
       console.log("actionChangePassword", result);
     });
   };
@@ -528,10 +530,11 @@ class ProfessionalSignup extends Component {
                       /> */}
                       <div className="motivate_pwd">
                         <Form.Control
-                          type="password"
+                          type="text"
                           name="userPassword"
                           onChange={this.handlePasswordChange}
-                          value={this.state.userPassword}
+                          // placeholder={this.state.proffDetail.u_text_password}
+                          value={this.state.userPassword }
                           minLength="8"
                           maxLength="15"
                           inputProps={{ maxLength: 15 }}

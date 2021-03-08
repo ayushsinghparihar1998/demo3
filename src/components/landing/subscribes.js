@@ -27,7 +27,7 @@ class SubscribeHere extends Component {
     let email = this.state.email;
     errors =
       email.length == 0
-        ? "Please Enter email id"
+        ? "Please enter a valid email Id"
         : !Validator.isEmail(email)
         ? "Please enter a valid email"
         : "";
