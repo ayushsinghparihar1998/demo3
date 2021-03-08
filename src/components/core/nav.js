@@ -462,7 +462,7 @@ class NavBar extends Component {
         id: "basic-nav-dropdown5",
         items: [
           sumedUpCheck
-          ? { content: "DONATE TIME", option: "/becomeListener" } : {},
+          ? { content: "DONATE TIME", option: "/coming-soon" } : {},
           { content: "DONATE MONEY", option: "/campaign" }
         ]
       },
