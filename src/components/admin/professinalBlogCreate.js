@@ -456,7 +456,7 @@ class ProfessinalBlogCreate extends Component {
                         maxLength={100}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {errors.writtenby}
+                        {errors.writtenby ? "Please enter the Author's name." : null}
                       </div>
                     </Form.Group>
 

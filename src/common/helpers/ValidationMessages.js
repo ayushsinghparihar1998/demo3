@@ -42,10 +42,10 @@ export default {
     required: "Please upload a profile image.",
   },
   u_bio: {
-    required: "Please write in brief about the professional.",
+    required: "Please write a bio about the professional.",
   },
   u_lang: {
-    required: "Please enter a language.",
+    required: "Please enter atleast one language.",
     validtext: "Please enter some valid text.",
   },
   u_education: {
@@ -119,7 +119,8 @@ export default {
     required: "Please write a brief description.",
   },
   writtenby: {
-    required: "Please enter the name by whom the blog is written by.",
+    required: "Please enter the Author/Publication name.",
+    blogRequired:"Please enter the Author's name."
   },
   cat: {
     required: "Please select atleast one category.",
