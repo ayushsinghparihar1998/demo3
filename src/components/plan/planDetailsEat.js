@@ -212,7 +212,7 @@ class PlanDetailsEat extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                BYCONDITIONS SUBSCRIPTION PLANS
+                BY CONDITION SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.conditionData &&
