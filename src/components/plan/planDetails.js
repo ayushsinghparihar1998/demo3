@@ -47,15 +47,15 @@ class PlanDetails extends Component {
   }
   handleShow2 = () => {
     const checkLoginStatus = (getLocalStorage("customerInfo") || getLocalStorage("userInfo"))
-    if(checkLoginStatus)
-    this.handlePath()
+    if (checkLoginStatus)
+      this.handlePath()
     else
-    this.setState({ show4: true });
+      this.setState({ show4: true });
   };
 
   handleClose2 = () => {
     this.setState({ show4: false });
-  }; 
+  };
   componentDidMount = () => {
     this.getplanlist_holisticbycondition();
     this.getplanlist_holisticdaily();
@@ -233,7 +233,7 @@ class PlanDetails extends Component {
                   <div className="subscriptionDetails pr-3">
                     <div className="fs28 fw600 col8">DISCOVER A HEALTHIER YOU</div>
                     <div className="fs15 fw400 col14 mt-3 mb-4 pb-1">
-                    Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our offerings and features for each subscription plan.{" "} 
+                      Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our offerings and features for each subscription plan.{" "}
                     </div>
 
                     <Form>
@@ -369,7 +369,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
                               <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
-                                  Buy Now
+                                Buy Now
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -384,7 +384,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                    By Condition Subscription Plans  
+                  BY CONDITION SUBSCRIPTION PLANS
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataByCondition &&
@@ -400,7 +400,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
 
-                              <div className="fs24 fw600 col29 text-center text-capitalize"> 
+                              <div className="fs24 fw600 col29 text-center text-capitalize">
                                 {item.pl_type == 1 ? (
                                   item.plan_category.length == 3 ? (
                                     <span className="holisticcat">
@@ -431,8 +431,8 @@ class PlanDetails extends Component {
                                       })
                                     )
                                 ) : (
-                                  "By Condition"
-                                )}
+                                    "By Condition"
+                                  )}
                               </div>
                             </div>
                             <div className="plantwo text-center">
@@ -464,7 +464,7 @@ class PlanDetails extends Component {
                                 </div>
                               </div>
                               <Button onClick={this.handleShow} className="btnType1 d-block w-100 mt-4">
-                                  Buy Now
+                                Buy Now
                               </Button>
                               {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
@@ -489,8 +489,8 @@ class PlanDetails extends Component {
                         <Button
                           variant="primary"
                           className="btnTyp5 mt-3"
-                          type="button" 
-                          onClick={() => this.handleShow2()}  
+                          type="button"
+                          onClick={() => this.handleShow2()}
                         >
                           Get A Quote
                         </Button>
@@ -545,31 +545,31 @@ class PlanDetails extends Component {
               </Button>
             </Modal.Header>
             <Modal.Body>
-              <div className="mb-4 mt-3 d-flex justify-content-center">  
-                {/* <Image src={Alerts} alt="alert" className="" /> */} 
-                {/* <Image src={logosmain} alt="" className="logofirst" />   */}
-                <Image src={logopink} alt="" className="elplogopink" />        
+              <div className="mb-4 mt-3 d-flex justify-content-center">
+                {/* <Image src={Alerts} alt="alert" className="" /> */}
+                <Image src={logosmain} alt="" className="logofirst" />
+                <Image src={logopink} alt="" className="elplogopink" />
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
               <div className="col14 fs20 fw500 mb-4">
-                  Please contact us at <br /> contact@eatluvnpray.com to get a <br /> quote for your organisation 
+                Please contact us at contact <br /> support@eatluvnpray.org to get a quote for your organisation
               </div>
-              {/* <div className="planmodalBtn mt-5 mb-4">  
-                  <Button
-                    type="button"
-                    className="btnTyp5 mr-5 transbtn" 
-                    onClick={this.handleClose2}
-                  >
-                    CANCEL
+              {/* <div className="planmodalBtn mt-5 mb-4">
+                <Button
+                  type="button"
+                  className="btnTyp5 mr-5 transbtn"
+                  onClick={this.handleClose2}
+                >
+                  CANCEL
                   </Button>
-                  <Button
-                    type="button"
-                    className="btnTyp5" 
-                    onClick={() => { this.setState({ redirectLogin: true }) }}
-                  >
-                    LOGIN
+                <Button
+                  type="button"
+                  className="btnTyp5"
+                  onClick={() => { this.setState({ redirectLogin: true }) }}
+                >
+                  LOGIN
                   </Button>
-              </div> */} 
+              </div> */}
             </Modal.Body>
           </Modal>
 
