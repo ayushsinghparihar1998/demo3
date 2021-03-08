@@ -117,12 +117,12 @@ class PlanDetailsEat extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-                LIFESTYLE SUBSCRIPTION PLANS
+                Lifestyle Subscription Plans
               </div>
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                  DAILY SUBSCRIPTION PLANS
+                    Daily Subscription Plans
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dailyData &&
@@ -212,7 +212,7 @@ class PlanDetailsEat extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                BYCONDITIONS SUBSCRIPTION PLANS
+                    By Condition Subscription Plans  
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.conditionData &&
@@ -290,12 +290,12 @@ class PlanDetailsEat extends Component {
             <Modal.Body>
               <div className="mb-4 mt-3 d-flex justify-content-center">
                 {/* <Image src={Alerts} alt="alert" className="" /> */}
-                <Image src={logosmain} alt="" className="logofirst" />
+                {/* <Image src={logosmain} alt="" className="logofirst" /> */}      
                 <Image src={logopink} alt="" className="elplogopink" />
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
               <div className="col14 fs20 fw500 mb-4">
-              Please login to buy our Lifestyle <br />
+              Please login to buy our Lifestyle <br />    
               subscription plans
               </div>
               <div className="planmodalBtn mt-5 mb-4">
@@ -305,8 +305,8 @@ class PlanDetailsEat extends Component {
                   onClick={this.handleClose}
                 >
                   CANCEL
-                </Button>
-                <Button
+                </Button>     
+                <Button 
                   type="button"
                   className="btnTyp5"
                   onClick={() => { this.setState({ redirectLogin: true }) }}

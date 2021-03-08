@@ -226,7 +226,7 @@ class PlanDetails extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-                LIFESTYLE SUBSCRIPTION PLANS
+                  Lifestyle Subscription Plans
               </div>
               <Row>
                 <Col md={5}>
@@ -289,7 +289,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                  DAILY SUBSCRIPTION PLANS
+                  Daily Subscription Plans
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataDaily &&
@@ -384,7 +384,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                BYCONDITIONS SUBSCRIPTION PLANS
+                    By Condition Subscription Plans  
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataByCondition &&
@@ -547,14 +547,14 @@ class PlanDetails extends Component {
             <Modal.Body>
               <div className="mb-4 mt-3 d-flex justify-content-center">  
                 {/* <Image src={Alerts} alt="alert" className="" /> */} 
-                <Image src={logosmain} alt="" className="logofirst" />  
+                {/* <Image src={logosmain} alt="" className="logofirst" />   */}
                 <Image src={logopink} alt="" className="elplogopink" />        
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
               <div className="col14 fs20 fw500 mb-4">
-                  Please contact to <br /> support@eatluvnpray.org for more info  
+                  Please contact us at <br /> contact@eatluvnpray.com to get a <br /> quote for your organisation 
               </div>
-              <div className="planmodalBtn mt-5 mb-4">  
+              {/* <div className="planmodalBtn mt-5 mb-4">  
                   <Button
                     type="button"
                     className="btnTyp5 mr-5 transbtn" 
@@ -569,7 +569,7 @@ class PlanDetails extends Component {
                   >
                     LOGIN
                   </Button>
-              </div>
+              </div> */} 
             </Modal.Body>
           </Modal>
 
