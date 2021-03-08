@@ -226,7 +226,7 @@ class PlanDetails extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-                LIFESTYLE SUBSCRIPTION PLANS
+                  Lifestyle Subscription Plans
               </div>
               <Row>
                 <Col md={5}>
@@ -289,7 +289,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                  DAILY SUBSCRIPTION PLANS
+                  Daily Subscription Plans
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataDaily &&
@@ -384,7 +384,7 @@ class PlanDetails extends Component {
 
               <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                  BY CONDITION SUBSCRIPTION PLANS
+                  By Condition Subscription Plans 
                 </div>
                 <Slider {...settingstwo}>
                   {this.state.dataByCondition &&

@@ -185,7 +185,7 @@ class Plans extends Component {
                             </div>
                           </div>
                         </div>
-                        <div className="planpricing">
+                        <div className="planpricing"> 
                           <div className="w-100 justify-content-between">
                             <div className="fs14 fw500 col29 mt-2 mb-3">
                               {item.pl_desc_details}
@@ -222,7 +222,7 @@ class Plans extends Component {
                               Buy Now
                             </Link> */}
                             <Link> 
-                              Buy Now
+                              Buy Now  
                             </Link> 
                           </Button>
                           {/* <div className="fs14 col29 fw400 text-center mt-2">
@@ -232,7 +232,7 @@ class Plans extends Component {
                       </div>
                     </div>
                   );
-                })}
+                })}      
               {/* <div className="items">
                             <div className="planList">
                                 <div className="planone">
@@ -280,7 +280,7 @@ class Plans extends Component {
             <Modal.Body>
               <div className="mb-4 mt-3 d-flex justify-content-center">  
                 {/* <Image src={Alerts} alt="alert" className="" /> */} 
-                <Image src={logosmain} alt="" className="logofirst" />  
+                {/* <Image src={logosmain} alt="" className="logofirst" />   */}
                 <Image src={logopink} alt="" className="elplogopink" />        
               </div>
               {/* <div className="fw600 fs28 mb-3">Alert!</div> */}
