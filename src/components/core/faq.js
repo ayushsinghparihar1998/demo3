@@ -38,7 +38,57 @@ class Faq extends Component {
                             FAQ about ELNP, Listener & Member Accounts, and more.
                         </div>
                         <div className="QuestionAnswer"> 
-                            <Accordion defaultActiveKey="0">    
+                            <Accordion defaultActiveKey="8">  
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="8">
+                                        What is Eat Luv N Pray Pvt. Ltd.?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="8">
+                                    <Card.Body> 
+                                        Aiming to create a ”Happy Planet” through Eating right, Loving better and Praying to the best of our 
+    capability, we are a lifestyle management organisation that runs solely on the concept of Eat, Love and 
+    Pray since we totally believe in the concept of bringing these three together to create a healthier and 
+    happier place to live in. <br />
+    We use active listening as the base to understand the client pain points and work around them to create 
+    a curated program for them using experts in the respective fields.
+                                   
+
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="9">
+                                        I'm not sure which plan is best for me. Can I talk to a Coach to figure out the best plan for me?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="9">
+                                    <Card.Body> 
+                                    Sure. You can chat with one of our Senior Coaches who will understand your body type, lifestyle, cuisine 
+preferences, weight gain history, medical conditions (if any) & can suggest the best suited plan for you.
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="10">
+                                        Do I get to select the coach or does ELNP assign me one?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="10"> 
+                                    <Card.Body> 
+                                    You will be assigned coaches as per your needs after assessment. If after sometime you want to change 
+a professional for any reason, you can put in a request. 
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="11">
+                                        What are ELNP Kits?
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="11">
+                                    <Card.Body> 
+                                        ELNP Kits are special care packages that you can get for yourself or gift them to a loved one.
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                {/* changes   */}
                                 <Card>
                                     <Accordion.Toggle as={Card.Header} eventKey="0">
                                        What is ELNP Foundation?
@@ -169,6 +219,16 @@ class Faq extends Component {
                                     </div>
                                     <div className="mb-2"><strong>Block:</strong> Cut off communication between you and a listener.</div>
                                     <div className="mb-1"><strong>Report Abuse:</strong> Report the listener for violating terms of service of the website with the appropriate reason. Please use this only if you feel this listener could be harmful for other members as well.</div>
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey="12">
+                                      My question is not listed here
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="12">   
+                                    <Card.Body> 
+                                        Please reach out to us at support@eatluvnpray.com
                                     </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>

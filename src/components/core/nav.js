@@ -679,7 +679,7 @@ class NavBar extends Component {
                                     className="pointer"
                                   />
                                 </span>
-                                <div className="dropdownnotifications">
+                                <div className="dropdownnotifications"> 
                                   {this.state.notificationData.length === 0 && (
                                     <>
                                       <ul className="notes">
@@ -687,8 +687,8 @@ class NavBar extends Component {
                                           <Col md={9}>
                                             {/* {console.log(data)} */}
                                             <div className="col10 fs17 fw400"></div>
-                                            <div className="fs15 col94 fw400">
-                                              No new notification
+                                            <div className="fs15 col94 fw400 text-capitalize"> 
+                                              No notification received yet. 
                                         </div>
                                           </Col>
                                           <Col md={3}>
