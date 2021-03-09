@@ -1,15 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
+import { Button, Container, Row, Col, Image, Form, Modal } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Ritikaimg from "../../assets/images/Ritika.png";
-import Samyukthaimg from "../../assets/images/Samyuktha.png";
-import Shrishtiimg from "../../assets/images/Shrishti.png";
 import Crossbtn from "../../assets/images/blue_cross.svg";
-import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component";
-import { Popover } from 'antd';
 import moment from "moment";
 import ELPRxApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
