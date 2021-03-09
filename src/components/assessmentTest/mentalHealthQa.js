@@ -1,38 +1,21 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
   Form,
-  Tabs,
-  Tab,
   Modal,
 } from "react-bootstrap";
 import Alerts from "../../assets/images/alerts.png";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
-import Editicon from "../../assets/images/edit_icon.svg";
-import Deleteicon from "../../assets/images/delete_icon.svg";
-import blogclock from "../../assets/images/blogclock.png";
-import UserChats from "../../assets/images/user_chat5.svg";
-import Infos from "../../assets/images/infos.png";
-import BlogProcessFive from "../../assets/images/blog4.png";
-import VideoIcon from "../../assets/images/videoIcon.png";
 import Slider from "react-rangeslider";
 
-import constant from "../../constant";
 class MentalhealthQa extends Component {
   constructor() {
     super();
@@ -41,7 +24,7 @@ class MentalhealthQa extends Component {
       show: false,
       show3: false,
       start: 0,
-      end: 4,
+      end: 6,
       asstQaList: [],
       ar_no_attend_que: 0,
       assess_submit: [],
@@ -236,7 +219,7 @@ class MentalhealthQa extends Component {
                       {asstQaList &&
                         asstQaList.map((item, index) => {
                           return index >= this.state.start &&
-                            index <= this.state.end ? (
+                            index <= this.state.end-2 ? (
                             <div className="QuestionList">
                               <div className="col8 fw500 qaList fs18 pb-1">
                                 <strong>Q {index + 1}.</strong>{" "}
