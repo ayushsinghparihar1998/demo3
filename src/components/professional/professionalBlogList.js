@@ -261,7 +261,7 @@ class ProfessionalBlogList extends Component {
         console.log(err);
       });
   };
-  getBlogdetails = (name, blog_id) => {
+  getBlogdetails = (name, blog_id) => { 
     // this.props.history.push("/blogsDetail/" + blog_id);
     if (name == "blog") {
       this.props.history.push({
@@ -506,7 +506,6 @@ class ProfessionalBlogList extends Component {
                     <div className="coverageTab">
                       <Row>
                         {/* <Col md={7}> */}
-                        <Row>
                           {this.state.blogLuv &&
                             this.state.blogLuv.map((data, i) =>
                               this.state.offset > i ? (
@@ -543,7 +542,6 @@ class ProfessionalBlogList extends Component {
                                 </Col>
                               ) : null
                             )}
-                        </Row>
                         {this.state.blogLuv &&
                         this.state.offset < this.state.blogLuv.length ? (
                           <div className="text-center mt-5 mb-5">
@@ -568,7 +566,6 @@ class ProfessionalBlogList extends Component {
                     <div className="coverageTab">
                       <Row>
                         {/* <Col md={7}> */}
-                        <Row>
                           {this.state.blogPray &&
                             this.state.blogPray.map((data, i) =>
                               this.state.offset > i ? (
@@ -606,8 +603,7 @@ class ProfessionalBlogList extends Component {
                                   </div>
                                 </Col>
                               ) : null
-                            )}
-                        </Row>
+                            )}  
                         {this.state.blogPray &&
                         this.state.offset < this.state.blogPray.length ? (
                           <div className="text-center mt-5 mb-5">
