@@ -265,8 +265,7 @@ class Plans extends Component {
             </Slider>
           </div>
         </Container>
-
-
+        
         <Modal
             show={this.state.show}
             onHide={this.handleClose}

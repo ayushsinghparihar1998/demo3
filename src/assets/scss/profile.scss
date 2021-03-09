@@ -1467,7 +1467,7 @@ button.btnDownloads {
                     span {
                         & > p {
                             font-weight: 400; 
-                            font-size: 13px; 
+                            font-size: 14px; 
                         }
                     }
                 }
@@ -2526,6 +2526,78 @@ ul.PlanAbouts {
         }
     }
 }
+
+// custom radio button start
+
+.mentalHealths { 
+    .QaListings {
+        .answerDetail {
+            span.ansOne {
+                .form-group {
+                    top: 0;
+                }
+                .form-check {
+                    display: flex;
+                    padding-left: 0; 
+                }
+            }
+        }
+       
+        [type="radio"]:checked,
+        [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+        }
+        [type="radio"]:checked + label,
+        [type="radio"]:not(:checked) + label
+        {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            line-height: 20px;
+            display: inline-block;
+            color: #666;
+        }
+        [type="radio"]:checked + label:before,
+        [type="radio"]:not(:checked) + label:before {
+            content: '';
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border: 1px solid #8AD1E7;
+            border-radius: 100%;
+            background: #fff;
+        }
+        [type="radio"]:checked + label:after,
+        [type="radio"]:not(:checked) + label:after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #8AD1E7;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            border-radius: 100%;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+        [type="radio"]:not(:checked) + label:after {
+            opacity: 0;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+        [type="radio"]:checked + label:after {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+}
+
+// custom radio button end
 
 @media (min-width: 992px) and (max-width: 1199px) {                     
     .profile_layout { 

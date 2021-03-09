@@ -284,6 +284,7 @@ as_weightage: "1" */}
                                                     item.as_que_id
                                                   )
                                                 }
+                                                label="" 
                                               />
                                             </Form.Group>
                                           </span>
