@@ -618,7 +618,8 @@
         padding-top: 10px; 
         .fgroups {
             position: relative;
-            max-width: 90%; 
+            max-width: 90%;
+            margin: auto; 
             .error {
                 text-transform: lowercase; 
                 position: relative;
@@ -877,6 +878,14 @@ img {
             // max-width: 1280px;  
         }
     }
+    .subscribe_here2 {
+        .subscribe_left {
+            padding-left: 38px;
+            padding-right: 0; 
+            margin: auto;
+        }
+    } 
+
 }
 @media (max-width: 1200px) {   
     .main_baner { 
@@ -941,6 +950,16 @@ img {
         right: 0; 
         max-width: 21px; 
     }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .subscribe_here2 {
+        .subscribe_left {
+            padding-left: 15px;
+            padding-right: 0; 
+            margin: auto;
+        }
+    } 
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
