@@ -38,7 +38,8 @@ class Happypatient extends Component {
                 <Container>
                     <div className="fs40 col8 fw600 w-100">Happy ELNP Members</div>   
                     <div className="col14 fs20 fw400 w-100 pt-3 mb-5 pb-2">             
-                        What people say about us. Here are comments from individuals who have visited Counselor.    
+                        What people say about us.  
+                        {/* Here are comments from individuals who have visited Counselor.     */}
                     </div> 
                     <div>  
                         <Slider {...settings}>    
@@ -60,7 +61,7 @@ class Happypatient extends Component {
                             </div>
                         </div>
                         <div>
-                            <div className="main_caro">
+                            <div className="main_caro">  
                                 <div className="fs17 italic_style col11 fw400 mb-5"> 
                                     {/* <div className="profileImage">
                                         <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
