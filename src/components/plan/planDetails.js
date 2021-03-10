@@ -400,7 +400,7 @@ class PlanDetails extends Component {
             }]}
             bodyInfo={{
               className : 'col14 fs20 fw500 mb-4',
-              html:"Please contact us at <br /> contact@eatluvnpray.org to get a quote <br /> for your .com"
+              html:"Please contact us at <br /> contact@eatluvnpray.com to get a quote <br /> for your organisation"
             }}
           />
 
