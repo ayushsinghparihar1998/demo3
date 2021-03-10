@@ -1,23 +1,17 @@
 import React, { Component } from "react";
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
   Form,
-  Tabs,
-  Tab,
   Tooltip,
   OverlayTrigger,
   Modal
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import UserChat from "../../assets/images/user_chat.svg";
-import UserChat2 from "../../assets/images/user_chat2.svg";
 import UserChat3 from "../../assets/images/user_chat.png";
 import UserChat4 from "../../assets/images/user_chat.png";
 import UserChat5 from "../../assets/images/user_chat5.svg";
