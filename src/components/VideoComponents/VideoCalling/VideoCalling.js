@@ -6,7 +6,6 @@ import { showErrorMessage } from '../../../common/helpers/Utils';
 function VideoCalling() {
   const socket = socketClass.getSocket();
   const [caller, setCaller] = useState(null);
-  const [callerView, setCallerView] = useState(true)
   const history = useHistory();
 
   useEffect(() => {

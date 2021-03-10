@@ -14,21 +14,14 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import UserChat3 from "../../assets/images/user_chat.png";
 import UserChat4 from "../../assets/images/user_chat.png";
-import UserChat5 from "../../assets/images/user_chat5.svg";
-import ChatCross from "../../assets/images/chat_cross.svg";
-import Warningnotification from "../../assets/images/notification_warning.svg";
-import Fullscreen from "../../assets/images/full_screen.svg";
-import Sounds from "../../assets/images/sound.svg";
 import Dangers from "../../assets/images/danger.svg";
 import Deletes from "../../assets/images/delete.svg";
-import Questions from "../../assets/images/question.svg";
 import Calls from "../../assets/images/calls.svg";
 import Videos from "../../assets/images/videos.svg";
 import Errors from "../../assets/images/errors.svg";
 import Chatcross2 from "../../assets/images/chat_cross2.svg";
 import Chatplus from "../../assets/images/user_plus.svg";
-import { getLocalStorage, setLocalStorage, showErrorToast, showErrorMessage } from "../../common/helpers/Utils";
-import SocketIOClient from "socket.io-client";
+import { getLocalStorage, setLocalStorage, showErrorMessage } from "../../common/helpers/Utils";
 import moment from "moment";
 import socketClass from "../../common/utility/socketClass";
 import getUserProfile from "../../common/utility/getUserProfile";
@@ -170,7 +163,11 @@ class ChatUser extends Component {
       })
     });
 
-
+    // socket.emit("updateTime",JSON.stringify({
+    //   user_id: getLocalStorage("customerInfo").u_id,
+    //   type:""
+    // }),(data)=>console.log("DATA ",data)
+    // )
 
     // socket.emit(
     //   "chat-login",

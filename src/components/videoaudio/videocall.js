@@ -9,21 +9,14 @@ import moment from "moment";
 
 
 import NavBar from "../core/nav";
-import Backicon from "../../assets/images/backicon.svg";
 import Videouser from "../../assets/images/placeholder_user.png";
-import Videousertwo from "../../assets/images/videousers.svg";
-import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
 import VideomuteInverse from "../../assets/images/mute-inverse.svg";
 import Videothree from "../../assets/images/video.svg";
 import Videoov from "../../assets/images/video_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
-import UserChat4 from "../../assets/images/user_chat4.svg";
-
 import Videomuteov from "../../assets/images/mute_ov.svg";
-
-import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import CONSTANTS from "../../common/helpers/Constants";
 import {
@@ -39,6 +32,7 @@ import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
 import { showErrorMessage } from "../../common/helpers/Utils";
+
 const socket = socketClass.getSocket();
 const Videocall = (props) => {
   const [showChat, setShowChat] = useState(false);
@@ -212,32 +206,8 @@ const Videocall = (props) => {
       }, 1000);
       console.log(`Participant 1234"${participant.identity}" is connected to the Room`, participant);
       return false;
-      participant.tracks.forEach(publication => {
-        console.log("publication", publication)
-        // if (publication.isSubscribed) {
-        //   handleTrackDisabled(publication.track);
-        // }
-        // publication.on('subscribed', handleTrackDisabled); 
-        if (publication.track) {
-          remoteContainer.appendChild(publication.track.attach());
-        }
-
-
-
-        publication.on('unsubscribed', () => {
-          console.log("unsubscribed", publication)
-        });
-        //   participant.tracks.forEach(publication => {
-        //     publication.on('subscribed', () => {
-        //       console.log("subscribed");
-        //     });
-        //  });
-      });
-
-      participant.on('trackSubscribed', track => {
-        remoteContainer.appendChild(track.attach());
-      });
     });
+
     room.once('participantConnected', participant => {
       console.log(`Participant === "${participant.identity}" connected`);
       setTimeout(() => {
@@ -334,13 +304,15 @@ const Videocall = (props) => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
       setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`)
-      if (getLocalStorage('customerInfo') && getLocalStorage('customerInfo').u_role_id == constant.roles.CORPORATE_CUSTOMER) {
+      if (getLocalStorage('customerInfo')?.u_role_id === constant.roles.CORPORATE_CUSTOMER) {
         socket.emit('updateTime', { "user_id": userDetails.id, type: 'audio' }, data => {
-          // console.log("userDetail data", data);
-          if (data.success == 2) {
+          console.log("userDetail data", data);
+          if (data.success === 2) {
             disconnect();
           } else {
             // handle odd scenario
+            console.log("userDetail data", data);
+            showErrorMessage(data.msg)
           }
         })
       }
