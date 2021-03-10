@@ -1,26 +1,18 @@
-import React, { Component, useState, useEffect, useRef } from "react";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
-import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video';
+import React, { useState, useEffect, useRef } from "react";
+import {  Container,Image } from "react-bootstrap";
+import { connect} from 'twilio-video';
 import {
   useParams,
   useHistory
 } from "react-router-dom";
 import moment from 'moment';
 import NavBar from "../core/nav";
-import Backicon from "../../assets/images/backicon.svg";
-import Videouser from "../../assets/images/pro_img2.svg";
 import Videousertwo from "../../assets/images/placeholder_user.png";
-import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
-import Videothree from "../../assets/images/video.svg";
 import Videomuteov from "../../assets/images/mute_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
-import Audioreceivecall from "../../assets/images/receive_call.svg";
 import VideomuteInverse from "../../assets/images/mute-inverse.svg";
-
-import UserChat4 from "../../assets/images/user_chat4.svg";
-import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
@@ -44,7 +36,6 @@ const AudioCall = (props) => {
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
   const [timerStr, setTimerStr] = useState(null);
-  const [remoteUserStatus, setRemoteUserStatus] = useState({ audio: false, video: false })
   const roomRef = useRef(null)
   const localVideoRef = useRef(null)
   const remoteVideoRef = useRef(null)
@@ -90,20 +81,22 @@ const AudioCall = (props) => {
       // disconnect();
 
     }
-  }, [])
+  })
   const runTimer = () => {
     const curr = new Date().getTime();
     callTimerRef.current = setInterval(() => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
       setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`);
-      if(getLocalStorage('customerInfo')&&getLocalStorage('customerInfo').u_role_id == constant.roles.CORPORATE_CUSTOMER){
+      if(getLocalStorage('customerInfo')?.u_role_id === constant.roles.CORPORATE_CUSTOMER){
         socket.emit('updateTime', { "user_id": userDetails.id,type:'video' }, data => {
-          // console.log("userDetail data", data);
-          if (data.success == 2) {
+          console.log("userDetail data", data);
+          if (data.success === 2) {
             disconnect();
           } else {
             // handle odd scenario
+            console.log("TIME UPDATED")
+            showErrorMessage(data.msg)
           }
         })
       }
