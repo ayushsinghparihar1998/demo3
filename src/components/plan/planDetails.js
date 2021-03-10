@@ -412,4 +412,4 @@ class PlanDetails extends Component {
     );
   }
 }
-export default PlanDetails;
+export default PlanDetails; 

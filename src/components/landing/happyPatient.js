@@ -54,7 +54,7 @@ class Happypatient extends Component {
                                     <div className="fs15 col13 mb-3 pb-1"></div> 
                                     <Image src={Inverted} alt="" className="invertedone" />
                                     <div className="txt_testi italic_item fs15 mt-2"> 
-                                        After my journey of being a Parent of two boys showing different difficulties, I wanted an ear to hear me out on my depressing life matters. I am Thankful for getting such a wonderful experience.. 
+                                        After my journey of being a Parent of two boys showing different difficulties, I wanted an ear to hear me out on my depressing life matters. I am Thankful for getting such a compassionate listener at ease of my home and truly having such a wonderful experience..  
                                     </div>
                                     <Image src={Invertedtwo} alt="" className="invertedtwo" />
                                 </div> 
