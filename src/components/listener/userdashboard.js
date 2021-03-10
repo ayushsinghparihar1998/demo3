@@ -491,7 +491,7 @@ class Userdashboard extends Component {
                                     <div>
                                        <div className="fs12 fw500 col18">Need a Listener?(Online Listeners)</div>
                                        <div className="fs13 fw500 col18">Listener to Listener</div>
-                                       <div className="fs12 fw500 col18">COming soon for now</div>
+                                       <div className="fs12 fw500 col18">Coming soon for now</div>
                                     </div>
                                  </div>
                               </div>

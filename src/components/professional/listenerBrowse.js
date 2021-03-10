@@ -1,22 +1,8 @@
 import React, { Component } from "react";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal } from "react-bootstrap";
+import { Button,Container, Row, Col, Image, Form, Modal } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Requestuser from "../../assets/images/pro_img.svg";
-import Requestusertwo from "../../assets/images/pro_img2.svg";
-import Requestuserthree from "../../assets/images/pro_img3.svg";
-import Aflag from "../../assets/images/australia_flag.svg";
-import Iflag from "../../assets/images/india_flag.svg";
 import Messagefour from "../../assets/images/msg4.svg";
-import Melida from "../../assets/images/melida.svg";
-import Searches from "../../assets/images/searches.svg";
-import Starblank from "../../assets/images/starempty.svg";
-import Starfill from "../../assets/images/starfill.svg";
-import Subscribes from "../../assets/images/subscribes.svg";
-import Searchbtn from "../../assets/images/search_btn.png";
-import { connect } from 'react-redux';
-import ReactStars from "react-rating-stars-component";
-import { Popover } from 'antd';
 import ELPRxApiService from "../../common/services/apiService";
 import Crossbtn from "../../assets/images/blue_cross.svg";
 
@@ -41,7 +27,7 @@ class ListenerBrowse extends Component {
     _getAllCategoriesHandler = async () => {
         try {
             let response = await ELPRxApiService("getCategoryList")
-            console.log(response)
+            console.log("RESPONSE ",response)
             this.setState({
                 categoriesList: response.data.data.categories_list
             })
@@ -57,6 +43,7 @@ class ListenerBrowse extends Component {
                 search_keyword: this.state.search_keyword,
                 order_by: this.state.order_by,
             })
+            console.log("LISTNER DATA " , response.data.data)
             this.setState({
                 listenerData: response.data.data
             })
@@ -122,20 +109,6 @@ class ListenerBrowse extends Component {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    {/* <Col lg={3} md={3}>
-                                        <Form.Group controlId="exampleForm.ControlSelect1" className="setSelectbtn">
-                                            <Form.Control as="select" className="selectTyp1"
-                                                onChange={(e) => this.setState({ selectedCategory: e.target.value })}>
-                                                <option disable >Select Category</option>
-                                                {
-                                                    this.state.categoriesList.map(elem => {
-                                                        return <option value={elem.cat_id}>{elem.cat_name}</option>
-                                                    })
-                                                }
-
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Col> */}
                                     <Col lg={3} md={3}>
                                         <div className="searchByOrder">
                                             <Button className="btnTyp5 bTyp5" onClick={this._getFilteredListenerData}>
@@ -151,12 +124,12 @@ class ListenerBrowse extends Component {
 
 
                                     {this.state.listenerData ? this.state.listenerData.map((obj, i) => {
-
+                                        console.log("CHECK ",obj)
                                         return this.state.offset > i ? <Col lg={4} md={6}>
                                             <div className="subscribes">
                                                 <div className="text-right mt-4 mr-3">
                                                     <Image src={Messagefour} alt="" />
-                                                    <span className="fs13 col14 fw400 ml-1">{obj.u_listen_to}</span>
+                                                    <span className="fs13 col14 fw400 ml-1">{obj.u_chat_count}</span>
                                                 </div>
                                                 <div className="text-center position-relative">
                                                     {/* <span className="onlines"></span> */}
@@ -222,10 +195,10 @@ class ListenerBrowse extends Component {
 
                         <Container>
                             <div className="layout_box text-center mt-3 mb-4">
-                                {/* <Image src={this.state.currentData.u_image} alt="" className="mt-5 mb-4" /> */}
                                 <div className="col10 fs30 fw600 mb-4">{this.state.currentData && this.state.currentData.u_name} (Bio)</div>
                                 <div className="fs300 fs20 col14 mb-5 pb-2">
-                                    {this.state.currentData && this.state.currentData.u_bio ? this.state.currentData.u_bio : 'Bio does not Exist!'}
+                                    {console.log("CURRENT DATA ", this.state.currentData)}
+                                    {this.state.currentData?.u_bio || 'Bio does not Exist!'}
                                 </div>
                             </div>
                         </Container>
