@@ -49,11 +49,12 @@ class Happypatient extends Component {
                                     {/* <div className="profileImage">
                                         <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
                                     </div>  */}
-                                    <div className="fs17 col12 fw500 mb-1 italic_item">Abraham Jhone | IT Manager</div>
-                                    <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
+                                    <div className="fs17 col12 fw500 mb-1 italic_item">Megha Bhatia</div>
+                                    {/* <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div> */}
+                                    <div className="fs15 col13 mb-3 pb-1"></div> 
                                     <Image src={Inverted} alt="" className="invertedone" />
                                     <div className="txt_testi italic_item fs15 mt-2"> 
-                                    After my parents both suffered from some tragic events recently. Iwas all cloaked in depression. Thank god such a good therapists as these exist, helping people in severely anxious conditions to spring back to a normal way of life!
+                                        After my journey of being a Parent of two boys showing different difficulties, I wanted an ear to hear me out on my depressing life matters. I am Thankful for getting such a wonderful experience.. 
                                     </div>
                                     <Image src={Invertedtwo} alt="" className="invertedtwo" />
                                 </div> 
@@ -63,43 +64,25 @@ class Happypatient extends Component {
                         <div>
                             <div className="main_caro">  
                                 <div className="fs17 italic_style col11 fw400 mb-5"> 
-                                    {/* <div className="profileImage">
-                                        <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
-                                    </div>  */}
-                                    <div className="fs17 col12 fw500 mb-1 italic_item">Jihaan Advani | Events & Membership Head</div>
-                                    <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
+                                    <div className="fs17 col12 fw500 mb-1 italic_item">Sonal puri</div>
+                                    <div className="fs15 col13 mb-3 pb-1"></div> 
                                     <Image src={Inverted} alt="" className="invertedone" />
                                     <div className="txt_testi italic_item fs15 mt-2"> 
-                                    After my parents both suffered from some tragic events recently. Iwas all cloaked in depression. Thank god such a good therapists as these exist, helping people in severely anxious conditions to spring back to a normal way of life!
+                                        After having a bad luck on some relationships, I was all cloaked in depression. if it would'nt be for counselling at ELNP, i would never have been able to move forward in life. This platform totally allows one to vent out at the times of need giving me a reason to love myself and live a better life
                                     </div>
                                     <Image src={Invertedtwo} alt="" className="invertedtwo" />
                                 </div> 
                                 
                             </div>
                         </div>
-                        <div>
-                            <div className="main_caro">
-                                <div className="fs17 italic_style col11 fw400 mb-5"> 
-                                    {/* <div className="profileImage">
-                                        <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
-                                    </div>  */}
-                                    <div className="fs17 col12 fw500 mb-1 italic_item">Abraham Jhone | IT Manager</div>
-                                    <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
-                                    <Image src={Inverted} alt="" className="invertedone" />
-                                    <div className="txt_testi italic_item fs15 mt-2"> 
-                                    After my parents both suffered from some tragic events recently. Iwas all cloaked in depression. Thank god such a good therapists as these exist, helping people in severely anxious conditions to spring back to a normal way of life!
-                                    </div>
-                                    <Image src={Invertedtwo} alt="" className="invertedtwo" />
-                                </div> 
-                                
-                            </div>
-                        </div>
-                        <div>
+
+                        
+                        {/* <div>
                             <div className="main_caro"> 
                                 <div className="fs17 italic_style col11 fw400 mb-5"> 
-                                    {/* <div className="profileImage">
+                                    <div className="profileImage">
                                         <Image src={Testimonials2} alt="Testimonials" className="mb-2" />
-                                    </div>  */}
+                                    </div> 
                                     <div className="fs17 col12 fw500 mb-1 italic_item">Jihaan Advani | Events & Membership Head</div>
                                     <div className="fs15 col13 mb-3 pb-1">Monday, May 2</div>
                                     <Image src={Inverted} alt="" className="invertedone" />
@@ -110,7 +93,7 @@ class Happypatient extends Component {
                                 </div> 
                                 
                             </div>
-                        </div>
+                        </div> */}
                         
                         </Slider>
                     </div>
