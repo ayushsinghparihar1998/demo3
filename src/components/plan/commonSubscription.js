@@ -9,7 +9,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
         <>
             <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                    Daily Subscription Plans
+                    Smart Subscription Plans  
                 </div>
                 <Slider {...settingstwo}>
                     {
@@ -78,7 +78,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                     )}
                                                 </div>
                                                 <div className="col14 fs17 fw400 peryears">
-                                                    {parseInt(item.pl_type) === 1 ? "Per Day" : ""}
+                                                    {parseInt(item.pl_type) === 1 ? "Per Month" : ""}
                                                 </div>
                                             </div>
                                         </div>
@@ -173,7 +173,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                 {
                                                     planHolistic &&
                                                     <div className="col14 fs17 fw400 peryears">
-                                                        {parseInt(item.pl_type) === 1 ? "Per Day" : ""}
+                                                        {parseInt(item.pl_type) === 1 ? "Per Month" : ""}
                                                     </div>
                                                 }
                                             </div>

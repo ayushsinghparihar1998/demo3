@@ -148,7 +148,7 @@ class Banner extends Component {
                     className="btnTyp5 talkBtntwo fs18 fw400"
                     onClick={this.handleModal}
                   >
-                    talk to a coco
+                    TALK TO A CoCo 
                   </Button>
                   {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon
@@ -204,7 +204,7 @@ class Banner extends Component {
                     className="btnTyp5 talkBtntwo fs18 fw400"
                     onClick={this.handleModal}
                   >
-                    talk to a coco
+                    TALK TO A CoCo
                   </Button>
                   {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon
@@ -260,7 +260,7 @@ class Banner extends Component {
                     className="btnTyp5 talkBtntwo fs18 fw400"
                     onClick={this.handleModal}
                   >
-                    talk to a coco 
+                    TALK TO A CoCo
                   </Button>
                   {/* <div className="fs14 col14 coming_m text-center mt-2">
                       Coming soon

@@ -181,7 +181,7 @@ class Plans extends Component {
                               {parseFloat(item.pl_discount_price).toFixed(2)}
                             </div>
                             <div className="col14 fs17 fw400 peryears">
-                              {item.pl_type == 1 ? "Per Day" : ""}
+                              {item.pl_type == 1 ? "Per Month" : ""}
                             </div>
                           </div>
                         </div>
