@@ -1957,6 +1957,7 @@ button.btnDownloads {
         text-transform: uppercase;
         font-weight: 600 !important; 
     }
+
     &.assessBlog {
         position: relative;
         .blogMain.ListsUI {
@@ -2136,9 +2137,10 @@ button.btnDownloads {
                     cursor: pointer; 
                 }
                 .col14.fs15.fw400 {
+                    max-height: 125px;
+                    overflow: hidden; 
                     &>p {
-                        max-height: 125px;
-                        overflow: hidden; 
+                        
                         // text-align: justify;
                         text-align: left; 
                     }
@@ -2152,9 +2154,9 @@ button.btnDownloads {
                             border-bottom: none; 
                         }
                         .col14.fs15.fw400 {
+                            max-height: 61px;
+                            overflow: hidden;    
                             & > p {
-                                max-height: 44px;
-                                overflow: hidden;      
                                 text-align: justify;  
                             }
                         }
@@ -2181,10 +2183,10 @@ button.btnDownloads {
                             object-fit: cover;
                         }
                         .col14.fw400.mt-1 {
+                            max-height: 145px;
+                            overflow: hidden; 
                             & > p {
-                                max-height: 110px;
-                                overflow: hidden; 
-                                text-align: justify;   
+                                text-align: justify;     
                             }
                         }
                     }
@@ -2290,6 +2292,8 @@ button.btnDownloads {
                 cursor: pointer;
                 text-transform: capitalize;
                 transition: 0.5s all;  
+                max-height: 64px;
+                overflow: hidden;
                 &:hover {
                     opacity: 0.5; 
                 }
@@ -2680,13 +2684,14 @@ ul.PlanAbouts {
                             height: 120px;
                         }
                     }
-                }
+                }  
+                
             }
         }
     }
     .blogrightSide {
         .col64.fs17.fw500 {
-            font-size: 15 !important; 
+            font-size: 15px !important; 
         }
         .col14.fs15.fw400 {
             font-size: 13px !important; 
@@ -2698,7 +2703,7 @@ ul.PlanAbouts {
 
     .innerVlog { 
         .col64.fs17.fw500 {
-            font-size: 15 !important; 
+            font-size: 15px !important; 
         }
         .col14.fs15.fw400 {
             font-size: 13px !important; 
@@ -2739,6 +2744,7 @@ ul.PlanAbouts {
                             margin-top: 10px; 
                         }
                     }
+                    
                 }
             }
         }
