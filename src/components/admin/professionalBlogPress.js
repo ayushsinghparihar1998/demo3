@@ -295,7 +295,7 @@ class ProfessinalBlogPress extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={8} lg={9} className="pl-1"> 
                 <div className="corporateMember layout_box">
                   <div className="fs28 col10 fw600 mb-3">
                     {this.props.match.params.id > 0

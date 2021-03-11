@@ -143,7 +143,7 @@ class ProfessinalBlogCreate extends Component {
     }
   };
 
-  _saveBlogHandler = async () => {
+  _saveBlogHandler = async () => { 
     let blobj = this.state.blobj;
     let catar = [];
     this.state.proffCat.map((item) => {
@@ -315,7 +315,7 @@ class ProfessinalBlogCreate extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={8} lg={9} className="pl-1">
                 <div className="corporateMember layout_box">
                   <div className="fs28 col10 fw600">
                     {this.props.match.params.id > 0

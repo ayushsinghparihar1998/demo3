@@ -79,7 +79,7 @@ class MyAssessmentTestSA extends Component {
         <div className="profile_layout myAssesstestMain pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3} className="pr-1">
+              <Col md={4} lg={3} className="pr-1">  
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -95,7 +95,7 @@ class MyAssessmentTestSA extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">
+              <Col md={8} lg={9} className="pl-1">  
                 <div className="chatsearch w-100">
                   <div className="myAssesstest">
                     <div className="col8 fw600 fs28 mt-4 mb-5 text-center">

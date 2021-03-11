@@ -38,7 +38,7 @@ class AssessmentTestLists extends Component {
         <div className="profile_layout adminProfessinal addKits pt-4 pb-5">    
           <Container>
             <Row>
-              <Col md={3} className="pr-1">
+              <Col  md={4} lg={3} className="pr-1">  
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
