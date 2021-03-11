@@ -1,27 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 
-// import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import UploadDetail from "../../assets/images/upload_detail.svg";
 import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
 import ELPViewApiService from "../../common/services/apiService";
 
 import constant from "../../constant";
@@ -30,7 +21,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import validateInput from "../../common/validations/validationSAblog";
 
-let prevCkEditorText = ''
 
 class ProfessinalBlogCreate extends Component {
   state = {
@@ -51,7 +41,7 @@ class ProfessinalBlogCreate extends Component {
       bl_written_by: "",
       press_blog_category: [],
     },
-    textLength:0
+    textLength: 0
   };
   componentDidMount() {
     this.getProffCat();
@@ -288,29 +278,14 @@ class ProfessinalBlogCreate extends Component {
       return tmp.textContent || tmp.innerText || "";
     }
     let stringData = stripHtml(data);
- 
-    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
-     
-      prevCkEditorText = data
-      this.setState({
-        textLength:stringData.length,
-        blobj: {
-          ...this.state.blobj,
-          bl_desc: data
-        },
-      });
-
-    } else {
-       
-      this.setState({
-        isReloadEditor: true
-      }, () => {
-        this.setState({
-          isReloadEditor: false
-        })
-      })
-
-    }
+    //REMOVED ---- stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER
+    this.setState({
+      textLength: stringData.length,
+      blobj: {
+        ...this.state.blobj,
+        bl_desc: data
+      },
+    });
 
   }
 

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
+import {  Container, Image} from "react-bootstrap";
 import NavBar from "../../core/nav";
 import Videousertwo from "../../../assets/images/placeholder_user.png";
 
-import Videothree from "../../../assets/images/video.svg";
 import Videodisconnect from "../../../assets/images/dissconect.svg";
 import Audioreceivecall from "../../../assets/images/receive_call.svg";
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import { useEffect } from "react";
 import socketClass from "../../../common/utility/socketClass";
-import { showErrorMessage } from "../../../common/helpers/Utils";
+// import { showErrorMessage } from "../../../common/helpers/Utils";
 
-import { getLocalStorage } from "../../../common/helpers/Utils";
+// import { getLocalStorage } from "../../../common/helpers/Utils";
 import moment from "moment";
 
 const socket = socketClass.getSocket();

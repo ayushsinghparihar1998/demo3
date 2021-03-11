@@ -81,7 +81,7 @@ const AudioCall = (props) => {
       // disconnect();
 
     }
-  })
+  },[])
   const runTimer = () => {
     const curr = new Date().getTime();
     callTimerRef.current = setInterval(() => {
@@ -237,7 +237,8 @@ const AudioCall = (props) => {
   }
   // console.log(props, getUserProfile, token)
   const editTrack = (type1, type2, todo) => {
-    if (type1 == 'local') {
+    //'local', 'audio', 'disable'
+    if (type1 === 'local') {
       streamTracks.local.forEach((track) => {
         if (track.kind == type2) {
           switch (todo) {

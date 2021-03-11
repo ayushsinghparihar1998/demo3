@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
@@ -26,9 +21,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Link } from "react-router-dom";
 import validateInput from "../../common/validations/validationSAblog";
 
-import UploadDetail from "../../assets/images/upload_detail.svg";
 
-let prevCkEditorText = "";
 
 class ProfessinalBlogPress extends Component {
   state = {
@@ -266,28 +259,14 @@ class ProfessinalBlogPress extends Component {
       return tmp.textContent || tmp.innerText || "";
     }
     let stringData = stripHtml(data);
+    // REMOVED ---------- stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER
+    let pblobj = this.state.pblobj;
+    pblobj.pbl_desc = data;
+    this.setState({
+      textLength: stringData.length,
+      pblobj,
+    });
 
-    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
-      prevCkEditorText = data;
-
-      let pblobj = this.state.pblobj;
-      pblobj.pbl_desc = data;
-      this.setState({
-        textLength: stringData.length,
-        pblobj,
-      });
-    } else {
-      this.setState(
-        {
-          isReloadEditor: true,
-        },
-        () => {
-          this.setState({
-            isReloadEditor: false,
-          });
-        }
-      );
-    }
   }
 
   render() {
@@ -349,8 +328,8 @@ class ProfessinalBlogPress extends Component {
                             {this.state.filename}
                           </strong>
                         ) : (
-                          ""
-                        )}
+                            ""
+                          )}
                       </div>
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.image}
