@@ -2168,7 +2168,7 @@ class Adminlistener extends Component {
                           value={1}
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 1)}
-                          label="Daily"
+                          label="Smart"
                           className={`mr-5  ${
                             this.state.plan_type == 2 ? "" : "active"
                           }`}
