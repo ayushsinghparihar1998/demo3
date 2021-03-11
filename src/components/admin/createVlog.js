@@ -1,34 +1,25 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
-import validator from "validator";
 // E:\workspace\ELP\newElp\ELNP\src\common\validations\validationAddVlogs.js
 import constant from "../../constant";
 import validateInput from "../../common/validations/validationAddVlogs";
-// import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
-let prevCkEditorText = "";
+
 
 class CreateVlog extends Component {
   state = {
@@ -146,33 +137,14 @@ class CreateVlog extends Component {
     }
   };
   validateCKEditorData(data) {
-    function stripHtml(html) {
-      let tmp = document.createElement("DIV");
-      tmp.innerHTML = html;
-      return tmp.textContent || tmp.innerText || "";
-    }
-    let stringData = stripHtml(data);
+    // REMOVED ----------- stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER
+    this.setState({
+      vlobj: {
+        ...this.state.vlobj,
+        vl_desc: data,
+      },
+    });
 
-    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
-      prevCkEditorText = data;
-      this.setState({
-        vlobj: {
-          ...this.state.vlobj,
-          vl_desc: data,
-        },
-      });
-    } else {
-      this.setState(
-        {
-          isReloadEditor: true,
-        },
-        () => {
-          this.setState({
-            isReloadEditor: false,
-          });
-        }
-      );
-    }
   }
 
   render() {
@@ -230,8 +202,8 @@ class CreateVlog extends Component {
                               {this.state.filename}
                             </strong>
                           ) : (
-                            ""
-                          )}
+                              ""
+                            )}
                         </div>
                         <div className="col27 fs14 fw400 mt-2 error">
                           {errors.vl_thumbnail_url}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Calling from '../../VideoComponents/Calling/Calling'
-import { useParams, useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 function CallingTo(props) {
   const [state, setState] = useState(null)

@@ -1,44 +1,22 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
   Form,
-  Tabs,
-  Tab,
-  Modal, 
-  handleShow, 
-  handleClose
+  Modal
 } from "react-bootstrap"; 
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
-import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
 import Editicon from "../../assets/images/edit_icon.svg";
 import Deleteicon from "../../assets/images/delete_icon.svg";
-import blogclock from "../../assets/images/blogclock.png"; 
-import UserChats from "../../assets/images/user_chat5.svg"; 
 import VideoIcon from "../../assets/images/videoIcon.png";
-import BlogProcessFour from "../../assets/images/p_blogs4.svg";
 import BlogProcessFive from "../../assets/images/blog4.png"; 
-// import Bootstrap from "react-bootstrap"; 
-// import React, { Component } from "react";
 
-import constant from "../../constant"; 
-
-// const [show, setShow] = useState(false);
-
-// const handleClose = () => setShow(false);
-// const handleShow = () => setShow(true); 
 
 class VlogList extends Component {     
   constructor() {
