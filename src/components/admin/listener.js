@@ -49,13 +49,7 @@ import {
   setLocalStorage,
 } from "../../common/helpers/Utils";
 import YouTube from "react-youtube";
-import UserListPage from "./InsidePage/userList";
-import BlockListPage from './InsidePage/blockList';
-import PlanListPage from "./InsidePage/planList";
-import ReviewListPage from "./InsidePage/reviewList";
-import SessionListPage from "./InsidePage/sessionList";
-import PaymentListPage from "./InsidePage/paymentList";
-import ProffListPage from "./InsidePage/proffessionalList";
+
 class Adminlistener extends Component {
   constructor(props) {
     super(props);
@@ -126,54 +120,91 @@ class Adminlistener extends Component {
     });
     this.setState({ show: false, vlogsList });
   };
-
-  handleListing = () => {
-    switch (getLocalStorage("tabToOpen")) {
-      case "listner":
-        this.getListnerListing("", "listner", 1);
-        break;
-
-      case "getProffListing":
-        this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
-        break;
-
-      case "getDomainListing":
-        this.getDomainListing(1, 10);
-        break;
-
-      case "getblogListHandler":
-        this.getblogListHandler(1, 10);
-        break;
-      case "getpressblogListHandler":
-        this.getpressblogListHandler(1, 10);
-        break;
-
-      case "superadminget_planlist":
-        this.superadminget_planlist(1, 10, getLocalStorage("internaltabToOpen") || 1);
-        break;
-
-      case "superadminkits_list":
-        this.superadminkits_list(1, 10);
-        break;
-
-      case "superadminvlogs_list":
-        this.superadminvlogs_list(1, 10, getLocalStorage("internaltabToOpen") || 1);
-        break;
-
-      case "superadminget_assessmenttestlist":
-        this.superadminget_assessmenttestlist(1, 10, getLocalStorage("internaltabToOpen") || 2);
-        break;
-
-      default:
-        this.getCustomerListing("", "user", 1);
-        break;
-    }
-  }
   componentDidMount() {
     this.getBlogCat("blogCategory", "getblogcategory");
     this.getBlogCat("pressBlogCategory", "getpressblogcategory");
-    console.log("get", getLocalStorage("tabToOpen"), typeof getLocalStorage("tabToOpen"));
-    this.handleListing()
+    console.log("get", getLocalStorage("tabToOpen"));
+
+    if (getLocalStorage("tabToOpen") && getLocalStorage("tabToOpen") == "user")
+      this.getCustomerListing("", "user", 1);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "listner"
+    )
+      // this.getCustomerListing("", "listner", 1);
+      this.getListnerListing("", "listner", 1);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getProffListing"
+    )
+      this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getDomainListing"
+    )
+      this.getDomainListing(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getblogListHandler"
+    )
+      this.getblogListHandler(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "getpressblogListHandler"
+    )
+      this.getpressblogListHandler(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminget_planlist"
+    )
+      this.superadminget_planlist(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 1
+      );
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminkits_list"
+    )
+      this.superadminkits_list(1, 10);
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminvlogs_list"
+    )
+      this.superadminvlogs_list(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 1
+      );
+    else if (
+      getLocalStorage("tabToOpen") &&
+      getLocalStorage("tabToOpen") == "superadminget_assessmenttestlist"
+    )
+      this.superadminget_assessmenttestlist(
+        1,
+        10,
+        getLocalStorage("internaltabToOpen")
+          ? getLocalStorage("internaltabToOpen")
+          : 2
+      );
+      // else if (
+      //   getLocalStorage("tabToOpen") &&
+      //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
+      // )
+      //   this.superadminget_assessmenttestlist(
+      //     1,
+      //     10,
+      //     getLocalStorage("internaltabToOpen")
+      //       ? getLocalStorage("internaltabToOpen")
+      //       : 2
+      //   );
+    else {
+      this.getCustomerListing("", "user", 1);
+    }
   }
   getListnerListing = (e, activaClass, pageNumber) => {
     // let chkUserProfile = this.state.activeProfile;
@@ -242,7 +273,7 @@ class Adminlistener extends Component {
       keyword,
       category
     );
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
@@ -293,7 +324,7 @@ class Adminlistener extends Component {
   };
   getDomainListing = (offset, count) => {
     console.log("count, offset", count, offset);
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
@@ -338,7 +369,7 @@ class Adminlistener extends Component {
     // offset - page no
     // count - perpage item
     console.log(count, offset, block_type);
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
@@ -350,7 +381,7 @@ class Adminlistener extends Component {
       block_type: block_type,
     };
     console.log(data);
-    if (block_type === 0) {
+    if (block_type == 0) {
       this.setState({
         key: "request",
       });
@@ -391,12 +422,12 @@ class Adminlistener extends Component {
       offset: offset,
       cs_status: cs_status,
     };
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (cs_status === 0) {
+    if (cs_status == 0) {
       this.setState({
         key: "request",
       });
@@ -439,12 +470,12 @@ class Adminlistener extends Component {
       offset: offset,
       review_type: review_type,
     };
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (review_type === 0) {
+    if (review_type == 0) {
       this.setState({
         key: "request",
       });
@@ -489,12 +520,12 @@ class Adminlistener extends Component {
       rating_type: review_type,
     };
     console.log(data);
-    if (offset === 1) {
+    if (offset == 1) {
       this.setState({
         pageno: 1,
       });
     }
-    if (review_type === 0) {
+    if (review_type == 0) {
       this.setState({
         key: "request",
       });
@@ -566,8 +597,8 @@ class Adminlistener extends Component {
   getblogListHandler = async (offset, count) => {
     try {
       let catval = [];
-      this.state.blogCategory.forEach((cat) => {
-        if (cat.bc_status === "1") {
+      this.state.blogCategory.map((cat) => {
+        if (cat.bc_status == "1") {
           catval.push("'" + cat.bc_name + "'");
         }
       });
@@ -610,7 +641,7 @@ class Adminlistener extends Component {
     try {
       let catval = [];
       this.state.pressBlogCategory.forEach((cat) => {
-        if (cat.pbc_status === "1") {
+        if (cat.pbc_status == "1") {
           catval.push("'" + cat.pbc_name + "'");
         }
       });
@@ -769,15 +800,15 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
-  superAdminChange_AssesStatus = async (as_id, as_status) => {
-    try {
-      let result = await ELPViewApiService("superadminchange_assessqueansstatus", {
-        as_id: as_id,
-        as_status: as_status
+  superAdminChange_AssesStatus = async (as_id , as_status) => {
+    try{
+      let result = await ELPViewApiService("superadminchange_assessqueansstatus",{
+        as_id : as_id,
+        as_status : as_status
       });
       if (result && result.status === 200) {
-        console.log("Results Updated", result, this.state.qaList.as_id);
-
+        console.log("Results Updated",result , this.state.qaList.as_id); 
+        
       }
       //Render This after updation Whatso ever is result
       this.superadminget_assessmenttestlist(1, 10, this.state.as_type);
@@ -879,7 +910,7 @@ class Adminlistener extends Component {
 
     // create an array of pages to ng-repeat in the pager control
     let pageArray;
-    if (startPage === endPage) {
+    if (startPage == endPage) {
       console.log("startPage, endPage", startPage, endPage);
 
       pageArray = [1];
@@ -898,7 +929,7 @@ class Adminlistener extends Component {
     });
   }
   onChangePage(page) {
-    console.log("PAGE", page);
+    console.log(page);
     console.log(this.state.pageno);
     this.setState({
       pageno: page,
@@ -1094,22 +1125,22 @@ class Adminlistener extends Component {
     var reg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
     // var test = reg.test(value.trim());
     errors.email =
-      memberObj.email.length === 0
+      memberObj.email.length == 0
         ? "Please enter email id."
         : !Validator.isEmail(memberObj.email)
-          ? "Please enter a valid email id."
-          : "";
+        ? "Please enter a valid email id."
+        : "";
     errors.password =
-      memberObj.password.length === 0
+      memberObj.password.length == 0
         ? "Please enter password."
         : !reg.test(memberObj.password.trim())
-          ? "Please enter a valid password."
-          : "";
+        ? "Please enter a valid password."
+        : "";
 
     this.setState({
       errors,
     });
-    if (errors.email.length === 0 && errors.password.length === 0) {
+    if (errors.email.length == 0 && errors.password.length == 0) {
       console.log("submit");
       ELPViewApiService("superadmincorporatecustomerregister", memberObj)
         .then((result) => {
@@ -1259,37 +1290,37 @@ class Adminlistener extends Component {
     let data =
       type == "PLAN" || this.state.deleteObjType == "PLAN"
         ? {
-          pl_id: id ? id : +this.state.deleteObjId,
-          pl_status: status,
-        }
+            pl_id: id ? id : +this.state.deleteObjId,
+            pl_status: status,
+          }
         : type == "KIT" || this.state.deleteObjType == "KIT"
-          ? {
+        ? {
             kt_id: id ? id : +this.state.deleteObjId,
             kt_status: status,
           }
-          : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
-            ? {
-              vl_id: id ? id : +this.state.deleteObjId,
-              vl_status: status,
-            }
-            : type == "QA" || this.state.deleteObjType == "QA"
-              ? {
-                as_id: id ? id : +this.state.deleteObjId,
-                as_status: status,
-              }
-              : "";
+        : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
+        ? {
+            vl_id: id ? id : +this.state.deleteObjId,
+            vl_status: status,
+          }
+        : type == "QA" || this.state.deleteObjType == "QA"
+        ? {
+            as_id: id ? id : +this.state.deleteObjId,
+            as_status: status,
+          }
+        : "";
 
     let apiData =
       type == ""
         ? this.state.deleteObjType == "PLAN"
           ? "superadmindelete_planstatus"
           : this.state.deleteObjType == "KIT"
-            ? "superadmindelete_kitsstatus"
-            : this.state.deleteObjType == "VLOGS"
-              ? "superadmindelete_vlogsstatus"
-              : this.state.deleteObjType == "QA"
-                ? "superadmindelete_assessteststatus"
-                : ""
+          ? "superadmindelete_kitsstatus"
+          : this.state.deleteObjType == "VLOGS"
+          ? "superadmindelete_vlogsstatus"
+          : this.state.deleteObjType == "QA"
+          ? "superadmindelete_assessteststatus"
+          : ""
         : api;
     ELPViewApiService(apiData, data).then((result) => {
       this.setState({ deleteObjConformationModal: false });
@@ -1416,10 +1447,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 0)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 0)
-          : type == "session"
-            ? this.getSessionListing(1, 10, 1)
-            : this.getReviewListing(1, 10, 0);
+        ? this.getRatinguserListing(1, 10, 0)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 1)
+        : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
       });
@@ -1427,10 +1458,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 2)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 2)
-          : type == "session"
-            ? this.getSessionListing(1, 10, 3)
-            : this.getReviewListing(1, 10, 2);
+        ? this.getRatinguserListing(1, 10, 2)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 3)
+        : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
       });
@@ -1441,10 +1472,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 1)
         : type == "rating"
-          ? this.getRatinguserListing(1, 10, 1)
-          : type == "session"
-            ? this.getSessionListing(1, 10, 2)
-            : this.getReviewListing(1, 10, 1);
+        ? this.getRatinguserListing(1, 10, 1)
+        : type == "session"
+        ? this.getSessionListing(1, 10, 2)
+        : this.getReviewListing(1, 10, 1);
     }
   }
   getRatingName = (ratingCount) => {
@@ -1488,227 +1519,75 @@ class Adminlistener extends Component {
       }
     );
   };
-
-  PAGING_LIST = [
-    {
-      pageName: 'USERS',
-      pageType: 'userlist',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getCustomerListing(e, "user", 1);
-      }
-    },
-    {
-      pageName: ' PROFESSIONALS',
-      pageType: 'proffList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getProffListing(1, 10, "", "", "", "'Pray','Luv','Eat'");
-      }
-    },
-    {
-      pageName: ' LISTENERS',
-      pageType: 'listner',
-      imageSrc: Menuiconblue,
-      handleClick: (e) => {
-        this.getListnerListing(e, "listner", 1);
-      }
-    },
-    {
-      pageName: 'DOMAIN LIST',
-      pageType: 'domainList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getDomainListing(1, 10);
-      }
-    },
-    {
-      pageName: 'ADD CORPORATE MEMBER',
-      pageType: 'addMember',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.setState({ pageType: "addMember" });
-      }
-    },
-    {
-      pageName: 'REPORT REQUESTS',
-      pageType: "blockList",
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getBlockuserListing(1, 10, 0);
-      }
-    },
-    {
-      pageName: ' REVIEW REQUESTS',
-      pageType: 'reviewList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getReviewListing(1, 10, 0);
-      }
-    },
-    {
-      pageName: ' SESSION REQUESTS',
-      pageType: 'sessionList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getSessionListing(1, 10, 0);
-      }
-    },
-    {
-      pageName: ' PAYMENT LIST',
-      pageType: 'paymentList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getPaymentListHandler(1, 10);
-      }
-    },
-    {
-      pageName: 'PRESS BLOGS',
-      pageType: 'pressblogList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getpressblogListHandler(1, 10);
-      }
-    },
-    {
-      pageName: 'BLOGS',
-      pageType: 'blogList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getblogListHandler(1, 10);
-      }
-    },
-    {
-      pageName: ' SUBSCRIPTION PLAN',
-      pageType: 'planList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.superadminget_planlist(1, 10, 1);
-      }
-    },
-    {
-      pageName: 'ELNP KITS',
-      pageType: 'kitList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.superadminkits_list(1, 10);
-      }
-    },
-    {
-      pageName: 'ELNP VLOGS',
-      pageType: 'vlogsList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.superadminvlogs_list(1, 10, 1);
-      }
-    },
-    {
-      pageName: 'ASSESSMENT TEST',
-      pageType: 'qaList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.superadminget_assessmenttestlist(1, 10, 2);
-      }
-    },
-    {
-      pageName: ' RATING REQUESTS',
-      pageType: 'ratingList',
-      imageSrc: Menuicon,
-      handleClick: (e) => {
-        this.getRatinguserListing(1, 10, 0);
-      }
-    },
-    {
-      pageName: ' UPLOAD ELNP DOCUMENT',
-      imageSrc: Menuicon,
-      midDiv: true,
-      handleClick: (e) => {
-        this.changepath("/subscriptionDocument", "")
-      }
-    },
-    {
-      pageName: ' UPLOAD CORPORATE DOCUMENT',
-      imageSrc: Menuicon,
-      midDiv: true,
-      handleClick: (e) => {
-        this.changepath("/corporateDocument", "");
-      }
-    },
-    {
-      pageName: ' MEMBERS ASSESSMENT TEST',
-      imageSrc: Menuicon,
-      midDiv: true,
-      handleClick: (e) => {
-        this.changepath("/assessmentTestList", "superadminget_assessmenttestlist")
-      }
-    }
-  ]
-
   render() {
     const { errors, totalRecord, memberObj } = this.state;
-    console.log("CHECKING ....", this.state.pageType, this.state.activeProfile)
     let userActveClass =
-      this.state.pageType === "userlist" && this.state.activeProfile === "user"
+      this.state.pageType == "userlist" && this.state.activeProfile == "user"
+        ? "position-relative active"
+        : "position-relative";
+    let professnalActveClass =
+      this.state.pageType == "userlist" &&
+      this.state.activeProfile == "professional"
         ? "position-relative active"
         : "position-relative";
     let listnerActveClass =
-      this.state.pageType === "userlist" && this.state.activeProfile === "listner"
+      this.state.pageType == "userlist" && this.state.activeProfile == "listner"
         ? "position-relative active"
         : "position-relative";
     let blockActveClass =
-      this.state.pageType === "blockList"
+      this.state.pageType == "blockList"
         ? "position-relative active"
         : "position-relative";
     let reviewActveClass =
-      this.state.pageType === "reviewList"
+      this.state.pageType == "reviewList"
         ? "position-relative active"
         : "position-relative";
     let sessionActveClass =
-      this.state.pageType === "sessionList"
+      this.state.pageType == "sessionList"
         ? "position-relative active"
         : "position-relative";
     let ratingActveClass =
-      this.state.pageType === "ratingList"
+      this.state.pageType == "ratingList"
         ? "position-relative active"
         : "position-relative";
     let paymentActveClass =
-      this.state.pageType === "paymentList"
+      this.state.pageType == "paymentList"
         ? "position-relative active"
         : "position-relative";
     let proffActveClass =
-      this.state.pageType === "proffList"
+      this.state.pageType == "proffList"
         ? "position-relative active"
         : "position-relative";
     let domainActveClass =
-      this.state.pageType === "domainList"
+      this.state.pageType == "domainList"
         ? "position-relative active"
         : "position-relative";
     let addMemberActveClass =
-      this.state.pageType === "addMember"
+      this.state.pageType == "addMember"
         ? "position-relative active"
         : "position-relative";
     let pressBlogActveClass =
-      this.state.pageType === "pressblogList"
+      this.state.pageType == "pressblogList"
         ? "position-relative active"
         : "position-relative";
     let blogActveClass =
-      this.state.pageType === "blogList"
+      this.state.pageType == "blogList"
         ? "position-relative active"
         : "position-relative";
     let planActveClass =
-      this.state.pageType === "planList"
+      this.state.pageType == "planList"
         ? "position-relative active"
         : "position-relative";
     let kitActveClass =
-      this.state.pageType === "kitList"
+      this.state.pageType == "kitList"
         ? "position-relative active"
         : "position-relative";
     let qaActveClass =
-      this.state.pageType === "qaList"
+      this.state.pageType == "qaList"
         ? "position-relative active"
         : "position-relative";
     let vlogsActveClass =
-      this.state.pageType === "vlogsList"
+      this.state.pageType == "vlogsList"
         ? "position-relative active"
         : "position-relative";
 
@@ -1728,124 +1607,1493 @@ class Adminlistener extends Component {
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Quick Links
                     </div>
-                    {
-                      this.PAGING_LIST.filter((pageInfo)=>this.state.pageType).map((pageInfo) => {
-                        if (pageInfo.midDiv) {
-                          return (
-                            <div className="d-flex m-3 pb-3 border-bottom">
-                              <div className="position-relative">
-                                <div onClick={pageInfo.handleClick} className="fs14 col28 fw500">
-                                  <Image src={pageInfo.imageSrc} alt="" className="mr-1" />{" "}
-                                  {pageInfo.pageName}
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        }
-                        else {
-                          let activeClassName;
-                          switch(pageInfo.pageName){
-                            case "USERS" : activeClassName = userActveClass; break;
-                            case " PROFESSIONALS" : activeClassName = proffActveClass; break;
-                            case " LISTENERS" : activeClassName = listnerActveClass;  break;
-                            case "DOMAIN LIST" : activeClassName = domainActveClass;  break;
-                            case "ADD CORPORATE MEMBER" : activeClassName = addMemberActveClass;  break;
-                            case "REPORT REQUESTS" : activeClassName = blockActveClass;  break;
-                            case " REVIEW REQUESTS" : activeClassName = reviewActveClass;  break;
-                            case " SESSION REQUESTS" :  activeClassName = sessionActveClass; break;
-                            case " PAYMENT LIST" : activeClassName = paymentActveClass; break;
-                            case "PRESS BLOGS" : activeClassName = pressBlogActveClass;  break;
-                            case "BLOGS" : activeClassName = blogActveClass;  break;
-                            case " SUBSCRIPTION PLAN": activeClassName = planActveClass; break;
-                            case 'ELNP KITS': activeClassName = kitActveClass; break;
-                            case 'ELNP VLOGS' : activeClassName = vlogsActveClass;  break;
-                            case 'ASSESSMENT TEST': activeClassName = qaActveClass;  break;
-                            case ' RATING REQUESTS': activeClassName = ratingActveClass;  break
-                            default : return null;
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={userActveClass}
+                        onClick={(e) => {
+                          this.getCustomerListing(e, "user", 1);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> USERS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={proffActveClass}
+                        onClick={(e) => {
+                          this.getProffListing(
+                            1,
+                            10,
+                            "",
+                            "",
+                            "",
+                            "'Pray','Luv','Eat'"
+                          );
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          PROFESSIONALS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={listnerActveClass}
+                        onClick={(e) => {
+                          this.getListnerListing(e, "listner", 1);
+                        }}
+                      >
+                        <div className="fs14 col23 fw500">
+                          <Image src={Menuiconblue} alt="" className="mr-1" />{" "}
+                          LISTENERS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={domainActveClass}
+                        onClick={(e) => {
+                          this.getDomainListing(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          DOMAIN LIST
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={addMemberActveClass}
+                        onClick={(e) => {
+                          this.setState({ pageType: "addMember" });
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          ADD CORPORATE MEMBER
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={blockActveClass}
+                        onClick={(e) => {
+                          this.getBlockuserListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          REPORT REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={reviewActveClass}
+                        onClick={(e) => {
+                          this.getReviewListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          REVIEW REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={sessionActveClass}
+                        onClick={(e) => {
+                          this.getSessionListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          SESSION REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={paymentActveClass}
+                        onClick={(e) => {
+                          this.getPaymentListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          PAYMENT LIST
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={pressBlogActveClass}
+                        onClick={(e) => {
+                          this.getpressblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          PRESS BLOGS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={blogActveClass}
+                        onClick={(e) => {
+                          this.getblogListHandler(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> BLOGS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={planActveClass}
+                        onClick={(e) => {
+                          this.superadminget_planlist(1, 10, 1);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          SUBSCRIPTION PLAN
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={kitActveClass}
+                        onClick={(e) => {
+                          this.superadminkits_list(1, 10);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
+                          KITS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={vlogsActveClass}
+                        onClick={(e) => {
+                          this.superadminvlogs_list(1, 10, 1);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" /> ELNP
+                          VLOGS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={qaActveClass}
+                        onClick={(e) => {
+                          this.superadminget_assessmenttestlist(1, 10, 2);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          ASSESSMENT TEST
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={ratingActveClass}
+                        onClick={(e) => {
+                          this.getRatinguserListing(1, 10, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          RATING REQUESTS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div className="position-relative">
+                        <div
+                          onClick={() =>
+                            this.changepath("/subscriptionDocument", "")
                           }
-                          return (
-                            <div className="d-flex m-3 pb-3 border-bottom">
-                              <div className={activeClassName} onClick={pageInfo.handleClick} >
-                                <div className="fs14 col28 fw500">
-                                  <Image src={pageInfo.imageSrc} alt="" className="mr-1" />
-                                  {pageInfo.pageName}
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        }
-                      })
-                    }
-                    
+                          className="fs14 col28 fw500"
+                        >
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          UPLOAD ELNP DOCUMENT
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div className="position-relative">
+                        <div
+                          onClick={() =>
+                            this.changepath("/corporateDocument", "")
+                          }
+                          className="fs14 col28 fw500"
+                        >
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          UPLOAD CORPORATE DOCUMENT
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div className="position-relative">
+                        <div
+                          className="fs14 col28 fw500"
+                          onClick={() =>
+                            this.changepath(
+                              "/assessmentTestList",
+                              "superadminget_assessmenttestlist"
+                            )
+                          }
+                        >
+                          <Image src={Menuicon} alt="" className="mr-1" />{" "}
+                          MEMBERS ASSESSMENT TEST
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Col>
 
-              {this.state.pageType === "userlist" ? 
-                <UserListPage 
-                profileListing={profileListing} 
-                Requestuser={Requestuser} 
-                Deleteicon={Deleteicon}
-                activeProfile={this.state.activeProfile}
-                userProfile={this.userProfile.bind(this)}
-                adminChangeUserStatus={this.adminChangeUserStatus.bind(this)}
-                adminUserDeleteConfirm={this.adminUserDeleteConfirm.bind(this)}
-                /> 
-                : this.state.pageType === "blockList" ? (
-                  <BlockListPage 
-                    onChangeTab={this.onChangePage.bind(this)}
-                    activeKey={this.state.key}
-                    blockList={this.state.blockList}
-                    blockUserStatus={this.blockUserStatus}
-                  />
-                ) : this.state.pageType === "planList" ? (
-                  <PlanListPage 
-                  changepath={this.changepath.bind(this)}
-                  plan_type={this.state.plan_type}
-                  superadminget_planlist={this.superadminget_planlist.bind(this)}
-                  planList = {this.state.planList}
-                  modifyAllContent={this.modifyAllContent.bind(this)}
-                  Editicon={Editicon}
-                  Deleteicon={Deleteicon}
+              {this.state.pageType == "userlist" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">
+                      List of{" "}
+                      {this.state.activeProfile == "listner"
+                        ? "Listeners"
+                        : "Users"}
+                    </div>
+                  </div>
+                  {profileListing &&
+                    profileListing.length > 0 &&
+                    profileListing.map((item, index) => {
+                      let categryLen = item.uc_cat_name
+                        ? item.uc_cat_name.length
+                        : 0;
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.u_image ? item.u_image : Requestuser}
+                                alt=""
+                                className="r50"
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div
+                                  onClick={(e) => {
+                                    this.userProfile(
+                                      e,
+                                      item.id,
+                                      this.state.activeProfile
+                                    );
+                                  }}
+                                >
+                                  <div className="col3 fw500 fs18 pb-1">
+                                    {item.u_name ? item.u_name : ""}
+                                  </div>
+                                  <div className="col40 fs15 fw400 pb-1">
+                                    Category:{" "}
+                                    {item.uc_cat_name &&
+                                      item.uc_cat_name.map((cat, idx) => {
+                                        return (
+                                          <span>
+                                            {" "}
+                                            {categryLen - 1 > idx
+                                              ? cat + ", "
+                                              : cat}
+                                          </span>
+                                        );
+                                      })}
+                                  </div>
+                                  <div className="fs14 fw400 col54 pb-1">
+                                    {item.email ? item.email : ""}
+                                  </div>
+                                </div>
+                                <div className="mt-auto mb-auto d-flex">
+                                  <span className="pr-3 fs14 col47 fw400">
+                                    {item.u_status == "1"
+                                      ? "Deactivate"
+                                      : "Activate"}
+                                  </span>
+                                  <span className="pr-3 disabled">
+                                    <Form.Check
+                                      type="switch"
+                                      id={"custom-switch" + index}
+                                      name={"status" + index}
+                                      label=""
+                                      onClick={(e) => {
+                                        this.adminChangeUserStatus(
+                                          e,
+                                          item.id,
+                                          item.u_status
+                                        );
+                                      }}
+                                      checked={
+                                        item.u_status == "1" ? true : false
+                                      }
+                                    />
+                                  </span>
+                                  <span
+                                    onClick={(e) => {
+                                      this.adminUserDeleteConfirm(
+                                        e,
+                                        item.id,
+                                        item.u_name
+                                      );
+                                    }}
+                                  >
+                                    <Image src={Deleteicon} alt="" />
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </Col>
+              ) : this.state.pageType == "blockList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">Report Requests</div>
+                  </div>
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        defaultActiveKey="request"
+                        activeKey={this.state.key}
+                        onSelect={(key) => this.onChangeTab(key, "block")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                  />
-                ) : this.state.pageType === "reviewList" ? (
-                  <ReviewListPage 
-                  changeStatusReview={this.changeStatusReview.bind(this)}
-                  reviewList={this.state.reviewList}
-                  onChangeTab={this.onChangeTab.bind(this)}
-                  activeKey={this.state.activeKey}
-                  />
-                ) : this.state.pageType === "sessionList" ? (
-                  <SessionListPage 
-                  onChangeTab={this.onChangeTab.bind(this)}
-                  activeKey={this.state.activeKey}
-                  sessionList={this.state.sessionList}
-                  changeStatusSession={this.changeStatusSession.bind(this)}
-                  Suser={Suser}
-                  />
-                ) : this.state.pageType === "paymentList" ? (
-                  <PaymentListPage 
-                  paymentList={this.state.paymentList}
-                  />
-                ) : this.state.pageType === "proffList" ? (
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
 
-                  <ProffListPage 
-                  changepath={this.changepath.bind(this)}
-                  handleSearch={this.handleSearch.bind(this)}
-                  name={this.state.name}
-                  Requestuser={Requestuser}
-                  proffList={this.state.proffList}
-                  adminChangeUserStatus={this.adminChangeUserStatus.bind(this)}
-                  keyword={this.state.keyword}
-                  handleCheckSearch={this.handleCheckSearch.bind(this)}
-                  keywordArray={this.state.keywordArray}
-                  catArray={this.state.catArray}
-                  searchSubmit={this.searchSubmit.bind(this)}
-                  Deleteicon={Deleteicon}
-                  Editicon={Editicon}
-                  />
-                ) : this.state.pageType === "domainList" ? (
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 1)
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.blockUserStatus(item.br_id, 2)
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.blockList &&
+                              this.state.blockList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.br_comment}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "planList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-3">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          Subscription Plan
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath(
+                                "/addSubscription/0",
+                                "superadminget_planlist",
+                                this.state.plan_type
+                              )
+                            }
+                          >
+                            ADD plan
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+
+                    <Form className="p_form mb-4">
+                      <Form.Group
+                        as={Row}
+                        className="justify-content-center customsRadio"
+                      >
+                        <Form.Check
+                          type="radio"
+                          id="plan_type1"
+                          value={1}
+                          name="plan_type"
+                          onChange={() => this.superadminget_planlist(1, 10, 1)}
+                          label="Daily"
+                          className={`mr-5  ${
+                            this.state.plan_type == 2 ? "" : "active"
+                          }`}
+                          checked={+this.state.plan_type == 1}
+                        />
+
+                        <Form.Check
+                          type="radio"
+                          id="plan_type2"
+                          value={2}
+                          name="plan_type"
+                          onChange={() => this.superadminget_planlist(1, 10, 2)}
+                          label="By Condition"
+                          className={`mr-5  ${
+                            this.state.plan_type == 1 ? "" : "active"
+                          }`}
+                          checked={+this.state.plan_type == 2}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </div>
+
+                  {/* pl_datetime: "2021-01-20 15:29:03"
+pl_desc_details: "Silver plan to buy"
+pl_discount_price: "2400"
+pl_id: "4"
+pl_price: "3000"
+pl_save: "20"
+pl_status: "1"
+pl_title: "Platinum Plan new" */}
+                  {this.state.planList &&
+                    this.state.planList.map((item, index) => {
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div className="col1 fw600 fs18 pb-1 cursor_d">
+                                      {item.pl_title}
+                                    </div>
+                                  </div>
+
+                                  <div className="fs15 fw500 col14 pb-1">
+                                    <span className="priceone pr-1">
+                                      Amount: Rs.
+                                      <strong className="fw700">
+                                        {item.pl_price}
+                                      </strong>
+                                    </span>{" "}
+                                    |{/* Rs. {item.pl_discount_price} */}
+                                    <span className="pricetwo pl-2">
+                                      Offer:
+                                      <strong className="fw700 pl-1">
+                                        {item.pl_save}%
+                                      </strong>
+                                    </span>
+                                  </div>
+                                  <div className="fs15 col14 fw400">
+                                    {item.pl_desc_details}{" "}
+                                    {/* <a className="col40">Read more...</a> */}
+                                  </div>
+                                </div>
+
+                                <div className="min-wi250">
+                                  <div className="d-flex ml-auto justify-content-end">
+                                    <span className="pr-3 fs14 col47 fw400">
+                                      {item.pl_status == "2"
+                                        ? "Deactivate"
+                                        : "Activate"}
+                                    </span>
+                                    <span className="pr-3 disabled">
+                                      <Form.Check
+                                        type="switch"
+                                        id={"custom-switch" + index}
+                                        name={"status" + index}
+                                        label=""
+                                        onClick={(e) => {
+                                          this.modifyAllContent(
+                                            "PLAN",
+                                            item.pl_id,
+                                            "superadminchange_planstatus",
+                                            item.pl_status == "1" ? "2" : "1"
+                                          );
+                                        }}
+                                        checked={item.pl_status == "1"}
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        onClick={() =>
+                                          this.changepath(
+                                            "/addSubscription/" + item.pl_id,
+                                            "superadminget_planlist",
+                                            this.state.plan_type
+                                          )
+                                        }
+                                        src={Editicon}
+                                        alt=""
+                                      />
+                                    </span>
+                                    <span>
+                                      <Image
+                                        onClick={(e) => {
+                                          this.handleOpenAllConformation(
+                                            item.pl_title,
+                                            item.pl_id,
+                                            "PLAN"
+                                          );
+                                        }}
+                                        src={Deleteicon}
+                                        alt=""
+                                      />
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="d-flex elpCategory">
+                                {item.plan_category.length < 3
+                                  ? item.plan_category.map((val) => {
+                                      return (
+                                        <span
+                                          className={
+                                            val.puc_cat_name == "Eat"
+                                              ? "eat"
+                                              : val.puc_cat_name == "Luv"
+                                              ? "luv"
+                                              : "pray"
+                                          }
+                                        >
+                                          {val.puc_cat_name}
+                                        </span>
+                                      );
+                                    })
+                                  : ""}
+                                {item.plan_category.length == 3 ? (
+                                  <span className="holistic">Holistic</span>
+                                ) : null}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </Col>
+              ) : this.state.pageType == "reviewList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">Review Requests</div>
+                  </div>
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "review")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {moment(item.rv_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.rv_text}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusReview(
+                                              item.rv_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.rv_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.rv_text}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.reviewList &&
+                              this.state.reviewList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.rv_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
+
+                                      <div className="col28 fs14 fw400 pt-1">
+                                        {item.rv_text}{" "}
+                                        {/* <span className="col40 fw500 pointer">
+                                          Read more...
+                                        </span> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "sessionList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">Session Requests</div>
+                  </div>
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "session")}
+                      >
+                        {/* 
+                        cs_corporate_email_id: "niharika.gupta@adobe.com"
+cs_corporate_name: "niharika.gupta"
+cs_corporate_u_id: "489"
+cs_date: "0000-00-00"
+cs_description: "test"
+cs_id: "23"
+cs_pro_email_id: "qwerty@yopmail.com"
+cs_pro_name: "testprofessional"
+cs_pro_u_id: "492"
+cs_status: "Processing"
+cs_subject: "test"
+cs_time: "00:00:02" */}
+                        <Tab eventKey="request" title="REQUESTED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="col28 fs14 fw400 pb-1">
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
+                                          </div>
+                                          {/* <div className="col28 fs14 fw400 pt-1">
+                                            
+                                          </div> */}
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {moment(
+                                              new Date(item.cs_date)
+                                            ).format("dddd MMM Do YYYY")}{" "}
+                                            {/* {}  */}
+                                            {item.cs_time}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          CONFIRM
+                                        </Button>
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusSession(
+                                              item.cs_id,
+                                              3
+                                            )
+                                          }
+                                        >
+                                          CANCEL
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="CONFIRMED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        {/* <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div> */}
+                                        <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="reject" title="CANCELED">
+                          <div className="requests">
+                            {this.state.sessionList &&
+                              this.state.sessionList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.cs_image ? item.cs_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.cs_corporate_name}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {item.cs_subject} {"-"}{" "}
+                                            {item.cs_description}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {/* {console.log(item)} */}
+                                            {/* {moment(item.cs_date).format(
+                                              "dddd MMM Do YYYY"
+                                            )}{" "} */}
+                                            {item.cs_date} {item.cs_time}
+                                          </div>
+                                        </div>
+                                        {/* <div className="col81 fs15 fs400 pr-3">
+                                          Session with - {item.cs_pro_name}
+                                        </div> */}
+                                        <div className="col81 fs15 fs400 pr-2 pl-2 min-190s">
+                                          <div className="text-right">
+                                            Session with
+                                          </div>
+                                          <div className="pt-2 just_aligns text-right">
+                                            <Image
+                                              src={
+                                                item.cs_pro_image
+                                                  ? item.cs_pro_image
+                                                  : Suser
+                                              }
+                                              className="mw35s r50"
+                                            />
+                                            <span className="pl-2 col1 fw500 fs13">
+                                              {item.cs_pro_name}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "paymentList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">List of Payments</div>
+                  </div>
+                  <div className="table_paymentlayout">
+                    <Table bordered>
+                      <thead>
+                        <tr>
+                          <th>Email</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.paymentList.map((elem) => {
+                          return (
+                            <tr>
+                              <td>{elem.pr_email || "-"}</td>
+                              <td>{elem.pr_txamount || "-"}</td>
+                              <td>
+                                <Button className="btnTyp9 reject color1">
+                                  {elem.pr_status.split("_")[1] || "-"}
+                                </Button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </Table>
+                  </div>
+                </Col>
+              ) : this.state.pageType == "proffList" ? (
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search">
+                    <Row className="mb-3">
+                      <Col md={8}>
+                        <div className="fs22 fw600 col10">
+                          List of Professionals
+                        </div>
+                      </Col>
+                      <Col md={4}>
+                        <div className="text-right pro_cbtn">
+                          <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={() =>
+                              this.changepath(
+                                "/professionalSignup",
+                                "getProffListing"
+                              )
+                            }
+                          >
+                            create professional
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                    <div className="fs16 col1 mb-4">Search Professional</div>
+                    <Form className="p_form">
+                      <Row>
+                        <Col md="6">
+                          <Form.Group
+                            controlId="formBasicTexts"
+                            className="mb-4"
+                          >
+                            <Form.Control
+                              type="text"
+                              placeholder="Search name"
+                              className="inputTyp2 inputpProcess"
+                              name="name"
+                              value={this.state.name}
+                              onChange={(e) => this.handleSearch(e)}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md="6">
+                          <Form.Group
+                            controlId="formBasickeyword"
+                            className="mb-4"
+                          >
+                            <Form.Control
+                              type="text"
+                              placeholder="Search keyword"
+                              className="inputTyp2 inputpProcess"
+                              name="keyword"
+                              value={this.state.keyword}
+                              onChange={(e) => this.handleSearch(e)}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md="12" lg="6">
+                          <Form.Group
+                            controlId="formBasicCheckbox2"
+                            className="row mb-4 statusCat"
+                          >
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
+                              Status
+                            </span>
+                            {this.state.keywordArray.map((item) => {
+                              return (
+                                <Form.Check
+                                  type="checkbox"
+                                  className="checkone checkboxTyp1 "
+                                  label={item.name}
+                                  id={item.value}
+                                  name={item.name}
+                                  // value={item.flag}
+                                  // checked={item.flag}
+                                  onChange={(e) =>
+                                    this.handleCheckSearch(e, "keyword", "")
+                                  }
+                                  // handleCheck={item.flag}
+                                  value={item.value}
+                                  checked={item.flag == true}
+                                  // onChange={(e) => this.handleCheck(e)}
+                                />
+                              );
+                            })}
+
+                            {/* 4 : inactive
+1 : active
+"" : all */}
+                          </Form.Group>   
+                        </Col>
+
+                        <Col md="12" lg="6">
+                          <Form.Group
+                            controlId="formBasicCheckbox4"
+                            className="row mb-4 statusCat"
+                          >
+                            <span className="fs16 fw500 col10 pl-3 pt-1 pr-3">
+                              Category
+                            </span>
+                            {this.state.catArray &&
+                              this.state.catArray.map((item) => {
+                                return (
+                                  <Form.Check
+                                    type="checkbox"
+                                    className="checkone checkboxTyp1 "
+                                    label={item.name}
+                                    id={item.value}
+                                    name={item.name}
+                                    // value={item.flag}
+                                    // checked={item.flag}
+                                    onChange={(e) =>
+                                      this.handleCheckSearch(e, "cat", "")
+                                    }
+                                    // handleCheck={item.flag}
+                                    value={item.value}
+                                    checked={item.flag == true}
+                                    // onChange={(e) => this.handleCheck(e)}
+                                  />
+                                );
+                              })}
+                          </Form.Group>
+                        </Col>
+
+                        <Col md="12" lg="6">
+                          <Button
+                            variant="primary process_btn"
+                            type="button"
+                            onClick={() => this.searchSubmit()}
+                          >
+                            search
+                          </Button>
+                        </Col>
+                      </Row>
+
+                      <div className="checkCategory">
+                        <Form.Group
+                          controlId="formBasicCheckbox1"
+                          className="row"
+                        ></Form.Group>
+                      </div>
+                    </Form>{" "}
+                  </div>
+                  {this.state.proffList &&
+                    this.state.proffList.map((item, index) => {
+                      // return(
+                      return (
+                        <div className="adminlistener p-4 mb-3">
+                          <div className="d-flex text-left">
+                            <div className="mr-2 pt-1">
+                              <Image
+                                src={item.u_image ? item.u_image : Requestuser}
+                                alt=""
+                                className="r50"
+                              />
+                            </div>
+                            <div className="pl-2 w-100">
+                              <div className="d-flex justify-content-between">
+                                <div className="w-100">
+                                  <div className="d-flex">
+                                    <div
+                                      className="col1 fw600 fs18 pb-1"
+                                      onClick={() =>
+                                        this.changepath(
+                                          "/professionalDetails/admin/" +
+                                            item.id,
+                                          "getProffListing"
+                                        )
+                                      }
+                                    >
+                                      {item.u_name}
+                                    </div>
+
+                                    <div className="d-flex ml-auto">
+                                      <span className="pr-3 fs14 col47 fw400">
+                                        {item.u_status == "1"
+                                          ? "Deactivate"
+                                          : "Activate"}
+                                      </span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id={"custom-switch" + index}
+                                          name={"status" + index}
+                                          label=""
+                                          onClick={(e) => {
+                                            this.adminChangeUserStatus(
+                                              e,
+                                              item.id,
+                                              item.u_status
+                                            );
+                                          }}
+                                          checked={
+                                            item.u_status == "1" ? true : false
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.changepath(
+                                              `/professionalModify/${item.id}`,
+                                              "getProffListing"
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span
+                                        onClick={(e) => {
+                                          this.adminUserDeleteConfirm(
+                                            e,
+                                            item.id,
+                                            item.u_name
+                                          );
+                                        }}
+                                      >
+                                        <Image src={Deleteicon} alt="" />
+                                      </span>
+                                    </div>
+
+                                    {/* <div className="d-flex ml-auto">
+                                      <span className="pr-3 fs14 col47 fw400">
+                                        {item.u_status == 1
+                                          ? "Active"
+                                          : "Inactive"}
+                                      </span>
+                                      <span className="pr-3 disabled">
+                                        <Form.Check
+                                          type="switch"
+                                          id="custom-switch5"
+                                          label=""
+                                          checked={
+                                            item.u_status == 0 ? false : true
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Editicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.props.history.push(
+                                              `/professionalModify/${item.id}`
+                                            )
+                                          }
+                                        />
+                                      </span>
+                                      <span>
+                                        <Image
+                                          src={Deleteicon}
+                                          alt=""
+                                          onClick={() =>
+                                            this.handleOpenConformation()
+                                          }
+                                        />
+                                      </span>
+                                    </div>*/}
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Age:</strong> {item.u_birthdate}{" "}
+                                    Years
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Work Experience:</strong>{" "}
+                                    {item.u_work_experience} Years
+                                  </div>
+
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Email:</strong> {item.email}
+                                  </div>
+                                  <div className="fs14 fw400 col14 pb-1">
+                                    <strong>Keywords:</strong>{" "}
+                                    {item.keyword_child_array.join(",")}
+                                  </div>
+
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
+                                    <strong className="m_w25">
+                                      Education:{" "}
+                                    </strong>
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.u_education,
+                                      }}
+                                    ></span>
+                                  </div>
+ */}
+                                  {/* <div className="fs14 fw400 col14 pb-1 e_detai">
+                                    <strong>Biography : </strong>
+                                    <span className="bio_content"  
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.u_bio,
+                                      }}
+                                    ></span>
+                                    <span className="mx-100w">
+                                      <a
+                                        className="col10"
+                                        onClick={() =>
+                                          this.changepath(
+                                            "/professionalDetails/admin/" +
+                                              item.id,
+                                            "getProffListing"
+                                          )
+                                        }
+                                      >
+                                        {"  "}Read more...
+                                      </a>
+                                    </span>
+                                  </div>
+ */}
+                                  <div className="eat_category">
+                                    {item.cat_child_array &&
+                                      item.cat_child_array.map((val) => {
+                                        return (
+                                          <span
+                                            className={
+                                              val == "Eat"
+                                                ? "eatcat"
+                                                : val == "Luv"
+                                                ? "luvcat"
+                                                : "praycat"
+                                            }
+                                          >
+                                            {val}
+                                          </span>
+                                        );
+                                      })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+
+                      // );
+                    })}
+                </Col>
+              ) : this.state.pageType == "domainList" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="corporateMember adminlistener d_detail">
                     <div className="domainSave mb-4 pb-2">
@@ -2082,8 +3330,9 @@ class Adminlistener extends Component {
                               return (
                                 <Form.Check
                                   type="checkbox"
-                                  className={`checkthree ${item.pbc_status == "1" ? "active" : ""
-                                    }`}
+                                  className={`checkthree ${
+                                    item.pbc_status == "1" ? "active" : ""
+                                  }`}
                                   label={item.pbc_name}
                                   id={item.pbc_id}
                                   name={item.pbc_name}
@@ -2099,7 +3348,7 @@ class Adminlistener extends Component {
                                   // handleCheck={item.flag}
                                   value={item.pbc_id}
                                   checked={item.pbc_status == "1"}
-                                // onChange={(e) => this.handleCheck(e)}
+                                  // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
                             })}
@@ -2262,8 +3511,9 @@ class Adminlistener extends Component {
                                 <Form.Check
                                   type="checkbox"
                                   // className="checkthree active"
-                                  className={`checkthree ${item.bc_status == "1" ? "active" : ""
-                                    }`}
+                                  className={`checkthree ${
+                                    item.bc_status == "1" ? "active" : ""
+                                  }`}
                                   label={item.bc_name}
                                   id={item.bc_id}
                                   name={item.bc_name}
@@ -2279,7 +3529,7 @@ class Adminlistener extends Component {
                                   // handleCheck={item.flag}
                                   value={item.bc_id}
                                   checked={item.bc_status == "1"}
-                                // onChange={(e) => this.handleCheck(e)}
+                                  // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
                             })}
@@ -2371,8 +3621,8 @@ class Adminlistener extends Component {
                                             val.buc_cat_name == "Eat"
                                               ? "eatcat"
                                               : val.buc_cat_name == "Luv"
-                                                ? "luvcat"
-                                                : "praycat"
+                                              ? "luvcat"
+                                              : "praycat"
                                           }
                                         >
                                           {val.buc_cat_name}
@@ -2567,15 +3817,15 @@ kt_status: "1" */}
                 </Col>
               ) : this.state.pageType == "qaList" ? (
                 // ---------------------------------------------------------------------------------------------
-                // --------------------------------------------------------This is Assesment List ----------------------------
+      // --------------------------------------------------------This is Assesment List ----------------------------
                 // --------------------------------------------------------------------------------
                 <>
                   <Col md={8} lg={9} className="pl-1">
                     <div className="professor_search listBlogs VlogLists">
                       <Row className="mb-1">
                         <Col md={8}>
-                          <div className="fs22 fw600 col10">
-                            Assessment Test
+                          <div className="fs22 fw600 col10">  
+                            Assessment Test      
                           </div>
                           <div className="fw300 fs16 col14">
                             {/* Lorem Ipsum is simply dummy and typesetting industry. */}
@@ -2617,8 +3867,9 @@ kt_status: "1" */}
                               onClick={(e) => {
                                 this.superadminget_assessmenttestlist(1, 10, 2);
                               }}
-                              className={`mr-5  ${this.state.as_type == 1 ? "" : "active"
-                                }`}
+                              className={`mr-5  ${
+                                this.state.as_type == 1 ? "" : "active"
+                              }`}
                               checked={+this.state.as_type == 2}
                             />
 
@@ -2634,15 +3885,16 @@ kt_status: "1" */}
                               onClick={(e) => {
                                 this.superadminget_assessmenttestlist(1, 10, 1);
                               }}
-                              className={`mr-5  ${this.state.as_type == 2 ? "" : "active"
-                                }`}
+                              className={`mr-5  ${
+                                this.state.as_type == 2 ? "" : "active"
+                              }`}
                               checked={+this.state.as_type == 1}
                             />
                           </Form.Group>
                         </div>
                       </Form>
                     </div>
-                    {/* 
+{/* 
   ----------------------------------------------------------------------------------------------------------------------
                                           QA List Rendering (ASSESMENT LIST)
   ----------------------------------------------------------------------------------------------------------------------
@@ -2659,7 +3911,7 @@ kt_status: "1" */}
                                       <div className="col1 fw600 fs18 pb-1 w-40">
                                         {item.as_title}
                                       </div>
-                                      <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">
+                                      <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">  
                                         <Button
                                           type="button"
                                           className="btn-btnTypAdd btnQa"
@@ -2677,15 +3929,15 @@ kt_status: "1" */}
                                           Add Question
                                         </Button>
                                         <span className="pr-3 disabled">
-                                          <Form.Check
-                                            id={"custom-switch".concat(item.as_id)}
-                                            type="switch"
-                                            // id= 
-                                            name="status"
-                                            checked={item.as_status == "1"}
-                                            label={item.as_status == "1" ? "Enable" : "Disabled"}
-                                            onChange={(val) => { this.superAdminChange_AssesStatus(item.as_id, item.as_status == "1" ? "2" : "1"); console.log("Onchange", item.as_status, item.as_status == "1" ? "Enable" : "Disabled") }}
-                                          />
+                                            <Form.Check
+                                                id={"custom-switch".concat(item.as_id)}
+                                                type="switch"
+                                                // id= 
+                                                name="status"
+                                                checked={item.as_status == "1"}
+                                                label={item.as_status == "1" ? "Enable" : "Disabled"} 
+                                                onChange={(val)=>{this.superAdminChange_AssesStatus(item.as_id , item.as_status == "1" ? "2" : "1" ); console.log("Onchange",item.as_status,item.as_status == "1" ? "Enable" : "Disabled")}}
+                                            />
                                         </span>
                                         <span className="mr-3">
                                           <Image
@@ -2708,7 +3960,7 @@ kt_status: "1" */}
                                             onClick={() =>
                                               this.changepath(
                                                 "/createAssessmentTest/" +
-                                                item.as_id,
+                                                  item.as_id,
                                                 "superadminget_assessmenttestlist",
                                                 this.state.as_type
                                               )
@@ -2737,8 +3989,8 @@ kt_status: "1" */}
                                         Price: {item.as_test_price}/-
                                       </div>
                                     ) : (
-                                        ""
-                                      )}
+                                      ""
+                                    )}
 
                                     <div className="mb-1">
                                       <span className="fs18 fw400 col14">
@@ -2757,45 +4009,45 @@ as_type: "2" */}
                                     <div className="d-flex elpCategory">
                                       {item.assessment_category.length < 3
                                         ? item.assessment_category.map(
-                                          (val) => {
-                                            return (
-                                              <span
-                                                className={
-                                                  val.as_test_cat_name ==
+                                            (val) => {
+                                              return (
+                                                <span
+                                                  className={
+                                                    val.as_test_cat_name ==
                                                     "Eat"
-                                                    ? "eat"
-                                                    : val.as_test_cat_name ==
-                                                      "Luv"
+                                                      ? "eat"
+                                                      : val.as_test_cat_name ==
+                                                        "Luv"
                                                       ? "luv"
                                                       : val.as_test_cat_name ==
                                                         "Pray"
-                                                        ? "pray"
-                                                        : "holistic"
-                                                }
-                                              >
-                                                {val.as_test_cat_name}
-                                              </span>
-                                            );
-                                          }
-                                        )
+                                                      ? "pray"
+                                                      : "holistic"
+                                                  }
+                                                >
+                                                  {val.as_test_cat_name}
+                                                </span>
+                                              );
+                                            }
+                                          )
                                         : ""}
                                       {item.assessment_category.length == 3 ? (
                                         <span className="holistic">
                                           Holistic
                                         </span>
                                       ) : (
-                                          ""
-                                        )}
+                                        ""
+                                      )}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            {/* <div className="w-100 text-right col108 pointer">Saved as Draft</div> */}
+                          {/* <div className="w-100 text-right col108 pointer">Saved as Draft</div> */} 
                           </div>
                         );
                       })}
-                  </Col>
+                  </Col> 
                 </>
               ) : this.state.pageType == "vlogsList" ? (
                 <>
@@ -2838,8 +4090,9 @@ as_type: "2" */}
                             name="vl_type"
                             onChange={() => this.superadminvlogs_list(1, 10, 1)}
                             label="All"
-                            className={`mr-5  ${this.state.vl_type == 2 ? "" : "active"
-                              }`}
+                            className={`mr-5  ${
+                              this.state.vl_type == 2 ? "" : "active"
+                            }`}
                             checked={+this.state.vl_type == 1}
                           />
 
@@ -2850,8 +4103,9 @@ as_type: "2" */}
                             name="vl_type"
                             onChange={() => this.superadminvlogs_list(1, 10, 2)}
                             label="Featured"
-                            className={`mr-5  ${this.state.vl_type == 1 ? "" : "active"
-                              }`}
+                            className={`mr-5  ${
+                              this.state.vl_type == 1 ? "" : "active"
+                            }`}
                             checked={+this.state.vl_type == 2}
                           />
                         </Form.Group>
@@ -2974,226 +4228,226 @@ as_type: "2" */}
                   </Col>
                 </>
               ) : (
-                                            <Col md={8} lg={9} className="pl-1">
-                                              <div className="professor_search mb-3">
-                                                <div className="fs22 fw600 col10">Rating Requests</div>
-                                              </div>
-                                              <div className="myprofile reviewrequest">
-                                                <div className="text-center user_tab">
-                                                  <Tabs
-                                                    activeKey={this.state.key}
-                                                    defaultActiveKey="request"
-                                                    onSelect={(key) => this.onChangeTab(key, "rating")}
-                                                  >
-                                                    <Tab eventKey="request" title="Requested">
-                                                      <div className="requests">
-                                                        {this.state.ratingList &&
-                                                          this.state.ratingList.map((item) => {
-                                                            return (
-                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                                                <div className="mr-4">
-                                                                  <Image
-                                                                    src={item.u_image ? item.u_image : ""}
-                                                                    alt=""
-                                                                    className="r50"
-                                                                  />
-                                                                </div>
-                                                                <div className="pl-2 w-100">
-                                                                  <div className="d-flex justify-content-between">
-                                                                    <div>
-                                                                      <div className="col3 fw500 fs18 pb-1">
-                                                                        {item.fromname}
-                                                                      </div>
-                                                                      <div className="fs14 fw400 col54 pb-1">
-                                                                        {moment(item.br_datetime).format(
-                                                                          "dddd MMM Do YYYY HH:mm"
-                                                                        )}
-                                                                      </div>
-                                                                    </div>
-                                                                    <div className="col81 fs15 fs400 pr-3">
-                                                                      Review for - {item.toname}
-                                                                    </div>
-                                                                  </div>
+                <Col md={8} lg={9} className="pl-1">
+                  <div className="professor_search mb-3">
+                    <div className="fs22 fw600 col10">Rating Requests</div>
+                  </div>
+                  <div className="myprofile reviewrequest">
+                    <div className="text-center user_tab">
+                      <Tabs
+                        activeKey={this.state.key}
+                        defaultActiveKey="request"
+                        onSelect={(key) => this.onChangeTab(key, "rating")}
+                      >
+                        <Tab eventKey="request" title="Requested">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                                                  <div className="mb-4">
-                                                                    <span className="mr-4">
-                                                                      {[
-                                                                        ...Array(
-                                                                          item.ur_rating
-                                                                            ? +item.ur_rating
-                                                                            : 4
-                                                                        ),
-                                                                      ].map((e, i) => (
-                                                                        <Image
-                                                                          src={Yellowstar}
-                                                                          alt=""
-                                                                          className="mr-1"
-                                                                        />
-                                                                      ))}
-                                                                    </span>
-                                                                    <span
-                                                                      className="fs18 fw600"
-                                                                      style={{
-                                                                        color:
-                                                                          item.ur_rating < 3
-                                                                            ? "red"
-                                                                            : "green",
-                                                                      }}
-                                                                    >
-                                                                      {this.getRatingName(item.ur_rating)}{" "}
-                                                                      {/* <Image src={Checkgreen} alt="" /> */}
-                                                                    </span>
-                                                                  </div>
-                                                                  <div className="mt-3">
-                                                                    <Button
-                                                                      className="btnTyp9 approve mr-4"
-                                                                      onClick={() =>
-                                                                        this.changeStatusRating(
-                                                                          item.ur_id,
-                                                                          1
-                                                                        )
-                                                                      }
-                                                                    >
-                                                                      APPROVE
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span
+                                          className="fs18 fw600"
+                                          style={{
+                                            color:
+                                              item.ur_rating < 3
+                                                ? "red"
+                                                : "green",
+                                          }}
+                                        >
+                                          {this.getRatingName(item.ur_rating)}{" "}
+                                          {/* <Image src={Checkgreen} alt="" /> */}
+                                        </span>
+                                      </div>
+                                      <div className="mt-3">
+                                        <Button
+                                          className="btnTyp9 approve mr-4"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              1
+                                            )
+                                          }
+                                        >
+                                          APPROVE
                                         </Button>
-                                                                    <Button
-                                                                      className="btnTyp9 reject"
-                                                                      onClick={() =>
-                                                                        this.changeStatusRating(
-                                                                          item.ur_id,
-                                                                          2
-                                                                        )
-                                                                      }
-                                                                    >
-                                                                      REJECT
+                                        <Button
+                                          className="btnTyp9 reject"
+                                          onClick={() =>
+                                            this.changeStatusRating(
+                                              item.ur_id,
+                                              2
+                                            )
+                                          }
+                                        >
+                                          REJECT
                                         </Button>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            );
-                                                          })}{" "}
-                                                      </div>
-                                                    </Tab>
-                                                    <Tab eventKey="completed" title="COMPLETED">
-                                                      <div className="requests">
-                                                        {this.state.ratingList &&
-                                                          this.state.ratingList.map((item) => {
-                                                            return (
-                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                                                <div className="mr-4">
-                                                                  <Image
-                                                                    src={item.u_image ? item.u_image : ""}
-                                                                    alt=""
-                                                                    className="r50"
-                                                                  />
-                                                                </div>
-                                                                <div className="pl-2 w-100">
-                                                                  <div className="d-flex justify-content-between">
-                                                                    <div>
-                                                                      <div className="col3 fw500 fs18 pb-1">
-                                                                        {item.fromname}
-                                                                      </div>
-                                                                      <div className="fs14 fw400 col54 pb-1">
-                                                                        {moment(item.br_datetime).format(
-                                                                          "dddd MMM Do YYYY HH:mm"
-                                                                        )}
-                                                                      </div>
-                                                                    </div>
-                                                                    <div className="col81 fs15 fs400 pr-3">
-                                                                      Review for - {item.toname}
-                                                                    </div>
-                                                                  </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
+                          </div>
+                        </Tab>
+                        <Tab eventKey="completed" title="COMPLETED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                                                  <div className="mb-4">
-                                                                    <span className="mr-4">
-                                                                      {[
-                                                                        ...Array(
-                                                                          item.ur_rating
-                                                                            ? +item.ur_rating
-                                                                            : 4
-                                                                        ),
-                                                                      ].map((e, i) => (
-                                                                        <Image
-                                                                          src={Yellowstar}
-                                                                          alt=""
-                                                                          className="mr-1"
-                                                                        />
-                                                                      ))}
-                                                                    </span>
-                                                                    <span className="col82 fs18 fw600">
-                                                                      Good!{" "}
-                                                                      <Image src={Checkgreen} alt="" />
-                                                                    </span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            );
-                                                          })}
-                                                      </div>
-                                                    </Tab>
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </Tab>
 
-                                                    <Tab eventKey="reject" title="REJECTED">
-                                                      <div className="requests">
-                                                        {this.state.ratingList &&
-                                                          this.state.ratingList.map((item) => {
-                                                            return (
-                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                                                <div className="mr-4">
-                                                                  <Image
-                                                                    src={item.u_image ? item.u_image : ""}
-                                                                    alt=""
-                                                                    className="r50"
-                                                                  />
-                                                                </div>
-                                                                <div className="pl-2 w-100">
-                                                                  <div className="d-flex justify-content-between">
-                                                                    <div>
-                                                                      <div className="col3 fw500 fs18 pb-1">
-                                                                        {item.fromname}
-                                                                      </div>
-                                                                      <div className="fs14 fw400 col54 pb-1">
-                                                                        {moment(item.br_datetime).format(
-                                                                          "dddd MMM Do YYYY HH:mm"
-                                                                        )}
-                                                                      </div>
-                                                                    </div>
-                                                                    <div className="col81 fs15 fs400 pr-3">
-                                                                      Review for - {item.toname}
-                                                                    </div>
-                                                                  </div>
+                        <Tab eventKey="reject" title="REJECTED">
+                          <div className="requests">
+                            {this.state.ratingList &&
+                              this.state.ratingList.map((item) => {
+                                return (
+                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                    <div className="mr-4">
+                                      <Image
+                                        src={item.u_image ? item.u_image : ""}
+                                        alt=""
+                                        className="r50"
+                                      />
+                                    </div>
+                                    <div className="pl-2 w-100">
+                                      <div className="d-flex justify-content-between">
+                                        <div>
+                                          <div className="col3 fw500 fs18 pb-1">
+                                            {item.fromname}
+                                          </div>
+                                          <div className="fs14 fw400 col54 pb-1">
+                                            {moment(item.br_datetime).format(
+                                              "dddd MMM Do YYYY HH:mm"
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="col81 fs15 fs400 pr-3">
+                                          Review for - {item.toname}
+                                        </div>
+                                      </div>
 
-                                                                  <div className="mb-4">
-                                                                    <span className="mr-4">
-                                                                      {[
-                                                                        ...Array(
-                                                                          item.ur_rating
-                                                                            ? +item.ur_rating
-                                                                            : 4
-                                                                        ),
-                                                                      ].map((e, i) => (
-                                                                        <Image
-                                                                          src={Yellowstar}
-                                                                          alt=""
-                                                                          className="mr-1"
-                                                                        />
-                                                                      ))}
-                                                                    </span>
-                                                                    <span className="col82 fs18 fw600">
-                                                                      Good!{" "}
-                                                                      <Image src={Checkgreen} alt="" />
-                                                                    </span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            );
-                                                          })}{" "}
-                                                      </div>
-                                                    </Tab>
-                                                  </Tabs>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                          )}
+                                      <div className="mb-4">
+                                        <span className="mr-4">
+                                          {[
+                                            ...Array(
+                                              item.ur_rating
+                                                ? +item.ur_rating
+                                                : 4
+                                            ),
+                                          ].map((e, i) => (
+                                            <Image
+                                              src={Yellowstar}
+                                              alt=""
+                                              className="mr-1"
+                                            />
+                                          ))}
+                                        </span>
+                                        <span className="col82 fs18 fw600">
+                                          Good!{" "}
+                                          <Image src={Checkgreen} alt="" />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}{" "}
+                          </div>
+                        </Tab>
+                      </Tabs>
+                    </div>
+                  </div>
+                </Col>
+              )}
             </Row>
           </Container>
 
@@ -3227,11 +4481,11 @@ as_type: "2" */}
                       this.state.deleteModalType == "admin"
                         ? this.adminUserDelete(event, this.state.profileId, 2)
                         : this.modifyDomainContent(
-                          "",
-                          this.state.deleteId,
-                          "superadmindeletecorporatedomain",
-                          2
-                        )
+                            "",
+                            this.state.deleteId,
+                            "superadmindeletecorporatedomain",
+                            2
+                          )
                     }
                   >
                     Yes
@@ -3247,42 +4501,42 @@ as_type: "2" */}
                   this.state.activeProfile == "professional" ? (
                     ""
                   ) : (
-                      <>
-                        <div className="fs18 fw500 col10 pointer write_txt mb-4">
-                          WRITE A REASON
+                    <>
+                      <div className="fs18 fw500 col10 pointer write_txt mb-4">
+                        WRITE A REASON
                       </div>
 
-                        <Form.Group
-                          controlId="exampleForm.ControlTextarea1"
-                          className="mb-4"
-                        >
-                          <Form.Control
-                            as="textarea"
-                            className="textTypes1"
-                            name="reasonForDelete"
-                            onChange={(event) => {
-                              this.handleChange(event);
-                            }}
-                          />
-                        </Form.Group>
+                      <Form.Group
+                        controlId="exampleForm.ControlTextarea1"
+                        className="mb-4"
+                      >
+                        <Form.Control
+                          as="textarea"
+                          className="textTypes1"
+                          name="reasonForDelete"
+                          onChange={(event) => {
+                            this.handleChange(event);
+                          }}
+                        />
+                      </Form.Group>
 
-                        <button
-                          className="btn btn-success bt-submit text-uppercase"
-                          onClick={(event) =>
-                            this.adminUserDeleteReason(
-                              event,
-                              this.state.profileId,
-                              2
-                            )
-                          }
-                        >
-                          SUBMIT & DELETE
+                      <button
+                        className="btn btn-success bt-submit text-uppercase"
+                        onClick={(event) =>
+                          this.adminUserDeleteReason(
+                            event,
+                            this.state.profileId,
+                            2
+                          )
+                        }
+                      >
+                        SUBMIT & DELETE
                       </button>
-                      </>
-                    )
+                    </>
+                  )
                 ) : (
-                    ""
-                  )}
+                  ""
+                )}
               </div>
             </Modal.Body>
           </Modal>
@@ -3325,91 +4579,94 @@ as_type: "2" */}
           </Modal>
 
           {this.state.pageType == "userlist" &&
-            totalRecord &&
-            totalRecord > customPagination.paginationPageSize ? (
-              <div className="paginationWrapper">
-                <Pagination
-                  activePage={this.state.pageNumber}
-                  itemsCountPerPage={customPagination.itemsCountPerPage}
-                  totalItemsCount={totalRecord}
-                  pageRangeDisplayed={customPagination.pageRangeDisplayed}
-                  onChange={this.handlePageChange.bind(this)}
-                  firstPageText={"<<"}
-                  lastPageText={">>"}
-                  prevPageText={"<"}
-                  nextPageText={">"}
-                />
-              </div>
-            ) : this.state.totalPage > 0 ? (
-              <div className="paginationWrapper">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination pg-blue deliva-pagination justify-content-end">
-                    <li class="page-item">
-                      <button
-                        class="page-link rotate-180 control-btn"
-                        aria-label="Previous"
-                        onClick={() => this.onChangePage(this.state.pageno - 1)}
-                        disabled={
+          totalRecord &&
+          totalRecord > customPagination.paginationPageSize ? (
+            <div className="paginationWrapper">
+              <Pagination
+                activePage={this.state.pageNumber}
+                itemsCountPerPage={customPagination.itemsCountPerPage}
+                totalItemsCount={totalRecord}
+                pageRangeDisplayed={customPagination.pageRangeDisplayed}
+                onChange={this.handlePageChange.bind(this)}
+                firstPageText={"<<"}
+                lastPageText={">>"}
+                prevPageText={"<"}
+                nextPageText={">"}
+              />
+            </div>
+          ) : this.state.totalPage > 0 ? (
+            <div className="paginationWrapper">
+              <nav aria-label="Page navigation">
+                <ul class="pagination pg-blue deliva-pagination justify-content-end">
+                  <li class="page-item">
+                    <button
+                      class="page-link rotate-180 control-btn"
+                      aria-label="Previous"
+                      onClick={() => this.onChangePage(this.state.pageno - 1)}
+                      disabled={
+                        this.state.pageno == 1 || this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-prev"></span>
+                      <span
+                        //className="prevNext"
+                        className={`sr-only ${
                           this.state.pageno == 1 || this.state.totalPage == 0
-                        }
-                      >
-                        <span className="icon-prev"></span>
-                        <span
-                          //className="prevNext"
-                          className={`sr-only ${this.state.pageno == 1 || this.state.totalPage == 0
                             ? ""
                             : "active"
-                            }`}
-                        >
-                          Previous
+                        }`}
+                      >
+                        Previous
                       </span>
-                      </button>
-                    </li>
+                    </button>
+                  </li>
 
-                    {this.state.totalPage > 0 &&
-                      this.state.pageArray.map((page, ind) => {
-                        return (
-                          <li class="page-item">
-                            <a
-                              className={`page-link ${this.state.pageno == page ? "active" : ""
-                                }`}
-                              onClick={() => this.onChangePage(page)}
-                            >
-                              {page}
-                            </a>
-                          </li>
-                        );
-                      })}
+                  {this.state.totalPage > 0 &&
+                    this.state.pageArray.map((page, ind) => {
+                      return (
+                        <li class="page-item">
+                          <a 
+                            className={`page-link ${
+                              this.state.pageno == page ? "active" : ""
+                            }`}
+                            onClick={() => this.onChangePage(page)}
+                          >
+                            {page}
+                          </a>
+                        </li>
+                      );
+                    })}
 
-                    <li class="page-item">
-                      <button
-                        class="page-link control-btn"
-                        aria-label="Next"
-                        onClick={() => this.onChangePage(this.state.pageno + 1)}
-                        disabled={
+                  <li class="page-item">
+                    <button
+                      class="page-link control-btn"
+                      aria-label="Next"
+                      onClick={() => this.onChangePage(this.state.pageno + 1)}
+                      disabled={
+                        this.state.pageno == this.state.totalPage ||
+                        this.state.totalPage == 0
+                      }
+                    >
+                      <span className="icon-next"></span>
+                      <span
+                        className={`sr-only ${
                           this.state.pageno == this.state.totalPage ||
                           this.state.totalPage == 0
-                        }
-                      >
-                        <span className="icon-next"></span>
-                        <span
-                          className={`sr-only ${this.state.pageno == this.state.totalPage ||
-                            this.state.totalPage == 0
                             ? ""
                             : "active"
-                            }`}
-                        >
-                          Next
+                        }`}
+                      >
+                        Next
                       </span>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            ) : (
-                <span></span>
-                // <div className="recordfound">No Record Found</div>
-              )}
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          ) : (
+            <span></span>
+            // <div className="recordfound">No Record Found</div>
+          )}
           {/* {this.state.totalRecordCount == 0 ? (
           ) : (
             ""
