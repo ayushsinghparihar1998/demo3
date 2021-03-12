@@ -11,10 +11,6 @@
         min-height: 100vh; 
         background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 10.21%, rgba(235, 35, 233, 0.65) 98.2%); 
 
-        nav.navbar-light {
-            // background: linear-gradient(180deg, $col18 0%, #CA5ACD 86.59%); 
-        }
-
         .coming_m {
             pointer-events: none; 
         }
@@ -119,7 +115,6 @@
         bottom: -20px; 
         li {
             button {
-                // display: none; 
                 width: 16px;
                 height: 16px;
                 background: $col54; 
@@ -157,8 +152,6 @@
         padding-bottom: 30px;
     }
     .planList {
-        // box-shadow: 4px 10px 21px rgba(0, 0, 0, 0.1);  
-        // box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
         box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.15);
         border: solid 1px #eeeeee;  
         min-height: 460px; 
@@ -203,7 +196,6 @@
                 }
             }
             .fw600.col29.text-center {
-                // color: #08A318 !important;  
                 word-break: break-all;
                 white-space: normal;
                 .eatcat {
@@ -226,14 +218,11 @@
         .plantwo { 
             padding: 20px;
             height: 190px;
-            // border-bottom: 1px dashed $col14; 
-            padding-bottom: 15px;  
-            // background-color: $col63; 
+            padding-bottom: 15px; 
             background-image: url(../images/rectals.png);
-            .peryears {  
-                // display: none; 
-            background-position: center; 
-        }
+            .peryears {    
+                background-position: center; 
+            }
 
             .btnSave {
                 background: transparent;
@@ -502,7 +491,6 @@
     background-size: cover;   
     text-align: center; 
     padding: 3rem 0 5rem;  
-    // background: $col96;
     background: #EFEFEF;
     .slick-prev:before, .slick-next:before {
         color: $col64;
@@ -562,10 +550,6 @@
             font-style: italic; 
         }
         .invertedone { 
-            // position: absolute;
-            // left: -56px;
-            // top: 8px;
-            // max-width: 50px;
             position: absolute;
             left: -36px;
             top: 38px;
@@ -573,10 +557,6 @@
         }
 
         .invertedtwo {
-            // position: absolute;
-            // right: 8%; 
-            // top: 114px; 
-            // max-width: 50px;
             position: absolute;
             right: -18px; 
             left: auto;
@@ -651,7 +631,6 @@
     background-color: #fff;
     padding: 60px 0;
     position: relative; 
-    // background-image: url('../images/sideimg.png');  
     background-position: left;
     background-repeat: no-repeat;
     padding-bottom: 70px;
@@ -691,15 +670,7 @@
             max-width: 250px; 
             margin: auto;
             display: block; 
-            // &.ones {
-            //     max-width: 265px;
-            // }
-            // &.twos {
-            //     max-width: 156px;
-            // }
-            // &.threes {
-            //     max-width: 230px; 
-            // }
+           
         }
     }
     .PillarsThree {
@@ -1156,12 +1127,6 @@ img {
 
 @media (min-width: 768px) and (max-width: 991px) {  
     .main_baner {
-        // .mainLanding {
-        //     width: 100%;
-        //     .mj_nav {
-        //         position: relative;
-        //     } 
-        // }
         &.home_banner {
             .mj_nav {
                 // max-width: 97%; 

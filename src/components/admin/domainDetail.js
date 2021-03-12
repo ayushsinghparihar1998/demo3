@@ -169,7 +169,7 @@ class DomainDetail extends Component {
         <div className="profile_layout adminProfessinal pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={3} className="pr-1">
+              <Col md={4} lg={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -185,7 +185,7 @@ class DomainDetail extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={9} className="pl-1">  
+              <Col md={8} lg={9} className="pl-1">    
                 <div className="corporateMember d_detail">
                   <div className="fs22 col10 mb-1">
                     {this.props.match.params.name}
@@ -193,7 +193,7 @@ class DomainDetail extends Component {
                   <div className="fs15 fw400 col14 mb-4">
                     {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                   </div>
-                  <Table bordered>
+                  <Table bordered> 
                     <thead>
                       <tr>
                         <th>Employees</th>
