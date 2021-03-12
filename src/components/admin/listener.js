@@ -3464,7 +3464,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">List of Blogs</div>
+                        <div className="fs22 fw600 col10">List of Blogs</div> 
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3544,20 +3544,26 @@ cs_time: "00:00:02" */}
                       return (
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
+                          <Col md={1}>
                             <div className="mr-2 pt-1">
                               <Image
                                 src={item.bl_image ? item.bl_image : ""}
                                 alt=""
                               />
                             </div>
+                            </Col>
+                            <Col md={11}>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
                                   <div className="d-flex">
+                                  <Col md={9} className="pl-0">  
                                     <div className="col1 fw600 fs18 pb-1">
                                       {item.bl_title}
                                     </div>
-                                    <div className="d-flex ml-auto">
+                                    </Col>
+                                    <Col md={3}>  
+                                    <div className="d-flex ml-auto justify-content-end"> 
                                       <span className="mr-3">
                                         <Image
                                           src={Editicon}
@@ -3583,6 +3589,7 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                     </div>
+                                    </Col> 
                                   </div>
 
                                   <div className="mb-1">
@@ -3592,7 +3599,7 @@ cs_time: "00:00:02" */}
                                         {item.bl_written_by}
                                       </span>{" "}
                                     </span>
-                                    <span className="ml-3">
+                                    <span className="ml-0 d-block">
                                       <Image
                                         src={blogclock}
                                         className="wSet-20 mr-2"
@@ -3635,6 +3642,8 @@ cs_time: "00:00:02" */}
                                 </div>
                               </div>
                             </div>
+                        
+                            </Col>
                           </div>
                         </div>
                       );
