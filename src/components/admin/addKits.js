@@ -515,7 +515,7 @@ class AddKits extends Component {
                         name="kt_name"
                         value={kitObj.kt_name}
                         onChange={(e) => this.handleChange(e)}
-                        maxLength={50}
+                        maxLength={150}
                       />
 
                       <div className="col27 fs14 fw400 mt-2 error">

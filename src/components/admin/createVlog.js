@@ -231,7 +231,7 @@ class CreateVlog extends Component {
                         type="text"
                         value={vlobj.vl_title}
                         className="inputTyp2"
-                        maxLength={50}
+                        maxLength={150}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.vl_title}

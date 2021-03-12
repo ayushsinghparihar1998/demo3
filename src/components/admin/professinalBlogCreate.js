@@ -363,20 +363,21 @@ class ProfessinalBlogCreate extends Component {
                       <Form.Control
                         onChange={(e) =>
                           // this.setState({ title: e.target.value })
+                          // .replace(
+                          //   /[^a-zA-Z0-9 ]/g,
+                          //   ""
+                          // )
                           this.setState({
                             blobj: {
                               ...this.state.blobj,
-                              bl_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g,
-                                ""
-                              ),
+                              bl_title: e.target.value,
                             },
                           })
                         }
                         type="text"
                         value={blobj.bl_title}
                         className="inputTyp2"
-                        maxLength={50}
+                        maxLength={150}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.title}
@@ -415,20 +416,21 @@ class ProfessinalBlogCreate extends Component {
                       </Form.Label>
                       <Form.Control
                         onChange={(e) =>
+                          // .replace(
+                          //   /[^a-zA-Z ]/g,
+                          //   ""
+                          // )
                           this.setState({
                             blobj: {
                               ...this.state.blobj,
-                              bl_written_by: e.target.value.replace(
-                                /[^a-zA-Z ]/g,
-                                ""
-                              ),
+                              bl_written_by: e.target.value,
                             },
                           })
                         }
                         type="text"
                         value={blobj.bl_written_by}
                         className="inputTyp2"
-                        maxLength={100}
+                        maxLength={150}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.writtenby ? "Please enter the Author's name." : null}
