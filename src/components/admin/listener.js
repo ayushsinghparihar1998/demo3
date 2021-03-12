@@ -3361,27 +3361,27 @@ cs_time: "00:00:02" */}
                       return (
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
+                            <Col md={1}>
                             <div className="mr-2 pt-1">
                               <Image
                                 src={item.pbl_image ? item.pbl_image : ""}
                                 alt=""
                               />
                             </div>
+                            </Col>
+                            <Col md={11}>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">
                                 <div className="w-100">
-                                  <div className="d-flex">
-                                    <div className="col1 fw600 fs18 pb-1">
-                                      {/* 
-                    pbl_desc: "Take a look at our buddy above. Cute kid. Of course, the mask is prominent"
-  pbl_id: "9"
-  pbl_image: "https://eatluvnpray.org/elp/blogimage/1/b5fecac905142648b9cb000d9aac223fa1c41cdd.jpg"
-  pbl_status: "Active"
-  pbl_title: "Press blog"
-  pbl_written_by: "ife" */}
-                                      {item.pbl_title}
-                                    </div>
-                                    <div className="d-flex ml-auto">
+                                  <div className="d-flex"> 
+                                    <Col md={9} className="pl-0">  
+                                        <div className="col1 fw600 fs18 pb-1">
+                                          
+                                          {item.pbl_title}
+                                        </div>
+                                    </Col>
+                                    <Col md={3}>
+                                    <div className="d-flex justify-content-end ml-auto">  
                                       <span className="mr-3">
                                         <Image
                                           src={Editicon}
@@ -3407,6 +3407,7 @@ cs_time: "00:00:02" */}
                                         />
                                       </span>
                                     </div>
+                                    </Col> 
                                   </div>
 
                                   <div className="mb-1">
@@ -3416,7 +3417,7 @@ cs_time: "00:00:02" */}
                                         {item.pbl_written_by}
                                       </span>{" "}
                                     </span>
-                                    <span className="ml-3">
+                                    <span className="ml-0 d-block"> 
                                       <Image
                                         src={blogclock}
                                         className="wSet-20 mr-2"
@@ -3452,6 +3453,7 @@ cs_time: "00:00:02" */}
                                 </div>
                               </div>
                             </div>
+                            </Col>
                           </div>
                         </div>
                       );
@@ -4143,15 +4145,18 @@ as_type: "2" */}
                                   </div>
                                 </div>
                               </Col>
-                              <Col md={10}>
+                              <Col md={10} className="pr-0"> 
                                 <div className="pl-2 w-100">
                                   <div className="d-flex justify-content-between">
                                     <div className="w-100">
-                                      <div className="d-flex">
-                                        <div className="col1 fw600 fs18 pb-1">
+                                      <div className="d-flex w-100">
+                                        <Col md={7} className="pl-0">
+                                        <div className="col1 fw600 fs17 pb-1">
                                           {item.vl_title}
                                         </div>
-                                        <div className="d-flex ml-auto">
+                                        </Col>
+                                        <Col md={5} className="ml-auto"> 
+                                        <div className="d-flex ml-auto justify-content-end">
                                           <span className="pr-3 fs14 col47 fw400">
                                             {item.vl_status == "2"
                                               ? "Deactivate"
@@ -4203,6 +4208,7 @@ as_type: "2" */}
                                             />
                                           </span>
                                         </div>
+                                        </Col>
                                       </div>
                                       <div className="fs16 fw400 col14 pb-1 e_detai">
                                         <strong className="fw600">
