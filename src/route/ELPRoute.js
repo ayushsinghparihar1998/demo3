@@ -28,7 +28,6 @@ import Userprofiledetail from "../components/jsx/superadmin/userprofiledetail";
 
 import AdminLogin from "../components/admin/adminlogin";
 import Adminlistener from "../components/admin/listener";
-import ListenerSearch from "../components/chat/listenerSearch";
 import Videocall from "../components/videoaudio/videocall";
 import Audiocall from "../components/videoaudio/audiocall";
 import Menubar from "../components/core/menu";
@@ -38,7 +37,7 @@ import ListenerProfile from "../components/listener/listenerprofile";
 import Compaign from "../components/user/campaign";
 
 import getUserProfile from "../common/utility/getUserProfile";
-import { getLocalStorage, showErrorMessage } from "../common/helpers/Utils";
+// import { getLocalStorage} from "../common/helpers/Utils";
 import socketClass from "../common/utility/socketClass";
 import VideoCalling from "../components/VideoComponents/VideoCalling/VideoCalling";
 import CallingTo from "../components/videoaudio/CallingTo/CallingTo";
@@ -71,7 +70,6 @@ import Termcondition from "../components/core/termcondition";
 import Privacypolicy from "../components/core/privacypolicy";
 import ShareProfile from "../components/core/ShareProfile";
 import About from "../components/core/about";
-import Blockuser from "../components/user/blockuser";
 import ProfessionalLsting from "../components/professional/professionalListing";
 import ProfessionalDetails from "../components/professional/professionalDetails";
 import ProfessionalSignup from "../components/professional/professionalSignup";
@@ -120,11 +118,11 @@ import MentalQa from "../components/assessmentTest/mentalQa";
 import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 import CorporateDocument from "../components/admin/corporateDocument";
 
-const user =
-  getLocalStorage("userInfo") ||
-  getLocalStorage("userInfoProff") ||
-  getLocalStorage("customerInfo") ||
-  getLocalStorage("userInfoAdmin");
+// const user =
+//   getLocalStorage("userInfo") ||
+//   getLocalStorage("userInfoProff") ||
+//   getLocalStorage("customerInfo") ||
+//   getLocalStorage("userInfoAdmin");
 class ELPRoute extends Component {
   state = {};
   componentDidMount() {
