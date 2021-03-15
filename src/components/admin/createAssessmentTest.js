@@ -511,7 +511,7 @@ class CreateAssessmentTest extends Component {
     }
     let stringData = stripHtml(data);
     console.log("ASd");
-    if (stringData.length <= constant.CK_EDITOR_CONFIG.MAX_CHARACTER) {
+    if (stringData.length <= 2000) {
       this.setState({
         textLength: stringData.length,
       });
@@ -578,19 +578,20 @@ class CreateAssessmentTest extends Component {
                         className="inputTyp2"
                         onChange={(e) =>
                           // this.setState({ title: e.target.value })
+                          /**
+                           * .replace(
+                                /[^a-zA-Z0-9 ]/g,
+                                ""
+                              )
+                           */
                           this.setState({
                             asstObj: {
                               ...this.state.asstObj,
-                              as_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g,
-                                ""
-                              ),
+                              as_title: e.target.value
                             },
                           })
                         }
-                        type="text"
                         value={asstObj.as_title}
-                        className="inputTyp2"
                         maxLength={50}
                       />
                       <div className="col27 fs14 fw400 mt-2 error">

@@ -145,41 +145,42 @@ class EditQa extends Component {
 
     console.log(name, value, ind, ansInd);
     console.log(ind, ansInd);
+    console.log("CJHECK " , as_que_ans[ind], name)
     let validName = "";
-    if (as_que_ans[ind].as_que_type == 2) {
+    if (as_que_ans[ind].as_que_type === "2") {
       validName =
-        name == "as_que_name"
+        name === "as_que_name"
           ? "Please enter a valid question"
-          : name == "as_que_type"
+          : name === "as_que_type"
           ? "Please select a question type"
-          : name == "option"
+          : name === "option"
           ? "Please enter a valid answer"
           : "";
     } else {
       validName =
-        name == "as_que_name"
+        name === "as_que_name"
           ? "Please enter a valid question"
-          : name == "as_que_type"
+          : name === "as_que_type"
           ? "Please select a question type"
-          : name == "weightage"
+          : name === "weightage"
           ? "Please enter a weightage value for the answer"
-          : name == "option"
+          : name === "option"
           ? "Please enter a valid answer"
           : "";
     }
     as_que_ans.map((item, index) => {
-      if (ind == index) {
+      if (ind === index) {
         if (ansInd !== "") {
           console.log(ansInd);
           item.as_ans.map((val, i) => {
             if (i == ansInd) {
               val[name] =
-                name == "weightage" ? value.replace(/[^0-9]/g, "") : value;
-              if (item.as_que_type == 2 && name == "weightage") {
+                name === "weightage" ? value.replace(/[^0-9]/g, "") : value;
+              if (item.as_que_type === "2" && name === "weightage") {
                 erroras_que_ans[ind].as_ans[i][name] = "";
               } else {
                 erroras_que_ans[ind].as_ans[i][name] =
-                  val[name].length == 0 ? validName : "";
+                  val[name].length === 0 ? validName : "";
               }
             }
           });
@@ -522,17 +523,17 @@ class EditQa extends Component {
                                     console.log("ASd")
                                     let data = editor.getData();
 
-                                    this.validateCKEditorData(data, (valid) => {
-                                      if (valid) {
+                                    // this.validateCKEditorData(data, (valid) => {
+                                    //   if (valid) {
                                         this.handleChangeLoop1(
                                           "as_que_name",
                                           editor.getData(),
                                           index,
                                           ""
                                         );
-                                      }
+                                      // }
 
-                                    })
+                                    // })
                                   }}
                                   className="inputTyp2"
                                 /> : null}
@@ -637,20 +638,15 @@ class EditQa extends Component {
                                             );
                                           }}
                                           onChange={(event, editor) => {
-                                            console.log("ASd")
                                             let data = editor.getData();
 
-                                            this.validateCKEditorData(data, (valid) => {
-                                              if (valid) {
                                                 this.handleChangeLoop1(
                                                   "option",
                                                   data,
                                                   index,
                                                   i
                                                 );
-                                              }
-
-                                            })
+                                              
                                           }}
                                           className="inputTyp2"
                                         /> : null}

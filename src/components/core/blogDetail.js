@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
+  Image
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Mediadetailone from "../../assets/images/mediadetail.svg";
-import Sharebtn from "../../assets/images/sharebtn.png";
 import ELPRxApiService from "../../common/services/apiService";
 import moment from "moment";
 import YouTube from "react-youtube";
@@ -25,38 +17,34 @@ const Mediadetails = (props) => {
   const [url, seturl] = useState("");
   const [play, setplay] = useState(Boolean);
   const [opts, setopts] = useState({});
-  const [catAr, setcatAr] = useState([]);
-  const [catClass, setcatClass] = useState({});
+  // const [catAr, setcatAr] = useState([]);
+  // const [catClass, setcatClass] = useState({});
 
-  useEffect(() => {
-    _getBlogDetailHandler();
-  }, []);
-
-  const _getBlogDetailHandler = async () => {
+  const _getBlogDetailHandler = useCallback( async () => {
     console.log(props.history.location.state.type);
     let api =
-      props.history.location.state.type == "blog"
+      props.history.location.state.type === "blog"
         ? "getBlogDetail"
         : "getvlogs_details";
     let data =
-      props.history.location.state.type == "blog"
+      props.history.location.state.type === "blog"
         ? { bl_id: props.match.params.id }
         : { vl_id: props.match.params.id };
     try {
       let response = await ELPRxApiService(api, data);
       console.log(" detail response", response);
-      if (props.history.location.state.type == "blog") {
+      if (props.history.location.state.type === "blog") {
         setBlogDetail({ ...response.data.data.blog_list[0] });
         console.log(response.data.data.blog_list[0].blog_category);
-        let catAr = [];
-        let catClass = "";
+        // let catAr = [];
+        // let catClass = "";
        
-        setcatAr(response.data.data.blog_list[0].blog_category);
+        // setcatAr(response.data.data.blog_list[0].blog_category);
       } else {
         let url = "";
-        var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         var match = response.data.data[0].vl_video_url.match(regExp);
-        if (match && match[2].length == 11) {
+        if (match && match[2].length === 11) {
           console.log("match[2]", match[2]);
           url = match[2];
           console.log(url);
@@ -69,7 +57,7 @@ const Mediadetails = (props) => {
           height: "390",
           width: "640",
           playerVars: {
-            autoplay: play == true ? 1 : "",
+            autoplay: play ? 1 : "",
           },
         });
         setplay(false);
@@ -81,7 +69,13 @@ const Mediadetails = (props) => {
       console.log("err");
       console.log(err);
     }
-  };
+  },[play ,props.history.location.state.type , props.match.params.id ])
+
+  useEffect(() => {
+    _getBlogDetailHandler();
+  }, [_getBlogDetailHandler]);
+
+
 
   return (
     <div className="page__wrapper innerpage">
@@ -116,7 +110,7 @@ const Mediadetails = (props) => {
               })}
             </div> */}
             <div className="col8 fw600 fs22 text-center text-uppercase w-100">
-              {props.history.location.state.type == "blog"
+              {props.history.location.state.type === "blog"
                 ? blogDetail.bl_title
                 : blogDetail.vl_title}
             </div>
@@ -124,7 +118,7 @@ const Mediadetails = (props) => {
             <Row className="mt-4">
               <Col lg={12}>
                 <div className="ngo_details mt-2">
-                  {props.history.location.state.type == "blog" ? (
+                  {props.history.location.state.type === "blog" ? (
                     <Image
                       src={blogDetail && blogDetail.bl_image}
                       alt=""
@@ -153,8 +147,9 @@ const Mediadetails = (props) => {
                     </>
                   )}
                   <div className="pt-3 pb-3">
+                      { blogDetail?.bl_written_by  && <div className="fs16 col28 fw300 pt-3 line_txt">Written By - {blogDetail.bl_written_by}</div> }
                     <div className="col14 fs14 fw400 pt-1">
-                      {props.history.location.state.type == "blog"
+                      {props.history.location.state.type === "blog"
                         ? moment(blogDetail.bl_datetime).format(
                             "dddd MMM Do YYYY"
                           )
@@ -166,7 +161,7 @@ const Mediadetails = (props) => {
                       className="fs14 col28 fw300 pt-3 line_txt"
                       dangerouslySetInnerHTML={{
                         __html:
-                          props.history.location.state.type == "blog"
+                          props.history.location.state.type === "blog"
                             ? blogDetail.bl_desc
                             : blogDetail.vl_desc,
                       }}

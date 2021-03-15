@@ -221,10 +221,7 @@ class CreateVlog extends Component {
                           this.setState({
                             vlobj: {
                               ...this.state.vlobj,
-                              vl_title: e.target.value.replace(
-                                /[^a-zA-Z0-9 ]/g,
-                                ""
-                              ),
+                              vl_title: e.target.value
                             },
                           })
                         }
