@@ -397,7 +397,7 @@ class ProfessinalBlog extends Component {
                     <div className="col14 fs16 fw300 mb-2">
                       For all press inquiries, please email
                     </div>
-                    <div className="col8 fs16 fw300">press@elphealth.com</div>
+                    <div className="col8 fs16 fw300">contact@eatluvnpray.com</div> 
                   </div>
                 </div>
               </div>

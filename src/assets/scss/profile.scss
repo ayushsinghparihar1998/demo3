@@ -2364,8 +2364,19 @@ button.btnDownloads {
             }
             .pressBlog {
                 .fs16.fw300.col14 {   
-                    max-height: 105px; 
-                    overflow: hidden;
+                    max-height: 105px;  
+                    overflow: hidden; 
+                }
+                .col-md-5 {
+                    .fs16.fw300.col14 {   
+                        max-height: 114px;
+                    }
+                }
+                .col-md-6 {
+                    &>.fs18 {     
+                        max-height: 318px;
+                        overflow: hidden;
+                    }
                 }
             }
         }
@@ -2612,6 +2623,19 @@ ul.PlanAbouts {
 }
 
 // custom radio button end
+
+.innerpage { 
+    .ngo_services {
+        .ngo_listing {
+            .ngo_details {
+                & > img {
+                    max-height: inherit;
+                    object-fit: inherit;
+                }
+            }
+        }
+    }
+}
 
 @media (min-width: 992px) and (max-width: 1199px) {                     
     .profile_layout { 
