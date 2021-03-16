@@ -83,29 +83,43 @@ const AudioCall = (props) => {
     }
   },[])
   const runTimer = () => {
+    console.log("RUN TIMER");
+    console.log("LOCAL STORAFE FOR CHECK",getLocalStorage('customerInfo')?.u_role_id , userDetails,paramsid.toString())
     const curr = new Date().getTime();
     callTimerRef.current = setInterval(() => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
       setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`);
       if(getLocalStorage('customerInfo')?.u_role_id === constant.roles.CORPORATE_CUSTOMER){
-        socket.emit('updateTime', { "user_id": userDetails.id,type:'video' }, data => {
+        socket.emit('updateTime', { "user_id": getLocalStorage('customerInfo').u_id,type:'audio' }, data => {
           console.log("userDetail data", data);
           if (data.success === 2) {
+            showErrorMessage(data.msg)
             disconnect();
           } else {
             // handle odd scenario
             console.log("TIME UPDATED")
-            showErrorMessage(data.msg)
+            // showErrorMessage(data.msg)
           }
         })
+        // socket.emit('updateTime', { "user_id": paramsid.toString(),type:'audio' }, data => {
+        //   console.log("userDetail data", data);
+        //   if (data.success === 2) {
+        //     showErrorMessage(data.msg)
+        //     disconnect();
+        //   } else {
+        //     // handle odd scenario
+        //     console.log("TIME UPDATED")
+        //     // showErrorMessage(data.msg)
+        //   }
+        // })
       }
      
     }, 1000)
   }
   const getUserDetails = (id) => {
     socket.emit('userDetail', { "user_id": id }, data => {
-      // console.log("userDetail data", data);
+      console.log("userDetail data", data);
       if (data.success === 1) {
         setUserDetails(data.userDetail);
       } else {
@@ -216,7 +230,7 @@ const AudioCall = (props) => {
     attachTracks(tracks, container, type);
   }
   const attachTracks = (tracks, container, type) => {
-    console.log('tracks', tracks);
+    console.log('tracks', tracks,callTimerRef ,type);
     if (type == 'local') {
       setTracks(prev => ({ ...prev, local: tracks }))
     } else {
