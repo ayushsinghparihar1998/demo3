@@ -56,8 +56,9 @@ const AudioCall = (props) => {
       console.log('-------  muteAndUnmute', data);
       setUserMuted(data.isMute)
     })
-    socket.on('endVideoCall', () => {
-      // showErrorMessage("Call has been ended.")
+    socket.on('endVideoCall', (data) => {
+      console.log("Call has been ended. DUE TO ",data)
+      showErrorMessage("Call has been ended.")
       if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
         history.push('/chatuser/' + paramsid)
       } else {
