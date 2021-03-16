@@ -94,7 +94,7 @@ const AudioCall = (props) => {
         socket.emit('updateTime', { "user_id": getLocalStorage('customerInfo').u_id,type:'audio' }, data => {
           console.log("userDetail data", data);
           if (data.success === 2) {
-            showErrorMessage(data.msg)
+            showErrorMessage(data.msg || "Call is Ended")
             disconnect();
           } else {
             // handle odd scenario
@@ -168,7 +168,7 @@ const AudioCall = (props) => {
       sender_id: getUserProfile().u_id
     }
     if (token) {
-      socket.emit('endVideoCall', payload);
+      socket.emit('cancelCall', payload);
     }
     if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
       history.push('/chatuser/' + paramsid)
