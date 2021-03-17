@@ -18,7 +18,7 @@ import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
-import { showErrorMessage } from "../../common/helpers/Utils";
+import { showErrorMessage , showSuccessToast } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
 import {
   getLocalStorage
@@ -26,7 +26,7 @@ import {
 import constant from "../../constant";
 
 const socket = socketClass.getSocket();
-let tmp = 0;
+
 const AudioCall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
@@ -56,6 +56,9 @@ const AudioCall = (props) => {
       console.log('-------  muteAndUnmute', data);
       setUserMuted(data.isMute)
     })
+    if(token){
+      console.log("THIS IS USEEFFECT TOKEN " ,token , userDetails)
+    }
     socket.on('endVideoCall', (data) => {
       console.log("Call has been ended. DUE TO ",data)
       showErrorMessage("Call has been ended.")
@@ -70,6 +73,7 @@ const AudioCall = (props) => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
       const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
       const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
+      console.log(" GOT THE TOKEN " , token)
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
@@ -100,23 +104,10 @@ const AudioCall = (props) => {
           } else {
             // handle odd scenario
             console.log("TIME UPDATED")
-            // showErrorMessage(data.msg)
           }
         })
-        // socket.emit('updateTime', { "user_id": paramsid.toString(),type:'audio' }, data => {
-        //   console.log("userDetail data", data);
-        //   if (data.success === 2) {
-        //     showErrorMessage(data.msg)
-        //     disconnect();
-        //   } else {
-        //     // handle odd scenario
-        //     console.log("TIME UPDATED")
-        //     // showErrorMessage(data.msg)
-        //   }
-        // })
       }
-     
-    }, 1000)
+    }, 2000)
   }
   const getUserDetails = (id) => {
     socket.emit('userDetail', { "user_id": id }, data => {
@@ -152,24 +143,28 @@ const AudioCall = (props) => {
 
   const disconnect = () => {
 
-
+    console.log("CALL ENDED " ,roomRef.current)
     sendMessage(`Audio call ended at`, 2)
     if (roomRef.current != null) {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
-
     }
-
+    console.log("GET TOKEN",token)
     const payload = {
       reciver_id: paramsid,
-      reciver_type: userDetails?.u_role_id,
+      reciver_type: userDetails?.u_role_id || "2",
       // "sender": {},
       type: "audio",
       sender_id: getUserProfile().u_id
     }
+    console.log("PAYLOAD ",payload)
     if (token) {
-      socket.emit('cancelCall', payload);
+      socket.emit('cancelCall', payload , (data)=>{
+        console.log("AFTER CALLL ENDED & GETING TOKEN ", data , payload)
+        if(data.success === 1)
+        showSuccessToast(data.msg)
+      });
     }
     if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
       history.push('/chatuser/' + paramsid)
