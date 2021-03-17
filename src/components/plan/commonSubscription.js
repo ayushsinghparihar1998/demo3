@@ -9,7 +9,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
         <>
             <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                    Smart Subscription Plans  
+                    Smart Plans  
                 </div>
                 <Slider {...settingstwo}>
                     {
@@ -101,7 +101,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
 
             <div className="PlanListOne">
                 <div className="fs28 fw600 col8 mt-5 pt-3 mb-4 text-center">
-                    By Condition Subscription Plans
+                    By Condition Plans
                 </div>
                 <Slider {...settingstwo}>
                     {dataByCondition &&

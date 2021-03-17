@@ -98,6 +98,9 @@
         font-weight: 400; 
     }
     .navbar-light {
+        .loginnav {
+            margin-top: -2px; 
+        }
         .navbar-brand {
             font-size: $fs23;
             font-weight: 600;
@@ -173,10 +176,10 @@
                 &.dropdown-toggle {
                     &::after {
                         position: relative;
-                        top: 2px; 
-                        border-top: .45em solid;
-                        border-right: .45em solid transparent;
-                        border-left: .45em solid transparent;
+                        top: 1px;  
+                        border-top: .35em solid;
+                        border-right: .35em solid transparent;
+                        border-left: .35em solid transparent;
                     }
                 }
             } 
@@ -474,7 +477,7 @@
 
 }
 
-@media (max-width: 1250px) {  
+@media (max-width: 1250px) {   
 .mj_nav {
     .navbar-light {
         .navbar-nav {

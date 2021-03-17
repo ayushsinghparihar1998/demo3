@@ -230,12 +230,12 @@ class PlanDetails extends Component {
           <Container>
             <div className="ngo_listing mt-4 mb-4">
               <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
-                  Lifestyle Subscription Plans
+                  Lifestyle Smart Plans
               </div>
               <Row>
                 <Col md={5}>
                   <div className="subscriptionDetails pr-3">
-                    <div className="fs28 fw600 col8">DISCOVER A HEALTHIER YOU</div>
+                    <div className="fs28 fw600 col8">DISCOVER A HEALTHIER YOU</div> 
                     <div className="fs15 fw400 col14 mt-3 mb-4 pb-1">
                       Your journey towards holistic wellness starts here. Get on one of our personalized programs. Check out our offerings and features for each subscription plan.{" "}
                     </div>
@@ -386,7 +386,7 @@ class PlanDetails extends Component {
                 info:'LOGIN'
               }
             ]}
-          />
+          /> 
 
           <CustomModal 
             modalShow={this.state.show4}
