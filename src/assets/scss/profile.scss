@@ -2637,6 +2637,18 @@ ul.PlanAbouts {
     }
 }
 
+.subscriptionDetails { 
+    form {
+        span.ml-3 {
+            position: relative;
+            top: 5px; 
+            & > a {
+                margin-right: 5px; 
+            }
+        }
+    }
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {                     
     .profile_layout { 
         .myprofile {
@@ -3156,8 +3168,14 @@ ul.PlanAbouts {
                 padding-left: 0px;
                 padding-right: 0px;
             }   
-        .subscriptionDetails {   
+        .subscriptionDetails {    
             padding-right: 0px !important;
+            form {
+                span.ml-3 {
+                    margin-top: 10px;
+                }
+            }
+           
             .fs36.fw600.col8 {
                 font-size: 1.5rem !important;
             }
@@ -3175,6 +3193,7 @@ ul.PlanAbouts {
     }
 
 }
+
 
 
 @media (max-width: 450px) {  
