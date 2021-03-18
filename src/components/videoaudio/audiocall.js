@@ -71,9 +71,9 @@ const AudioCall = (props) => {
     //get the token
     (async () => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
-      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
+      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'audio' });
       const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
-      console.log(" GOT THE TOKEN " , token)
+      console.log(" GOT THE PARAMS IN USEFFECT  " ,room,params, token)
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
@@ -110,8 +110,8 @@ const AudioCall = (props) => {
     }, 2000)
   }
   const getUserDetails = (id) => {
-    socket.emit('userDetail', { "user_id": id }, data => {
-      console.log("userDetail data", data);
+    socket.emit('userDetail', { "user_id": paramsid }, data => {
+      console.log("userDetail data", data , paramsid);
       if (data.success === 1) {
         setUserDetails(data.userDetail);
       } else {
@@ -145,7 +145,7 @@ const AudioCall = (props) => {
 
     console.log("CALL ENDED " ,roomRef.current)
     sendMessage(`Audio call ended at`, 2)
-    if (roomRef.current != null) {
+    if (roomRef.current) {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
@@ -159,13 +159,13 @@ const AudioCall = (props) => {
       sender_id: getUserProfile().u_id
     }
     console.log("PAYLOAD ",payload)
-    if (token) {
+    // if (token) {
       socket.emit('cancelCall', payload , (data)=>{
         console.log("AFTER CALLL ENDED & GETING TOKEN ", data , payload)
         if(data.success === 1)
         showSuccessToast(data.msg)
       });
-    }
+    // }
     if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
       history.push('/chatuser/' + paramsid)
     } else {
@@ -180,7 +180,7 @@ const AudioCall = (props) => {
       audio: true,
       name: room,
       video: false
-    }).then(roomjoined);
+    }).then(roomjoined).catch(err=>console.log("COULDNT CONNECT TO WILLO BECAUSE",err));
   }
   const roomjoined = (room) => {
     roomRef.current = room;
@@ -311,7 +311,7 @@ const AudioCall = (props) => {
             <div className="audiocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
-                (muteAudio == false) ?
+                (!muteAudio) ?
                   <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
                     <Image src={Videomute} alt="" />
                   </button> :
