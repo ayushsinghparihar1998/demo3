@@ -1,24 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
-import {  Container,Image } from "react-bootstrap";
-import { connect} from 'twilio-video';
+import React, { Component, useState, useEffect, useRef } from "react";
+import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab } from "react-bootstrap";
+import { connect, createLocalTracks, createLocalVideoTrack } from 'twilio-video';
 import {
   useParams,
   useHistory
 } from "react-router-dom";
 import moment from 'moment';
 import NavBar from "../core/nav";
+import Backicon from "../../assets/images/backicon.svg";
+import Videouser from "../../assets/images/pro_img2.svg";
 import Videousertwo from "../../assets/images/placeholder_user.png";
+import Soundstwo from "../../assets/images/sounds.svg";
 import Videomute from "../../assets/images/mute.svg";
+import Videothree from "../../assets/images/video.svg";
 import Videomuteov from "../../assets/images/mute_ov.svg";
 import Videochat from "../../assets/images/chat.svg";
 import Videodisconnect from "../../assets/images/dissconect.svg";
+import Audioreceivecall from "../../assets/images/receive_call.svg";
 import VideomuteInverse from "../../assets/images/mute-inverse.svg";
+
+import UserChat4 from "../../assets/images/user_chat4.svg";
+import ChatCross from "../../assets/images/cross2s.svg";
 import getUserProfile from "../../common/utility/getUserProfile";
 import Axios from "axios";
 import generateRoomId from "../../common/utility/generateRoomId";
 import ChatInCall from "../VideoComponents/ChatInCall/ChatInCall";
 import socketClass, { SOCKET_IO_URL } from "../../common/utility/socketClass";
-import { showErrorMessage , showSuccessToast } from "../../common/helpers/Utils";
+import { showErrorMessage } from "../../common/helpers/Utils";
 import CONSTANTS from "../../common/helpers/Constants";
 import {
   getLocalStorage
@@ -26,7 +34,7 @@ import {
 import constant from "../../constant";
 
 const socket = socketClass.getSocket();
-
+let tmp = 0;
 const AudioCall = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [muteVideo, setMuteVideo] = useState(false);
@@ -36,6 +44,7 @@ const AudioCall = (props) => {
   const [roomid, setRoomId] = useState("ELPLocalhost3000");
   const [streamTracks, setTracks] = useState({});
   const [timerStr, setTimerStr] = useState(null);
+  const [remoteUserStatus, setRemoteUserStatus] = useState({ audio: false, video: false })
   const roomRef = useRef(null)
   const localVideoRef = useRef(null)
   const remoteVideoRef = useRef(null)
@@ -56,12 +65,8 @@ const AudioCall = (props) => {
       console.log('-------  muteAndUnmute', data);
       setUserMuted(data.isMute)
     })
-    if(token){
-      console.log("THIS IS USEEFFECT TOKEN " ,token , userDetails)
-    }
-    socket.on('endVideoCall', (data) => {
-      console.log("Call has been ended. DUE TO ",data)
-      showErrorMessage("Call has been ended.")
+    socket.on('endVideoCall', () => {
+      // showErrorMessage("Call has been ended.")
       if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
         history.push('/chatuser/' + paramsid)
       } else {
@@ -71,9 +76,8 @@ const AudioCall = (props) => {
     //get the token
     (async () => {
       const room = generateRoomId(getUserProfile().u_id, paramsid);
-      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'audio' });
+      const params = new window.URLSearchParams({ identity: 'user' + getUserProfile().u_id, room_id: room, type: 'video' });
       const token = await Axios.get(`${SOCKET_IO_URL}/getToken?${params}`).then(res => res.data.token);
-      console.log(" GOT THE PARAMS IN USEFFECT  " ,room,params, token)
       setRoomId(room);
       setToken(token);
       connectTwillio(token, room);
@@ -86,32 +90,43 @@ const AudioCall = (props) => {
       // disconnect();
 
     }
-  },[])
+  }, [])
   const runTimer = () => {
-    console.log("RUN TIMER");
-    console.log("LOCAL STORAFE FOR CHECK",getLocalStorage('customerInfo')?.u_role_id , userDetails,paramsid.toString())
+    console.log("RUNNER TIMWE " ,getLocalStorage('customerInfo') , userDetails , paramsid)
     const curr = new Date().getTime();
     callTimerRef.current = setInterval(() => {
       const diff = Date.now() - curr;
       const time = moment.duration(diff);
       setTimerStr(`${time.hours()}h: ${time.minutes()}m: ${time.seconds()}s`);
-      if(getLocalStorage('customerInfo')?.u_role_id === constant.roles.CORPORATE_CUSTOMER){
-        socket.emit('updateTime', { "user_id": getLocalStorage('customerInfo').u_id,type:'audio' }, data => {
-          console.log("userDetail data", data);
-          if (data.success === 2) {
-            showErrorMessage(data.msg || "Call is Ended")
-            disconnect();
+      if(getLocalStorage('customerInfo')?.u_role_id == constant.roles.CORPORATE_CUSTOMER){
+        socket.emit('userDetail', { "user_id": paramsid }, user_data => {
+          // console.log("userDetail data", data);
+          if (user_data.success === 1) {
+            setUserDetails(user_data.userDetail);
+            console.log("GOING TO UPDATE TIME" , user_data.userDetail)
+            console.log("SENDING REQUEST ",{ "user_id": user_data.userDetail.created_by, type: 'audio' })
+            socket.emit('updateTime', { "user_id": getLocalStorage('customerInfo')?.u_id, type: 'audio' }, data => {
+              console.log("runner time userDetail data", data);
+              if (data.success === 2) {
+                let msg = data.msg||"Call Limit Over"
+                showErrorMessage(msg)
+                disconnect(user_data.userDetail);
+              } else {
+                console.log(data.msg)
+                // handle odd scenario
+              }
+            })
           } else {
             // handle odd scenario
-            console.log("TIME UPDATED")
           }
         })
       }
+     
     }, 2000)
   }
   const getUserDetails = (id) => {
-    socket.emit('userDetail', { "user_id": paramsid }, data => {
-      console.log("userDetail data", data , paramsid);
+    socket.emit('userDetail', { "user_id": id }, data => {
+      // console.log("userDetail data", data);
       if (data.success === 1) {
         setUserDetails(data.userDetail);
       } else {
@@ -141,31 +156,32 @@ const AudioCall = (props) => {
     });
   }
 
-  const disconnect = () => {
+  const disconnect = (data) => {
 
-    console.log("CALL ENDED " ,roomRef.current)
+    console.log("TRIED TO DISCONNECT " , roomRef.current)
     sendMessage(`Audio call ended at`, 2)
-    if (roomRef.current) {
+    if (roomRef.current != null) {
       setToken(null)
       // this.setState({ tracks: { counterparty: {}, local: [] }, disconnected: true });
       roomRef.current.disconnect();
+
     }
-    console.log("GET TOKEN",token)
+
     const payload = {
       reciver_id: paramsid,
-      reciver_type: userDetails?.u_role_id || "2",
+      reciver_type: userDetails?.u_role_id || data.u_role_id,
       // "sender": {},
       type: "audio",
       sender_id: getUserProfile().u_id
     }
-    console.log("PAYLOAD ",payload)
-    // if (token) {
-      socket.emit('cancelCall', payload , (data)=>{
-        console.log("AFTER CALLL ENDED & GETING TOKEN ", data , payload)
-        if(data.success === 1)
-        showSuccessToast(data.msg)
-      });
-    // }
+    console.log("PAYLOAD TO END " , payload)
+    if(data){
+      socket.emit('endVideoCall', payload);
+      showErrorMessage("Call Disconnected Due to Limit")
+    }
+    if (token) {
+      socket.emit('endVideoCall', payload);
+    }
     if (getUserProfile().u_role_id == CONSTANTS.ROLES.USER) {
       history.push('/chatuser/' + paramsid)
     } else {
@@ -180,7 +196,7 @@ const AudioCall = (props) => {
       audio: true,
       name: room,
       video: false
-    }).then(roomjoined).catch(err=>console.log("COULDNT CONNECT TO WILLO BECAUSE",err));
+    }).then(roomjoined);
   }
   const roomjoined = (room) => {
     roomRef.current = room;
@@ -226,7 +242,7 @@ const AudioCall = (props) => {
     attachTracks(tracks, container, type);
   }
   const attachTracks = (tracks, container, type) => {
-    console.log('tracks', tracks,callTimerRef ,type);
+    console.log('tracks', tracks);
     if (type == 'local') {
       setTracks(prev => ({ ...prev, local: tracks }))
     } else {
@@ -247,8 +263,7 @@ const AudioCall = (props) => {
   }
   // console.log(props, getUserProfile, token)
   const editTrack = (type1, type2, todo) => {
-    //'local', 'audio', 'disable'
-    if (type1 === 'local') {
+    if (type1 == 'local') {
       streamTracks.local.forEach((track) => {
         if (track.kind == type2) {
           switch (todo) {
@@ -311,7 +326,7 @@ const AudioCall = (props) => {
             <div className="audiocontrolicon text-center">
               {/* <Image src={Soundstwo} className="mr-3 pointer" /> */}
               {
-                (!muteAudio) ?
+                (muteAudio == false) ?
                   <button onClick={() => editTrack('local', 'audio', 'disable')} className="btn btn-primary">
                     <Image src={Videomute} alt="" />
                   </button> :
