@@ -152,8 +152,8 @@ class Kits extends Component {
                                 </ul>
                                 <Button className="btnType1 d-block w-100 mt-4">
                                   <Link to={{ pathname: "/coming-soon" }}>
-                                    Buy Now
-                                  </Link>{" "}
+                                    Buy Now  
+                                  </Link>{" "}  
                                 </Button>
                               </div>
                             </div>

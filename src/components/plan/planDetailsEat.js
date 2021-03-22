@@ -10,9 +10,9 @@ import { Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import { getLocalStorage } from "../../common/helpers/Utils";
 import CustomModal from "../modals/customModal";
-import CommonSubScription from "./commonSubscription";
+import CommonSubScription from "./commonSubscription";  
 
-class PlanDetailsEat extends Component {
+class PlanDetailsEat extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -127,9 +127,9 @@ class PlanDetailsEat extends Component {
             </div>
           </Container>
 
-          {/* Custom Modal BY PROPS  */}
+          {/* Custom Modal BY PROPS  */}       
           <CustomModal
-            modalShow={this.state.show}
+            modalShow={this.state.show}  
             modalHide={this.handleClose}
             modalClasName="CreateAccount planUidetails"
             headerImage={CrossTwo}

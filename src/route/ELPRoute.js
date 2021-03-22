@@ -117,6 +117,7 @@ import AssessmentTestListTwo from "../components/assessmentTest/assessmentTestLi
 import MentalQa from "../components/assessmentTest/mentalQa";
 import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 import CorporateDocument from "../components/admin/corporateDocument";
+import KitListings from "../components/kits/kitListings"; 
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -233,6 +234,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/editQa/:id/:type" component={EditQa} />
           <Route path="/planlistholistic" component={PlanDetails} /> 
           <PublicRoute path="/corporateDocument" component={CorporateDocument} /> 
+          <Route path="/kitListings" component={KitListings} /> 
+          
           <PublicRoute
             path="/listenerAssessmentTest"
             component={ListenerAssessmentTest}
