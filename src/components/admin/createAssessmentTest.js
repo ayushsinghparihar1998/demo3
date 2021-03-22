@@ -3,29 +3,21 @@ import { connect } from "react-redux";
 
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddQA1";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
-import constant from "../../constant";
+
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
-import Deleteicon from "../../assets/images/delete_icon.svg";
 
 class CreateAssessmentTest extends Component {
   constructor(props, context) {

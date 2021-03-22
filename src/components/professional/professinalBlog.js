@@ -354,7 +354,7 @@ class ProfessinalBlog extends Component {
                               <>
                                 <div className="coverageList">
                                   <Row>
-                                    <Col md={8}>
+                                    <Col md={6}>
                                       <div
                                         className="fw600 fs16 col64"
                                         onClick={() =>
@@ -364,9 +364,19 @@ class ProfessinalBlog extends Component {
                                         {data.pbl_title}
                                       </div>
                                     </Col>
-                                    <Col md={4}>
+                                    <Col md={3}>
                                       {/* <div className="fw400 fs15 col14">{moment(data.pbl_time).format('DD MMM YYYY')}</div> */}
                                     </Col>
+                                    <Col md={3}>
+                                    <div
+                                      className="fw400 fs15 col14"
+                                      onClick={() =>
+                                        this.setState({ showDetails: true })
+                                      }
+                                    >
+                                      {data.pbl_written_by}
+                                    </div>
+                                  </Col>
                                   </Row>
                                 </div>
                               </>
