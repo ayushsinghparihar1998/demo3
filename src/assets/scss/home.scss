@@ -93,17 +93,17 @@
 }
 
 .holisticcat {     
-    color: #FFBB00 !important; 
+    color: $col113 !important; 
 }
 
 .eatcat {
-    color: #08A318 !important; 
+    color: $col132 !important; 
 }
 .luvcat {
-    color: #FF0000 !important; 
+    color: $col133 !important; 
 }
 .praycat {
-    color: #C62CC4 !important; 
+    color: $col134 !important;  
 }
 
 .plans {
@@ -158,7 +158,7 @@
         
         .planone {
             padding: 15px;
-            background: #EAF9FF; 
+            background: $col135; 
             position: relative;
             height: 61px;
             img.planeImg {
@@ -199,19 +199,19 @@
                 word-break: break-all;
                 white-space: normal;
                 .eatcat {
-                    color: #08A318 !important; 
+                    color: $col132 !important; 
                 }
                 .luvcat {
-                    color: #FF0000 !important; 
+                    color: $col133 !important; 
                 }
                 .praycat {
-                    color: #C62CC4 !important; 
+                    color: $col134 !important; 
                 }
                 .holisticcat { 
-                    color: #FFBB00 !important; 
+                    color: $col113 !important; 
                 }
                 .andClass {
-                    color: #3c3c3c !important; 
+                    color: $col64 !important; 
                 }
             }
         }
@@ -327,51 +327,51 @@
         }
 
         .planList {
-            background: #E6FFE0;
+            background: $col136; 
             margin-bottom: 30px; 
             .planBorder { 
                 border: solid 5px $col18; 
             }
             &.red-bg {
-                background: #FFE0E0; 
+                background: $col137; 
                 button.btnType1.reds { 
-                    background: #FF6969 !important;
-                    border: solid 1px #FF6969 !important; 
+                    background: $col138 !important;
+                    border: solid 1px $col138 !important; 
                 }
                 .profile_set {
                     &::after {
-                        border-left: 326px solid #FF6969; 
+                        border-left: 326px solid $col138; 
                     }
                 }
                 .btnType1 {
-                    background: #FF6969 !important;
-                    border: solid 1px #FF6969 !important;
+                    background: $col138 !important;
+                    border: solid 1px $col138 !important;
                     margin-top: 5px;
                 }
                 .borderSs {
-                    border-bottom: 1px dashed #FF6969; 
+                    border-bottom: 1px dashed $col138; 
                 }
                 
             }
             
             &.blue-bg {  
-                background: #EEE0FF;   
+                background: $col139;    
                 button.btnType1.blues {  
-                    background: #AC6BFC !important;
-                    border: solid 1px #AC6BFC !important; 
+                    background: $col140 !important;
+                    border: solid 1px $col140 !important; 
                 }
                 .profile_set { 
                     &::after {
-                        border-left: 326px solid #AC6BFC;  
+                        border-left: 326px solid $col140;  
                     }
                 }
                 .btnType1 {
-                    background: #AC6BFC !important;
-                    border: solid 1px #AC6BFC !important;
+                    background: $col140 !important;
+                    border: solid 1px $col140 !important;
                     margin-top: 5px;
                 }
                 .borderSs {
-                    border-bottom: 1px dashed #AC6BFC; 
+                    border-bottom: 1px dashed $col140; 
                 }
             }
         }
@@ -391,7 +391,7 @@
                 height: 0;
                 border-top: 27px solid transparent;
                 border-bottom: 4px solid transparent;
-                border-left: 332px solid #72C55E;
+                border-left: 332px solid $col141;
                 position: absolute;
                 bottom: -21px;
                 transform: rotate(178deg);
@@ -405,7 +405,7 @@
             padding: 10px 0 20px; 
             background-color: transparent;   
             .borderSs {
-                border-bottom: 1px dashed #72C55E;
+                border-bottom: 1px dashed $col141;
                 padding: 0 30px 10px;
                 word-break: break-all;
             }
@@ -453,9 +453,9 @@
                 }
             }
             .btnType1 { 
-                background:#72C55E !important;
-                border: solid 1px #72C55E !important;
-                margin-top: 5px;  
+                background: $col141 !important;
+                border: solid 1px $col141 !important;
+                margin-top: 5px; 
             }
         }
     }
@@ -492,7 +492,7 @@
     background-size: cover;   
     text-align: center; 
     padding: 3rem 0 5rem;  
-    background: #EFEFEF;
+    background: $col142; 
     .slick-prev:before, .slick-next:before {
         color: $col64;
         font-size: 30px; 
@@ -629,7 +629,7 @@
 }
 
 .aboutEats {  
-    background-color: #fff;
+    background-color: $col18;
     padding: 60px 0;
     position: relative; 
     background-position: left;
@@ -713,7 +713,7 @@
     }        
 
     .organise_carousel {   
-        background-color: #F3F3F3; 
+        background-color: $col143;  
         border-radius: 0;
         max-width: 300px;
         text-align: center;
@@ -1177,7 +1177,7 @@ img {
                 right: 0;
                 z-index: 999;
                 max-width: 94%;
-                border: solid 1px #ddd;
+                border: solid 1px $col145;
 
                 .navbar-nav a.nav-link {
                     // margin-bottom: 10px; 
@@ -1204,7 +1204,7 @@ img {
                 }
                 div.dropdown-menu {
                     position: absolute;
-                    border: solid 1px #ddd;
+                    border: solid 1px $col145;
                     width: 98%; 
                     left: inherit; 
                 }
@@ -1593,8 +1593,8 @@ img {
             padding: 0 0rem !important; 
             &.transbtn {
                 background: transparent !important;
-                border: 1px solid #284486 !important;
-                color: #284486 !important;
+                border: 1px solid $col1 !important;
+                color: $col1 !important;
                 font-weight: 600;
                 opacity: 0.5;
                 padding: 0 0rem !important;
@@ -1670,7 +1670,7 @@ img {
             .navbar-light {
                 .navbar-nav {
                     a.nav-link { 
-                        border-bottom: solid 1px #ddd; 
+                        border-bottom: solid 1px $col145; 
                         text-align: center;
                         color: $col3 !important; 
                         &+.btnTypeone {
@@ -1685,7 +1685,7 @@ img {
                         &.donatebtns { 
                             // border: none !important; 
                             // max-height: inherit !important; 
-                            // border-bottom: solid 1px #ddd !important; 
+                            // border-bottom: solid 1px $col145 !important; 
                         }
                     }
 
@@ -1698,7 +1698,7 @@ img {
                     .dropdown-menu {
                         padding: 0;
                         a.dropdown-item {
-                            border-bottom: solid 1px #ddd !important;
+                            border-bottom: solid 1px $col145 !important;
 
                             &:last-child {
                                 border-bottom: none !important; 
@@ -1745,8 +1745,8 @@ img {
                 font-size: 15px !important; 
                 &.transbtn {
                     background: transparent !important;
-                    border: 1px solid #284486 !important;
-                    color: #284486 !important;
+                    border: 1px solid $col1 !important;
+                    color: $col1 !important;
                     font-weight: 600;
                     opacity: 0.5;
                     padding: 0 0rem !important;
@@ -1874,7 +1874,7 @@ img {
                     flex-basis: 100%;
                     flex-grow: 1;
                     align-items: center;
-                    background: #ffffff;
+                    background: $col18;
                     padding: 15px 0;
                     border-radius: 12px;
                     position: absolute;
@@ -1883,7 +1883,7 @@ img {
                     right: 0;
                     z-index: 999;
                     max-width: 94%;
-                    border: solid 1px #ddd;
+                    border: solid 1px $col145;
                     padding-top: 5px;  
                 }
                 .navbar-nav {
@@ -2070,7 +2070,7 @@ img {
 
     .subscribe_here2 { 
         padding: 0 0 20px;
-        background: #ffffff;
+        background: $col18;
     }
     
     .Discussanything {

@@ -100,7 +100,7 @@
             }
 
             span.camspam {
-                background: #3f3f40;
+                background: $col109;
                 position: absolute;
                 right: 15px;
                 width: 30px;
@@ -371,9 +371,9 @@
 
 .pro_signup {
     input[type="file"] {
-        color: #9F9F9F !important;
-        background: #f3fdff !important;
-        border: solid 0.5px #8AD1E7 !important;
+        color: $col25 !important; 
+        background: $col25 !important;
+        border: solid 0.5px $col23 !important; 
         box-shadow: none;
         height: 3.5rem;
         border-radius: 0px;
@@ -401,7 +401,7 @@
     .setSelectbtn {
         .selectTyp1 {
             height: 2.5rem !important;
-            background-color: #ffffff !important;
+            background-color: $col18 !important; 
             padding: 0 3rem 0 1rem !important;
             color: $col10 !important; 
             font-size: 1rem !important;
@@ -517,7 +517,7 @@
                 }
                 .read2 {
                     a {
-                        color: #03A9F4; 
+                        color: $col65; 
                         font-size: 14px;
                         text-transform: capitalize;
                         text-decoration: underline; 
@@ -563,7 +563,7 @@
                 .inputTyp1 {
                     padding-right: 17px;
                     font-size: 18px !important;
-                    color: #333 !important;
+                    color: $col64 !important;
                     font-weight: 500 !important; 
                 }
             }
@@ -759,7 +759,7 @@
     }
 }
 .border_t {
-    border-top: solid 1px #BBE8F5;
+    border-top: solid 1px $col85;
     padding-top: 15px;
 }
 .mw35s {
@@ -788,7 +788,7 @@
          
          table {
             &.table-bordered {
-                border: 1px solid #BBE8F5; 
+                border: 1px solid $col85; 
             }
             thead {
                 tr {
@@ -798,9 +798,9 @@
                         height: auto;
                         line-height: 22px;
                         text-align: center;
-                        background: #3EB2DD;
-                        color: #ffffff;
-                        border: 1px solid #BBE8F5; 
+                        background: $col10;
+                        color: $col18;
+                        border: 1px solid $col85;  
                     }
                 }
             }
@@ -813,7 +813,7 @@
                         height: auto;
                         line-height: 28px;
                         text-align: center;
-                        border: 1px solid #BBE8F5;
+                        border: 1px solid $col85;
                         min-width: 120px;
                         max-width: 180px;
                         span {
@@ -1006,7 +1006,7 @@ button.btnDownloads {
             }
         }
         .borderRight {
-            border-right: solid 1px #ddd; 
+            border-right: solid 1px $col145; 
             margin-bottom: 10px;  
             &:last-child {
                 border-right: none; 
@@ -1094,7 +1094,7 @@ button.btnDownloads {
             margin-right: 10px;  
         }
         span.featureone {  
-            border: solid 1px #ccc; 
+            border: solid 1px $col144; 
             border-radius: 30px;
             padding: 5px 12px;
             font-size: 14px; 
@@ -1342,26 +1342,26 @@ button.btnDownloads {
         margin-right: 10px; 
     }
     .eat {
-        background: #A3F57D;
+        background: $col110;
         @include elpAll; 
     }
     .luv {
-        background: #FD7C7C;
+        background: $col111;
         @include elpAll; 
     }
     .pray {
-        background: #FA7CFD; 
+        background: $col112;
         @include elpAll; 
     } 
     .holistic {
-        background: #FFBB00;
+        background: $col113;
         @include elpAll;
         width: 120px; 
         padding: 0 0;  
     } 
 }
 .holistic {   
-    background: #FFBB00;
+    background: $col113; 
     width: 120px; 
     height: 30px;
     line-height: 30px; 
@@ -1421,7 +1421,7 @@ button.btnDownloads {
             height: 60px;
             align-items: center;
             padding: 0 20px;
-            background: #EAFAFF;
+            background: $col114; 
         }
         .QaBody {
             position: relative;
@@ -1455,7 +1455,7 @@ button.btnDownloads {
                 li {                            
                     list-style: none;
                     font-size: 16px;
-                    color: #595454;
+                    color: $col14;
                     font-weight: 300;
                     margin-bottom: 12px; 
                     display: flex;
@@ -1556,8 +1556,8 @@ button.btnDownloads {
         }
     }
     .btnTyp5.talkBtntwo {
-        background: #3EB2DD !important;
-        border: solid 1px #3EB2DD !important; 
+        background: $col10 !important;
+        border: solid 1px $col10 !important; 
     }
 }
 
@@ -1598,8 +1598,8 @@ button.btnDownloads {
     padding: 30px 30px; 
 }
 .scoreDetails {
-    background: #E3F7FF;
-    border: 1px solid #60B2D2; 
+    background: $col115;
+    border: 1px solid $col116;  
     padding-bottom: 50px;
     margin-top: 75px; 
     text-align: center;
@@ -1614,15 +1614,15 @@ button.btnDownloads {
         margin-top: -80px;
         margin-bottom: 20px;
         .CircularProgressbar .CircularProgressbar-trail {
-            stroke: #e8f6fa;
+            stroke: $col117;
             stroke-width: 10px;
         }
         .CircularProgressbar .CircularProgressbar-path {
-            stroke: #8ad1e7;
+            stroke: $col118;
             stroke-width: 10px; 
         }
         .CircularProgressbar .CircularProgressbar-text {
-            fill: #333;
+            fill: $col64; 
             font-size: 26px;
             dominant-baseline: middle;
             text-anchor: middle;
@@ -1677,21 +1677,21 @@ button.btnDownloads {
             font-weight: 500; 
         }
         .rangeslider {
-            background: #CDEDF5;
+            background: $col119;
             box-shadow: none; 
         }
         .rangeslider-horizontal {
             .rangeslider__fill { 
-                background-color: #3EB2DD;
+                background-color: $col10;
                 box-shadow: none;
             }
             .rangeslider__handle {
-                background: #3eb2dd;
+                background: $col10;
                 box-shadow: none;
-                border: solid 1px #3eb2dd;
+                border: solid 1px $col10;
                 outline: 0; 
                 &:after { 
-                    background-color: #fff;
+                    background-color: $col18; 
                     box-shadow: none; 
                 }
             }   
@@ -1701,7 +1701,7 @@ button.btnDownloads {
 
 .buttonTypes {
     .btn-btnTypAdd {
-        color: #3EB2DD !important; 
+        color: $col10 !important; 
         padding: 0 0;
         font-size: 16px !important;
         font-weight: 500;
@@ -1715,7 +1715,7 @@ button.btnDownloads {
             color: $col14 !important; 
             & > span {
                 margin-right: 5px; 
-                color: #3EB2DD;
+                color: $col10;
                 i {
                     font-size: 11px; 
                 }
@@ -1725,7 +1725,7 @@ button.btnDownloads {
             width: 22px;
             height: 22px;
             line-height: 18px;
-            border: solid 1px #3EB2DD;
+            border: solid 1px $col10;
             display: inline-block;
             border-radius: 50%;
             margin-right: 2px; 
@@ -1748,12 +1748,12 @@ button.btnDownloads {
 .addKits {
     .ck-editor .ck-editor__main .ck-content {
         min-height: 150px;
-        background: #f3fdff;
-        border: solid 1px #8AD1E7 !important;
+        background: $col22;
+        border: solid 1px $col23 !important;
     }
     .ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
-        background: #f3fdff;
-        border: solid 1px #8AD1E7 !important; 
+        background: $col22;
+        border: solid 1px $col23 !important; 
         border-bottom: none !important; 
     }
     textarea.inputTyp2 {
@@ -1796,7 +1796,7 @@ button.btnDownloads {
 
 .corporateMember {
     position: relative;
-    background: #fff;
+    background: $col18;
     padding: 20px 30px;
     min-height: 100vh;    
     .domainSave {
@@ -1813,8 +1813,8 @@ button.btnDownloads {
     }
     .form-group {
         input[type="file"] {      
-            color: #9F9F9F !important;
-            background: #f3fdff !important;
+            color: $col25 !important;
+            background: $col22 !important;
             border: solid 0.5px $col23 !important; 
             box-shadow: none;
             height: 3.5rem;
@@ -1974,8 +1974,8 @@ button.btnDownloads {
                 padding: 30px;
             }
             @mixin blogBtnColor {
-                background: #F17777;
-                border: solid 1px #F17777;
+                background: $col120;
+                border: solid 1px $col120;  
                 width: 50px;
                 height: 25px;
                 font-size: 14px;
@@ -1999,60 +1999,60 @@ button.btnDownloads {
                 @include blogCommon;  
             }
             .bg-Color1 {
-                background: linear-gradient(180deg, #FFD6D6 0%, #FFFFFF 100%);
+                background: linear-gradient(180deg, $col121 0%, $col18 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
             }
             .bg-Color2 {
-                background: linear-gradient(180deg, #E3FFD6 0%, #FFFFFF 100%);
+                background: linear-gradient(180deg, $col122 0%, $col18 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
             }
             .bg-Color3 {
-                background: linear-gradient(180deg, #D7FCFF 0%, #FFFFFF 100%);
+                background: linear-gradient(180deg, $col123 0%, $col18 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
             }
             .bg-Color4 {
-                background: linear-gradient(180deg, #DBDAFF 0%, #FFFFFF 100%);
+                background: linear-gradient(180deg, $col124 0%, $col18 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
             }
             .bg-Color5 {    
-                background: linear-gradient(180deg, #FFF8D6 0%, #FFFFFF 100%);
+                background: linear-gradient(180deg, $col125 0%, $col18 100%);
                 box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
             }
             .bg-Color6 {     
-                background: linear-gradient(180deg, #FED8C3 0%, #FFFFFF 100%);
-                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15); 
+                background: linear-gradient(180deg, $col126 0%, $col18 100%);
+                box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);  
             }
             .blogBtns {
                 @include blogBtnColor; 
                 cursor: default; 
             }
             .btnColor2 {
-                background: #7AD052;
-                border: solid 1px #7AD052; 
+                background: $col127;
+                border: solid 1px $col127; 
             }
             .btnColor3 {
-                background: #1FC7D5;
-                border: solid 1px #1FC7D5; 
+                background: $col128;
+                border: solid 1px $col128; 
             }
             .btnColor4 {
-                background: #6763EA;
-                border: solid 1px #6763EA; 
+                background: $col129;
+                border: solid 1px $col129; 
             }
             .btnColor5 {
-                background: #D9BD3D;
-                border: solid 1px #D9BD3D; 
+                background: $col130;
+                border: solid 1px $col130;  
             }
             .btnColor6 {
-                background: #DA6A2A;
-                border: solid 1px #DA6A2A; 
+                background: $col131;
+                border: solid 1px $col131; 
             }
             .PlanBtns {
                 @include PlanBtnColor; 
             }
             .PlanColor2  {
-                background: #46C5EC;
-                border: solid 1px #46C5EC;
-                color: #fff; 
+                background: $col40;
+                border: solid 1px $col40;
+                color: $col18; 
             }
         }
     }
@@ -2313,7 +2313,7 @@ button.btnDownloads {
             .coverageTab {  
                 .coverageList {
                     position: relative; 
-                    border-bottom: 0.5px solid #ccc; 
+                    border-bottom: 0.5px solid $col144;  
                     padding: 24px 0; 
                     .fw600.fs16.col64 {
                         cursor: pointer;
@@ -2429,7 +2429,7 @@ button.btnDownloads {
         line-height: 36px;
         padding: 0 0 !important; 
         background: transparent;
-        border: solid 1px #284486;
+        border: solid 1px $col1; 
         position: relative; 
         & > input {
             width: 170px; 
@@ -2517,7 +2517,7 @@ ul.PlanAbouts {
             outline: 0; 
             span {
                 font-size: 38px;
-                color: #fff;    
+                color: $col18;    
             }
         } 
     }
@@ -2592,16 +2592,16 @@ ul.PlanAbouts {
             top: 0;
             width: 22px;
             height: 22px;
-            border: 1px solid #8AD1E7;
+            border: 1px solid $col23;
             border-radius: 100%;
-            background: #fff;
+            background: $col18;
         }
         [type="radio"]:checked + label:after,
         [type="radio"]:not(:checked) + label:after {
             content: '';
             width: 14px;
             height: 14px;
-            background: #8AD1E7;
+            background: $col23;
             position: absolute;
             top: 4px;
             left: 4px;
@@ -2921,7 +2921,7 @@ ul.PlanAbouts {
         }
         .profiledetails {
             padding: 0; 
-            background: #f3fdff; 
+            background: $col22; 
             .detailone {
                 padding: 20px;
             }
