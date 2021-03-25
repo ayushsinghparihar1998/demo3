@@ -2095,4 +2095,11 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
+  superadminget_subscriberlist :{
+    url : 'elp/superadminget_subscriberlist',
+    method: "POST",
+    data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  }
 };
