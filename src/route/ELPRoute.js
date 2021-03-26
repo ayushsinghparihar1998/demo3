@@ -118,6 +118,8 @@ import MentalQa from "../components/assessmentTest/mentalQa";
 import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 import CorporateDocument from "../components/admin/corporateDocument";
 import KitListings from "../components/kits/kitListings"; 
+import KitDetails from "../components/kits/kitDetails"; 
+import DownloadPdf from "../components/admin/superAdmin/downloadPdf"; 
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -198,6 +200,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/reviewcomments" component={Reviewcomments} />
           <PublicRoute path="/donatedata" component={Donatedata} />
           <PublicRoute path="/foundation" component={Foundation} />
+          <PublicRoute path="/downloadPdf" component={DownloadPdf} />
           {/* <PublicRoute path="/paymentdetail" component={Paymentdetail} /> */}
           {/* <PublicRoute path="/corporateMember" component={CorporateMember} /> */}
           <PublicRoute path="/addDomain/:id" component={AddDomain} />
@@ -235,6 +238,7 @@ class ELPRoute extends Component {
           <Route path="/planlistholistic" component={PlanDetails} /> 
           <PublicRoute path="/corporateDocument" component={CorporateDocument} /> 
           <Route path="/kitListings" component={KitListings} /> 
+          <Route path="/kitDetails" component={KitDetails} /> 
           
           <PublicRoute
             path="/listenerAssessmentTest"

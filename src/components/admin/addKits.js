@@ -22,17 +22,20 @@ import { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import Womanvideo from "../../assets/images/womanvideo.jpg";
-
+import Slider from "react-rangeslider";
+import "react-rangeslider/lib/index.css"; 
 import constant from "../../constant";
+
 class AddKits extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
     this.state = {
       pageType: "",
       paymentList: [],
       pageno: 1,
       records: 10,
       totalCount: "",
+      value: 10,
 
       kitObj: {
         kt_name: "",
@@ -74,6 +77,20 @@ class AddKits extends Component {
     };
     this.checkServiceError = this.checkServiceError.bind(this);
   }
+
+  // handleChangeStart = () => {
+  //   console.log('Change event started')
+  // };
+
+  // handleChange = value => {
+  //   this.setState({
+  //     value: value
+  //   })
+  // };
+
+  // handleChangeComplete = () => {
+  //   console.log('Change event completed')
+  // };
 
   componentDidMount = () => {
     console.log(this.props.match.params.id);
@@ -447,12 +464,12 @@ class AddKits extends Component {
       this.setState({
         isUploading: false,
         kitObj,
-        filename: fileObject.name,
+        filename: fileObject.name, 
       });
     }
   };
 
-  render() {
+  render() { 
     const { kitObj, errors, errorServiceData } = this.state;
     return (
       <div className="page__wrapper innerpage">
@@ -485,8 +502,8 @@ class AddKits extends Component {
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
-                      <Form.Label className="fs20 fw600 col14">
-                        Add Picture*
+                      <Form.Label className="fs20 fw600 col14"> 
+                          Upload  
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
                         <Image src={kitObj.kt_image_url} className="" />{" "}
@@ -525,6 +542,24 @@ class AddKits extends Component {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">
+                          Kit Sub-Heading 
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        className="inputTyp2"
+                        name="kt_name"
+                        value={kitObj.kt_name}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={150}
+                      />
+
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.kt_name}
+                      </div>
+                    </Form.Group>
+
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fs20 fw600 col14">
                         Kit Description
                       </Form.Label>
                       <Form.Control
@@ -539,17 +574,51 @@ class AddKits extends Component {
                         {errors.kt_desc}
                       </div>
                     </Form.Group>
+
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fs20 fw600 col14">
+                          Kit Overview 
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        className="inputTyp2"
+                        name="kt_desc"
+                        value={kitObj.kt_desc}
+                        onChange={(e) => this.handleChange(e)}
+                        maxLength={200}
+                      />
+                      <div className="col27 fs14 fw400 mt-2 error">
+                        {errors.kt_desc}
+                      </div>
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-4">
+                            <Form.Label className="fs20 fw600 col14">
+                              Select range of months
+                            </Form.Label>
+                            {/* <Form.Control type="range" className="inputTyp2" />  */}
+                            <div className="slider">
+                            <Slider
+                                min={0}
+                                max={100}
+                                value={0}    
+                                onChangeStart={this.handleChangeStart}
+                                onChange={this.handleChange}
+                                onChangeComplete={this.handleChangeComplete}
+                              />
+                              <div className='value'></div>
+                            </div>
+                            
+                          </Form.Group>
+
                     {this.state.serviceData.map((cat, index) => {
                       return (
                         <Row>
-                          <Col md={5}> 
+                          {/* <Col md={5}> 
                             <Form.Group className="mt-1 mb-4">
                               <Form.Label className="fs20 fw600 col14">
                                 Service Name
                               </Form.Label>
-                              {/* ks_services: "",
-          ks_actual_price: "",
-          ks_discounted_price: "", */}
                               <Form.Control
                                 className="inputTyp2"
                                 type="text"
@@ -564,8 +633,8 @@ class AddKits extends Component {
                                 {errorServiceData[index].ks_services}
                               </div>
                             </Form.Group>
-                          </Col>
-                          <Col md={3}>
+                          </Col> */}
+                          <Col md={6}>
                             <Form.Group className="mt-1 mb-4">
                               <Form.Label className="fs20 fw600 col14">
                                 Price
@@ -585,7 +654,7 @@ class AddKits extends Component {
                               </div>
                             </Form.Group>
                           </Col>
-                          <Col md={3}>
+                          <Col md={6}>
                             <Form.Group className="mt-1 mb-4">
                               <Form.Label className="fs20 fw600 col14">
                                 Discounted Price
@@ -622,7 +691,7 @@ class AddKits extends Component {
                     })}
                     <div className="position-relative mb-2">
                       <Button
-                        variant="btnTypAdd"
+                        variant="btnTypAdd" 
                         type="button"
                         disabled={!this.state.serviceShow}
                         onClick={() => this.addCategorySetup()}

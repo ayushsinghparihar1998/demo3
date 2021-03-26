@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddQA1";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { CKEditor } from "@ckeditor/ckeditor5-react"; 
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
