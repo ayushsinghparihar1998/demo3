@@ -49,6 +49,7 @@ import {
   setLocalStorage,
 } from "../../common/helpers/Utils";
 import YouTube from "react-youtube";
+import DownLoadPDFListing from "./sidePage/dwnLdPDFListing";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -191,20 +192,35 @@ class Adminlistener extends Component {
           ? getLocalStorage("internaltabToOpen")
           : 2
       );
-      // else if (
-      //   getLocalStorage("tabToOpen") &&
-      //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
-      // )
-      //   this.superadminget_assessmenttestlist(
-      //     1,
-      //     10,
-      //     getLocalStorage("internaltabToOpen")
-      //       ? getLocalStorage("internaltabToOpen")
-      //       : 2
-      //   );
+    else if (getLocalStorage("tabToOpen") === "dwnldPDFList") {
+      this.getDwnLdPDFListing("dwnldPDFList", 12)
+    }
+    // else if (
+    //   getLocalStorage("tabToOpen") &&
+    //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
+    // )
+    //   this.superadminget_assessmenttestlist(
+    //     1,
+    //     10,
+    //     getLocalStorage("internaltabToOpen")
+    //       ? getLocalStorage("internaltabToOpen")
+    //       : 2
+    //   );
     else {
       this.getCustomerListing("", "user", 1);
     }
+  }
+  getDwnLdPDFListing = (activaClass, pageNumber) => {
+    this.setState(
+      {
+        activeProfile: activaClass,
+        pageNumber: pageNumber,
+        pageType: "dwnldPDFList",
+      }
+    );
+    // ELPViewApiService("superadminget_subscriberlist",{count:10 , offset:1})
+    // .then((result)=>console.log("RESULT DOWNLOAD PDF " , result))
+    // .catch((err)=>console.log("error Occured", err));
   }
   getListnerListing = (e, activaClass, pageNumber) => {
     // let chkUserProfile = this.state.activeProfile;
@@ -800,15 +816,15 @@ class Adminlistener extends Component {
       console.log(err);
     }
   };
-  superAdminChange_AssesStatus = async (as_id , as_status) => {
-    try{
-      let result = await ELPViewApiService("superadminchange_assessqueansstatus",{
-        as_id : as_id,
-        as_status : as_status
+  superAdminChange_AssesStatus = async (as_id, as_status) => {
+    try {
+      let result = await ELPViewApiService("superadminchange_assessqueansstatus", {
+        as_id: as_id,
+        as_status: as_status
       });
       if (result && result.status === 200) {
-        console.log("Results Updated",result , this.state.qaList.as_id); 
-        
+        console.log("Results Updated", result, this.state.qaList.as_id);
+
       }
       //Render This after updation Whatso ever is result
       this.superadminget_assessmenttestlist(1, 10, this.state.as_type);
@@ -1128,14 +1144,14 @@ class Adminlistener extends Component {
       memberObj.email.length == 0
         ? "Please enter email id."
         : !Validator.isEmail(memberObj.email)
-        ? "Please enter a valid email id."
-        : "";
+          ? "Please enter a valid email id."
+          : "";
     errors.password =
       memberObj.password.length == 0
         ? "Please enter password."
         : !reg.test(memberObj.password.trim())
-        ? "Please enter a valid password."
-        : "";
+          ? "Please enter a valid password."
+          : "";
 
     this.setState({
       errors,
@@ -1290,37 +1306,37 @@ class Adminlistener extends Component {
     let data =
       type == "PLAN" || this.state.deleteObjType == "PLAN"
         ? {
-            pl_id: id ? id : +this.state.deleteObjId,
-            pl_status: status,
-          }
+          pl_id: id ? id : +this.state.deleteObjId,
+          pl_status: status,
+        }
         : type == "KIT" || this.state.deleteObjType == "KIT"
-        ? {
+          ? {
             kt_id: id ? id : +this.state.deleteObjId,
             kt_status: status,
           }
-        : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
-        ? {
-            vl_id: id ? id : +this.state.deleteObjId,
-            vl_status: status,
-          }
-        : type == "QA" || this.state.deleteObjType == "QA"
-        ? {
-            as_id: id ? id : +this.state.deleteObjId,
-            as_status: status,
-          }
-        : "";
+          : type == "VLOGS" || this.state.deleteObjType == "VLOGS"
+            ? {
+              vl_id: id ? id : +this.state.deleteObjId,
+              vl_status: status,
+            }
+            : type == "QA" || this.state.deleteObjType == "QA"
+              ? {
+                as_id: id ? id : +this.state.deleteObjId,
+                as_status: status,
+              }
+              : "";
 
     let apiData =
       type == ""
         ? this.state.deleteObjType == "PLAN"
           ? "superadmindelete_planstatus"
           : this.state.deleteObjType == "KIT"
-          ? "superadmindelete_kitsstatus"
-          : this.state.deleteObjType == "VLOGS"
-          ? "superadmindelete_vlogsstatus"
-          : this.state.deleteObjType == "QA"
-          ? "superadmindelete_assessteststatus"
-          : ""
+            ? "superadmindelete_kitsstatus"
+            : this.state.deleteObjType == "VLOGS"
+              ? "superadmindelete_vlogsstatus"
+              : this.state.deleteObjType == "QA"
+                ? "superadmindelete_assessteststatus"
+                : ""
         : api;
     ELPViewApiService(apiData, data).then((result) => {
       this.setState({ deleteObjConformationModal: false });
@@ -1447,10 +1463,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 0)
         : type == "rating"
-        ? this.getRatinguserListing(1, 10, 0)
-        : type == "session"
-        ? this.getSessionListing(1, 10, 1)
-        : this.getReviewListing(1, 10, 0);
+          ? this.getRatinguserListing(1, 10, 0)
+          : type == "session"
+            ? this.getSessionListing(1, 10, 1)
+            : this.getReviewListing(1, 10, 0);
       this.setState({
         key: "request",
       });
@@ -1458,10 +1474,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 2)
         : type == "rating"
-        ? this.getRatinguserListing(1, 10, 2)
-        : type == "session"
-        ? this.getSessionListing(1, 10, 3)
-        : this.getReviewListing(1, 10, 2);
+          ? this.getRatinguserListing(1, 10, 2)
+          : type == "session"
+            ? this.getSessionListing(1, 10, 3)
+            : this.getReviewListing(1, 10, 2);
       this.setState({
         key: "reject",
       });
@@ -1472,10 +1488,10 @@ class Adminlistener extends Component {
       type == "block"
         ? this.getBlockuserListing(1, 10, 1)
         : type == "rating"
-        ? this.getRatinguserListing(1, 10, 1)
-        : type == "session"
-        ? this.getSessionListing(1, 10, 2)
-        : this.getReviewListing(1, 10, 1);
+          ? this.getRatinguserListing(1, 10, 1)
+          : type == "session"
+            ? this.getSessionListing(1, 10, 2)
+            : this.getReviewListing(1, 10, 1);
     }
   }
   getRatingName = (ratingCount) => {
@@ -1527,7 +1543,7 @@ class Adminlistener extends Component {
         : "position-relative";
     let professnalActveClass =
       this.state.pageType == "userlist" &&
-      this.state.activeProfile == "professional"
+        this.state.activeProfile == "professional"
         ? "position-relative active"
         : "position-relative";
     let listnerActveClass =
@@ -1588,6 +1604,10 @@ class Adminlistener extends Component {
         : "position-relative";
     let vlogsActveClass =
       this.state.pageType == "vlogsList"
+        ? "position-relative active"
+        : "position-relative";
+    let dwnldPDFListActiveClass =
+      this.state.pageType === "dwnldPDFList"
         ? "position-relative active"
         : "position-relative";
 
@@ -1807,7 +1827,19 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
-
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={dwnldPDFListActiveClass}
+                        onClick={(e) => {
+                          this.getDwnLdPDFListing("dwnldPDFList", 12);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          DOWNLOADED PDF Listing
+                        </div>
+                      </div>
+                    </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
                         className={ratingActveClass}
@@ -1866,8 +1898,12 @@ class Adminlistener extends Component {
                   </div>
                 </div>
               </Col>
-
-              {this.state.pageType == "userlist" ? (
+              {
+                // this.state.pageType === "dwnldPDFList" ? <div>DOWNLOAD LISTING</div> :null
+              }
+              {
+              this.state.pageType === "dwnldPDFList" ? <DownLoadPDFListing /> :
+              this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
                     <div className="fs22 fw600 col10">
@@ -2169,9 +2205,8 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 1)}
                           label="Smart"
-                          className={`mr-5  ${
-                            this.state.plan_type == 2 ? "" : "active"
-                          }`}
+                          className={`mr-5  ${this.state.plan_type == 2 ? "" : "active"
+                            }`}
                           checked={+this.state.plan_type == 1}
                         />
 
@@ -2182,9 +2217,8 @@ class Adminlistener extends Component {
                           name="plan_type"
                           onChange={() => this.superadminget_planlist(1, 10, 2)}
                           label="By Condition"
-                          className={`mr-5  ${
-                            this.state.plan_type == 1 ? "" : "active"
-                          }`}
+                          className={`mr-5  ${this.state.plan_type == 1 ? "" : "active"
+                            }`}
                           checked={+this.state.plan_type == 2}
                         />
                       </Form.Group>
@@ -2291,20 +2325,20 @@ pl_title: "Platinum Plan new" */}
                               <div className="d-flex elpCategory">
                                 {item.plan_category.length < 3
                                   ? item.plan_category.map((val) => {
-                                      return (
-                                        <span
-                                          className={
-                                            val.puc_cat_name == "Eat"
-                                              ? "eat"
-                                              : val.puc_cat_name == "Luv"
+                                    return (
+                                      <span
+                                        className={
+                                          val.puc_cat_name == "Eat"
+                                            ? "eat"
+                                            : val.puc_cat_name == "Luv"
                                               ? "luv"
                                               : "pray"
-                                          }
-                                        >
-                                          {val.puc_cat_name}
-                                        </span>
-                                      );
-                                    })
+                                        }
+                                      >
+                                        {val.puc_cat_name}
+                                      </span>
+                                    );
+                                  })
                                   : ""}
                                 {item.plan_category.length == 3 ? (
                                   <span className="holistic">Holistic</span>
@@ -2833,7 +2867,7 @@ cs_time: "00:00:02" */}
                                   // handleCheck={item.flag}
                                   value={item.value}
                                   checked={item.flag == true}
-                                  // onChange={(e) => this.handleCheck(e)}
+                                // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
                             })}
@@ -2841,7 +2875,7 @@ cs_time: "00:00:02" */}
                             {/* 4 : inactive
 1 : active
 "" : all */}
-                          </Form.Group>   
+                          </Form.Group>
                         </Col>
 
                         <Col md="12" lg="6">
@@ -2869,7 +2903,7 @@ cs_time: "00:00:02" */}
                                     // handleCheck={item.flag}
                                     value={item.value}
                                     checked={item.flag == true}
-                                    // onChange={(e) => this.handleCheck(e)}
+                                  // onChange={(e) => this.handleCheck(e)}
                                   />
                                 );
                               })}
@@ -2917,7 +2951,7 @@ cs_time: "00:00:02" */}
                                       onClick={() =>
                                         this.changepath(
                                           "/professionalDetails/admin/" +
-                                            item.id,
+                                          item.id,
                                           "getProffListing"
                                         )
                                       }
@@ -3074,8 +3108,8 @@ cs_time: "00:00:02" */}
                                               val == "Eat"
                                                 ? "eatcat"
                                                 : val == "Luv"
-                                                ? "luvcat"
-                                                : "praycat"
+                                                  ? "luvcat"
+                                                  : "praycat"
                                             }
                                           >
                                             {val}
@@ -3330,9 +3364,8 @@ cs_time: "00:00:02" */}
                               return (
                                 <Form.Check
                                   type="checkbox"
-                                  className={`checkthree ${
-                                    item.pbc_status == "1" ? "active" : ""
-                                  }`}
+                                  className={`checkthree ${item.pbc_status == "1" ? "active" : ""
+                                    }`}
                                   label={item.pbc_name}
                                   id={item.pbc_id}
                                   name={item.pbc_name}
@@ -3348,7 +3381,7 @@ cs_time: "00:00:02" */}
                                   // handleCheck={item.flag}
                                   value={item.pbc_id}
                                   checked={item.pbc_status == "1"}
-                                  // onChange={(e) => this.handleCheck(e)}
+                                // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
                             })}
@@ -3362,97 +3395,97 @@ cs_time: "00:00:02" */}
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
                             <Col md={1}>
-                            <div className="mr-2 pt-1">
-                              <Image
-                                src={item.pbl_image ? item.pbl_image : ""}
-                                alt=""
-                              />
-                            </div>
+                              <div className="mr-2 pt-1">
+                                <Image
+                                  src={item.pbl_image ? item.pbl_image : ""}
+                                  alt=""
+                                />
+                              </div>
                             </Col>
                             <Col md={11}>
-                            <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">
-                                <div className="w-100">
-                                  <div className="d-flex"> 
-                                    <Col md={9} className="pl-0">  
+                              <div className="pl-2 w-100">
+                                <div className="d-flex justify-content-between">
+                                  <div className="w-100">
+                                    <div className="d-flex">
+                                      <Col md={9} className="pl-0">
                                         <div className="col1 fw600 fs18 pb-1">
-                                          
+
                                           {item.pbl_title}
                                         </div>
-                                    </Col>
-                                    <Col md={3}>
-                                    <div className="d-flex justify-content-end ml-auto">  
-                                      <span className="mr-3">
-                                        <Image
-                                          src={Editicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.changepath(
-                                              `/professinalBlogPress/${item.pbl_id}`,
-                                              "getpressblogListHandler"
-                                            )
-                                          }
-                                        />
+                                      </Col>
+                                      <Col md={3}>
+                                        <div className="d-flex justify-content-end ml-auto">
+                                          <span className="mr-3">
+                                            <Image
+                                              src={Editicon}
+                                              alt=""
+                                              onClick={() =>
+                                                this.changepath(
+                                                  `/professinalBlogPress/${item.pbl_id}`,
+                                                  "getpressblogListHandler"
+                                                )
+                                              }
+                                            />
+                                          </span>
+                                          <span>
+                                            <Image
+                                              src={Deleteicon}
+                                              alt=""
+                                              onClick={() =>
+                                                this.changeStatusBlog(
+                                                  item.pbl_id,
+                                                  "superadmin_change_press_blogstatus"
+                                                )
+                                              }
+                                            />
+                                          </span>
+                                        </div>
+                                      </Col>
+                                    </div>
+
+                                    <div className="mb-1">
+                                      <span className="fs16 fw400 col14">
+                                        Written by{" "}
+                                        <span className="col8">
+                                          {item.pbl_written_by}
+                                        </span>{" "}
                                       </span>
-                                      <span>
+                                      <span className="ml-0 d-block">
                                         <Image
-                                          src={Deleteicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.changeStatusBlog(
-                                              item.pbl_id,
-                                              "superadmin_change_press_blogstatus"
-                                            )
-                                          }
+                                          src={blogclock}
+                                          className="wSet-20 mr-2"
                                         />
+                                        {moment(item.pbl_time).format(
+                                          "dddd MMM Do YYYY HH:mm"
+                                        )}
                                       </span>
                                     </div>
-                                    </Col> 
-                                  </div>
 
-                                  <div className="mb-1">
-                                    <span className="fs16 fw400 col14">
-                                      Written by{" "}
-                                      <span className="col8">
-                                        {item.pbl_written_by}
-                                      </span>{" "}
-                                    </span>
-                                    <span className="ml-0 d-block"> 
-                                      <Image
-                                        src={blogclock}
-                                        className="wSet-20 mr-2"
-                                      />
-                                      {moment(item.pbl_time).format(
-                                        "dddd MMM Do YYYY HH:mm"
-                                      )}
-                                    </span>
-                                  </div>
+                                    <div className="fs16 fw400 col14 pb-1 e_detai">
+                                      <strong className="fw600">
+                                        Description:{" "}
+                                      </strong>
+                                      <span
+                                        className="fs14"
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.pbl_desc,
+                                        }}
+                                      ></span>
+                                    </div>
 
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600">
-                                      Description:{" "}
-                                    </strong>
-                                    <span
-                                      className="fs14"
-                                      dangerouslySetInnerHTML={{
-                                        __html: item.pbl_desc,
-                                      }}
-                                    ></span>
-                                  </div>
-
-                                  <div className="eat_category">
-                                    {item.press_blog_category &&
-                                      item.press_blog_category.map((val) => {
-                                        return (
-                                          <span className="eatcat">
-                                            {val.pbc_cat_name}
-                                          </span>
-                                        );
-                                      })}
+                                    <div className="eat_category">
+                                      {item.press_blog_category &&
+                                        item.press_blog_category.map((val) => {
+                                          return (
+                                            <span className="eatcat">
+                                              {val.pbc_cat_name}
+                                            </span>
+                                          );
+                                        })}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
                             </Col>
                           </div>
                         </div>
@@ -3464,7 +3497,7 @@ cs_time: "00:00:02" */}
                   <div className="professor_search">
                     <Row className="mb">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">List of Blogs</div> 
+                        <div className="fs22 fw600 col10">List of Blogs</div>
                         <div className="fw300 fs16 col14">
                           {/* Lorem Ipsum is simply dummy and typesetting industry. */}
                         </div>
@@ -3513,9 +3546,8 @@ cs_time: "00:00:02" */}
                                 <Form.Check
                                   type="checkbox"
                                   // className="checkthree active"
-                                  className={`checkthree ${
-                                    item.bc_status == "1" ? "active" : ""
-                                  }`}
+                                  className={`checkthree ${item.bc_status == "1" ? "active" : ""
+                                    }`}
                                   label={item.bc_name}
                                   id={item.bc_id}
                                   name={item.bc_name}
@@ -3531,7 +3563,7 @@ cs_time: "00:00:02" */}
                                   // handleCheck={item.flag}
                                   value={item.bc_id}
                                   checked={item.bc_status == "1"}
-                                  // onChange={(e) => this.handleCheck(e)}
+                                // onChange={(e) => this.handleCheck(e)}
                                 />
                               );
                             })}
@@ -3544,105 +3576,105 @@ cs_time: "00:00:02" */}
                       return (
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
-                          <Col md={1}>
-                            <div className="mr-2 pt-1">
-                              <Image
-                                src={item.bl_image ? item.bl_image : ""}
-                                alt=""
-                              />
-                            </div>
+                            <Col md={1}>
+                              <div className="mr-2 pt-1">
+                                <Image
+                                  src={item.bl_image ? item.bl_image : ""}
+                                  alt=""
+                                />
+                              </div>
                             </Col>
                             <Col md={11}>
-                            <div className="pl-2 w-100">
-                              <div className="d-flex justify-content-between">
-                                <div className="w-100">
-                                  <div className="d-flex">
-                                  <Col md={9} className="pl-0">  
-                                    <div className="col1 fw600 fs18 pb-1">
-                                      {item.bl_title}
+                              <div className="pl-2 w-100">
+                                <div className="d-flex justify-content-between">
+                                  <div className="w-100">
+                                    <div className="d-flex">
+                                      <Col md={9} className="pl-0">
+                                        <div className="col1 fw600 fs18 pb-1">
+                                          {item.bl_title}
+                                        </div>
+                                      </Col>
+                                      <Col md={3}>
+                                        <div className="d-flex ml-auto justify-content-end">
+                                          <span className="mr-3">
+                                            <Image
+                                              src={Editicon}
+                                              alt=""
+                                              onClick={() =>
+                                                this.changepath(
+                                                  `/professinalBlogCreate/${item.bl_id}`,
+                                                  "getblogListHandler"
+                                                )
+                                              }
+                                            />
+                                          </span>
+                                          <span>
+                                            <Image
+                                              src={Deleteicon}
+                                              alt=""
+                                              onClick={() =>
+                                                this.changeStatusBlog(
+                                                  item.bl_id,
+                                                  "superadmin_changeblogstatus"
+                                                )
+                                              }
+                                            />
+                                          </span>
+                                        </div>
+                                      </Col>
                                     </div>
-                                    </Col>
-                                    <Col md={3}>  
-                                    <div className="d-flex ml-auto justify-content-end"> 
-                                      <span className="mr-3">
-                                        <Image
-                                          src={Editicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.changepath(
-                                              `/professinalBlogCreate/${item.bl_id}`,
-                                              "getblogListHandler"
-                                            )
-                                          }
-                                        />
+
+                                    <div className="mb-1">
+                                      <span className="fs16 fw400 col14">
+                                        Written by{" "}
+                                        <span className="col8">
+                                          {item.bl_written_by}
+                                        </span>{" "}
                                       </span>
-                                      <span>
+                                      <span className="ml-0 d-block">
                                         <Image
-                                          src={Deleteicon}
-                                          alt=""
-                                          onClick={() =>
-                                            this.changeStatusBlog(
-                                              item.bl_id,
-                                              "superadmin_changeblogstatus"
-                                            )
-                                          }
+                                          src={blogclock}
+                                          className="wSet-20 mr-2"
                                         />
+                                        {moment(item.bl_time).format(
+                                          "dddd MMM Do YYYY HH:mm"
+                                        )}
                                       </span>
                                     </div>
-                                    </Col> 
-                                  </div>
 
-                                  <div className="mb-1">
-                                    <span className="fs16 fw400 col14">
-                                      Written by{" "}
-                                      <span className="col8">
-                                        {item.bl_written_by}
-                                      </span>{" "}
-                                    </span>
-                                    <span className="ml-0 d-block">
-                                      <Image
-                                        src={blogclock}
-                                        className="wSet-20 mr-2"
-                                      />
-                                      {moment(item.bl_time).format(
-                                        "dddd MMM Do YYYY HH:mm"
-                                      )}
-                                    </span>
-                                  </div>
+                                    <div className="fs16 fw400 col14 pb-1 e_detai">
+                                      <strong className="fw600">
+                                        Description:{" "}
+                                      </strong>
+                                      <span
+                                        className="fs14"
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.bl_desc,
+                                        }}
+                                      ></span>
+                                    </div>
 
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600">
-                                      Description:{" "}
-                                    </strong>
-                                    <span
-                                      className="fs14"
-                                      dangerouslySetInnerHTML={{
-                                        __html: item.bl_desc,
-                                      }}
-                                    ></span>
-                                  </div>
-
-                                  <div className="eat_category">
-                                    {item.blog_category.map((val) => {
-                                      return (
-                                        <span
-                                          className={
-                                            val.buc_cat_name == "Eat"
-                                              ? "eatcat"
-                                              : val.buc_cat_name == "Luv"
-                                              ? "luvcat"
-                                              : "praycat"
-                                          }
-                                        >
-                                          {val.buc_cat_name}
-                                        </span>
-                                      );
-                                    })}
+                                    <div className="eat_category">
+                                      {item.blog_category.map((val) => {
+                                        return (
+                                          <span
+                                            className={
+                                              val.buc_cat_name == "Eat"
+                                                ? "eatcat"
+                                                : val.buc_cat_name == "Luv"
+                                                  ? "luvcat"
+                                                  : "praycat"
+                                            }
+                                          >
+                                            {val.buc_cat_name}
+                                          </span>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                        
+
                             </Col>
                           </div>
                         </div>
@@ -3828,15 +3860,15 @@ kt_status: "1" */}
                 </Col>
               ) : this.state.pageType == "qaList" ? (
                 // ---------------------------------------------------------------------------------------------
-      // --------------------------------------------------------This is Assesment List ----------------------------
+                // --------------------------------------------------------This is Assesment List ----------------------------
                 // --------------------------------------------------------------------------------
                 <>
                   <Col md={8} lg={9} className="pl-1">
                     <div className="professor_search listBlogs VlogLists">
                       <Row className="mb-1">
                         <Col md={8}>
-                          <div className="fs22 fw600 col10">  
-                            Assessment Test      
+                          <div className="fs22 fw600 col10">
+                            Assessment Test
                           </div>
                           <div className="fw300 fs16 col14">
                             {/* Lorem Ipsum is simply dummy and typesetting industry. */}
@@ -3878,9 +3910,8 @@ kt_status: "1" */}
                               onClick={(e) => {
                                 this.superadminget_assessmenttestlist(1, 10, 2);
                               }}
-                              className={`mr-5  ${
-                                this.state.as_type == 1 ? "" : "active"
-                              }`}
+                              className={`mr-5  ${this.state.as_type == 1 ? "" : "active"
+                                }`}
                               checked={+this.state.as_type == 2}
                             />
 
@@ -3896,16 +3927,15 @@ kt_status: "1" */}
                               onClick={(e) => {
                                 this.superadminget_assessmenttestlist(1, 10, 1);
                               }}
-                              className={`mr-5  ${
-                                this.state.as_type == 2 ? "" : "active"
-                              }`}
+                              className={`mr-5  ${this.state.as_type == 2 ? "" : "active"
+                                }`}
                               checked={+this.state.as_type == 1}
                             />
                           </Form.Group>
                         </div>
                       </Form>
                     </div>
-{/* 
+                    {/* 
   ----------------------------------------------------------------------------------------------------------------------
                                           QA List Rendering (ASSESMENT LIST)
   ----------------------------------------------------------------------------------------------------------------------
@@ -3922,7 +3952,7 @@ kt_status: "1" */}
                                       <div className="col1 fw600 fs18 pb-1 w-40">
                                         {item.as_title}
                                       </div>
-                                      <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">  
+                                      <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">
                                         <Button
                                           type="button"
                                           className="btn-btnTypAdd btnQa"
@@ -3940,15 +3970,15 @@ kt_status: "1" */}
                                           Add Question
                                         </Button>
                                         <span className="pr-3 disabled">
-                                            <Form.Check
-                                                id={"custom-switch".concat(item.as_id)}
-                                                type="switch"
-                                                // id= 
-                                                name="status"
-                                                checked={item.as_status == "1"}
-                                                label={item.as_status == "1" ? "Enable" : "Disabled"} 
-                                                onChange={(val)=>{this.superAdminChange_AssesStatus(item.as_id , item.as_status == "1" ? "2" : "1" ); console.log("Onchange",item.as_status,item.as_status == "1" ? "Enable" : "Disabled")}}
-                                            />
+                                          <Form.Check
+                                            id={"custom-switch".concat(item.as_id)}
+                                            type="switch"
+                                            // id= 
+                                            name="status"
+                                            checked={item.as_status == "1"}
+                                            label={item.as_status == "1" ? "Enable" : "Disabled"}
+                                            onChange={(val) => { this.superAdminChange_AssesStatus(item.as_id, item.as_status == "1" ? "2" : "1"); console.log("Onchange", item.as_status, item.as_status == "1" ? "Enable" : "Disabled") }}
+                                          />
                                         </span>
                                         <span className="mr-3">
                                           <Image
@@ -3971,7 +4001,7 @@ kt_status: "1" */}
                                             onClick={() =>
                                               this.changepath(
                                                 "/createAssessmentTest/" +
-                                                  item.as_id,
+                                                item.as_id,
                                                 "superadminget_assessmenttestlist",
                                                 this.state.as_type
                                               )
@@ -4000,8 +4030,8 @@ kt_status: "1" */}
                                         Price: {item.as_test_price}/-
                                       </div>
                                     ) : (
-                                      ""
-                                    )}
+                                        ""
+                                      )}
 
                                     <div className="mb-1">
                                       <span className="fs18 fw400 col14">
@@ -4020,45 +4050,45 @@ as_type: "2" */}
                                     <div className="d-flex elpCategory">
                                       {item.assessment_category.length < 3
                                         ? item.assessment_category.map(
-                                            (val) => {
-                                              return (
-                                                <span
-                                                  className={
-                                                    val.as_test_cat_name ==
+                                          (val) => {
+                                            return (
+                                              <span
+                                                className={
+                                                  val.as_test_cat_name ==
                                                     "Eat"
-                                                      ? "eat"
-                                                      : val.as_test_cat_name ==
-                                                        "Luv"
+                                                    ? "eat"
+                                                    : val.as_test_cat_name ==
+                                                      "Luv"
                                                       ? "luv"
                                                       : val.as_test_cat_name ==
                                                         "Pray"
-                                                      ? "pray"
-                                                      : "holistic"
-                                                  }
-                                                >
-                                                  {val.as_test_cat_name}
-                                                </span>
-                                              );
-                                            }
-                                          )
+                                                        ? "pray"
+                                                        : "holistic"
+                                                }
+                                              >
+                                                {val.as_test_cat_name}
+                                              </span>
+                                            );
+                                          }
+                                        )
                                         : ""}
                                       {item.assessment_category.length == 3 ? (
                                         <span className="holistic">
                                           Holistic
                                         </span>
                                       ) : (
-                                        ""
-                                      )}
+                                          ""
+                                        )}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          {/* <div className="w-100 text-right col108 pointer">Saved as Draft</div> */} 
+                            {/* <div className="w-100 text-right col108 pointer">Saved as Draft</div> */}
                           </div>
                         );
                       })}
-                  </Col> 
+                  </Col>
                 </>
               ) : this.state.pageType == "vlogsList" ? (
                 <>
@@ -4101,9 +4131,8 @@ as_type: "2" */}
                             name="vl_type"
                             onChange={() => this.superadminvlogs_list(1, 10, 1)}
                             label="All"
-                            className={`mr-5  ${
-                              this.state.vl_type == 2 ? "" : "active"
-                            }`}
+                            className={`mr-5  ${this.state.vl_type == 2 ? "" : "active"
+                              }`}
                             checked={+this.state.vl_type == 1}
                           />
 
@@ -4114,9 +4143,8 @@ as_type: "2" */}
                             name="vl_type"
                             onChange={() => this.superadminvlogs_list(1, 10, 2)}
                             label="Featured"
-                            className={`mr-5  ${
-                              this.state.vl_type == 1 ? "" : "active"
-                            }`}
+                            className={`mr-5  ${this.state.vl_type == 1 ? "" : "active"
+                              }`}
                             checked={+this.state.vl_type == 2}
                           />
                         </Form.Group>
@@ -4154,69 +4182,69 @@ as_type: "2" */}
                                   </div>
                                 </div>
                               </Col>
-                              <Col md={10} className="pr-0"> 
+                              <Col md={10} className="pr-0">
                                 <div className="pl-2 w-100">
                                   <div className="d-flex justify-content-between">
                                     <div className="w-100">
                                       <div className="d-flex w-100">
                                         <Col md={7} className="pl-0">
-                                        <div className="col1 fw600 fs17 pb-1">
-                                          {item.vl_title}
-                                        </div>
+                                          <div className="col1 fw600 fs17 pb-1">
+                                            {item.vl_title}
+                                          </div>
                                         </Col>
-                                        <Col md={5} className="ml-auto"> 
-                                        <div className="d-flex ml-auto justify-content-end">
-                                          <span className="pr-3 fs14 col47 fw400">
-                                            {item.vl_status == "2"
-                                              ? "Deactivate"
-                                              : "Activate"}
-                                          </span>
-                                          <span className="pr-3 disabled">
-                                            <Form.Check
-                                              type="switch"
-                                              id={"custom-switch" + index}
-                                              name={"status" + index}
-                                              label=""
-                                              onClick={(e) => {
-                                                this.modifyAllContent(
-                                                  "VLOGS",
-                                                  item.vl_id,
-                                                  "superadminchange_vlogsstatus",
-                                                  item.vl_status == "1"
-                                                    ? "2"
-                                                    : "1"
-                                                );
-                                              }}
-                                              checked={item.vl_status == "1"}
-                                            />
-                                          </span>
-                                          <span className="mr-3">
-                                            <Image
-                                              onClick={() =>
-                                                this.changepath(
-                                                  "/createVlog/" + item.vl_id,
-                                                  "superadminvlogs_list",
-                                                  this.state.vl_type
-                                                )
-                                              }
-                                              src={Editicon}
-                                              alt=""
-                                            />
-                                          </span>
-                                          <span>
-                                            <Image
-                                              onClick={(e) => {
-                                                this.handleOpenAllConformation(
-                                                  item.vl_title,
-                                                  item.vl_id,
-                                                  "VLOGS"
-                                                );
-                                              }}
-                                              src={Deleteicon}
-                                              alt=""
-                                            />
-                                          </span>
-                                        </div>
+                                        <Col md={5} className="ml-auto">
+                                          <div className="d-flex ml-auto justify-content-end">
+                                            <span className="pr-3 fs14 col47 fw400">
+                                              {item.vl_status == "2"
+                                                ? "Deactivate"
+                                                : "Activate"}
+                                            </span>
+                                            <span className="pr-3 disabled">
+                                              <Form.Check
+                                                type="switch"
+                                                id={"custom-switch" + index}
+                                                name={"status" + index}
+                                                label=""
+                                                onClick={(e) => {
+                                                  this.modifyAllContent(
+                                                    "VLOGS",
+                                                    item.vl_id,
+                                                    "superadminchange_vlogsstatus",
+                                                    item.vl_status == "1"
+                                                      ? "2"
+                                                      : "1"
+                                                  );
+                                                }}
+                                                checked={item.vl_status == "1"}
+                                              />
+                                            </span>
+                                            <span className="mr-3">
+                                              <Image
+                                                onClick={() =>
+                                                  this.changepath(
+                                                    "/createVlog/" + item.vl_id,
+                                                    "superadminvlogs_list",
+                                                    this.state.vl_type
+                                                  )
+                                                }
+                                                src={Editicon}
+                                                alt=""
+                                              />
+                                            </span>
+                                            <span>
+                                              <Image
+                                                onClick={(e) => {
+                                                  this.handleOpenAllConformation(
+                                                    item.vl_title,
+                                                    item.vl_id,
+                                                    "VLOGS"
+                                                  );
+                                                }}
+                                                src={Deleteicon}
+                                                alt=""
+                                              />
+                                            </span>
+                                          </div>
                                         </Col>
                                       </div>
                                       <div className="fs16 fw400 col14 pb-1 e_detai">
@@ -4243,226 +4271,226 @@ as_type: "2" */}
                   </Col>
                 </>
               ) : (
-                <Col md={8} lg={9} className="pl-1">
-                  <div className="professor_search mb-3">
-                    <div className="fs22 fw600 col10">Rating Requests</div>
-                  </div>
-                  <div className="myprofile reviewrequest">
-                    <div className="text-center user_tab">
-                      <Tabs
-                        activeKey={this.state.key}
-                        defaultActiveKey="request"
-                        onSelect={(key) => this.onChangeTab(key, "rating")}
-                      >
-                        <Tab eventKey="request" title="Requested">
-                          <div className="requests">
-                            {this.state.ratingList &&
-                              this.state.ratingList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2 w-100">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
+                                            <Col md={8} lg={9} className="pl-1">
+                                              <div className="professor_search mb-3">
+                                                <div className="fs22 fw600 col10">Rating Requests</div>
+                                              </div>
+                                              <div className="myprofile reviewrequest">
+                                                <div className="text-center user_tab">
+                                                  <Tabs
+                                                    activeKey={this.state.key}
+                                                    defaultActiveKey="request"
+                                                    onSelect={(key) => this.onChangeTab(key, "rating")}
+                                                  >
+                                                    <Tab eventKey="request" title="Requested">
+                                                      <div className="requests">
+                                                        {this.state.ratingList &&
+                                                          this.state.ratingList.map((item) => {
+                                                            return (
+                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                                                <div className="mr-4">
+                                                                  <Image
+                                                                    src={item.u_image ? item.u_image : ""}
+                                                                    alt=""
+                                                                    className="r50"
+                                                                  />
+                                                                </div>
+                                                                <div className="pl-2 w-100">
+                                                                  <div className="d-flex justify-content-between">
+                                                                    <div>
+                                                                      <div className="col3 fw500 fs18 pb-1">
+                                                                        {item.fromname}
+                                                                      </div>
+                                                                      <div className="fs14 fw400 col54 pb-1">
+                                                                        {moment(item.br_datetime).format(
+                                                                          "dddd MMM Do YYYY HH:mm"
+                                                                        )}
+                                                                      </div>
+                                                                    </div>
+                                                                    <div className="col81 fs15 fs400 pr-3">
+                                                                      Review for - {item.toname}
+                                                                    </div>
+                                                                  </div>
 
-                                      <div className="mb-4">
-                                        <span className="mr-4">
-                                          {[
-                                            ...Array(
-                                              item.ur_rating
-                                                ? +item.ur_rating
-                                                : 4
-                                            ),
-                                          ].map((e, i) => (
-                                            <Image
-                                              src={Yellowstar}
-                                              alt=""
-                                              className="mr-1"
-                                            />
-                                          ))}
-                                        </span>
-                                        <span
-                                          className="fs18 fw600"
-                                          style={{
-                                            color:
-                                              item.ur_rating < 3
-                                                ? "red"
-                                                : "green",
-                                          }}
-                                        >
-                                          {this.getRatingName(item.ur_rating)}{" "}
-                                          {/* <Image src={Checkgreen} alt="" /> */}
-                                        </span>
-                                      </div>
-                                      <div className="mt-3">
-                                        <Button
-                                          className="btnTyp9 approve mr-4"
-                                          onClick={() =>
-                                            this.changeStatusRating(
-                                              item.ur_id,
-                                              1
-                                            )
-                                          }
-                                        >
-                                          APPROVE
+                                                                  <div className="mb-4">
+                                                                    <span className="mr-4">
+                                                                      {[
+                                                                        ...Array(
+                                                                          item.ur_rating
+                                                                            ? +item.ur_rating
+                                                                            : 4
+                                                                        ),
+                                                                      ].map((e, i) => (
+                                                                        <Image
+                                                                          src={Yellowstar}
+                                                                          alt=""
+                                                                          className="mr-1"
+                                                                        />
+                                                                      ))}
+                                                                    </span>
+                                                                    <span
+                                                                      className="fs18 fw600"
+                                                                      style={{
+                                                                        color:
+                                                                          item.ur_rating < 3
+                                                                            ? "red"
+                                                                            : "green",
+                                                                      }}
+                                                                    >
+                                                                      {this.getRatingName(item.ur_rating)}{" "}
+                                                                      {/* <Image src={Checkgreen} alt="" /> */}
+                                                                    </span>
+                                                                  </div>
+                                                                  <div className="mt-3">
+                                                                    <Button
+                                                                      className="btnTyp9 approve mr-4"
+                                                                      onClick={() =>
+                                                                        this.changeStatusRating(
+                                                                          item.ur_id,
+                                                                          1
+                                                                        )
+                                                                      }
+                                                                    >
+                                                                      APPROVE
                                         </Button>
-                                        <Button
-                                          className="btnTyp9 reject"
-                                          onClick={() =>
-                                            this.changeStatusRating(
-                                              item.ur_id,
-                                              2
-                                            )
-                                          }
-                                        >
-                                          REJECT
+                                                                    <Button
+                                                                      className="btnTyp9 reject"
+                                                                      onClick={() =>
+                                                                        this.changeStatusRating(
+                                                                          item.ur_id,
+                                                                          2
+                                                                        )
+                                                                      }
+                                                                    >
+                                                                      REJECT
                                         </Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
-                              })}{" "}
-                          </div>
-                        </Tab>
-                        <Tab eventKey="completed" title="COMPLETED">
-                          <div className="requests">
-                            {this.state.ratingList &&
-                              this.state.ratingList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2 w-100">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            );
+                                                          })}{" "}
+                                                      </div>
+                                                    </Tab>
+                                                    <Tab eventKey="completed" title="COMPLETED">
+                                                      <div className="requests">
+                                                        {this.state.ratingList &&
+                                                          this.state.ratingList.map((item) => {
+                                                            return (
+                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                                                <div className="mr-4">
+                                                                  <Image
+                                                                    src={item.u_image ? item.u_image : ""}
+                                                                    alt=""
+                                                                    className="r50"
+                                                                  />
+                                                                </div>
+                                                                <div className="pl-2 w-100">
+                                                                  <div className="d-flex justify-content-between">
+                                                                    <div>
+                                                                      <div className="col3 fw500 fs18 pb-1">
+                                                                        {item.fromname}
+                                                                      </div>
+                                                                      <div className="fs14 fw400 col54 pb-1">
+                                                                        {moment(item.br_datetime).format(
+                                                                          "dddd MMM Do YYYY HH:mm"
+                                                                        )}
+                                                                      </div>
+                                                                    </div>
+                                                                    <div className="col81 fs15 fs400 pr-3">
+                                                                      Review for - {item.toname}
+                                                                    </div>
+                                                                  </div>
 
-                                      <div className="mb-4">
-                                        <span className="mr-4">
-                                          {[
-                                            ...Array(
-                                              item.ur_rating
-                                                ? +item.ur_rating
-                                                : 4
-                                            ),
-                                          ].map((e, i) => (
-                                            <Image
-                                              src={Yellowstar}
-                                              alt=""
-                                              className="mr-1"
-                                            />
-                                          ))}
-                                        </span>
-                                        <span className="col82 fs18 fw600">
-                                          Good!{" "}
-                                          <Image src={Checkgreen} alt="" />
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                          </div>
-                        </Tab>
+                                                                  <div className="mb-4">
+                                                                    <span className="mr-4">
+                                                                      {[
+                                                                        ...Array(
+                                                                          item.ur_rating
+                                                                            ? +item.ur_rating
+                                                                            : 4
+                                                                        ),
+                                                                      ].map((e, i) => (
+                                                                        <Image
+                                                                          src={Yellowstar}
+                                                                          alt=""
+                                                                          className="mr-1"
+                                                                        />
+                                                                      ))}
+                                                                    </span>
+                                                                    <span className="col82 fs18 fw600">
+                                                                      Good!{" "}
+                                                                      <Image src={Checkgreen} alt="" />
+                                                                    </span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            );
+                                                          })}
+                                                      </div>
+                                                    </Tab>
 
-                        <Tab eventKey="reject" title="REJECTED">
-                          <div className="requests">
-                            {this.state.ratingList &&
-                              this.state.ratingList.map((item) => {
-                                return (
-                                  <div className="d-flex pt-4 pb-4 text-left border-grays">
-                                    <div className="mr-4">
-                                      <Image
-                                        src={item.u_image ? item.u_image : ""}
-                                        alt=""
-                                        className="r50"
-                                      />
-                                    </div>
-                                    <div className="pl-2 w-100">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <div className="col3 fw500 fs18 pb-1">
-                                            {item.fromname}
-                                          </div>
-                                          <div className="fs14 fw400 col54 pb-1">
-                                            {moment(item.br_datetime).format(
-                                              "dddd MMM Do YYYY HH:mm"
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="col81 fs15 fs400 pr-3">
-                                          Review for - {item.toname}
-                                        </div>
-                                      </div>
+                                                    <Tab eventKey="reject" title="REJECTED">
+                                                      <div className="requests">
+                                                        {this.state.ratingList &&
+                                                          this.state.ratingList.map((item) => {
+                                                            return (
+                                                              <div className="d-flex pt-4 pb-4 text-left border-grays">
+                                                                <div className="mr-4">
+                                                                  <Image
+                                                                    src={item.u_image ? item.u_image : ""}
+                                                                    alt=""
+                                                                    className="r50"
+                                                                  />
+                                                                </div>
+                                                                <div className="pl-2 w-100">
+                                                                  <div className="d-flex justify-content-between">
+                                                                    <div>
+                                                                      <div className="col3 fw500 fs18 pb-1">
+                                                                        {item.fromname}
+                                                                      </div>
+                                                                      <div className="fs14 fw400 col54 pb-1">
+                                                                        {moment(item.br_datetime).format(
+                                                                          "dddd MMM Do YYYY HH:mm"
+                                                                        )}
+                                                                      </div>
+                                                                    </div>
+                                                                    <div className="col81 fs15 fs400 pr-3">
+                                                                      Review for - {item.toname}
+                                                                    </div>
+                                                                  </div>
 
-                                      <div className="mb-4">
-                                        <span className="mr-4">
-                                          {[
-                                            ...Array(
-                                              item.ur_rating
-                                                ? +item.ur_rating
-                                                : 4
-                                            ),
-                                          ].map((e, i) => (
-                                            <Image
-                                              src={Yellowstar}
-                                              alt=""
-                                              className="mr-1"
-                                            />
-                                          ))}
-                                        </span>
-                                        <span className="col82 fs18 fw600">
-                                          Good!{" "}
-                                          <Image src={Checkgreen} alt="" />
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
-                              })}{" "}
-                          </div>
-                        </Tab>
-                      </Tabs>
-                    </div>
-                  </div>
-                </Col>
-              )}
+                                                                  <div className="mb-4">
+                                                                    <span className="mr-4">
+                                                                      {[
+                                                                        ...Array(
+                                                                          item.ur_rating
+                                                                            ? +item.ur_rating
+                                                                            : 4
+                                                                        ),
+                                                                      ].map((e, i) => (
+                                                                        <Image
+                                                                          src={Yellowstar}
+                                                                          alt=""
+                                                                          className="mr-1"
+                                                                        />
+                                                                      ))}
+                                                                    </span>
+                                                                    <span className="col82 fs18 fw600">
+                                                                      Good!{" "}
+                                                                      <Image src={Checkgreen} alt="" />
+                                                                    </span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            );
+                                                          })}{" "}
+                                                      </div>
+                                                    </Tab>
+                                                  </Tabs>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                          )}
             </Row>
           </Container>
 
@@ -4496,11 +4524,11 @@ as_type: "2" */}
                       this.state.deleteModalType == "admin"
                         ? this.adminUserDelete(event, this.state.profileId, 2)
                         : this.modifyDomainContent(
-                            "",
-                            this.state.deleteId,
-                            "superadmindeletecorporatedomain",
-                            2
-                          )
+                          "",
+                          this.state.deleteId,
+                          "superadmindeletecorporatedomain",
+                          2
+                        )
                     }
                   >
                     Yes
@@ -4516,42 +4544,42 @@ as_type: "2" */}
                   this.state.activeProfile == "professional" ? (
                     ""
                   ) : (
-                    <>
-                      <div className="fs18 fw500 col10 pointer write_txt mb-4">
-                        WRITE A REASON
+                      <>
+                        <div className="fs18 fw500 col10 pointer write_txt mb-4">
+                          WRITE A REASON
                       </div>
 
-                      <Form.Group
-                        controlId="exampleForm.ControlTextarea1"
-                        className="mb-4"
-                      >
-                        <Form.Control
-                          as="textarea"
-                          className="textTypes1"
-                          name="reasonForDelete"
-                          onChange={(event) => {
-                            this.handleChange(event);
-                          }}
-                        />
-                      </Form.Group>
+                        <Form.Group
+                          controlId="exampleForm.ControlTextarea1"
+                          className="mb-4"
+                        >
+                          <Form.Control
+                            as="textarea"
+                            className="textTypes1"
+                            name="reasonForDelete"
+                            onChange={(event) => {
+                              this.handleChange(event);
+                            }}
+                          />
+                        </Form.Group>
 
-                      <button
-                        className="btn btn-success bt-submit text-uppercase"
-                        onClick={(event) =>
-                          this.adminUserDeleteReason(
-                            event,
-                            this.state.profileId,
-                            2
-                          )
-                        }
-                      >
-                        SUBMIT & DELETE
+                        <button
+                          className="btn btn-success bt-submit text-uppercase"
+                          onClick={(event) =>
+                            this.adminUserDeleteReason(
+                              event,
+                              this.state.profileId,
+                              2
+                            )
+                          }
+                        >
+                          SUBMIT & DELETE
                       </button>
-                    </>
-                  )
+                      </>
+                    )
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
               </div>
             </Modal.Body>
           </Modal>
@@ -4594,94 +4622,91 @@ as_type: "2" */}
           </Modal>
 
           {this.state.pageType == "userlist" &&
-          totalRecord &&
-          totalRecord > customPagination.paginationPageSize ? (
-            <div className="paginationWrapper">
-              <Pagination
-                activePage={this.state.pageNumber}
-                itemsCountPerPage={customPagination.itemsCountPerPage}
-                totalItemsCount={totalRecord}
-                pageRangeDisplayed={customPagination.pageRangeDisplayed}
-                onChange={this.handlePageChange.bind(this)}
-                firstPageText={"<<"}
-                lastPageText={">>"}
-                prevPageText={"<"}
-                nextPageText={">"}
-              />
-            </div>
-          ) : this.state.totalPage > 0 ? (
-            <div className="paginationWrapper">
-              <nav aria-label="Page navigation">
-                <ul class="pagination pg-blue deliva-pagination justify-content-end">
-                  <li class="page-item">
-                    <button
-                      class="page-link rotate-180 control-btn"
-                      aria-label="Previous"
-                      onClick={() => this.onChangePage(this.state.pageno - 1)}
-                      disabled={
-                        this.state.pageno == 1 || this.state.totalPage == 0
-                      }
-                    >
-                      <span className="icon-prev"></span>
-                      <span
-                        //className="prevNext"
-                        className={`sr-only ${
+            totalRecord &&
+            totalRecord > customPagination.paginationPageSize ? (
+              <div className="paginationWrapper">
+                <Pagination
+                  activePage={this.state.pageNumber}
+                  itemsCountPerPage={customPagination.itemsCountPerPage}
+                  totalItemsCount={totalRecord}
+                  pageRangeDisplayed={customPagination.pageRangeDisplayed}
+                  onChange={this.handlePageChange.bind(this)}
+                  firstPageText={"<<"}
+                  lastPageText={">>"}
+                  prevPageText={"<"}
+                  nextPageText={">"}
+                />
+              </div>
+            ) : this.state.totalPage > 0 ? (
+              <div className="paginationWrapper">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination pg-blue deliva-pagination justify-content-end">
+                    <li class="page-item">
+                      <button
+                        class="page-link rotate-180 control-btn"
+                        aria-label="Previous"
+                        onClick={() => this.onChangePage(this.state.pageno - 1)}
+                        disabled={
                           this.state.pageno == 1 || this.state.totalPage == 0
-                            ? ""
-                            : "active"
-                        }`}
+                        }
                       >
-                        Previous
-                      </span>
-                    </button>
-                  </li>
-
-                  {this.state.totalPage > 0 &&
-                    this.state.pageArray.map((page, ind) => {
-                      return (
-                        <li class="page-item">
-                          <a 
-                            className={`page-link ${
-                              this.state.pageno == page ? "active" : ""
+                        <span className="icon-prev"></span>
+                        <span
+                          //className="prevNext"
+                          className={`sr-only ${this.state.pageno == 1 || this.state.totalPage == 0
+                              ? ""
+                              : "active"
                             }`}
-                            onClick={() => this.onChangePage(page)}
-                          >
-                            {page}
-                          </a>
-                        </li>
-                      );
-                    })}
+                        >
+                          Previous
+                      </span>
+                      </button>
+                    </li>
 
-                  <li class="page-item">
-                    <button
-                      class="page-link control-btn"
-                      aria-label="Next"
-                      onClick={() => this.onChangePage(this.state.pageno + 1)}
-                      disabled={
-                        this.state.pageno == this.state.totalPage ||
-                        this.state.totalPage == 0
-                      }
-                    >
-                      <span className="icon-next"></span>
-                      <span
-                        className={`sr-only ${
+                    {this.state.totalPage > 0 &&
+                      this.state.pageArray.map((page, ind) => {
+                        return (
+                          <li class="page-item">
+                            <a
+                              className={`page-link ${this.state.pageno == page ? "active" : ""
+                                }`}
+                              onClick={() => this.onChangePage(page)}
+                            >
+                              {page}
+                            </a>
+                          </li>
+                        );
+                      })}
+
+                    <li class="page-item">
+                      <button
+                        class="page-link control-btn"
+                        aria-label="Next"
+                        onClick={() => this.onChangePage(this.state.pageno + 1)}
+                        disabled={
                           this.state.pageno == this.state.totalPage ||
                           this.state.totalPage == 0
-                            ? ""
-                            : "active"
-                        }`}
+                        }
                       >
-                        Next
+                        <span className="icon-next"></span>
+                        <span
+                          className={`sr-only ${this.state.pageno == this.state.totalPage ||
+                              this.state.totalPage == 0
+                              ? ""
+                              : "active"
+                            }`}
+                        >
+                          Next
                       </span>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          ) : (
-            <span></span>
-            // <div className="recordfound">No Record Found</div>
-          )}
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            ) : (
+                <span></span>
+                // <div className="recordfound">No Record Found</div>
+              )}
           {/* {this.state.totalRecordCount == 0 ? (
           ) : (
             ""
