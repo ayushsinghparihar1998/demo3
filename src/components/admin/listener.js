@@ -1836,7 +1836,7 @@ class Adminlistener extends Component {
                       >
                         <div className="fs14 col28 fw500">
                           <Image src={Menuicon} alt="" className="mr-1" />
-                          DOWNLOADED PDF Listing
+                          DOWNLOADED PDF 
                         </div>
                       </div>
                     </div>

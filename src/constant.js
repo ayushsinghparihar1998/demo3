@@ -8,8 +8,8 @@ export default {
     SERVER_URL: 'https://staging.eatluvnpray.org/', //staging  
 
 
-    SOCKET_URL: 'https://eatluvnpray.org:8443', // live  
-    // SOCKET_URL:"https://staging.eatluvnpray.org:2089", // staging 
+    // SOCKET_URL: 'https://eatluvnpray.org:8443', // live  
+    SOCKET_URL:"https://staging.eatluvnpray.org:2089", // staging 
 
     roles: {
         LISTENER: '1',

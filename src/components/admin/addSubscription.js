@@ -308,6 +308,26 @@ class addSubscription extends Component {
                     Subscription Plan
                   </div>
                   <Form>
+                  <Form.Group className="mb-4">
+                      <Form.Label className="fs20 fw600 col14"> 
+                          Upload  PDF
+                      </Form.Label>
+                      {/* <div className="mt-1 mb-3 imgSetProfile"> */}
+                        {/* <Image src={kitObj.kt_image_url} className="" />{" "} */}
+                      {/* </div> */}
+                      <Form.Group>
+                        <Form.File
+                          id="exampleFormControlFile1"
+                          className="inputTyp2"
+                          onChange={(e) =>console.log("CHANGE D ",e)
+                            // this.handleUploadPicture(e, "backgroud_img")
+                          }
+                        />
+                        <div className="col27 fs14 fw400 mt-2 error">
+                          {/* {errors.kt_image_url} */}
+                        </div>
+                      </Form.Group>
+                    </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
                         Plan Name *
