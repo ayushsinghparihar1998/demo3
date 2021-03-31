@@ -18,6 +18,9 @@ import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationPlanAdd";
+import constant from "../../constant";
+import { post } from "axios";
+import { showErrorMessage, showErrorToast } from "../../common/helpers/Utils";
 
 class addSubscription extends Component {
   constructor(props) {
@@ -35,6 +38,7 @@ class addSubscription extends Component {
         pl_desc_details: "",
         pl_save: "",
         plan_type: "",
+        pl_pdf_doc:''
         // plan_cat_name: "",
       },
 
@@ -138,6 +142,7 @@ class addSubscription extends Component {
           pl_save: this.state.planObj.pl_save,
           pl_status: this.state.planObj.pl_status,
           pl_title: this.state.planObj.pl_title,
+          pl_pdf_doc : this.state.planObj.pl_pdf_doc,
           // plan_cat_name: "",
           plan_type: this.state.planObj.plan_type,
         };
@@ -275,6 +280,39 @@ class addSubscription extends Component {
     return isValid;
   }
 
+  handleUploadPicture = async (event, name) => {
+    const fileObject = event.target.files[0];
+    console.log();
+    if (fileObject) {
+      this.setState({
+        isUploading: true,
+      });
+      const formData = new FormData();
+      formData.set("u_image", fileObject);
+      console.log("formDataformData", formData);
+
+      const url = constant.SERVER_URL + "elp/superadmin_uploaddocument";
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const response = await post(url, formData, config);
+      console.log(name, "resultresultresult", response);
+      let planObj = this.state.planObj;
+      if (response.data.status == "error") {
+        const message = response.data.message;
+        showErrorToast(message);
+      } else {
+      planObj.pl_pdf_doc = response.data.data.filepath;
+      this.setState({
+        isUploading: false,
+        planObj,
+        filename: fileObject.name, 
+      });}
+    }
+  };
+
   render() {
     const { planObj, errors, proffCat } = this.state;
     return (
@@ -319,8 +357,8 @@ class addSubscription extends Component {
                         <Form.File
                           id="exampleFormControlFile1"
                           className="inputTyp2"
-                          onChange={(e) =>console.log("CHANGE D ",e)
-                            // this.handleUploadPicture(e, "backgroud_img")
+                          onChange={(e) =>{console.log("CHANGE D ",e);
+                            this.handleUploadPicture(e, "backgroud_img")}
                           }
                         />
                         <div className="col27 fs14 fw400 mt-2 error">
