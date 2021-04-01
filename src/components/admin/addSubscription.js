@@ -305,6 +305,7 @@ class addSubscription extends Component {
         showErrorToast(message);
       } else {
       planObj.pl_pdf_doc = response.data.data.filepath;
+      console.log("GOING TO SET STATE ", planObj)
       this.setState({
         isUploading: false,
         planObj,
@@ -350,9 +351,12 @@ class addSubscription extends Component {
                       <Form.Label className="fs20 fw600 col14"> 
                           Upload  PDF
                       </Form.Label>
-                      {/* <div className="mt-1 mb-3 imgSetProfile"> */}
-                        {/* <Image src={kitObj.kt_image_url} className="" />{" "} */}
-                      {/* </div> */}
+                      {
+                        planObj.pl_pdf_doc &&
+                        <div className="mt-1 mb-3 imgSetProfile">
+                        <Image src={planObj.pl_pdf_doc} className="" />{" "}
+                      </div>
+                      }
                       <Form.Group>
                         <Form.File
                           id="exampleFormControlFile1"
