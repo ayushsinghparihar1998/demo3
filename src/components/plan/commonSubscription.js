@@ -106,6 +106,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                 <Slider {...settingstwo}>
                     {dataByCondition &&
                         dataByCondition.map((item) => {
+                            console.log( item.pl_title === 'Early ACCESS' ? item : "ITEM NOT EARLY" , dataByCondition)
                             return (
                                 <div className="items">
                                     <div className="planList">
@@ -184,6 +185,10 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                     {item.pl_desc_details}
                                                 </div>
                                             </div>
+                                            {
+                                                item.pl_pdf_doc && 
+                                                <a href={item.pl_pdf_doc} >Download PDF</a>
+                                            }
                                             <Button onClick={handleShow} className="btnType1 d-block w-100 mt-4">
                                                 Buy Now
                                             </Button>
