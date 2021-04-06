@@ -18,38 +18,52 @@ import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddKit";
-import { post } from "axios";
+import Axios, { post } from "axios";
 import ELPRxApiService from "../../common/services/apiService";
 import Deleteicon from "../../assets/images/delete_icon.svg";
 import Womanvideo from "../../assets/images/womanvideo.jpg";
 import Slider from "react-rangeslider";
-import "react-rangeslider/lib/index.css"; 
+import "react-rangeslider/lib/index.css";
 import constant from "../../constant";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Validator from "validator";
+import ValidationMessages from "../../common/helpers/ValidationMessages";
 
 class AddKits extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
+      isReloadEditor: false,
       pageType: "",
       paymentList: [],
       pageno: 1,
       records: 10,
       totalCount: "",
       value: 10,
-
+      sliderChange: 0,
       kitObj: {
         kt_name: "",
         kt_desc: "",
         kt_image_url: "",
-        // kt_price: "",
+        kt_price: "",
+        kt_overview: "",
+        kt_subheading: '',
         kits_service_name: [
           {
-            ks_services: "",
-            ks_actual_price: "",
-            ks_discounted_price: "",
+            ks_services: "0",
           },
         ],
+        kits_price_month: [
+          {
+            kp_min_range_month: '',
+            kp_max_range_month: '',
+            kp_price: '',
+            kp_discount: ''
+          }
+        ]
       },
+
       serviceData: [
         {
           ks_services: "",
@@ -64,6 +78,10 @@ class AddKits extends Component {
           ks_discounted_price: "",
         },
       ],
+      errorKits_price_month: [{
+        kp_price: '',
+        kp_discount: ''
+      }],
       count: 10,
       offset: 1,
       errors: {
@@ -72,25 +90,14 @@ class AddKits extends Component {
         kt_desc: "",
         kt_image_url: "",
         // kt_price: "",
+        kt_overview: '',
+        kt_subheading: '',
+        
       },
       serviceShow: false,
     };
     this.checkServiceError = this.checkServiceError.bind(this);
   }
-
-  // handleChangeStart = () => {
-  //   console.log('Change event started')
-  // };
-
-  // handleChange = value => {
-  //   this.setState({
-  //     value: value
-  //   })
-  // };
-
-  // handleChangeComplete = () => {
-  //   console.log('Change event completed')
-  // };
 
   componentDidMount = () => {
     console.log(this.props.match.params.id);
@@ -138,6 +145,7 @@ class AddKits extends Component {
           kitObj,
           serviceData,
           errorServiceData,
+          isReloadEditor: true
         },
         () => {
           console.log("kitObj", this.state.kitObj);
@@ -145,60 +153,75 @@ class AddKits extends Component {
           this.checkServiceError();
         }
       );
-    });
+    }).catch((error) => console.log(error));
   };
 
   handleSubmit = () => {
     let kitObj = this.state.kitObj;
-    let serviceData = this.state.serviceData;
-    let errorServiceData = this.state.errorServiceData;
+    // let serviceData = this.state.serviceData;
+    // let errorServiceData = this.state.errorServiceData;
 
-    kitObj.kits_service_name = serviceData;
-    delete kitObj.kits_services;
-    delete kitObj.kt_datetime;
-    delete kitObj.kt_price;
-    delete kitObj.kt_status;
-
-    kitObj.kits_service_name.map((item, ind) => {
-      errorServiceData[ind].ks_services =
-        item.ks_services.length == 0 ? "Please enter service name" : "";
-      errorServiceData[ind].ks_actual_price =
-        +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
-          ? "Please enter actual price"
-          : "";
-      errorServiceData[ind].ks_discounted_price =
-        +item.ks_discounted_price == 0 || item.ks_discounted_price.length == 0
-          ? "Please enter discounted price"
-          : +item.ks_discounted_price >= +item.ks_actual_price
-          ? "Please enter amount less then actual price"
-          : "";
-
-      if (
-        item.ks_actual_price
-          .toString()
-          .charAt(item.ks_actual_price.length - 1) == "."
-      ) {
-        item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
+    // kitObj.kits_service_name = serviceData;
+    // delete kitObj.kits_services;
+    // delete kitObj.kt_datetime;
+    // delete kitObj.kt_price;
+    // delete kitObj.kt_status;
+    // console.log("SERVICE NAME ", kitObj, errorServiceData);
+    // kitObj.kits_service_name.map((item, ind) => {
+    //   errorServiceData[ind].ks_services =
+    //     item.ks_services.length == 0 ? "Please enter service name" : "";
+    //   errorServiceData[ind].ks_actual_price =
+    //     +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
+    //       ? "Please enter actual price"
+    //       : "";
+    //   errorServiceData[ind].ks_discounted_price =
+    //     +item.ks_discounted_price == 0 || item.ks_discounted_price.length == 0
+    //       ? "Please enter discounted price"
+    //       : +item.ks_discounted_price >= +item.ks_actual_price
+    //         ? "Please enter amount less then actual price"
+    //         : "";
+    //   console.log("SERVICE NAME ", kitObj, errorServiceData);
+    //   if (
+    //     item.ks_actual_price
+    //       .toString()
+    //       .charAt(item.ks_actual_price.length - 1) == "."
+    //   ) {
+    //     item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
+    //   }
+    //   if (
+    //     item.ks_discounted_price
+    //       .toString()
+    //       .charAt(item.ks_discounted_price.length - 1) == "."
+    //   ) {
+    //     item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
+    //   }
+    //   console.log("SERVICE NAME ", kitObj, errorServiceData);
+    // });
+    // this.setState(
+    //   {
+    //     errorServiceData,
+    //     // kitObj
+    //   },
+    //   () => {
+    //     console.log(this.state.errorServiceData);
+    //   }
+    // );
+    const errorKits_price_month = this.state.errorKits_price_month;
+    kitObj.kits_price_month.forEach((month_price,index)=>{
+      console.log("month_price.kp_price",month_price.kp_price)
+      console.log("errors.kits_price_month[index].kp_price" , errorKits_price_month[index])
+      console.log("Validator.isEmpty(month_price.kp_price)",Validator.isEmpty(month_price.kp_price))
+      if (Validator.isEmpty(month_price.kp_price) || month_price.kp_price.trim() === "") {
+        errorKits_price_month[index].kp_price = ValidationMessages.kits_price_month.kp_price.required;
       }
-      if (
-        item.ks_discounted_price
-          .toString()
-          .charAt(item.ks_discounted_price.length - 1) == "."
-      ) {
-        item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
+      if (Validator.isEmpty(month_price.kp_discount) || month_price.kp_discount.trim() === "") {
+        errorKits_price_month[index].kp_discount = ValidationMessages.kits_price_month.kp_discount.required;
       }
-    });
-    this.setState(
-      {
-        errorServiceData,
-        // kitObj
-      },
-      () => {
-        console.log(this.state.errorServiceData);
-      }
-    );
-    console.log(this.isValid(), this.state.serviceShow);
-    if (this.isValid() && this.state.serviceShow) {
+    })
+    this.setState({errorKits_price_month},()=>console.log("ERROR KITS PRICE MONTH",errorKits_price_month));
+    console.log("DATA GOT ", this.state.kitObj);
+    console.log(this.isValid(), "IS VALID ");
+    if (this.isValid() ) {//this.isValid() && this.state.serviceShow
       this.setState({
         showLoader: true,
         kitObj,
@@ -210,6 +233,7 @@ class AddKits extends Component {
       if (this.props.match.params.id > 0) {
         data.kt_id = this.props.match.params.id;
       }
+
       ELPViewApiService(
         this.props.match.params.id == 0
           ? "superadminadd_kits"
@@ -234,123 +258,136 @@ class AddKits extends Component {
           this.setState({
             showLoader: false,
           });
-        });
+      });
     } else {
       this.setState({
         showLoader: false,
       });
     }
   };
-
+  handleSlider = (event, index) => {
+    console.log("Handle Change", event);
+    let kitObj = this.state.kitObj;
+    kitObj.kits_service_name[index].ks_services = `${event} Months`;
+    this.setState(
+      {
+        sliderChange: event,
+        kitObj
+      },
+      () => {
+        console.log("SLIDER CHANGE INDEX", index, this.state.kitObj);
+      }
+    );
+  };
   handleChange = (event) => {
+    console.log("Handle Change", event);
     const { name, value } = event.target;
-    console.log(name, value);
     let kitObj = this.state.kitObj;
     kitObj[name] = value;
     this.setState(
       {
-        kitObj,
+        kitObj
       },
       () => {
-        console.log(this.state.kitObj);
+        console.log(" CHANGE", this.state.kitObj);
       }
     );
   };
-  handleChangeLoop = (event, ind) => {
-    let kitObj = this.state.kitObj;
-    let serviceData = this.state.serviceData;
-    let errorServiceData = this.state.errorServiceData;
+  // handleChangeLoop = (event, ind) => {
+  //   // let kitObj = this.state.kitObj;
+  //   let serviceData = this.state.serviceData;
+  //   let errorServiceData = this.state.errorServiceData;
 
-    let validName =
-      event.currentTarget.name == "ks_services"
-        ? "service name"
-        : event.currentTarget.name == "ks_discounted_price"
-        ? "discounted price"
-        : "actual price";
+  //   let validName =
+  //     event.currentTarget.name == "ks_services"
+  //       ? "service name"
+  //       : event.currentTarget.name == "ks_discounted_price"
+  //         ? "discounted price"
+  //         : "actual price";
 
-    serviceData.map((item, index) => {
-      if (ind == index) {
-        if (event.currentTarget.name == "ks_services") {
-          item[event.currentTarget.name] = event.currentTarget.value;
-          errorServiceData[ind][event.currentTarget.name] =
-            item[event.currentTarget.name].length == 0
-              ? "Please enter " + validName
-              : "";
-        }
-        // if (!event.currentTarget.value === NaN) {
-        else
-          item[event.currentTarget.name] =
-            !event.currentTarget.value ||
-            !event.currentTarget.value.length ||
-            event.currentTarget.value[event.currentTarget.value.length - 1] ===
-              "."
-              ? event.currentTarget.value || 0
-              : parseFloat(event.currentTarget.value) || 0;
+  //   serviceData.map((item, index) => {
+  //     if (ind == index) {
+  //       if (event.currentTarget.name == "ks_services") {
+  //         item[event.currentTarget.name] = event.currentTarget.value;
+  //         errorServiceData[ind][event.currentTarget.name] =
+  //           item[event.currentTarget.name].length == 0
+  //             ? "Please enter " + validName
+  //             : "";
+  //       }
+  //       // if (!event.currentTarget.value === NaN) {
+  //       else
+  //         item[event.currentTarget.name] =
+  //           !event.currentTarget.value ||
+  //             !event.currentTarget.value.length ||
+  //             event.currentTarget.value[event.currentTarget.value.length - 1] ===
+  //             "."
+  //             ? event.currentTarget.value || 0
+  //             : parseFloat(event.currentTarget.value) || 0;
 
-        var countDot = 0;
-        var stringArray = event.currentTarget.value.split("");
-        stringArray.forEach(function (character) {
-          if (character == ".") {
-            console.log("yesyes");
-            countDot++;
-          }
-        });
-        console.log(countDot);
-        if (countDot > 1) {
-          item[event.currentTarget.name] = item[event.currentTarget.name].slice(
-            0,
-            -1
-          );
-        }
-        if (event.currentTarget.name == "ks_actual_price") {
-          errorServiceData[ind].ks_actual_price =
-            +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
-              ? "Please enter a valid amount"
-              : "";
-          errorServiceData[ind].ks_discounted_price =
-            +item.ks_discounted_price >= +item.ks_actual_price
-              ? "Please enter amount less then actual price"
-              : "";
-        } else if (event.currentTarget.name == "ks_discounted_price") {
-          errorServiceData[ind].ks_discounted_price =
-            +item.ks_discounted_price == 0 ||
-            item.ks_discounted_price.length == 0
-              ? "Please enter a valid amount"
-              : +item.ks_discounted_price >= +item.ks_actual_price
-              ? "Please enter amount less then actual price"
-              : "";
-        }
+  //       var countDot = 0;
+  //       var stringArray = event.currentTarget.value.split("");
+  //       stringArray.forEach(function (character) {
+  //         if (character == ".") {
+  //           console.log("yesyes");
+  //           countDot++;
+  //         }
+  //       });
+  //       console.log(countDot);
+  //       if (countDot > 1) {
+  //         item[event.currentTarget.name] = item[event.currentTarget.name].slice(
+  //           0,
+  //           -1
+  //         );
+  //       }
+  //       if (event.currentTarget.name == "ks_actual_price") {
+  //         errorServiceData[ind].ks_actual_price =
+  //           +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
+  //             ? "Please enter a valid amount"
+  //             : "";
+  //         errorServiceData[ind].ks_discounted_price =
+  //           +item.ks_discounted_price >= +item.ks_actual_price
+  //             ? "Please enter amount less then actual price"
+  //             : "";
+  //       } else if (event.currentTarget.name == "ks_discounted_price") {
+  //         errorServiceData[ind].ks_discounted_price =
+  //           +item.ks_discounted_price == 0 ||
+  //             item.ks_discounted_price.length == 0
+  //             ? "Please enter a valid amount"
+  //             : +item.ks_discounted_price >= +item.ks_actual_price
+  //               ? "Please enter amount less then actual price"
+  //               : "";
+  //       }
 
-        // }
-        // item.item_category_id = foodId;
+  //       // }
+  //       // item.item_category_id = foodId;
 
-        // errorServiceData[ind][event.currentTarget.name] =
-        // item[event.currentTarget.name].length == 0
-        //   ? "Please enter " + validName
-        //   : event.currentTarget.name == "ks_actual_price" &&
-        //     !re.test(event.currentTarget.value)
-        //   ? "Please enter a valid " + validName
-        //   : event.currentTarget.name == "ks_discounted_price"
-        //   ? !re.test(event.currentTarget.value)
-        //     ? "Please enter a valid " + validName
-        //     : +event.currentTarget.value > +item.ks_actual_price
-        //     ? "Please enter amount less then actual price"
-        //     : ""
-        //   : "";
-      }
-    });
-    this.setState(
-      {
-        serviceData,
-        errorServiceData,
-      },
-      () => {
-        console.log(this.state.errorServiceData);
-        console.log(this.state.serviceData);
-        this.checkServiceError();
-      }
-    );
-  };
+  //       // errorServiceData[ind][event.currentTarget.name] =
+  //       // item[event.currentTarget.name].length == 0
+  //       //   ? "Please enter " + validName
+  //       //   : event.currentTarget.name == "ks_actual_price" &&
+  //       //     !re.test(event.currentTarget.value)
+  //       //   ? "Please enter a valid " + validName
+  //       //   : event.currentTarget.name == "ks_discounted_price"
+  //       //   ? !re.test(event.currentTarget.value)
+  //       //     ? "Please enter a valid " + validName
+  //       //     : +event.currentTarget.value > +item.ks_actual_price
+  //       //     ? "Please enter amount less then actual price"
+  //       //     : ""
+  //       //   : "";
+  //     }
+  //   });
+  //   this.setState(
+  //     {
+  //       serviceData,
+  //       errorServiceData,
+  //     },
+  //     () => {
+  //       console.log(this.state.errorServiceData);
+  //       console.log(this.state.serviceData);
+  //       this.checkServiceError();
+  //     }
+  //   );
+  // };
 
   isValid() {
     const { errors, isValid } = validateInput(this.state.kitObj);
@@ -361,61 +398,62 @@ class AddKits extends Component {
     return isValid;
   }
 
-  addCategorySetup() {
-    let obj = {
-      ks_services: "",
-      ks_actual_price: "",
-      ks_discounted_price: "",
-    };
-    let serviceData = this.state.serviceData;
-    let errorServiceData = this.state.errorServiceData;
+  // addCategorySetup() {
+  //   console.log("ADD CATEGORY")
+  //   let obj = {
+  //     ks_services: "",
+  //     ks_actual_price: "",
+  //     ks_discounted_price: "",
+  //   };
+  //   let serviceData = this.state.serviceData;
+  //   let errorServiceData = this.state.errorServiceData;
 
-    serviceData.map((item) => {
-      if (
-        item.ks_actual_price
-          .toString()
-          .charAt(item.ks_actual_price.length - 1) == "."
-      ) {
-        item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
-      }
-      if (
-        item.ks_discounted_price
-          .toString()
-          .charAt(item.ks_discounted_price.length - 1) == "."
-      ) {
-        item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
-      }
+  //   serviceData.map((item) => {
+  //     if (
+  //       item.ks_actual_price
+  //         .toString()
+  //         .charAt(item.ks_actual_price.length - 1) == "."
+  //     ) {
+  //       item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
+  //     }
+  //     if (
+  //       item.ks_discounted_price
+  //         .toString()
+  //         .charAt(item.ks_discounted_price.length - 1) == "."
+  //     ) {
+  //       item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
+  //     }
 
-      return item;
-    });
-    serviceData.push(obj);
-    errorServiceData.push({
-      ks_actual_price: "",
-      ks_discounted_price: "",
-      ks_services: "",
-    });
-    this.setState(
-      {
-        serviceData,
-        errorServiceData,
-      },
-      () => {
-        this.checkServiceError();
-      }
-    );
-  }
-  removeCategorySetup(index) {
-    let serviceData = this.state.serviceData;
-    serviceData.splice(index, 1);
-    this.setState(
-      {
-        serviceData,
-      },
-      () => {
-        this.checkServiceError();
-      }
-    );
-  }
+  //     return item;
+  //   });
+  //   serviceData.push(obj);
+  //   errorServiceData.push({
+  //     ks_actual_price: "",
+  //     ks_discounted_price: "",
+  //     ks_services: "",
+  //   });
+  //   this.setState(
+  //     {
+  //       serviceData,
+  //       errorServiceData,
+  //     },
+  //     () => {
+  //       this.checkServiceError();
+  //     }
+  //   );
+  // }
+  // removeCategorySetup(index) {
+  //   let serviceData = this.state.serviceData;
+  //   serviceData.splice(index, 1);
+  //   this.setState(
+  //     {
+  //       serviceData,
+  //     },
+  //     () => {
+  //       this.checkServiceError();
+  //     }
+  //   );
+  // }
   checkServiceError = () => {
     let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
@@ -441,35 +479,76 @@ class AddKits extends Component {
   };
 
   handleUploadPicture = async (event, name) => {
-    const fileObject = event.target.files[0];
-    console.log();
-    if (fileObject) {
-      this.setState({
-        isUploading: true,
-      });
-      const formData = new FormData();
-      formData.set("u_image", fileObject);
-      console.log("formDataformData", formData);
-
-      const url = constant.SERVER_URL + "elp/uploadkits_image";
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-      const response = await post(url, formData, config);
-      console.log(name, "resultresultresult", response);
-      let kitObj = this.state.kitObj;
-      kitObj.kt_image_url = response.data.data.filepath;
-      this.setState({
-        isUploading: false,
-        kitObj,
-        filename: fileObject.name, 
-      });
-    }
+    // const fileObject = event.target.files[0];
+    console.log(event.target.files, "FILE OBJECT");
+    Object.values(event.target.files)
+    .forEach((fileObject)=>{
+      if (fileObject) {
+        this.setState({
+          isUploading: true,
+        });
+        const formData = new FormData();
+        formData.set("u_image", fileObject);
+        console.log("formDataformData", formData);
+  
+        const url = constant.SERVER_URL + "elp/uploadkits_image";
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        Axios.post(url, formData, config).then((response)=>{
+          console.log(name, "resultresultresult", response);
+          let kitObj = this.state.kitObj;
+          kitObj.kt_image_url = response.data.data.filepath;
+          this.setState({
+            isUploading: false,
+            kitObj,
+            filename: fileObject.name,
+          },()=>console.log("AFTER FILE APPEND",kitObj));
+        }, ( err)=>console.log("ERROR ",err));
+        
+      }
+    })
   };
-
-  render() { 
+  handlePriceMonth = (event, index) => {
+    const { name, value } = event.target;
+    let kitObj = this.state.kitObj;
+    kitObj.kits_price_month[index][name] = value;
+    kitObj.kits_price_month[index].kp_min_range_month = "1";
+    kitObj.kits_price_month[index].kp_max_range_month = "3";
+    this.setState({ kitObj }, () => console.log("CHANGE PRICE MONTH ", kitObj));
+  }
+  handleADDMonths = () => {
+    const ks = {
+      ks_services: "0",
+    }
+    const kp = {
+      kp_min_range_month: '',
+      kp_max_range_month: '',
+      kp_price: '',
+      kp_discount: ''
+    }
+    const price_month= {
+      kp_price: '',
+      kp_discount: ''
+    }
+    let kitObj = this.state.kitObj;
+    kitObj.kits_service_name.push(ks);
+    kitObj.kits_price_month.push(kp);
+    const errorKits_price_month = this.state.errorKits_price_month;
+    errorKits_price_month.push(price_month);
+    this.setState({ kitObj ,errorKits_price_month }, () => console.log("ADDED MONTH", kitObj,errorKits_price_month));
+  }
+  removeADDEDMonths = (index) => {
+    let kitObj = this.state.kitObj;
+    kitObj.kits_service_name[index] = null;
+    kitObj.kits_price_month[index] = null;
+    const errorKits_price_month = this.state.errorKits_price_month;
+    errorKits_price_month[index] = null;
+    this.setState({ kitObj , errorKits_price_month }, () => console.log("ADDED MONTH", kitObj , errorKits_price_month));
+  }
+  render() {
     const { kitObj, errors, errorServiceData } = this.state;
     return (
       <div className="page__wrapper innerpage">
@@ -479,7 +558,7 @@ class AddKits extends Component {
         <div className="profile_layout adminProfessinal addKits pt-4 pb-5">
           <Container>
             <Row>
-              <Col md={4} lg={3} className="pr-1"> 
+              <Col md={4} lg={3} className="pr-1">
                 <div className="adminsidebar">
                   <div className="inner_area">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
@@ -498,12 +577,12 @@ class AddKits extends Component {
               <Col md={8} lg={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP KIT 
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP KIT
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
-                      <Form.Label className="fs20 fw600 col14"> 
-                          Upload  
+                      <Form.Label className="fs20 fw600 col14">
+                        Upload
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
                         <Image src={kitObj.kt_image_url} className="" />{" "}
@@ -512,6 +591,7 @@ class AddKits extends Component {
                         <Form.File
                           id="exampleFormControlFile1"
                           className="inputTyp2"
+                          multiple={true}
                           onChange={(e) =>
                             this.handleUploadPicture(e, "backgroud_img")
                           }
@@ -542,19 +622,19 @@ class AddKits extends Component {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">
-                          Kit Sub-Heading 
+                        Kit Sub-Heading
                       </Form.Label>
                       <Form.Control
                         type="text"
                         className="inputTyp2"
-                        name="kt_name"
-                        value={kitObj.kt_name}
+                        name="kt_subheading"
+                        value={kitObj.kt_subheading}
                         onChange={(e) => this.handleChange(e)}
                         maxLength={150}
                       />
 
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {errors.kt_name}
+                        {errors.kt_subheading}
                       </div>
                     </Form.Group>
 
@@ -562,14 +642,27 @@ class AddKits extends Component {
                       <Form.Label className="fs20 fw600 col14">
                         Kit Description
                       </Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        className="inputTyp2"
-                        name="kt_desc"
-                        value={kitObj.kt_desc}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={200}
-                      />
+                      {(this.props.match.params.id === "0" || this.state.isReloadEditor) && <CKEditor
+                        config={{
+                          height: 500,
+                          maxCharCount: 250,
+                          toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link']
+                        }}
+                        editor={ClassicEditor}
+                        data={kitObj.kt_desc}
+
+                        onReady={editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log('Editor is ready to use!', editor);
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          let kitObj = this.state.kitObj;
+                          kitObj["kt_desc"] = data;
+                          this.setState({ kitObj }, () => console.log("EDITOR CHANGE ", this.state.kitObj.kt_desc))
+                        }}
+
+                      />}
                       <div className="col27 fs14 fw400 mt-2 error">
                         {errors.kt_desc}
                       </div>
@@ -577,129 +670,130 @@ class AddKits extends Component {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">
-                          Kit Overview 
+                        Kit Overview
                       </Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        className="inputTyp2"
-                        name="kt_desc"
-                        value={kitObj.kt_desc}
-                        onChange={(e) => this.handleChange(e)}
-                        maxLength={200}
-                      />
+                      {
+                        (this.props.match.params.id === "0" || this.state.isReloadEditor) &&
+                        <CKEditor
+                          className="inputTyp2"
+                          config={{
+                            height: 500,
+                            maxCharCount: 250,
+                            toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link']
+                          }}
+                          editor={ClassicEditor}
+                          data={kitObj.kt_overview}
+
+                          onReady={editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log('Editor is ready to use!', editor);
+                          }}
+                          onChange={(event, editor) => {
+                            const data = editor.getData();
+                            let kitObj = this.state.kitObj;
+                            kitObj["kt_overview"] = data;
+                            this.setState({ kitObj }, () => console.log("EDITOR CHANGE ", this.state.kitObj.kt_overview))
+                          }}
+                        />
+                      }
+
                       <div className="col27 fs14 fw400 mt-2 error">
-                        {errors.kt_desc}
+                        {errors.kt_overview}
                       </div>
                     </Form.Group>
-                    
-                    <Form.Group className="mb-4">
-                            <Form.Label className="fs20 fw600 col14">
-                              Select range of months
-                            </Form.Label>
-                            {/* <Form.Control type="range" className="inputTyp2" />  */}
-                            <div className="slider">
-                            <Slider
-                                min={0}
-                                max={100}
-                                value={0}    
-                                onChangeStart={this.handleChangeStart}
-                                onChange={this.handleChange}
-                                onChangeComplete={this.handleChangeComplete}
-                              />
-                              <div className='value'></div>
-                            </div>
-                            
-                          </Form.Group>
 
-                    {this.state.serviceData.map((cat, index) => {
+
+                    {kitObj.kits_price_month.map((cat, index) => {
                       return (
-                        <Row>
-                          {/* <Col md={5}> 
-                            <Form.Group className="mt-1 mb-4">
-                              <Form.Label className="fs20 fw600 col14">
-                                Service Name
+                        <>
+                          {
+                            kitObj.kits_service_name.filter((ser_name, indx) => index === indx).map((ser_name, indx) =>
+                              <Form.Group className="mb-4" key={ser_name.ks_services}>
+                                <Form.Label className="fs20 fw600 col14">
+                                  Select range of months
+                                </Form.Label>
+                                <div className="slider">
+                                  <Slider
+
+                                    min={0}
+                                    max={9}
+                                    step={3}
+                                    value={parseInt(ser_name.ks_services)}
+                                    onChange={(e) => { this.handleSlider(e, index) }}
+                                  />
+                                  <div className='value'></div>
+                                </div>
+                              </Form.Group>
+                            )
+                          }
+                          <Row>
+                            <Col md={6}>
+                              <Form.Group className="mt-1 mb-4">
+                                <Form.Label className="fs20 fw600 col14">
+                                  Price
                               </Form.Label>
-                              <Form.Control
-                                className="inputTyp2"
-                                type="text"
-                                name="ks_services"
-                                value={cat.ks_services}
-                                onChange={(e) =>
-                                  this.handleChangeLoop(e, index)
-                                }
-                                maxLength={30}
-                              />
-                              <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData[index].ks_services}
-                              </div>
-                            </Form.Group>
-                          </Col> */}
-                          <Col md={6}>
-                            <Form.Group className="mt-1 mb-4">
-                              <Form.Label className="fs20 fw600 col14">
-                                Price
-                              </Form.Label>
-                              <Form.Control
-                                className="inputTyp2"
-                                type="text"
-                                name="ks_actual_price"
-                                value={cat.ks_actual_price}
-                                onChange={(e) =>
-                                  this.handleChangeLoop(e, index)
-                                }
-                                maxLength={7}
-                              />
-                              <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData[index].ks_actual_price}
-                              </div>
-                            </Form.Group>
-                          </Col>
-                          <Col md={6}>
-                            <Form.Group className="mt-1 mb-4">
-                              <Form.Label className="fs20 fw600 col14">
-                                Discounted Price
-                              </Form.Label>
-                              <Form.Control
-                                type="text"
-                                className="inputTyp2"
-                                name="ks_discounted_price"
-                                value={cat.ks_discounted_price}
-                                onChange={(e) =>
-                                  this.handleChangeLoop(e, index)
-                                }
-                                maxLength={7}
-                              />
-                              <div className="col27 fs14 fw400 mt-2 error">
-                                {errorServiceData[index].ks_discounted_price}
-                              </div>
-                            </Form.Group>
-                          </Col>
-                          {this.state.serviceData.length > 1 ? (
-                            <Col md={1}>
-                              <Image
-                                src={Deleteicon}
-                                alt=""
-                                className="deleteUserset"
-                                onClick={() => this.removeCategorySetup(index)}
-                              />
+                                <Form.Control
+                                  className="inputTyp2"
+                                  type="text"
+                                  name="kp_price"
+                                  value={cat.kp_price}
+                                  onChange={(e) =>
+                                    this.handlePriceMonth(e, index)
+                                  }
+                                  maxLength={7}
+                                />
+                                <div className="col27 fs14 fw400 mt-2 error">
+                                    {this.state.errorKits_price_month[index].kp_price}
+                                    </div>
+                              </Form.Group>
                             </Col>
-                          ) : (
-                            ""
-                          )}
-                        </Row>
+                            <Col md={6}>
+                              <Form.Group className="mt-1 mb-4">
+                                <Form.Label className="fs20 fw600 col14">
+                                  Discounted Price
+                              </Form.Label>
+                                <Form.Control
+                                  type="text"
+                                  className="inputTyp2"
+                                  name="kp_discount"
+                                  value={cat.kp_discount}
+                                  onChange={(e) =>
+                                    this.handlePriceMonth(e, index)
+                                  }
+                                  maxLength={7}
+                                />
+                                <div className="col27 fs14 fw400 mt-2 error">
+                                      {this.state.errorKits_price_month[index].kp_discount}
+                                    </div>
+                              </Form.Group>
+                            </Col>
+                            {kitObj.kits_price_month.length > 1 ? (
+                              <Col md={1}>
+                                <Image
+                                  src={Deleteicon}
+                                  alt=""
+                                  className="deleteUserset"
+                                  onClick={() => this.removeADDEDMonths(index)}
+                                />
+                              </Col>
+                            ) : (
+                                ""
+                              )}
+                          </Row>
+                        </>
                       );
                     })}
                     <div className="position-relative mb-2">
                       <Button
-                        variant="btnTypAdd" 
+                        variant="btnTypAdd"
                         type="button"
                         disabled={!this.state.serviceShow}
-                        onClick={() => this.addCategorySetup()}
+                        onClick={() => this.handleADDMonths()}
                       >
-                        <span>
+                        <span onClick={() => this.handleADDMonths()}>
                           <i className="fa fa-plus"></i>
                         </span>{" "}
-                        Add Services 
+                        Add Months
                       </Button>
                     </div>
 

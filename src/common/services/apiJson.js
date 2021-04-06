@@ -1727,12 +1727,22 @@ export default {
       kt_desc: "",
       kt_image_url: "",
       kt_price: "",
+      kt_overview: "",
+      kt_subheading:'',
       kits_service_name: [
         {
           ks_services: "",
-          ks_actual_price: "",
-          ks_discounted_price: "",
+          // ks_actual_price: "",
+          // ks_discounted_price: "",
         },
+      ],
+      kits_price_month: [
+        {
+          kp_min_range_month: '',
+          kp_max_range_month: '',
+          kp_price: '',
+          kp_discount: ''
+        }
       ],
     },
     showResultMessage: false,

@@ -3795,10 +3795,7 @@ kt_status: "1" */}
                                     <strong className="fw600 fs15">
                                       Description:
                                     </strong>{" "}
-                                    <span className="fs15">
-                                      {item.kt_desc}
-                                      {/* <a>Read more...</a> */}
-                                    </span>
+                                    <span className="fs15" dangerouslySetInnerHTML={{__html : item.kt_desc}}/>
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">

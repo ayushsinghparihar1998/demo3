@@ -22,6 +22,20 @@ export default {
     required: "Please enter a valid name.",
     // alphaOnly: "Please enter a valid screen name.",
   },
+  kt_overview : {
+    required: "Please enter kit overview.",
+  },
+  kt_subheading:{
+    required: "Please enter kit sub-heading.",
+  },
+  kits_price_month:{
+    kp_price:{
+      required: "Please enter kit price."
+    },
+    kp_discount:{
+      required: "Please enter kit discount."
+    }
+  },
   // : "",
   // : "",
   // kt_image_url: "",
