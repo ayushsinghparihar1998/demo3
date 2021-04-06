@@ -994,7 +994,7 @@
         }
       }
       .borderRight {
-        border-right: solid 1px $col145;
+        // border-right: solid 1px $col145; 
         margin-bottom: 10px;
         &:last-child {
           border-right: none;
@@ -2879,6 +2879,30 @@
                           }
                       }
                   }
+              }
+              .slick-slider {
+                  .slick-prev {
+                      z-index: 9;
+                      left: -15px;
+                      background: #fff;
+                      border-radius: 50%;
+                      padding: 0 0;
+                  }
+                  .slick-next {
+                      z-index: 9; 
+                      right: -4px; 
+                      background: #fff;
+                      border-radius: 50%;  
+                      padding: 0 0; 
+                  }
+              }
+              .slick-prev, .slick-next {
+                 &:before {
+                    color: $col10;
+                    opacity: 1;
+                    font-size: 32px;
+                    z-index: 9999;
+                 }
               }
           }
           .overViews {

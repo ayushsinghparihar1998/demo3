@@ -257,9 +257,9 @@ class ELPRoute extends Component {
           <PublicRoute path="/mentalQa" component={MentalQa} />
           <PublicRoute path="/userPurchasingHistory" component={UserPurchasingHistory} />  
 
-          <PublicRoute
+          <PublicRoute   
             path="/professionalBlogList"
-            component={ProfessionalBlogList}
+            component={ProfessionalBlogList} 
           />
           <PublicRoute path="/blogUser" component={BlogUser} />
           {/* <PublicRoute path="/adminBlogListing" component={AdminBlogListing} />
@@ -272,7 +272,7 @@ class ELPRoute extends Component {
             path="/subscriptionDocument"
             component={SubscriptionDocument}
           />
-          <Route
+          <Route 
             path="/starttest/:id"
             component={MentalhealthQa} 
           />

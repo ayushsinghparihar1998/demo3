@@ -807,7 +807,8 @@ img {
 }
 
 .bannerLinks {
-    position: absolute; 
+    position: relative; 
+    top: 30px;
     background-image: url('../images/links.png'); 
     width: 100%;
     background-repeat: no-repeat;
@@ -817,10 +818,11 @@ img {
     justify-content: center;
     padding-left: 10px; 
     max-width: 275px;
-    padding-top: 5px;  
+    padding-top: 5px; 
+    z-index: 9;  
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1400px) {  
   .main_baner {
     .header2banner {
       & > img {
@@ -839,7 +841,7 @@ img {
   }
 
   .mj_nav {
-    .navbar-light {
+    .navbar-light {  
       .navbar-nav {
         .userprofiles.menus {
           .profile_icon {
@@ -853,6 +855,12 @@ img {
   }
 }
 
+@media (min-width: 1380px) {       
+   .bannerLinks {
+       position: absolute; 
+   }
+}
+
 /* media screen start */
 @media (min-width: 1200px) {
   .Discussanything {
@@ -860,7 +868,7 @@ img {
       // max-width: 1280px;
     }
   }
-  .subscribe_here2 {
+  .subscribe_here2 { 
     .subscribe_left {
       padding-left: 38px;
       padding-right: 0;
@@ -868,7 +876,7 @@ img {
     }
   }
   .bannerLinks {
-    top: 40px; 
+    top: 70px; 
   }
 }
 @media (max-width: 1200px) {

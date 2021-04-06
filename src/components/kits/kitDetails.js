@@ -165,7 +165,7 @@ class KitDetails extends Component {
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>    
 
                             <div className="col64 fs24 fw300"><strong className="fw600">
                                 <span className="mr-3 fs20 fw400 col14">
@@ -173,7 +173,7 @@ class KitDetails extends Component {
                                 </span> 
                                 <i className="fa fa-inr"></i> 1630</strong> <span className="fs20">/ month</span>
                             </div> 
-                            
+
                             <div className="byBtnmain">   
                                 <Button type="button" className="btnTyp5 byBtns">Buy Now <span><Image src={RightArrow2} /></span></Button>
 
