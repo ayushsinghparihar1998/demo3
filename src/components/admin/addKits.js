@@ -74,7 +74,8 @@ class AddKits extends Component {
       ],
       errorKits_price_month: [{
         kp_price: '',
-        kp_discount: ''
+        kp_discount: '',
+        kp_max_range_month: ''
       }],
       count: 10,
       offset: 1,
@@ -89,6 +90,7 @@ class AddKits extends Component {
 
       },
       serviceShow: false,
+      customError: false
     };
     this.checkServiceError = this.checkServiceError.bind(this);
   }
@@ -110,6 +112,7 @@ class AddKits extends Component {
       console.log("result", result, result.data.data.kits_details_listing[0]);
       let kitObj = {};
       let serviceData = {};
+      let errorKits_price_month = [];
       let errorServiceData = [];
       let kits_price_month = {};
       if (result && result.status === 200) {
@@ -119,6 +122,9 @@ class AddKits extends Component {
             : [];
         kitObj.kits_price_month = kitObj.month_array;
         kitObj.kits_service_name = this.state.kitObj.kits_service_name;
+        kitObj.month_array.forEach((item) => {
+          errorKits_price_month.push(this.state.errorKits_price_month[0]);
+        })
         // serviceData =
         //   result && result.data && result.data.data
         //     ? result.data.data.kits_details_listing[0].kits_services
@@ -138,6 +144,7 @@ class AddKits extends Component {
       this.setState(
         {
           kitObj,
+          errorKits_price_month,
           // serviceData,
           // errorServiceData,
           isReloadEditor: true
@@ -153,22 +160,41 @@ class AddKits extends Component {
 
   handleSubmit = () => {
     let kitObj = this.state.kitObj;
-    const errorKits_price_month = this.state.errorKits_price_month;
+    let errorCurrent = this.state.customError;
+    let test = [];
     kitObj.kits_price_month.forEach((month_price, index) => {
-      console.log("month_price.kp_price", month_price.kp_price)
-      console.log("errors.kits_price_month[index].kp_price", errorKits_price_month[index])
-      console.log("Validator.isEmpty(month_price.kp_price)", Validator.isEmpty(month_price.kp_price))
-      if (Validator.isEmpty(month_price.kp_price) || month_price.kp_price.trim() === "") {
-        errorKits_price_month[index].kp_price = ValidationMessages.kits_price_month.kp_price.required;
+      let k = {
+        kp_price: '',
+        kp_discount: '',
+        kp_max_range_month: ''
+      };
+      if (Validator.isEmpty(month_price.kp_price)) {
+        k.kp_price = ValidationMessages.kits_price_month.kp_price.required;
+        errorCurrent = true;
       }
-      if (Validator.isEmpty(month_price.kp_discount) || month_price.kp_discount.trim() === "") {
-        errorKits_price_month[index].kp_discount = ValidationMessages.kits_price_month.kp_discount.required;
+      else errorCurrent = false;
+      if (Validator.isEmpty(month_price.kp_discount)) {
+        k.kp_discount = ValidationMessages.kits_price_month.kp_discount.required;
+        errorCurrent = true;
       }
+      else errorCurrent = false;
+      if (parseInt(month_price.kp_price) <= parseInt(month_price.kp_discount)) {
+        k.kp_price = ValidationMessages.kits_price_month.kp_price.balance;
+        k.kp_discount = ValidationMessages.kits_price_month.kp_discount.balance;
+        errorCurrent = true;
+      }
+      else errorCurrent = false;
+      if (parseInt(month_price.kp_max_range_month) === 0) {
+        k.kp_max_range_month = ValidationMessages.kits_price_month.kp_max_range_month.required;
+        errorCurrent = true;
+      }
+      else errorCurrent = false;
+      test.push(k);
     })
-    this.setState({ errorKits_price_month }, () => console.log("ERROR KITS PRICE MONTH", errorKits_price_month));
+    this.setState({ errorKits_price_month: test, customError: errorCurrent }, () => console.log("ERROR KITS PRICE MONTH", test, kitObj.kits_price_month));
     console.log("DATA GOT ", this.state.kitObj);
-    console.log(this.isValid(), "IS VALID ");
-    if (this.isValid()) {//this.isValid() && this.state.serviceShow
+    console.log(this.isValid(), "IS VALID ", !errorCurrent);
+    if (this.isValid() && !errorCurrent) {//this.isValid() && this.state.serviceShow
       this.setState({
         showLoader: true,
         kitObj,
@@ -313,13 +339,10 @@ class AddKits extends Component {
     let kitObj = this.state.kitObj;
     kitObj.kits_price_month[index][name] = value;
     kitObj.kits_price_month[index].kp_min_range_month = "1";
-    kitObj.kits_price_month[index].kp_max_range_month = "3";
     this.setState({ kitObj }, () => console.log("CHANGE PRICE MONTH ", kitObj));
   }
   handleADDMonths = () => {
-    const ks = {
-      ks_services: "0",
-    }
+
     const kp = {
       kp_min_range_month: '',
       kp_max_range_month: '',
@@ -331,7 +354,7 @@ class AddKits extends Component {
       kp_discount: ''
     }
     let kitObj = this.state.kitObj;
-    kitObj.kits_service_name.push(ks);
+    // kitObj.kits_service_name.push(ks);
     kitObj.kits_price_month.push(kp);
     const errorKits_price_month = this.state.errorKits_price_month;
     errorKits_price_month.push(price_month);
@@ -499,7 +522,6 @@ class AddKits extends Component {
                       </div>
                     </Form.Group>
 
-                    {console.log("kitObj.kits_service_name", kitObj.kits_service_name)}
                     {kitObj.kits_price_month && kitObj.kits_price_month.map((cat, index) => {
                       return (
                         <>
@@ -516,7 +538,9 @@ class AddKits extends Component {
                                 value={parseInt(cat.kp_max_range_month)}
                                 onChange={(e) => { this.handleSlider(e, index) }}
                               />
-                              <div className='value'></div>
+                              <div className="col27 fs14 fw400 mt-2 error">
+                                {this.state.errorKits_price_month[index].kp_max_range_month}
+                              </div>
                             </div>
                           </Form.Group>
                           <Row>
@@ -530,8 +554,9 @@ class AddKits extends Component {
                                   type="text"
                                   name="kp_price"
                                   value={cat.kp_price}
-                                  onChange={(e) =>
+                                  onChange={(e) => {
                                     this.handlePriceMonth(e, index)
+                                  }
                                   }
                                   maxLength={7}
                                 />
@@ -550,8 +575,9 @@ class AddKits extends Component {
                                   className="inputTyp2"
                                   name="kp_discount"
                                   value={cat.kp_discount}
-                                  onChange={(e) =>
+                                  onChange={(e) => {
                                     this.handlePriceMonth(e, index)
+                                  }
                                   }
                                   maxLength={7}
                                 />
@@ -566,7 +592,7 @@ class AddKits extends Component {
                                   src={Deleteicon}
                                   alt=""
                                   className="deleteUserset"
-                                  onClick={() => this.removeADDEDMonths(index)}
+                                  onClick={() => { this.removeADDEDMonths(index) }}
                                 />
                               </Col>
                             ) : (
@@ -581,9 +607,9 @@ class AddKits extends Component {
                         variant="btnTypAdd"
                         type="button"
                         disabled={!this.state.serviceShow}
-                        onClick={() => this.handleADDMonths()}
+                        onClick={() => { this.handleADDMonths() }}
                       >
-                        <span onClick={() => this.handleADDMonths()}>
+                        <span onClick={() => { this.handleADDMonths() }}>
                           <i className="fa fa-plus"></i>
                         </span>{" "}
                         Add Months
@@ -593,7 +619,7 @@ class AddKits extends Component {
                     <Button
                       variant="primary btnTyp5 mt-4"
                       type="button"
-                      onClick={() => this.handleSubmit()}
+                      onClick={() => { this.handleSubmit() }}
                     >
                       {this.props.match.params.id > 0 ? "UPDATE" : "SUBMIT"}
                     </Button>

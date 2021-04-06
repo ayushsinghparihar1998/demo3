@@ -29,11 +29,16 @@ export default {
     required: "Please enter kit sub-heading.",
   },
   kits_price_month:{
+    kp_max_range_month : {
+      required: "Please Select Minimun 3 Months."
+    },
     kp_price:{
-      required: "Please enter kit price."
+      required: "Please enter kit price.",
+      balance : 'Price should be greater than Discount Price',
     },
     kp_discount:{
-      required: "Please enter kit discount."
+      required: "Please enter kit discount.",
+      balance : 'Discount price should be lower than of original.'
     }
   },
   // : "",

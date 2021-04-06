@@ -18,7 +18,7 @@ import Suser from "../../assets/images/s_images.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Visibilitys from "../../assets/images/visibilitys.png";
 import VideoIcon from "../../assets/images/videoIcon.png";
-// import moment from "moment";
+// import moment from "moment"; 
 import {
   Button,
   Table,
@@ -3791,30 +3791,33 @@ kt_name: "latest new"
 kt_price: "2000"
 kt_status: "1" */}
 
-                                  <div className="fs16 fw400 col14 pb-1 e_detai">
-                                    <strong className="fw600 fs15">
+                                  <div className="fs16 fw400 col14 pb-1 e_detai mb-1">
+                                    {/* <strong className="fw600 fs15">
                                       Description:
                                     </strong>{" "}
                                     <span className="fs15" dangerouslySetInnerHTML={{__html : item.kt_desc}}/>
+                                    </strong>{" "} */}
+                                    <span className="fs15" dangerouslySetInnerHTML={{__html : item.kt_desc}}/>
+                                    {/* <span className="fs15" >{item.kt_desc}</span> */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1">
-                                    <div className="">
-                                      <div className="text-left">
-                                        <span className="fw500 fs15 col29 col14">
-                                          Services:
-                                        </span>
-                                      </div>
-                                    </div>
+                                    
                                     <Row>
                                       {" "}
-                                      {item.kits_services.map((val, ind) => {
+                                      {item.month_array.map((val, ind) => {
+                                        console.log("SERVICE",item)
                                         return (
                                           <>
                                             <Col
-                                              md="3"
+                                              md="6"
                                               className="borderRight pr-2"
                                             >
+                                                <div className="text-left">
+                                                  <span className="fw500 fs16 col29 col14 mt-1">
+                                                      {val.kp_max_range_month} Months: 
+                                                  </span>
+                                                </div> 
                                               <div className="d-flex justify-content-between">
                                                 {/* <div>
                                                   <span className="fw400 fs14 col29 col14">
@@ -3824,19 +3827,19 @@ kt_status: "1" */}
                                                 </div> */}
                                                 <div>
                                                   <span className="fs13">
-                                                    {val.ks_services}
-                                                  </span>{" "}
-                                                  <br />
-                                                  <span className="fs13">
-                                                    Price:{" "}
-                                                    <del>
-                                                      Rs.{val.ks_actual_price}
-                                                    </del>
-                                                    <strong className="fw500 col29 pl-1">
-                                                      Rs.
+                                                    {/* {val.ks_services} */}
+                                                    {/* 3 Months: */}
+                                                  </span>{" "} 
+                                                  <span className="fs15 fw400 col14">    
+                                                    Price:{" "}  
+                                                      {/* Rs.{val.ks_actual_price} */}
+                                                       {val.kp_price}/- <span className="ml-1 mr-1">|</span> 
+                                                    <strong className="fw400 pl-1"> 
+                                                      {/* Rs. 
                                                       {
                                                         val.ks_discounted_price
-                                                      }{" "}
+                                                      }{" "} */}
+                                                      Discounted Price: {val.kp_discount}/- 
                                                     </strong>
                                                   </span>
                                                 </div>

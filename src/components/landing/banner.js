@@ -97,11 +97,13 @@ class Banner extends Component {
       <Container>
         <Row>
           <Col md={6}>  
-            <div className="bannerLinks"> 
+            <div className="bannerLinks">  
                 <div>  
                     <div className="fs14 fw600 col18 mb-1">Participate in Life Chapter Series</div>
-                    <div className="fw400 fs12 col18"><a>Click to know more and register!! 
-                    <Image src={rightArrow} alt="" className="rArrow ml-2" /></a></div> 
+                    <div className="fw400 fs12 col18">
+                        <a className="col18 pointer" href="https://docs.google.com/forms/d/e/1FAIpQLSdtvtZCFBEssrybcBvX5XogqLbOMYkfrwhZcuAmq8_drHkndA/viewform" target="_blank">Click to know more and register!! 
+                        <Image src={rightArrow} alt="" className="rArrow ml-2" />
+                         </a></div> 
                 </div> 
             </div> 
             <Carousel className="baner_carousel">
