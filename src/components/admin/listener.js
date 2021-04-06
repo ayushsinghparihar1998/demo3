@@ -3794,17 +3794,18 @@ kt_status: "1" */}
                                   <div className="fs16 fw400 col14 pb-1 e_detai mb-1">
                                     {/* <strong className="fw600 fs15">
                                       Description:
+                                    </strong>{" "}
+                                    <span className="fs15" dangerouslySetInnerHTML={{__html : item.kt_desc}}/>
                                     </strong>{" "} */}
-                                    <span className="fs15">
-                                      {item.kt_desc}
-                                      {/* <a>Read more...</a> */}
-                                    </span>
+                                    <span className="fs15" dangerouslySetInnerHTML={{__html : item.kt_desc}}/>
+                                    {/* <span className="fs15" >{item.kt_desc}</span> */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1"> 
                                     <Row> 
                                       {" "}
-                                      {item.kits_services.map((val, ind) => {
+                                      {item.month_array.map((val, ind) => {
+                                        console.log("SERVICE",item)
                                         return (
                                           <>
                                             <Col
@@ -3813,7 +3814,7 @@ kt_status: "1" */}
                                             >
                                                 <div className="text-left">
                                                   <span className="fw500 fs16 col29 col14 mt-1">
-                                                      3 Months: 
+                                                      {val.kp_max_range_month} Months: 
                                                   </span>
                                                 </div> 
                                               <div className="d-flex justify-content-between">
@@ -3831,13 +3832,13 @@ kt_status: "1" */}
                                                   <span className="fs15 fw400 col14">    
                                                     Price:{" "}  
                                                       {/* Rs.{val.ks_actual_price} */}
-                                                       520/- <span className="ml-1 mr-1">|</span> 
+                                                       {val.kp_price}/- <span className="ml-1 mr-1">|</span> 
                                                     <strong className="fw400 pl-1"> 
                                                       {/* Rs. 
                                                       {
                                                         val.ks_discounted_price
                                                       }{" "} */}
-                                                      Discounted Price: 420/- 
+                                                      Discounted Price: {val.kp_discount}/- 
                                                     </strong>
                                                   </span>
                                                 </div>

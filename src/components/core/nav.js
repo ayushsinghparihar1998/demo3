@@ -422,7 +422,7 @@ class NavBar extends Component {
   dropDownRender = (strategy) => {
     //SOME CHECKS 
     const customerInfo = (getLocalStorage("customerInfo")?.u_role_id && getLocalStorage("customerInfo")?.u_role_id !== constant.roles.CORPORATE_CUSTOMER)
-    const userInfo = ( getLocalStorage("userInfo") && getLocalStorage("userInfo")?.u_role_id !== constant.roles.LISTENER)
+    const userInfo = (getLocalStorage("userInfo") && getLocalStorage("userInfo")?.u_role_id !== constant.roles.LISTENER)
     const sumedUpCheck = strategy || customerInfo || userInfo;
     /**
      * Adds to Header Section AND Items Refer to Drop Down 
@@ -454,7 +454,8 @@ class NavBar extends Component {
         items: [
           { content: "SUBSCRIPTION PLANS", option: "/planlistholistic" },
           { content: "BLOGS", option: "/blogs/ALL" },
-          { content: "ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC" }
+          { content: "ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC" },
+          { content: 'KITS', option: '/kitListings' }
         ]
       },
       {
@@ -462,7 +463,7 @@ class NavBar extends Component {
         id: "basic-nav-dropdown5",
         items: [
           sumedUpCheck
-          ? { content: "DONATE TIME", option: "/coming-soon" } : {},
+            ? { content: "DONATE TIME", option: "/coming-soon" } : {},
           { content: "DONATE MONEY", option: "/campaign" }
         ]
       },
@@ -679,7 +680,7 @@ class NavBar extends Component {
                                     className="pointer"
                                   />
                                 </span>
-                                <div className="dropdownnotifications"> 
+                                <div className="dropdownnotifications">
                                   {this.state.notificationData.length === 0 && (
                                     <>
                                       <ul className="notes">
@@ -687,8 +688,8 @@ class NavBar extends Component {
                                           <Col md={9}>
                                             {/* {console.log(data)} */}
                                             <div className="col10 fs17 fw400"></div>
-                                            <div className="fs15 col94 fw400 text-capitalize"> 
-                                              No notification received yet. 
+                                            <div className="fs15 col94 fw400 text-capitalize">
+                                              No notification received yet.
                                         </div>
                                           </Col>
                                           <Col md={3}>

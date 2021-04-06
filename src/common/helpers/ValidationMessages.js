@@ -22,6 +22,25 @@ export default {
     required: "Please enter a valid name.",
     // alphaOnly: "Please enter a valid screen name.",
   },
+  kt_overview : {
+    required: "Please enter kit overview.",
+  },
+  kt_subheading:{
+    required: "Please enter kit sub-heading.",
+  },
+  kits_price_month:{
+    kp_max_range_month : {
+      required: "Please Select Minimun 3 Months."
+    },
+    kp_price:{
+      required: "Please enter kit price.",
+      balance : 'Price should be greater than Discount Price',
+    },
+    kp_discount:{
+      required: "Please enter kit discount.",
+      balance : 'Discount price should be lower than of original.'
+    }
+  },
   // : "",
   // : "",
   // kt_image_url: "",
