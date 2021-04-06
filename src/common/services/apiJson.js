@@ -1732,8 +1732,8 @@ export default {
       kits_service_name: [
         {
           ks_services: "",
-          // ks_actual_price: "",
-          // ks_discounted_price: "",
+          ks_actual_price: "",
+          ks_discounted_price: "",
         },
       ],
       kits_price_month: [

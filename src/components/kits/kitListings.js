@@ -50,7 +50,8 @@ const KitListings = (props) => {
                                             <div className="fs16 col14 fw400 mb-1" dangerouslySetInnerHTML={{__html : kitList.kt_desc}}/>
                                             <div className="d-flex mb-2">
                                                 <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                                <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i>{kitList.kt_price}</span>
+                                                <span className=""><i class="fa fa-inr" aria-hidden="true"></i>{kitList.month_array.length && kitList.month_array[0].kp_price}</span>
+                                                <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i>{kitList.month_array.length && kitList.month_array[0].kp_discount}</span>
                                             </div>
                                         </div>
                                     </Col>

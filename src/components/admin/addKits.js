@@ -1,27 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
 import {
   Button,
-  NavDropdown,
-  Carousel,
   Container,
   Row,
   Col,
   Image,
-  Form,
-  Tabs,
-  Tab,
+  Form
 } from "react-bootstrap";
 import NavBar from "../core/navAdmin";
 import Footer from "../core/footer";
 import { Link } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import validateInput from "../../common/validations/validationAddKit";
-import Axios, { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
+import Axios from "axios";
 import Deleteicon from "../../assets/images/delete_icon.svg";
-import Womanvideo from "../../assets/images/womanvideo.jpg";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import constant from "../../constant";
@@ -52,6 +44,8 @@ class AddKits extends Component {
         kits_service_name: [
           {
             ks_services: "0",
+            ks_actual_price: "",
+            ks_discounted_price: "",
           },
         ],
         kits_price_month: [
@@ -92,7 +86,7 @@ class AddKits extends Component {
         // kt_price: "",
         kt_overview: '',
         kt_subheading: '',
-        
+
       },
       serviceShow: false,
     };
@@ -113,29 +107,30 @@ class AddKits extends Component {
     };
 
     ELPViewApiService("superadminget_kitsdetails", data).then((result) => {
-      console.log("result", result.data.data.kits_details_listing[0]);
+      console.log("result", result, result.data.data.kits_details_listing[0]);
       let kitObj = {};
       let serviceData = {};
       let errorServiceData = [];
-
+      let kits_price_month = {};
       if (result && result.status === 200) {
         kitObj =
           result && result.data && result.data.data
             ? result.data.data.kits_details_listing[0]
             : [];
+        kitObj.kits_price_month = kitObj.month_array;
+        kitObj.kits_service_name = this.state.kitObj.kits_service_name;
+        // serviceData =
+        //   result && result.data && result.data.data
+        //     ? result.data.data.kits_details_listing[0].kits_services
+        //     : [];
 
-        serviceData =
-          result && result.data && result.data.data
-            ? result.data.data.kits_details_listing[0].kits_services
-            : [];
-
-        result.data.data.kits_details_listing[0].kits_services.map((item) => {
-          errorServiceData.push({
-            ks_actual_price: "",
-            ks_discounted_price: "",
-            ks_services: "",
-          });
-        });
+        // result.data.data.kits_details_listing[0].kits_services.map((item) => {
+        //   errorServiceData.push({
+        //     ks_actual_price: "",
+        //     ks_discounted_price: "",
+        //     ks_services: "",
+        //   });
+        // });
         kitObj.kits_service_name = serviceData;
         delete kitObj.kits_services;
       }
@@ -143,8 +138,8 @@ class AddKits extends Component {
       this.setState(
         {
           kitObj,
-          serviceData,
-          errorServiceData,
+          // serviceData,
+          // errorServiceData,
           isReloadEditor: true
         },
         () => {
@@ -158,59 +153,11 @@ class AddKits extends Component {
 
   handleSubmit = () => {
     let kitObj = this.state.kitObj;
-    // let serviceData = this.state.serviceData;
-    // let errorServiceData = this.state.errorServiceData;
-
-    // kitObj.kits_service_name = serviceData;
-    // delete kitObj.kits_services;
-    // delete kitObj.kt_datetime;
-    // delete kitObj.kt_price;
-    // delete kitObj.kt_status;
-    // console.log("SERVICE NAME ", kitObj, errorServiceData);
-    // kitObj.kits_service_name.map((item, ind) => {
-    //   errorServiceData[ind].ks_services =
-    //     item.ks_services.length == 0 ? "Please enter service name" : "";
-    //   errorServiceData[ind].ks_actual_price =
-    //     +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
-    //       ? "Please enter actual price"
-    //       : "";
-    //   errorServiceData[ind].ks_discounted_price =
-    //     +item.ks_discounted_price == 0 || item.ks_discounted_price.length == 0
-    //       ? "Please enter discounted price"
-    //       : +item.ks_discounted_price >= +item.ks_actual_price
-    //         ? "Please enter amount less then actual price"
-    //         : "";
-    //   console.log("SERVICE NAME ", kitObj, errorServiceData);
-    //   if (
-    //     item.ks_actual_price
-    //       .toString()
-    //       .charAt(item.ks_actual_price.length - 1) == "."
-    //   ) {
-    //     item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
-    //   }
-    //   if (
-    //     item.ks_discounted_price
-    //       .toString()
-    //       .charAt(item.ks_discounted_price.length - 1) == "."
-    //   ) {
-    //     item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
-    //   }
-    //   console.log("SERVICE NAME ", kitObj, errorServiceData);
-    // });
-    // this.setState(
-    //   {
-    //     errorServiceData,
-    //     // kitObj
-    //   },
-    //   () => {
-    //     console.log(this.state.errorServiceData);
-    //   }
-    // );
     const errorKits_price_month = this.state.errorKits_price_month;
-    kitObj.kits_price_month.forEach((month_price,index)=>{
-      console.log("month_price.kp_price",month_price.kp_price)
-      console.log("errors.kits_price_month[index].kp_price" , errorKits_price_month[index])
-      console.log("Validator.isEmpty(month_price.kp_price)",Validator.isEmpty(month_price.kp_price))
+    kitObj.kits_price_month.forEach((month_price, index) => {
+      console.log("month_price.kp_price", month_price.kp_price)
+      console.log("errors.kits_price_month[index].kp_price", errorKits_price_month[index])
+      console.log("Validator.isEmpty(month_price.kp_price)", Validator.isEmpty(month_price.kp_price))
       if (Validator.isEmpty(month_price.kp_price) || month_price.kp_price.trim() === "") {
         errorKits_price_month[index].kp_price = ValidationMessages.kits_price_month.kp_price.required;
       }
@@ -218,10 +165,10 @@ class AddKits extends Component {
         errorKits_price_month[index].kp_discount = ValidationMessages.kits_price_month.kp_discount.required;
       }
     })
-    this.setState({errorKits_price_month},()=>console.log("ERROR KITS PRICE MONTH",errorKits_price_month));
+    this.setState({ errorKits_price_month }, () => console.log("ERROR KITS PRICE MONTH", errorKits_price_month));
     console.log("DATA GOT ", this.state.kitObj);
     console.log(this.isValid(), "IS VALID ");
-    if (this.isValid() ) {//this.isValid() && this.state.serviceShow
+    if (this.isValid()) {//this.isValid() && this.state.serviceShow
       this.setState({
         showLoader: true,
         kitObj,
@@ -258,7 +205,7 @@ class AddKits extends Component {
           this.setState({
             showLoader: false,
           });
-      });
+        });
     } else {
       this.setState({
         showLoader: false,
@@ -268,7 +215,7 @@ class AddKits extends Component {
   handleSlider = (event, index) => {
     console.log("Handle Change", event);
     let kitObj = this.state.kitObj;
-    kitObj.kits_service_name[index].ks_services = `${event} Months`;
+    kitObj.kits_price_month[index].kp_max_range_month = `${event}`;
     this.setState(
       {
         sliderChange: event,
@@ -293,101 +240,7 @@ class AddKits extends Component {
       }
     );
   };
-  // handleChangeLoop = (event, ind) => {
-  //   // let kitObj = this.state.kitObj;
-  //   let serviceData = this.state.serviceData;
-  //   let errorServiceData = this.state.errorServiceData;
 
-  //   let validName =
-  //     event.currentTarget.name == "ks_services"
-  //       ? "service name"
-  //       : event.currentTarget.name == "ks_discounted_price"
-  //         ? "discounted price"
-  //         : "actual price";
-
-  //   serviceData.map((item, index) => {
-  //     if (ind == index) {
-  //       if (event.currentTarget.name == "ks_services") {
-  //         item[event.currentTarget.name] = event.currentTarget.value;
-  //         errorServiceData[ind][event.currentTarget.name] =
-  //           item[event.currentTarget.name].length == 0
-  //             ? "Please enter " + validName
-  //             : "";
-  //       }
-  //       // if (!event.currentTarget.value === NaN) {
-  //       else
-  //         item[event.currentTarget.name] =
-  //           !event.currentTarget.value ||
-  //             !event.currentTarget.value.length ||
-  //             event.currentTarget.value[event.currentTarget.value.length - 1] ===
-  //             "."
-  //             ? event.currentTarget.value || 0
-  //             : parseFloat(event.currentTarget.value) || 0;
-
-  //       var countDot = 0;
-  //       var stringArray = event.currentTarget.value.split("");
-  //       stringArray.forEach(function (character) {
-  //         if (character == ".") {
-  //           console.log("yesyes");
-  //           countDot++;
-  //         }
-  //       });
-  //       console.log(countDot);
-  //       if (countDot > 1) {
-  //         item[event.currentTarget.name] = item[event.currentTarget.name].slice(
-  //           0,
-  //           -1
-  //         );
-  //       }
-  //       if (event.currentTarget.name == "ks_actual_price") {
-  //         errorServiceData[ind].ks_actual_price =
-  //           +item.ks_actual_price == 0 || item.ks_actual_price.length == 0
-  //             ? "Please enter a valid amount"
-  //             : "";
-  //         errorServiceData[ind].ks_discounted_price =
-  //           +item.ks_discounted_price >= +item.ks_actual_price
-  //             ? "Please enter amount less then actual price"
-  //             : "";
-  //       } else if (event.currentTarget.name == "ks_discounted_price") {
-  //         errorServiceData[ind].ks_discounted_price =
-  //           +item.ks_discounted_price == 0 ||
-  //             item.ks_discounted_price.length == 0
-  //             ? "Please enter a valid amount"
-  //             : +item.ks_discounted_price >= +item.ks_actual_price
-  //               ? "Please enter amount less then actual price"
-  //               : "";
-  //       }
-
-  //       // }
-  //       // item.item_category_id = foodId;
-
-  //       // errorServiceData[ind][event.currentTarget.name] =
-  //       // item[event.currentTarget.name].length == 0
-  //       //   ? "Please enter " + validName
-  //       //   : event.currentTarget.name == "ks_actual_price" &&
-  //       //     !re.test(event.currentTarget.value)
-  //       //   ? "Please enter a valid " + validName
-  //       //   : event.currentTarget.name == "ks_discounted_price"
-  //       //   ? !re.test(event.currentTarget.value)
-  //       //     ? "Please enter a valid " + validName
-  //       //     : +event.currentTarget.value > +item.ks_actual_price
-  //       //     ? "Please enter amount less then actual price"
-  //       //     : ""
-  //       //   : "";
-  //     }
-  //   });
-  //   this.setState(
-  //     {
-  //       serviceData,
-  //       errorServiceData,
-  //     },
-  //     () => {
-  //       console.log(this.state.errorServiceData);
-  //       console.log(this.state.serviceData);
-  //       this.checkServiceError();
-  //     }
-  //   );
-  // };
 
   isValid() {
     const { errors, isValid } = validateInput(this.state.kitObj);
@@ -398,62 +251,6 @@ class AddKits extends Component {
     return isValid;
   }
 
-  // addCategorySetup() {
-  //   console.log("ADD CATEGORY")
-  //   let obj = {
-  //     ks_services: "",
-  //     ks_actual_price: "",
-  //     ks_discounted_price: "",
-  //   };
-  //   let serviceData = this.state.serviceData;
-  //   let errorServiceData = this.state.errorServiceData;
-
-  //   serviceData.map((item) => {
-  //     if (
-  //       item.ks_actual_price
-  //         .toString()
-  //         .charAt(item.ks_actual_price.length - 1) == "."
-  //     ) {
-  //       item.ks_actual_price = item.ks_actual_price.replace(/.$/, "");
-  //     }
-  //     if (
-  //       item.ks_discounted_price
-  //         .toString()
-  //         .charAt(item.ks_discounted_price.length - 1) == "."
-  //     ) {
-  //       item.ks_discounted_price = item.ks_discounted_price.replace(/.$/, "");
-  //     }
-
-  //     return item;
-  //   });
-  //   serviceData.push(obj);
-  //   errorServiceData.push({
-  //     ks_actual_price: "",
-  //     ks_discounted_price: "",
-  //     ks_services: "",
-  //   });
-  //   this.setState(
-  //     {
-  //       serviceData,
-  //       errorServiceData,
-  //     },
-  //     () => {
-  //       this.checkServiceError();
-  //     }
-  //   );
-  // }
-  // removeCategorySetup(index) {
-  //   let serviceData = this.state.serviceData;
-  //   serviceData.splice(index, 1);
-  //   this.setState(
-  //     {
-  //       serviceData,
-  //     },
-  //     () => {
-  //       this.checkServiceError();
-  //     }
-  //   );
-  // }
   checkServiceError = () => {
     let serviceData = this.state.serviceData;
     let errorServiceData = this.state.errorServiceData;
@@ -482,34 +279,34 @@ class AddKits extends Component {
     // const fileObject = event.target.files[0];
     console.log(event.target.files, "FILE OBJECT");
     Object.values(event.target.files)
-    .forEach((fileObject)=>{
-      if (fileObject) {
-        this.setState({
-          isUploading: true,
-        });
-        const formData = new FormData();
-        formData.set("u_image", fileObject);
-        console.log("formDataformData", formData);
-  
-        const url = constant.SERVER_URL + "elp/uploadkits_image";
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-        Axios.post(url, formData, config).then((response)=>{
-          console.log(name, "resultresultresult", response);
-          let kitObj = this.state.kitObj;
-          kitObj.kt_image_url = response.data.data.filepath;
+      .forEach((fileObject) => {
+        if (fileObject) {
           this.setState({
-            isUploading: false,
-            kitObj,
-            filename: fileObject.name,
-          },()=>console.log("AFTER FILE APPEND",kitObj));
-        }, ( err)=>console.log("ERROR ",err));
-        
-      }
-    })
+            isUploading: true,
+          });
+          const formData = new FormData();
+          formData.set("u_image", fileObject);
+          console.log("formDataformData", formData);
+
+          const url = constant.SERVER_URL + "elp/uploadkits_image";
+          const config = {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          };
+          Axios.post(url, formData, config).then((response) => {
+            console.log(name, "resultresultresult", response);
+            let kitObj = this.state.kitObj;
+            kitObj.kt_image_url = response.data.data.filepath;
+            this.setState({
+              isUploading: false,
+              kitObj,
+              filename: fileObject.name,
+            }, () => console.log("AFTER FILE APPEND", kitObj));
+          }, (err) => console.log("ERROR ", err));
+
+        }
+      })
   };
   handlePriceMonth = (event, index) => {
     const { name, value } = event.target;
@@ -529,7 +326,7 @@ class AddKits extends Component {
       kp_price: '',
       kp_discount: ''
     }
-    const price_month= {
+    const price_month = {
       kp_price: '',
       kp_discount: ''
     }
@@ -538,7 +335,7 @@ class AddKits extends Component {
     kitObj.kits_price_month.push(kp);
     const errorKits_price_month = this.state.errorKits_price_month;
     errorKits_price_month.push(price_month);
-    this.setState({ kitObj ,errorKits_price_month }, () => console.log("ADDED MONTH", kitObj,errorKits_price_month));
+    this.setState({ kitObj, errorKits_price_month }, () => console.log("ADDED MONTH", kitObj, errorKits_price_month));
   }
   removeADDEDMonths = (index) => {
     let kitObj = this.state.kitObj;
@@ -546,7 +343,7 @@ class AddKits extends Component {
     kitObj.kits_price_month[index] = null;
     const errorKits_price_month = this.state.errorKits_price_month;
     errorKits_price_month[index] = null;
-    this.setState({ kitObj , errorKits_price_month }, () => console.log("ADDED MONTH", kitObj , errorKits_price_month));
+    this.setState({ kitObj, errorKits_price_month }, () => console.log("ADDED MONTH", kitObj, errorKits_price_month));
   }
   render() {
     const { kitObj, errors, errorServiceData } = this.state;
@@ -692,7 +489,7 @@ class AddKits extends Component {
                             const data = editor.getData();
                             let kitObj = this.state.kitObj;
                             kitObj["kt_overview"] = data;
-                            this.setState({ kitObj }, () => console.log("EDITOR CHANGE ", this.state.kitObj.kt_overview))
+                            this.setState({ kitObj }, () => console.log("EDITOR CHANGE ", kitObj.kt_overview))
                           }}
                         />
                       }
@@ -702,30 +499,26 @@ class AddKits extends Component {
                       </div>
                     </Form.Group>
 
-
-                    {kitObj.kits_price_month.map((cat, index) => {
+                    {console.log("kitObj.kits_service_name", kitObj.kits_service_name)}
+                    {kitObj.kits_price_month && kitObj.kits_price_month.map((cat, index) => {
                       return (
                         <>
-                          {
-                            kitObj.kits_service_name.filter((ser_name, indx) => index === indx).map((ser_name, indx) =>
-                              <Form.Group className="mb-4" key={ser_name.ks_services}>
-                                <Form.Label className="fs20 fw600 col14">
-                                  Select range of months
+                          <Form.Group className="mb-4" key={cat.kp_max_range_month}>
+                            <Form.Label className="fs20 fw600 col14">
+                              Select range of months
                                 </Form.Label>
-                                <div className="slider">
-                                  <Slider
+                            <div className="slider">
+                              <Slider
 
-                                    min={0}
-                                    max={9}
-                                    step={3}
-                                    value={parseInt(ser_name.ks_services)}
-                                    onChange={(e) => { this.handleSlider(e, index) }}
-                                  />
-                                  <div className='value'></div>
-                                </div>
-                              </Form.Group>
-                            )
-                          }
+                                min={0}
+                                max={9}
+                                step={3}
+                                value={parseInt(cat.kp_max_range_month)}
+                                onChange={(e) => { this.handleSlider(e, index) }}
+                              />
+                              <div className='value'></div>
+                            </div>
+                          </Form.Group>
                           <Row>
                             <Col md={6}>
                               <Form.Group className="mt-1 mb-4">
@@ -743,8 +536,8 @@ class AddKits extends Component {
                                   maxLength={7}
                                 />
                                 <div className="col27 fs14 fw400 mt-2 error">
-                                    {this.state.errorKits_price_month[index].kp_price}
-                                    </div>
+                                  {this.state.errorKits_price_month[index].kp_price}
+                                </div>
                               </Form.Group>
                             </Col>
                             <Col md={6}>
@@ -763,8 +556,8 @@ class AddKits extends Component {
                                   maxLength={7}
                                 />
                                 <div className="col27 fs14 fw400 mt-2 error">
-                                      {this.state.errorKits_price_month[index].kp_discount}
-                                    </div>
+                                  {this.state.errorKits_price_month[index].kp_discount}
+                                </div>
                               </Form.Group>
                             </Col>
                             {kitObj.kits_price_month.length > 1 ? (
