@@ -3801,9 +3801,8 @@ kt_status: "1" */}
                                     </span>
                                   </div>
 
-                                  <div className="fs16 fw400 col14 pb-1">
-                                    
-                                    <Row>
+                                  <div className="fs16 fw400 col14 pb-1"> 
+                                    <Row> 
                                       {" "}
                                       {item.kits_services.map((val, ind) => {
                                         return (

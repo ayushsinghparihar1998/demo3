@@ -118,7 +118,8 @@ import MentalQa from "../components/assessmentTest/mentalQa";
 import MentalhealthQa from "../components/assessmentTest/mentalHealthQa";
 import CorporateDocument from "../components/admin/corporateDocument";
 import KitListings from "../components/kits/kitListings"; 
-import KitDetails from "../components/kits/kitDetails"; 
+import KitDetails from "../components/kits/kitDetails";
+import Checkouts from "../components/kits/checkout";
 import DownloadPdf from "../components/admin/superAdmin/downloadPdf"; 
 import UserPurchasingHistory from "../components/admin/superAdmin/userPurchasingHistory"; 
 
@@ -240,6 +241,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/corporateDocument" component={CorporateDocument} /> 
           <Route path="/kitListings" component={KitListings} /> 
           <Route path="/kitDetails" component={KitDetails} /> 
+          <Route path="/checkouts" component={Checkouts} />    
           
           <PublicRoute
             path="/listenerAssessmentTest"
