@@ -120,6 +120,7 @@ import CorporateDocument from "../components/admin/corporateDocument";
 import KitListings from "../components/kits/kitListings"; 
 import KitDetails from "../components/kits/kitDetails"; 
 import DownloadPdf from "../components/admin/superAdmin/downloadPdf"; 
+import UserPurchasingHistory from "../components/admin/superAdmin/userPurchasingHistory"; 
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -249,11 +250,12 @@ class ELPRoute extends Component {
             path="/assessmentTestLists"
             component={AssessmentTestLists}
           />
-          <Route
+          <Route 
             path="/assessmentTests/:name"
             component={AssessmentTestListTwo}
-          />
+          />     
           <PublicRoute path="/mentalQa" component={MentalQa} />
+          <PublicRoute path="/userPurchasingHistory" component={UserPurchasingHistory} />  
 
           <PublicRoute
             path="/professionalBlogList"

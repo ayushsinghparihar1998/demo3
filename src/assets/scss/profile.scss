@@ -2516,7 +2516,7 @@
     }
   }
   
-  .VlogMain {
+  .VlogMain { 
     position: relative;
   
     .elpVideoblog {
@@ -2771,7 +2771,7 @@
     background-color: $col22;
     overflow: hidden;
     min-height: calc(100vh - 146px);
-    .kitplans {
+    .kitplans { 
       width: 100%;
       background-color: $col18;
       margin: auto;
@@ -2794,7 +2794,203 @@
         overflow: hidden;
       }
     }
+
   }
+  
+  .kitDetailMain {
+      background-color: $col22; 
+      overflow: hidden;
+      min-height: calc(100vh - 146px);
+    .kitDetailTwo { 
+        width: 100%;
+        background-color: $col18;
+        margin: auto;
+        box-shadow: 0px 0px 15px rgba(62, 178, 221, 0.01%);
+        border-top: solid 10px $col23;
+        padding: 0 30px 0;
+        padding-bottom: 3rem; 
+        .detailsLeft {
+          position: relative; 
+          .socialUser {
+              display: flex;
+              justify-content: space-between; 
+              ul {
+                // width: 100%; 
+                margin: 0;
+                padding: 0;
+                  li {
+                      list-style: none; 
+                      display: inline-block;
+                      margin-left: 10px; 
+                      a { 
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        text-align: center;
+                        line-height: 30px;
+                        border-radius: 50%;
+                        cursor: pointer; 
+                        font-size: 15px;
+                        &.faceBook {
+                          background: #3B5998; 
+                        }
+                        &.twiTter {
+                          background: #009DFF; 
+                        }
+                        &.enveLope {
+                          background: #ED6F6F; 
+                        }
+                        &.linkeDin {
+                          background: #0478B1; 
+                        }
+                          i {
+                              color: $col18; 
+                          }
+                      }
+                  }
+              }
+          } 
+          .thumbDetails {
+              position: relative;
+              margin-bottom: 40px;
+              margin-top: 30px;
+              .slick-slide {
+                  img {
+                     height: 390px;
+                     width: 100%;
+                     object-fit: cover;
+                  } 
+              }  
+              .thumbImg {
+                  margin-top: 5px;
+                  ul {
+                      width: 100%;
+                      margin: 0;
+                      padding: 0; 
+                      display: flex; 
+                      justify-content: space-between; 
+                      li {
+                          list-style: none;
+                          max-width: 32%;
+                          img.thumb1 {
+                              width: 100%; 
+                              height: 105px;
+                              object-fit: cover;  
+                          }
+                      }
+                  }
+              }
+          }
+          .overViews {
+            position: relative; 
+            ul {
+                width: 100%;
+                margin: 0;
+                padding-left: 20px; 
+
+                li {
+                    font-weight: 400; 
+                    font-size: 15px; 
+                    color: $col14; 
+                    margin-bottom: 10px; 
+                }
+            }
+        }
+
+      }         
+        .detailMonth {
+            border: 1px solid $col146;
+            padding: 1.5rem;
+            min-height: 90vh;
+
+            .monthPlan {
+              position: relative;
+              margin-top: 15px;
+              margin-bottom: 20px; 
+               ul {
+                   width: 100%;
+                   padding: 0;
+                   margin: 0; 
+                   li {
+                      position: relative;
+                      list-style: none;
+                      display: inline-block;
+                      margin-right: 10px; 
+                       .detailBtn {
+                          position: relative;  
+                          .form-check {
+                             border: solid 1px $col1;
+                             cursor: pointer;
+                             padding: 10px 10px;
+                             border-radius: 40px;
+                             color: $col1;
+                                                      
+                             &.active {
+                               background: $col40;
+                               border: solid 1px $col40;
+                               color: $col18; 
+                             }
+                             .form-check-input {
+                                margin-left: 0; 
+                                left: 0;
+                                opacity: 0;
+                                cursor: pointer;
+                             }
+                             .form-check-label {
+                                // margin-left: -15px;
+                                cursor: pointer;
+                             }
+                          }
+                       }
+                   }
+               }
+            }
+            .byBtnmain {
+               position: relative; 
+               margin-top: 30px; 
+               
+               @mixin btnDetails {
+                  display: flex;
+                  width: 100%;
+                  justify-content: space-between;
+                  align-items: center;
+                  height: 3.1rem; 
+                  font-size: 18px !important;
+                  font-weight: 500;
+                  margin-bottom: 30px;
+               }
+
+               .btnTyp5 {  
+                  &.byBtns {     
+                      @include btnDetails;
+                  }
+                  &.gifts {
+                      @include btnDetails;
+                      background: transparent !important; 
+                      border: solid 1px $col1 !important; 
+                      color: $col1 !important;  
+                  }
+               }
+            }
+            .overViews {
+                position: relative; 
+                ul {
+                    width: 100%;
+                    margin: 0;
+                    padding-left: 20px; 
+
+                    li {
+                        font-weight: 400; 
+                        font-size: 15px; 
+                        color: $col14; 
+                        margin-bottom: 10px; 
+                    }
+                }
+            }
+        }
+    }
+  }
+  
   
   @media (min-width: 992px) and (max-width: 1199px) {
     .profile_layout {

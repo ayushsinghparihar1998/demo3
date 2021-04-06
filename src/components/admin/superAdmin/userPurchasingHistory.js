@@ -7,10 +7,9 @@ import Requestusertwo from "../../../assets/images/pro_img2.svg";
 import Visibilitys from "../../../assets/images/visibilitys.png";      
 import Deleteicon from "../../../assets/images/delete_icon.svg";
 import ArrowDownload from "../../../assets/images/arrow_download.png";  
-import { Link } from "react-router-dom";       
+import { Link } from "react-router-dom";        
 
-class DownloadPdf extends Component {   
-
+class UserPurchasingHistory extends Component {   
     render() {
         return ( 
             <div className="page__wrapper innerpage">
@@ -40,46 +39,74 @@ class DownloadPdf extends Component {
                     <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">   
                         <div className="chatsearch w-100">
                             <div className="myAssesstest"> 
-                                <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">Downloaded PDF</div> 
+                                <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">User Purchasing History</div>  
                                         <div className="mainTables"> 
                                         <Table bordered size="lg">
                                             <thead>
                                                 <tr>
-                                                    <th>User’s Email ID</th>
-                                                    <th>ACTION</th>
+                                                    <th>User</th>
+                                                    <th>Email ID</th>
+                                                    <th>Name</th>
+                                                    <th>Months</th> 
+                                                    <th>Category</th>
+                                                    <th>Action</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
+                                                    <td>andrew@gmail.com</td>
+                                                    <td>Smart Plan</td>
+                                                    <td>3 Months</td>
+                                                    <td>
+                                                        <div className="d-flex elpCategory">
+                                                            <span className="luv">Luv</span><span className="pray">Pray</span>
+                                                        </div>
+                                                    </td>
                                                     <td> 
                                                         <span><Image src={Deleteicon} className="pointer" /></span>  
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>29 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
+                                                    <td>andrew@gmail.com</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td> 
                                                         <span><Image src={Deleteicon} className="pointer" /></span>  
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
+                                                    <td>andrew@gmail.com</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td> 
                                                         <span><Image src={Deleteicon} className="pointer" /></span>  
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td> 
                                                         <span><Image src={Deleteicon} className="pointer" /></span>  
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td> 
                                                         <span><Image src={Deleteicon} className="pointer" /></span>  
                                                     </td>
-                                                </tr>
+                                                </tr>  
                                             </tbody>
                                             </Table>
                                         </div>
@@ -99,7 +126,7 @@ class DownloadPdf extends Component {
     }
 }
 
-export default DownloadPdf;   
+export default UserPurchasingHistory; 
 
 
 
