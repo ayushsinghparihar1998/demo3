@@ -806,6 +806,20 @@ img {
   }
 }
 
+.bannerLinks {
+    position: absolute; 
+    background-image: url('../images/links.png'); 
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px; 
+    max-width: 275px;
+    padding-top: 5px;  
+}
+
 @media (max-width: 1400px) {
   .main_baner {
     .header2banner {
@@ -852,6 +866,9 @@ img {
       padding-right: 0;
       margin: auto;
     }
+  }
+  .bannerLinks {
+    top: 40px; 
   }
 }
 @media (max-width: 1200px) {
@@ -2333,7 +2350,7 @@ img {
   }
 }
 
-/* media screen start */
+/* media screen end */
 .coming_soon {
   /*background-color: #f3fdff;*/
   overflow: hidden;
