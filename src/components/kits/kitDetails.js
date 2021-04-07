@@ -26,6 +26,7 @@ const KitDetails = (props) => {
     const goToKitList = () => history.push('/kitListings');
     const [kitsDetail, setKitsDetail] = useState(null);
     const [monthPlanIndex, setMonthPlanIndex] = useState(0);
+    const buyNow = () => history.push('/kit-checkout/'.concat(id));
     console.log("PARAMS ", id, history, location);
     const settings = {
         dots: true,
@@ -143,7 +144,7 @@ const KitDetails = (props) => {
 
                                                 }
                                                 <div className="byBtnmain">
-                                                    <Button type="button" className="btnTyp5 byBtns">Buy Now <span><Image src={RightArrow2} /></span></Button>
+                                                    <Button type="button" className="btnTyp5 byBtns" onClick={buyNow}>Buy Now <span><Image src={RightArrow2} /></span></Button>
 
                                                     <Button type="button" className="btnTyp5 gifts">Give as a gift <span><Image src={GiftBox} /></span></Button>
                                                 </div>
