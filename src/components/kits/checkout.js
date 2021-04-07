@@ -28,6 +28,7 @@ import KitThree from "../../assets/images/kits3.png";
 import RightArrow2 from "../../assets/images/rightarrow2.png"; 
 import GiftBox from "../../assets/images/giftbox.png"; 
 import Kits1 from "../../assets/images/kitd1.png"; 
+import XCircle from "../../assets/images/XCircle.png"
 import Slider from "react-slick"; 
 
 
@@ -41,7 +42,7 @@ import Slider from "react-slick";
 // ];
 
 
-class Checkouts extends Component {
+class Checkouts extends Component { 
 
   render() {
     const settings = {
@@ -80,6 +81,13 @@ class Checkouts extends Component {
                                     <hr className="hrB" /> 
                                     <div className="promocodes">
                                          <Button className="btnPromo">Have Promo Code?</Button>
+                                         <div className="promo2 d-none">   
+                                              <span className="position-relative">  
+                                                  <Button className="btnPromo minBtn">FFTW</Button>
+                                                  <Image src={XCircle} alt="" /> 
+                                              </span> 
+                                              <span className="fs14 fw700 col26 text-uppercase ml-3">Apply</span> 
+                                         </div> 
                                     </div>
                                 </div>
                                 <div className="orderTwo mt-3"> 
@@ -91,7 +99,7 @@ class Checkouts extends Component {
                             </div>
                             
                         </div>
-                        <div className="mt-5 mb-5 text-center">
+                        <div className="mt-5 mb-5 text-center"> 
                             <Button className="btnTyp5">proceed</Button>
                         </div>
                     </Col>

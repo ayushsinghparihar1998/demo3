@@ -3076,7 +3076,20 @@
                            box-shadow: none;
                            outline: 0;
                         }
-                    }
+                        &.minBtn {
+                           min-width: 150px;
+                           border-radius: 6px;
+                           text-align: left; 
+                        }
+                      }
+                      .promo2 {
+                          position: relative; 
+                          img {
+                              position: absolute;
+                              top: 4px;
+                              right: 7px;
+                          }
+                      }
                 }
             }
         }
