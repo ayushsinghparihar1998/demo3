@@ -455,7 +455,7 @@ class NavBar extends Component {
           { content: "SUBSCRIPTION PLANS", option: "/planlistholistic" },
           { content: "BLOGS", option: "/blogs/ALL" },
           { content: "ASSESSMENT TESTS", option: "/assessmentTests/HOLISTIC" },
-          { content: 'KITS', option: '/kitListings' }
+          constant.SERVER_URL !== 'https://www.eatluvnpray.org/' && { content: 'KITS', option: '/kitListings' }
         ]
       },
       {
