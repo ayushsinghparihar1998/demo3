@@ -7,15 +7,18 @@ import {
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import KitOne from "../../assets/images/kits.png";
-import KitTwo from "../../assets/images/kits2.png";
-import KitThree from "../../assets/images/kits3.png";
+// import KitOne from "../../assets/images/kits.png";
+// import KitTwo from "../../assets/images/kits2.png";
+// import KitThree from "../../assets/images/kits3.png";
 import ELPViewApiService from "../../common/services/apiService";
+import { useHistory } from "react-router";
 
 
 const KitListings = (props) => {
     const [kitsListing, setKitListing] = useState();
     const [, setRecordCount] = useState();
+    const history = useHistory();
+    const openKitDetail = (id)=> history.push(`kitDetails/${id}`) ;
     useEffect(() => {
         ELPViewApiService("getkits_list", { "count": 10, "offset": 1 })
             .then((response) => {
@@ -44,7 +47,7 @@ const KitListings = (props) => {
                                 kitsListing &&
                                 kitsListing.map((kitList) =>
                                     <Col md={4} sm={6}>
-                                        <div className="mb-4">
+                                        <div className="mb-4" onClick={()=>{openKitDetail(kitList.kt_id)}}>
                                             <Image src={kitList.kt_image_url} className="emotions" />
                                             <div className="col64 fw500 fs22 mb-1 mt-3">{kitList.kt_name}</div>
                                             <div className="fs16 col14 fw400 mb-1" dangerouslySetInnerHTML={{__html : kitList.kt_desc}}/>

@@ -1587,7 +1587,7 @@ export default {
       pl_desc_details: "",
       pl_save: "",
       plan_type: "",
-      pl_pdf_doc:'',
+      pl_pdf_doc: '',
       plan_cat_name: "",
     },
     showResultMessage: true,
@@ -1603,7 +1603,7 @@ export default {
       pl_desc_details: "",
       pl_save: "",
       plan_type: "",
-      pl_pdf_doc:'',
+      pl_pdf_doc: '',
       plan_cat_name: "",
     },
     showResultMessage: true,
@@ -1728,7 +1728,7 @@ export default {
       kt_image_url: "",
       kt_price: "",
       kt_overview: "",
-      kt_subheading:'',
+      kt_subheading: '',
       kits_service_name: [
         {
           ks_services: "",
@@ -1775,7 +1775,7 @@ export default {
         },
       ],
       kt_overview: "",
-      kt_subheading:'',
+      kt_subheading: '',
       kits_price_month: [
         {
           kp_min_range_month: '',
@@ -2025,8 +2025,8 @@ export default {
     showResultMessage: true,
     showErrorMessage: true,
   },
-  superadminchange_assessqueansstatus:{
-    url:"elp/superadmin_assesstestchangestatus",
+  superadminchange_assessqueansstatus: {
+    url: "elp/superadmin_assesstestchangestatus",
     method: "POST",
     data: { as_id: "", as_status: "" },
     showResultMessage: true,
@@ -2100,12 +2100,12 @@ export default {
     showResultMessage: false,
     showErrorMessage: true,
   },
-  exportSuperAdminCor_Docs :{
+  exportSuperAdminCor_Docs: {
     url: "elp/superadminadd_doc_corporate",
     method: "POST",
     data: {
-      pu_title_corporate: "", 
-      pu_doc_url_corporate:"",
+      pu_title_corporate: "",
+      pu_doc_url_corporate: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -2117,10 +2117,17 @@ export default {
     showResultMessage: false,
     showErrorMessage: false,
   },
-  superadminget_subscriberlist :{
-    url : 'elp/superadminget_subscriberlist',
+  superadminget_subscriberlist: {
+    url: 'elp/superadminget_subscriberlist',
     method: "POST",
     data: { count: "", offset: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getkits_listdetails: {
+    url: 'elp/getkits_listdetails',
+    method: "POST",
+    data: { kt_id: '' },
     showResultMessage: false,
     showErrorMessage: true
   }

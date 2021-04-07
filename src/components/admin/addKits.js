@@ -27,6 +27,7 @@ class AddKits extends Component {
     super(props);
     this.state = {
       isReloadEditor: false,
+      testImage: [],
       pageType: "",
       paymentList: [],
       pageno: 1,
@@ -323,16 +324,20 @@ class AddKits extends Component {
           Axios.post(url, formData, config).then((response) => {
             console.log(name, "resultresultresult", response);
             let kitObj = this.state.kitObj;
+            let testImage = this.state.testImage;
             kitObj.kt_image_url = response.data.data.filepath;
+            testImage.push(response.data.data.filepath);
             this.setState({
               isUploading: false,
               kitObj,
+              testImage,
               filename: fileObject.name,
-            }, () => console.log("AFTER FILE APPEND", kitObj));
+            }, () => console.log("AFTER FILE APPEND", kitObj, testImage));
           }, (err) => console.log("ERROR ", err));
-
+          console.log("TEST IMAGE ", this.state.testImage)
         }
-      })
+      });
+    console.log("TEST IMAGE ", this.state.testImage)
   };
   handlePriceMonth = (event, index) => {
     const { name, value } = event.target;
@@ -362,14 +367,16 @@ class AddKits extends Component {
   }
   removeADDEDMonths = (index) => {
     let kitObj = this.state.kitObj;
-    kitObj.kits_service_name[index] = null;
-    kitObj.kits_price_month[index] = null;
+    kitObj.kits_price_month.splice(index, 1);
+    kitObj.kits_service_name.splice(index, 1);
+
     const errorKits_price_month = this.state.errorKits_price_month;
-    errorKits_price_month[index] = null;
+    errorKits_price_month.splice(index, 1);
     this.setState({ kitObj, errorKits_price_month }, () => console.log("ADDED MONTH", kitObj, errorKits_price_month));
   }
   render() {
-    const { kitObj, errors, errorServiceData } = this.state;
+    const { kitObj, errors } = this.state;
+    console.log("TEST IMAGE ", this.state.testImage)
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -521,21 +528,21 @@ class AddKits extends Component {
                         {errors.kt_overview}
                       </div>
                     </Form.Group>
-
+                    {console.log("kitObj.kits_price_month", kitObj.kits_price_month)}
                     {kitObj.kits_price_month && kitObj.kits_price_month.map((cat, index) => {
                       return (
                         <>
-                          <Form.Group className="mb-4" key={cat.kp_max_range_month}>
+                          <Form.Group className="mb-4" key={"cat.kp_max_range_month".concat(index)}>
                             <Form.Label className="fs20 fw600 col14">
                               Select range of months
                                 </Form.Label>
                             <div className="slider">
                               <Slider
 
-                                min={0}
-                                max={9}
-                                step={3}
-                                value={parseInt(cat.kp_max_range_month)}
+                                min={1}
+                                max={12}
+                                // step={3}
+                                value={cat.kp_max_range_month}
                                 onChange={(e) => { this.handleSlider(e, index) }}
                               />
                               <div className="col27 fs14 fw400 mt-2 error">
@@ -606,10 +613,9 @@ class AddKits extends Component {
                       <Button
                         variant="btnTypAdd"
                         type="button"
-                        disabled={!this.state.serviceShow}
                         onClick={() => { this.handleADDMonths() }}
                       >
-                        <span onClick={() => { this.handleADDMonths() }}>
+                        <span>
                           <i className="fa fa-plus"></i>
                         </span>{" "}
                         Add Months
