@@ -20,12 +20,13 @@ import freechat from "../../assets/images/free-chat.svg";
 import therapy from "../../assets/images/therapy.svg";
 // import women from '../../assets/images/header_banner2.svg';
 import women from "../../assets/images/header_banner3.png";
-import user from "../../assets/images/user.svg";
+import user from "../../assets/images/user.svg"; 
 import usercomment from "../../assets/images/user-comment.svg";
 import usersend from "../../assets/images/user-send.svg";
+import rightArrow from "../../assets/images/rightarrow.png";            
 import UserSignup from "../signup/userSignup";
 import { Link, NavLink, Router } from "react-router-dom";
-import ELPViewApiService from "../../common/services/apiService";
+import ELPViewApiService from "../../common/services/apiService"; 
 
 class Banner extends Component {
   constructor(props) {
@@ -91,11 +92,20 @@ class Banner extends Component {
       show3: false,
     });
   };
-  render() {
+  render() {                
     return (
       <Container>
         <Row>
-          <Col md={6}>
+          <Col md={6}>  
+            <div className="bannerLinks">  
+                <div>  
+                    <div className="fs14 fw600 col18 mb-1">Participate in Life Chapter Series</div>
+                    <div className="fw400 fs12 col18">
+                        <a className="col18 pointer" href="https://docs.google.com/forms/d/e/1FAIpQLSdtvtZCFBEssrybcBvX5XogqLbOMYkfrwhZcuAmq8_drHkndA/viewform" target="_blank">Click to know more and register!! 
+                        <Image src={rightArrow} alt="" className="rArrow ml-2" />
+                         </a></div> 
+                </div> 
+            </div> 
             <Carousel className="baner_carousel">
               <Carousel.Item>
                 {/* <div className="fs40 pt-120 ptn-170 col18 fw600 mb-4">Need a Constant Companion? Come talk to us, you're never alone</div> */}
@@ -160,7 +170,7 @@ class Banner extends Component {
                 <div className="fs40 pt-120 ptn-170 col64 fw700 mb-4">
                   Luv Often
                 </div>
-                <div className="fw400 col64 fs22 mb-5">
+                <div className="fw400 col64 fs22 mb-5">  
                   I am stronger than Depression and I am braver than Loneliness
                   and nothing will ever exhaust me.
                 </div>
@@ -175,7 +185,7 @@ class Banner extends Component {
                   <Button
                     type="button"
                     className="btnTyp5 talkBtn fs16 fw400 mr-3"
-                    onClick={this.handleModal}
+                    onClick={this.handleModal} 
                   >
                     <Link to={{ pathname: `/planlistholistic` }}>family</Link>
                   </Button>
