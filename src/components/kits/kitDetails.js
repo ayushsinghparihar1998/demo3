@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import Splan from "../../assets/images/blog5.png";
+import Splan from "../../assets/images/blog5.png"; 
 import Arrowright from "../../assets/images/Arrowright.png";
 import { Link, Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
@@ -28,6 +28,7 @@ import KitThree from "../../assets/images/kits3.png";
 import RightArrow2 from "../../assets/images/rightarrow2.png"; 
 import GiftBox from "../../assets/images/giftbox.png"; 
 import Kits1 from "../../assets/images/kitd1.png"; 
+import BannerS from "../../assets/images/bannerS.png";  
 import Slider from "react-slick"; 
 
 
@@ -39,7 +40,6 @@ import Slider from "react-slick";
 //   { name: 'Radio', value: '2' },
 //   { name: 'Radio', value: '3' },
 // ];
-
 
 class KitDetails extends Component {
 
@@ -58,9 +58,14 @@ class KitDetails extends Component {
         </div>
         <div className="kitDetailMain"> 
             <Container>
-                <div className="kitDetailTwo mt-4 mb-4">  
+                <div className="kitDetailTwo mt-4 mb-4"> 
+                    <div className="banLayout">
+                        <div className="layTwo">Get 
+                         <span className="text-uppercase ml-1 mr-1">free audio video calls</span> 
+                          by buying any plan </div> 
+                    </div> 
                     <div className="fs18 text-left fw500 mt-3 mb-5"><span className="col14 fw300 mr-1">Kits</span> / 
-                    <span className="col29 fs18 ml-1">Kit Details</span></div>  
+                    <span className="col29 fs18 ml-1">Kit Details</span></div>    
 
                     <Row>
                     <Col md={6}>
@@ -74,11 +79,11 @@ class KitDetails extends Component {
                                       <li><a className="linkeDin"><i className="fa fa-linkedin"></i></a></li>
                                   </ul> 
                               </div>
-                              <div className="fw400 fs15 col14 mt-2">  
+                              <div className="fw400 fs15 col14 mt-2">      
                                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
                               </div> 
 
-                              <div className="thumbDetails"> 
+                              <div className="thumbDetails">  
                                   <div>
                                       <Slider {...settings}>
                                         <div>
@@ -167,7 +172,7 @@ class KitDetails extends Component {
                                 </ul>
                             </div>    
 
-                            <div className="col64 fs24 fw300"><strong className="fw600">
+                            <div className="col64 fs24 fw300"><strong className="fw600"> 
                                 <span className="mr-3 fs20 fw400 col14">
                                     <del><i className="fa fa-inr"></i> 1750</del> 
                                 </span> 

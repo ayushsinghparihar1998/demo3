@@ -524,6 +524,31 @@
       }
     }
   }
+
+ .banLayout {              
+     position: relative; 
+     background-image: url('../images/bannerS.png');   
+     background-size: cover;
+     width: 100%;
+     background-repeat: no-repeat;
+     height: 120px;
+     margin: auto;
+     background-position: center;
+     display: flex;
+     justify-content: center;
+     align-items: center; 
+     margin-top: 15px;  
+
+     .layTwo {
+        color: #fff; 
+        padding-top: 50px;
+        font-size: 20px;
+     }
+ }
+
+ .leftAudio {
+    border: solid 1px #ccc; 
+ }
   
   .RegistrationLayout {
     .layout_box {
@@ -3081,7 +3106,7 @@
                            border-radius: 6px;
                            text-align: left; 
                         }
-                      }
+                      }     
                       .promo2 {
                           position: relative; 
                           top: 0;

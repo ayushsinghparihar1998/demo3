@@ -112,10 +112,10 @@ class PlanDetailsEat extends Component {
         <div className="ngo_services plans">
           <Container>
             <div className="ngo_listing mt-4 mb-4">
-              <div className="fs28 fw600 col8 w-100 mb-5 text-center mt-4">
+              <div className="fs28 fw600 col8 w-100 mb-2 text-center mt-4">
                 Lifestyle Smart Plans
-              </div>
-
+              </div> 
+              
               <CommonSubScription 
                 planEat
                 settingstwo={settingstwo}
@@ -153,7 +153,7 @@ class PlanDetailsEat extends Component {
               {
                 type: "button",
                 className: "btnTyp5",
-                handleClick: () => { this.setState({ redirectLogin: true }) },
+                handleClick: () => { this.setState({ redirectLogin: true }) }, 
                 info: 'LOGIN'
               }
             ]}
@@ -165,4 +165,5 @@ class PlanDetailsEat extends Component {
     );
   }
 }
-export default PlanDetailsEat;
+export default PlanDetailsEat; 
+

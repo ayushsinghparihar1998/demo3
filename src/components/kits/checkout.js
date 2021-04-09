@@ -71,7 +71,7 @@ class Checkouts extends Component {
                                 <div className="orderImgFirst">
                                     <Image src={Kits1} alt="banImg" /> 
                                 </div> 
-                                <div className="p-4 bg63">    
+                                <div className="p-4 bg63">     
                                     <div className="catOne mb-2">  
                                         <div className="fs22 fw500 col64">I’M Sexy</div>
                                         <div className="fs22 fw500 col64"><i className="fa fa-inr"></i> 1630</div>
@@ -83,14 +83,14 @@ class Checkouts extends Component {
                                          <Button className="btnPromo">Have Promo Code?</Button>
                                          <div className="promo2 d-none">   
                                               <span className="position-relative">  
-                                                  <Button className="btnPromo minBtn">FFTW</Button>
-                                                  <Image src={XCircle} alt="" /> 
+                                                  <Button className="btnPromo minBtn">FFTW</Button>  
+                                                  <Image src={XCircle} alt="" />  
                                               </span> 
                                               <span className="fs14 fw700 col26 text-uppercase ml-3">Apply</span> 
                                          </div> 
                                     </div>
                                 </div>
-                                <div className="orderTwo mt-3"> 
+                                <div className="orderTwo mt-3">  
                                     <div className="catOne">   
                                         <div className="fs16 fw500 col18">Total Amount</div>
                                         <div className="fs22 fw600 col18"><i className="fa fa-inr"></i> 1615</div> 
