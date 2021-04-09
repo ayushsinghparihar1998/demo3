@@ -14,25 +14,66 @@ import { useHistory, useLocation, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import Alerts from "../../assets/images/alerts.png";
+import { getLocalStorage } from "../../common/helpers/Utils";
+import ELPRxApiService from "../../common/services/apiService";
 
 const Checkouts = (props) => {
   const history = useHistory();
   const location = useLocation();
   const { id } = useParams();
   const [kitsDetail, setKitsDetail] = useState(null);
-  const [monthPlanIndex ] = useState(0);
   const [showPopUp, setShowPopUp] = useState(false);
   const [openCode, setOpenCode] = useState(false);
   const goToKitList = () => history.push('/kitListings');
   const goToKitDetail = () => history.push('/kitDetails/'.concat(id));
+  const priceIndex = getLocalStorage("kit_buy") || 0;
   const handleShow = () => {
-    setShowPopUp(true)
+    let type;
+    if (getLocalStorage("userInfo")) {
+      type = "listner";
+    } else if (getLocalStorage("customerInfo")) {
+      type = "customer";
+    } else if (getLocalStorage("userInfoProff")) {
+      type = "professional";
+    }
+    if (type) {
+      ELPRxApiService(type + "DashboardDetail")
+        .then((res) => {
+          console.log("res ============>", res);
+          if (res.data.data.dashboard_list.u_verified !== "1") {
+            setShowPopUp(true);
+          }
+          else if (kitsDetail.month_array[priceIndex].kp_max_range_month) {
+            const data = {
+              kt_id: id,
+              kt_amount: kitsDetail.month_array[priceIndex].kp_discount,
+              kt_month: kitsDetail.month_array[priceIndex].kp_max_range_month
+            }
+            ELPViewApiService("addKits_paymentdetails", data)
+              .then((response) => {
+                console.log("GOT TRANSACTION ID IS ", response, response.status === 'success')
+                if (response.data?.status === 'success') {
+                  const trans_id = response.data.data.kt_transaction_id;
+                  console.log("GOT TRANSACTION ID IS ", trans_id)
+                  const link = 'https://staging.eatluvnpray.org/kits_demo/kits.php?transaction_id='.concat(trans_id);
+                  window.open(link, "_blank");
+                }
+              })
+              .catch(err => console.log("ERROR ADDING PAYMENT ", err))
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else setShowPopUp(true);
   };
 
   const handleClose = () => {
     setShowPopUp(false);
   };
   useEffect(() => {
+
     ELPViewApiService("getkits_listdetails", { kt_id: id })
       .then((response) => {
         console.log("RESPONSE ", response);
@@ -75,16 +116,16 @@ const Checkouts = (props) => {
                             <div className="fs22 fw500 col64">{kitsDetail.kt_name}</div>
                             <div className="fs22 fw500 col64">
                               <i className="fa fa-inr"></i>
-                              {kitsDetail.month_array[monthPlanIndex].kp_price}
+                              {kitsDetail.month_array[priceIndex].kp_price}
                             </div>
                           </div>
                           <div className="mb-2 fs17 col14 fw500">
-                            {kitsDetail.month_array[monthPlanIndex].kp_max_range_month} months kit plan
+                            {kitsDetail.month_array[priceIndex].kp_max_range_month} months kit plan
                           </div>
                           <div className="fs17 col14 fw500">1 Kit</div>
                           <hr className="hrB" />
                           <div className="promocodes">
-                            
+
                             {
                               openCode ? (
                                 <div className="promo2">
@@ -94,7 +135,7 @@ const Checkouts = (props) => {
                                   </span>
                                   <span className="fs14 fw700 col26 text-uppercase ml-3">Apply</span>
                                 </div>
-                              ) : <Button className="btnPromo" onClick={()=>{setOpenCode(true)}}>Have Promo Code?</Button>
+                              ) : <Button className="btnPromo" onClick={() => { setOpenCode(true) }}>Have Promo Code?</Button>
                             }
                           </div>
                         </div>
@@ -103,7 +144,7 @@ const Checkouts = (props) => {
                             <div className="fs16 fw500 col18">Total Amount</div>
                             <div className="fs22 fw600 col18">
                               <i className="fa fa-inr"></i>
-                              {kitsDetail.month_array[monthPlanIndex].kp_discount}
+                              {kitsDetail.month_array[priceIndex].kp_discount}
                             </div>
                           </div>
                         </div>

@@ -18,6 +18,7 @@ import Kits1 from "../../assets/images/kitd1.png";
 import Slider from "react-slick";
 import { useHistory, useLocation, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
+import { setLocalStorage } from "../../common/helpers/Utils";
 
 const KitDetails = (props) => {
     const history = useHistory();
@@ -26,7 +27,10 @@ const KitDetails = (props) => {
     const goToKitList = () => history.push('/kitListings');
     const [kitsDetail, setKitsDetail] = useState(null);
     const [monthPlanIndex, setMonthPlanIndex] = useState(0);
-    const buyNow = () => history.push('/kit-checkout/'.concat(id));
+    const buyNow = () => {
+        history.push('/kit-checkout/'.concat(id));
+        setLocalStorage("kit_buy",monthPlanIndex);
+    };
     console.log("PARAMS ", id, history, location);
     const settings = {
         dots: true,

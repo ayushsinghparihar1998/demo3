@@ -2130,5 +2130,12 @@ export default {
     data: { kt_id: '' },
     showResultMessage: false,
     showErrorMessage: true
+  },
+  addKits_paymentdetails : {
+    url: 'elp/addKits_paymentdetails',
+    method: "POST",
+    data: {kt_id:"",kt_amount:"",kt_month: ""},
+    showResultMessage: false,
+    showErrorMessage: true
   }
 };
