@@ -240,8 +240,8 @@ class ELPRoute extends Component {
           <Route path="/planlistholistic" component={PlanDetails} /> 
           <PublicRoute path="/corporateDocument" component={CorporateDocument} /> 
           <Route path="/kitListings" component={KitListings} /> 
-          <Route path="/kitDetails" component={KitDetails} /> 
-          <Route path="/checkouts" component={Checkouts} />    
+          <Route path="/kitDetails/:id" component={KitDetails} /> 
+          <Route path="/kit-checkout/:id" component={Checkouts} />    
           
           <PublicRoute
             path="/listenerAssessmentTest"
