@@ -9,7 +9,7 @@ import Deleteicon from "../../../assets/images/delete_icon.svg";
 import ArrowDownload from "../../../assets/images/arrow_download.png";  
 import { Link } from "react-router-dom";        
 
-class UserPurchasingHistory extends Component {   
+class UserQuoteDetails extends Component {        
     render() {
         return ( 
             <div className="page__wrapper innerpage">
@@ -39,54 +39,54 @@ class UserPurchasingHistory extends Component {
                     <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">   
                         <div className="chatsearch w-100">
                             <div className="myAssesstest"> 
-                                <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">User Purchasing History</div>  
+                                <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">User Quote Details</div>  
                                         <div className="mainTables"> 
                                         <Table bordered size="lg">
                                             <thead>
                                                 <tr>
-                                                    <th>Date</th>
+                                                    <th>User</th>
                                                     <th>Email ID</th>
-                                                    <th>Type</th>
-                                                    <th>Name</th> 
-                                                    <th>Months</th> 
+                                                    <th>Phone No.</th>
+                                                    <th>Company Name</th> 
+                                                    <th>Country</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
                                                     <td>andrew@gmail.com</td>
-                                                    <td>Subscription Plan</td>
-                                                    <td>Smart Plan</td> 
-                                                    <td>3 Months</td> 
+                                                    <td>+9874561201</td>
+                                                    <td>Genex pvt ltd</td>  
+                                                    <td>India</td>  
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
                                                     <td>andrew@gmail.com</td>
-                                                    <td>Subscription Plan</td>
-                                                    <td>Smart Plan</td> 
-                                                    <td>3 Months</td> 
+                                                    <td>+9874561201</td>
+                                                    <td>Genex pvt ltd</td>  
+                                                    <td>India</td>  
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
                                                     <td>andrew@gmail.com</td>
-                                                    <td>Subscription Plan</td>
-                                                    <td>Smart Plan</td> 
-                                                    <td>3 Months</td> 
+                                                    <td>+9874561201</td>
+                                                    <td>Genex pvt ltd</td>  
+                                                    <td>India</td>  
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
                                                     <td>andrew@gmail.com</td>
-                                                    <td>Subscription Plan</td>
-                                                    <td>Smart Plan</td> 
-                                                    <td>3 Months</td> 
+                                                    <td>+9874561201</td>
+                                                    <td>Genex pvt ltd</td>  
+                                                    <td>India</td>  
                                                 </tr>
                                                 <tr>
-                                                    <td>28 Jan, 2021</td> 
+                                                    <td>Mr. Andrew d’souza</td> 
                                                     <td>andrew@gmail.com</td>
-                                                    <td>Subscription Plan</td>
-                                                    <td>Smart Plan</td> 
-                                                    <td>3 Months</td> 
-                                                </tr> 
+                                                    <td>+9874561201</td>
+                                                    <td>Genex pvt ltd</td>  
+                                                    <td>India</td>  
+                                                </tr>
 
                                             </tbody>
                                             </Table>
@@ -107,7 +107,5 @@ class UserPurchasingHistory extends Component {
     }
 }
 
-export default UserPurchasingHistory; 
-
-
+export default UserQuoteDetails;  
 

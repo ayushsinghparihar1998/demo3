@@ -23,6 +23,7 @@ import ELPRxApiService from "../../common/services/apiService";
 import constant from "../../constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Deleteicon from "../../assets/images/delete_icon.svg"; 
 
 // import React, { useState } from 'react';
 // import RangeSlider from 'react-bootstrap-range-slider';
@@ -484,17 +485,18 @@ class EditQa extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={8} lg={9} className="pl-1">
+              <Col md={8} lg={9} className="pl-1"> 
                 <div className="corporateMember CreateAssessment">
-                  <div className="fs28 col10 mb-4">Assessment Test</div>
+                  <div className="fs28 col10 mb-4">Edit Assessment Question & Answers</div>
                   <Form method="post">
                     {this.state.as_que_ans &&
-                      this.state.as_que_ans.map((item, index) => {
+                      this.state.as_que_ans.map((item, index) => {  
                         return (
                           <div className="QuestionListings">
-                            <Form.Group className="mb-4">
-                              <Form.Label className="fs20 fw600 col14">
-                                Question.{index + 1}
+                            <Form.Group className="mb-4">        
+                              <Form.Label className="fs20 fw600 col14 questionSet"> 
+                                  <div>Question.{index + 1}</div> 
+                                  <div><Image src={Deleteicon} className="d2 pointer" /></div> 
                               </Form.Label>
                               
                               {!this.state.isReloadEditor ?
@@ -610,9 +612,10 @@ class EditQa extends Component {
                               item.as_ans.map((val, i) => {
                                 return (
                                   <>
-                                    <Form.Group className="mb-4">
-                                      <Form.Label className="fs20 fw600 col14">
-                                        Answer.{i + 1}
+                                    <Form.Group className="mb-4"> 
+                                      <Form.Label className="fs20 fw600 col14 questionSet ansBg"> 
+                                        <div>Answer.{i + 1}</div> 
+                                        <div><Image src={Deleteicon} className="d2 pointer" /></div> 
                                       </Form.Label>
 
                                       {/* <Form.Control as="textarea" rows={3} className="inputTyp2" />    */}
@@ -715,7 +718,7 @@ class EditQa extends Component {
                         ""
                       ) : (
                         <Button
-                          variant="btnTypAdd"
+                          variant="btnTypAdd btnSet9"
                           type="button"
                           className="inputTyp2 form-control"
                           onClick={() => this.addQuesion()}

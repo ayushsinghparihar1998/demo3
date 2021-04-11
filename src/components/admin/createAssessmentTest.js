@@ -556,9 +556,14 @@ class CreateAssessmentTest extends Component {
               </Col>
               <Col md={8} lg={9} className="pl-1"> 
                 <div className="corporateMember CreateAssessment">
-                  <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "Update" : "Create"}
-                    <span className="pl-1">Assessment Test</span>
+                  <div className="flexAssement">
+                      <div className="fs28 col10 mb-4">
+                        {this.props.match.params.id > 0 ? "Update" : "Create"}
+                        <span className="pl-1">Assessment Test</span>
+                      </div>
+                      <div>
+                            <Button type="button" className="btnTyp6">Save Draft</Button>
+                      </div>
                   </div>
                   <Form method="post">
                     <Form.Group className="mb-4">
@@ -592,7 +597,7 @@ class CreateAssessmentTest extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
-                        Test Type
+                          Plans Select by
                       </Form.Label>
                       <Row>
                         <Col md={4}>
@@ -639,7 +644,7 @@ class CreateAssessmentTest extends Component {
 
                     <Form.Group className="mb-4">
                       <Form.Label className="fs20 fw600 col14">
-                        Test Price (If Paid)
+                        Test Price <span className="fw400">(If Paid)</span> 
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -677,7 +682,7 @@ class CreateAssessmentTest extends Component {
                                     onChange={(e) => this.handleCheckSearch(e)}
                                     value={item.as_cat_id}
                                     checked={item.flag == true}
-                                  />
+                                  /> 
                                 </Form.Group>
                               </Col>
                             );

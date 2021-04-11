@@ -546,9 +546,6 @@
      }
  }
 
- .leftAudio {
-    border: solid 1px #ccc; 
- }
   
   .RegistrationLayout {
     .layout_box {
@@ -571,7 +568,26 @@
       // text-transform: capitalize;
     }
   }
-  
+  .borderFours {
+      position: relative; 
+      border-bottom: 1px solid #EAEAEA; 
+      padding: 0px 0 12px;
+      margin-bottom: 12px; 
+      .leftAudio {
+          text-align: center;
+          border: 1px solid $col27;    
+          border-radius: 40px;
+          padding: 7px 0;
+          font-size: 15px;
+      }
+      .rightVideo {
+          text-align: center;  
+          border: 1px solid $col27;    
+          border-radius: 40px;
+          padding: 7px 0;
+          font-size: 15px; 
+      }
+  }
   .subscribe_here2 {
     &.eatBlog {
       position: relative;
@@ -1124,8 +1140,18 @@
       }
       span {
         display: block;
-        max-height: 76px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
         overflow: hidden;
+        & > p {
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
         p {
           margin-bottom: 18px;
         }
@@ -1149,7 +1175,7 @@
           }
         }
         .e_detai {
-          max-width: 88%;
+          max-width: 100%;
         }
         div.mr-2.pt-1 {
           & > img {
@@ -1780,6 +1806,16 @@
       padding: 0 0;
       font-size: 18px;
       font-weight: 600;
+      &.btnSet9 {
+          background: #FFE5DF !important; 
+          border: solid 1px #FF6541 !important; 
+          &>span {
+            color: $col26 !important; 
+          }
+          &>b {
+            color: $col26 !important; 
+          }
+      }
       &:focus {
         background: transparent;
         box-shadow: none !important;
@@ -3121,6 +3157,39 @@
         }
 
     }
+  }
+
+  .questionSet {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding: 10px 10px;
+      margin-bottom: 20px;
+      background: $col148; 
+      img.d2 {
+          width: 20px; 
+      }
+      &.ansBg {
+         background: transparent; 
+         padding: 10px 0px ;
+         margin-bottom: 0;
+      }
+  }
+
+  .flexAssement {
+      width: 100%; 
+      display: flex; 
+      justify-content: space-between; 
+      button.btnTyp6 {
+          background: #F5FDFF !important;
+          border: 0.5px solid #8AD1E7 !important;
+          box-sizing: border-box;
+          border-radius: 0px !important;
+          color: $col14 !important; 
+          font-size: 16px;
+          height: 2.5rem; 
+          text-transform: capitalize; 
+      }
   }
   
   

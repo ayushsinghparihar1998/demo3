@@ -401,10 +401,10 @@ class AddKits extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={8} lg={9} className="pl-1">
+              <Col md={8} lg={9} className="pl-1">  
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
-                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP KIT
+                    {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP Kits
                   </div>
                   <Form>
                     <Form.Group className="mb-4">
@@ -528,6 +528,34 @@ class AddKits extends Component {
                         {errors.kt_overview}
                       </div>
                     </Form.Group>
+
+                    <Row>
+                         <Col md={6}>
+                            <Form.Group className="mb-4">
+                            <Form.Label className="fs20 fw600 col14">
+                                Audio Calls<span className="fw400">(Minutes)</span>
+                             </Form.Label>
+                              <Form.Control
+                                type="text"
+                                className="inputTyp2"
+                                name="kt_subheading"
+                              />
+                              </Form.Group>
+                         </Col> 
+                         <Col md={6}>
+                            <Form.Group className="mb-4">
+                            <Form.Label className="fs20 fw600 col14">
+                                Video Calls<span className="fw400">(Minutes)</span>
+                             </Form.Label>
+                              <Form.Control
+                                type="text"
+                                className="inputTyp2"
+                                name="kt_subheading2"
+                              />
+                              </Form.Group>
+                         </Col> 
+                    </Row>
+
                     {console.log("kitObj.kits_price_month", kitObj.kits_price_month)}
                     {kitObj.kits_price_month && kitObj.kits_price_month.map((cat, index) => {
                       return (

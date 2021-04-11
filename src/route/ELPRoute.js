@@ -122,6 +122,10 @@ import KitDetails from "../components/kits/kitDetails";
 import Checkouts from "../components/kits/checkout";
 import DownloadPdf from "../components/admin/superAdmin/downloadPdf"; 
 import UserPurchasingHistory from "../components/admin/superAdmin/userPurchasingHistory"; 
+import AssessmentPurchasingHistory from "../components/admin/superAdmin/assessmentPurchasingHistory";
+import UserQuoteDetails from "../components/admin/superAdmin/userQuoteDetails";
+import UserCouponDetails from "../components/admin/superAdmin/userCouponDetails";  
+import TestRequest from "../components/admin/superAdmin/testRequest";  
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -258,6 +262,10 @@ class ELPRoute extends Component {
           />     
           <PublicRoute path="/mentalQa" component={MentalQa} />
           <PublicRoute path="/userPurchasingHistory" component={UserPurchasingHistory} />  
+          <PublicRoute path="/assessmentPurchasingHistory" component={AssessmentPurchasingHistory} />
+          <PublicRoute path="/userQuoteDetails" component={UserQuoteDetails} />   
+          <PublicRoute path="/userCouponDetails" component={UserCouponDetails} />
+          <PublicRoute path="/testRequest" component={TestRequest} /> 
 
           <PublicRoute   
             path="/professionalBlogList"
