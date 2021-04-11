@@ -122,6 +122,7 @@ import KitDetails from "../components/kits/kitDetails";
 import Checkouts from "../components/kits/checkout";
 import DownloadPdf from "../components/admin/superAdmin/downloadPdf"; 
 import UserPurchasingHistory from "../components/admin/superAdmin/userPurchasingHistory"; 
+import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -226,6 +227,7 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/blogVideoDetails" component={BlogVideoDetails} />
           <PublicRoute path="/addKits/:id" component={AddKits} />
+          <PublicRoute path="/kit/detail/:id" component={KitsDetailSA} />
           <PublicRoute path="/vlogList" component={VlogList} />
           <PublicRoute
             path="/assessmentTestList"

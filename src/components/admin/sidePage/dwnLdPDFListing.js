@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Table, Image } from 'react-bootstrap';
 import ELPViewApiService from '../../../common/services/apiService';
-import ArrowDownload from "../../../assets/images/arrow_download.png";
+import Deleteicon from "../../../assets/images/delete_icon.svg";
+
 const DownLoadPDFListing = () => {
     const [subscriberListing, setSubscriberListing] = useState([]);
     useEffect(() => {
         if (true)
             ELPViewApiService("superadminget_subscriberlist", { count: 10, offset: 1 })
                 .then((result) => {
-                    console.log("RESULT DOWNLOAD PDF ", result)
                     const data = result.data.data.subscriber_listing;
-                    console.log("DATA LOADED ", data)
                     setSubscriberListing(data);
                 })
                 .catch((err) => console.log("error Occured", err));
@@ -37,7 +36,7 @@ const DownLoadPDFListing = () => {
                                                 <tr>
                                                     <td>{subscribers?.s_email}</td>
                                                     <td>
-                                                        <span><Image src={ArrowDownload} className="pointer" /></span>
+                                                        <span><Image src={Deleteicon} className="pointer" /></span>
                                                     </td>
                                                 </tr>
 

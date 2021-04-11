@@ -4,12 +4,11 @@ import {
   Container,
   Row,
   Col,
-  Image, Modal
+  Image, Modal, Form
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 // import Kits1 from "../../assets/images/kitd1.png";
-import XCircle from "../../assets/images/XCircle.png";
 import { useHistory, useLocation, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
 import CrossTwo from "../../assets/images/crosstwo.png";
@@ -24,6 +23,8 @@ const Checkouts = (props) => {
   const [kitsDetail, setKitsDetail] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [openCode, setOpenCode] = useState(false);
+  const [editCoupon, setCoupon] = useState();
+  const [applyCode, setCouponCode] = useState(0);
   const goToKitList = () => history.push('/kitListings');
   const goToKitDetail = () => history.push('/kitDetails/'.concat(id));
   const priceIndex = getLocalStorage("kit_buy") || 0;
@@ -86,7 +87,18 @@ const Checkouts = (props) => {
       })
       .catch(err => console.log("ERROR CAUSED ", err));
   }, [id]);
-  console.log("PARAMS ", id, history, location);
+
+  const applyCouponCode = () => {
+    setCouponCode(1);
+    // {"gift_code":"vhfnzjaxitqc"}
+    ELPViewApiService("kits_redeemcode", {"gift_code":"vhfnzjaxitqc"})
+      .then((response) => {
+        console.log("RESPONSE KITS CODE  ", response);
+        if (response.status === 200) {
+        }
+      })
+      .catch(err => console.log("ERROR CAUSED ", err));
+  }
   return (
     <div className="page__wrapper innerpage">
       <div className="main_baner">
@@ -116,7 +128,7 @@ const Checkouts = (props) => {
                             <div className="fs22 fw500 col64">{kitsDetail.kt_name}</div>
                             <div className="fs22 fw500 col64">
                               <i className="fa fa-inr"></i>
-                              {kitsDetail.month_array[priceIndex].kp_price}
+                              {kitsDetail.month_array[priceIndex].kp_discount}
                             </div>
                           </div>
                           <div className="mb-2 fs17 col14 fw500">
@@ -130,12 +142,31 @@ const Checkouts = (props) => {
                               openCode ? (
                                 <div className="promo2">
                                   <span className="position-relative">
-                                    <Button className="btnPromo minBtn">FFTW</Button>
-                                    <Image src={XCircle} alt="" />
+                                    <Form.Control
+                                      type="text"
+                                      className="btnPromo minBtn"
+                                      name="Kits_coupon"
+                                      value={editCoupon}
+                                      onChange={(e) => { setCoupon(e.target.value) }}
+                                      maxLength={8}
+                                    />
                                   </span>
-                                  <span className="fs14 fw700 col26 text-uppercase ml-3">Apply</span>
+                                  <span className="fs14 fw700 col26 text-uppercase ml-3" onClick={applyCouponCode}>Apply</span>
                                 </div>
                               ) : <Button className="btnPromo" onClick={() => { setOpenCode(true) }}>Have Promo Code?</Button>
+                            }
+                            {
+                              applyCode > 0 ?
+                                <>
+                                  <div className="fs17 col14 fw500">Coupon Code</div>
+                                  <div className="fs22 fw500 col64">
+                                    -
+                                    <i className="fa fa-inr"></i>
+                                    {applyCode}
+                                  </div>
+                                  <div className="fs17 col14 fw500">{editCoupon}</div>
+                                </>
+                                : null
                             }
                           </div>
                         </div>
@@ -144,7 +175,7 @@ const Checkouts = (props) => {
                             <div className="fs16 fw500 col18">Total Amount</div>
                             <div className="fs22 fw600 col18">
                               <i className="fa fa-inr"></i>
-                              {kitsDetail.month_array[priceIndex].kp_discount}
+                              {kitsDetail.month_array[priceIndex].kp_discount - applyCode}
                             </div>
                           </div>
                         </div>

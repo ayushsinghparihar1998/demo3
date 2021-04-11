@@ -2131,10 +2131,45 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  addKits_paymentdetails : {
+  addKits_paymentdetails: {
     url: 'elp/addKits_paymentdetails',
     method: "POST",
-    data: {kt_id:"",kt_amount:"",kt_month: ""},
+    data: { kt_id: "", kt_amount: "", kt_month: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  kits_redeemcode: {
+    url: 'elp/kits_redeemcode',
+    method: "POST",
+    data: { "gift_code": "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_quoteuserlist: {
+    url: 'elp/superadminget_quoteuserlist',
+    method: "POST",
+    data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_usercouponlist: {
+    url: 'elp/superadminget_usercouponlist',
+    method: "POST",
+    data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_assessmenttesthistory:{
+    url:'elp/superadminget_assessmenttesthistory',
+    method: "POST",
+    data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_userpurchasehistory:{
+    url:'elp/superadminget_userpurchasehistory',
+    method: "POST",
+    data: { count: '', offset: '' },
     showResultMessage: false,
     showErrorMessage: true
   }
