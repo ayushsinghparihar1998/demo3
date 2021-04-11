@@ -112,9 +112,9 @@
 }
 
 .plans {
-  position: relative;
+  position: relative;    
   .slick-list {
-    max-height: 508px;
+    max-height: 575px;       
   }
   ul.slick-dots {
     bottom: -20px;
@@ -222,6 +222,7 @@
     }
     .plantwo {
       padding: 20px;
+      padding-top: 10px;
       height: 190px;
       padding-bottom: 15px;
       background-image: url(../images/rectals.png);
@@ -251,6 +252,37 @@
           outline: 0;
         }
       }
+    }
+    .SelectPlans {   
+        max-width: 130px;
+        margin: auto;
+        margin-top: 5px;
+        .form-control {  
+            border-radius: 50px;
+            border: solid 1px $col1; 
+            color: $col1;
+            background: $col18; 
+            cursor: pointer; 
+            &:hover, &:focus {
+                box-shadow: none; 
+            }
+        }
+    }
+    button.btnTypDown {
+        background: transparent;
+        border: solid 1px $col1; 
+        color: $col1; 
+        text-transform: uppercase;
+        height: 3.2rem;
+        font-size: 14px;
+        border-radius: 50px;
+        font-weight: 500;
+        outline: 0;
+        &:hover, &:focus {
+          box-shadow: none;
+          background: transparent; 
+      }
+        
     }
     .planpricing {
       position: relative;
@@ -809,7 +841,7 @@ img {
 .bannerLinks {
     position: relative; 
     top: 30px;
-    background-image: url('../images/links.png'); 
+    background-image: url('../images/links.png');   
     width: 100%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -855,7 +887,7 @@ img {
   }
 }
 
-@media (min-width: 1380px) {       
+@media (min-width: 1380px) {        
    .bannerLinks {
        position: absolute; 
    }

@@ -54,7 +54,7 @@ const KitDetails = (props) => {
     }, [id]);
 
     return (
-        <div className="page__wrapper innerpage">
+        <div className="page__wrapper innerpage"> 
             <div className="main_baner">
                 <NavBar {...props} />
             </div>

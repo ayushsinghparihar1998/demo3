@@ -3913,9 +3913,17 @@ kt_status: "1" */}
                                   </div>
 
                                   <div className="fs16 fw400 col14 pb-1"> 
-                                    <Row> 
+                                    <Row>
+                                        <Col>
+                                            <div className="leftAudio">Audio Calls Limit : <strong className="fw600">120 mins</strong></div>
+                                        </Col>    
+                                        <Col>    
+                                            <div className="rightVideo">Video Calls Limit : <strong className="fw600">180 mins</strong></div>  
+                                        </Col>
+                                    </Row>
+                                    <Row>  
                                       {" "}
-                                      {item.month_array.map((val, ind) => {
+                                      {item.month_array.map((val, ind) => {    
                                         console.log("SERVICE",item)
                                         return (
                                           <>

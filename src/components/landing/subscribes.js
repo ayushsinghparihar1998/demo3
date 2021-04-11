@@ -74,7 +74,7 @@ class SubscribeHere extends Component {
   };
   render() {
     return (
-      <div className="subscribe_here2">
+      <div className="subscribe_here2">   
         <Container>
           <Row>
             <Col md={6} lg={6}>
@@ -83,9 +83,9 @@ class SubscribeHere extends Component {
                   <div className="fs30 col8 fw600 w-100"> 
                     Download our FREE guide now!
                   </div>
-                  <div className="col14 fs20 fw300 w-100">
+                  <div className="col14 fs20 fw300 w-100">  
                     Looking to implement corporate wellness in your
-                    organization?
+                    organization? 
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ class SubscribeHere extends Component {
             <Col md={6} lg={6}> 
               <div className="subscribe_form">
                 <Form>
-                  <Form.Group className="fgroups" controlId="formBasicEmail">
+                  <Form.Group className="fgroups" controlId="formBasicEmail"> 
                     <Form.Control
                       type="email"
                       placeholder="Email address"

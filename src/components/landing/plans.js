@@ -11,7 +11,7 @@ import {
   Row,
   Col,
   Modal
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 import { getLocalStorage } from "../../common/helpers/Utils";
 import { connect } from "react-redux";
 import validationSubscribe from "../../common/validations/validationSubscribe";
@@ -150,39 +150,48 @@ class Plans extends Component {
                                           : "praycat"
                                       }
                                     >
-                                      {val.puc_cat_name}
+                                      {val.puc_cat_name}  
                                       <span className="andClass">
                                         {item.plan_category.length == 2 &&
                                         index == 0
                                           ? " & "
                                           : ""}{" "}
                                       </span>
-                                    </span>
+                                    </span> 
                                   );
                                 })
                               )
                             ) : (
-                              "By Condition"
+                              "By Condition" 
                             )}
                           </div>
-                        </div>
-                        <div className="plantwo text-center">
-                          <div className="d-flex justify-content-center mb-2">
-                            <Button className="btnSave">
-                              {/* Save {item.pl_save}% */} {item.pl_title}
-                            </Button>
-                          </div>
+                        </div> 
+                        <div className="plantwo text-center">   
+                          <div className="d-flex justify-content-center mb-0"> 
+                            {/* <Button className="btnSave">
+                              Save {item.pl_save}% {item.pl_title}
+                            </Button> */}
+                            <div className="col1 fs20 fw600 text-uppercase">Basic</div>
+                          </div> 
                           <div className="pt-1">
                             <div className="col14 fs16 fw400 pb-1">
-                              <del>Rs. {item.pl_price}</del>
+                              <del>Rs. {item.pl_price}</del> 
                             </div>
                             <div className="col14 fs30 fw600 pb-1">
                               Rs.{" "}
                               {parseFloat(item.pl_discount_price).toFixed(2)}
                             </div>
-                            <div className="col14 fs17 fw400 peryears">
+                            {/* <div className="col14 fs17 fw400 peryears"> 
                               {item.pl_type == 1 ? "Per Month" : ""}
-                            </div>
+                            </div> */}
+                              <div className="SelectPlans">   
+                                <Form.Control as="select"> 
+                                  <option>3 Months</option>
+                                  <option>6 Months</option>
+                                  <option>9 Months</option>
+                                  <option>12 Months</option>
+                                </Form.Control>
+                              </div>
                           </div>
                         </div>
                         <div className="planpricing"> 
@@ -217,13 +226,27 @@ class Plans extends Component {
                               </span>
                             </li>
                           </ul>
+
+                          <Button className="btnTypDown d-block w-100 mt-4">  
+                            {/* <Link to={{ pathname: "/coming-soon" }}>
+                              Buy Now
+                            </Link> */}
+                            {/* <Link> 
+                              Buy Now  
+                            </Link> */}
+                                Download program brochure
+                          </Button>  
+
                           <Button className="btnType1 d-block w-100 mt-4" onClick={() => this.handleShow()}>
                             {/* <Link to={{ pathname: "/coming-soon" }}>
                               Buy Now
                             </Link> */}
-                            <Link> 
+                            {/* <Link> 
                               Buy Now  
-                            </Link> 
+                            </Link> */}
+                            <Link> 
+                                SUBSCRIBE NOW 
+                            </Link>  
                           </Button>
                           {/* <div className="fs14 col29 fw400 text-center mt-2">
                             COMING SOON
