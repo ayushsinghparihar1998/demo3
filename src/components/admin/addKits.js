@@ -21,6 +21,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Validator from "validator";
 import ValidationMessages from "../../common/helpers/ValidationMessages";
+import XCircle from "../../assets/images/XCircle.png";
 
 class AddKits extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class AddKits extends Component {
         kits_price_month: [
           {
             kp_min_range_month: '',
-            kp_max_range_month: '',
+            kp_max_range_month: '1',
             kp_price: '',
             kp_discount: ''
           }
@@ -93,7 +94,6 @@ class AddKits extends Component {
       serviceShow: false,
       customError: false
     };
-    this.checkServiceError = this.checkServiceError.bind(this);
   }
 
   componentDidMount = () => {
@@ -153,7 +153,6 @@ class AddKits extends Component {
         () => {
           console.log("kitObj", this.state.kitObj);
           console.log("serviceData", this.state.serviceData);
-          this.checkServiceError();
         }
       );
     }).catch((error) => console.log(error));
@@ -161,7 +160,7 @@ class AddKits extends Component {
 
   handleSubmit = () => {
     let kitObj = this.state.kitObj;
-    let errorCurrent = this.state.customError;
+    let errorCurrent = 0;
     let test = [];
     kitObj.kits_price_month.forEach((month_price, index) => {
       let k = {
@@ -171,31 +170,31 @@ class AddKits extends Component {
       };
       if (Validator.isEmpty(month_price.kp_price)) {
         k.kp_price = ValidationMessages.kits_price_month.kp_price.required;
-        errorCurrent = true;
+        errorCurrent = errorCurrent + 1;
       }
-      else errorCurrent = false;
+      // else errorCurrent = false;
       if (Validator.isEmpty(month_price.kp_discount)) {
         k.kp_discount = ValidationMessages.kits_price_month.kp_discount.required;
-        errorCurrent = true;
+        errorCurrent = errorCurrent + 1;
       }
-      else errorCurrent = false;
+      // else errorCurrent = false;
       if (parseInt(month_price.kp_price) <= parseInt(month_price.kp_discount)) {
         k.kp_price = ValidationMessages.kits_price_month.kp_price.balance;
         k.kp_discount = ValidationMessages.kits_price_month.kp_discount.balance;
-        errorCurrent = true;
+        errorCurrent = errorCurrent + 1;
       }
-      else errorCurrent = false;
+      // else errorCurrent = false;
       if (parseInt(month_price.kp_max_range_month) === 0) {
         k.kp_max_range_month = ValidationMessages.kits_price_month.kp_max_range_month.required;
-        errorCurrent = true;
+        errorCurrent = errorCurrent + 1;
       }
-      else errorCurrent = false;
+      // else errorCurrent = false;
       test.push(k);
     })
     this.setState({ errorKits_price_month: test, customError: errorCurrent }, () => console.log("ERROR KITS PRICE MONTH", test, kitObj.kits_price_month));
     console.log("DATA GOT ", this.state.kitObj);
     console.log(this.isValid(), "IS VALID ", !errorCurrent);
-    if (this.isValid() && !errorCurrent) {//this.isValid() && this.state.serviceShow
+    if (this.isValid() && errorCurrent === 0) {//this.isValid() && this.state.serviceShow
       this.setState({
         showLoader: true,
         kitObj,
@@ -278,29 +277,6 @@ class AddKits extends Component {
     return isValid;
   }
 
-  checkServiceError = () => {
-    let serviceData = this.state.serviceData;
-    let errorServiceData = this.state.errorServiceData;
-
-    let arr = [];
-    let err = [];
-    serviceData.map((item) => {
-      arr.push(!Object.values(item).some((o) => o == ""));
-    });
-    let val = arr.every((o) => o === true);
-    if (val == true) {
-      errorServiceData.map((item) => {
-        err.push(!Object.values(item).some((o) => o !== ""));
-      });
-      this.setState({
-        serviceShow: err.every((o) => o === true),
-      });
-    } else {
-      this.setState({
-        serviceShow: val,
-      });
-    }
-  };
 
   handleUploadPicture = async (event, name) => {
     // const fileObject = event.target.files[0];
@@ -413,6 +389,17 @@ class AddKits extends Component {
                       </Form.Label>
                       <div className="mt-1 mb-3 imgSetProfile">
                         <Image src={kitObj.kt_image_url} className="" />{" "}
+                        {
+                          !!kitObj.kt_image_url &&
+                          <Image
+                            src={XCircle}
+                            onClick={() => {
+                              let kitObj = this.state.kitObj;
+                              kitObj.kt_image_url = '';
+                              this.setState({ kitObj });
+                            }}
+                          />
+                        }
                       </div>
                       <Form.Group>
                         <Form.File

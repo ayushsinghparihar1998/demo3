@@ -18,6 +18,7 @@ import Suser from "../../assets/images/s_images.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Visibilitys from "../../assets/images/visibilitys.png";
 import VideoIcon from "../../assets/images/videoIcon.png";
+import SeeKitsIcon from "../../assets/images/see_kits.svg";
 // import moment from "moment"; 
 import {
   Button,
@@ -50,6 +51,10 @@ import {
 } from "../../common/helpers/Utils";
 import YouTube from "react-youtube";
 import DownLoadPDFListing from "./sidePage/dwnLdPDFListing";
+import UserQuoteDetail from "./sidePage/userQuoteDetail";
+import UserCouponDetail from "./sidePage/userCouponDetail";
+import AssTestPurchHist from "./sidePage/asstestPurcHistory";
+import UserPurchaseHistory from "./sidePage/userPurHist";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -195,6 +200,19 @@ class Adminlistener extends Component {
     else if (getLocalStorage("tabToOpen") === "dwnldPDFList") {
       this.getDwnLdPDFListing("dwnldPDFList", 12)
     }
+    else if (getLocalStorage("tabToOpen") === 'userQuoteDetails'){
+      this.addPageToList('userQuoteDetails',13)
+    }
+    else if (getLocalStorage("tabToOpen") === 'userCouponStatus'){
+      this.addPageToList('userCouponStatus',14)
+    }
+    else if (getLocalStorage("tabToOpen") === 'testPurchaseHis'){
+      this.addPageToList('testPurchaseHis',15)
+    }
+    else if (getLocalStorage("tabToOpen") === 'userPurHis'){
+      this.addPageToList('userPurHis',16)
+    }
+    //userPurHis
     // else if (
     //   getLocalStorage("tabToOpen") &&
     //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
@@ -218,9 +236,15 @@ class Adminlistener extends Component {
         pageType: "dwnldPDFList",
       }
     );
-    // ELPViewApiService("superadminget_subscriberlist",{count:10 , offset:1})
-    // .then((result)=>console.log("RESULT DOWNLOAD PDF " , result))
-    // .catch((err)=>console.log("error Occured", err));
+  }
+  addPageToList = (activaClass, pageNumber) => {
+    this.setState(
+      {
+        activeProfile: activaClass,
+        pageNumber: pageNumber,
+        pageType: activaClass,
+      }
+    );
   }
   getListnerListing = (e, activaClass, pageNumber) => {
     // let chkUserProfile = this.state.activeProfile;
@@ -1610,9 +1634,29 @@ class Adminlistener extends Component {
       this.state.pageType === "dwnldPDFList"
         ? "position-relative active"
         : "position-relative";
+    let userQteDetActiveClass = 
+    this.state.pageType === "userQuoteDetails"
+    ? "position-relative active"
+    : "position-relative";
+    let userCouponDetClass =
+    this.state.pageType === "userCouponStatus"
+    ? "position-relative active"
+    : "position-relative";
+    
+    let testPuchHisClass = 
+    this.state.pageType === "testPurchaseHis"
+    ? "position-relative active"
+    : "position-relative";
+    
+    let userPurHisClass = 
+    this.state.pageType === "userPurHis"
+    ? "position-relative active"
+    : "position-relative";
 
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
+
+
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -1842,6 +1886,60 @@ class Adminlistener extends Component {
                     </div>
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
+                        className={userQteDetActiveClass}
+                        onClick={(e) => {
+                          this.addPageToList("userQuoteDetails", 13);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          USER QUOTE DETAILS 
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={userCouponDetClass}
+                        onClick={(e) => {
+                          this.addPageToList("userCouponStatus", 14);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          USER COUPON STATUS 
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={testPuchHisClass}
+                        onClick={(e) => {
+                          this.addPageToList("testPurchaseHis", 15);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          ASSESMENT TEST PURCHASING HISTORY
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={userPurHisClass}
+                        onClick={(e) => {
+                          this.addPageToList("userPurHis", 16);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          User Purchasing History (KITS & Plans)
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
                         className={ratingActveClass}
                         onClick={(e) => {
                           this.getRatinguserListing(1, 10, 0);
@@ -1898,11 +1996,13 @@ class Adminlistener extends Component {
                   </div>
                 </div>
               </Col>
-              {
-                // this.state.pageType === "dwnldPDFList" ? <div>DOWNLOAD LISTING</div> :null
-              }
+              
               {
               this.state.pageType === "dwnldPDFList" ? <DownLoadPDFListing /> :
+              this.state.pageType === 'userQuoteDetails' ? <UserQuoteDetail /> :
+              this.state.pageType === 'userCouponStatus' ? <UserCouponDetail />:
+              this.state.pageType === 'testPurchaseHis' ? <AssTestPurchHist />:
+              this.state.pageType === 'userPurHis' ? <UserPurchaseHistory />:
               this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -3754,6 +3854,17 @@ cs_time: "00:00:02" */}
                                           }}
                                           checked={item.kt_status == "1"}
                                         />
+                                      </span>
+                                      <span className="mr-3">
+                                      <Image 
+                                      src={SeeKitsIcon}
+                                      onClick={() =>
+                                        this.changepath(
+                                          "/Kit/detail/" + item.kt_id,
+                                          "superadminkits_list"
+                                        )
+                                      }
+                                      />
                                       </span>
                                       <span className="mr-3">
                                         <Image
