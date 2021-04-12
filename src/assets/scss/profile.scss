@@ -3226,6 +3226,22 @@
         }
   }
   
+  .passageLayout { 
+    .ngo_listing {
+        padding: 0px 45px 0 !important; 
+    }
+    .PassagesList { 
+        border-bottom: 0.5px solid rgba(138, 209, 231, 0.33); 
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+    }
+    .minw-22 {
+        min-width: 22px; 
+    }
+      a.readMores {
+          color: $col10; 
+      }
+  }
   
   @media (min-width: 992px) and (max-width: 1199px) {
     .profile_layout {

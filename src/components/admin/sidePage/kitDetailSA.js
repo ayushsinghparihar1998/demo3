@@ -6,7 +6,7 @@ import ELPViewApiService from '../../../common/services/apiService';
 import NavBar from "../../core/nav";
 import Footer from "../../core/footer";
 import Slider from "react-slick";
-// import KitOne from "../../assets/images/kits.png";
+// import KitOne from "../../assets/images/kits.png"; 
 import KitOne from "../../../assets/images/kits.png";
 import KitTwo from "../../../assets/images/kits2.png";
 import KitThree from "../../../assets/images/kits3.png";
