@@ -129,6 +129,8 @@ import TestRequest from "../components/admin/superAdmin/testRequest";
 import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
 import CreateListPassage from "../components/admin/sidePage/createLisPassage";  
 import StartTest from "../components/passages/startText";  
+import GetAQuote from "../components/passages/getAQuotes"; 
+
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -272,6 +274,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/testRequest" component={TestRequest} /> 
           <PublicRoute path="/createPassage/:id" component={CreateListPassage} />
           <PublicRoute path="/startTest" component={StartTest} /> 
+          <PublicRoute path="/getAQuote" component={GetAQuote} /> 
 
           <PublicRoute   
             path="/professionalBlogList"
