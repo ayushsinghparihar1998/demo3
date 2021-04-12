@@ -22,9 +22,13 @@ function validateInput(data) {
   if (Validator.isEmpty(data.kt_overview) || data.kt_overview.trim() === "") {
     errors.kt_overview = ValidationMessages.kt_overview.required;
   }
-  if (Validator.isEmpty(data.kt_image_url)) {
+  // if (Validator.isEmpty(data.kt_image_url)) {
+  //   errors.kt_image_url = ValidationMessages.kt_image_url.required;
+  // }
+  if (data.kits_image_array.length === 0) {
     errors.kt_image_url = ValidationMessages.kt_image_url.required;
   }
+  //kits_image_array
   // data.kits_price_month.forEach((month_price,index)=>{
   //   console.log("month_price.kp_price",month_price.kp_price)
   //   console.log("errors.kits_price_month[index].kp_price" , errors.kits_price_month)

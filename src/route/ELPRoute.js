@@ -127,8 +127,7 @@ import UserQuoteDetails from "../components/admin/superAdmin/userQuoteDetails";
 import UserCouponDetails from "../components/admin/superAdmin/userCouponDetails";  
 import TestRequest from "../components/admin/superAdmin/testRequest";  
 import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
-import PassageText from "../components/passages/passageText";  
-
+import CreateListPassage from "../components/admin/sidePage/createLisPassage";  
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -270,8 +269,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/userQuoteDetails" component={UserQuoteDetails} />   
           <PublicRoute path="/userCouponDetails" component={UserCouponDetails} />
           <PublicRoute path="/testRequest" component={TestRequest} /> 
-          <PublicRoute path="/passageText" component={PassageText} />  
-          
+          <PublicRoute path="/createPassage/:id" component={CreateListPassage} />
 
           <PublicRoute   
             path="/professionalBlogList"

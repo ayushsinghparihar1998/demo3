@@ -1729,6 +1729,8 @@ export default {
       kt_price: "",
       kt_overview: "",
       kt_subheading: '',
+      kt_video_min: "",
+      kt_audio_min: "",
       kits_service_name: [
         {
           ks_services: "",
@@ -1767,6 +1769,8 @@ export default {
       // kt_services: "",
       kt_image_url: "",
       kt_price: "",
+      kt_video_min: "",
+      kt_audio_min: "",
       kits_service_name: [
         {
           ks_services: "",
@@ -2159,17 +2163,31 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  superadminget_assessmenttesthistory:{
-    url:'elp/superadminget_assessmenttesthistory',
+  superadminget_assessmenttesthistory: {
+    url: 'elp/superadminget_assessmenttesthistory',
     method: "POST",
     data: { count: '', offset: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-  superadminget_userpurchasehistory:{
-    url:'elp/superadminget_userpurchasehistory',
+  superadminget_userpurchasehistory: {
+    url: 'elp/superadminget_userpurchasehistory',
     method: "POST",
     data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  uploadKits_images: {
+    url: 'elp/uploadKits_images',
+    method: "POST",
+    data: [],
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_listnerparagraphtest:{
+    url:'elp/superadminget_listnerparagraphtest',
+    method : 'POST',
+    data : { "count" : '' , "offset" : ''},
     showResultMessage: false,
     showErrorMessage: true
   }
