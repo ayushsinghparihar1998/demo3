@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from "react-slick";
-import { Form, } from "react-bootstrap"; 
+import { Form, } from "react-bootstrap";
 
 import {
     Button
@@ -10,13 +10,13 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
     return (
         <>
             <div className="PlanListOne">
-                    <div className="banLayout"> 
-                        <div className="layTwo">Get 
-                         <span className="text-uppercase ml-1 mr-1">free audio video calls</span> 
-                          by buying any plan </div> 
-                    </div> 
+                <div className="banLayout">
+                    <div className="layTwo">Get
+                         <span className="text-uppercase ml-1 mr-1">free audio video calls</span>
+                          by buying any plan </div>
+                </div>
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
-                    Smart Plans  
+                    Smart Plans
                 </div>
                 <Slider {...settingstwo}>
                     {
@@ -70,10 +70,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                         </div>
                                         <div className="plantwo text-center">
                                             <div className="d-flex justify-content-center mb-2">
-                                                {/* <Button className="btnSave">
-                                                    {item.pl_title}
-                                                </Button> */}
-                                                <div className="col1 fs20 fw600 text-uppercase">Basic</div> 
+                                                <div className="col1 fs20 fw600 text-uppercase">{item.pl_title}</div>
                                             </div>
                                             <div className="pt-1">
                                                 <div className="col14 fs16 fw400 pb-1">
@@ -85,16 +82,13 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                         2
                                                     )}
                                                 </div>
-                                                {/* <div className="col14 fs17 fw400 peryears">
-                                                    {parseInt(item.pl_type) === 1 ? "Per Month" : ""}
-                                                </div> */}
-                                                <div className="SelectPlans">   
-                                                    <Form.Control as="select"> 
+                                                <div className="SelectPlans">
+                                                    <Form.Control as="select">
                                                         <option>3 Months</option>
                                                         <option>6 Months</option>
                                                         <option>9 Months</option>
                                                         <option>12 Months</option>
-                                                    </Form.Control> 
+                                                    </Form.Control>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,15 +98,15 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                     {item.pl_desc_details}
                                                 </div>
                                             </div>
-                                            <Button className="btnTypDown d-block w-100 mt-4">  
-                                                {/* <Link to={{ pathname: "/coming-soon" }}>
-                                                Buy Now
-                                                </Link> */}
-                                                {/* <Link> 
-                                                Buy Now  
-                                                </Link> */}
+                                            {
+                                                !!item.pl_pdf_doc &&
+                                                <Button
+                                                    className="btnTypDown d-block w-100 mt-4"
+                                                    onClick={() => { window.open(item.pl_pdf_doc, 'Download') }}
+                                                >
                                                     Download program brochure
-                                            </Button>
+                                                </Button>
+                                            }
                                             <Button onClick={handleShow} className="btnType1 d-block w-100 mt-4">
                                                 Buy Now
                                             </Button>
@@ -131,7 +125,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                 <Slider {...settingstwo}>
                     {dataByCondition &&
                         dataByCondition.map((item) => {
-                            console.log( item.pl_title === 'Early ACCESS' ? item : "ITEM NOT EARLY" , dataByCondition)
+                            console.log(item.pl_title === 'Early ACCESS' ? item : "ITEM NOT EARLY", dataByCondition)
                             return (
                                 <div className="items">
                                     <div className="planList">
@@ -139,12 +133,12 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                             <div className="offer_bg">
                                                 <div className="fs14 fw500 col64 savedata">
                                                     Save {item.pl_save}%
-                                                </div> 
+                                                </div>
                                             </div>
 
                                             <div className="fs24 fw600 col29 text-center text-capitalize">
                                                 {/* ------------------ */}
-                                                
+
                                                 {
                                                     planHolistic && parseInt(item.pl_type) === 1 ? (
                                                         item.plan_category.length === 3 ? (
@@ -184,8 +178,8 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                             <div className="d-flex justify-content-center mb-2">
                                                 {/* <Button className="btnSave">
                                                     {item.pl_title}
-                                                </Button> */} 
-                                                <div className="col1 fs20 fw600 text-uppercase">Basic</div> 
+                                                </Button> */}
+                                                <div className="col1 fs20 fw600 text-uppercase">Basic</div>
                                             </div>
                                             <div className="pt-1">
                                                 <div className="col14 fs16 fw400 pb-1">
@@ -203,14 +197,14 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                         {parseInt(item.pl_type) === 1 ? "Per Month" : ""}
                                                     </div>
                                                 } */}
-                                                    <div className="SelectPlans">   
-                                                        <Form.Control as="select"> 
+                                                <div className="SelectPlans">
+                                                    <Form.Control as="select">
                                                         <option>3 Months</option>
                                                         <option>6 Months</option>
                                                         <option>9 Months</option>
                                                         <option>12 Months</option>
-                                                        </Form.Control> 
-                                                    </div> 
+                                                    </Form.Control>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="planpricing">
@@ -222,8 +216,8 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                             {/* {
                                                 item.pl_pdf_doc && 
                                                 <a href={item.pl_pdf_doc} >Download PDF</a>
-                                            } */}  
-                                            <Button className="btnTypDown d-block w-100 mt-4">  
+                                            } */}
+                                            <Button className="btnTypDown d-block w-100 mt-4">
                                                 {/* <Link to={{ pathname: "/coming-soon" }}>
                                                 Buy Now
                                                 </Link> */}

@@ -43,6 +43,9 @@ class AddKits extends Component {
         kt_price: "",
         kt_overview: "",
         kt_subheading: '',
+        kt_video_min: "0",
+        kt_audio_min: "0",
+        kits_image_array: [],
         kits_service_name: [
           {
             ks_services: "0",
@@ -89,7 +92,7 @@ class AddKits extends Component {
         // kt_price: "",
         kt_overview: '',
         kt_subheading: '',
-
+        kits_image_array:[]
       },
       serviceShow: false,
       customError: false
@@ -252,11 +255,15 @@ class AddKits extends Component {
       }
     );
   };
-  handleChange = (event) => {
+  handleChange = (event , strat) => {
     console.log("Handle Change", event);
     const { name, value } = event.target;
     let kitObj = this.state.kitObj;
     kitObj[name] = value;
+    if(strat){
+      // if(parseInt(value) > 0 && parseInt(value) < 20)
+      kitObj[name] = (value ? parseInt(value) * 60 : '').toString() ;
+    }
     this.setState(
       {
         kitObj
@@ -278,42 +285,43 @@ class AddKits extends Component {
   }
 
 
-  handleUploadPicture = async (event, name) => {
+  handleUploadPicture = event => {
     // const fileObject = event.target.files[0];
-    console.log(event.target.files, "FILE OBJECT");
-    Object.values(event.target.files)
-      .forEach((fileObject) => {
-        if (fileObject) {
-          this.setState({
-            isUploading: true,
-          });
-          const formData = new FormData();
-          formData.set("u_image", fileObject);
-          console.log("formDataformData", formData);
 
-          const url = constant.SERVER_URL + "elp/uploadkits_image";
-          const config = {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          };
-          Axios.post(url, formData, config).then((response) => {
-            console.log(name, "resultresultresult", response);
-            let kitObj = this.state.kitObj;
-            let testImage = this.state.testImage;
-            kitObj.kt_image_url = response.data.data.filepath;
-            testImage.push(response.data.data.filepath);
-            this.setState({
-              isUploading: false,
-              kitObj,
-              testImage,
-              filename: fileObject.name,
-            }, () => console.log("AFTER FILE APPEND", kitObj, testImage));
-          }, (err) => console.log("ERROR ", err));
-          console.log("TEST IMAGE ", this.state.testImage)
-        }
-      });
-    console.log("TEST IMAGE ", this.state.testImage)
+    // const file = event.target.files[0];
+    for (let index = 0; index <= event.target.files.length; index++) {
+      const file = event.target.files[index];
+      const reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file)
+      }
+      reader.onloadend = () => {
+        const formdata = new FormData();
+        formdata.append('tt_images[]', file);
+        const url = constant.SERVER_URL + "elp/uploadKits_images";
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        Axios.post(url, formdata, config)
+          .then((res) => {
+            console.log(res, res.data.status === 'success')
+
+            if (res.data.status === 'success') {
+              const data = res.data.data;
+              const kitObj =this.state.kitObj;
+              kitObj.kits_image_array = kitObj.kits_image_array.concat(data) ;
+              kitObj.kt_image_url = kitObj.kt_image_url || data[0].file_path;
+              this.setState({ kitObj }, () => console.log("TEST STATE",kitObj));
+            }
+          })
+          .catch(err => err);
+      }
+
+    }
+
+
   };
   handlePriceMonth = (event, index) => {
     const { name, value } = event.target;
@@ -350,9 +358,10 @@ class AddKits extends Component {
     errorKits_price_month.splice(index, 1);
     this.setState({ kitObj, errorKits_price_month }, () => console.log("ADDED MONTH", kitObj, errorKits_price_month));
   }
+
   render() {
     const { kitObj, errors } = this.state;
-    console.log("TEST IMAGE ", this.state.testImage)
+
     return (
       <div className="page__wrapper innerpage">
         <div className="main_baner">
@@ -377,7 +386,7 @@ class AddKits extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={8} lg={9} className="pl-1">  
+              <Col md={8} lg={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
                     {this.props.match.params.id > 0 ? "UPDATE " : "ADD "}ELNP Kits
@@ -387,31 +396,65 @@ class AddKits extends Component {
                       <Form.Label className="fs20 fw600 col14">
                         Upload
                       </Form.Label>
-                      <div className="mt-1 mb-3 imgSetProfile">
-                        <Image src={kitObj.kt_image_url} className="" />{" "}
-                        {
-                          !!kitObj.kt_image_url &&
-                          <Image
-                            src={XCircle}
-                            onClick={() => {
-                              let kitObj = this.state.kitObj;
-                              kitObj.kt_image_url = '';
-                              this.setState({ kitObj });
-                            }}
-                          />
-                        }
-                      </div>
+
+                      {
+                        // !!kitObj.kt_image_url &&
+                        // <div className="mt-1 mb-3 imgSetProfile">
+                        //   <Image src={kitObj.kt_image_url} className="" />{" "}
+                        //   <Image
+                        //     src={XCircle}
+                        //     onClick={() => {
+                        //       let kitObj = this.state.kitObj;
+                        //       kitObj.kt_image_url = '';
+                        //       this.setState({ kitObj });
+                        //     }}
+                        //   />
+                        // </div>
+                      }
+                      {
+                        this.props.match.params.id === "0" ?
+                          <>
+                            {
+                              kitObj.kits_image_array.length !== 0 &&  kitObj.kits_image_array.map((file, index) =>
+                                <div className="mt-1 mb-3 imgSetProfile">
+                                  <Image src={file.file_path} className="" />{" "}
+                                  <Image
+                                    src={XCircle}
+                                    onClick={() => {
+                                      let test_img = this.state.kitObj.kits_image_array;
+                                      test_img.splice(index, 1);
+                                      this.setState({ kitObj: test_img });
+                                    }}
+                                  />
+                                </div>)
+                            }
+                          </>
+                          : <>
+                            {
+                              kitObj.kits_image_array.map((file, index) =>
+                                <div className="mt-1 mb-3 imgSetProfile">
+                                  <Image src={file.ki_image_upload || file.file_path} className="" />{" "}
+                                  <Image
+                                    src={XCircle}
+                                    onClick={() => {
+                                      let kitObj = this.state.kitObj
+                                      kitObj.kits_image_array.splice(index, 1);
+                                      this.setState({ kitObj });
+                                    }}
+                                  />
+                                </div>)
+                            }
+                          </>
+                      }
                       <Form.Group>
                         <Form.File
                           id="exampleFormControlFile1"
                           className="inputTyp2"
                           multiple={true}
-                          onChange={(e) =>
-                            this.handleUploadPicture(e, "backgroud_img")
-                          }
+                          onChange={this.handleUploadPicture}
                         />
                         <div className="col27 fs14 fw400 mt-2 error">
-                          {errors.kt_image_url}
+                          { errors.kits_image_array}
                         </div>
                       </Form.Group>
                     </Form.Group>
@@ -517,33 +560,40 @@ class AddKits extends Component {
                     </Form.Group>
 
                     <Row>
-                         <Col md={6}>
-                            <Form.Group className="mb-4">
-                            <Form.Label className="fs20 fw600 col14">
-                                Audio Calls<span className="fw400">(Minutes)</span>
-                             </Form.Label>
-                              <Form.Control
-                                type="text"
-                                className="inputTyp2"
-                                name="kt_subheading"
-                              />
-                              </Form.Group>
-                         </Col> 
-                         <Col md={6}>
-                            <Form.Group className="mb-4">
-                            <Form.Label className="fs20 fw600 col14">
-                                Video Calls<span className="fw400">(Minutes)</span>
-                             </Form.Label>
-                              <Form.Control
-                                type="text"
-                                className="inputTyp2"
-                                name="kt_subheading2"
-                              />
-                              </Form.Group>
-                         </Col> 
+                      <Col md={6}>
+                        <Form.Group className="mb-4">
+                          <Form.Label className="fs20 fw600 col14">
+                            Audio Calls<span className="fw400">(Minutes)</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="number"
+                            className="inputTyp2"
+                            name="kt_audio_min"
+                            value={parseInt(kitObj.kt_audio_min)/60}
+                            onChange={(e) => this.handleChange(e,"a")}
+                            max={20}
+                            min={0}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group className="mb-4">
+                          <Form.Label className="fs20 fw600 col14">
+                            Video Calls<span className="fw400">(Minutes)</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="number"
+                            className="inputTyp2"
+                            name="kt_video_min"
+                            value={kitObj.kt_video_min ? parseInt(kitObj.kt_video_min)/60 : ''}
+                            onChange={(e) => this.handleChange(e,"a")}
+                            max={20}
+                            min={0}
+                          />
+                        </Form.Group>
+                      </Col>
                     </Row>
 
-                    {console.log("kitObj.kits_price_month", kitObj.kits_price_month)}
                     {kitObj.kits_price_month && kitObj.kits_price_month.map((cat, index) => {
                       return (
                         <>

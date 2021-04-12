@@ -13,7 +13,7 @@ import { useHistory, useLocation, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import Alerts from "../../assets/images/alerts.png";
-import { getLocalStorage } from "../../common/helpers/Utils";
+import { getLocalStorage, showErrorToast, showSuccessToast } from "../../common/helpers/Utils";
 import ELPRxApiService from "../../common/services/apiService";
 
 const Checkouts = (props) => {
@@ -89,12 +89,17 @@ const Checkouts = (props) => {
   }, [id]);
 
   const applyCouponCode = () => {
-    setCouponCode(1);
+    // setCouponCode(1);
     // {"gift_code":"vhfnzjaxitqc"}
-    ELPViewApiService("kits_redeemcode", {"gift_code":"vhfnzjaxitqc"})
+    ELPViewApiService("kits_redeemcode", {"gift_code":editCoupon})
       .then((response) => {
         console.log("RESPONSE KITS CODE  ", response);
-        if (response.status === 200) {
+        if (response.data.status === "success") {
+          showSuccessToast(response.data.data.message)
+          setCouponCode(parseInt(kitsDetail.month_array[priceIndex].kp_discount));
+        }
+        else{
+          showErrorToast("Un Identified Coupon!");
         }
       })
       .catch(err => console.log("ERROR CAUSED ", err));

@@ -7,9 +7,6 @@ import {
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-// import KitOne from "../../assets/images/kits.png";
-// import KitTwo from "../../assets/images/kits2.png";
-// import KitThree from "../../assets/images/kits3.png";
 import ELPViewApiService from "../../common/services/apiService";
 import { useHistory } from "react-router";
 
@@ -60,105 +57,6 @@ const KitListings = (props) => {
                                     </Col>
                                 )
                             }
-                            {/* <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitOne} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Emotional Welness Kit</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitTwo} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">I’M Sexy</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitThree} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Feeling Fab</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitOne} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Feeling Fab</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitTwo} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">I’M Sexy</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitThree} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Emotional Welness Kit</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitOne} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">I’M Sexy</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitTwo} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Feeling Fab</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={4} sm={6}>
-                                <div className="mb-4">
-                                    <Image src={KitThree} className="emotions" />
-                                    <div className="col64 fw500 fs22 mb-1 mt-3">Emotional Welness Kit</div>
-                                    <div className="fs16 col14 fw400 mb-1">Lorem Ipsum is simply dummy text of the printing</div>
-                                    <div className="d-flex mb-2">
-                                        <span className="italics col14 fs16 fw400 mr-2">From</span>
-                                        <span className="prices col26"><i class="fa fa-inr" aria-hidden="true"></i> 1630</span>
-                                    </div>
-                                </div>
-                            </Col> */}
                         </Row>
                     </div>
                 </Container>

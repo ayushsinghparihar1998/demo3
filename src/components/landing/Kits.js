@@ -113,9 +113,7 @@ class Kits extends Component {
                               </div>
 
                               <div className="emotion_ul">
-                                <div className="fs13 col11 fw400">
-                                  {item.kt_desc}
-                                </div>
+                                <div className="fs13 col11 fw400" dangerouslySetInnerHTML={{__html:item.kt_desc}}/>
 
                                 <Button className="btnType1 d-block w-100 mt-4">
                                   <Link to={{ pathname: "/coming-soon" }}>

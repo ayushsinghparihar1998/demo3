@@ -55,6 +55,7 @@ import UserQuoteDetail from "./sidePage/userQuoteDetail";
 import UserCouponDetail from "./sidePage/userCouponDetail";
 import AssTestPurchHist from "./sidePage/asstestPurcHistory";
 import UserPurchaseHistory from "./sidePage/userPurHist";
+import ListnerPassage from "./sidePage/listnerPassage";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -212,7 +213,10 @@ class Adminlistener extends Component {
     else if (getLocalStorage("tabToOpen") === 'userPurHis'){
       this.addPageToList('userPurHis',16)
     }
-    //userPurHis
+    else if (getLocalStorage("tabToOpen") === 'list_pass'){
+      this.addPageToList('list_pass',17)
+    }
+    //list_pass
     // else if (
     //   getLocalStorage("tabToOpen") &&
     //   getLocalStorage("tabToOpen") == "superadminupload_cor_doc"
@@ -1653,6 +1657,11 @@ class Adminlistener extends Component {
     ? "position-relative active"
     : "position-relative";
 
+    let list_passClass =
+    this.state.pageType === "list_pass"
+    ? "position-relative active"
+    : "position-relative";
+
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
 
@@ -1937,6 +1946,21 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={list_passClass}
+                        onClick={(e) => {
+                          this.addPageToList("list_pass", 17);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          LISTNER's PASSAGE
+                        </div>
+                      </div>
+                    </div>
                     
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
@@ -2003,6 +2027,7 @@ class Adminlistener extends Component {
               this.state.pageType === 'userCouponStatus' ? <UserCouponDetail />:
               this.state.pageType === 'testPurchaseHis' ? <AssTestPurchHist />:
               this.state.pageType === 'userPurHis' ? <UserPurchaseHistory />:
+              this.state.pageType === 'list_pass' ? <ListnerPassage />:
               this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -3916,10 +3941,12 @@ kt_status: "1" */}
                                     <div className="borderFours">  
                                         <Row>
                                             <Col md={4}>    
-                                                <div className="leftAudio">Audio Calls Limit : <strong className="fw600">120 mins</strong></div>
+                                                <div className="leftAudio">Audio Calls Limit : 
+                                                <strong className="fw600">{Math.floor(parseInt(item.kt_audio_min)/60)} mins</strong></div>
                                             </Col>    
                                             <Col md={4}>     
-                                                <div className="rightVideo">Video Calls Limit : <strong className="fw600">180 mins</strong></div>  
+                                                <div className="rightVideo">Video Calls Limit : 
+                                                <strong className="fw600">{Math.floor(parseInt(item.kt_video_min)/60)} mins</strong></div>  
                                             </Col>
                                         </Row>
                                     </div>
