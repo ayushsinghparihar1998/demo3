@@ -19,7 +19,7 @@ const AssTestPurchHist = () => {
 
     function join(t, a, s) {
         function format(m) {
-            let f = new Intl.DateTimeFormat('en', m);
+            let f = new Intl.DateTimeFormat('en', m);  
             return f.format(t);
         }
         return a.map(format).join(s);
@@ -29,11 +29,11 @@ const AssTestPurchHist = () => {
 
 
     return (
-        <Col md={9} className="pl-1">
+        <Col md={9} className="pl-1">  
             <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">
                 <div className="chatsearch w-100">
                     <div className="myAssesstest">
-                        <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">USER QUOTE HISTORY</div>
+                        <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">USER QUOTE HISTORY</div> 
                         <div className="mainTables">
                             <Table bordered size="lg">
                                 <thead>
@@ -47,7 +47,7 @@ const AssTestPurchHist = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        assObj && assObj.map((users) =>
+                                        assObj && assObj.map((users) =>  
                                             <tr>
                                                 <td>{join(Date.parse(users.ah_datetime), a, '-')}</td>
                                                 <td>{users.u_name}</td>

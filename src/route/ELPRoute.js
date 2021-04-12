@@ -126,6 +126,8 @@ import AssessmentPurchasingHistory from "../components/admin/superAdmin/assessme
 import UserQuoteDetails from "../components/admin/superAdmin/userQuoteDetails";
 import UserCouponDetails from "../components/admin/superAdmin/userCouponDetails";  
 import TestRequest from "../components/admin/superAdmin/testRequest";  
+import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
+
 
 // const user =
 //   getLocalStorage("userInfo") ||
@@ -230,7 +232,7 @@ class ELPRoute extends Component {
           />
           <PublicRoute path="/blogVideoDetails" component={BlogVideoDetails} />
           <PublicRoute path="/addKits/:id" component={AddKits} />
-          {/* <PublicRoute path="/kit/detail/:id" component={KitsDetailSA} /> */}
+          <PublicRoute path="/kit/detail/:id" component={KitsDetailSA} />
           <PublicRoute path="/vlogList" component={VlogList} />
           <PublicRoute
             path="/assessmentTestList"
@@ -259,7 +261,7 @@ class ELPRoute extends Component {
           />
           <Route 
             path="/assessmentTests/:name"
-            component={AssessmentTestListTwo}
+            component={AssessmentTestListTwo} 
           />     
           <PublicRoute path="/mentalQa" component={MentalQa} />
           <PublicRoute path="/userPurchasingHistory" component={UserPurchasingHistory} />  

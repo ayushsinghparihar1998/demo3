@@ -2840,7 +2840,8 @@
       border-top: solid 10px $col23;
       padding: 0 30px 0;
       padding-bottom: 3rem;
-      img.emotions {
+      img.emotions {  
+        width: 100%; 
         height: 210px;
         object-fit: cover;
       }
@@ -3176,7 +3177,7 @@
       }
   }
 
-  .flexAssement {
+  .flexAssement {  
       width: 100%; 
       display: flex; 
       justify-content: space-between; 
@@ -3190,6 +3191,39 @@
           height: 2.5rem; 
           text-transform: capitalize; 
       }
+  }
+
+  .bg-grayarea { 
+      background-color: #f3fdff; 
+      overflow: hidden;
+      min-height: calc(100vh - 146px);
+      
+      .kitDetailMain {
+         margin-top: 24px; 
+            .kitDetailTwo {  
+              .kitsflex {
+                  display: flex;
+                  justify-content: space-between; 
+                  margin-top: 30px;
+                  margin-bottom: 20px; 
+                  button.btnTyp12 {
+                      &:hover, &:focus {
+                          background: transparent !important; 
+                          color: $col1 !important;
+                      }
+                  }
+              }
+              .detailsLeft {
+                .thumbDetails {
+                    .slick-slide { 
+                        img {
+                            height: 300px;
+                        }
+                    }
+                }
+              }
+            }
+        }
   }
   
   
