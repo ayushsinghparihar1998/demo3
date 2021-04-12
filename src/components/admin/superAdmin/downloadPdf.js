@@ -21,21 +21,21 @@ class DownloadPdf extends Component {
             <Container>
                 <Row>
                 <Col md={3} className="pr-1">
-                <div className="adminsidebar mt-4"> 
-                  <div className="inner_area">
-                    <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                      Quick Links
-                    </div>
-                    <div className="d-flex m-3 pb-3 border-bottom"> 
-                      <div>
-                        <div className="fs14 col28 fw500">
-                          <Link to={{ pathname: `/admin` }}>Back</Link> 
+                    <div className="adminsidebar mt-4"> 
+                    <div className="inner_area">
+                        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+                        Quick Links
                         </div>
-                      </div>
+                        <div className="d-flex m-3 pb-3 border-bottom"> 
+                        <div>
+                            <div className="fs14 col28 fw500">
+                            <Link to={{ pathname: `/admin` }}>Back</Link> 
+                            </div>
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </Col> 
+                    </div>
+                </Col> 
               <Col md={9} className="pl-1">
                     <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">   
                         <div className="chatsearch w-100">
