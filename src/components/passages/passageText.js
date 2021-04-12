@@ -115,7 +115,7 @@ class PassageText extends Component {
                                 <div className="d-flex justify-content-between">
                                     <div className="d-flex">
                                         <div className="minw-22 col8">1.</div>
-                                        <div>
+                                        <div> 
                                             <div className="col8 fw500 fs18 pb-1"> Hospitality Management</div>
                                                 <div className="fs16 fw400 col14 pb-1">Number of questions 
                                                 <span className="fw500 ml-1">: 120</span>
