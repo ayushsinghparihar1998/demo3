@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router';
-import Deleteicon from "../../../assets/images/delete_icon.svg";
-import Editicon from "../../../assets/images/edit_icon.svg";
-import Visibilitys from "../../../assets/images/visibilitys.png";
-import ELPViewApiService from '../../../common/services/apiService';
+import Deleteicon from "../../../../assets/images/delete_icon.svg";
+import Editicon from "../../../../assets/images/edit_icon.svg";
+import Visibilitys from "../../../../assets/images/visibilitys.png";
+import ELPViewApiService from '../../../../common/services/apiService';
 const ListnerPassage = () => {
     const [listPas, setListPass] = useState();
     const history = useHistory();

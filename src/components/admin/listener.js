@@ -55,7 +55,7 @@ import UserQuoteDetail from "./sidePage/userQuoteDetail";
 import UserCouponDetail from "./sidePage/userCouponDetail";
 import AssTestPurchHist from "./sidePage/asstestPurcHistory";
 import UserPurchaseHistory from "./sidePage/userPurHist";
-import ListnerPassage from "./sidePage/listnerPassage";
+import ListnerPassage from "./sidePage/ListnerPassage/listnerPassage";
 
 class Adminlistener extends Component {
   constructor(props) {

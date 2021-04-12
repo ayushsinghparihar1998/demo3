@@ -2184,10 +2184,37 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  superadminget_listnerparagraphtest:{
-    url:'elp/superadminget_listnerparagraphtest',
-    method : 'POST',
-    data : { "count" : '' , "offset" : ''},
+  superadminget_listnerparagraphtest: {
+    url: 'elp/superadminget_listnerparagraphtest',
+    method: 'POST',
+    data: { "count": '', "offset": '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminadd_listnerparagraphtest: {
+    url: 'elp/superadminadd_listnerparagraphtest',
+    method: 'POST',
+    data: { "lp_title": "", "lp_description": "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminadd_Listnerqueans: {
+    url: 'elp/superadminadd_Listnerqueans',
+    method: 'POST',
+    data: {
+      listner_paragraph_id: '',
+      listner_que_ans: [
+        {
+          ls_que_name: '',
+          ls_correct_answer: "",
+          ls_ans: [
+            {
+              option: ''
+            }
+          ]
+        }
+      ]
+    },
     showResultMessage: false,
     showErrorMessage: true
   }
