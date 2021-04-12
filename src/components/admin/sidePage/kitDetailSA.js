@@ -6,7 +6,7 @@ import ELPViewApiService from '../../../common/services/apiService';
 import NavBar from "../../core/nav";
 import Footer from "../../core/footer"; 
 import Slider from "react-slick";
-// import KitOne from "../../assets/images/kits.png";
+// import KitOne from "../../assets/images/kits.png"; 
 import KitOne from "../../../assets/images/kits.png";
 import KitTwo from "../../../assets/images/kits2.png";
 import KitThree from "../../../assets/images/kits3.png";
@@ -107,7 +107,7 @@ const KitsDetailSA = () => {
                                                 </ul>
                                             </div>
                                         </div>
-
+ 
                                         <div class="overViews"> 
                                             <div class="fs17 fw500 col14 mb-1">Description</div>
                                             <div class="fw400 fs15 col14 mt-1">

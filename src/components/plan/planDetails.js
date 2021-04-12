@@ -143,7 +143,7 @@ class PlanDetails extends Component {
       }
     );
   };
-  handleLogin(roleType) {
+  handleLogin(roleType) {     
     this.props.history.push({
       pathname: "login",
       state: { roleType: roleType, emailmember: this.state.email },
@@ -176,8 +176,8 @@ class PlanDetails extends Component {
     });
   };
 
-  render() {
-    const settingstwo = {
+  render() { 
+    const settingstwo = { 
       dots: true,
       infinite: true,
       speed: 500,
@@ -201,7 +201,7 @@ class PlanDetails extends Component {
         },
       ],
     };
-    const opts = {
+    const opts = { 
       height: "390",
       width: "640",
       playerVars: {
