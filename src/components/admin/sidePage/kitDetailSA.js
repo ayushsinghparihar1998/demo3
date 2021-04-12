@@ -42,8 +42,8 @@ const KitsDetailSA = () => {
                         </>
                         )
                     } 
-                </div>
-                <div>
+                </div>    
+                <div>  
                     KITS IMAGE : 
                     <Image src={kitObj.kt_image_url} width={100} height={100}/>    
                 </div>
