@@ -36,11 +36,11 @@ class PassageText extends Component {
                                                 <div className="fs16 fw400 col14 pb-1">Number of questions 
                                                 <span className="fw500 ml-1">: 120</span>
                                             </div>
-                                            <div className="fs15 col14 fw300">
+                                            <div className="fs15 col14 fw300">    
                                                 Lorem dummy content Lorem Ipsum is simply dummy text
                 of the printing and typesetting industry.  <a className="readMores">Read more...</a>
-                                            </div> 
-                                        </div>
+                                            </div>  
+                                        </div> 
                                     </div> 
 
                                     <div className="col81 fs15 fs400 pr-3">

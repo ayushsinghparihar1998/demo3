@@ -127,16 +127,12 @@ import UserQuoteDetails from "../components/admin/superAdmin/userQuoteDetails";
 import UserCouponDetails from "../components/admin/superAdmin/userCouponDetails";  
 import TestRequest from "../components/admin/superAdmin/testRequest";  
 import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
-<<<<<<< HEAD
 import CreateListPassage from "../components/admin/sidePage/ListnerPassage/createLisPassage";
-import PassageQA from "../components/admin/sidePage/ListnerPassage/passageQA";
-=======
-import CreateListPassage from "../components/admin/sidePage/createLisPassage";  
+import PassageQA from "../components/admin/sidePage/ListnerPassage/passageQA"; 
 import StartTest from "../components/passages/startText";  
 import GetAQuote from "../components/passages/getAQuotes"; 
-
->>>>>>> 572094709564481b65005004f443b943a14be306
-
+import PassageText from "../components/passages/passageText";   
+import ViewPassage from "../components/admin/superAdmin/viewPassage";  
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||
@@ -279,8 +275,12 @@ class ELPRoute extends Component {
           <PublicRoute path="/testRequest" component={TestRequest} /> 
           <PublicRoute path="/createPassage/:id" component={CreateListPassage} />
           <PublicRoute path="/passageQA/:id" component={PassageQA} />
+          {/* <PublicRoute path="/passageText" component={PassageText} /> */}
+        
           <PublicRoute path="/startTest" component={StartTest} /> 
           <PublicRoute path="/getAQuote" component={GetAQuote} /> 
+          <PublicRoute path="/viewPassage" component={ViewPassage} />  
+          
 
           <PublicRoute   
             path="/professionalBlogList"
