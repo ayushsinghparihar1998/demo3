@@ -42,7 +42,7 @@ const Checkouts = (props) => {
         .then((res) => {
           console.log("res ============>", res);
           if (res.data.data.dashboard_list.u_verified !== "1") {
-            setShowPopUp(true);
+            setShowPopUp('Please verify your email to start using our services.');
           }
           else if (kitsDetail.month_array[priceIndex].kp_max_range_month) {
             const data = {
@@ -67,7 +67,7 @@ const Checkouts = (props) => {
           console.log(err);
         });
     }
-    else setShowPopUp(true);
+    else setShowPopUp('You can not proceed without verifying your email address. Please create your account and profile first.');
   };
 
   const handleClose = () => {
@@ -214,7 +214,7 @@ const Checkouts = (props) => {
             </div>
             <div className="fw600 fs28 mb-3">Alert!</div>
             <div className="col14 fs20 fw500 mb-4">
-              You can not proceed without verifying your email address. Please create your account and profile first.
+              {showPopUp}
             </div>
             <Button
               type="button"

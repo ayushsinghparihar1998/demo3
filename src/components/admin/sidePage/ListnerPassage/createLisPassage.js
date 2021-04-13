@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import NavBar from "../../../core/navAdmin";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -10,22 +10,47 @@ const CreateListPassage = () => {
     const [passage, setPassage] = useState('');
     const [passDecribe, setPassDescribe] = useState('');
     const history = useHistory();
+    const { id } = useParams();
 
     const createPassage = () => {
-        const data = { "lp_title": passage, "lp_description": passDecribe };
-        ELPViewApiService('superadminadd_listnerparagraphtest',data)
-        .then((response)=>{
-            console.log("RESPONSE", response);
+        let data , type;
+        if(id === '0'){
+            data = { "lp_title": passage, "lp_description": passDecribe };
+            type = 'superadminadd_listnerparagraphtest';
+        }
+        else{
+            data = { "lp_id" : id, "lp_title": passage, "lp_description": passDecribe };
+            type = 'superadminedit_listnerparagraphtest';
+        }
+        ELPViewApiService(type, data)
+            .then((response) => {
+                console.log("RESPONSE", response);
                 if (response.data.status === 'success') {
                     const data = response.data.data;
                     console.log("DATA ", data);
-                    history.push(`/passageQA/${data.listner_paragraph_id}`)
+                    let passID = id !== '0' ? id : data.listner_paragraph_id
+                    history.push(`/passageQA/${passID}`)
                 }
-        })
-        .catch(err=>console.log("ERROR ",err));
+            })
+            .catch(err => console.log("ERROR ", err));
     }
 
-    
+    useEffect(() => {
+        if (id !== 0) {
+            ELPViewApiService('superadminget_detailslistnerparagraphtest', { "lp_id": id })
+                .then((response) => {
+                    console.log("RESPONSE ", response)
+                    if (response.data.status === "success") {
+                        const data = response.data.data;
+                        console.log("DATA ", data[0]);
+                        setPassage(data[0].lp_title);
+                        setPassDescribe(data[0].lp_description);
+                    }
+                })
+                .catch(err => new Error(`Error in Getting PARA ${err}`))
+        }
+    }, [id])
+
     return (
         <>
             <div className="page__wrapper innerpage">
@@ -53,7 +78,7 @@ const CreateListPassage = () => {
                             </Col>
                             <Col md={8} lg={9} className="pl-1">
                                 <div className="corporateMember subscriptionplan">
-                                    <div className="fs28 col10 mb-4">Create Passage</div>
+                                    <div className="fs28 col10 mb-4">{id === "0" ? 'Create' : 'Update'}  Passage</div>
                                     <Form>
                                         <Form.Group className="mb-4">
                                             <Form.Label className="fs20 fw600 col14">

@@ -8,7 +8,7 @@ import ELPViewApiService from '../../../../common/services/apiService';
 const ListnerPassage = () => {
     const [listPas, setListPass] = useState();
     const history = useHistory();
-    const openCreatePassage = () => history.push('/createPassage/0');
+    const openCreatePassage = (id) => history.push(`/createPassage/${id}`);
 
     useEffect(() => {
         ELPViewApiService('superadminget_listnerparagraphtest', { "count": 10, "offset": 1 })
@@ -44,7 +44,7 @@ const ListnerPassage = () => {
                                 <Button
                                     type="button"
                                     className="btnTyp5"
-                                    onClick={openCreatePassage}
+                                    onClick={()=>{openCreatePassage(0)}}
                                 >
                                     create passage
                             </Button>
@@ -98,6 +98,7 @@ const ListnerPassage = () => {
                                                             src={Editicon}
                                                             alt=""
                                                             className="pointer"
+                                                            onClick={()=>{openCreatePassage(list.lp_id)}}
                                                         />
                                                     </span>
                                                     <span>

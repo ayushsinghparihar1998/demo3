@@ -38,7 +38,9 @@ class addSubscription extends Component {
         pl_desc_details: "",
         pl_save: "",
         plan_type: "",
-        pl_pdf_doc:''
+        pl_pdf_doc: '',
+        pl_video_min: "0",
+        pl_audio_min: "0",
         // plan_cat_name: "",
       },
 
@@ -52,16 +54,18 @@ class addSubscription extends Component {
         pl_save: "",
         plan_type: "",
         plan_cat_name: "",
+        pl_video_min: "0",
+        pl_audio_min: "0",
       },
     };
   }
   componentDidMount = () => {
     console.log(window.location.hash);
     // window.onload = function () {
-      if (!window.location.hash) {
-        window.location = window.location + "#loaded";
-        window.location.reload();
-      }
+    if (!window.location.hash) {
+      window.location = window.location + "#loaded";
+      window.location.reload();
+    }
     // };
     console.log(this.props.match.params.id);
     console.log(this.props);
@@ -142,9 +146,11 @@ class addSubscription extends Component {
           pl_save: this.state.planObj.pl_save,
           pl_status: this.state.planObj.pl_status,
           pl_title: this.state.planObj.pl_title,
-          pl_pdf_doc : this.state.planObj.pl_pdf_doc,
+          pl_pdf_doc: this.state.planObj.pl_pdf_doc,
           // plan_cat_name: "",
           plan_type: this.state.planObj.plan_type,
+          pl_video_min: this.state.planObj.pl_video_min,
+          pl_audio_min: this.state.planObj.pl_audio_min,
         };
         if (
           +data.plan_type == 1 ||
@@ -166,8 +172,8 @@ class addSubscription extends Component {
             : +data.plan_type == 1 ||
               data.plan_type == "1" ||
               data.plan_type == 1
-            ? "superadminedit_plan1"
-            : "superadminedit_plan1",
+              ? "superadminedit_plan1"
+              : "superadminedit_plan1",
           data
         )
           .then((result) => {
@@ -206,8 +212,8 @@ class addSubscription extends Component {
           ? value || 0
           : parseFloat(value) || 0
         : name == "pl_save"
-        ? value.replace(/[^0-9]/g, "")
-        : value;
+          ? value.replace(/[^0-9]/g, "")
+          : value;
     let proffCat = this.state.proffCat;
     if (name == "plan_type" && +value == 2) {
       proffCat.map((item) => {
@@ -215,6 +221,10 @@ class addSubscription extends Component {
         return item;
       });
       delete planObj.plan_cat_name;
+    }
+    if (name === 'pl_audio_min' || name === 'pl_video_min') {
+      // if(parseInt(value) > 0 && parseInt(value) < 20)
+      planObj[name] = (value ? parseInt(value) * 60 : '').toString();
     }
     this.setState(
       {
@@ -304,13 +314,14 @@ class addSubscription extends Component {
         const message = response.data.message;
         showErrorToast(message);
       } else {
-      planObj.pl_pdf_doc = response.data.data.filepath;
-      console.log("GOING TO SET STATE ", planObj)
-      this.setState({
-        isUploading: false,
-        planObj,
-        filename: fileObject.name, 
-      });}
+        planObj.pl_pdf_doc = response.data.data.filepath;
+        console.log("GOING TO SET STATE ", planObj)
+        this.setState({
+          isUploading: false,
+          planObj,
+          filename: fileObject.name,
+        });
+      }
     }
   };
 
@@ -340,29 +351,31 @@ class addSubscription extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={8} lg={9} className="pl-1"> 
+              <Col md={8} lg={9} className="pl-1">
                 <div className="corporateMember subscriptionplan">
                   <div className="fs28 col10 mb-4">
                     {this.props.match.params.id == 0 ? "Add " : "Update "}
                     Subscription Plan
                   </div>
                   <Form>
-                  <Form.Group className="mb-4">
-                      <Form.Label className="fs20 fw600 col14"> 
-                          Upload  PDF
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fs20 fw600 col14">
+                        Upload  PDF
                       </Form.Label>
                       {
                         planObj.pl_pdf_doc &&
                         <div className="mt-1 mb-3 imgSetProfile">
-                        <Image src={planObj.pl_pdf_doc} className="" />{" "}
-                      </div>
+                          <Image src={planObj.pl_pdf_doc} className="" />{" "}
+                        </div>
                       }
                       <Form.Group>
                         <Form.File
                           id="exampleFormControlFile1"
                           className="inputTyp2"
-                          onChange={(e) =>{console.log("CHANGE D ",e);
-                            this.handleUploadPicture(e, "backgroud_img")}
+                          onChange={(e) => {
+                            console.log("CHANGE D ", e);
+                            this.handleUploadPicture(e, "backgroud_img")
+                          }
                           }
                         />
                         <div className="col27 fs14 fw400 mt-2 error">
@@ -427,6 +440,42 @@ class addSubscription extends Component {
                         {errors.pl_desc_details}
                       </div>
                     </Form.Group>
+
+                    <Row>
+                      <Col md={6}>
+                        <Form.Group className="mb-4">
+                          <Form.Label className="fs20 fw600 col14">
+                            Audio Calls<span className="fw400">(Minutes)</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="number"
+                            className="inputTyp2"
+                            name="pl_audio_min"
+                            value={parseInt(planObj.pl_audio_min) / 60}
+                            onChange={(e) => this.handleChange(e, "a")}
+                            max={20}
+                            min={0}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col md={6}>
+                        <Form.Group className="mb-4">
+                          <Form.Label className="fs20 fw600 col14">
+                            Video Calls<span className="fw400">(Minutes)</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="number"
+                            className="inputTyp2"
+                            name="pl_video_min"
+                            value={planObj.pl_video_min ? parseInt(planObj.pl_video_min) / 60 : ''}
+                            onChange={(e) => this.handleChange(e, "a")}
+                            max={20}
+                            min={0}
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
 
                     <Form.Group>
                       <Form.Label className="fs20 fw600 col14">
@@ -519,8 +568,8 @@ class addSubscription extends Component {
                           {errors.plan_cat_name}
                         </div>
                       ) : (
-                        ""
-                      )}
+                          ""
+                        )}
                     </Form.Group>
 
                     <Button

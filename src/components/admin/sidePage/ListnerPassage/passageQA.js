@@ -7,15 +7,18 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Deleteicon from "../../../../assets/images/delete_icon.svg";
 import ELPViewApiService from '../../../../common/services/apiService';
 import { showSuccessToast } from '../../../../common/helpers/Utils';
+import { nanoid } from 'nanoid'
 
 const EMPTY_QA = {
     ls_que_name: '',
     ls_correct_answer: "",
     ls_ans: [
         {
-            option: ''
+            option: '',
+            id: nanoid(5)
         }
-    ]
+    ],
+    id: nanoid(5)
 }
 
 const PassageQA = () => {
@@ -23,43 +26,96 @@ const PassageQA = () => {
     const { id } = useParams();
     const [listnerQA, setListnerQA] = useState([EMPTY_QA, EMPTY_QA]);
 
+    useEffect(()=>{
+        if(id !== '0'){
+            const data = {"count":10,"offset":1,"listner_paragraph_id":id}
+            ELPViewApiService('superadminget_quesanslistenerlist',data)
+            .then((response)=>{
+                console.log("RESPONSE", response);
+                if (response.data.status === 'success') {
+                    const data = response.data.data;
+                    console.log("DATA ", data)
+                }
+            })
+            .catch((err)=>new Error(`Error is ${err}`));
+        }
+    },[id])
 
     const addAnswer = (index) => {
-        console.log("BEFORE ,", listnerQA[index].ls_ans)
         const answer = EMPTY_QA.ls_ans;
         let newEdit = [...listnerQA];
         newEdit[index].ls_ans.push(answer[0]);
-        console.log("STATE ", index, listnerQA[index].ls_ans[index], answer, listnerQA[index].ls_ans)
         setListnerQA(newEdit);
     }
 
-    const deleteAnswer = (index) => {
-        let newEdit = [...listnerQA];
-        newEdit[index].ls_ans.splice(index, 1);
-        console.log("STATE ", listnerQA)
+    const deleteAnswer = (Qindex , Aindex) => {
+        listnerQA[Qindex].ls_ans.splice(Aindex, 1);
+        if(String(Aindex) === listnerQA[Qindex].ls_correct_answer){
+            listnerQA[Qindex].ls_correct_answer = ''
+        }
+        const newEdit = listnerQA.map((listner, i) => {
+            return Qindex === i ? ({
+                ...listner,
+                ls_correct_answer : listner.ls_correct_answer,
+                ls_ans: listner.ls_ans
+            }) : listner
+        })
         setListnerQA(newEdit);
     }
 
     const deleteQuestion = (index) => {
-        let newEdit = [...listnerQA];
-        newEdit.splice(index);
-        console.log("STATE ", listnerQA)
+        listnerQA.splice(index, 1);
+        const newEdit = listnerQA.map((listner, i) => {
+            return index === i ? ({
+                ...listner
+            }) : listner
+        })
         setListnerQA(newEdit);
     }
 
     const addQuestion = () => {
         let newEdit = [...listnerQA];
         newEdit.push(EMPTY_QA);
-        console.log("STATE ", listnerQA)
         setListnerQA(newEdit);
     }
 
-    const markCorrectAnswer = (index , idx) => {
-        let newEdit = [...listnerQA];
-        newEdit[index].ls_correct_answer = newEdit[index].ls_ans[idx].option;
-        console.log("STATE ", listnerQA)
+    const markCorrectAnswer = (index, idx) => {
+        const newEdit = listnerQA.map((listner, i) => {
+            return index === i ? ({
+                ...listner,
+                ls_correct_answer: String(idx)
+            }) : listner
+        })
         setListnerQA(newEdit);
     }
+
+    const enterQA = (editor, index) => {
+        let data = editor.getData();
+        const newEdit = listnerQA.map((listner, i) => {
+            return index === i ? ({
+                ...listner,
+                ls_que_name: data
+            }) : listner
+        })
+        setListnerQA(newEdit);
+    }
+
+    const enterAnswer = (editor, Qindex, Aindex) => {
+        let data = editor.getData();
+        const newEdit = listnerQA.map((listner, i) => {
+            return Qindex === i ? ({
+                ...listner,
+                ls_ans: listner.ls_ans.map((answer, i) => {
+                    return Aindex === i ? ({
+                        ...answer,
+                        option: data
+                    }) : answer
+                })
+            }) : listner
+        })
+        setListnerQA(newEdit);
+    }
+
 
     const submitForm = () => {
         const data = {
@@ -81,6 +137,7 @@ const PassageQA = () => {
     console.log("STATE ", listnerQA)
     return (
         <>
+            <pre>{JSON.stringify(listnerQA, null, 2)}</pre>
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
                     <NavBar />
@@ -111,7 +168,7 @@ const PassageQA = () => {
                                         {console.log("SD", listnerQA)}
                                         {
                                             listnerQA.map((listner, index) =>
-                                                <div key={"jnka".concat(index)}>
+                                                <div key={listner.id}>
                                                     <Form.Group className="mb-4">
                                                         <Form.Label className="fs20 fw600 col14 questionSet">
                                                             <div>Question. {index + 1} </div>
@@ -127,7 +184,7 @@ const PassageQA = () => {
                                                         </Form.Label>
 
                                                         <CKEditor
-                                                            key={listner.ls_que_name.concat("ds")}
+                                                            key={listner.id}
                                                             data={listner.ls_que_name}
                                                             config={{
                                                                 height: 500,
@@ -149,9 +206,7 @@ const PassageQA = () => {
                                                             }}
 
                                                             onChange={(event, editor) => {
-                                                                let data = editor.getData();
-                                                                listnerQA[index].ls_que_name = data;
-                                                                setListnerQA(listnerQA)
+                                                                enterQA(editor, index)
                                                             }}
                                                             className="inputTyp2"
                                                         />
@@ -169,7 +224,7 @@ const PassageQA = () => {
                                                                                 src={Deleteicon}
                                                                                 className="d2 pointer"
                                                                                 onClick={() => {
-                                                                                    deleteAnswer(index)
+                                                                                    deleteAnswer(index , idx)
                                                                                 }}
                                                                             />
                                                                         </div>
@@ -177,7 +232,7 @@ const PassageQA = () => {
 
 
                                                                     <CKEditor
-                                                                        key={answer.option}
+                                                                        key={answer.id}
                                                                         data={answer.option}
                                                                         config={{
                                                                             height: 500,
@@ -198,9 +253,7 @@ const PassageQA = () => {
                                                                             );
                                                                         }}
                                                                         onChange={(event, editor) => {
-                                                                            let data = editor.getData();
-                                                                            listnerQA[index].ls_ans[idx].option = data;
-                                                                            setListnerQA(listnerQA)
+                                                                            enterAnswer(editor, index, idx)
                                                                         }}
                                                                         className="inputTyp2"
                                                                     />
@@ -215,20 +268,21 @@ const PassageQA = () => {
                                                                             className="row"
                                                                         >
                                                                             <Form.Check
-                                                                                id={idx}
-                                                                                key={idx}
+                                                                                id={answer.id}
+                                                                                key={answer.id}
                                                                                 type="checkbox"
                                                                                 // className={`checkthree ${item.pbc_status == "1" ? "active" : ""
                                                                                 //     }`}
-                                                                                label={"Mark As A Correct Answer"}
-                                                                                onChange={()=>{
-                                                                                    markCorrectAnswer(index,idx)
+                                                                                // label={"Mark As A Correct Answer"}
+                                                                                onChange={() => {
+                                                                                    markCorrectAnswer(index, idx)
                                                                                 }}
-                                                                                // name={item.pbc_name}
-                                                                                // onChange={(e) => { }}
-                                                                                // value={item.pbc_id}
-                                                                                // checked={item.pbc_status == "1"}
+
+                                                                                checked={String(idx) === listner.ls_correct_answer}
                                                                             />
+                                                                            <Form.Label>
+                                                                                Mark As A Correct Answer
+                                                                            </Form.Label>
                                                                         </Form.Group>
                                                                     </div>
                                                                 </Form>
@@ -261,7 +315,7 @@ const PassageQA = () => {
                                             variant="btnTypAdd btnSet9"
                                             type="button"
                                             className="inputTyp2 form-control"
-                                            onClick={addQuestion}
+                                            onClick={() => { addQuestion() }}
                                         >
                                             <span className="col40">
                                                 <i className="fa fa-plus"></i>
@@ -273,7 +327,7 @@ const PassageQA = () => {
                                     <Button
                                         variant="primary btnTyp5 mt-4"
                                         type="button"
-                                        onClick={submitForm}
+                                        onClick={() => { submitForm() }}
                                     >
                                         Save
                                     </Button>
