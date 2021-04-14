@@ -6,6 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ELPViewApiService from '../../../../common/services/apiService';
 
+
 const CreateListPassage = () => {
     const [passage, setPassage] = useState('');
     const [passDecribe, setPassDescribe] = useState('');
@@ -29,14 +30,17 @@ const CreateListPassage = () => {
                     const data = response.data.data;
                     console.log("DATA ", data);
                     let passID = id !== '0' ? id : data.listner_paragraph_id
+                    if(id==='0')
                     history.push(`/passageQA/${passID}`)
+                    else
+                    history.push(`/viewPassage/${id}`)
                 }
             })
             .catch(err => console.log("ERROR ", err));
     }
 
     useEffect(() => {
-        if (id !== 0) {
+        if (id !== "0") {
             ELPViewApiService('superadminget_detailslistnerparagraphtest', { "lp_id": id })
                 .then((response) => {
                     console.log("RESPONSE ", response)
@@ -131,7 +135,7 @@ const CreateListPassage = () => {
                                             className="btnTyp5"
                                             onClick={createPassage}
                                         >
-                                            Next
+                                            {id === '0' ? 'Next' : 'Save'}
                                         </Button>
                                     </div>
 

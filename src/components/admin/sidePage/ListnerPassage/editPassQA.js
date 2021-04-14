@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import NavBar from "../../../core/navAdmin";
@@ -9,135 +9,114 @@ import ELPViewApiService from '../../../../common/services/apiService';
 import { showSuccessToast } from '../../../../common/helpers/Utils';
 import { nanoid } from 'nanoid'
 
+
 function stripHtml(html) {
     let tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
 }
 
-const EMPTY_QA = {
-    ls_que_name: '',
-    ls_correct_answer: "",
-    ls_ans: [
-        {
+const EditPassQA = () => {
+    const history = useHistory();
+    const { id , questionID} = useParams();
+    const [listPassQA, setListnerPassQA] = useState([]);
+
+    const openViewPassage = () => history.push(`/viewPassQA/${id}`);
+
+    useEffect(() => {
+        if (id !== '0') {
+            const data = { "count": "10", "offset": "1", "ql_id": questionID }
+            ELPViewApiService('superadminget_quesanslistnerdetails', data)
+                .then((response) => {
+                    console.log("RESPONSE ", response)
+                    if (response.data.status === "success") {
+                        const data = response.data.data;
+                        console.log("DATA ", data);
+
+                        const update = {
+                            ls_que_name: data[0].ql_text,
+                            ls_correct_answer: data[0].qc_correct_answer,
+                            ls_ans: data[0].uc_cat_name.map((answer) => ({ option: answer.qa_options, id: answer.qa_id })),
+                            id: data[0].qc_id
+                        }
+                        setListnerPassQA([update]);
+                        console.log("DATA ", update)
+                    }
+                })
+                .catch(err => new Error(`Error in Getting PARA ${err}`))
+        }
+    }, [id,questionID])
+
+    const onChangeQuestion = (e, editor) => {
+        let data = editor.getData();
+        const newEdit = [...listPassQA];
+        newEdit[0].ls_que_name = data;
+        console.log("ON CHANGE ", newEdit)
+        setListnerPassQA(newEdit)
+    }
+
+    const onChangeAnswer = (editor, index) => {
+        let data = editor.getData();
+        const newEdit = [...listPassQA];
+        newEdit[0].ls_ans[index].option = data;
+        console.log("ON CHANGE ", newEdit)
+        setListnerPassQA(newEdit)
+    }
+
+    const markCorrectAnswer = (index) => {
+        const newEdit = [...listPassQA];
+        newEdit[0].ls_correct_answer = newEdit[0].ls_ans[index].option;
+        setListnerPassQA(newEdit);
+    }
+
+    const addAnswer = (index) => {
+        const update = {
             option: '',
             id: nanoid(5)
         }
-    ],
-    id: nanoid(5)
-}
-
-const PassageQA = () => {
-    const history = useHistory();
-    const { id } = useParams();
-    const [listnerQA, setListnerQA] = useState([EMPTY_QA, EMPTY_QA]);
-
-    const addAnswer = (index) => {
-        const answer = EMPTY_QA.ls_ans;
-        let newEdit = [...listnerQA];
-        newEdit[index].ls_ans.push(answer[0]);
-        setListnerQA(newEdit);
+        const newEdit = [...listPassQA];
+        newEdit[0].ls_ans.splice(index + 1, 0, update);
+        setListnerPassQA(newEdit);
     }
 
-    const deleteAnswer = (Qindex, Aindex) => {
-        listnerQA[Qindex].ls_ans.splice(Aindex, 1);
-        if (String(Aindex) === listnerQA[Qindex].ls_correct_answer) {
-            listnerQA[Qindex].ls_correct_answer = ''
-        }
-        const newEdit = listnerQA.map((listner, i) => {
-            return Qindex === i ? ({
-                ...listner,
-                ls_correct_answer: listner.ls_correct_answer,
-                ls_ans: listner.ls_ans
-            }) : listner
-        })
-        setListnerQA(newEdit);
+    const deleteAnswer = (index) => {
+        const newEdit = [...listPassQA];
+        newEdit[0].ls_ans.splice(index);
+        setListnerPassQA(newEdit);
     }
-
-    const deleteQuestion = (index) => {
-        listnerQA.splice(index, 1);
-        const newEdit = listnerQA.map((listner, i) => {
-            return index === i ? ({
-                ...listner
-            }) : listner
-        })
-        setListnerQA(newEdit);
-    }
-
-    const addQuestion = () => {
-        let newEdit = [...listnerQA];
-        newEdit.push(EMPTY_QA);
-        setListnerQA(newEdit);
-    }
-
-    const markCorrectAnswer = (index, idx) => {
-        const newEdit = listnerQA.map((listner, i) => {
-            return index === i ? ({
-                ...listner,
-                ls_correct_answer: listner.ls_ans[idx].option
-            }) : listner
-        })
-        setListnerQA(newEdit);
-    }
-
-    const enterQA = (editor, index) => {
-        let data = editor.getData();
-        const newEdit = listnerQA.map((listner, i) => {
-            return index === i ? ({
-                ...listner,
-                ls_que_name: data
-            }) : listner
-        })
-        setListnerQA(newEdit);
-    }
-
-    const enterAnswer = (editor, Qindex, Aindex) => {
-        let data = editor.getData();
-        const newEdit = listnerQA.map((listner, i) => {
-            return Qindex === i ? ({
-                ...listner,
-                ls_ans: listner.ls_ans.map((answer, i) => {
-                    return Aindex === i ? ({
-                        ...answer,
-                        option: data
-                    }) : answer
-                })
-            }) : listner
-        })
-        setListnerQA(newEdit);
-    }
-
 
     const submitForm = () => {
-        const newEdit = listnerQA.map((listner) => {
+        const newEdit = listPassQA.map((listner) => {
             const updates = {
-                ls_que_name: stripHtml( listner.ls_que_name),
+                ls_que_name: stripHtml(listner.ls_que_name),
                 ls_correct_answer: stripHtml(listner.ls_correct_answer),
                 ls_ans: listner.ls_ans.map((answer) => ({ option: stripHtml(answer.option) }))
             }
             return updates;
         })
-        console.log("NEW EDIT ", newEdit);
+        
         const data = {
             listner_paragraph_id: id,
-            listner_que_ans: newEdit
+            listner_que_ans: newEdit,
+            listner_que_id: questionID
         }
-        ELPViewApiService('superadminadd_Listnerqueans', data)
+        console.log("NEW EDIT ", newEdit , data);
+        ELPViewApiService('superadminedit_Listnerqueans', data)
             .then((response) => {
                 console.log("RESPONSE", response);
                 if (response.data.status === 'success') {
                     const data = response.data.data;
                     console.log("DATA ", data);
                     showSuccessToast(response.data.message)
-                    history.push('/admin');
+                    openViewPassage()
                 }
             })
             .catch(err => console.log("Error is ", err))
     }
-    console.log("STATE ", listnerQA)
+
     return (
         <>
-            {/* <pre>{JSON.stringify(listnerQA, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(listPassQA, null, 2)}</pre> */}
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
                     <NavBar />
@@ -154,7 +133,7 @@ const PassageQA = () => {
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div>
                                                 <div className="fs14 col28 fw500">
-                                                    <Link to={{ pathname: `/admin` }}>Back</Link>
+                                                    <Link to={{ pathname: '/viewPassQA/'.concat(id) }}>Back</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,27 +144,25 @@ const PassageQA = () => {
                                 <div className="corporateMember subscriptionplan">
                                     <div className="fs28 col10 mb-4">Passage Q&A</div>
                                     <div className="QuestionListings">
-                                        {console.log("SD", listnerQA)}
                                         {
-                                            listnerQA.map((listner, index) =>
-                                                <div key={listner.id}>
+                                            listPassQA.length > 0 &&
+                                            listPassQA.map((list, index) =>
+                                                <div key={list.id}>
                                                     <Form.Group className="mb-4">
                                                         <Form.Label className="fs20 fw600 col14 questionSet">
                                                             <div>Question. {index + 1} </div>
-                                                            <div>
+                                                            {/* <div>
                                                                 <Image
                                                                     src={Deleteicon}
                                                                     className="d2 pointer"
-                                                                    onClick={() => {
-                                                                        deleteQuestion(index)
-                                                                    }}
+                                                                    
                                                                 />
-                                                            </div>
+                                                            </div> */}
                                                         </Form.Label>
 
                                                         <CKEditor
-                                                            key={listner.id}
-                                                            data={listner.ls_que_name}
+
+                                                            data={list.ls_que_name}
                                                             config={{
                                                                 height: 500,
                                                                 toolbar: [
@@ -205,27 +182,23 @@ const PassageQA = () => {
                                                                 );
                                                             }}
 
-                                                            onChange={(event, editor) => {
-                                                                enterQA(editor, index)
-                                                            }}
+                                                            onChange={onChangeQuestion}
                                                             className="inputTyp2"
                                                         />
 
                                                     </Form.Group>
 
                                                     {
-                                                        listner.ls_ans.map((answer, idx) =>
+                                                        list.ls_ans.map((answer, idx) =>
                                                             <>
                                                                 <Form.Group className="mb-4">
                                                                     <Form.Label className="fs20 fw600 col14 questionSet ansBg">
-                                                                        <div>Answer. {index + 1}</div>
+                                                                        <div>Answer. {idx + 1} </div>
                                                                         <div>
                                                                             <Image
                                                                                 src={Deleteicon}
                                                                                 className="d2 pointer"
-                                                                                onClick={() => {
-                                                                                    deleteAnswer(index, idx)
-                                                                                }}
+                                                                                onClick={() => { deleteAnswer(idx) }}
                                                                             />
                                                                         </div>
                                                                     </Form.Label>
@@ -253,7 +226,7 @@ const PassageQA = () => {
                                                                             );
                                                                         }}
                                                                         onChange={(event, editor) => {
-                                                                            enterAnswer(editor, index, idx)
+                                                                            onChangeAnswer(editor, idx)
                                                                         }}
                                                                         className="inputTyp2"
                                                                     />
@@ -268,17 +241,12 @@ const PassageQA = () => {
                                                                             className="row"
                                                                         >
                                                                             <Form.Check
-                                                                                id={answer.id}
-                                                                                key={answer.id}
                                                                                 type="checkbox"
-                                                                                // className={`checkthree ${item.pbc_status == "1" ? "active" : ""
-                                                                                //     }`}
-                                                                                // label={"Mark As A Correct Answer"}
                                                                                 onChange={() => {
-                                                                                    markCorrectAnswer(index, idx)
+                                                                                    markCorrectAnswer(idx)
                                                                                 }}
 
-                                                                                checked={stripHtml(answer.option) === stripHtml(listner.ls_correct_answer)}
+                                                                                checked={stripHtml(answer.option) === stripHtml(list.ls_correct_answer)}
                                                                             />
                                                                             <Form.Label>
                                                                                 Mark As A Correct Answer
@@ -292,9 +260,7 @@ const PassageQA = () => {
                                                                         <Button
                                                                             variant="btnTypAdd"
                                                                             type="button"
-                                                                            onClick={() => {
-                                                                                addAnswer(index)
-                                                                            }}
+                                                                            onClick={() => addAnswer(idx)}
                                                                         >
                                                                             <span>
                                                                                 <i className="fa fa-plus"></i>
@@ -311,23 +277,22 @@ const PassageQA = () => {
                                             )
                                         }
 
-                                        <Button
+                                        {/* <Button
                                             variant="btnTypAdd btnSet9"
                                             type="button"
                                             className="inputTyp2 form-control"
-                                            onClick={() => { addQuestion() }}
                                         >
                                             <span className="col40">
                                                 <i className="fa fa-plus"></i>
                                             </span>
                                             <b className="col40 fw500">Add Question</b>
-                                        </Button>
+                                        </Button> */}
 
                                     </div>
                                     <Button
                                         variant="primary btnTyp5 mt-4"
                                         type="button"
-                                        onClick={() => { submitForm() }}
+                                        onClick={submitForm}
                                     >
                                         Save
                                     </Button>
@@ -341,4 +306,4 @@ const PassageQA = () => {
     )
 }
 
-export default PassageQA;
+export default EditPassQA;

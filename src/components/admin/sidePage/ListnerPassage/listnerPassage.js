@@ -4,13 +4,16 @@ import { useHistory } from 'react-router';
 import Deleteicon from "../../../../assets/images/delete_icon.svg";
 import Editicon from "../../../../assets/images/edit_icon.svg";
 import Visibilitys from "../../../../assets/images/visibilitys.png";
+import { showSuccessToast } from '../../../../common/helpers/Utils';
 import ELPViewApiService from '../../../../common/services/apiService';
+
 const ListnerPassage = () => {
     const [listPas, setListPass] = useState();
     const history = useHistory();
     const openCreatePassage = (id) => history.push(`/createPassage/${id}`);
+    const openViewPassage = (id) => history.push(`/viewPassage/${id}`);
 
-    useEffect(() => {
+    const getListPara = () => {
         ELPViewApiService('superadminget_listnerparagraphtest', { "count": 10, "offset": 1 })
             .then((response) => {
                 console.log("RESPONSE", response);
@@ -20,7 +23,40 @@ const ListnerPassage = () => {
                     setListPass(data.listener_paragraph_test)
                 }
             })
+    }
+    useEffect(() => {
+        getListPara();
     }, []);
+
+    const deletePassage = (id) => {
+        console.log("GET ID" , id)
+        const data = {lp_id:id,  lp_status:"3"};
+        ELPViewApiService('superadminparagraph_testdeletestatus',data)
+        .then((response)=>{
+            console.log("RESPONSE", response);
+            if (response.data.status === 'success') {
+                console.log("DATA ", response.data);
+                showSuccessToast(response.data.message);
+                getListPara();
+            }
+        })
+        .catch((err)=>new Error(` Error ocured ${err}`))
+    }
+
+    const changeParaStatus = (id , status) => {
+        console.log("GET ID" , id)
+        const data = {lp_id:String(id),  lp_status:String(status)};
+        ELPViewApiService('superadminparagraph_testchangestatus',data)
+        .then((response)=>{
+            console.log("RESPONSE", response);
+            if (response.data.status === 'success') {
+                console.log("DATA ", response.data);
+                showSuccessToast(response.data.message);
+                getListPara();
+            }
+        })
+        .catch((err)=>new Error(` Error ocured ${err}`))
+    }
 
     if (!listPas) {
         return 'Loading...'
@@ -56,7 +92,7 @@ const ListnerPassage = () => {
 
                 {
                     listPas.map((list) =>
-                        <div className="adminlistener p-4 mb-3">
+                        <div className="adminlistener p-4 mb-3" key={list.lp_id}>
                             <div className="d-flex text-left">
                                 <div className="w-100">
                                     <div className="d-flex justify-content-between">
@@ -78,12 +114,15 @@ const ListnerPassage = () => {
                                                         </Button>
                                                     <span className="pr-3 disabled">
                                                         <Form.Check
-                                                            id={"custom-switch".concat("item.as_id")}
+                                                            id={"custom-switch".concat(list.lp_id)}
                                                             type="switch"
                                                             name="status"
+                                                            key={list.lp_id}
                                                             checked={list.lp_status === "1"}
                                                             label={list.lp_status === "1" ? "Enable" : "Disabled"}
-                                                        // onChange={(val) => { this.superAdminChange_AssesStatus(item.as_id, item.lp_status == "1" ? "2" : "1"); console.log("Onchange", item.lp_status, item.lp_status == "1" ? "Enable" : "Disabled") }}
+                                                            onChange={()=>{
+                                                                changeParaStatus(list.lp_id ,list.lp_status === '1' ? '2' : '1') 
+                                                            }}
                                                         />
                                                     </span>
                                                     <span className="mr-3">
@@ -91,6 +130,7 @@ const ListnerPassage = () => {
                                                             src={Visibilitys}
                                                             alt=""
                                                             className="pointer"
+                                                            onClick={()=>{openViewPassage(list.lp_id)}}
                                                         />
                                                     </span>
                                                     <span className="mr-3">
@@ -106,7 +146,7 @@ const ListnerPassage = () => {
                                                             src={Deleteicon}
                                                             alt=""
                                                             className="pointer"
-
+                                                            onClick={()=>{deletePassage(list.lp_id)}}
                                                         />
                                                     </span>
                                                 </div>
