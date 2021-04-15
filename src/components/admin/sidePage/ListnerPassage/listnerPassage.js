@@ -59,7 +59,34 @@ const ListnerPassage = () => {
     }
 
     if (!listPas) {
-        return 'Loading...'
+        return (
+            <Col md={8} lg={9} className="pl-1">
+                <div className="professor_search listBlogs VlogLists">
+                    <Row className="mb-1">
+                        <Col md={8}>
+                            <div className="fs22 fw600 col10">
+                                Listner's Passage
+                          </div>
+                            <div className="fw300 fs16 col14">
+                                {/* Lorem Ipsum is simply dummy and typesetting industry. */}
+                            </div>
+                        </Col>
+                        <Col md={4}>
+                            <div className="text-right pro_cbtn">
+                                <Button
+                                    type="button"
+                                    className="btnTyp5"
+                                    onClick={()=>{openCreatePassage(0)}}
+                                >
+                                    create passage
+                            </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                    No Passage Available .
+                </div>
+            </Col>
+        )
     }
     
     return (
