@@ -135,9 +135,9 @@ import PassageText from "../components/passages/passageText";
 import ViewPassage from "../components/admin/superAdmin/viewPassage";  
 import BannerDashboard from "../components/assessmentTest/bannerDashboard"; 
 import LuvPrayPlanDetails from "../components/assessmentTest/luvPrayPlanDetails"; 
-import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
+// import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
 import ViewPassQA from "../components/admin/sidePage/ListnerPassage/viewPassQA";
-import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA";
+import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA"; 
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||

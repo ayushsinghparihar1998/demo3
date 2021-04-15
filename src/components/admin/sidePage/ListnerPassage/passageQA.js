@@ -27,7 +27,7 @@ const EMPTY_QA = {
     id: nanoid(5)
 }
 
-const PassageQA = () => {
+const PassageQA = () => { 
     const history = useHistory();
     const { id } = useParams();
     const [listnerQA, setListnerQA] = useState([EMPTY_QA, EMPTY_QA]);
