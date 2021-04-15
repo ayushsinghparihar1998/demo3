@@ -1589,6 +1589,8 @@ export default {
       plan_type: "",
       pl_pdf_doc: '',
       plan_cat_name: "",
+      pl_video_min: "",
+        pl_audio_min: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -1605,6 +1607,8 @@ export default {
       plan_type: "",
       pl_pdf_doc: '',
       plan_cat_name: "",
+      pl_video_min: "",
+        pl_audio_min: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -1620,6 +1624,8 @@ export default {
       pl_save: "",
       plan_type: "",
       plan_cat_name: "",
+      pl_video_min: "",
+        pl_audio_min: "",
     },
     showResultMessage: true,
     showErrorMessage: true,
@@ -2198,6 +2204,27 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+  superadminedit_Listnerqueans: {
+    url: 'elp/superadminedit_Listnerqueans',
+    method: 'POST',
+    data: {
+      listner_paragraph_id: '',
+      listner_que_id:'',
+      listner_que_ans: [
+        {
+          ls_que_name: '',
+          ls_correct_answer: "",
+          ls_ans: [
+            {
+              option: ''
+            }
+          ]
+        }
+      ]
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
   superadminadd_Listnerqueans: {
     url: 'elp/superadminadd_Listnerqueans',
     method: 'POST',
@@ -2215,6 +2242,55 @@ export default {
         }
       ]
     },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_detailslistnerparagraphtest:{
+    url : "elp/superadminget_detailslistnerparagraphtest",
+    method : 'POST',
+    data : {lp_id:''}, //{lp_id:"",lp_title:"", lp_description:""},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminedit_listnerparagraphtest : {
+    url : 'elp/superadminedit_listnerparagraphtest',
+    method : 'POST',
+    data : {lp_id:"",lp_title:"", lp_description:""},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_quesanslistenerlist:{
+    url : 'elp/superadminget_quesanslistenerlist',
+    method : 'POST',
+    data : {"count":'',"offset":'',"listner_paragraph_id":""},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminparagraph_testdeletestatus: {
+    url : 'elp/superadminparagraph_testdeletestatus',
+    method : 'POST',
+    data : {lp_id:'',  lp_status:''},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminparagraph_testchangestatus:{
+    url :'elp/superadminparagraph_testchangestatus',
+    method : 'POST',
+    data : {lp_id:'',  lp_status:''},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_quesanslistnerdetails : {
+    url : 'elp//superadminget_quesanslistnerdetails',
+    method : 'POST',
+    data : {"count":'',"offset":'',"ql_id":''},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminqueans_listnerchangestatus:{
+    url : 'elp/superadminqueans_listnerchangestatus',
+    method : 'POST',
+    data : {ql_id:'',  ql_status : ""},
     showResultMessage: false,
     showErrorMessage: true
   }

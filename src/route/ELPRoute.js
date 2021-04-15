@@ -135,6 +135,9 @@ import PassageText from "../components/passages/passageText";
 import ViewPassage from "../components/admin/superAdmin/viewPassage";  
 import BannerDashboard from "../components/assessmentTest/bannerDashboard"; 
 import LuvPrayPlanDetails from "../components/assessmentTest/luvPrayPlanDetails"; 
+import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
+import ViewPassQA from "../components/admin/sidePage/ListnerPassage/viewPassQA";
+import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA";
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||
@@ -283,9 +286,10 @@ class ELPRoute extends Component {
         
           <PublicRoute path="/startTest" component={StartTest} /> 
           <PublicRoute path="/getAQuote" component={GetAQuote} /> 
-          <PublicRoute path="/viewPassage" component={ViewPassage} />  
+          <PublicRoute path="/viewPassage/:id" component={ViewPassage} />  
+          <PublicRoute path="/viewPassQA/:id" component={ViewPassQA} />            
+          <PublicRoute path="/editPassQA/:id/:questionID" component={EditPassQA} />            
           
-
           <PublicRoute   
             path="/professionalBlogList"
             component={ProfessionalBlogList} 

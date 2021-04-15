@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import { Button, NavDropdown, Carousel, Container, Row, Col, Image, Form, Tabs, Tab, Modal, Table } from "react-bootstrap";
+import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import NavBar from "../../core/nav";
-import Footer from "../../core/footer"; 
-import Requestuser from "../../../assets/images/pro_img.svg";
-import Requestusertwo from "../../../assets/images/pro_img2.svg";
-import Visibilitys from "../../../assets/images/visibilitys.png";      
-import Deleteicon from "../../../assets/images/delete_icon.svg";
-import ArrowDownload from "../../../assets/images/arrow_download.png";  
+import Footer from "../../core/footer";  
 import Editicon from "../../../assets/images/edit_icon.svg"; 
 import { Link } from "react-router-dom";        
 

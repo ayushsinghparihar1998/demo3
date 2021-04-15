@@ -148,9 +148,9 @@ const KitDetails = (props) => {
 
                                                 }
                                                 <div className="byBtnmain">
-                                                    <Button type="button" className="btnTyp5 byBtns" onClick={buyNow}>Buy Now <span><Image src={RightArrow2} /></span></Button>
+                                                    <Button type="button" className="btnTyp5 byBtns" >Buy Now <span><Image src={RightArrow2} /></span></Button>
 
-                                                    <Button type="button" className="btnTyp5 gifts">Give as a gift <span><Image src={GiftBox} /></span></Button>
+                                                    <Button type="button" className="btnTyp5 gifts" onClick={buyNow}>Give as a gift <span><Image src={GiftBox} /></span></Button>
                                                 </div>
 
                                                 <div className="overViews">
