@@ -2315,7 +2315,12 @@
             text-transform: capitalize;
             padding-top: 10px;
             transition: 0.5s;
-            cursor: pointer;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: pointer;                  
   
             &::first-letter {
               font-size: 100%;
@@ -3262,6 +3267,148 @@
           } 
       }
   }
+
+// banner start 
+
+.dashboardBannerOne {   
+    position: relative;
+    background-image: url('../images/dashban1.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    padding: 20px; 
+    height: 132px;  
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    button.btnTyp6 {  
+        margin-top: 20px;
+        color: $col149 !important; 
+        border-radius: 5px;  
+        background: $col18 !important;
+        text-transform: capitalize;
+        font-size: 18px;     
+        outline: 0;
+        cursor: pointer; 
+        &:hover, &:focus {
+            background: $col18 !important; 
+            color: $col149 !important; 
+            box-shadow: none; 
+        }
+    }
+}
+
+.dashboardBannerTwo {    
+    position: relative;
+    background-image: url('../images/dashban2.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat;  
+    padding: 20px; 
+    height: 132px;  
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+}
+
+.dashboardBannerThree {     
+  position: relative;
+  background-image: url('../images/dashban3.png'); 
+  background-size: contain; 
+  background-repeat: no-repeat;  
+  padding: 20px; 
+  height: 132px;  
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  .subsc { 
+    color: $col18; 
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+.dashboardBannerFour {       
+  position: relative;
+  background-image: url('../images/dashban4.png');   
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .jakao {
+      position: relative; 
+      border: 1px dashed $col18; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+  }
+
+  &.fiveBans {
+      background-image: url('../images/dashban5.png'); 
+  }
+}
+
+.dashboardBannerSix {    
+  position: relative;
+  background-image: url('../images/dashban6.png'); 
+  background-size: contain; 
+  background-repeat: no-repeat;  
+  padding: 20px; 
+  height: 132px;  
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  .subsc { 
+    position: absolute;
+    top: 12px;
+    left: 25px;
+    text-align: center;
+  }
+  ul {
+      width: 100%;
+      margin: 0;
+      padding: 0; 
+      li { 
+          width: 100%;
+          margin-left: 10px; 
+          list-style: circle; 
+          color: $col18; 
+          // display: flex;
+          // justify-content: space-between; 
+      }
+  }
+}
+
+.luvPrayDetails {
+    .luvPrayList {
+        .luvTwo {
+            border: 1px solid #9FBAFF;
+            border-radius: 5px;
+            overflow: hidden;
+            .planSecond {
+              padding: 20px 20px 40px;  
+            }
+        }
+        .prayDetails { 
+            position: relative;
+            background-image: url('../images/dashban7.png');   
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            height: 145px;
+            display: flex;
+            align-items: center;
+            width: 100%; 
+        }
+    }
+}
+
   
   @media (min-width: 992px) and (max-width: 1199px) {
     .profile_layout {

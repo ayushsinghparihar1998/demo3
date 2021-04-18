@@ -326,14 +326,14 @@
     }
   }
   &.kits {
-    position: relative;
+    position: relative; 
     background: $col107;
     margin-top: 55px !important;
-    padding-top: 40px;
-    padding-bottom: 80px;
+    padding-top: 40px; 
+    padding-bottom: 80px; 
 
     .slick-list {
-      max-height: 620px;
+      max-height: 520px; 
     }
     ul.slick-dots {
       bottom: -20px;

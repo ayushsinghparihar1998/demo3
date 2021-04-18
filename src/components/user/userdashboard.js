@@ -283,7 +283,7 @@ class Userdashboard extends Component {
       let recentJoin = this.state.recentJoin;
       let dashboardData = this.state.dashboardData;
       return (
-         <div className="page__wrapper innerpage">
+         <div className="page__wrapper innerpage"> 
             <div className="main_baner">
                <NavBar {...this.props} />
             </div>
@@ -292,7 +292,7 @@ class Userdashboard extends Component {
                   <Row>
                      <Col md={9}>
                         <Row>
-                           <Col md={4} className="pl-0">
+                           <Col md={4} className="pl-0"> 
                               <div className="left_sidebar">
                                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
 

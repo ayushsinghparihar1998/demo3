@@ -28,7 +28,7 @@ const EMPTY_QA = {
     id: nanoid(5)
 }
 
-const PassageQA = () => {
+const PassageQA = () => { 
     const history = useHistory();
     const location = useLocation();
     const { id } = useParams();

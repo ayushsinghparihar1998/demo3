@@ -281,7 +281,7 @@ class Userdashboard extends Component {
             <div className="main_baner">
                <NavBar {...this.props} />
             </div>
-            <div className="userdashboards pt-4 pb-5">
+            <div className="userdashboards pt-4 pb-5"> 
                <Container>
                   <Row>
                      {' '}
@@ -493,7 +493,7 @@ class Userdashboard extends Component {
                                        <div className="fs13 fw500 col18">Listener to Listener</div>
                                        <div className="fs12 fw500 col18">Coming soon for now</div>
                                     </div>
-                                 </div>
+                                 </div> 
                               </div>
                            </Col>
 
@@ -688,7 +688,7 @@ class Userdashboard extends Component {
                            <div className="right_inner_side">
                               <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                                  Recent join
-                  </div>
+                           </div>
                               {recentJoin &&
                                  recentJoin.map((data, index) => {
                                     return (

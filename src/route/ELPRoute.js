@@ -132,15 +132,18 @@ import PassageQA from "../components/admin/sidePage/ListnerPassage/passageQA";
 import StartTest from "../components/passages/startText";  
 import GetAQuote from "../components/passages/getAQuotes"; 
 import PassageText from "../components/passages/passageText";   
-import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
+import ViewPassage from "../components/admin/superAdmin/viewPassage";  
+import BannerDashboard from "../components/assessmentTest/bannerDashboard"; 
+import LuvPrayPlanDetails from "../components/assessmentTest/luvPrayPlanDetails"; 
+// import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
 import ViewPassQA from "../components/admin/sidePage/ListnerPassage/viewPassQA";
-import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA";
+import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA"; 
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||
 //   getLocalStorage("customerInfo") ||
 //   getLocalStorage("userInfoAdmin");
-class ELPRoute extends Component {
+class ELPRoute extends Component { 
   state = {};
   componentDidMount() {
     window.addEventListener("beforeunload", socketClass.disconnect);
@@ -278,6 +281,8 @@ class ELPRoute extends Component {
           <PublicRoute path="/createPassage/:id" component={CreateListPassage} />
           <PublicRoute path="/passageQA/:id" component={PassageQA} />
           {/* <PublicRoute path="/passageText" component={PassageText} /> */}
+          <PublicRoute path="/bannerDashboard" component={BannerDashboard} />  
+          <PublicRoute path="/luvPrayPlanDetails" component={LuvPrayPlanDetails} />  
         
           <PublicRoute path="/startTest" component={StartTest} /> 
           <PublicRoute path="/getAQuote" component={GetAQuote} /> 

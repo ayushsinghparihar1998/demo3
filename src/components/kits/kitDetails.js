@@ -60,8 +60,8 @@ const KitDetails = (props) => {
             </div>
             <div className="kitDetailMain">   
                 <Container>
-                    <div className="kitDetailTwo mt-4 mb-4">
-                        <div className="fs18 text-left fw500 mt-3 mb-5" onClick={goToKitList}><span className="col14 fw300 mr-1">Kits</span> /
+                    <div className="kitDetailTwo mt-4 mb-4">  
+                        <div className="fs18 text-left fw500 mt-3 mb-5 pointer" onClick={goToKitList}><span className="col14 fw300 mr-1">Kits</span> /
                       <span className="col29 fs18 ml-1">Kit Details</span></div>
 
                         <Row>

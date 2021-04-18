@@ -12,7 +12,7 @@ import {
   Tabs,
   Tab,
   Modal,
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
@@ -231,8 +231,8 @@ class Userdashboard extends Component {
             <Row>
               <Col md={3}>
                 <div className="left_sidebar">
-                  <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
+                  <RecentChat onRedirect={this.handleRedirectRecentChat} />  
+                  <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />  
                   {/* <div className="inner_side">
                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
                       Chat
@@ -333,11 +333,11 @@ class Userdashboard extends Component {
                           Show Less
                         </div>
                       )}
-                  </div> */}
+                  </div> */}  
                 </div>
               </Col>
 
-              <Col md={6}>
+              <Col md={6}>        
                 <div className="user_body">
                   <div className="inner_body mb-3">
                     <div className="d-flex justify-content-between border_yellow">
