@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import Deleteicon from "../../../../assets/images/delete_icon.svg";
 import Editicon from "../../../../assets/images/edit_icon.svg";
 import Visibilitys from "../../../../assets/images/visibilitys.png";
@@ -10,8 +10,10 @@ import ELPViewApiService from '../../../../common/services/apiService';
 const ListnerPassage = () => {
     const [listPas, setListPass] = useState();
     const history = useHistory();
-    const openCreatePassage = (id) => history.push(`/createPassage/${id}`);
-    const openViewPassage = (id) => history.push(`/viewPassage/${id}`);
+    const location = useLocation();
+    const openCreatePassage = (id) => history.push(`/createPassage/${id}`, location.state);
+    const openViewPassage = (id) => history.push(`/viewPassage/${id}`, location.state);
+    const openAddQuestion = (id) => history.push(`/passageQA/${id}` , location.state);
 
     const getListPara = () => {
         ELPViewApiService('superadminget_listnerparagraphtest', { "count": 10, "offset": 1 })
@@ -29,33 +31,33 @@ const ListnerPassage = () => {
     }, []);
 
     const deletePassage = (id) => {
-        console.log("GET ID" , id)
-        const data = {lp_id:id,  lp_status:"3"};
-        ELPViewApiService('superadminparagraph_testdeletestatus',data)
-        .then((response)=>{
-            console.log("RESPONSE", response);
-            if (response.data.status === 'success') {
-                console.log("DATA ", response.data);
-                showSuccessToast(response.data.message);
-                getListPara();
-            }
-        })
-        .catch((err)=>new Error(` Error ocured ${err}`))
+        console.log("GET ID", id)
+        const data = { lp_id: id, lp_status: "3" };
+        ELPViewApiService('superadminparagraph_testdeletestatus', data)
+            .then((response) => {
+                console.log("RESPONSE", response);
+                if (response.data.status === 'success') {
+                    console.log("DATA ", response.data);
+                    showSuccessToast(response.data.message);
+                    getListPara();
+                }
+            })
+            .catch((err) => new Error(` Error ocured ${err}`))
     }
 
-    const changeParaStatus = (id , status) => {
-        console.log("GET ID" , id)
-        const data = {lp_id:String(id),  lp_status:String(status)};
-        ELPViewApiService('superadminparagraph_testchangestatus',data)
-        .then((response)=>{
-            console.log("RESPONSE", response);
-            if (response.data.status === 'success') {
-                console.log("DATA ", response.data);
-                showSuccessToast(response.data.message);
-                getListPara();
-            }
-        })
-        .catch((err)=>new Error(` Error ocured ${err}`))
+    const changeParaStatus = (id, status) => {
+        console.log("GET ID", id)
+        const data = { lp_id: String(id), lp_status: String(status) };
+        ELPViewApiService('superadminparagraph_testchangestatus', data)
+            .then((response) => {
+                console.log("RESPONSE", response);
+                if (response.data.status === 'success') {
+                    console.log("DATA ", response.data);
+                    showSuccessToast(response.data.message);
+                    getListPara();
+                }
+            })
+            .catch((err) => new Error(` Error ocured ${err}`))
     }
 
     if (!listPas) {
@@ -76,7 +78,7 @@ const ListnerPassage = () => {
                                 <Button
                                     type="button"
                                     className="btnTyp5"
-                                    onClick={()=>{openCreatePassage(0)}}
+                                    onClick={() => { openCreatePassage(0) }}
                                 >
                                     create passage
                             </Button>
@@ -88,7 +90,7 @@ const ListnerPassage = () => {
             </Col>
         )
     }
-    
+
     return (
         <>
             <Col md={8} lg={9} className="pl-1">
@@ -107,7 +109,7 @@ const ListnerPassage = () => {
                                 <Button
                                     type="button"
                                     className="btnTyp5"
-                                    onClick={()=>{openCreatePassage(0)}}
+                                    onClick={() => { openCreatePassage(0) }}
                                 >
                                     create passage
                             </Button>
@@ -127,12 +129,12 @@ const ListnerPassage = () => {
                                             <div className="d-flex w-100">
                                                 <div className="col1 fw600 fs18 pb-1 w-40">
                                                     {list.lp_title}
-                                                    </div>
+                                                </div>
                                                 <div className="d-flex ml-auto w-60 justify-content-end buttonTypes">
                                                     <Button
                                                         type="button"
                                                         className="btn-btnTypAdd btnQa"
-
+                                                        onClick={() => { openAddQuestion(list.lp_id) }}
                                                     >
                                                         <span>
                                                             <i class="fa fa-plus"></i>
@@ -147,8 +149,8 @@ const ListnerPassage = () => {
                                                             key={list.lp_id}
                                                             checked={list.lp_status === "1"}
                                                             label={list.lp_status === "1" ? "Enable" : "Disabled"}
-                                                            onChange={()=>{
-                                                                changeParaStatus(list.lp_id ,list.lp_status === '1' ? '2' : '1') 
+                                                            onChange={() => {
+                                                                changeParaStatus(list.lp_id, list.lp_status === '1' ? '2' : '1')
                                                             }}
                                                         />
                                                     </span>
@@ -157,7 +159,7 @@ const ListnerPassage = () => {
                                                             src={Visibilitys}
                                                             alt=""
                                                             className="pointer"
-                                                            onClick={()=>{openViewPassage(list.lp_id)}}
+                                                            onClick={() => { openViewPassage(list.lp_id) }}
                                                         />
                                                     </span>
                                                     <span className="mr-3">
@@ -165,7 +167,7 @@ const ListnerPassage = () => {
                                                             src={Editicon}
                                                             alt=""
                                                             className="pointer"
-                                                            onClick={()=>{openCreatePassage(list.lp_id)}}
+                                                            onClick={() => { openCreatePassage(list.lp_id) }}
                                                         />
                                                     </span>
                                                     <span>
@@ -173,7 +175,7 @@ const ListnerPassage = () => {
                                                             src={Deleteicon}
                                                             alt=""
                                                             className="pointer"
-                                                            onClick={()=>{deletePassage(list.lp_id)}}
+                                                            onClick={() => { deletePassage(list.lp_id) }}
                                                         />
                                                     </span>
                                                 </div>

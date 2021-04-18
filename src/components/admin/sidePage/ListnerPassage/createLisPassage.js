@@ -5,38 +5,53 @@ import NavBar from "../../../core/navAdmin";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ELPViewApiService from '../../../../common/services/apiService';
+import { ValidatePass } from './validatePassageQA';
 
+function stripHtml(html) {
+    let tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+}
 
 const CreateListPassage = () => {
     const [passage, setPassage] = useState('');
     const [passDecribe, setPassDescribe] = useState('');
+    const [errorPass, setErrorPass] = useState();
     const history = useHistory();
     const { id } = useParams();
 
     const createPassage = () => {
-        let data , type;
-        if(id === '0'){
-            data = { "lp_title": passage, "lp_description": passDecribe };
-            type = 'superadminadd_listnerparagraphtest';
+        const validate = ValidatePass(passage, passDecribe);
+        if (validate) {
+            setErrorPass(validate);
+
         }
-        else{
-            data = { "lp_id" : id, "lp_title": passage, "lp_description": passDecribe };
-            type = 'superadminedit_listnerparagraphtest';
+        else {
+                let data , type;
+            if(id === '0'){
+                data = { "lp_title": passage, "lp_description": stripHtml(passDecribe) };
+                type = 'superadminadd_listnerparagraphtest';
+            }
+            else{
+                data = { "lp_id" : id, "lp_title": passage, "lp_description": stripHtml(passDecribe) };
+                type = 'superadminedit_listnerparagraphtest';
+            }
+            ELPViewApiService(type, data)
+                .then((response) => {
+                    console.log("RESPONSE", response);
+                    if (response.data.status === 'success') {
+                        const data = response.data.data;
+                        console.log("DATA ", data);
+                        let passID = id !== '0' ? id : data.listner_paragraph_id
+                        if(id==='0')
+                        history.push(`/passageQA/${passID}`)
+                        else
+                        history.push(`/viewPassage/${id}`)
+                    }
+                })
+                .catch(err => console.log("ERROR ", err));
         }
-        ELPViewApiService(type, data)
-            .then((response) => {
-                console.log("RESPONSE", response);
-                if (response.data.status === 'success') {
-                    const data = response.data.data;
-                    console.log("DATA ", data);
-                    let passID = id !== '0' ? id : data.listner_paragraph_id
-                    if(id==='0')
-                    history.push(`/passageQA/${passID}`)
-                    else
-                    history.push(`/viewPassage/${id}`)
-                }
-            })
-            .catch(err => console.log("ERROR ", err));
+
     }
 
     useEffect(() => {
@@ -96,9 +111,8 @@ const CreateListPassage = () => {
                                                 onChange={(e) => { setPassage(e.target.value) }}
                                                 maxLength={150}
                                             />
-
                                             <div className="col27 fs14 fw400 mt-2 error">
-                                                {/* {errors.kt_subheading} */}
+                                                {errorPass?.passageError}
                                             </div>
                                         </Form.Group>
 
@@ -125,7 +139,9 @@ const CreateListPassage = () => {
                                                     setPassDescribe(data);
                                                 }}
                                             />
-
+                                            <div className="col27 fs14 fw400 mt-2 error">
+                                                {errorPass?.passageDescribe}
+                                            </div>
                                         </Form.Group>
                                     </Form>
 

@@ -8,6 +8,7 @@ import Deleteicon from "../../../../assets/images/delete_icon.svg";
 import ELPViewApiService from '../../../../common/services/apiService';
 import { showSuccessToast } from '../../../../common/helpers/Utils';
 import { nanoid } from 'nanoid'
+import ValidatePassageQA from './validatePassageQA';
 
 
 function stripHtml(html) {
@@ -18,8 +19,9 @@ function stripHtml(html) {
 
 const EditPassQA = () => {
     const history = useHistory();
-    const { id , questionID} = useParams();
+    const { id, questionID } = useParams();
     const [listPassQA, setListnerPassQA] = useState([]);
+    const [errorsQA, setErrorsQA] = useState();
 
     const openViewPassage = () => history.push(`/viewPassQA/${id}`);
 
@@ -45,7 +47,7 @@ const EditPassQA = () => {
                 })
                 .catch(err => new Error(`Error in Getting PARA ${err}`))
         }
-    }, [id,questionID])
+    }, [id, questionID])
 
     const onChangeQuestion = (e, editor) => {
         let data = editor.getData();
@@ -77,12 +79,14 @@ const EditPassQA = () => {
         const newEdit = [...listPassQA];
         newEdit[0].ls_ans.splice(index + 1, 0, update);
         setListnerPassQA(newEdit);
+        setErrorsQA(null)
     }
 
     const deleteAnswer = (index) => {
         const newEdit = [...listPassQA];
-        newEdit[0].ls_ans.splice(index);
+        newEdit[0].ls_ans.splice(index, 1);
         setListnerPassQA(newEdit);
+        setErrorsQA(null)
     }
 
     const submitForm = () => {
@@ -94,24 +98,29 @@ const EditPassQA = () => {
             }
             return updates;
         })
-        
-        const data = {
-            listner_paragraph_id: id,
-            listner_que_ans: newEdit,
-            listner_que_id: questionID
+        const validate = ValidatePassageQA(newEdit)
+        if (Array.isArray(validate)) {
+            setErrorsQA(validate);
         }
-        console.log("NEW EDIT ", newEdit , data);
-        ELPViewApiService('superadminedit_Listnerqueans', data)
-            .then((response) => {
-                console.log("RESPONSE", response);
-                if (response.data.status === 'success') {
-                    const data = response.data.data;
-                    console.log("DATA ", data);
-                    showSuccessToast(response.data.message)
-                    openViewPassage()
-                }
-            })
-            .catch(err => console.log("Error is ", err))
+        else {
+            const data = {
+                listner_paragraph_id: id,
+                listner_que_ans: newEdit,
+                listner_que_id: questionID
+            }
+            console.log("NEW EDIT ", newEdit, data);
+            ELPViewApiService('superadminedit_Listnerqueans', data)
+                .then((response) => {
+                    console.log("RESPONSE", response);
+                    if (response.data.status === 'success') {
+                        const data = response.data.data;
+                        console.log("DATA ", data);
+                        showSuccessToast(response.data.message)
+                        openViewPassage()
+                    }
+                })
+                .catch(err => console.log("Error is ", err))
+        }
     }
 
     return (
@@ -185,7 +194,12 @@ const EditPassQA = () => {
                                                             onChange={onChangeQuestion}
                                                             className="inputTyp2"
                                                         />
-
+                                                        {
+                                                            !!errorsQA &&
+                                                            <div className="col27 fs14 fw400 mt-2 error">
+                                                                {errorsQA[index].ls_que_name}
+                                                            </div>
+                                                        }
                                                     </Form.Group>
 
                                                     {
@@ -194,13 +208,16 @@ const EditPassQA = () => {
                                                                 <Form.Group className="mb-4">
                                                                     <Form.Label className="fs20 fw600 col14 questionSet ansBg">
                                                                         <div>Answer. {idx + 1} </div>
-                                                                        <div>
-                                                                            <Image
-                                                                                src={Deleteicon}
-                                                                                className="d2 pointer"
-                                                                                onClick={() => { deleteAnswer(idx) }}
-                                                                            />
-                                                                        </div>
+                                                                        {
+                                                                            list.ls_ans.length > 1 &&
+                                                                            <div>
+                                                                                <Image
+                                                                                    src={Deleteicon}
+                                                                                    className="d2 pointer"
+                                                                                    onClick={() => { deleteAnswer(idx) }}
+                                                                                />
+                                                                            </div>
+                                                                        }
                                                                     </Form.Label>
 
 
@@ -231,7 +248,12 @@ const EditPassQA = () => {
                                                                         className="inputTyp2"
                                                                     />
 
-
+                                                                    {
+                                                                        !!errorsQA &&
+                                                                        <div className="col27 fs14 fw400 mt-2 error">
+                                                                            {errorsQA[index].ls_ans[idx].option}
+                                                                        </div>
+                                                                    }
                                                                 </Form.Group>
 
                                                                 <Form className="p_form mb-4">
@@ -251,6 +273,12 @@ const EditPassQA = () => {
                                                                             <Form.Label>
                                                                                 Mark As A Correct Answer
                                                                             </Form.Label>
+                                                                            {
+                                                                                !!errorsQA &&
+                                                                                <div className="col27 fs14 fw400 mt-2 error">
+                                                                                    {errorsQA[index].ls_correct_answer}
+                                                                                </div>
+                                                                            }
                                                                         </Form.Group>
                                                                     </div>
                                                                 </Form>
@@ -276,17 +304,6 @@ const EditPassQA = () => {
                                                 </div>
                                             )
                                         }
-
-                                        {/* <Button
-                                            variant="btnTypAdd btnSet9"
-                                            type="button"
-                                            className="inputTyp2 form-control"
-                                        >
-                                            <span className="col40">
-                                                <i className="fa fa-plus"></i>
-                                            </span>
-                                            <b className="col40 fw500">Add Question</b>
-                                        </Button> */}
 
                                     </div>
                                     <Button
