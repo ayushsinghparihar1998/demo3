@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from "react-slick";
 import { Form, } from "react-bootstrap";
 
@@ -7,8 +7,18 @@ import {
 } from "react-bootstrap";
 const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByCondition, dataDaily, handleShow }) => {
     // const eatCondition = item.plan_category.length < 3 ;
+    const [sliderState, setSliderState] = useState(0);
+    const [itemSlider , setItemSlider] = useState(0);
+    const handleSlider = (index , itemIndex) =>{ setSliderState(parseInt(index)); setItemSlider(itemIndex)};
+    const filterMonthPrice = (index , itemID) => {
+        //if(itemSlider === 0) 
+        return (index === sliderState) ;
+        //else return (index === sliderState && itemID === itemSlider)
+    }
     return (
         <>
+        {/* <pre>{JSON.stringify(sliderState, null, 2)}</pre>
+        <pre>{JSON.stringify(itemSlider, null, 2)}</pre> */}
             <div className="PlanListOne">
                 <div className="banLayout">
                     <div className="layTwo">Get
@@ -21,7 +31,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                 <Slider {...settingstwo}>
                     {
                         dataDaily &&
-                        dataDaily.map((item) => {
+                        dataDaily.map((item ,itemIndex) => {
                             return ((planHolistic && item.plan_category.length === 3) || (planEat && item.plan_category.length < 3)) ? (
                                 <div className="items">
                                     <div className="planList">
@@ -73,21 +83,33 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                 <div className="col1 fs20 fw600 text-uppercase">{item.pl_title}</div>
                                             </div>
                                             <div className="pt-1">
-                                                <div className="col14 fs16 fw400 pb-1">
-                                                    <del>Rs. {item.pl_price}</del>
-                                                </div>
-                                                <div className="col14 fs30 fw600 pb-1">
-                                                    Rs.{" "}
-                                                    {parseFloat(item.pl_discount_price).toFixed(
-                                                        2
-                                                    )}
-                                                </div>
+                                                {
+                                                    item?.plan_month_price &&
+                                                    item.plan_month_price
+                                                        .filter((id, index) => filterMonthPrice(index ,item.pl_id))
+                                                        .map((plan_month) =>
+                                                            <>
+                                                                <div className="col14 fs16 fw400 pb-1">
+                                                                    <del>Rs. {plan_month.pp_price}</del>
+                                                                </div>
+                                                                <div className="col14 fs30 fw600 pb-1">
+                                                                    Rs.{" "}
+                                                                    {parseFloat(plan_month.pp_discount_price).toFixed(
+                                                                        2
+                                                                    )}
+                                                                </div>
+                                                            </>
+                                                        )
+                                                }
                                                 <div className="SelectPlans">
-                                                    <Form.Control as="select">
-                                                        <option>3 Months</option>
-                                                        <option>6 Months</option>
-                                                        <option>9 Months</option>
-                                                        <option>12 Months</option>
+                                                    <Form.Control onChange={(e)=>{handleSlider(e.target.value , item.pl_id)}}  as="select">
+                                                        {
+                                                            item.plan_month_price.map((plan_month , index) =>
+                                                                <option value={index}  >
+                                                                    {plan_month.pp_max_range_month} Months
+                                                                </option>
+                                                            )
+                                                        }
                                                     </Form.Control>
                                                 </div>
                                             </div>

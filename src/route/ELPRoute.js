@@ -129,15 +129,16 @@ import TestRequest from "../components/admin/superAdmin/testRequest";
 import KitsDetailSA from "../components/admin/sidePage/kitDetailSA";
 import CreateListPassage from "../components/admin/sidePage/ListnerPassage/createLisPassage";
 import PassageQA from "../components/admin/sidePage/ListnerPassage/passageQA"; 
-import StartTest from "../components/passages/startText";  
+import StartTest from "../components/passages/startTest";  
 import GetAQuote from "../components/passages/getAQuotes"; 
-import PassageText from "../components/passages/passageText";   
+import PassageTest from "../components/passages/passageTest";   
 import ViewPassage from "../components/admin/superAdmin/viewPassage";  
 import BannerDashboard from "../components/assessmentTest/bannerDashboard"; 
 import LuvPrayPlanDetails from "../components/assessmentTest/luvPrayPlanDetails"; 
 // import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassList";
 import ViewPassQA from "../components/admin/sidePage/ListnerPassage/viewPassQA";
 import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA"; 
+import ListnerPassageTest from "../components/passages/listnerPassageTest";
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||
@@ -168,6 +169,10 @@ class ELPRoute extends Component {
           <PublicRoute path="/adminLogin" component={AdminLogin} />
           <PublicRoute path="/becomeListener" component={Becomelistener} />
           <PublicRoute path="/listenersignup" component={Listenersignup} />
+          <PrivateRouteList path="/listner-test-list" component={PassageTest} />
+          <PrivateRouteList path="/listner-start-test/:testId" component={StartTest} />
+          <PrivateRouteList path="/listner-test/:testId" component={ListnerPassageTest} />
+
           <PublicRoute
             path="/professionalLogin"
             component={ProfessionalLogin}
@@ -284,7 +289,6 @@ class ELPRoute extends Component {
           <PublicRoute path="/bannerDashboard" component={BannerDashboard} />  
           <PublicRoute path="/luvPrayPlanDetails" component={LuvPrayPlanDetails} />  
         
-          <PublicRoute path="/startTest" component={StartTest} /> 
           <PublicRoute path="/getAQuote" component={GetAQuote} /> 
           <PublicRoute path="/viewPassage/:id" component={ViewPassage} />  
           <PublicRoute path="/viewPassQA/:id" component={ViewPassQA} />            

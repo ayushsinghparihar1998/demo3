@@ -2309,5 +2309,19 @@ export default {
     data: { ql_id: '', ql_status: "" },
     showResultMessage: false,
     showErrorMessage: true
+  },
+  getlistner_paragraphtest:{
+    url:'elp/getlistner_paragraphtest',
+    method: 'POST',
+    data: {count:'',offset:'',listner_paragraph_id:""},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getquesans_listnerlist:{
+    url:'elp/getquesans_listnerlist',
+    method: 'POST',
+    data: {count:'',offset:'',listner_paragraph_id:""},
+    showResultMessage: false,
+    showErrorMessage: true
   }
 };
