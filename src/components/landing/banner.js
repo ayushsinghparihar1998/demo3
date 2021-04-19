@@ -27,6 +27,7 @@ import rightArrow from "../../assets/images/rightarrow.png";
 import UserSignup from "../signup/userSignup";
 import { Link, NavLink, Router } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService"; 
+import VideoIconFour from "../../assets/images/videoico.png"
 
 class Banner extends Component {
   constructor(props) {
@@ -278,6 +279,10 @@ class Banner extends Component {
                 </div>
               </Carousel.Item>
             </Carousel>
+
+              <div className="fs17 col18 fw400 mt-3"> 
+                    <Image src={VideoIconFour} className="videIco pointer"/>See how it works
+              </div> 
           </Col>
           <div className="header2banner">
             <Image src={women} alt="" className="w-100" />
@@ -344,3 +349,6 @@ class Banner extends Component {
 }
 
 export default Banner;
+
+
+
