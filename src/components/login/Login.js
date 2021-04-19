@@ -229,7 +229,7 @@ class Login extends Component {
               errors: {},
             });
             let u_que_ans_per = result.data.data.u_que_ans_per;
-            if (u_que_ans_per >= 60) {
+            if (true) { //changed -> u_que_ans_per >= 60
               setLocalStorage("userInfo", result.data.data);
               setLocalStorage("loggedIn", true);
               this.props.history.push({ pathname: "/userdashboard" });

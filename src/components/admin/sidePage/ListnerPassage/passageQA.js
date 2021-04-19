@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import NavBar from "../../../core/navAdmin";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -8,6 +8,7 @@ import Deleteicon from "../../../../assets/images/delete_icon.svg";
 import ELPViewApiService from '../../../../common/services/apiService';
 import { showSuccessToast } from '../../../../common/helpers/Utils';
 import { nanoid } from 'nanoid'
+import ValidatePassageQA from './validatePassageQA';
 
 function stripHtml(html) {
     let tmp = document.createElement("DIV");
@@ -29,14 +30,18 @@ const EMPTY_QA = {
 
 const PassageQA = () => { 
     const history = useHistory();
+    const location = useLocation();
     const { id } = useParams();
     const [listnerQA, setListnerQA] = useState([EMPTY_QA, EMPTY_QA]);
+    const [errorsQA, setErrorsQA] = useState([EMPTY_QA, EMPTY_QA]);
+    const goback = () => history.push('/admin',{state : location.state});
 
     const addAnswer = (index) => {
         const answer = EMPTY_QA.ls_ans;
         let newEdit = [...listnerQA];
         newEdit[index].ls_ans.push(answer[0]);
         setListnerQA(newEdit);
+        setErrorsQA(null);
     }
 
     const deleteAnswer = (Qindex, Aindex) => {
@@ -52,6 +57,7 @@ const PassageQA = () => {
             }) : listner
         })
         setListnerQA(newEdit);
+        setErrorsQA(null);
     }
 
     const deleteQuestion = (index) => {
@@ -62,12 +68,14 @@ const PassageQA = () => {
             }) : listner
         })
         setListnerQA(newEdit);
+        setErrorsQA(null);
     }
 
     const addQuestion = () => {
         let newEdit = [...listnerQA];
         newEdit.push(EMPTY_QA);
         setListnerQA(newEdit);
+        setErrorsQA(null);
     }
 
     const markCorrectAnswer = (index, idx) => {
@@ -78,6 +86,7 @@ const PassageQA = () => {
             }) : listner
         })
         setListnerQA(newEdit);
+
     }
 
     const enterQA = (editor, index) => {
@@ -89,6 +98,7 @@ const PassageQA = () => {
             }) : listner
         })
         setListnerQA(newEdit);
+
     }
 
     const enterAnswer = (editor, Qindex, Aindex) => {
@@ -105,39 +115,51 @@ const PassageQA = () => {
             }) : listner
         })
         setListnerQA(newEdit);
+
     }
 
 
     const submitForm = () => {
         const newEdit = listnerQA.map((listner) => {
             const updates = {
-                ls_que_name: stripHtml( listner.ls_que_name),
+                ls_que_name: stripHtml(listner.ls_que_name),
                 ls_correct_answer: stripHtml(listner.ls_correct_answer),
                 ls_ans: listner.ls_ans.map((answer) => ({ option: stripHtml(answer.option) }))
             }
             return updates;
         })
-        console.log("NEW EDIT ", newEdit);
-        const data = {
-            listner_paragraph_id: id,
-            listner_que_ans: newEdit
+        const validate = ValidatePassageQA(newEdit);
+        if (Array.isArray(validate)) {
+            setErrorsQA(validate);
         }
-        ELPViewApiService('superadminadd_Listnerqueans', data)
-            .then((response) => {
-                console.log("RESPONSE", response);
-                if (response.data.status === 'success') {
-                    const data = response.data.data;
-                    console.log("DATA ", data);
-                    showSuccessToast(response.data.message)
-                    history.push('/admin');
-                }
-            })
-            .catch(err => console.log("Error is ", err))
+        else {
+            const data = {
+                listner_paragraph_id: id,
+                listner_que_ans: newEdit
+            }
+            ELPViewApiService('superadminadd_Listnerqueans', data)
+                .then((response) => {
+                    console.log("RESPONSE", response);
+                    if (response.data.status === 'success') {
+                        const data = response.data.data;
+                        console.log("DATA ", data);
+                        showSuccessToast(response.data.message)
+                        history.push('/admin');
+                    }
+                })
+                .catch(err => console.log("Error is ", err))
+        }
     }
-    console.log("STATE ", listnerQA)
+
+    const isAnswerChecked = (answer , listner ) => {
+        if(listner.ls_correct_answer === '') return false;
+        else return stripHtml(answer.option) === stripHtml(listner.ls_correct_answer)
+    }
+
     return (
         <>
-            {/* <pre>{JSON.stringify(listnerQA, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(listnerQA, null, 2)}</pre>
+            <pre>{JSON.stringify(errorsQA, null, 2)}</pre> */}
             <div className="page__wrapper innerpage">
                 <div className="main_baner">
                     <NavBar />
@@ -153,8 +175,8 @@ const PassageQA = () => {
                                         </div>
                                         <div className="d-flex m-3 pb-3 border-bottom">
                                             <div>
-                                                <div className="fs14 col28 fw500">
-                                                    <Link to={{ pathname: `/admin` }}>Back</Link>
+                                                <div className="fs14 col28 fw500" onClick={goback}>
+                                                    <Link >Back</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +187,6 @@ const PassageQA = () => {
                                 <div className="corporateMember subscriptionplan">
                                     <div className="fs28 col10 mb-4">Passage Q&A</div>
                                     <div className="QuestionListings">
-                                        {console.log("SD", listnerQA)}
                                         {
                                             listnerQA.map((listner, index) =>
                                                 <div key={listner.id}>
@@ -210,7 +231,12 @@ const PassageQA = () => {
                                                             }}
                                                             className="inputTyp2"
                                                         />
-
+                                                        {
+                                                            !!errorsQA &&
+                                                            <div className="col27 fs14 fw400 mt-2 error">
+                                                                {errorsQA[index].ls_que_name}
+                                                            </div>
+                                                        }
                                                     </Form.Group>
 
                                                     {
@@ -258,6 +284,12 @@ const PassageQA = () => {
                                                                         className="inputTyp2"
                                                                     />
 
+                                                                    {
+                                                                        !!errorsQA &&
+                                                                        <div className="col27 fs14 fw400 mt-2 error">
+                                                                            {errorsQA[index].ls_ans[idx].option}
+                                                                        </div>
+                                                                    }
 
                                                                 </Form.Group>
 
@@ -271,19 +303,22 @@ const PassageQA = () => {
                                                                                 id={answer.id}
                                                                                 key={answer.id}
                                                                                 type="checkbox"
-                                                                                // className={`checkthree ${item.pbc_status == "1" ? "active" : ""
-                                                                                //     }`}
-                                                                                // label={"Mark As A Correct Answer"}
                                                                                 onChange={() => {
                                                                                     markCorrectAnswer(index, idx)
                                                                                 }}
 
-                                                                                checked={stripHtml(answer.option) === stripHtml(listner.ls_correct_answer)}
+                                                                                checked={isAnswerChecked(answer , listner)}
                                                                             />
                                                                             <Form.Label>
                                                                                 Mark As A Correct Answer
                                                                             </Form.Label>
                                                                         </Form.Group>
+                                                                        {
+                                                                            !!errorsQA &&
+                                                                            <div className="col27 fs14 fw400 mt-2 error">
+                                                                                {errorsQA[index].ls_correct_answer}
+                                                                            </div>
+                                                                        }
                                                                     </div>
                                                                 </Form>
 
@@ -324,13 +359,16 @@ const PassageQA = () => {
                                         </Button>
 
                                     </div>
-                                    <Button
-                                        variant="primary btnTyp5 mt-4"
-                                        type="button"
-                                        onClick={() => { submitForm() }}
-                                    >
-                                        Save
-                                    </Button>
+                                    {
+                                        listnerQA && listnerQA.length > 0 &&
+                                        <Button
+                                            variant="primary btnTyp5 mt-4"
+                                            type="button"
+                                            onClick={() => { submitForm() }}
+                                        >
+                                            Save
+                                        </Button>
+                                    }
                                 </div>
                             </Col>
                         </Row>

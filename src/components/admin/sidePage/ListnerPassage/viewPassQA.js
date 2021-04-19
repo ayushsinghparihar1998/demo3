@@ -13,6 +13,7 @@ const ViewPassQA = (props) => {
     const {id} = useParams();
     const [passListing ,setPassListing] = useState();
     const openEditPass = (qID) => history.push(`/editPassQA/${id}/${qID}`);
+    const openQuestionPage = () => history.push(`/passageQA/${id}`) ;
 
     useEffect(()=>{
         if(id !== '0'){
@@ -85,7 +86,7 @@ const ViewPassQA = (props) => {
                         </Col>
                         <Col md={8} lg={9} className="pl-1">
                 <div className="professor_search ViewQa">
-                  <div className="fs22 fw600 col10">Question Answer</div>
+                  <div className="fs22 fw600 col10" onClick={openQuestionPage}>Question Answer</div>
                   <div className="mentalOne">
                     <div className="col14 fs18 fw600">
                       { passListing &&passListing.length}
@@ -94,7 +95,7 @@ const ViewPassQA = (props) => {
                       <Button
                         variant="btnTypAdd"
                         type="button"
-                        
+                        onClick={openQuestionPage}
                       >
                         <span>
                           <i className="fa fa-plus"></i>

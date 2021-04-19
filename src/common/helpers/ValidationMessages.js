@@ -191,6 +191,19 @@ export default {
   plan_cat_name: {
     required: "Please select atleast one catagory.",
   },
+  pp_month:{
+    pp_max_range_month : {
+      required : 'Please Select Minimun 1 months'
+    },
+    pp_price : {
+      required: "Please enter Plan discount.",
+      balance : 'Original Price Should be greater than of discount price.'
+    },
+    pp_discount : {
+      required: "Please enter Plan discount.",
+      balance : 'Discount price should be lower than of original.'
+    }
+  },
   pl_desc_details: {
     required: "Please enter plan description.",
   },
@@ -198,4 +211,23 @@ export default {
     required: "Please enter plan offer.",
     correct : "Please enter a valid offer"
   },
+  ques_answ : {
+    correct_ans : {
+      required : 'Please Tick At least 1 Answer'
+    },
+    ques : {
+      required : 'Please Enter Question'
+    },
+    answ : {
+      required : 'Please Enter Answer'
+    }
+  },
+  pass_err : {
+    passageTitle : {
+      required : 'Please Enter Title'
+    },
+    passageDescribe : {
+      required : 'Please Enter Description'
+    }
+  }
 };
