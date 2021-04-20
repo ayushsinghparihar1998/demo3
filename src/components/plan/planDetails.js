@@ -6,7 +6,7 @@ import {
   Col,
   Image,
   Form
-} from "react-bootstrap";
+} from "react-bootstrap"; 
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import Splan from "../../assets/images/blog5.png";
@@ -14,6 +14,7 @@ import Arrowright from "../../assets/images/Arrowright.png";
 import { Link, Redirect } from "react-router-dom";
 import ELPViewApiService from "../../common/services/apiService";
 import VideoIcon from "../../assets/images/videoIcon.png";
+import DownloadTwo from "../../assets/images/downloadtwo.png";
 
 import CrossTwo from "../../assets/images/crosstwo.png";
 import logopink from "../../assets/images/elplogopink.png";
@@ -315,18 +316,24 @@ class PlanDetails extends Component {
                           type="button"
                           onClick={() => this.handleShow2()}
                         >
-                          Get A Quote
+                          Get A Quote 
                         </Button>
-                        <span className="ml-3">
-                          <Link to={{ pathname: `/coming-soon` }}>
+                        <span className="ml-3 mt-1"> 
+                          <Link className="btnType30" to={{ pathname: `/coming-soon` }}>
                             LEARN MORE
-                          </Link>
-                          <Image src={Arrowright} />
+                            <Image src={Arrowright} className="ml-1" />  
+                          </Link> 
+                          
                         </span>
+                        <div className="mt-4">
+                            <Button type="button" className="btnTyp12 downActive">   
+                              <Image src={DownloadTwo} alt="Download" className="dl2 mr-2" />Download Corporate brochure
+                            </Button>                             
+                        </div>
                       </Form>
                     </div>
                   </Col>
-                  <Col md={7}>
+                  <Col md={7}> 
                     <div className="pr-3">
                       <div class="elpVideoblog">
                         {!this.state.play1 ? (
@@ -354,7 +361,7 @@ class PlanDetails extends Component {
                 </Row>
               </div>
             </div>
-          </Container> 
+          </Container>      
           
           {/* Custom Modal BY PROPS  */}
           <CustomModal 
@@ -404,7 +411,7 @@ class PlanDetails extends Component {
             }}
           />
 
-          {/* END OF MODAL  */}
+          {/* END OF MODAL  */}  
 
         </div>
         <Footer />

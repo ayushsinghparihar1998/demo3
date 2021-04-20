@@ -156,7 +156,7 @@ const Checkouts = (props) => {
                                       maxLength={8}
                                     />
                                   </span>
-                                  <span className="fs14 fw700 col26 text-uppercase ml-3" onClick={applyCouponCode}>Apply</span>
+                                  <span className="fs14 fw700 col26 text-uppercase ml-3 pt-2" onClick={applyCouponCode}>Apply</span>
                                 </div>
                               ) : <Button className="btnPromo" onClick={() => { setOpenCode(true) }}>Have Promo Code?</Button>
                             }

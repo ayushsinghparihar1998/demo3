@@ -2825,7 +2825,7 @@
     form {
       span.ml-3 {
         position: relative;
-        top: 5px;
+        top: 7px;
         & > a {
           margin-right: 5px;
         }
@@ -3145,6 +3145,7 @@
                         }
                         &.minBtn {
                            min-width: 150px;
+                           max-width: 150px;
                            border-radius: 6px;
                            text-align: left; 
                         }
@@ -3152,6 +3153,7 @@
                       .promo2 {
                           position: relative; 
                           top: 0;
+                          display: flex; 
                           img {
                               position: absolute;
                               top: 4px;
@@ -3395,6 +3397,14 @@
               padding: 20px 20px 40px;  
             }
         }
+        .luvThree {
+           border: 1px solid #9FBAFF; 
+           border-radius: 5px;
+           height: 85px;
+           display: flex;
+           align-items: center;
+           padding-left: 20px; 
+        }
         .prayDetails { 
             position: relative;
             background-image: url('../images/dashban7.png');   
@@ -3405,10 +3415,54 @@
             display: flex;
             align-items: center;
             width: 100%; 
+            .setPos {
+                position: absolute;
+                top: 12px;
+                right: 15px;
+            }
         }
     }
 }
 
+.brTop {
+    border-top: solid 1px $col23; 
+}
+.Disclaimer {
+    background: $col152; 
+    padding: 15px 24px 30px;
+    .brTop2 {
+        border-top: solid 1px $col144;  
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+a.btnType30 {
+    background: $col8; 
+    border-radius: 40px; 
+    margin-right: 5px;
+    padding: 13px 8px;
+    font-size: 15px;
+    color: $col18;    
+}
+.btnTyp12 {
+    &.downActive {
+        height: 3.8rem; 
+        color: $col64;
+        font-weight: 600;
+        font-size: 16px; 
+        padding: 0 0rem;
+        padding-left: 6px; 
+        padding-right: 18px; 
+        border: solid 2px $col10;
+        outline: 0; 
+        &:hover, &:focus {
+            border: solid 2px $col10 !important;
+            background: transparent !important;
+            box-shadow: none; 
+            color: $col64 !important; 
+        }
+    }
+}
   
   @media (min-width: 992px) and (max-width: 1199px) {
     .profile_layout {
@@ -3583,9 +3637,9 @@
     }
   }
   
-  @media (max-width: 767px) {
+  @media (max-width: 767px) { 
     .scoreDetails {
-      .scoreBorders {
+      .scoreBorders { 
         flex-wrap: wrap;
       }
     }
@@ -3950,6 +4004,83 @@
         }
       }
     }
+
+    .passageLayout {
+      .ngo_listing {     
+          padding: 0px 18px 0 !important;  
+      }
+    }
+
+    .btnTyp12 {
+      &.downActive {
+        font-size: 13px;
+        padding: 0 0rem;
+        padding-left: 6px;
+        padding-right: 10px;
+        padding-top: 3px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    .kitDetailMain {
+      .kitDetailTwo { 
+          padding: 0 15px 0;
+        .detailsLeft {
+          .socialUser {
+              flex-wrap: wrap; 
+              .fs24 {
+                   font-size: 20px !important; 
+                   margin-bottom: 20px;
+              }
+          }
+        }
+        .detailMonth {
+           padding: 15px; 
+           margin-top: 20px; 
+           .fs24 {  
+                font-size: 1rem !important; 
+            }
+            .fs20 {   
+              font-size: 1rem !important; 
+            }
+            .byBtnmain {
+                & .btnTyp5.gifts { 
+                    font-size: 1rem !important; 
+                }
+            } 
+        }
+
+        .checkoutDetails {
+            .orderCat {
+              .p-4.bg63 { 
+                  padding: 1rem !important; 
+              }
+              .catOne {
+                  justify-content: space-between;
+                  .fs22 {
+                     font-size: 14px !important; 
+                  }
+                } 
+            }
+          }
+
+      }
+    }
+    .luvPrayDetails {
+      .luvPrayList {
+        .prayDetails {
+          .setPos {
+              position: static;
+              text-align: right;
+          }
+        }
+      }
+    }
+
   }
   
   @media (max-width: 576px) {
@@ -3957,13 +4088,13 @@
       .kitplans {
         img.emotions {
           width: 100%;
-          height: auto;
+          height: 210px;
         }
       }
     }
   }
   
-  @media (max-width: 450px) {
+  @media (max-width: 450px) { 
     .profile_layout {
       .myprofile {
         .layout {

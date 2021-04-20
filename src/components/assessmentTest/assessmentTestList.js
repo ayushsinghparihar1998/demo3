@@ -116,6 +116,7 @@ class AssessmentTestListTwo extends Component {
               <div className="text-center fs28 fw500 col64 mb-2">
                 ASSESSMENT TESTS
               </div>
+              <div className="brTop mt-4"></div>
               <div className="blogMain ListsUI">
                 <Tabs
                   onSelect={(k) =>
@@ -493,6 +494,13 @@ class AssessmentTestListTwo extends Component {
                     </div>
                   </Tab>
                 </Tabs>
+              </div>
+              <div className="Disclaimer mt-4">  
+                  <div className="col64 fw500 fs22">Disclaimer</div>
+                  <div className="brTop2"></div>
+                  <div className="fw400 col14">
+                      These tests are intended for informational and entertainment purposes only. It is not a substitute for professional diagnosis or for the treatment of any health condition. Seek the advice of a licensed professional if required.
+                  </div>
               </div>
             </div>
           </Container>
