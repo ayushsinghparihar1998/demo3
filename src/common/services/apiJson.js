@@ -2310,17 +2310,29 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  getlistner_paragraphtest:{
-    url:'elp/getlistner_paragraphtest',
+  getlistner_paragraphtest: {
+    url: 'elp/getlistner_paragraphtest',
     method: 'POST',
-    data: {count:'',offset:'',listner_paragraph_id:""},
+    data: { count: '', offset: '', listner_paragraph_id: "" },
     showResultMessage: false,
     showErrorMessage: true
   },
-  getquesans_listnerlist:{
-    url:'elp/getquesans_listnerlist',
+  getquesans_listnerlist: {
+    url: 'elp/getquesans_listnerlist',
     method: 'POST',
-    data: {count:'',offset:'',listner_paragraph_id:""},
+    data: { count: '', offset: '', listner_paragraph_id: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  submit_listnerTest: {
+    url: 'elp/submit_listnerTest',
+    method: 'POST',
+    data: {
+      "listner_paragraph_id": "",
+      "lr_no_attend_que": '',
+      "lr_skip_que": "",
+      "lr_submit": [{"que_id":"","ans_id":""}]
+    },
     showResultMessage: false,
     showErrorMessage: true
   }
