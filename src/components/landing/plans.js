@@ -177,8 +177,8 @@ class Plans extends Component {
                             {/* <div className="col14 fs17 fw400 peryears"> 
                               {item.pl_type == 1 ? "Per Month" : ""}
                             </div> */}
-                            <div className="SelectPlans">
-                              <Form.Control as="select">
+                            <div className="SelectPlans"> 
+                              <Form.Control as="select" className="selectTyp1">
                                 <option>3 Months</option>
                                 <option>6 Months</option>
                                 <option>9 Months</option>

@@ -22,7 +22,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
             <div className="PlanListOne">
                 <div className="banLayout">
                     <div className="layTwo">Get
-                         <span className="text-uppercase ml-1 mr-1">free audio video calls</span>
+                         <span className="text-uppercase ml-1 mr-1">free audio & video calls</span>
                           by buying any plan </div>
                 </div>
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
@@ -102,7 +102,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                         )
                                                 }
                                                 <div className="SelectPlans">
-                                                    <Form.Control onChange={(e)=>{handleSlider(e.target.value , item.pl_id)}}  as="select">
+                                                    <Form.Control onChange={(e)=>{handleSlider(e.target.value , item.pl_id)}}  as="select" className="selectTyp1"> 
                                                         {
                                                             item.plan_month_price.map((plan_month , index) =>
                                                                 <option value={index}  >
@@ -220,7 +220,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                     </div>
                                                 } */}
                                                 <div className="SelectPlans">
-                                                    <Form.Control as="select">
+                                                    <Form.Control as="select" className="selectTyp1"> 
                                                         <option>3 Months</option>
                                                         <option>6 Months</option>
                                                         <option>9 Months</option>
@@ -229,7 +229,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="planpricing">
+                                        <div className="planpricing">  
                                             <div className="w-100 justify-content-between">
                                                 <div className="fs14 fw500 col29 mt-2 mb-3">
                                                     {item.pl_desc_details}
@@ -262,4 +262,4 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
     )
 }
 
-export default CommonSubScription
+export default CommonSubScription; 

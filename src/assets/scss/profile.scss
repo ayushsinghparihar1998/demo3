@@ -2950,8 +2950,7 @@
               .slick-slider {
                   .slick-prev {
                       z-index: 9;
-                      left: -15px;
-                      // background: #fff;
+                      left: -15px; 
                       border-radius: 50%;
                       padding: 0 0; 
                       background-image: url('../images/leftArrow.png');
@@ -2966,7 +2965,6 @@
                   .slick-next {
                       z-index: 9; 
                       right: -4px; 
-                      // background: #fff; 
                       border-radius: 50%;  
                       padding: 0 0; 
                       background-image: url('../images/rightArrows.png'); 

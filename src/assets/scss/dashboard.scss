@@ -522,6 +522,10 @@
                             display: none;   
                         }
                     }
+                    & > img.pointer {
+                        width: 40px;
+                        height: 40px; 
+                    }
                 }
             }
 

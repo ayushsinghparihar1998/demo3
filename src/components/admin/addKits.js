@@ -616,7 +616,7 @@ class AddKits extends Component {
                             </div>
                           </Form.Group>
                           <Row>
-                            <Col md={6}>
+                            <Col md={5}>  
                               <Form.Group className="mt-1 mb-4">
                                 <Form.Label className="fs20 fw600 col14">
                                   Price
@@ -637,7 +637,7 @@ class AddKits extends Component {
                                 </div>
                               </Form.Group>
                             </Col>
-                            <Col md={6}>
+                            <Col md={5}>
                               <Form.Group className="mt-1 mb-4">
                                 <Form.Label className="fs20 fw600 col14">
                                   Discounted Price
@@ -659,7 +659,7 @@ class AddKits extends Component {
                               </Form.Group>
                             </Col>
                             {kitObj.kits_price_month.length > 1 ? (
-                              <Col md={1}>
+                              <Col md={2}>
                                 <Image
                                   src={Deleteicon}
                                   alt=""
@@ -706,4 +706,4 @@ class AddKits extends Component {
   }
 }
 
-export default AddKits;
+export default AddKits; 

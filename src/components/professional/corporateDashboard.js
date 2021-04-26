@@ -134,12 +134,12 @@ class CorporateDashboard extends Component {
 
                               </div>
                            </Col>
-                           {/*<BlogList />*/}
+                           {/*<BlogList />*/}   
                         </Row>
                      </Col>
 
                      <Col md={3}>
-                        <div className="right_sidebar">
+                        <div className="right_sidebar">  
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer"> 
                                  <Button className="btnType18 d-block twos">My Account</Button>
