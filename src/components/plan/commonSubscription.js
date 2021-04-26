@@ -8,7 +8,7 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
             <div className="PlanListOne">
                 <div className="banLayout">
                     <div className="layTwo">Get
-                         <span className="text-uppercase ml-1 mr-1">free audio video calls</span>
+                         <span className="text-uppercase ml-1 mr-1">free audio & video calls</span>
                           by buying any plan </div>
                 </div>
                 <div className="fs28 fw600 col8 mt-5 mb-4 text-center">
@@ -154,4 +154,4 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
     )
 }
 
-export default CommonSubScription
+export default CommonSubScription; 

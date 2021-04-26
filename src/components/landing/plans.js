@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Form,
   Button,
   Image,
   Container,
@@ -10,7 +9,6 @@ import { getLocalStorage } from "../../common/helpers/Utils";
 import Slider from "react-slick";
 import ELPViewApiService from "../../common/services/apiService";
 import { Redirect } from "react-router-dom";
-import Squares from "../../assets/images/squares.png";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import logopink from "../../assets/images/elplogopink.png";
 import PlanSelection from "../plan/planSelection";

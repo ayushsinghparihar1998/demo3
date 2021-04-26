@@ -253,21 +253,7 @@
         }
       }
     }
-    .SelectPlans {   
-        max-width: 130px;
-        margin: auto;
-        margin-top: 5px;
-        .form-control {  
-            border-radius: 50px;
-            border: solid 1px $col1; 
-            color: $col1;
-            background: $col18; 
-            cursor: pointer; 
-            &:hover, &:focus {
-                box-shadow: none; 
-            }
-        }
-    }
+    
     button.btnTypDown {
         background: transparent;
         border: solid 1px $col1; 
@@ -496,6 +482,29 @@
     }
   }
 }
+
+.SelectPlans {   
+        max-width: 130px;
+        margin: auto;
+        margin-top: 5px;
+        .form-control {  
+            border-radius: 50px !important;
+            border: solid 1px $col1 !important;
+            color: $col1 !important;
+            // background: $col18 !important; 
+            cursor: pointer; 
+
+
+            &.selectTyp1 {     
+                padding: 0 1rem 0 1rem !important;
+                height: 2.5rem !important;
+                background: url('../images/arrowblue.png') no-repeat 94% 50% $col18 !important; ;
+            }
+            &:hover, &:focus {
+                box-shadow: none; 
+            }
+        }
+    }
 
 .delete_user {
   .text-center.fs24.mt-4.col64 {

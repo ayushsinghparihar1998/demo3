@@ -4560,7 +4560,7 @@ as_type: "2" */}
                                                                         )
                                                                       }
                                                                     >
-                                                                      APPROVE
+                                                                      APPROVE 
                                         </Button>
                                                                     <Button
                                                                       className="btnTyp9 reject"

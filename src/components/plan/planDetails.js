@@ -325,7 +325,7 @@ class PlanDetails extends Component {
                           type="button"
                           onClick={() => this.handleShow2()}
                         >
-                          Get A Quote 
+                          Get A Quote   
                         </Button>
                         <span className="ml-3 mt-1"> 
                           <Link className="btnType30" to={{ pathname: `/coming-soon` }}>

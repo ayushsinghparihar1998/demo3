@@ -36,6 +36,9 @@ import Facebooknew from "../../assets/images/facebook_new.svg";
 import Instagramnew from "../../assets/images/instagram_new.svg";
 import Creditcard from "../../assets/images/credit-card.svg";
 import Subscriptions from "../../assets/images/subscription_plan.svg";
+import liveMsg from "../../assets/images/live_msg.png";
+import renewNote from "../../assets/images/renew_note.png";
+import VideoCalls from "../../assets/images/video_calls.png"; 
 import Paymentmethod from "../../assets/images/payment-method.svg";
 import Gmail from '../../assets/images/gmail1.svg';
 import Whatsapp from '../../assets/images/whatsapp1.svg';
@@ -374,7 +377,7 @@ class Userdashboard extends Component {
                      </Col>
 
                      <Col md={3}>
-                        <div className="right_sidebar">
+                        <div className="right_sidebar"> 
                            <div className="right_inner_side">
                               <div className="chat-bg chatn fs600 fs17 col18 pl-3 pointer">
                                  {console.log('getLocalStorage("customerInfo") ===>',getLocalStorage("customerInfo"))}
@@ -397,8 +400,7 @@ class Userdashboard extends Component {
                                     </> : null
                               }
 
-
-                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
+                              <div onClick={() => this.props.history.push('/coming-soon')} className="d-none m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Subscriptions} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
@@ -407,7 +409,7 @@ class Userdashboard extends Component {
                                     </span>
                                  </div>
                               </div>
-                              <div onClick={() => this.props.history.push('/coming-soon')} className="m-3 pb-3 bg-grays">
+                              <div onClick={() => this.props.history.push('/coming-soon')} className="d-none m-3 pb-3 bg-grays">
                                  <div className="d-flex mb-2">
                                     <Image src={Paymentmethod} alt="" className="pointer" />
                                     <span className="pl-3 mt-auto mb-auto col14 fs16 fw400">
@@ -416,6 +418,41 @@ class Userdashboard extends Component {
                                     </span>
                                  </div>
                               </div>
+
+                               {/* updated code */}   
+
+                              <div className="m-3 pb-3 bg-grays">
+                                 <div className="d-flex mb-2">
+                                    <Image src={VideoCalls} alt="" className="pointer"/> 
+                                    <div className="pl-3 mt-auto mb-auto col14 fs14 fw400">
+                                       Audio Calling Left <br />
+                                       <span className="col153 fs18 fw500">NA</span> 
+                                    </div>
+                                 </div>
+                              </div>
+                              <div className="m-3 pb-3 bg-grays">
+                                 <div className="d-flex mb-2">     
+                                    <Image src={liveMsg} alt="" className="pointer" />
+                                    <div className="pl-3 mt-auto mb-auto col14 fs14 fw400"> 
+                                       Video Calling Left <br />
+                                       <span className="col154 fs18 fw500">NA</span>  
+                                    </div>
+                                 </div>
+                              </div>
+                              <div className="m-3 pb-3 bg-grays">
+                                 <div className="d-flex mb-2">
+                                    <Image src={renewNote} alt="" className="pointer" />
+                                    <div className="pl-3 mt-auto mb-auto col14 fs14 fw400">  
+                                        Renewal Date: <span className="col26 fss16 fw500">NA</span>
+                                        <div className=""> 
+                                             Upgrade to buy the subscription <br />
+                                             plan/Kits to activate this. 
+                                        </div>
+                                    </div>
+                                 </div>
+                              </div>
+
+
                            </div>
                            {getLocalStorage("customerInfo").u_role_id !== constant.roles.CORPORATE_CUSTOMER ?
                               <>
