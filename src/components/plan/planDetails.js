@@ -49,7 +49,7 @@ class PlanDetails extends Component {
     if (checkLoginStatus)
       this.handlePath()
     else
-      this.setState({ show4: true });
+      this.props.history.push('/getAQuote');
   };
 
   handleClose2 = () => {
@@ -73,10 +73,19 @@ class PlanDetails extends Component {
     }
   };
 
-  handleShow = () => {
+  handleShow = (data) => {
     const checkLoginStatus = (getLocalStorage("customerInfo") || getLocalStorage("userInfo"))
-    if (checkLoginStatus)
-      this.handlePath()
+    if (checkLoginStatus){
+      ELPViewApiService('addplan_paymentdetails',data)
+      .then((response)=>{
+        const data =  response.data;
+        if(data.status === 'success'){
+          const transactionID = data.data.pl_transaction_id;
+          window.open(`https://staging.eatluvnpray.org/plan_demo/plan.php?transaction_id=${transactionID}`);
+        }
+      })
+      .catch(err=>new Error(` Error Occured because ${err}`))
+    }
     else
     this.setState({ show: true });
   };

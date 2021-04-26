@@ -31,9 +31,7 @@ class addSubscription extends Component {
 
       planObj: {
         pl_title: "",
-        pl_price: "",
         pl_desc_details: "",
-        pl_save: "",
         plan_type: "",
         pl_pdf_doc: '',
         pl_video_min: "0",
@@ -54,9 +52,7 @@ class addSubscription extends Component {
 
       errors: {
         pl_title: "",
-        pl_price: "",
         pl_desc_details: "",
-        pl_save: "",
         plan_type: "",
         plan_cat_name: "",
         pl_video_min: "0",
@@ -166,8 +162,8 @@ class addSubscription extends Component {
           pl_desc_details: this.state.planObj.pl_desc_details,
           pl_discount_price: this.state.planObj.pl_discount_price,
           pl_id: this.state.planObj.pl_id,
-          pl_price: this.state.planObj.pl_price,
-          pl_save: this.state.planObj.pl_save,
+          // pl_price: this.state.planObj.pl_price,
+          // pl_save: this.state.planObj.pl_save,
           pl_status: this.state.planObj.pl_status,
           pl_title: this.state.planObj.pl_title,
           pl_pdf_doc: this.state.planObj.pl_pdf_doc,
@@ -387,12 +383,12 @@ class addSubscription extends Component {
     }
     let planObj = this.state.planObj;
     planObj.pl_price_month.push(kp);
-    const errorpl_price_month = this.state.errors.pl_price_month;
-    errorpl_price_month.push(kp);
+    // const errorpl_price_month = this.state.errors.pl_price_month;
+    // errorpl_price_month.push(kp);
     this.setState({
-      planObj, errorpl_price_month
+      planObj, //errorpl_price_month
     },
-      () => console.log("ADDED MONTH", planObj, errorpl_price_month)
+      () => console.log("ADDED MONTH", planObj)//, errorpl_price_month)
     );
   }
   removeADDEDMonths = (index) => {
@@ -410,8 +406,8 @@ class addSubscription extends Component {
     const { planObj, errors, proffCat } = this.state;
     return (
       <>
-        {/* <pre>{JSON.stringify(planObj, null, 2)}</pre>
-        <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(planObj, null, 2)}</pre> */}
+        <pre>{JSON.stringify(errors, null, 2)}</pre> 
         <div className="page__wrapper innerpage">
           <div className="main_baner">
             <NavBar {...this.props} />
@@ -488,7 +484,7 @@ class addSubscription extends Component {
                           {errors.pl_title}
                         </div>
                       </Form.Group>
-                      <Form.Group>
+                      {/* <Form.Group>
                         <Form.Label className="fs20 fw600 col14">
                           Plan Amount *
                       </Form.Label>
@@ -506,7 +502,7 @@ class addSubscription extends Component {
                         <div className="col27 fs14 fw400 mt-2 error">
                           {errors.pl_price}
                         </div>
-                      </Form.Group>
+                      </Form.Group> */}
 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14">
@@ -578,7 +574,7 @@ class addSubscription extends Component {
                                   onChange={(e) => { this.handleSlider(e, index) }}
                                 />
                                 <div className="col27 fs14 fw400 mt-2 error">
-                                  {errors.pl_price_month && errors.pl_price_month[index]?.pp_max_range_month}
+                                  {errors.pl_price_month ? errors.pl_price_month[index]?.pp_max_range_month : null}
                                 </div>
                               </div>
                             </Form.Group>
@@ -600,7 +596,7 @@ class addSubscription extends Component {
                                     maxLength={7}
                                   />
                                   <div className="col27 fs14 fw400 mt-2 error">
-                                    {errors.pl_price_month && errors.pl_price_month[index].pp_price}
+                                    {errors.pl_price_month ? errors.pl_price_month[index]?.pp_price : null}
                                   </div>
                                 </Form.Group>
                               </Col>
@@ -621,7 +617,7 @@ class addSubscription extends Component {
                                     maxLength={7}
                                   />
                                   <div className="col27 fs14 fw400 mt-2 error">
-                                    {errors.pl_price_month && errors.pl_price_month[index].pp_discount}
+                                    {errors.pl_price_month && errors.pl_price_month[index]?.pp_discount}
                                   </div>
                                 </Form.Group>
                               </Col>
@@ -653,7 +649,7 @@ class addSubscription extends Component {
                         Add Months
                       </Button>
                       </div>
-                      <Form.Group>
+                      {/* <Form.Group>
                         <Form.Label className="fs20 fw600 col14">
                           Plan Offer(%) *
                       </Form.Label>
@@ -671,7 +667,7 @@ class addSubscription extends Component {
                         <div className="col27 fs14 fw400 mt-2 error">
                           {errors.pl_save}
                         </div>
-                      </Form.Group>
+                      </Form.Group> */}
 
                       <Form.Group>
                         <Form.Label className="fs20 fw600 col14">

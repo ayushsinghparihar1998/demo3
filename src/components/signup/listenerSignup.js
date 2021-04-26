@@ -115,10 +115,12 @@ class Listenersignup extends Component {
         .then((result) => {
           if (result && result.data.status === 'success') {
             setLocalStorage('userInfo', result.data.data);
-            this.setState({
-              secondSignUp: true,
-              userInfo: result.data.data,
-            });
+            // this.setState({
+            //   secondSignUp: true,
+            //   userInfo: result.data.data,
+            // });
+            this.props.history.push('/listner-test-list')
+            
           } else {
             this.setState({
               showLoader: false,

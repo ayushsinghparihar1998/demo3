@@ -229,5 +229,14 @@ export default {
     passageDescribe : {
       required : 'Please Enter Description'
     }
+  },
+  phoneNumber:{
+    invalid : 'Please Enter Valid Phone Number',
+    required : 'Phone Number is Required'
+  },
+  userQuote :{
+    qu_name : { required : 'Please Enter Name '},
+    qu_country : { required : 'Please Select Country'},
+    qu_company_name : {required : 'Please Enter Company Name'}
   }
 };

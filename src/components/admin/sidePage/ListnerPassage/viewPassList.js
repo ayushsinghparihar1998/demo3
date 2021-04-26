@@ -12,19 +12,26 @@ const ViewPassage = (props) => {
     const {id} = useParams();
     const [passage, setPassage] = useState('');
     const [passDecribe, setPassDescribe] = useState('');
+    const [questCount , setQuesCount] = useState();
     const openCreatePassage = () => history.push(`/createPassage/${id}`);
     const openViewPassageQA = () => history.push(`/viewPassQA/${id}`);
 
     useEffect(() => {
         if (id !== "0") {
-            ELPViewApiService('superadminget_detailslistnerparagraphtest', { lp_id: id })
+            ELPViewApiService('superadminget_listnerparagraphtest', { count : 10  , offset : 1})
                 .then((response) => {
                     console.log("RESPONSE ", response)
                     if (response.data.status === "success") {
                         const data = response.data.data;
-                        console.log("DATA ", data[0]);
-                        setPassage(data[0].lp_title);
-                        setPassDescribe(data[0].lp_description);
+                        console.log("DATA ", data.listener_paragraph_test);
+                        data.listener_paragraph_test
+                        .filter((test)=>test.lp_id === id)
+                        .forEach((test)=>{
+                            setPassage(test.lp_title);
+                            setPassDescribe(test.lp_description);
+                            setQuesCount(test.total_que_count);
+                        })
+                        
                         //{list.total_que_count}
                     }
                 })
@@ -63,7 +70,7 @@ const ViewPassage = (props) => {
                                 <div>
                                     <div className="col10 fw500 fs22 pb-1">{passage}</div>
                                     <div className="fs18 fw400 col14 pb-1">Number of questions 
-                                    <span className="fw500 ml-1">: 120</span> 
+                                    <span className="fw500 ml-1">: {questCount}</span> 
                                     </div> 
                                 </div>
                                 <div className="col81 fs15 fs400 pr-3"> 

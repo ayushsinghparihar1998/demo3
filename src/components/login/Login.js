@@ -30,6 +30,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import Crossbtn from "../../assets/images/blue_cross.svg";
+import Alerts from "../../assets/images/alerts.png";
+import CrossTwo from "../../assets/images/crosstwo.png";
 import NavBar from "../core/nav";
 import NavBarAdmin from "../core/navAdmin";
 import Footer from "../core/footer";
@@ -44,6 +46,7 @@ class Login extends Component {
     super(props);
     const parsed = qs.parse(this.props.location.search);
     this.state = {
+      listnerSApopUp: false,
       email: "",
       errors: {},
       password: "",
@@ -54,10 +57,10 @@ class Login extends Component {
         : this.props.location &&
           this.props.location.state &&
           this.props.location.state.roleType
-        ? this.props.location.state.roleType
-        : this.props.roleType
-        ? this.props.roleType
-        : CONSTANTS.ROLES.LISTNER,
+          ? this.props.location.state.roleType
+          : this.props.roleType
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
       emailmember:
         this.props.location.state && this.props.location.state.emailmember
           ? this.props.location.state.emailmember
@@ -81,10 +84,10 @@ class Login extends Component {
       roleType: parsed.u_role_id
         ? this.state.roleType
         : next.location && next.location.state && next.location.state.roleType
-        ? next.location.state.roleType
-        : this.props.roleType
-        ? this.props.roleType
-        : CONSTANTS.ROLES.LISTNER,
+          ? next.location.state.roleType
+          : this.props.roleType
+            ? this.props.roleType
+            : CONSTANTS.ROLES.LISTNER,
     });
   }
   componentDidMount() {
@@ -228,13 +231,18 @@ class Login extends Component {
             this.setState({
               errors: {},
             });
-            let u_que_ans_per = result.data.data.u_que_ans_per;
-            if (true) { //changed -> u_que_ans_per >= 60
+            let u_listner_test = result.data.data.u_listner_test;
+            if (u_listner_test === "1") {
+              this.openListnerSAPopUp();
+              setLocalStorage("loggedIn", false);
+            }
+            else if (u_listner_test === "2") { //changed -> u_que_ans_per >= 60
               setLocalStorage("userInfo", result.data.data);
               setLocalStorage("loggedIn", true);
               this.props.history.push({ pathname: "/userdashboard" });
-            } else {
-              setLocalStorage("result", u_que_ans_per);
+            }
+            else {
+              setLocalStorage("result", result.data.data.u_que_ans_per);
               setLocalStorage("loggedIn", false);
             }
           } else {
@@ -366,6 +374,9 @@ class Login extends Component {
     });
   };
 
+  openListnerSAPopUp = () => {this.setState({ listnerSApopUp: true })};
+  closeListnerSAPopUp = () => {this.setState({ listnerSApopUp: false })};
+
   render() {
     const { email, password } = this.state;
     const { errors } = this.state;
@@ -384,12 +395,12 @@ class Login extends Component {
               {this.state.roleType === CONSTANTS.ROLES.LISTNER
                 ? "Listener Login"
                 : this.state.roleType === CONSTANTS.ROLES.PROFESSIONAL
-                ? "Professional Login"
-                : this.state.roleType === CONSTANTS.ROLES.USER
-                ? "Member Login"
-                : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
-                ? "Admin Login"
-                : ""}
+                  ? "Professional Login"
+                  : this.state.roleType === CONSTANTS.ROLES.USER
+                    ? "Member Login"
+                    : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN
+                      ? "Admin Login"
+                      : ""}
             </div>
             {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
               <div className="col14 fs25 fw300 mb-4 pb-2">
@@ -410,13 +421,13 @@ class Login extends Component {
                   ) : this.state.roleType === CONSTANTS.ROLES.SUPER_ADMIN ? (
                     " Become a Admin"
                   ) : (
-                    ""
-                  )}
+                            ""
+                          )}
                 </strong>
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
 
             <div className="layout_box mb-4">
               <Form.Group className="mb-4 pb-2">
@@ -494,8 +505,8 @@ class Login extends Component {
                   LOGIN
                 </Button>
               ) : (
-                ""
-              )}
+                        ""
+                      )}
               <div className="pt-2 fs18 fw300 col14">
                 Forgot your password?
                 <span
@@ -511,20 +522,6 @@ class Login extends Component {
                 </span>
               </div>
             </div>
-
-            {/* {this.state.roleType !== CONSTANTS.ROLES.SUPER_ADMIN ? (
-              <div className="fs18 fw300 pb-5 col14">
-                Interested in becoming a Listener?
-                <span
-                  className="fw600 pointer pl-1"
-                  onClick={() => this.changepath("/listenersignup")}
-                >
-                  Learn More / Signup
-                </span>
-              </div>
-            ) : (
-              ""
-            )} */}
           </Container>
         </div>
         <Modal
@@ -579,6 +576,35 @@ class Login extends Component {
                 handleSet={() => this.setState({ userSignUp: false })}
               />
             </Container>
+          </Modal.Body>
+        </Modal>
+
+        {/*  User Popup Super Admin Not Admitted */}
+        <Modal
+          show={this.state.listnerSApopUp}
+          onHide={this.closeListnerSAPopUp.bind(this)}
+          className="CreateAccount alertShow"
+        >
+          <Modal.Header>
+            <Button type="button" onClick={this.closeListnerSAPopUp.bind(this)} class="close">
+              <Image src={CrossTwo} alt="alert" className="alertCross" />
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="mb-4">
+              <Image src={Alerts} alt="alert" className="" />
+            </div>
+            <div className="fw600 fs28 mb-3">Alert!</div>
+            <div className="col14 fs20 fw500 mb-4">
+              Super Admin Didn't Verified it please wait for Verfication .
+            </div>
+            <Button
+              type="button"
+              className="btnTyp5"
+              onClick={this.closeListnerSAPopUp.bind(this)}
+            >
+              OKAY
+            </Button>
           </Modal.Body>
         </Modal>
         <Footer />

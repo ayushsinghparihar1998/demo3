@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 import Squares from "../../assets/images/squares.png";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import logopink from "../../assets/images/elplogopink.png";
+import PlanSelection from "../plan/planSelection";
 
 class Plans extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Plans extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
   }
-  handleShow = () => {
+  handleShow = (data) => {
     let type;
     if (getLocalStorage("userInfo")) {
       type = "listner";
@@ -159,81 +160,14 @@ class Plans extends Component {
                               )}
                           </div>
                         </div>
-                        <div className="plantwo text-center">
-                          <div className="d-flex justify-content-center mb-0">
-                            {/* <Button className="btnSave">
-                              Save {item.pl_save}% {item.pl_title}
-                            </Button> */}
-                            <div className="col1 fs20 fw600 text-uppercase">{item.pl_title}</div>
-                          </div>
-                          <div className="pt-1">
-                            <div className="col14 fs16 fw400 pb-1">
-                              <del>Rs. {item.pl_price}</del>
-                            </div>
-                            <div className="col14 fs30 fw600 pb-1">
-                              Rs.{" "}
-                              {parseFloat(item.pl_discount_price).toFixed(2)}
-                            </div>
-                            {/* <div className="col14 fs17 fw400 peryears"> 
-                              {item.pl_type == 1 ? "Per Month" : ""}
-                            </div> */}
-                            <div className="SelectPlans">
-                              <Form.Control as="select">
-                                <option>3 Months</option>
-                                <option>6 Months</option>
-                                <option>9 Months</option>
-                                <option>12 Months</option>
-                              </Form.Control>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="planpricing">
-                          <div className="w-100 justify-content-between">
-                            <div className="fs14 fw500 col29 mt-2 mb-3">
-                              {item.pl_desc_details}
-                            </div>
-                          </div>
-                          <ul className="PlanAbouts">
-                            <li>
-                              <span className="sleft col11 fw400">
-                                <Image src={Squares} alt="sqaress" />
-                                It is a long established fact
-                              </span>
-                            </li>
-                            <li>
-                              <span className="sleft col11 fw400">
-                                <Image src={Squares} alt="sqaress" />
-                                It is a long established fact
-                              </span>
-                            </li>
-                            <li>
-                              <span className="sleft col11 fw400">
-                                <Image src={Squares} alt="sqaress" />
-                                It is a long established fact
-                              </span>
-                            </li>
-                            <li>
-                              <span className="sleft col11 fw400">
-                                <Image src={Squares} alt="sqaress" />
-                                It is a long established fact
-                              </span>
-                            </li>
-                          </ul>
-                          {
-                            !!item.pl_pdf_doc &&
-                            <Button
-                              className="btnTypDown d-block w-100 mt-4"
-                              onClick={() => { window.open(item.pl_pdf_doc, 'Download') }}
-                            >
-                              Download program brochure
-                            </Button>
-                          }
-
-
-                          <Button className="btnType1 d-block w-100 mt-4" onClick={() => this.handleShow()}>
-                            SUBSCRIBE NOW
-                          </Button>
-                        </div>
+                        {
+                          item?.plan_month_price && item.plan_month_price.length > 0 &&
+                          <PlanSelection
+                            item={item}
+                            handleShow={this.handleShow.bind(this)}
+                            plan_array={item.plan_month_price}
+                          />
+                        }
                       </div>
                     </div>
                   );

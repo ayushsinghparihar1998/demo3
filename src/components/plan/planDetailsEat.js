@@ -31,10 +31,21 @@ class PlanDetailsEat extends Component {
     console.log(" this.props.match", this.props.match.params.name);
   };
 
-  handleShow = () => {
+  handleShow = (data) => {
     const checkLoginStatus = (getLocalStorage("customerInfo") || getLocalStorage("userInfo"))
-    if (checkLoginStatus)
-      this.handlePath()
+    if (checkLoginStatus){
+      ELPViewApiService('addplan_paymentdetails',data)
+      .then((response)=>{
+        const data =  response.data;
+        if(data.status === 'success'){
+          //{"pl_transaction_id":"8jpur0wk7oyh"}
+          const transactionID = data.data.pl_transaction_id;
+          window.open(`https://staging.eatluvnpray.org/plan_demo/plan.php?transaction_id=${transactionID}`);
+        }
+      })
+      .catch(err=>new Error(` Error Occured because ${err}`))
+    }
+      // this.handlePath()
     else
       this.setState({ show: true });
   };

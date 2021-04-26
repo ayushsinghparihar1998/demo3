@@ -2331,9 +2331,39 @@ export default {
       "listner_paragraph_id": "",
       "lr_no_attend_que": '',
       "lr_skip_que": "",
-      "lr_submit": [{"que_id":"","ans_id":""}]
+      "lr_submit": [{ "que_id": "", "ans_id": "" }]
     },
     showResultMessage: false,
     showErrorMessage: true
-  }
+  },
+  addquote_user: {
+    url: 'elp/addquote_user',
+    method: "POST",
+    data: {
+      "qu_name": "",
+      "qu_email": "",
+      "qu_phone_number": "",
+      "qu_company_name": "",
+      "qu_country": ""
+    },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  addplan_paymentdetails:{
+    url : 'elp/addplan_paymentdetails',
+    method : "POST",
+    data : {"pl_id":"","pl_amount":"","pl_month": ""},
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminget_listnerresult:{
+    url : 'elp//superadminget_listnerresult',
+    method : 'POST',
+    data : { count :  '' , offset : ''}, 
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  // superadminparagraph_testdeletestatus:{
+
+  // }
 };

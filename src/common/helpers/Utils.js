@@ -208,3 +208,7 @@ export const range = (start, end) => {
     (_, i) => start + i * inc
   );
 };
+
+export const valueRounding = (value) => {
+  return value % 1 === 0 ? value : value.toFixed(2);
+}

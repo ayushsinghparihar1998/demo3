@@ -51,7 +51,7 @@ const PassageTest = (props) => {
                                                     <div>
                                                         <div className="col8 fw500 fs18 pb-1">{para.lp_title}</div>
                                                         <div className="fs16 fw400 col14 pb-1">Number of questions
-                                                        <span className="fw500 ml-1">: 120</span>
+                                                        <span className="fw500 ml-1">: {para.total_que_count}</span>
                                                         </div>
                                                         <div className="fs15 col14 fw300">
                                                             {para.lp_description}

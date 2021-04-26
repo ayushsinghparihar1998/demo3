@@ -777,15 +777,26 @@ class NavBar extends Component {
                               </NavDropdown.Item>
                             ) : null}
                           {getLocalStorage("customerInfo") || getLocalStorage("userInfo") ? (
-                            <NavDropdown.Item
-                              href="#"
-                              onClick={() =>
-                                this.verifyInCallNavigation("/myAssessmentTest")
-                              }
-                            >
-                              <Image src={Userenables} alt="" />
-                              <span>My Tests</span>
-                            </NavDropdown.Item>
+                            <>
+                              <NavDropdown.Item
+                                href="#"
+                                onClick={() =>
+                                  this.verifyInCallNavigation("/myAssessmentTest")
+                                }
+                              >
+                                <Image src={Userenables} alt="" />
+                                <span>My Tests</span>
+                              </NavDropdown.Item>
+                              <NavDropdown.Item
+                                href="#"
+                                onClick={() =>
+                                  this.verifyInCallNavigation("/listner-test-list")
+                                }
+                              >
+                                <Image src={Userenables} alt="" />
+                                <span>Give Listner Tests</span>
+                              </NavDropdown.Item>
+                            </>
                           ) : null}
                           <NavDropdown.Item href="#" onClick={this.handleLogout}>
                             <Image src={Userlogouts} alt="" /> <span>LOGOUT</span>

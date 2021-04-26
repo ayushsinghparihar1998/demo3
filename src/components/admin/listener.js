@@ -56,6 +56,7 @@ import UserCouponDetail from "./sidePage/userCouponDetail";
 import AssTestPurchHist from "./sidePage/asstestPurcHistory";
 import UserPurchaseHistory from "./sidePage/userPurHist";
 import ListnerPassage from "./sidePage/ListnerPassage/listnerPassage";
+import TestRequest from "./sidePage/testRequest";
 
 class Adminlistener extends Component {
   constructor(props) {
@@ -215,6 +216,9 @@ class Adminlistener extends Component {
     }
     else if (getLocalStorage("tabToOpen") === 'list_pass'){
       this.addPageToList('list_pass',17)
+    }
+    else if (getLocalStorage("tabToOpen") === 'testRequest'){
+      this.addPageToList('testRequest',18)
     }
     //list_pass
     // else if (
@@ -1662,6 +1666,11 @@ class Adminlistener extends Component {
     ? "position-relative active"
     : "position-relative";
 
+    let testRequestClass = 
+    this.state.pageType === "testRequest"
+    ? "position-relative active"
+    : "position-relative";
+
     let profileListing = this.state.profileListing;
     let profileName = this.state.userProfileName;
 
@@ -1961,6 +1970,21 @@ class Adminlistener extends Component {
                         </div>
                       </div>
                     </div>
+
+                    <div className="d-flex m-3 pb-3 border-bottom">
+                      <div
+                        className={testRequestClass}
+                        onClick={(e) => {
+                          this.addPageToList("testRequest", 18);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        <div className="fs14 col28 fw500">
+                          <Image src={Menuicon} alt="" className="mr-1" />
+                          Test Request
+                        </div>
+                      </div>
+                    </div>
                     
                     <div className="d-flex m-3 pb-3 border-bottom">
                       <div
@@ -2028,6 +2052,8 @@ class Adminlistener extends Component {
               this.state.pageType === 'testPurchaseHis' ? <AssTestPurchHist />:
               this.state.pageType === 'userPurHis' ? <UserPurchaseHistory />:
               this.state.pageType === 'list_pass' ? <ListnerPassage />:
+              this.state.pageType === 'testRequest' ? <TestRequest />:
+
               this.state.pageType == "userlist" ? (
                 <Col md={8} lg={9} className="pl-1">
                   <div className="professor_search mb-3">
@@ -2371,26 +2397,62 @@ pl_title: "Platinum Plan new" */}
                                       {item.pl_title}
                                     </div>
                                   </div>
-
-                                  <div className="fs15 fw500 col14 pb-1">
-                                    <span className="priceone pr-1">
-                                      Amount: Rs.
-                                      <strong className="fw700">
-                                        {item.pl_price}
-                                      </strong>
-                                    </span>{" "}
-                                    |{/* Rs. {item.pl_discount_price} */}
-                                    <span className="pricetwo pl-2">
-                                      Offer:
-                                      <strong className="fw700 pl-1">
-                                        {item.pl_save}%
-                                      </strong>
-                                    </span>
-                                  </div>
                                   <div className="fs15 col14 fw400">
                                     {item.pl_desc_details}{" "}
                                     {/* <a className="col40">Read more...</a> */}
                                   </div>
+                                  <div className="fs16 fw400 col14 pb-1"> 
+                                    <div className="borderFours">  
+                                        <Row>
+                                            <Col md={4}>    
+                                                <div className="leftAudio">Audio Calls Limit : 
+                                                <strong className="fw600">{Math.floor(parseInt(item.pl_audio_min)/60)} mins</strong></div>
+                                            </Col>    
+                                            <Col md={4}>     
+                                                <div className="rightVideo">Video Calls Limit : 
+                                                <strong className="fw600">{Math.floor(parseInt(item.pl_video_min)/60)} mins</strong></div>  
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                    <Row>  
+                                      {" "}
+                                      {item.plan_month_price.map((val, ind) => {    
+                                        console.log("SERVICE",item)
+                                        return (
+                                          <>
+                                            <Col
+                                              md="6"
+                                              className="borderRight pr-2"
+                                            >
+                                                <div className="text-left">
+                                                  <span className="fw500 fs16 col29 col14 mt-1">
+                                                      {val.pp_max_range_month} Months: 
+                                                  </span>
+                                                </div> 
+                                              <div className="d-flex justify-content-between">
+                                                <div>
+                                                  <span className="fs13">
+                                                  </span>{" "} 
+                                                  <span className="fs15 fw400 col14">    
+                                                    Price:{" "}  
+                                                       {val.pp_price}/- <span className="ml-1 mr-1">|</span> 
+                                                    <strong className="fw400 pl-1"> 
+                                                      {/* Rs. 
+                                                      {
+                                                        val.ks_discounted_price
+                                                      }{" "} */}
+                                                      Discounted Price: {val.pp_discount}/- 
+                                                    </strong>
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </Col>
+                                          </>
+                                        );
+                                      })}
+                                    </Row>
+                                  </div>
+                                  
                                 </div>
 
                                 <div className="min-wi250">

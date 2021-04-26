@@ -14,7 +14,7 @@ import NavBar from "../core/nav";
 import Footer from "../core/footer";
 import ELPViewApiService from "../../common/services/apiService";
 import Slider from "react-rangeslider";
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { showErrorMessage, showSuccessToast } from '../../common/helpers/Utils';
 
 // {
@@ -34,14 +34,19 @@ const ListnerPassageTest = (props) => {
         "lr_no_attend_que": 0,
         "lr_skip_que": "",
         "lr_submit": []
-    })
+    });
+    const history = useHistory();
+    const [showSumbitPop, setSubmitPop] = useState(false);
+
+    const showSubmitPopUp = () => setSubmitPop(true);
+    const closeSubmitPopUp = () => setSubmitPop(false);
+
     useEffect(() => {
         ELPViewApiService('getquesans_listnerlist', { count: 10, offset: 1, listner_paragraph_id: testId })
             .then((response) => {
                 console.log("RESPONSE", response);
                 if (response.data.status === 'success') {
                     const data = response.data.data;
-                    console.log("DATA ", data);
                     setTestData(data.listing);
                     // setTestData(data.listener_paragraph_test[0]);
                 }
@@ -53,14 +58,14 @@ const ListnerPassageTest = (props) => {
         let start = showQuesAns.start;
         let end = showQuesAns.end;
         if (key === "next") {
-            start = start + 5;
-            end = end + 5;
+            start = start + 6;
+            end = end + 6;
         }
         if (key === "prev") {
-            start = start - 5;
-            end = end - 5;
+            start = start - 6;
+            end = end - 6;
         }
-        setShowQuesAns({ start: start, end: end });
+        setShowQuesAns({ start: start, end: end, attempted_ques: showQuesAns.attempted_ques });
     };
 
     const giveAnswer = (quesID, answerID, quesIndex, ansIndex) => {
@@ -78,8 +83,8 @@ const ListnerPassageTest = (props) => {
         })
         const lr_submit = { que_id: quesID, ans_id: answerID };
         let submit = submitForm;
-        submit.lr_submit[quesIndex]=lr_submit;
-        submit.lr_no_attend_que =  submit.lr_submit.filter(function (el) {
+        submit.lr_submit[quesIndex] = lr_submit;
+        submit.lr_no_attend_que = submit.lr_submit.filter(function (el) {
             return el != null;
         }).length;
         submit.lr_skip_que = testData.length - submit.lr_no_attend_que;
@@ -88,20 +93,25 @@ const ListnerPassageTest = (props) => {
     }
 
     const submitTest = () => {
-        if(submitForm.lr_submit.length > 0)
-        ELPViewApiService('submit_listnerTest',submitForm)
-        .then((response)=>{
-            console.log("RESPONSE", response);
-            if (response.data.status === 'success') {
-                const data = response.data.data;
-                console.log("DATA ", data);
-                showSuccessToast(response.data.message);
-            }
-        })
-        .catch(err=>new Error(`Error Occured is ${err}`));
+        if (submitForm.lr_submit.length > 0)
+            ELPViewApiService('submit_listnerTest', submitForm)
+                .then((response) => {
+                    console.log("RESPONSE", response);
+                    if (response.data.status === 'success') {
+                        showSuccessToast(response.data.message);
+                        showSubmitPopUp();
+                    }
+                })
+                .catch(err => new Error(`Error Occured is ${err}`));
         else
-        showErrorMessage('Give Atleast 1 Answer')
+            showErrorMessage('Give Atleast 1 Answer')
     }
+
+    const endPopUp = () => {
+        history.push('/');
+        closeSubmitPopUp();
+    }
+
     return (
         <>
             {/* <pre>{JSON.stringify(submitForm, null, 2)}</pre> */}
@@ -120,7 +130,7 @@ const ListnerPassageTest = (props) => {
                                                 <Form.Group className="mb-4">
                                                     <div className="slider">
                                                         <div className="value mb-3">
-                                                            Question 1/
+                                                            Question {submitForm.lr_no_attend_que}/
                                                         <small>
                                                                 {Array.isArray(testData) && testData.length}
                                                             </small>
@@ -136,7 +146,11 @@ const ListnerPassageTest = (props) => {
                                             {
                                                 Array.isArray(testData) &&
                                                 testData
-                                                    .filter(data => data.ql_status === '1').map((data, quesIndex) =>
+                                                    .filter((data, testDataIndex) =>
+                                                        data.ql_status === '1' &&
+                                                        testDataIndex >= showQuesAns.start &&
+                                                        testDataIndex <= showQuesAns.end
+                                                    ).map((data, quesIndex) =>
                                                         <div className="QuestionList" key={data.ql_id}>
                                                             <div className="col8 fw500 qaList fs18 pb-1">
                                                                 <strong>Q {quesIndex + 1}.</strong>{" "}
@@ -197,24 +211,24 @@ const ListnerPassageTest = (props) => {
                                         </div>
 
                                         <div className="mt-4 text-right">
-
-                                            <Button
-                                                type="button"
-                                                className={`btnTyp5 talkBtntwo  ${showQuesAns.end <= testData?.length ? "disable" : ""
-                                                    }`}
-                                                onClick={() => { pageHandle("next") }}
-                                            >
-                                                SAVE & NEXT
-                                        </Button>
-
-                                            <Button
-                                                type="button"
-                                                className="btnTyp5 talkBtntwo"
-                                                onClick={submitTest}
-                                            >
-                                                Submit
-                                        </Button>
-
+                                            {
+                                                showQuesAns.end <= testData?.length ?
+                                                    <Button
+                                                        type="button"
+                                                        className={`btnTyp5 talkBtntwo  ${showQuesAns.end <= testData?.length ? "disable" : ""
+                                                            }`}
+                                                        onClick={() => { pageHandle("next") }}
+                                                    >
+                                                        SAVE & NEXT
+                                                    </Button>
+                                                    : <Button
+                                                        type="button"
+                                                        className="btnTyp5 talkBtntwo"
+                                                        onClick={submitTest}
+                                                    >
+                                                        Submit
+                                                    </Button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -225,37 +239,34 @@ const ListnerPassageTest = (props) => {
                 <Footer />
 
                 {/* modal start */}
-                {/* <Button variant="primary" onClick={this.handleShow}>
-          Launch demo modal
-        </Button> */}
 
-                {/* <Modal
-            show={this.state.show}
-            onHide={this.handleClose}
-            className="CreateAccount alertShow"
-          >
-            <Modal.Header>
-              <Button type="button" onClick={this.handleClose} class="close">
-                <Image src={CrossTwo} alt="alert" className="alertCross" />
-              </Button>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="mb-4">
-                <Image src={Alerts} alt="alert" className="" />
-              </div>
-              <div className="fw600 fs28 mb-3">Alert!</div>
-              <div className="col14 fs20 fw500 mb-4">
-                  Your entries are final and if you submit the test, your report will be generated.
-              </div>
-              <Button
-                type="button"
-                className="btnTyp5"
-                onClick={() => this.handleSubmit()}
-              >
-                OKAY
-              </Button>
-            </Modal.Body>
-          </Modal> */}
+                <Modal
+                    show={showSumbitPop}
+                    onHide={endPopUp}
+                    className="CreateAccount alertShow"
+                >
+                    <Modal.Header>
+                        <Button type="button" onClick={endPopUp} class="close">
+                            <Image src={CrossTwo} alt="alert" className="alertCross" />
+                        </Button>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="mb-4">
+                            <Image src={Alerts} alt="alert" className="" />
+                        </div>
+                        <div className="fw600 fs28 mb-3">Alert!</div>
+                        <div className="col14 fs20 fw500 mb-4">
+                            Your entries are Submitted .
+                        </div>
+                        <Button
+                            type="button"
+                            className="btnTyp5"
+                            onClick={endPopUp}
+                        >
+                            OKAY
+                        </Button>
+                    </Modal.Body>
+                </Modal>
                 {/* modal end */}
             </div>
         </>
