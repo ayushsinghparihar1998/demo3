@@ -105,13 +105,13 @@ const ListnerPassage = () => {
                             </div>
                         </Col>
                         <Col md={4}>
-                            <div className="text-right pro_cbtn">
+                            <div className="text-right pro_cbtn mb-4">
                                 <Button
                                     type="button"
-                                    className="btnTyp5"
+                                    className="btnTyp5" 
                                     onClick={() => { openCreatePassage(0) }}
                                 >
-                                    create passage
+                                    create passage  
                             </Button>
                             </div>
                         </Col>

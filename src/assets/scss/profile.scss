@@ -2953,7 +2953,15 @@
                       left: -15px;
                       // background: #fff;
                       border-radius: 50%;
-                      padding: 0 0;
+                      padding: 0 0; 
+                      background-image: url('../images/leftArrow.png');
+                      background-size: cover; 
+                      width: 60px;
+                      height: 60px; 
+
+                      &:before {
+                          display: none; 
+                      }
                   }
                   .slick-next {
                       z-index: 9; 
@@ -2961,6 +2969,13 @@
                       // background: #fff; 
                       border-radius: 50%;  
                       padding: 0 0; 
+                      background-image: url('../images/rightArrows.png'); 
+                      background-size: cover; 
+                      width: 60px;
+                      height: 60px; 
+                      &:before {
+                        display: none;  
+                      }
                   }
               }
               .slick-prev, .slick-next {

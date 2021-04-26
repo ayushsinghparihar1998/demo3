@@ -37,7 +37,7 @@ const KitListings = (props) => {
             </div>
             <div className="kitListings">
                 <Container>
-                    <div className="kitplans mt-4 mb-4">
+                    <div className="kitplans mt-4 mb-4">  
                         <div className="fs28 col8 text-center fw500 mt-3 mb-5">KITS PLAN</div>  
                         <Row>   
                             {
@@ -51,7 +51,7 @@ const KitListings = (props) => {
                                             <div className="d-flex mb-2">
                                                 <span className="italics col14 fs16 fw400 mr-2">From</span>
                                                 <span className="mr-1"> <i class="fa fa-inr" aria-hidden="true"></i>  {kitList.month_array.length && kitList.month_array[0].kp_price}</span>
-                                                <span className="prices col26"> <i class="fa fa-inr" aria-hidden="true"></i>{kitList.month_array.length && kitList.month_array[0].kp_discount}</span>
+                                                <span className="prices col26 ml-1"> <i class="fa fa-inr" aria-hidden="true"></i>{kitList.month_array.length && kitList.month_array[0].kp_discount}</span>
                                             </div>
                                         </div>
                                     </Col>
@@ -66,3 +66,6 @@ const KitListings = (props) => {
     );
 }
 export default KitListings; 
+
+
+
