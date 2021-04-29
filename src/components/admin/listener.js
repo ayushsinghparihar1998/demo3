@@ -2269,7 +2269,7 @@ class Adminlistener extends Component {
                                 );
                               })}
                           </div>
-                        </Tab>
+                        </Tab> 
                         <Tab eventKey="reject" title="REJECTED">
                           <div className="requests">
                             {this.state.blockList &&
@@ -2321,8 +2321,8 @@ class Adminlistener extends Component {
                   <div className="professor_search">
                     <Row className="mb-3">
                       <Col md={8}>
-                        <div className="fs22 fw600 col10">
-                          Subscription Plan
+                        <div className="fs22 fw600 col10">               
+                          Subscription Plan 
                         </div>
                       </Col>
                       <Col md={4}>
