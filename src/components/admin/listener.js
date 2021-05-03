@@ -2397,18 +2397,18 @@ pl_title: "Platinum Plan new" */}
                                       {item.pl_title}
                                     </div>
                                   </div>
-                                  <div className="fs15 col14 fw400">
+                                  <div className="fs15 col14 fw400 mb-2">
                                     {item.pl_desc_details}{" "}
                                     {/* <a className="col40">Read more...</a> */}
                                   </div>
                                   <div className="fs16 fw400 col14 pb-1"> 
                                     <div className="borderFours">  
                                         <Row>
-                                            <Col md={4}>    
+                                            <Col md={5}>    
                                                 <div className="leftAudio">Audio Calls Limit : 
                                                 <strong className="fw600">{Math.floor(parseInt(item.pl_audio_min)/60)} mins</strong></div>
                                             </Col>    
-                                            <Col md={4}>     
+                                            <Col md={5}>     
                                                 <div className="rightVideo">Video Calls Limit : 
                                                 <strong className="fw600">{Math.floor(parseInt(item.pl_video_min)/60)} mins</strong></div>  
                                             </Col>
@@ -2433,7 +2433,7 @@ pl_title: "Platinum Plan new" */}
                                                 <div>
                                                   <span className="fs13">
                                                   </span>{" "} 
-                                                  <span className="fs15 fw400 col14">    
+                                                  <span className="fs13 fw400 col14">    
                                                     Price:{" "}  
                                                        {val.pp_price}/- <span className="ml-1 mr-1">|</span> 
                                                     <strong className="fw400 pl-1"> 

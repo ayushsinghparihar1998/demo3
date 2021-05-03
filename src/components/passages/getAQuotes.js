@@ -103,8 +103,8 @@ const GetAQuote = (props) => {
 
                                 <Form.Group>
                                     <Form.Label className="fs20 fw600 col14">
-                                        Phone Number <sup>*</sup>
-                                    </Form.Label>
+                                        Phone Number 
+                                    </Form.Label>  
 
                                     <Form.Control
                                         type="number"

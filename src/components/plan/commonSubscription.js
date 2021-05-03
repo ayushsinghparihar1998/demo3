@@ -5,9 +5,9 @@ const CommonSubScription = ({ planEat, planHolistic, settingstwo, dataByConditio
     
     return (
         <>
-            <div className="PlanListOne">
+            <div className="PlanListOne"> 
                 <div className="banLayout">
-                    <div className="layTwo">Get
+                    <div className="layTwo">Get 
                          <span className="text-uppercase ml-1 mr-1">free audio & video calls</span>
                           by buying any plan </div>
                 </div>
