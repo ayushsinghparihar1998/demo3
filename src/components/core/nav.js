@@ -38,6 +38,8 @@ import ELPRxApiService from "../../common/services/apiService";
 import CONSTANTS from "../../common/helpers/Constants";
 import constant from "../../constant";
 import CallDisconnectConfirmation from "../modals/CallDisconnectConfirmation";
+import { ReactComponent as CouponHistorySVG } from '../../assets/images/coupon_history.svg';
+import { ReactComponent as OrderHistorySVG } from '../../assets/images/order_history.svg';
 
 const socket = socketClass.getSocket();
 
@@ -795,6 +797,24 @@ class NavBar extends Component {
                               >
                                 <Image src={Userenables} alt="" />
                                 <span>Give Listner Tests</span>
+                              </NavDropdown.Item>
+                              <NavDropdown.Item
+                                href="#"
+                                onClick={() =>
+                                  this.verifyInCallNavigation("/coupon-history")
+                                }
+                              >
+                                <CouponHistorySVG />
+                                <span>Coupon History</span>
+                              </NavDropdown.Item>
+                              <NavDropdown.Item
+                                href="#"
+                                onClick={() =>
+                                  this.verifyInCallNavigation("/order-history")
+                                }
+                              >
+                                <OrderHistorySVG />
+                                <span>Order History</span>
                               </NavDropdown.Item>
                             </>
                           ) : null}

@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Row, Col, Image } from "react-bootstrap";
+import { Button, Container, Row, Col, Image, Modal } from "react-bootstrap";
 import NavBar from "../../../core/nav";
 import Editicon from "../../../../assets/images/edit_icon.svg";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Footer from '../../../core/footer';
 import ELPViewApiService from '../../../../common/services/apiService';
 import Deleteicon from "../../../../assets/images/delete_icon.svg";
-import { showErrorToast, showSuccessToast } from '../../../../common/helpers/Utils';
+import { showSuccessToast } from '../../../../common/helpers/Utils';
+import Alerts from "../../../../assets/images/alerts.png";
+import CrossTwo from "../../../../assets/images/crosstwo.png";
 
 const ViewPassQA = (props) => {
   const history = useHistory();
   const { id } = useParams();
   const [passListing, setPassListing] = useState();
   const [passageTitle , setPassageTitle] = useState('');
+  const [ modal ,setModal ] = useState(false);
   const openEditPass = (qID) => history.push(`/editPassQA/${id}/${qID}`);
   const openQuestionPage = () => history.push(`/passageQA/${id}`);
-
   useEffect(() => {
-    if (id !== '0') {
+    if (id !== '0' && !modal) {
       const data = { "count": 10, "offset": 1, "listner_paragraph_id": id }
       ELPViewApiService('superadminget_quesanslistenerlist', data)
         .then((response) => {
@@ -37,43 +39,43 @@ const ViewPassQA = (props) => {
             const data = response.data.data;
             console.log("DATA ", data[0]);
             setPassageTitle(data[0].lp_title);
-            // setPassDescribe(data[0].lp_description);
-            // setQuesCount(data[0].total_que_count);
-            //{list.total_que_count}
           }
         })
         .catch(err => new Error(`Error in Getting PARA ${err}`))
     }
-  }, [id]);
+  }, [id , modal]);
 
-  const deleteQuestion = (id) => {
-    const data = { ql_id: id, ql_status: '3' }
-    ELPViewApiService('superadminqueans_listnerchangestatus', data)
+  const deleteQuestion = () => {
+    const data = { ql_id: parseInt(modal), ql_status: 3 }
+    ELPViewApiService('superadminqueans_listnerdeletestatus', data)
       .then((response) => {
         console.log("RESPONSE", response);
         if (response.data.status === 'success') {
-          const data = response.data.data;
-          console.log("DATA ", data);
-          showErrorToast(response.data.message);
-        }
-      })
-      .catch((err) => new Error(`Error is ${err}`));
-
-  }
-
-  const changeQuestionStatus = (status) => {
-    const data = { ql_id: id, ql_status: status }
-    ELPViewApiService('superadminqueans_listnerchangestatus', data)
-      .then((response) => {
-        console.log("RESPONSE", response);
-        if (response.data.status === 'success') {
-          const data = response.data.data;
-          console.log("DATA ", data);
           showSuccessToast(response.data.message);
+          setModal(false);
         }
       })
       .catch((err) => new Error(`Error is ${err}`));
+
   }
+
+  const closeModal = () => {
+    setModal(false);
+  }
+
+  // const changeQuestionStatus = (status) => {
+  //   const data = { ql_id: id, ql_status: status }
+  //   ELPViewApiService('superadminqueans_listnerchangestatus', data)
+  //     .then((response) => {
+  //       console.log("RESPONSE", response);
+  //       if (response.data.status === 'success') {
+  //         const data = response.data.data;
+  //         console.log("DATA ", data);
+  //         showSuccessToast(response.data.message);
+  //       }
+  //     })
+  //     .catch((err) => new Error(`Error is ${err}`));
+  // }
 
   return (
     <div className="page__wrapper innerpage">
@@ -123,7 +125,7 @@ const ViewPassQA = (props) => {
                   </div>
                 </div>
                 {passListing &&
-                  passListing.map((item, index) => {
+                  passListing.filter((item)=>item.ql_status !== '3').map((item, index) => {
                     return (
                       <div className="QaListings">
                         <div className="QaHeader">
@@ -145,7 +147,7 @@ const ViewPassQA = (props) => {
                             </span>
                             <span
                               className="pointer"
-                              onClick={() => { deleteQuestion(item.ql_id) }}
+                              onClick={() => { setModal(item.ql_id) }}
                             >
                               <Image src={Deleteicon} alt="" />
                             </span>
@@ -182,6 +184,42 @@ const ViewPassQA = (props) => {
           </Row>
         </Container>
       </div>
+
+      <Modal
+          show={modal}
+          onHide={closeModal}
+          className="CreateAccount alertShow"
+        >
+          <Modal.Header>
+            <Button type="button" onClick={closeModal} class="close">
+              <Image src={CrossTwo} alt="alert" className="alertCross" />
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="mb-4">
+              <Image src={Alerts} alt="alert" className="" />
+            </div>
+            <div className="fw600 fs28 mb-3">Alert!</div>
+            <div className="col14 fs20 fw500 mb-4">
+              Do You Want to Delete Question ?
+            </div>
+            <Button
+              type="button"
+              className="btnTyp5"
+              onClick={closeModal}
+            >
+              NO
+            </Button>
+            <Button
+              type="button"
+              className="btnTyp5"
+              onClick={deleteQuestion}
+            >
+              Yes
+            </Button>
+          </Modal.Body>
+        </Modal>
+
       <Footer />
     </div>
   );

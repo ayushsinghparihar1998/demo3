@@ -1793,6 +1793,7 @@ export default {
       kt_price: "",
       kt_video_min: "",
       kt_audio_min: "",
+      // kits_image_array :[],
       kits_service_name: [
         {
           ks_services: "",
@@ -2164,6 +2165,13 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
+  addkitspurchase_paymentdetails: {
+    elp: 'elp/addkitspurchase_paymentdetails',
+    method: "POST",
+    data: { kt_id: "", kt_amount: "", kt_month: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
   kits_redeemcode: {
     url: 'elp/kits_redeemcode',
     method: "POST",
@@ -2297,9 +2305,23 @@ export default {
     showErrorMessage: true
   },
   superadminget_quesanslistnerdetails: {
-    url: 'elp//superadminget_quesanslistnerdetails',
+    url: 'elp/superadminget_quesanslistnerdetails',
     method: 'POST',
     data: { "count": '', "offset": '', "ql_id": '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadminqueans_listnerdeletestatus: {
+    url: 'elp/superadminqueans_listnerdeletestatus',
+    method: 'POST',
+    data: { ql_id: '', ql_status: "" },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  superadmindelete_subscriberlist: {
+    url: 'elp/superadmindelete_subscriberlist',
+    method: 'POST',
+    data: { s_id: '', s_status: "" },
     showResultMessage: false,
     showErrorMessage: true
   },
@@ -2349,21 +2371,32 @@ export default {
     showResultMessage: false,
     showErrorMessage: true
   },
-  addplan_paymentdetails:{
-    url : 'elp/addplan_paymentdetails',
-    method : "POST",
-    data : {"pl_id":"","pl_amount":"","pl_month": ""},
+  addplan_paymentdetails: {
+    url: 'elp/addplan_paymentdetails',
+    method: "POST",
+    data: { "pl_id": "", "pl_amount": "", "pl_month": "" },
     showResultMessage: false,
     showErrorMessage: true
   },
-  superadminget_listnerresult:{
-    url : 'elp//superadminget_listnerresult',
-    method : 'POST',
-    data : { count :  '' , offset : ''}, 
+  superadminget_listnerresult: {
+    url: 'elp//superadminget_listnerresult',
+    method: 'POST',
+    data: { count: '', offset: '' },
     showResultMessage: false,
     showErrorMessage: true
   },
-  // superadminparagraph_testdeletestatus:{
-
-  // }
+  getuser_orderhistory:{
+    url : 'elp/getuser_orderhistory',
+    method: 'POST',
+    data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  },
+  getuser_kitscouponlist:{
+    url : 'elp/getuser_kitscouponlist',
+    method: 'POST',
+    data: { count: '', offset: '' },
+    showResultMessage: false,
+    showErrorMessage: true
+  }
 };

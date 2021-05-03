@@ -91,7 +91,11 @@ class Kits extends Component {
                         >
                           <div className="planBorder">
                             <div className="profile_set">
-                              <Image src={item.kt_image_url} alt="" />
+                              <Image 
+                                src={
+                                  item?.kits_image_array?.length ? item?.kits_image_array[0]?.ki_image_upload : item.kt_image_url
+                                } alt="" 
+                              />
                             </div>
                             <div className="planpricing">
                               <div className="text-center fw500 fs16 col64 text-uppercase borderSs">

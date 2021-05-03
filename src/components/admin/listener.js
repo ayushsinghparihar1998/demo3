@@ -3910,7 +3910,9 @@ cs_time: "00:00:02" */}
                         <div className="adminlistener p-4 mb-3">
                           <div className="d-flex text-left">
                             <div className="mr-2 pt-1">
-                              <Image src={item.kt_image_url} alt="" />
+                              <Image 
+                                src={item.kits_image_array?.length ? item.kits_image_array[0]?.ki_image_upload : item?.kt_image_url} alt="" 
+                              />
                             </div>
                             <div className="pl-2 w-100">
                               <div className="d-flex justify-content-between">

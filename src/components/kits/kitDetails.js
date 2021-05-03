@@ -9,29 +9,28 @@ import {
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-import KitOne from "../../assets/images/kits.png";
-import KitTwo from "../../assets/images/kits2.png";
-import KitThree from "../../assets/images/kits3.png";
+// import KitOne from "../../assets/images/kits.png";
+// import KitTwo from "../../assets/images/kits2.png";
+// import KitThree from "../../assets/images/kits3.png";
 import RightArrow2 from "../../assets/images/rightarrow2.png";
 import GiftBox from "../../assets/images/giftbox.png";
-import Kits1 from "../../assets/images/kitd1.png";
+// import Kits1 from "../../assets/images/kitd1.png";
 import Slider from "react-slick";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
 import { setLocalStorage } from "../../common/helpers/Utils";
 
 const KitDetails = (props) => {
     const history = useHistory();
-    const location = useLocation();
     const { id } = useParams();
     const goToKitList = () => history.push('/kitListings');
     const [kitsDetail, setKitsDetail] = useState(null);
     const [monthPlanIndex, setMonthPlanIndex] = useState(0);
-    const buyNow = () => {
-        history.push('/kit-checkout/'.concat(id));
-        setLocalStorage("kit_buy",monthPlanIndex);
+    const buyNow = (startegy) => {
+        history.push('/kit-checkout/'.concat(id).concat(`/${startegy || 0}`));
+        setLocalStorage("kit_buy", monthPlanIndex);
     };
-    console.log("PARAMS ", id, history, location);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -39,6 +38,7 @@ const KitDetails = (props) => {
         slidesToShow: 1,
         slidesToScroll: 1
     };
+
     useEffect(() => {
         ELPViewApiService("getkits_listdetails", { kt_id: id })
             .then((response) => {
@@ -54,22 +54,22 @@ const KitDetails = (props) => {
     }, [id]);
 
     return (
-        <div className="page__wrapper innerpage">  
+        <div className="page__wrapper innerpage">
             <div className="main_baner">
                 <NavBar {...props} />
             </div>
-            <div className="kitDetailMain">   
+            <div className="kitDetailMain">
                 <Container>
-                      <div className="kitDetailTwo mt-4 mb-5"> 
-                        <div className="banLayout mb-4"> 
+                    <div className="kitDetailTwo mt-4 mb-5">
+                        <div className="banLayout mb-4">
                             <div className="layTwo">Get
                                 <span className="text-uppercase ml-1 mr-1">free audio & video calls</span>
-                                by buying any kit </div> 
-                        </div>  
+                                by buying any kit </div>
+                        </div>
                         <div className="fs18 text-left fw500 mt-3 mb-5 pointer" onClick={goToKitList}>
                             <span className="col14 fw300 mr-1">Kits</span> /
-                            <span className="col29 fs18 ml-1">Kit Details</span> 
-                        </div> 
+                            <span className="col29 fs18 ml-1">Kit Details</span>
+                        </div>
 
                         <Row>
                             {
@@ -95,20 +95,22 @@ const KitDetails = (props) => {
                                                 <div className="thumbDetails">
                                                     <div>
                                                         <Slider {...settings}>
-                                                            <div>
-                                                                <Image src={kitsDetail.kt_image_url} alt="Kit" />
-                                                            </div>
-                                                            <div>
-                                                                <Image src={kitsDetail.kt_image_url} alt="Kit" />
-                                                            </div>
+                                                            {
+                                                                kitsDetail?.kits_image_array?.length &&
+                                                                kitsDetail?.kits_image_array.map((item) =>
+                                                                    <div>
+                                                                        <Image src={item?.ki_image_upload} alt="Kit" />
+                                                                    </div>
+                                                                )
+                                                            }
                                                         </Slider>
                                                     </div>
                                                     <div className="thumbImg">
-                                                        <ul>
+                                                        {/* <ul>
                                                             <li><Image src={KitOne} className="thumb1" /></li>
                                                             <li><Image src={KitTwo} className="thumb1" /></li>
                                                             <li><Image src={KitThree} className="thumb1" /></li>
-                                                        </ul>
+                                                        </ul> */}
                                                     </div>
                                                 </div>
 
@@ -155,7 +157,7 @@ const KitDetails = (props) => {
 
                                                 }
                                                 <div className="byBtnmain">
-                                                    <Button type="button" className="btnTyp5 byBtns" >Buy Now <span><Image src={RightArrow2} /></span></Button>
+                                                    <Button type="button" className="btnTyp5 byBtns" onClick={() => { buyNow(1) }} >Buy Now <span><Image src={RightArrow2} /></span></Button>
 
                                                     <Button type="button" className="btnTyp5 gifts" onClick={buyNow}>Give as a gift <span><Image src={GiftBox} /></span></Button>
                                                 </div>
@@ -166,7 +168,7 @@ const KitDetails = (props) => {
                                                 </div>
 
                                             </div>
-                                        </Col> 
+                                        </Col>
                                     </>
                                 )
                             }

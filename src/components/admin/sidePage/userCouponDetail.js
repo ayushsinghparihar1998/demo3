@@ -31,7 +31,7 @@ const UserCouponDetail = () => {
             <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">
                 <div className="chatsearch w-100">
                     <div className="myAssesstest">
-                        <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">USER QUOTE HISTORY</div>
+                        <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">USER COUPON HISTORY</div>
                         <div className="mainTables">
                             <Table bordered size="lg">
                                 <thead>

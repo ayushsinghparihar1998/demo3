@@ -23,6 +23,12 @@ import Validator from "validator";
 import ValidationMessages from "../../common/helpers/ValidationMessages";
 import XCircle from "../../assets/images/XCircle.png";
 
+function stripHtml(html) {
+  let tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+}
+
 class AddKits extends Component {
   constructor(props) {
     super(props);
@@ -204,6 +210,8 @@ class AddKits extends Component {
       });
 
       let data = this.state.kitObj;
+      data.kt_desc = stripHtml(data.kt_desc);
+      data.kt_overview = stripHtml(data.kt_overview);
       console.log(data);
 
       if (this.props.match.params.id > 0) {
@@ -284,30 +292,11 @@ class AddKits extends Component {
     return isValid;
   }
 
-
-  handleUploadPicture = event => {
-    // const fileObject = event.target.files[0];
-
-    // const file = event.target.files[0];
-    for (let index = 0; index <= event.target.files.length; index++) {
-      const file = event.target.files[index];
-      const reader = new FileReader();
-      if (file) {
-        reader.readAsDataURL(file)
-      }
-      reader.onloadend = () => {
-        const formdata = new FormData();
-        formdata.append('tt_images[]', file);
-        const url = constant.SERVER_URL + "elp/uploadKits_images";
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-        Axios.post(url, formdata, config)
+  apiUpload = (url, formdata, config) => {
+    Axios.post(url, formdata, config)
           .then((res) => {
             console.log(res, res.data.status === 'success')
-
+ 
             if (res.data.status === 'success') {
               const data = res.data.data;
               const kitObj =this.state.kitObj;
@@ -317,12 +306,31 @@ class AddKits extends Component {
             }
           })
           .catch(err => err);
-      }
-
+  }
+ 
+  handleUploadPicture = (event) => {
+    const formdata = new FormData();
+    for (let index = 0; index <= event.target.files.length; index++) {
+      const file = event.target.files[index];
+      if(file)
+      formdata.append('tt_images[]', file);
     }
-
-
+ 
+    const paramID = this.props.match.params.id;
+    const name = paramID ? 'edituploadkits_images' : 'uploadKits_images';
+    const url = constant.SERVER_URL + "elp/".concat(name);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    if(paramID !== "0"){
+      formdata.append('ki_image_kt_id',paramID);
+    }
+    this.apiUpload(url, formdata, config);
+ 
   };
+
   handlePriceMonth = (event, index) => {
     const { name, value } = event.target;
     let kitObj = this.state.kitObj;
@@ -398,20 +406,6 @@ class AddKits extends Component {
                       </Form.Label>
 
                       {
-                        // !!kitObj.kt_image_url &&
-                        // <div className="mt-1 mb-3 imgSetProfile">
-                        //   <Image src={kitObj.kt_image_url} className="" />{" "}
-                        //   <Image
-                        //     src={XCircle}
-                        //     onClick={() => {
-                        //       let kitObj = this.state.kitObj;
-                        //       kitObj.kt_image_url = '';
-                        //       this.setState({ kitObj });
-                        //     }}
-                        //   />
-                        // </div>
-                      }
-                      {
                         this.props.match.params.id === "0" ?
                           <>
                             {
@@ -431,7 +425,7 @@ class AddKits extends Component {
                           </>
                           : <>
                             {
-                              kitObj.kits_image_array.map((file, index) =>
+                              kitObj.kits_image_array.length !== 0 && kitObj.kits_image_array.map((file, index) =>
                                 <div className="mt-1 mb-3 imgSetProfile">
                                   <Image src={file.ki_image_upload || file.file_path} className="" />{" "}
                                   <Image

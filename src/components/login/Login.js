@@ -231,20 +231,20 @@ class Login extends Component {
             this.setState({
               errors: {},
             });
-            let u_listner_test = result.data.data.u_listner_test;
-            if (u_listner_test === "1") {
-              this.openListnerSAPopUp();
-              setLocalStorage("loggedIn", false);
-            }
-            else if (u_listner_test === "2") { //changed -> u_que_ans_per >= 60
+            // let u_listner_test = result.data.data.u_listner_test;
+            // if (u_listner_test === "1") {
+            //   this.openListnerSAPopUp();
+            //   setLocalStorage("loggedIn", false);
+            // }
+            // else if (u_listner_test === "2") { //changed -> u_que_ans_per >= 60
               setLocalStorage("userInfo", result.data.data);
               setLocalStorage("loggedIn", true);
               this.props.history.push({ pathname: "/userdashboard" });
-            }
-            else {
-              setLocalStorage("result", result.data.data.u_que_ans_per);
-              setLocalStorage("loggedIn", false);
-            }
+            // }
+            // else {
+            //   setLocalStorage("result", result.data.data.u_que_ans_per);
+            //   setLocalStorage("loggedIn", false);
+            // }
           } else {
             this.setState({
               errors: {},

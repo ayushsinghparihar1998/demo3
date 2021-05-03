@@ -139,6 +139,8 @@ import ViewPassage from "../components/admin/sidePage/ListnerPassage/viewPassLis
 import ViewPassQA from "../components/admin/sidePage/ListnerPassage/viewPassQA";
 import EditPassQA from "../components/admin/sidePage/ListnerPassage/editPassQA"; 
 import ListnerPassageTest from "../components/passages/listnerPassageTest";
+import CouponHistory from "../components/listener/couponHistory";
+import OrderHistory from "../components/listener/orderHistory";
 // const user =
 //   getLocalStorage("userInfo") ||
 //   getLocalStorage("userInfoProff") ||
@@ -262,7 +264,7 @@ class ELPRoute extends Component {
           <PublicRoute path="/corporateDocument" component={CorporateDocument} /> 
           <Route path="/kitListings" component={KitListings} /> 
           <Route path="/kitDetails/:id" component={KitDetails} /> 
-          <Route path="/kit-checkout/:id" component={Checkouts} />    
+          <Route path="/kit-checkout/:id/:buyId" component={Checkouts} />    
           
           <PublicRoute
             path="/listenerAssessmentTest"
@@ -436,6 +438,9 @@ class ELPRoute extends Component {
             path="/professionalSearch"
             component={ProfessionalChatSearch}
           />
+
+          <PrivateRoutes path="/coupon-history" component={CouponHistory} />
+          <PrivateRoutes path="/order-history" component={OrderHistory}/>
         </Switch>
       </>
     );

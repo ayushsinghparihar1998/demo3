@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, NavDropdown, Carousel, Container, Row, Col, Form, Tabs, Tab, Modal, Table } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { Image } from 'react-bootstrap';
 import { useHistory, useLocation, useParams } from "react-router";
 import ELPViewApiService from '../../../common/services/apiService';
 import NavBar from "../../core/nav";
 import Footer from "../../core/footer";
 import Slider from "react-slick";
-// import KitOne from "../../assets/images/kits.png"; 
-import KitOne from "../../../assets/images/kits.png";
-import KitTwo from "../../../assets/images/kits2.png";
-import KitThree from "../../../assets/images/kits3.png";
 import { Link } from "react-router-dom";
 import Editicon from "../../../assets/images/edit_icon.svg";
-
+import Carousel from 'react-gallery-carousel';
+import 'react-gallery-carousel/dist/index.css';
 
 const KitsDetailSA = () => {
     const history = useHistory();
@@ -30,10 +27,10 @@ const KitsDetailSA = () => {
             }
         }).catch((error) => console.log(error));
     }, [id])
-    
+
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -75,7 +72,7 @@ const KitsDetailSA = () => {
                                                     type="button"
                                                     className="btnTyp12"
                                                     onClick={editDetail}
-                                                >   
+                                                >
                                                     <Image
                                                         src={Editicon}
                                                         alt=""
@@ -90,28 +87,36 @@ const KitsDetailSA = () => {
                                                 <div className="detailsLeft">
                                                     <div className="thumbDetails">
                                                         <div>
-                                                            <Slider {...settings}>
-                                                                <div>
-                                                                    <Image src={kitObj.kt_image_url} alt="Kit" />
-                                                                </div>
-                                                                {/* <div>
-                                                                    <Image src={KitTwo} alt="Kit" />
-                                                                </div> */}
+                                                            <Slider onSwipe {...settings}>
+                                                                {
+                                                                    kitObj?.kits_image_array?.length &&
+                                                                    kitObj.kits_image_array.map((kit) =>
+                                                                        <div>
+                                                                            <Image src={kit.ki_image_upload} alt="Kit" />
+                                                                        </div>
+                                                                    )
+                                                                }
                                                             </Slider>
                                                         </div>
                                                         <div className="thumbImg">
-                                                            <ul>
-                                                                <li><Image src={KitOne} className="thumb1" /></li>
-                                                                <li><Image src={KitTwo} className="thumb1" /></li>
-                                                                <li><Image src={KitThree} className="thumb1" /></li>
-                                                            </ul>
+                                                            
+                                                            {/* <ul>
+                                                                {
+                                                                    kitObj?.kits_image_array?.length &&
+                                                                    kitObj.kits_image_array.map((kit) =>
+                                                                        <li>
+                                                                            <Image src={kit.ki_image_upload} className="thumb1" />
+                                                                        </li>
+                                                                    )
+                                                                }
+                                                            </ul> */}
                                                         </div>
                                                     </div>
 
                                                     <div class="overViews">
                                                         <div class="fs17 fw500 col14 mb-1">Description</div>
                                                         <div class="fw400 fs15 col14 mt-1">
-                                                            {kitObj.kt_desc}
+                                                            {kitObj?.kt_desc}
                                                         </div>
                                                     </div>
 
@@ -119,14 +124,14 @@ const KitsDetailSA = () => {
                                             </Col>
                                             <Col md={6}>
                                                 <div className="detailMonthtwo">
-                                                    <div className="fw500 col29 fs22 mt-4 mb-2">{kitObj.kt_name}</div>
+                                                    <div className="fw500 col29 fs22 mt-4 mb-2">{kitObj?.kt_name}</div>
                                                     <div className="fw400 col14 mb-3">
-                                                        {kitObj.kt_subheading}
+                                                        {kitObj?.kt_subheading}
                                                     </div>
 
                                                     <div className="mb-4">
                                                         {
-                                                            kitObj.month_array.map((kitsMonth) =>
+                                                            kitObj?.month_array.map((kitsMonth) =>
                                                                 <>
                                                                     <div className="fw500 fs18 col29 col14 mt-1">
                                                                         {kitsMonth.kp_max_range_month} Months:
@@ -140,7 +145,7 @@ const KitsDetailSA = () => {
                                                                         <span className="ml-1 mr-1">|</span>
                                                                         <span>Discounted Price:
                                                                         <strong className="fw500">
-                                                                                {kitsMonth.kp_discount_price}/-
+                                                                                {kitsMonth.kp_discount}/-
                                                                         </strong>
                                                                         </span>
                                                                     </div>

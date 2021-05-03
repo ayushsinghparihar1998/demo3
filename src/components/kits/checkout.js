@@ -8,8 +8,7 @@ import {
 } from "react-bootstrap";
 import NavBar from "../core/nav";
 import Footer from "../core/footer";
-// import Kits1 from "../../assets/images/kitd1.png";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import ELPViewApiService from "../../common/services/apiService";
 import CrossTwo from "../../assets/images/crosstwo.png";
 import Alerts from "../../assets/images/alerts.png";
@@ -18,8 +17,7 @@ import ELPRxApiService from "../../common/services/apiService";
 
 const Checkouts = (props) => {
   const history = useHistory();
-  const location = useLocation();
-  const { id } = useParams();
+  const { id, buyId } = useParams();
   const [kitsDetail, setKitsDetail] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [openCode, setOpenCode] = useState(false);
@@ -28,6 +26,32 @@ const Checkouts = (props) => {
   const goToKitList = () => history.push('/kitListings');
   const goToKitDetail = () => history.push('/kitDetails/'.concat(id));
   const priceIndex = getLocalStorage("kit_buy") || 0;
+
+  const switchBuyType = (data) => {
+    if (parseInt(buyId)) {
+      ELPViewApiService("addkitspurchase_paymentdetails", data)
+        .then((response) => {
+          if (response.data?.status === 'success') {
+            const trans_id = response.data.data.kt_transaction_id;
+            const link = 'https://staging.eatluvnpray.org/kits_purchase/kitspurchase.php?transaction_id'.concat(trans_id);
+            window.open(link, "_blank");
+          }
+        })
+        .catch(err => console.log("ERROR ADDING PAYMENT ", err))
+    }
+    else {
+      ELPViewApiService("addKits_paymentdetails", data)
+        .then((response) => {
+          if (response.data?.status === 'success') {
+            const trans_id = response.data.data.kt_transaction_id;
+            const link = 'https://staging.eatluvnpray.org/kits_demo/kits.php?transaction_id='.concat(trans_id);
+            window.open(link, "_blank");
+          }
+        })
+        .catch(err => console.log("ERROR ADDING PAYMENT ", err))
+    }
+  }
+
   const handleShow = () => {
     let type;
     if (getLocalStorage("userInfo")) {
@@ -50,17 +74,7 @@ const Checkouts = (props) => {
               kt_amount: kitsDetail.month_array[priceIndex].kp_discount,
               kt_month: kitsDetail.month_array[priceIndex].kp_max_range_month
             }
-            ELPViewApiService("addKits_paymentdetails", data)
-              .then((response) => {
-                console.log("GOT TRANSACTION ID IS ", response, response.status === 'success')
-                if (response.data?.status === 'success') {
-                  const trans_id = response.data.data.kt_transaction_id;
-                  console.log("GOT TRANSACTION ID IS ", trans_id)
-                  const link = 'https://staging.eatluvnpray.org/kits_demo/kits.php?transaction_id='.concat(trans_id);
-                  window.open(link, "_blank");
-                }
-              })
-              .catch(err => console.log("ERROR ADDING PAYMENT ", err))
+            switchBuyType(data);
           }
         })
         .catch((err) => {
@@ -91,14 +105,14 @@ const Checkouts = (props) => {
   const applyCouponCode = () => {
     // setCouponCode(1);
     // {"gift_code":"vhfnzjaxitqc"}
-    ELPViewApiService("kits_redeemcode", {"gift_code":editCoupon})
+    ELPViewApiService("kits_redeemcode", { "gift_code": editCoupon })
       .then((response) => {
         console.log("RESPONSE KITS CODE  ", response);
         if (response.data.status === "success") {
           showSuccessToast(response.data.data.message)
           setCouponCode(parseInt(kitsDetail.month_array[priceIndex].kp_discount));
         }
-        else{
+        else {
           showErrorToast("Un Identified Coupon!");
         }
       })
@@ -140,40 +154,47 @@ const Checkouts = (props) => {
                             {kitsDetail.month_array[priceIndex].kp_max_range_month} months kit plan
                           </div>
                           <div className="fs17 col14 fw500">1 Kit</div>
-                          <hr className="hrB" />
-                          <div className="promocodes">
+                          {
+                            !Boolean(parseInt(buyId)) &&
+                            (
+                              <>
+                                <hr className="hrB" />
+                                <div className="promocodes">
 
-                            {
-                              openCode ? (
-                                <div className="promo2">
-                                  <span className="position-relative">
-                                    <Form.Control
-                                      type="text"
-                                      className="btnPromo minBtn"
-                                      name="Kits_coupon"
-                                      value={editCoupon}
-                                      onChange={(e) => { setCoupon(e.target.value) }}
-                                      maxLength={8}
-                                    />
-                                  </span>
-                                  <span className="fs14 fw700 col26 text-uppercase ml-3 pt-2" onClick={applyCouponCode}>Apply</span>
+                                  {
+                                    openCode ? (
+                                      <div className="promo2">
+                                        <span className="position-relative">
+                                          <Form.Control
+                                            type="text"
+                                            className="btnPromo minBtn"
+                                            name="Kits_coupon"
+                                            value={editCoupon}
+                                            onChange={(e) => { setCoupon(e.target.value) }}
+                                            maxLength={8}
+                                          />
+                                        </span>
+                                        <span className="fs14 fw700 col26 text-uppercase ml-3 pt-2" onClick={applyCouponCode}>Apply</span>
+                                      </div>
+                                    ) : <Button className="btnPromo" onClick={() => { setOpenCode(true) }}>Have Promo Code?</Button>
+                                  }
+                                  {
+                                    applyCode > 0 ?
+                                      <>
+                                        <div className="fs17 col14 fw500">Coupon Code</div>
+                                        <div className="fs22 fw500 col64">
+                                          -
+                                          <i className="fa fa-inr"></i>
+                                          {applyCode}
+                                        </div>
+                                        <div className="fs17 col14 fw500">{editCoupon}</div>
+                                      </>
+                                      : null
+                                  }
                                 </div>
-                              ) : <Button className="btnPromo" onClick={() => { setOpenCode(true) }}>Have Promo Code?</Button>
-                            }
-                            {
-                              applyCode > 0 ?
-                                <>
-                                  <div className="fs17 col14 fw500">Coupon Code</div>
-                                  <div className="fs22 fw500 col64">
-                                    -
-                                    <i className="fa fa-inr"></i>
-                                    {applyCode}
-                                  </div>
-                                  <div className="fs17 col14 fw500">{editCoupon}</div>
-                                </>
-                                : null
-                            }
-                          </div>
+                              </>
+                            )
+                          }
                         </div>
                         <div className="orderTwo mt-3">
                           <div className="catOne">
