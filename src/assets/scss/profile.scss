@@ -901,7 +901,13 @@
   .bg_lightBlue {
     background-color: $col22;
     min-height: calc(100vh - 146px);
+    &.blueTwo {
+        .myAssesstest {
+            padding: 0 40px; 
+        }
+    }
   }
+  
   
   .createPdf {
     & > a {

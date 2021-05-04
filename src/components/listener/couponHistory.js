@@ -36,14 +36,14 @@ const CouponHistory = (props) => {
                 <div className="main_baner">
                     <NavBar {...props} />
                 </div>
-                <div className="bg_lightBlue">
+                <div className="bg_lightBlue blueTwo">
                     <Container>
                         <Row>
-                            <Col md={9} className="pl-1">
+                            <Col md={12}>
                                 <div className="profile_layout ListenerTests myAssesstestMain pt-4 pb-5">
                                     <div className="chatsearch w-100">
                                         <div className="myAssesstest">
-                                            <div className="fs22 fw600 col10 mt-4 mb-4 pl-4">Order History</div>
+                                            <div className="fs28 fw500 col8 mt-4 mb-4 pb-2 pl-4 text-center text-uppercase">Coupon History</div> 
                                             <div className="mainTables">
                                                 <Table bordered size="lg">
                                                     <thead>
