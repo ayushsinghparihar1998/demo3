@@ -30,9 +30,7 @@ const KitsDetailSA = () => {
             }
         }).catch((error) => console.log(error));
     }, [id])
-    if (!kitObj) {
-        return 'Loading ...'
-    }
+    
 
     const settings = {
         dots: true,

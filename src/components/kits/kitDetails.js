@@ -54,15 +54,22 @@ const KitDetails = (props) => {
     }, [id]);
 
     return (
-        <div className="page__wrapper innerpage"> 
+        <div className="page__wrapper innerpage">  
             <div className="main_baner">
                 <NavBar {...props} />
             </div>
             <div className="kitDetailMain">   
                 <Container>
-                    <div className="kitDetailTwo mt-4 mb-4">  
-                        <div className="fs18 text-left fw500 mt-3 mb-5 pointer" onClick={goToKitList}><span className="col14 fw300 mr-1">Kits</span> /
-                      <span className="col29 fs18 ml-1">Kit Details</span></div>
+                      <div className="kitDetailTwo mt-4 mb-5"> 
+                        <div className="banLayout mb-4"> 
+                            <div className="layTwo">Get
+                                <span className="text-uppercase ml-1 mr-1">free audio & video calls</span>
+                                by buying any kit </div> 
+                        </div>  
+                        <div className="fs18 text-left fw500 mt-3 mb-5 pointer" onClick={goToKitList}>
+                            <span className="col14 fw300 mr-1">Kits</span> /
+                            <span className="col29 fs18 ml-1">Kit Details</span> 
+                        </div> 
 
                         <Row>
                             {
