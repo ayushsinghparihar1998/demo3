@@ -101,7 +101,7 @@ class Kits extends Component {
                               <div className="text-center fw500 fs16 col64 text-uppercase borderSs">
                                 {item.kt_name}
                                 {
-                                  item.month_array.map((itemMonth) =>
+                                  item.month_array.filter((data,idx)=>idx===0).map((itemMonth) =>
                                     <div className="col64 fs24 fw300">
                                       <strong className="fw600">
                                         <span className="mr-3 fs20 fw400 col14">
