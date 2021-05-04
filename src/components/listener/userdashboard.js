@@ -2,50 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
    Button,
-   NavDropdown,
-   Carousel,
    Container,
    Row,
    Col,
    Image,
    Form,
-   Tabs,
-   Tab,
    Modal,
 } from 'react-bootstrap';
 import NavBar from '../core/nav';
 import Footer from '../core/footer';
-import moment from 'moment';
 import {
    actionGetRecentJoin,
    actionGetListnerDashBoard,
 } from '../../common/redux/actions';
-import CONSTANTS from '../../common/helpers/Constants';
-import validateInput from '../../common/validations/validationSignup';
 import Educations from '../../assets/images/educations.svg';
-import Educationmarks from '../../assets/images/education_marks.svg';
 import Educationtwo from '../../assets/images/ice_fail.svg';
-import Educationmarktwo from '../../assets/images/education_mark2.svg';
 import Crossbluetwo from '../../assets/images/blue_cross.svg';
-import UserChat from '../../assets/images/user_chat.svg';
-import UserChat2 from '../../assets/images/user_chat2.svg';
-import UserChat3 from '../../assets/images/user_chat3.svg';
-import UserChat4 from '../../assets/images/user_chat4.svg';
-import UserChat5 from '../../assets/images/user_chat5.svg';
-import ChatCross from '../../assets/images/chat_cross.svg';
-import Heartfive from '../../assets/images/heart5.svg';
-import Skill from '../../assets/images/skills.svg';
-import Skill2 from '../../assets/images/skills2.svg';
-import Skill3 from '../../assets/images/skills3.svg';
 import Copys from '../../assets/images/copy_icon.svg';
 import Warningtwo from '../../assets/images/w_signal.svg';
 import Progresss from '../../assets/images/progress_bar.svg';
-import Stars from '../../assets/images/stars.svg';
-import Hearttwo from '../../assets/images/heart2.svg';
-import Medals from '../../assets/images/medals.svg';
 import Rflag from '../../assets/images/r_flag.svg';
-import Listimg from '../../assets/images/listimg.png';
-import Starsone from '../../assets/images/stars.png';
 import Speakers from '../../assets/images/speakers.svg';
 import Gmail from '../../assets/images/gmail1.svg';
 import Whatsapp from '../../assets/images/whatsapp1.svg';
@@ -61,15 +37,9 @@ import Calendertwo from '../../assets/images/calender_icon2.svg';
 import Calenderthree from '../../assets/images/calender_icon3.svg';
 import Topgreen from '../../assets/images/top_green.svg';
 import Bottomred from '../../assets/images/bottom_red.svg';
-import Quotetwo from '../../assets/images/quote_two.svg';
-import Blogs from '../../assets/images/blogs.svg';
-import Blogstwo from '../../assets/images/blogs2.svg';
-import Blogsthree from '../../assets/images/blogs3.svg';
 import Ricon from '../../assets/images/r_icons.svg';
-import Quotefour from '../../assets/images/quote4.png';
 import constant from '../../constant'
 
-import SocketIOClient from 'socket.io-client';
 import {
    getLocalStorage,
    setLocalStorage,
@@ -79,15 +49,23 @@ import socketClass from '../../common/utility/socketClass';
 import RecentChat from '../ChatShared/RecentChat/RecentChat';
 import ActiveUsers from '../ChatShared/ActiveUsers/ActiveUsers';
 import Quotes from '../quotes';
-import BlogList from '../blogList';
 import FunFact from '../funfacts';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { NavLink } from "react-router-dom"
+import ELPViewApiService from '../../common/services/apiService';
 // const SOCKET_IO_URL = 'http://103.76.253.131:8282';
 // const socket = SocketIOClient(SOCKET_IO_URL);
 const socket = socketClass.getSocket();
+function dateMaker(t, s) {
+   let a = [{ day: 'numeric' }, { month: 'short' }, { year: 'numeric' }];
+   function format(m) {
+      let f = new Intl.DateTimeFormat('en', m);
+      return f.format(t);
+   }
+   return a.map(format).join(s);
+}
 class Userdashboard extends Component {
    constructor(props) {
       super(props);
@@ -96,6 +74,9 @@ class Userdashboard extends Component {
          dashboardData: [],
          showVal: 4,
          activeChatUsers: [],
+         plan_details: [],
+         kits_details: [],
+         couponList: [],
          user_id: getLocalStorage("userInfo").u_id
       };
    }
@@ -115,6 +96,7 @@ class Userdashboard extends Component {
       }
       window.addEventListener("beforeunload", this.unmount);
       this.getRecentJoinUsers();
+      this.getCouponList();
       this.getListnerDashBoard();
       let result = getLocalStorage('result');
       // if (getLocalStorage("result") >= 60) {
@@ -233,6 +215,18 @@ class Userdashboard extends Component {
    changepath = (path) => {
       this.props.history.push(path);
    };
+   getCouponList = () => {
+      ELPViewApiService('getuser_kitscouponlist', { count: 10, offset: 1 })
+         .then((response) => {
+            if (response && response.data && response.data.status === "success") {
+               const data = response.data.data;
+               this.setState({ couponList: data.kits_listing });
+            }
+         })
+         .catch((err) => {
+            console.log(err);
+         });
+   }
    getRecentJoinUsers() {
       let userInfo = getLocalStorage('userInfo');
       this.props.actionGetRecentJoin({}).then((result) => {
@@ -248,6 +242,9 @@ class Userdashboard extends Component {
          if (result && result.status === 200) {
             let res = result.data.data && result.data.data.dashboard_list ? result.data.data.dashboard_list : [];
             this.setState({ dashboardData: res });
+            if (res?.length) {
+               this.setState({ plan_details: res.plan_details, kits_details: res.kits_details })
+            }
          }
       });
    }
@@ -281,7 +278,7 @@ class Userdashboard extends Component {
             <div className="main_baner">
                <NavBar {...this.props} />
             </div>
-            <div className="userdashboards pt-4 pb-5"> 
+            <div className="userdashboards pt-4 pb-5">
                <Container>
                   <Row>
                      {' '}
@@ -493,8 +490,105 @@ class Userdashboard extends Component {
                                        <div className="fs13 fw500 col18">Listener to Listener</div>
                                        <div className="fs12 fw500 col18">Coming soon for now</div>
                                     </div>
-                                 </div> 
+                                 </div>
                               </div>
+
+                              <div className="mt-4"></div>
+                              {/* {"kt_id":"45","u_name":"Super Admin","kt_month":"3","kt_gift_code":"rxzswqmlbakf"
+                              ,"kt_expiry_date":"2021-07-05 00:00:00","kt_name":"todays Kit"} */}
+                              {
+                                 !!this.state.couponList?.length &&
+                                 this.state.couponList.map((coupon, index) =>
+                                    <>
+                                       <div className="mt-4"></div>
+                                       <div key={coupon.kt_id} className={index % 2 === 0 ? "dashboardBannerFour fiveBans" : "dashboardBannerFour"}>
+                                          <Col md={5}>
+                                             <div className="jakao col18 fw600 text-center">
+                                                <div>{coupon.kt_gift_code}
+                                                   <span className="fw300 fs11 d-block">
+                                                      {Date.parse(coupon.kt_expiry_date) < Date.now() ? 'Expired Coupon' : 'Active Coupon'}
+                                                   </span>
+                                                </div>
+                                             </div>
+                                          </Col>
+                                          <Col md={7}>
+                                             <div className="col18 fs14 fw500 mt-1">{coupon.kt_name}</div>
+                                             <div className="col18 fs14 fw300 mt-1">Valid till {dateMaker(Date.parse(coupon.kt_expiry_date), '-')}</div>
+                                             <div className="col18 fs14 fw300 mt-1">
+                                                Issued on {new Date(coupon.kt_expiry_date).setMonth(new Date(coupon.kt_expiry_date).getMonth() - 3).toLocaleDateString()}
+                                             </div>
+                                          </Col>
+                                       </div>
+                                    </>
+                                 )
+                              }
+
+                              {/* <div className="mt-4"></div> */}
+                              {/* 
+                              <div className="dashboardBannerFour fiveBans">
+                                 <Col md={5}>
+                                    <div className="jakao col18 fw600 text-center"><div>TFOE
+                                      <span className="fw300 fs11 d-block">Active Coupon</span></div></div>
+                                 </Col>
+                                 <Col md={7}>
+                                    <div className="col18 fs14 fw500 mt-1">FEELING FAB KIT</div>
+                                    <div className="col18 fs14 fw300 mt-1">Valid till 25 March</div>
+                                    <div className="col18 fs14 fw300 mt-1">Issued on 10 Fab 2021</div>
+                                 </Col>
+                              </div> */}
+
+                              <div className="mt-4"></div>
+
+                              <div className="dashboardBannerOne">
+                                 <div>
+                                    <div className="fs14 fw500 col18">Subscribe to our Lifestyle Plan for FREE Audio & Video Calls</div>
+                                    <Button type="button" className="btnTyp6">Subscribe Now</Button>
+                                 </div>
+                              </div>
+
+                              <div className="mt-4"></div>
+
+                              {/* "plan_id":"65","plan_name":"new plan for daily","month":"3","expirydate":"21-08-04" */}
+                              {
+                                 !!this.state.plan_details?.length &&
+                                 this.state.plan_details.map((plan) =>
+
+                                    <div key={plan.plan_id} className="dashboardBannerTwo">
+                                       <Col md={9} className="ml-auto">
+                                          <div className="fs15 fw400 col1">
+                                             <span className="col150 fw500">LUV</span> <span className="col14 fw500">&</span> <span className="col134 fw500">PRAY</span> ({plan.month} Months)
+                                          </div>
+                                          <div className="col18 fs14 fw500 mt-1">
+                                             {plan.plan_name}
+                                          </div>
+                                          <div className="col18 fs14 fw300 mt-1">{dateMaker(Date.parse(plan?.expirydate), '-')}</div>
+                                       </Col>
+                                    </div>
+                                 )
+                              }
+
+
+                              <div className="mt-4"></div>
+                              {/* "kt_id":"68","kt_name":"HoneyComber Club","month":"5","expirydate":"2021-09-28 00:00:00" */}
+                              {
+                                 !!this.state.kits_details?.length &&
+                                 this.state.kits_details.map((detail) =>
+                                    <div className="dashboardBannerSix">
+                                       <div className="w-100">
+                                          <div className="fs15 fw500 subsc col18">
+                                             Purchased KIT
+                                    </div>
+                                          <ul>
+                                             <li>
+                                                <div className="pull-left col18 fw600 fs15">{detail.kt_name} <span className="ml-1 col18 fw300 fs13">({detail.month} months)</span></div>
+                                                <div className="pull-right col18 fw300 fs13">{dateMaker(Date.parse(detail?.expirydate), '-')}</div>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 )
+                              }
+
                            </Col>
 
 
@@ -779,8 +873,8 @@ class Userdashboard extends Component {
                            <div className="layout_box text-center mt-3 mb-4 p-4">
                               <Image src={Educationtwo} alt="" className="mb-4" />
                               <div className="col9 fs44 fw600 mb-2">Sorry</div>
-                              <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">  
-                                 Please take the survey again or contact Admin   
+                              <div className="fs25 nt-4 fw500 col14 mb-4 pb-2">
+                                 Please take the survey again or contact Admin
                                </div>
 
                               <CircularProgressbar minValue={0} maxValue={100} styles={{

@@ -1,33 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import {
-  Button,
-  NavDropdown,
-  Carousel,
   Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Tabs,
-  Tab,
+  Col
 } from "react-bootstrap";  
 import NavBar from "../core/navAdmin"; 
 import Footer from "../core/footer";
-import { Link } from "react-router-dom";
-import ELPViewApiService from "../../common/services/apiService";
-import validateInput from "../../common/validations/validationAddDomain";
-import { post } from "axios";
-import ELPRxApiService from "../../common/services/apiService";
-import Editicon from "../../assets/images/edit_icon.svg";
-import Deleteicon from "../../assets/images/delete_icon.svg";
-import blogclock from "../../assets/images/blogclock.png"; 
-import UserChats from "../../assets/images/user_chat5.svg"; 
-import Infos from "../../assets/images/infos.png"; 
 
-
-import constant from "../../constant"; 
 class LuvPrayPlanDetails extends Component {    
   render() {
     return (
