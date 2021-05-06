@@ -120,7 +120,7 @@ class Kits extends Component {
                                 <div className="fs13 col11 fw400" dangerouslySetInnerHTML={{__html:item.kt_desc}}/>
 
                                 <Button className="btnType1 d-block w-100 mt-4">
-                                  <Link to={{ pathname: "/coming-soon" }}>
+                                  <Link to={{ pathname: "/kitListings" }}>
                                     Buy Now
                                   </Link>{" "}
                                 </Button>

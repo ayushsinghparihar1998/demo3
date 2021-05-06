@@ -18,7 +18,7 @@ const StartTest = (props) => {
                 if (response.data.status === 'success') {
                     const data = response.data.data;
                     console.log("DATA ", data);
-                    setTestData(data.listener_paragraph_test[0]);
+                    setTestData(data.listener_paragraph_test.find(({lp_id})=>lp_id === testId));
                 }
             })
             .catch((err) => new Error(`Error occured because ${err}`))

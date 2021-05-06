@@ -407,7 +407,7 @@ class addSubscription extends Component {
     return (
       <>
         {/* <pre>{JSON.stringify(planObj, null, 2)}</pre> */}
-        <pre>{JSON.stringify(errors, null, 2)}</pre> 
+        {/* <pre>{JSON.stringify(errors, null, 2)}</pre>  */}
         <div className="page__wrapper innerpage">
           <div className="main_baner">
             <NavBar {...this.props} />

@@ -7,7 +7,7 @@ import ChatCross from '../../../assets/images/chat_cross.svg';
 import moment from "moment";
 
 const socket = socketClass.getSocket();
-function RecentChat({ onRedirect }) {
+function RecentChat({ onRedirect, restriction }) {
   const user = getUserProfile();
   const [recentChats, setRecentChats] = useState([]);
   useEffect(() => {
@@ -38,16 +38,29 @@ function RecentChat({ onRedirect }) {
         console.warn("Error, getRecentsChatedUsers", data)
     });
   }
+
+  if (restriction) {
+    return (
+      <div className="inner_side">
+        <div className="chat-bg fs600 fs17 col18 pl-3 ">
+          Chat
+        </div>
+        <div className="fs18 fw600 m-auto" style={{ textAlign: 'center' }}>
+          Your Account is restricted  Please Contact to Admin !
+      </div>
+      </div>
+    )
+  }
   return (
     <div className="inner_side">
       <div className="chat-bg fs600 fs17 col18 pl-3 ">
         Chat
         </div>
-        {
-        !recentChats||recentChats.length == 0?<div className="fs18 fw600 m-auto" style={{textAlign:'center'}}>
-        No chat found 
-      </div>:null
-        }
+      {
+        !recentChats || recentChats.length == 0 ? <div className="fs18 fw600 m-auto" style={{ textAlign: 'center' }}>
+          No chat found
+      </div> : null
+      }
       {recentChats &&
         recentChats.map((item) => {
           return (
@@ -82,11 +95,6 @@ function RecentChat({ onRedirect }) {
 
                   {item.date_time}
                 </div>
-                {/* <Image
-                  src={ChatCross}
-                  alt=""
-                  className="pointer cross_btn"
-                /> */}
                 {
                   item.from_user_id != user.u_id ?
                     item.to_user_unread_count != 0 ? <div className="counts">{item.to_user_unread_count}</div> : null

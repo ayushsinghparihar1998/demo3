@@ -2398,5 +2398,12 @@ export default {
     data: { count: '', offset: '' },
     showResultMessage: false,
     showErrorMessage: true
+  },
+  superadminchange_listnerteststatus:{
+    url : 'elp/superadminchange_listnerteststatus',
+    method: 'POST',
+    data: { userid: '', u_listner_test: '' },
+    showResultMessage: false,
+    showErrorMessage: true
   }
 };

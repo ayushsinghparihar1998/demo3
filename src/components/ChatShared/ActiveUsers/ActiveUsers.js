@@ -4,7 +4,7 @@ import UserChat from '../../../assets/images/user_chat.png';
 import getUserProfile from '../../../common/utility/getUserProfile'
 import socketClass from '../../../common/utility/socketClass'
 const socket = socketClass.getSocket();
-function ActiveUsers({ onRedirect }) {
+function ActiveUsers({ onRedirect, restriction }) {
   const user = getUserProfile();
   const [activeUsers, setActiveUsers] = useState([]);
   const [showVal, setShowVal] = useState(4);
@@ -39,12 +39,20 @@ function ActiveUsers({ onRedirect }) {
         }
       }
     );
-    // socket.emit('getRecentsChatedUsers', JSON.stringify({ user_id: user.u_id }), data => {
-    //   if (data.success)
-    //     setActiveUsers(data.data)
-    //   else
-    //     console.warn("Error, getRecentsChatedUsers", data)
-    // });
+  }
+  if (restriction && user.u_role_id === "1") {
+    return (
+      <div className="inner_side">
+        <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
+          <span
+          // onClick={() => this.call()}
+          >
+            Currently Active Listeners
+          </span>
+        </div>
+        Your Account is restricted  Please Contact to Admin !
+      </div>
+    )
   }
   return (
     <div className="inner_side">
@@ -52,11 +60,11 @@ function ActiveUsers({ onRedirect }) {
         <span
         // onClick={() => this.call()}
         >
-          Currently Active {user.u_role_id == "3" ? 'Listeners' : 'Users'}
-      </span>
+          Currently Active {user.u_role_id === "1" ? 'Listeners' : 'Users'}
+        </span>
       </div>
       <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-        <Tab eventKey="home" title={user.u_role_id == "3" ? 'Listeners' : 'Users'}>
+        <Tab eventKey="home" title={user.u_role_id === "1" ? 'Listeners' : 'Users'}>
           <div className="chat-border"></div>
           {activeUsers &&
             activeUsers.map((item, ind) => {

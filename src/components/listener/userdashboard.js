@@ -66,6 +66,13 @@ function dateMaker(t, s) {
    }
    return a.map(format).join(s);
 }
+function calculateIssueDate(date) {
+   const oldDate = new Date(new Date(date).setMonth(new Date(date).getMonth() - 3))
+   let year = oldDate.getFullYear();
+   let month = oldDate.getMonth() + 1 //getMonth is zero based;
+   let day = oldDate.getDate();
+   return (day + "-" + month + "-" + year);
+}
 class Userdashboard extends Component {
    constructor(props) {
       super(props);
@@ -77,7 +84,8 @@ class Userdashboard extends Component {
          plan_details: [],
          kits_details: [],
          couponList: [],
-         user_id: getLocalStorage("userInfo").u_id
+         user_id: getLocalStorage("userInfo").u_id,
+         admin_listner_per: '',
       };
    }
    componentWillUnmount() {
@@ -242,9 +250,11 @@ class Userdashboard extends Component {
          if (result && result.status === 200) {
             let res = result.data.data && result.data.data.dashboard_list ? result.data.data.dashboard_list : [];
             this.setState({ dashboardData: res });
-            if (res?.length) {
-               this.setState({ plan_details: res.plan_details, kits_details: res.kits_details })
-            }
+            // if (res?.length) {
+               debugger;
+               const y =res.u_listner_test;
+               this.setState({ plan_details: res.plan_details, kits_details: res.kits_details, admin_listner_per: res.u_listner_test })
+            //}
          }
       });
    }
@@ -286,201 +296,18 @@ class Userdashboard extends Component {
                         <Row>
                            <Col md={4} className="pl-0">
                               <div className="left_sidebar">
-                                 {/* <div className="inner_side">
-                                    <div className="chat-bg fs600 fs17 col18 pl-3 ">Hall of fame</div>
-                                    <div className="col1 fs16 fw500 mt-2 ml-3 pb-2">CoCo of the month</div>
-                                    <div className="d-flex m-3 border-bottom bottom2">
-                                       <div>
-                                          <Image src={Listimg} alt="" />
-                                       </div>
-                                       <div className="mt-auto mb-auto pl-3">
-                                          <div className="fs15 fw500 col14">Melinda Jems</div>
-                                       </div>
-                                    </div>
-                                    <div className="d-flex justify-content-center w-100">
-                                       <div className="mr-3">
-                                          <Image src={Starsone} alt="" />
-                                       </div>
-                                       <div className="">
-                                          <div className="col23 fs14 fw600 pb-2">Monthly Rating</div>
-                                          <div className="text-center col14 fs14 fw500 pb-2">4.5/<small>5</small></div>
-                                       </div>
-                                    </div>
-                                 </div> */}
+
                                  <div className="left_sidebar">
-                                    <RecentChat onRedirect={this.handleRedirectRecentChat} />
-                                    {/* 
-                  <div className="inner_side">
-                     <div className="chat-bg fs600 fs17 col18 pl-3 ">
-                        Chat
-                     </div>
-                     {this.state.recentChatUsers &&
-                     this.state.recentChatUsers.map((item) => {
-                     return (
-                     <div className="d-flex m-3 border-bottom pointer" onClick={this.handleRedirectRecentChat(item)}>
-                        <div className="position-relative">
-                           <Image
-                              src={
-                              item.from_image ? item.from_image : UserChat
-                              }
-                              alt=""
-                              className="r50 pt-1"
-                              />
-                           <span className={(item.from_user_id ==
-                           getLocalStorage("userInfo").u_id
-                           ? item.to_user_online
-                           : item.from_user_online) == "1" ? 'online' : ''}></span>
-                        </div>
-                        <div className="position-relative pl-3">
-                           <div className="fs15 col23 fw500 pr-2">
-                              {item.from_user_id ==
-                              getLocalStorage("userInfo").u_id
-                              ? item.to_user_name
-                              : item.from_user_name}
-                           </div>
-                           <div className="col27 fs13 fw500">
-                              {item.message}
-                           </div>
-                           <Image
-                              src={ChatCross}
-                              alt=""
-                              className="pointer cross_btn"
-                              />
-                        </div>
-                     </div>
-                     );
-                     })}
-                  </div>
-                  */}
-                                    {/* 
-                  <div className="inner_side">
-                     <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                        <span>Currently Active Listeners</span>
-                     </div>
-                     <Tabs
-                        defaultActiveKey="home"
-                        id="uncontrolled-tab-example"
-                        >
-                        <Tab eventKey="home" title="Listener">
-                           <div className="chat-border"></div>
-                           {this.state.activeChatUsers &&
-                           this.state.activeChatUsers.map((item, ind) => {
-                           return ind < this.state.showVal ? (
-                           <div className="d-flex m-3 border-bottom">
-                              <div className="position-relative">
-                                 <Image
-                                    src={
-                                    item.u_image ? item.u_image : UserChat
-                                    }
-                                    alt=""
-                                    className="r50 pt-1"
+                                    <RecentChat
+                                       restriction={this.state.admin_listner_per === '1'}
+                                       onRedirect={this.handleRedirectRecentChat}
                                     />
-                              </div>
-                              <div className="position-relative pl-3 mt-auto mb-auto">
-                                 <div
-                                    className="fs14 col14 fw500"
-                                    onClick={() =>
-                                    this.changepath("/chat/" + item.id)
-                                    }
-                                    >
-                                    {item.u_name}
+
                                  </div>
-                              </div>
-                           </div>
-                           ) : (
-                           ""
-                           );
-                           })}
-                        </Tab>
-                     </Tabs>
-                     {this.state.showVal == 4 ? (
-                     <div
-                        className="fs15 fw600 col23 p-3 pointer show-more"
-                        onClick={() => {
-                        this.setState({
-                        showVal: this.state.activeChatUsers.length,
-                        });
-                        }}
-                        >
-                        Show More
-                     </div>
-                     ) : (
-                     <div
-                        className="fs15 fw600 col23 p-3 pointer show-more"
-                        onClick={() => {
-                        this.setState({
-                        showVal: 4,
-                        });
-                        }}
-                        >
-                        Show Less
-                     </div>
-                     )}
-                  </div>
-                  */}
-                                 </div>
-                                 <ActiveUsers onRedirect={this.handleRedirectActiveUsers} />
-                                 {/* 
-               <div className="inner_side">
-                  <div className="chat-bg fs600 fs17 col18 pl-3 pointer">
-                     <span>Currently Active Listeners asdf </span>
-                  </div>
-                  <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-                     <Tab eventKey="home" title="Listener">
-                        <div className="chat-border"></div>
-                        {this.state.activeChatUsers &&
-                        this.state.activeChatUsers.map((item, ind) => {
-                        return ind < this.state.showVal ? (
-                        <div className="d-flex m-3 border-bottom pointer"
-                           onClick={() =>
-                           this.changepath("/chat/" + item.id)
-                           }>
-                           <div className="position-relative">
-                              <Image
-                                 src={item.u_image ? item.u_image : UserChat}
-                                 alt=""
-                                 className="r50 pt-1"
+                                 <ActiveUsers
+                                    restriction={this.state.admin_listner_per === '1'}
+                                    onRedirect={this.handleRedirectActiveUsers}
                                  />
-                           </div>
-                           <div className="position-relative pl-3 mt-auto mb-auto">
-                              <div
-                                 className="fs14 col14 fw500"
-                                 >
-                                 {item.u_name}
-                              </div>
-                           </div>
-                        </div>
-                        ) : (
-                        ''
-                        );
-                        })}
-                     </Tab>
-                  </Tabs>
-                  {this.state.showVal == 4 ? (
-                  <div
-                     className="fs15 fw600 col23 p-3 pointer show-more"
-                     onClick={() => {
-                     this.setState({
-                     showVal: this.state.activeChatUsers.length,
-                     });
-                     }}
-                     >
-                     Show More
-                  </div>
-                  ) : (
-                  <div
-                     className="fs15 fw600 col23 p-3 pointer show-more"
-                     onClick={() => {
-                     this.setState({
-                     showVal: 4,
-                     });
-                     }}
-                     >
-                     Show Less
-                  </div>
-                  )}
-               </div>
-               */}
                                  <div className="chat-bgyellow fs600 fs17 col18 pl-2 d-flex">
                                     <div className="mr-2">
                                        <Image src={Speakers} alt="" />
@@ -515,7 +342,7 @@ class Userdashboard extends Component {
                                              <div className="col18 fs14 fw500 mt-1">{coupon.kt_name}</div>
                                              <div className="col18 fs14 fw300 mt-1">Valid till {dateMaker(Date.parse(coupon.kt_expiry_date), '-')}</div>
                                              <div className="col18 fs14 fw300 mt-1">
-                                                Issued on {new Date(coupon.kt_expiry_date).setMonth(new Date(coupon.kt_expiry_date).getMonth() - 3).toLocaleDateString()}
+                                                Issued on {calculateIssueDate(coupon.kt_expiry_date)}
                                              </div>
                                           </Col>
                                        </div>

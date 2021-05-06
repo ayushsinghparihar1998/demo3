@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ELPViewApiService from '../../../common/services/apiService';
 import { Col, Form, Table } from 'react-bootstrap';
+import { showSuccessToast } from '../../../common/helpers/Utils';
 
 const TestRequest = () => {
     const [listnerResult, setListnerResult] = useState([]);
+    const [testStatus , setTestStatus] = useState(false);
 
     useEffect(() => {
         ELPViewApiService('superadminget_listnerresult', { count: 10, offset: 1 })
@@ -14,7 +16,7 @@ const TestRequest = () => {
                 }
             })
             .catch((err) => new Error(`New Error Occured ${err}`));
-    }, []);
+    }, [testStatus]);
 
     function join(t, a, s) {
         function format(m) {
@@ -25,6 +27,18 @@ const TestRequest = () => {
     }
 
     let a = [{ day: 'numeric' }, { month: 'short' }, { year: 'numeric' }];
+
+    const changeUserStatus = (userid , listnerTest) => {
+        ELPViewApiService('superadminchange_listnerteststatus',{ userid: userid, u_listner_test: listnerTest })
+        .then((response) => {
+            console.log("RESPONSE", response);
+            if (response.data.status === 'success') {
+                showSuccessToast(response.data.message);
+                setTestStatus(!testStatus);
+            }
+        })
+        .catch((err) => new Error(` Error ocured ${err}`))
+    }
 
     return (
         <Col md={9} className="pl-1">
@@ -60,7 +74,7 @@ const TestRequest = () => {
                                                             checked={users.u_listner_test === "2"}
                                                             label={users.u_listner_test === "1" ? "In Active" : "Active"}
                                                             onChange={() => {
-                                                                //changeParaStatus(list.lp_id, list.u_listner_test === '1' ? '2' : '1')
+                                                                changeUserStatus(users.lr_u_id, users.u_listner_test === '1' ? '2' : '1')
                                                             }}
                                                         />
                                                     </span>
